@@ -259,6 +259,44 @@ const SLICES := [
 			"unit_enemy_001": {"resources": {"hp": 6}},
 		},
 	},
+	{
+		"id": "slice_25_accuracy_increases_hit_chance",
+		"encounter": "res://resources/data/combat_encounters/slice_25_accuracy_increases_hit_chance.json",
+		"commands": "res://tests/data/combat_commands/slice_25_accuracy_increases_hit_chance_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"],
+		"expected_result": "in_progress",
+		"expected_hit_roll": {
+			"roll": 72,
+			"base_hit_chance": 70,
+			"accuracy_modifier": 10,
+			"evasion_modifier": 0,
+			"hit_chance": 80,
+			"outcome": "hit",
+		},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 4}},
+		},
+	},
+	{
+		"id": "slice_26_evasion_decreases_hit_chance",
+		"encounter": "res://resources/data/combat_encounters/slice_26_evasion_decreases_hit_chance.json",
+		"commands": "res://tests/data/combat_commands/slice_26_evasion_decreases_hit_chance_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "hit_roll_resolved"],
+		"expected_result": "in_progress",
+		"expected_hit_roll": {
+			"roll": 40,
+			"base_hit_chance": 70,
+			"accuracy_modifier": 0,
+			"evasion_modifier": 40,
+			"hit_chance": 30,
+			"outcome": "miss",
+		},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 6}},
+		},
+	},
 ]
 
 
@@ -311,7 +349,7 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 		var expected_hit_roll: Dictionary = spec["expected_hit_roll"]
 		if hit_roll.is_empty():
 			errors.append("%s: expected hit_roll_resolved event" % spec["id"])
-		elif int(hit_roll.get("roll", 0)) != int(expected_hit_roll["roll"]) or int(hit_roll.get("hit_chance", 0)) != int(expected_hit_roll["hit_chance"]) or hit_roll.get("outcome", "") != expected_hit_roll["outcome"]:
+		elif not _hit_roll_matches(hit_roll, expected_hit_roll):
 			errors.append("%s: unexpected hit roll payload %s" % [spec["id"], hit_roll])
 
 	if spec.has("expected_active_unit_id") and state["turn_state"]["active_unit_id"] != spec["expected_active_unit_id"]:
@@ -398,6 +436,16 @@ func _first_event(state: Dictionary, event_type: String) -> Dictionary:
 		if event["type"] == event_type:
 			return event
 	return {}
+
+
+func _hit_roll_matches(actual: Dictionary, expected: Dictionary) -> bool:
+	for key: String in expected:
+		if key == "outcome":
+			if actual.get(key, "") != expected[key]:
+				return false
+		elif int(actual.get(key, 0)) != int(expected[key]):
+			return false
+	return true
 
 
 func _unit_by_id(state: Dictionary, unit_id: String) -> Dictionary:

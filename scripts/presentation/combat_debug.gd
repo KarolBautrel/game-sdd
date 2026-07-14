@@ -135,7 +135,7 @@ func _render_unit_list() -> void:
 	var lines: Array[String] = []
 	for unit: Dictionary in state["units"]:
 		var marker := "*" if unit["id"] == state["turn_state"]["active_unit_id"] else " "
-		lines.append("%s %s [%s] HP %s/%s AP %s/%s pos (%s,%s)" % [
+		lines.append("%s %s [%s] HP %s/%s AP %s/%s ACC %s EVA %s pos (%s,%s)" % [
 			marker,
 			unit["id"],
 			unit["team"],
@@ -143,6 +143,8 @@ func _render_unit_list() -> void:
 			unit["stats"]["max_hp"],
 			unit["resources"]["ap"],
 			unit["stats"]["max_ap"],
+			unit["stats"].get("accuracy", 0),
+			unit["stats"].get("evasion", 0),
 			unit["position"]["x"],
 			unit["position"]["y"],
 		])
@@ -300,10 +302,13 @@ func _event_summary(event: Dictionary) -> String:
 	if event["type"] == "damage_applied":
 		return "(%s damage to %s)" % [event.get("damage", "?"), event.get("target_unit_id", "?")]
 	if event["type"] == "hit_roll_resolved":
-		return "(%s: roll %s vs %s%%)" % [
+		return "(%s: roll %s vs %s%%, base %s + acc %s - eva %s)" % [
 			event.get("outcome", "?"),
 			event.get("roll", "?"),
 			event.get("hit_chance", "?"),
+			event.get("base_hit_chance", "?"),
+			event.get("accuracy_modifier", "?"),
+			event.get("evasion_modifier", "?"),
 		]
 	if event["type"] == "unit_moved":
 		return "(%s -> %s)" % [event.get("from", {}), event.get("to", {})]

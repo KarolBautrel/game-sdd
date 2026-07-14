@@ -59,7 +59,9 @@
               "defense": { "type": "integer", "minimum": 0 },
               "initiative": { "type": "integer", "minimum": 0 },
               "move_points": { "type": "integer", "minimum": 0 },
-              "max_ap": { "type": "integer", "minimum": 0 }
+              "max_ap": { "type": "integer", "minimum": 0 },
+              "accuracy": { "type": "integer" },
+              "evasion": { "type": "integer" }
             }
           },
           "resources": {

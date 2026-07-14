@@ -59,13 +59,17 @@ The project now has:
 - Hit chance v1:
   - `ranged_attack` resolves a deterministic 1-100 roll;
   - base hit chance is 70%;
-  - `hit_roll_resolved` records roll, chance, and outcome;
+  - `hit_roll_resolved` records roll, base chance, modifiers, final chance, and outcome;
   - misses spend AP but do not apply damage;
   - melee attacks still always hit.
+- Accuracy/evasion v1:
+  - final ranged hit chance uses `base + attacker.accuracy - target.evasion`;
+  - omitted accuracy/evasion stats default to 0;
+  - final hit chance is clamped to 10-95.
 - Debug scene usability pass:
   - action buttons use readable labels;
   - ranged attack can be selected and tested;
-  - unit HP/AP and position are visible in a side panel;
+  - unit HP/AP, accuracy/evasion, and position are visible in a side panel;
   - a compact legend explains grid colors.
 
 ## Verified Slices
@@ -102,6 +106,8 @@ Current verified slices:
 - `022_ranged_attack_out_of_range.md`
 - `023_ranged_attack_hit_roll.md`
 - `024_ranged_attack_miss.md`
+- `025_accuracy_increases_hit_chance.md`
+- `026_evasion_decreases_hit_chance.md`
 
 ## Latest Update
 
@@ -119,6 +125,7 @@ Latest verified scope:
 - terrain v1 is specified and highground movement is verified.
 - ranged attack v1 is specified and verified in Python and Godot.
 - hit chance v1 is specified and verified in Python and Godot.
+- accuracy/evasion v1 is specified and verified in Python and Godot.
 - debug scene has a clearer status panel, unit panel, legend, and ranged attack button.
 
 ## Important Files
@@ -179,16 +186,15 @@ These specs exist as planned placeholders:
 
 ## Recommended Next Step
 
-Implement accuracy/evasion stats v1:
+Implement highground ranged modifier v1:
 
-- add `accuracy` and `evasion` to combat unit stats;
-- keep base ranged hit chance at 70%;
-- calculate final hit chance from base + accuracy - evasion;
-- clamp final hit chance to a clear min/max range.
+- attacker on `highground` gets a small ranged accuracy bonus;
+- target on `highground` may get no modifier for v1, unless a slice proves otherwise;
+- record terrain modifier in `hit_roll_resolved`;
+- keep line of sight and cover deferred.
 
 Suggested slice:
 
 ```text
-docs/specs/combat/slices/025_accuracy_increases_hit_chance.md
-docs/specs/combat/slices/026_evasion_decreases_hit_chance.md
+docs/specs/combat/slices/027_highground_increases_ranged_hit_chance.md
 ```

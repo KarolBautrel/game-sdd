@@ -5,6 +5,8 @@ from dataclasses import dataclass
 from typing import Any
 
 RANGED_ATTACK_HIT_CHANCE = 70
+MIN_HIT_CHANCE = 10
+MAX_HIT_CHANCE = 95
 
 
 @dataclass
@@ -124,7 +126,11 @@ def _resolve_attack(
 
     if uses_hit_chance:
         roll = _deterministic_roll(state, command)
-        outcome = "hit" if roll <= RANGED_ATTACK_HIT_CHANCE else "miss"
+        base_hit_chance = RANGED_ATTACK_HIT_CHANCE
+        accuracy_modifier = _stat(actor, "accuracy")
+        evasion_modifier = _stat(target, "evasion")
+        hit_chance = _clamp(base_hit_chance + accuracy_modifier - evasion_modifier, MIN_HIT_CHANCE, MAX_HIT_CHANCE)
+        outcome = "hit" if roll <= hit_chance else "miss"
         sequence = _emit(
             state,
             sequence,
@@ -134,7 +140,10 @@ def _resolve_attack(
                 "actor_id": actor["id"],
                 "target_unit_id": target["id"],
                 "roll": roll,
-                "hit_chance": RANGED_ATTACK_HIT_CHANCE,
+                "base_hit_chance": base_hit_chance,
+                "accuracy_modifier": accuracy_modifier,
+                "evasion_modifier": evasion_modifier,
+                "hit_chance": hit_chance,
                 "outcome": outcome,
             },
         )
@@ -411,6 +420,14 @@ def _emit(state: dict[str, Any], sequence: int, event_type: str, payload: dict[s
 def _deterministic_roll(state: dict[str, Any], command: dict[str, Any]) -> int:
     command_hash = sum(ord(character) for character in command["id"])
     return ((state["seed"] + command_hash * 17) % 100) + 1
+
+
+def _stat(unit: dict[str, Any], stat_name: str) -> int:
+    return int(unit["stats"].get(stat_name, 0))
+
+
+def _clamp(value: int, minimum: int, maximum: int) -> int:
+    return max(minimum, min(maximum, value))
 
 
 def _unit_by_id(state: dict[str, Any], unit_id: str) -> dict[str, Any] | None:

@@ -12,6 +12,10 @@ Hit chance resolves whether an attack hits or misses.
 - `ranged_attack` uses hit chance.
 - `basic_attack` still always hits.
 - Base ranged hit chance is 70%.
+- Final hit chance uses:
+  - `base_hit_chance + attacker.accuracy - target.evasion`
+- `accuracy` and `evasion` default to 0 when omitted.
+- Final hit chance is clamped to 10-95.
 - Roll range is 1-100.
 - A roll hits when `roll <= hit_chance`.
 - The roll is deterministic from encounter seed and command id.
@@ -28,6 +32,9 @@ Hit chance resolves whether an attack hits or misses.
 - `actor_id`
 - `target_unit_id`
 - `roll`
+- `base_hit_chance`
+- `accuracy_modifier`
+- `evasion_modifier`
 - `hit_chance`
 - `outcome`
 
@@ -35,8 +42,10 @@ Hit chance resolves whether an attack hits or misses.
 
 ## Deferred
 
-- accuracy stat;
-- evasion stat;
+- weapon accuracy modifiers;
+- equipment modifiers;
+- shield modifiers;
+- status modifiers;
 - cover modifiers;
 - distance modifiers;
 - highground modifiers;

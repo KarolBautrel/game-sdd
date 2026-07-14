@@ -12,6 +12,7 @@ This folder separates rules from executable scenarios.
 - `005_event_log_and_replay.md`
 - `020_ranged_attacks.md`
 - `021_hit_chance.md`
+- `025_accuracy_evasion.md`
 - `024_terrain.md`
 
 ## Planned Rule Specs

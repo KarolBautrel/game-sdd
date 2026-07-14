@@ -2,6 +2,8 @@ extends RefCounted
 class_name CombatResolver
 
 const RANGED_ATTACK_HIT_CHANCE := 70
+const MIN_HIT_CHANCE := 10
+const MAX_HIT_CHANCE := 95
 
 
 static func simulate(encounter: Dictionary, commands: Array) -> Dictionary:
@@ -101,13 +103,20 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 
 	if uses_hit_chance:
 		var roll := _deterministic_roll(state, command)
-		var outcome := "hit" if roll <= RANGED_ATTACK_HIT_CHANCE else "miss"
+		var base_hit_chance := RANGED_ATTACK_HIT_CHANCE
+		var accuracy_modifier := _stat(actor, "accuracy")
+		var evasion_modifier := _stat(target, "evasion")
+		var hit_chance := clampi(base_hit_chance + accuracy_modifier - evasion_modifier, MIN_HIT_CHANCE, MAX_HIT_CHANCE)
+		var outcome := "hit" if roll <= hit_chance else "miss"
 		sequence = _emit(state, sequence, "hit_roll_resolved", {
 			"command_id": command["id"],
 			"actor_id": actor["id"],
 			"target_unit_id": target["id"],
 			"roll": roll,
-			"hit_chance": RANGED_ATTACK_HIT_CHANCE,
+			"base_hit_chance": base_hit_chance,
+			"accuracy_modifier": accuracy_modifier,
+			"evasion_modifier": evasion_modifier,
+			"hit_chance": hit_chance,
 			"outcome": outcome,
 		})
 		if outcome == "miss":
@@ -318,6 +327,10 @@ static func _deterministic_roll(state: Dictionary, command: Dictionary) -> int:
 		command_hash += command["id"].unicode_at(index)
 	var total := int(state["seed"]) + command_hash * 17
 	return total % 100 + 1
+
+
+static func _stat(unit: Dictionary, stat_name: String) -> int:
+	return int(unit["stats"].get(stat_name, 0))
 
 
 static func _unit_by_id(state: Dictionary, unit_id: String) -> Dictionary:

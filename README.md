@@ -70,7 +70,7 @@ Debug scene controls:
 - Blocked terrain is dark.
 - Highground terrain is gold.
 - The right side shows action buttons, unit HP/AP, and the event log.
-- Ranged attacks show hit/miss rolls in the event log.
+- Ranged attacks show hit/miss rolls and hit chance modifiers in the event log.
 - Rejected commands show the rejection reason in the feedback label.
 - Read the right-side event log to verify what the domain resolver emitted.
 

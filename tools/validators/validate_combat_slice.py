@@ -605,6 +605,87 @@ def validate_combat_slice_24() -> list[str]:
     return errors
 
 
+def validate_combat_slice_25() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_25_accuracy_increases_hit_chance.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_25_accuracy_increases_hit_chance_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if player["resources"]["ap"] != 0:
+        errors.append("slice_25_accuracy_increases_hit_chance: expected player AP to be 0")
+    if enemy["resources"]["hp"] != 4:
+        errors.append(f"slice_25_accuracy_increases_hit_chance: expected enemy HP 4, got {enemy['resources']['hp']}")
+    if event_types != ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"]:
+        errors.append(f"slice_25_accuracy_increases_hit_chance: unexpected events {event_types}")
+
+    roll = [event for event in state["event_log"] if event["type"] == "hit_roll_resolved"]
+    if len(roll) != 1:
+        errors.append("slice_25_accuracy_increases_hit_chance: expected one hit_roll_resolved event")
+    elif not _hit_roll_matches(
+        roll[0],
+        roll=72,
+        base_hit_chance=70,
+        accuracy_modifier=10,
+        evasion_modifier=0,
+        hit_chance=80,
+        outcome="hit",
+    ):
+        errors.append(f"slice_25_accuracy_increases_hit_chance: unexpected roll payload {roll[0]}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_25_accuracy_increases_hit_chance: replay event log differs")
+
+    return errors
+
+
+def validate_combat_slice_26() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_26_evasion_decreases_hit_chance.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_26_evasion_decreases_hit_chance_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if player["resources"]["ap"] != 0:
+        errors.append("slice_26_evasion_decreases_hit_chance: expected player AP to be 0")
+    if enemy["resources"]["hp"] != 6:
+        errors.append("slice_26_evasion_decreases_hit_chance: expected enemy HP to remain 6")
+    if event_types != ["combat_started", "turn_started", "action_performed", "hit_roll_resolved"]:
+        errors.append(f"slice_26_evasion_decreases_hit_chance: unexpected events {event_types}")
+
+    roll = [event for event in state["event_log"] if event["type"] == "hit_roll_resolved"]
+    if len(roll) != 1:
+        errors.append("slice_26_evasion_decreases_hit_chance: expected one hit_roll_resolved event")
+    elif not _hit_roll_matches(
+        roll[0],
+        roll=40,
+        base_hit_chance=70,
+        accuracy_modifier=0,
+        evasion_modifier=40,
+        hit_chance=30,
+        outcome="miss",
+    ):
+        errors.append(f"slice_26_evasion_decreases_hit_chance: unexpected roll payload {roll[0]}")
+
+    if any(event["type"] == "damage_applied" for event in state["event_log"]):
+        errors.append("slice_26_evasion_decreases_hit_chance: damage_applied should not be emitted")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_26_evasion_decreases_hit_chance: replay event log differs")
+
+    return errors
+
+
 def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_result: str) -> list[str]:
     errors: list[str] = []
     encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
@@ -633,6 +714,26 @@ def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_res
         errors.append(f"{slice_id}: replay event log differs")
 
     return errors
+
+
+def _hit_roll_matches(
+    event: dict,
+    *,
+    roll: int,
+    base_hit_chance: int,
+    accuracy_modifier: int,
+    evasion_modifier: int,
+    hit_chance: int,
+    outcome: str,
+) -> bool:
+    return (
+        event.get("roll") == roll
+        and event.get("base_hit_chance") == base_hit_chance
+        and event.get("accuracy_modifier") == accuracy_modifier
+        and event.get("evasion_modifier") == evasion_modifier
+        and event.get("hit_chance") == hit_chance
+        and event.get("outcome") == outcome
+    )
 
 
 def _validate_rejected_move(
@@ -715,6 +816,8 @@ def main() -> int:
     errors.extend(validate_combat_slice_22())
     errors.extend(validate_combat_slice_23())
     errors.extend(validate_combat_slice_24())
+    errors.extend(validate_combat_slice_25())
+    errors.extend(validate_combat_slice_26())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:
