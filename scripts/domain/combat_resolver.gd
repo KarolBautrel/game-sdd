@@ -4,6 +4,7 @@ class_name CombatResolver
 const RANGED_ATTACK_HIT_CHANCE := 70
 const MIN_HIT_CHANCE := 10
 const MAX_HIT_CHANCE := 95
+const HIGHGROUND_RANGED_HIT_MODIFIER := 10
 
 
 static func simulate(encounter: Dictionary, commands: Array) -> Dictionary:
@@ -106,7 +107,8 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 		var base_hit_chance := RANGED_ATTACK_HIT_CHANCE
 		var accuracy_modifier := _stat(actor, "accuracy")
 		var evasion_modifier := _stat(target, "evasion")
-		var hit_chance := clampi(base_hit_chance + accuracy_modifier - evasion_modifier, MIN_HIT_CHANCE, MAX_HIT_CHANCE)
+		var terrain_modifier := _terrain_hit_modifier(state, actor, action_id)
+		var hit_chance := clampi(base_hit_chance + accuracy_modifier - evasion_modifier + terrain_modifier, MIN_HIT_CHANCE, MAX_HIT_CHANCE)
 		var outcome := "hit" if roll <= hit_chance else "miss"
 		sequence = _emit(state, sequence, "hit_roll_resolved", {
 			"command_id": command["id"],
@@ -116,6 +118,7 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 			"base_hit_chance": base_hit_chance,
 			"accuracy_modifier": accuracy_modifier,
 			"evasion_modifier": evasion_modifier,
+			"terrain_modifier": terrain_modifier,
 			"hit_chance": hit_chance,
 			"outcome": outcome,
 		})
@@ -331,6 +334,12 @@ static func _deterministic_roll(state: Dictionary, command: Dictionary) -> int:
 
 static func _stat(unit: Dictionary, stat_name: String) -> int:
 	return int(unit["stats"].get(stat_name, 0))
+
+
+static func _terrain_hit_modifier(state: Dictionary, actor: Dictionary, action_id: String) -> int:
+	if action_id == "ranged_attack" and _tile_type(state, actor["position"]) == "highground":
+		return HIGHGROUND_RANGED_HIT_MODIFIER
+	return 0
 
 
 static func _unit_by_id(state: Dictionary, unit_id: String) -> Dictionary:

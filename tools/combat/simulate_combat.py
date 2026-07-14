@@ -7,6 +7,7 @@ from typing import Any
 RANGED_ATTACK_HIT_CHANCE = 70
 MIN_HIT_CHANCE = 10
 MAX_HIT_CHANCE = 95
+HIGHGROUND_RANGED_HIT_MODIFIER = 10
 
 
 @dataclass
@@ -129,7 +130,12 @@ def _resolve_attack(
         base_hit_chance = RANGED_ATTACK_HIT_CHANCE
         accuracy_modifier = _stat(actor, "accuracy")
         evasion_modifier = _stat(target, "evasion")
-        hit_chance = _clamp(base_hit_chance + accuracy_modifier - evasion_modifier, MIN_HIT_CHANCE, MAX_HIT_CHANCE)
+        terrain_modifier = _terrain_hit_modifier(state, actor, action_id)
+        hit_chance = _clamp(
+            base_hit_chance + accuracy_modifier - evasion_modifier + terrain_modifier,
+            MIN_HIT_CHANCE,
+            MAX_HIT_CHANCE,
+        )
         outcome = "hit" if roll <= hit_chance else "miss"
         sequence = _emit(
             state,
@@ -143,6 +149,7 @@ def _resolve_attack(
                 "base_hit_chance": base_hit_chance,
                 "accuracy_modifier": accuracy_modifier,
                 "evasion_modifier": evasion_modifier,
+                "terrain_modifier": terrain_modifier,
                 "hit_chance": hit_chance,
                 "outcome": outcome,
             },
@@ -428,6 +435,12 @@ def _stat(unit: dict[str, Any], stat_name: str) -> int:
 
 def _clamp(value: int, minimum: int, maximum: int) -> int:
     return max(minimum, min(maximum, value))
+
+
+def _terrain_hit_modifier(state: dict[str, Any], actor: dict[str, Any], action_id: str) -> int:
+    if action_id == "ranged_attack" and _tile_type(state, actor["position"]) == "highground":
+        return HIGHGROUND_RANGED_HIT_MODIFIER
+    return 0
 
 
 def _unit_by_id(state: dict[str, Any], unit_id: str) -> dict[str, Any] | None:

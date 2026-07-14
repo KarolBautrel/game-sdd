@@ -297,6 +297,26 @@ const SLICES := [
 			"unit_enemy_001": {"resources": {"hp": 6}},
 		},
 	},
+	{
+		"id": "slice_27_highground_increases_ranged_hit_chance",
+		"encounter": "res://resources/data/combat_encounters/slice_27_highground_increases_ranged_hit_chance.json",
+		"commands": "res://tests/data/combat_commands/slice_27_highground_increases_ranged_hit_chance_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"],
+		"expected_result": "in_progress",
+		"expected_hit_roll": {
+			"roll": 72,
+			"base_hit_chance": 70,
+			"accuracy_modifier": 0,
+			"evasion_modifier": 0,
+			"terrain_modifier": 10,
+			"hit_chance": 80,
+			"outcome": "hit",
+		},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 4}},
+		},
+	},
 ]
 
 

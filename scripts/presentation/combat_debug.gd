@@ -302,13 +302,14 @@ func _event_summary(event: Dictionary) -> String:
 	if event["type"] == "damage_applied":
 		return "(%s damage to %s)" % [event.get("damage", "?"), event.get("target_unit_id", "?")]
 	if event["type"] == "hit_roll_resolved":
-		return "(%s: roll %s vs %s%%, base %s + acc %s - eva %s)" % [
+		return "(%s: roll %s vs %s%%, base %s + acc %s - eva %s + terrain %s)" % [
 			event.get("outcome", "?"),
 			event.get("roll", "?"),
 			event.get("hit_chance", "?"),
 			event.get("base_hit_chance", "?"),
 			event.get("accuracy_modifier", "?"),
 			event.get("evasion_modifier", "?"),
+			event.get("terrain_modifier", "?"),
 		]
 	if event["type"] == "unit_moved":
 		return "(%s -> %s)" % [event.get("from", {}), event.get("to", {})]
