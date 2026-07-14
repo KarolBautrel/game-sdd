@@ -54,8 +54,14 @@ The project now has:
 - Ranged attack v1:
   - `ranged_attack` targets a living enemy up to range 3;
   - range uses Chebyshev distance to match current 8-way movement;
-  - no line of sight, cover, or hit chance is applied yet;
+  - no line of sight or cover is applied yet;
   - out-of-range targets are rejected with `target_out_of_range`.
+- Hit chance v1:
+  - `ranged_attack` resolves a deterministic 1-100 roll;
+  - base hit chance is 70%;
+  - `hit_roll_resolved` records roll, chance, and outcome;
+  - misses spend AP but do not apply damage;
+  - melee attacks still always hit.
 - Debug scene usability pass:
   - action buttons use readable labels;
   - ranged attack can be selected and tested;
@@ -94,6 +100,8 @@ Current verified slices:
 - `020_terrain_debug_visible.md`
 - `021_ranged_attack_in_range.md`
 - `022_ranged_attack_out_of_range.md`
+- `023_ranged_attack_hit_roll.md`
+- `024_ranged_attack_miss.md`
 
 ## Latest Update
 
@@ -110,6 +118,7 @@ Latest verified scope:
 - debug scene has a one-click enemy turn helper.
 - terrain v1 is specified and highground movement is verified.
 - ranged attack v1 is specified and verified in Python and Godot.
+- hit chance v1 is specified and verified in Python and Godot.
 - debug scene has a clearer status panel, unit panel, legend, and ranged attack button.
 
 ## Important Files
@@ -165,22 +174,21 @@ Interactive combat debug scene:
 
 These specs exist as planned placeholders:
 
-- hit chance;
 - line of sight;
 - cover.
 
 ## Recommended Next Step
 
-Implement hit chance v1:
+Implement accuracy/evasion stats v1:
 
-- deterministic hit roll from encounter seed and command id;
-- `hit_roll_resolved` event;
-- hit and miss outcomes for `ranged_attack`;
-- no accuracy/evasion stats yet unless the slice requires them.
+- add `accuracy` and `evasion` to combat unit stats;
+- keep base ranged hit chance at 70%;
+- calculate final hit chance from base + accuracy - evasion;
+- clamp final hit chance to a clear min/max range.
 
 Suggested slice:
 
 ```text
-docs/specs/combat/slices/023_ranged_attack_hit.md
-docs/specs/combat/slices/024_ranged_attack_miss.md
+docs/specs/combat/slices/025_accuracy_increases_hit_chance.md
+docs/specs/combat/slices/026_evasion_decreases_hit_chance.md
 ```

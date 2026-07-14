@@ -4,6 +4,8 @@ from copy import deepcopy
 from dataclasses import dataclass
 from typing import Any
 
+RANGED_ATTACK_HIT_CHANCE = 70
+
 
 @dataclass
 class SimulationResult:
@@ -77,9 +79,9 @@ def _resolve_command(state: dict[str, Any], command: dict[str, Any], sequence: i
         return _reject(state, sequence, command, "unsupported_command_type")
 
     if command["action_id"] == "basic_attack":
-        return _resolve_attack(state, command, sequence, action_id="basic_attack", max_range=1)
+        return _resolve_attack(state, command, sequence, action_id="basic_attack", max_range=1, uses_hit_chance=False)
     if command["action_id"] == "ranged_attack":
-        return _resolve_attack(state, command, sequence, action_id="ranged_attack", max_range=3)
+        return _resolve_attack(state, command, sequence, action_id="ranged_attack", max_range=3, uses_hit_chance=True)
     if command["action_id"] == "move":
         return _resolve_move(state, command, sequence)
     if command["action_id"] == "defend":
@@ -96,6 +98,7 @@ def _resolve_attack(
     sequence: int,
     action_id: str,
     max_range: int,
+    uses_hit_chance: bool,
 ) -> int:
     actor = _unit_by_id(state, command["actor_id"])
     target = _unit_by_id(state, command["target"].get("unit_id", ""))
@@ -105,9 +108,6 @@ def _resolve_attack(
         return _reject(state, sequence, command, rejection)
 
     actor["resources"]["ap"] -= 1
-    damage = max(1, actor["stats"]["strength"] - target["stats"]["defense"])
-    old_hp = target["resources"]["hp"]
-    target["resources"]["hp"] = max(0, old_hp - damage)
 
     sequence = _emit(
         state,
@@ -121,6 +121,29 @@ def _resolve_attack(
             "ap_spent": 1,
         },
     )
+
+    if uses_hit_chance:
+        roll = _deterministic_roll(state, command)
+        outcome = "hit" if roll <= RANGED_ATTACK_HIT_CHANCE else "miss"
+        sequence = _emit(
+            state,
+            sequence,
+            "hit_roll_resolved",
+            {
+                "command_id": command["id"],
+                "actor_id": actor["id"],
+                "target_unit_id": target["id"],
+                "roll": roll,
+                "hit_chance": RANGED_ATTACK_HIT_CHANCE,
+                "outcome": outcome,
+            },
+        )
+        if outcome == "miss":
+            return sequence
+
+    damage = max(1, actor["stats"]["strength"] - target["stats"]["defense"])
+    old_hp = target["resources"]["hp"]
+    target["resources"]["hp"] = max(0, old_hp - damage)
     sequence = _emit(
         state,
         sequence,
@@ -383,6 +406,11 @@ def _emit(state: dict[str, Any], sequence: int, event_type: str, payload: dict[s
     event.update(payload)
     state["event_log"].append(event)
     return sequence + 1
+
+
+def _deterministic_roll(state: dict[str, Any], command: dict[str, Any]) -> int:
+    command_hash = sum(ord(character) for character in command["id"])
+    return ((state["seed"] + command_hash * 17) % 100) + 1
 
 
 def _unit_by_id(state: dict[str, Any], unit_id: str) -> dict[str, Any] | None:

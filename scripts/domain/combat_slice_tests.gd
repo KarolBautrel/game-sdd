@@ -215,8 +215,9 @@ const SLICES := [
 		"id": "slice_21_ranged_attack_in_range",
 		"encounter": "res://resources/data/combat_encounters/slice_21_ranged_attack_in_range.json",
 		"commands": "res://tests/data/combat_commands/slice_21_ranged_attack_in_range_commands.json",
-		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied"],
+		"expected_events": ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"],
 		"expected_result": "in_progress",
+		"expected_hit_roll": {"roll": 38, "hit_chance": 70, "outcome": "hit"},
 		"unit_expectations": {
 			"unit_player_001": {"resources": {"ap": 0}},
 			"unit_enemy_001": {"resources": {"hp": 4}},
@@ -231,6 +232,30 @@ const SLICES := [
 		"expected_rejection": "target_out_of_range",
 		"unit_expectations": {
 			"unit_player_001": {"resources": {"ap": 1}},
+			"unit_enemy_001": {"resources": {"hp": 6}},
+		},
+	},
+	{
+		"id": "slice_23_ranged_attack_hit_roll",
+		"encounter": "res://resources/data/combat_encounters/slice_23_ranged_attack_hit_roll.json",
+		"commands": "res://tests/data/combat_commands/slice_23_ranged_attack_hit_roll_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"],
+		"expected_result": "in_progress",
+		"expected_hit_roll": {"roll": 40, "hit_chance": 70, "outcome": "hit"},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 4}},
+		},
+	},
+	{
+		"id": "slice_24_ranged_attack_miss",
+		"encounter": "res://resources/data/combat_encounters/slice_24_ranged_attack_miss.json",
+		"commands": "res://tests/data/combat_commands/slice_24_ranged_attack_miss_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "hit_roll_resolved"],
+		"expected_result": "in_progress",
+		"expected_hit_roll": {"roll": 72, "hit_chance": 70, "outcome": "miss"},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
 			"unit_enemy_001": {"resources": {"hp": 6}},
 		},
 	},
@@ -280,6 +305,14 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 			errors.append("%s: expected combat_ended event" % spec["id"])
 		elif ended.get("result", "") != spec["expected_combat_ended_result"]:
 			errors.append("%s: expected combat_ended result %s, got %s" % [spec["id"], spec["expected_combat_ended_result"], ended.get("result", "")])
+
+	if spec.has("expected_hit_roll"):
+		var hit_roll: Dictionary = _first_event(state, "hit_roll_resolved")
+		var expected_hit_roll: Dictionary = spec["expected_hit_roll"]
+		if hit_roll.is_empty():
+			errors.append("%s: expected hit_roll_resolved event" % spec["id"])
+		elif int(hit_roll.get("roll", 0)) != int(expected_hit_roll["roll"]) or int(hit_roll.get("hit_chance", 0)) != int(expected_hit_roll["hit_chance"]) or hit_roll.get("outcome", "") != expected_hit_roll["outcome"]:
+			errors.append("%s: unexpected hit roll payload %s" % [spec["id"], hit_roll])
 
 	if spec.has("expected_active_unit_id") and state["turn_state"]["active_unit_id"] != spec["expected_active_unit_id"]:
 		errors.append("%s: expected active unit %s, got %s" % [spec["id"], spec["expected_active_unit_id"], state["turn_state"]["active_unit_id"]])

@@ -6,6 +6,9 @@
     "requires_line_of_sight": false
   },
   "cost": { "ap": 1 },
+  "hit_chance": {
+    "base_percent": 70
+  },
   "effects": [
     {
       "type": "damage",

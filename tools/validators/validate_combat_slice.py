@@ -491,12 +491,16 @@ def validate_combat_slice_21() -> list[str]:
         errors.append(f"slice_21_ranged_attack_in_range: expected enemy HP 4, got {enemy['resources']['hp']}")
     if result.result != "in_progress":
         errors.append(f"slice_21_ranged_attack_in_range: expected result in_progress, got {result.result}")
-    if event_types != ["combat_started", "turn_started", "action_performed", "damage_applied"]:
+    if event_types != ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"]:
         errors.append(f"slice_21_ranged_attack_in_range: unexpected events {event_types}")
 
     performed = [event for event in state["event_log"] if event["type"] == "action_performed"]
     if len(performed) != 1 or performed[0].get("action_id") != "ranged_attack":
         errors.append("slice_21_ranged_attack_in_range: expected ranged_attack action_performed event")
+
+    roll_events = [event for event in state["event_log"] if event["type"] == "hit_roll_resolved"]
+    if len(roll_events) != 1 or roll_events[0].get("outcome") != "hit":
+        errors.append("slice_21_ranged_attack_in_range: expected hit roll outcome hit")
 
     replay = simulate(encounter, commands)
     if replay.state["event_log"] != state["event_log"]:
@@ -532,6 +536,71 @@ def validate_combat_slice_22() -> list[str]:
     replay = simulate(encounter, commands)
     if replay.state["event_log"] != state["event_log"]:
         errors.append("slice_22_ranged_attack_out_of_range: replay event log differs")
+
+    return errors
+
+
+def validate_combat_slice_23() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_23_ranged_attack_hit_roll.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_23_ranged_attack_hit_roll_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if player["resources"]["ap"] != 0:
+        errors.append("slice_23_ranged_attack_hit_roll: expected player AP to be 0")
+    if enemy["resources"]["hp"] != 4:
+        errors.append(f"slice_23_ranged_attack_hit_roll: expected enemy HP 4, got {enemy['resources']['hp']}")
+    if event_types != ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"]:
+        errors.append(f"slice_23_ranged_attack_hit_roll: unexpected events {event_types}")
+
+    roll = [event for event in state["event_log"] if event["type"] == "hit_roll_resolved"]
+    if len(roll) != 1:
+        errors.append("slice_23_ranged_attack_hit_roll: expected one hit_roll_resolved event")
+    elif roll[0].get("roll") != 40 or roll[0].get("hit_chance") != 70 or roll[0].get("outcome") != "hit":
+        errors.append(f"slice_23_ranged_attack_hit_roll: unexpected roll payload {roll[0]}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_23_ranged_attack_hit_roll: replay event log differs")
+
+    return errors
+
+
+def validate_combat_slice_24() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_24_ranged_attack_miss.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_24_ranged_attack_miss_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if player["resources"]["ap"] != 0:
+        errors.append("slice_24_ranged_attack_miss: expected player AP to be 0")
+    if enemy["resources"]["hp"] != 6:
+        errors.append("slice_24_ranged_attack_miss: expected enemy HP to remain 6")
+    if event_types != ["combat_started", "turn_started", "action_performed", "hit_roll_resolved"]:
+        errors.append(f"slice_24_ranged_attack_miss: unexpected events {event_types}")
+
+    roll = [event for event in state["event_log"] if event["type"] == "hit_roll_resolved"]
+    if len(roll) != 1:
+        errors.append("slice_24_ranged_attack_miss: expected one hit_roll_resolved event")
+    elif roll[0].get("roll") != 72 or roll[0].get("hit_chance") != 70 or roll[0].get("outcome") != "miss":
+        errors.append(f"slice_24_ranged_attack_miss: unexpected roll payload {roll[0]}")
+
+    if any(event["type"] == "damage_applied" for event in state["event_log"]):
+        errors.append("slice_24_ranged_attack_miss: damage_applied should not be emitted")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_24_ranged_attack_miss: replay event log differs")
 
     return errors
 
@@ -644,6 +713,8 @@ def main() -> int:
     errors.extend(validate_combat_slice_19())
     errors.extend(validate_combat_slice_21())
     errors.extend(validate_combat_slice_22())
+    errors.extend(validate_combat_slice_23())
+    errors.extend(validate_combat_slice_24())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:

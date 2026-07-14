@@ -1,32 +1,45 @@
 # 021 Hit Chance
 
-Status: planned  
+Status: specified  
 Date: 2026-07-14
 
 ## Intent
 
-Hit chance resolves whether an attack hits, misses, grazes, or critically hits.
+Hit chance resolves whether an attack hits or misses.
 
-## Planned Scope
+## Scope V1
 
-- deterministic RNG seed use;
+- `ranged_attack` uses hit chance.
+- `basic_attack` still always hits.
+- Base ranged hit chance is 70%.
+- Roll range is 1-100.
+- A roll hits when `roll <= hit_chance`.
+- The roll is deterministic from encounter seed and command id.
+- The resolver emits `hit_roll_resolved` before damage is applied.
+- A hit continues to `damage_applied`.
+- A miss does not emit `damage_applied`.
+- AP is spent whether the attack hits or misses.
+
+## Event Shape
+
+`hit_roll_resolved` contains:
+
+- `command_id`
+- `actor_id`
+- `target_unit_id`
+- `roll`
+- `hit_chance`
+- `outcome`
+
+`outcome` is either `hit` or `miss`.
+
+## Deferred
+
 - accuracy stat;
 - evasion stat;
 - cover modifiers;
 - distance modifiers;
-- hit roll event shape;
-- replay stability.
-
-## Deferred Until
-
-- deterministic round cycle exists;
-- event log is stable for at least one complete combat;
-- ranged targeting and line of sight are specified.
-
-## Initial Questions
-
-- Should melee attacks always hit in the early slice?
-- Should hit chance be shown to the player before command confirmation?
-- Is the target result binary hit/miss, or hit/graze/miss/crit?
-- Should random rolls be precomputed or generated at command resolution?
-
+- highground modifiers;
+- graze;
+- critical hit;
+- UI preview before command confirmation.

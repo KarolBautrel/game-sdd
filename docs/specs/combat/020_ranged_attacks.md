@@ -16,11 +16,13 @@ Ranged attacks allow units to target enemies beyond adjacent melee range.
 - The target must be a living enemy unit.
 - The actor must be the active living unit.
 - The actor must have `ranged_attack` in `available_actions`.
-- Damage uses the current deterministic prototype formula:
+- Hit chance is resolved by `021_hit_chance.md`.
+- On hit, damage uses the current deterministic prototype formula:
   - `max(1, attacker.strength - target.defense)`
 - The action emits the same deterministic event shape as melee:
   - `action_performed`
-  - `damage_applied`
+- `hit_roll_resolved`
+- optional `damage_applied`
   - optional `unit_defeated`
   - optional `combat_ended`
 
@@ -44,6 +46,5 @@ Ranged attacks allow units to target enemies beyond adjacent melee range.
 - cooldowns;
 - line of sight;
 - cover;
-- hit chance;
 - reaction attacks;
 - area ranged skills.

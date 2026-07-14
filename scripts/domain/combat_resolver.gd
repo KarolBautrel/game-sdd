@@ -1,6 +1,8 @@
 extends RefCounted
 class_name CombatResolver
 
+const RANGED_ATTACK_HIT_CHANCE := 70
+
 
 static func simulate(encounter: Dictionary, commands: Array) -> Dictionary:
 	var state: Dictionary = encounter.duplicate(true)
@@ -66,9 +68,9 @@ static func _resolve_command(state: Dictionary, command: Dictionary, sequence: i
 
 	match command["action_id"]:
 		"basic_attack":
-			return _resolve_attack(state, command, sequence, "basic_attack", 1)
+			return _resolve_attack(state, command, sequence, "basic_attack", 1, false)
 		"ranged_attack":
-			return _resolve_attack(state, command, sequence, "ranged_attack", 3)
+			return _resolve_attack(state, command, sequence, "ranged_attack", 3, true)
 		"move":
 			return _resolve_move(state, command, sequence)
 		"defend":
@@ -79,7 +81,7 @@ static func _resolve_command(state: Dictionary, command: Dictionary, sequence: i
 			return _reject(state, sequence, command, "unsupported_action")
 
 
-static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: int, action_id: String, max_range: int) -> int:
+static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: int, action_id: String, max_range: int, uses_hit_chance: bool) -> int:
 	var actor := _unit_by_id(state, command["actor_id"])
 	var target := _unit_by_id(state, command["target"].get("unit_id", ""))
 
@@ -88,9 +90,6 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 		return _reject(state, sequence, command, rejection)
 
 	actor["resources"]["ap"] -= 1
-	var damage: int = max(1, actor["stats"]["strength"] - target["stats"]["defense"])
-	var old_hp: int = target["resources"]["hp"]
-	target["resources"]["hp"] = max(0, old_hp - damage)
 
 	sequence = _emit(state, sequence, "action_performed", {
 		"command_id": command["id"],
@@ -99,6 +98,25 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 		"target_unit_id": target["id"],
 		"ap_spent": 1,
 	})
+
+	if uses_hit_chance:
+		var roll := _deterministic_roll(state, command)
+		var outcome := "hit" if roll <= RANGED_ATTACK_HIT_CHANCE else "miss"
+		sequence = _emit(state, sequence, "hit_roll_resolved", {
+			"command_id": command["id"],
+			"actor_id": actor["id"],
+			"target_unit_id": target["id"],
+			"roll": roll,
+			"hit_chance": RANGED_ATTACK_HIT_CHANCE,
+			"outcome": outcome,
+		})
+		if outcome == "miss":
+			return sequence
+
+	var damage: int = max(1, actor["stats"]["strength"] - target["stats"]["defense"])
+	var old_hp: int = target["resources"]["hp"]
+	target["resources"]["hp"] = max(0, old_hp - damage)
+
 	sequence = _emit(state, sequence, "damage_applied", {
 		"command_id": command["id"],
 		"actor_id": actor["id"],
@@ -292,6 +310,14 @@ static func _emit(state: Dictionary, sequence: int, event_type: String, payload:
 		event[key] = payload[key]
 	state["event_log"].append(event)
 	return sequence + 1
+
+
+static func _deterministic_roll(state: Dictionary, command: Dictionary) -> int:
+	var command_hash := 0
+	for index in range(command["id"].length()):
+		command_hash += command["id"].unicode_at(index)
+	var total := int(state["seed"]) + command_hash * 17
+	return total % 100 + 1
 
 
 static func _unit_by_id(state: Dictionary, unit_id: String) -> Dictionary:

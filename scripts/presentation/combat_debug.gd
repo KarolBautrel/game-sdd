@@ -299,6 +299,12 @@ func _event_summary(event: Dictionary) -> String:
 		return "(%s)" % event.get("reason", "")
 	if event["type"] == "damage_applied":
 		return "(%s damage to %s)" % [event.get("damage", "?"), event.get("target_unit_id", "?")]
+	if event["type"] == "hit_roll_resolved":
+		return "(%s: roll %s vs %s%%)" % [
+			event.get("outcome", "?"),
+			event.get("roll", "?"),
+			event.get("hit_chance", "?"),
+		]
 	if event["type"] == "unit_moved":
 		return "(%s -> %s)" % [event.get("from", {}), event.get("to", {})]
 	if event.has("action_id"):
@@ -313,6 +319,9 @@ func _feedback_from_events(events: Array) -> String:
 	for event: Dictionary in events:
 		if event["type"] == "combat_ended":
 			return "Combat ended: %s" % event.get("result", "unknown")
+	for event: Dictionary in events:
+		if event["type"] == "hit_roll_resolved" and event.get("outcome", "") == "miss":
+			return "Miss: roll %s vs %s%%" % [event.get("roll", "?"), event.get("hit_chance", "?")]
 	for event: Dictionary in events:
 		if event["type"] == "damage_applied":
 			return "Damage: %s to %s" % [event.get("damage", "?"), event.get("target_unit_id", "?")]
