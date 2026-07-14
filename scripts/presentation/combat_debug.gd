@@ -2,7 +2,8 @@ extends Control
 
 const CombatResolver := preload("res://scripts/domain/combat_resolver.gd")
 
-const DEFAULT_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_03_move.json"
+const DEFAULT_ENCOUNTER_PATH := "res://resources/data/combat_encounters/debug_full_combat_showcase.json"
+const FULL_COMBAT_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_full_combat_showcase.json"
 const LOS_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_28_ranged_attack_blocked_by_line_of_sight.json"
 const COVER_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_29_cover_reduces_ranged_hit_chance.json"
 const RANGED_AI_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_30_enemy_ai_ranged_attack.json"
@@ -29,30 +30,20 @@ const WEAPON_GRANTS_POWER_STRIKE_TEST_ENCOUNTER_PATH := "res://resources/data/co
 const ARMOR_REDUCES_DAMAGE_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_58_armor_reduces_damage.json"
 const SHIELD_WALL_DAMAGE_REDUCTION_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_59_shield_wall_applies_damage_reduction.json"
 const MOVEMENT_POINTS_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_60_movement_points_multi_tile.json"
-const UNIT_ICON_SIZE := Vector2i(108, 108)
-const PLAYER_UNIT_TEXTURES := {
-	"south": "res://assets/combat/units/heroes/warrior/warrior_south.png",
-	"north": "res://assets/combat/units/heroes/warrior/warrior_north.png",
-	"east": "res://assets/combat/units/heroes/warrior/warrior_east.png",
-	"west": "res://assets/combat/units/heroes/warrior/warrior_west.png",
-	"north_east": "res://assets/combat/units/heroes/warrior/warrior_north_east.png",
-	"north_west": "res://assets/combat/units/heroes/warrior/warrior_north_west.png",
-	"south_east": "res://assets/combat/units/heroes/warrior/warrior_south_east.png",
-	"south_west": "res://assets/combat/units/heroes/warrior/warrior_south_west.png",
+const AP_MP_ECONOMY_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_61_ap_mp_turn_economy.json"
+const UNIT_ICON_SIZE := Vector2i(90, 90)
+const UNIT_RESOURCE_LABEL_SIZE := Vector2(104, 18)
+const TILE_SIZE := 76
+const TILE_GAP := 2
+const MOVE_STEP_SECONDS := 0.52
+const COMBAT_LUNGE_PIXELS := 18.0
+const COMBAT_WINDUP_SECONDS := 0.09
+const COMBAT_RETURN_SECONDS := 0.14
+const UNIT_VISUALS := {
+	"unit_player_001": {"faction": "heroes", "character": "warrior"},
+	"unit_enemy_001": {"faction": "villains", "character": "enemy_orc"},
+	"unit_enemy_002": {"faction": "villains", "character": "enemy_skeleton"},
 }
-const ENEMY_UNIT_TEXTURES := {
-	"south": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_south.png",
-	"north": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_north.png",
-	"east": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_east.png",
-	"west": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_west.png",
-	"north_east": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_north_east.png",
-	"north_west": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_north_west.png",
-	"south_east": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_south_east.png",
-	"south_west": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_south_west.png",
-}
-const TILE_SIZE := 96
-const TILE_GAP := 8
-const MOVE_STEP_SECONDS := 0.22
 const COMMAND_ACTION_IDS := ["move", "basic_attack", "ranged_attack", "aimed_shot", "power_strike", "shield_wall", "defend", "end_turn", "enemy_ai", "enemy_turn"]
 const ACTION_LABELS := {
 	"move": "Move",
@@ -64,8 +55,9 @@ const ACTION_LABELS := {
 	"defend": "Defend",
 	"end_turn": "End turn",
 	"enemy_ai": "Enemy AI once",
-	"enemy_turn": "Enemy turn helper",
+	"enemy_turn": "Next turn step",
 	"reset": "Reset encounter",
+	"full_combat_showcase": "Full combat showcase",
 	"load_los_test": "Load LoS test",
 	"load_cover_test": "Load Cover test",
 	"load_ranged_ai_test": "Load Ranged AI test",
@@ -102,12 +94,14 @@ var command_index := 1
 var selected_action := "move"
 var last_feedback := "Select an action."
 var current_encounter_path := DEFAULT_ENCOUNTER_PATH
-var selected_scenario_id := "reset"
+var selected_scenario_id := "full_combat_showcase"
 var selected_position: Dictionary = {}
 var unit_facing: Dictionary = {}
+var unit_visual_action: Dictionary = {}
 var unit_texture_cache: Dictionary = {}
 var visual_positions_px: Dictionary = {}
 var visual_generation := 0
+var animation_locked := false
 
 
 func _ready() -> void:
@@ -120,6 +114,7 @@ func _reset_debug_encounter() -> void:
 	command_index = 1
 	selected_action = "move"
 	unit_facing.clear()
+	unit_visual_action.clear()
 	visual_positions_px.clear()
 	last_feedback = "Encounter reset."
 	var result := CombatResolver.simulate(state, [])
@@ -152,6 +147,7 @@ func _render() -> void:
 
 func _build_tile(position: Dictionary) -> Button:
 	var tile := Button.new()
+	tile.disabled = animation_locked
 	tile.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
 	tile.text = _tile_text(position)
 	tile.tooltip_text = _tile_tooltip(position)
@@ -161,50 +157,30 @@ func _build_tile(position: Dictionary) -> Button:
 
 	var unit := _living_unit_at(position)
 	if _tile_type(position) == "blocked":
-		tile.modulate = Color(0.32, 0.32, 0.34)
+		tile.modulate = Color(0.34, 0.34, 0.35)
 	elif _tile_type(position) == "highground":
-		tile.modulate = Color(0.84, 0.72, 0.42)
+		tile.modulate = Color(0.66, 0.60, 0.42)
 	elif _tile_type(position) == "cover_low":
-		tile.modulate = Color(0.46, 0.62, 0.42)
+		tile.modulate = Color(0.42, 0.52, 0.39)
 	else:
-		tile.modulate = Color(0.64, 0.66, 0.58)
+		tile.modulate = Color(0.55, 0.56, 0.52)
 
 	if _is_active_unit_at(position):
-		tile.modulate = Color(1.0, 0.92, 0.35)
+		tile.modulate = Color(0.83, 0.78, 0.45)
 	elif not unit.is_empty() and unit["team"] == "player":
-		tile.modulate = Color(0.55, 0.8, 1.0)
+		tile.modulate = Color(0.45, 0.58, 0.68)
 	elif not unit.is_empty():
-		tile.modulate = Color(1.0, 0.48, 0.42)
+		tile.modulate = Color(0.70, 0.43, 0.40)
 	elif _is_legal_target_for_selected_action(position):
-		tile.modulate = Color(0.55, 1.0, 0.55)
+		tile.modulate = Color(0.50, 0.70, 0.47)
 	elif _positions_equal(selected_position, position):
-		tile.modulate = Color(0.78, 0.78, 1.0)
+		tile.modulate = Color(0.58, 0.58, 0.72)
 
 	return tile
 
 
 func _tile_text(position: Dictionary) -> String:
-	var unit := _living_unit_at(position)
-	if unit.is_empty():
-		match _tile_type(position):
-			"blocked":
-				return "BLOCK"
-			"highground":
-				return "HIGH"
-			"cover_low":
-				return "COVER"
-			_:
-				return ""
-
-	var hp: int = unit["resources"]["hp"]
-	var ap: int = unit["resources"]["ap"]
-	var mp_label := ""
-	if unit["resources"].has("mp"):
-		mp_label = " MP %s" % unit["resources"]["mp"]
-	var tile_marker := _occupied_tile_marker(position)
-	if unit["team"] == "player":
-		return "%s\nHP %s AP %s%s" % [tile_marker, hp, ap, mp_label]
-	return "%s\nHP %s AP %s%s" % [tile_marker, hp, ap, mp_label]
+	return ""
 
 
 func _occupied_tile_marker(position: Dictionary) -> String:
@@ -236,7 +212,7 @@ func _render_feedback() -> void:
 
 
 func _render_legend() -> void:
-	legend_label.text = "Blue player | Red enemy | Yellow active | Green legal | Lavender inspected | Gold highground | Olive cover | Dark blocked"
+	legend_label.text = "Blue player | Red enemy | Active muted gold | Legal green | Highground ochre | Cover olive | Blocked dark"
 
 
 func _render_unit_list() -> void:
@@ -342,17 +318,21 @@ func _render_command_buttons() -> void:
 func _add_button_section(title: String) -> void:
 	var label := Label.new()
 	label.text = title
-	label.add_theme_font_size_override("font_size", 14)
+	label.add_theme_font_size_override("font_size", 12)
 	command_buttons.add_child(label)
 
 
 func _add_action_button(action_id: String) -> void:
 	var button := Button.new()
 	button.text = ACTION_LABELS.get(action_id, action_id)
+	button.custom_minimum_size = Vector2(0, 24)
+	button.add_theme_font_size_override("font_size", 11)
 	button.toggle_mode = true
 	button.button_pressed = selected_action == action_id
-	button.disabled = _combat_result() != "in_progress"
+	button.disabled = animation_locked or _combat_result() != "in_progress"
 	button.pressed.connect(func() -> void:
+		if animation_locked:
+			return
 		selected_action = action_id
 		if action_id == "enemy_turn":
 			_run_enemy_turn_helper()
@@ -370,6 +350,8 @@ func _add_action_button(action_id: String) -> void:
 func _add_scenario_picker() -> void:
 	var picker := OptionButton.new()
 	picker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	picker.custom_minimum_size = Vector2(0, 24)
+	picker.add_theme_font_size_override("font_size", 11)
 
 	var selected_index := 0
 	var options := _scenario_options()
@@ -389,6 +371,9 @@ func _add_scenario_picker() -> void:
 	var load_button := Button.new()
 	load_button.text = "Load selected test"
 	load_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	load_button.disabled = animation_locked
+	load_button.custom_minimum_size = Vector2(0, 24)
+	load_button.add_theme_font_size_override("font_size", 11)
 	load_button.pressed.connect(func() -> void:
 		_load_selected_scenario()
 	)
@@ -396,6 +381,8 @@ func _add_scenario_picker() -> void:
 
 
 func _load_selected_scenario() -> void:
+	if animation_locked:
+		return
 	for option: Dictionary in _scenario_options():
 		if option["id"] == selected_scenario_id:
 			current_encounter_path = option["path"]
@@ -408,37 +395,13 @@ func _load_selected_scenario() -> void:
 
 func _scenario_options() -> Array[Dictionary]:
 	return [
-		{"id": "reset", "label": "Default move", "path": DEFAULT_ENCOUNTER_PATH},
-		{"id": "load_los_test", "label": "LoS blocked shot", "path": LOS_TEST_ENCOUNTER_PATH},
-		{"id": "load_cover_test", "label": "Cover", "path": COVER_TEST_ENCOUNTER_PATH},
-		{"id": "load_ranged_ai_test", "label": "Ranged enemy AI", "path": RANGED_AI_TEST_ENCOUNTER_PATH},
-		{"id": "load_pathfinding_test", "label": "Pathfinding obstacle", "path": PATHFINDING_TEST_ENCOUNTER_PATH},
-		{"id": "load_low_chance_ai_test", "label": "Low chance AI approach", "path": LOW_CHANCE_AI_TEST_ENCOUNTER_PATH},
-		{"id": "load_multi_enemy_test", "label": "Multi enemy", "path": MULTI_ENEMY_TEST_ENCOUNTER_PATH},
-		{"id": "load_bottleneck_test", "label": "Bottleneck spacing", "path": BOTTLENECK_TEST_ENCOUNTER_PATH},
-		{"id": "load_mixed_roles_test", "label": "Mixed melee/ranged roles", "path": MIXED_ROLES_TEST_ENCOUNTER_PATH},
-		{"id": "load_target_selection_test", "label": "Target selection", "path": TARGET_SELECTION_TEST_ENCOUNTER_PATH},
-		{"id": "load_intercept_test", "label": "Ranged intercept", "path": INTERCEPT_TEST_ENCOUNTER_PATH},
-		{"id": "load_weapon_melee_test", "label": "Weapon melee damage", "path": WEAPON_MELEE_TEST_ENCOUNTER_PATH},
-		{"id": "load_weapon_ranged_test", "label": "Weapon ranged range/hit", "path": WEAPON_RANGED_TEST_ENCOUNTER_PATH},
-		{"id": "load_weapon_ap_cost_test", "label": "Weapon AP cost blocked", "path": WEAPON_AP_COST_TEST_ENCOUNTER_PATH},
-		{"id": "load_power_strike_test", "label": "Power strike", "path": POWER_STRIKE_TEST_ENCOUNTER_PATH},
-		{"id": "load_weapon_ap_cost_success_test", "label": "Weapon AP cost success", "path": WEAPON_AP_COST_SUCCESS_TEST_ENCOUNTER_PATH},
-		{"id": "load_enemy_power_strike_test", "label": "Enemy power strike", "path": ENEMY_POWER_STRIKE_TEST_ENCOUNTER_PATH},
-		{"id": "load_enemy_power_strike_cooldown_test", "label": "Enemy power strike cooldown", "path": ENEMY_POWER_STRIKE_COOLDOWN_TEST_ENCOUNTER_PATH},
-		{"id": "load_skill_cooldown_expires_test", "label": "Skill cooldown expires", "path": SKILL_COOLDOWN_EXPIRES_TEST_ENCOUNTER_PATH},
-		{"id": "load_weapon_loadout_test", "label": "Loadout weapon grants melee", "path": WEAPON_LOADOUT_TEST_ENCOUNTER_PATH},
-		{"id": "load_bow_required_test", "label": "Bow required for ranged", "path": BOW_REQUIRED_TEST_ENCOUNTER_PATH},
-		{"id": "load_shield_required_test", "label": "Shield required for shield wall", "path": SHIELD_REQUIRED_TEST_ENCOUNTER_PATH},
-		{"id": "load_two_handed_blocks_shield_test", "label": "Two-handed blocks shield", "path": TWO_HANDED_BLOCKS_SHIELD_TEST_ENCOUNTER_PATH},
-		{"id": "load_weapon_grants_power_strike_test", "label": "Weapon grants power strike", "path": WEAPON_GRANTS_POWER_STRIKE_TEST_ENCOUNTER_PATH},
-		{"id": "load_armor_reduces_damage_test", "label": "Armor reduces damage", "path": ARMOR_REDUCES_DAMAGE_TEST_ENCOUNTER_PATH},
-		{"id": "load_shield_wall_damage_reduction_test", "label": "Shield wall damage reduction", "path": SHIELD_WALL_DAMAGE_REDUCTION_TEST_ENCOUNTER_PATH},
-		{"id": "load_movement_points_test", "label": "Movement points multi-tile", "path": MOVEMENT_POINTS_TEST_ENCOUNTER_PATH},
+		{"id": "full_combat_showcase", "label": "Full combat showcase", "path": FULL_COMBAT_SHOWCASE_PATH},
 	]
 
 
 func _on_tile_pressed(position: Dictionary) -> void:
+	if animation_locked:
+		return
 	selected_position = position.duplicate(true)
 	if selected_action == "move":
 		_run_command(_build_command("move", {
@@ -483,56 +446,62 @@ func _build_command(action_id: String, target: Dictionary) -> Dictionary:
 
 
 func _run_command(command: Dictionary) -> void:
+	if animation_locked:
+		return
 	if _combat_result() != "in_progress":
 		last_feedback = "Combat already ended."
 		_render()
 		return
 
 	var previous_log: Array = state["event_log"].duplicate(true)
-	var result := CombatResolver.simulate(_state_without_log(), [command])
-	state = result["state"]
-	var new_events: Array = _events_after_startup(result["state"]["event_log"])
-	state["event_log"] = previous_log + new_events
-	last_feedback = _feedback_from_events(new_events)
+	var previous_state := _state_without_log()
+	var result := CombatResolver.simulate(previous_state, [command])
+	var next_state: Dictionary = result["state"]
+	var new_events: Array = _events_after_startup(next_state["event_log"])
+	var next_log := previous_log + new_events
+	var next_feedback := _feedback_from_events(new_events)
 	command_index += 1
 	_capture_unit_facings(new_events)
 	var has_movement_animation := _prepare_movement_animation(new_events)
-	_render()
+	var has_combat_flash := _prepare_combat_flash(new_events)
 	if has_movement_animation:
-		_play_movement_animation(new_events)
+		last_feedback = next_feedback
+		animation_locked = true
+		_render()
+		_play_movement_animation(new_events, next_state, next_log)
+		return
+
+	state = next_state
+	state["event_log"] = next_log
+	last_feedback = next_feedback
+	_render()
+	if has_combat_flash:
+		_play_combat_animation(new_events)
 	else:
 		_schedule_visual_reset()
 
 
 func _run_enemy_turn_helper() -> void:
+	if animation_locked:
+		return
 	if _combat_result() != "in_progress":
 		last_feedback = "Combat already ended."
 		_render()
 		return
 
-	var safety_limit := 4
-	while safety_limit > 0 and _combat_result() == "in_progress":
-		var active := _unit_by_id(state["turn_state"]["active_unit_id"])
-		if active.is_empty():
-			last_feedback = "No active unit."
-			break
+	var active := _unit_by_id(state["turn_state"]["active_unit_id"])
+	if active.is_empty():
+		last_feedback = "No active unit."
+		_render()
+		return
 
-		if active["team"] == "player":
-			_run_command_without_render(_build_command("end_turn", {}))
-		elif active["team"] == "enemy":
-			_run_command_without_render(CombatResolver.choose_enemy_command(state, "cmd_%03d" % command_index))
-		else:
-			last_feedback = "Unknown active team."
-			break
-
-		var next_active := _unit_by_id(state["turn_state"]["active_unit_id"])
-		if next_active.is_empty() or next_active["team"] == "player":
-			break
-
-		safety_limit -= 1
-
-	last_feedback = "Enemy turn helper complete."
-	_render()
+	if active["team"] == "player":
+		_run_command(_build_command("end_turn", {}))
+	elif active["team"] == "enemy":
+		_run_command(CombatResolver.choose_enemy_command(state, "cmd_%03d" % command_index))
+	else:
+		last_feedback = "Unknown active team."
+		_render()
 
 
 func _run_command_without_render(command: Dictionary) -> void:
@@ -657,13 +626,14 @@ func _capture_unit_facings(events: Array) -> void:
 
 
 func _schedule_visual_reset() -> void:
-	if unit_facing.is_empty():
+	if unit_facing.is_empty() and unit_visual_action.is_empty():
 		return
 	visual_generation += 1
 	var current_generation := visual_generation
-	get_tree().create_timer(0.35).timeout.connect(func() -> void:
+	get_tree().create_timer(0.45).timeout.connect(func() -> void:
 		if current_generation != visual_generation:
 			return
+		unit_visual_action.clear()
 		_render()
 	)
 
@@ -677,39 +647,119 @@ func _prepare_movement_animation(events: Array) -> bool:
 		if actor_id == "":
 			continue
 		visual_positions_px[actor_id] = _position_to_unit_top_left(event.get("from", {}))
+		unit_visual_action[actor_id] = "walk"
 		prepared = true
 	return prepared
 
 
-func _play_movement_animation(events: Array) -> void:
+func _prepare_combat_flash(events: Array) -> bool:
+	var prepared := false
+	for event: Dictionary in events:
+		if event["type"] != "damage_applied" and event["type"] != "hit_roll_resolved":
+			continue
+		var actor_id := str(event.get("actor_id", ""))
+		if actor_id == "":
+			continue
+		unit_visual_action[actor_id] = "combat"
+		prepared = true
+	return prepared
+
+
+func _play_combat_animation(events: Array) -> void:
+	animation_locked = true
 	visual_generation += 1
 	var current_generation := visual_generation
-	_play_movement_animation_async(events, current_generation)
+	var tween := create_tween()
+	var tween_has_steps := false
+	var animated_actors: Dictionary = {}
+
+	for event: Dictionary in events:
+		if event["type"] != "damage_applied" and event["type"] != "hit_roll_resolved":
+			continue
+		var actor_id := str(event.get("actor_id", ""))
+		if actor_id == "" or animated_actors.has(actor_id):
+			continue
+		var actor := _unit_by_id(actor_id)
+		if actor.is_empty():
+			continue
+		var unit_node := unit_layer.get_node_or_null(actor_id)
+		if unit_node == null:
+			continue
+		var target := _unit_by_id(str(event.get("target_unit_id", "")))
+		var origin := _unit_visual_pixel_position(actor)
+		var lunge := _combat_lunge_offset(actor, target)
+		tween.tween_property(unit_node, "position", origin + lunge, COMBAT_WINDUP_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tween.tween_property(unit_node, "position", origin, COMBAT_RETURN_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		animated_actors[actor_id] = true
+		tween_has_steps = true
+
+	if not tween_has_steps:
+		_finish_combat_animation(current_generation)
+		return
+
+	tween.finished.connect(func() -> void:
+		_finish_combat_animation(current_generation)
+	)
 
 
-func _play_movement_animation_async(events: Array, current_generation: int) -> void:
+func _finish_combat_animation(current_generation: int) -> void:
+	if current_generation != visual_generation:
+		return
+	unit_visual_action.clear()
+	animation_locked = false
+	_render()
+
+
+func _combat_lunge_offset(actor: Dictionary, target: Dictionary) -> Vector2:
+	if target.is_empty():
+		return Vector2(0, -COMBAT_LUNGE_PIXELS)
+	var dx := float(int(target["position"]["x"]) - int(actor["position"]["x"]))
+	var dy := float(int(target["position"]["y"]) - int(actor["position"]["y"]))
+	var direction := Vector2(dx, dy)
+	if direction.length() <= 0.001:
+		return Vector2(0, -COMBAT_LUNGE_PIXELS)
+	return direction.normalized() * COMBAT_LUNGE_PIXELS
+
+
+func _play_movement_animation(events: Array, next_state: Dictionary, next_log: Array) -> void:
+	visual_generation += 1
+	var current_generation := visual_generation
+	var tween := create_tween()
+	var tween_has_steps := false
 	for event: Dictionary in events:
 		if event["type"] != "unit_moved":
 			continue
 		var actor_id := str(event.get("actor_id", ""))
 		var path: Array = event.get("path", [event.get("to", {})])
 		var unit_node := unit_layer.get_node_or_null(actor_id)
+		if unit_node == null:
+			continue
 		for step: Dictionary in path:
-			if current_generation != visual_generation:
-				return
 			var target_position := _position_to_unit_top_left(step)
-			visual_positions_px[actor_id] = target_position
-			if unit_node != null:
-				var tween := create_tween()
-				tween.tween_property(unit_node, "position", target_position, MOVE_STEP_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-				await tween.finished
-			else:
-				_render()
-				await get_tree().create_timer(MOVE_STEP_SECONDS).timeout
+			tween.tween_property(unit_node, "position", target_position, MOVE_STEP_SECONDS).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+			tween_has_steps = true
+	if not tween_has_steps:
+		_finish_movement_animation(events, current_generation, next_state, next_log)
+		return
+	tween.finished.connect(func() -> void:
+		_finish_movement_animation(events, current_generation, next_state, next_log)
+	)
+
+
+func _finish_movement_animation(events: Array, current_generation: int, next_state: Dictionary, next_log: Array) -> void:
+	if current_generation != visual_generation:
+		return
+	for event: Dictionary in events:
+		if event["type"] != "unit_moved":
+			continue
+		var actor_id := str(event.get("actor_id", ""))
 		visual_positions_px.erase(actor_id)
-	if current_generation == visual_generation:
-		_render()
-		_schedule_visual_reset()
+		unit_visual_action.erase(actor_id)
+	state = next_state
+	state["event_log"] = next_log
+	animation_locked = false
+	_render()
+	_schedule_visual_reset()
 
 
 func _clear_grid() -> void:
@@ -737,23 +787,58 @@ func _render_units() -> void:
 	for unit: Dictionary in state["units"]:
 		if unit["resources"]["hp"] <= 0:
 			continue
+		var unit_node := Control.new()
+		unit_node.name = unit["id"]
+		unit_node.custom_minimum_size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
+		unit_node.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
+		unit_node.position = _unit_visual_pixel_position(unit)
+		unit_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 		var sprite := TextureRect.new()
-		sprite.name = unit["id"]
+		sprite.name = "Sprite"
 		sprite.texture = _unit_icon(unit)
 		sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		sprite.custom_minimum_size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
 		sprite.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
-		sprite.position = _unit_visual_pixel_position(unit)
 		sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		unit_layer.add_child(sprite)
+		unit_node.add_child(sprite)
+
+		var resource_label := Label.new()
+		resource_label.name = "Resources"
+		resource_label.text = _unit_resource_text(unit)
+		resource_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		resource_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		resource_label.custom_minimum_size = UNIT_RESOURCE_LABEL_SIZE
+		resource_label.size = UNIT_RESOURCE_LABEL_SIZE
+		resource_label.position = Vector2(
+			(float(UNIT_ICON_SIZE.x) - UNIT_RESOURCE_LABEL_SIZE.x) / 2.0,
+			float(UNIT_ICON_SIZE.y) - UNIT_RESOURCE_LABEL_SIZE.y
+		)
+		resource_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		resource_label.add_theme_font_size_override("font_size", 10)
+		resource_label.add_theme_color_override("font_color", Color(0.96, 0.96, 0.90))
+		resource_label.add_theme_color_override("font_shadow_color", Color(0.04, 0.04, 0.04, 0.95))
+		resource_label.add_theme_constant_override("shadow_offset_x", 1)
+		resource_label.add_theme_constant_override("shadow_offset_y", 1)
+		unit_node.add_child(resource_label)
+
+		unit_layer.add_child(unit_node)
+
+
+func _unit_resource_text(unit: Dictionary) -> String:
+	return "HP %s  AP %s  MP %s" % [
+		unit["resources"].get("hp", "-"),
+		unit["resources"].get("ap", "-"),
+		unit["resources"].get("mp", "-"),
+	]
 
 
 func _unit_icon(unit: Dictionary) -> Texture2D:
-	var team := str(unit.get("team", "enemy"))
 	var direction := _unit_direction(unit)
-	var texture_path := _unit_texture_path(team, direction)
-	var cache_key := "%s:%s" % [texture_path, UNIT_ICON_SIZE]
+	var visual_action := str(unit_visual_action.get(unit["id"], "pose"))
+	var texture_path := _unit_texture_path(unit, direction, visual_action)
+	var cache_key := "%s:%s:%s" % [texture_path, UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y]
 	if unit_texture_cache.has(cache_key):
 		return unit_texture_cache[cache_key]
 
@@ -777,11 +862,49 @@ func _unit_direction(unit: Dictionary) -> String:
 	return _direction_between(unit["position"], nearest["position"])
 
 
-func _unit_texture_path(team: String, direction: String) -> String:
-	var textures: Dictionary = PLAYER_UNIT_TEXTURES if team == "player" else ENEMY_UNIT_TEXTURES
-	if textures.has(direction):
-		return textures[direction]
-	return textures["south"]
+func _unit_texture_path(unit: Dictionary, direction: String, visual_action: String) -> String:
+	var visual := _unit_visual_config(unit)
+	var faction := str(visual["faction"])
+	var character := str(visual["character"])
+	var base_path := "res://assets/combat/units/%s/%s" % [faction, character]
+	var candidates: Array[String] = []
+
+	if visual_action == "walk":
+		candidates.append("%s/walk/%s_%s_walk.png" % [base_path, character, direction])
+		candidates.append("%s/walk/%s_walk.png" % [base_path, direction])
+	elif visual_action == "combat":
+		candidates.append("%s/combat/%s_%s_combat.png" % [base_path, character, direction])
+		candidates.append("%s/combat/%s_combat.png" % [base_path, direction])
+		candidates.append("%s/combat/%s_%s_attack.png" % [base_path, character, direction])
+		candidates.append("%s/combat/%s_attack.png" % [base_path, direction])
+
+	candidates.append("%s/pose/%s_%s.png" % [base_path, character, direction])
+	candidates.append("%s/pose/%s_%s.png" % [base_path, _legacy_character_prefix(character), direction])
+	candidates.append("%s/pose/%s_south.png" % [base_path, character])
+	candidates.append("%s/pose/%s_south.png" % [base_path, _legacy_character_prefix(character)])
+
+	for candidate in candidates:
+		if ResourceLoader.exists(candidate) or FileAccess.file_exists(candidate):
+			return candidate
+	return candidates[-1]
+
+
+func _unit_visual_config(unit: Dictionary) -> Dictionary:
+	if UNIT_VISUALS.has(unit["id"]):
+		return UNIT_VISUALS[unit["id"]]
+	if unit.get("team", "enemy") == "player":
+		return {"faction": "heroes", "character": "warrior"}
+	return {"faction": "villains", "character": "enemy_baddie"}
+
+
+func _legacy_character_prefix(character: String) -> String:
+	match character:
+		"enemy_orc":
+			return "enemy_baddie"
+		"enemy_skeleton":
+			return "enemy_baddie"
+		_:
+			return character
 
 
 func _nearest_living_opponent(unit: Dictionary) -> Dictionary:

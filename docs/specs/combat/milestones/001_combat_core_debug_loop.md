@@ -59,6 +59,8 @@ The project now has:
   - units with `resources.mp` spend MP, not AP, for `move`;
   - multi-tile movement resolves a legal path up to remaining MP;
   - `unit_moved.path` exposes each step for presentation animation;
+  - AP remains available for abilities after movement;
+  - abilities such as `basic_attack` spend AP without reducing MP;
   - legacy units without `resources.mp` keep the original 1 AP adjacent move behavior.
 - Deterministic event logs.
 - Replay checks for executable slices.
@@ -185,6 +187,7 @@ Current verified slices:
 - `058_armor_reduces_damage.md`
 - `059_shield_wall_applies_damage_reduction.md`
 - `060_movement_points_multi_tile.md`
+- `061_ap_mp_turn_economy.md`
 
 ## Spec Organization
 
@@ -274,10 +277,17 @@ Latest verified scope:
 - debug scene can load dedicated armor and shield wall mitigation tests.
 - movement points v1 is specified and verified in Python and Godot.
 - slice 060 verifies a two-tile move that spends 2 MP and 0 AP while recording `unit_moved.path`.
+- slice 061 verifies a unit can move with MP and then attack with AP in the same turn.
 - combat debug unit assets were reorganized into `assets/combat/units/heroes/warrior` and `assets/combat/units/villains/enemy_baddie`.
 - debug scene loads sprites from the new asset folders and can animate multi-step movement paths.
 - debug scene can load the dedicated movement points multi-tile test.
+- debug scene can load the dedicated AP/MP move-then-attack economy test.
 - debug scene now renders units on a separate overlay layer with larger tactical sprites, larger grid tiles, and tweened pixel movement between tile centers.
+- debug scene scenario picker was reduced to one full combat showcase instead of exposing low-level regression slices.
+- `debug_full_combat_showcase` uses an 8x8 arena with blocked tiles, highground, cover, one sword-and-shield hero, one melee enemy, and one bow enemy.
+- debug showcase grid scale was tuned down for an 8x8 arena, unit stats were moved out of tile labels, and movement animation now uses one chained tween across path steps.
+- debug showcase UI was compacted for the 8x8 board, tactical grid markings were muted, units start closer together, and movement tweens are slower/linear so walk sprites read more clearly.
+- debug showcase resource readouts now render as compact HP/AP/MP overlays on unit sprites, and turn stepping uses the same animated command path instead of jumping through hidden commands.
 - Validation passed on 2026-07-14:
   - `python tools\validators\validate_all.py`
   - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd`
@@ -356,7 +366,7 @@ Interactive combat debug scene:
 Suggested next slices:
 
 ```text
-docs/specs/combat/slices/061_aimed_shot_from_bow.md
-docs/specs/combat/slices/062_learned_skill_without_weapon.md
-docs/specs/combat/slices/063_enemy_archetype_loadout.md
+docs/specs/combat/slices/062_enemy_ai_move_then_attack.md
+docs/specs/combat/slices/063_aimed_shot_from_bow.md
+docs/specs/combat/slices/064_learned_skill_without_weapon.md
 ```

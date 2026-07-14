@@ -9,6 +9,14 @@ Actions are data-driven commands available to units. The first slice needs three
 
 ## Initial Actions
 
+## Turn Resources
+
+- AP is the ability/action resource used by attacks, defensive actions, and skills.
+- MP is the movement resource used by movement.
+- Units with `resources.mp` can move and still spend AP on abilities later in the same turn.
+- Units can spend AP on abilities without reducing MP.
+- AP and MP both refresh on the unit's own turn start.
+
 ### Move
 
 Purpose: change unit position on the combat grid.
@@ -88,6 +96,15 @@ Rules:
 - Then AP is reduced by 1
 - And damage is applied
 - And events `action_performed` and `damage_applied` are emitted
+
+### Move then attack command
+
+- Given the active unit has 1 AP and 3 MP
+- And an enemy is two movement steps away from melee range
+- When it performs `move` for 2 MP
+- And then performs `basic_attack`
+- Then the unit has 0 AP and 1 MP
+- And the enemy takes melee damage in the same turn
 
 ### Defend command
 

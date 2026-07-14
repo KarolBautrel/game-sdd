@@ -795,6 +795,28 @@ const SLICES := [
 			"mp_spent": 2,
 		},
 	},
+	{
+		"id": "slice_61_ap_mp_turn_economy",
+		"encounter": "res://resources/data/combat_encounters/slice_61_ap_mp_turn_economy.json",
+		"commands": "res://tests/data/combat_commands/slice_61_ap_mp_turn_economy_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "unit_moved", "action_performed", "damage_applied"],
+		"expected_result": "in_progress",
+		"expected_active_unit_id": "unit_player_001",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0, "mp": 1}, "position": {"x": 3, "y": 1}},
+			"unit_enemy_001": {"resources": {"hp": 3}},
+		},
+		"expected_move": {
+			"from": {"x": 1, "y": 1},
+			"to": {"x": 3, "y": 1},
+			"path": [{"x": 2, "y": 1}, {"x": 3, "y": 1}],
+			"mp_spent": 2,
+		},
+		"expected_action_costs": [
+			{"action_id": "move", "ap_spent": 0, "mp_spent": 2},
+			{"action_id": "basic_attack", "ap_spent": 1},
+		],
+	},
 ]
 
 
@@ -890,6 +912,22 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 				errors.append("%s: expected move mp_spent %s, got %s" % [spec["id"], expected_move.get("mp_spent", 0), move_event.get("mp_spent", 0)])
 			if not _paths_equal(move_event.get("path", []), expected_move["path"]):
 				errors.append("%s: expected move path %s, got %s" % [spec["id"], expected_move["path"], move_event.get("path", [])])
+
+	if spec.has("expected_action_costs"):
+		var action_events: Array[Dictionary] = _events_of_type(state, "action_performed")
+		var expected_action_costs: Array = spec["expected_action_costs"]
+		if action_events.size() != expected_action_costs.size():
+			errors.append("%s: expected action costs %s, got %s action events" % [spec["id"], expected_action_costs, action_events.size()])
+		else:
+			for index in range(expected_action_costs.size()):
+				var expected_cost: Dictionary = expected_action_costs[index]
+				var action_event: Dictionary = action_events[index]
+				for key: String in expected_cost:
+					if key == "action_id":
+						if action_event.get(key, "") != expected_cost[key]:
+							errors.append("%s: expected action %s %s, got %s" % [spec["id"], key, expected_cost[key], action_event.get(key, "")])
+					elif int(action_event.get(key, 0)) != int(expected_cost[key]):
+						errors.append("%s: expected action %s %s, got %s" % [spec["id"], key, expected_cost[key], action_event.get(key, 0)])
 
 	if spec.has("expected_active_unit_id") and state["turn_state"]["active_unit_id"] != spec["expected_active_unit_id"]:
 		errors.append("%s: expected active unit %s, got %s" % [spec["id"], spec["expected_active_unit_id"], state["turn_state"]["active_unit_id"]])
@@ -1040,6 +1078,14 @@ func _first_event(state: Dictionary, event_type: String) -> Dictionary:
 		if event["type"] == event_type:
 			return event
 	return {}
+
+
+func _events_of_type(state: Dictionary, event_type: String) -> Array[Dictionary]:
+	var events: Array[Dictionary] = []
+	for event: Dictionary in state["event_log"]:
+		if event["type"] == event_type:
+			events.append(event)
+	return events
 
 
 func _hit_roll_matches(actual: Dictionary, expected: Dictionary) -> bool:

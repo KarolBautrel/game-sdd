@@ -4,14 +4,32 @@ Use the current unit PNGs as the visual reference for future combat characters.
 
 ## Reference Assets
 
-- Player/hero style: `heroes/warrior/warrior_south.png`, `heroes/warrior/warrior_east.png`
-- Enemy style: `villains/enemy_baddie/enemy_baddie_south.png`, `villains/enemy_baddie/enemy_baddie_east.png`
+- Player/hero style: `heroes/warrior/pose/warrior_south.png`, `heroes/warrior/pose/warrior_east.png`
+- Enemy style: `villains/enemy_baddie/pose/enemy_baddie_south.png`, `villains/enemy_baddie/pose/enemy_baddie_east.png`
 
 ## Folder Layout
 
 - `heroes/<character_id>/` stores player-side or party unit variants.
 - `villains/<character_id>/` stores hostile unit variants.
-- Each character folder owns all directional PNGs for that character.
+- Each character folder owns action-state subfolders:
+  - `pose/` for idle/standing frames;
+  - `walk/` for movement frames;
+  - `combat/` for attack/combat frames.
+- Debug combat uses `pose` while idle, `walk` during movement, and attempts `combat` during attack feedback.
+- If a `combat` frame is missing, presentation falls back to the matching `pose` frame.
+
+## Naming
+
+Preferred names:
+
+- `pose/<character_id>_<direction>.png`
+- `walk/<character_id>_<direction>_walk.png`
+- `combat/<character_id>_<direction>_combat.png`
+
+Short walk/combat names are also accepted:
+
+- `walk/<direction>_walk.png`
+- `combat/<direction>_combat.png`
 
 ## Target Format
 

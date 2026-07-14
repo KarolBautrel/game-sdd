@@ -1837,6 +1837,63 @@ def validate_combat_slice_60() -> list[str]:
     return errors
 
 
+def validate_combat_slice_61() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_61_ap_mp_turn_economy.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_61_ap_mp_turn_economy_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    expected_events = [
+        "combat_started",
+        "turn_started",
+        "action_performed",
+        "unit_moved",
+        "action_performed",
+        "damage_applied",
+    ]
+    if result.result != "in_progress":
+        errors.append(f"slice_61_ap_mp_turn_economy: expected result in_progress, got {result.result}")
+    if event_types != expected_events:
+        errors.append(f"slice_61_ap_mp_turn_economy: unexpected events {event_types}")
+    if state["turn_state"]["active_unit_id"] != "unit_player_001":
+        errors.append(f"slice_61_ap_mp_turn_economy: expected player to remain active, got {state['turn_state']['active_unit_id']}")
+    if player["position"] != {"x": 3, "y": 1}:
+        errors.append(f"slice_61_ap_mp_turn_economy: expected player at {{'x': 3, 'y': 1}}, got {player['position']}")
+    if player["resources"]["ap"] != 0:
+        errors.append(f"slice_61_ap_mp_turn_economy: expected AP 0, got {player['resources']['ap']}")
+    if player["resources"]["mp"] != 1:
+        errors.append(f"slice_61_ap_mp_turn_economy: expected MP 1, got {player['resources']['mp']}")
+    if enemy["resources"]["hp"] != 3:
+        errors.append(f"slice_61_ap_mp_turn_economy: expected enemy HP 3, got {enemy['resources']['hp']}")
+
+    actions = [event for event in state["event_log"] if event["type"] == "action_performed"]
+    if len(actions) != 2:
+        errors.append(f"slice_61_ap_mp_turn_economy: expected two action_performed events, got {actions}")
+    else:
+        if actions[0].get("action_id") != "move" or actions[0].get("ap_spent") != 0 or actions[0].get("mp_spent") != 2:
+            errors.append(f"slice_61_ap_mp_turn_economy: unexpected move action payload {actions[0]}")
+        if actions[1].get("action_id") != "basic_attack" or actions[1].get("ap_spent") != 1:
+            errors.append(f"slice_61_ap_mp_turn_economy: unexpected attack action payload {actions[1]}")
+
+    moved = next((event for event in state["event_log"] if event["type"] == "unit_moved"), None)
+    expected_path = [{"x": 2, "y": 1}, {"x": 3, "y": 1}]
+    if moved is None:
+        errors.append("slice_61_ap_mp_turn_economy: expected unit_moved")
+    elif moved.get("path") != expected_path or moved.get("mp_spent") != 2:
+        errors.append(f"slice_61_ap_mp_turn_economy: unexpected move payload {moved}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_61_ap_mp_turn_economy: replay event log differs")
+
+    return errors
+
+
 def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_result: str) -> list[str]:
     errors: list[str] = []
     encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
@@ -2037,6 +2094,7 @@ def main() -> int:
     errors.extend(validate_combat_slice_58())
     errors.extend(validate_combat_slice_59())
     errors.extend(validate_combat_slice_60())
+    errors.extend(validate_combat_slice_61())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:
