@@ -243,7 +243,50 @@ Interactive combat debug scene:
 
 ## Planned But Not Implemented
 
-No planned combat rule placeholder is currently blocked from implementation.
+### Multi-Enemy AI V1
+
+Next planned combat step is support for more than one active enemy in practical scenarios.
+
+Spec plan:
+
+```text
+docs/specs/combat/ai/040_multi_enemy_ai_plan.md
+```
+
+Primary problem to solve:
+
+- enemies currently make decisions one active unit at a time;
+- with multiple enemies, the next enemy must respect positions already occupied or newly moved into by earlier enemies;
+- AI must remain deterministic, so repeated runs produce the same movement, target choice, and event log.
+
+First implementation slice:
+
+```text
+docs/specs/combat/slices/040_multi_enemy_pathing_and_targeting.md
+```
+
+Acceptance shape for the first slice:
+
+- one player and two enemies;
+- both enemies have `move`;
+- enemy A moves first toward the player;
+- enemy B then chooses a different legal tile, not enemy A's destination;
+- neither enemy moves onto an occupied tile;
+- replay event log remains deterministic in Python and Godot.
+
+Manual debug scene target:
+
+- add `Load Multi Enemy test`;
+- use `Enemy turn helper`;
+- verify both enemies move without stacking on the same tile.
+
+Deferred until after slice 040:
+
+- flanking;
+- focus fire;
+- enemy role behavior;
+- ranged enemies choosing firing lanes while melee enemies engage;
+- multi-enemy congestion handling in one-tile corridors.
 
 ## Recommended Next Step
 
@@ -253,6 +296,7 @@ Implement multi-enemy AI planning:
 - enemies should not block each other forever in narrow paths;
 - target selection should stay deterministic;
 - this should be planned carefully before implementation because it touches pathfinding, occupancy, and turn order.
+- start with the minimal two-enemy movement slice before adding smarter tactics.
 
 Suggested slice:
 
