@@ -142,6 +142,7 @@ Current verified slices:
 - `032_enemy_ai_multi_turn_path_pursuit.md`
 - `033_diagonal_corner_cut_blocked.md`
 - `034_enemy_ai_approaches_low_chance_ranged_target.md`
+- `035_debug_sandbox_ui_pass.md`
 
 ## Spec Organization
 
@@ -191,6 +192,7 @@ Latest verified scope:
 - debug scene can load a dedicated ranged enemy AI test.
 - debug scene can load a dedicated pathfinding obstacle test.
 - debug scene can load a dedicated low-chance ranged AI test.
+- debug scene has grouped command/load buttons, newest-first event log, tile inspect panel, and action rejection previews.
 
 ## Important Files
 

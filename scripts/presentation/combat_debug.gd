@@ -10,7 +10,8 @@ const PATHFINDING_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters
 const LOW_CHANCE_AI_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_34_enemy_ai_approaches_low_chance_ranged_target.json"
 const TILE_SIZE := 56
 const TILE_GAP := 4
-const ACTION_IDS := ["move", "basic_attack", "ranged_attack", "defend", "end_turn", "enemy_ai", "enemy_turn", "reset", "load_los_test", "load_cover_test", "load_ranged_ai_test", "load_pathfinding_test", "load_low_chance_ai_test"]
+const COMMAND_ACTION_IDS := ["move", "basic_attack", "ranged_attack", "defend", "end_turn", "enemy_ai", "enemy_turn"]
+const SCENARIO_ACTION_IDS := ["reset", "load_los_test", "load_cover_test", "load_ranged_ai_test", "load_pathfinding_test", "load_low_chance_ai_test"]
 const ACTION_LABELS := {
 	"move": "Move",
 	"basic_attack": "Melee attack",
@@ -32,6 +33,7 @@ const ACTION_LABELS := {
 @onready var feedback_label: Label = %FeedbackLabel
 @onready var legend_label: Label = %LegendLabel
 @onready var unit_list_label: Label = %UnitListLabel
+@onready var inspect_label: Label = %InspectLabel
 @onready var event_log_label: Label = %EventLogLabel
 @onready var command_buttons: VBoxContainer = %CommandButtons
 
@@ -40,6 +42,7 @@ var command_index := 1
 var selected_action := "move"
 var last_feedback := "Select an action."
 var current_encounter_path := DEFAULT_ENCOUNTER_PATH
+var selected_position: Dictionary = {}
 
 
 func _ready() -> void:
@@ -54,6 +57,7 @@ func _reset_debug_encounter() -> void:
 	last_feedback = "Encounter reset."
 	var result := CombatResolver.simulate(state, [])
 	state = result["state"]
+	selected_position = _unit_by_id(state["turn_state"]["active_unit_id"]).get("position", {})
 	_render()
 
 
@@ -69,6 +73,7 @@ func _render() -> void:
 	_render_feedback()
 	_render_legend()
 	_render_unit_list()
+	_render_inspect()
 	_render_event_log()
 	_render_command_buttons()
 
@@ -77,7 +82,7 @@ func _build_tile(position: Dictionary) -> Button:
 	var tile := Button.new()
 	tile.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
 	tile.text = _tile_text(position)
-	tile.tooltip_text = "x:%s y:%s" % [position["x"], position["y"]]
+	tile.tooltip_text = _tile_tooltip(position)
 	tile.pressed.connect(func() -> void:
 		_on_tile_pressed(position)
 	)
@@ -101,6 +106,8 @@ func _build_tile(position: Dictionary) -> Button:
 		tile.modulate = Color(1.0, 0.92, 0.35)
 	elif _is_legal_target_for_selected_action(position):
 		tile.modulate = Color(0.55, 1.0, 0.55)
+	elif _positions_equal(selected_position, position):
+		tile.modulate = Color(0.78, 0.78, 1.0)
 
 	return tile
 
@@ -154,7 +161,7 @@ func _render_feedback() -> void:
 
 
 func _render_legend() -> void:
-	legend_label.text = "Blue: player | Red: enemy | Yellow: active | Green: legal target | Gold: highground | Olive: cover | Dark: blocked"
+	legend_label.text = "Blue player | Red enemy | Yellow active | Green legal | Lavender inspected | Gold highground | Olive cover | Dark blocked"
 
 
 func _render_unit_list() -> void:
@@ -177,10 +184,43 @@ func _render_unit_list() -> void:
 	unit_list_label.text = "\n".join(lines)
 
 
+func _render_inspect() -> void:
+	if selected_position.is_empty():
+		inspect_label.text = "No tile selected."
+		return
+
+	var unit := _living_unit_at(selected_position)
+	var lines: Array[String] = [
+		"Tile: (%s,%s)" % [selected_position["x"], selected_position["y"]],
+		"Terrain: %s" % _tile_type(selected_position),
+	]
+	if unit.is_empty():
+		lines.append("Unit: none")
+	else:
+		lines.append("Unit: %s [%s]" % [unit["id"], unit["team"]])
+		lines.append("HP/AP: %s/%s" % [unit["resources"]["hp"], unit["resources"]["ap"]])
+
+	var command := _preview_command_for_position(selected_position)
+	if command.is_empty():
+		lines.append("Selected action: %s" % ACTION_LABELS.get(selected_action, selected_action))
+	else:
+		var rejection := _command_rejection_reason(command)
+		if rejection == "":
+			lines.append("Selected action: legal")
+		else:
+			lines.append("Selected action: rejected")
+			lines.append("Reason: %s" % rejection)
+
+	inspect_label.text = "\n".join(lines)
+
+
 func _render_event_log() -> void:
 	var lines: Array[String] = []
-	for event: Dictionary in state["event_log"]:
-		lines.append("%s. %s %s" % [
+	var events: Array = state["event_log"].duplicate(true)
+	events.reverse()
+	for event: Dictionary in events:
+		lines.append("%s %s. %s %s" % [
+			_event_marker(event),
 			event["sequence"],
 			event["type"],
 			_event_summary(event),
@@ -192,45 +232,62 @@ func _render_command_buttons() -> void:
 	for child in command_buttons.get_children():
 		child.queue_free()
 
-	for action_id in ACTION_IDS:
-		var button := Button.new()
-		button.text = ACTION_LABELS.get(action_id, action_id)
-		button.toggle_mode = true
-		button.button_pressed = selected_action == action_id
-		button.disabled = _combat_result() != "in_progress" and action_id not in ["reset", "load_los_test", "load_cover_test", "load_ranged_ai_test", "load_pathfinding_test", "load_low_chance_ai_test"]
-		button.pressed.connect(func() -> void:
-			selected_action = action_id
-			if action_id == "reset":
-				_reset_debug_encounter()
-			elif action_id == "load_los_test":
-				current_encounter_path = LOS_TEST_ENCOUNTER_PATH
-				_reset_debug_encounter()
-			elif action_id == "load_cover_test":
-				current_encounter_path = COVER_TEST_ENCOUNTER_PATH
-				_reset_debug_encounter()
-			elif action_id == "load_ranged_ai_test":
-				current_encounter_path = RANGED_AI_TEST_ENCOUNTER_PATH
-				_reset_debug_encounter()
-			elif action_id == "load_pathfinding_test":
-				current_encounter_path = PATHFINDING_TEST_ENCOUNTER_PATH
-				_reset_debug_encounter()
-			elif action_id == "load_low_chance_ai_test":
-				current_encounter_path = LOW_CHANCE_AI_TEST_ENCOUNTER_PATH
-				_reset_debug_encounter()
-			elif action_id == "enemy_turn":
-				_run_enemy_turn_helper()
-			elif action_id == "enemy_ai":
-				_run_command(CombatResolver.choose_enemy_command(state, "cmd_%03d" % command_index))
-			elif action_id in ["defend", "end_turn"]:
-				_run_command(_build_command(action_id, {}))
-			else:
-				last_feedback = "Select a highlighted target for %s." % ACTION_LABELS.get(action_id, action_id)
-				_render()
-		)
-		command_buttons.add_child(button)
+	_add_button_section("Commands")
+	for action_id in COMMAND_ACTION_IDS:
+		_add_action_button(action_id)
+
+	_add_button_section("Load Tests")
+	for action_id in SCENARIO_ACTION_IDS:
+		_add_action_button(action_id)
+
+
+func _add_button_section(title: String) -> void:
+	var label := Label.new()
+	label.text = title
+	label.add_theme_font_size_override("font_size", 14)
+	command_buttons.add_child(label)
+
+
+func _add_action_button(action_id: String) -> void:
+	var button := Button.new()
+	button.text = ACTION_LABELS.get(action_id, action_id)
+	button.toggle_mode = true
+	button.button_pressed = selected_action == action_id
+	button.disabled = _combat_result() != "in_progress" and action_id not in SCENARIO_ACTION_IDS
+	button.pressed.connect(func() -> void:
+		selected_action = action_id
+		if action_id == "reset":
+			_reset_debug_encounter()
+		elif action_id == "load_los_test":
+			current_encounter_path = LOS_TEST_ENCOUNTER_PATH
+			_reset_debug_encounter()
+		elif action_id == "load_cover_test":
+			current_encounter_path = COVER_TEST_ENCOUNTER_PATH
+			_reset_debug_encounter()
+		elif action_id == "load_ranged_ai_test":
+			current_encounter_path = RANGED_AI_TEST_ENCOUNTER_PATH
+			_reset_debug_encounter()
+		elif action_id == "load_pathfinding_test":
+			current_encounter_path = PATHFINDING_TEST_ENCOUNTER_PATH
+			_reset_debug_encounter()
+		elif action_id == "load_low_chance_ai_test":
+			current_encounter_path = LOW_CHANCE_AI_TEST_ENCOUNTER_PATH
+			_reset_debug_encounter()
+		elif action_id == "enemy_turn":
+			_run_enemy_turn_helper()
+		elif action_id == "enemy_ai":
+			_run_command(CombatResolver.choose_enemy_command(state, "cmd_%03d" % command_index))
+		elif action_id in ["defend", "end_turn"]:
+			_run_command(_build_command(action_id, {}))
+		else:
+			last_feedback = "Select a highlighted target for %s." % ACTION_LABELS.get(action_id, action_id)
+			_render()
+	)
+	command_buttons.add_child(button)
 
 
 func _on_tile_pressed(position: Dictionary) -> void:
+	selected_position = position.duplicate(true)
 	if selected_action == "move":
 		_run_command(_build_command("move", {
 			"type": "tile",
@@ -360,6 +417,22 @@ func _event_summary(event: Dictionary) -> String:
 	return ""
 
 
+func _event_marker(event: Dictionary) -> String:
+	match event["type"]:
+		"command_rejected":
+			return "!"
+		"damage_applied", "unit_defeated", "combat_ended":
+			return "*"
+		"hit_roll_resolved":
+			return "%"
+		"unit_moved":
+			return ">"
+		"turn_started", "turn_ended":
+			return "-"
+		_:
+			return "."
+
+
 func _feedback_from_events(events: Array) -> String:
 	for event: Dictionary in events:
 		if event["type"] == "command_rejected":
@@ -420,6 +493,18 @@ func _tile_type(position: Dictionary) -> String:
 	return ""
 
 
+func _tile_tooltip(position: Dictionary) -> String:
+	var lines: Array[String] = [
+		"x:%s y:%s" % [position["x"], position["y"]],
+		"terrain: %s" % _tile_type(position),
+	]
+	var command := _preview_command_for_position(position)
+	if not command.is_empty():
+		var rejection := _command_rejection_reason(command)
+		lines.append("selected action: legal" if rejection == "" else "rejected: %s" % rejection)
+	return "\n".join(lines)
+
+
 func _is_active_unit_at(position: Dictionary) -> bool:
 	var active := _unit_by_id(state["turn_state"]["active_unit_id"])
 	return not active.is_empty() and active["resources"]["hp"] > 0 and _positions_equal(active["position"], position)
@@ -453,11 +538,40 @@ func _is_legal_target_for_selected_action(position: Dictionary) -> bool:
 
 
 func _command_would_be_accepted(command: Dictionary) -> bool:
+	return _command_rejection_reason(command) == ""
+
+
+func _command_rejection_reason(command: Dictionary) -> String:
 	var result: Dictionary = CombatResolver.simulate(_state_without_log(), [command])
 	for event: Dictionary in _events_after_startup(result["state"]["event_log"]):
 		if event["type"] == "command_rejected":
-			return false
-	return true
+			return event.get("reason", "unknown")
+	return ""
+
+
+func _preview_command_for_position(position: Dictionary) -> Dictionary:
+	if selected_action == "move":
+		return _build_command("move", {
+			"type": "tile",
+			"position": position,
+		})
+	if selected_action == "basic_attack":
+		var melee_unit := _living_unit_at(position)
+		if melee_unit.is_empty():
+			return {}
+		return _build_command("basic_attack", {
+			"type": "unit",
+			"unit_id": melee_unit["id"],
+		})
+	if selected_action == "ranged_attack":
+		var ranged_unit := _living_unit_at(position)
+		if ranged_unit.is_empty():
+			return {}
+		return _build_command("ranged_attack", {
+			"type": "unit",
+			"unit_id": ranged_unit["id"],
+		})
+	return {}
 
 
 func _positions_equal(first: Dictionary, second: Dictionary) -> bool:
