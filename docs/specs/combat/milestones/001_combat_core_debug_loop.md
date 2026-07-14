@@ -10,6 +10,7 @@ Combat has a verified core loop in both Python and Godot.
 The project now has:
 
 - combat rule specs;
+- combat rule specs organized by tactical domain;
 - executable combat slices;
 - JSON encounter and command data;
 - Python simulation and validation;
@@ -108,6 +109,26 @@ Current verified slices:
 - `024_ranged_attack_miss.md`
 - `025_accuracy_increases_hit_chance.md`
 - `026_evasion_decreases_hit_chance.md`
+
+## Spec Organization
+
+Rule specs now live in domain folders:
+
+- `overview/`
+- `grid/`
+- `turns/`
+- `actions/`
+- `attacks/`
+- `hit_resolution/`
+- `ai/`
+
+Executable slices remain flat in `slices/`.
+
+See:
+
+```text
+docs/specs/combat/STRUCTURE.md
+```
 
 ## Latest Update
 

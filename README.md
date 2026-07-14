@@ -84,7 +84,8 @@ Debug scene controls:
 
 ## Spec Domains
 
-- `docs/specs/combat/` tactical combat on a square grid.
+- `docs/specs/combat/` tactical combat specs, organized by domain.
+- `docs/specs/combat/STRUCTURE.md` explains combat spec ownership and folder rules.
 - `docs/specs/combat/slices/` executable combat acceptance scenarios.
 - `docs/specs/dungeon/` dungeon exploration and encounter triggers.
 - `docs/specs/world/` world map, towns, travel, and services.

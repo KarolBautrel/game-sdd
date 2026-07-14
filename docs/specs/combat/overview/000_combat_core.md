@@ -79,6 +79,11 @@ Minimum stats:
 - `move_points`
 - `max_ap`
 
+Optional hit resolution stats:
+
+- `accuracy`
+- `evasion`
+
 ### Resources
 
 Minimum resources:
@@ -138,4 +143,3 @@ Example:
 - Morale.
 - Complex AI.
 - Status stacking rules beyond placeholder structure.
-

@@ -24,6 +24,7 @@ Initial tile types:
 
 - `floor`: walkable and targetable.
 - `blocked`: not walkable and blocks movement.
+- `highground`: walkable elevation tile; no bonus unless a separate rule spec applies it.
 
 Future tile types:
 
