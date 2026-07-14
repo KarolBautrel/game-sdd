@@ -9,7 +9,9 @@ Make the combat debug scene easier to use while combat rules are still evolving.
 
 ## Expected Debug Scene Behavior
 
-- command buttons are grouped separately from scenario loading buttons;
+- command buttons are grouped separately from scenario loading controls;
+- scenario tests are selected from one compact picker and loaded with one button;
+- event log has enough reserved vertical space to remain visible as the test list grows;
 - the event log shows newest events first;
 - selecting or clicking a tile updates an inspect panel;
 - the inspect panel shows tile position, terrain, occupant, and current action legality;

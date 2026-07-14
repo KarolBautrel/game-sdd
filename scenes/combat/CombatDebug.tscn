@@ -116,7 +116,7 @@ text = "Event log newest first"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 180)
+custom_minimum_size = Vector2(0, 260)
 size_flags_vertical = 3
 
 [node name="EventLogLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/RightPanel/ScrollContainer"]

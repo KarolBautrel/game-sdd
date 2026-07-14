@@ -1,0 +1,74 @@
+{
+  "id": "slice_56_two_handed_blocks_shield",
+  "seed": 1056,
+  "item_profiles": {
+    "greatsword": {
+      "id": "greatsword",
+      "slot": "main_hand",
+      "two_handed": true,
+      "grants_actions": ["basic_attack", "power_strike"],
+      "action_profiles": {
+        "basic_attack": { "id": "greatsword_basic_attack", "action_id": "basic_attack", "range": 1, "ap_cost": 1, "damage_bonus": 2 },
+        "power_strike": { "id": "greatsword_power_strike", "action_id": "power_strike", "range": 1, "ap_cost": 2, "damage_bonus": 4, "cooldown_turns": 3 }
+      }
+    },
+    "wooden_shield": {
+      "id": "wooden_shield",
+      "slot": "off_hand",
+      "grants_actions": ["shield_wall"],
+      "action_profiles": {
+        "shield_wall": {
+          "id": "wooden_shield_wall",
+          "action_id": "shield_wall",
+          "ap_cost": 1,
+          "status_id": "shield_wall",
+          "status_remaining_turns": 1,
+          "damage_reduction": 2,
+          "cooldown_turns": 2
+        }
+      }
+    }
+  },
+  "grid": {
+    "width": 3,
+    "height": 3,
+    "tiles": [
+      { "x": 0, "y": 0, "type": "floor" },
+      { "x": 1, "y": 0, "type": "floor" },
+      { "x": 2, "y": 0, "type": "floor" },
+      { "x": 0, "y": 1, "type": "floor" },
+      { "x": 1, "y": 1, "type": "floor" },
+      { "x": 2, "y": 1, "type": "floor" },
+      { "x": 0, "y": 2, "type": "floor" },
+      { "x": 1, "y": 2, "type": "floor" },
+      { "x": 2, "y": 2, "type": "floor" }
+    ]
+  },
+  "units": [
+    {
+      "id": "unit_player_001",
+      "team": "player",
+      "position": { "x": 1, "y": 1 },
+      "stats": { "max_hp": 10, "strength": 4, "defense": 1, "initiative": 10, "move_points": 3, "max_ap": 2 },
+      "resources": { "hp": 10, "ap": 2 },
+      "statuses": [],
+      "available_actions": ["move", "defend", "end_turn"],
+      "loadout": { "main_hand": "greatsword", "off_hand": "wooden_shield", "armor": null }
+    },
+    {
+      "id": "unit_enemy_001",
+      "team": "enemy",
+      "position": { "x": 2, "y": 1 },
+      "stats": { "max_hp": 6, "strength": 3, "defense": 2, "initiative": 8, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 6, "ap": 1 },
+      "statuses": [],
+      "available_actions": ["basic_attack", "move", "defend", "end_turn"]
+    }
+  ],
+  "turn_state": {
+    "active_unit_id": "unit_player_001",
+    "round": 1,
+    "turn_order": ["unit_player_001", "unit_enemy_001"]
+  },
+  "event_log": []
+}

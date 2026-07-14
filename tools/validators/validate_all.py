@@ -49,6 +49,23 @@ from tools.validators.validate_combat_slice import (
     validate_combat_slice_33,
     validate_combat_slice_34,
     validate_combat_slice_40,
+    validate_combat_slice_41,
+    validate_combat_slice_42,
+    validate_combat_slice_43,
+    validate_combat_slice_44,
+    validate_combat_slice_45,
+    validate_combat_slice_46,
+    validate_combat_slice_47,
+    validate_combat_slice_48,
+    validate_combat_slice_49,
+    validate_combat_slice_50,
+    validate_combat_slice_51,
+    validate_combat_slice_52,
+    validate_combat_slice_53,
+    validate_combat_slice_54,
+    validate_combat_slice_55,
+    validate_combat_slice_56,
+    validate_combat_slice_57,
 )
 
 
@@ -144,6 +161,23 @@ def main() -> int:
     errors.extend(validate_combat_slice_33())
     errors.extend(validate_combat_slice_34())
     errors.extend(validate_combat_slice_40())
+    errors.extend(validate_combat_slice_41())
+    errors.extend(validate_combat_slice_42())
+    errors.extend(validate_combat_slice_43())
+    errors.extend(validate_combat_slice_44())
+    errors.extend(validate_combat_slice_45())
+    errors.extend(validate_combat_slice_46())
+    errors.extend(validate_combat_slice_47())
+    errors.extend(validate_combat_slice_48())
+    errors.extend(validate_combat_slice_49())
+    errors.extend(validate_combat_slice_50())
+    errors.extend(validate_combat_slice_51())
+    errors.extend(validate_combat_slice_52())
+    errors.extend(validate_combat_slice_53())
+    errors.extend(validate_combat_slice_54())
+    errors.extend(validate_combat_slice_55())
+    errors.extend(validate_combat_slice_56())
+    errors.extend(validate_combat_slice_57())
 
     if errors:
         print("Validation failed:")

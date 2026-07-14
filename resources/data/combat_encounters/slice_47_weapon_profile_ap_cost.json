@@ -1,0 +1,58 @@
+{
+  "id": "slice_47_weapon_profile_ap_cost",
+  "seed": 1047,
+  "weapon_profiles": {
+    "heavy_axe": {
+      "id": "heavy_axe",
+      "action_id": "basic_attack",
+      "range": 1,
+      "ap_cost": 2,
+      "damage_bonus": 4
+    }
+  },
+  "grid": {
+    "width": 4,
+    "height": 3,
+    "tiles": [
+      { "x": 0, "y": 0, "type": "floor" },
+      { "x": 1, "y": 0, "type": "floor" },
+      { "x": 2, "y": 0, "type": "floor" },
+      { "x": 3, "y": 0, "type": "floor" },
+      { "x": 0, "y": 1, "type": "floor" },
+      { "x": 1, "y": 1, "type": "floor" },
+      { "x": 2, "y": 1, "type": "floor" },
+      { "x": 3, "y": 1, "type": "floor" },
+      { "x": 0, "y": 2, "type": "floor" },
+      { "x": 1, "y": 2, "type": "floor" },
+      { "x": 2, "y": 2, "type": "floor" },
+      { "x": 3, "y": 2, "type": "floor" }
+    ]
+  },
+  "units": [
+    {
+      "id": "unit_player_001",
+      "team": "player",
+      "position": { "x": 1, "y": 1 },
+      "stats": { "max_hp": 10, "strength": 4, "defense": 1, "initiative": 10, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 10, "ap": 1 },
+      "statuses": [],
+      "available_actions": ["basic_attack", "move", "defend", "end_turn"],
+      "equipped_weapon_id": "heavy_axe"
+    },
+    {
+      "id": "unit_enemy_001",
+      "team": "enemy",
+      "position": { "x": 2, "y": 1 },
+      "stats": { "max_hp": 6, "strength": 3, "defense": 2, "initiative": 8, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 6, "ap": 1 },
+      "statuses": [],
+      "available_actions": ["basic_attack", "move", "defend", "end_turn"]
+    }
+  ],
+  "turn_state": {
+    "active_unit_id": "unit_player_001",
+    "round": 1,
+    "turn_order": ["unit_player_001", "unit_enemy_001"]
+  },
+  "event_log": []
+}

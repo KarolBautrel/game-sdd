@@ -90,6 +90,21 @@ The project now has:
   - final ranged hit chance uses `base + attacker.accuracy - target.evasion`;
   - omitted accuracy/evasion stats default to 0;
   - final hit chance is clamped to 10-95.
+- Weapon profiles v1:
+  - encounters may define `weapon_profiles`;
+  - units may equip `equipped_weapon_id`;
+  - weapon profiles can control action id, range, AP cost, ranged base hit chance, and damage bonus;
+  - legacy units without equipped weapons still use fallback combat values.
+- Special skills v1:
+  - `power_strike` is implemented as the first melee special action;
+  - `power_strike` can be driven by a weapon profile.
+- Equipment/loadout v1:
+  - encounters may define `item_profiles`;
+  - units may equip `main_hand`, `off_hand`, and `armor` items through `loadout`;
+  - equipped items may grant combat actions;
+  - item action profiles can define AP cost, range, hit chance, damage bonus, cooldowns, and status effects;
+  - `basic_attack`, `ranged_attack`, `shield_wall`, and `power_strike` can now be gated by equipped items;
+  - two-handed main-hand items reject off-hand-dependent actions when an off-hand item is present.
 - Debug scene usability pass:
   - action buttons use readable labels;
   - ranged attack can be selected and tested;
@@ -144,6 +159,23 @@ Current verified slices:
 - `034_enemy_ai_approaches_low_chance_ranged_target.md`
 - `035_debug_sandbox_ui_pass.md`
 - `040_multi_enemy_pathing_and_targeting.md`
+- `041_multi_enemy_bottleneck_spacing.md`
+- `042_mixed_melee_ranged_enemy_roles.md`
+- `043_target_selection_multiple_players.md`
+- `044_ranged_intercept_by_unit.md`
+- `045_weapon_profile_melee_damage.md`
+- `046_weapon_profile_ranged_range_hit.md`
+- `047_weapon_profile_ap_cost.md`
+- `048_power_strike_skill.md`
+- `049_weapon_profile_ap_cost_success.md`
+- `050_enemy_ai_power_strike.md`
+- `051_enemy_ai_power_strike_cooldown_blocks_repeat.md`
+- `052_skill_cooldown_expires_on_own_turn.md`
+- `053_weapon_loadout_v1.md`
+- `054_bow_required_for_ranged_attack.md`
+- `055_shield_required_for_shield_wall.md`
+- `056_two_handed_blocks_shield.md`
+- `057_weapon_grants_power_strike.md`
 
 ## Spec Organization
 
@@ -155,6 +187,8 @@ Rule specs now live in domain folders:
 - `actions/`
 - `attacks/`
 - `hit_resolution/`
+- `equipment/`
+- `weapons/`
 - `ai/`
 
 Executable slices remain flat in `slices/`.
@@ -196,6 +230,31 @@ Latest verified scope:
 - debug scene has grouped command/load buttons, newest-first event log, tile inspect panel, and action rejection previews.
 - multi-enemy movement v1 is specified and verified for two enemies acting on the current board state.
 - debug scene can load a dedicated multi-enemy test.
+- multi-enemy bottleneck spacing is specified and verified for a one-tile corridor.
+- debug scene can load a dedicated bottleneck test.
+- mixed melee/ranged enemy roles are specified and verified.
+- debug scene can load a dedicated mixed roles test.
+- multiple-player target selection is specified and verified for nearest living ranged targets.
+- debug scene can load a dedicated target selection test.
+- ranged intercept by living units is specified and verified.
+- debug scene can load a dedicated ranged intercept test.
+- debug scene test loading now uses a compact scenario picker instead of a long button list.
+- debug scene reserves more vertical space for the newest-first event log.
+- weapon profiles v1 is specified and verified in Python and Godot.
+- melee weapon damage bonus, ranged weapon range/base hit, and blocked weapon AP cost are covered by slices 045-047.
+- `power_strike` special action is specified and verified by slice 048.
+- positive 2 AP heavy weapon attack is verified by slice 049.
+- debug scene can load dedicated weapon profile and power strike tests.
+- enemy AI can use `power_strike` when adjacent, eligible, and deterministic chance passes.
+- `power_strike` applies `skill_cooldown`, which prevents repeat use and expires on the actor's own turn start.
+- debug scene can load dedicated enemy power strike and cooldown tests.
+- item profiles and unit loadouts are specified and verified in Python and Godot.
+- equipped items can grant actions that are not listed in legacy `available_actions`.
+- sword-only units cannot perform `ranged_attack`.
+- shieldless units cannot perform `shield_wall`.
+- invalid two-handed plus off-hand loadouts reject shield-dependent actions.
+- greatsword loadout can grant `power_strike` and apply its cooldown.
+- debug scene can load dedicated loadout/equipment tests 053-057.
 
 ## Important Files
 
@@ -248,75 +307,32 @@ Interactive combat debug scene:
 
 ## Planned But Not Implemented
 
-### Multi-Enemy AI V2
+### Recommended Next Development Order
 
-Next planned combat step is smarter support for more than one active enemy in practical scenarios.
+1. Armor v1:
+   - add armor item profiles in `equipment/`;
+   - add flat damage reduction or defense bonus;
+   - verify that unarmored, light armor, and heavy armor resolve damage differently.
+2. Learned skills vs equipment skills:
+   - keep equipment-granted skills from loadout;
+   - add a separate unit-level learned skill list later;
+   - action is available if it is granted by equipment or learned by the unit.
+3. Enemy archetype loadouts:
+   - define simple archetypes such as swordsman, shieldman, archer, bruiser;
+   - build enemy encounters from loadout data instead of ad hoc action lists.
+4. More special skills:
+   - shield skill: `shield_wall` positive case with damage reduction;
+   - bow skill: `aimed_shot` positive case with higher hit chance and cooldown;
+   - melee control skill: `guard_break` or `crippling_strike`.
+5. Inventory/equipment outside combat:
+   - defer full inventory UI until combat rules stabilize;
+   - combat only needs resolved loadout data for now.
 
-Spec plan:
-
-```text
-docs/specs/combat/ai/040_multi_enemy_ai_plan.md
-```
-
-Primary problem to solve:
-
-- enemies currently make decisions one active unit at a time;
-- with multiple enemies, the next enemy must respect positions already occupied or newly moved into by earlier enemies;
-- AI must remain deterministic, so repeated runs produce the same movement, target choice, and event log.
-
-First implemented slice:
-
-```text
-docs/specs/combat/slices/040_multi_enemy_pathing_and_targeting.md
-```
-
-Implemented acceptance shape:
-
-- one player and two enemies;
-- both enemies have `move`;
-- enemy A moves first toward the player;
-- enemy B then chooses a different legal tile, not enemy A's destination;
-- neither enemy moves onto an occupied tile;
-- replay event log remains deterministic in Python and Godot.
-
-Manual debug scene target:
-
-- add `Load Multi Enemy test`;
-- use `Enemy turn helper`;
-- verify both enemies move without stacking on the same tile.
-
-Deferred until after slice 040:
-
-- flanking;
-- focus fire;
-- enemy role behavior;
-- ranged enemies choosing firing lanes while melee enemies engage;
-- multi-enemy congestion handling in one-tile corridors.
-
-## Recommended Next Step
-
-Implement multi-enemy AI V2:
-
-- enemies should not block each other forever in narrow paths;
-- target selection should stay deterministic;
-- add a narrow corridor or bottleneck test;
-- decide whether an enemy should wait, sidestep, or pick another target when the shortest path is occupied.
-
-Suggested slice:
+Suggested next slices:
 
 ```text
-docs/specs/combat/slices/041_multi_enemy_bottleneck_spacing.md
+docs/specs/combat/slices/058_armor_reduces_damage.md
+docs/specs/combat/slices/059_shield_wall_applies_damage_reduction.md
+docs/specs/combat/slices/060_aimed_shot_from_bow.md
+docs/specs/combat/slices/061_learned_skill_without_weapon.md
 ```
-
-Acceptance shape for slice 041:
-
-- one player and two enemies;
-- a narrow pass or corridor creates a bottleneck;
-- enemy A moves into the best approach tile first;
-- enemy B sees enemy A's new position as occupied;
-- enemy B must not move onto enemy A's tile;
-- enemy B should either:
-  - move to a deterministic legal backup tile, if one exists;
-  - otherwise choose `end_turn` instead of emitting an invalid move;
-- replay event log must remain deterministic in Python and Godot;
-- debug scene should reuse `Load Multi Enemy test` or add `Load Bottleneck test`.

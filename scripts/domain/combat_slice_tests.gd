@@ -455,6 +455,294 @@ const SLICES := [
 			"unit_enemy_002": {"resources": {"ap": 0}, "position": {"x": 3, "y": 2}},
 		},
 	},
+	{
+		"id": "slice_41_multi_enemy_bottleneck_spacing",
+		"encounter": "res://resources/data/combat_encounters/slice_41_multi_enemy_bottleneck_spacing.json",
+		"multi_enemy_ai_commands": true,
+		"expected_first_command_position": {"x": 3, "y": 1},
+		"expected_second_command_position": {"x": 4, "y": 1},
+		"expected_events": [
+			"combat_started",
+			"turn_started",
+			"action_performed",
+			"unit_moved",
+			"action_performed",
+			"turn_ended",
+			"turn_started",
+			"action_performed",
+			"unit_moved",
+		],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_enemy_001": {"resources": {"ap": 0}, "position": {"x": 3, "y": 1}},
+			"unit_enemy_002": {"resources": {"ap": 0}, "position": {"x": 4, "y": 1}},
+		},
+	},
+	{
+		"id": "slice_42_mixed_melee_ranged_enemy_roles",
+		"encounter": "res://resources/data/combat_encounters/slice_42_mixed_melee_ranged_enemy_roles.json",
+		"mixed_roles_ai_commands": true,
+		"expected_events": [
+			"combat_started",
+			"turn_started",
+			"action_performed",
+			"unit_moved",
+			"action_performed",
+			"turn_ended",
+			"turn_started",
+			"action_performed",
+			"hit_roll_resolved",
+			"damage_applied",
+		],
+		"expected_result": "in_progress",
+		"expected_hit_roll": {
+			"roll": 8,
+			"base_hit_chance": 70,
+			"accuracy_modifier": 0,
+			"evasion_modifier": 0,
+			"terrain_modifier": 0,
+			"cover_modifier": 0,
+			"hit_chance": 70,
+			"outcome": "hit",
+		},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"hp": 8}},
+			"unit_enemy_001": {"resources": {"ap": 0}, "position": {"x": 3, "y": 1}},
+			"unit_enemy_002": {"resources": {"ap": 0}, "position": {"x": 4, "y": 2}},
+		},
+	},
+	{
+		"id": "slice_43_target_selection_multiple_players",
+		"encounter": "res://resources/data/combat_encounters/slice_43_target_selection_multiple_players.json",
+		"ai_command": true,
+		"expected_command_action": "ranged_attack",
+		"expected_command_actor": "unit_enemy_001",
+		"expected_command_target": "unit_player_002",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"],
+		"expected_result": "in_progress",
+		"expected_hit_roll": {
+			"roll": 9,
+			"base_hit_chance": 70,
+			"accuracy_modifier": 0,
+			"evasion_modifier": 0,
+			"terrain_modifier": 0,
+			"cover_modifier": 0,
+			"hit_chance": 70,
+			"outcome": "hit",
+		},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"hp": 10}},
+			"unit_player_002": {"resources": {"hp": 8}},
+			"unit_player_003": {"resources": {"hp": 0}},
+			"unit_enemy_001": {"resources": {"ap": 0}},
+		},
+	},
+	{
+		"id": "slice_44_ranged_intercept_by_unit",
+		"encounter": "res://resources/data/combat_encounters/slice_44_ranged_intercept_by_unit.json",
+		"commands": "res://tests/data/combat_commands/slice_44_ranged_intercept_by_unit_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "shot_intercept_resolved", "hit_roll_resolved", "damage_applied"],
+		"expected_result": "in_progress",
+		"expected_intercept": {
+			"original_target_unit_id": "unit_enemy_001",
+			"blocker_unit_id": "unit_enemy_002",
+			"final_target_unit_id": "unit_enemy_002",
+			"blocker_progress": 67,
+			"intercept_chance": 60,
+			"roll": 34,
+			"outcome": "intercepted",
+		},
+		"expected_hit_roll": {
+			"target_unit_id": "unit_enemy_002",
+			"roll": 61,
+			"base_hit_chance": 70,
+			"accuracy_modifier": 0,
+			"evasion_modifier": 0,
+			"terrain_modifier": 0,
+			"cover_modifier": 0,
+			"hit_chance": 70,
+			"outcome": "hit",
+		},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 6}},
+			"unit_enemy_002": {"resources": {"hp": 4}},
+		},
+	},
+	{
+		"id": "slice_45_weapon_profile_melee_damage",
+		"encounter": "res://resources/data/combat_encounters/slice_45_weapon_profile_melee_damage.json",
+		"commands": "res://tests/data/combat_commands/slice_45_weapon_profile_melee_damage_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 2}},
+		},
+	},
+	{
+		"id": "slice_46_weapon_profile_ranged_range_hit",
+		"encounter": "res://resources/data/combat_encounters/slice_46_weapon_profile_ranged_range_hit.json",
+		"commands": "res://tests/data/combat_commands/slice_46_weapon_profile_ranged_range_hit_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"],
+		"expected_result": "in_progress",
+		"expected_hit_roll": {
+			"roll": 63,
+			"base_hit_chance": 85,
+			"accuracy_modifier": 0,
+			"evasion_modifier": 0,
+			"terrain_modifier": 0,
+			"cover_modifier": 0,
+			"hit_chance": 85,
+			"outcome": "hit",
+		},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 3}},
+		},
+	},
+	{
+		"id": "slice_47_weapon_profile_ap_cost",
+		"encounter": "res://resources/data/combat_encounters/slice_47_weapon_profile_ap_cost.json",
+		"commands": "res://tests/data/combat_commands/slice_47_weapon_profile_ap_cost_commands.json",
+		"expected_events": ["combat_started", "turn_started", "command_rejected"],
+		"expected_result": "in_progress",
+		"expected_rejection": "not_enough_ap",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 1}},
+			"unit_enemy_001": {"resources": {"hp": 6}},
+		},
+	},
+	{
+		"id": "slice_48_power_strike_skill",
+		"encounter": "res://resources/data/combat_encounters/slice_48_power_strike_skill.json",
+		"commands": "res://tests/data/combat_commands/slice_48_power_strike_skill_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "status_applied", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}, "statuses": ["skill_cooldown"]},
+			"unit_enemy_001": {"resources": {"hp": 1}},
+		},
+	},
+	{
+		"id": "slice_49_weapon_profile_ap_cost_success",
+		"encounter": "res://resources/data/combat_encounters/slice_49_weapon_profile_ap_cost_success.json",
+		"commands": "res://tests/data/combat_commands/slice_49_weapon_profile_ap_cost_success_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 4}},
+		},
+	},
+	{
+		"id": "slice_50_enemy_ai_power_strike",
+		"encounter": "res://resources/data/combat_encounters/slice_50_enemy_ai_power_strike.json",
+		"ai_command": true,
+		"expected_command_action": "power_strike",
+		"expected_command_actor": "unit_enemy_001",
+		"expected_command_target": "unit_player_001",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "status_applied", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_enemy_001": {"resources": {"ap": 0}, "statuses": ["skill_cooldown"]},
+			"unit_player_001": {"resources": {"hp": 8}},
+		},
+	},
+	{
+		"id": "slice_51_enemy_ai_power_strike_cooldown_blocks_repeat",
+		"encounter": "res://resources/data/combat_encounters/slice_51_enemy_ai_power_strike_cooldown_blocks_repeat.json",
+		"ai_command": true,
+		"expected_command_action": "basic_attack",
+		"expected_command_actor": "unit_enemy_001",
+		"expected_command_target": "unit_player_001",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_enemy_001": {"resources": {"ap": 1}, "statuses": ["skill_cooldown"]},
+			"unit_player_001": {"resources": {"hp": 11}},
+		},
+	},
+	{
+		"id": "slice_52_skill_cooldown_expires_on_own_turn",
+		"encounter": "res://resources/data/combat_encounters/slice_52_skill_cooldown_expires_on_own_turn.json",
+		"commands": "res://tests/data/combat_commands/slice_52_skill_cooldown_expires_on_own_turn_commands.json",
+		"expected_events": [
+			"combat_started",
+			"turn_started",
+			"action_performed",
+			"turn_ended",
+			"turn_started",
+			"action_performed",
+			"turn_ended",
+			"turn_started",
+			"status_expired",
+		],
+		"expected_result": "in_progress",
+		"expected_active_unit_id": "unit_enemy_001",
+		"expected_round": 2,
+		"unit_expectations": {
+			"unit_enemy_001": {"resources": {"ap": 2}, "statuses": []},
+		},
+	},
+	{
+		"id": "slice_53_weapon_loadout_v1",
+		"encounter": "res://resources/data/combat_encounters/slice_53_weapon_loadout_v1.json",
+		"commands": "res://tests/data/combat_commands/slice_53_weapon_loadout_v1_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 4}},
+		},
+	},
+	{
+		"id": "slice_54_bow_required_for_ranged_attack",
+		"encounter": "res://resources/data/combat_encounters/slice_54_bow_required_for_ranged_attack.json",
+		"commands": "res://tests/data/combat_commands/slice_54_bow_required_for_ranged_attack_commands.json",
+		"expected_events": ["combat_started", "turn_started", "command_rejected"],
+		"expected_result": "in_progress",
+		"expected_rejection": "action_not_available",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 1}},
+			"unit_enemy_001": {"resources": {"hp": 6}},
+		},
+	},
+	{
+		"id": "slice_55_shield_required_for_shield_wall",
+		"encounter": "res://resources/data/combat_encounters/slice_55_shield_required_for_shield_wall.json",
+		"commands": "res://tests/data/combat_commands/slice_55_shield_required_for_shield_wall_commands.json",
+		"expected_events": ["combat_started", "turn_started", "command_rejected"],
+		"expected_result": "in_progress",
+		"expected_rejection": "action_not_available",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 1}},
+			"unit_enemy_001": {"resources": {"hp": 6}},
+		},
+	},
+	{
+		"id": "slice_56_two_handed_blocks_shield",
+		"encounter": "res://resources/data/combat_encounters/slice_56_two_handed_blocks_shield.json",
+		"commands": "res://tests/data/combat_commands/slice_56_two_handed_blocks_shield_commands.json",
+		"expected_events": ["combat_started", "turn_started", "command_rejected"],
+		"expected_result": "in_progress",
+		"expected_rejection": "invalid_loadout_two_handed_with_off_hand",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 2}},
+			"unit_enemy_001": {"resources": {"hp": 6}},
+		},
+	},
+	{
+		"id": "slice_57_weapon_grants_power_strike",
+		"encounter": "res://resources/data/combat_encounters/slice_57_weapon_grants_power_strike.json",
+		"commands": "res://tests/data/combat_commands/slice_57_weapon_grants_power_strike_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "status_applied", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}, "statuses": ["skill_cooldown"]},
+			"unit_enemy_001": {"resources": {"hp": 4}},
+		},
+	},
 ]
 
 
@@ -510,6 +798,19 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 		elif not _hit_roll_matches(hit_roll, expected_hit_roll):
 			errors.append("%s: unexpected hit roll payload %s" % [spec["id"], hit_roll])
 
+	if spec.has("expected_intercept"):
+		var intercept: Dictionary = _first_event(state, "shot_intercept_resolved")
+		var expected_intercept: Dictionary = spec["expected_intercept"]
+		if intercept.is_empty():
+			errors.append("%s: expected shot_intercept_resolved event" % spec["id"])
+		else:
+			for key: String in expected_intercept:
+				if key == "outcome" or key.ends_with("_unit_id"):
+					if intercept.get(key, "") != expected_intercept[key]:
+						errors.append("%s: expected intercept %s %s, got %s" % [spec["id"], key, expected_intercept[key], intercept.get(key, "")])
+				elif int(intercept.get(key, 0)) != int(expected_intercept[key]):
+					errors.append("%s: expected intercept %s %s, got %s" % [spec["id"], key, expected_intercept[key], intercept.get(key, 0)])
+
 	if spec.has("expected_active_unit_id") and state["turn_state"]["active_unit_id"] != spec["expected_active_unit_id"]:
 		errors.append("%s: expected active unit %s, got %s" % [spec["id"], spec["expected_active_unit_id"], state["turn_state"]["active_unit_id"]])
 
@@ -529,14 +830,42 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 
 
 func _commands_for_spec(spec: Dictionary, encounter: Dictionary) -> Array:
+	if spec.get("mixed_roles_ai_commands", false):
+		var first_command: Dictionary = CombatResolver.choose_enemy_command(encounter)
+		if first_command["action_id"] != "move":
+			push_error("%s: expected melee AI move, got %s" % [spec["id"], first_command["action_id"]])
+		if first_command["actor_id"] != "unit_enemy_001":
+			push_error("%s: expected melee AI actor unit_enemy_001, got %s" % [spec["id"], first_command["actor_id"]])
+		if not _positions_equal(first_command["target"].get("position", {}), {"x": 3, "y": 1}):
+			push_error("%s: expected melee AI position {x:3,y:1}, got %s" % [spec["id"], first_command["target"].get("position", {})])
+
+		var end_turn := {
+			"id": "cmd_002",
+			"type": "perform_action",
+			"actor_id": "unit_enemy_001",
+			"action_id": "end_turn",
+			"target": {"type": "none"},
+		}
+		var after_first: Dictionary = CombatResolver.simulate(encounter, [first_command, end_turn])["state"]
+		var second_command: Dictionary = CombatResolver.choose_enemy_command(after_first)
+		if second_command["action_id"] != "ranged_attack":
+			push_error("%s: expected ranged AI ranged_attack, got %s" % [spec["id"], second_command["action_id"]])
+		if second_command["actor_id"] != "unit_enemy_002":
+			push_error("%s: expected ranged AI actor unit_enemy_002, got %s" % [spec["id"], second_command["actor_id"]])
+		if second_command["target"].get("unit_id", "") != "unit_player_001":
+			push_error("%s: expected ranged AI target unit_player_001, got %s" % [spec["id"], second_command["target"].get("unit_id", "")])
+		return [first_command, end_turn, second_command]
+
 	if spec.get("multi_enemy_ai_commands", false):
+		var expected_first_position: Dictionary = spec.get("expected_first_command_position", {"x": 3, "y": 1})
+		var expected_second_position: Dictionary = spec.get("expected_second_command_position", {"x": 3, "y": 2})
 		var first_command: Dictionary = CombatResolver.choose_enemy_command(encounter)
 		if first_command["action_id"] != "move":
 			push_error("%s: expected first AI move, got %s" % [spec["id"], first_command["action_id"]])
 		if first_command["actor_id"] != "unit_enemy_001":
 			push_error("%s: expected first AI actor unit_enemy_001, got %s" % [spec["id"], first_command["actor_id"]])
-		if not _positions_equal(first_command["target"].get("position", {}), {"x": 3, "y": 1}):
-			push_error("%s: expected first AI position {x:3,y:1}, got %s" % [spec["id"], first_command["target"].get("position", {})])
+		if not _positions_equal(first_command["target"].get("position", {}), expected_first_position):
+			push_error("%s: expected first AI position %s, got %s" % [spec["id"], expected_first_position, first_command["target"].get("position", {})])
 
 		var end_turn := {
 			"id": "cmd_002",
@@ -551,8 +880,8 @@ func _commands_for_spec(spec: Dictionary, encounter: Dictionary) -> Array:
 			push_error("%s: expected second AI move, got %s" % [spec["id"], second_command["action_id"]])
 		if second_command["actor_id"] != "unit_enemy_002":
 			push_error("%s: expected second AI actor unit_enemy_002, got %s" % [spec["id"], second_command["actor_id"]])
-		if not _positions_equal(second_command["target"].get("position", {}), {"x": 3, "y": 2}):
-			push_error("%s: expected second AI position {x:3,y:2}, got %s" % [spec["id"], second_command["target"].get("position", {})])
+		if not _positions_equal(second_command["target"].get("position", {}), expected_second_position):
+			push_error("%s: expected second AI position %s, got %s" % [spec["id"], expected_second_position, second_command["target"].get("position", {})])
 		if _positions_equal(first_command["target"].get("position", {}), second_command["target"].get("position", {})):
 			push_error("%s: enemies chose the same destination" % spec["id"])
 		return [first_command, end_turn, second_command]
@@ -626,7 +955,7 @@ func _first_event(state: Dictionary, event_type: String) -> Dictionary:
 
 func _hit_roll_matches(actual: Dictionary, expected: Dictionary) -> bool:
 	for key: String in expected:
-		if key == "outcome":
+		if key == "outcome" or key.ends_with("_unit_id"):
 			if actual.get(key, "") != expected[key]:
 				return false
 		elif int(actual.get(key, 0)) != int(expected[key]):

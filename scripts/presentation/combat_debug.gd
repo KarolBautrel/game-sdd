@@ -9,14 +9,33 @@ const RANGED_AI_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/s
 const PATHFINDING_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_31_enemy_ai_pathfinds_around_blocked_tile.json"
 const LOW_CHANCE_AI_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_34_enemy_ai_approaches_low_chance_ranged_target.json"
 const MULTI_ENEMY_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_40_multi_enemy_pathing_and_targeting.json"
+const BOTTLENECK_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_41_multi_enemy_bottleneck_spacing.json"
+const MIXED_ROLES_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_42_mixed_melee_ranged_enemy_roles.json"
+const TARGET_SELECTION_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_43_target_selection_multiple_players.json"
+const INTERCEPT_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_44_ranged_intercept_by_unit.json"
+const WEAPON_MELEE_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_45_weapon_profile_melee_damage.json"
+const WEAPON_RANGED_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_46_weapon_profile_ranged_range_hit.json"
+const WEAPON_AP_COST_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_47_weapon_profile_ap_cost.json"
+const POWER_STRIKE_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_48_power_strike_skill.json"
+const WEAPON_AP_COST_SUCCESS_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_49_weapon_profile_ap_cost_success.json"
+const ENEMY_POWER_STRIKE_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_50_enemy_ai_power_strike.json"
+const ENEMY_POWER_STRIKE_COOLDOWN_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_51_enemy_ai_power_strike_cooldown_blocks_repeat.json"
+const SKILL_COOLDOWN_EXPIRES_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_52_skill_cooldown_expires_on_own_turn.json"
+const WEAPON_LOADOUT_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_53_weapon_loadout_v1.json"
+const BOW_REQUIRED_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_54_bow_required_for_ranged_attack.json"
+const SHIELD_REQUIRED_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_55_shield_required_for_shield_wall.json"
+const TWO_HANDED_BLOCKS_SHIELD_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_56_two_handed_blocks_shield.json"
+const WEAPON_GRANTS_POWER_STRIKE_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_57_weapon_grants_power_strike.json"
 const TILE_SIZE := 56
 const TILE_GAP := 4
-const COMMAND_ACTION_IDS := ["move", "basic_attack", "ranged_attack", "defend", "end_turn", "enemy_ai", "enemy_turn"]
-const SCENARIO_ACTION_IDS := ["reset", "load_los_test", "load_cover_test", "load_ranged_ai_test", "load_pathfinding_test", "load_low_chance_ai_test", "load_multi_enemy_test"]
+const COMMAND_ACTION_IDS := ["move", "basic_attack", "ranged_attack", "aimed_shot", "power_strike", "shield_wall", "defend", "end_turn", "enemy_ai", "enemy_turn"]
 const ACTION_LABELS := {
 	"move": "Move",
 	"basic_attack": "Melee attack",
 	"ranged_attack": "Ranged attack",
+	"aimed_shot": "Aimed shot",
+	"power_strike": "Power strike",
+	"shield_wall": "Shield wall",
 	"defend": "Defend",
 	"end_turn": "End turn",
 	"enemy_ai": "Enemy AI once",
@@ -28,6 +47,18 @@ const ACTION_LABELS := {
 	"load_pathfinding_test": "Load Pathfinding test",
 	"load_low_chance_ai_test": "Load Low Chance AI test",
 	"load_multi_enemy_test": "Load Multi Enemy test",
+	"load_bottleneck_test": "Load Bottleneck test",
+	"load_mixed_roles_test": "Load Mixed Roles test",
+	"load_target_selection_test": "Load Target Selection test",
+	"load_intercept_test": "Load Intercept test",
+	"load_weapon_melee_test": "Load Weapon Melee test",
+	"load_weapon_ranged_test": "Load Weapon Ranged test",
+	"load_weapon_ap_cost_test": "Load Weapon AP Cost blocked test",
+	"load_power_strike_test": "Load Power Strike test",
+	"load_weapon_ap_cost_success_test": "Load Weapon AP Cost success test",
+	"load_enemy_power_strike_test": "Load Enemy Power Strike test",
+	"load_enemy_power_strike_cooldown_test": "Load Enemy Power Strike cooldown test",
+	"load_skill_cooldown_expires_test": "Load Skill Cooldown expires test",
 }
 
 @onready var grid_container: GridContainer = %GridContainer
@@ -44,6 +75,7 @@ var command_index := 1
 var selected_action := "move"
 var last_feedback := "Select an action."
 var current_encounter_path := DEFAULT_ENCOUNTER_PATH
+var selected_scenario_id := "reset"
 var selected_position: Dictionary = {}
 
 
@@ -170,7 +202,7 @@ func _render_unit_list() -> void:
 	var lines: Array[String] = []
 	for unit: Dictionary in state["units"]:
 		var marker := "*" if unit["id"] == state["turn_state"]["active_unit_id"] else " "
-		lines.append("%s %s [%s] HP %s/%s AP %s/%s ACC %s EVA %s pos (%s,%s)" % [
+		lines.append("%s %s [%s] HP %s/%s AP %s/%s ACC %s EVA %s WPN %s pos (%s,%s)\n  Cooldowns: %s | Statuses: %s" % [
 			marker,
 			unit["id"],
 			unit["team"],
@@ -180,10 +212,32 @@ func _render_unit_list() -> void:
 			unit["stats"]["max_ap"],
 			unit["stats"].get("accuracy", 0),
 			unit["stats"].get("evasion", 0),
+			unit.get("equipped_weapon_id", "none"),
 			unit["position"]["x"],
 			unit["position"]["y"],
+			_cooldown_summary(unit),
+			_status_summary(unit),
 		])
 	unit_list_label.text = "\n".join(lines)
+
+
+func _status_summary(unit: Dictionary) -> String:
+	var status_labels: Array[String] = []
+	for status: Dictionary in unit["statuses"]:
+		if status.get("id", "") != "skill_cooldown":
+			if status.has("damage_reduction"):
+				status_labels.append("%s %s DR" % [status.get("id", "unknown"), status.get("damage_reduction", "?")])
+			else:
+				status_labels.append(status.get("id", "unknown"))
+	return ",".join(status_labels) if not status_labels.is_empty() else "none"
+
+
+func _cooldown_summary(unit: Dictionary) -> String:
+	var cooldown_labels: Array[String] = []
+	for status: Dictionary in unit["statuses"]:
+		if status.get("id", "") == "skill_cooldown":
+			cooldown_labels.append("%s %s" % [ACTION_LABELS.get(status.get("action_id", "skill"), status.get("action_id", "skill")), status.get("remaining_turns", "?")])
+	return ", ".join(cooldown_labels) if not cooldown_labels.is_empty() else "none"
 
 
 func _render_inspect() -> void:
@@ -238,9 +292,8 @@ func _render_command_buttons() -> void:
 	for action_id in COMMAND_ACTION_IDS:
 		_add_action_button(action_id)
 
-	_add_button_section("Load Tests")
-	for action_id in SCENARIO_ACTION_IDS:
-		_add_action_button(action_id)
+	_add_button_section("Load Test")
+	_add_scenario_picker()
 
 
 func _add_button_section(title: String) -> void:
@@ -255,40 +308,88 @@ func _add_action_button(action_id: String) -> void:
 	button.text = ACTION_LABELS.get(action_id, action_id)
 	button.toggle_mode = true
 	button.button_pressed = selected_action == action_id
-	button.disabled = _combat_result() != "in_progress" and action_id not in SCENARIO_ACTION_IDS
+	button.disabled = _combat_result() != "in_progress"
 	button.pressed.connect(func() -> void:
 		selected_action = action_id
-		if action_id == "reset":
-			_reset_debug_encounter()
-		elif action_id == "load_los_test":
-			current_encounter_path = LOS_TEST_ENCOUNTER_PATH
-			_reset_debug_encounter()
-		elif action_id == "load_cover_test":
-			current_encounter_path = COVER_TEST_ENCOUNTER_PATH
-			_reset_debug_encounter()
-		elif action_id == "load_ranged_ai_test":
-			current_encounter_path = RANGED_AI_TEST_ENCOUNTER_PATH
-			_reset_debug_encounter()
-		elif action_id == "load_pathfinding_test":
-			current_encounter_path = PATHFINDING_TEST_ENCOUNTER_PATH
-			_reset_debug_encounter()
-		elif action_id == "load_low_chance_ai_test":
-			current_encounter_path = LOW_CHANCE_AI_TEST_ENCOUNTER_PATH
-			_reset_debug_encounter()
-		elif action_id == "load_multi_enemy_test":
-			current_encounter_path = MULTI_ENEMY_TEST_ENCOUNTER_PATH
-			_reset_debug_encounter()
-		elif action_id == "enemy_turn":
+		if action_id == "enemy_turn":
 			_run_enemy_turn_helper()
 		elif action_id == "enemy_ai":
 			_run_command(CombatResolver.choose_enemy_command(state, "cmd_%03d" % command_index))
-		elif action_id in ["defend", "end_turn"]:
+		elif action_id in ["shield_wall", "defend", "end_turn"]:
 			_run_command(_build_command(action_id, {}))
 		else:
 			last_feedback = "Select a highlighted target for %s." % ACTION_LABELS.get(action_id, action_id)
 			_render()
 	)
 	command_buttons.add_child(button)
+
+
+func _add_scenario_picker() -> void:
+	var picker := OptionButton.new()
+	picker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	var selected_index := 0
+	var options := _scenario_options()
+	for index in range(options.size()):
+		var option: Dictionary = options[index]
+		picker.add_item(option["label"])
+		picker.set_item_metadata(index, option["id"])
+		if option["id"] == selected_scenario_id:
+			selected_index = index
+
+	picker.select(selected_index)
+	picker.item_selected.connect(func(index: int) -> void:
+		selected_scenario_id = str(picker.get_item_metadata(index))
+	)
+	command_buttons.add_child(picker)
+
+	var load_button := Button.new()
+	load_button.text = "Load selected test"
+	load_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	load_button.pressed.connect(func() -> void:
+		_load_selected_scenario()
+	)
+	command_buttons.add_child(load_button)
+
+
+func _load_selected_scenario() -> void:
+	for option: Dictionary in _scenario_options():
+		if option["id"] == selected_scenario_id:
+			current_encounter_path = option["path"]
+			_reset_debug_encounter()
+			return
+
+	last_feedback = "Unknown test selection: %s" % selected_scenario_id
+	_render()
+
+
+func _scenario_options() -> Array[Dictionary]:
+	return [
+		{"id": "reset", "label": "Default move", "path": DEFAULT_ENCOUNTER_PATH},
+		{"id": "load_los_test", "label": "LoS blocked shot", "path": LOS_TEST_ENCOUNTER_PATH},
+		{"id": "load_cover_test", "label": "Cover", "path": COVER_TEST_ENCOUNTER_PATH},
+		{"id": "load_ranged_ai_test", "label": "Ranged enemy AI", "path": RANGED_AI_TEST_ENCOUNTER_PATH},
+		{"id": "load_pathfinding_test", "label": "Pathfinding obstacle", "path": PATHFINDING_TEST_ENCOUNTER_PATH},
+		{"id": "load_low_chance_ai_test", "label": "Low chance AI approach", "path": LOW_CHANCE_AI_TEST_ENCOUNTER_PATH},
+		{"id": "load_multi_enemy_test", "label": "Multi enemy", "path": MULTI_ENEMY_TEST_ENCOUNTER_PATH},
+		{"id": "load_bottleneck_test", "label": "Bottleneck spacing", "path": BOTTLENECK_TEST_ENCOUNTER_PATH},
+		{"id": "load_mixed_roles_test", "label": "Mixed melee/ranged roles", "path": MIXED_ROLES_TEST_ENCOUNTER_PATH},
+		{"id": "load_target_selection_test", "label": "Target selection", "path": TARGET_SELECTION_TEST_ENCOUNTER_PATH},
+		{"id": "load_intercept_test", "label": "Ranged intercept", "path": INTERCEPT_TEST_ENCOUNTER_PATH},
+		{"id": "load_weapon_melee_test", "label": "Weapon melee damage", "path": WEAPON_MELEE_TEST_ENCOUNTER_PATH},
+		{"id": "load_weapon_ranged_test", "label": "Weapon ranged range/hit", "path": WEAPON_RANGED_TEST_ENCOUNTER_PATH},
+		{"id": "load_weapon_ap_cost_test", "label": "Weapon AP cost blocked", "path": WEAPON_AP_COST_TEST_ENCOUNTER_PATH},
+		{"id": "load_power_strike_test", "label": "Power strike", "path": POWER_STRIKE_TEST_ENCOUNTER_PATH},
+		{"id": "load_weapon_ap_cost_success_test", "label": "Weapon AP cost success", "path": WEAPON_AP_COST_SUCCESS_TEST_ENCOUNTER_PATH},
+		{"id": "load_enemy_power_strike_test", "label": "Enemy power strike", "path": ENEMY_POWER_STRIKE_TEST_ENCOUNTER_PATH},
+		{"id": "load_enemy_power_strike_cooldown_test", "label": "Enemy power strike cooldown", "path": ENEMY_POWER_STRIKE_COOLDOWN_TEST_ENCOUNTER_PATH},
+		{"id": "load_skill_cooldown_expires_test", "label": "Skill cooldown expires", "path": SKILL_COOLDOWN_EXPIRES_TEST_ENCOUNTER_PATH},
+		{"id": "load_weapon_loadout_test", "label": "Loadout weapon grants melee", "path": WEAPON_LOADOUT_TEST_ENCOUNTER_PATH},
+		{"id": "load_bow_required_test", "label": "Bow required for ranged", "path": BOW_REQUIRED_TEST_ENCOUNTER_PATH},
+		{"id": "load_shield_required_test", "label": "Shield required for shield wall", "path": SHIELD_REQUIRED_TEST_ENCOUNTER_PATH},
+		{"id": "load_two_handed_blocks_shield_test", "label": "Two-handed blocks shield", "path": TWO_HANDED_BLOCKS_SHIELD_TEST_ENCOUNTER_PATH},
+		{"id": "load_weapon_grants_power_strike_test", "label": "Weapon grants power strike", "path": WEAPON_GRANTS_POWER_STRIKE_TEST_ENCOUNTER_PATH},
+	]
 
 
 func _on_tile_pressed(position: Dictionary) -> void:
@@ -307,6 +408,18 @@ func _on_tile_pressed(position: Dictionary) -> void:
 	elif selected_action == "ranged_attack":
 		var unit := _living_unit_at(position)
 		_run_command(_build_command("ranged_attack", {
+			"type": "unit",
+			"unit_id": unit.get("id", ""),
+		}))
+	elif selected_action == "aimed_shot":
+		var unit := _living_unit_at(position)
+		_run_command(_build_command("aimed_shot", {
+			"type": "unit",
+			"unit_id": unit.get("id", ""),
+		}))
+	elif selected_action == "power_strike":
+		var unit := _living_unit_at(position)
+		_run_command(_build_command("power_strike", {
 			"type": "unit",
 			"unit_id": unit.get("id", ""),
 		}))
@@ -403,7 +516,13 @@ func _event_summary(event: Dictionary) -> String:
 	if event["type"] == "command_rejected":
 		return "(%s)" % event.get("reason", "")
 	if event["type"] == "damage_applied":
-		return "(%s damage to %s)" % [event.get("damage", "?"), event.get("target_unit_id", "?")]
+		return "(%s damage to %s, reduction %s)" % [event.get("damage", "?"), event.get("target_unit_id", "?"), event.get("damage_reduction", 0)]
+	if event["type"] == "status_applied":
+		var status: Dictionary = event.get("status", {})
+		return "(%s on %s, turns %s)" % [status.get("id", "?"), event.get("target_unit_id", "?"), status.get("remaining_turns", "?")]
+	if event["type"] == "status_expired":
+		var expired_status: Dictionary = event.get("status", {})
+		return "(%s on %s)" % [expired_status.get("id", "?"), event.get("target_unit_id", "?")]
 	if event["type"] == "hit_roll_resolved":
 		return "(%s: roll %s vs %s%%, base %s + acc %s - eva %s + terrain %s + cover %s)" % [
 			event.get("outcome", "?"),
@@ -414,6 +533,15 @@ func _event_summary(event: Dictionary) -> String:
 			event.get("evasion_modifier", "?"),
 			event.get("terrain_modifier", "?"),
 			event.get("cover_modifier", "?"),
+		]
+	if event["type"] == "shot_intercept_resolved":
+		return "(%s: %s -> %s via %s, roll %s vs %s%%)" % [
+			event.get("outcome", "?"),
+			event.get("original_target_unit_id", "?"),
+			event.get("final_target_unit_id", "?"),
+			event.get("blocker_unit_id", "?"),
+			event.get("roll", "?"),
+			event.get("intercept_chance", "?"),
 		]
 	if event["type"] == "unit_moved":
 		return "(%s -> %s)" % [event.get("from", {}), event.get("to", {})]
@@ -428,8 +556,12 @@ func _event_marker(event: Dictionary) -> String:
 			return "!"
 		"damage_applied", "unit_defeated", "combat_ended":
 			return "*"
+		"status_applied", "status_expired":
+			return "#"
 		"hit_roll_resolved":
 			return "%"
+		"shot_intercept_resolved":
+			return "~"
 		"unit_moved":
 			return ">"
 		"turn_started", "turn_ended":
@@ -539,6 +671,22 @@ func _is_legal_target_for_selected_action(position: Dictionary) -> bool:
 			"type": "unit",
 			"unit_id": unit["id"],
 		}))
+	if selected_action == "aimed_shot":
+		var unit := _living_unit_at(position)
+		if unit.is_empty():
+			return false
+		return _command_would_be_accepted(_build_command("aimed_shot", {
+			"type": "unit",
+			"unit_id": unit["id"],
+		}))
+	if selected_action == "power_strike":
+		var unit := _living_unit_at(position)
+		if unit.is_empty():
+			return false
+		return _command_would_be_accepted(_build_command("power_strike", {
+			"type": "unit",
+			"unit_id": unit["id"],
+		}))
 	return false
 
 
@@ -575,6 +723,22 @@ func _preview_command_for_position(position: Dictionary) -> Dictionary:
 		return _build_command("ranged_attack", {
 			"type": "unit",
 			"unit_id": ranged_unit["id"],
+		})
+	if selected_action == "aimed_shot":
+		var aimed_unit := _living_unit_at(position)
+		if aimed_unit.is_empty():
+			return {}
+		return _build_command("aimed_shot", {
+			"type": "unit",
+			"unit_id": aimed_unit["id"],
+		})
+	if selected_action == "power_strike":
+		var power_unit := _living_unit_at(position)
+		if power_unit.is_empty():
+			return {}
+		return _build_command("power_strike", {
+			"type": "unit",
+			"unit_id": power_unit["id"],
 		})
 	return {}
 

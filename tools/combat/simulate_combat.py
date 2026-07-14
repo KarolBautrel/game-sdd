@@ -10,6 +10,12 @@ MAX_HIT_CHANCE = 95
 HIGHGROUND_RANGED_HIT_MODIFIER = 10
 COVER_LOW_RANGED_HIT_MODIFIER = -20
 AI_RANGED_MIN_HIT_CHANCE = 60
+MIN_INTERCEPT_CHANCE = 20
+MAX_INTERCEPT_CHANCE = 80
+AI_POWER_STRIKE_CHANCE = 35
+POWER_STRIKE_COOLDOWN_TURNS = 2
+DEFAULT_AIMED_SHOT_COOLDOWN_TURNS = 2
+DEFAULT_SHIELD_WALL_COOLDOWN_TURNS = 2
 
 
 @dataclass
@@ -28,7 +34,19 @@ def choose_enemy_command(state: dict[str, Any], command_id: str = "cmd_ai_001") 
         return _end_turn_command(state["turn_state"]["active_unit_id"], command_id)
 
     adjacent_player = _adjacent_living_enemy(state, actor, target_team="player")
-    if adjacent_player is not None and actor["resources"]["ap"] >= 1 and "basic_attack" in actor["available_actions"]:
+    if adjacent_player is not None and _enemy_should_use_power_strike(state, actor, adjacent_player):
+        return {
+            "id": command_id,
+            "type": "perform_action",
+            "actor_id": actor["id"],
+            "action_id": "power_strike",
+            "target": {
+                "type": "unit",
+                "unit_id": adjacent_player["id"],
+            },
+        }
+
+    if adjacent_player is not None and actor["resources"]["ap"] >= 1 and _action_available(state, actor, "basic_attack"):
         return {
             "id": command_id,
             "type": "perform_action",
@@ -55,7 +73,7 @@ def choose_enemy_command(state: dict[str, Any], command_id: str = "cmd_ai_001") 
 
     nearest_player = _nearest_living_enemy(state, actor, target_team="player")
     move_target = _best_step_toward(state, actor, nearest_player) if nearest_player is not None else None
-    if move_target is not None and actor["resources"]["ap"] >= 1 and "move" in actor["available_actions"]:
+    if move_target is not None and actor["resources"]["ap"] >= 1 and _action_available(state, actor, "move"):
         return {
             "id": command_id,
             "type": "perform_action",
@@ -100,6 +118,12 @@ def _resolve_command(state: dict[str, Any], command: dict[str, Any], sequence: i
         return _resolve_attack(state, command, sequence, action_id="basic_attack", max_range=1, uses_hit_chance=False)
     if command["action_id"] == "ranged_attack":
         return _resolve_attack(state, command, sequence, action_id="ranged_attack", max_range=3, uses_hit_chance=True)
+    if command["action_id"] == "aimed_shot":
+        return _resolve_attack(state, command, sequence, action_id="aimed_shot", max_range=4, uses_hit_chance=True, damage_bonus=1, ap_cost=2)
+    if command["action_id"] == "power_strike":
+        return _resolve_attack(state, command, sequence, action_id="power_strike", max_range=1, uses_hit_chance=False, damage_bonus=2, ap_cost=2)
+    if command["action_id"] == "shield_wall":
+        return _resolve_self_status_action(state, command, sequence, action_id="shield_wall", ap_cost=1)
     if command["action_id"] == "move":
         return _resolve_move(state, command, sequence)
     if command["action_id"] == "defend":
@@ -117,15 +141,26 @@ def _resolve_attack(
     action_id: str,
     max_range: int,
     uses_hit_chance: bool,
+    damage_bonus: int = 0,
+    ap_cost: int = 1,
 ) -> int:
     actor = _unit_by_id(state, command["actor_id"])
     target = _unit_by_id(state, command["target"].get("unit_id", ""))
+    action_profile = _profile_for_action(state, actor, action_id)
 
-    rejection = _attack_rejection(state, actor, target, action_id, max_range)
+    rejection = _attack_rejection(state, actor, target, action_id, max_range, ap_cost)
     if rejection is not None:
         return _reject(state, sequence, command, rejection)
 
-    actor["resources"]["ap"] -= 1
+    attack_range = _attack_range(action_profile, max_range)
+    attack_ap_cost = _attack_ap_cost(action_profile, ap_cost)
+    attack_damage_bonus = _attack_damage_bonus(action_profile, damage_bonus)
+
+    rejection = _range_rejection(state, actor, target, action_id, attack_range)
+    if rejection is not None:
+        return _reject(state, sequence, command, rejection)
+
+    actor["resources"]["ap"] -= attack_ap_cost
 
     sequence = _emit(
         state,
@@ -136,13 +171,56 @@ def _resolve_attack(
             "actor_id": actor["id"],
             "action_id": command["action_id"],
             "target_unit_id": target["id"],
-            "ap_spent": 1,
+            "ap_spent": attack_ap_cost,
+            "profile_id": action_profile.get("id", ""),
+            "weapon_id": action_profile.get("id", ""),
         },
     )
+    cooldown_turns = _cooldown_turns(action_profile, _default_cooldown_turns(action_id))
+    if cooldown_turns > 0:
+        cooldown_status = _skill_cooldown_status(actor["id"], action_id, cooldown_turns)
+        actor["statuses"].append(cooldown_status)
+        sequence = _emit(
+            state,
+            sequence,
+            "status_applied",
+            {
+                "command_id": command["id"],
+                "actor_id": actor["id"],
+                "target_unit_id": actor["id"],
+                "status": cooldown_status,
+            },
+        )
+
+    original_target = target
+    if uses_hit_chance:
+        intercept = _ranged_intercept_candidate(state, actor, target)
+        if intercept is not None:
+            intercept_roll = _deterministic_intercept_roll(state, command)
+            blocker = intercept["unit"]
+            outcome = "intercepted" if intercept_roll <= intercept["chance"] else "clear"
+            sequence = _emit(
+                state,
+                sequence,
+                "shot_intercept_resolved",
+                {
+                    "command_id": command["id"],
+                    "actor_id": actor["id"],
+                    "original_target_unit_id": original_target["id"],
+                    "blocker_unit_id": blocker["id"],
+                    "final_target_unit_id": blocker["id"] if outcome == "intercepted" else original_target["id"],
+                    "blocker_progress": intercept["progress"],
+                    "intercept_chance": intercept["chance"],
+                    "roll": intercept_roll,
+                    "outcome": outcome,
+                },
+            )
+            if outcome == "intercepted":
+                target = blocker
 
     if uses_hit_chance:
         roll = _deterministic_roll(state, command)
-        base_hit_chance = RANGED_ATTACK_HIT_CHANCE
+        base_hit_chance = _base_hit_chance(action_profile)
         accuracy_modifier = _stat(actor, "accuracy")
         evasion_modifier = _stat(target, "evasion")
         terrain_modifier = _terrain_hit_modifier(state, actor, action_id)
@@ -174,7 +252,9 @@ def _resolve_attack(
         if outcome == "miss":
             return sequence
 
-    damage = max(1, actor["stats"]["strength"] - target["stats"]["defense"])
+    raw_damage = max(1, actor["stats"]["strength"] + attack_damage_bonus - target["stats"]["defense"])
+    reduction = _damage_reduction(target)
+    damage = max(1, raw_damage - reduction)
     old_hp = target["resources"]["hp"]
     target["resources"]["hp"] = max(0, old_hp - damage)
     sequence = _emit(
@@ -186,6 +266,11 @@ def _resolve_attack(
             "actor_id": actor["id"],
             "target_unit_id": target["id"],
             "damage": damage,
+            "raw_damage": raw_damage,
+            "damage_reduction": reduction,
+            "damage_bonus": attack_damage_bonus,
+            "profile_id": action_profile.get("id", ""),
+            "weapon_id": action_profile.get("id", ""),
             "hp_before": old_hp,
             "hp_after": target["resources"]["hp"],
         },
@@ -212,6 +297,67 @@ def _resolve_attack(
                 "command_id": command["id"],
                 "actor_id": actor["id"],
                 "result": _combat_result(state),
+            },
+        )
+
+    return sequence
+
+
+def _resolve_self_status_action(
+    state: dict[str, Any],
+    command: dict[str, Any],
+    sequence: int,
+    action_id: str,
+    ap_cost: int,
+) -> int:
+    actor = _unit_by_id(state, command["actor_id"])
+    action_profile = _profile_for_action(state, actor, action_id)
+    required_ap = _attack_ap_cost(action_profile, ap_cost)
+    rejection = _self_action_rejection(state, actor, action_id, required_ap)
+    if rejection is not None:
+        return _reject(state, sequence, command, rejection)
+
+    actor["resources"]["ap"] -= required_ap
+    sequence = _emit(
+        state,
+        sequence,
+        "action_performed",
+        {
+            "command_id": command["id"],
+            "actor_id": actor["id"],
+            "action_id": action_id,
+            "ap_spent": required_ap,
+            "profile_id": action_profile.get("id", ""),
+        },
+    )
+
+    status = _profile_status(actor["id"], action_profile, fallback_status_id=action_id)
+    actor["statuses"].append(status)
+    sequence = _emit(
+        state,
+        sequence,
+        "status_applied",
+        {
+            "command_id": command["id"],
+            "actor_id": actor["id"],
+            "target_unit_id": actor["id"],
+            "status": status,
+        },
+    )
+
+    cooldown_turns = _cooldown_turns(action_profile, _default_cooldown_turns(action_id))
+    if cooldown_turns > 0:
+        cooldown_status = _skill_cooldown_status(actor["id"], action_id, cooldown_turns)
+        actor["statuses"].append(cooldown_status)
+        sequence = _emit(
+            state,
+            sequence,
+            "status_applied",
+            {
+                "command_id": command["id"],
+                "actor_id": actor["id"],
+                "target_unit_id": actor["id"],
+                "status": cooldown_status,
             },
         )
 
@@ -309,6 +455,7 @@ def _resolve_end_turn(state: dict[str, Any], command: dict[str, Any], sequence: 
     state["turn_state"]["active_unit_id"] = next_unit_id
     next_unit = _unit_by_id(state, next_unit_id)
     next_unit["resources"]["ap"] = next_unit["stats"]["max_ap"]
+    expired_statuses = _tick_turn_start_statuses(next_unit)
 
     sequence = _emit(
         state,
@@ -330,7 +477,7 @@ def _resolve_end_turn(state: dict[str, Any], command: dict[str, Any], sequence: 
             "actor_id": previous_unit_id,
         },
     )
-    return _emit(
+    sequence = _emit(
         state,
         sequence,
         "turn_started",
@@ -340,6 +487,19 @@ def _resolve_end_turn(state: dict[str, Any], command: dict[str, Any], sequence: 
             "round": state["turn_state"]["round"],
         },
     )
+    for status in expired_statuses:
+        sequence = _emit(
+            state,
+            sequence,
+            "status_expired",
+            {
+                "command_id": command["id"],
+                "actor_id": next_unit_id,
+                "target_unit_id": next_unit_id,
+                "status": status,
+            },
+        )
+    return sequence
 
 
 def _attack_rejection(
@@ -348,6 +508,7 @@ def _attack_rejection(
     target: dict[str, Any] | None,
     action_id: str,
     max_range: int,
+    required_ap: int = 1,
 ) -> str | None:
     if actor is None:
         return "missing_actor"
@@ -361,14 +522,59 @@ def _attack_rejection(
         return "target_defeated"
     if actor["team"] == target["team"]:
         return "target_is_not_enemy"
-    if actor["resources"]["ap"] < 1:
+    loadout_rejection = _loadout_rejection(state, actor)
+    if loadout_rejection is not None:
+        return loadout_rejection
+    if not _action_available(state, actor, action_id):
+        return "action_not_available"
+    weapon_profile = _weapon_profile_for_action(state, actor, action_id)
+    if weapon_profile is None:
+        return "missing_weapon_profile"
+    if actor["resources"]["ap"] < _attack_ap_cost(weapon_profile, required_ap):
         return "not_enough_ap"
+    if _skill_on_cooldown(actor, action_id):
+        return "skill_on_cooldown"
+    range_rejection = _range_rejection(state, actor, target, action_id, _attack_range(weapon_profile, max_range))
+    if range_rejection is not None:
+        return range_rejection
+    return None
+
+
+def _self_action_rejection(
+    state: dict[str, Any],
+    actor: dict[str, Any] | None,
+    action_id: str,
+    required_ap: int,
+) -> str | None:
+    if actor is None:
+        return "missing_actor"
+    if state["turn_state"]["active_unit_id"] != actor["id"]:
+        return "actor_is_not_active_unit"
+    if actor["resources"]["hp"] <= 0:
+        return "actor_defeated"
+    if actor["resources"]["ap"] < required_ap:
+        return "not_enough_ap"
+    loadout_rejection = _loadout_rejection(state, actor)
+    if loadout_rejection is not None:
+        return loadout_rejection
+    if _skill_on_cooldown(actor, action_id):
+        return "skill_on_cooldown"
+    if not _action_available(state, actor, action_id):
+        return "action_not_available"
+    return None
+
+
+def _range_rejection(
+    state: dict[str, Any],
+    actor: dict[str, Any],
+    target: dict[str, Any],
+    action_id: str,
+    max_range: int,
+) -> str | None:
     if _chebyshev(actor["position"], target["position"]) > max_range:
         return "target_out_of_range"
     if action_id == "ranged_attack" and not _has_line_of_sight(state, actor["position"], target["position"]):
         return "target_not_visible"
-    if action_id not in actor["available_actions"]:
-        return "action_not_available"
     return None
 
 
@@ -386,7 +592,7 @@ def _action_rejection(
         return "actor_defeated"
     if actor["resources"]["ap"] < required_ap:
         return "not_enough_ap"
-    if action_id not in actor["available_actions"]:
+    if not _action_available(state, actor, action_id):
         return "action_not_available"
     return None
 
@@ -404,7 +610,7 @@ def _move_rejection(
         return "actor_defeated"
     if actor["resources"]["ap"] < 1:
         return "not_enough_ap"
-    if "move" not in actor["available_actions"]:
+    if not _action_available(state, actor, "move"):
         return "action_not_available"
     if not {"x", "y"}.issubset(destination):
         return "missing_destination"
@@ -450,8 +656,212 @@ def _deterministic_roll(state: dict[str, Any], command: dict[str, Any]) -> int:
     return ((state["seed"] + command_hash * 17) % 100) + 1
 
 
+def _deterministic_intercept_roll(state: dict[str, Any], command: dict[str, Any]) -> int:
+    command_hash = sum(ord(character) for character in f'{command["id"]}_intercept')
+    return ((state["seed"] + command_hash * 17) % 100) + 1
+
+
+def _deterministic_ai_decision_roll(state: dict[str, Any], actor: dict[str, Any], action_id: str) -> int:
+    roll_key = f'{actor["id"]}_{action_id}_{state["turn_state"]["round"]}'
+    command_hash = sum(ord(character) for character in roll_key)
+    return ((state["seed"] + command_hash * 13) % 100) + 1
+
+
 def _stat(unit: dict[str, Any], stat_name: str) -> int:
     return int(unit["stats"].get(stat_name, 0))
+
+
+def _profile_for_action(
+    state: dict[str, Any],
+    actor: dict[str, Any] | None,
+    action_id: str,
+) -> dict[str, Any] | None:
+    if actor is None:
+        return {}
+    weapon_id = actor.get("equipped_weapon_id")
+    profile: dict[str, Any] = {}
+    if not weapon_id:
+        profile = {}
+    else:
+        profiles = state.get("weapon_profiles", {})
+        found_profile = profiles.get(weapon_id)
+        if found_profile is None:
+            return None
+        if found_profile.get("action_id") == action_id:
+            profile = found_profile
+    if profile:
+        return profile
+    item_profile = _item_action_profile_for_action(state, actor, action_id)
+    if item_profile is not None:
+        return item_profile
+    action_profile = state.get("action_profiles", {}).get(action_id)
+    if action_profile is not None:
+        return action_profile
+    return {}
+
+
+def _weapon_profile_for_action(
+    state: dict[str, Any],
+    actor: dict[str, Any] | None,
+    action_id: str,
+) -> dict[str, Any] | None:
+    profile = _profile_for_action(state, actor, action_id)
+    if profile is None:
+        return None
+    return profile
+
+
+def _enemy_should_use_power_strike(state: dict[str, Any], actor: dict[str, Any], target: dict[str, Any]) -> bool:
+    if not _action_available(state, actor, "power_strike"):
+        return False
+    profile = _profile_for_action(state, actor, "power_strike") or {}
+    if _attack_rejection(state, actor, target, "power_strike", 1, _attack_ap_cost(profile, 2)) is not None:
+        return False
+    return _deterministic_ai_decision_roll(state, actor, "power_strike") <= AI_POWER_STRIKE_CHANCE
+
+
+def _skill_on_cooldown(actor: dict[str, Any], action_id: str) -> bool:
+    for status in actor["statuses"]:
+        if status.get("id") == "skill_cooldown" and status.get("action_id") == action_id and status.get("remaining_turns", 0) > 0:
+            return True
+    return False
+
+
+def _skill_cooldown_status(source_unit_id: str, action_id: str, remaining_turns: int) -> dict[str, Any]:
+    return {
+        "id": "skill_cooldown",
+        "action_id": action_id,
+        "remaining_turns": remaining_turns,
+        "duration_rule": "own_turn_starts",
+        "source_unit_id": source_unit_id,
+    }
+
+
+def _tick_turn_start_statuses(unit: dict[str, Any]) -> list[dict[str, Any]]:
+    kept_statuses: list[dict[str, Any]] = []
+    expired_statuses: list[dict[str, Any]] = []
+    for status in unit["statuses"]:
+        next_status = deepcopy(status)
+        if next_status.get("id") == "skill_cooldown":
+            next_status["remaining_turns"] = max(0, int(next_status.get("remaining_turns", 0)) - 1)
+            if next_status["remaining_turns"] == 0:
+                expired_statuses.append(next_status)
+                continue
+        elif next_status.get("duration_rule") == "own_turn_starts":
+            next_status["remaining_turns"] = max(0, int(next_status.get("remaining_turns", 0)) - 1)
+            if next_status["remaining_turns"] == 0:
+                expired_statuses.append(next_status)
+                continue
+        kept_statuses.append(next_status)
+    unit["statuses"] = kept_statuses
+    return expired_statuses
+
+
+def _attack_range(weapon_profile: dict[str, Any], fallback: int) -> int:
+    return int(weapon_profile.get("range", fallback))
+
+
+def _action_available(state: dict[str, Any], actor: dict[str, Any], action_id: str) -> bool:
+    if action_id in actor.get("available_actions", []):
+        return True
+    for item in _loadout_items(state, actor):
+        if action_id in item.get("grants_actions", []):
+            return True
+    return False
+
+
+def _item_action_profile_for_action(
+    state: dict[str, Any],
+    actor: dict[str, Any] | None,
+    action_id: str,
+) -> dict[str, Any] | None:
+    if actor is None:
+        return None
+    for item in _loadout_items(state, actor):
+        if action_id not in item.get("grants_actions", []):
+            continue
+        action_profiles = item.get("action_profiles", {})
+        if action_id in action_profiles:
+            return action_profiles[action_id]
+    return None
+
+
+def _loadout_items(state: dict[str, Any], actor: dict[str, Any]) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    item_profiles = state.get("item_profiles", {})
+    for item_id in actor.get("loadout", {}).values():
+        if item_id is None:
+            continue
+        item = item_profiles.get(item_id)
+        if item is not None:
+            items.append(item)
+    return items
+
+
+def _loadout_rejection(state: dict[str, Any], actor: dict[str, Any]) -> str | None:
+    loadout = actor.get("loadout", {})
+    if not loadout:
+        return None
+    item_profiles = state.get("item_profiles", {})
+    for slot, item_id in loadout.items():
+        if item_id is None:
+            continue
+        item = item_profiles.get(item_id)
+        if item is None:
+            return "missing_item_profile"
+        if item.get("slot") != slot:
+            return "item_slot_mismatch"
+    main_item_id = loadout.get("main_hand")
+    off_item_id = loadout.get("off_hand")
+    main_item = item_profiles.get(main_item_id) if main_item_id is not None else None
+    if main_item is not None and main_item.get("two_handed", False) and off_item_id is not None:
+        return "invalid_loadout_two_handed_with_off_hand"
+    return None
+
+
+def _attack_ap_cost(weapon_profile: dict[str, Any], fallback: int) -> int:
+    return int(weapon_profile.get("ap_cost", fallback))
+
+
+def _attack_damage_bonus(weapon_profile: dict[str, Any], fallback: int) -> int:
+    return int(weapon_profile.get("damage_bonus", fallback))
+
+
+def _base_hit_chance(weapon_profile: dict[str, Any]) -> int:
+    return int(weapon_profile.get("base_hit_chance", RANGED_ATTACK_HIT_CHANCE))
+
+
+def _cooldown_turns(action_profile: dict[str, Any], fallback: int) -> int:
+    return int(action_profile.get("cooldown_turns", fallback))
+
+
+def _default_cooldown_turns(action_id: str) -> int:
+    if action_id == "power_strike":
+        return POWER_STRIKE_COOLDOWN_TURNS
+    if action_id == "aimed_shot":
+        return DEFAULT_AIMED_SHOT_COOLDOWN_TURNS
+    if action_id == "shield_wall":
+        return DEFAULT_SHIELD_WALL_COOLDOWN_TURNS
+    return 0
+
+
+def _profile_status(source_unit_id: str, action_profile: dict[str, Any], fallback_status_id: str) -> dict[str, Any]:
+    status = {
+        "id": action_profile.get("status_id", fallback_status_id),
+        "remaining_turns": int(action_profile.get("status_remaining_turns", 1)),
+        "duration_rule": "own_turn_starts",
+        "source_unit_id": source_unit_id,
+    }
+    if "damage_reduction" in action_profile:
+        status["damage_reduction"] = int(action_profile["damage_reduction"])
+    return status
+
+
+def _damage_reduction(target: dict[str, Any]) -> int:
+    reduction = 0
+    for status in target["statuses"]:
+        reduction += int(status.get("damage_reduction", 0))
+    return reduction
 
 
 def _clamp(value: int, minimum: int, maximum: int) -> int:
@@ -477,30 +887,40 @@ def _has_line_of_sight(state: dict[str, Any], origin: dict[str, int], target: di
     return True
 
 
+def _ranged_intercept_candidate(
+    state: dict[str, Any],
+    actor: dict[str, Any],
+    target: dict[str, Any],
+) -> dict[str, Any] | None:
+    total_distance = _chebyshev(actor["position"], target["position"])
+    if total_distance <= 1:
+        return None
+
+    candidates: list[dict[str, Any]] = []
+    for position in _line_between(actor["position"], target["position"]):
+        unit = _living_unit_at(state, position)
+        if unit is None or unit["id"] in {actor["id"], target["id"]}:
+            continue
+        distance_from_actor = _chebyshev(actor["position"], unit["position"])
+        progress = _clamp(round(distance_from_actor * 100 / total_distance), 1, 99)
+        chance = _clamp(MIN_INTERCEPT_CHANCE + round(60 * progress / 100), MIN_INTERCEPT_CHANCE, MAX_INTERCEPT_CHANCE)
+        candidates.append({"unit": unit, "progress": progress, "chance": chance})
+
+    return sorted(candidates, key=lambda item: (-item["progress"], item["unit"]["id"]))[0] if candidates else None
+
+
 def _line_between(origin: dict[str, int], target: dict[str, int]) -> list[dict[str, int]]:
-    x0 = origin["x"]
-    y0 = origin["y"]
-    x1 = target["x"]
-    y1 = target["y"]
-    dx = abs(x1 - x0)
-    dy = -abs(y1 - y0)
-    sx = 1 if x0 < x1 else -1
-    sy = 1 if y0 < y1 else -1
-    error = dx + dy
-    x = x0
-    y = y0
+    distance = _chebyshev(origin, target)
+    if distance <= 1:
+        return []
+
     positions: list[dict[str, int]] = []
 
-    while x != x1 or y != y1:
-        error2 = 2 * error
-        if error2 >= dy:
-            error += dy
-            x += sx
-        if error2 <= dx:
-            error += dx
-            y += sy
-        if x != x1 or y != y1:
-            positions.append({"x": x, "y": y})
+    for step in range(1, distance):
+        positions.append({
+            "x": round(origin["x"] + (target["x"] - origin["x"]) * step / distance),
+            "y": round(origin["y"] + (target["y"] - origin["y"]) * step / distance),
+        })
 
     return positions
 
@@ -674,8 +1094,9 @@ def _path_position_is_legal(state: dict[str, Any], actor: dict[str, Any], origin
 
 
 def _ranged_hit_chance(state: dict[str, Any], actor: dict[str, Any], target: dict[str, Any], action_id: str) -> int:
+    weapon_profile = _profile_for_action(state, actor, action_id) or {}
     return _clamp(
-        RANGED_ATTACK_HIT_CHANCE
+        _base_hit_chance(weapon_profile)
         + _stat(actor, "accuracy")
         - _stat(target, "evasion")
         + _terrain_hit_modifier(state, actor, action_id)

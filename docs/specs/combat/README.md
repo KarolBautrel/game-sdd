@@ -22,6 +22,7 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 ### Actions
 
 - `actions/003_actions.md`
+- `actions/048_special_skills_v1.md`
 
 ### Attacks
 
@@ -32,6 +33,15 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 
 - `hit_resolution/021_hit_chance.md`
 - `hit_resolution/025_accuracy_evasion.md`
+- `hit_resolution/044_ranged_intercept.md`
+
+### Equipment
+
+- `equipment/053_loadout_and_item_profiles_v1.md`
+
+### Weapons
+
+- `weapons/045_weapon_profiles_v1.md`
 
 ### AI
 

@@ -13,13 +13,14 @@ Line of sight determines whether a unit can target another unit or tile with ran
 - Line of sight is traced from attacker tile center to target tile center.
 - Attacker and target tiles do not block their own line.
 - Intermediate `blocked` tiles block line of sight.
-- Units do not block line of sight in v1.
+- Units do not hard-block line of sight in v1.
+- Living units on the shot line may intercept ranged attacks; see `../hit_resolution/044_ranged_intercept.md`.
 - `floor` and `highground` do not block line of sight.
 - A blocked line rejects the command with `target_not_visible`.
 
 ## Deferred
 
-- units blocking line of sight;
+- AI line-of-fire risk evaluation;
 - low cover and high cover;
 - line-of-sight preview overlay;
 - highground line-of-sight exceptions;

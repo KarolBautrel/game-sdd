@@ -25,6 +25,7 @@ Hit chance resolves whether an attack hits or misses.
 - A hit continues to `damage_applied`.
 - A miss does not emit `damage_applied`.
 - AP is spent whether the attack hits or misses.
+- Ranged intercept, when present, resolves before `hit_roll_resolved`; see `044_ranged_intercept.md`.
 
 ## Event Shape
 

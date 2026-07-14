@@ -7,6 +7,12 @@ const MAX_HIT_CHANCE := 95
 const HIGHGROUND_RANGED_HIT_MODIFIER := 10
 const COVER_LOW_RANGED_HIT_MODIFIER := -20
 const AI_RANGED_MIN_HIT_CHANCE := 60
+const MIN_INTERCEPT_CHANCE := 20
+const MAX_INTERCEPT_CHANCE := 80
+const AI_POWER_STRIKE_CHANCE := 35
+const POWER_STRIKE_COOLDOWN_TURNS := 2
+const DEFAULT_AIMED_SHOT_COOLDOWN_TURNS := 2
+const DEFAULT_SHIELD_WALL_COOLDOWN_TURNS := 2
 
 
 static func simulate(encounter: Dictionary, commands: Array) -> Dictionary:
@@ -35,7 +41,19 @@ static func choose_enemy_command(state: Dictionary, command_id: String = "cmd_ai
 		return _end_turn_command(state["turn_state"]["active_unit_id"], command_id)
 
 	var adjacent_player := _adjacent_living_enemy(state, actor, "player")
-	if not adjacent_player.is_empty() and actor["resources"]["ap"] >= 1 and actor["available_actions"].has("basic_attack"):
+	if not adjacent_player.is_empty() and _enemy_should_use_power_strike(state, actor, adjacent_player):
+		return {
+			"id": command_id,
+			"type": "perform_action",
+			"actor_id": actor["id"],
+			"action_id": "power_strike",
+			"target": {
+				"type": "unit",
+				"unit_id": adjacent_player["id"],
+			},
+		}
+
+	if not adjacent_player.is_empty() and actor["resources"]["ap"] >= 1 and _action_available(state, actor, "basic_attack"):
 		return {
 			"id": command_id,
 			"type": "perform_action",
@@ -62,7 +80,7 @@ static func choose_enemy_command(state: Dictionary, command_id: String = "cmd_ai
 
 	var nearest_player := _nearest_living_enemy(state, actor, "player")
 	var move_target := _best_step_toward(state, actor, nearest_player) if not nearest_player.is_empty() else {}
-	if not move_target.is_empty() and actor["resources"]["ap"] >= 1 and actor["available_actions"].has("move"):
+	if not move_target.is_empty() and actor["resources"]["ap"] >= 1 and _action_available(state, actor, "move"):
 		return {
 			"id": command_id,
 			"type": "perform_action",
@@ -89,6 +107,12 @@ static func _resolve_command(state: Dictionary, command: Dictionary, sequence: i
 			return _resolve_attack(state, command, sequence, "basic_attack", 1, false)
 		"ranged_attack":
 			return _resolve_attack(state, command, sequence, "ranged_attack", 3, true)
+		"aimed_shot":
+			return _resolve_attack(state, command, sequence, "aimed_shot", 4, true, 1, 2)
+		"power_strike":
+			return _resolve_attack(state, command, sequence, "power_strike", 1, false, 2, 2)
+		"shield_wall":
+			return _resolve_self_status_action(state, command, sequence, "shield_wall", 1)
 		"move":
 			return _resolve_move(state, command, sequence)
 		"defend":
@@ -99,27 +123,70 @@ static func _resolve_command(state: Dictionary, command: Dictionary, sequence: i
 			return _reject(state, sequence, command, "unsupported_action")
 
 
-static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: int, action_id: String, max_range: int, uses_hit_chance: bool) -> int:
+static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: int, action_id: String, max_range: int, uses_hit_chance: bool, damage_bonus: int = 0, ap_cost: int = 1) -> int:
 	var actor := _unit_by_id(state, command["actor_id"])
 	var target := _unit_by_id(state, command["target"].get("unit_id", ""))
+	var weapon_profile_variant: Variant = _profile_for_action(state, actor, action_id)
 
-	var rejection := _attack_rejection(state, actor, target, action_id, max_range)
+	var rejection := _attack_rejection(state, actor, target, action_id, max_range, ap_cost)
 	if rejection != "":
 		return _reject(state, sequence, command, rejection)
 
-	actor["resources"]["ap"] -= 1
+	var weapon_profile: Dictionary = weapon_profile_variant
+	var attack_range := _attack_range(weapon_profile, max_range)
+	var attack_ap_cost := _attack_ap_cost(weapon_profile, ap_cost)
+	var attack_damage_bonus := _attack_damage_bonus(weapon_profile, damage_bonus)
+
+	rejection = _range_rejection(state, actor, target, action_id, attack_range)
+	if rejection != "":
+		return _reject(state, sequence, command, rejection)
+
+	actor["resources"]["ap"] -= attack_ap_cost
 
 	sequence = _emit(state, sequence, "action_performed", {
 		"command_id": command["id"],
 		"actor_id": actor["id"],
 		"action_id": command["action_id"],
 		"target_unit_id": target["id"],
-		"ap_spent": 1,
+		"ap_spent": attack_ap_cost,
+		"profile_id": weapon_profile.get("id", ""),
+		"weapon_id": weapon_profile.get("id", ""),
 	})
+	var cooldown_turns := _cooldown_turns(weapon_profile, _default_cooldown_turns(action_id))
+	if cooldown_turns > 0:
+		var cooldown_status := _skill_cooldown_status(actor["id"], action_id, cooldown_turns)
+		actor["statuses"].append(cooldown_status)
+		sequence = _emit(state, sequence, "status_applied", {
+			"command_id": command["id"],
+			"actor_id": actor["id"],
+			"target_unit_id": actor["id"],
+			"status": cooldown_status,
+		})
+
+	var original_target := target
+	if uses_hit_chance:
+		var intercept := _ranged_intercept_candidate(state, actor, target)
+		if not intercept.is_empty():
+			var intercept_roll := _deterministic_intercept_roll(state, command)
+			var blocker: Dictionary = intercept["unit"]
+			var intercept_outcome := "intercepted" if intercept_roll <= int(intercept["chance"]) else "clear"
+			sequence = _emit(state, sequence, "shot_intercept_resolved", {
+				"command_id": command["id"],
+				"actor_id": actor["id"],
+				"original_target_unit_id": original_target["id"],
+				"blocker_unit_id": blocker["id"],
+				"final_target_unit_id": blocker["id"] if intercept_outcome == "intercepted" else original_target["id"],
+				"blocker_progress": intercept["progress"],
+				"intercept_chance": intercept["chance"],
+				"roll": intercept_roll,
+				"outcome": intercept_outcome,
+			})
+			if intercept_outcome == "intercepted":
+				target = blocker
 
 	if uses_hit_chance:
 		var roll := _deterministic_roll(state, command)
-		var base_hit_chance := RANGED_ATTACK_HIT_CHANCE
+		var base_hit_chance := _base_hit_chance(weapon_profile)
 		var accuracy_modifier := _stat(actor, "accuracy")
 		var evasion_modifier := _stat(target, "evasion")
 		var terrain_modifier := _terrain_hit_modifier(state, actor, action_id)
@@ -142,7 +209,9 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 		if outcome == "miss":
 			return sequence
 
-	var damage: int = max(1, actor["stats"]["strength"] - target["stats"]["defense"])
+	var raw_damage: int = max(1, actor["stats"]["strength"] + attack_damage_bonus - target["stats"]["defense"])
+	var reduction := _damage_reduction(target)
+	var damage: int = max(1, raw_damage - reduction)
 	var old_hp: int = target["resources"]["hp"]
 	target["resources"]["hp"] = max(0, old_hp - damage)
 
@@ -151,6 +220,11 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 		"actor_id": actor["id"],
 		"target_unit_id": target["id"],
 		"damage": damage,
+		"raw_damage": raw_damage,
+		"damage_reduction": reduction,
+		"damage_bonus": attack_damage_bonus,
+		"profile_id": weapon_profile.get("id", ""),
+		"weapon_id": weapon_profile.get("id", ""),
 		"hp_before": old_hp,
 		"hp_after": target["resources"]["hp"],
 	})
@@ -167,6 +241,46 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 			"command_id": command["id"],
 			"actor_id": actor["id"],
 			"result": _combat_result(state),
+		})
+
+	return sequence
+
+
+static func _resolve_self_status_action(state: Dictionary, command: Dictionary, sequence: int, action_id: String, ap_cost: int) -> int:
+	var actor := _unit_by_id(state, command["actor_id"])
+	var action_profile: Dictionary = _profile_for_action(state, actor, action_id)
+	var required_ap := _attack_ap_cost(action_profile, ap_cost)
+	var rejection := _self_action_rejection(state, actor, action_id, required_ap)
+	if rejection != "":
+		return _reject(state, sequence, command, rejection)
+
+	actor["resources"]["ap"] -= required_ap
+	sequence = _emit(state, sequence, "action_performed", {
+		"command_id": command["id"],
+		"actor_id": actor["id"],
+		"action_id": action_id,
+		"ap_spent": required_ap,
+		"profile_id": action_profile.get("id", ""),
+	})
+
+	var status := _profile_status(actor["id"], action_profile, action_id)
+	actor["statuses"].append(status)
+	sequence = _emit(state, sequence, "status_applied", {
+		"command_id": command["id"],
+		"actor_id": actor["id"],
+		"target_unit_id": actor["id"],
+		"status": status,
+	})
+
+	var cooldown_turns := _cooldown_turns(action_profile, _default_cooldown_turns(action_id))
+	if cooldown_turns > 0:
+		var cooldown_status := _skill_cooldown_status(actor["id"], action_id, cooldown_turns)
+		actor["statuses"].append(cooldown_status)
+		sequence = _emit(state, sequence, "status_applied", {
+			"command_id": command["id"],
+			"actor_id": actor["id"],
+			"target_unit_id": actor["id"],
+			"status": cooldown_status,
 		})
 
 	return sequence
@@ -243,6 +357,7 @@ static func _resolve_end_turn(state: Dictionary, command: Dictionary, sequence: 
 	state["turn_state"]["active_unit_id"] = next_unit_id
 	var next_unit := _unit_by_id(state, next_unit_id)
 	next_unit["resources"]["ap"] = next_unit["stats"]["max_ap"]
+	var expired_statuses := _tick_turn_start_statuses(next_unit)
 
 	sequence = _emit(state, sequence, "action_performed", {
 		"command_id": command["id"],
@@ -254,14 +369,22 @@ static func _resolve_end_turn(state: Dictionary, command: Dictionary, sequence: 
 		"command_id": command["id"],
 		"actor_id": previous_unit_id,
 	})
-	return _emit(state, sequence, "turn_started", {
+	sequence = _emit(state, sequence, "turn_started", {
 		"command_id": command["id"],
 		"actor_id": next_unit_id,
 		"round": state["turn_state"]["round"],
 	})
+	for status: Dictionary in expired_statuses:
+		sequence = _emit(state, sequence, "status_expired", {
+			"command_id": command["id"],
+			"actor_id": next_unit_id,
+			"target_unit_id": next_unit_id,
+			"status": status,
+		})
+	return sequence
 
 
-static func _attack_rejection(state: Dictionary, actor: Dictionary, target: Dictionary, action_id: String, max_range: int) -> String:
+static func _attack_rejection(state: Dictionary, actor: Dictionary, target: Dictionary, action_id: String, max_range: int, required_ap: int = 1) -> String:
 	if actor.is_empty():
 		return "missing_actor"
 	if target.is_empty():
@@ -274,14 +397,49 @@ static func _attack_rejection(state: Dictionary, actor: Dictionary, target: Dict
 		return "target_defeated"
 	if actor["team"] == target["team"]:
 		return "target_is_not_enemy"
-	if actor["resources"]["ap"] < 1:
+	var loadout_rejection := _loadout_rejection(state, actor)
+	if loadout_rejection != "":
+		return loadout_rejection
+	if not _action_available(state, actor, action_id):
+		return "action_not_available"
+	var weapon_profile_variant: Variant = _weapon_profile_for_action(state, actor, action_id)
+	if weapon_profile_variant == null:
+		return "missing_weapon_profile"
+	var weapon_profile: Dictionary = weapon_profile_variant
+	if actor["resources"]["ap"] < _attack_ap_cost(weapon_profile, required_ap):
 		return "not_enough_ap"
+	if _skill_on_cooldown(actor, action_id):
+		return "skill_on_cooldown"
+	var range_rejection := _range_rejection(state, actor, target, action_id, _attack_range(weapon_profile, max_range))
+	if range_rejection != "":
+		return range_rejection
+	return ""
+
+
+static func _self_action_rejection(state: Dictionary, actor: Dictionary, action_id: String, required_ap: int) -> String:
+	if actor.is_empty():
+		return "missing_actor"
+	if state["turn_state"]["active_unit_id"] != actor["id"]:
+		return "actor_is_not_active_unit"
+	if actor["resources"]["hp"] <= 0:
+		return "actor_defeated"
+	if actor["resources"]["ap"] < required_ap:
+		return "not_enough_ap"
+	var loadout_rejection := _loadout_rejection(state, actor)
+	if loadout_rejection != "":
+		return loadout_rejection
+	if _skill_on_cooldown(actor, action_id):
+		return "skill_on_cooldown"
+	if not _action_available(state, actor, action_id):
+		return "action_not_available"
+	return ""
+
+
+static func _range_rejection(state: Dictionary, actor: Dictionary, target: Dictionary, action_id: String, max_range: int) -> String:
 	if _chebyshev(actor["position"], target["position"]) > max_range:
 		return "target_out_of_range"
 	if action_id == "ranged_attack" and not _has_line_of_sight(state, actor["position"], target["position"]):
 		return "target_not_visible"
-	if not actor["available_actions"].has(action_id):
-		return "action_not_available"
 	return ""
 
 
@@ -294,7 +452,7 @@ static func _action_rejection(state: Dictionary, actor: Dictionary, action_id: S
 		return "actor_defeated"
 	if actor["resources"]["ap"] < required_ap:
 		return "not_enough_ap"
-	if not actor["available_actions"].has(action_id):
+	if not _action_available(state, actor, action_id):
 		return "action_not_available"
 	return ""
 
@@ -308,7 +466,7 @@ static func _move_rejection(state: Dictionary, actor: Dictionary, destination: D
 		return "actor_defeated"
 	if actor["resources"]["ap"] < 1:
 		return "not_enough_ap"
-	if not actor["available_actions"].has("move"):
+	if not _action_available(state, actor, "move"):
 		return "action_not_available"
 	if not destination.has("x") or not destination.has("y"):
 		return "missing_destination"
@@ -353,8 +511,202 @@ static func _deterministic_roll(state: Dictionary, command: Dictionary) -> int:
 	return total % 100 + 1
 
 
+static func _deterministic_intercept_roll(state: Dictionary, command: Dictionary) -> int:
+	var roll_id := "%s_intercept" % command["id"]
+	var command_hash := 0
+	for index in range(roll_id.length()):
+		command_hash += roll_id.unicode_at(index)
+	var total := int(state["seed"]) + command_hash * 17
+	return total % 100 + 1
+
+
+static func _deterministic_ai_decision_roll(state: Dictionary, actor: Dictionary, action_id: String) -> int:
+	var roll_id := "%s_%s_%s" % [actor["id"], action_id, state["turn_state"]["round"]]
+	var command_hash := 0
+	for index in range(roll_id.length()):
+		command_hash += roll_id.unicode_at(index)
+	var total := int(state["seed"]) + command_hash * 13
+	return total % 100 + 1
+
+
 static func _stat(unit: Dictionary, stat_name: String) -> int:
 	return int(unit["stats"].get(stat_name, 0))
+
+
+static func _profile_for_action(state: Dictionary, actor: Dictionary, action_id: String) -> Variant:
+	if actor.is_empty():
+		return {}
+	var profile: Dictionary = {}
+	if actor.has("equipped_weapon_id"):
+		var weapon_id: String = actor["equipped_weapon_id"]
+		var profiles: Dictionary = state.get("weapon_profiles", {})
+		if not profiles.has(weapon_id):
+			return null
+		var found_profile: Dictionary = profiles[weapon_id]
+		if found_profile.get("action_id", "") == action_id:
+			profile = found_profile
+	if not profile.is_empty():
+		return profile
+	var item_profile_variant: Variant = _item_action_profile_for_action(state, actor, action_id)
+	if item_profile_variant != null:
+		return item_profile_variant
+	var action_profiles: Dictionary = state.get("action_profiles", {})
+	if action_profiles.has(action_id):
+		return action_profiles[action_id]
+	return {}
+
+
+static func _weapon_profile_for_action(state: Dictionary, actor: Dictionary, action_id: String) -> Variant:
+	return _profile_for_action(state, actor, action_id)
+
+
+static func _enemy_should_use_power_strike(state: Dictionary, actor: Dictionary, target: Dictionary) -> bool:
+	if not _action_available(state, actor, "power_strike"):
+		return false
+	var profile: Dictionary = _profile_for_action(state, actor, "power_strike")
+	if _attack_rejection(state, actor, target, "power_strike", 1, _attack_ap_cost(profile, 2)) != "":
+		return false
+	return _deterministic_ai_decision_roll(state, actor, "power_strike") <= AI_POWER_STRIKE_CHANCE
+
+
+static func _skill_on_cooldown(actor: Dictionary, action_id: String) -> bool:
+	for status: Dictionary in actor["statuses"]:
+		if status.get("id", "") == "skill_cooldown" and status.get("action_id", "") == action_id and int(status.get("remaining_turns", 0)) > 0:
+			return true
+	return false
+
+
+static func _skill_cooldown_status(source_unit_id: String, action_id: String, remaining_turns: int) -> Dictionary:
+	return {
+		"id": "skill_cooldown",
+		"action_id": action_id,
+		"remaining_turns": remaining_turns,
+		"duration_rule": "own_turn_starts",
+		"source_unit_id": source_unit_id,
+	}
+
+
+static func _tick_turn_start_statuses(unit: Dictionary) -> Array[Dictionary]:
+	var kept_statuses: Array[Dictionary] = []
+	var expired_statuses: Array[Dictionary] = []
+	for status: Dictionary in unit["statuses"]:
+		var next_status: Dictionary = status.duplicate(true)
+		if next_status.get("id", "") == "skill_cooldown":
+			next_status["remaining_turns"] = max(0, int(next_status.get("remaining_turns", 0)) - 1)
+			if int(next_status["remaining_turns"]) == 0:
+				expired_statuses.append(next_status)
+				continue
+		elif next_status.get("duration_rule", "") == "own_turn_starts":
+			next_status["remaining_turns"] = max(0, int(next_status.get("remaining_turns", 0)) - 1)
+			if int(next_status["remaining_turns"]) == 0:
+				expired_statuses.append(next_status)
+				continue
+		kept_statuses.append(next_status)
+	unit["statuses"] = kept_statuses
+	return expired_statuses
+
+
+static func _attack_range(weapon_profile: Dictionary, fallback: int) -> int:
+	return int(weapon_profile.get("range", fallback))
+
+
+static func _action_available(state: Dictionary, actor: Dictionary, action_id: String) -> bool:
+	if actor.get("available_actions", []).has(action_id):
+		return true
+	for item: Dictionary in _loadout_items(state, actor):
+		if item.get("grants_actions", []).has(action_id):
+			return true
+	return false
+
+
+static func _item_action_profile_for_action(state: Dictionary, actor: Dictionary, action_id: String) -> Variant:
+	if actor.is_empty():
+		return null
+	for item: Dictionary in _loadout_items(state, actor):
+		if not item.get("grants_actions", []).has(action_id):
+			continue
+		var action_profiles: Dictionary = item.get("action_profiles", {})
+		if action_profiles.has(action_id):
+			return action_profiles[action_id]
+	return null
+
+
+static func _loadout_items(state: Dictionary, actor: Dictionary) -> Array[Dictionary]:
+	var items: Array[Dictionary] = []
+	var item_profiles: Dictionary = state.get("item_profiles", {})
+	for item_id: Variant in actor.get("loadout", {}).values():
+		if item_id == null:
+			continue
+		if item_profiles.has(item_id):
+			items.append(item_profiles[item_id])
+	return items
+
+
+static func _loadout_rejection(state: Dictionary, actor: Dictionary) -> String:
+	var loadout: Dictionary = actor.get("loadout", {})
+	if loadout.is_empty():
+		return ""
+	var item_profiles: Dictionary = state.get("item_profiles", {})
+	for slot: String in loadout:
+		var item_id: Variant = loadout[slot]
+		if item_id == null:
+			continue
+		if not item_profiles.has(item_id):
+			return "missing_item_profile"
+		var item: Dictionary = item_profiles[item_id]
+		if item.get("slot", "") != slot:
+			return "item_slot_mismatch"
+	var main_item_id: Variant = loadout.get("main_hand", null)
+	var off_item_id: Variant = loadout.get("off_hand", null)
+	var main_item: Dictionary = item_profiles.get(main_item_id, {}) if main_item_id != null else {}
+	if not main_item.is_empty() and main_item.get("two_handed", false) and off_item_id != null:
+		return "invalid_loadout_two_handed_with_off_hand"
+	return ""
+
+
+static func _attack_ap_cost(weapon_profile: Dictionary, fallback: int) -> int:
+	return int(weapon_profile.get("ap_cost", fallback))
+
+
+static func _attack_damage_bonus(weapon_profile: Dictionary, fallback: int) -> int:
+	return int(weapon_profile.get("damage_bonus", fallback))
+
+
+static func _base_hit_chance(weapon_profile: Dictionary) -> int:
+	return int(weapon_profile.get("base_hit_chance", RANGED_ATTACK_HIT_CHANCE))
+
+
+static func _cooldown_turns(action_profile: Dictionary, fallback: int) -> int:
+	return int(action_profile.get("cooldown_turns", fallback))
+
+
+static func _default_cooldown_turns(action_id: String) -> int:
+	if action_id == "power_strike":
+		return POWER_STRIKE_COOLDOWN_TURNS
+	if action_id == "aimed_shot":
+		return DEFAULT_AIMED_SHOT_COOLDOWN_TURNS
+	if action_id == "shield_wall":
+		return DEFAULT_SHIELD_WALL_COOLDOWN_TURNS
+	return 0
+
+
+static func _profile_status(source_unit_id: String, action_profile: Dictionary, fallback_status_id: String) -> Dictionary:
+	var status := {
+		"id": action_profile.get("status_id", fallback_status_id),
+		"remaining_turns": int(action_profile.get("status_remaining_turns", 1)),
+		"duration_rule": "own_turn_starts",
+		"source_unit_id": source_unit_id,
+	}
+	if action_profile.has("damage_reduction"):
+		status["damage_reduction"] = int(action_profile["damage_reduction"])
+	return status
+
+
+static func _damage_reduction(target: Dictionary) -> int:
+	var reduction := 0
+	for status: Dictionary in target["statuses"]:
+		reduction += int(status.get("damage_reduction", 0))
+	return reduction
 
 
 static func _terrain_hit_modifier(state: Dictionary, actor: Dictionary, action_id: String) -> int:
@@ -376,30 +728,41 @@ static func _has_line_of_sight(state: Dictionary, origin: Dictionary, target: Di
 	return true
 
 
+static func _ranged_intercept_candidate(state: Dictionary, actor: Dictionary, target: Dictionary) -> Dictionary:
+	var total_distance := _chebyshev(actor["position"], target["position"])
+	if total_distance <= 1:
+		return {}
+
+	var candidates: Array[Dictionary] = []
+	for position: Dictionary in _line_between(actor["position"], target["position"]):
+		var unit := _living_unit_at(state, position)
+		if unit.is_empty() or unit["id"] == actor["id"] or unit["id"] == target["id"]:
+			continue
+		var distance_from_actor := _chebyshev(actor["position"], unit["position"])
+		var progress := clampi(roundi(float(distance_from_actor) * 100.0 / float(total_distance)), 1, 99)
+		var chance := clampi(MIN_INTERCEPT_CHANCE + roundi(60.0 * float(progress) / 100.0), MIN_INTERCEPT_CHANCE, MAX_INTERCEPT_CHANCE)
+		candidates.append({"unit": unit, "progress": progress, "chance": chance})
+
+	candidates.sort_custom(func(first: Dictionary, second: Dictionary) -> bool:
+		if int(first["progress"]) != int(second["progress"]):
+			return int(first["progress"]) > int(second["progress"])
+		return first["unit"]["id"] < second["unit"]["id"]
+	)
+	return candidates[0] if not candidates.is_empty() else {}
+
+
 static func _line_between(origin: Dictionary, target: Dictionary) -> Array[Dictionary]:
-	var x0: int = origin["x"]
-	var y0: int = origin["y"]
-	var x1: int = target["x"]
-	var y1: int = target["y"]
-	var dx: int = abs(x1 - x0)
-	var dy: int = -abs(y1 - y0)
-	var sx := 1 if x0 < x1 else -1
-	var sy := 1 if y0 < y1 else -1
-	var error := dx + dy
-	var x := x0
-	var y := y0
+	var distance := _chebyshev(origin, target)
+	if distance <= 1:
+		return []
+
 	var positions: Array[Dictionary] = []
 
-	while x != x1 or y != y1:
-		var error2 := 2 * error
-		if error2 >= dy:
-			error += dy
-			x += sx
-		if error2 <= dx:
-			error += dx
-			y += sy
-		if x != x1 or y != y1:
-			positions.append({"x": x, "y": y})
+	for step in range(1, distance):
+		positions.append({
+			"x": roundi(float(origin["x"]) + float(target["x"] - origin["x"]) * float(step) / float(distance)),
+			"y": roundi(float(origin["y"]) + float(target["y"] - origin["y"]) * float(step) / float(distance)),
+		})
 
 	return positions
 
@@ -436,7 +799,7 @@ static func _is_walkable_tile(state: Dictionary, position: Dictionary) -> bool:
 
 static func _living_unit_at(state: Dictionary, position: Dictionary) -> Dictionary:
 	for unit: Dictionary in state["units"]:
-		if unit["resources"]["hp"] > 0 and unit["position"] == position:
+		if unit["resources"]["hp"] > 0 and int(unit["position"]["x"]) == int(position["x"]) and int(unit["position"]["y"]) == int(position["y"]):
 			return unit
 	return {}
 
@@ -594,8 +957,9 @@ static func _path_position_is_legal(state: Dictionary, actor: Dictionary, origin
 
 
 static func _ranged_hit_chance(state: Dictionary, actor: Dictionary, target: Dictionary, action_id: String) -> int:
+	var weapon_profile: Dictionary = _profile_for_action(state, actor, action_id)
 	return clampi(
-		RANGED_ATTACK_HIT_CHANCE
+		_base_hit_chance(weapon_profile)
 		+ _stat(actor, "accuracy")
 		- _stat(target, "evasion")
 		+ _terrain_hit_modifier(state, actor, action_id)

@@ -27,6 +27,10 @@ docs/specs/combat/
     Melee/ranged attack rules, damage, statuses.
   hit_resolution/
     Hit chance, accuracy, evasion, future hit modifiers.
+  equipment/
+    Loadout, item slots, equipment-granted actions.
+  weapons/
+    Weapon profile rules: range, AP cost, base hit chance, damage modifiers.
   ai/
     Enemy decision rules and tactical behavior.
   slices/
@@ -51,4 +55,6 @@ docs/specs/combat/
 - `actions/`: action availability, command shape, movement, defend, end turn.
 - `attacks/`: attack action definitions and damage/status effects.
 - `hit_resolution/`: hit chance formula and modifiers.
+- `equipment/`: equipped items, slots, and action availability from loadout.
+- `weapons/`: weapon profile ownership for attack tuning data.
 - `ai/`: enemy command selection and tactical behavior.

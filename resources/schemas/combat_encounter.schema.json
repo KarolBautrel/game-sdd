@@ -30,6 +30,84 @@
         }
       }
     },
+    "weapon_profiles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["id", "action_id", "range", "ap_cost"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "action_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "range": { "type": "integer", "minimum": 1 },
+          "ap_cost": { "type": "integer", "minimum": 0 },
+          "base_hit_chance": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "damage_bonus": { "type": "integer" },
+          "cooldown_turns": { "type": "integer", "minimum": 0 },
+          "status_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "status_remaining_turns": { "type": "integer", "minimum": 0 },
+          "damage_reduction": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "action_profiles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["id", "action_id", "ap_cost"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "action_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "range": { "type": "integer", "minimum": 1 },
+          "ap_cost": { "type": "integer", "minimum": 0 },
+          "base_hit_chance": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "damage_bonus": { "type": "integer" },
+          "cooldown_turns": { "type": "integer", "minimum": 0 },
+          "status_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "status_remaining_turns": { "type": "integer", "minimum": 0 },
+          "damage_reduction": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "item_profiles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["id", "slot", "grants_actions"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "slot": { "type": "string", "enum": ["main_hand", "off_hand", "armor"] },
+          "two_handed": { "type": "boolean" },
+          "grants_actions": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+            "uniqueItems": true
+          },
+          "action_profiles": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "required": ["id", "action_id", "ap_cost"],
+              "additionalProperties": false,
+              "properties": {
+                "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+                "action_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+                "range": { "type": "integer", "minimum": 1 },
+                "ap_cost": { "type": "integer", "minimum": 0 },
+                "base_hit_chance": { "type": "integer", "minimum": 0, "maximum": 100 },
+                "damage_bonus": { "type": "integer" },
+                "cooldown_turns": { "type": "integer", "minimum": 0 },
+                "status_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+                "status_remaining_turns": { "type": "integer", "minimum": 0 },
+                "damage_reduction": { "type": "integer", "minimum": 0 }
+              }
+            }
+          }
+        }
+      }
+    },
     "units": {
       "type": "array",
       "minItems": 2,
@@ -81,6 +159,16 @@
             "type": "array",
             "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
             "uniqueItems": true
+          },
+          "equipped_weapon_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "loadout": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "main_hand": { "type": ["string", "null"], "pattern": "^[a-z0-9_]+$" },
+              "off_hand": { "type": ["string", "null"], "pattern": "^[a-z0-9_]+$" },
+              "armor": { "type": ["string", "null"], "pattern": "^[a-z0-9_]+$" }
+            }
           }
         }
       }
