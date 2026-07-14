@@ -1,0 +1,8 @@
+{
+  "id": "town_ravenford",
+  "display_name": "Ravenford",
+  "services": ["inn", "blacksmith", "market"],
+  "npcs": ["npc_mayor_001", "npc_smith_001"],
+  "entry_scene": "res://scenes/town/town_shell.tscn"
+}
+

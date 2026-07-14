@@ -1,0 +1,239 @@
+extends SceneTree
+
+const CombatResolver := preload("res://scripts/domain/combat_resolver.gd")
+
+const SLICES := [
+	{
+		"id": "slice_01_basic_attack",
+		"encounter": "res://resources/data/combat_encounters/slice_01_basic_attack.json",
+		"commands": "res://tests/data/combat_commands/slice_01_basic_attack_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 4}},
+		},
+	},
+	{
+		"id": "slice_02_invalid_no_ap",
+		"encounter": "res://resources/data/combat_encounters/slice_02_invalid_no_ap.json",
+		"commands": "res://tests/data/combat_commands/slice_02_invalid_no_ap_commands.json",
+		"expected_events": ["combat_started", "turn_started", "command_rejected"],
+		"expected_result": "in_progress",
+		"expected_rejection": "not_enough_ap",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0, "hp": 10}, "position": {"x": 1, "y": 1}},
+			"unit_enemy_001": {"resources": {"hp": 6}, "position": {"x": 2, "y": 1}},
+		},
+	},
+	{
+		"id": "slice_03_move",
+		"encounter": "res://resources/data/combat_encounters/slice_03_move.json",
+		"commands": "res://tests/data/combat_commands/slice_03_move_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "unit_moved"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}, "position": {"x": 2, "y": 1}},
+			"unit_enemy_001": {"resources": {"hp": 6}},
+		},
+	},
+	{
+		"id": "slice_04_move_occupied",
+		"encounter": "res://resources/data/combat_encounters/slice_04_move_occupied.json",
+		"commands": "res://tests/data/combat_commands/slice_04_move_occupied_commands.json",
+		"expected_events": ["combat_started", "turn_started", "command_rejected"],
+		"expected_result": "in_progress",
+		"expected_rejection": "destination_occupied",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 1}, "position": {"x": 1, "y": 1}},
+			"unit_enemy_001": {"resources": {"hp": 6}, "position": {"x": 2, "y": 1}},
+		},
+	},
+	{
+		"id": "slice_05_move_blocked",
+		"encounter": "res://resources/data/combat_encounters/slice_05_move_blocked.json",
+		"commands": "res://tests/data/combat_commands/slice_05_move_blocked_commands.json",
+		"expected_events": ["combat_started", "turn_started", "command_rejected"],
+		"expected_result": "in_progress",
+		"expected_rejection": "destination_not_walkable",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 1}, "position": {"x": 1, "y": 1}},
+			"unit_enemy_001": {"resources": {"hp": 6}, "position": {"x": 4, "y": 1}},
+		},
+	},
+	{
+		"id": "slice_06_defend",
+		"encounter": "res://resources/data/combat_encounters/slice_06_defend.json",
+		"commands": "res://tests/data/combat_commands/slice_06_defend_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "status_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}, "statuses": ["defending"]},
+		},
+	},
+	{
+		"id": "slice_07_end_turn",
+		"encounter": "res://resources/data/combat_encounters/slice_07_end_turn.json",
+		"commands": "res://tests/data/combat_commands/slice_07_end_turn_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "turn_ended", "turn_started"],
+		"expected_result": "in_progress",
+		"expected_active_unit_id": "unit_enemy_001",
+		"unit_expectations": {
+			"unit_enemy_001": {"resources": {"ap": 1}},
+		},
+	},
+	{
+		"id": "slice_08_enemy_ai_adjacent_attack",
+		"encounter": "res://resources/data/combat_encounters/slice_08_enemy_ai_adjacent_attack.json",
+		"ai_command": true,
+		"expected_command_action": "basic_attack",
+		"expected_command_actor": "unit_enemy_001",
+		"expected_command_target": "unit_player_001",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"hp": 8}},
+			"unit_enemy_001": {"resources": {"ap": 0}},
+		},
+	},
+	{
+		"id": "slice_09_enemy_ai_move_toward_player",
+		"encounter": "res://resources/data/combat_encounters/slice_09_enemy_ai_move_toward_player.json",
+		"ai_command": true,
+		"expected_command_action": "move",
+		"expected_command_actor": "unit_enemy_001",
+		"expected_command_position": {"x": 3, "y": 1},
+		"expected_events": ["combat_started", "turn_started", "action_performed", "unit_moved"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_enemy_001": {"resources": {"ap": 0}, "position": {"x": 3, "y": 1}},
+		},
+	},
+]
+
+
+func _init() -> void:
+	var errors: Array[String] = []
+	for spec: Dictionary in SLICES:
+		errors.append_array(_validate_slice(spec))
+
+	if errors.is_empty():
+		print("Godot combat slice validation passed.")
+		quit(0)
+		return
+
+	push_error("Godot combat slice validation failed.")
+	for error: String in errors:
+		push_error(error)
+	quit(1)
+
+
+func _validate_slice(spec: Dictionary) -> Array[String]:
+	var errors: Array[String] = []
+	var encounter: Dictionary = _load_json(spec["encounter"])
+	var commands: Array = _commands_for_spec(spec, encounter)
+	var result: Dictionary = CombatResolver.simulate(encounter, commands)
+	var state: Dictionary = result["state"]
+
+	if result["result"] != spec["expected_result"]:
+		errors.append("%s: expected result %s, got %s" % [spec["id"], spec["expected_result"], result["result"]])
+
+	var event_types: Array[String] = _event_types(state)
+	if event_types != spec["expected_events"]:
+		errors.append("%s: expected events %s, got %s" % [spec["id"], spec["expected_events"], event_types])
+
+	if spec.has("expected_rejection"):
+		var rejection: Dictionary = _first_event(state, "command_rejected")
+		if rejection.is_empty():
+			errors.append("%s: expected command_rejected event" % spec["id"])
+		elif rejection.get("reason", "") != spec["expected_rejection"]:
+			errors.append("%s: expected rejection %s, got %s" % [spec["id"], spec["expected_rejection"], rejection.get("reason", "")])
+
+	if spec.has("expected_active_unit_id") and state["turn_state"]["active_unit_id"] != spec["expected_active_unit_id"]:
+		errors.append("%s: expected active unit %s, got %s" % [spec["id"], spec["expected_active_unit_id"], state["turn_state"]["active_unit_id"]])
+
+	for unit_id: String in spec["unit_expectations"]:
+		var unit := _unit_by_id(state, unit_id)
+		var expectation: Dictionary = spec["unit_expectations"][unit_id]
+		errors.append_array(_validate_unit_expectation(spec["id"], unit, expectation))
+
+	var replay: Dictionary = CombatResolver.simulate(encounter, commands)
+	if replay["state"]["event_log"] != state["event_log"]:
+		errors.append("%s: replay event log differs" % spec["id"])
+
+	return errors
+
+
+func _commands_for_spec(spec: Dictionary, encounter: Dictionary) -> Array:
+	if spec.get("ai_command", false):
+		var command: Dictionary = CombatResolver.choose_enemy_command(encounter)
+		if command["action_id"] != spec["expected_command_action"]:
+			push_error("%s: expected AI command %s, got %s" % [spec["id"], spec["expected_command_action"], command["action_id"]])
+		if command["actor_id"] != spec["expected_command_actor"]:
+			push_error("%s: expected AI actor %s, got %s" % [spec["id"], spec["expected_command_actor"], command["actor_id"]])
+		if spec.has("expected_command_target") and command["target"].get("unit_id", "") != spec["expected_command_target"]:
+			push_error("%s: expected AI target %s, got %s" % [spec["id"], spec["expected_command_target"], command["target"].get("unit_id", "")])
+		if spec.has("expected_command_position") and not _positions_equal(command["target"].get("position", {}), spec["expected_command_position"]):
+			push_error("%s: expected AI position %s, got %s" % [spec["id"], spec["expected_command_position"], command["target"].get("position", {})])
+		return [command]
+
+	return _load_json(spec["commands"])
+
+
+func _validate_unit_expectation(slice_id: String, unit: Dictionary, expectation: Dictionary) -> Array[String]:
+	var errors: Array[String] = []
+	if expectation.has("resources"):
+		for resource_name: String in expectation["resources"]:
+			var expected: int = expectation["resources"][resource_name]
+			var actual: int = unit["resources"][resource_name]
+			if actual != expected:
+				errors.append("%s: expected %s %s, got %s" % [slice_id, resource_name, expected, actual])
+
+	if expectation.has("position") and not _positions_equal(unit["position"], expectation["position"]):
+		errors.append("%s: expected position %s, got %s" % [slice_id, expectation["position"], unit["position"]])
+
+	if expectation.has("statuses"):
+		var status_ids: Array[String] = []
+		for status: Dictionary in unit["statuses"]:
+			status_ids.append(status["id"])
+		if status_ids != expectation["statuses"]:
+			errors.append("%s: expected statuses %s, got %s" % [slice_id, expectation["statuses"], status_ids])
+
+	return errors
+
+
+func _load_json(path: String) -> Variant:
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		push_error("Cannot open JSON file: %s" % path)
+		return {}
+	var parsed: Variant = JSON.parse_string(file.get_as_text())
+	if parsed == null:
+		push_error("Cannot parse JSON file: %s" % path)
+		return {}
+	return parsed
+
+
+func _event_types(state: Dictionary) -> Array[String]:
+	var types: Array[String] = []
+	for event: Dictionary in state["event_log"]:
+		types.append(event["type"])
+	return types
+
+
+func _positions_equal(actual: Dictionary, expected: Dictionary) -> bool:
+	return int(actual["x"]) == int(expected["x"]) and int(actual["y"]) == int(expected["y"])
+
+
+func _first_event(state: Dictionary, event_type: String) -> Dictionary:
+	for event: Dictionary in state["event_log"]:
+		if event["type"] == event_type:
+			return event
+	return {}
+
+
+func _unit_by_id(state: Dictionary, unit_id: String) -> Dictionary:
+	for unit: Dictionary in state["units"]:
+		if unit["id"] == unit_id:
+			return unit
+	return {}

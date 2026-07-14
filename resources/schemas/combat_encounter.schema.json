@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sdd-game/combat_encounter.schema.json",
+  "type": "object",
+  "required": ["id", "seed", "grid", "units", "turn_state", "event_log"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+    "seed": { "type": "integer", "minimum": 0 },
+    "grid": {
+      "type": "object",
+      "required": ["width", "height", "tiles"],
+      "additionalProperties": false,
+      "properties": {
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "tiles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["x", "y", "type"],
+            "additionalProperties": false,
+            "properties": {
+              "x": { "type": "integer", "minimum": 0 },
+              "y": { "type": "integer", "minimum": 0 },
+              "type": { "type": "string", "enum": ["floor", "blocked"] }
+            }
+          }
+        }
+      }
+    },
+    "units": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "team", "position", "stats", "resources", "statuses", "available_actions"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "team": { "type": "string", "enum": ["player", "enemy"] },
+          "position": {
+            "type": "object",
+            "required": ["x", "y"],
+            "additionalProperties": false,
+            "properties": {
+              "x": { "type": "integer", "minimum": 0 },
+              "y": { "type": "integer", "minimum": 0 }
+            }
+          },
+          "stats": {
+            "type": "object",
+            "required": ["max_hp", "strength", "defense", "initiative", "move_points", "max_ap"],
+            "additionalProperties": false,
+            "properties": {
+              "max_hp": { "type": "integer", "minimum": 1 },
+              "strength": { "type": "integer", "minimum": 0 },
+              "defense": { "type": "integer", "minimum": 0 },
+              "initiative": { "type": "integer", "minimum": 0 },
+              "move_points": { "type": "integer", "minimum": 0 },
+              "max_ap": { "type": "integer", "minimum": 0 }
+            }
+          },
+          "resources": {
+            "type": "object",
+            "required": ["hp", "ap"],
+            "additionalProperties": false,
+            "properties": {
+              "hp": { "type": "integer", "minimum": 0 },
+              "ap": { "type": "integer", "minimum": 0 }
+            }
+          },
+          "statuses": {
+            "type": "array",
+            "items": { "type": "object" }
+          },
+          "available_actions": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "turn_state": {
+      "type": "object",
+      "required": ["active_unit_id", "round", "turn_order"],
+      "additionalProperties": false,
+      "properties": {
+        "active_unit_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "round": { "type": "integer", "minimum": 1 },
+        "turn_order": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "pattern": "^[a-z0-9_]+$" }
+        }
+      }
+    },
+    "event_log": {
+      "type": "array",
+      "items": { "type": "object" }
+    }
+  }
+}
+

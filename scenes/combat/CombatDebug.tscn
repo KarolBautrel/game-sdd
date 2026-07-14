@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/presentation/combat_debug.gd" id="1_combat_debug"]
+
+[node name="CombatDebug" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_combat_debug")
+
+[node name="RootMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RootHBox" type="HBoxContainer" parent="RootMargin"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="LeftPanel" type="VBoxContainer" parent="RootMargin/RootHBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StatusLabel" type="Label" parent="RootMargin/RootHBox/LeftPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Combat status"
+
+[node name="GridContainer" type="GridContainer" parent="RootMargin/RootHBox/LeftPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 6
+
+[node name="RightPanel" type="VBoxContainer" parent="RootMargin/RootHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="CommandButtons" type="VBoxContainer" parent="RootMargin/RootHBox/RightPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="EventLogTitle" type="Label" parent="RootMargin/RootHBox/RightPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Event log"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RootMargin/RootHBox/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EventLogLabel" type="Label" parent="RootMargin/RootHBox/RightPanel/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
+text = ""
+

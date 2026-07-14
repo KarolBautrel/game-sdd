@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sdd-game/world_region.schema.json",
+  "type": "object",
+  "required": ["id", "nodes", "edges"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "position", "entry_spec"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "type": { "type": "string", "enum": ["town", "dungeon", "event", "camp", "blockade", "ruin"] },
+          "position": {
+            "type": "object",
+            "required": ["x", "y"],
+            "additionalProperties": false,
+            "properties": {
+              "x": { "type": "integer" },
+              "y": { "type": "integer" }
+            }
+          },
+          "entry_spec": { "type": "string", "pattern": "^[a-z0-9_]+$" }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "travel_cost", "danger"],
+        "additionalProperties": false,
+        "properties": {
+          "from": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "to": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "travel_cost": {
+            "type": "object",
+            "required": ["time_hours", "food"],
+            "additionalProperties": false,
+            "properties": {
+              "time_hours": { "type": "integer", "minimum": 0 },
+              "food": { "type": "integer", "minimum": 0 }
+            }
+          },
+          "danger": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    }
+  }
+}
+

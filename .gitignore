@@ -1,0 +1,14 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Local build and temporary output
+builds/
+exports/
+*.tmp
+*.log
+
+# Python tooling
+__pycache__/
+.pytest_cache/
+.venv/

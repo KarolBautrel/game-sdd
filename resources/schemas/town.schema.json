@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sdd-game/town.schema.json",
+  "type": "object",
+  "required": ["id", "display_name", "services", "npcs", "entry_scene"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+    "display_name": { "type": "string", "minLength": 1 },
+    "services": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["inn", "blacksmith", "market", "healer", "tavern"] },
+      "uniqueItems": true
+    },
+    "npcs": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+      "uniqueItems": true
+    },
+    "entry_scene": { "type": "string", "pattern": "^res://.+\\.tscn$" }
+  }
+}
+

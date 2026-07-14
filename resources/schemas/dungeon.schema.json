@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sdd-game/dungeon.schema.json",
+  "type": "object",
+  "required": ["id", "map", "encounter_table", "recommended_party_level", "exit_rules"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+    "map": { "type": "string", "pattern": "^res://resources/data/maps/.+\\.json$" },
+    "encounter_table": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+    "recommended_party_level": { "type": "integer", "minimum": 1 },
+    "exit_rules": {
+      "type": "object",
+      "required": ["allow_retreat", "boss_required"],
+      "additionalProperties": false,
+      "properties": {
+        "allow_retreat": { "type": "boolean" },
+        "boss_required": { "type": "boolean" }
+      }
+    }
+  }
+}
+

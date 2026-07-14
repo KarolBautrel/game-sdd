@@ -1,0 +1,11 @@
+{
+  "id": "dungeon_old_mine",
+  "map": "res://resources/data/maps/dungeon_old_mine.json",
+  "encounter_table": "encounter_old_mine_v1",
+  "recommended_party_level": 1,
+  "exit_rules": {
+    "allow_retreat": true,
+    "boss_required": false
+  }
+}
+

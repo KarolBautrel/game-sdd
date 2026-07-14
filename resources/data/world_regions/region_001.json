@@ -1,0 +1,38 @@
+{
+  "id": "region_001",
+  "nodes": [
+    {
+      "id": "town_ravenford",
+      "type": "town",
+      "position": { "x": 12, "y": 8 },
+      "entry_spec": "town_ravenford"
+    },
+    {
+      "id": "dungeon_old_mine",
+      "type": "dungeon",
+      "position": { "x": 18, "y": 11 },
+      "entry_spec": "dungeon_old_mine"
+    },
+    {
+      "id": "event_broken_cart",
+      "type": "event",
+      "position": { "x": 15, "y": 10 },
+      "entry_spec": "event_broken_cart"
+    }
+  ],
+  "edges": [
+    {
+      "from": "town_ravenford",
+      "to": "dungeon_old_mine",
+      "travel_cost": { "time_hours": 6, "food": 1 },
+      "danger": 0.35
+    },
+    {
+      "from": "town_ravenford",
+      "to": "event_broken_cart",
+      "travel_cost": { "time_hours": 2, "food": 0 },
+      "danger": 0.15
+    }
+  ]
+}
+
