@@ -66,7 +66,9 @@ static func _resolve_command(state: Dictionary, command: Dictionary, sequence: i
 
 	match command["action_id"]:
 		"basic_attack":
-			return _resolve_basic_attack(state, command, sequence)
+			return _resolve_attack(state, command, sequence, "basic_attack", 1)
+		"ranged_attack":
+			return _resolve_attack(state, command, sequence, "ranged_attack", 3)
 		"move":
 			return _resolve_move(state, command, sequence)
 		"defend":
@@ -77,11 +79,11 @@ static func _resolve_command(state: Dictionary, command: Dictionary, sequence: i
 			return _reject(state, sequence, command, "unsupported_action")
 
 
-static func _resolve_basic_attack(state: Dictionary, command: Dictionary, sequence: int) -> int:
+static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: int, action_id: String, max_range: int) -> int:
 	var actor := _unit_by_id(state, command["actor_id"])
 	var target := _unit_by_id(state, command["target"].get("unit_id", ""))
 
-	var rejection := _basic_attack_rejection(state, actor, target)
+	var rejection := _attack_rejection(state, actor, target, action_id, max_range)
 	if rejection != "":
 		return _reject(state, sequence, command, rejection)
 
@@ -212,7 +214,7 @@ static func _resolve_end_turn(state: Dictionary, command: Dictionary, sequence: 
 	})
 
 
-static func _basic_attack_rejection(state: Dictionary, actor: Dictionary, target: Dictionary) -> String:
+static func _attack_rejection(state: Dictionary, actor: Dictionary, target: Dictionary, action_id: String, max_range: int) -> String:
 	if actor.is_empty():
 		return "missing_actor"
 	if target.is_empty():
@@ -227,9 +229,9 @@ static func _basic_attack_rejection(state: Dictionary, actor: Dictionary, target
 		return "target_is_not_enemy"
 	if actor["resources"]["ap"] < 1:
 		return "not_enough_ap"
-	if _chebyshev(actor["position"], target["position"]) > 1:
+	if _chebyshev(actor["position"], target["position"]) > max_range:
 		return "target_out_of_range"
-	if not actor["available_actions"].has("basic_attack"):
+	if not actor["available_actions"].has(action_id):
 		return "action_not_available"
 	return ""
 

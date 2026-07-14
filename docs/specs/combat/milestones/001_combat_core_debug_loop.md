@@ -51,6 +51,16 @@ The project now has:
   - `blocked` tiles are not walkable;
   - `highground` tiles are walkable;
   - debug scene colors terrain types distinctly.
+- Ranged attack v1:
+  - `ranged_attack` targets a living enemy up to range 3;
+  - range uses Chebyshev distance to match current 8-way movement;
+  - no line of sight, cover, or hit chance is applied yet;
+  - out-of-range targets are rejected with `target_out_of_range`.
+- Debug scene usability pass:
+  - action buttons use readable labels;
+  - ranged attack can be selected and tested;
+  - unit HP/AP and position are visible in a side panel;
+  - a compact legend explains grid colors.
 
 ## Verified Slices
 
@@ -82,6 +92,8 @@ Current verified slices:
 - `018_debug_reset_and_enemy_turn_helper.md`
 - `019_highground_walkable.md`
 - `020_terrain_debug_visible.md`
+- `021_ranged_attack_in_range.md`
+- `022_ranged_attack_out_of_range.md`
 
 ## Latest Update
 
@@ -97,6 +109,8 @@ Latest verified scope:
 - debug scene can reset the encounter;
 - debug scene has a one-click enemy turn helper.
 - terrain v1 is specified and highground movement is verified.
+- ranged attack v1 is specified and verified in Python and Godot.
+- debug scene has a clearer status panel, unit panel, legend, and ranged attack button.
 
 ## Important Files
 
@@ -151,21 +165,22 @@ Interactive combat debug scene:
 
 These specs exist as planned placeholders:
 
-- ranged attacks;
 - hit chance;
 - line of sight;
 - cover.
 
 ## Recommended Next Step
 
-Implement next combat UX polish:
+Implement hit chance v1:
 
-- consider showing turn order and current round more clearly.
-- add lightweight visual combat result banner.
-- add visible HP/AP side panel for units.
+- deterministic hit roll from encounter seed and command id;
+- `hit_roll_resolved` event;
+- hit and miss outcomes for `ranged_attack`;
+- no accuracy/evasion stats yet unless the slice requires them.
 
 Suggested slice:
 
 ```text
-docs/specs/combat/slices/019_debug_turn_order_and_unit_panel.md
+docs/specs/combat/slices/023_ranged_attack_hit.md
+docs/specs/combat/slices/024_ranged_attack_miss.md
 ```

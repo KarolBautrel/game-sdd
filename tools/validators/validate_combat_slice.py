@@ -474,6 +474,68 @@ def validate_combat_slice_19() -> list[str]:
     return errors
 
 
+def validate_combat_slice_21() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_21_ranged_attack_in_range.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_21_ranged_attack_in_range_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if player["resources"]["ap"] != 0:
+        errors.append("slice_21_ranged_attack_in_range: expected player AP to be 0")
+    if enemy["resources"]["hp"] != 4:
+        errors.append(f"slice_21_ranged_attack_in_range: expected enemy HP 4, got {enemy['resources']['hp']}")
+    if result.result != "in_progress":
+        errors.append(f"slice_21_ranged_attack_in_range: expected result in_progress, got {result.result}")
+    if event_types != ["combat_started", "turn_started", "action_performed", "damage_applied"]:
+        errors.append(f"slice_21_ranged_attack_in_range: unexpected events {event_types}")
+
+    performed = [event for event in state["event_log"] if event["type"] == "action_performed"]
+    if len(performed) != 1 or performed[0].get("action_id") != "ranged_attack":
+        errors.append("slice_21_ranged_attack_in_range: expected ranged_attack action_performed event")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_21_ranged_attack_in_range: replay event log differs")
+
+    return errors
+
+
+def validate_combat_slice_22() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_22_ranged_attack_out_of_range.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_22_ranged_attack_out_of_range_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if player["resources"]["ap"] != 1:
+        errors.append("slice_22_ranged_attack_out_of_range: expected player AP to remain 1")
+    if enemy["resources"]["hp"] != 6:
+        errors.append("slice_22_ranged_attack_out_of_range: expected enemy HP to remain 6")
+    if result.result != "in_progress":
+        errors.append(f"slice_22_ranged_attack_out_of_range: expected result in_progress, got {result.result}")
+    if event_types != ["combat_started", "turn_started", "command_rejected"]:
+        errors.append(f"slice_22_ranged_attack_out_of_range: unexpected events {event_types}")
+
+    rejected = [event for event in state["event_log"] if event["type"] == "command_rejected"]
+    if len(rejected) != 1 or rejected[0].get("reason") != "target_out_of_range":
+        errors.append("slice_22_ranged_attack_out_of_range: expected target_out_of_range rejection")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_22_ranged_attack_out_of_range: replay event log differs")
+
+    return errors
+
+
 def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_result: str) -> list[str]:
     errors: list[str] = []
     encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
@@ -580,6 +642,8 @@ def main() -> int:
     errors.extend(validate_combat_slice_15())
     errors.extend(validate_combat_slice_16())
     errors.extend(validate_combat_slice_19())
+    errors.extend(validate_combat_slice_21())
+    errors.extend(validate_combat_slice_22())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:

@@ -31,6 +31,11 @@ theme_override_constants/separation = 18
 layout_mode = 2
 theme_override_constants/separation = 12
 
+[node name="TitleLabel" type="Label" parent="RootMargin/RootHBox/LeftPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Combat Debug"
+
 [node name="StatusLabel" type="Label" parent="RootMargin/RootHBox/LeftPanel"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -42,6 +47,12 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "Feedback"
+
+[node name="LegendLabel" type="Label" parent="RootMargin/RootHBox/LeftPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Legend"
 
 [node name="GridContainer" type="GridContainer" parent="RootMargin/RootHBox/LeftPanel"]
 unique_name_in_owner = true
@@ -55,10 +66,26 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
+[node name="ActionsTitle" type="Label" parent="RootMargin/RootHBox/RightPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Actions"
+
 [node name="CommandButtons" type="VBoxContainer" parent="RootMargin/RootHBox/RightPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
+
+[node name="UnitsTitle" type="Label" parent="RootMargin/RootHBox/RightPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Units"
+
+[node name="UnitListLabel" type="Label" parent="RootMargin/RootHBox/RightPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = ""
 
 [node name="EventLogTitle" type="Label" parent="RootMargin/RootHBox/RightPanel"]
 layout_mode = 2

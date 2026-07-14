@@ -77,7 +77,9 @@ def _resolve_command(state: dict[str, Any], command: dict[str, Any], sequence: i
         return _reject(state, sequence, command, "unsupported_command_type")
 
     if command["action_id"] == "basic_attack":
-        return _resolve_basic_attack(state, command, sequence)
+        return _resolve_attack(state, command, sequence, action_id="basic_attack", max_range=1)
+    if command["action_id"] == "ranged_attack":
+        return _resolve_attack(state, command, sequence, action_id="ranged_attack", max_range=3)
     if command["action_id"] == "move":
         return _resolve_move(state, command, sequence)
     if command["action_id"] == "defend":
@@ -88,11 +90,17 @@ def _resolve_command(state: dict[str, Any], command: dict[str, Any], sequence: i
     return _reject(state, sequence, command, "unsupported_action")
 
 
-def _resolve_basic_attack(state: dict[str, Any], command: dict[str, Any], sequence: int) -> int:
+def _resolve_attack(
+    state: dict[str, Any],
+    command: dict[str, Any],
+    sequence: int,
+    action_id: str,
+    max_range: int,
+) -> int:
     actor = _unit_by_id(state, command["actor_id"])
     target = _unit_by_id(state, command["target"].get("unit_id", ""))
 
-    rejection = _basic_attack_rejection(state, actor, target)
+    rejection = _attack_rejection(state, actor, target, action_id, max_range)
     if rejection is not None:
         return _reject(state, sequence, command, rejection)
 
@@ -278,10 +286,12 @@ def _resolve_end_turn(state: dict[str, Any], command: dict[str, Any], sequence: 
     )
 
 
-def _basic_attack_rejection(
+def _attack_rejection(
     state: dict[str, Any],
     actor: dict[str, Any] | None,
     target: dict[str, Any] | None,
+    action_id: str,
+    max_range: int,
 ) -> str | None:
     if actor is None:
         return "missing_actor"
@@ -297,9 +307,9 @@ def _basic_attack_rejection(
         return "target_is_not_enemy"
     if actor["resources"]["ap"] < 1:
         return "not_enough_ap"
-    if _chebyshev(actor["position"], target["position"]) > 1:
+    if _chebyshev(actor["position"], target["position"]) > max_range:
         return "target_out_of_range"
-    if "basic_attack" not in actor["available_actions"]:
+    if action_id not in actor["available_actions"]:
         return "action_not_available"
     return None
 

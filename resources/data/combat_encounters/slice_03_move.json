@@ -58,7 +58,7 @@
       },
       "resources": { "hp": 10, "ap": 1 },
       "statuses": [],
-      "available_actions": ["basic_attack", "move", "defend", "end_turn"]
+      "available_actions": ["basic_attack", "ranged_attack", "move", "defend", "end_turn"]
     },
     {
       "id": "unit_enemy_001",

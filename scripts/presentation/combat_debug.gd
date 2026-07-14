@@ -5,10 +5,23 @@ const CombatResolver := preload("res://scripts/domain/combat_resolver.gd")
 const ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_03_move.json"
 const TILE_SIZE := 56
 const TILE_GAP := 4
+const ACTION_IDS := ["move", "basic_attack", "ranged_attack", "defend", "end_turn", "enemy_ai", "enemy_turn", "reset"]
+const ACTION_LABELS := {
+	"move": "Move",
+	"basic_attack": "Melee attack",
+	"ranged_attack": "Ranged attack",
+	"defend": "Defend",
+	"end_turn": "End turn",
+	"enemy_ai": "Enemy AI once",
+	"enemy_turn": "Enemy turn helper",
+	"reset": "Reset encounter",
+}
 
 @onready var grid_container: GridContainer = %GridContainer
 @onready var status_label: Label = %StatusLabel
 @onready var feedback_label: Label = %FeedbackLabel
+@onready var legend_label: Label = %LegendLabel
+@onready var unit_list_label: Label = %UnitListLabel
 @onready var event_log_label: Label = %EventLogLabel
 @onready var command_buttons: VBoxContainer = %CommandButtons
 
@@ -43,6 +56,8 @@ func _render() -> void:
 
 	_render_status()
 	_render_feedback()
+	_render_legend()
+	_render_unit_list()
 	_render_event_log()
 	_render_command_buttons()
 
@@ -80,7 +95,13 @@ func _build_tile(position: Dictionary) -> Button:
 func _tile_text(position: Dictionary) -> String:
 	var unit := _living_unit_at(position)
 	if unit.is_empty():
-		return ""
+		match _tile_type(position):
+			"blocked":
+				return "BLOCK"
+			"highground":
+				return "HIGH"
+			_:
+				return ""
 
 	var hp: int = unit["resources"]["hp"]
 	var ap: int = unit["resources"]["ap"]
@@ -91,18 +112,41 @@ func _tile_text(position: Dictionary) -> String:
 
 func _render_status() -> void:
 	var active := _unit_by_id(state["turn_state"]["active_unit_id"])
-	status_label.text = "Result: %s | Active: %s | Team: %s | HP: %s | AP: %s | Action: %s" % [
+	status_label.text = "Round %s | Result: %s\nActive: %s (%s) | HP %s | AP %s | Selected: %s" % [
+		state["turn_state"]["round"],
 		_combat_result(),
 		active.get("id", "missing"),
 		active.get("team", "missing"),
 		active.get("resources", {}).get("hp", "?"),
 		active.get("resources", {}).get("ap", "?"),
-		selected_action,
+		ACTION_LABELS.get(selected_action, selected_action),
 	]
 
 
 func _render_feedback() -> void:
-	feedback_label.text = "Feedback: %s" % last_feedback
+	feedback_label.text = last_feedback
+
+
+func _render_legend() -> void:
+	legend_label.text = "Blue: player | Red: enemy | Yellow: active | Green: legal target | Gold: highground | Dark: blocked"
+
+
+func _render_unit_list() -> void:
+	var lines: Array[String] = []
+	for unit: Dictionary in state["units"]:
+		var marker := "*" if unit["id"] == state["turn_state"]["active_unit_id"] else " "
+		lines.append("%s %s [%s] HP %s/%s AP %s/%s pos (%s,%s)" % [
+			marker,
+			unit["id"],
+			unit["team"],
+			unit["resources"]["hp"],
+			unit["stats"]["max_hp"],
+			unit["resources"]["ap"],
+			unit["stats"]["max_ap"],
+			unit["position"]["x"],
+			unit["position"]["y"],
+		])
+	unit_list_label.text = "\n".join(lines)
 
 
 func _render_event_log() -> void:
@@ -120,9 +164,9 @@ func _render_command_buttons() -> void:
 	for child in command_buttons.get_children():
 		child.queue_free()
 
-	for action_id in ["move", "basic_attack", "defend", "end_turn", "enemy_ai", "enemy_turn", "reset"]:
+	for action_id in ACTION_IDS:
 		var button := Button.new()
-		button.text = action_id
+		button.text = ACTION_LABELS.get(action_id, action_id)
 		button.toggle_mode = true
 		button.button_pressed = selected_action == action_id
 		button.disabled = _combat_result() != "in_progress" and action_id != "reset"
@@ -137,7 +181,7 @@ func _render_command_buttons() -> void:
 			elif action_id in ["defend", "end_turn"]:
 				_run_command(_build_command(action_id, {}))
 			else:
-				last_feedback = "Select a highlighted target."
+				last_feedback = "Select a highlighted target for %s." % ACTION_LABELS.get(action_id, action_id)
 				_render()
 		)
 		command_buttons.add_child(button)
@@ -152,6 +196,12 @@ func _on_tile_pressed(position: Dictionary) -> void:
 	elif selected_action == "basic_attack":
 		var unit := _living_unit_at(position)
 		_run_command(_build_command("basic_attack", {
+			"type": "unit",
+			"unit_id": unit.get("id", ""),
+		}))
+	elif selected_action == "ranged_attack":
+		var unit := _living_unit_at(position)
+		_run_command(_build_command("ranged_attack", {
 			"type": "unit",
 			"unit_id": unit.get("id", ""),
 		}))
@@ -331,6 +381,14 @@ func _is_legal_target_for_selected_action(position: Dictionary) -> bool:
 		if unit.is_empty():
 			return false
 		return _command_would_be_accepted(_build_command("basic_attack", {
+			"type": "unit",
+			"unit_id": unit["id"],
+		}))
+	if selected_action == "ranged_attack":
+		var unit := _living_unit_at(position)
+		if unit.is_empty():
+			return false
+		return _command_would_be_accepted(_build_command("ranged_attack", {
 			"type": "unit",
 			"unit_id": unit["id"],
 		}))

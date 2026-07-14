@@ -1,0 +1,16 @@
+{
+  "id": "ranged_attack",
+  "targeting": {
+    "type": "single_enemy",
+    "range": 3,
+    "requires_line_of_sight": false
+  },
+  "cost": { "ap": 1 },
+  "effects": [
+    {
+      "type": "damage",
+      "formula": "attacker.strength - target.defense",
+      "minimum": 1
+    }
+  ]
+}

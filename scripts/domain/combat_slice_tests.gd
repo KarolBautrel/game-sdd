@@ -211,6 +211,29 @@ const SLICES := [
 			"unit_player_001": {"resources": {"ap": 0}, "position": {"x": 2, "y": 1}},
 		},
 	},
+	{
+		"id": "slice_21_ranged_attack_in_range",
+		"encounter": "res://resources/data/combat_encounters/slice_21_ranged_attack_in_range.json",
+		"commands": "res://tests/data/combat_commands/slice_21_ranged_attack_in_range_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 4}},
+		},
+	},
+	{
+		"id": "slice_22_ranged_attack_out_of_range",
+		"encounter": "res://resources/data/combat_encounters/slice_22_ranged_attack_out_of_range.json",
+		"commands": "res://tests/data/combat_commands/slice_22_ranged_attack_out_of_range_commands.json",
+		"expected_events": ["combat_started", "turn_started", "command_rejected"],
+		"expected_result": "in_progress",
+		"expected_rejection": "target_out_of_range",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 1}},
+			"unit_enemy_001": {"resources": {"hp": 6}},
+		},
+	},
 ]
 
 

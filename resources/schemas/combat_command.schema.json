@@ -10,7 +10,7 @@
       "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
       "type": { "type": "string", "enum": ["perform_action"] },
       "actor_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-      "action_id": { "type": "string", "enum": ["basic_attack", "move", "defend", "end_turn"] },
+      "action_id": { "type": "string", "enum": ["basic_attack", "ranged_attack", "move", "defend", "end_turn"] },
       "target": {
         "type": "object",
         "required": ["type"],
@@ -32,4 +32,3 @@
     }
   }
 }
-

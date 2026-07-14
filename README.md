@@ -59,6 +59,7 @@ Debug scene controls:
 
 - Select `move`, then click a neighboring floor tile.
 - Select `basic_attack`, then click an enemy tile.
+- Select `ranged_attack`, then click an enemy tile up to 3 tiles away.
 - Click `defend` to apply the defending status.
 - Click `end_turn` to pass control to the next unit.
 - Click `enemy_ai` while an enemy is active to let AI v0 choose a command.
@@ -68,6 +69,7 @@ Debug scene controls:
 - Legal move and attack targets are highlighted green.
 - Blocked terrain is dark.
 - Highground terrain is gold.
+- The right side shows action buttons, unit HP/AP, and the event log.
 - Rejected commands show the rejection reason in the feedback label.
 - Read the right-side event log to verify what the domain resolver emitted.
 
