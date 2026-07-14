@@ -210,7 +210,8 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 			return sequence
 
 	var raw_damage: int = max(1, actor["stats"]["strength"] + attack_damage_bonus - target["stats"]["defense"])
-	var reduction := _damage_reduction(target)
+	var reduction := _damage_reduction(state, target)
+	var armor_id := _armor_id(target)
 	var damage: int = max(1, raw_damage - reduction)
 	var old_hp: int = target["resources"]["hp"]
 	target["resources"]["hp"] = max(0, old_hp - damage)
@@ -223,6 +224,7 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 		"raw_damage": raw_damage,
 		"damage_reduction": reduction,
 		"damage_bonus": attack_damage_bonus,
+		"armor_id": armor_id,
 		"profile_id": weapon_profile.get("id", ""),
 		"weapon_id": weapon_profile.get("id", ""),
 		"hp_before": old_hp,
@@ -702,11 +704,31 @@ static func _profile_status(source_unit_id: String, action_profile: Dictionary, 
 	return status
 
 
-static func _damage_reduction(target: Dictionary) -> int:
+static func _damage_reduction(state: Dictionary, target: Dictionary) -> int:
 	var reduction := 0
 	for status: Dictionary in target["statuses"]:
 		reduction += int(status.get("damage_reduction", 0))
+	var armor := _armor_item(state, target)
+	if not armor.is_empty():
+		reduction += int(armor.get("armor_reduction", 0))
 	return reduction
+
+
+static func _armor_item(state: Dictionary, target: Dictionary) -> Dictionary:
+	var armor_id := _armor_id(target)
+	if armor_id == "":
+		return {}
+	var armor: Dictionary = state.get("item_profiles", {}).get(armor_id, {})
+	if armor.is_empty() or armor.get("slot", "") != "armor":
+		return {}
+	return armor
+
+
+static func _armor_id(target: Dictionary) -> String:
+	var armor_id: Variant = target.get("loadout", {}).get("armor", null)
+	if armor_id == null:
+		return ""
+	return str(armor_id)
 
 
 static func _terrain_hit_modifier(state: Dictionary, actor: Dictionary, action_id: String) -> int:

@@ -21,6 +21,14 @@ If target has `defending`, reduce final damage by 1 after the minimum calculatio
 max(1, base_damage - 1)
 ```
 
+Equipment may add more reduction before the final minimum is applied:
+
+```text
+max(1, raw_damage - status_damage_reduction - armor_reduction)
+```
+
+Armor mitigation is owned by `equipment/058_armor_v1.md`.
+
 ## HP Rules
 
 - HP cannot go below 0.
@@ -65,4 +73,3 @@ Fields:
 - When it receives 2 damage
 - Then its HP becomes 0
 - And event `unit_defeated` is emitted
-

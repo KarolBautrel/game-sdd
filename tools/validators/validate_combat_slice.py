@@ -1709,6 +1709,93 @@ def validate_combat_slice_57() -> list[str]:
     return errors
 
 
+def validate_combat_slice_58() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_58_armor_reduces_damage.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_58_armor_reduces_damage_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if enemy["resources"]["ap"] != 0:
+        errors.append("slice_58_armor_reduces_damage: expected enemy AP to be 0")
+    if player["resources"]["hp"] != 8:
+        errors.append(f"slice_58_armor_reduces_damage: expected player HP 8, got {player['resources']['hp']}")
+    if event_types != ["combat_started", "turn_started", "action_performed", "damage_applied"]:
+        errors.append(f"slice_58_armor_reduces_damage: unexpected events {event_types}")
+
+    damage_events = [event for event in state["event_log"] if event["type"] == "damage_applied"]
+    if len(damage_events) != 1:
+        errors.append(f"slice_58_armor_reduces_damage: expected one damage event, got {damage_events}")
+    else:
+        damage = damage_events[0]
+        if damage.get("raw_damage") != 4 or damage.get("damage_reduction") != 2 or damage.get("damage") != 2:
+            errors.append(f"slice_58_armor_reduces_damage: unexpected damage payload {damage}")
+        if damage.get("armor_id") != "chainmail":
+            errors.append(f"slice_58_armor_reduces_damage: expected chainmail armor_id, got {damage}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_58_armor_reduces_damage: replay event log differs")
+
+    return errors
+
+
+def validate_combat_slice_59() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_59_shield_wall_applies_damage_reduction.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_59_shield_wall_applies_damage_reduction_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if player["resources"]["hp"] != 9:
+        errors.append(f"slice_59_shield_wall_applies_damage_reduction: expected player HP 9, got {player['resources']['hp']}")
+    if enemy["resources"]["ap"] != 0:
+        errors.append("slice_59_shield_wall_applies_damage_reduction: expected enemy AP to be 0")
+
+    expected_events = [
+        "combat_started",
+        "turn_started",
+        "action_performed",
+        "status_applied",
+        "status_applied",
+        "action_performed",
+        "turn_ended",
+        "turn_started",
+        "action_performed",
+        "damage_applied",
+    ]
+    if event_types != expected_events:
+        errors.append(f"slice_59_shield_wall_applies_damage_reduction: unexpected events {event_types}")
+
+    shield_statuses = [status for status in player["statuses"] if status.get("id") == "shield_wall"]
+    if len(shield_statuses) != 1 or shield_statuses[0].get("damage_reduction") != 2:
+        errors.append(f"slice_59_shield_wall_applies_damage_reduction: expected shield_wall DR status, got {player['statuses']}")
+
+    damage_events = [event for event in state["event_log"] if event["type"] == "damage_applied"]
+    if len(damage_events) != 1:
+        errors.append(f"slice_59_shield_wall_applies_damage_reduction: expected one damage event, got {damage_events}")
+    else:
+        damage = damage_events[0]
+        if damage.get("raw_damage") != 4 or damage.get("damage_reduction") != 4 or damage.get("damage") != 1:
+            errors.append(f"slice_59_shield_wall_applies_damage_reduction: unexpected damage payload {damage}")
+        if damage.get("armor_id") != "chainmail":
+            errors.append(f"slice_59_shield_wall_applies_damage_reduction: expected chainmail armor_id, got {damage}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_59_shield_wall_applies_damage_reduction: replay event log differs")
+
+    return errors
+
+
 def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_result: str) -> list[str]:
     errors: list[str] = []
     encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
@@ -1906,6 +1993,8 @@ def main() -> int:
     errors.extend(validate_combat_slice_55())
     errors.extend(validate_combat_slice_56())
     errors.extend(validate_combat_slice_57())
+    errors.extend(validate_combat_slice_58())
+    errors.extend(validate_combat_slice_59())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:

@@ -253,7 +253,8 @@ def _resolve_attack(
             return sequence
 
     raw_damage = max(1, actor["stats"]["strength"] + attack_damage_bonus - target["stats"]["defense"])
-    reduction = _damage_reduction(target)
+    reduction = _damage_reduction(state, target)
+    armor_id = _armor_id(target)
     damage = max(1, raw_damage - reduction)
     old_hp = target["resources"]["hp"]
     target["resources"]["hp"] = max(0, old_hp - damage)
@@ -269,6 +270,7 @@ def _resolve_attack(
             "raw_damage": raw_damage,
             "damage_reduction": reduction,
             "damage_bonus": attack_damage_bonus,
+            "armor_id": armor_id,
             "profile_id": action_profile.get("id", ""),
             "weapon_id": action_profile.get("id", ""),
             "hp_before": old_hp,
@@ -857,11 +859,31 @@ def _profile_status(source_unit_id: str, action_profile: dict[str, Any], fallbac
     return status
 
 
-def _damage_reduction(target: dict[str, Any]) -> int:
+def _damage_reduction(state: dict[str, Any], target: dict[str, Any]) -> int:
     reduction = 0
     for status in target["statuses"]:
         reduction += int(status.get("damage_reduction", 0))
+    armor = _armor_item(state, target)
+    if armor is not None:
+        reduction += int(armor.get("armor_reduction", 0))
     return reduction
+
+
+def _armor_item(state: dict[str, Any], target: dict[str, Any]) -> dict[str, Any] | None:
+    armor_id = _armor_id(target)
+    if armor_id is None:
+        return None
+    armor = state.get("item_profiles", {}).get(armor_id)
+    if armor is None or armor.get("slot") != "armor":
+        return None
+    return armor
+
+
+def _armor_id(target: dict[str, Any]) -> str | None:
+    armor_id = target.get("loadout", {}).get("armor")
+    if armor_id is None:
+        return None
+    return str(armor_id)
 
 
 def _clamp(value: int, minimum: int, maximum: int) -> int:

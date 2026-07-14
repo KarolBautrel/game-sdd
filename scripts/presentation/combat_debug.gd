@@ -26,6 +26,8 @@ const BOW_REQUIRED_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounter
 const SHIELD_REQUIRED_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_55_shield_required_for_shield_wall.json"
 const TWO_HANDED_BLOCKS_SHIELD_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_56_two_handed_blocks_shield.json"
 const WEAPON_GRANTS_POWER_STRIKE_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_57_weapon_grants_power_strike.json"
+const ARMOR_REDUCES_DAMAGE_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_58_armor_reduces_damage.json"
+const SHIELD_WALL_DAMAGE_REDUCTION_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_59_shield_wall_applies_damage_reduction.json"
 const PLAYER_WARRIOR_SHEET_PATH := "res://assets/combat/units/player_warrior_sheet.png"
 const ENEMY_RAIDER_SHEET_PATH := "res://assets/combat/units/enemy_raider_sheet.png"
 const TILE_SIZE := 64
@@ -407,6 +409,8 @@ func _scenario_options() -> Array[Dictionary]:
 		{"id": "load_shield_required_test", "label": "Shield required for shield wall", "path": SHIELD_REQUIRED_TEST_ENCOUNTER_PATH},
 		{"id": "load_two_handed_blocks_shield_test", "label": "Two-handed blocks shield", "path": TWO_HANDED_BLOCKS_SHIELD_TEST_ENCOUNTER_PATH},
 		{"id": "load_weapon_grants_power_strike_test", "label": "Weapon grants power strike", "path": WEAPON_GRANTS_POWER_STRIKE_TEST_ENCOUNTER_PATH},
+		{"id": "load_armor_reduces_damage_test", "label": "Armor reduces damage", "path": ARMOR_REDUCES_DAMAGE_TEST_ENCOUNTER_PATH},
+		{"id": "load_shield_wall_damage_reduction_test", "label": "Shield wall damage reduction", "path": SHIELD_WALL_DAMAGE_REDUCTION_TEST_ENCOUNTER_PATH},
 	]
 
 

@@ -80,6 +80,7 @@
           "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
           "slot": { "type": "string", "enum": ["main_hand", "off_hand", "armor"] },
           "two_handed": { "type": "boolean" },
+          "armor_reduction": { "type": "integer", "minimum": 0 },
           "grants_actions": {
             "type": "array",
             "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },

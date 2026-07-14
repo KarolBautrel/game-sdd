@@ -176,6 +176,7 @@ Current verified slices:
 - `055_shield_required_for_shield_wall.md`
 - `056_two_handed_blocks_shield.md`
 - `057_weapon_grants_power_strike.md`
+- `058_armor_reduces_damage.md`
 
 ## Spec Organization
 
@@ -257,6 +258,12 @@ Latest verified scope:
 - debug scene can load dedicated loadout/equipment tests 053-057.
 - debug scene now has temporary Aseprite-generated pixel-art unit sprites.
 - movement and attack events briefly switch unit sprites to simple test animation frames.
+- armor v1 is specified and verified in Python and Godot.
+- equipped armor can contribute passive `armor_reduction` to incoming damage.
+- slice 058 verifies `chainmail` reducing raw damage 4 to final damage 2.
+- `shield_wall` positive case is specified and verified in Python and Godot.
+- slice 059 verifies status-based `damage_reduction` stacking with armor mitigation and clamping final damage to minimum 1.
+- debug scene can load dedicated armor and shield wall mitigation tests.
 
 ## Important Files
 
@@ -311,10 +318,10 @@ Interactive combat debug scene:
 
 ### Recommended Next Development Order
 
-1. Armor v1:
-   - add armor item profiles in `equipment/`;
-   - add flat damage reduction or defense bonus;
-   - verify that unarmored, light armor, and heavy armor resolve damage differently.
+1. Aimed shot positive case:
+   - keep using equipment-granted bow actions;
+   - verify `aimed_shot` can come from a bow profile;
+   - verify higher hit chance/damage behavior and cooldown payload.
 2. Learned skills vs equipment skills:
    - keep equipment-granted skills from loadout;
    - add a separate unit-level learned skill list later;
@@ -323,7 +330,6 @@ Interactive combat debug scene:
    - define simple archetypes such as swordsman, shieldman, archer, bruiser;
    - build enemy encounters from loadout data instead of ad hoc action lists.
 4. More special skills:
-   - shield skill: `shield_wall` positive case with damage reduction;
    - bow skill: `aimed_shot` positive case with higher hit chance and cooldown;
    - melee control skill: `guard_break` or `crippling_strike`.
 5. Inventory/equipment outside combat:
@@ -333,8 +339,7 @@ Interactive combat debug scene:
 Suggested next slices:
 
 ```text
-docs/specs/combat/slices/058_armor_reduces_damage.md
-docs/specs/combat/slices/059_shield_wall_applies_damage_reduction.md
 docs/specs/combat/slices/060_aimed_shot_from_bow.md
 docs/specs/combat/slices/061_learned_skill_without_weapon.md
+docs/specs/combat/slices/062_enemy_archetype_loadout.md
 ```

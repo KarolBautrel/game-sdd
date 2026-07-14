@@ -743,6 +743,42 @@ const SLICES := [
 			"unit_enemy_001": {"resources": {"hp": 4}},
 		},
 	},
+	{
+		"id": "slice_58_armor_reduces_damage",
+		"encounter": "res://resources/data/combat_encounters/slice_58_armor_reduces_damage.json",
+		"commands": "res://tests/data/combat_commands/slice_58_armor_reduces_damage_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_enemy_001": {"resources": {"ap": 0}},
+			"unit_player_001": {"resources": {"hp": 8}},
+		},
+		"expected_damage": {
+			"target_unit_id": "unit_player_001",
+			"raw_damage": 4,
+			"damage_reduction": 2,
+			"damage": 2,
+			"armor_id": "chainmail",
+		},
+	},
+	{
+		"id": "slice_59_shield_wall_applies_damage_reduction",
+		"encounter": "res://resources/data/combat_encounters/slice_59_shield_wall_applies_damage_reduction.json",
+		"commands": "res://tests/data/combat_commands/slice_59_shield_wall_applies_damage_reduction_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "status_applied", "status_applied", "action_performed", "turn_ended", "turn_started", "action_performed", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"hp": 9}, "statuses": ["shield_wall", "skill_cooldown"]},
+			"unit_enemy_001": {"resources": {"ap": 0}},
+		},
+		"expected_damage": {
+			"target_unit_id": "unit_player_001",
+			"raw_damage": 4,
+			"damage_reduction": 4,
+			"damage": 1,
+			"armor_id": "chainmail",
+		},
+	},
 ]
 
 
@@ -810,6 +846,19 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 						errors.append("%s: expected intercept %s %s, got %s" % [spec["id"], key, expected_intercept[key], intercept.get(key, "")])
 				elif int(intercept.get(key, 0)) != int(expected_intercept[key]):
 					errors.append("%s: expected intercept %s %s, got %s" % [spec["id"], key, expected_intercept[key], intercept.get(key, 0)])
+
+	if spec.has("expected_damage"):
+		var damage_event: Dictionary = _first_event(state, "damage_applied")
+		var expected_damage: Dictionary = spec["expected_damage"]
+		if damage_event.is_empty():
+			errors.append("%s: expected damage_applied event" % spec["id"])
+		else:
+			for key: String in expected_damage:
+				if key.ends_with("_id"):
+					if damage_event.get(key, "") != expected_damage[key]:
+						errors.append("%s: expected damage %s %s, got %s" % [spec["id"], key, expected_damage[key], damage_event.get(key, "")])
+				elif int(damage_event.get(key, 0)) != int(expected_damage[key]):
+					errors.append("%s: expected damage %s %s, got %s" % [spec["id"], key, expected_damage[key], damage_event.get(key, 0)])
 
 	if spec.has("expected_active_unit_id") and state["turn_state"]["active_unit_id"] != spec["expected_active_unit_id"]:
 		errors.append("%s: expected active unit %s, got %s" % [spec["id"], spec["expected_active_unit_id"], state["turn_state"]["active_unit_id"]])

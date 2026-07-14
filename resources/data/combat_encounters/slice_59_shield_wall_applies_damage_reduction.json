@@ -1,0 +1,73 @@
+{
+  "id": "slice_59_shield_wall_applies_damage_reduction",
+  "seed": 1059,
+  "item_profiles": {
+    "wooden_shield": {
+      "id": "wooden_shield",
+      "slot": "off_hand",
+      "grants_actions": ["shield_wall"],
+      "action_profiles": {
+        "shield_wall": {
+          "id": "wooden_shield_wall",
+          "action_id": "shield_wall",
+          "ap_cost": 1,
+          "status_id": "shield_wall",
+          "status_remaining_turns": 1,
+          "damage_reduction": 2,
+          "cooldown_turns": 2
+        }
+      }
+    },
+    "chainmail": {
+      "id": "chainmail",
+      "slot": "armor",
+      "armor_reduction": 2,
+      "grants_actions": []
+    }
+  },
+  "grid": {
+    "width": 4,
+    "height": 3,
+    "tiles": [
+      { "x": 0, "y": 0, "type": "floor" },
+      { "x": 1, "y": 0, "type": "floor" },
+      { "x": 2, "y": 0, "type": "floor" },
+      { "x": 3, "y": 0, "type": "floor" },
+      { "x": 0, "y": 1, "type": "floor" },
+      { "x": 1, "y": 1, "type": "floor" },
+      { "x": 2, "y": 1, "type": "floor" },
+      { "x": 3, "y": 1, "type": "floor" },
+      { "x": 0, "y": 2, "type": "floor" },
+      { "x": 1, "y": 2, "type": "floor" },
+      { "x": 2, "y": 2, "type": "floor" },
+      { "x": 3, "y": 2, "type": "floor" }
+    ]
+  },
+  "units": [
+    {
+      "id": "unit_player_001",
+      "team": "player",
+      "position": { "x": 1, "y": 1 },
+      "stats": { "max_hp": 10, "strength": 4, "defense": 1, "initiative": 10, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 10, "ap": 1 },
+      "statuses": [],
+      "available_actions": ["basic_attack", "move", "defend", "end_turn"],
+      "loadout": { "main_hand": null, "off_hand": "wooden_shield", "armor": "chainmail" }
+    },
+    {
+      "id": "unit_enemy_001",
+      "team": "enemy",
+      "position": { "x": 2, "y": 1 },
+      "stats": { "max_hp": 10, "strength": 5, "defense": 1, "initiative": 8, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 10, "ap": 1 },
+      "statuses": [],
+      "available_actions": ["basic_attack", "move", "defend", "end_turn"]
+    }
+  ],
+  "turn_state": {
+    "active_unit_id": "unit_player_001",
+    "round": 1,
+    "turn_order": ["unit_player_001", "unit_enemy_001"]
+  },
+  "event_log": []
+}

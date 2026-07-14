@@ -38,6 +38,7 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 ### Equipment
 
 - `equipment/053_loadout_and_item_profiles_v1.md`
+- `equipment/058_armor_v1.md`
 
 ### Weapons
 
