@@ -24,7 +24,7 @@
             "properties": {
               "x": { "type": "integer", "minimum": 0 },
               "y": { "type": "integer", "minimum": 0 },
-              "type": { "type": "string", "enum": ["floor", "blocked"] }
+              "type": { "type": "string", "enum": ["floor", "blocked", "highground"] }
             }
           }
         }
@@ -103,4 +103,3 @@
     }
   }
 }
-

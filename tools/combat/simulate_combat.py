@@ -342,7 +342,7 @@ def _move_rejection(
         return "missing_destination"
     if not _inside_grid(state, destination):
         return "destination_out_of_bounds"
-    if _tile_type(state, destination) != "floor":
+    if not _is_walkable_tile(state, destination):
         return "destination_not_walkable"
     if _living_unit_at(state, destination) is not None:
         return "destination_occupied"
@@ -399,6 +399,10 @@ def _tile_type(state: dict[str, Any], position: dict[str, int]) -> str | None:
         if tile["x"] == position["x"] and tile["y"] == position["y"]:
             return tile["type"]
     return None
+
+
+def _is_walkable_tile(state: dict[str, Any], position: dict[str, int]) -> bool:
+    return _tile_type(state, position) in {"floor", "highground"}
 
 
 def _living_unit_at(state: dict[str, Any], position: dict[str, int]) -> dict[str, Any] | None:

@@ -64,6 +64,8 @@ func _build_tile(position: Dictionary) -> Button:
 			tile.modulate = Color(1.0, 0.48, 0.42)
 	elif _tile_type(position) == "blocked":
 		tile.modulate = Color(0.32, 0.32, 0.34)
+	elif _tile_type(position) == "highground":
+		tile.modulate = Color(0.84, 0.72, 0.42)
 	else:
 		tile.modulate = Color(0.64, 0.66, 0.58)
 

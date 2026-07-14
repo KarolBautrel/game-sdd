@@ -201,6 +201,16 @@ const SLICES := [
 			"unit_player_001": {"position": {"x": 1, "y": 1}},
 		},
 	},
+	{
+		"id": "slice_19_highground_walkable",
+		"encounter": "res://resources/data/combat_encounters/slice_19_highground_walkable.json",
+		"commands": "res://tests/data/combat_commands/slice_19_highground_walkable_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "unit_moved"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}, "position": {"x": 2, "y": 1}},
+		},
+	},
 ]
 
 

@@ -66,6 +66,8 @@ Debug scene controls:
 - Click `reset` to reload the debug encounter.
 - The active unit is highlighted yellow.
 - Legal move and attack targets are highlighted green.
+- Blocked terrain is dark.
+- Highground terrain is gold.
 - Rejected commands show the rejection reason in the feedback label.
 - Read the right-side event log to verify what the domain resolver emitted.
 

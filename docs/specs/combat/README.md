@@ -10,6 +10,7 @@ This folder separates rules from executable scenarios.
 - `003_actions.md`
 - `004_damage_and_statuses.md`
 - `005_event_log_and_replay.md`
+- `024_terrain.md`
 
 ## Planned Rule Specs
 
@@ -23,4 +24,3 @@ This folder separates rules from executable scenarios.
 Executable acceptance scenarios live in `slices/`.
 
 They are not the whole rule system. They are small proofs that the rules are implemented and remain stable.
-

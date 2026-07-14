@@ -263,7 +263,7 @@ static func _move_rejection(state: Dictionary, actor: Dictionary, destination: D
 		return "missing_destination"
 	if not _inside_grid(state, destination):
 		return "destination_out_of_bounds"
-	if _tile_type(state, destination) != "floor":
+	if not _is_walkable_tile(state, destination):
 		return "destination_not_walkable"
 	if not _living_unit_at(state, destination).is_empty():
 		return "destination_occupied"
@@ -316,6 +316,10 @@ static func _tile_type(state: Dictionary, position: Dictionary) -> String:
 		if tile["x"] == position["x"] and tile["y"] == position["y"]:
 			return tile["type"]
 	return ""
+
+
+static func _is_walkable_tile(state: Dictionary, position: Dictionary) -> bool:
+	return _tile_type(state, position) in ["floor", "highground"]
 
 
 static func _living_unit_at(state: Dictionary, position: Dictionary) -> Dictionary:

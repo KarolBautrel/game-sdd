@@ -47,6 +47,10 @@ The project now has:
   - last player defeated emits `combat_ended` with `defeat`;
   - commands after combat end are rejected with `combat_already_ended`;
   - debug scene disables command buttons after combat ends.
+- Terrain v1:
+  - `blocked` tiles are not walkable;
+  - `highground` tiles are walkable;
+  - debug scene colors terrain types distinctly.
 
 ## Verified Slices
 
@@ -76,6 +80,8 @@ Current verified slices:
 - `016_command_after_combat_end_rejected.md`
 - `017_debug_legal_target_feedback.md`
 - `018_debug_reset_and_enemy_turn_helper.md`
+- `019_highground_walkable.md`
+- `020_terrain_debug_visible.md`
 
 ## Latest Update
 
@@ -90,6 +96,7 @@ Latest verified scope:
 - debug scene displays last accepted action or rejection reason.
 - debug scene can reset the encounter;
 - debug scene has a one-click enemy turn helper.
+- terrain v1 is specified and highground movement is verified.
 
 ## Important Files
 

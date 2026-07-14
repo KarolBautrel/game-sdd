@@ -454,6 +454,26 @@ def validate_combat_slice_16() -> list[str]:
     return errors
 
 
+def validate_combat_slice_19() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_19_highground_walkable.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_19_highground_walkable_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if player["position"] != {"x": 2, "y": 1}:
+        errors.append(f"slice_19_highground_walkable: expected player position {{'x': 2, 'y': 1}}, got {player['position']}")
+    if player["resources"]["ap"] != 0:
+        errors.append("slice_19_highground_walkable: expected player AP to be 0")
+    if event_types != ["combat_started", "turn_started", "action_performed", "unit_moved"]:
+        errors.append(f"slice_19_highground_walkable: unexpected events {event_types}")
+
+    return errors
+
+
 def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_result: str) -> list[str]:
     errors: list[str] = []
     encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
@@ -559,6 +579,7 @@ def main() -> int:
     errors.extend(validate_combat_slice_14())
     errors.extend(validate_combat_slice_15())
     errors.extend(validate_combat_slice_16())
+    errors.extend(validate_combat_slice_19())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:
