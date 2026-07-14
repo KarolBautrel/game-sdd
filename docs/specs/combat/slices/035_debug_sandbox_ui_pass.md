@@ -17,10 +17,13 @@ Make the combat debug scene easier to use while combat rules are still evolving.
 - the inspect panel shows tile position, terrain, occupant, and current action legality;
 - tooltips include terrain and rejection reason for the selected action;
 - selected tile is visually highlighted separately from legal targets and active unit.
+- player and enemy units use temporary pixel-art sprite sheets in the grid;
+- movement and attacks briefly switch the unit sprite to a matching test frame;
+- pixel-art source generation lives in `assets_src/aseprite/`.
 
 ## Non-Goals
 
 - final in-game combat UI;
-- pixel-art assets;
-- animation;
+- final pixel-art assets;
+- production animation state machine;
 - controller support.

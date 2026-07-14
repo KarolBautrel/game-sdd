@@ -26,8 +26,16 @@ const BOW_REQUIRED_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounter
 const SHIELD_REQUIRED_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_55_shield_required_for_shield_wall.json"
 const TWO_HANDED_BLOCKS_SHIELD_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_56_two_handed_blocks_shield.json"
 const WEAPON_GRANTS_POWER_STRIKE_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_57_weapon_grants_power_strike.json"
-const TILE_SIZE := 56
+const PLAYER_WARRIOR_SHEET_PATH := "res://assets/combat/units/player_warrior_sheet.png"
+const ENEMY_RAIDER_SHEET_PATH := "res://assets/combat/units/enemy_raider_sheet.png"
+const TILE_SIZE := 64
 const TILE_GAP := 4
+const UNIT_FRAME_SIZE := Vector2i(32, 32)
+const UNIT_POSE_FRAMES := {
+	"idle": 0,
+	"move": 1,
+	"attack": 2,
+}
 const COMMAND_ACTION_IDS := ["move", "basic_attack", "ranged_attack", "aimed_shot", "power_strike", "shield_wall", "defend", "end_turn", "enemy_ai", "enemy_turn"]
 const ACTION_LABELS := {
 	"move": "Move",
@@ -77,6 +85,10 @@ var last_feedback := "Select an action."
 var current_encounter_path := DEFAULT_ENCOUNTER_PATH
 var selected_scenario_id := "reset"
 var selected_position: Dictionary = {}
+var unit_visual_pose: Dictionary = {}
+var unit_texture_cache: Dictionary = {}
+var unit_sheet_cache: Dictionary = {}
+var visual_generation := 0
 
 
 func _ready() -> void:
@@ -88,6 +100,7 @@ func _reset_debug_encounter() -> void:
 	state["event_log"] = []
 	command_index = 1
 	selected_action = "move"
+	unit_visual_pose.clear()
 	last_feedback = "Encounter reset."
 	var result := CombatResolver.simulate(state, [])
 	state = result["state"]
@@ -123,6 +136,11 @@ func _build_tile(position: Dictionary) -> Button:
 
 	var unit := _living_unit_at(position)
 	if not unit.is_empty():
+		tile.icon = _unit_icon(unit)
+		tile.expand_icon = false
+		tile.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		tile.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
+		tile.add_theme_font_size_override("font_size", 10)
 		if unit["team"] == "player":
 			tile.modulate = Color(0.55, 0.8, 1.0)
 		else:
@@ -163,8 +181,8 @@ func _tile_text(position: Dictionary) -> String:
 	var ap: int = unit["resources"]["ap"]
 	var tile_marker := _occupied_tile_marker(position)
 	if unit["team"] == "player":
-		return "P%s\nHP %s\nAP %s" % [tile_marker, hp, ap]
-	return "E%s\nHP %s\nAP %s" % [tile_marker, hp, ap]
+		return "%s\nHP %s AP %s" % [tile_marker, hp, ap]
+	return "%s\nHP %s AP %s" % [tile_marker, hp, ap]
 
 
 func _occupied_tile_marker(position: Dictionary) -> String:
@@ -449,7 +467,9 @@ func _run_command(command: Dictionary) -> void:
 	state["event_log"] = previous_log + new_events
 	last_feedback = _feedback_from_events(new_events)
 	command_index += 1
+	_capture_unit_visuals(new_events)
 	_render()
+	_schedule_visual_reset()
 
 
 func _run_enemy_turn_helper() -> void:
@@ -493,6 +513,7 @@ func _run_command_without_render(command: Dictionary) -> void:
 	var new_events: Array = _events_after_startup(result["state"]["event_log"])
 	state["event_log"] = previous_log + new_events
 	command_index += 1
+	_capture_unit_visuals(new_events)
 
 
 func _state_without_log() -> Dictionary:
@@ -592,9 +613,65 @@ func _feedback_from_events(events: Array) -> String:
 	return "Command accepted."
 
 
+func _capture_unit_visuals(events: Array) -> void:
+	for event: Dictionary in events:
+		if event["type"] == "unit_moved":
+			unit_visual_pose[event.get("actor_id", "")] = "move"
+		elif event["type"] == "damage_applied":
+			unit_visual_pose[event.get("actor_id", "")] = "attack"
+
+
+func _schedule_visual_reset() -> void:
+	if unit_visual_pose.is_empty():
+		return
+	visual_generation += 1
+	var current_generation := visual_generation
+	get_tree().create_timer(0.35).timeout.connect(func() -> void:
+		if current_generation != visual_generation:
+			return
+		unit_visual_pose.clear()
+		_render()
+	)
+
+
 func _clear_grid() -> void:
 	for child in grid_container.get_children():
 		child.queue_free()
+
+
+func _unit_icon(unit: Dictionary) -> Texture2D:
+	var pose := str(unit_visual_pose.get(unit["id"], "idle"))
+	var team := str(unit.get("team", "enemy"))
+	var cache_key := "%s:%s" % [team, pose]
+	if unit_texture_cache.has(cache_key):
+		return unit_texture_cache[cache_key]
+
+	var sheet_path := PLAYER_WARRIOR_SHEET_PATH if team == "player" else ENEMY_RAIDER_SHEET_PATH
+	var sheet := _unit_sheet(sheet_path)
+	if sheet == null:
+		return null
+
+	var frame: int = UNIT_POSE_FRAMES.get(pose, 0)
+	var texture := AtlasTexture.new()
+	texture.atlas = sheet
+	texture.region = Rect2(frame * UNIT_FRAME_SIZE.x, 0, UNIT_FRAME_SIZE.x, UNIT_FRAME_SIZE.y)
+	unit_texture_cache[cache_key] = texture
+	return texture
+
+
+func _unit_sheet(sheet_path: String) -> Texture2D:
+	if unit_sheet_cache.has(sheet_path):
+		return unit_sheet_cache[sheet_path]
+
+	var image := Image.new()
+	var error := image.load(sheet_path)
+	if error != OK:
+		push_error("Cannot load unit sprite sheet: %s" % sheet_path)
+		return null
+
+	var texture := ImageTexture.create_from_image(image)
+	unit_sheet_cache[sheet_path] = texture
+	return texture
 
 
 func _load_json(path: String) -> Variant:

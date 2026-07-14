@@ -255,6 +255,8 @@ Latest verified scope:
 - invalid two-handed plus off-hand loadouts reject shield-dependent actions.
 - greatsword loadout can grant `power_strike` and apply its cooldown.
 - debug scene can load dedicated loadout/equipment tests 053-057.
+- debug scene now has temporary Aseprite-generated pixel-art unit sprites.
+- movement and attack events briefly switch unit sprites to simple test animation frames.
 
 ## Important Files
 
