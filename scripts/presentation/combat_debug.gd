@@ -53,6 +53,10 @@ const UNIT_VISUALS := {
 	"unit_enemy_001": {"faction": "villains", "character": "enemy_orc"},
 	"unit_enemy_002": {"faction": "villains", "character": "enemy_skeleton"},
 }
+const TERRAIN_DECORATIONS := {
+	"3,2": "res://assets/terrain/nature/fallen_branch/fallen_branch_frame_0.png",
+	"5,2": "res://assets/terrain/nature/mossy_boulder/mossy_boulder_frame_0.png",
+}
 const PRIMARY_COMMAND_ACTION_IDS := ["move", "basic_attack", "ranged_attack", "aimed_shot", "power_strike", "shield_wall", "defend", "end_turn"]
 const DEBUG_COMMAND_ACTION_IDS := ["enemy_ai", "enemy_turn"]
 const ACTION_LABELS := {
@@ -114,6 +118,7 @@ var unit_facing: Dictionary = {}
 var unit_visual_action: Dictionary = {}
 var unit_texture_cache: Dictionary = {}
 var tile_texture_cache: Dictionary = {}
+var terrain_decoration_texture_cache: Dictionary = {}
 var temporary_visual_units: Dictionary = {}
 var visual_positions_px: Dictionary = {}
 var visual_generation := 0
@@ -186,13 +191,25 @@ func _build_tile(position: Dictionary) -> Button:
 	var terrain_type := _tile_type(position)
 	var terrain_texture := TextureRect.new()
 	terrain_texture.name = "Terrain"
-	terrain_texture.texture = _tile_visual_texture(terrain_type)
+	terrain_texture.texture = _tile_visual_texture(terrain_type, position)
 	terrain_texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	terrain_texture.stretch_mode = TextureRect.STRETCH_SCALE
 	terrain_texture.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
 	terrain_texture.size = Vector2(TILE_SIZE, TILE_SIZE)
 	terrain_texture.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	tile.add_child(terrain_texture)
+
+	var decoration_texture := _tile_decoration_texture(position)
+	if decoration_texture != null:
+		var decoration := TextureRect.new()
+		decoration.name = "TerrainDecoration"
+		decoration.texture = decoration_texture
+		decoration.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		decoration.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		decoration.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
+		decoration.size = Vector2(TILE_SIZE, TILE_SIZE)
+		decoration.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		tile.add_child(decoration)
 
 	var unit := _living_unit_at(position)
 	var overlay_color := _tile_overlay_color(position, unit)
@@ -208,9 +225,11 @@ func _build_tile(position: Dictionary) -> Button:
 	return tile
 
 
-func _tile_visual_texture(terrain_type: String) -> Texture2D:
-	if tile_texture_cache.has(terrain_type):
-		return tile_texture_cache[terrain_type]
+func _tile_visual_texture(terrain_type: String, position: Dictionary) -> Texture2D:
+	var atlas_index := _tile_atlas_index(terrain_type, position)
+	var cache_key := "%s:%s" % [terrain_type, atlas_index]
+	if tile_texture_cache.has(cache_key):
+		return tile_texture_cache[cache_key]
 	if not tile_texture_cache.has("__atlas"):
 		var image := Image.new()
 		var error := image.load(TILE_ATLAS_TEXTURE_PATH)
@@ -221,21 +240,41 @@ func _tile_visual_texture(terrain_type: String) -> Texture2D:
 	var atlas_texture: Texture2D = tile_texture_cache["__atlas"]
 	var atlas := AtlasTexture.new()
 	atlas.atlas = atlas_texture
-	atlas.region = Rect2(_tile_atlas_index(terrain_type) * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE)
-	tile_texture_cache[terrain_type] = atlas
+	atlas.region = Rect2(atlas_index * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE)
+	tile_texture_cache[cache_key] = atlas
 	return atlas
 
 
-func _tile_atlas_index(terrain_type: String) -> int:
+func _tile_atlas_index(terrain_type: String, position: Dictionary) -> int:
+	var x := int(position.get("x", 0))
+	var y := int(position.get("y", 0))
 	match terrain_type:
 		"blocked":
-			return 1
+			return 4 if (x + y) % 3 == 1 else 1
 		"highground":
 			return 2
 		"cover_low":
-			return 3
+			return 5 if (x * 2 + y) % 4 == 0 else 3
 		_:
 			return 0
+
+
+func _tile_decoration_texture(position: Dictionary) -> Texture2D:
+	var key := "%s,%s" % [position.get("x", 0), position.get("y", 0)]
+	if not TERRAIN_DECORATIONS.has(key):
+		return null
+	var path: String = TERRAIN_DECORATIONS[key]
+	if terrain_decoration_texture_cache.has(path):
+		return terrain_decoration_texture_cache[path]
+	var image := Image.new()
+	var error := image.load(path)
+	if error != OK:
+		push_error("Cannot load terrain decoration texture: %s" % path)
+		return null
+	image.resize(TILE_SIZE, TILE_SIZE, Image.INTERPOLATE_NEAREST)
+	var texture := ImageTexture.create_from_image(image)
+	terrain_decoration_texture_cache[path] = texture
+	return texture
 
 
 func _tile_overlay_color(position: Dictionary, unit: Dictionary) -> Color:

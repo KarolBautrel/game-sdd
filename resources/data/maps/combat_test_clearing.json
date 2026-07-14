@@ -168,7 +168,7 @@
     {
       "x": 8,
       "y": 2,
-      "type": "highground"
+      "type": "cover_low"
     },
     {
       "x": 9,
@@ -378,7 +378,7 @@
     {
       "x": 2,
       "y": 6,
-      "type": "highground"
+      "type": "cover_low"
     },
     {
       "x": 3,

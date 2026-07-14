@@ -359,22 +359,81 @@ Interactive combat debug scene:
 
 ## Planned But Not Implemented
 
+Status: intentionally paused after the Tiled combat map showcase. The next steps below are recorded so the project can resume with a clear order instead of reopening design questions.
+
+Combat is not considered finished. The current state is a validated rules prototype plus a sandbox. When work resumes, the priority is not "add another random skill"; the priority is to turn the prototype into an authored, readable combat experience.
+
+Immediate next focus:
+
+1. Bridge Tiled maps into combat encounters so the map source drives the playable grid.
+2. Improve combat sandbox UX so movement, targeting, hit chance, AP/MP cost, and blocked reasons are clear before the player clicks.
+3. Push terrain art and presentation toward the current tactical 2.5D direction before adding many more combat rules.
+4. Use `assets/terrain/nature/` and the current sandbox tileset as the visual reference for terrain art until a stricter terrain art bible exists.
+
 ### Recommended Next Development Order
 
-1. More special skills:
-   - bow control skill: `pinning_shot` or `crippling_shot`;
-   - melee control skill: `guard_break` or `crippling_strike`.
-2. Enemy archetype expansion:
-   - define simple archetypes such as swordsman, shieldman, archer, bruiser;
-   - move showcase enemies toward reusable archetype data.
-3. Inventory/equipment outside combat:
-   - defer full inventory UI until combat rules stabilize;
-   - combat only needs resolved loadout data for now.
+1. **Map Pipeline V1**
+   - keep Tiled `.tmx` files as editable map sources;
+   - keep generated `resources/data/maps/*.json` as engine-ready data;
+   - add a validator that every combat encounter using map data matches map width, height, terrain, and spawn constraints.
+
+2. **Combat Map Runtime Bridge**
+   - stop duplicating `grid.tiles` manually inside debug combat encounters;
+   - allow an encounter to reference `map_id` or `map_path`;
+   - resolve terrain/spawns from the generated map JSON before combat starts.
+
+3. **Combat Sandbox Presentation Pass**
+   - replace pure debug buttons with a more game-like combat viewport;
+   - keep tactical overlays available, but make them secondary;
+   - make the map, units, action banner, and selected action readable at first glance.
+
+4. **Terrain Art V1**
+   - replace the current placeholder `combat_logic_tiles.png` with intentional terrain tiles;
+   - keep the current 2.5D tactical direction from `assets/terrain/nature/` and the sandbox tileset: slightly side-on, readable height, shadows, and foreground faces;
+   - define source rules for Aseprite terrain tiles and Tiled tileset updates.
+
+5. **Terrain Gameplay V2**
+   - add terrain movement costs;
+   - define whether cover/highground affect melee, ranged, and movement differently;
+   - verify pathfinding with varied movement costs and blocked chokepoints.
+
+6. **Action Targeting UX**
+   - show legal movement range as a soft overlay, not a harsh full-tile recolor;
+   - show attack range and line of sight while an attack action is selected;
+   - show preview text for expected AP/MP cost, hit chance, and blocked reasons.
+
+7. **Special Skills V2**
+   - implement the next small combat skills after `aimed_shot`, likely:
+     - `guard_break` for melee anti-shield/control;
+     - `pinning_shot` or `crippling_shot` for bow control;
+   - make each skill data-driven through action/item profiles where possible.
+
+8. **Enemy Archetype V2**
+   - define reusable archetypes: swordsman, shieldman, archer, bruiser;
+   - move showcase enemies to archetype-driven loadouts;
+   - make AI decisions aware of archetype role instead of only checking available actions.
+
+9. **Animation State Machine V1**
+   - replace one-off visual flags with a small unit animation state machine;
+   - support neutral idle, combat idle, walk, attack, hit, death, and status reactions consistently;
+   - keep fallback behavior for missing animation folders.
+
+10. **Combat Encounter Authoring Workflow**
+    - document how to create a new combat test encounter from a Tiled map;
+    - add a generator/helper for encounter scaffolds from map spawns;
+    - make the debug scene load authored scenarios without code changes.
 
 Suggested next slices:
 
 ```text
-docs/specs/combat/slices/066_guard_break_skill.md
-docs/specs/combat/slices/067_enemy_archetype_showcase_refactor.md
-docs/specs/combat/slices/068_inventory_loadout_bridge.md
+docs/specs/combat/slices/066_map_reference_encounter.md
+docs/specs/combat/slices/067_terrain_movement_costs.md
+docs/specs/combat/slices/068_targeting_preview_overlay.md
+docs/specs/combat/slices/069_guard_break_skill.md
+docs/specs/combat/slices/070_pinning_shot_skill.md
+docs/specs/combat/slices/071_enemy_archetype_roles_v2.md
+docs/specs/combat/slices/072_unit_animation_state_machine.md
+docs/specs/combat/slices/073_tiled_spawn_to_encounter_scaffold.md
+docs/specs/combat/slices/074_combat_sandbox_presentation_pass.md
+docs/specs/combat/slices/075_terrain_art_contract_v1.md
 ```
