@@ -19,8 +19,15 @@ var last_feedback := "Select an action."
 
 
 func _ready() -> void:
+	_reset_debug_encounter()
+
+
+func _reset_debug_encounter() -> void:
 	state = _load_json(ENCOUNTER_PATH)
 	state["event_log"] = []
+	command_index = 1
+	selected_action = "move"
+	last_feedback = "Encounter reset."
 	var result := CombatResolver.simulate(state, [])
 	state = result["state"]
 	_render()
@@ -111,15 +118,19 @@ func _render_command_buttons() -> void:
 	for child in command_buttons.get_children():
 		child.queue_free()
 
-	for action_id in ["move", "basic_attack", "defend", "end_turn", "enemy_ai"]:
+	for action_id in ["move", "basic_attack", "defend", "end_turn", "enemy_ai", "enemy_turn", "reset"]:
 		var button := Button.new()
 		button.text = action_id
 		button.toggle_mode = true
 		button.button_pressed = selected_action == action_id
-		button.disabled = _combat_result() != "in_progress"
+		button.disabled = _combat_result() != "in_progress" and action_id != "reset"
 		button.pressed.connect(func() -> void:
 			selected_action = action_id
-			if action_id == "enemy_ai":
+			if action_id == "reset":
+				_reset_debug_encounter()
+			elif action_id == "enemy_turn":
+				_run_enemy_turn_helper()
+			elif action_id == "enemy_ai":
 				_run_command(CombatResolver.choose_enemy_command(state, "cmd_%03d" % command_index))
 			elif action_id in ["defend", "end_turn"]:
 				_run_command(_build_command(action_id, {}))
@@ -169,6 +180,49 @@ func _run_command(command: Dictionary) -> void:
 	last_feedback = _feedback_from_events(new_events)
 	command_index += 1
 	_render()
+
+
+func _run_enemy_turn_helper() -> void:
+	if _combat_result() != "in_progress":
+		last_feedback = "Combat already ended."
+		_render()
+		return
+
+	var safety_limit := 4
+	while safety_limit > 0 and _combat_result() == "in_progress":
+		var active := _unit_by_id(state["turn_state"]["active_unit_id"])
+		if active.is_empty():
+			last_feedback = "No active unit."
+			break
+
+		if active["team"] == "player":
+			_run_command_without_render(_build_command("end_turn", {}))
+		elif active["team"] == "enemy":
+			_run_command_without_render(CombatResolver.choose_enemy_command(state, "cmd_%03d" % command_index))
+		else:
+			last_feedback = "Unknown active team."
+			break
+
+		var next_active := _unit_by_id(state["turn_state"]["active_unit_id"])
+		if next_active.is_empty() or next_active["team"] == "player":
+			break
+
+		safety_limit -= 1
+
+	last_feedback = "Enemy turn helper complete."
+	_render()
+
+
+func _run_command_without_render(command: Dictionary) -> void:
+	if _combat_result() != "in_progress":
+		return
+
+	var previous_log: Array = state["event_log"].duplicate(true)
+	var result := CombatResolver.simulate(_state_without_log(), [command])
+	state = result["state"]
+	var new_events: Array = _events_after_startup(result["state"]["event_log"])
+	state["event_log"] = previous_log + new_events
+	command_index += 1
 
 
 func _state_without_log() -> Dictionary:

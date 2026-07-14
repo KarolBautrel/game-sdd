@@ -75,6 +75,7 @@ Current verified slices:
 - `015_defeat_last_player_defeated.md`
 - `016_command_after_combat_end_rejected.md`
 - `017_debug_legal_target_feedback.md`
+- `018_debug_reset_and_enemy_turn_helper.md`
 
 ## Latest Update
 
@@ -87,6 +88,8 @@ Latest verified scope:
 - commands after combat end are rejected.
 - debug scene highlights active unit and legal targets using resolver-backed checks;
 - debug scene displays last accepted action or rejection reason.
+- debug scene can reset the encounter;
+- debug scene has a one-click enemy turn helper.
 
 ## Important Files
 
@@ -148,14 +151,14 @@ These specs exist as planned placeholders:
 
 ## Recommended Next Step
 
-Implement combat lifecycle polish:
+Implement next combat UX polish:
 
-- add a reset/reload button for the debug encounter;
-- add a one-click enemy turn helper;
 - consider showing turn order and current round more clearly.
+- add lightweight visual combat result banner.
+- add visible HP/AP side panel for units.
 
 Suggested slice:
 
 ```text
-docs/specs/combat/slices/018_debug_reset_and_enemy_turn_helper.md
+docs/specs/combat/slices/019_debug_turn_order_and_unit_panel.md
 ```

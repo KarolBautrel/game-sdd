@@ -62,6 +62,8 @@ Debug scene controls:
 - Click `defend` to apply the defending status.
 - Click `end_turn` to pass control to the next unit.
 - Click `enemy_ai` while an enemy is active to let AI v0 choose a command.
+- Click `enemy_turn` to advance through a simple enemy turn sequence.
+- Click `reset` to reload the debug encounter.
 - The active unit is highlighted yellow.
 - Legal move and attack targets are highlighted green.
 - Rejected commands show the rejection reason in the feedback label.
