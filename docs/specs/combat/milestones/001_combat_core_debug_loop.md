@@ -290,6 +290,8 @@ Latest verified scope:
 - debug showcase grid scale was tuned down for an 8x8 arena, unit stats were moved out of tile labels, and movement animation now uses one chained tween across path steps.
 - debug showcase UI was compacted for the 8x8 board, tactical grid markings were muted, units start closer together, and movement tweens are slower/linear so walk sprites read more clearly.
 - debug showcase resource readouts now render as compact HP/AP/MP overlays on unit sprites, and turn stepping uses the same animated command path instead of jumping through hidden commands.
+- combat debug UI now has a prominent pixel-styled action banner, human-readable action feed, and clearer selected-action buttons.
+- combat debug action buttons are filtered by the active unit's available actions, loadout-granted actions, cooldowns, and current AP/MP so unavailable equipment actions do not clutter the UI.
 - Validation passed on 2026-07-14:
   - `python tools\validators\validate_all.py`
   - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd`

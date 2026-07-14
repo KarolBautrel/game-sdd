@@ -31,6 +31,7 @@ const ARMOR_REDUCES_DAMAGE_TEST_ENCOUNTER_PATH := "res://resources/data/combat_e
 const SHIELD_WALL_DAMAGE_REDUCTION_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_59_shield_wall_applies_damage_reduction.json"
 const MOVEMENT_POINTS_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_60_movement_points_multi_tile.json"
 const AP_MP_ECONOMY_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_61_ap_mp_turn_economy.json"
+const PIXEL_PANEL_TEXTURE_PATH := "res://assets/ui/combat/pixel_panel.png"
 const UNIT_ICON_SIZE := Vector2i(90, 90)
 const UNIT_RESOURCE_LABEL_SIZE := Vector2(104, 18)
 const TILE_SIZE := 76
@@ -44,7 +45,8 @@ const UNIT_VISUALS := {
 	"unit_enemy_001": {"faction": "villains", "character": "enemy_orc"},
 	"unit_enemy_002": {"faction": "villains", "character": "enemy_skeleton"},
 }
-const COMMAND_ACTION_IDS := ["move", "basic_attack", "ranged_attack", "aimed_shot", "power_strike", "shield_wall", "defend", "end_turn", "enemy_ai", "enemy_turn"]
+const PRIMARY_COMMAND_ACTION_IDS := ["move", "basic_attack", "ranged_attack", "aimed_shot", "power_strike", "shield_wall", "defend", "end_turn"]
+const DEBUG_COMMAND_ACTION_IDS := ["enemy_ai", "enemy_turn"]
 const ACTION_LABELS := {
 	"move": "Move",
 	"basic_attack": "Melee attack",
@@ -81,6 +83,10 @@ const ACTION_LABELS := {
 @onready var board_root: Control = %BoardRoot
 @onready var grid_container: GridContainer = %GridContainer
 @onready var unit_layer: Control = %UnitLayer
+@onready var action_panel: PanelContainer = %ActionPanel
+@onready var action_title_label: Label = %ActionTitleLabel
+@onready var action_detail_label: Label = %ActionDetailLabel
+@onready var action_feed_label: Label = %ActionFeedLabel
 @onready var status_label: Label = %StatusLabel
 @onready var feedback_label: Label = %FeedbackLabel
 @onready var legend_label: Label = %LegendLabel
@@ -102,9 +108,13 @@ var unit_texture_cache: Dictionary = {}
 var visual_positions_px: Dictionary = {}
 var visual_generation := 0
 var animation_locked := false
+var current_action_title := "Combat ready"
+var current_action_detail := "Select an action or step the next turn."
+var action_feed: Array[String] = []
 
 
 func _ready() -> void:
+	_apply_pixel_theme()
 	_reset_debug_encounter()
 
 
@@ -116,6 +126,9 @@ func _reset_debug_encounter() -> void:
 	unit_facing.clear()
 	unit_visual_action.clear()
 	visual_positions_px.clear()
+	action_feed.clear()
+	current_action_title = "Combat ready"
+	current_action_detail = "Select an action or step the next turn."
 	last_feedback = "Encounter reset."
 	var result := CombatResolver.simulate(state, [])
 	state = result["state"]
@@ -135,7 +148,9 @@ func _render() -> void:
 		for x in range(int(state["grid"]["width"])):
 			grid_container.add_child(_build_tile({"x": x, "y": y}))
 	_render_units()
+	_sync_selected_action_with_visible_actions(_visible_primary_action_ids())
 
+	_render_action_panel()
 	_render_status()
 	_render_feedback()
 	_render_legend()
@@ -205,6 +220,16 @@ func _render_status() -> void:
 		active.get("resources", {}).get("mp", "-"),
 		ACTION_LABELS.get(selected_action, selected_action),
 	]
+
+
+func _render_action_panel() -> void:
+	action_title_label.text = current_action_title
+	action_detail_label.text = current_action_detail
+	if action_feed.is_empty():
+		action_feed_label.text = "Recent: no actions yet"
+	else:
+		var recent_feed := action_feed.slice(0, mini(3, action_feed.size()))
+		action_feed_label.text = "Recent: " + "  |  ".join(recent_feed)
 
 
 func _render_feedback() -> void:
@@ -294,11 +319,10 @@ func _render_event_log() -> void:
 	var events: Array = state["event_log"].duplicate(true)
 	events.reverse()
 	for event: Dictionary in events:
-		lines.append("%s %s. %s %s" % [
+		lines.append("%s %s. %s" % [
 			_event_marker(event),
 			event["sequence"],
-			event["type"],
-			_event_summary(event),
+			_event_timeline_line(event),
 		])
 	event_log_label.text = "\n".join(lines)
 
@@ -307,12 +331,77 @@ func _render_command_buttons() -> void:
 	for child in command_buttons.get_children():
 		child.queue_free()
 
+	var primary_actions := _visible_primary_action_ids()
+	_sync_selected_action_with_visible_actions(primary_actions)
+
 	_add_button_section("Commands")
-	for action_id in COMMAND_ACTION_IDS:
+	for action_id in primary_actions:
 		_add_action_button(action_id)
+
+	var debug_actions := _visible_debug_action_ids()
+	if not debug_actions.is_empty():
+		_add_button_section("Turn Tools")
+		for action_id in debug_actions:
+			_add_action_button(action_id)
 
 	_add_button_section("Load Test")
 	_add_scenario_picker()
+
+
+func _visible_primary_action_ids() -> Array[String]:
+	var visible: Array[String] = []
+	var active := _unit_by_id(state["turn_state"]["active_unit_id"])
+	if active.is_empty() or _combat_result() != "in_progress":
+		return visible
+	for action_id: String in PRIMARY_COMMAND_ACTION_IDS:
+		if _action_can_be_shown_now(active, action_id):
+			visible.append(action_id)
+	return visible
+
+
+func _visible_debug_action_ids() -> Array[String]:
+	if _combat_result() != "in_progress":
+		return []
+	var visible: Array[String] = ["enemy_turn"]
+	var active := _unit_by_id(state["turn_state"]["active_unit_id"])
+	if not active.is_empty() and active.get("team", "") == "enemy":
+		visible.push_front("enemy_ai")
+	return visible
+
+
+func _sync_selected_action_with_visible_actions(visible_actions: Array[String]) -> void:
+	if visible_actions.has(selected_action):
+		return
+	if visible_actions.has("move"):
+		selected_action = "move"
+	elif not visible_actions.is_empty():
+		selected_action = visible_actions[0]
+	else:
+		selected_action = "end_turn"
+
+
+func _action_can_be_shown_now(unit: Dictionary, action_id: String) -> bool:
+	if not _action_granted_to_unit(unit, action_id):
+		return false
+	match action_id:
+		"move":
+			if unit["resources"].has("mp"):
+				return int(unit["resources"].get("mp", 0)) >= 1
+			return int(unit["resources"].get("ap", 0)) >= 1
+		"end_turn":
+			return true
+		"defend":
+			return int(unit["resources"].get("ap", 0)) >= 1
+		"shield_wall":
+			return int(unit["resources"].get("ap", 0)) >= _action_ap_cost(unit, action_id, 1) and not _skill_on_cooldown(unit, action_id)
+		"power_strike":
+			return int(unit["resources"].get("ap", 0)) >= _action_ap_cost(unit, action_id, 2) and not _skill_on_cooldown(unit, action_id)
+		"aimed_shot":
+			return int(unit["resources"].get("ap", 0)) >= _action_ap_cost(unit, action_id, 2) and not _skill_on_cooldown(unit, action_id)
+		"basic_attack", "ranged_attack":
+			return int(unit["resources"].get("ap", 0)) >= _action_ap_cost(unit, action_id, 1)
+		_:
+			return true
 
 
 func _add_button_section(title: String) -> void:
@@ -324,11 +413,15 @@ func _add_button_section(title: String) -> void:
 
 func _add_action_button(action_id: String) -> void:
 	var button := Button.new()
-	button.text = ACTION_LABELS.get(action_id, action_id)
-	button.custom_minimum_size = Vector2(0, 24)
-	button.add_theme_font_size_override("font_size", 11)
+	button.text = ">> %s <<" % ACTION_LABELS.get(action_id, action_id) if selected_action == action_id else ACTION_LABELS.get(action_id, action_id)
+	button.custom_minimum_size = Vector2(0, 30)
+	button.add_theme_font_size_override("font_size", 12)
+	button.add_theme_color_override("font_color", Color(0.94, 0.88, 0.72))
+	button.add_theme_color_override("font_pressed_color", Color(1.0, 0.86, 0.38))
+	button.add_theme_color_override("font_hover_color", Color(1.0, 0.94, 0.68))
 	button.toggle_mode = true
 	button.button_pressed = selected_action == action_id
+	button.modulate = Color(1.0, 0.88, 0.46) if selected_action == action_id else Color(0.86, 0.82, 0.72)
 	button.disabled = animation_locked or _combat_result() != "in_progress"
 	button.pressed.connect(func() -> void:
 		if animation_locked:
@@ -341,6 +434,7 @@ func _add_action_button(action_id: String) -> void:
 		elif action_id in ["shield_wall", "defend", "end_turn"]:
 			_run_command(_build_command(action_id, {}))
 		else:
+			_set_targeting_banner(action_id)
 			last_feedback = "Select a highlighted target for %s." % ACTION_LABELS.get(action_id, action_id)
 			_render()
 	)
@@ -461,6 +555,7 @@ func _run_command(command: Dictionary) -> void:
 	var next_log := previous_log + new_events
 	var next_feedback := _feedback_from_events(new_events)
 	command_index += 1
+	_set_action_banner_from_events(command, new_events)
 	_capture_unit_facings(new_events)
 	var has_movement_animation := _prepare_movement_animation(new_events)
 	var has_combat_flash := _prepare_combat_flash(new_events)
@@ -515,6 +610,7 @@ func _run_command_without_render(command: Dictionary) -> void:
 	state["event_log"] = previous_log + new_events
 	command_index += 1
 	_capture_unit_facings(new_events)
+	_set_action_banner_from_events(command, new_events)
 
 
 func _state_without_log() -> Dictionary:
@@ -532,6 +628,175 @@ func _events_after_startup(events: Array) -> Array:
 		next_event["sequence"] = state["event_log"].size() + filtered.size() + 1
 		filtered.append(next_event)
 	return filtered
+
+
+func _apply_pixel_theme() -> void:
+	var panel_texture := _load_pixel_ui_texture(PIXEL_PANEL_TEXTURE_PATH)
+	if panel_texture != null:
+		var panel_style := StyleBoxTexture.new()
+		panel_style.texture = panel_texture
+		panel_style.texture_margin_left = 8
+		panel_style.texture_margin_top = 8
+		panel_style.texture_margin_right = 8
+		panel_style.texture_margin_bottom = 8
+		panel_style.content_margin_left = 12
+		panel_style.content_margin_top = 8
+		panel_style.content_margin_right = 12
+		panel_style.content_margin_bottom = 8
+		action_panel.add_theme_stylebox_override("panel", panel_style)
+
+	var action_title_color := Color(1.0, 0.86, 0.38)
+	var action_text_color := Color(0.96, 0.92, 0.80)
+	var shadow_color := Color(0.05, 0.04, 0.03, 1.0)
+	for label: Label in [action_title_label, action_detail_label, action_feed_label, status_label, feedback_label, legend_label]:
+		label.add_theme_color_override("font_color", action_text_color)
+		label.add_theme_color_override("font_shadow_color", shadow_color)
+		label.add_theme_constant_override("shadow_offset_x", 1)
+		label.add_theme_constant_override("shadow_offset_y", 1)
+	action_title_label.add_theme_color_override("font_color", action_title_color)
+
+
+func _load_pixel_ui_texture(path: String) -> Texture2D:
+	var image := Image.new()
+	var error := image.load(path)
+	if error != OK:
+		push_error("Cannot load pixel UI texture: %s" % path)
+		return null
+	return ImageTexture.create_from_image(image)
+
+
+func _set_targeting_banner(action_id: String) -> void:
+	current_action_title = "Targeting: %s" % ACTION_LABELS.get(action_id, action_id)
+	current_action_detail = "Pick a highlighted target on the board."
+
+
+func _set_action_banner_from_events(command: Dictionary, events: Array) -> void:
+	var title := ""
+	var detail := ""
+	var feed_line := ""
+
+	for event: Dictionary in events:
+		if event["type"] == "command_rejected":
+			title = "Action rejected"
+			detail = "%s could not use %s: %s" % [
+				_unit_display_name(event.get("actor_id", command.get("actor_id", ""))),
+				ACTION_LABELS.get(command.get("action_id", ""), command.get("action_id", "")),
+				_rejection_label(event.get("reason", "unknown")),
+			]
+			feed_line = "Rejected %s" % ACTION_LABELS.get(command.get("action_id", ""), command.get("action_id", "action"))
+			break
+
+	for event: Dictionary in events:
+		if event["type"] == "damage_applied":
+			title = "%s hits %s" % [
+				_unit_display_name(event.get("actor_id", "")),
+				_unit_display_name(event.get("target_unit_id", "")),
+			]
+			detail = "%s damage dealt. HP %s -> %s. Reduction: %s." % [
+				event.get("damage", "?"),
+				event.get("hp_before", "?"),
+				event.get("hp_after", "?"),
+				event.get("damage_reduction", 0),
+			]
+			feed_line = "%s hit %s for %s" % [
+				_unit_display_name(event.get("actor_id", "")),
+				_unit_display_name(event.get("target_unit_id", "")),
+				event.get("damage", "?"),
+			]
+			break
+
+	if title == "":
+		for event: Dictionary in events:
+			if event["type"] == "hit_roll_resolved":
+				var outcome := str(event.get("outcome", "?")).capitalize()
+				title = "%s: %s" % [ACTION_LABELS.get(command.get("action_id", ""), command.get("action_id", "")), outcome]
+				detail = "%s rolled %s vs %s%% to hit %s." % [
+					_unit_display_name(event.get("actor_id", "")),
+					event.get("roll", "?"),
+					event.get("hit_chance", "?"),
+					_unit_display_name(event.get("target_unit_id", "")),
+				]
+				feed_line = "%s %s %s" % [_unit_display_name(event.get("actor_id", "")), outcome.to_lower(), _unit_display_name(event.get("target_unit_id", ""))]
+				break
+
+	if title == "":
+		for event: Dictionary in events:
+			if event["type"] == "unit_moved":
+				title = "%s moves" % _unit_display_name(event.get("actor_id", ""))
+				detail = "%s -> %s. MP spent: %s. Path steps: %s." % [
+					_position_label(event.get("from", {})),
+					_position_label(event.get("to", {})),
+					event.get("mp_spent", 0),
+					event.get("path", []).size(),
+				]
+				feed_line = "%s moved to %s" % [_unit_display_name(event.get("actor_id", "")), _position_label(event.get("to", {}))]
+				break
+
+	if title == "":
+		for event: Dictionary in events:
+			if event["type"] == "status_applied":
+				var status: Dictionary = event.get("status", {})
+				title = "%s gains %s" % [
+					_unit_display_name(event.get("target_unit_id", "")),
+					_status_label(status),
+				]
+				detail = "Turns: %s. Source: %s." % [status.get("remaining_turns", "?"), _unit_display_name(event.get("actor_id", ""))]
+				feed_line = "%s gained %s" % [_unit_display_name(event.get("target_unit_id", "")), _status_label(status)]
+				break
+
+	if title == "":
+		for event: Dictionary in events:
+			if event["type"] == "turn_ended":
+				title = "%s ends turn" % _unit_display_name(event.get("actor_id", ""))
+				detail = "Next unit is starting."
+				feed_line = "%s ended turn" % _unit_display_name(event.get("actor_id", ""))
+			elif event["type"] == "turn_started":
+				title = "%s starts turn" % _unit_display_name(event.get("actor_id", ""))
+				detail = "Round %s. AP/MP refreshed if available." % event.get("round", "?")
+				feed_line = "%s started turn" % _unit_display_name(event.get("actor_id", ""))
+
+	if title == "":
+		title = "Command accepted"
+		detail = "%s resolved." % ACTION_LABELS.get(command.get("action_id", ""), command.get("action_id", "Action"))
+		feed_line = detail
+
+	current_action_title = title
+	current_action_detail = detail
+	_push_action_feed(feed_line)
+
+
+func _push_action_feed(line: String) -> void:
+	if line == "":
+		return
+	action_feed.push_front(line)
+	while action_feed.size() > 5:
+		action_feed.pop_back()
+
+
+func _event_timeline_line(event: Dictionary) -> String:
+	match event["type"]:
+		"action_performed":
+			return "%s uses %s" % [_unit_display_name(event.get("actor_id", "")), ACTION_LABELS.get(event.get("action_id", ""), event.get("action_id", ""))]
+		"unit_moved":
+			return "%s moves %s -> %s, MP %s" % [_unit_display_name(event.get("actor_id", "")), _position_label(event.get("from", {})), _position_label(event.get("to", {})), event.get("mp_spent", 0)]
+		"damage_applied":
+			return "%s hits %s for %s damage (HP %s -> %s)" % [_unit_display_name(event.get("actor_id", "")), _unit_display_name(event.get("target_unit_id", "")), event.get("damage", "?"), event.get("hp_before", "?"), event.get("hp_after", "?")]
+		"hit_roll_resolved":
+			return "%s rolls %s vs %s%%: %s" % [_unit_display_name(event.get("actor_id", "")), event.get("roll", "?"), event.get("hit_chance", "?"), event.get("outcome", "?")]
+		"status_applied":
+			return "%s gains %s" % [_unit_display_name(event.get("target_unit_id", "")), _status_label(event.get("status", {}))]
+		"status_expired":
+			return "%s loses %s" % [_unit_display_name(event.get("target_unit_id", "")), _status_label(event.get("status", {}))]
+		"turn_ended":
+			return "%s ends turn" % _unit_display_name(event.get("actor_id", ""))
+		"turn_started":
+			return "%s starts turn, round %s" % [_unit_display_name(event.get("actor_id", "")), event.get("round", "?")]
+		"command_rejected":
+			return "%s rejected: %s" % [_unit_display_name(event.get("actor_id", "")), _rejection_label(event.get("reason", "unknown"))]
+		"combat_ended":
+			return "Combat ended: %s" % event.get("result", "?")
+		_:
+			return "%s %s" % [event["type"], _event_summary(event)]
 
 
 func _event_summary(event: Dictionary) -> String:
@@ -961,6 +1226,107 @@ func _unit_by_id(unit_id: String) -> Dictionary:
 		if unit["id"] == unit_id:
 			return unit
 	return {}
+
+
+func _action_granted_to_unit(unit: Dictionary, action_id: String) -> bool:
+	if unit.get("available_actions", []).has(action_id):
+		return true
+	for item: Dictionary in _loadout_items_for_unit(unit):
+		if item.get("grants_actions", []).has(action_id):
+			return true
+	return false
+
+
+func _action_ap_cost(unit: Dictionary, action_id: String, fallback: int) -> int:
+	var profile := _action_profile_for_unit(unit, action_id)
+	return int(profile.get("ap_cost", fallback))
+
+
+func _action_profile_for_unit(unit: Dictionary, action_id: String) -> Dictionary:
+	for item: Dictionary in _loadout_items_for_unit(unit):
+		if not item.get("grants_actions", []).has(action_id):
+			continue
+		var action_profiles: Dictionary = item.get("action_profiles", {})
+		if action_profiles.has(action_id):
+			return action_profiles[action_id]
+	var action_profiles: Dictionary = state.get("action_profiles", {})
+	if action_profiles.has(action_id):
+		return action_profiles[action_id]
+	return {}
+
+
+func _loadout_items_for_unit(unit: Dictionary) -> Array[Dictionary]:
+	var items: Array[Dictionary] = []
+	var item_profiles: Dictionary = state.get("item_profiles", {})
+	for item_id: Variant in unit.get("loadout", {}).values():
+		if item_id == null:
+			continue
+		if item_profiles.has(item_id):
+			items.append(item_profiles[item_id])
+	return items
+
+
+func _skill_on_cooldown(unit: Dictionary, action_id: String) -> bool:
+	for status: Dictionary in unit.get("statuses", []):
+		if status.get("id", "") == "skill_cooldown" and status.get("action_id", "") == action_id and int(status.get("remaining_turns", 0)) > 0:
+			return true
+	return false
+
+
+func _unit_display_name(unit_id: String) -> String:
+	match unit_id:
+		"unit_player_001":
+			return "Warrior"
+		"unit_enemy_001":
+			return "Orc Raider"
+		"unit_enemy_002":
+			return "Skeleton Archer"
+		"":
+			return "Unknown"
+		_:
+			var unit := _unit_by_id(unit_id)
+			if unit.is_empty():
+				return unit_id
+			return "%s %s" % [str(unit.get("team", "unit")).capitalize(), unit_id.replace("unit_", "")]
+
+
+func _position_label(position: Dictionary) -> String:
+	if position.is_empty():
+		return "(?,?)"
+	return "(%s,%s)" % [position.get("x", "?"), position.get("y", "?")]
+
+
+func _status_label(status: Dictionary) -> String:
+	var status_id := str(status.get("id", "status"))
+	return status_id.replace("_", " ").capitalize()
+
+
+func _rejection_label(reason: String) -> String:
+	match reason:
+		"not_enough_ap":
+			return "not enough AP"
+		"not_enough_mp":
+			return "not enough MP"
+		"target_out_of_range":
+			return "target out of range"
+		"target_not_visible":
+			return "line of sight is blocked"
+		"destination_occupied":
+			return "destination occupied"
+		"destination_not_walkable":
+			return "destination blocked"
+		"destination_unreachable":
+			return "destination unreachable"
+		"action_not_available":
+			return "action not available"
+		"missing_weapon_profile":
+			return "missing weapon profile"
+		"skill_on_cooldown":
+			return "skill on cooldown"
+		"combat_already_ended":
+			return "combat already ended"
+		_:
+			return reason.replace("_", " ")
 
 
 func _living_unit_at(position: Dictionary) -> Dictionary:

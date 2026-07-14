@@ -45,6 +45,35 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Combat Sandbox"
 
+[node name="ActionPanel" type="PanelContainer" parent="RootMargin/RootScroll/RootHBox/LeftPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 92)
+
+[node name="ActionVBox" type="VBoxContainer" parent="RootMargin/RootScroll/RootHBox/LeftPanel/ActionPanel"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="ActionTitleLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/LeftPanel/ActionPanel/ActionVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Action"
+
+[node name="ActionDetailLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/LeftPanel/ActionPanel/ActionVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 3
+text = "Action detail"
+
+[node name="ActionFeedLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/LeftPanel/ActionPanel/ActionVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+autowrap_mode = 3
+text = "Recent actions"
+
 [node name="StatusLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/LeftPanel"]
 unique_name_in_owner = true
 layout_mode = 2
