@@ -36,6 +36,7 @@ When a turn ends:
 - event `turn_ended` is emitted;
 - active index advances to the next living unit;
 - dead units are skipped.
+- round increments when the active index wraps back to an earlier living unit.
 
 ## Round
 
@@ -64,4 +65,3 @@ For the first slice, initiative is not recalculated between rounds.
 - And its current AP is 0
 - When its turn starts
 - Then current AP becomes 2
-

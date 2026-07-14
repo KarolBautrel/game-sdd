@@ -185,6 +185,9 @@ static func _resolve_end_turn(state: Dictionary, command: Dictionary, sequence: 
 	if next_unit_id == "":
 		return _reject(state, sequence, command, "no_next_living_unit")
 
+	if _turn_order_wraps(state, previous_unit_id, next_unit_id):
+		state["turn_state"]["round"] += 1
+
 	state["turn_state"]["active_unit_id"] = next_unit_id
 	var next_unit := _unit_by_id(state, next_unit_id)
 	next_unit["resources"]["ap"] = next_unit["stats"]["max_ap"]
@@ -328,6 +331,11 @@ static func _next_living_unit_id(state: Dictionary, current_unit_id: String) -> 
 		if not candidate.is_empty() and candidate["resources"]["hp"] > 0:
 			return candidate_id
 	return ""
+
+
+static func _turn_order_wraps(state: Dictionary, current_unit_id: String, next_unit_id: String) -> bool:
+	var turn_order: Array = state["turn_state"]["turn_order"]
+	return turn_order.find(next_unit_id) <= turn_order.find(current_unit_id)
 
 
 static func _adjacent_living_enemy(state: Dictionary, actor: Dictionary, target_team: String) -> Dictionary:

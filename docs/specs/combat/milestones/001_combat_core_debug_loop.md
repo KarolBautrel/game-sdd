@@ -65,6 +65,15 @@ Current verified slices:
 - `010_diagonal_move.md`
 - `011_diagonal_attack.md`
 - `012_enemy_ai_no_ap_end_turn.md`
+- `013_round_cycle_player_enemy_player.md`
+
+## Latest Update
+
+Commit scope after this milestone update:
+
+- round increments when turn order wraps back to the player;
+- player AP refreshes when the next player turn starts;
+- full player -> enemy -> player round cycle is verified in Python and Godot.
 
 ## Important Files
 
@@ -126,17 +135,14 @@ These specs exist as planned placeholders:
 
 ## Recommended Next Step
 
-Implement a round-cycle slice:
+Implement victory and defeat slices:
 
-- player acts;
-- player ends turn;
-- enemy AI acts;
-- enemy ends turn;
-- turn returns to player;
-- player AP refreshes.
+- player kills the last enemy and combat emits `combat_ended` with `victory`;
+- enemy kills the last player and combat emits `combat_ended` with `defeat`;
+- debug scene blocks or clearly ignores further commands after combat ends.
 
 Suggested slice:
 
 ```text
-docs/specs/combat/slices/010_round_cycle_player_enemy_player.md
+docs/specs/combat/slices/014_victory_last_enemy_defeated.md
 ```

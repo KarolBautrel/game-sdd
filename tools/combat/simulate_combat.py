@@ -236,6 +236,9 @@ def _resolve_end_turn(state: dict[str, Any], command: dict[str, Any], sequence: 
     if next_unit_id is None:
         return _reject(state, sequence, command, "no_next_living_unit")
 
+    if _turn_order_wraps(state, previous_unit_id, next_unit_id):
+        state["turn_state"]["round"] += 1
+
     state["turn_state"]["active_unit_id"] = next_unit_id
     next_unit = _unit_by_id(state, next_unit_id)
     next_unit["resources"]["ap"] = next_unit["stats"]["max_ap"]
@@ -411,6 +414,11 @@ def _next_living_unit_id(state: dict[str, Any], current_unit_id: str) -> str | N
         if candidate is not None and candidate["resources"]["hp"] > 0:
             return candidate_id
     return None
+
+
+def _turn_order_wraps(state: dict[str, Any], current_unit_id: str, next_unit_id: str) -> bool:
+    turn_order = state["turn_state"]["turn_order"]
+    return turn_order.index(next_unit_id) <= turn_order.index(current_unit_id)
 
 
 def _adjacent_living_enemy(state: dict[str, Any], actor: dict[str, Any], target_team: str) -> dict[str, Any] | None:

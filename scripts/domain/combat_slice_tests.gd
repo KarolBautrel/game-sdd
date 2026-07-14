@@ -144,6 +144,30 @@ const SLICES := [
 			"unit_enemy_001": {"resources": {"ap": 0}},
 		},
 	},
+	{
+		"id": "slice_13_round_cycle_player_enemy_player",
+		"encounter": "res://resources/data/combat_encounters/slice_13_round_cycle_player_enemy_player.json",
+		"commands": "res://tests/data/combat_commands/slice_13_round_cycle_player_enemy_player_commands.json",
+		"expected_events": [
+			"combat_started",
+			"turn_started",
+			"action_performed",
+			"turn_ended",
+			"turn_started",
+			"action_performed",
+			"unit_moved",
+			"action_performed",
+			"turn_ended",
+			"turn_started",
+		],
+		"expected_result": "in_progress",
+		"expected_active_unit_id": "unit_player_001",
+		"expected_round": 2,
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 1}},
+			"unit_enemy_001": {"resources": {"ap": 0}, "position": {"x": 2, "y": 1}},
+		},
+	},
 ]
 
 
@@ -186,6 +210,9 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 
 	if spec.has("expected_active_unit_id") and state["turn_state"]["active_unit_id"] != spec["expected_active_unit_id"]:
 		errors.append("%s: expected active unit %s, got %s" % [spec["id"], spec["expected_active_unit_id"], state["turn_state"]["active_unit_id"]])
+
+	if spec.has("expected_round") and int(state["turn_state"]["round"]) != int(spec["expected_round"]):
+		errors.append("%s: expected round %s, got %s" % [spec["id"], spec["expected_round"], state["turn_state"]["round"]])
 
 	for unit_id: String in spec["unit_expectations"]:
 		var unit := _unit_by_id(state, unit_id)

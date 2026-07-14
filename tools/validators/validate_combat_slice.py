@@ -367,6 +367,53 @@ def validate_combat_slice_12() -> list[str]:
     return errors
 
 
+def validate_combat_slice_13() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_13_round_cycle_player_enemy_player.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_13_round_cycle_player_enemy_player_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if state["turn_state"]["active_unit_id"] != "unit_player_001":
+        errors.append(
+            "slice_13_round_cycle_player_enemy_player: expected active unit unit_player_001, "
+            f"got {state['turn_state']['active_unit_id']}"
+        )
+    if state["turn_state"]["round"] != 2:
+        errors.append(f"slice_13_round_cycle_player_enemy_player: expected round 2, got {state['turn_state']['round']}")
+    if player["resources"]["ap"] != 1:
+        errors.append("slice_13_round_cycle_player_enemy_player: expected player AP to refresh to 1")
+    if enemy["resources"]["ap"] != 0:
+        errors.append("slice_13_round_cycle_player_enemy_player: expected enemy AP to be 0")
+    if enemy["position"] != {"x": 2, "y": 1}:
+        errors.append(f"slice_13_round_cycle_player_enemy_player: expected enemy position {{'x': 2, 'y': 1}}, got {enemy['position']}")
+
+    expected_events = [
+        "combat_started",
+        "turn_started",
+        "action_performed",
+        "turn_ended",
+        "turn_started",
+        "action_performed",
+        "unit_moved",
+        "action_performed",
+        "turn_ended",
+        "turn_started",
+    ]
+    if event_types != expected_events:
+        errors.append(f"slice_13_round_cycle_player_enemy_player: unexpected events {event_types}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_13_round_cycle_player_enemy_player: replay event log differs")
+
+    return errors
+
+
 def _validate_rejected_move(
     slice_id: str,
     expected_reason: str,
@@ -438,6 +485,7 @@ def main() -> int:
     errors.extend(validate_combat_slice_10())
     errors.extend(validate_combat_slice_11())
     errors.extend(validate_combat_slice_12())
+    errors.extend(validate_combat_slice_13())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:
