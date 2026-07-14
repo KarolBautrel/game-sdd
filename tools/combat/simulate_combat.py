@@ -70,6 +70,9 @@ def simulate(encounter: dict[str, Any], commands: list[dict[str, Any]]) -> Simul
 
 
 def _resolve_command(state: dict[str, Any], command: dict[str, Any], sequence: int) -> int:
+    if _combat_result(state) != "in_progress":
+        return _reject(state, sequence, command, "combat_already_ended")
+
     if command["type"] != "perform_action":
         return _reject(state, sequence, command, "unsupported_command_type")
 

@@ -58,6 +58,9 @@ static func choose_enemy_command(state: Dictionary, command_id: String = "cmd_ai
 
 
 static func _resolve_command(state: Dictionary, command: Dictionary, sequence: int) -> int:
+	if _combat_result(state) != "in_progress":
+		return _reject(state, sequence, command, "combat_already_ended")
+
 	if command["type"] != "perform_action":
 		return _reject(state, sequence, command, "unsupported_command_type")
 

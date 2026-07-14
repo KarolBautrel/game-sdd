@@ -168,6 +168,39 @@ const SLICES := [
 			"unit_enemy_001": {"resources": {"ap": 0}, "position": {"x": 2, "y": 1}},
 		},
 	},
+	{
+		"id": "slice_14_victory_last_enemy_defeated",
+		"encounter": "res://resources/data/combat_encounters/slice_14_victory_last_enemy_defeated.json",
+		"commands": "res://tests/data/combat_commands/slice_14_victory_last_enemy_defeated_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied", "unit_defeated", "combat_ended"],
+		"expected_result": "victory",
+		"expected_combat_ended_result": "victory",
+		"unit_expectations": {
+			"unit_enemy_001": {"resources": {"hp": 0}},
+		},
+	},
+	{
+		"id": "slice_15_defeat_last_player_defeated",
+		"encounter": "res://resources/data/combat_encounters/slice_15_defeat_last_player_defeated.json",
+		"commands": "res://tests/data/combat_commands/slice_15_defeat_last_player_defeated_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied", "unit_defeated", "combat_ended"],
+		"expected_result": "defeat",
+		"expected_combat_ended_result": "defeat",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"hp": 0}},
+		},
+	},
+	{
+		"id": "slice_16_command_after_combat_end_rejected",
+		"encounter": "res://resources/data/combat_encounters/slice_16_command_after_combat_end_rejected.json",
+		"commands": "res://tests/data/combat_commands/slice_16_command_after_combat_end_rejected_commands.json",
+		"expected_events": ["combat_started", "turn_started", "command_rejected"],
+		"expected_result": "victory",
+		"expected_rejection": "combat_already_ended",
+		"unit_expectations": {
+			"unit_player_001": {"position": {"x": 1, "y": 1}},
+		},
+	},
 ]
 
 
@@ -207,6 +240,13 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 			errors.append("%s: expected command_rejected event" % spec["id"])
 		elif rejection.get("reason", "") != spec["expected_rejection"]:
 			errors.append("%s: expected rejection %s, got %s" % [spec["id"], spec["expected_rejection"], rejection.get("reason", "")])
+
+	if spec.has("expected_combat_ended_result"):
+		var ended: Dictionary = _first_event(state, "combat_ended")
+		if ended.is_empty():
+			errors.append("%s: expected combat_ended event" % spec["id"])
+		elif ended.get("result", "") != spec["expected_combat_ended_result"]:
+			errors.append("%s: expected combat_ended result %s, got %s" % [spec["id"], spec["expected_combat_ended_result"], ended.get("result", "")])
 
 	if spec.has("expected_active_unit_id") and state["turn_state"]["active_unit_id"] != spec["expected_active_unit_id"]:
 		errors.append("%s: expected active unit %s, got %s" % [spec["id"], spec["expected_active_unit_id"], state["turn_state"]["active_unit_id"]])

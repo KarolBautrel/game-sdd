@@ -74,7 +74,8 @@ func _tile_text(position: Dictionary) -> String:
 
 func _render_status() -> void:
 	var active := _unit_by_id(state["turn_state"]["active_unit_id"])
-	status_label.text = "Active: %s | Team: %s | HP: %s | AP: %s | Action: %s" % [
+	status_label.text = "Result: %s | Active: %s | Team: %s | HP: %s | AP: %s | Action: %s" % [
+		_combat_result(),
 		active.get("id", "missing"),
 		active.get("team", "missing"),
 		active.get("resources", {}).get("hp", "?"),
@@ -103,6 +104,7 @@ func _render_command_buttons() -> void:
 		button.text = action_id
 		button.toggle_mode = true
 		button.button_pressed = selected_action == action_id
+		button.disabled = _combat_result() != "in_progress"
 		button.pressed.connect(func() -> void:
 			selected_action = action_id
 			if action_id == "enemy_ai":
@@ -141,6 +143,10 @@ func _build_command(action_id: String, target: Dictionary) -> Dictionary:
 
 
 func _run_command(command: Dictionary) -> void:
+	if _combat_result() != "in_progress":
+		_render()
+		return
+
 	var previous_log: Array = state["event_log"].duplicate(true)
 	var result := CombatResolver.simulate(_state_without_log(), [command])
 	state = result["state"]
@@ -218,3 +224,20 @@ func _tile_type(position: Dictionary) -> String:
 
 func _positions_equal(first: Dictionary, second: Dictionary) -> bool:
 	return int(first["x"]) == int(second["x"]) and int(first["y"]) == int(second["y"])
+
+
+func _combat_result() -> String:
+	var player_alive := false
+	var enemy_alive := false
+
+	for unit: Dictionary in state["units"]:
+		if unit["team"] == "player" and unit["resources"]["hp"] > 0:
+			player_alive = true
+		if unit["team"] == "enemy" and unit["resources"]["hp"] > 0:
+			enemy_alive = true
+
+	if player_alive and enemy_alive:
+		return "in_progress"
+	if player_alive:
+		return "victory"
+	return "defeat"

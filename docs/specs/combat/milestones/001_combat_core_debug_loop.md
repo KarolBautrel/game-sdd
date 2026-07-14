@@ -42,6 +42,11 @@ The project now has:
   - AI can use diagonal steps when moving toward the player.
 - Deterministic event logs.
 - Replay checks for executable slices.
+- Terminal combat results:
+  - last enemy defeated emits `combat_ended` with `victory`;
+  - last player defeated emits `combat_ended` with `defeat`;
+  - commands after combat end are rejected with `combat_already_ended`;
+  - debug scene disables command buttons after combat ends.
 
 ## Verified Slices
 
@@ -66,14 +71,19 @@ Current verified slices:
 - `011_diagonal_attack.md`
 - `012_enemy_ai_no_ap_end_turn.md`
 - `013_round_cycle_player_enemy_player.md`
+- `014_victory_last_enemy_defeated.md`
+- `015_defeat_last_player_defeated.md`
+- `016_command_after_combat_end_rejected.md`
 
 ## Latest Update
 
-Commit scope after this milestone update:
+Latest verified scope:
 
 - round increments when turn order wraps back to the player;
 - player AP refreshes when the next player turn starts;
-- full player -> enemy -> player round cycle is verified in Python and Godot.
+- full player -> enemy -> player round cycle is verified in Python and Godot;
+- victory and defeat are verified in Python and Godot;
+- commands after combat end are rejected.
 
 ## Important Files
 
@@ -135,14 +145,15 @@ These specs exist as planned placeholders:
 
 ## Recommended Next Step
 
-Implement victory and defeat slices:
+Implement basic combat UX polish:
 
-- player kills the last enemy and combat emits `combat_ended` with `victory`;
-- enemy kills the last player and combat emits `combat_ended` with `defeat`;
-- debug scene blocks or clearly ignores further commands after combat ends.
+- highlight active unit;
+- highlight legal movement tiles for selected unit;
+- highlight legal attack targets;
+- show last rejection reason as a visible message.
 
 Suggested slice:
 
 ```text
-docs/specs/combat/slices/014_victory_last_enemy_defeated.md
+docs/specs/combat/slices/017_debug_legal_target_feedback.md
 ```
