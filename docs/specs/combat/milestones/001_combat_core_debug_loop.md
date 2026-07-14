@@ -34,7 +34,12 @@ The project now has:
 - Enemy AI v0:
   - attack adjacent player;
   - otherwise move one tile toward nearest living player;
+  - end turn when it has no AP;
   - otherwise end turn.
+- 8-way adjacency:
+  - diagonal movement is legal;
+  - diagonal melee attacks are legal;
+  - AI can use diagonal steps when moving toward the player.
 - Deterministic event logs.
 - Replay checks for executable slices.
 
@@ -57,6 +62,9 @@ Current verified slices:
 - `007_end_turn.md`
 - `008_enemy_ai_adjacent_attack.md`
 - `009_enemy_ai_move_toward_player.md`
+- `010_diagonal_move.md`
+- `011_diagonal_attack.md`
+- `012_enemy_ai_no_ap_end_turn.md`
 
 ## Important Files
 
@@ -132,4 +140,3 @@ Suggested slice:
 ```text
 docs/specs/combat/slices/010_round_cycle_player_enemy_player.md
 ```
-

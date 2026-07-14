@@ -221,7 +221,7 @@ static func _basic_attack_rejection(state: Dictionary, actor: Dictionary, target
 		return "target_is_not_enemy"
 	if actor["resources"]["ap"] < 1:
 		return "not_enough_ap"
-	if _manhattan(actor["position"], target["position"]) > 1:
+	if _chebyshev(actor["position"], target["position"]) > 1:
 		return "target_out_of_range"
 	if not actor["available_actions"].has("basic_attack"):
 		return "action_not_available"
@@ -261,7 +261,7 @@ static func _move_rejection(state: Dictionary, actor: Dictionary, destination: D
 		return "destination_not_walkable"
 	if not _living_unit_at(state, destination).is_empty():
 		return "destination_occupied"
-	if _manhattan(actor["position"], destination) != 1:
+	if _chebyshev(actor["position"], destination) != 1:
 		return "destination_not_adjacent"
 	return ""
 
@@ -297,6 +297,10 @@ static func _manhattan(first: Dictionary, second: Dictionary) -> int:
 	return abs(first["x"] - second["x"]) + abs(first["y"] - second["y"])
 
 
+static func _chebyshev(first: Dictionary, second: Dictionary) -> int:
+	return max(abs(first["x"] - second["x"]), abs(first["y"] - second["y"]))
+
+
 static func _inside_grid(state: Dictionary, position: Dictionary) -> bool:
 	return 0 <= position["x"] and position["x"] < state["grid"]["width"] and 0 <= position["y"] and position["y"] < state["grid"]["height"]
 
@@ -329,7 +333,7 @@ static func _next_living_unit_id(state: Dictionary, current_unit_id: String) -> 
 static func _adjacent_living_enemy(state: Dictionary, actor: Dictionary, target_team: String) -> Dictionary:
 	var candidates: Array[Dictionary] = []
 	for unit: Dictionary in state["units"]:
-		if unit["team"] == target_team and unit["resources"]["hp"] > 0 and _manhattan(actor["position"], unit["position"]) == 1:
+		if unit["team"] == target_team and unit["resources"]["hp"] > 0 and _chebyshev(actor["position"], unit["position"]) == 1:
 			candidates.append(unit)
 
 	candidates.sort_custom(func(first: Dictionary, second: Dictionary) -> bool:
@@ -361,6 +365,10 @@ static func _best_step_toward(state: Dictionary, actor: Dictionary, target: Dict
 		{"x": actor["position"]["x"] + 1, "y": actor["position"]["y"]},
 		{"x": actor["position"]["x"], "y": actor["position"]["y"] - 1},
 		{"x": actor["position"]["x"], "y": actor["position"]["y"] + 1},
+		{"x": actor["position"]["x"] - 1, "y": actor["position"]["y"] - 1},
+		{"x": actor["position"]["x"] - 1, "y": actor["position"]["y"] + 1},
+		{"x": actor["position"]["x"] + 1, "y": actor["position"]["y"] - 1},
+		{"x": actor["position"]["x"] + 1, "y": actor["position"]["y"] + 1},
 	]
 	var legal_candidates: Array[Dictionary] = []
 	for position: Dictionary in candidates:

@@ -109,6 +109,41 @@ const SLICES := [
 			"unit_enemy_001": {"resources": {"ap": 0}, "position": {"x": 3, "y": 1}},
 		},
 	},
+	{
+		"id": "slice_10_diagonal_move",
+		"encounter": "res://resources/data/combat_encounters/slice_10_diagonal_move.json",
+		"commands": "res://tests/data/combat_commands/slice_10_diagonal_move_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "unit_moved"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}, "position": {"x": 2, "y": 2}},
+		},
+	},
+	{
+		"id": "slice_11_diagonal_attack",
+		"encounter": "res://resources/data/combat_encounters/slice_11_diagonal_attack.json",
+		"commands": "res://tests/data/combat_commands/slice_11_diagonal_attack_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 4}},
+		},
+	},
+	{
+		"id": "slice_12_enemy_ai_no_ap_end_turn",
+		"encounter": "res://resources/data/combat_encounters/slice_12_enemy_ai_no_ap_end_turn.json",
+		"ai_command": true,
+		"expected_command_action": "end_turn",
+		"expected_command_actor": "unit_enemy_001",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "turn_ended", "turn_started"],
+		"expected_result": "in_progress",
+		"expected_active_unit_id": "unit_player_001",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 1}},
+			"unit_enemy_001": {"resources": {"ap": 0}},
+		},
+	},
 ]
 
 

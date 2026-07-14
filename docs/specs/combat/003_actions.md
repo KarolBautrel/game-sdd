@@ -33,7 +33,7 @@ Rules:
 - actor must be alive;
 - target must be alive;
 - target must be enemy team;
-- target must be in range 1 by Manhattan distance;
+- target must be in range 1 by Chebyshev distance;
 - actor must have required AP;
 - damage is resolved by the damage spec.
 
@@ -84,4 +84,3 @@ Rules:
 - Then AP is reduced by 1
 - And status `defending` is added
 - And event `status_applied` is emitted
-

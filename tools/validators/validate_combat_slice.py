@@ -297,6 +297,76 @@ def validate_combat_slice_09() -> list[str]:
     return errors
 
 
+def validate_combat_slice_10() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_10_diagonal_move.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_10_diagonal_move_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if player["position"] != {"x": 2, "y": 2}:
+        errors.append(f"slice_10_diagonal_move: expected player position {{'x': 2, 'y': 2}}, got {player['position']}")
+    if player["resources"]["ap"] != 0:
+        errors.append("slice_10_diagonal_move: expected player AP to be 0")
+    if event_types != ["combat_started", "turn_started", "action_performed", "unit_moved"]:
+        errors.append(f"slice_10_diagonal_move: unexpected events {event_types}")
+
+    return errors
+
+
+def validate_combat_slice_11() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_11_diagonal_attack.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_11_diagonal_attack_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if player["resources"]["ap"] != 0:
+        errors.append("slice_11_diagonal_attack: expected player AP to be 0")
+    if enemy["resources"]["hp"] != 4:
+        errors.append(f"slice_11_diagonal_attack: expected enemy HP 4, got {enemy['resources']['hp']}")
+    if event_types != ["combat_started", "turn_started", "action_performed", "damage_applied"]:
+        errors.append(f"slice_11_diagonal_attack: unexpected events {event_types}")
+
+    return errors
+
+
+def validate_combat_slice_12() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_12_enemy_ai_no_ap_end_turn.json")
+    command = choose_enemy_command(encounter)
+
+    if command["action_id"] != "end_turn":
+        errors.append(f"slice_12_enemy_ai_no_ap_end_turn: expected AI end_turn, got {command['action_id']}")
+
+    result = simulate(encounter, [command])
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if state["turn_state"]["active_unit_id"] != "unit_player_001":
+        errors.append(
+            "slice_12_enemy_ai_no_ap_end_turn: expected active unit unit_player_001, "
+            f"got {state['turn_state']['active_unit_id']}"
+        )
+    if player["resources"]["ap"] != 1:
+        errors.append("slice_12_enemy_ai_no_ap_end_turn: expected player AP to refresh to 1")
+    if enemy["resources"]["ap"] != 0:
+        errors.append("slice_12_enemy_ai_no_ap_end_turn: expected enemy AP to remain 0")
+    if event_types != ["combat_started", "turn_started", "action_performed", "turn_ended", "turn_started"]:
+        errors.append(f"slice_12_enemy_ai_no_ap_end_turn: unexpected events {event_types}")
+
+    return errors
+
+
 def _validate_rejected_move(
     slice_id: str,
     expected_reason: str,
@@ -365,6 +435,9 @@ def main() -> int:
     errors.extend(validate_combat_slice_07())
     errors.extend(validate_combat_slice_08())
     errors.extend(validate_combat_slice_09())
+    errors.extend(validate_combat_slice_10())
+    errors.extend(validate_combat_slice_11())
+    errors.extend(validate_combat_slice_12())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:

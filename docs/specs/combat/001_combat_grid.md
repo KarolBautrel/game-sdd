@@ -36,14 +36,18 @@ Future tile types:
 
 ## Movement
 
-Initial movement uses orthogonal adjacency only:
+Movement uses 8-way adjacency:
 
 - north
 - south
 - east
 - west
+- north-east
+- north-west
+- south-east
+- south-west
 
-Diagonal movement is not allowed in the first slice.
+Diagonal movement is allowed when the destination tile is inside bounds, walkable, and unoccupied.
 
 ## Occupancy
 
@@ -57,10 +61,10 @@ Rules:
 
 ## Distance
 
-Initial distance uses Manhattan distance:
+Melee adjacency and one-step movement use Chebyshev distance:
 
 ```text
-abs(ax - bx) + abs(ay - by)
+max(abs(ax - bx), abs(ay - by))
 ```
 
 ## Acceptance Criteria
@@ -87,4 +91,3 @@ abs(ax - bx) + abs(ay - by)
 - And an enemy unit at `{ "x": 2, "y": 1 }`
 - When the player attempts to move to `{ "x": 2, "y": 1 }`
 - Then the move is rejected
-

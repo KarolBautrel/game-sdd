@@ -291,7 +291,7 @@ def _basic_attack_rejection(
         return "target_is_not_enemy"
     if actor["resources"]["ap"] < 1:
         return "not_enough_ap"
-    if _manhattan(actor["position"], target["position"]) > 1:
+    if _chebyshev(actor["position"], target["position"]) > 1:
         return "target_out_of_range"
     if "basic_attack" not in actor["available_actions"]:
         return "action_not_available"
@@ -340,7 +340,7 @@ def _move_rejection(
         return "destination_not_walkable"
     if _living_unit_at(state, destination) is not None:
         return "destination_occupied"
-    if _manhattan(actor["position"], destination) != 1:
+    if _chebyshev(actor["position"], destination) != 1:
         return "destination_not_adjacent"
     return None
 
@@ -380,6 +380,10 @@ def _manhattan(first: dict[str, int], second: dict[str, int]) -> int:
     return abs(first["x"] - second["x"]) + abs(first["y"] - second["y"])
 
 
+def _chebyshev(first: dict[str, int], second: dict[str, int]) -> int:
+    return max(abs(first["x"] - second["x"]), abs(first["y"] - second["y"]))
+
+
 def _inside_grid(state: dict[str, Any], position: dict[str, int]) -> bool:
     return 0 <= position["x"] < state["grid"]["width"] and 0 <= position["y"] < state["grid"]["height"]
 
@@ -415,7 +419,7 @@ def _adjacent_living_enemy(state: dict[str, Any], actor: dict[str, Any], target_
         for unit in state["units"]
         if unit["team"] == target_team
         and unit["resources"]["hp"] > 0
-        and _manhattan(actor["position"], unit["position"]) == 1
+        and _chebyshev(actor["position"], unit["position"]) == 1
     ]
     return sorted(candidates, key=lambda unit: unit["id"])[0] if candidates else None
 
@@ -440,6 +444,10 @@ def _best_step_toward(
         {"x": actor["position"]["x"] + 1, "y": actor["position"]["y"]},
         {"x": actor["position"]["x"], "y": actor["position"]["y"] - 1},
         {"x": actor["position"]["x"], "y": actor["position"]["y"] + 1},
+        {"x": actor["position"]["x"] - 1, "y": actor["position"]["y"] - 1},
+        {"x": actor["position"]["x"] - 1, "y": actor["position"]["y"] + 1},
+        {"x": actor["position"]["x"] + 1, "y": actor["position"]["y"] - 1},
+        {"x": actor["position"]["x"] + 1, "y": actor["position"]["y"] + 1},
     ]
     legal_candidates = [
         position
