@@ -5,6 +5,8 @@ const RANGED_ATTACK_HIT_CHANCE := 70
 const MIN_HIT_CHANCE := 10
 const MAX_HIT_CHANCE := 95
 const HIGHGROUND_RANGED_HIT_MODIFIER := 10
+const COVER_LOW_RANGED_HIT_MODIFIER := -20
+const AI_RANGED_MIN_HIT_CHANCE := 60
 
 
 static func simulate(encounter: Dictionary, commands: Array) -> Dictionary:
@@ -42,6 +44,19 @@ static func choose_enemy_command(state: Dictionary, command_id: String = "cmd_ai
 			"target": {
 				"type": "unit",
 				"unit_id": adjacent_player["id"],
+			},
+		}
+
+	var ranged_player := _ranged_living_enemy(state, actor, "player")
+	if not ranged_player.is_empty():
+		return {
+			"id": command_id,
+			"type": "perform_action",
+			"actor_id": actor["id"],
+			"action_id": "ranged_attack",
+			"target": {
+				"type": "unit",
+				"unit_id": ranged_player["id"],
 			},
 		}
 
@@ -108,7 +123,8 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 		var accuracy_modifier := _stat(actor, "accuracy")
 		var evasion_modifier := _stat(target, "evasion")
 		var terrain_modifier := _terrain_hit_modifier(state, actor, action_id)
-		var hit_chance := clampi(base_hit_chance + accuracy_modifier - evasion_modifier + terrain_modifier, MIN_HIT_CHANCE, MAX_HIT_CHANCE)
+		var cover_modifier := _cover_hit_modifier(state, target, action_id)
+		var hit_chance := clampi(base_hit_chance + accuracy_modifier - evasion_modifier + terrain_modifier + cover_modifier, MIN_HIT_CHANCE, MAX_HIT_CHANCE)
 		var outcome := "hit" if roll <= hit_chance else "miss"
 		sequence = _emit(state, sequence, "hit_roll_resolved", {
 			"command_id": command["id"],
@@ -119,6 +135,7 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 			"accuracy_modifier": accuracy_modifier,
 			"evasion_modifier": evasion_modifier,
 			"terrain_modifier": terrain_modifier,
+			"cover_modifier": cover_modifier,
 			"hit_chance": hit_chance,
 			"outcome": outcome,
 		})
@@ -261,6 +278,8 @@ static func _attack_rejection(state: Dictionary, actor: Dictionary, target: Dict
 		return "not_enough_ap"
 	if _chebyshev(actor["position"], target["position"]) > max_range:
 		return "target_out_of_range"
+	if action_id == "ranged_attack" and not _has_line_of_sight(state, actor["position"], target["position"]):
+		return "target_not_visible"
 	if not actor["available_actions"].has(action_id):
 		return "action_not_available"
 	return ""
@@ -301,6 +320,8 @@ static func _move_rejection(state: Dictionary, actor: Dictionary, destination: D
 		return "destination_occupied"
 	if _chebyshev(actor["position"], destination) != 1:
 		return "destination_not_adjacent"
+	if _is_diagonal_step(actor["position"], destination) and not _diagonal_step_allowed(state, actor["position"], destination):
+		return "diagonal_corner_blocked"
 	return ""
 
 
@@ -342,6 +363,47 @@ static func _terrain_hit_modifier(state: Dictionary, actor: Dictionary, action_i
 	return 0
 
 
+static func _cover_hit_modifier(state: Dictionary, target: Dictionary, action_id: String) -> int:
+	if action_id == "ranged_attack" and _tile_type(state, target["position"]) == "cover_low":
+		return COVER_LOW_RANGED_HIT_MODIFIER
+	return 0
+
+
+static func _has_line_of_sight(state: Dictionary, origin: Dictionary, target: Dictionary) -> bool:
+	for position: Dictionary in _line_between(origin, target):
+		if _tile_type(state, position) == "blocked":
+			return false
+	return true
+
+
+static func _line_between(origin: Dictionary, target: Dictionary) -> Array[Dictionary]:
+	var x0: int = origin["x"]
+	var y0: int = origin["y"]
+	var x1: int = target["x"]
+	var y1: int = target["y"]
+	var dx: int = abs(x1 - x0)
+	var dy: int = -abs(y1 - y0)
+	var sx := 1 if x0 < x1 else -1
+	var sy := 1 if y0 < y1 else -1
+	var error := dx + dy
+	var x := x0
+	var y := y0
+	var positions: Array[Dictionary] = []
+
+	while x != x1 or y != y1:
+		var error2 := 2 * error
+		if error2 >= dy:
+			error += dy
+			x += sx
+		if error2 <= dx:
+			error += dx
+			y += sy
+		if x != x1 or y != y1:
+			positions.append({"x": x, "y": y})
+
+	return positions
+
+
 static func _unit_by_id(state: Dictionary, unit_id: String) -> Dictionary:
 	for unit: Dictionary in state["units"]:
 		if unit["id"] == unit_id:
@@ -369,7 +431,7 @@ static func _tile_type(state: Dictionary, position: Dictionary) -> String:
 
 
 static func _is_walkable_tile(state: Dictionary, position: Dictionary) -> bool:
-	return _tile_type(state, position) in ["floor", "highground"]
+	return _tile_type(state, position) in ["floor", "highground", "cover_low"]
 
 
 static func _living_unit_at(state: Dictionary, position: Dictionary) -> Dictionary:
@@ -423,7 +485,27 @@ static func _nearest_living_enemy(state: Dictionary, actor: Dictionary, target_t
 	return candidates[0] if not candidates.is_empty() else {}
 
 
+static func _ranged_living_enemy(state: Dictionary, actor: Dictionary, target_team: String) -> Dictionary:
+	var candidates: Array[Dictionary] = []
+	for unit: Dictionary in state["units"]:
+		if unit["team"] == target_team and unit["resources"]["hp"] > 0 and _attack_rejection(state, actor, unit, "ranged_attack", 3) == "" and _ranged_hit_chance(state, actor, unit, "ranged_attack") >= AI_RANGED_MIN_HIT_CHANCE:
+			candidates.append(unit)
+
+	candidates.sort_custom(func(first: Dictionary, second: Dictionary) -> bool:
+		var first_distance: int = _chebyshev(actor["position"], first["position"])
+		var second_distance: int = _chebyshev(actor["position"], second["position"])
+		if first_distance == second_distance:
+			return first["id"] < second["id"]
+		return first_distance < second_distance
+	)
+	return candidates[0] if not candidates.is_empty() else {}
+
+
 static func _best_step_toward(state: Dictionary, actor: Dictionary, target: Dictionary) -> Dictionary:
+	var path_step := _first_path_step_toward(state, actor, target)
+	if not path_step.is_empty():
+		return path_step
+
 	var current_distance: int = _manhattan(actor["position"], target["position"])
 	var candidates: Array[Dictionary] = [
 		{"x": actor["position"]["x"] - 1, "y": actor["position"]["y"]},
@@ -450,6 +532,91 @@ static func _best_step_toward(state: Dictionary, actor: Dictionary, target: Dict
 		return int(first["x"]) < int(second["x"])
 	)
 	return legal_candidates[0] if not legal_candidates.is_empty() else {}
+
+
+static func _first_path_step_toward(state: Dictionary, actor: Dictionary, target: Dictionary) -> Dictionary:
+	var start: Dictionary = actor["position"]
+	var queue: Array[Dictionary] = [{"position": start, "path": []}]
+	var visited := {_position_key(start): true}
+
+	while not queue.is_empty():
+		var item: Dictionary = queue.pop_front()
+		var current: Dictionary = item["position"]
+		var path: Array = item["path"]
+		if not path.is_empty() and _chebyshev(current, target["position"]) == 1:
+			return path[0]
+
+		for neighbor: Dictionary in _path_neighbors(state, actor, current):
+			var key := _position_key(neighbor)
+			if visited.has(key):
+				continue
+			visited[key] = true
+			var next_path := path.duplicate(true)
+			next_path.append(neighbor)
+			queue.append({"position": neighbor, "path": next_path})
+
+	return {}
+
+
+static func _path_neighbors(state: Dictionary, actor: Dictionary, position: Dictionary) -> Array[Dictionary]:
+	var candidates: Array[Dictionary] = [
+		{"x": position["x"] - 1, "y": position["y"]},
+		{"x": position["x"] + 1, "y": position["y"]},
+		{"x": position["x"], "y": position["y"] - 1},
+		{"x": position["x"], "y": position["y"] + 1},
+		{"x": position["x"] - 1, "y": position["y"] - 1},
+		{"x": position["x"] - 1, "y": position["y"] + 1},
+		{"x": position["x"] + 1, "y": position["y"] - 1},
+		{"x": position["x"] + 1, "y": position["y"] + 1},
+	]
+	var legal_candidates: Array[Dictionary] = []
+	for candidate: Dictionary in candidates:
+		if _path_position_is_legal(state, actor, position, candidate):
+			legal_candidates.append(candidate)
+
+	legal_candidates.sort_custom(func(first: Dictionary, second: Dictionary) -> bool:
+		if int(first["y"]) != int(second["y"]):
+			return int(first["y"]) < int(second["y"])
+		return int(first["x"]) < int(second["x"])
+	)
+	return legal_candidates
+
+
+static func _path_position_is_legal(state: Dictionary, actor: Dictionary, origin: Dictionary, position: Dictionary) -> bool:
+	if not _inside_grid(state, position):
+		return false
+	if not _is_walkable_tile(state, position):
+		return false
+	if _is_diagonal_step(origin, position) and not _diagonal_step_allowed(state, origin, position):
+		return false
+	var unit := _living_unit_at(state, position)
+	return unit.is_empty() or unit["id"] == actor["id"]
+
+
+static func _ranged_hit_chance(state: Dictionary, actor: Dictionary, target: Dictionary, action_id: String) -> int:
+	return clampi(
+		RANGED_ATTACK_HIT_CHANCE
+		+ _stat(actor, "accuracy")
+		- _stat(target, "evasion")
+		+ _terrain_hit_modifier(state, actor, action_id)
+		+ _cover_hit_modifier(state, target, action_id),
+		MIN_HIT_CHANCE,
+		MAX_HIT_CHANCE
+	)
+
+
+static func _is_diagonal_step(origin: Dictionary, destination: Dictionary) -> bool:
+	return abs(origin["x"] - destination["x"]) == 1 and abs(origin["y"] - destination["y"]) == 1
+
+
+static func _diagonal_step_allowed(state: Dictionary, origin: Dictionary, destination: Dictionary) -> bool:
+	var side_a := {"x": destination["x"], "y": origin["y"]}
+	var side_b := {"x": origin["x"], "y": destination["y"]}
+	return _is_walkable_tile(state, side_a) and _is_walkable_tile(state, side_b)
+
+
+static func _position_key(position: Dictionary) -> String:
+	return "%s,%s" % [position["x"], position["y"]]
 
 
 static func _end_turn_command(actor_id: String, command_id: String) -> Dictionary:

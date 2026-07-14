@@ -30,7 +30,6 @@ When the enemy has 0 AP:
 
 ## Deferred
 
-- tactical ranged AI;
 - retreating;
 - target priority by HP or threat;
 - using cover;
@@ -38,3 +37,6 @@ When the enemy has 0 AP:
 - multi-enemy coordination;
 - skill selection.
 
+## Extended By
+
+- `030_enemy_ai_ranged_v1.md`

@@ -13,9 +13,10 @@ Hit chance resolves whether an attack hits or misses.
 - `basic_attack` still always hits.
 - Base ranged hit chance is 70%.
 - Final hit chance uses:
-  - `base_hit_chance + attacker.accuracy - target.evasion + terrain_modifier`
+  - `base_hit_chance + attacker.accuracy - target.evasion + terrain_modifier + cover_modifier`
 - `accuracy` and `evasion` default to 0 when omitted.
 - `terrain_modifier` is 10 when the attacker uses `ranged_attack` from `highground`; otherwise it is 0.
+- `cover_modifier` is -20 when the ranged target stands on `cover_low`; otherwise it is 0.
 - Final hit chance is clamped to 10-95.
 - Roll range is 1-100.
 - A roll hits when `roll <= hit_chance`.
@@ -37,6 +38,7 @@ Hit chance resolves whether an attack hits or misses.
 - `accuracy_modifier`
 - `evasion_modifier`
 - `terrain_modifier`
+- `cover_modifier`
 - `hit_chance`
 - `outcome`
 
@@ -48,7 +50,6 @@ Hit chance resolves whether an attack hits or misses.
 - equipment modifiers;
 - shield modifiers;
 - status modifiers;
-- cover modifiers;
 - distance modifiers;
 - graze;
 - critical hit;

@@ -13,10 +13,6 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 
 - `grid/001_combat_grid.md`
 - `grid/024_terrain.md`
-
-Planned:
-
-- `grid/022_line_of_sight.md`
 - `grid/023_cover.md`
 
 ### Turns
@@ -40,6 +36,9 @@ Planned:
 ### AI
 
 - `ai/008_enemy_ai_v0.md`
+- `ai/030_enemy_ai_ranged_v1.md`
+- `ai/031_enemy_ai_pathfinding_v1.md`
+- `ai/032_enemy_ai_ranged_positioning_v1.md`
 
 ## Executable Slices
 

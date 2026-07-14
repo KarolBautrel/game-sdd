@@ -37,6 +37,19 @@ The project now has:
   - otherwise move one tile toward nearest living player;
   - end turn when it has no AP;
   - otherwise end turn.
+- Enemy AI ranged v1:
+  - adjacent melee stays higher priority than ranged;
+  - otherwise enemies with `ranged_attack` shoot a legal visible target in range;
+  - if no ranged shot is legal, enemies still move toward the nearest living player.
+- Enemy AI pathfinding v1:
+  - enemy movement searches for a route through legal walkable tiles;
+  - enemies can route around a `blocked` tile instead of only stepping toward lower distance;
+  - pathfinding stops when it reaches a tile adjacent to the target;
+  - diagonal movement cannot cut through blocked corners.
+- Enemy AI ranged positioning v1:
+  - enemies shoot legal ranged targets at 60% final hit chance or better;
+  - enemies move instead of shooting when cover/evasion drops final hit chance below 60%;
+  - blocked line of sight makes ranged target illegal, so AI falls back to movement.
 - 8-way adjacency:
   - diagonal movement is legal;
   - diagonal melee attacks are legal;
@@ -51,17 +64,26 @@ The project now has:
 - Terrain v1:
   - `blocked` tiles are not walkable;
   - `highground` tiles are walkable;
+  - `cover_low` tiles are walkable;
   - debug scene colors terrain types distinctly;
   - attacker on `highground` gets `+10` ranged hit chance.
+- Line of sight v1:
+  - `ranged_attack` requires clear line of sight;
+  - intermediate `blocked` tiles reject ranged attacks with `target_not_visible`;
+  - units do not block line of sight yet.
+- Cover v1:
+  - target standing on `cover_low` gets `-20` ranged hit chance;
+  - `cover_low` does not block line of sight;
+  - cover does not reduce damage yet.
 - Ranged attack v1:
   - `ranged_attack` targets a living enemy up to range 3;
   - range uses Chebyshev distance to match current 8-way movement;
-  - no line of sight or cover is applied yet;
+  - line of sight and cover are applied;
   - out-of-range targets are rejected with `target_out_of_range`.
 - Hit chance v1:
   - `ranged_attack` resolves a deterministic 1-100 roll;
   - base hit chance is 70%;
-  - `hit_roll_resolved` records roll, base chance, unit modifiers, terrain modifier, final chance, and outcome;
+  - `hit_roll_resolved` records roll, base chance, unit modifiers, terrain modifier, cover modifier, final chance, and outcome;
   - misses spend AP but do not apply damage;
   - melee attacks still always hit.
 - Accuracy/evasion v1:
@@ -71,6 +93,8 @@ The project now has:
 - Debug scene usability pass:
   - action buttons use readable labels;
   - ranged attack can be selected and tested;
+  - LoS blocked-shot scenario can be loaded from the debug UI;
+  - cover scenario can be loaded from the debug UI;
   - unit HP/AP, accuracy/evasion, and position are visible in a side panel;
   - a compact legend explains grid colors.
 
@@ -111,6 +135,13 @@ Current verified slices:
 - `025_accuracy_increases_hit_chance.md`
 - `026_evasion_decreases_hit_chance.md`
 - `027_highground_increases_ranged_hit_chance.md`
+- `028_ranged_attack_blocked_by_line_of_sight.md`
+- `029_cover_reduces_ranged_hit_chance.md`
+- `030_enemy_ai_ranged_attack.md`
+- `031_enemy_ai_pathfinds_around_blocked_tile.md`
+- `032_enemy_ai_multi_turn_path_pursuit.md`
+- `033_diagonal_corner_cut_blocked.md`
+- `034_enemy_ai_approaches_low_chance_ranged_target.md`
 
 ## Spec Organization
 
@@ -150,7 +181,16 @@ Latest verified scope:
 - hit chance v1 is specified and verified in Python and Godot.
 - accuracy/evasion v1 is specified and verified in Python and Godot.
 - highground ranged hit modifier is specified and verified in Python and Godot.
+- line of sight v1 is specified and verified in Python and Godot.
+- cover v1 is specified and verified in Python and Godot.
+- enemy AI ranged v1 is specified and verified in Python and Godot.
+- enemy AI pathfinding v1 is specified and verified in Python and Godot.
+- diagonal corner-cutting is blocked and verified in Python and Godot.
+- enemy AI ranged positioning v1 is specified and verified in Python and Godot.
 - debug scene has a clearer status panel, unit panel, legend, and ranged attack button.
+- debug scene can load a dedicated ranged enemy AI test.
+- debug scene can load a dedicated pathfinding obstacle test.
+- debug scene can load a dedicated low-chance ranged AI test.
 
 ## Important Files
 
@@ -203,22 +243,19 @@ Interactive combat debug scene:
 
 ## Planned But Not Implemented
 
-These specs exist as planned placeholders:
-
-- line of sight;
-- cover.
+No planned combat rule placeholder is currently blocked from implementation.
 
 ## Recommended Next Step
 
-Implement line of sight v1:
+Implement multi-enemy AI planning:
 
-- `ranged_attack` requires clear line of sight;
-- `blocked` tiles block line of sight;
-- no cover modifier yet;
-- no highground line-of-sight exception yet.
+- two enemies must not choose the same destination;
+- enemies should not block each other forever in narrow paths;
+- target selection should stay deterministic;
+- this should be planned carefully before implementation because it touches pathfinding, occupancy, and turn order.
 
 Suggested slice:
 
 ```text
-docs/specs/combat/slices/028_ranged_attack_blocked_by_line_of_sight.md
+docs/specs/combat/slices/040_multi_enemy_pathing_and_targeting.md
 ```

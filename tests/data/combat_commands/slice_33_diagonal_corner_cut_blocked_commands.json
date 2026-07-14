@@ -1,0 +1,9 @@
+[
+  {
+    "id": "cmd_001",
+    "type": "perform_action",
+    "actor_id": "unit_player_001",
+    "action_id": "move",
+    "target": { "type": "tile", "position": { "x": 2, "y": 2 } }
+  }
+]

@@ -2,10 +2,15 @@ extends Control
 
 const CombatResolver := preload("res://scripts/domain/combat_resolver.gd")
 
-const ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_03_move.json"
+const DEFAULT_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_03_move.json"
+const LOS_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_28_ranged_attack_blocked_by_line_of_sight.json"
+const COVER_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_29_cover_reduces_ranged_hit_chance.json"
+const RANGED_AI_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_30_enemy_ai_ranged_attack.json"
+const PATHFINDING_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_31_enemy_ai_pathfinds_around_blocked_tile.json"
+const LOW_CHANCE_AI_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_34_enemy_ai_approaches_low_chance_ranged_target.json"
 const TILE_SIZE := 56
 const TILE_GAP := 4
-const ACTION_IDS := ["move", "basic_attack", "ranged_attack", "defend", "end_turn", "enemy_ai", "enemy_turn", "reset"]
+const ACTION_IDS := ["move", "basic_attack", "ranged_attack", "defend", "end_turn", "enemy_ai", "enemy_turn", "reset", "load_los_test", "load_cover_test", "load_ranged_ai_test", "load_pathfinding_test", "load_low_chance_ai_test"]
 const ACTION_LABELS := {
 	"move": "Move",
 	"basic_attack": "Melee attack",
@@ -15,6 +20,11 @@ const ACTION_LABELS := {
 	"enemy_ai": "Enemy AI once",
 	"enemy_turn": "Enemy turn helper",
 	"reset": "Reset encounter",
+	"load_los_test": "Load LoS test",
+	"load_cover_test": "Load Cover test",
+	"load_ranged_ai_test": "Load Ranged AI test",
+	"load_pathfinding_test": "Load Pathfinding test",
+	"load_low_chance_ai_test": "Load Low Chance AI test",
 }
 
 @onready var grid_container: GridContainer = %GridContainer
@@ -29,6 +39,7 @@ var state: Dictionary = {}
 var command_index := 1
 var selected_action := "move"
 var last_feedback := "Select an action."
+var current_encounter_path := DEFAULT_ENCOUNTER_PATH
 
 
 func _ready() -> void:
@@ -36,7 +47,7 @@ func _ready() -> void:
 
 
 func _reset_debug_encounter() -> void:
-	state = _load_json(ENCOUNTER_PATH)
+	state = _load_json(current_encounter_path)
 	state["event_log"] = []
 	command_index = 1
 	selected_action = "move"
@@ -81,6 +92,8 @@ func _build_tile(position: Dictionary) -> Button:
 		tile.modulate = Color(0.32, 0.32, 0.34)
 	elif _tile_type(position) == "highground":
 		tile.modulate = Color(0.84, 0.72, 0.42)
+	elif _tile_type(position) == "cover_low":
+		tile.modulate = Color(0.46, 0.62, 0.42)
 	else:
 		tile.modulate = Color(0.64, 0.66, 0.58)
 
@@ -100,14 +113,27 @@ func _tile_text(position: Dictionary) -> String:
 				return "BLOCK"
 			"highground":
 				return "HIGH"
+			"cover_low":
+				return "COVER"
 			_:
 				return ""
 
 	var hp: int = unit["resources"]["hp"]
 	var ap: int = unit["resources"]["ap"]
+	var tile_marker := _occupied_tile_marker(position)
 	if unit["team"] == "player":
-		return "P\nHP %s\nAP %s" % [hp, ap]
-	return "E\nHP %s\nAP %s" % [hp, ap]
+		return "P%s\nHP %s\nAP %s" % [tile_marker, hp, ap]
+	return "E%s\nHP %s\nAP %s" % [tile_marker, hp, ap]
+
+
+func _occupied_tile_marker(position: Dictionary) -> String:
+	match _tile_type(position):
+		"highground":
+			return "\nHIGH"
+		"cover_low":
+			return "\nCOVER"
+		_:
+			return ""
 
 
 func _render_status() -> void:
@@ -128,7 +154,7 @@ func _render_feedback() -> void:
 
 
 func _render_legend() -> void:
-	legend_label.text = "Blue: player | Red: enemy | Yellow: active | Green: legal target | Gold: highground | Dark: blocked"
+	legend_label.text = "Blue: player | Red: enemy | Yellow: active | Green: legal target | Gold: highground | Olive: cover | Dark: blocked"
 
 
 func _render_unit_list() -> void:
@@ -171,10 +197,25 @@ func _render_command_buttons() -> void:
 		button.text = ACTION_LABELS.get(action_id, action_id)
 		button.toggle_mode = true
 		button.button_pressed = selected_action == action_id
-		button.disabled = _combat_result() != "in_progress" and action_id != "reset"
+		button.disabled = _combat_result() != "in_progress" and action_id not in ["reset", "load_los_test", "load_cover_test", "load_ranged_ai_test", "load_pathfinding_test", "load_low_chance_ai_test"]
 		button.pressed.connect(func() -> void:
 			selected_action = action_id
 			if action_id == "reset":
+				_reset_debug_encounter()
+			elif action_id == "load_los_test":
+				current_encounter_path = LOS_TEST_ENCOUNTER_PATH
+				_reset_debug_encounter()
+			elif action_id == "load_cover_test":
+				current_encounter_path = COVER_TEST_ENCOUNTER_PATH
+				_reset_debug_encounter()
+			elif action_id == "load_ranged_ai_test":
+				current_encounter_path = RANGED_AI_TEST_ENCOUNTER_PATH
+				_reset_debug_encounter()
+			elif action_id == "load_pathfinding_test":
+				current_encounter_path = PATHFINDING_TEST_ENCOUNTER_PATH
+				_reset_debug_encounter()
+			elif action_id == "load_low_chance_ai_test":
+				current_encounter_path = LOW_CHANCE_AI_TEST_ENCOUNTER_PATH
 				_reset_debug_encounter()
 			elif action_id == "enemy_turn":
 				_run_enemy_turn_helper()
@@ -302,7 +343,7 @@ func _event_summary(event: Dictionary) -> String:
 	if event["type"] == "damage_applied":
 		return "(%s damage to %s)" % [event.get("damage", "?"), event.get("target_unit_id", "?")]
 	if event["type"] == "hit_roll_resolved":
-		return "(%s: roll %s vs %s%%, base %s + acc %s - eva %s + terrain %s)" % [
+		return "(%s: roll %s vs %s%%, base %s + acc %s - eva %s + terrain %s + cover %s)" % [
 			event.get("outcome", "?"),
 			event.get("roll", "?"),
 			event.get("hit_chance", "?"),
@@ -310,6 +351,7 @@ func _event_summary(event: Dictionary) -> String:
 			event.get("accuracy_modifier", "?"),
 			event.get("evasion_modifier", "?"),
 			event.get("terrain_modifier", "?"),
+			event.get("cover_modifier", "?"),
 		]
 	if event["type"] == "unit_moved":
 		return "(%s -> %s)" % [event.get("from", {}), event.get("to", {})]

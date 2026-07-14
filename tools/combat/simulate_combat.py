@@ -8,6 +8,8 @@ RANGED_ATTACK_HIT_CHANCE = 70
 MIN_HIT_CHANCE = 10
 MAX_HIT_CHANCE = 95
 HIGHGROUND_RANGED_HIT_MODIFIER = 10
+COVER_LOW_RANGED_HIT_MODIFIER = -20
+AI_RANGED_MIN_HIT_CHANCE = 60
 
 
 @dataclass
@@ -35,6 +37,19 @@ def choose_enemy_command(state: dict[str, Any], command_id: str = "cmd_ai_001") 
             "target": {
                 "type": "unit",
                 "unit_id": adjacent_player["id"],
+            },
+        }
+
+    ranged_player = _ranged_living_enemy(state, actor, target_team="player")
+    if ranged_player is not None:
+        return {
+            "id": command_id,
+            "type": "perform_action",
+            "actor_id": actor["id"],
+            "action_id": "ranged_attack",
+            "target": {
+                "type": "unit",
+                "unit_id": ranged_player["id"],
             },
         }
 
@@ -131,8 +146,9 @@ def _resolve_attack(
         accuracy_modifier = _stat(actor, "accuracy")
         evasion_modifier = _stat(target, "evasion")
         terrain_modifier = _terrain_hit_modifier(state, actor, action_id)
+        cover_modifier = _cover_hit_modifier(state, target, action_id)
         hit_chance = _clamp(
-            base_hit_chance + accuracy_modifier - evasion_modifier + terrain_modifier,
+            base_hit_chance + accuracy_modifier - evasion_modifier + terrain_modifier + cover_modifier,
             MIN_HIT_CHANCE,
             MAX_HIT_CHANCE,
         )
@@ -150,6 +166,7 @@ def _resolve_attack(
                 "accuracy_modifier": accuracy_modifier,
                 "evasion_modifier": evasion_modifier,
                 "terrain_modifier": terrain_modifier,
+                "cover_modifier": cover_modifier,
                 "hit_chance": hit_chance,
                 "outcome": outcome,
             },
@@ -348,6 +365,8 @@ def _attack_rejection(
         return "not_enough_ap"
     if _chebyshev(actor["position"], target["position"]) > max_range:
         return "target_out_of_range"
+    if action_id == "ranged_attack" and not _has_line_of_sight(state, actor["position"], target["position"]):
+        return "target_not_visible"
     if action_id not in actor["available_actions"]:
         return "action_not_available"
     return None
@@ -397,6 +416,8 @@ def _move_rejection(
         return "destination_occupied"
     if _chebyshev(actor["position"], destination) != 1:
         return "destination_not_adjacent"
+    if _is_diagonal_step(actor["position"], destination) and not _diagonal_step_allowed(state, actor["position"], destination):
+        return "diagonal_corner_blocked"
     return None
 
 
@@ -443,6 +464,47 @@ def _terrain_hit_modifier(state: dict[str, Any], actor: dict[str, Any], action_i
     return 0
 
 
+def _cover_hit_modifier(state: dict[str, Any], target: dict[str, Any], action_id: str) -> int:
+    if action_id == "ranged_attack" and _tile_type(state, target["position"]) == "cover_low":
+        return COVER_LOW_RANGED_HIT_MODIFIER
+    return 0
+
+
+def _has_line_of_sight(state: dict[str, Any], origin: dict[str, int], target: dict[str, int]) -> bool:
+    for position in _line_between(origin, target):
+        if _tile_type(state, position) == "blocked":
+            return False
+    return True
+
+
+def _line_between(origin: dict[str, int], target: dict[str, int]) -> list[dict[str, int]]:
+    x0 = origin["x"]
+    y0 = origin["y"]
+    x1 = target["x"]
+    y1 = target["y"]
+    dx = abs(x1 - x0)
+    dy = -abs(y1 - y0)
+    sx = 1 if x0 < x1 else -1
+    sy = 1 if y0 < y1 else -1
+    error = dx + dy
+    x = x0
+    y = y0
+    positions: list[dict[str, int]] = []
+
+    while x != x1 or y != y1:
+        error2 = 2 * error
+        if error2 >= dy:
+            error += dy
+            x += sx
+        if error2 <= dx:
+            error += dx
+            y += sy
+        if x != x1 or y != y1:
+            positions.append({"x": x, "y": y})
+
+    return positions
+
+
 def _unit_by_id(state: dict[str, Any], unit_id: str) -> dict[str, Any] | None:
     for unit in state["units"]:
         if unit["id"] == unit_id:
@@ -470,7 +532,7 @@ def _tile_type(state: dict[str, Any], position: dict[str, int]) -> str | None:
 
 
 def _is_walkable_tile(state: dict[str, Any], position: dict[str, int]) -> bool:
-    return _tile_type(state, position) in {"floor", "highground"}
+    return _tile_type(state, position) in {"floor", "highground", "cover_low"}
 
 
 def _living_unit_at(state: dict[str, Any], position: dict[str, int]) -> dict[str, Any] | None:
@@ -516,11 +578,27 @@ def _nearest_living_enemy(state: dict[str, Any], actor: dict[str, Any], target_t
     return sorted(candidates, key=lambda unit: (_manhattan(actor["position"], unit["position"]), unit["id"]))[0] if candidates else None
 
 
+def _ranged_living_enemy(state: dict[str, Any], actor: dict[str, Any], target_team: str) -> dict[str, Any] | None:
+    candidates = [
+        unit
+        for unit in state["units"]
+        if unit["team"] == target_team
+        and unit["resources"]["hp"] > 0
+        and _attack_rejection(state, actor, unit, "ranged_attack", 3) is None
+        and _ranged_hit_chance(state, actor, unit, "ranged_attack") >= AI_RANGED_MIN_HIT_CHANCE
+    ]
+    return sorted(candidates, key=lambda unit: (_chebyshev(actor["position"], unit["position"]), unit["id"]))[0] if candidates else None
+
+
 def _best_step_toward(
     state: dict[str, Any],
     actor: dict[str, Any],
     target: dict[str, Any],
 ) -> dict[str, int] | None:
+    path_step = _first_path_step_toward(state, actor, target)
+    if path_step is not None:
+        return path_step
+
     current_distance = _manhattan(actor["position"], target["position"])
     candidates = [
         {"x": actor["position"]["x"] - 1, "y": actor["position"]["y"]},
@@ -539,6 +617,86 @@ def _best_step_toward(
         and _manhattan(position, target["position"]) < current_distance
     ]
     return sorted(legal_candidates, key=lambda position: (_manhattan(position, target["position"]), position["y"], position["x"]))[0] if legal_candidates else None
+
+
+def _first_path_step_toward(
+    state: dict[str, Any],
+    actor: dict[str, Any],
+    target: dict[str, Any],
+) -> dict[str, int] | None:
+    start = actor["position"]
+    queue: list[tuple[dict[str, int], list[dict[str, int]]]] = [(start, [])]
+    visited = {_position_key(start)}
+
+    while queue:
+        current, path = queue.pop(0)
+        if path and _chebyshev(current, target["position"]) == 1:
+            return path[0]
+
+        for neighbor in _path_neighbors(state, actor, current):
+            key = _position_key(neighbor)
+            if key in visited:
+                continue
+            visited.add(key)
+            queue.append((neighbor, path + [neighbor]))
+
+    return None
+
+
+def _path_neighbors(state: dict[str, Any], actor: dict[str, Any], position: dict[str, int]) -> list[dict[str, int]]:
+    candidates = [
+        {"x": position["x"] - 1, "y": position["y"]},
+        {"x": position["x"] + 1, "y": position["y"]},
+        {"x": position["x"], "y": position["y"] - 1},
+        {"x": position["x"], "y": position["y"] + 1},
+        {"x": position["x"] - 1, "y": position["y"] - 1},
+        {"x": position["x"] - 1, "y": position["y"] + 1},
+        {"x": position["x"] + 1, "y": position["y"] - 1},
+        {"x": position["x"] + 1, "y": position["y"] + 1},
+    ]
+    legal_candidates = [
+        candidate
+        for candidate in candidates
+        if _path_position_is_legal(state, actor, position, candidate)
+    ]
+    return sorted(legal_candidates, key=lambda candidate: (candidate["y"], candidate["x"]))
+
+
+def _path_position_is_legal(state: dict[str, Any], actor: dict[str, Any], origin: dict[str, int], position: dict[str, int]) -> bool:
+    if not _inside_grid(state, position):
+        return False
+    if not _is_walkable_tile(state, position):
+        return False
+    if _is_diagonal_step(origin, position) and not _diagonal_step_allowed(state, origin, position):
+        return False
+    unit = _living_unit_at(state, position)
+    return unit is None or unit["id"] == actor["id"]
+
+
+def _ranged_hit_chance(state: dict[str, Any], actor: dict[str, Any], target: dict[str, Any], action_id: str) -> int:
+    return _clamp(
+        RANGED_ATTACK_HIT_CHANCE
+        + _stat(actor, "accuracy")
+        - _stat(target, "evasion")
+        + _terrain_hit_modifier(state, actor, action_id)
+        + _cover_hit_modifier(state, target, action_id),
+        MIN_HIT_CHANCE,
+        MAX_HIT_CHANCE,
+    )
+
+
+def _is_diagonal_step(origin: dict[str, int], destination: dict[str, int]) -> bool:
+    return abs(origin["x"] - destination["x"]) == 1 and abs(origin["y"] - destination["y"]) == 1
+
+
+def _diagonal_step_allowed(state: dict[str, Any], origin: dict[str, int], destination: dict[str, int]) -> bool:
+    side_a = {"x": destination["x"], "y": origin["y"]}
+    side_b = {"x": origin["x"], "y": destination["y"]}
+    return _is_walkable_tile(state, side_a) and _is_walkable_tile(state, side_b)
+
+
+def _position_key(position: dict[str, int]) -> str:
+    return f'{position["x"]},{position["y"]}'
 
 
 def _end_turn_command(actor_id: str, command_id: str) -> dict[str, Any]:
