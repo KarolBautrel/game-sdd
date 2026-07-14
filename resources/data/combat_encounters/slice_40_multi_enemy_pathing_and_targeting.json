@@ -1,0 +1,75 @@
+{
+  "id": "slice_40_multi_enemy_pathing_and_targeting",
+  "seed": 1040,
+  "grid": {
+    "width": 6,
+    "height": 5,
+    "tiles": [
+      { "x": 0, "y": 0, "type": "floor" },
+      { "x": 1, "y": 0, "type": "floor" },
+      { "x": 2, "y": 0, "type": "floor" },
+      { "x": 3, "y": 0, "type": "blocked" },
+      { "x": 4, "y": 0, "type": "blocked" },
+      { "x": 5, "y": 0, "type": "floor" },
+      { "x": 0, "y": 1, "type": "floor" },
+      { "x": 1, "y": 1, "type": "floor" },
+      { "x": 2, "y": 1, "type": "floor" },
+      { "x": 3, "y": 1, "type": "floor" },
+      { "x": 4, "y": 1, "type": "floor" },
+      { "x": 5, "y": 1, "type": "floor" },
+      { "x": 0, "y": 2, "type": "floor" },
+      { "x": 1, "y": 2, "type": "floor" },
+      { "x": 2, "y": 2, "type": "floor" },
+      { "x": 3, "y": 2, "type": "floor" },
+      { "x": 4, "y": 2, "type": "floor" },
+      { "x": 5, "y": 2, "type": "floor" },
+      { "x": 0, "y": 3, "type": "floor" },
+      { "x": 1, "y": 3, "type": "floor" },
+      { "x": 2, "y": 3, "type": "floor" },
+      { "x": 3, "y": 3, "type": "floor" },
+      { "x": 4, "y": 3, "type": "floor" },
+      { "x": 5, "y": 3, "type": "floor" },
+      { "x": 0, "y": 4, "type": "floor" },
+      { "x": 1, "y": 4, "type": "floor" },
+      { "x": 2, "y": 4, "type": "floor" },
+      { "x": 3, "y": 4, "type": "floor" },
+      { "x": 4, "y": 4, "type": "floor" },
+      { "x": 5, "y": 4, "type": "floor" }
+    ]
+  },
+  "units": [
+    {
+      "id": "unit_player_001",
+      "team": "player",
+      "position": { "x": 1, "y": 1 },
+      "stats": { "max_hp": 10, "strength": 4, "defense": 1, "initiative": 10, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 10, "ap": 1 },
+      "statuses": [],
+      "available_actions": ["basic_attack", "move", "defend", "end_turn"]
+    },
+    {
+      "id": "unit_enemy_001",
+      "team": "enemy",
+      "position": { "x": 4, "y": 1 },
+      "stats": { "max_hp": 6, "strength": 3, "defense": 1, "initiative": 8, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 6, "ap": 1 },
+      "statuses": [],
+      "available_actions": ["basic_attack", "move", "defend", "end_turn"]
+    },
+    {
+      "id": "unit_enemy_002",
+      "team": "enemy",
+      "position": { "x": 4, "y": 2 },
+      "stats": { "max_hp": 6, "strength": 3, "defense": 1, "initiative": 7, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 6, "ap": 1 },
+      "statuses": [],
+      "available_actions": ["basic_attack", "move", "defend", "end_turn"]
+    }
+  ],
+  "turn_state": {
+    "active_unit_id": "unit_enemy_001",
+    "round": 1,
+    "turn_order": ["unit_player_001", "unit_enemy_001", "unit_enemy_002"]
+  },
+  "event_log": []
+}

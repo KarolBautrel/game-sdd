@@ -48,6 +48,7 @@ from tools.validators.validate_combat_slice import (
     validate_combat_slice_32,
     validate_combat_slice_33,
     validate_combat_slice_34,
+    validate_combat_slice_40,
 )
 
 
@@ -142,6 +143,7 @@ def main() -> int:
     errors.extend(validate_combat_slice_32())
     errors.extend(validate_combat_slice_33())
     errors.extend(validate_combat_slice_34())
+    errors.extend(validate_combat_slice_40())
 
     if errors:
         print("Validation failed:")

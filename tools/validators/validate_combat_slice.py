@@ -995,6 +995,77 @@ def validate_combat_slice_34() -> list[str]:
     return errors
 
 
+def validate_combat_slice_40() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_40_multi_enemy_pathing_and_targeting.json")
+    first_command = choose_enemy_command(encounter)
+
+    if first_command["action_id"] != "move":
+        errors.append(f"slice_40_multi_enemy_pathing_and_targeting: expected first AI move, got {first_command['action_id']}")
+    if first_command["actor_id"] != "unit_enemy_001":
+        errors.append(f"slice_40_multi_enemy_pathing_and_targeting: expected first actor unit_enemy_001, got {first_command['actor_id']}")
+    if first_command["target"].get("position") != {"x": 3, "y": 1}:
+        errors.append(
+            "slice_40_multi_enemy_pathing_and_targeting: expected first target {'x': 3, 'y': 1}, "
+            f"got {first_command['target'].get('position')}"
+        )
+
+    end_turn = {
+        "id": "cmd_002",
+        "type": "perform_action",
+        "actor_id": "unit_enemy_001",
+        "action_id": "end_turn",
+        "target": {"type": "none"},
+    }
+    after_first = simulate(encounter, [first_command, end_turn]).state
+    second_command = choose_enemy_command(after_first)
+
+    if second_command["action_id"] != "move":
+        errors.append(f"slice_40_multi_enemy_pathing_and_targeting: expected second AI move, got {second_command['action_id']}")
+    if second_command["actor_id"] != "unit_enemy_002":
+        errors.append(f"slice_40_multi_enemy_pathing_and_targeting: expected second actor unit_enemy_002, got {second_command['actor_id']}")
+    if second_command["target"].get("position") != {"x": 3, "y": 2}:
+        errors.append(
+            "slice_40_multi_enemy_pathing_and_targeting: expected second target {'x': 3, 'y': 2}, "
+            f"got {second_command['target'].get('position')}"
+        )
+    if second_command["target"].get("position") == first_command["target"].get("position"):
+        errors.append("slice_40_multi_enemy_pathing_and_targeting: enemies chose the same destination")
+
+    result = simulate(encounter, [first_command, end_turn, second_command])
+    state = result.state
+    enemy_001 = _unit_by_id(state, "unit_enemy_001")
+    enemy_002 = _unit_by_id(state, "unit_enemy_002")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if enemy_001["position"] != {"x": 3, "y": 1}:
+        errors.append(f"slice_40_multi_enemy_pathing_and_targeting: expected enemy 001 at {{'x': 3, 'y': 1}}, got {enemy_001['position']}")
+    if enemy_002["position"] != {"x": 3, "y": 2}:
+        errors.append(f"slice_40_multi_enemy_pathing_and_targeting: expected enemy 002 at {{'x': 3, 'y': 2}}, got {enemy_002['position']}")
+    if enemy_001["position"] == enemy_002["position"]:
+        errors.append("slice_40_multi_enemy_pathing_and_targeting: enemies stacked on the same tile")
+
+    expected_events = [
+        "combat_started",
+        "turn_started",
+        "action_performed",
+        "unit_moved",
+        "action_performed",
+        "turn_ended",
+        "turn_started",
+        "action_performed",
+        "unit_moved",
+    ]
+    if event_types != expected_events:
+        errors.append(f"slice_40_multi_enemy_pathing_and_targeting: unexpected events {event_types}")
+
+    replay = simulate(encounter, [first_command, end_turn, second_command])
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_40_multi_enemy_pathing_and_targeting: replay event log differs")
+
+    return errors
+
+
 def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_result: str) -> list[str]:
     errors: list[str] = []
     encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
@@ -1139,6 +1210,7 @@ def main() -> int:
     errors.extend(validate_combat_slice_32())
     errors.extend(validate_combat_slice_33())
     errors.extend(validate_combat_slice_34())
+    errors.extend(validate_combat_slice_40())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:

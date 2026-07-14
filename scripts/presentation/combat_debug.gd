@@ -8,10 +8,11 @@ const COVER_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice
 const RANGED_AI_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_30_enemy_ai_ranged_attack.json"
 const PATHFINDING_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_31_enemy_ai_pathfinds_around_blocked_tile.json"
 const LOW_CHANCE_AI_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_34_enemy_ai_approaches_low_chance_ranged_target.json"
+const MULTI_ENEMY_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_40_multi_enemy_pathing_and_targeting.json"
 const TILE_SIZE := 56
 const TILE_GAP := 4
 const COMMAND_ACTION_IDS := ["move", "basic_attack", "ranged_attack", "defend", "end_turn", "enemy_ai", "enemy_turn"]
-const SCENARIO_ACTION_IDS := ["reset", "load_los_test", "load_cover_test", "load_ranged_ai_test", "load_pathfinding_test", "load_low_chance_ai_test"]
+const SCENARIO_ACTION_IDS := ["reset", "load_los_test", "load_cover_test", "load_ranged_ai_test", "load_pathfinding_test", "load_low_chance_ai_test", "load_multi_enemy_test"]
 const ACTION_LABELS := {
 	"move": "Move",
 	"basic_attack": "Melee attack",
@@ -26,6 +27,7 @@ const ACTION_LABELS := {
 	"load_ranged_ai_test": "Load Ranged AI test",
 	"load_pathfinding_test": "Load Pathfinding test",
 	"load_low_chance_ai_test": "Load Low Chance AI test",
+	"load_multi_enemy_test": "Load Multi Enemy test",
 }
 
 @onready var grid_container: GridContainer = %GridContainer
@@ -272,6 +274,9 @@ func _add_action_button(action_id: String) -> void:
 			_reset_debug_encounter()
 		elif action_id == "load_low_chance_ai_test":
 			current_encounter_path = LOW_CHANCE_AI_TEST_ENCOUNTER_PATH
+			_reset_debug_encounter()
+		elif action_id == "load_multi_enemy_test":
+			current_encounter_path = MULTI_ENEMY_TEST_ENCOUNTER_PATH
 			_reset_debug_encounter()
 		elif action_id == "enemy_turn":
 			_run_enemy_turn_helper()

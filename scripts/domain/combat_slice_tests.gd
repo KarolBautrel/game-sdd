@@ -434,6 +434,27 @@ const SLICES := [
 			"unit_enemy_001": {"resources": {"ap": 0}, "position": {"x": 3, "y": 1}},
 		},
 	},
+	{
+		"id": "slice_40_multi_enemy_pathing_and_targeting",
+		"encounter": "res://resources/data/combat_encounters/slice_40_multi_enemy_pathing_and_targeting.json",
+		"multi_enemy_ai_commands": true,
+		"expected_events": [
+			"combat_started",
+			"turn_started",
+			"action_performed",
+			"unit_moved",
+			"action_performed",
+			"turn_ended",
+			"turn_started",
+			"action_performed",
+			"unit_moved",
+		],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_enemy_001": {"resources": {"ap": 0}, "position": {"x": 3, "y": 1}},
+			"unit_enemy_002": {"resources": {"ap": 0}, "position": {"x": 3, "y": 2}},
+		},
+	},
 ]
 
 
@@ -508,6 +529,34 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 
 
 func _commands_for_spec(spec: Dictionary, encounter: Dictionary) -> Array:
+	if spec.get("multi_enemy_ai_commands", false):
+		var first_command: Dictionary = CombatResolver.choose_enemy_command(encounter)
+		if first_command["action_id"] != "move":
+			push_error("%s: expected first AI move, got %s" % [spec["id"], first_command["action_id"]])
+		if first_command["actor_id"] != "unit_enemy_001":
+			push_error("%s: expected first AI actor unit_enemy_001, got %s" % [spec["id"], first_command["actor_id"]])
+		if not _positions_equal(first_command["target"].get("position", {}), {"x": 3, "y": 1}):
+			push_error("%s: expected first AI position {x:3,y:1}, got %s" % [spec["id"], first_command["target"].get("position", {})])
+
+		var end_turn := {
+			"id": "cmd_002",
+			"type": "perform_action",
+			"actor_id": "unit_enemy_001",
+			"action_id": "end_turn",
+			"target": {"type": "none"},
+		}
+		var after_first: Dictionary = CombatResolver.simulate(encounter, [first_command, end_turn])["state"]
+		var second_command: Dictionary = CombatResolver.choose_enemy_command(after_first)
+		if second_command["action_id"] != "move":
+			push_error("%s: expected second AI move, got %s" % [spec["id"], second_command["action_id"]])
+		if second_command["actor_id"] != "unit_enemy_002":
+			push_error("%s: expected second AI actor unit_enemy_002, got %s" % [spec["id"], second_command["actor_id"]])
+		if not _positions_equal(second_command["target"].get("position", {}), {"x": 3, "y": 2}):
+			push_error("%s: expected second AI position {x:3,y:2}, got %s" % [spec["id"], second_command["target"].get("position", {})])
+		if _positions_equal(first_command["target"].get("position", {}), second_command["target"].get("position", {})):
+			push_error("%s: enemies chose the same destination" % spec["id"])
+		return [first_command, end_turn, second_command]
+
 	if spec.get("ai_command", false):
 		var command: Dictionary = CombatResolver.choose_enemy_command(encounter)
 		if command["action_id"] != spec["expected_command_action"]:

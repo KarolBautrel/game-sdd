@@ -143,6 +143,7 @@ Current verified slices:
 - `033_diagonal_corner_cut_blocked.md`
 - `034_enemy_ai_approaches_low_chance_ranged_target.md`
 - `035_debug_sandbox_ui_pass.md`
+- `040_multi_enemy_pathing_and_targeting.md`
 
 ## Spec Organization
 
@@ -193,6 +194,8 @@ Latest verified scope:
 - debug scene can load a dedicated pathfinding obstacle test.
 - debug scene can load a dedicated low-chance ranged AI test.
 - debug scene has grouped command/load buttons, newest-first event log, tile inspect panel, and action rejection previews.
+- multi-enemy movement v1 is specified and verified for two enemies acting on the current board state.
+- debug scene can load a dedicated multi-enemy test.
 
 ## Important Files
 
@@ -245,9 +248,9 @@ Interactive combat debug scene:
 
 ## Planned But Not Implemented
 
-### Multi-Enemy AI V1
+### Multi-Enemy AI V2
 
-Next planned combat step is support for more than one active enemy in practical scenarios.
+Next planned combat step is smarter support for more than one active enemy in practical scenarios.
 
 Spec plan:
 
@@ -261,13 +264,13 @@ Primary problem to solve:
 - with multiple enemies, the next enemy must respect positions already occupied or newly moved into by earlier enemies;
 - AI must remain deterministic, so repeated runs produce the same movement, target choice, and event log.
 
-First implementation slice:
+First implemented slice:
 
 ```text
 docs/specs/combat/slices/040_multi_enemy_pathing_and_targeting.md
 ```
 
-Acceptance shape for the first slice:
+Implemented acceptance shape:
 
 - one player and two enemies;
 - both enemies have `move`;
@@ -292,16 +295,28 @@ Deferred until after slice 040:
 
 ## Recommended Next Step
 
-Implement multi-enemy AI planning:
+Implement multi-enemy AI V2:
 
-- two enemies must not choose the same destination;
 - enemies should not block each other forever in narrow paths;
 - target selection should stay deterministic;
-- this should be planned carefully before implementation because it touches pathfinding, occupancy, and turn order.
-- start with the minimal two-enemy movement slice before adding smarter tactics.
+- add a narrow corridor or bottleneck test;
+- decide whether an enemy should wait, sidestep, or pick another target when the shortest path is occupied.
 
 Suggested slice:
 
 ```text
-docs/specs/combat/slices/040_multi_enemy_pathing_and_targeting.md
+docs/specs/combat/slices/041_multi_enemy_bottleneck_spacing.md
 ```
+
+Acceptance shape for slice 041:
+
+- one player and two enemies;
+- a narrow pass or corridor creates a bottleneck;
+- enemy A moves into the best approach tile first;
+- enemy B sees enemy A's new position as occupied;
+- enemy B must not move onto enemy A's tile;
+- enemy B should either:
+  - move to a deterministic legal backup tile, if one exists;
+  - otherwise choose `end_turn` instead of emitting an invalid move;
+- replay event log must remain deterministic in Python and Godot;
+- debug scene should reuse `Load Multi Enemy test` or add `Load Bottleneck test`.
