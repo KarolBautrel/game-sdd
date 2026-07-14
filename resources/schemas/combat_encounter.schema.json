@@ -2,11 +2,16 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "sdd-game/combat_encounter.schema.json",
   "type": "object",
-  "required": ["id", "seed", "grid", "units", "turn_state", "event_log"],
+  "required": ["id", "seed", "units", "turn_state", "event_log"],
   "additionalProperties": false,
+  "anyOf": [
+    { "required": ["grid"] },
+    { "required": ["map_path"] }
+  ],
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
     "seed": { "type": "integer", "minimum": 0 },
+    "map_path": { "type": "string", "pattern": "^res://resources/data/maps/.+\\.json$" },
     "grid": {
       "type": "object",
       "required": ["width", "height", "tiles"],

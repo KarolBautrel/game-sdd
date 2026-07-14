@@ -59,3 +59,11 @@ tools/combat/simulate_combat.py
 ```
 
 Presentation code must not decide combat legality or outcomes. It sends commands to the resolver and displays events.
+
+## Art Creation Rules
+
+Read `agents/README.md` before creating or editing pixel art.
+
+- Pixel-art work must use Aseprite as the source/editor pipeline.
+- Terrain art must follow the current tactical 2.5D/oblique direction, not flat top-down debug tiles.
+- Keep exported assets repeatable: store Aseprite sources under `assets_src/aseprite/` and generation/export scripts under `tools/aseprite/` when practical.

@@ -1,147 +1,29 @@
 {
   "id": "debug_map_scale_showcase",
   "seed": 1001,
-  "grid": {
-    "width": 12,
-    "height": 10,
-    "tiles": [
-      { "x": 0, "y": 0, "type": "floor" },
-      { "x": 1, "y": 0, "type": "floor" },
-      { "x": 2, "y": 0, "type": "floor" },
-      { "x": 3, "y": 0, "type": "floor" },
-      { "x": 4, "y": 0, "type": "floor" },
-      { "x": 5, "y": 0, "type": "floor" },
-      { "x": 6, "y": 0, "type": "floor" },
-      { "x": 7, "y": 0, "type": "floor" },
-      { "x": 8, "y": 0, "type": "floor" },
-      { "x": 9, "y": 0, "type": "floor" },
-      { "x": 10, "y": 0, "type": "floor" },
-      { "x": 11, "y": 0, "type": "floor" },
-      { "x": 0, "y": 1, "type": "floor" },
-      { "x": 1, "y": 1, "type": "floor" },
-      { "x": 2, "y": 1, "type": "floor" },
-      { "x": 3, "y": 1, "type": "cover_low" },
-      { "x": 4, "y": 1, "type": "floor" },
-      { "x": 5, "y": 1, "type": "floor" },
-      { "x": 6, "y": 1, "type": "floor" },
-      { "x": 7, "y": 1, "type": "highground" },
-      { "x": 8, "y": 1, "type": "highground" },
-      { "x": 9, "y": 1, "type": "floor" },
-      { "x": 10, "y": 1, "type": "floor" },
-      { "x": 11, "y": 1, "type": "floor" },
-      { "x": 0, "y": 2, "type": "floor" },
-      { "x": 1, "y": 2, "type": "blocked" },
-      { "x": 2, "y": 2, "type": "floor" },
-      { "x": 3, "y": 2, "type": "cover_low" },
-      { "x": 4, "y": 2, "type": "floor" },
-      { "x": 5, "y": 2, "type": "blocked" },
-      { "x": 6, "y": 2, "type": "floor" },
-      { "x": 7, "y": 2, "type": "highground" },
-      { "x": 8, "y": 2, "type": "highground" },
-      { "x": 9, "y": 2, "type": "floor" },
-      { "x": 10, "y": 2, "type": "blocked" },
-      { "x": 11, "y": 2, "type": "floor" },
-      { "x": 0, "y": 3, "type": "floor" },
-      { "x": 1, "y": 3, "type": "blocked" },
-      { "x": 2, "y": 3, "type": "floor" },
-      { "x": 3, "y": 3, "type": "floor" },
-      { "x": 4, "y": 3, "type": "floor" },
-      { "x": 5, "y": 3, "type": "blocked" },
-      { "x": 6, "y": 3, "type": "floor" },
-      { "x": 7, "y": 3, "type": "floor" },
-      { "x": 8, "y": 3, "type": "floor" },
-      { "x": 9, "y": 3, "type": "floor" },
-      { "x": 10, "y": 3, "type": "blocked" },
-      { "x": 11, "y": 3, "type": "floor" },
-      { "x": 0, "y": 4, "type": "floor" },
-      { "x": 1, "y": 4, "type": "floor" },
-      { "x": 2, "y": 4, "type": "floor" },
-      { "x": 3, "y": 4, "type": "floor" },
-      { "x": 4, "y": 4, "type": "cover_low" },
-      { "x": 5, "y": 4, "type": "cover_low" },
-      { "x": 6, "y": 4, "type": "floor" },
-      { "x": 7, "y": 4, "type": "blocked" },
-      { "x": 8, "y": 4, "type": "floor" },
-      { "x": 9, "y": 4, "type": "floor" },
-      { "x": 10, "y": 4, "type": "floor" },
-      { "x": 11, "y": 4, "type": "floor" },
-      { "x": 0, "y": 5, "type": "floor" },
-      { "x": 1, "y": 5, "type": "floor" },
-      { "x": 2, "y": 5, "type": "blocked" },
-      { "x": 3, "y": 5, "type": "floor" },
-      { "x": 4, "y": 5, "type": "floor" },
-      { "x": 5, "y": 5, "type": "floor" },
-      { "x": 6, "y": 5, "type": "floor" },
-      { "x": 7, "y": 5, "type": "blocked" },
-      { "x": 8, "y": 5, "type": "floor" },
-      { "x": 9, "y": 5, "type": "cover_low" },
-      { "x": 10, "y": 5, "type": "floor" },
-      { "x": 11, "y": 5, "type": "floor" },
-      { "x": 0, "y": 6, "type": "floor" },
-      { "x": 1, "y": 6, "type": "highground" },
-      { "x": 2, "y": 6, "type": "highground" },
-      { "x": 3, "y": 6, "type": "floor" },
-      { "x": 4, "y": 6, "type": "blocked" },
-      { "x": 5, "y": 6, "type": "floor" },
-      { "x": 6, "y": 6, "type": "floor" },
-      { "x": 7, "y": 6, "type": "floor" },
-      { "x": 8, "y": 6, "type": "floor" },
-      { "x": 9, "y": 6, "type": "cover_low" },
-      { "x": 10, "y": 6, "type": "floor" },
-      { "x": 11, "y": 6, "type": "floor" },
-      { "x": 0, "y": 7, "type": "floor" },
-      { "x": 1, "y": 7, "type": "highground" },
-      { "x": 2, "y": 7, "type": "highground" },
-      { "x": 3, "y": 7, "type": "floor" },
-      { "x": 4, "y": 7, "type": "blocked" },
-      { "x": 5, "y": 7, "type": "floor" },
-      { "x": 6, "y": 7, "type": "floor" },
-      { "x": 7, "y": 7, "type": "blocked" },
-      { "x": 8, "y": 7, "type": "floor" },
-      { "x": 9, "y": 7, "type": "floor" },
-      { "x": 10, "y": 7, "type": "floor" },
-      { "x": 11, "y": 7, "type": "floor" },
-      { "x": 0, "y": 8, "type": "floor" },
-      { "x": 1, "y": 8, "type": "floor" },
-      { "x": 2, "y": 8, "type": "floor" },
-      { "x": 3, "y": 8, "type": "floor" },
-      { "x": 4, "y": 8, "type": "floor" },
-      { "x": 5, "y": 8, "type": "cover_low" },
-      { "x": 6, "y": 8, "type": "floor" },
-      { "x": 7, "y": 8, "type": "blocked" },
-      { "x": 8, "y": 8, "type": "floor" },
-      { "x": 9, "y": 8, "type": "floor" },
-      { "x": 10, "y": 8, "type": "floor" },
-      { "x": 11, "y": 8, "type": "floor" },
-      { "x": 0, "y": 9, "type": "floor" },
-      { "x": 1, "y": 9, "type": "floor" },
-      { "x": 2, "y": 9, "type": "floor" },
-      { "x": 3, "y": 9, "type": "floor" },
-      { "x": 4, "y": 9, "type": "floor" },
-      { "x": 5, "y": 9, "type": "floor" },
-      { "x": 6, "y": 9, "type": "floor" },
-      { "x": 7, "y": 9, "type": "floor" },
-      { "x": 8, "y": 9, "type": "floor" },
-      { "x": 9, "y": 9, "type": "floor" },
-      { "x": 10, "y": 9, "type": "floor" },
-      { "x": 11, "y": 9, "type": "floor" }
-    ]
-  },
+  "map_path": "res://resources/data/maps/combat_test_clearing.json",
   "item_profiles": {
     "iron_sword": {
       "id": "iron_sword",
       "slot": "main_hand",
-      "grants_actions": ["basic_attack"]
+      "grants_actions": [
+        "basic_attack"
+      ]
     },
     "wooden_shield": {
       "id": "wooden_shield",
       "slot": "off_hand",
-      "grants_actions": ["shield_wall"]
+      "grants_actions": [
+        "shield_wall"
+      ]
     },
     "shortbow": {
       "id": "shortbow",
       "slot": "main_hand",
-      "grants_actions": ["ranged_attack", "aimed_shot"],
+      "grants_actions": [
+        "ranged_attack",
+        "aimed_shot"
+      ],
       "two_handed": true,
       "action_profiles": {
         "ranged_attack": {
@@ -177,40 +59,118 @@
     {
       "id": "unit_player_001",
       "team": "player",
-      "position": { "x": 1, "y": 8 },
-      "stats": { "max_hp": 14, "strength": 5, "defense": 2, "initiative": 12, "move_points": 5, "max_ap": 2, "accuracy": 5, "evasion": 5 },
-      "resources": { "hp": 14, "ap": 2, "mp": 5 },
+      "position": {
+        "x": 1,
+        "y": 8
+      },
+      "stats": {
+        "max_hp": 14,
+        "strength": 5,
+        "defense": 2,
+        "initiative": 12,
+        "move_points": 5,
+        "max_ap": 2,
+        "accuracy": 5,
+        "evasion": 5
+      },
+      "resources": {
+        "hp": 14,
+        "ap": 2,
+        "mp": 5
+      },
       "statuses": [],
-      "available_actions": ["move", "basic_attack", "defend", "end_turn"],
-      "learned_actions": ["shield_wall"],
-      "loadout": { "main_hand": "iron_sword", "off_hand": "wooden_shield" }
+      "available_actions": [
+        "move",
+        "basic_attack",
+        "defend",
+        "end_turn"
+      ],
+      "learned_actions": [
+        "shield_wall"
+      ],
+      "loadout": {
+        "main_hand": "iron_sword",
+        "off_hand": "wooden_shield"
+      }
     },
     {
       "id": "unit_enemy_001",
       "team": "enemy",
-      "position": { "x": 9, "y": 1 },
-      "stats": { "max_hp": 9, "strength": 4, "defense": 1, "initiative": 8, "move_points": 4, "max_ap": 1, "accuracy": 0, "evasion": 0 },
-      "resources": { "hp": 9, "ap": 1, "mp": 4 },
+      "position": {
+        "x": 9,
+        "y": 1
+      },
+      "stats": {
+        "max_hp": 9,
+        "strength": 4,
+        "defense": 1,
+        "initiative": 8,
+        "move_points": 4,
+        "max_ap": 1,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "resources": {
+        "hp": 9,
+        "ap": 1,
+        "mp": 4
+      },
       "statuses": [],
-      "available_actions": ["move", "basic_attack", "defend", "end_turn"],
-      "loadout": { "main_hand": "iron_sword" }
+      "available_actions": [
+        "move",
+        "basic_attack",
+        "defend",
+        "end_turn"
+      ],
+      "loadout": {
+        "main_hand": "iron_sword"
+      }
     },
     {
       "id": "unit_enemy_002",
       "team": "enemy",
-      "position": { "x": 10, "y": 7 },
-      "stats": { "max_hp": 7, "strength": 3, "defense": 0, "initiative": 7, "move_points": 3, "max_ap": 1, "accuracy": 10, "evasion": 0 },
-      "resources": { "hp": 7, "ap": 1, "mp": 3 },
+      "position": {
+        "x": 10,
+        "y": 7
+      },
+      "stats": {
+        "max_hp": 7,
+        "strength": 3,
+        "defense": 0,
+        "initiative": 7,
+        "move_points": 3,
+        "max_ap": 1,
+        "accuracy": 10,
+        "evasion": 0
+      },
+      "resources": {
+        "hp": 7,
+        "ap": 1,
+        "mp": 3
+      },
       "statuses": [],
-      "available_actions": ["move", "ranged_attack", "defend", "end_turn"],
-      "learned_actions": ["aimed_shot"],
-      "loadout": { "main_hand": "shortbow" }
+      "available_actions": [
+        "move",
+        "ranged_attack",
+        "defend",
+        "end_turn"
+      ],
+      "learned_actions": [
+        "aimed_shot"
+      ],
+      "loadout": {
+        "main_hand": "shortbow"
+      }
     }
   ],
   "turn_state": {
     "active_unit_id": "unit_player_001",
     "round": 1,
-    "turn_order": ["unit_player_001", "unit_enemy_001", "unit_enemy_002"]
+    "turn_order": [
+      "unit_player_001",
+      "unit_enemy_001",
+      "unit_enemy_002"
+    ]
   },
   "event_log": []
 }

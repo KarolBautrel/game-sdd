@@ -17,6 +17,7 @@ const DEFAULT_SHIELD_WALL_COOLDOWN_TURNS := 2
 
 static func simulate(encounter: Dictionary, commands: Array) -> Dictionary:
 	var state: Dictionary = encounter.duplicate(true)
+	_apply_map_reference(state)
 	_apply_enemy_archetypes(state)
 	state["event_log"] = []
 	var sequence := 1
@@ -715,8 +716,29 @@ static func _item_action_profile_for_action(state: Dictionary, actor: Dictionary
 
 static func _state_with_archetypes(state: Dictionary) -> Dictionary:
 	var prepared := state.duplicate(true)
+	_apply_map_reference(prepared)
 	_apply_enemy_archetypes(prepared)
 	return prepared
+
+
+static func _apply_map_reference(state: Dictionary) -> void:
+	var map_path := str(state.get("map_path", ""))
+	if map_path == "":
+		return
+	var file := FileAccess.open(map_path, FileAccess.READ)
+	if file == null:
+		push_error("Could not load combat map: %s" % map_path)
+		return
+	var parsed: Variant = JSON.parse_string(file.get_as_text())
+	if not parsed is Dictionary:
+		push_error("Combat map is not a JSON object: %s" % map_path)
+		return
+	var map_data: Dictionary = parsed
+	state["grid"] = {
+		"width": map_data["width"],
+		"height": map_data["height"],
+		"tiles": map_data["tiles"].duplicate(true),
+	}
 
 
 static func _apply_enemy_archetypes(state: Dictionary) -> void:

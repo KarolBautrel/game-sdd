@@ -119,6 +119,12 @@ The project now has:
   - encounters may define `enemy_archetypes`;
   - enemy units may reference an `archetype_id`;
   - archetypes can provide available actions and loadout before AI command selection and command resolution.
+- Map Pipeline V1:
+  - combat encounters may reference generated Tiled map JSON through `map_path`;
+  - Python and Godot combat setup resolve `grid.width`, `grid.height`, and `grid.tiles` from the referenced map;
+  - inline `grid` remains supported for low-level regression slices;
+  - validators reject stale inline grids that conflict with `map_path`;
+  - validators reject referenced-map unit spawns outside bounds or on blocked tiles.
 - Debug scene usability pass:
   - action buttons use readable labels;
   - ranged attack can be selected and tested;
@@ -198,6 +204,9 @@ Current verified slices:
 - `063_aimed_shot_from_bow.md`
 - `064_learned_skill_without_weapon.md`
 - `065_enemy_archetype_loadout.md`
+- `066_map_reference_encounter.md`
+- `068_move_preview_confirm.md`
+- `069_combat_presentation_architecture_v1.md`
 
 ## Spec Organization
 
@@ -292,6 +301,9 @@ Latest verified scope:
 - slice 063 verifies `aimed_shot` can be granted by a bow profile with higher hit chance, damage bonus, AP cost, and cooldown.
 - slice 064 verifies learned unit skills can grant combat actions without a weapon loadout.
 - slice 065 verifies enemy archetypes can provide loadout and actions before AI command selection.
+- slice 066 verifies `debug_map_scale_showcase` uses `map_path`, resolves its combat grid from `combat_test_clearing.json`, and no longer duplicates inline grid tiles.
+- slice 068 documents the combat sandbox move interaction: legal movement overlay is softer, first click previews path/MP cost, and second click confirms the move.
+- slice 069 starts the production-facing combat presentation architecture by extracting text formatting, unit art lookup, action visibility, and scenario catalog responsibilities from `combat_debug.gd`.
 - character assets were reorganized into `assets/characters/heroes/warrior` and `assets/characters/villains/enemy_baddie`, so combat now consumes shared character art instead of owning unit sprites.
 - debug scene loads sprites from the new asset folders and can animate multi-step movement paths.
 - debug scene can load the dedicated movement points multi-tile test.
@@ -365,19 +377,19 @@ Combat is not considered finished. The current state is a validated rules protot
 
 Immediate next focus:
 
-1. Bridge Tiled maps into combat encounters so the map source drives the playable grid.
-2. Improve combat sandbox UX so movement, targeting, hit chance, AP/MP cost, and blocked reasons are clear before the player clicks.
-3. Push terrain art and presentation toward the current tactical 2.5D direction before adding many more combat rules.
-4. Use `assets/terrain/nature/` and the current sandbox tileset as the visual reference for terrain art until a stricter terrain art bible exists.
+1. Improve combat sandbox UX so movement, targeting, hit chance, AP/MP cost, and blocked reasons are clear before the player clicks.
+2. Push terrain art and presentation toward the current tactical 2.5D direction before adding many more combat rules.
+3. Use `assets/terrain/nature/` and the current sandbox tileset as the visual reference for terrain art until a stricter terrain art bible exists.
+4. Add terrain movement costs now that authored map data drives the sandbox grid.
 
 ### Recommended Next Development Order
 
-1. **Map Pipeline V1**
+1. **Map Pipeline V1** - implemented by slice 066.
    - keep Tiled `.tmx` files as editable map sources;
    - keep generated `resources/data/maps/*.json` as engine-ready data;
    - add a validator that every combat encounter using map data matches map width, height, terrain, and spawn constraints.
 
-2. **Combat Map Runtime Bridge**
+2. **Combat Map Runtime Bridge** - implemented by slice 066.
    - stop duplicating `grid.tiles` manually inside debug combat encounters;
    - allow an encounter to reference `map_id` or `map_path`;
    - resolve terrain/spawns from the generated map JSON before combat starts.
@@ -426,14 +438,13 @@ Immediate next focus:
 Suggested next slices:
 
 ```text
-docs/specs/combat/slices/066_map_reference_encounter.md
 docs/specs/combat/slices/067_terrain_movement_costs.md
-docs/specs/combat/slices/068_targeting_preview_overlay.md
-docs/specs/combat/slices/069_guard_break_skill.md
-docs/specs/combat/slices/070_pinning_shot_skill.md
-docs/specs/combat/slices/071_enemy_archetype_roles_v2.md
-docs/specs/combat/slices/072_unit_animation_state_machine.md
-docs/specs/combat/slices/073_tiled_spawn_to_encounter_scaffold.md
-docs/specs/combat/slices/074_combat_sandbox_presentation_pass.md
-docs/specs/combat/slices/075_terrain_art_contract_v1.md
+docs/specs/combat/slices/070_targeting_preview_overlay.md
+docs/specs/combat/slices/071_guard_break_skill.md
+docs/specs/combat/slices/072_pinning_shot_skill.md
+docs/specs/combat/slices/073_enemy_archetype_roles_v2.md
+docs/specs/combat/slices/074_unit_animation_state_machine.md
+docs/specs/combat/slices/075_tiled_spawn_to_encounter_scaffold.md
+docs/specs/combat/slices/076_combat_sandbox_presentation_pass.md
+docs/specs/combat/slices/077_terrain_art_contract_v1.md
 ```

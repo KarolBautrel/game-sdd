@@ -915,6 +915,18 @@ const SLICES := [
 			"profile_id": "shortbow_ranged_attack",
 		},
 	},
+	{
+		"id": "slice_66_map_reference_encounter",
+		"encounter": "res://resources/data/combat_encounters/debug_map_scale_showcase.json",
+		"commands": "res://tests/data/combat_commands/no_commands.json",
+		"expected_events": ["combat_started", "turn_started"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"hp": 14, "ap": 2, "mp": 5}},
+			"unit_enemy_001": {"resources": {"hp": 9, "ap": 1, "mp": 4}},
+			"unit_enemy_002": {"resources": {"hp": 7, "ap": 1, "mp": 3}},
+		},
+	},
 ]
 
 

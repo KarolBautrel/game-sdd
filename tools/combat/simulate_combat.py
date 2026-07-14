@@ -2,7 +2,11 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import dataclass
+import json
+from pathlib import Path
 from typing import Any
+
+ROOT = Path(__file__).resolve().parents[2]
 
 RANGED_ATTACK_HIT_CHANCE = 70
 MIN_HIT_CHANCE = 10
@@ -91,6 +95,7 @@ def choose_enemy_command(state: dict[str, Any], command_id: str = "cmd_ai_001") 
 
 def simulate(encounter: dict[str, Any], commands: list[dict[str, Any]]) -> SimulationResult:
     state = deepcopy(encounter)
+    _apply_map_reference(state)
     _apply_enemy_archetypes(state)
     state["event_log"] = []
     sequence = 1
@@ -871,8 +876,33 @@ def _item_action_profile_for_action(
 
 def _state_with_archetypes(state: dict[str, Any]) -> dict[str, Any]:
     prepared = deepcopy(state)
+    _apply_map_reference(prepared)
     _apply_enemy_archetypes(prepared)
     return prepared
+
+
+def _apply_map_reference(state: dict[str, Any]) -> None:
+    map_path = state.get("map_path")
+    if not map_path:
+        return
+    map_data = _load_map_json(str(map_path))
+    state["grid"] = {
+        "width": map_data["width"],
+        "height": map_data["height"],
+        "tiles": deepcopy(map_data["tiles"]),
+    }
+
+
+def _load_map_json(map_path: str) -> dict[str, Any]:
+    path = _resource_path(map_path)
+    with path.open("r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def _resource_path(path: str) -> Path:
+    if path.startswith("res://"):
+        return ROOT / path.removeprefix("res://")
+    return ROOT / path
 
 
 def _apply_enemy_archetypes(state: dict[str, Any]) -> None:

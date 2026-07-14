@@ -74,6 +74,7 @@ from tools.validators.validate_combat_slice import (
     validate_combat_slice_63,
     validate_combat_slice_64,
     validate_combat_slice_65,
+    validate_combat_slice_66,
 )
 from tools.maps.tiled_to_map_json import convert_tmx
 
@@ -170,6 +171,45 @@ def validate_map_integrity() -> list[str]:
     return errors
 
 
+def validate_combat_map_references() -> list[str]:
+    errors: list[str] = []
+    for path in sorted((ROOT / "resources/data/combat_encounters").glob("*.json")):
+        encounter = load_json(path)
+        map_path = encounter.get("map_path")
+        if not map_path:
+            continue
+
+        resolved_map_path = ROOT / str(map_path).removeprefix("res://")
+        if not resolved_map_path.exists():
+            errors.append(f"{path.relative_to(ROOT)}: map_path does not exist: {map_path}")
+            continue
+
+        map_data = load_json(resolved_map_path)
+        referenced_grid = {
+            "width": map_data["width"],
+            "height": map_data["height"],
+            "tiles": map_data["tiles"],
+        }
+        if "grid" in encounter and encounter["grid"] != referenced_grid:
+            errors.append(f"{path.relative_to(ROOT)}: inline grid conflicts with referenced map_path {map_path}")
+
+        width = int(map_data["width"])
+        height = int(map_data["height"])
+        blocked = {
+            (int(tile["x"]), int(tile["y"]))
+            for tile in map_data["tiles"]
+            if tile["type"] == "blocked"
+        }
+        for unit in encounter["units"]:
+            position = unit["position"]
+            point = (int(position["x"]), int(position["y"]))
+            if not (0 <= point[0] < width and 0 <= point[1] < height):
+                errors.append(f"{path.relative_to(ROOT)}: unit {unit['id']} spawn out of referenced map bounds at {point}")
+            if point in blocked:
+                errors.append(f"{path.relative_to(ROOT)}: unit {unit['id']} spawn is on blocked referenced map tile {point}")
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
 
@@ -183,6 +223,7 @@ def main() -> int:
 
     errors.extend(validate_world_region_references())
     errors.extend(validate_map_integrity())
+    errors.extend(validate_combat_map_references())
     errors.extend(validate_combat_slice_01())
     errors.extend(validate_combat_slice_02())
     errors.extend(validate_combat_slice_03())
@@ -240,6 +281,7 @@ def main() -> int:
     errors.extend(validate_combat_slice_63())
     errors.extend(validate_combat_slice_64())
     errors.extend(validate_combat_slice_65())
+    errors.extend(validate_combat_slice_66())
 
     if errors:
         print("Validation failed:")

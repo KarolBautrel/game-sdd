@@ -2077,6 +2077,48 @@ def validate_combat_slice_65() -> list[str]:
     return errors
 
 
+def validate_combat_slice_66() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/debug_map_scale_showcase.json")
+    map_data = load_json(ROOT / "resources/data/maps/combat_test_clearing.json")
+
+    if encounter.get("map_path") != "res://resources/data/maps/combat_test_clearing.json":
+        errors.append(f"slice_66_map_reference_encounter: unexpected map_path {encounter.get('map_path')}")
+    if "grid" in encounter:
+        errors.append("slice_66_map_reference_encounter: debug_map_scale_showcase should not duplicate inline grid")
+
+    result = simulate(encounter, [])
+    state = result.state
+    event_types = [event["type"] for event in state["event_log"]]
+    expected_events = ["combat_started", "turn_started"]
+    if event_types != expected_events:
+        errors.append(f"slice_66_map_reference_encounter: expected events {expected_events}, got {event_types}")
+
+    expected_grid = {
+        "width": map_data["width"],
+        "height": map_data["height"],
+        "tiles": map_data["tiles"],
+    }
+    if state.get("grid") != expected_grid:
+        errors.append("slice_66_map_reference_encounter: resolved combat grid does not match referenced map")
+
+    blocked = {
+        (int(tile["x"]), int(tile["y"]))
+        for tile in map_data["tiles"]
+        if tile["type"] == "blocked"
+    }
+    for unit in encounter["units"]:
+        position = unit["position"]
+        point = (int(position["x"]), int(position["y"]))
+        if point in blocked:
+            errors.append(f"slice_66_map_reference_encounter: unit {unit['id']} starts on blocked tile {point}")
+
+    replay = simulate(encounter, [])
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_66_map_reference_encounter: replay event log differs")
+    return errors
+
+
 def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_result: str) -> list[str]:
     errors: list[str] = []
     encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
@@ -2282,6 +2324,7 @@ def main() -> int:
     errors.extend(validate_combat_slice_63())
     errors.extend(validate_combat_slice_64())
     errors.extend(validate_combat_slice_65())
+    errors.extend(validate_combat_slice_66())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:
