@@ -2,8 +2,9 @@ extends Control
 
 const CombatResolver := preload("res://scripts/domain/combat_resolver.gd")
 
-const DEFAULT_ENCOUNTER_PATH := "res://resources/data/combat_encounters/debug_full_combat_showcase.json"
+const DEFAULT_ENCOUNTER_PATH := "res://resources/data/combat_encounters/debug_map_scale_showcase.json"
 const FULL_COMBAT_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_full_combat_showcase.json"
+const MAP_SCALE_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_map_scale_showcase.json"
 const LOS_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_28_ranged_attack_blocked_by_line_of_sight.json"
 const COVER_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_29_cover_reduces_ranged_hit_chance.json"
 const RANGED_AI_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_30_enemy_ai_ranged_attack.json"
@@ -32,11 +33,12 @@ const SHIELD_WALL_DAMAGE_REDUCTION_TEST_ENCOUNTER_PATH := "res://resources/data/
 const MOVEMENT_POINTS_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_60_movement_points_multi_tile.json"
 const AP_MP_ECONOMY_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_61_ap_mp_turn_economy.json"
 const PIXEL_PANEL_TEXTURE_PATH := "res://assets/ui/combat/pixel_panel.png"
+const TILE_ATLAS_TEXTURE_PATH := "res://assets/tilesets/combat_logic_tiles.png"
 const UNIT_ICON_SIZE := Vector2i(90, 90)
 const UNIT_RESOURCE_LABEL_SIZE := Vector2(74, 34)
 const UNIT_RESOURCE_LABEL_OFFSET_Y := -32.0
 const TILE_SIZE := 76
-const TILE_GAP := 2
+const TILE_GAP := 0
 const MOVE_STEP_SECONDS := 0.52
 const COMBAT_LUNGE_PIXELS := 18.0
 const COMBAT_WINDUP_SECONDS := 0.09
@@ -106,11 +108,12 @@ var command_index := 1
 var selected_action := "move"
 var last_feedback := "Select an action."
 var current_encounter_path := DEFAULT_ENCOUNTER_PATH
-var selected_scenario_id := "full_combat_showcase"
+var selected_scenario_id := "map_scale_showcase"
 var selected_position: Dictionary = {}
 var unit_facing: Dictionary = {}
 var unit_visual_action: Dictionary = {}
 var unit_texture_cache: Dictionary = {}
+var tile_texture_cache: Dictionary = {}
 var temporary_visual_units: Dictionary = {}
 var visual_positions_px: Dictionary = {}
 var visual_generation := 0
@@ -172,34 +175,81 @@ func _build_tile(position: Dictionary) -> Button:
 	var tile := Button.new()
 	tile.disabled = animation_locked
 	tile.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
-	tile.text = _tile_text(position)
+	tile.size = Vector2(TILE_SIZE, TILE_SIZE)
+	tile.flat = true
+	tile.text = ""
 	tile.tooltip_text = _tile_tooltip(position)
 	tile.pressed.connect(func() -> void:
 		_on_tile_pressed(position)
 	)
 
-	var unit := _living_unit_at(position)
-	if _tile_type(position) == "blocked":
-		tile.modulate = Color(0.34, 0.34, 0.35)
-	elif _tile_type(position) == "highground":
-		tile.modulate = Color(0.66, 0.60, 0.42)
-	elif _tile_type(position) == "cover_low":
-		tile.modulate = Color(0.42, 0.52, 0.39)
-	else:
-		tile.modulate = Color(0.55, 0.56, 0.52)
+	var terrain_type := _tile_type(position)
+	var terrain_texture := TextureRect.new()
+	terrain_texture.name = "Terrain"
+	terrain_texture.texture = _tile_visual_texture(terrain_type)
+	terrain_texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	terrain_texture.stretch_mode = TextureRect.STRETCH_SCALE
+	terrain_texture.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
+	terrain_texture.size = Vector2(TILE_SIZE, TILE_SIZE)
+	terrain_texture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	tile.add_child(terrain_texture)
 
-	if _is_active_unit_at(position):
-		tile.modulate = Color(0.83, 0.78, 0.45)
-	elif not unit.is_empty() and unit["team"] == "player":
-		tile.modulate = Color(0.45, 0.58, 0.68)
-	elif not unit.is_empty():
-		tile.modulate = Color(0.70, 0.43, 0.40)
-	elif _is_legal_target_for_selected_action(position):
-		tile.modulate = Color(0.50, 0.70, 0.47)
-	elif _positions_equal(selected_position, position):
-		tile.modulate = Color(0.58, 0.58, 0.72)
+	var unit := _living_unit_at(position)
+	var overlay_color := _tile_overlay_color(position, unit)
+	if overlay_color.a > 0.001:
+		var overlay := ColorRect.new()
+		overlay.name = "Overlay"
+		overlay.color = overlay_color
+		overlay.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
+		overlay.size = Vector2(TILE_SIZE, TILE_SIZE)
+		overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		tile.add_child(overlay)
 
 	return tile
+
+
+func _tile_visual_texture(terrain_type: String) -> Texture2D:
+	if tile_texture_cache.has(terrain_type):
+		return tile_texture_cache[terrain_type]
+	if not tile_texture_cache.has("__atlas"):
+		var image := Image.new()
+		var error := image.load(TILE_ATLAS_TEXTURE_PATH)
+		if error != OK:
+			push_error("Cannot load tile atlas texture: %s" % TILE_ATLAS_TEXTURE_PATH)
+			return null
+		tile_texture_cache["__atlas"] = ImageTexture.create_from_image(image)
+	var atlas_texture: Texture2D = tile_texture_cache["__atlas"]
+	var atlas := AtlasTexture.new()
+	atlas.atlas = atlas_texture
+	atlas.region = Rect2(_tile_atlas_index(terrain_type) * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE)
+	tile_texture_cache[terrain_type] = atlas
+	return atlas
+
+
+func _tile_atlas_index(terrain_type: String) -> int:
+	match terrain_type:
+		"blocked":
+			return 1
+		"highground":
+			return 2
+		"cover_low":
+			return 3
+		_:
+			return 0
+
+
+func _tile_overlay_color(position: Dictionary, unit: Dictionary) -> Color:
+	if _is_active_unit_at(position):
+		return Color(1.0, 0.83, 0.18, 0.34)
+	if not unit.is_empty() and unit["team"] == "player":
+		return Color(0.18, 0.45, 0.85, 0.26)
+	if not unit.is_empty():
+		return Color(0.90, 0.16, 0.12, 0.26)
+	if _is_legal_target_for_selected_action(position):
+		return Color(0.25, 0.95, 0.35, 0.30)
+	if _positions_equal(selected_position, position):
+		return Color(0.50, 0.48, 0.90, 0.28)
+	return Color(0, 0, 0, 0)
 
 
 func _tile_text(position: Dictionary) -> String:
@@ -497,6 +547,7 @@ func _load_selected_scenario() -> void:
 
 func _scenario_options() -> Array[Dictionary]:
 	return [
+		{"id": "map_scale_showcase", "label": "Map scale showcase", "path": MAP_SCALE_SHOWCASE_PATH},
 		{"id": "full_combat_showcase", "label": "Full combat showcase", "path": FULL_COMBAT_SHOWCASE_PATH},
 	]
 

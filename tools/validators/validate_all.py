@@ -75,6 +75,7 @@ from tools.validators.validate_combat_slice import (
     validate_combat_slice_64,
     validate_combat_slice_65,
 )
+from tools.maps.tiled_to_map_json import convert_tmx
 
 
 ID_RE = re.compile(r"^[a-z0-9_]+$")
@@ -83,6 +84,7 @@ VALIDATION_TARGETS = [
     ("resources/schemas/world_region.schema.json", "resources/data/world_regions/*.json"),
     ("resources/schemas/town.schema.json", "resources/data/towns/*.json"),
     ("resources/schemas/dungeon.schema.json", "resources/data/dungeons/*.json"),
+    ("resources/schemas/map.schema.json", "resources/data/maps/*.json"),
     ("resources/schemas/combat_action.schema.json", "resources/data/combat_actions/*.json"),
     ("resources/schemas/combat_encounter.schema.json", "resources/data/combat_encounters/*.json"),
     ("resources/schemas/combat_command.schema.json", "tests/data/combat_commands/*.json"),
@@ -125,6 +127,49 @@ def validate_world_region_references() -> list[str]:
     return errors
 
 
+def validate_map_integrity() -> list[str]:
+    errors: list[str] = []
+    for path in sorted((ROOT / "resources/data/maps").glob("*.json")):
+        map_data = load_json(path)
+        source_path = ROOT / str(map_data["source"]).removeprefix("res://")
+        if not source_path.exists():
+            errors.append(f"{path.relative_to(ROOT)}: source TMX does not exist: {map_data['source']}")
+        else:
+            exported = convert_tmx(source_path)
+            if exported != map_data:
+                errors.append(f"{path.relative_to(ROOT)}: JSON is not in sync with {source_path.relative_to(ROOT)}")
+        width = int(map_data["width"])
+        height = int(map_data["height"])
+        tiles = map_data["tiles"]
+        if len(tiles) != width * height:
+            errors.append(f"{path.relative_to(ROOT)}: expected {width * height} tiles, found {len(tiles)}")
+
+        occupied: set[tuple[int, int]] = set()
+        blocked: set[tuple[int, int]] = set()
+        for tile in tiles:
+            position = (int(tile["x"]), int(tile["y"]))
+            if position in occupied:
+                errors.append(f"{path.relative_to(ROOT)}: duplicate tile at {position}")
+            occupied.add(position)
+            if not (0 <= position[0] < width and 0 <= position[1] < height):
+                errors.append(f"{path.relative_to(ROOT)}: tile out of bounds at {position}")
+            if tile["type"] == "blocked":
+                blocked.add(position)
+
+        for y in range(height):
+            for x in range(width):
+                if (x, y) not in occupied:
+                    errors.append(f"{path.relative_to(ROOT)}: missing tile at {(x, y)}")
+
+        for spawn in map_data["test_spawns"]:
+            position = (int(spawn["x"]), int(spawn["y"]))
+            if not (0 <= position[0] < width and 0 <= position[1] < height):
+                errors.append(f"{path.relative_to(ROOT)}: spawn {spawn['id']} out of bounds at {position}")
+            if position in blocked:
+                errors.append(f"{path.relative_to(ROOT)}: spawn {spawn['id']} is on blocked tile {position}")
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
 
@@ -137,6 +182,7 @@ def main() -> int:
         errors.extend(validate_schema(schema_path, data_paths))
 
     errors.extend(validate_world_region_references())
+    errors.extend(validate_map_integrity())
     errors.extend(validate_combat_slice_01())
     errors.extend(validate_combat_slice_02())
     errors.extend(validate_combat_slice_03())
