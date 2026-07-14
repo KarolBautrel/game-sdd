@@ -1,6 +1,6 @@
-# Combat Unit Art Direction
+# Character Art Direction
 
-Use the current unit PNGs as the visual reference for future combat characters.
+Use the current character PNGs as the visual reference for future heroes, villains, and combat-capable NPCs. Character art lives in `assets/characters` because the same actor can be reused by combat, exploration, roster, dialogue, and future presentation layers.
 
 ## Reference Assets
 
@@ -12,24 +12,39 @@ Use the current unit PNGs as the visual reference for future combat characters.
 - `heroes/<character_id>/` stores player-side or party unit variants.
 - `villains/<character_id>/` stores hostile unit variants.
 - Each character folder owns action-state subfolders:
-  - `pose/` for idle/standing frames;
+  - `pose/` for neutral idle/standing frames, used when the nearest enemy is farther than 2 tiles;
+  - `fight-stance-idle-8-frames/` for combat-ready idle frames, used when an enemy is within 2 tiles;
   - `walk/` for movement frames;
-  - `combat/` for attack/combat frames.
-- Debug combat uses `pose` while idle, `walk` during movement, and attempts `combat` during attack feedback.
-- If a `combat` frame is missing, presentation falls back to the matching `pose` frame.
+  - `combat/` for attack frames;
+  - `hit/` for taking-damage frames;
+  - `falling-back-death/` for death frames.
+- Debug combat uses `pose` for neutral stance, `fight-stance-idle-8-frames` for nearby combat stance, `walk` during movement, `combat` during attacks, `hit` when damage is received, and `falling-back-death` when a unit dies.
+- If an action-state frame is missing, presentation falls back through compatible aliases and then to the matching `pose` frame.
+- Every production combat-capable character should ship all six visual states above before it is considered complete.
 
 ## Naming
 
 Preferred names:
 
 - `pose/<character_id>_<direction>.png`
+- `fight-stance-idle-8-frames/<character_id>_<direction>_fight-stance-idle-8-frames.png`
 - `walk/<character_id>_<direction>_walk.png`
 - `combat/<character_id>_<direction>_combat.png`
+- `hit/<character_id>_<direction>_hit.png`
+- `falling-back-death/<character_id>_<direction>_falling-back-death.png`
 
-Short walk/combat names are also accepted:
+Short action names are also accepted:
 
 - `walk/<direction>_walk.png`
 - `combat/<direction>_combat.png`
+- `hit/<direction>_hit.png`
+- `falling-back-death/<direction>_falling-back-death.png`
+
+Accepted compatibility aliases:
+
+- combat stance: `combat_idle/<character_id>_<direction>_combat_idle.png`
+- taking damage: `damage/<character_id>_<direction>_damage.png` or `hurt/<character_id>_<direction>_hurt.png`
+- death: `death/<character_id>_<direction>_death.png`
 
 ## Target Format
 

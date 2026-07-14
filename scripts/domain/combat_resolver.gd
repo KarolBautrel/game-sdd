@@ -17,6 +17,7 @@ const DEFAULT_SHIELD_WALL_COOLDOWN_TURNS := 2
 
 static func simulate(encounter: Dictionary, commands: Array) -> Dictionary:
 	var state: Dictionary = encounter.duplicate(true)
+	_apply_enemy_archetypes(state)
 	state["event_log"] = []
 	var sequence := 1
 
@@ -36,6 +37,7 @@ static func simulate(encounter: Dictionary, commands: Array) -> Dictionary:
 
 
 static func choose_enemy_command(state: Dictionary, command_id: String = "cmd_ai_001") -> Dictionary:
+	state = _state_with_archetypes(state)
 	var actor := _unit_by_id(state, state["turn_state"]["active_unit_id"])
 	if actor.is_empty() or actor["team"] != "enemy":
 		return _end_turn_command(state["turn_state"]["active_unit_id"], command_id)
@@ -691,6 +693,8 @@ static func _attack_range(weapon_profile: Dictionary, fallback: int) -> int:
 static func _action_available(state: Dictionary, actor: Dictionary, action_id: String) -> bool:
 	if actor.get("available_actions", []).has(action_id):
 		return true
+	if actor.get("learned_actions", []).has(action_id):
+		return true
 	for item: Dictionary in _loadout_items(state, actor):
 		if item.get("grants_actions", []).has(action_id):
 			return true
@@ -707,6 +711,35 @@ static func _item_action_profile_for_action(state: Dictionary, actor: Dictionary
 		if action_profiles.has(action_id):
 			return action_profiles[action_id]
 	return null
+
+
+static func _state_with_archetypes(state: Dictionary) -> Dictionary:
+	var prepared := state.duplicate(true)
+	_apply_enemy_archetypes(prepared)
+	return prepared
+
+
+static func _apply_enemy_archetypes(state: Dictionary) -> void:
+	var archetypes: Dictionary = state.get("enemy_archetypes", {})
+	if archetypes.is_empty():
+		return
+	for unit: Dictionary in state["units"]:
+		var archetype_id := str(unit.get("archetype_id", ""))
+		if unit.get("team", "") != "enemy" or archetype_id == "":
+			continue
+		if not archetypes.has(archetype_id):
+			continue
+		var archetype: Dictionary = archetypes[archetype_id]
+		var merged_actions: Array = unit.get("available_actions", []).duplicate(true)
+		for action_id: String in archetype.get("available_actions", []):
+			if not merged_actions.has(action_id):
+				merged_actions.append(action_id)
+		unit["available_actions"] = merged_actions
+		if archetype.has("loadout"):
+			var loadout: Dictionary = archetype["loadout"].duplicate(true)
+			for slot: String in unit.get("loadout", {}):
+				loadout[slot] = unit["loadout"][slot]
+			unit["loadout"] = loadout
 
 
 static func _loadout_items(state: Dictionary, actor: Dictionary) -> Array[Dictionary]:

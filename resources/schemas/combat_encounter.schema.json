@@ -109,6 +109,31 @@
         }
       }
     },
+    "enemy_archetypes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["id", "available_actions"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "available_actions": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+            "uniqueItems": true
+          },
+          "loadout": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "main_hand": { "type": ["string", "null"], "pattern": "^[a-z0-9_]+$" },
+              "off_hand": { "type": ["string", "null"], "pattern": "^[a-z0-9_]+$" },
+              "armor": { "type": ["string", "null"], "pattern": "^[a-z0-9_]+$" }
+            }
+          }
+        }
+      }
+    },
     "units": {
       "type": "array",
       "minItems": 2,
@@ -162,6 +187,12 @@
             "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
             "uniqueItems": true
           },
+          "learned_actions": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+            "uniqueItems": true
+          },
+          "archetype_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
           "equipped_weapon_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
           "loadout": {
             "type": "object",

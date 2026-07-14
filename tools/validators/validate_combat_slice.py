@@ -1968,6 +1968,115 @@ def validate_combat_slice_62() -> list[str]:
     return errors
 
 
+def validate_combat_slice_63() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_63_aimed_shot_from_bow.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_63_aimed_shot_from_bow_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    expected_events = ["combat_started", "turn_started", "action_performed", "status_applied", "hit_roll_resolved", "damage_applied"]
+    if event_types != expected_events:
+        errors.append(f"slice_63_aimed_shot_from_bow: unexpected events {event_types}")
+    if player["resources"]["ap"] != 0:
+        errors.append(f"slice_63_aimed_shot_from_bow: expected player AP 0, got {player['resources']['ap']}")
+    if enemy["resources"]["hp"] != 5:
+        errors.append(f"slice_63_aimed_shot_from_bow: expected enemy HP 5, got {enemy['resources']['hp']}")
+    if [status.get("id") for status in player["statuses"]] != ["skill_cooldown"] or player["statuses"][0].get("action_id") != "aimed_shot":
+        errors.append(f"slice_63_aimed_shot_from_bow: expected aimed_shot cooldown, got {player['statuses']}")
+
+    performed = [event for event in state["event_log"] if event["type"] == "action_performed"]
+    if len(performed) != 1 or performed[0].get("profile_id") != "hunting_bow_aimed_shot" or performed[0].get("ap_spent") != 2:
+        errors.append(f"slice_63_aimed_shot_from_bow: unexpected action payload {performed}")
+    hit_roll = next((event for event in state["event_log"] if event["type"] == "hit_roll_resolved"), None)
+    if hit_roll is None or hit_roll.get("base_hit_chance") != 90 or hit_roll.get("hit_chance") != 90 or hit_roll.get("outcome") != "hit":
+        errors.append(f"slice_63_aimed_shot_from_bow: unexpected hit roll {hit_roll}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_63_aimed_shot_from_bow: replay event log differs")
+    return errors
+
+
+def validate_combat_slice_64() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_64_learned_skill_without_weapon.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_64_learned_skill_without_weapon_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    expected_events = ["combat_started", "turn_started", "action_performed", "status_applied", "damage_applied"]
+    if event_types != expected_events:
+        errors.append(f"slice_64_learned_skill_without_weapon: unexpected events {event_types}")
+    if player["resources"]["ap"] != 0:
+        errors.append(f"slice_64_learned_skill_without_weapon: expected player AP 0, got {player['resources']['ap']}")
+    if enemy["resources"]["hp"] != 5:
+        errors.append(f"slice_64_learned_skill_without_weapon: expected enemy HP 5, got {enemy['resources']['hp']}")
+    if player.get("loadout", {}) != {}:
+        errors.append(f"slice_64_learned_skill_without_weapon: expected no loadout, got {player.get('loadout', {})}")
+    if "power_strike" not in player.get("learned_actions", []):
+        errors.append("slice_64_learned_skill_without_weapon: expected learned power_strike")
+
+    performed = [event for event in state["event_log"] if event["type"] == "action_performed"]
+    if len(performed) != 1 or performed[0].get("profile_id") != "learned_power_strike" or performed[0].get("ap_spent") != 2:
+        errors.append(f"slice_64_learned_skill_without_weapon: unexpected action payload {performed}")
+    if [status.get("id") for status in player["statuses"]] != ["skill_cooldown"] or player["statuses"][0].get("action_id") != "power_strike":
+        errors.append(f"slice_64_learned_skill_without_weapon: expected power_strike cooldown, got {player['statuses']}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_64_learned_skill_without_weapon: replay event log differs")
+    return errors
+
+
+def validate_combat_slice_65() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_65_enemy_archetype_loadout.json")
+
+    command = choose_enemy_command(encounter, "cmd_001")
+    if command["action_id"] != "ranged_attack":
+        errors.append(f"slice_65_enemy_archetype_loadout: expected AI ranged_attack, got {command['action_id']}")
+    if command["actor_id"] != "unit_enemy_001":
+        errors.append(f"slice_65_enemy_archetype_loadout: expected actor unit_enemy_001, got {command['actor_id']}")
+    if command["target"].get("unit_id") != "unit_player_001":
+        errors.append(f"slice_65_enemy_archetype_loadout: expected target unit_player_001, got {command['target'].get('unit_id')}")
+
+    result = simulate(encounter, [command])
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    expected_events = ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"]
+    if event_types != expected_events:
+        errors.append(f"slice_65_enemy_archetype_loadout: unexpected events {event_types}")
+    if player["resources"]["hp"] != 8:
+        errors.append(f"slice_65_enemy_archetype_loadout: expected player HP 8, got {player['resources']['hp']}")
+    if enemy["resources"]["ap"] != 0:
+        errors.append(f"slice_65_enemy_archetype_loadout: expected enemy AP 0, got {enemy['resources']['ap']}")
+    if enemy.get("loadout", {}).get("main_hand") != "shortbow":
+        errors.append(f"slice_65_enemy_archetype_loadout: expected archetype shortbow loadout, got {enemy.get('loadout', {})}")
+    if enemy.get("available_actions", []) != ["move", "end_turn"]:
+        errors.append(f"slice_65_enemy_archetype_loadout: expected archetype inline actions, got {enemy.get('available_actions', [])}")
+
+    performed = [event for event in state["event_log"] if event["type"] == "action_performed"]
+    if len(performed) != 1 or performed[0].get("profile_id") != "shortbow_ranged_attack":
+        errors.append(f"slice_65_enemy_archetype_loadout: unexpected action payload {performed}")
+
+    replay = simulate(encounter, [command])
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_65_enemy_archetype_loadout: replay event log differs")
+    return errors
+
+
 def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_result: str) -> list[str]:
     errors: list[str] = []
     encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
@@ -2170,6 +2279,9 @@ def main() -> int:
     errors.extend(validate_combat_slice_60())
     errors.extend(validate_combat_slice_61())
     errors.extend(validate_combat_slice_62())
+    errors.extend(validate_combat_slice_63())
+    errors.extend(validate_combat_slice_64())
+    errors.extend(validate_combat_slice_65())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:

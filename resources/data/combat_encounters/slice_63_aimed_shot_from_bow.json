@@ -1,0 +1,64 @@
+{
+  "id": "slice_63_aimed_shot_from_bow",
+  "seed": 1063,
+  "item_profiles": {
+    "hunting_bow": {
+      "id": "hunting_bow",
+      "slot": "main_hand",
+      "two_handed": true,
+      "grants_actions": ["ranged_attack", "aimed_shot"],
+      "action_profiles": {
+        "ranged_attack": { "id": "hunting_bow_ranged_attack", "action_id": "ranged_attack", "range": 4, "ap_cost": 1, "base_hit_chance": 70 },
+        "aimed_shot": { "id": "hunting_bow_aimed_shot", "action_id": "aimed_shot", "range": 4, "ap_cost": 2, "base_hit_chance": 90, "damage_bonus": 2, "cooldown_turns": 2 }
+      }
+    }
+  },
+  "grid": {
+    "width": 5,
+    "height": 3,
+    "tiles": [
+      { "x": 0, "y": 0, "type": "floor" },
+      { "x": 1, "y": 0, "type": "floor" },
+      { "x": 2, "y": 0, "type": "floor" },
+      { "x": 3, "y": 0, "type": "floor" },
+      { "x": 4, "y": 0, "type": "floor" },
+      { "x": 0, "y": 1, "type": "floor" },
+      { "x": 1, "y": 1, "type": "floor" },
+      { "x": 2, "y": 1, "type": "floor" },
+      { "x": 3, "y": 1, "type": "floor" },
+      { "x": 4, "y": 1, "type": "floor" },
+      { "x": 0, "y": 2, "type": "floor" },
+      { "x": 1, "y": 2, "type": "floor" },
+      { "x": 2, "y": 2, "type": "floor" },
+      { "x": 3, "y": 2, "type": "floor" },
+      { "x": 4, "y": 2, "type": "floor" }
+    ]
+  },
+  "units": [
+    {
+      "id": "unit_player_001",
+      "team": "player",
+      "position": { "x": 1, "y": 1 },
+      "stats": { "max_hp": 10, "strength": 4, "defense": 1, "initiative": 10, "move_points": 3, "max_ap": 2, "accuracy": 0, "evasion": 0 },
+      "resources": { "hp": 10, "ap": 2 },
+      "statuses": [],
+      "available_actions": ["move", "defend", "end_turn"],
+      "loadout": { "main_hand": "hunting_bow", "off_hand": null, "armor": null }
+    },
+    {
+      "id": "unit_enemy_001",
+      "team": "enemy",
+      "position": { "x": 4, "y": 1 },
+      "stats": { "max_hp": 10, "strength": 3, "defense": 1, "initiative": 8, "move_points": 3, "max_ap": 1, "accuracy": 0, "evasion": 0 },
+      "resources": { "hp": 10, "ap": 1 },
+      "statuses": [],
+      "available_actions": ["basic_attack", "move", "defend", "end_turn"]
+    }
+  ],
+  "turn_state": {
+    "active_unit_id": "unit_player_001",
+    "round": 1,
+    "turn_order": ["unit_player_001", "unit_enemy_001"]
+  },
+  "event_log": []
+}

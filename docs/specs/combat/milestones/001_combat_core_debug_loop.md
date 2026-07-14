@@ -105,7 +105,9 @@ The project now has:
   - legacy units without equipped weapons still use fallback combat values.
 - Special skills v1:
   - `power_strike` is implemented as the first melee special action;
-  - `power_strike` can be driven by a weapon profile.
+  - `power_strike` can be driven by a weapon profile;
+  - `aimed_shot` can be granted by a bow item profile;
+  - learned unit actions can grant skills independently from equipment.
 - Equipment/loadout v1:
   - encounters may define `item_profiles`;
   - units may equip `main_hand`, `off_hand`, and `armor` items through `loadout`;
@@ -113,6 +115,10 @@ The project now has:
   - item action profiles can define AP cost, range, hit chance, damage bonus, cooldowns, and status effects;
   - `basic_attack`, `ranged_attack`, `shield_wall`, and `power_strike` can now be gated by equipped items;
   - two-handed main-hand items reject off-hand-dependent actions when an off-hand item is present.
+- Enemy archetype loadouts v1:
+  - encounters may define `enemy_archetypes`;
+  - enemy units may reference an `archetype_id`;
+  - archetypes can provide available actions and loadout before AI command selection and command resolution.
 - Debug scene usability pass:
   - action buttons use readable labels;
   - ranged attack can be selected and tested;
@@ -189,6 +195,9 @@ Current verified slices:
 - `060_movement_points_multi_tile.md`
 - `061_ap_mp_turn_economy.md`
 - `062_enemy_ai_move_then_attack.md`
+- `063_aimed_shot_from_bow.md`
+- `064_learned_skill_without_weapon.md`
+- `065_enemy_archetype_loadout.md`
 
 ## Spec Organization
 
@@ -280,7 +289,10 @@ Latest verified scope:
 - slice 060 verifies a two-tile move that spends 2 MP and 0 AP while recording `unit_moved.path`.
 - slice 061 verifies a unit can move with MP and then attack with AP in the same turn.
 - slice 062 verifies enemy AI can spend MP to move adjacent and then choose `basic_attack` while AP remains available.
-- combat debug unit assets were reorganized into `assets/combat/units/heroes/warrior` and `assets/combat/units/villains/enemy_baddie`.
+- slice 063 verifies `aimed_shot` can be granted by a bow profile with higher hit chance, damage bonus, AP cost, and cooldown.
+- slice 064 verifies learned unit skills can grant combat actions without a weapon loadout.
+- slice 065 verifies enemy archetypes can provide loadout and actions before AI command selection.
+- character assets were reorganized into `assets/characters/heroes/warrior` and `assets/characters/villains/enemy_baddie`, so combat now consumes shared character art instead of owning unit sprites.
 - debug scene loads sprites from the new asset folders and can animate multi-step movement paths.
 - debug scene can load the dedicated movement points multi-tile test.
 - debug scene can load the dedicated AP/MP move-then-attack economy test.
@@ -349,28 +361,20 @@ Interactive combat debug scene:
 
 ### Recommended Next Development Order
 
-1. Aimed shot positive case:
-   - keep using equipment-granted bow actions;
-   - verify `aimed_shot` can come from a bow profile;
-   - verify higher hit chance/damage behavior and cooldown payload.
-2. Learned skills vs equipment skills:
-   - keep equipment-granted skills from loadout;
-   - add a separate unit-level learned skill list later;
-   - action is available if it is granted by equipment or learned by the unit.
-3. Enemy archetype loadouts:
-   - define simple archetypes such as swordsman, shieldman, archer, bruiser;
-   - build enemy encounters from loadout data instead of ad hoc action lists.
-4. More special skills:
-   - bow skill: `aimed_shot` positive case with higher hit chance and cooldown;
+1. More special skills:
+   - bow control skill: `pinning_shot` or `crippling_shot`;
    - melee control skill: `guard_break` or `crippling_strike`.
-5. Inventory/equipment outside combat:
+2. Enemy archetype expansion:
+   - define simple archetypes such as swordsman, shieldman, archer, bruiser;
+   - move showcase enemies toward reusable archetype data.
+3. Inventory/equipment outside combat:
    - defer full inventory UI until combat rules stabilize;
    - combat only needs resolved loadout data for now.
 
 Suggested next slices:
 
 ```text
-docs/specs/combat/slices/063_aimed_shot_from_bow.md
-docs/specs/combat/slices/064_learned_skill_without_weapon.md
-docs/specs/combat/slices/065_enemy_archetype_loadout.md
+docs/specs/combat/slices/066_guard_break_skill.md
+docs/specs/combat/slices/067_enemy_archetype_showcase_refactor.md
+docs/specs/combat/slices/068_inventory_loadout_bridge.md
 ```

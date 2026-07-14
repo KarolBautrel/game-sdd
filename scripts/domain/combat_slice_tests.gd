@@ -841,6 +841,80 @@ const SLICES := [
 			{"action_id": "basic_attack", "ap_spent": 1},
 		],
 	},
+	{
+		"id": "slice_63_aimed_shot_from_bow",
+		"encounter": "res://resources/data/combat_encounters/slice_63_aimed_shot_from_bow.json",
+		"commands": "res://tests/data/combat_commands/slice_63_aimed_shot_from_bow_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "status_applied", "hit_roll_resolved", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}, "statuses": ["skill_cooldown"]},
+			"unit_enemy_001": {"resources": {"hp": 5}},
+		},
+		"expected_action_costs": [
+			{"action_id": "aimed_shot", "ap_spent": 2},
+		],
+		"expected_hit_roll": {
+			"actor_id": "unit_player_001",
+			"target_unit_id": "unit_enemy_001",
+			"base_hit_chance": 90,
+			"hit_chance": 90,
+			"outcome": "hit",
+		},
+		"expected_damage": {
+			"target_unit_id": "unit_enemy_001",
+			"raw_damage": 5,
+			"damage": 5,
+			"profile_id": "hunting_bow_aimed_shot",
+		},
+	},
+	{
+		"id": "slice_64_learned_skill_without_weapon",
+		"encounter": "res://resources/data/combat_encounters/slice_64_learned_skill_without_weapon.json",
+		"commands": "res://tests/data/combat_commands/slice_64_learned_skill_without_weapon_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "status_applied", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}, "statuses": ["skill_cooldown"]},
+			"unit_enemy_001": {"resources": {"hp": 5}},
+		},
+		"expected_action_costs": [
+			{"action_id": "power_strike", "ap_spent": 2},
+		],
+		"expected_damage": {
+			"target_unit_id": "unit_enemy_001",
+			"raw_damage": 5,
+			"damage": 5,
+			"profile_id": "learned_power_strike",
+		},
+	},
+	{
+		"id": "slice_65_enemy_archetype_loadout",
+		"encounter": "res://resources/data/combat_encounters/slice_65_enemy_archetype_loadout.json",
+		"ai_command": true,
+		"expected_command_action": "ranged_attack",
+		"expected_command_actor": "unit_enemy_001",
+		"expected_command_target": "unit_player_001",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_enemy_001": {"resources": {"ap": 0}},
+			"unit_player_001": {"resources": {"hp": 8}},
+		},
+		"expected_hit_roll": {
+			"actor_id": "unit_enemy_001",
+			"target_unit_id": "unit_player_001",
+			"base_hit_chance": 85,
+			"hit_chance": 85,
+			"outcome": "hit",
+		},
+		"expected_damage": {
+			"target_unit_id": "unit_player_001",
+			"raw_damage": 2,
+			"damage": 2,
+			"profile_id": "shortbow_ranged_attack",
+		},
+	},
 ]
 
 

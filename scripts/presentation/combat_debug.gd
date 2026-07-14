@@ -33,13 +33,19 @@ const MOVEMENT_POINTS_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encoun
 const AP_MP_ECONOMY_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_61_ap_mp_turn_economy.json"
 const PIXEL_PANEL_TEXTURE_PATH := "res://assets/ui/combat/pixel_panel.png"
 const UNIT_ICON_SIZE := Vector2i(90, 90)
-const UNIT_RESOURCE_LABEL_SIZE := Vector2(104, 18)
+const UNIT_RESOURCE_LABEL_SIZE := Vector2(74, 34)
+const UNIT_RESOURCE_LABEL_OFFSET_Y := -32.0
 const TILE_SIZE := 76
 const TILE_GAP := 2
 const MOVE_STEP_SECONDS := 0.52
 const COMBAT_LUNGE_PIXELS := 18.0
 const COMBAT_WINDUP_SECONDS := 0.09
 const COMBAT_RETURN_SECONDS := 0.14
+const HIT_SHAKE_PIXELS := 7.0
+const HIT_SHAKE_SECONDS := 0.055
+const DEATH_FALL_PIXELS := 16.0
+const DEATH_SECONDS := 0.65
+const DEATH_HOLD_SECONDS := 0.45
 const UNIT_VISUALS := {
 	"unit_player_001": {"faction": "heroes", "character": "warrior"},
 	"unit_enemy_001": {"faction": "villains", "character": "enemy_orc"},
@@ -105,6 +111,7 @@ var selected_position: Dictionary = {}
 var unit_facing: Dictionary = {}
 var unit_visual_action: Dictionary = {}
 var unit_texture_cache: Dictionary = {}
+var temporary_visual_units: Dictionary = {}
 var visual_positions_px: Dictionary = {}
 var visual_generation := 0
 var animation_locked := false
@@ -125,6 +132,7 @@ func _reset_debug_encounter() -> void:
 	selected_action = "move"
 	unit_facing.clear()
 	unit_visual_action.clear()
+	temporary_visual_units.clear()
 	visual_positions_px.clear()
 	action_feed.clear()
 	current_action_title = "Combat ready"
@@ -558,7 +566,7 @@ func _run_command(command: Dictionary) -> void:
 	_set_action_banner_from_events(command, new_events)
 	_capture_unit_facings(new_events)
 	var has_movement_animation := _prepare_movement_animation(new_events)
-	var has_combat_flash := _prepare_combat_flash(new_events)
+	var has_combat_flash := _prepare_combat_flash(new_events, previous_state)
 	if has_movement_animation:
 		last_feedback = next_feedback
 		animation_locked = true
@@ -891,7 +899,7 @@ func _capture_unit_facings(events: Array) -> void:
 
 
 func _schedule_visual_reset() -> void:
-	if unit_facing.is_empty() and unit_visual_action.is_empty():
+	if unit_facing.is_empty() and unit_visual_action.is_empty() and temporary_visual_units.is_empty():
 		return
 	visual_generation += 1
 	var current_generation := visual_generation
@@ -899,6 +907,7 @@ func _schedule_visual_reset() -> void:
 		if current_generation != visual_generation:
 			return
 		unit_visual_action.clear()
+		temporary_visual_units.clear()
 		_render()
 	)
 
@@ -917,7 +926,7 @@ func _prepare_movement_animation(events: Array) -> bool:
 	return prepared
 
 
-func _prepare_combat_flash(events: Array) -> bool:
+func _prepare_combat_flash(events: Array, previous_state: Dictionary) -> bool:
 	var prepared := false
 	for event: Dictionary in events:
 		if event["type"] != "damage_applied" and event["type"] != "hit_roll_resolved":
@@ -926,6 +935,18 @@ func _prepare_combat_flash(events: Array) -> bool:
 		if actor_id == "":
 			continue
 		unit_visual_action[actor_id] = "combat"
+		if event["type"] == "damage_applied":
+			var target_id := str(event.get("target_unit_id", ""))
+			if target_id != "":
+				if int(event.get("hp_after", 1)) <= 0:
+					var defeated_unit := _unit_by_id_in_state(previous_state, target_id)
+					if not defeated_unit.is_empty():
+						defeated_unit = defeated_unit.duplicate(true)
+						defeated_unit["resources"]["hp"] = 0
+						temporary_visual_units[target_id] = defeated_unit
+					unit_visual_action[target_id] = "death"
+				else:
+					unit_visual_action[target_id] = "hit"
 		prepared = true
 	return prepared
 
@@ -937,6 +958,7 @@ func _play_combat_animation(events: Array) -> void:
 	var tween := create_tween()
 	var tween_has_steps := false
 	var animated_actors: Dictionary = {}
+	var animated_targets: Dictionary = {}
 
 	for event: Dictionary in events:
 		if event["type"] != "damage_applied" and event["type"] != "hit_roll_resolved":
@@ -958,6 +980,30 @@ func _play_combat_animation(events: Array) -> void:
 		animated_actors[actor_id] = true
 		tween_has_steps = true
 
+		if event["type"] != "damage_applied":
+			continue
+		var target_id := str(event.get("target_unit_id", ""))
+		if target_id == "" or animated_targets.has(target_id):
+			continue
+		var target_node := unit_layer.get_node_or_null(target_id)
+		if target_node == null:
+			continue
+		var target_unit := _unit_by_id(target_id)
+		if target_unit.is_empty() and temporary_visual_units.has(target_id):
+			target_unit = temporary_visual_units[target_id]
+		if target_unit.is_empty():
+			continue
+		var target_origin := _unit_visual_pixel_position(target_unit)
+		if int(event.get("hp_after", 1)) <= 0:
+			tween.tween_property(target_node, "position", target_origin + Vector2(0, DEATH_FALL_PIXELS), DEATH_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			tween.parallel().tween_property(target_node, "modulate:a", 0.72, DEATH_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			tween.tween_interval(DEATH_HOLD_SECONDS)
+		else:
+			tween.tween_property(target_node, "position", target_origin + _hit_shake_offset(actor, target_unit), HIT_SHAKE_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			tween.tween_property(target_node, "position", target_origin, HIT_SHAKE_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		animated_targets[target_id] = true
+		tween_has_steps = true
+
 	if not tween_has_steps:
 		_finish_combat_animation(current_generation)
 		return
@@ -971,6 +1017,7 @@ func _finish_combat_animation(current_generation: int) -> void:
 	if current_generation != visual_generation:
 		return
 	unit_visual_action.clear()
+	temporary_visual_units.clear()
 	animation_locked = false
 	_render()
 
@@ -984,6 +1031,15 @@ func _combat_lunge_offset(actor: Dictionary, target: Dictionary) -> Vector2:
 	if direction.length() <= 0.001:
 		return Vector2(0, -COMBAT_LUNGE_PIXELS)
 	return direction.normalized() * COMBAT_LUNGE_PIXELS
+
+
+func _hit_shake_offset(actor: Dictionary, target: Dictionary) -> Vector2:
+	var dx := float(int(target["position"]["x"]) - int(actor["position"]["x"]))
+	var dy := float(int(target["position"]["y"]) - int(actor["position"]["y"]))
+	var direction := Vector2(dx, dy)
+	if direction.length() <= 0.001:
+		return Vector2(HIT_SHAKE_PIXELS, 0)
+	return direction.normalized() * HIT_SHAKE_PIXELS
 
 
 func _play_movement_animation(events: Array, next_state: Dictionary, next_log: Array) -> void:
@@ -1020,6 +1076,7 @@ func _finish_movement_animation(events: Array, current_generation: int, next_sta
 		var actor_id := str(event.get("actor_id", ""))
 		visual_positions_px.erase(actor_id)
 		unit_visual_action.erase(actor_id)
+	temporary_visual_units.clear()
 	state = next_state
 	state["event_log"] = next_log
 	animation_locked = false
@@ -1049,8 +1106,9 @@ func _resize_board() -> void:
 
 
 func _render_units() -> void:
-	for unit: Dictionary in state["units"]:
-		if unit["resources"]["hp"] <= 0:
+	for unit: Dictionary in _visual_units_for_render():
+		var is_temporary := temporary_visual_units.has(unit["id"])
+		if unit["resources"]["hp"] <= 0 and not is_temporary:
 			continue
 		var unit_node := Control.new()
 		unit_node.name = unit["id"]
@@ -1069,6 +1127,20 @@ func _render_units() -> void:
 		sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		unit_node.add_child(sprite)
 
+		var resource_panel := PanelContainer.new()
+		resource_panel.name = "ResourcePanel"
+		resource_panel.custom_minimum_size = UNIT_RESOURCE_LABEL_SIZE
+		resource_panel.size = UNIT_RESOURCE_LABEL_SIZE
+		resource_panel.position = Vector2(
+			(float(UNIT_ICON_SIZE.x) - UNIT_RESOURCE_LABEL_SIZE.x) / 2.0,
+			UNIT_RESOURCE_LABEL_OFFSET_Y
+		)
+		resource_panel.position.x += _unit_resource_label_nudge(unit)
+		if unit_node.position.y + resource_panel.position.y < 0:
+			resource_panel.position.y = 0
+		resource_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		resource_panel.add_theme_stylebox_override("panel", _unit_resource_style(unit))
+
 		var resource_label := Label.new()
 		resource_label.name = "Resources"
 		resource_label.text = _unit_resource_text(unit)
@@ -1076,32 +1148,74 @@ func _render_units() -> void:
 		resource_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		resource_label.custom_minimum_size = UNIT_RESOURCE_LABEL_SIZE
 		resource_label.size = UNIT_RESOURCE_LABEL_SIZE
-		resource_label.position = Vector2(
-			(float(UNIT_ICON_SIZE.x) - UNIT_RESOURCE_LABEL_SIZE.x) / 2.0,
-			float(UNIT_ICON_SIZE.y) - UNIT_RESOURCE_LABEL_SIZE.y
-		)
 		resource_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		resource_label.add_theme_font_size_override("font_size", 10)
-		resource_label.add_theme_color_override("font_color", Color(0.96, 0.96, 0.90))
-		resource_label.add_theme_color_override("font_shadow_color", Color(0.04, 0.04, 0.04, 0.95))
+		resource_label.add_theme_font_size_override("font_size", 11)
+		resource_label.add_theme_color_override("font_color", Color(1.0, 0.96, 0.78))
+		resource_label.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 1.0))
 		resource_label.add_theme_constant_override("shadow_offset_x", 1)
 		resource_label.add_theme_constant_override("shadow_offset_y", 1)
-		unit_node.add_child(resource_label)
+		resource_panel.add_child(resource_label)
+		unit_node.add_child(resource_panel)
 
 		unit_layer.add_child(unit_node)
 
 
+func _visual_units_for_render() -> Array[Dictionary]:
+	var units: Array[Dictionary] = []
+	var added: Dictionary = {}
+	for unit: Dictionary in state["units"]:
+		if temporary_visual_units.has(unit["id"]):
+			units.append(temporary_visual_units[unit["id"]])
+			added[unit["id"]] = true
+			continue
+		units.append(unit)
+		added[unit["id"]] = true
+	for unit_id: String in temporary_visual_units.keys():
+		if added.has(unit_id):
+			continue
+		units.append(temporary_visual_units[unit_id])
+	return units
+
+
 func _unit_resource_text(unit: Dictionary) -> String:
-	return "HP %s  AP %s  MP %s" % [
+	return "HP %s/%s\nAP %s  MP %s" % [
 		unit["resources"].get("hp", "-"),
+		unit["stats"].get("max_hp", "-"),
 		unit["resources"].get("ap", "-"),
 		unit["resources"].get("mp", "-"),
 	]
 
 
+func _unit_resource_style(unit: Dictionary) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.08, 0.07, 0.06, 0.92)
+	style.border_width_left = 2
+	style.border_width_top = 2
+	style.border_width_right = 2
+	style.border_width_bottom = 2
+	style.border_color = Color(0.36, 0.62, 0.90) if unit.get("team", "") == "player" else Color(0.82, 0.30, 0.24)
+	style.corner_radius_top_left = 0
+	style.corner_radius_top_right = 0
+	style.corner_radius_bottom_left = 0
+	style.corner_radius_bottom_right = 0
+	style.content_margin_left = 3
+	style.content_margin_top = 1
+	style.content_margin_right = 3
+	style.content_margin_bottom = 1
+	return style
+
+
+func _unit_resource_label_nudge(unit: Dictionary) -> float:
+	var x := int(unit.get("position", {}).get("x", 0))
+	var team := str(unit.get("team", "enemy"))
+	if team == "player":
+		return -10.0 if x % 2 == 0 else -4.0
+	return 10.0 if x % 2 == 0 else 4.0
+
+
 func _unit_icon(unit: Dictionary) -> Texture2D:
 	var direction := _unit_direction(unit)
-	var visual_action := str(unit_visual_action.get(unit["id"], "pose"))
+	var visual_action := str(unit_visual_action.get(unit["id"], _default_visual_action(unit)))
 	var texture_path := _unit_texture_path(unit, direction, visual_action)
 	var cache_key := "%s:%s:%s" % [texture_path, UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y]
 	if unit_texture_cache.has(cache_key):
@@ -1131,7 +1245,9 @@ func _unit_texture_path(unit: Dictionary, direction: String, visual_action: Stri
 	var visual := _unit_visual_config(unit)
 	var faction := str(visual["faction"])
 	var character := str(visual["character"])
-	var base_path := "res://assets/combat/units/%s/%s" % [faction, character]
+	var base_path := "res://assets/characters/%s/%s" % [faction, character]
+	var legacy_character := _legacy_character_prefix(character)
+	var legacy_base_path := "res://assets/characters/%s/%s" % [faction, legacy_character]
 	var candidates: Array[String] = []
 
 	if visual_action == "walk":
@@ -1142,16 +1258,62 @@ func _unit_texture_path(unit: Dictionary, direction: String, visual_action: Stri
 		candidates.append("%s/combat/%s_combat.png" % [base_path, direction])
 		candidates.append("%s/combat/%s_%s_attack.png" % [base_path, character, direction])
 		candidates.append("%s/combat/%s_attack.png" % [base_path, direction])
+		if legacy_character != character:
+			candidates.append("%s/combat/%s_%s_combat.png" % [legacy_base_path, legacy_character, direction])
+			candidates.append("%s/combat/%s_combat.png" % [legacy_base_path, direction])
+	elif visual_action == "hit":
+		candidates.append("%s/hit/%s_%s_hit.png" % [base_path, character, direction])
+		candidates.append("%s/hit/%s_hit.png" % [base_path, direction])
+		candidates.append("%s/damage/%s_%s_damage.png" % [base_path, character, direction])
+		candidates.append("%s/damage/%s_damage.png" % [base_path, direction])
+		candidates.append("%s/hurt/%s_%s_hurt.png" % [base_path, character, direction])
+		candidates.append("%s/hurt/%s_hurt.png" % [base_path, direction])
+		candidates.append("%s/combat/%s_%s_combat.png" % [base_path, character, direction])
+		candidates.append("%s/combat/%s_combat.png" % [base_path, direction])
+		if legacy_character != character:
+			candidates.append("%s/hit/%s_%s_hit.png" % [legacy_base_path, legacy_character, direction])
+			candidates.append("%s/damage/%s_%s_damage.png" % [legacy_base_path, legacy_character, direction])
+			candidates.append("%s/hurt/%s_%s_hurt.png" % [legacy_base_path, legacy_character, direction])
+			candidates.append("%s/combat/%s_%s_combat.png" % [legacy_base_path, legacy_character, direction])
+	elif visual_action == "death":
+		candidates.append("%s/falling-back-death/%s_%s_falling-back-death.png" % [base_path, character, direction])
+		candidates.append("%s/falling-back-death/%s_falling-back-death.png" % [base_path, direction])
+		candidates.append("%s/death/%s_%s_death.png" % [base_path, character, direction])
+		candidates.append("%s/death/%s_death.png" % [base_path, direction])
+		candidates.append("%s/combat/%s_%s_combat.png" % [base_path, character, direction])
+		candidates.append("%s/combat/%s_combat.png" % [base_path, direction])
+		if legacy_character != character:
+			candidates.append("%s/falling-back-death/%s_%s_falling-back-death.png" % [legacy_base_path, legacy_character, direction])
+			candidates.append("%s/falling-back-death/%s_falling-back-death.png" % [legacy_base_path, direction])
+			candidates.append("%s/death/%s_%s_death.png" % [legacy_base_path, legacy_character, direction])
+			candidates.append("%s/combat/%s_%s_combat.png" % [legacy_base_path, legacy_character, direction])
+	elif visual_action == "combat_idle":
+		candidates.append("%s/fight-stance-idle-8-frames/%s_%s_fight-stance-idle-8-frames.png" % [base_path, character, direction])
+		candidates.append("%s/fight-stance-idle-8-frames/%s_fight-stance-idle-8-frames.png" % [base_path, direction])
+		candidates.append("%s/combat_idle/%s_%s_combat_idle.png" % [base_path, character, direction])
+		candidates.append("%s/combat_idle/%s_combat_idle.png" % [base_path, direction])
+		if legacy_character != character:
+			candidates.append("%s/fight-stance-idle-8-frames/%s_%s_fight-stance-idle-8-frames.png" % [legacy_base_path, legacy_character, direction])
+			candidates.append("%s/fight-stance-idle-8-frames/%s_fight-stance-idle-8-frames.png" % [legacy_base_path, direction])
+			candidates.append("%s/combat_idle/%s_%s_combat_idle.png" % [legacy_base_path, legacy_character, direction])
 
 	candidates.append("%s/pose/%s_%s.png" % [base_path, character, direction])
-	candidates.append("%s/pose/%s_%s.png" % [base_path, _legacy_character_prefix(character), direction])
 	candidates.append("%s/pose/%s_south.png" % [base_path, character])
-	candidates.append("%s/pose/%s_south.png" % [base_path, _legacy_character_prefix(character)])
+	if legacy_character != character:
+		candidates.append("%s/pose/%s_%s.png" % [legacy_base_path, legacy_character, direction])
+		candidates.append("%s/pose/%s_south.png" % [legacy_base_path, legacy_character])
 
 	for candidate in candidates:
 		if ResourceLoader.exists(candidate) or FileAccess.file_exists(candidate):
 			return candidate
 	return candidates[-1]
+
+
+func _default_visual_action(unit: Dictionary) -> String:
+	var nearest := _nearest_living_opponent(unit)
+	if nearest.is_empty():
+		return "pose"
+	return "combat_idle" if _tile_distance(unit["position"], nearest["position"]) <= 2 else "pose"
 
 
 func _unit_visual_config(unit: Dictionary) -> Dictionary:
@@ -1178,11 +1340,18 @@ func _nearest_living_opponent(unit: Dictionary) -> Dictionary:
 	for other: Dictionary in state["units"]:
 		if other["team"] == unit["team"] or other["resources"]["hp"] <= 0:
 			continue
-		var distance: int = abs(int(unit["position"]["x"]) - int(other["position"]["x"])) + abs(int(unit["position"]["y"]) - int(other["position"]["y"]))
+		var distance := _tile_distance(unit["position"], other["position"])
 		if distance < best_distance:
 			best_distance = distance
 			best_unit = other
 	return best_unit
+
+
+func _tile_distance(from_position: Dictionary, to_position: Dictionary) -> int:
+	return maxi(
+		abs(int(from_position["x"]) - int(to_position["x"])),
+		abs(int(from_position["y"]) - int(to_position["y"]))
+	)
 
 
 func _direction_between(from_position: Dictionary, to_position: Dictionary) -> String:
@@ -1228,8 +1397,17 @@ func _unit_by_id(unit_id: String) -> Dictionary:
 	return {}
 
 
+func _unit_by_id_in_state(source_state: Dictionary, unit_id: String) -> Dictionary:
+	for unit: Dictionary in source_state.get("units", []):
+		if unit["id"] == unit_id:
+			return unit
+	return {}
+
+
 func _action_granted_to_unit(unit: Dictionary, action_id: String) -> bool:
 	if unit.get("available_actions", []).has(action_id):
+		return true
+	if unit.get("learned_actions", []).has(action_id):
 		return true
 	for item: Dictionary in _loadout_items_for_unit(unit):
 		if item.get("grants_actions", []).has(action_id):

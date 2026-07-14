@@ -29,6 +29,7 @@ class CombatSimulationError(ValueError):
 
 
 def choose_enemy_command(state: dict[str, Any], command_id: str = "cmd_ai_001") -> dict[str, Any]:
+    state = _state_with_archetypes(state)
     actor = _unit_by_id(state, state["turn_state"]["active_unit_id"])
     if actor is None or actor["team"] != "enemy":
         return _end_turn_command(state["turn_state"]["active_unit_id"], command_id)
@@ -90,6 +91,7 @@ def choose_enemy_command(state: dict[str, Any], command_id: str = "cmd_ai_001") 
 
 def simulate(encounter: dict[str, Any], commands: list[dict[str, Any]]) -> SimulationResult:
     state = deepcopy(encounter)
+    _apply_enemy_archetypes(state)
     state["event_log"] = []
     sequence = 1
 
@@ -843,6 +845,8 @@ def _attack_range(weapon_profile: dict[str, Any], fallback: int) -> int:
 def _action_available(state: dict[str, Any], actor: dict[str, Any], action_id: str) -> bool:
     if action_id in actor.get("available_actions", []):
         return True
+    if action_id in actor.get("learned_actions", []):
+        return True
     for item in _loadout_items(state, actor):
         if action_id in item.get("grants_actions", []):
             return True
@@ -863,6 +867,30 @@ def _item_action_profile_for_action(
         if action_id in action_profiles:
             return action_profiles[action_id]
     return None
+
+
+def _state_with_archetypes(state: dict[str, Any]) -> dict[str, Any]:
+    prepared = deepcopy(state)
+    _apply_enemy_archetypes(prepared)
+    return prepared
+
+
+def _apply_enemy_archetypes(state: dict[str, Any]) -> None:
+    archetypes = state.get("enemy_archetypes", {})
+    if not archetypes:
+        return
+    for unit in state["units"]:
+        archetype_id = unit.get("archetype_id")
+        if unit.get("team") != "enemy" or not archetype_id:
+            continue
+        archetype = archetypes.get(archetype_id)
+        if archetype is None:
+            continue
+        unit["available_actions"] = list(dict.fromkeys(unit.get("available_actions", []) + archetype.get("available_actions", [])))
+        if "loadout" in archetype:
+            loadout = dict(archetype["loadout"])
+            loadout.update(unit.get("loadout", {}))
+            unit["loadout"] = loadout
 
 
 def _loadout_items(state: dict[str, Any], actor: dict[str, Any]) -> list[dict[str, Any]]:
