@@ -188,6 +188,7 @@ Current verified slices:
 - `059_shield_wall_applies_damage_reduction.md`
 - `060_movement_points_multi_tile.md`
 - `061_ap_mp_turn_economy.md`
+- `062_enemy_ai_move_then_attack.md`
 
 ## Spec Organization
 
@@ -278,6 +279,7 @@ Latest verified scope:
 - movement points v1 is specified and verified in Python and Godot.
 - slice 060 verifies a two-tile move that spends 2 MP and 0 AP while recording `unit_moved.path`.
 - slice 061 verifies a unit can move with MP and then attack with AP in the same turn.
+- slice 062 verifies enemy AI can spend MP to move adjacent and then choose `basic_attack` while AP remains available.
 - combat debug unit assets were reorganized into `assets/combat/units/heroes/warrior` and `assets/combat/units/villains/enemy_baddie`.
 - debug scene loads sprites from the new asset folders and can animate multi-step movement paths.
 - debug scene can load the dedicated movement points multi-tile test.
@@ -366,7 +368,7 @@ Interactive combat debug scene:
 Suggested next slices:
 
 ```text
-docs/specs/combat/slices/062_enemy_ai_move_then_attack.md
 docs/specs/combat/slices/063_aimed_shot_from_bow.md
 docs/specs/combat/slices/064_learned_skill_without_weapon.md
+docs/specs/combat/slices/065_enemy_archetype_loadout.md
 ```

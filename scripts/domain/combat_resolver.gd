@@ -79,7 +79,7 @@ static func choose_enemy_command(state: Dictionary, command_id: String = "cmd_ai
 		}
 
 	var nearest_player := _nearest_living_enemy(state, actor, "player")
-	var move_target := _best_step_toward(state, actor, nearest_player) if not nearest_player.is_empty() else {}
+	var move_target := _best_move_toward(state, actor, nearest_player) if not nearest_player.is_empty() else {}
 	if not move_target.is_empty() and _can_pay_move(actor) and _action_available(state, actor, "move"):
 		return {
 			"id": command_id,
@@ -962,7 +962,12 @@ static func _ranged_living_enemy(state: Dictionary, actor: Dictionary, target_te
 	return candidates[0] if not candidates.is_empty() else {}
 
 
-static func _best_step_toward(state: Dictionary, actor: Dictionary, target: Dictionary) -> Dictionary:
+static func _best_move_toward(state: Dictionary, actor: Dictionary, target: Dictionary) -> Dictionary:
+	if _movement_uses_mp(actor):
+		var multi_tile_target := _best_mp_move_toward(state, actor, target)
+		if not multi_tile_target.is_empty():
+			return multi_tile_target
+
 	var path_step := _first_path_step_toward(state, actor, target)
 	if not path_step.is_empty():
 		return path_step
@@ -993,6 +998,68 @@ static func _best_step_toward(state: Dictionary, actor: Dictionary, target: Dict
 		return int(first["x"]) < int(second["x"])
 	)
 	return legal_candidates[0] if not legal_candidates.is_empty() else {}
+
+
+static func _best_mp_move_toward(state: Dictionary, actor: Dictionary, target: Dictionary) -> Dictionary:
+	var max_steps := int(actor["resources"].get("mp", 0))
+	if max_steps <= 0:
+		return {}
+
+	var start: Dictionary = actor["position"]
+	var queue: Array[Dictionary] = [{"position": start, "path": []}]
+	var visited := {_position_key(start): true}
+	var candidates: Array[Dictionary] = []
+
+	while not queue.is_empty():
+		var item: Dictionary = queue.pop_front()
+		var current: Dictionary = item["position"]
+		var path: Array = item["path"]
+		if not path.is_empty():
+			candidates.append({"position": current, "path": path})
+		if path.size() >= max_steps:
+			continue
+
+		for neighbor: Dictionary in _path_neighbors(state, actor, current):
+			var key := _position_key(neighbor)
+			if visited.has(key):
+				continue
+			visited[key] = true
+			var next_path := path.duplicate(true)
+			next_path.append(neighbor)
+			queue.append({"position": neighbor, "path": next_path})
+
+	var current_distance := _chebyshev(start, target["position"])
+	var legal_candidates: Array[Dictionary] = []
+	for candidate: Dictionary in candidates:
+		var position: Dictionary = candidate["position"]
+		if _move_rejection(state, actor, position) != "":
+			continue
+		if _chebyshev(position, target["position"]) >= current_distance:
+			continue
+		legal_candidates.append(candidate)
+
+	legal_candidates.sort_custom(func(first: Dictionary, second: Dictionary) -> bool:
+		var first_position: Dictionary = first["position"]
+		var second_position: Dictionary = second["position"]
+		var first_adjacent := 0 if _chebyshev(first_position, target["position"]) == 1 else 1
+		var second_adjacent := 0 if _chebyshev(second_position, target["position"]) == 1 else 1
+		if first_adjacent != second_adjacent:
+			return first_adjacent < second_adjacent
+		var first_chebyshev := _chebyshev(first_position, target["position"])
+		var second_chebyshev := _chebyshev(second_position, target["position"])
+		if first_chebyshev != second_chebyshev:
+			return first_chebyshev < second_chebyshev
+		var first_manhattan := _manhattan(first_position, target["position"])
+		var second_manhattan := _manhattan(second_position, target["position"])
+		if first_manhattan != second_manhattan:
+			return first_manhattan < second_manhattan
+		if first["path"].size() != second["path"].size():
+			return first["path"].size() < second["path"].size()
+		if int(first_position["y"]) != int(second_position["y"]):
+			return int(first_position["y"]) < int(second_position["y"])
+		return int(first_position["x"]) < int(second_position["x"])
+	)
+	return legal_candidates[0]["position"] if not legal_candidates.is_empty() else {}
 
 
 static func _first_path_step_toward(state: Dictionary, actor: Dictionary, target: Dictionary) -> Dictionary:

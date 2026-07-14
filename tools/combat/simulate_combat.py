@@ -72,7 +72,7 @@ def choose_enemy_command(state: dict[str, Any], command_id: str = "cmd_ai_001") 
         }
 
     nearest_player = _nearest_living_enemy(state, actor, target_team="player")
-    move_target = _best_step_toward(state, actor, nearest_player) if nearest_player is not None else None
+    move_target = _best_move_toward(state, actor, nearest_player) if nearest_player is not None else None
     if move_target is not None and _can_pay_move(actor) and _action_available(state, actor, "move"):
         return {
             "id": command_id,
@@ -1109,11 +1109,16 @@ def _ranged_living_enemy(state: dict[str, Any], actor: dict[str, Any], target_te
     return sorted(candidates, key=lambda unit: (_chebyshev(actor["position"], unit["position"]), unit["id"]))[0] if candidates else None
 
 
-def _best_step_toward(
+def _best_move_toward(
     state: dict[str, Any],
     actor: dict[str, Any],
     target: dict[str, Any],
 ) -> dict[str, int] | None:
+    if _movement_uses_mp(actor):
+        multi_tile_target = _best_mp_move_toward(state, actor, target)
+        if multi_tile_target is not None:
+            return multi_tile_target
+
     path_step = _first_path_step_toward(state, actor, target)
     if path_step is not None:
         return path_step
@@ -1136,6 +1141,64 @@ def _best_step_toward(
         and _manhattan(position, target["position"]) < current_distance
     ]
     return sorted(legal_candidates, key=lambda position: (_manhattan(position, target["position"]), position["y"], position["x"]))[0] if legal_candidates else None
+
+
+def _best_mp_move_toward(
+    state: dict[str, Any],
+    actor: dict[str, Any],
+    target: dict[str, Any],
+) -> dict[str, int] | None:
+    max_steps = int(actor["resources"].get("mp", 0))
+    if max_steps <= 0:
+        return None
+
+    start = actor["position"]
+    queue: list[tuple[dict[str, int], list[dict[str, int]]]] = [(start, [])]
+    visited = {_position_key(start)}
+    candidates: list[tuple[dict[str, int], list[dict[str, int]]]] = []
+
+    while queue:
+        current, path = queue.pop(0)
+        if path:
+            candidates.append((current, path))
+        if len(path) >= max_steps:
+            continue
+
+        for neighbor in _path_neighbors(state, actor, current):
+            key = _position_key(neighbor)
+            if key in visited:
+                continue
+            visited.add(key)
+            queue.append((neighbor, path + [neighbor]))
+
+    candidates = [
+        (position, path)
+        for position, path in candidates
+        if _move_rejection(state, actor, position) is None
+    ]
+    if not candidates:
+        return None
+
+    current_distance = _chebyshev(start, target["position"])
+    closer_candidates = [
+        (position, path)
+        for position, path in candidates
+        if _chebyshev(position, target["position"]) < current_distance
+    ]
+    if not closer_candidates:
+        return None
+
+    return sorted(
+        closer_candidates,
+        key=lambda item: (
+            0 if _chebyshev(item[0], target["position"]) == 1 else 1,
+            _chebyshev(item[0], target["position"]),
+            _manhattan(item[0], target["position"]),
+            len(item[1]),
+            item[0]["y"],
+            item[0]["x"],
+        ),
+    )[0][0]
 
 
 def _first_path_step_toward(

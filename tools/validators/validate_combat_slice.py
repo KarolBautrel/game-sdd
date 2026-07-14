@@ -1894,6 +1894,80 @@ def validate_combat_slice_61() -> list[str]:
     return errors
 
 
+def validate_combat_slice_62() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_62_enemy_ai_move_then_attack.json")
+
+    first_command = choose_enemy_command(encounter, "cmd_001")
+    if first_command["action_id"] != "move":
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected first AI move, got {first_command['action_id']}")
+    if first_command["actor_id"] != "unit_enemy_001":
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected first AI actor unit_enemy_001, got {first_command['actor_id']}")
+    if first_command["target"].get("position") != {"x": 3, "y": 1}:
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected first AI position {{'x': 3, 'y': 1}}, got {first_command['target'].get('position')}")
+
+    after_first = simulate(encounter, [first_command]).state
+    second_command = choose_enemy_command(after_first, "cmd_002")
+    if second_command["action_id"] != "basic_attack":
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected second AI basic_attack, got {second_command['action_id']}")
+    if second_command["actor_id"] != "unit_enemy_001":
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected second AI actor unit_enemy_001, got {second_command['actor_id']}")
+    if second_command["target"].get("unit_id") != "unit_player_001":
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected second AI target unit_player_001, got {second_command['target'].get('unit_id')}")
+
+    commands = [first_command, second_command]
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    expected_events = [
+        "combat_started",
+        "turn_started",
+        "action_performed",
+        "unit_moved",
+        "action_performed",
+        "damage_applied",
+    ]
+    if result.result != "in_progress":
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected result in_progress, got {result.result}")
+    if event_types != expected_events:
+        errors.append(f"slice_62_enemy_ai_move_then_attack: unexpected events {event_types}")
+    if state["turn_state"]["active_unit_id"] != "unit_enemy_001":
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected enemy to remain active, got {state['turn_state']['active_unit_id']}")
+    if enemy["position"] != {"x": 3, "y": 1}:
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected enemy at {{'x': 3, 'y': 1}}, got {enemy['position']}")
+    if enemy["resources"]["ap"] != 0:
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected enemy AP 0, got {enemy['resources']['ap']}")
+    if enemy["resources"]["mp"] != 1:
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected enemy MP 1, got {enemy['resources']['mp']}")
+    if player["resources"]["hp"] != 8:
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected player HP 8, got {player['resources']['hp']}")
+
+    actions = [event for event in state["event_log"] if event["type"] == "action_performed"]
+    if len(actions) != 2:
+        errors.append(f"slice_62_enemy_ai_move_then_attack: expected two action_performed events, got {actions}")
+    else:
+        if actions[0].get("action_id") != "move" or actions[0].get("ap_spent") != 0 or actions[0].get("mp_spent") != 2:
+            errors.append(f"slice_62_enemy_ai_move_then_attack: unexpected move action payload {actions[0]}")
+        if actions[1].get("action_id") != "basic_attack" or actions[1].get("ap_spent") != 1:
+            errors.append(f"slice_62_enemy_ai_move_then_attack: unexpected attack action payload {actions[1]}")
+
+    moved = next((event for event in state["event_log"] if event["type"] == "unit_moved"), None)
+    expected_path = [{"x": 2, "y": 1}, {"x": 3, "y": 1}]
+    if moved is None:
+        errors.append("slice_62_enemy_ai_move_then_attack: expected unit_moved")
+    elif moved.get("path") != expected_path or moved.get("mp_spent") != 2:
+        errors.append(f"slice_62_enemy_ai_move_then_attack: unexpected move payload {moved}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_62_enemy_ai_move_then_attack: replay event log differs")
+
+    return errors
+
+
 def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_result: str) -> list[str]:
     errors: list[str] = []
     encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
@@ -2095,6 +2169,7 @@ def main() -> int:
     errors.extend(validate_combat_slice_59())
     errors.extend(validate_combat_slice_60())
     errors.extend(validate_combat_slice_61())
+    errors.extend(validate_combat_slice_62())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:

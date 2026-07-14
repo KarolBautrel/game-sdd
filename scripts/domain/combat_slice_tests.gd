@@ -817,6 +817,30 @@ const SLICES := [
 			{"action_id": "basic_attack", "ap_spent": 1},
 		],
 	},
+	{
+		"id": "slice_62_enemy_ai_move_then_attack",
+		"encounter": "res://resources/data/combat_encounters/slice_62_enemy_ai_move_then_attack.json",
+		"ai_move_then_attack_commands": true,
+		"expected_first_command_position": {"x": 3, "y": 1},
+		"expected_second_command_target": "unit_player_001",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "unit_moved", "action_performed", "damage_applied"],
+		"expected_result": "in_progress",
+		"expected_active_unit_id": "unit_enemy_001",
+		"unit_expectations": {
+			"unit_enemy_001": {"resources": {"ap": 0, "mp": 1}, "position": {"x": 3, "y": 1}},
+			"unit_player_001": {"resources": {"hp": 8}},
+		},
+		"expected_move": {
+			"from": {"x": 1, "y": 1},
+			"to": {"x": 3, "y": 1},
+			"path": [{"x": 2, "y": 1}, {"x": 3, "y": 1}],
+			"mp_spent": 2,
+		},
+		"expected_action_costs": [
+			{"action_id": "move", "ap_spent": 0, "mp_spent": 2},
+			{"action_id": "basic_attack", "ap_spent": 1},
+		],
+	},
 ]
 
 
@@ -948,6 +972,25 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 
 
 func _commands_for_spec(spec: Dictionary, encounter: Dictionary) -> Array:
+	if spec.get("ai_move_then_attack_commands", false):
+		var first_command: Dictionary = CombatResolver.choose_enemy_command(encounter, "cmd_001")
+		if first_command["action_id"] != "move":
+			push_error("%s: expected first AI move, got %s" % [spec["id"], first_command["action_id"]])
+		if first_command["actor_id"] != "unit_enemy_001":
+			push_error("%s: expected first AI actor unit_enemy_001, got %s" % [spec["id"], first_command["actor_id"]])
+		if not _positions_equal(first_command["target"].get("position", {}), spec["expected_first_command_position"]):
+			push_error("%s: expected first AI position %s, got %s" % [spec["id"], spec["expected_first_command_position"], first_command["target"].get("position", {})])
+
+		var after_first: Dictionary = CombatResolver.simulate(encounter, [first_command])["state"]
+		var second_command: Dictionary = CombatResolver.choose_enemy_command(after_first, "cmd_002")
+		if second_command["action_id"] != "basic_attack":
+			push_error("%s: expected second AI basic_attack, got %s" % [spec["id"], second_command["action_id"]])
+		if second_command["actor_id"] != "unit_enemy_001":
+			push_error("%s: expected second AI actor unit_enemy_001, got %s" % [spec["id"], second_command["actor_id"]])
+		if second_command["target"].get("unit_id", "") != spec["expected_second_command_target"]:
+			push_error("%s: expected second AI target %s, got %s" % [spec["id"], spec["expected_second_command_target"], second_command["target"].get("unit_id", "")])
+		return [first_command, second_command]
+
 	if spec.get("mixed_roles_ai_commands", false):
 		var first_command: Dictionary = CombatResolver.choose_enemy_command(encounter)
 		if first_command["action_id"] != "move":
