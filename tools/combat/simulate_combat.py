@@ -73,7 +73,7 @@ def choose_enemy_command(state: dict[str, Any], command_id: str = "cmd_ai_001") 
 
     nearest_player = _nearest_living_enemy(state, actor, target_team="player")
     move_target = _best_step_toward(state, actor, nearest_player) if nearest_player is not None else None
-    if move_target is not None and actor["resources"]["ap"] >= 1 and _action_available(state, actor, "move"):
+    if move_target is not None and _can_pay_move(actor) and _action_available(state, actor, "move"):
         return {
             "id": command_id,
             "type": "perform_action",
@@ -375,7 +375,13 @@ def _resolve_move(state: dict[str, Any], command: dict[str, Any], sequence: int)
         return _reject(state, sequence, command, rejection)
 
     old_position = dict(actor["position"])
-    actor["resources"]["ap"] -= 1
+    movement_path = _movement_path(state, actor, destination)
+    movement_cost = len(movement_path)
+    ap_spent = 0 if _movement_uses_mp(actor) else 1
+    mp_spent = movement_cost if _movement_uses_mp(actor) else 0
+    actor["resources"]["ap"] -= ap_spent
+    if _movement_uses_mp(actor):
+        actor["resources"]["mp"] -= mp_spent
     actor["position"] = dict(destination)
 
     sequence = _emit(
@@ -386,7 +392,8 @@ def _resolve_move(state: dict[str, Any], command: dict[str, Any], sequence: int)
             "command_id": command["id"],
             "actor_id": actor["id"],
             "action_id": command["action_id"],
-            "ap_spent": 1,
+            "ap_spent": ap_spent,
+            "mp_spent": mp_spent,
         },
     )
     return _emit(
@@ -398,6 +405,8 @@ def _resolve_move(state: dict[str, Any], command: dict[str, Any], sequence: int)
             "actor_id": actor["id"],
             "from": old_position,
             "to": dict(destination),
+            "path": [dict(position) for position in movement_path],
+            "mp_spent": mp_spent,
         },
     )
 
@@ -457,6 +466,8 @@ def _resolve_end_turn(state: dict[str, Any], command: dict[str, Any], sequence: 
     state["turn_state"]["active_unit_id"] = next_unit_id
     next_unit = _unit_by_id(state, next_unit_id)
     next_unit["resources"]["ap"] = next_unit["stats"]["max_ap"]
+    if "mp" in next_unit["resources"]:
+        next_unit["resources"]["mp"] = next_unit["stats"]["move_points"]
     expired_statuses = _tick_turn_start_statuses(next_unit)
 
     sequence = _emit(
@@ -610,7 +621,10 @@ def _move_rejection(
         return "actor_is_not_active_unit"
     if actor["resources"]["hp"] <= 0:
         return "actor_defeated"
-    if actor["resources"]["ap"] < 1:
+    if _movement_uses_mp(actor):
+        if actor["resources"]["mp"] < 1:
+            return "not_enough_mp"
+    elif actor["resources"]["ap"] < 1:
         return "not_enough_ap"
     if not _action_available(state, actor, "move"):
         return "action_not_available"
@@ -622,11 +636,74 @@ def _move_rejection(
         return "destination_not_walkable"
     if _living_unit_at(state, destination) is not None:
         return "destination_occupied"
-    if _chebyshev(actor["position"], destination) != 1:
+    if not _movement_uses_mp(actor) and _chebyshev(actor["position"], destination) != 1:
         return "destination_not_adjacent"
-    if _is_diagonal_step(actor["position"], destination) and not _diagonal_step_allowed(state, actor["position"], destination):
+    movement_path = _movement_path(state, actor, destination)
+    if not movement_path:
+        return "destination_unreachable"
+    if _movement_uses_mp(actor):
+        if len(movement_path) > actor["resources"]["mp"]:
+            return "not_enough_mp"
+    elif _is_diagonal_step(actor["position"], destination) and not _diagonal_step_allowed(state, actor["position"], destination):
         return "diagonal_corner_blocked"
     return None
+
+
+def _movement_uses_mp(actor: dict[str, Any]) -> bool:
+    return "mp" in actor.get("resources", {})
+
+
+def _can_pay_move(actor: dict[str, Any]) -> bool:
+    if _movement_uses_mp(actor):
+        return actor["resources"]["mp"] >= 1
+    return actor["resources"]["ap"] >= 1
+
+
+def _movement_path(
+    state: dict[str, Any],
+    actor: dict[str, Any],
+    destination: dict[str, int],
+) -> list[dict[str, int]]:
+    if not {"x", "y"}.issubset(destination):
+        return []
+    start = actor["position"]
+    if start == destination:
+        return []
+
+    queue: list[tuple[dict[str, int], list[dict[str, int]]]] = [(start, [])]
+    visited = {_position_key(start)}
+
+    while queue:
+        current, path = queue.pop(0)
+        for neighbor in _movement_neighbors(state, actor, current):
+            key = _position_key(neighbor)
+            if key in visited:
+                continue
+            next_path = path + [neighbor]
+            if neighbor == destination:
+                return next_path
+            visited.add(key)
+            queue.append((neighbor, next_path))
+
+    return []
+
+
+def _movement_neighbors(state: dict[str, Any], actor: dict[str, Any], position: dict[str, int]) -> list[dict[str, int]]:
+    candidates = [
+        {"x": position["x"] - 1, "y": position["y"]},
+        {"x": position["x"] + 1, "y": position["y"]},
+        {"x": position["x"], "y": position["y"] - 1},
+        {"x": position["x"], "y": position["y"] + 1},
+        {"x": position["x"] - 1, "y": position["y"] - 1},
+        {"x": position["x"] - 1, "y": position["y"] + 1},
+        {"x": position["x"] + 1, "y": position["y"] - 1},
+        {"x": position["x"] + 1, "y": position["y"] + 1},
+    ]
+    return [
+        candidate
+        for candidate in candidates
+        if _path_position_is_legal(state, actor, position, candidate)
+    ]
 
 
 def _reject(state: dict[str, Any], sequence: int, command: dict[str, Any], reason: str) -> int:

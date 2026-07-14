@@ -12,4 +12,4 @@ if (-not (Test-Path -LiteralPath (Join-Path $projectPath "project.godot"))) {
 }
 
 Set-Location -LiteralPath $projectPath
-& $godotPath --path $projectPath
+& $godotPath --path $projectPath --scene "res://scenes/combat/CombatDebug.tscn"

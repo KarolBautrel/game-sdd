@@ -80,7 +80,7 @@ static func choose_enemy_command(state: Dictionary, command_id: String = "cmd_ai
 
 	var nearest_player := _nearest_living_enemy(state, actor, "player")
 	var move_target := _best_step_toward(state, actor, nearest_player) if not nearest_player.is_empty() else {}
-	if not move_target.is_empty() and actor["resources"]["ap"] >= 1 and _action_available(state, actor, "move"):
+	if not move_target.is_empty() and _can_pay_move(actor) and _action_available(state, actor, "move"):
 		return {
 			"id": command_id,
 			"type": "perform_action",
@@ -297,20 +297,29 @@ static func _resolve_move(state: Dictionary, command: Dictionary, sequence: int)
 		return _reject(state, sequence, command, rejection)
 
 	var old_position: Dictionary = actor["position"].duplicate(true)
-	actor["resources"]["ap"] -= 1
+	var movement_path := _movement_path(state, actor, destination)
+	var movement_cost := movement_path.size()
+	var ap_spent := 0 if _movement_uses_mp(actor) else 1
+	var mp_spent := movement_cost if _movement_uses_mp(actor) else 0
+	actor["resources"]["ap"] -= ap_spent
+	if _movement_uses_mp(actor):
+		actor["resources"]["mp"] -= mp_spent
 	actor["position"] = destination.duplicate(true)
 
 	sequence = _emit(state, sequence, "action_performed", {
 		"command_id": command["id"],
 		"actor_id": actor["id"],
 		"action_id": command["action_id"],
-		"ap_spent": 1,
+		"ap_spent": ap_spent,
+		"mp_spent": mp_spent,
 	})
 	return _emit(state, sequence, "unit_moved", {
 		"command_id": command["id"],
 		"actor_id": actor["id"],
 		"from": old_position,
 		"to": destination.duplicate(true),
+		"path": movement_path,
+		"mp_spent": mp_spent,
 	})
 
 
@@ -359,6 +368,8 @@ static func _resolve_end_turn(state: Dictionary, command: Dictionary, sequence: 
 	state["turn_state"]["active_unit_id"] = next_unit_id
 	var next_unit := _unit_by_id(state, next_unit_id)
 	next_unit["resources"]["ap"] = next_unit["stats"]["max_ap"]
+	if next_unit["resources"].has("mp"):
+		next_unit["resources"]["mp"] = next_unit["stats"]["move_points"]
 	var expired_statuses := _tick_turn_start_statuses(next_unit)
 
 	sequence = _emit(state, sequence, "action_performed", {
@@ -466,7 +477,10 @@ static func _move_rejection(state: Dictionary, actor: Dictionary, destination: D
 		return "actor_is_not_active_unit"
 	if actor["resources"]["hp"] <= 0:
 		return "actor_defeated"
-	if actor["resources"]["ap"] < 1:
+	if _movement_uses_mp(actor):
+		if actor["resources"]["mp"] < 1:
+			return "not_enough_mp"
+	elif actor["resources"]["ap"] < 1:
 		return "not_enough_ap"
 	if not _action_available(state, actor, "move"):
 		return "action_not_available"
@@ -478,11 +492,73 @@ static func _move_rejection(state: Dictionary, actor: Dictionary, destination: D
 		return "destination_not_walkable"
 	if not _living_unit_at(state, destination).is_empty():
 		return "destination_occupied"
-	if _chebyshev(actor["position"], destination) != 1:
+	if not _movement_uses_mp(actor) and _chebyshev(actor["position"], destination) != 1:
 		return "destination_not_adjacent"
-	if _is_diagonal_step(actor["position"], destination) and not _diagonal_step_allowed(state, actor["position"], destination):
+	var movement_path := _movement_path(state, actor, destination)
+	if movement_path.is_empty():
+		return "destination_unreachable"
+	if _movement_uses_mp(actor):
+		if movement_path.size() > actor["resources"]["mp"]:
+			return "not_enough_mp"
+	elif _is_diagonal_step(actor["position"], destination) and not _diagonal_step_allowed(state, actor["position"], destination):
 		return "diagonal_corner_blocked"
 	return ""
+
+
+static func _movement_uses_mp(actor: Dictionary) -> bool:
+	return actor.get("resources", {}).has("mp")
+
+
+static func _can_pay_move(actor: Dictionary) -> bool:
+	if _movement_uses_mp(actor):
+		return actor["resources"]["mp"] >= 1
+	return actor["resources"]["ap"] >= 1
+
+
+static func _movement_path(state: Dictionary, actor: Dictionary, destination: Dictionary) -> Array:
+	if not destination.has("x") or not destination.has("y"):
+		return []
+	var start: Dictionary = actor["position"]
+	if _positions_equal(start, destination):
+		return []
+
+	var queue: Array[Dictionary] = [{"position": start, "path": []}]
+	var visited := {_position_key(start): true}
+
+	while not queue.is_empty():
+		var item: Dictionary = queue.pop_front()
+		var current: Dictionary = item["position"]
+		var path: Array = item["path"]
+		for neighbor: Dictionary in _movement_neighbors(state, actor, current):
+			var key := _position_key(neighbor)
+			if visited.has(key):
+				continue
+			var next_path := path.duplicate(true)
+			next_path.append(neighbor)
+			if _positions_equal(neighbor, destination):
+				return next_path
+			visited[key] = true
+			queue.append({"position": neighbor, "path": next_path})
+
+	return []
+
+
+static func _movement_neighbors(state: Dictionary, actor: Dictionary, position: Dictionary) -> Array[Dictionary]:
+	var candidates: Array[Dictionary] = [
+		{"x": position["x"] - 1, "y": position["y"]},
+		{"x": position["x"] + 1, "y": position["y"]},
+		{"x": position["x"], "y": position["y"] - 1},
+		{"x": position["x"], "y": position["y"] + 1},
+		{"x": position["x"] - 1, "y": position["y"] - 1},
+		{"x": position["x"] - 1, "y": position["y"] + 1},
+		{"x": position["x"] + 1, "y": position["y"] - 1},
+		{"x": position["x"] + 1, "y": position["y"] + 1},
+	]
+	var legal_candidates: Array[Dictionary] = []
+	for candidate: Dictionary in candidates:
+		if _path_position_is_legal(state, actor, position, candidate):
+			legal_candidates.append(candidate)
+	return legal_candidates
 
 
 static func _reject(state: Dictionary, sequence: int, command: Dictionary, reason: String) -> int:
@@ -1003,6 +1079,10 @@ static func _diagonal_step_allowed(state: Dictionary, origin: Dictionary, destin
 
 static func _position_key(position: Dictionary) -> String:
 	return "%s,%s" % [position["x"], position["y"]]
+
+
+static func _positions_equal(first: Dictionary, second: Dictionary) -> bool:
+	return int(first["x"]) == int(second["x"]) and int(first["y"]) == int(second["y"])
 
 
 static func _end_turn_command(actor_id: String, command_id: String) -> Dictionary:

@@ -1796,6 +1796,47 @@ def validate_combat_slice_59() -> list[str]:
     return errors
 
 
+def validate_combat_slice_60() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_60_movement_points_multi_tile.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_60_movement_points_multi_tile_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    if result.result != "in_progress":
+        errors.append(f"slice_60_movement_points_multi_tile: expected result in_progress, got {result.result}")
+    if event_types != ["combat_started", "turn_started", "action_performed", "unit_moved"]:
+        errors.append(f"slice_60_movement_points_multi_tile: unexpected events {event_types}")
+    if player["position"] != {"x": 3, "y": 1}:
+        errors.append(f"slice_60_movement_points_multi_tile: expected player at {{'x': 3, 'y': 1}}, got {player['position']}")
+    if player["resources"]["ap"] != 1:
+        errors.append(f"slice_60_movement_points_multi_tile: expected AP 1, got {player['resources']['ap']}")
+    if player["resources"]["mp"] != 1:
+        errors.append(f"slice_60_movement_points_multi_tile: expected MP 1, got {player['resources']['mp']}")
+
+    action = next((event for event in state["event_log"] if event["type"] == "action_performed"), None)
+    if action is None:
+        errors.append("slice_60_movement_points_multi_tile: expected action_performed")
+    elif action.get("ap_spent") != 0 or action.get("mp_spent") != 2:
+        errors.append(f"slice_60_movement_points_multi_tile: unexpected action payload {action}")
+
+    moved = next((event for event in state["event_log"] if event["type"] == "unit_moved"), None)
+    expected_path = [{"x": 2, "y": 1}, {"x": 3, "y": 1}]
+    if moved is None:
+        errors.append("slice_60_movement_points_multi_tile: expected unit_moved")
+    elif moved.get("from") != {"x": 1, "y": 1} or moved.get("to") != {"x": 3, "y": 1} or moved.get("path") != expected_path:
+        errors.append(f"slice_60_movement_points_multi_tile: unexpected move payload {moved}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_60_movement_points_multi_tile: replay event log differs")
+
+    return errors
+
+
 def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_result: str) -> list[str]:
     errors: list[str] = []
     encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
@@ -1995,6 +2036,7 @@ def main() -> int:
     errors.extend(validate_combat_slice_57())
     errors.extend(validate_combat_slice_58())
     errors.extend(validate_combat_slice_59())
+    errors.extend(validate_combat_slice_60())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:

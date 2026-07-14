@@ -50,6 +50,8 @@ Movement uses 8-way adjacency:
 
 Diagonal movement is allowed when the destination tile is inside bounds, walkable, and unoccupied.
 
+Multi-tile movement may target any walkable, unoccupied destination reachable by legal steps within the unit's remaining MP. The resolved movement event records the concrete step path used by presentation.
+
 ## Occupancy
 
 Rules:

@@ -17,6 +17,7 @@ The project now has:
 - Godot domain resolver;
 - Godot headless combat slice tests;
 - interactive Godot combat debug scene.
+- movement-point resource support for multi-tile movement in debug combat.
 
 ## Implemented Combat Rules
 
@@ -54,6 +55,11 @@ The project now has:
   - diagonal movement is legal;
   - diagonal melee attacks are legal;
   - AI can use diagonal steps when moving toward the player.
+- Movement points v1:
+  - units with `resources.mp` spend MP, not AP, for `move`;
+  - multi-tile movement resolves a legal path up to remaining MP;
+  - `unit_moved.path` exposes each step for presentation animation;
+  - legacy units without `resources.mp` keep the original 1 AP adjacent move behavior.
 - Deterministic event logs.
 - Replay checks for executable slices.
 - Terminal combat results:
@@ -177,6 +183,8 @@ Current verified slices:
 - `056_two_handed_blocks_shield.md`
 - `057_weapon_grants_power_strike.md`
 - `058_armor_reduces_damage.md`
+- `059_shield_wall_applies_damage_reduction.md`
+- `060_movement_points_multi_tile.md`
 
 ## Spec Organization
 
@@ -264,6 +272,15 @@ Latest verified scope:
 - `shield_wall` positive case is specified and verified in Python and Godot.
 - slice 059 verifies status-based `damage_reduction` stacking with armor mitigation and clamping final damage to minimum 1.
 - debug scene can load dedicated armor and shield wall mitigation tests.
+- movement points v1 is specified and verified in Python and Godot.
+- slice 060 verifies a two-tile move that spends 2 MP and 0 AP while recording `unit_moved.path`.
+- combat debug unit assets were reorganized into `assets/combat/units/heroes/warrior` and `assets/combat/units/villains/enemy_baddie`.
+- debug scene loads sprites from the new asset folders and can animate multi-step movement paths.
+- debug scene can load the dedicated movement points multi-tile test.
+- debug scene now renders units on a separate overlay layer with larger tactical sprites, larger grid tiles, and tweened pixel movement between tile centers.
+- Validation passed on 2026-07-14:
+  - `python tools\validators\validate_all.py`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd`
 
 ## Important Files
 
@@ -339,7 +356,7 @@ Interactive combat debug scene:
 Suggested next slices:
 
 ```text
-docs/specs/combat/slices/060_aimed_shot_from_bow.md
-docs/specs/combat/slices/061_learned_skill_without_weapon.md
-docs/specs/combat/slices/062_enemy_archetype_loadout.md
+docs/specs/combat/slices/061_aimed_shot_from_bow.md
+docs/specs/combat/slices/062_learned_skill_without_weapon.md
+docs/specs/combat/slices/063_enemy_archetype_loadout.md
 ```

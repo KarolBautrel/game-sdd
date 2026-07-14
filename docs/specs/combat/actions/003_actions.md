@@ -21,7 +21,9 @@ Rules:
 - destination must be walkable;
 - destination must be unoccupied;
 - path length must be less than or equal to remaining move allowance;
-- movement costs 1 AP in the first slice.
+- legacy units without `resources.mp` spend 1 AP and may move only one adjacent tile;
+- units with `resources.mp` spend MP equal to path length and do not spend AP for `move`;
+- multi-tile movement emits `unit_moved.path` so presentation can animate each step.
 
 ### Basic Attack
 
@@ -67,6 +69,16 @@ Rules:
 - Then AP is reduced by 1
 - And the unit position changes
 - And event `unit_moved` is emitted
+
+### MP move command
+
+- Given the active unit has 1 AP and 3 MP
+- And a legal two-step path exists to the destination
+- When it performs `move`
+- Then AP is unchanged
+- And MP is reduced by 2
+- And the unit position changes to the destination
+- And event `unit_moved` includes the two-step path
 
 ### Attack command
 

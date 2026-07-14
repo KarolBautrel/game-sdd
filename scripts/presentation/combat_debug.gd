@@ -28,16 +28,31 @@ const TWO_HANDED_BLOCKS_SHIELD_TEST_ENCOUNTER_PATH := "res://resources/data/comb
 const WEAPON_GRANTS_POWER_STRIKE_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_57_weapon_grants_power_strike.json"
 const ARMOR_REDUCES_DAMAGE_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_58_armor_reduces_damage.json"
 const SHIELD_WALL_DAMAGE_REDUCTION_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_59_shield_wall_applies_damage_reduction.json"
-const PLAYER_WARRIOR_SHEET_PATH := "res://assets/combat/units/player_warrior_sheet.png"
-const ENEMY_RAIDER_SHEET_PATH := "res://assets/combat/units/enemy_raider_sheet.png"
-const TILE_SIZE := 64
-const TILE_GAP := 4
-const UNIT_FRAME_SIZE := Vector2i(32, 32)
-const UNIT_POSE_FRAMES := {
-	"idle": 0,
-	"move": 1,
-	"attack": 2,
+const MOVEMENT_POINTS_TEST_ENCOUNTER_PATH := "res://resources/data/combat_encounters/slice_60_movement_points_multi_tile.json"
+const UNIT_ICON_SIZE := Vector2i(108, 108)
+const PLAYER_UNIT_TEXTURES := {
+	"south": "res://assets/combat/units/heroes/warrior/warrior_south.png",
+	"north": "res://assets/combat/units/heroes/warrior/warrior_north.png",
+	"east": "res://assets/combat/units/heroes/warrior/warrior_east.png",
+	"west": "res://assets/combat/units/heroes/warrior/warrior_west.png",
+	"north_east": "res://assets/combat/units/heroes/warrior/warrior_north_east.png",
+	"north_west": "res://assets/combat/units/heroes/warrior/warrior_north_west.png",
+	"south_east": "res://assets/combat/units/heroes/warrior/warrior_south_east.png",
+	"south_west": "res://assets/combat/units/heroes/warrior/warrior_south_west.png",
 }
+const ENEMY_UNIT_TEXTURES := {
+	"south": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_south.png",
+	"north": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_north.png",
+	"east": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_east.png",
+	"west": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_west.png",
+	"north_east": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_north_east.png",
+	"north_west": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_north_west.png",
+	"south_east": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_south_east.png",
+	"south_west": "res://assets/combat/units/villains/enemy_baddie/enemy_baddie_south_west.png",
+}
+const TILE_SIZE := 96
+const TILE_GAP := 8
+const MOVE_STEP_SECONDS := 0.22
 const COMMAND_ACTION_IDS := ["move", "basic_attack", "ranged_attack", "aimed_shot", "power_strike", "shield_wall", "defend", "end_turn", "enemy_ai", "enemy_turn"]
 const ACTION_LABELS := {
 	"move": "Move",
@@ -71,7 +86,9 @@ const ACTION_LABELS := {
 	"load_skill_cooldown_expires_test": "Load Skill Cooldown expires test",
 }
 
+@onready var board_root: Control = %BoardRoot
 @onready var grid_container: GridContainer = %GridContainer
+@onready var unit_layer: Control = %UnitLayer
 @onready var status_label: Label = %StatusLabel
 @onready var feedback_label: Label = %FeedbackLabel
 @onready var legend_label: Label = %LegendLabel
@@ -87,9 +104,9 @@ var last_feedback := "Select an action."
 var current_encounter_path := DEFAULT_ENCOUNTER_PATH
 var selected_scenario_id := "reset"
 var selected_position: Dictionary = {}
-var unit_visual_pose: Dictionary = {}
+var unit_facing: Dictionary = {}
 var unit_texture_cache: Dictionary = {}
-var unit_sheet_cache: Dictionary = {}
+var visual_positions_px: Dictionary = {}
 var visual_generation := 0
 
 
@@ -102,7 +119,8 @@ func _reset_debug_encounter() -> void:
 	state["event_log"] = []
 	command_index = 1
 	selected_action = "move"
-	unit_visual_pose.clear()
+	unit_facing.clear()
+	visual_positions_px.clear()
 	last_feedback = "Encounter reset."
 	var result := CombatResolver.simulate(state, [])
 	state = result["state"]
@@ -112,11 +130,16 @@ func _reset_debug_encounter() -> void:
 
 func _render() -> void:
 	_clear_grid()
+	_clear_units()
 	grid_container.columns = int(state["grid"]["width"])
+	grid_container.add_theme_constant_override("h_separation", TILE_GAP)
+	grid_container.add_theme_constant_override("v_separation", TILE_GAP)
+	_resize_board()
 
 	for y in range(int(state["grid"]["height"])):
 		for x in range(int(state["grid"]["width"])):
 			grid_container.add_child(_build_tile({"x": x, "y": y}))
+	_render_units()
 
 	_render_status()
 	_render_feedback()
@@ -137,17 +160,7 @@ func _build_tile(position: Dictionary) -> Button:
 	)
 
 	var unit := _living_unit_at(position)
-	if not unit.is_empty():
-		tile.icon = _unit_icon(unit)
-		tile.expand_icon = false
-		tile.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		tile.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
-		tile.add_theme_font_size_override("font_size", 10)
-		if unit["team"] == "player":
-			tile.modulate = Color(0.55, 0.8, 1.0)
-		else:
-			tile.modulate = Color(1.0, 0.48, 0.42)
-	elif _tile_type(position) == "blocked":
+	if _tile_type(position) == "blocked":
 		tile.modulate = Color(0.32, 0.32, 0.34)
 	elif _tile_type(position) == "highground":
 		tile.modulate = Color(0.84, 0.72, 0.42)
@@ -158,6 +171,10 @@ func _build_tile(position: Dictionary) -> Button:
 
 	if _is_active_unit_at(position):
 		tile.modulate = Color(1.0, 0.92, 0.35)
+	elif not unit.is_empty() and unit["team"] == "player":
+		tile.modulate = Color(0.55, 0.8, 1.0)
+	elif not unit.is_empty():
+		tile.modulate = Color(1.0, 0.48, 0.42)
 	elif _is_legal_target_for_selected_action(position):
 		tile.modulate = Color(0.55, 1.0, 0.55)
 	elif _positions_equal(selected_position, position):
@@ -181,10 +198,13 @@ func _tile_text(position: Dictionary) -> String:
 
 	var hp: int = unit["resources"]["hp"]
 	var ap: int = unit["resources"]["ap"]
+	var mp_label := ""
+	if unit["resources"].has("mp"):
+		mp_label = " MP %s" % unit["resources"]["mp"]
 	var tile_marker := _occupied_tile_marker(position)
 	if unit["team"] == "player":
-		return "%s\nHP %s AP %s" % [tile_marker, hp, ap]
-	return "%s\nHP %s AP %s" % [tile_marker, hp, ap]
+		return "%s\nHP %s AP %s%s" % [tile_marker, hp, ap, mp_label]
+	return "%s\nHP %s AP %s%s" % [tile_marker, hp, ap, mp_label]
 
 
 func _occupied_tile_marker(position: Dictionary) -> String:
@@ -199,13 +219,14 @@ func _occupied_tile_marker(position: Dictionary) -> String:
 
 func _render_status() -> void:
 	var active := _unit_by_id(state["turn_state"]["active_unit_id"])
-	status_label.text = "Round %s | Result: %s\nActive: %s (%s) | HP %s | AP %s | Selected: %s" % [
+	status_label.text = "Round %s | Result: %s\nActive: %s (%s) | HP %s | AP %s | MP %s | Selected: %s" % [
 		state["turn_state"]["round"],
 		_combat_result(),
 		active.get("id", "missing"),
 		active.get("team", "missing"),
 		active.get("resources", {}).get("hp", "?"),
 		active.get("resources", {}).get("ap", "?"),
+		active.get("resources", {}).get("mp", "-"),
 		ACTION_LABELS.get(selected_action, selected_action),
 	]
 
@@ -222,7 +243,7 @@ func _render_unit_list() -> void:
 	var lines: Array[String] = []
 	for unit: Dictionary in state["units"]:
 		var marker := "*" if unit["id"] == state["turn_state"]["active_unit_id"] else " "
-		lines.append("%s %s [%s] HP %s/%s AP %s/%s ACC %s EVA %s WPN %s pos (%s,%s)\n  Cooldowns: %s | Statuses: %s" % [
+		lines.append("%s %s [%s] HP %s/%s AP %s/%s MP %s/%s ACC %s EVA %s WPN %s pos (%s,%s)\n  Cooldowns: %s | Statuses: %s" % [
 			marker,
 			unit["id"],
 			unit["team"],
@@ -230,6 +251,8 @@ func _render_unit_list() -> void:
 			unit["stats"]["max_hp"],
 			unit["resources"]["ap"],
 			unit["stats"]["max_ap"],
+			unit["resources"].get("mp", "-"),
+			unit["stats"].get("move_points", "-"),
 			unit["stats"].get("accuracy", 0),
 			unit["stats"].get("evasion", 0),
 			unit.get("equipped_weapon_id", "none"),
@@ -274,7 +297,7 @@ func _render_inspect() -> void:
 		lines.append("Unit: none")
 	else:
 		lines.append("Unit: %s [%s]" % [unit["id"], unit["team"]])
-		lines.append("HP/AP: %s/%s" % [unit["resources"]["hp"], unit["resources"]["ap"]])
+		lines.append("HP/AP/MP: %s/%s/%s" % [unit["resources"]["hp"], unit["resources"]["ap"], unit["resources"].get("mp", "-")])
 
 	var command := _preview_command_for_position(selected_position)
 	if command.is_empty():
@@ -411,6 +434,7 @@ func _scenario_options() -> Array[Dictionary]:
 		{"id": "load_weapon_grants_power_strike_test", "label": "Weapon grants power strike", "path": WEAPON_GRANTS_POWER_STRIKE_TEST_ENCOUNTER_PATH},
 		{"id": "load_armor_reduces_damage_test", "label": "Armor reduces damage", "path": ARMOR_REDUCES_DAMAGE_TEST_ENCOUNTER_PATH},
 		{"id": "load_shield_wall_damage_reduction_test", "label": "Shield wall damage reduction", "path": SHIELD_WALL_DAMAGE_REDUCTION_TEST_ENCOUNTER_PATH},
+		{"id": "load_movement_points_test", "label": "Movement points multi-tile", "path": MOVEMENT_POINTS_TEST_ENCOUNTER_PATH},
 	]
 
 
@@ -471,9 +495,13 @@ func _run_command(command: Dictionary) -> void:
 	state["event_log"] = previous_log + new_events
 	last_feedback = _feedback_from_events(new_events)
 	command_index += 1
-	_capture_unit_visuals(new_events)
+	_capture_unit_facings(new_events)
+	var has_movement_animation := _prepare_movement_animation(new_events)
 	_render()
-	_schedule_visual_reset()
+	if has_movement_animation:
+		_play_movement_animation(new_events)
+	else:
+		_schedule_visual_reset()
 
 
 func _run_enemy_turn_helper() -> void:
@@ -517,7 +545,7 @@ func _run_command_without_render(command: Dictionary) -> void:
 	var new_events: Array = _events_after_startup(result["state"]["event_log"])
 	state["event_log"] = previous_log + new_events
 	command_index += 1
-	_capture_unit_visuals(new_events)
+	_capture_unit_facings(new_events)
 
 
 func _state_without_log() -> Dictionary:
@@ -569,7 +597,7 @@ func _event_summary(event: Dictionary) -> String:
 			event.get("intercept_chance", "?"),
 		]
 	if event["type"] == "unit_moved":
-		return "(%s -> %s)" % [event.get("from", {}), event.get("to", {})]
+		return "(%s -> %s, MP %s)" % [event.get("from", {}), event.get("to", {}), event.get("mp_spent", 0)]
 	if event.has("action_id"):
 		return "(%s)" % event["action_id"]
 	return ""
@@ -617,25 +645,71 @@ func _feedback_from_events(events: Array) -> String:
 	return "Command accepted."
 
 
-func _capture_unit_visuals(events: Array) -> void:
+func _capture_unit_facings(events: Array) -> void:
 	for event: Dictionary in events:
 		if event["type"] == "unit_moved":
-			unit_visual_pose[event.get("actor_id", "")] = "move"
+			unit_facing[event.get("actor_id", "")] = _direction_between(event.get("from", {}), event.get("to", {}))
 		elif event["type"] == "damage_applied":
-			unit_visual_pose[event.get("actor_id", "")] = "attack"
+			var actor := _unit_by_id(event.get("actor_id", ""))
+			var target := _unit_by_id(event.get("target_unit_id", ""))
+			if not actor.is_empty() and not target.is_empty():
+				unit_facing[actor["id"]] = _direction_between(actor["position"], target["position"])
 
 
 func _schedule_visual_reset() -> void:
-	if unit_visual_pose.is_empty():
+	if unit_facing.is_empty():
 		return
 	visual_generation += 1
 	var current_generation := visual_generation
 	get_tree().create_timer(0.35).timeout.connect(func() -> void:
 		if current_generation != visual_generation:
 			return
-		unit_visual_pose.clear()
 		_render()
 	)
+
+
+func _prepare_movement_animation(events: Array) -> bool:
+	var prepared := false
+	for event: Dictionary in events:
+		if event["type"] != "unit_moved":
+			continue
+		var actor_id := str(event.get("actor_id", ""))
+		if actor_id == "":
+			continue
+		visual_positions_px[actor_id] = _position_to_unit_top_left(event.get("from", {}))
+		prepared = true
+	return prepared
+
+
+func _play_movement_animation(events: Array) -> void:
+	visual_generation += 1
+	var current_generation := visual_generation
+	_play_movement_animation_async(events, current_generation)
+
+
+func _play_movement_animation_async(events: Array, current_generation: int) -> void:
+	for event: Dictionary in events:
+		if event["type"] != "unit_moved":
+			continue
+		var actor_id := str(event.get("actor_id", ""))
+		var path: Array = event.get("path", [event.get("to", {})])
+		var unit_node := unit_layer.get_node_or_null(actor_id)
+		for step: Dictionary in path:
+			if current_generation != visual_generation:
+				return
+			var target_position := _position_to_unit_top_left(step)
+			visual_positions_px[actor_id] = target_position
+			if unit_node != null:
+				var tween := create_tween()
+				tween.tween_property(unit_node, "position", target_position, MOVE_STEP_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+				await tween.finished
+			else:
+				_render()
+				await get_tree().create_timer(MOVE_STEP_SECONDS).timeout
+		visual_positions_px.erase(actor_id)
+	if current_generation == visual_generation:
+		_render()
+		_schedule_visual_reset()
 
 
 func _clear_grid() -> void:
@@ -643,39 +717,108 @@ func _clear_grid() -> void:
 		child.queue_free()
 
 
+func _clear_units() -> void:
+	for child in unit_layer.get_children():
+		child.queue_free()
+
+
+func _resize_board() -> void:
+	var width: int = int(state["grid"]["width"]) * TILE_SIZE + maxi(0, int(state["grid"]["width"]) - 1) * TILE_GAP
+	var height: int = int(state["grid"]["height"]) * TILE_SIZE + maxi(0, int(state["grid"]["height"]) - 1) * TILE_GAP
+	var board_size := Vector2(width, height)
+	board_root.custom_minimum_size = board_size
+	grid_container.custom_minimum_size = board_size
+	grid_container.size = board_size
+	unit_layer.custom_minimum_size = board_size
+	unit_layer.size = board_size
+
+
+func _render_units() -> void:
+	for unit: Dictionary in state["units"]:
+		if unit["resources"]["hp"] <= 0:
+			continue
+		var sprite := TextureRect.new()
+		sprite.name = unit["id"]
+		sprite.texture = _unit_icon(unit)
+		sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		sprite.custom_minimum_size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
+		sprite.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
+		sprite.position = _unit_visual_pixel_position(unit)
+		sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		unit_layer.add_child(sprite)
+
+
 func _unit_icon(unit: Dictionary) -> Texture2D:
-	var pose := str(unit_visual_pose.get(unit["id"], "idle"))
 	var team := str(unit.get("team", "enemy"))
-	var cache_key := "%s:%s" % [team, pose]
+	var direction := _unit_direction(unit)
+	var texture_path := _unit_texture_path(team, direction)
+	var cache_key := "%s:%s" % [texture_path, UNIT_ICON_SIZE]
 	if unit_texture_cache.has(cache_key):
 		return unit_texture_cache[cache_key]
 
-	var sheet_path := PLAYER_WARRIOR_SHEET_PATH if team == "player" else ENEMY_RAIDER_SHEET_PATH
-	var sheet := _unit_sheet(sheet_path)
-	if sheet == null:
+	var image := Image.new()
+	var error := image.load(texture_path)
+	if error != OK:
+		push_error("Cannot load unit texture: %s" % texture_path)
 		return null
-
-	var frame: int = UNIT_POSE_FRAMES.get(pose, 0)
-	var texture := AtlasTexture.new()
-	texture.atlas = sheet
-	texture.region = Rect2(frame * UNIT_FRAME_SIZE.x, 0, UNIT_FRAME_SIZE.x, UNIT_FRAME_SIZE.y)
+	image.resize(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y, Image.INTERPOLATE_NEAREST)
+	var texture := ImageTexture.create_from_image(image)
 	unit_texture_cache[cache_key] = texture
 	return texture
 
 
-func _unit_sheet(sheet_path: String) -> Texture2D:
-	if unit_sheet_cache.has(sheet_path):
-		return unit_sheet_cache[sheet_path]
+func _unit_direction(unit: Dictionary) -> String:
+	if unit_facing.has(unit["id"]):
+		return unit_facing[unit["id"]]
+	var nearest := _nearest_living_opponent(unit)
+	if nearest.is_empty():
+		return "south"
+	return _direction_between(unit["position"], nearest["position"])
 
-	var image := Image.new()
-	var error := image.load(sheet_path)
-	if error != OK:
-		push_error("Cannot load unit sprite sheet: %s" % sheet_path)
-		return null
 
-	var texture := ImageTexture.create_from_image(image)
-	unit_sheet_cache[sheet_path] = texture
-	return texture
+func _unit_texture_path(team: String, direction: String) -> String:
+	var textures: Dictionary = PLAYER_UNIT_TEXTURES if team == "player" else ENEMY_UNIT_TEXTURES
+	if textures.has(direction):
+		return textures[direction]
+	return textures["south"]
+
+
+func _nearest_living_opponent(unit: Dictionary) -> Dictionary:
+	var best_unit: Dictionary = {}
+	var best_distance: int = 999999
+	for other: Dictionary in state["units"]:
+		if other["team"] == unit["team"] or other["resources"]["hp"] <= 0:
+			continue
+		var distance: int = abs(int(unit["position"]["x"]) - int(other["position"]["x"])) + abs(int(unit["position"]["y"]) - int(other["position"]["y"]))
+		if distance < best_distance:
+			best_distance = distance
+			best_unit = other
+	return best_unit
+
+
+func _direction_between(from_position: Dictionary, to_position: Dictionary) -> String:
+	if from_position.is_empty() or to_position.is_empty():
+		return "south"
+	var dx := clampi(int(to_position["x"]) - int(from_position["x"]), -1, 1)
+	var dy := clampi(int(to_position["y"]) - int(from_position["y"]), -1, 1)
+	if dx == 0 and dy < 0:
+		return "north"
+	if dx == 0 and dy > 0:
+		return "south"
+	if dx > 0 and dy == 0:
+		return "east"
+	if dx < 0 and dy == 0:
+		return "west"
+	if dx > 0 and dy < 0:
+		return "north_east"
+	if dx < 0 and dy < 0:
+		return "north_west"
+	if dx > 0 and dy > 0:
+		return "south_east"
+	if dx < 0 and dy > 0:
+		return "south_west"
+	return "south"
 
 
 func _load_json(path: String) -> Variant:
@@ -700,6 +843,15 @@ func _unit_by_id(unit_id: String) -> Dictionary:
 func _living_unit_at(position: Dictionary) -> Dictionary:
 	for unit: Dictionary in state["units"]:
 		if unit["resources"]["hp"] > 0 and _positions_equal(unit["position"], position):
+			return unit
+	return {}
+
+
+func _visual_living_unit_at(position: Dictionary) -> Dictionary:
+	for unit: Dictionary in state["units"]:
+		if unit["resources"]["hp"] <= 0:
+			continue
+		if _positions_equal(unit["position"], position):
 			return unit
 	return {}
 
@@ -826,6 +978,20 @@ func _preview_command_for_position(position: Dictionary) -> Dictionary:
 
 func _positions_equal(first: Dictionary, second: Dictionary) -> bool:
 	return int(first["x"]) == int(second["x"]) and int(first["y"]) == int(second["y"])
+
+
+func _unit_visual_pixel_position(unit: Dictionary) -> Vector2:
+	if visual_positions_px.has(unit["id"]):
+		return visual_positions_px[unit["id"]]
+	return _position_to_unit_top_left(unit["position"])
+
+
+func _position_to_unit_top_left(position: Dictionary) -> Vector2:
+	var tile_origin := Vector2(
+		int(position["x"]) * (TILE_SIZE + TILE_GAP),
+		int(position["y"]) * (TILE_SIZE + TILE_GAP)
+	)
+	return tile_origin + Vector2(TILE_SIZE - UNIT_ICON_SIZE.x, TILE_SIZE - UNIT_ICON_SIZE.y) / 2.0
 
 
 func _combat_result() -> String:

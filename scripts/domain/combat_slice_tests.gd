@@ -779,6 +779,22 @@ const SLICES := [
 			"armor_id": "chainmail",
 		},
 	},
+	{
+		"id": "slice_60_movement_points_multi_tile",
+		"encounter": "res://resources/data/combat_encounters/slice_60_movement_points_multi_tile.json",
+		"commands": "res://tests/data/combat_commands/slice_60_movement_points_multi_tile_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "unit_moved"],
+		"expected_result": "in_progress",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 1, "mp": 1}, "position": {"x": 3, "y": 1}},
+		},
+		"expected_move": {
+			"from": {"x": 1, "y": 1},
+			"to": {"x": 3, "y": 1},
+			"path": [{"x": 2, "y": 1}, {"x": 3, "y": 1}],
+			"mp_spent": 2,
+		},
+	},
 ]
 
 
@@ -859,6 +875,21 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 						errors.append("%s: expected damage %s %s, got %s" % [spec["id"], key, expected_damage[key], damage_event.get(key, "")])
 				elif int(damage_event.get(key, 0)) != int(expected_damage[key]):
 					errors.append("%s: expected damage %s %s, got %s" % [spec["id"], key, expected_damage[key], damage_event.get(key, 0)])
+
+	if spec.has("expected_move"):
+		var move_event: Dictionary = _first_event(state, "unit_moved")
+		var expected_move: Dictionary = spec["expected_move"]
+		if move_event.is_empty():
+			errors.append("%s: expected unit_moved event" % spec["id"])
+		else:
+			if not _positions_equal(move_event.get("from", {}), expected_move["from"]):
+				errors.append("%s: expected move from %s, got %s" % [spec["id"], expected_move["from"], move_event.get("from", {})])
+			if not _positions_equal(move_event.get("to", {}), expected_move["to"]):
+				errors.append("%s: expected move to %s, got %s" % [spec["id"], expected_move["to"], move_event.get("to", {})])
+			if int(move_event.get("mp_spent", 0)) != int(expected_move.get("mp_spent", 0)):
+				errors.append("%s: expected move mp_spent %s, got %s" % [spec["id"], expected_move.get("mp_spent", 0), move_event.get("mp_spent", 0)])
+			if not _paths_equal(move_event.get("path", []), expected_move["path"]):
+				errors.append("%s: expected move path %s, got %s" % [spec["id"], expected_move["path"], move_event.get("path", [])])
 
 	if spec.has("expected_active_unit_id") and state["turn_state"]["active_unit_id"] != spec["expected_active_unit_id"]:
 		errors.append("%s: expected active unit %s, got %s" % [spec["id"], spec["expected_active_unit_id"], state["turn_state"]["active_unit_id"]])
@@ -993,6 +1024,15 @@ func _event_types(state: Dictionary) -> Array[String]:
 
 func _positions_equal(actual: Dictionary, expected: Dictionary) -> bool:
 	return int(actual["x"]) == int(expected["x"]) and int(actual["y"]) == int(expected["y"])
+
+
+func _paths_equal(actual: Array, expected: Array) -> bool:
+	if actual.size() != expected.size():
+		return false
+	for index in range(expected.size()):
+		if not _positions_equal(actual[index], expected[index]):
+			return false
+	return true
 
 
 func _first_event(state: Dictionary, event_type: String) -> Dictionary:
