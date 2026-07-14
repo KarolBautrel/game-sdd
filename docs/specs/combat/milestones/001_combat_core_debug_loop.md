@@ -74,6 +74,7 @@ Current verified slices:
 - `014_victory_last_enemy_defeated.md`
 - `015_defeat_last_player_defeated.md`
 - `016_command_after_combat_end_rejected.md`
+- `017_debug_legal_target_feedback.md`
 
 ## Latest Update
 
@@ -84,6 +85,8 @@ Latest verified scope:
 - full player -> enemy -> player round cycle is verified in Python and Godot;
 - victory and defeat are verified in Python and Godot;
 - commands after combat end are rejected.
+- debug scene highlights active unit and legal targets using resolver-backed checks;
+- debug scene displays last accepted action or rejection reason.
 
 ## Important Files
 
@@ -145,15 +148,14 @@ These specs exist as planned placeholders:
 
 ## Recommended Next Step
 
-Implement basic combat UX polish:
+Implement combat lifecycle polish:
 
-- highlight active unit;
-- highlight legal movement tiles for selected unit;
-- highlight legal attack targets;
-- show last rejection reason as a visible message.
+- add a reset/reload button for the debug encounter;
+- add a one-click enemy turn helper;
+- consider showing turn order and current round more clearly.
 
 Suggested slice:
 
 ```text
-docs/specs/combat/slices/017_debug_legal_target_feedback.md
+docs/specs/combat/slices/018_debug_reset_and_enemy_turn_helper.md
 ```

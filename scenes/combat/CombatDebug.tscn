@@ -37,6 +37,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Combat status"
 
+[node name="FeedbackLabel" type="Label" parent="RootMargin/RootHBox/LeftPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Feedback"
+
 [node name="GridContainer" type="GridContainer" parent="RootMargin/RootHBox/LeftPanel"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -69,4 +75,3 @@ layout_mode = 2
 size_flags_horizontal = 3
 autowrap_mode = 3
 text = ""
-

@@ -8,12 +8,14 @@ const TILE_GAP := 4
 
 @onready var grid_container: GridContainer = %GridContainer
 @onready var status_label: Label = %StatusLabel
+@onready var feedback_label: Label = %FeedbackLabel
 @onready var event_log_label: Label = %EventLogLabel
 @onready var command_buttons: VBoxContainer = %CommandButtons
 
 var state: Dictionary = {}
 var command_index := 1
 var selected_action := "move"
+var last_feedback := "Select an action."
 
 
 func _ready() -> void:
@@ -33,6 +35,7 @@ func _render() -> void:
 			grid_container.add_child(_build_tile({"x": x, "y": y}))
 
 	_render_status()
+	_render_feedback()
 	_render_event_log()
 	_render_command_buttons()
 
@@ -56,6 +59,11 @@ func _build_tile(position: Dictionary) -> Button:
 		tile.modulate = Color(0.32, 0.32, 0.34)
 	else:
 		tile.modulate = Color(0.64, 0.66, 0.58)
+
+	if _is_active_unit_at(position):
+		tile.modulate = Color(1.0, 0.92, 0.35)
+	elif _is_legal_target_for_selected_action(position):
+		tile.modulate = Color(0.55, 1.0, 0.55)
 
 	return tile
 
@@ -82,6 +90,10 @@ func _render_status() -> void:
 		active.get("resources", {}).get("ap", "?"),
 		selected_action,
 	]
+
+
+func _render_feedback() -> void:
+	feedback_label.text = "Feedback: %s" % last_feedback
 
 
 func _render_event_log() -> void:
@@ -112,6 +124,7 @@ func _render_command_buttons() -> void:
 			elif action_id in ["defend", "end_turn"]:
 				_run_command(_build_command(action_id, {}))
 			else:
+				last_feedback = "Select a highlighted target."
 				_render()
 		)
 		command_buttons.add_child(button)
@@ -144,13 +157,16 @@ func _build_command(action_id: String, target: Dictionary) -> Dictionary:
 
 func _run_command(command: Dictionary) -> void:
 	if _combat_result() != "in_progress":
+		last_feedback = "Combat already ended."
 		_render()
 		return
 
 	var previous_log: Array = state["event_log"].duplicate(true)
 	var result := CombatResolver.simulate(_state_without_log(), [command])
 	state = result["state"]
-	state["event_log"] = previous_log + _events_after_startup(result["state"]["event_log"])
+	var new_events: Array = _events_after_startup(result["state"]["event_log"])
+	state["event_log"] = previous_log + new_events
+	last_feedback = _feedback_from_events(new_events)
 	command_index += 1
 	_render()
 
@@ -182,6 +198,25 @@ func _event_summary(event: Dictionary) -> String:
 	if event.has("action_id"):
 		return "(%s)" % event["action_id"]
 	return ""
+
+
+func _feedback_from_events(events: Array) -> String:
+	for event: Dictionary in events:
+		if event["type"] == "command_rejected":
+			return "Rejected: %s" % event.get("reason", "unknown")
+	for event: Dictionary in events:
+		if event["type"] == "combat_ended":
+			return "Combat ended: %s" % event.get("result", "unknown")
+	for event: Dictionary in events:
+		if event["type"] == "damage_applied":
+			return "Damage: %s to %s" % [event.get("damage", "?"), event.get("target_unit_id", "?")]
+	for event: Dictionary in events:
+		if event["type"] == "unit_moved":
+			return "Moved to %s" % event.get("to", {})
+	for event: Dictionary in events:
+		if event["type"] == "status_applied":
+			return "Status applied: %s" % event.get("status", {}).get("id", "unknown")
+	return "Command accepted."
 
 
 func _clear_grid() -> void:
@@ -220,6 +255,38 @@ func _tile_type(position: Dictionary) -> String:
 		if int(tile["x"]) == int(position["x"]) and int(tile["y"]) == int(position["y"]):
 			return tile["type"]
 	return ""
+
+
+func _is_active_unit_at(position: Dictionary) -> bool:
+	var active := _unit_by_id(state["turn_state"]["active_unit_id"])
+	return not active.is_empty() and active["resources"]["hp"] > 0 and _positions_equal(active["position"], position)
+
+
+func _is_legal_target_for_selected_action(position: Dictionary) -> bool:
+	if _combat_result() != "in_progress":
+		return false
+	if selected_action == "move":
+		return _command_would_be_accepted(_build_command("move", {
+			"type": "tile",
+			"position": position,
+		}))
+	if selected_action == "basic_attack":
+		var unit := _living_unit_at(position)
+		if unit.is_empty():
+			return false
+		return _command_would_be_accepted(_build_command("basic_attack", {
+			"type": "unit",
+			"unit_id": unit["id"],
+		}))
+	return false
+
+
+func _command_would_be_accepted(command: Dictionary) -> bool:
+	var result: Dictionary = CombatResolver.simulate(_state_without_log(), [command])
+	for event: Dictionary in _events_after_startup(result["state"]["event_log"]):
+		if event["type"] == "command_rejected":
+			return false
+	return true
 
 
 func _positions_equal(first: Dictionary, second: Dictionary) -> bool:
