@@ -2,7 +2,7 @@ extends SceneTree
 
 const WIDTH := 10
 const HEIGHT := 10
-const TILE_SIZE := 104
+const TILE_SIZE := 112
 const OUTPUT_DIR := "res://assets/combat/terrain/backgrounds"
 
 const GRASS_SIZE := 64

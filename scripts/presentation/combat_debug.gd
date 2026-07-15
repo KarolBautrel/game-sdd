@@ -26,10 +26,10 @@ const GRASS_FLOOR_TEXTURE_PATHS := [
 	"res://assets/combat/terrain/grass/meadow_grass_floor_14.png",
 	"res://assets/combat/terrain/grass/meadow_grass_floor_15.png",
 ]
-const UNIT_ICON_SIZE := Vector2i(142, 142)
-const UNIT_RESOURCE_LABEL_SIZE := Vector2(104, 36)
+const UNIT_ICON_SIZE := Vector2i(150, 150)
+const UNIT_RESOURCE_LABEL_SIZE := Vector2(112, 36)
 const UNIT_RESOURCE_LABEL_OFFSET_Y := 6.0
-const TILE_SIZE := 104
+const TILE_SIZE := 112
 const GRASS_PATCH_SIZE := 64
 const DECORATION_SIZE_BY_KIND := {
 	"grass_tuft": Vector2(52, 52),
@@ -85,6 +85,7 @@ const ACTION_LABELS := CombatTextUtil.ACTION_LABELS
 @onready var grid_container: GridContainer = %GridContainer
 @onready var unit_layer: Control = %UnitLayer
 @onready var action_panel: PanelContainer = %ActionPanel
+@onready var bottom_hud: PanelContainer = %BottomHud
 @onready var action_title_label: Label = %ActionTitleLabel
 @onready var action_detail_label: Label = %ActionDetailLabel
 @onready var action_feed_label: Label = %ActionFeedLabel
@@ -94,7 +95,9 @@ const ACTION_LABELS := CombatTextUtil.ACTION_LABELS
 @onready var unit_list_label: Label = %UnitListLabel
 @onready var inspect_label: Label = %InspectLabel
 @onready var event_log_label: Label = %EventLogLabel
-@onready var command_buttons: VBoxContainer = %CommandButtons
+@onready var command_buttons: HBoxContainer = %CommandButtons
+@onready var turn_order_panel: PanelContainer = %TurnOrderPanel
+@onready var turn_order_label: Label = %TurnOrderLabel
 
 var state: Dictionary = {}
 var command_index := 1
@@ -163,6 +166,7 @@ func _render() -> void:
 	_render_feedback()
 	_render_legend()
 	_render_unit_list()
+	_render_turn_order()
 	_render_inspect()
 	_render_event_log()
 	_render_command_buttons()
@@ -618,6 +622,24 @@ func _render_unit_list() -> void:
 	unit_list_label.text = "\n".join(lines)
 
 
+func _render_turn_order() -> void:
+	var active_id := str(state.get("turn_state", {}).get("active_unit_id", ""))
+	var labels: Array[String] = []
+	for unit_id in state.get("turn_state", {}).get("turn_order", []):
+		var unit := _unit_by_id(str(unit_id))
+		if unit.is_empty() or unit.get("resources", {}).get("hp", 0) <= 0:
+			continue
+		var marker := ">" if str(unit_id) == active_id else " "
+		labels.append("%s %s  HP %s  AP %s  MP %s" % [
+			marker,
+			_unit_display_name(str(unit_id)),
+			unit["resources"].get("hp", "-"),
+			unit["resources"].get("ap", "-"),
+			unit["resources"].get("mp", "-"),
+		])
+	turn_order_label.text = "TURN ORDER\n%s" % "\n".join(labels)
+
+
 func _status_summary(unit: Dictionary) -> String:
 	var status_labels: Array[String] = []
 	for status: Dictionary in unit["statuses"]:
@@ -693,17 +715,15 @@ func _render_command_buttons() -> void:
 	var primary_actions := _visible_primary_action_ids()
 	_sync_selected_action_with_visible_actions(primary_actions)
 
-	_add_button_section("Actions")
+	var slot := 1
 	for action_id in primary_actions:
-		_add_action_button(action_id)
+		_add_action_button(action_id, slot)
+		slot += 1
 
 	var debug_actions := _visible_debug_action_ids()
-	if not debug_actions.is_empty():
-		_add_button_section("Enemy")
-		for action_id in debug_actions:
-			_add_action_button(action_id)
-
-	_add_button_section("Encounter")
+	for action_id in debug_actions:
+		_add_action_button(action_id, slot)
+		slot += 1
 	_add_scenario_picker()
 
 
@@ -742,10 +762,12 @@ func _add_button_section(title: String) -> void:
 	command_buttons.add_child(label)
 
 
-func _add_action_button(action_id: String) -> void:
+func _add_action_button(action_id: String, slot: int = 0) -> void:
 	var button := Button.new()
-	button.text = ACTION_LABELS.get(action_id, action_id)
-	button.custom_minimum_size = Vector2(0, 30)
+	var label: String = ACTION_LABELS.get(action_id, action_id)
+	button.text = "%s\n%s" % [slot, label] if slot > 0 and slot <= 9 else label
+	button.custom_minimum_size = Vector2(132, 62)
+	button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	button.add_theme_font_size_override("font_size", 12)
 	button.add_theme_color_override("font_color", Color(0.94, 0.88, 0.72))
 	button.add_theme_color_override("font_pressed_color", Color(1.0, 0.86, 0.38))
@@ -754,6 +776,7 @@ func _add_action_button(action_id: String) -> void:
 	button.button_pressed = selected_action == action_id
 	button.modulate = Color(1.0, 0.88, 0.46) if selected_action == action_id else Color(0.92, 0.88, 0.78)
 	button.disabled = animation_locked or _combat_result() != "in_progress"
+	_apply_skill_button_style(button, selected_action == action_id)
 	button.pressed.connect(func() -> void:
 		if animation_locked:
 			return
@@ -774,10 +797,38 @@ func _add_action_button(action_id: String) -> void:
 	command_buttons.add_child(button)
 
 
+func _apply_skill_button_style(button: Button, selected: bool) -> void:
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = Color(0.06, 0.07, 0.045, 0.96)
+	normal.border_color = Color(0.44, 0.34, 0.16) if not selected else Color(1.0, 0.76, 0.22)
+	normal.border_width_left = 2
+	normal.border_width_top = 2
+	normal.border_width_right = 2
+	normal.border_width_bottom = 2
+	normal.content_margin_left = 6
+	normal.content_margin_top = 4
+	normal.content_margin_right = 6
+	normal.content_margin_bottom = 4
+
+	var hover := normal.duplicate()
+	hover.bg_color = Color(0.10, 0.11, 0.065, 0.98)
+	hover.border_color = Color(0.95, 0.70, 0.28)
+
+	var pressed := normal.duplicate()
+	pressed.bg_color = Color(0.13, 0.10, 0.045, 0.98)
+	pressed.border_color = Color(1.0, 0.84, 0.35)
+
+	button.add_theme_stylebox_override("normal", normal)
+	button.add_theme_stylebox_override("hover", hover)
+	button.add_theme_stylebox_override("pressed", pressed)
+	button.add_theme_stylebox_override("disabled", normal)
+	button.add_theme_stylebox_override("focus", pressed)
+
+
 func _add_scenario_picker() -> void:
 	var picker := OptionButton.new()
-	picker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	picker.custom_minimum_size = Vector2(0, 28)
+	picker.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	picker.custom_minimum_size = Vector2(210, 30)
 	picker.add_theme_font_size_override("font_size", 11)
 
 	var selected_index := 0
@@ -796,10 +847,10 @@ func _add_scenario_picker() -> void:
 	command_buttons.add_child(picker)
 
 	var load_button := Button.new()
-	load_button.text = "Enter encounter"
-	load_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	load_button.text = "Load"
+	load_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	load_button.disabled = animation_locked
-	load_button.custom_minimum_size = Vector2(0, 28)
+	load_button.custom_minimum_size = Vector2(86, 30)
 	load_button.add_theme_font_size_override("font_size", 11)
 	load_button.pressed.connect(func() -> void:
 		_load_selected_scenario()
@@ -1015,16 +1066,19 @@ func _apply_pixel_theme() -> void:
 		panel_style.content_margin_right = 12
 		panel_style.content_margin_bottom = 8
 		action_panel.add_theme_stylebox_override("panel", panel_style)
+		bottom_hud.add_theme_stylebox_override("panel", panel_style)
+		turn_order_panel.add_theme_stylebox_override("panel", panel_style)
 
 	var action_title_color := Color(1.0, 0.86, 0.38)
 	var action_text_color := Color(0.96, 0.92, 0.80)
 	var shadow_color := Color(0.05, 0.04, 0.03, 1.0)
-	for label: Label in [action_title_label, action_detail_label, action_feed_label, status_label, feedback_label, legend_label, unit_list_label, inspect_label, event_log_label]:
+	for label: Label in [action_title_label, action_detail_label, action_feed_label, status_label, feedback_label, legend_label, unit_list_label, inspect_label, event_log_label, turn_order_label]:
 		label.add_theme_color_override("font_color", action_text_color)
 		label.add_theme_color_override("font_shadow_color", shadow_color)
 		label.add_theme_constant_override("shadow_offset_x", 1)
 		label.add_theme_constant_override("shadow_offset_y", 1)
 	action_title_label.add_theme_color_override("font_color", action_title_color)
+	turn_order_label.add_theme_color_override("font_color", action_title_color)
 
 
 func _load_pixel_ui_texture(path: String) -> Texture2D:

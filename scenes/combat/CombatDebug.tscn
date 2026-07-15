@@ -28,89 +28,59 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
 
-[node name="RootScroll" type="ScrollContainer" parent="RootMargin"]
+[node name="RootVBox" type="VBoxContainer" parent="RootMargin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 0
+theme_override_constants/separation = 8
 
-[node name="RootHBox" type="HBoxContainer" parent="RootMargin/RootScroll"]
+[node name="TopHud" type="HBoxContainer" parent="RootMargin/RootVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 58)
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="TopLeft" type="VBoxContainer" parent="RootMargin/RootVBox/TopHud"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 14
+theme_override_constants/separation = 2
 
-[node name="LeftPanel" type="VBoxContainer" parent="RootMargin/RootScroll/RootHBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 4.0
-theme_override_constants/separation = 6
-
-[node name="TitleLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/LeftPanel"]
+[node name="TitleLabel" type="Label" parent="RootMargin/RootVBox/TopHud/TopLeft"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Old Mine Skirmish"
 
-[node name="ActionPanel" type="PanelContainer" parent="RootMargin/RootScroll/RootHBox/LeftPanel"]
-unique_name_in_owner = true
-layout_mode = 2
-custom_minimum_size = Vector2(0, 84)
-
-[node name="ActionVBox" type="VBoxContainer" parent="RootMargin/RootScroll/RootHBox/LeftPanel/ActionPanel"]
-layout_mode = 2
-theme_override_constants/separation = 2
-
-[node name="ActionTitleLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/LeftPanel/ActionPanel/ActionVBox"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 15
-text = "Action"
-
-[node name="ActionDetailLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/LeftPanel/ActionPanel/ActionVBox"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 11
-autowrap_mode = 3
-text = "Action detail"
-
-[node name="ActionFeedLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/LeftPanel/ActionPanel/ActionVBox"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-autowrap_mode = 3
-text = "Recent actions"
-
-[node name="StatusLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/LeftPanel"]
+[node name="StatusLabel" type="Label" parent="RootMargin/RootVBox/TopHud/TopLeft"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
 text = "Combat status"
 
-[node name="FeedbackLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/LeftPanel"]
+[node name="TurnOrderPanel" type="PanelContainer" parent="RootMargin/RootVBox/TopHud"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Feedback"
+custom_minimum_size = Vector2(360, 0)
+size_flags_horizontal = 0
 
-[node name="LegendLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/LeftPanel"]
+[node name="TurnOrderLabel" type="Label" parent="RootMargin/RootVBox/TopHud/TurnOrderPanel"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Legend"
+theme_override_font_sizes/font_size = 11
+autowrap_mode = 3
+text = "Turn order"
 
-[node name="BoardRoot" type="Control" parent="RootMargin/RootScroll/RootHBox/LeftPanel"]
+[node name="BoardRoot" type="Control" parent="RootMargin/RootVBox"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 3
 
-[node name="BoardBackdrop" type="ColorRect" parent="RootMargin/RootScroll/RootHBox/LeftPanel/BoardRoot"]
+[node name="BoardBackdrop" type="ColorRect" parent="RootMargin/RootVBox/BoardRoot"]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = -6.0
@@ -120,7 +90,7 @@ offset_bottom = 646.0
 mouse_filter = 2
 color = Color(0.101961, 0.0745098, 0.0431373, 1)
 
-[node name="BoardTerrain" type="TextureRect" parent="RootMargin/RootScroll/RootHBox/LeftPanel/BoardRoot"]
+[node name="BoardTerrain" type="TextureRect" parent="RootMargin/RootVBox/BoardRoot"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 0
@@ -130,7 +100,7 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 0
 
-[node name="GridContainer" type="GridContainer" parent="RootMargin/RootScroll/RootHBox/LeftPanel/BoardRoot"]
+[node name="GridContainer" type="GridContainer" parent="RootMargin/RootVBox/BoardRoot"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 0
@@ -140,7 +110,7 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 6
 
-[node name="UnitLayer" type="Control" parent="RootMargin/RootScroll/RootHBox/LeftPanel/BoardRoot"]
+[node name="UnitLayer" type="Control" parent="RootMargin/RootVBox/BoardRoot"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 0
@@ -148,60 +118,78 @@ offset_right = 768.0
 offset_bottom = 640.0
 mouse_filter = 2
 
-[node name="RightPanel" type="VBoxContainer" parent="RootMargin/RootScroll/RootHBox"]
+[node name="BottomHud" type="PanelContainer" parent="RootMargin/RootVBox"]
+unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(430, 0)
+custom_minimum_size = Vector2(0, 118)
+size_flags_horizontal = 3
+
+[node name="BottomHBox" type="HBoxContainer" parent="RootMargin/RootVBox/BottomHud"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ActionPanel" type="PanelContainer" parent="RootMargin/RootVBox/BottomHud/BottomHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(440, 0)
 size_flags_horizontal = 1
-size_flags_stretch_ratio = 1.0
-theme_override_constants/separation = 4
 
-[node name="ActionsTitle" type="Label" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
+[node name="ActionVBox" type="VBoxContainer" parent="RootMargin/RootVBox/BottomHud/BottomHBox/ActionPanel"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
-text = "Actions"
+theme_override_constants/separation = 2
 
-[node name="CommandButtons" type="VBoxContainer" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
+[node name="ActionTitleLabel" type="Label" parent="RootMargin/RootVBox/BottomHud/BottomHBox/ActionPanel/ActionVBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_font_sizes/font_size = 15
+text = "Action"
 
-[node name="UnitsTitle" type="Label" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 11
-text = "Units"
-
-[node name="UnitListLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
+[node name="ActionDetailLabel" type="Label" parent="RootMargin/RootVBox/BottomHud/BottomHBox/ActionPanel/ActionVBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = ""
-
-[node name="InspectTitle" type="Label" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
-layout_mode = 2
 theme_override_font_sizes/font_size = 11
-text = "Tile"
+autowrap_mode = 3
+text = "Action detail"
 
-[node name="InspectLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
+[node name="ActionFeedLabel" type="Label" parent="RootMargin/RootVBox/BottomHud/BottomHBox/ActionPanel/ActionVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 autowrap_mode = 3
-text = ""
+text = "Recent actions"
 
-[node name="EventLogTitle" type="Label" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 11
-text = "Battle Log"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 150)
-size_flags_vertical = 3
-
-[node name="EventLogLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/RightPanel/ScrollContainer"]
+[node name="CommandButtons" type="HBoxContainer" parent="RootMargin/RootVBox/BottomHud/BottomHBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-autowrap_mode = 3
-theme_override_font_sizes/font_size = 10
+alignment = 1
+theme_override_constants/separation = 6
+
+[node name="HiddenDebug" type="Control" parent="."]
+visible = false
+layout_mode = 1
+
+[node name="FeedbackLabel" type="Label" parent="HiddenDebug"]
+unique_name_in_owner = true
+layout_mode = 0
+text = "Feedback"
+
+[node name="LegendLabel" type="Label" parent="HiddenDebug"]
+unique_name_in_owner = true
+layout_mode = 0
+text = "Legend"
+
+[node name="UnitListLabel" type="Label" parent="HiddenDebug"]
+unique_name_in_owner = true
+layout_mode = 0
+text = ""
+
+[node name="InspectLabel" type="Label" parent="HiddenDebug"]
+unique_name_in_owner = true
+layout_mode = 0
+text = ""
+
+[node name="EventLogLabel" type="Label" parent="HiddenDebug"]
+unique_name_in_owner = true
+layout_mode = 0
 text = ""
