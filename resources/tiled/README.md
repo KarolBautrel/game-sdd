@@ -22,6 +22,6 @@ The generated JSON in `resources/data/maps/` is consumed by validators and futur
 ## Terrain Art Direction
 
 - Terrain art should read like a tactical 2.5D battlefield, not a flat top-down editor grid.
-- Match the current reference direction in `assets/terrain/nature/` and the placeholder direction in `assets/tilesets/combat_logic_tiles.png`: slightly side-on forms, front faces, contact shadows, raised highground, bulky blocked terrain, and low cover with visible volume.
+- Match the current reference direction in `assets/combat/terrain/nature/` and the placeholder direction in `assets/combat/tilesets/combat_logic_tiles.png`: slightly side-on forms, front faces, contact shadows, raised highground, bulky blocked terrain, and low cover with visible volume.
 - Keep tile silhouettes readable at 76x76 combat scale.
 - Final pixel terrain work should be authored or touched up in Aseprite. Scripted placeholders are allowed only for temporary sandbox work.

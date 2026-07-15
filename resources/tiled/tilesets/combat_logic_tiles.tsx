@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.10" tiledversion="1.11.2" name="combat_logic_tiles" tilewidth="76" tileheight="76" tilecount="6" columns="6">
- <image source="../../../assets/tilesets/combat_logic_tiles.png" width="456" height="76"/>
+ <image source="../../../assets/combat/tilesets/combat_logic_tiles.png" width="456" height="76"/>
  <tile id="0">
   <properties>
    <property name="type" value="floor"/>

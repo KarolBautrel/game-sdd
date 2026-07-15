@@ -18,6 +18,10 @@ The project now has:
 - Godot headless combat slice tests;
 - interactive Godot combat debug scene.
 - movement-point resource support for multi-tile movement in debug combat.
+- combat terrain decoration scale contract for grass tufts, stumps, boulders, and fallen branches.
+- combat terrain decorations render without square debug tint underneath their transparent PNGs.
+- combat unit art preloads all combat directions/actions once per encounter and caches resolved texture paths to avoid runtime stalls during animations.
+- combat debug presentation now separates static grid rendering from dynamic tile overlays and updates unit nodes in place instead of recreating them during actions.
 
 ## Implemented Combat Rules
 
@@ -304,7 +308,7 @@ Latest verified scope:
 - slice 066 verifies `debug_map_scale_showcase` uses `map_path`, resolves its combat grid from `combat_test_clearing.json`, and no longer duplicates inline grid tiles.
 - slice 068 documents the combat sandbox move interaction: legal movement overlay is softer, first click previews path/MP cost, and second click confirms the move.
 - slice 069 starts the production-facing combat presentation architecture by extracting text formatting, unit art lookup, action visibility, and scenario catalog responsibilities from `combat_debug.gd`.
-- character assets were reorganized into `assets/characters/heroes/warrior` and `assets/characters/villains/enemy_baddie`, so combat now consumes shared character art instead of owning unit sprites.
+- character assets were reorganized into `assets/combat/characters/heroes/warrior` and `assets/combat/characters/villains/enemy_baddie`, keeping combat character art separate from future dungeon crawler and world map assets.
 - debug scene loads sprites from the new asset folders and can animate multi-step movement paths.
 - debug scene can load the dedicated movement points multi-tile test.
 - debug scene can load the dedicated AP/MP move-then-attack economy test.
@@ -316,6 +320,16 @@ Latest verified scope:
 - debug showcase resource readouts now render as compact HP/AP/MP overlays on unit sprites, and turn stepping uses the same animated command path instead of jumping through hidden commands.
 - combat debug UI now has a prominent pixel-styled action banner, human-readable action feed, and clearer selected-action buttons.
 - combat debug action buttons are filtered by the active unit's available actions, loadout-granted actions, cooldowns, and current AP/MP so unavailable equipment actions do not clutter the UI.
+- asset folders are now split by gameplay layer: combat visuals live under `assets/combat/`, with `assets/dungeon/` and `assets/world/` reserved for dungeon crawler and world map art.
+- combat scene now uses `assets/combat/terrain/grass/meadow_grass_floor_*.png` variants as the base floor visuals.
+- combat scene presentation moved closer to an in-game battle screen: larger 72px tiles, larger 96px unit sprites, a framed board, darker scene background, cleaner combat HUD copy, and `debug_full_combat_showcase` as the default encounter.
+- combat scene scale was retuned for 2K presentation: 128px tiles, 160px unit sprites, 2560x1440 default viewport, solid grass base under transparent floor art, and special terrain now uses generated nature props over the grass instead of the old hand-painted logic atlas tiles.
+- combat floor rendering now uses 96px logical tiles with 112px overlapped terrain art, so transparent grass edges blend across neighboring tiles instead of exposing visible square gaps.
+- combat 2K layout was enlarged again: 150px logical tiles, 214px overlapped terrain art, 190px unit sprites, and a 4:1 left-board/right-command layout so the battle board becomes the dominant screen area.
+- combat floor rendering was reworked to preserve asset sharpness: the showcase is now a 12x12 arena, each 104px logical tile is built from multiple unscaled 64px grass patches, terrain props render at 98px centered scale, and unit sprites render at 142px.
+- combat floor rendering was optimized into a single generated board background texture. Grass patches are composited once per encounter into `BoardTerrain`, while per-tile nodes now handle only interaction overlays, terrain props, previews, and units.
+- combat terrain backgrounds are now authored/generated as reusable full-board PNGs in `assets/combat/terrain/backgrounds/`; combat encounters can reference one with `background_path`, and `debug_full_combat_showcase` uses `old_mine_meadow_00_lush.png`.
+- combat background generation now creates two 10x10 continuous meadow surfaces instead of visible per-tile grass blocks. It uses procedural grass texture, soft clumps, and occasional smaller `grass_tuft` accents so the board reads as one field.
 - Validation passed on 2026-07-14:
   - `python tools\validators\validate_all.py`
   - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd`
@@ -379,7 +393,7 @@ Immediate next focus:
 
 1. Improve combat sandbox UX so movement, targeting, hit chance, AP/MP cost, and blocked reasons are clear before the player clicks.
 2. Push terrain art and presentation toward the current tactical 2.5D direction before adding many more combat rules.
-3. Use `assets/terrain/nature/` and the current sandbox tileset as the visual reference for terrain art until a stricter terrain art bible exists.
+3. Use `assets/combat/terrain/nature/` and the current sandbox tileset as the visual reference for combat terrain art until a stricter terrain art bible exists.
 4. Add terrain movement costs now that authored map data drives the sandbox grid.
 
 ### Recommended Next Development Order
@@ -401,7 +415,7 @@ Immediate next focus:
 
 4. **Terrain Art V1**
    - replace the current placeholder `combat_logic_tiles.png` with intentional terrain tiles;
-   - keep the current 2.5D tactical direction from `assets/terrain/nature/` and the sandbox tileset: slightly side-on, readable height, shadows, and foreground faces;
+   - keep the current 2.5D tactical direction from `assets/combat/terrain/nature/` and the sandbox tileset: slightly side-on, readable height, shadows, and foreground faces;
    - define source rules for Aseprite terrain tiles and Tiled tileset updates.
 
 5. **Terrain Gameplay V2**

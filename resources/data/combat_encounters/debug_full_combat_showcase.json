@@ -1,11 +1,15 @@
 {
   "id": "debug_full_combat_showcase",
   "seed": 2001,
+  "background_path": "res://assets/combat/terrain/backgrounds/old_mine_meadow_00_lush.png",
   "item_profiles": {
     "hero_sword": {
       "id": "hero_sword",
       "slot": "main_hand",
-      "grants_actions": ["basic_attack", "power_strike"],
+      "grants_actions": [
+        "basic_attack",
+        "power_strike"
+      ],
       "action_profiles": {
         "basic_attack": {
           "id": "hero_sword_basic_attack",
@@ -27,7 +31,9 @@
     "hero_shield": {
       "id": "hero_shield",
       "slot": "off_hand",
-      "grants_actions": ["shield_wall"],
+      "grants_actions": [
+        "shield_wall"
+      ],
       "action_profiles": {
         "shield_wall": {
           "id": "hero_shield_wall",
@@ -49,7 +55,9 @@
     "raider_sword": {
       "id": "raider_sword",
       "slot": "main_hand",
-      "grants_actions": ["basic_attack"],
+      "grants_actions": [
+        "basic_attack"
+      ],
       "action_profiles": {
         "basic_attack": {
           "id": "raider_sword_basic_attack",
@@ -63,7 +71,9 @@
     "raider_bow": {
       "id": "raider_bow",
       "slot": "main_hand",
-      "grants_actions": ["ranged_attack"],
+      "grants_actions": [
+        "ranged_attack"
+      ],
       "action_profiles": {
         "ranged_attack": {
           "id": "raider_bow_ranged_attack",
@@ -77,111 +87,622 @@
     }
   },
   "grid": {
-    "width": 8,
-    "height": 8,
+    "width": 10,
+    "height": 10,
     "tiles": [
-      { "x": 0, "y": 0, "type": "floor" },
-      { "x": 1, "y": 0, "type": "floor" },
-      { "x": 2, "y": 0, "type": "floor" },
-      { "x": 3, "y": 0, "type": "floor" },
-      { "x": 4, "y": 0, "type": "floor" },
-      { "x": 5, "y": 0, "type": "floor" },
-      { "x": 6, "y": 0, "type": "floor" },
-      { "x": 7, "y": 0, "type": "floor" },
-      { "x": 0, "y": 1, "type": "floor" },
-      { "x": 1, "y": 1, "type": "highground" },
-      { "x": 2, "y": 1, "type": "floor" },
-      { "x": 3, "y": 1, "type": "floor" },
-      { "x": 4, "y": 1, "type": "floor" },
-      { "x": 5, "y": 1, "type": "floor" },
-      { "x": 6, "y": 1, "type": "highground" },
-      { "x": 7, "y": 1, "type": "floor" },
-      { "x": 0, "y": 2, "type": "floor" },
-      { "x": 1, "y": 2, "type": "floor" },
-      { "x": 2, "y": 2, "type": "floor" },
-      { "x": 3, "y": 2, "type": "blocked" },
-      { "x": 4, "y": 2, "type": "floor" },
-      { "x": 5, "y": 2, "type": "floor" },
-      { "x": 6, "y": 2, "type": "highground" },
-      { "x": 7, "y": 2, "type": "floor" },
-      { "x": 0, "y": 3, "type": "floor" },
-      { "x": 1, "y": 3, "type": "floor" },
-      { "x": 2, "y": 3, "type": "floor" },
-      { "x": 3, "y": 3, "type": "blocked" },
-      { "x": 4, "y": 3, "type": "blocked" },
-      { "x": 5, "y": 3, "type": "floor" },
-      { "x": 6, "y": 3, "type": "floor" },
-      { "x": 7, "y": 3, "type": "floor" },
-      { "x": 0, "y": 4, "type": "floor" },
-      { "x": 1, "y": 4, "type": "floor" },
-      { "x": 2, "y": 4, "type": "cover_low" },
-      { "x": 3, "y": 4, "type": "floor" },
-      { "x": 4, "y": 4, "type": "blocked" },
-      { "x": 5, "y": 4, "type": "cover_low" },
-      { "x": 6, "y": 4, "type": "floor" },
-      { "x": 7, "y": 4, "type": "floor" },
-      { "x": 0, "y": 5, "type": "floor" },
-      { "x": 1, "y": 5, "type": "floor" },
-      { "x": 2, "y": 5, "type": "cover_low" },
-      { "x": 3, "y": 5, "type": "floor" },
-      { "x": 4, "y": 5, "type": "floor" },
-      { "x": 5, "y": 5, "type": "floor" },
-      { "x": 6, "y": 5, "type": "floor" },
-      { "x": 7, "y": 5, "type": "floor" },
-      { "x": 0, "y": 6, "type": "floor" },
-      { "x": 1, "y": 6, "type": "floor" },
-      { "x": 2, "y": 6, "type": "floor" },
-      { "x": 3, "y": 6, "type": "floor" },
-      { "x": 4, "y": 6, "type": "floor" },
-      { "x": 5, "y": 6, "type": "floor" },
-      { "x": 6, "y": 6, "type": "floor" },
-      { "x": 7, "y": 6, "type": "floor" },
-      { "x": 0, "y": 7, "type": "floor" },
-      { "x": 1, "y": 7, "type": "floor" },
-      { "x": 2, "y": 7, "type": "floor" },
-      { "x": 3, "y": 7, "type": "floor" },
-      { "x": 4, "y": 7, "type": "floor" },
-      { "x": 5, "y": 7, "type": "floor" },
-      { "x": 6, "y": 7, "type": "floor" },
-      { "x": 7, "y": 7, "type": "floor" }
+      {
+        "x": 0,
+        "y": 0,
+        "type": "floor"
+      },
+      {
+        "x": 1,
+        "y": 0,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 0,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 0,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 0,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 0,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 0,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 0,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 0,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 0,
+        "type": "floor"
+      },
+      {
+        "x": 0,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "type": "highground"
+      },
+      {
+        "x": 2,
+        "y": 1,
+        "type": "highground"
+      },
+      {
+        "x": 3,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 1,
+        "type": "highground"
+      },
+      {
+        "x": 9,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 0,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 1,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 0,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 1,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 3,
+        "type": "blocked"
+      },
+      {
+        "x": 5,
+        "y": 3,
+        "type": "blocked"
+      },
+      {
+        "x": 6,
+        "y": 3,
+        "type": "blocked"
+      },
+      {
+        "x": 7,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 0,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 1,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 4,
+        "type": "blocked"
+      },
+      {
+        "x": 5,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 4,
+        "type": "blocked"
+      },
+      {
+        "x": 7,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 0,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 1,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 0,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 1,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 6,
+        "type": "cover_low"
+      },
+      {
+        "x": 4,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 6,
+        "type": "cover_low"
+      },
+      {
+        "x": 8,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 0,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 1,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 7,
+        "type": "cover_low"
+      },
+      {
+        "x": 3,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 7,
+        "type": "blocked"
+      },
+      {
+        "x": 6,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 7,
+        "type": "cover_low"
+      },
+      {
+        "x": 9,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 1,
+        "y": 8,
+        "type": "highground"
+      },
+      {
+        "x": 2,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "type": "highground"
+      },
+      {
+        "x": 9,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 0,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 1,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 9,
+        "type": "floor"
+      }
     ]
   },
   "units": [
     {
       "id": "unit_player_001",
       "team": "player",
-      "position": { "x": 2, "y": 5 },
-      "stats": { "max_hp": 14, "strength": 5, "defense": 2, "initiative": 12, "move_points": 4, "max_ap": 2, "accuracy": 5, "evasion": 5 },
-      "resources": { "hp": 14, "ap": 2, "mp": 4 },
+      "position": {
+        "x": 3,
+        "y": 8
+      },
+      "stats": {
+        "max_hp": 14,
+        "strength": 5,
+        "defense": 2,
+        "initiative": 12,
+        "move_points": 4,
+        "max_ap": 2,
+        "accuracy": 5,
+        "evasion": 5
+      },
+      "resources": {
+        "hp": 14,
+        "ap": 2,
+        "mp": 4
+      },
       "statuses": [],
-      "available_actions": ["move", "defend", "end_turn"],
-      "loadout": { "main_hand": "hero_sword", "off_hand": "hero_shield", "armor": "hero_chainmail" }
+      "available_actions": [
+        "move",
+        "defend",
+        "end_turn"
+      ],
+      "loadout": {
+        "main_hand": "hero_sword",
+        "off_hand": "hero_shield",
+        "armor": "hero_chainmail"
+      }
     },
     {
       "id": "unit_enemy_001",
       "team": "enemy",
-      "position": { "x": 4, "y": 5 },
-      "stats": { "max_hp": 9, "strength": 4, "defense": 1, "initiative": 8, "move_points": 4, "max_ap": 1, "accuracy": 0, "evasion": 0 },
-      "resources": { "hp": 9, "ap": 1, "mp": 4 },
+      "position": {
+        "x": 6,
+        "y": 8
+      },
+      "stats": {
+        "max_hp": 9,
+        "strength": 4,
+        "defense": 1,
+        "initiative": 8,
+        "move_points": 4,
+        "max_ap": 1,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "resources": {
+        "hp": 9,
+        "ap": 1,
+        "mp": 4
+      },
       "statuses": [],
-      "available_actions": ["move", "defend", "end_turn"],
-      "loadout": { "main_hand": "raider_sword", "off_hand": null, "armor": null }
+      "available_actions": [
+        "move",
+        "defend",
+        "end_turn"
+      ],
+      "loadout": {
+        "main_hand": "raider_sword",
+        "off_hand": null,
+        "armor": null
+      }
     },
     {
       "id": "unit_enemy_002",
       "team": "enemy",
-      "position": { "x": 6, "y": 2 },
-      "stats": { "max_hp": 7, "strength": 3, "defense": 0, "initiative": 7, "move_points": 3, "max_ap": 1, "accuracy": 10, "evasion": 0 },
-      "resources": { "hp": 7, "ap": 1, "mp": 3 },
+      "position": {
+        "x": 8,
+        "y": 3
+      },
+      "stats": {
+        "max_hp": 7,
+        "strength": 3,
+        "defense": 0,
+        "initiative": 7,
+        "move_points": 3,
+        "max_ap": 1,
+        "accuracy": 10,
+        "evasion": 0
+      },
+      "resources": {
+        "hp": 7,
+        "ap": 1,
+        "mp": 3
+      },
       "statuses": [],
-      "available_actions": ["move", "end_turn"],
-      "loadout": { "main_hand": "raider_bow", "off_hand": null, "armor": null }
+      "available_actions": [
+        "move",
+        "end_turn"
+      ],
+      "loadout": {
+        "main_hand": "raider_bow",
+        "off_hand": null,
+        "armor": null
+      }
     }
   ],
   "turn_state": {
     "active_unit_id": "unit_player_001",
     "round": 1,
-    "turn_order": ["unit_player_001", "unit_enemy_001", "unit_enemy_002"]
+    "turn_order": [
+      "unit_player_001",
+      "unit_enemy_001",
+      "unit_enemy_002"
+    ]
   },
   "event_log": []
 }

@@ -8,12 +8,36 @@ const CombatScenarioCatalog := preload("res://scripts/presentation/combat/combat
 
 const DEFAULT_ENCOUNTER_PATH := CombatScenarioCatalog.DEFAULT_ENCOUNTER_PATH
 const PIXEL_PANEL_TEXTURE_PATH := "res://assets/ui/combat/pixel_panel.png"
-const TILE_ATLAS_TEXTURE_PATH := "res://assets/tilesets/combat_logic_tiles.png"
-const UNIT_ICON_SIZE := Vector2i(76, 76)
-const UNIT_RESOURCE_LABEL_SIZE := Vector2(64, 28)
-const UNIT_RESOURCE_LABEL_OFFSET_Y := -24.0
-const TILE_ATLAS_SOURCE_SIZE := 76
-const TILE_SIZE := 64
+const GRASS_FLOOR_TEXTURE_PATHS := [
+	"res://assets/combat/terrain/grass/meadow_grass_floor_00.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_01.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_02.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_03.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_04.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_05.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_06.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_07.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_08.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_09.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_10.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_11.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_12.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_13.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_14.png",
+	"res://assets/combat/terrain/grass/meadow_grass_floor_15.png",
+]
+const UNIT_ICON_SIZE := Vector2i(142, 142)
+const UNIT_RESOURCE_LABEL_SIZE := Vector2(104, 36)
+const UNIT_RESOURCE_LABEL_OFFSET_Y := 6.0
+const TILE_SIZE := 104
+const GRASS_PATCH_SIZE := 64
+const DECORATION_SIZE_BY_KIND := {
+	"grass_tuft": Vector2(52, 52),
+	"tree_stump": Vector2(62, 62),
+	"mossy_boulder": Vector2(76, 76),
+	"fallen_branch": Vector2(84, 84),
+	"default": Vector2(64, 64),
+}
 const TILE_GAP := 0
 const MOVE_STEP_SECONDS := 0.52
 const COMBAT_LUNGE_PIXELS := 18.0
@@ -24,19 +48,40 @@ const HIT_SHAKE_SECONDS := 0.055
 const DEATH_FALL_PIXELS := 16.0
 const DEATH_SECONDS := 0.65
 const DEATH_HOLD_SECONDS := 0.45
-const TERRAIN_DECORATIONS := {
-	"3,2": "res://assets/terrain/nature/fallen_branch/fallen_branch_frame_0.png",
-	"5,2": "res://assets/terrain/nature/mossy_boulder/mossy_boulder_frame_0.png",
-	"10,2": "res://assets/terrain/nature/tree_stump/tree_stump_frame_2.png",
-	"2,5": "res://assets/terrain/nature/mossy_boulder/mossy_boulder_frame_6.png",
-	"9,5": "res://assets/terrain/nature/grass_tuft/grass_tuft_frame_4.png",
-	"2,6": "res://assets/terrain/nature/grass_tuft/grass_tuft_frame_9.png",
-	"4,6": "res://assets/terrain/nature/tree_stump/tree_stump_frame_5.png",
-	"7,7": "res://assets/terrain/nature/fallen_branch/fallen_branch_frame_10.png",
+const PRELOAD_UNIT_VISUAL_ACTIONS := ["pose", "combat_idle", "walk", "combat", "hit", "death"]
+const PRELOAD_UNIT_DIRECTIONS := ["north", "north_east", "east", "south_east", "south", "south_west", "west", "north_west"]
+const DECORATION_BY_POSITION := {
+	"1,6": "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_9.png",
+	"6,6": "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_13.png",
+}
+const BLOCKED_DECORATION_PATHS := [
+	"res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_3.png",
+	"res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_10.png",
+	"res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_11.png",
+	"res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_12.png",
+]
+const COVER_DECORATION_PATHS := [
+	"res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_2.png",
+	"res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_8.png",
+	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_5.png",
+	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_15.png",
+]
+const HIGHLAND_DECORATION_PATHS := [
+	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_1.png",
+	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_8.png",
+	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_12.png",
+]
+const TERRAIN_BASE_COLORS := {
+	"floor": Color(0.10, 0.30, 0.10, 1.0),
+	"blocked": Color(0.09, 0.25, 0.09, 1.0),
+	"cover_low": Color(0.11, 0.29, 0.10, 1.0),
+	"highground": Color(0.13, 0.31, 0.09, 1.0),
 }
 const ACTION_LABELS := CombatTextUtil.ACTION_LABELS
 
 @onready var board_root: Control = %BoardRoot
+@onready var board_backdrop: ColorRect = %BoardBackdrop
+@onready var board_terrain: TextureRect = %BoardTerrain
 @onready var grid_container: GridContainer = %GridContainer
 @onready var unit_layer: Control = %UnitLayer
 @onready var action_panel: PanelContainer = %ActionPanel
@@ -56,7 +101,7 @@ var command_index := 1
 var selected_action := "move"
 var last_feedback := "Select an action."
 var current_encounter_path := DEFAULT_ENCOUNTER_PATH
-var selected_scenario_id := "map_scale_showcase"
+var selected_scenario_id := "full_combat_showcase"
 var selected_position: Dictionary = {}
 var pending_move_position: Dictionary = {}
 var pending_move_event: Dictionary = {}
@@ -64,7 +109,10 @@ var unit_facing: Dictionary = {}
 var unit_visual_action: Dictionary = {}
 var unit_texture_cache: Dictionary = {}
 var tile_texture_cache: Dictionary = {}
+var grass_image_cache: Dictionary = {}
 var terrain_decoration_texture_cache: Dictionary = {}
+var preloaded_unit_visual_keys: Dictionary = {}
+var rendered_grid_key := ""
 var temporary_visual_units: Dictionary = {}
 var visual_positions_px: Dictionary = {}
 var visual_generation := 0
@@ -92,10 +140,13 @@ func _reset_debug_encounter() -> void:
 	unit_visual_action.clear()
 	temporary_visual_units.clear()
 	visual_positions_px.clear()
+	preloaded_unit_visual_keys.clear()
+	rendered_grid_key = ""
 	action_feed.clear()
-	current_action_title = "Combat ready"
-	current_action_detail = "Select an action or step the next turn."
+	current_action_title = "Battle ready"
+	current_action_detail = "Choose an action, then pick a tile or target."
 	last_feedback = "Encounter reset."
+	_clear_units()
 	var result := CombatResolver.simulate(state, [])
 	state = result["state"]
 	selected_position = _unit_by_id(state["turn_state"]["active_unit_id"]).get("position", {})
@@ -104,16 +155,7 @@ func _reset_debug_encounter() -> void:
 
 
 func _render() -> void:
-	_clear_grid()
-	_clear_units()
-	grid_container.columns = int(state["grid"]["width"])
-	grid_container.add_theme_constant_override("h_separation", TILE_GAP)
-	grid_container.add_theme_constant_override("v_separation", TILE_GAP)
-	_resize_board()
-
-	for y in range(int(state["grid"]["height"])):
-		for x in range(int(state["grid"]["width"])):
-			grid_container.add_child(_build_tile({"x": x, "y": y}))
+	_render_grid()
 	_render_units()
 
 	_render_action_panel()
@@ -136,15 +178,72 @@ func _prepare_presentation_cache() -> void:
 func _preload_presentation_assets() -> void:
 	for tile: Dictionary in state.get("grid", {}).get("tiles", []):
 		var position := {"x": int(tile["x"]), "y": int(tile["y"])}
-		_tile_visual_texture(str(tile["type"]), position)
-		_tile_decoration_texture(position)
+		_tile_decoration_texture(_tile_decoration_path(position))
+	_board_terrain_texture()
 
-	var preload_actions := ["pose", "combat_idle", "walk", "combat", "hit", "death"]
 	for unit: Dictionary in state.get("units", []):
-		for visual_action: String in preload_actions:
+		_preload_unit_visuals(unit)
+
+
+func _preload_unit_visuals(unit: Dictionary) -> void:
+	var unit_id := str(unit.get("id", ""))
+	if unit_id == "":
+		return
+	var preload_key := "%s:%s:%s" % [unit_id, UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y]
+	if preloaded_unit_visual_keys.has(preload_key):
+		return
+	for direction: String in PRELOAD_UNIT_DIRECTIONS:
+		var facing_override := {}
+		facing_override[unit_id] = direction
+		for visual_action: String in PRELOAD_UNIT_VISUAL_ACTIONS:
 			var visual_actions := {}
-			visual_actions[unit["id"]] = visual_action
-			unit_art.icon(unit, state, unit_facing, visual_actions, UNIT_ICON_SIZE)
+			visual_actions[unit_id] = visual_action
+			unit_art.icon(unit, state, facing_override, visual_actions, UNIT_ICON_SIZE)
+	preloaded_unit_visual_keys[preload_key] = true
+
+
+func _render_grid() -> void:
+	grid_container.columns = int(state["grid"]["width"])
+	grid_container.add_theme_constant_override("h_separation", TILE_GAP)
+	grid_container.add_theme_constant_override("v_separation", TILE_GAP)
+	_resize_board()
+	board_terrain.texture = _board_terrain_texture()
+
+	var grid_key := _grid_render_key()
+	var expected_tile_count := int(state["grid"]["width"]) * int(state["grid"]["height"])
+	if rendered_grid_key != grid_key or grid_container.get_child_count() != expected_tile_count:
+		_clear_grid()
+		for y in range(int(state["grid"]["height"])):
+			for x in range(int(state["grid"]["width"])):
+				grid_container.add_child(_build_tile({"x": x, "y": y}))
+		rendered_grid_key = grid_key
+		return
+
+	_update_grid_dynamic_tiles()
+
+
+func _update_grid_dynamic_tiles() -> void:
+	var width := int(state["grid"]["width"])
+	var height := int(state["grid"]["height"])
+	for y in range(height):
+		for x in range(width):
+			var index := y * width + x
+			var tile := grid_container.get_child(index) as Button
+			if tile == null:
+				continue
+			_update_tile_dynamic(tile, {"x": x, "y": y})
+
+
+func _grid_render_key() -> String:
+	var parts: Array[String] = [
+		str(state.get("background_path", "")),
+		str(state.get("grid", {}).get("width", 0)),
+		str(state.get("grid", {}).get("height", 0)),
+	]
+	for tile: Dictionary in state.get("grid", {}).get("tiles", []):
+		var position := {"x": int(tile["x"]), "y": int(tile["y"])}
+		parts.append("%s:%s:%s" % [_position_key(position), str(tile.get("type", "")), _tile_decoration_path(position)])
+	return "|".join(parts)
 
 
 func _build_tile(position: Dictionary) -> Button:
@@ -155,32 +254,46 @@ func _build_tile(position: Dictionary) -> Button:
 	tile.flat = true
 	tile.text = ""
 	tile.tooltip_text = _tile_tooltip(position)
+	_apply_tile_button_style(tile)
 	tile.pressed.connect(func() -> void:
 		_on_tile_pressed(position)
 	)
 
 	var terrain_type := _tile_type(position)
-	var terrain_texture := TextureRect.new()
-	terrain_texture.name = "Terrain"
-	terrain_texture.texture = _tile_visual_texture(terrain_type, position)
-	terrain_texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	terrain_texture.stretch_mode = TextureRect.STRETCH_SCALE
-	terrain_texture.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
-	terrain_texture.size = Vector2(TILE_SIZE, TILE_SIZE)
-	terrain_texture.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	tile.add_child(terrain_texture)
+	var decoration_path := _tile_decoration_path(position)
+	var terrain_tint := _terrain_tint_color(terrain_type, decoration_path)
+	if terrain_tint.a > 0.001:
+		var tint := ColorRect.new()
+		tint.name = "TerrainTint"
+		tint.color = terrain_tint
+		tint.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
+		tint.size = Vector2(TILE_SIZE, TILE_SIZE)
+		tint.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		tile.add_child(tint)
 
-	var decoration_texture := _tile_decoration_texture(position)
+	var decoration_texture := _tile_decoration_texture(decoration_path)
 	if decoration_texture != null:
+		var decoration_size := _decoration_size(decoration_path)
 		var decoration := TextureRect.new()
 		decoration.name = "TerrainDecoration"
 		decoration.texture = decoration_texture
 		decoration.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		decoration.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		decoration.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
-		decoration.size = Vector2(TILE_SIZE, TILE_SIZE)
+		decoration.position = (Vector2(TILE_SIZE, TILE_SIZE) - decoration_size) / 2.0
+		decoration.custom_minimum_size = decoration_size
+		decoration.size = decoration_size
 		decoration.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tile.add_child(decoration)
+
+	_update_tile_dynamic(tile, position)
+	return tile
+
+
+func _update_tile_dynamic(tile: Button, position: Dictionary) -> void:
+	tile.disabled = animation_locked
+	tile.tooltip_text = _tile_tooltip(position)
+	_remove_child_if_present(tile, "Overlay")
+	_remove_child_if_present(tile, "PreviewLabel")
 
 	var unit := _living_unit_at(position)
 	var overlay_color := _tile_overlay_color(position, unit)
@@ -210,48 +323,166 @@ func _build_tile(position: Dictionary) -> Button:
 		preview_label.add_theme_constant_override("shadow_offset_y", 1)
 		tile.add_child(preview_label)
 
-	return tile
+
+func _remove_child_if_present(parent: Node, child_name: String) -> void:
+	var child := parent.get_node_or_null(child_name)
+	if child != null:
+		parent.remove_child(child)
+		child.queue_free()
 
 
-func _tile_visual_texture(terrain_type: String, position: Dictionary) -> Texture2D:
-	var atlas_index := _tile_atlas_index(terrain_type, position)
-	var cache_key := "%s:%s" % [terrain_type, atlas_index]
+func _apply_tile_button_style(tile: Button) -> void:
+	var empty_style := StyleBoxEmpty.new()
+	tile.add_theme_stylebox_override("normal", empty_style)
+	tile.add_theme_stylebox_override("hover", empty_style)
+	tile.add_theme_stylebox_override("pressed", empty_style)
+	tile.add_theme_stylebox_override("disabled", empty_style)
+	tile.add_theme_stylebox_override("focus", empty_style)
+
+
+func _board_terrain_texture() -> Texture2D:
+	var background_path := str(state.get("background_path", ""))
+	if background_path != "":
+		return _static_board_background_texture(background_path)
+
+	var cache_key := _board_terrain_cache_key()
 	if tile_texture_cache.has(cache_key):
 		return tile_texture_cache[cache_key]
-	if not tile_texture_cache.has("__atlas"):
-		var image := Image.new()
-		var error := image.load(TILE_ATLAS_TEXTURE_PATH)
-		if error != OK:
-			push_error("Cannot load tile atlas texture: %s" % TILE_ATLAS_TEXTURE_PATH)
-			return null
-		tile_texture_cache["__atlas"] = ImageTexture.create_from_image(image)
-	var atlas_texture: Texture2D = tile_texture_cache["__atlas"]
-	var atlas := AtlasTexture.new()
-	atlas.atlas = atlas_texture
-	atlas.region = Rect2(atlas_index * TILE_ATLAS_SOURCE_SIZE, 0, TILE_ATLAS_SOURCE_SIZE, TILE_ATLAS_SOURCE_SIZE)
-	tile_texture_cache[cache_key] = atlas
-	return atlas
+
+	var width := int(state["grid"]["width"]) * TILE_SIZE
+	var height := int(state["grid"]["height"]) * TILE_SIZE
+	var image := Image.create(width, height, false, Image.FORMAT_RGBA8)
+	image.fill(TERRAIN_BASE_COLORS["floor"])
+
+	for tile_data: Dictionary in state["grid"]["tiles"]:
+		var position := {"x": int(tile_data["x"]), "y": int(tile_data["y"])}
+		var tile_origin := Vector2i(position["x"] * TILE_SIZE, position["y"] * TILE_SIZE)
+		image.fill_rect(Rect2i(tile_origin, Vector2i(TILE_SIZE, TILE_SIZE)), _terrain_base_color(str(tile_data["type"])))
+		for patch_index in range(5):
+			var patch_image := _grass_patch_image(position, patch_index)
+			var patch_position := tile_origin + Vector2i(_grass_patch_position(position, patch_index))
+			_blend_patch_clipped(image, patch_image, patch_position)
+
+	var texture := ImageTexture.create_from_image(image)
+	tile_texture_cache[cache_key] = texture
+	return texture
 
 
-func _tile_atlas_index(terrain_type: String, position: Dictionary) -> int:
+func _static_board_background_texture(path: String) -> Texture2D:
+	var cache_key := "static_board_background:%s" % path
+	if tile_texture_cache.has(cache_key):
+		return tile_texture_cache[cache_key]
+	var image := Image.new()
+	var error := image.load(path)
+	if error != OK:
+		push_error("Cannot load combat board background: %s" % path)
+		return null
+	var expected_size := Vector2i(
+		int(state["grid"]["width"]) * TILE_SIZE,
+		int(state["grid"]["height"]) * TILE_SIZE
+	)
+	if image.get_size() != expected_size:
+		push_error("Combat board background %s has size %s, expected %s" % [path, image.get_size(), expected_size])
+	var texture := ImageTexture.create_from_image(image)
+	tile_texture_cache[cache_key] = texture
+	return texture
+
+
+func _board_terrain_cache_key() -> String:
+	var parts: Array[String] = [
+		"board_terrain",
+		str(state.get("id", "unknown")),
+		str(state.get("grid", {}).get("width", 0)),
+		str(state.get("grid", {}).get("height", 0)),
+		str(TILE_SIZE),
+	]
+	for tile_data: Dictionary in state.get("grid", {}).get("tiles", []):
+		parts.append("%s,%s,%s" % [tile_data.get("x", 0), tile_data.get("y", 0), tile_data.get("type", "")])
+	return "|".join(parts)
+
+
+func _grass_patch_image(position: Dictionary, patch_index: int) -> Image:
+	var index := _grass_floor_index({
+		"x": int(position.get("x", 0)) + patch_index * 3,
+		"y": int(position.get("y", 0)) + patch_index * 5,
+	})
+	if grass_image_cache.has(index):
+		return grass_image_cache[index]
+	var image := Image.new()
+	var path: String = GRASS_FLOOR_TEXTURE_PATHS[index]
+	var error := image.load(path)
+	if error != OK:
+		push_error("Cannot load grass floor image: %s" % path)
+		return Image.create(GRASS_PATCH_SIZE, GRASS_PATCH_SIZE, false, Image.FORMAT_RGBA8)
+	grass_image_cache[index] = image
+	return image
+
+
+func _blend_patch_clipped(target: Image, patch: Image, destination: Vector2i) -> void:
+	var src_position := Vector2i.ZERO
+	var dst_position := destination
+	var size := patch.get_size()
+
+	if dst_position.x < 0:
+		src_position.x = -dst_position.x
+		size.x -= src_position.x
+		dst_position.x = 0
+	if dst_position.y < 0:
+		src_position.y = -dst_position.y
+		size.y -= src_position.y
+		dst_position.y = 0
+	if dst_position.x + size.x > target.get_width():
+		size.x = target.get_width() - dst_position.x
+	if dst_position.y + size.y > target.get_height():
+		size.y = target.get_height() - dst_position.y
+	if size.x <= 0 or size.y <= 0:
+		return
+
+	target.blend_rect(patch, Rect2i(src_position, size), dst_position)
+
+
+func _grass_patch_position(position: Dictionary, patch_index: int) -> Vector2:
 	var x := int(position.get("x", 0))
 	var y := int(position.get("y", 0))
+	var layouts := [
+		Vector2(-8, -8),
+		Vector2(38, -6),
+		Vector2(-6, 38),
+		Vector2(40, 40),
+		Vector2(18, 18),
+	]
+	var jitter_x := float(((x * 17 + y * 7 + patch_index * 11) % 9) - 4)
+	var jitter_y := float(((x * 5 + y * 19 + patch_index * 13) % 9) - 4)
+	return layouts[patch_index] + Vector2(jitter_x, jitter_y)
+
+
+func _grass_floor_index(position: Dictionary) -> int:
+	var x := int(position.get("x", 0))
+	var y := int(position.get("y", 0))
+	return absi((x * 7 + y * 11 + x * y * 3) % GRASS_FLOOR_TEXTURE_PATHS.size())
+
+
+func _terrain_base_color(terrain_type: String) -> Color:
+	return TERRAIN_BASE_COLORS.get(terrain_type, TERRAIN_BASE_COLORS["floor"])
+
+
+func _terrain_tint_color(terrain_type: String, decoration_path: String = "") -> Color:
+	if decoration_path != "":
+		return Color(0, 0, 0, 0)
 	match terrain_type:
 		"blocked":
-			return 4 if (x + y) % 3 == 1 else 1
+			return Color(0.05, 0.04, 0.03, 0.24)
 		"highground":
-			return 2
+			return Color(0.72, 0.58, 0.18, 0.18)
 		"cover_low":
-			return 5 if (x * 2 + y) % 4 == 0 else 3
+			return Color(0.55, 0.39, 0.20, 0.13)
 		_:
-			return 0
+			return Color(0, 0, 0, 0)
 
 
-func _tile_decoration_texture(position: Dictionary) -> Texture2D:
-	var key := "%s,%s" % [position.get("x", 0), position.get("y", 0)]
-	if not TERRAIN_DECORATIONS.has(key):
+func _tile_decoration_texture(path: String) -> Texture2D:
+	if path == "":
 		return null
-	var path: String = TERRAIN_DECORATIONS[key]
 	if terrain_decoration_texture_cache.has(path):
 		return terrain_decoration_texture_cache[path]
 	var image := Image.new()
@@ -262,6 +493,42 @@ func _tile_decoration_texture(position: Dictionary) -> Texture2D:
 	var texture := ImageTexture.create_from_image(image)
 	terrain_decoration_texture_cache[path] = texture
 	return texture
+
+
+func _decoration_size(path: String) -> Vector2:
+	return DECORATION_SIZE_BY_KIND.get(_decoration_kind(path), DECORATION_SIZE_BY_KIND["default"])
+
+
+func _decoration_kind(path: String) -> String:
+	if path.contains("/grass_tuft/"):
+		return "grass_tuft"
+	if path.contains("/tree_stump/"):
+		return "tree_stump"
+	if path.contains("/mossy_boulder/"):
+		return "mossy_boulder"
+	if path.contains("/fallen_branch/"):
+		return "fallen_branch"
+	return "default"
+
+
+func _tile_decoration_path(position: Dictionary) -> String:
+	var key := "%s,%s" % [position.get("x", 0), position.get("y", 0)]
+	var terrain_type := _tile_type(position)
+	if terrain_type == "blocked":
+		return BLOCKED_DECORATION_PATHS[_decoration_index(position, BLOCKED_DECORATION_PATHS.size())]
+	if terrain_type == "cover_low":
+		return COVER_DECORATION_PATHS[_decoration_index(position, COVER_DECORATION_PATHS.size())]
+	if terrain_type == "highground":
+		return HIGHLAND_DECORATION_PATHS[_decoration_index(position, HIGHLAND_DECORATION_PATHS.size())]
+	return DECORATION_BY_POSITION.get(key, "")
+
+
+func _decoration_index(position: Dictionary, count: int) -> int:
+	if count <= 0:
+		return 0
+	var x := int(position.get("x", 0))
+	var y := int(position.get("y", 0))
+	return absi((x * 5 + y * 13 + 1) % count)
 
 
 func _tile_overlay_color(position: Dictionary, unit: Dictionary) -> Color:
@@ -304,11 +571,10 @@ func _occupied_tile_marker(position: Dictionary) -> String:
 
 func _render_status() -> void:
 	var active := _unit_by_id(state["turn_state"]["active_unit_id"])
-	status_label.text = "Round %s | Result: %s\nActive: %s (%s) | HP %s | AP %s | MP %s | Selected: %s" % [
+	status_label.text = "Round %s  -  %s\n%s's turn  HP %s  AP %s  MP %s  -  %s" % [
 		state["turn_state"]["round"],
-		_combat_result(),
-		active.get("id", "missing"),
-		active.get("team", "missing"),
+		_combat_result().capitalize(),
+		_unit_display_name(active.get("id", "missing")),
 		active.get("resources", {}).get("hp", "?"),
 		active.get("resources", {}).get("ap", "?"),
 		active.get("resources", {}).get("mp", "-"),
@@ -320,10 +586,10 @@ func _render_action_panel() -> void:
 	action_title_label.text = current_action_title
 	action_detail_label.text = current_action_detail
 	if action_feed.is_empty():
-		action_feed_label.text = "Recent: no actions yet"
+		action_feed_label.text = "No blows traded yet."
 	else:
 		var recent_feed := action_feed.slice(0, mini(3, action_feed.size()))
-		action_feed_label.text = "Recent: " + "  |  ".join(recent_feed)
+		action_feed_label.text = "  |  ".join(recent_feed)
 
 
 func _render_feedback() -> void:
@@ -331,29 +597,22 @@ func _render_feedback() -> void:
 
 
 func _render_legend() -> void:
-	legend_label.text = "Blue player | Red enemy | Active gold | Legal soft green | Preview path blue | Confirm tile amber"
+	legend_label.text = "Gold active  -  green legal target  -  blue route  -  amber confirm"
 
 
 func _render_unit_list() -> void:
 	var lines: Array[String] = []
 	for unit: Dictionary in state["units"]:
-		var marker := "*" if unit["id"] == state["turn_state"]["active_unit_id"] else " "
-		lines.append("%s %s [%s] HP %s/%s AP %s/%s MP %s/%s ACC %s EVA %s WPN %s pos (%s,%s)\n  Cooldowns: %s | Statuses: %s" % [
+		var marker := "> " if unit["id"] == state["turn_state"]["active_unit_id"] else "  "
+		lines.append("%s%s  HP %s/%s  AP %s/%s  MP %s/%s\n  Status: %s" % [
 			marker,
-			unit["id"],
-			unit["team"],
+			_unit_display_name(unit["id"]),
 			unit["resources"]["hp"],
 			unit["stats"]["max_hp"],
 			unit["resources"]["ap"],
 			unit["stats"]["max_ap"],
 			unit["resources"].get("mp", "-"),
 			unit["stats"].get("move_points", "-"),
-			unit["stats"].get("accuracy", 0),
-			unit["stats"].get("evasion", 0),
-			unit.get("equipped_weapon_id", "none"),
-			unit["position"]["x"],
-			unit["position"]["y"],
-			_cooldown_summary(unit),
 			_status_summary(unit),
 		])
 	unit_list_label.text = "\n".join(lines)
@@ -434,17 +693,17 @@ func _render_command_buttons() -> void:
 	var primary_actions := _visible_primary_action_ids()
 	_sync_selected_action_with_visible_actions(primary_actions)
 
-	_add_button_section("Commands")
+	_add_button_section("Actions")
 	for action_id in primary_actions:
 		_add_action_button(action_id)
 
 	var debug_actions := _visible_debug_action_ids()
 	if not debug_actions.is_empty():
-		_add_button_section("Turn Tools")
+		_add_button_section("Enemy")
 		for action_id in debug_actions:
 			_add_action_button(action_id)
 
-	_add_button_section("Load Test")
+	_add_button_section("Encounter")
 	_add_scenario_picker()
 
 
@@ -475,21 +734,25 @@ func _action_can_be_shown_now(unit: Dictionary, action_id: String) -> bool:
 func _add_button_section(title: String) -> void:
 	var label := Label.new()
 	label.text = title
-	label.add_theme_font_size_override("font_size", 10)
+	label.add_theme_font_size_override("font_size", 11)
+	label.add_theme_color_override("font_color", Color(1.0, 0.82, 0.34))
+	label.add_theme_color_override("font_shadow_color", Color(0.05, 0.04, 0.03, 1.0))
+	label.add_theme_constant_override("shadow_offset_x", 1)
+	label.add_theme_constant_override("shadow_offset_y", 1)
 	command_buttons.add_child(label)
 
 
 func _add_action_button(action_id: String) -> void:
 	var button := Button.new()
-	button.text = ">> %s <<" % ACTION_LABELS.get(action_id, action_id) if selected_action == action_id else ACTION_LABELS.get(action_id, action_id)
-	button.custom_minimum_size = Vector2(0, 24)
-	button.add_theme_font_size_override("font_size", 10)
+	button.text = ACTION_LABELS.get(action_id, action_id)
+	button.custom_minimum_size = Vector2(0, 30)
+	button.add_theme_font_size_override("font_size", 12)
 	button.add_theme_color_override("font_color", Color(0.94, 0.88, 0.72))
 	button.add_theme_color_override("font_pressed_color", Color(1.0, 0.86, 0.38))
 	button.add_theme_color_override("font_hover_color", Color(1.0, 0.94, 0.68))
 	button.toggle_mode = true
 	button.button_pressed = selected_action == action_id
-	button.modulate = Color(1.0, 0.88, 0.46) if selected_action == action_id else Color(0.86, 0.82, 0.72)
+	button.modulate = Color(1.0, 0.88, 0.46) if selected_action == action_id else Color(0.92, 0.88, 0.78)
 	button.disabled = animation_locked or _combat_result() != "in_progress"
 	button.pressed.connect(func() -> void:
 		if animation_locked:
@@ -514,8 +777,8 @@ func _add_action_button(action_id: String) -> void:
 func _add_scenario_picker() -> void:
 	var picker := OptionButton.new()
 	picker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	picker.custom_minimum_size = Vector2(0, 22)
-	picker.add_theme_font_size_override("font_size", 10)
+	picker.custom_minimum_size = Vector2(0, 28)
+	picker.add_theme_font_size_override("font_size", 11)
 
 	var selected_index := 0
 	var options := _scenario_options()
@@ -533,11 +796,11 @@ func _add_scenario_picker() -> void:
 	command_buttons.add_child(picker)
 
 	var load_button := Button.new()
-	load_button.text = "Load selected test"
+	load_button.text = "Enter encounter"
 	load_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	load_button.disabled = animation_locked
-	load_button.custom_minimum_size = Vector2(0, 22)
-	load_button.add_theme_font_size_override("font_size", 10)
+	load_button.custom_minimum_size = Vector2(0, 28)
+	load_button.add_theme_font_size_override("font_size", 11)
 	load_button.pressed.connect(func() -> void:
 		_load_selected_scenario()
 	)
@@ -732,6 +995,13 @@ func _events_after_startup(events: Array) -> Array:
 
 
 func _apply_pixel_theme() -> void:
+	var title_label := get_node_or_null("RootMargin/RootScroll/RootHBox/LeftPanel/TitleLabel") as Label
+	if title_label != null:
+		title_label.add_theme_color_override("font_color", Color(1.0, 0.80, 0.32))
+		title_label.add_theme_color_override("font_shadow_color", Color(0.04, 0.03, 0.02, 1.0))
+		title_label.add_theme_constant_override("shadow_offset_x", 2)
+		title_label.add_theme_constant_override("shadow_offset_y", 2)
+
 	var panel_texture := _load_pixel_ui_texture(PIXEL_PANEL_TEXTURE_PATH)
 	if panel_texture != null:
 		var panel_style := StyleBoxTexture.new()
@@ -749,7 +1019,7 @@ func _apply_pixel_theme() -> void:
 	var action_title_color := Color(1.0, 0.86, 0.38)
 	var action_text_color := Color(0.96, 0.92, 0.80)
 	var shadow_color := Color(0.05, 0.04, 0.03, 1.0)
-	for label: Label in [action_title_label, action_detail_label, action_feed_label, status_label, feedback_label, legend_label]:
+	for label: Label in [action_title_label, action_detail_label, action_feed_label, status_label, feedback_label, legend_label, unit_list_label, inspect_label, event_log_label]:
 		label.add_theme_color_override("font_color", action_text_color)
 		label.add_theme_color_override("font_shadow_color", shadow_color)
 		label.add_theme_constant_override("shadow_offset_x", 1)
@@ -1103,6 +1373,11 @@ func _resize_board() -> void:
 	var height: int = int(state["grid"]["height"]) * TILE_SIZE + maxi(0, int(state["grid"]["height"]) - 1) * TILE_GAP
 	var board_size := Vector2(width, height)
 	board_root.custom_minimum_size = board_size
+	board_backdrop.position = Vector2(-6, -6)
+	board_backdrop.custom_minimum_size = board_size + Vector2(12, 12)
+	board_backdrop.size = board_size + Vector2(12, 12)
+	board_terrain.custom_minimum_size = board_size
+	board_terrain.size = board_size
 	grid_container.custom_minimum_size = board_size
 	grid_container.size = board_size
 	unit_layer.custom_minimum_size = board_size
@@ -1110,58 +1385,92 @@ func _resize_board() -> void:
 
 
 func _render_units() -> void:
+	var desired_unit_ids: Dictionary = {}
 	for unit: Dictionary in _visual_units_for_render():
 		var is_temporary := temporary_visual_units.has(unit["id"])
 		if unit["resources"]["hp"] <= 0 and not is_temporary:
 			continue
-		var unit_node := Control.new()
-		unit_node.name = unit["id"]
-		unit_node.custom_minimum_size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
-		unit_node.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
-		unit_node.position = _unit_visual_pixel_position(unit)
-		unit_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var unit_id := str(unit["id"])
+		desired_unit_ids[unit_id] = true
+		var unit_node := unit_layer.get_node_or_null(unit_id) as Control
+		if unit_node == null:
+			unit_node = _create_unit_node(unit_id)
+			unit_layer.add_child(unit_node)
+		_update_unit_node(unit_node, unit)
 
-		var sprite := TextureRect.new()
-		sprite.name = "Sprite"
+	for child in unit_layer.get_children():
+		if not desired_unit_ids.has(child.name):
+			child.queue_free()
+
+
+func _create_unit_node(unit_id: String) -> Control:
+	var unit_node := Control.new()
+	unit_node.name = unit_id
+	unit_node.custom_minimum_size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
+	unit_node.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
+	unit_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var sprite := TextureRect.new()
+	sprite.name = "Sprite"
+	sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	sprite.custom_minimum_size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
+	sprite.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
+	sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	unit_node.add_child(sprite)
+
+	var resource_panel := PanelContainer.new()
+	resource_panel.name = "ResourcePanel"
+	resource_panel.custom_minimum_size = UNIT_RESOURCE_LABEL_SIZE
+	resource_panel.size = UNIT_RESOURCE_LABEL_SIZE
+	resource_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var resource_label := Label.new()
+	resource_label.name = "Resources"
+	resource_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	resource_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	resource_label.custom_minimum_size = UNIT_RESOURCE_LABEL_SIZE
+	resource_label.size = UNIT_RESOURCE_LABEL_SIZE
+	resource_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	resource_label.add_theme_font_size_override("font_size", 10)
+	resource_label.add_theme_color_override("font_color", Color(1.0, 0.96, 0.78))
+	resource_label.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 1.0))
+	resource_label.add_theme_constant_override("shadow_offset_x", 1)
+	resource_label.add_theme_constant_override("shadow_offset_y", 1)
+	resource_panel.add_child(resource_label)
+	unit_node.add_child(resource_panel)
+	return unit_node
+
+
+func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
+	unit_node.custom_minimum_size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
+	unit_node.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
+	unit_node.position = _unit_visual_pixel_position(unit)
+	unit_node.modulate = Color(1, 1, 1, 1)
+
+	var sprite := unit_node.get_node_or_null("Sprite") as TextureRect
+	if sprite != null:
 		sprite.texture = _unit_icon(unit)
-		sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		sprite.custom_minimum_size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
 		sprite.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
-		sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		unit_node.add_child(sprite)
 
-		var resource_panel := PanelContainer.new()
-		resource_panel.name = "ResourcePanel"
-		resource_panel.custom_minimum_size = UNIT_RESOURCE_LABEL_SIZE
-		resource_panel.size = UNIT_RESOURCE_LABEL_SIZE
-		resource_panel.position = Vector2(
-			(float(UNIT_ICON_SIZE.x) - UNIT_RESOURCE_LABEL_SIZE.x) / 2.0,
-			UNIT_RESOURCE_LABEL_OFFSET_Y
-		)
-		resource_panel.position.x += _unit_resource_label_nudge(unit)
-		if unit_node.position.y + resource_panel.position.y < 0:
-			resource_panel.position.y = 0
-		resource_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		resource_panel.add_theme_stylebox_override("panel", _unit_resource_style(unit))
+	var resource_panel := unit_node.get_node_or_null("ResourcePanel") as PanelContainer
+	if resource_panel == null:
+		return
+	resource_panel.custom_minimum_size = UNIT_RESOURCE_LABEL_SIZE
+	resource_panel.size = UNIT_RESOURCE_LABEL_SIZE
+	resource_panel.position = Vector2(
+		(float(UNIT_ICON_SIZE.x) - UNIT_RESOURCE_LABEL_SIZE.x) / 2.0,
+		UNIT_RESOURCE_LABEL_OFFSET_Y
+	)
+	resource_panel.position.x += _unit_resource_label_nudge(unit)
+	if unit_node.position.y + resource_panel.position.y < 0:
+		resource_panel.position.y = 0
+	resource_panel.add_theme_stylebox_override("panel", _unit_resource_style(unit))
 
-		var resource_label := Label.new()
-		resource_label.name = "Resources"
+	var resource_label := resource_panel.get_node_or_null("Resources") as Label
+	if resource_label != null:
 		resource_label.text = _unit_resource_text(unit)
-		resource_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		resource_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		resource_label.custom_minimum_size = UNIT_RESOURCE_LABEL_SIZE
-		resource_label.size = UNIT_RESOURCE_LABEL_SIZE
-		resource_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		resource_label.add_theme_font_size_override("font_size", 10)
-		resource_label.add_theme_color_override("font_color", Color(1.0, 0.96, 0.78))
-		resource_label.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 1.0))
-		resource_label.add_theme_constant_override("shadow_offset_x", 1)
-		resource_label.add_theme_constant_override("shadow_offset_y", 1)
-		resource_panel.add_child(resource_label)
-		unit_node.add_child(resource_panel)
-
-		unit_layer.add_child(unit_node)
 
 
 func _visual_units_for_render() -> Array[Dictionary]:

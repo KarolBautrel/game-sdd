@@ -1,6 +1,6 @@
 # Character Art Direction
 
-Use the current character PNGs as the visual reference for future heroes, villains, and combat-capable NPCs. Character art lives in `assets/characters` because the same actor can be reused by combat, exploration, roster, dialogue, and future presentation layers.
+Use the current character PNGs as the visual reference for future combat heroes, villains, and combat-capable NPCs. Character art lives in `assets/combat/characters` so combat assets stay separate from dungeon crawler and world map presentation layers.
 
 ## Reference Assets
 

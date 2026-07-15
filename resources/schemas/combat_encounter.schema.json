@@ -11,6 +11,7 @@
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
     "seed": { "type": "integer", "minimum": 0 },
+    "background_path": { "type": "string", "pattern": "^res://assets/combat/terrain/backgrounds/.+\\.png$" },
     "map_path": { "type": "string", "pattern": "^res://resources/data/maps/.+\\.json$" },
     "grid": {
       "type": "object",

@@ -11,6 +11,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_combat_debug")
 
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0352941, 0.0470588, 0.0313726, 1)
+
 [node name="RootMargin" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -34,22 +44,23 @@ vertical_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 6
+theme_override_constants/separation = 14
 
 [node name="LeftPanel" type="VBoxContainer" parent="RootMargin/RootScroll/RootHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 4
+size_flags_stretch_ratio = 4.0
+theme_override_constants/separation = 6
 
 [node name="TitleLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/LeftPanel"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Combat Sandbox"
+theme_override_font_sizes/font_size = 18
+text = "Old Mine Skirmish"
 
 [node name="ActionPanel" type="PanelContainer" parent="RootMargin/RootScroll/RootHBox/LeftPanel"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(0, 68)
+custom_minimum_size = Vector2(0, 84)
 
 [node name="ActionVBox" type="VBoxContainer" parent="RootMargin/RootScroll/RootHBox/LeftPanel/ActionPanel"]
 layout_mode = 2
@@ -97,6 +108,27 @@ text = "Legend"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BoardBackdrop" type="ColorRect" parent="RootMargin/RootScroll/RootHBox/LeftPanel/BoardRoot"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 774.0
+offset_bottom = 646.0
+mouse_filter = 2
+color = Color(0.101961, 0.0745098, 0.0431373, 1)
+
+[node name="BoardTerrain" type="TextureRect" parent="RootMargin/RootScroll/RootHBox/LeftPanel/BoardRoot"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+offset_right = 768.0
+offset_bottom = 640.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
 
 [node name="GridContainer" type="GridContainer" parent="RootMargin/RootScroll/RootHBox/LeftPanel/BoardRoot"]
 unique_name_in_owner = true
@@ -118,8 +150,9 @@ mouse_filter = 2
 
 [node name="RightPanel" type="VBoxContainer" parent="RootMargin/RootScroll/RootHBox"]
 layout_mode = 2
-custom_minimum_size = Vector2(228, 0)
+custom_minimum_size = Vector2(430, 0)
 size_flags_horizontal = 1
+size_flags_stretch_ratio = 1.0
 theme_override_constants/separation = 4
 
 [node name="ActionsTitle" type="Label" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
@@ -146,7 +179,7 @@ text = ""
 [node name="InspectTitle" type="Label" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
-text = "Inspect"
+text = "Tile"
 
 [node name="InspectLabel" type="Label" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
 unique_name_in_owner = true
@@ -158,7 +191,7 @@ text = ""
 [node name="EventLogTitle" type="Label" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
-text = "Event log newest first"
+text = "Battle Log"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="RootMargin/RootScroll/RootHBox/RightPanel"]
 layout_mode = 2

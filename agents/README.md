@@ -6,14 +6,14 @@
 - Prefer Aseprite CLI scripts for generated UI sprites, debug sprites, tiles, and animation-frame exports so the operation is repeatable.
 - Do not use general image editors or ad hoc raster scripts for final pixel-art assets unless Aseprite is unavailable and the user explicitly approves the fallback.
 - Keep source scripts for generated pixel assets under `tools/aseprite/` when practical.
-- Terrain tiles and terrain objects must follow the current `assets/terrain/nature/` reference direction and the `assets/tilesets/combat_logic_tiles.png` sandbox direction: tactical 2.5D/oblique pixel art, slightly viewed from the side rather than flat top-down.
+- Terrain tiles and terrain objects must follow the current `assets/combat/terrain/nature/` reference direction and the `assets/combat/tilesets/combat_logic_tiles.png` sandbox direction: tactical 2.5D/oblique pixel art, slightly viewed from the side rather than flat top-down.
 - Terrain forms should have readable volume: front faces, contact shadows, height cues, and silhouettes that make blocked tiles, cover, and highground understandable at combat zoom.
 - Do not make final terrain as simple flat-color debug tiles. Debug placeholders are acceptable only when clearly documented as temporary.
 
 ## Terrain Art Contract
 
-- Treat `assets_src/aseprite/terrain/combat_logic_tiles.aseprite` as the editable source for the current combat terrain atlas.
-- Export terrain atlas updates to `assets/tilesets/combat_logic_tiles.png` through Aseprite, preferably with `tools/aseprite/combat_terrain_tiles.lua` or a similarly repeatable Aseprite script.
+- Treat `assets_src/aseprite/combat/terrain/combat_logic_tiles.aseprite` as the editable source for the current combat terrain atlas.
+- Export terrain atlas updates to `assets/combat/tilesets/combat_logic_tiles.png` through Aseprite, preferably with `tools/aseprite/combat_terrain_tiles.lua` or a similarly repeatable Aseprite script.
 - Preserve the combat tile scale and readability target: the atlas currently uses 76x76 tiles for the sandbox and Tiled map pipeline.
 - Terrain should read like a tactical RPG board in the direction of Battle Brothers, Wartales, or The Iron Oath: slightly side-on, chunky silhouettes, strong contact shadows, readable height, and painterly pixel texture.
 - Do not use clean vector shapes, smooth gradients, noisy AI leftovers, or single-color logic squares as final terrain.

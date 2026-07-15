@@ -8,6 +8,7 @@ const UNIT_VISUALS := {
 }
 
 var texture_cache: Dictionary = {}
+var texture_path_cache: Dictionary = {}
 
 
 func icon(unit: Dictionary, state: Dictionary, facing: Dictionary, visual_actions: Dictionary, icon_size: Vector2i) -> Texture2D:
@@ -42,9 +43,12 @@ func texture_path(unit: Dictionary, direction: String, visual_action: String) ->
 	var visual := unit_visual_config(unit)
 	var faction := str(visual["faction"])
 	var character := str(visual["character"])
-	var base_path := "res://assets/characters/%s/%s" % [faction, character]
+	var cache_key := "%s:%s:%s:%s" % [faction, character, direction, visual_action]
+	if texture_path_cache.has(cache_key):
+		return texture_path_cache[cache_key]
+	var base_path := "res://assets/combat/characters/%s/%s" % [faction, character]
 	var legacy_character := legacy_character_prefix(character)
-	var legacy_base_path := "res://assets/characters/%s/%s" % [faction, legacy_character]
+	var legacy_base_path := "res://assets/combat/characters/%s/%s" % [faction, legacy_character]
 	var candidates: Array[String] = []
 
 	if visual_action == "walk":
@@ -102,7 +106,9 @@ func texture_path(unit: Dictionary, direction: String, visual_action: String) ->
 
 	for candidate in candidates:
 		if ResourceLoader.exists(candidate) or FileAccess.file_exists(candidate):
+			texture_path_cache[cache_key] = candidate
 			return candidate
+	texture_path_cache[cache_key] = candidates[-1]
 	return candidates[-1]
 
 
