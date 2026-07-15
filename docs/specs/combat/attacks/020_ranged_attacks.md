@@ -12,6 +12,7 @@ Ranged attacks allow units to target enemies beyond adjacent melee range.
 - `ranged_attack` is a single-target enemy action.
 - The action costs 1 AP.
 - The action has maximum range 3.
+- If the attacker stands on `highground`, `ranged_attack` gains +1 effective maximum range.
 - Range uses Chebyshev distance, matching the current 8-way movement and melee adjacency model.
 - The target must be a living enemy unit.
 - The actor must be the active living unit.
@@ -28,7 +29,7 @@ Ranged attacks allow units to target enemies beyond adjacent melee range.
 
 ## Rejections
 
-- `target_out_of_range` when target distance is greater than 3.
+- `target_out_of_range` when target distance is greater than the action's effective maximum range.
 - Existing action rejection reasons still apply:
   - `missing_actor`
   - `missing_target`

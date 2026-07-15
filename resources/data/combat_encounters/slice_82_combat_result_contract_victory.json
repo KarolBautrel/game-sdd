@@ -1,0 +1,52 @@
+{
+  "id": "slice_82_combat_result_contract_victory",
+  "seed": 1082,
+  "source_dungeon_id": "debug_cave_001",
+  "source_room_id": "room_guarded_cache",
+  "rewards": {
+    "xp": 12,
+    "gold": 7,
+    "items": ["rusty_key"]
+  },
+  "grid": {
+    "width": 3,
+    "height": 3,
+    "tiles": [
+      { "x": 0, "y": 0, "type": "floor" },
+      { "x": 1, "y": 0, "type": "floor" },
+      { "x": 2, "y": 0, "type": "floor" },
+      { "x": 0, "y": 1, "type": "floor" },
+      { "x": 1, "y": 1, "type": "floor" },
+      { "x": 2, "y": 1, "type": "floor" },
+      { "x": 0, "y": 2, "type": "floor" },
+      { "x": 1, "y": 2, "type": "floor" },
+      { "x": 2, "y": 2, "type": "floor" }
+    ]
+  },
+  "units": [
+    {
+      "id": "unit_player_001",
+      "team": "player",
+      "position": { "x": 1, "y": 1 },
+      "stats": { "max_hp": 10, "strength": 4, "defense": 1, "initiative": 10, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 9, "ap": 1, "mp": 3 },
+      "statuses": [],
+      "available_actions": ["basic_attack", "move", "defend", "end_turn"]
+    },
+    {
+      "id": "unit_enemy_001",
+      "team": "enemy",
+      "position": { "x": 2, "y": 1 },
+      "stats": { "max_hp": 2, "strength": 3, "defense": 2, "initiative": 8, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 2, "ap": 1, "mp": 3 },
+      "statuses": [],
+      "available_actions": ["basic_attack", "move", "defend", "end_turn"]
+    }
+  ],
+  "turn_state": {
+    "active_unit_id": "unit_player_001",
+    "round": 1,
+    "turn_order": ["unit_player_001", "unit_enemy_001"]
+  },
+  "event_log": []
+}

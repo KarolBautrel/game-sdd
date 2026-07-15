@@ -11,8 +11,24 @@
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
     "seed": { "type": "integer", "minimum": 0 },
+    "source_dungeon_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+    "source_room_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
     "background_path": { "type": "string", "pattern": "^res://assets/combat/terrain/backgrounds/.+\\.png$" },
     "map_path": { "type": "string", "pattern": "^res://resources/data/maps/.+\\.json$" },
+    "rewards": {
+      "type": "object",
+      "required": ["xp", "gold", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "xp": { "type": "integer", "minimum": 0 },
+        "gold": { "type": "integer", "minimum": 0 },
+        "items": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "uniqueItems": true
+        }
+      }
+    },
     "grid": {
       "type": "object",
       "required": ["width", "height", "tiles"],
@@ -129,7 +145,15 @@
         "additionalProperties": false,
         "properties": {
           "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "role": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "family": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "display_name": { "type": "string", "minLength": 1 },
           "available_actions": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+            "uniqueItems": true
+          },
+          "learned_actions": {
             "type": "array",
             "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
             "uniqueItems": true

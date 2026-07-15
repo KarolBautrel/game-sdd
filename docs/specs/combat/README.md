@@ -8,6 +8,7 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 
 - `overview/000_combat_core.md`
 - `overview/005_event_log_and_replay.md`
+- `overview/082_combat_result_contract_v1.md`
 
 ### Grid
 
@@ -55,6 +56,7 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 - `ai/031_enemy_ai_pathfinding_v1.md`
 - `ai/032_enemy_ai_ranged_positioning_v1.md`
 - `ai/065_enemy_archetype_loadout_v1.md`
+- `ai/081_enemy_archetype_roles_v2.md`
 
 ### Presentation
 

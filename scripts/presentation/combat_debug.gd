@@ -37,6 +37,9 @@ const UNIT_STATUS_ICON_GAP := 2.0
 const UNIT_TARGET_PREVIEW_LABEL_SIZE := Vector2(136, 48)
 const UNIT_TARGET_PREVIEW_GAP := 3.0
 const TILE_SIZE := 112
+const HIGHGROUND_UNIT_OFFSET_Y := -30.0
+const HIGHGROUND_UNIT_BASE_SIZE := Vector2(104, 22)
+const HIGHGROUND_UNIT_BASE_OFFSET := Vector2(23, 118)
 const GRASS_PATCH_SIZE := 64
 const DECORATION_SIZE_BY_KIND := {
 	"grass_tuft": Vector2(52, 52),
@@ -284,6 +287,25 @@ func _build_tile(position: Dictionary) -> Button:
 		tint.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tile.add_child(tint)
 
+	if terrain_type == "highground":
+		var ledge_shadow := ColorRect.new()
+		ledge_shadow.name = "HighgroundLedgeShadow"
+		ledge_shadow.color = Color(0.05, 0.035, 0.015, 0.42)
+		ledge_shadow.position = Vector2(10, TILE_SIZE - 28)
+		ledge_shadow.custom_minimum_size = Vector2(TILE_SIZE - 20, 18)
+		ledge_shadow.size = Vector2(TILE_SIZE - 20, 18)
+		ledge_shadow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		tile.add_child(ledge_shadow)
+
+		var ledge_rim := ColorRect.new()
+		ledge_rim.name = "HighgroundLedgeRim"
+		ledge_rim.color = Color(0.86, 0.70, 0.26, 0.54)
+		ledge_rim.position = Vector2(12, TILE_SIZE - 32)
+		ledge_rim.custom_minimum_size = Vector2(TILE_SIZE - 24, 4)
+		ledge_rim.size = Vector2(TILE_SIZE - 24, 4)
+		ledge_rim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		tile.add_child(ledge_rim)
+
 	var decoration_texture := _tile_decoration_texture(decoration_path)
 	if decoration_texture != null:
 		var decoration_size := _decoration_size(decoration_path)
@@ -480,13 +502,13 @@ func _terrain_base_color(terrain_type: String) -> Color:
 
 
 func _terrain_tint_color(terrain_type: String, decoration_path: String = "") -> Color:
-	if decoration_path != "":
+	if decoration_path != "" and terrain_type != "highground":
 		return Color(0, 0, 0, 0)
 	match terrain_type:
 		"blocked":
 			return Color(0.05, 0.04, 0.03, 0.24)
 		"highground":
-			return Color(0.72, 0.58, 0.18, 0.18)
+			return Color(0.78, 0.58, 0.16, 0.30)
 		"cover_low":
 			return Color(0.55, 0.39, 0.20, 0.13)
 		_:
@@ -998,8 +1020,15 @@ func _on_move_tile_pressed(position: Dictionary) -> void:
 		_run_command(command)
 		return
 
+	var move_event := _preview_move_event(position)
+	if move_event.is_empty():
+		_clear_move_preview()
+		last_feedback = "Move rejected: %s" % _rejection_label("destination_unreachable")
+		_render()
+		return
+
 	pending_move_position = position.duplicate(true)
-	pending_move_event = preview.get("move_event", {})
+	pending_move_event = move_event
 	current_action_title = "Move preview"
 	current_action_detail = "Route to %s costs %s MP. Click the same tile again to move." % [
 		_position_label(position),
@@ -1568,6 +1597,24 @@ func _create_unit_node(unit_id: String) -> Control:
 	unit_node.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
 	unit_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
+	var elevation_shadow := ColorRect.new()
+	elevation_shadow.name = "HighgroundUnitBaseShadow"
+	elevation_shadow.color = Color(0.04, 0.025, 0.01, 0.58)
+	elevation_shadow.position = HIGHGROUND_UNIT_BASE_OFFSET + Vector2(0, 6)
+	elevation_shadow.custom_minimum_size = HIGHGROUND_UNIT_BASE_SIZE
+	elevation_shadow.size = HIGHGROUND_UNIT_BASE_SIZE
+	elevation_shadow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	unit_node.add_child(elevation_shadow)
+
+	var elevation_rim := PanelContainer.new()
+	elevation_rim.name = "HighgroundUnitBase"
+	elevation_rim.custom_minimum_size = HIGHGROUND_UNIT_BASE_SIZE
+	elevation_rim.size = HIGHGROUND_UNIT_BASE_SIZE
+	elevation_rim.position = HIGHGROUND_UNIT_BASE_OFFSET
+	elevation_rim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	elevation_rim.add_theme_stylebox_override("panel", _highground_unit_base_style())
+	unit_node.add_child(elevation_rim)
+
 	var sprite := TextureRect.new()
 	sprite.name = "Sprite"
 	sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -1633,6 +1680,22 @@ func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
 	unit_node.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
 	unit_node.position = _unit_visual_pixel_position(unit)
 	unit_node.modulate = Color(1, 1, 1, 1)
+
+	var on_highground := _tile_type(unit.get("position", {})) == "highground"
+	var elevation_shadow := unit_node.get_node_or_null("HighgroundUnitBaseShadow") as ColorRect
+	if elevation_shadow != null:
+		elevation_shadow.visible = on_highground
+		elevation_shadow.position = HIGHGROUND_UNIT_BASE_OFFSET + Vector2(0, 6)
+		elevation_shadow.custom_minimum_size = HIGHGROUND_UNIT_BASE_SIZE
+		elevation_shadow.size = HIGHGROUND_UNIT_BASE_SIZE
+
+	var elevation_rim := unit_node.get_node_or_null("HighgroundUnitBase") as PanelContainer
+	if elevation_rim != null:
+		elevation_rim.visible = on_highground
+		elevation_rim.position = HIGHGROUND_UNIT_BASE_OFFSET
+		elevation_rim.custom_minimum_size = HIGHGROUND_UNIT_BASE_SIZE
+		elevation_rim.size = HIGHGROUND_UNIT_BASE_SIZE
+		elevation_rim.add_theme_stylebox_override("panel", _highground_unit_base_style())
 
 	var sprite := unit_node.get_node_or_null("Sprite") as TextureRect
 	if sprite != null:
@@ -1851,6 +1914,21 @@ func _unit_resource_style(unit: Dictionary) -> StyleBoxFlat:
 	return style
 
 
+func _highground_unit_base_style() -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.35, 0.24, 0.08, 0.62)
+	style.border_color = Color(0.98, 0.78, 0.30, 0.88)
+	style.border_width_left = 2
+	style.border_width_right = 2
+	style.border_width_top = 2
+	style.border_width_bottom = 4
+	style.corner_radius_top_left = 2
+	style.corner_radius_top_right = 2
+	style.corner_radius_bottom_left = 2
+	style.corner_radius_bottom_right = 2
+	return style
+
+
 func _unit_resource_label_nudge(unit: Dictionary) -> float:
 	var x := int(unit.get("position", {}).get("x", 0))
 	var team := str(unit.get("team", "enemy"))
@@ -1984,6 +2062,7 @@ func _tile_tooltip(position: Dictionary) -> String:
 	var lines: Array[String] = [
 		"x:%s y:%s" % [position["x"], position["y"]],
 		"terrain: %s" % _tile_type(position),
+		"move cost: %s MP" % _terrain_movement_cost(position),
 	]
 	var preview := _target_preview_for_position(position)
 	if not preview.is_empty():
@@ -2014,9 +2093,6 @@ func _command_rejection_reason(command: Dictionary) -> String:
 
 
 func _preview_move_event(position: Dictionary) -> Dictionary:
-	var cached := _target_preview_for_position(position)
-	if not cached.is_empty() and cached.has("move_event"):
-		return cached["move_event"]
 	var command := _build_command("move", {
 		"type": "tile",
 		"position": position,
@@ -2025,6 +2101,9 @@ func _preview_move_event(position: Dictionary) -> Dictionary:
 	for event: Dictionary in _events_after_startup(result["state"]["event_log"]):
 		if event["type"] == "unit_moved":
 			return event
+	var cached := _target_preview_for_position(position)
+	if not cached.is_empty() and cached.has("move_event"):
+		return cached["move_event"]
 	return {}
 
 
@@ -2051,31 +2130,47 @@ func _build_move_preview_cache() -> Dictionary:
 		return cache
 	if not CombatActionModel.action_granted_to_unit(state, actor, "move"):
 		return cache
-	var max_steps := 1
-	if actor.get("resources", {}).has("mp"):
-		max_steps = int(actor["resources"].get("mp", 0))
+	var uses_mp: bool = actor.get("resources", {}).has("mp")
+	var max_cost := 1
+	if uses_mp:
+		max_cost = int(actor["resources"].get("mp", 0))
 	elif int(actor["resources"].get("ap", 0)) < 1:
 		return cache
-	if max_steps < 1:
+	if max_cost < 1:
 		return cache
 
 	var start: Dictionary = actor["position"]
-	var queue: Array[Dictionary] = [{"position": start, "path": []}]
-	var visited := {_position_key(start): true}
+	var queue: Array[Dictionary] = [{"position": start, "path": [], "cost": 0}]
+	var best_cost := {_position_key(start): 0}
 
 	while not queue.is_empty():
+		queue.sort_custom(func(first: Dictionary, second: Dictionary) -> bool:
+			if int(first["cost"]) != int(second["cost"]):
+				return int(first["cost"]) < int(second["cost"])
+			if first["path"].size() != second["path"].size():
+				return first["path"].size() < second["path"].size()
+			var first_position: Dictionary = first["position"]
+			var second_position: Dictionary = second["position"]
+			if int(first_position["y"]) != int(second_position["y"]):
+				return int(first_position["y"]) < int(second_position["y"])
+			return int(first_position["x"]) < int(second_position["x"])
+		)
 		var item: Dictionary = queue.pop_front()
 		var current: Dictionary = item["position"]
 		var path: Array = item["path"]
-		if path.size() >= max_steps:
+		var cost := int(item["cost"])
+		if (uses_mp and cost >= max_cost) or (not uses_mp and path.size() >= 1):
 			continue
 		for neighbor: Dictionary in _move_preview_neighbors(actor, current):
 			var key := _position_key(neighbor)
-			if visited.has(key):
+			var next_cost := cost + _terrain_movement_cost(neighbor)
+			if uses_mp and next_cost > max_cost:
+				continue
+			if best_cost.has(key) and int(best_cost[key]) <= next_cost:
 				continue
 			var next_path := path.duplicate(true)
 			next_path.append(neighbor)
-			visited[key] = true
+			best_cost[key] = next_cost
 			cache[key] = {
 				"rejection": "",
 				"move_event": {
@@ -2083,11 +2178,11 @@ func _build_move_preview_cache() -> Dictionary:
 					"actor_id": actor["id"],
 					"from": start,
 					"to": neighbor,
-					"mp_spent": next_path.size(),
+					"mp_spent": next_cost if uses_mp else 0,
 					"path": next_path,
 				},
 			}
-			queue.append({"position": neighbor, "path": next_path})
+			queue.append({"position": neighbor, "path": next_path, "cost": next_cost})
 	return cache
 
 
@@ -2120,6 +2215,16 @@ func _move_preview_position_is_legal(actor: Dictionary, origin: Dictionary, posi
 	if _is_diagonal_step(origin, position) and not _diagonal_step_allowed(origin, position):
 		return false
 	return true
+
+
+func _terrain_movement_cost(position: Dictionary) -> int:
+	match _tile_type(position):
+		"highground":
+			return 2
+		"floor", "cover_low":
+			return 1
+		_:
+			return 999999
 
 
 func _inside_grid(position: Dictionary) -> bool:
@@ -2269,7 +2374,8 @@ func _position_to_unit_top_left(position: Dictionary) -> Vector2:
 		int(position["x"]) * (TILE_SIZE + TILE_GAP),
 		int(position["y"]) * (TILE_SIZE + TILE_GAP)
 	)
-	return tile_origin + Vector2(TILE_SIZE - UNIT_ICON_SIZE.x, TILE_SIZE - UNIT_ICON_SIZE.y) / 2.0
+	var elevation_offset := Vector2(0, HIGHGROUND_UNIT_OFFSET_Y) if _tile_type(position) == "highground" else Vector2.ZERO
+	return tile_origin + Vector2(TILE_SIZE - UNIT_ICON_SIZE.x, TILE_SIZE - UNIT_ICON_SIZE.y) / 2.0 + elevation_offset
 
 
 func _combat_result() -> String:

@@ -126,6 +126,10 @@ The project now has:
   - encounters may define `enemy_archetypes`;
   - enemy units may reference an `archetype_id`;
   - archetypes can provide available actions and loadout before AI command selection and command resolution.
+- Enemy archetype roles v2:
+  - reusable humanoid roles include swordsman, shieldman/bruiser, and archer;
+  - reusable beast roles include stalker and bruiser for wolves, spiders, boars, hounds, and similar monsters;
+  - natural weapons can be modeled through the same loadout contract as humanoid weapons.
 - Map Pipeline V1:
   - combat encounters may reference generated Tiled map JSON through `map_path`;
   - Python and Godot combat setup resolve `grid.width`, `grid.height`, and `grid.tiles` from the referenced map;
@@ -217,6 +221,12 @@ Current verified slices:
 - `074_combat_action_feedback.md`
 - `075_targeting_preview_completion.md`
 - `076_unit_animation_state_machine.md`
+- `077_bleeding_status_v1.md`
+- `078_guard_break_v1.md`
+- `079_terrain_movement_costs.md`
+- `080_highground_ranged_range_bonus.md`
+- `081_enemy_archetype_roles_v2.md`
+- `082_combat_result_contract.md`
 
 ## Spec Organization
 
@@ -244,6 +254,8 @@ Current presentation rule specs:
 - `actions/063_aimed_shot_v1.md`
 - `actions/064_learned_actions_v1.md`
 - `ai/065_enemy_archetype_loadout_v1.md`
+- `ai/081_enemy_archetype_roles_v2.md`
+- `overview/082_combat_result_contract_v1.md`
 
 See:
 
@@ -358,6 +370,17 @@ Latest verified scope:
 - floating text helper mapping is covered by `scripts/presentation/combat_floating_text_tests.gd`, closing the automated gap for `damage_applied`, miss, and `status_applied` event-to-message conversion.
 - targeting preview formatting is extracted into `scripts/presentation/combat/combat_targeting_preview.gd` and covered by `scripts/presentation/combat_targeting_preview_tests.gd`, including `100% HIT`, `% HIT`, `DMG`, `COST X AP`, and rejected-target suppression.
 - unit visual state selection is extracted into `scripts/presentation/combat/combat_unit_visual_state.gd` and covered by `scripts/presentation/combat_unit_visual_state_tests.gd`, including walk, combat, hit, death, and status reaction mapping.
+- terrain movement costs are specified and verified by slice 079: `highground` costs 2 MP, while `floor` and `cover_low` cost 1 MP.
+- Python and Godot movement pathfinding now choose the cheapest legal path and record total terrain cost in `action_performed.mp_spent` and `unit_moved.mp_spent`.
+- enemy AI movement respects varied terrain costs when selecting MP movement targets.
+- combat move preview now uses terrain MP cost and labels the total cost before confirmation.
+- highground presentation is more readable through a stronger warm tint, ledge/shadow markers, and a slight upward unit offset for characters standing on highground.
+- highground unit readability was reinforced for low-profile enemies: units on highground now render with a stronger upward offset plus a visible base/ledge marker under the sprite.
+- highground ranged advantage is extended by slice 080: `ranged_attack` gets +1 effective maximum range when the attacker stands on `highground`, while keeping the existing +10 hit chance modifier.
+- enemy archetype roles v2 are specified and verified by slice 081: humanoid swordsman/shieldman/archer roles and beast stalker/bruiser roles can provide reusable loadouts and actions for AI command selection.
+- `debug_full_combat_showcase` now uses enemy `archetype_id` references for its melee and ranged enemies instead of inline enemy action/loadout setup.
+- dungeon exploration target flow is now planned in `docs/specs/dungeon/overview/000_dungeon_exploration_loop.md`, with the dungeon-combat boundary planned in `docs/specs/dungeon/overview/001_dungeon_combat_boundary.md`.
+- combat result contract v1 is specified and verified by slice 082: `simulate()` returns `result_payload`, terminal `combat_ended` events include the same payload, and victory/defeat payloads expose dungeon source ids, surviving player summaries, defeated ids, remaining enemy summaries, and reward-shaped data.
 - Validation passed on 2026-07-15:
   - `python tools\validators\validate_all.py`
   - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --quit --resolution 2560x1440`
@@ -445,6 +468,7 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
 - At least one melee enemy and one ranged enemy use reusable archetype/loadout data.
 - At least one simple status effect is fully specified, sliced, validated, displayed, and resolved over turns.
 - Combat can end with victory/defeat and expose enough result data for a dungeon scene to continue.
+- Dungeon exploration and dungeon-combat boundary rules are captured in `docs/specs/dungeon/`.
 - Full validation passes:
   - `python tools\validators\validate_all.py`
   - Godot headless project load at `2560x1440`
@@ -521,7 +545,7 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
      - `combat_slice_tests.gd` includes `slice_78_guard_break_v1`;
      - `combat_floating_text_tests.gd` asserts `guard_broken` renders as `GUARD BROKEN`.
 
-7. **Next - Terrain Movement Costs V1**
+7. **Done - Terrain Movement Costs V1**
    - Goal: make authored terrain affect movement without changing the whole map pipeline again.
    - Owner spec: `grid/024_terrain.md`
    - Slice: `slices/079_terrain_movement_costs.md`
@@ -530,22 +554,48 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
      - movement preview and pathfinding use MP cost;
      - enemy pathfinding handles varied costs;
      - UI preview shows final MP cost.
-   - Test proof: Python/Godot combat slice tests and map validator updates if data schema changes.
+   - Implementation:
+     - `tools/combat/simulate_combat.py`
+     - `scripts/domain/combat_resolver.gd`
+     - `scripts/presentation/combat_debug.gd`
+   - Test proof:
+     - `python -m tools.validators.validate_combat_slice`
+     - `python tools\validators\validate_all.py`
+     - Godot headless project load at `2560x1440`
+     - Godot combat slice tests
 
-8. **Enemy Archetype Roles V2**
+8. **Done - Highground Ranged Range Bonus**
+   - Goal: make highground improve ranged reach as well as hit chance.
+   - Owner specs:
+     - `attacks/020_ranged_attacks.md`
+     - `grid/024_terrain.md`
+   - Slice: `slices/080_highground_ranged_range_bonus.md`
+   - Required behavior:
+     - `ranged_attack` keeps base maximum range 3;
+     - highground attackers get +1 effective maximum range for `ranged_attack`;
+     - highground ranged attacks still get the existing +10 hit chance modifier.
+   - Implementation:
+     - `tools/combat/simulate_combat.py`
+     - `scripts/domain/combat_resolver.gd`
+   - Test proof:
+     - `python -m tools.validators.validate_combat_slice`
+     - Godot combat slice tests
+
+9. **Done - Enemy Archetype Roles V2**
    - Goal: make enemies reusable enough for dungeon encounters.
-   - Owner spec: `ai/065_enemy_archetype_loadout_v1.md` or new `ai/080_enemy_archetype_roles_v2.md`
-   - Slice: `slices/080_enemy_archetype_roles_v2.md`
+   - Owner spec: `ai/081_enemy_archetype_roles_v2.md`
+   - Slice: `slices/081_enemy_archetype_roles_v2.md`
    - Required behavior:
      - define swordsman, shieldman/bruiser, archer archetypes;
+     - define beast archetypes for wolves, spiders, and larger beasts;
      - showcase encounter uses archetypes instead of bespoke inline enemy setup;
      - AI chooses actions consistent with role and loadout.
    - Test proof: Python/Godot combat slice tests.
 
-9. **Encounter Result Contract V1**
+10. **Done - Encounter Result Contract V1**
    - Goal: define what dungeon receives when combat ends.
-   - Owner spec: `overview/` or new `presentation/`/`encounter` boundary spec.
-   - Slice: `slices/081_combat_result_contract.md`
+   - Owner spec: `overview/082_combat_result_contract_v1.md`
+   - Slice: `slices/082_combat_result_contract.md`
    - Required behavior:
      - victory/defeat result is queryable;
      - surviving units/resources can be summarized;
@@ -553,20 +603,20 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
      - no dungeon implementation required yet.
    - Test proof: Python/Godot combat slice tests.
 
-10. **Combat Encounter Authoring V1**
+11. **Next - Combat Encounter Authoring V1**
     - Goal: make one new combat encounter from map + archetypes without code changes.
     - Owner spec: map/encounter authoring docs.
-    - Slice: `slices/082_combat_encounter_authoring_v1.md`
+    - Slice: `slices/083_combat_encounter_authoring_v1.md`
     - Required behavior:
       - documented steps for adding a combat map encounter;
       - validator checks map reference, spawns, archetypes, loadouts, and background;
       - debug scene scenario catalog can load it without controller edits.
     - Test proof: validators plus Godot project load.
 
-11. **Combat Readiness Review For Dungeon**
+12. **Combat Readiness Review For Dungeon**
     - Goal: run the exit criteria as a final checklist.
     - Owner spec: this milestone plus any transition/boundary spec.
-    - Slice: `slices/083_combat_ready_for_dungeon.md`
+    - Slice: `slices/084_combat_ready_for_dungeon.md`
     - Required behavior:
       - all required roadmap items are done or explicitly deferred;
       - validation commands pass;

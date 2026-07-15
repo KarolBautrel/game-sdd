@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import deepcopy
 import json
 from pathlib import Path
 
@@ -2254,6 +2255,286 @@ def validate_combat_slice_78() -> list[str]:
     return errors
 
 
+def validate_combat_slice_79() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_79_terrain_movement_costs.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_79_terrain_movement_costs_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+    expected_events = [
+        "combat_started",
+        "turn_started",
+        "action_performed",
+        "unit_moved",
+        "action_performed",
+        "turn_ended",
+        "turn_started",
+        "command_rejected",
+    ]
+
+    if result.result != "in_progress":
+        errors.append(f"slice_79_terrain_movement_costs: expected result in_progress, got {result.result}")
+    if event_types != expected_events:
+        errors.append(f"slice_79_terrain_movement_costs: expected events {expected_events}, got {event_types}")
+    if player["position"] != {"x": 1, "y": 1}:
+        errors.append(f"slice_79_terrain_movement_costs: expected player on highground, got {player['position']}")
+    if player["resources"]["ap"] != 1 or player["resources"]["mp"] != 1:
+        errors.append(f"slice_79_terrain_movement_costs: expected player AP 1 MP 1, got {player['resources']}")
+    if enemy["position"] != {"x": 2, "y": 3} or enemy["resources"]["mp"] != 1:
+        errors.append(f"slice_79_terrain_movement_costs: expected enemy unchanged with MP 1, got {enemy}")
+
+    actions = [event for event in state["event_log"] if event["type"] == "action_performed"]
+    if len(actions) != 2:
+        errors.append(f"slice_79_terrain_movement_costs: expected two action_performed events, got {actions}")
+    elif actions[0].get("action_id") != "move" or actions[0].get("mp_spent") != 2 or actions[0].get("ap_spent") != 0:
+        errors.append(f"slice_79_terrain_movement_costs: unexpected move action payload {actions[0]}")
+
+    moved = next((event for event in state["event_log"] if event["type"] == "unit_moved"), None)
+    if moved is None:
+        errors.append("slice_79_terrain_movement_costs: expected unit_moved")
+    elif moved.get("path") != [{"x": 1, "y": 1}] or moved.get("mp_spent") != 2:
+        errors.append(f"slice_79_terrain_movement_costs: unexpected move payload {moved}")
+
+    rejected = [event for event in state["event_log"] if event["type"] == "command_rejected"]
+    if len(rejected) != 1 or rejected[0].get("reason") != "not_enough_mp":
+        errors.append(f"slice_79_terrain_movement_costs: expected not_enough_mp rejection, got {rejected}")
+
+    ai_encounter = load_json(ROOT / "resources/data/combat_encounters/slice_79_terrain_movement_costs.json")
+    ai_encounter["turn_state"]["active_unit_id"] = "unit_enemy_002"
+    ai_encounter["units"][0]["position"] = {"x": 1, "y": 1}
+    ai_encounter["units"][2]["position"] = {"x": 3, "y": 3}
+    command = choose_enemy_command(ai_encounter, "cmd_ai_cost")
+    if command["action_id"] != "move":
+        errors.append(f"slice_79_terrain_movement_costs: expected AI move, got {command['action_id']}")
+    if command["target"].get("position") != {"x": 2, "y": 1}:
+        errors.append(f"slice_79_terrain_movement_costs: expected AI to prefer floor at {{'x': 2, 'y': 1}}, got {command['target'].get('position')}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_79_terrain_movement_costs: replay event log differs")
+
+    return errors
+
+
+def validate_combat_slice_80() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_80_highground_ranged_range_bonus.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_80_highground_ranged_range_bonus_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    expected_events = ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"]
+    if result.result != "in_progress":
+        errors.append(f"slice_80_highground_ranged_range_bonus: expected result in_progress, got {result.result}")
+    if event_types != expected_events:
+        errors.append(f"slice_80_highground_ranged_range_bonus: expected events {expected_events}, got {event_types}")
+    if player["resources"]["ap"] != 0:
+        errors.append(f"slice_80_highground_ranged_range_bonus: expected player AP 0, got {player['resources']['ap']}")
+    if enemy["resources"]["hp"] != 4:
+        errors.append(f"slice_80_highground_ranged_range_bonus: expected enemy HP 4, got {enemy['resources']['hp']}")
+
+    roll = [event for event in state["event_log"] if event["type"] == "hit_roll_resolved"]
+    if len(roll) != 1:
+        errors.append("slice_80_highground_ranged_range_bonus: expected one hit_roll_resolved event")
+    elif not _hit_roll_matches(
+        roll[0],
+        roll=1,
+        base_hit_chance=70,
+        accuracy_modifier=0,
+        evasion_modifier=0,
+        terrain_modifier=10,
+        hit_chance=80,
+        outcome="hit",
+    ):
+        errors.append(f"slice_80_highground_ranged_range_bonus: unexpected roll payload {roll[0]}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_80_highground_ranged_range_bonus: replay event log differs")
+
+    return errors
+
+
+def validate_combat_slice_81() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_81_enemy_archetype_roles_v2.json")
+    showcase = load_json(ROOT / "resources/data/combat_encounters/debug_full_combat_showcase.json")
+
+    expected_archetypes = {
+        "raider_swordsman",
+        "raider_shieldman",
+        "raider_archer",
+        "beast_stalker",
+        "beast_bruiser",
+    }
+    archetypes = encounter.get("enemy_archetypes", {})
+    missing_archetypes = sorted(expected_archetypes.difference(archetypes.keys()))
+    if missing_archetypes:
+        errors.append(f"slice_81_enemy_archetype_roles_v2: missing archetypes {missing_archetypes}")
+    beast_archetypes = sorted(archetype_id for archetype_id, archetype in archetypes.items() if archetype.get("family") == "beast")
+    if beast_archetypes != ["beast_bruiser", "beast_stalker"]:
+        errors.append(f"slice_81_enemy_archetype_roles_v2: expected beast archetypes, got {beast_archetypes}")
+
+    for unit in showcase.get("units", []):
+        if unit.get("team") != "enemy":
+            continue
+        if not unit.get("archetype_id"):
+            errors.append(f"slice_81_enemy_archetype_roles_v2: showcase enemy {unit['id']} has no archetype_id")
+        if unit.get("available_actions", []) != []:
+            errors.append(f"slice_81_enemy_archetype_roles_v2: showcase enemy {unit['id']} still has inline actions {unit.get('available_actions')}")
+        if "loadout" in unit:
+            errors.append(f"slice_81_enemy_archetype_roles_v2: showcase enemy {unit['id']} still has inline loadout")
+
+    command_expectations = {
+        "unit_enemy_archer": ("ranged_attack", "unit_player_001", None),
+        "unit_enemy_swordsman": ("move", None, {"x": 2, "y": 2}),
+        "unit_enemy_spider": ("basic_attack", "unit_player_001", None),
+    }
+    for actor_id, (expected_action, expected_target, expected_position) in command_expectations.items():
+        active_state = deepcopy(encounter)
+        active_state["turn_state"]["active_unit_id"] = actor_id
+        command = choose_enemy_command(active_state, f"cmd_{actor_id}")
+        if command["action_id"] != expected_action:
+            errors.append(f"slice_81_enemy_archetype_roles_v2: expected {actor_id} {expected_action}, got {command['action_id']}")
+        if expected_target is not None and command["target"].get("unit_id") != expected_target:
+            errors.append(f"slice_81_enemy_archetype_roles_v2: expected {actor_id} target {expected_target}, got {command['target'].get('unit_id')}")
+        if expected_position is not None and command["target"].get("position") != expected_position:
+            errors.append(f"slice_81_enemy_archetype_roles_v2: expected {actor_id} position {expected_position}, got {command['target'].get('position')}")
+
+    archer_command = choose_enemy_command(encounter, "cmd_001")
+    result = simulate(encounter, [archer_command])
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    archer = _unit_by_id(state, "unit_enemy_archer")
+    spider = _unit_by_id(state, "unit_enemy_spider")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    expected_events = ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"]
+    if event_types != expected_events:
+        errors.append(f"slice_81_enemy_archetype_roles_v2: expected events {expected_events}, got {event_types}")
+    if player["resources"]["hp"] != 16:
+        errors.append(f"slice_81_enemy_archetype_roles_v2: expected player HP 16, got {player['resources']['hp']}")
+    if archer.get("loadout", {}).get("main_hand") != "raider_bow":
+        errors.append(f"slice_81_enemy_archetype_roles_v2: expected archer bow loadout, got {archer.get('loadout', {})}")
+    if "ranged_attack" not in [event.get("action_id") for event in state["event_log"] if event["type"] == "action_performed"]:
+        errors.append("slice_81_enemy_archetype_roles_v2: expected ranged_attack action")
+    if spider.get("loadout", {}).get("main_hand") != "beast_fangs":
+        errors.append(f"slice_81_enemy_archetype_roles_v2: expected spider beast_fangs loadout, got {spider.get('loadout', {})}")
+
+    roll = [event for event in state["event_log"] if event["type"] == "hit_roll_resolved"]
+    if len(roll) != 1:
+        errors.append("slice_81_enemy_archetype_roles_v2: expected one hit_roll_resolved event")
+    elif not _hit_roll_matches(
+        roll[0],
+        roll=80,
+        base_hit_chance=75,
+        accuracy_modifier=5,
+        evasion_modifier=0,
+        hit_chance=80,
+        outcome="hit",
+    ):
+        errors.append(f"slice_81_enemy_archetype_roles_v2: unexpected roll payload {roll[0]}")
+
+    replay = simulate(encounter, [archer_command])
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_81_enemy_archetype_roles_v2: replay event log differs")
+
+    return errors
+
+
+def validate_combat_slice_82() -> list[str]:
+    errors: list[str] = []
+    errors.extend(_validate_combat_result_payload(
+        "slice_82_combat_result_contract_victory",
+        expected_result="victory",
+        expected_surviving_players=["unit_player_001"],
+        expected_defeated_players=[],
+        expected_defeated_enemies=["unit_enemy_001"],
+        expected_remaining_enemies=[],
+    ))
+    errors.extend(_validate_combat_result_payload(
+        "slice_82_combat_result_contract_defeat",
+        expected_result="defeat",
+        expected_surviving_players=[],
+        expected_defeated_players=["unit_player_001"],
+        expected_defeated_enemies=[],
+        expected_remaining_enemies=["unit_enemy_001"],
+    ))
+    return errors
+
+
+def _validate_combat_result_payload(
+    slice_id: str,
+    *,
+    expected_result: str,
+    expected_surviving_players: list[str],
+    expected_defeated_players: list[str],
+    expected_defeated_enemies: list[str],
+    expected_remaining_enemies: list[str],
+) -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
+    commands = load_json(ROOT / f"tests/data/combat_commands/{slice_id}_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    payload = result.result_payload
+    event_types = [event["type"] for event in state["event_log"]]
+    expected_events = ["combat_started", "turn_started", "action_performed", "damage_applied", "unit_defeated", "combat_ended"]
+    if event_types != expected_events:
+        errors.append(f"{slice_id}: expected events {expected_events}, got {event_types}")
+    if result.result != expected_result:
+        errors.append(f"{slice_id}: expected result {expected_result}, got {result.result}")
+    if payload.get("result") != expected_result:
+        errors.append(f"{slice_id}: expected payload result {expected_result}, got {payload.get('result')}")
+    if payload.get("combat_id") != slice_id:
+        errors.append(f"{slice_id}: expected combat_id {slice_id}, got {payload.get('combat_id')}")
+    if payload.get("source_dungeon_id") != "debug_cave_001":
+        errors.append(f"{slice_id}: unexpected source_dungeon_id {payload.get('source_dungeon_id')}")
+    if payload.get("source_room_id") != "room_guarded_cache":
+        errors.append(f"{slice_id}: unexpected source_room_id {payload.get('source_room_id')}")
+    if payload.get("rewards") != {"xp": 12, "gold": 7, "items": ["rusty_key"]}:
+        errors.append(f"{slice_id}: unexpected rewards {payload.get('rewards')}")
+
+    surviving_player_ids = [unit["id"] for unit in payload.get("surviving_players", [])]
+    remaining_enemy_ids = [unit["id"] for unit in payload.get("remaining_enemies", [])]
+    if surviving_player_ids != expected_surviving_players:
+        errors.append(f"{slice_id}: expected surviving players {expected_surviving_players}, got {surviving_player_ids}")
+    if payload.get("defeated_player_ids") != expected_defeated_players:
+        errors.append(f"{slice_id}: expected defeated players {expected_defeated_players}, got {payload.get('defeated_player_ids')}")
+    if payload.get("defeated_enemy_ids") != expected_defeated_enemies:
+        errors.append(f"{slice_id}: expected defeated enemies {expected_defeated_enemies}, got {payload.get('defeated_enemy_ids')}")
+    if remaining_enemy_ids != expected_remaining_enemies:
+        errors.append(f"{slice_id}: expected remaining enemies {expected_remaining_enemies}, got {remaining_enemy_ids}")
+
+    for summary in payload.get("surviving_players", []) + payload.get("remaining_enemies", []):
+        for key in ["id", "team", "hp", "max_hp", "statuses", "position"]:
+            if key not in summary:
+                errors.append(f"{slice_id}: summary missing {key}: {summary}")
+
+    ended_events = [event for event in state["event_log"] if event["type"] == "combat_ended"]
+    if len(ended_events) != 1:
+        errors.append(f"{slice_id}: expected one combat_ended event")
+    elif ended_events[0].get("result_payload") != payload:
+        errors.append(f"{slice_id}: combat_ended payload differs from simulate result payload")
+
+    replay = simulate(encounter, commands)
+    if replay.result_payload != payload:
+        errors.append(f"{slice_id}: replay result payload differs")
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append(f"{slice_id}: replay event log differs")
+
+    return errors
+
+
 def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_result: str) -> list[str]:
     errors: list[str] = []
     encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
@@ -2462,6 +2743,10 @@ def main() -> int:
     errors.extend(validate_combat_slice_66())
     errors.extend(validate_combat_slice_77())
     errors.extend(validate_combat_slice_78())
+    errors.extend(validate_combat_slice_79())
+    errors.extend(validate_combat_slice_80())
+    errors.extend(validate_combat_slice_81())
+    errors.extend(validate_combat_slice_82())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:

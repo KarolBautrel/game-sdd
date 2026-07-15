@@ -13,6 +13,7 @@ MIN_HIT_CHANCE = 10
 MAX_HIT_CHANCE = 95
 HIGHGROUND_RANGED_HIT_MODIFIER = 10
 COVER_LOW_RANGED_HIT_MODIFIER = -20
+HIGHGROUND_RANGED_RANGE_BONUS = 1
 AI_RANGED_MIN_HIT_CHANCE = 60
 MIN_INTERCEPT_CHANCE = 20
 MAX_INTERCEPT_CHANCE = 80
@@ -26,6 +27,7 @@ DEFAULT_SHIELD_WALL_COOLDOWN_TURNS = 2
 class SimulationResult:
     state: dict[str, Any]
     result: str
+    result_payload: dict[str, Any]
 
 
 class CombatSimulationError(ValueError):
@@ -111,7 +113,7 @@ def simulate(encounter: dict[str, Any], commands: list[dict[str, Any]]) -> Simul
     for command in commands:
         sequence = _resolve_command(state, command, sequence)
 
-    return SimulationResult(state=state, result=_combat_result(state))
+    return SimulationResult(state=state, result=_combat_result(state), result_payload=_combat_result_payload(state))
 
 
 def _resolve_command(state: dict[str, Any], command: dict[str, Any], sequence: int) -> int:
@@ -163,7 +165,7 @@ def _resolve_attack(
     if rejection is not None:
         return _reject(state, sequence, command, rejection)
 
-    attack_range = _attack_range(action_profile, max_range)
+    attack_range = _effective_attack_range(state, actor, action_id, _attack_range(action_profile, max_range))
     attack_ap_cost = _attack_ap_cost(action_profile, ap_cost)
     attack_damage_bonus = _attack_damage_bonus(action_profile, damage_bonus)
 
@@ -317,6 +319,7 @@ def _resolve_attack(
         )
 
     if _combat_result(state) != "in_progress":
+        result_payload = _combat_result_payload(state)
         sequence = _emit(
             state,
             sequence,
@@ -324,7 +327,8 @@ def _resolve_attack(
             {
                 "command_id": command["id"],
                 "actor_id": actor["id"],
-                "result": _combat_result(state),
+                "result": result_payload["result"],
+                "result_payload": result_payload,
             },
         )
 
@@ -402,7 +406,7 @@ def _resolve_move(state: dict[str, Any], command: dict[str, Any], sequence: int)
 
     old_position = dict(actor["position"])
     movement_path = _movement_path(state, actor, destination)
-    movement_cost = len(movement_path)
+    movement_cost = _movement_path_cost(state, movement_path)
     ap_spent = 0 if _movement_uses_mp(actor) else 1
     mp_spent = movement_cost if _movement_uses_mp(actor) else 0
     actor["resources"]["ap"] -= ap_spent
@@ -545,6 +549,7 @@ def _resolve_end_turn(state: dict[str, Any], command: dict[str, Any], sequence: 
                 },
             )
             if _combat_result(state) != "in_progress":
+                result_payload = _combat_result_payload(state)
                 sequence = _emit(
                     state,
                     sequence,
@@ -552,7 +557,8 @@ def _resolve_end_turn(state: dict[str, Any], command: dict[str, Any], sequence: 
                     {
                         "command_id": command["id"],
                         "actor_id": next_unit_id,
-                        "result": _combat_result(state),
+                        "result": result_payload["result"],
+                        "result_payload": result_payload,
                     },
                 )
     for status in expired_statuses:
@@ -602,7 +608,7 @@ def _attack_rejection(
         return "not_enough_ap"
     if _skill_on_cooldown(actor, action_id):
         return "skill_on_cooldown"
-    range_rejection = _range_rejection(state, actor, target, action_id, _attack_range(weapon_profile, max_range))
+    range_rejection = _range_rejection(state, actor, target, action_id, _effective_attack_range(state, actor, action_id, _attack_range(weapon_profile, max_range)))
     if range_rejection is not None:
         return range_rejection
     return None
@@ -697,7 +703,7 @@ def _move_rejection(
     if not movement_path:
         return "destination_unreachable"
     if _movement_uses_mp(actor):
-        if len(movement_path) > actor["resources"]["mp"]:
+        if _movement_path_cost(state, movement_path) > actor["resources"]["mp"]:
             return "not_enough_mp"
     elif _is_diagonal_step(actor["position"], destination) and not _diagonal_step_allowed(state, actor["position"], destination):
         return "diagonal_corner_blocked"
@@ -714,6 +720,10 @@ def _can_pay_move(actor: dict[str, Any]) -> bool:
     return actor["resources"]["ap"] >= 1
 
 
+def _movement_path_cost(state: dict[str, Any], path: list[dict[str, int]]) -> int:
+    return sum(_terrain_movement_cost(state, position) for position in path)
+
+
 def _movement_path(
     state: dict[str, Any],
     actor: dict[str, Any],
@@ -725,20 +735,22 @@ def _movement_path(
     if start == destination:
         return []
 
-    queue: list[tuple[dict[str, int], list[dict[str, int]]]] = [(start, [])]
-    visited = {_position_key(start)}
+    queue: list[tuple[dict[str, int], list[dict[str, int]], int]] = [(start, [], 0)]
+    best_cost = {_position_key(start): 0}
 
     while queue:
-        current, path = queue.pop(0)
+        queue.sort(key=lambda item: (item[2], len(item[1]), _manhattan(item[0], destination), item[0]["y"], item[0]["x"]))
+        current, path, cost = queue.pop(0)
+        if current == destination and path:
+            return path
         for neighbor in _movement_neighbors(state, actor, current):
             key = _position_key(neighbor)
-            if key in visited:
+            next_cost = cost + _terrain_movement_cost(state, neighbor)
+            if key in best_cost and best_cost[key] <= next_cost:
                 continue
             next_path = path + [neighbor]
-            if neighbor == destination:
-                return next_path
-            visited.add(key)
-            queue.append((neighbor, next_path))
+            best_cost[key] = next_cost
+            queue.append((neighbor, next_path, next_cost))
 
     return []
 
@@ -918,6 +930,12 @@ def _attack_range(weapon_profile: dict[str, Any], fallback: int) -> int:
     return int(weapon_profile.get("range", fallback))
 
 
+def _effective_attack_range(state: dict[str, Any], actor: dict[str, Any], action_id: str, base_range: int) -> int:
+    if action_id == "ranged_attack" and _tile_type(state, actor["position"]) == "highground":
+        return base_range + HIGHGROUND_RANGED_RANGE_BONUS
+    return base_range
+
+
 def _action_available(state: dict[str, Any], actor: dict[str, Any], action_id: str) -> bool:
     if action_id in actor.get("available_actions", []):
         return True
@@ -988,6 +1006,7 @@ def _apply_enemy_archetypes(state: dict[str, Any]) -> None:
         if archetype is None:
             continue
         unit["available_actions"] = list(dict.fromkeys(unit.get("available_actions", []) + archetype.get("available_actions", [])))
+        unit["learned_actions"] = list(dict.fromkeys(unit.get("learned_actions", []) + archetype.get("learned_actions", [])))
         if "loadout" in archetype:
             loadout = dict(archetype["loadout"])
             loadout.update(unit.get("loadout", {}))
@@ -1198,6 +1217,15 @@ def _is_walkable_tile(state: dict[str, Any], position: dict[str, int]) -> bool:
     return _tile_type(state, position) in {"floor", "highground", "cover_low"}
 
 
+def _terrain_movement_cost(state: dict[str, Any], position: dict[str, int]) -> int:
+    terrain_type = _tile_type(state, position)
+    if terrain_type == "highground":
+        return 2
+    if terrain_type in {"floor", "cover_low"}:
+        return 1
+    return 999999
+
+
 def _living_unit_at(state: dict[str, Any], position: dict[str, int]) -> dict[str, Any] | None:
     for unit in state["units"]:
         if unit["resources"]["hp"] > 0 and unit["position"] == position:
@@ -1292,32 +1320,36 @@ def _best_mp_move_toward(
     actor: dict[str, Any],
     target: dict[str, Any],
 ) -> dict[str, int] | None:
-    max_steps = int(actor["resources"].get("mp", 0))
-    if max_steps <= 0:
+    max_cost = int(actor["resources"].get("mp", 0))
+    if max_cost <= 0:
         return None
 
     start = actor["position"]
-    queue: list[tuple[dict[str, int], list[dict[str, int]]]] = [(start, [])]
-    visited = {_position_key(start)}
-    candidates: list[tuple[dict[str, int], list[dict[str, int]]]] = []
+    queue: list[tuple[dict[str, int], list[dict[str, int]], int]] = [(start, [], 0)]
+    best_cost = {_position_key(start): 0}
+    candidates: list[tuple[dict[str, int], list[dict[str, int]], int]] = []
 
     while queue:
-        current, path = queue.pop(0)
+        queue.sort(key=lambda item: (item[2], len(item[1]), item[0]["y"], item[0]["x"]))
+        current, path, cost = queue.pop(0)
         if path:
-            candidates.append((current, path))
-        if len(path) >= max_steps:
+            candidates.append((current, path, cost))
+        if cost >= max_cost:
             continue
 
         for neighbor in _path_neighbors(state, actor, current):
-            key = _position_key(neighbor)
-            if key in visited:
+            next_cost = cost + _terrain_movement_cost(state, neighbor)
+            if next_cost > max_cost:
                 continue
-            visited.add(key)
-            queue.append((neighbor, path + [neighbor]))
+            key = _position_key(neighbor)
+            if key in best_cost and best_cost[key] <= next_cost:
+                continue
+            best_cost[key] = next_cost
+            queue.append((neighbor, path + [neighbor], next_cost))
 
     candidates = [
-        (position, path)
-        for position, path in candidates
+        (position, path, cost)
+        for position, path, cost in candidates
         if _move_rejection(state, actor, position) is None
     ]
     if not candidates:
@@ -1325,8 +1357,8 @@ def _best_mp_move_toward(
 
     current_distance = _chebyshev(start, target["position"])
     closer_candidates = [
-        (position, path)
-        for position, path in candidates
+        (position, path, cost)
+        for position, path, cost in candidates
         if _chebyshev(position, target["position"]) < current_distance
     ]
     if not closer_candidates:
@@ -1338,6 +1370,7 @@ def _best_mp_move_toward(
             0 if _chebyshev(item[0], target["position"]) == 1 else 1,
             _chebyshev(item[0], target["position"]),
             _manhattan(item[0], target["position"]),
+            item[2],
             len(item[1]),
             item[0]["y"],
             item[0]["x"],
@@ -1445,3 +1478,49 @@ def _combat_result(state: dict[str, Any]) -> str:
     if player_alive:
         return "victory"
     return "defeat"
+
+
+def _combat_result_payload(state: dict[str, Any]) -> dict[str, Any]:
+    result = _combat_result(state)
+    payload = {
+        "result": result,
+        "combat_id": state["id"],
+        "source_dungeon_id": state.get("source_dungeon_id", ""),
+        "source_room_id": state.get("source_room_id", ""),
+        "surviving_players": [],
+        "defeated_player_ids": [],
+        "defeated_enemy_ids": [],
+        "remaining_enemies": [],
+        "rewards": deepcopy(state.get("rewards", {"xp": 0, "gold": 0, "items": []})),
+    }
+    if result == "in_progress":
+        return payload
+
+    for unit in state["units"]:
+        if unit["team"] == "player":
+            if unit["resources"]["hp"] > 0:
+                payload["surviving_players"].append(_unit_result_summary(unit))
+            else:
+                payload["defeated_player_ids"].append(unit["id"])
+        elif unit["team"] == "enemy":
+            if unit["resources"]["hp"] > 0:
+                payload["remaining_enemies"].append(_unit_result_summary(unit))
+            else:
+                payload["defeated_enemy_ids"].append(unit["id"])
+    return payload
+
+
+def _unit_result_summary(unit: dict[str, Any]) -> dict[str, Any]:
+    summary = {
+        "id": unit["id"],
+        "team": unit["team"],
+        "hp": int(unit["resources"].get("hp", 0)),
+        "max_hp": int(unit["stats"].get("max_hp", 0)),
+        "statuses": deepcopy(unit.get("statuses", [])),
+        "position": deepcopy(unit.get("position", {})),
+    }
+    if "ap" in unit.get("resources", {}):
+        summary["ap"] = int(unit["resources"].get("ap", 0))
+    if "mp" in unit.get("resources", {}):
+        summary["mp"] = int(unit["resources"].get("mp", 0))
+    return summary

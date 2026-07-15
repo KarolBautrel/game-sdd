@@ -6,6 +6,7 @@ const MIN_HIT_CHANCE := 10
 const MAX_HIT_CHANCE := 95
 const HIGHGROUND_RANGED_HIT_MODIFIER := 10
 const COVER_LOW_RANGED_HIT_MODIFIER := -20
+const HIGHGROUND_RANGED_RANGE_BONUS := 1
 const AI_RANGED_MIN_HIT_CHANCE := 60
 const MIN_INTERCEPT_CHANCE := 20
 const MAX_INTERCEPT_CHANCE := 80
@@ -34,6 +35,7 @@ static func simulate(encounter: Dictionary, commands: Array) -> Dictionary:
 	return {
 		"state": state,
 		"result": _combat_result(state),
+		"result_payload": _combat_result_payload(state),
 	}
 
 
@@ -140,7 +142,7 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 		return _reject(state, sequence, command, rejection)
 
 	var weapon_profile: Dictionary = weapon_profile_variant
-	var attack_range := _attack_range(weapon_profile, max_range)
+	var attack_range := _effective_attack_range(state, actor, action_id, _attack_range(weapon_profile, max_range))
 	var attack_ap_cost := _attack_ap_cost(weapon_profile, ap_cost)
 	var attack_damage_bonus := _attack_damage_bonus(weapon_profile, damage_bonus)
 
@@ -256,10 +258,12 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 		})
 
 	if _combat_result(state) != "in_progress":
+		var result_payload := _combat_result_payload(state)
 		sequence = _emit(state, sequence, "combat_ended", {
 			"command_id": command["id"],
 			"actor_id": actor["id"],
-			"result": _combat_result(state),
+			"result": result_payload["result"],
+			"result_payload": result_payload,
 		})
 
 	return sequence
@@ -315,7 +319,7 @@ static func _resolve_move(state: Dictionary, command: Dictionary, sequence: int)
 
 	var old_position: Dictionary = actor["position"].duplicate(true)
 	var movement_path := _movement_path(state, actor, destination)
-	var movement_cost := movement_path.size()
+	var movement_cost := _movement_path_cost(state, movement_path)
 	var ap_spent := 0 if _movement_uses_mp(actor) else 1
 	var mp_spent := movement_cost if _movement_uses_mp(actor) else 0
 	actor["resources"]["ap"] -= ap_spent
@@ -418,10 +422,12 @@ static func _resolve_end_turn(state: Dictionary, command: Dictionary, sequence: 
 				"target_unit_id": next_unit_id,
 			})
 			if _combat_result(state) != "in_progress":
+				var result_payload := _combat_result_payload(state)
 				sequence = _emit(state, sequence, "combat_ended", {
 					"command_id": command["id"],
 					"actor_id": next_unit_id,
-					"result": _combat_result(state),
+					"result": result_payload["result"],
+					"result_payload": result_payload,
 				})
 	for status: Dictionary in expired_statuses:
 		sequence = _emit(state, sequence, "status_expired", {
@@ -459,7 +465,7 @@ static func _attack_rejection(state: Dictionary, actor: Dictionary, target: Dict
 		return "not_enough_ap"
 	if _skill_on_cooldown(actor, action_id):
 		return "skill_on_cooldown"
-	var range_rejection := _range_rejection(state, actor, target, action_id, _attack_range(weapon_profile, max_range))
+	var range_rejection := _range_rejection(state, actor, target, action_id, _effective_attack_range(state, actor, action_id, _attack_range(weapon_profile, max_range)))
 	if range_rejection != "":
 		return range_rejection
 	return ""
@@ -534,7 +540,7 @@ static func _move_rejection(state: Dictionary, actor: Dictionary, destination: D
 	if movement_path.is_empty():
 		return "destination_unreachable"
 	if _movement_uses_mp(actor):
-		if movement_path.size() > actor["resources"]["mp"]:
+		if _movement_path_cost(state, movement_path) > actor["resources"]["mp"]:
 			return "not_enough_mp"
 	elif _is_diagonal_step(actor["position"], destination) and not _diagonal_step_allowed(state, actor["position"], destination):
 		return "diagonal_corner_blocked"
@@ -551,6 +557,13 @@ static func _can_pay_move(actor: Dictionary) -> bool:
 	return actor["resources"]["ap"] >= 1
 
 
+static func _movement_path_cost(state: Dictionary, path: Array) -> int:
+	var cost := 0
+	for position: Dictionary in path:
+		cost += _terrain_movement_cost(state, position)
+	return cost
+
+
 static func _movement_path(state: Dictionary, actor: Dictionary, destination: Dictionary) -> Array:
 	if not destination.has("x") or not destination.has("y"):
 		return []
@@ -558,23 +571,40 @@ static func _movement_path(state: Dictionary, actor: Dictionary, destination: Di
 	if _positions_equal(start, destination):
 		return []
 
-	var queue: Array[Dictionary] = [{"position": start, "path": []}]
-	var visited := {_position_key(start): true}
+	var queue: Array[Dictionary] = [{"position": start, "path": [], "cost": 0}]
+	var best_cost := {_position_key(start): 0}
 
 	while not queue.is_empty():
+		queue.sort_custom(func(first: Dictionary, second: Dictionary) -> bool:
+			if int(first["cost"]) != int(second["cost"]):
+				return int(first["cost"]) < int(second["cost"])
+			if first["path"].size() != second["path"].size():
+				return first["path"].size() < second["path"].size()
+			var first_position: Dictionary = first["position"]
+			var second_position: Dictionary = second["position"]
+			var first_distance := _manhattan(first_position, destination)
+			var second_distance := _manhattan(second_position, destination)
+			if first_distance != second_distance:
+				return first_distance < second_distance
+			if int(first_position["y"]) != int(second_position["y"]):
+				return int(first_position["y"]) < int(second_position["y"])
+			return int(first_position["x"]) < int(second_position["x"])
+		)
 		var item: Dictionary = queue.pop_front()
 		var current: Dictionary = item["position"]
 		var path: Array = item["path"]
+		var cost := int(item["cost"])
+		if _positions_equal(current, destination) and not path.is_empty():
+			return path
 		for neighbor: Dictionary in _movement_neighbors(state, actor, current):
 			var key := _position_key(neighbor)
-			if visited.has(key):
+			var next_cost := cost + _terrain_movement_cost(state, neighbor)
+			if best_cost.has(key) and int(best_cost[key]) <= next_cost:
 				continue
 			var next_path := path.duplicate(true)
 			next_path.append(neighbor)
-			if _positions_equal(neighbor, destination):
-				return next_path
-			visited[key] = true
-			queue.append({"position": neighbor, "path": next_path})
+			best_cost[key] = next_cost
+			queue.append({"position": neighbor, "path": next_path, "cost": next_cost})
 
 	return []
 
@@ -745,6 +775,12 @@ static func _attack_range(weapon_profile: Dictionary, fallback: int) -> int:
 	return int(weapon_profile.get("range", fallback))
 
 
+static func _effective_attack_range(state: Dictionary, actor: Dictionary, action_id: String, base_range: int) -> int:
+	if action_id == "ranged_attack" and _tile_type(state, actor["position"]) == "highground":
+		return base_range + HIGHGROUND_RANGED_RANGE_BONUS
+	return base_range
+
+
 static func _action_available(state: Dictionary, actor: Dictionary, action_id: String) -> bool:
 	if actor.get("available_actions", []).has(action_id):
 		return true
@@ -811,6 +847,11 @@ static func _apply_enemy_archetypes(state: Dictionary) -> void:
 			if not merged_actions.has(action_id):
 				merged_actions.append(action_id)
 		unit["available_actions"] = merged_actions
+		var merged_learned_actions: Array = unit.get("learned_actions", []).duplicate(true)
+		for action_id: String in archetype.get("learned_actions", []):
+			if not merged_learned_actions.has(action_id):
+				merged_learned_actions.append(action_id)
+		unit["learned_actions"] = merged_learned_actions
 		if archetype.has("loadout"):
 			var loadout: Dictionary = archetype["loadout"].duplicate(true)
 			for slot: String in unit.get("loadout", {}):
@@ -1019,6 +1060,16 @@ static func _is_walkable_tile(state: Dictionary, position: Dictionary) -> bool:
 	return _tile_type(state, position) in ["floor", "highground", "cover_low"]
 
 
+static func _terrain_movement_cost(state: Dictionary, position: Dictionary) -> int:
+	match _tile_type(state, position):
+		"highground":
+			return 2
+		"floor", "cover_low":
+			return 1
+		_:
+			return 999999
+
+
 static func _living_unit_at(state: Dictionary, position: Dictionary) -> Dictionary:
 	for unit: Dictionary in state["units"]:
 		if unit["resources"]["hp"] > 0 and int(unit["position"]["x"]) == int(position["x"]) and int(unit["position"]["y"]) == int(position["y"]):
@@ -1125,32 +1176,47 @@ static func _best_move_toward(state: Dictionary, actor: Dictionary, target: Dict
 
 
 static func _best_mp_move_toward(state: Dictionary, actor: Dictionary, target: Dictionary) -> Dictionary:
-	var max_steps := int(actor["resources"].get("mp", 0))
-	if max_steps <= 0:
+	var max_cost := int(actor["resources"].get("mp", 0))
+	if max_cost <= 0:
 		return {}
 
 	var start: Dictionary = actor["position"]
-	var queue: Array[Dictionary] = [{"position": start, "path": []}]
-	var visited := {_position_key(start): true}
+	var queue: Array[Dictionary] = [{"position": start, "path": [], "cost": 0}]
+	var best_cost := {_position_key(start): 0}
 	var candidates: Array[Dictionary] = []
 
 	while not queue.is_empty():
+		queue.sort_custom(func(first: Dictionary, second: Dictionary) -> bool:
+			if int(first["cost"]) != int(second["cost"]):
+				return int(first["cost"]) < int(second["cost"])
+			if first["path"].size() != second["path"].size():
+				return first["path"].size() < second["path"].size()
+			var first_position: Dictionary = first["position"]
+			var second_position: Dictionary = second["position"]
+			if int(first_position["y"]) != int(second_position["y"]):
+				return int(first_position["y"]) < int(second_position["y"])
+			return int(first_position["x"]) < int(second_position["x"])
+		)
 		var item: Dictionary = queue.pop_front()
 		var current: Dictionary = item["position"]
 		var path: Array = item["path"]
+		var cost := int(item["cost"])
 		if not path.is_empty():
-			candidates.append({"position": current, "path": path})
-		if path.size() >= max_steps:
+			candidates.append({"position": current, "path": path, "cost": cost})
+		if cost >= max_cost:
 			continue
 
 		for neighbor: Dictionary in _path_neighbors(state, actor, current):
-			var key := _position_key(neighbor)
-			if visited.has(key):
+			var next_cost := cost + _terrain_movement_cost(state, neighbor)
+			if next_cost > max_cost:
 				continue
-			visited[key] = true
+			var key := _position_key(neighbor)
+			if best_cost.has(key) and int(best_cost[key]) <= next_cost:
+				continue
+			best_cost[key] = next_cost
 			var next_path := path.duplicate(true)
 			next_path.append(neighbor)
-			queue.append({"position": neighbor, "path": next_path})
+			queue.append({"position": neighbor, "path": next_path, "cost": next_cost})
 
 	var current_distance := _chebyshev(start, target["position"])
 	var legal_candidates: Array[Dictionary] = []
@@ -1177,6 +1243,8 @@ static func _best_mp_move_toward(state: Dictionary, actor: Dictionary, target: D
 		var second_manhattan := _manhattan(second_position, target["position"])
 		if first_manhattan != second_manhattan:
 			return first_manhattan < second_manhattan
+		if int(first["cost"]) != int(second["cost"]):
+			return int(first["cost"]) < int(second["cost"])
 		if first["path"].size() != second["path"].size():
 			return first["path"].size() < second["path"].size()
 		if int(first_position["y"]) != int(second_position["y"]):
@@ -1301,3 +1369,57 @@ static func _combat_result(state: Dictionary) -> String:
 	if player_alive:
 		return "victory"
 	return "defeat"
+
+
+static func _combat_result_payload(state: Dictionary) -> Dictionary:
+	var result := _combat_result(state)
+	var payload := {
+		"result": result,
+		"combat_id": state["id"],
+		"source_dungeon_id": state.get("source_dungeon_id", ""),
+		"source_room_id": state.get("source_room_id", ""),
+		"surviving_players": [],
+		"defeated_player_ids": [],
+		"defeated_enemy_ids": [],
+		"remaining_enemies": [],
+		"rewards": _reward_result_summary(state.get("rewards", {})),
+	}
+	if result == "in_progress":
+		return payload
+
+	for unit: Dictionary in state["units"]:
+		if unit["team"] == "player":
+			if int(unit["resources"]["hp"]) > 0:
+				payload["surviving_players"].append(_unit_result_summary(unit))
+			else:
+				payload["defeated_player_ids"].append(unit["id"])
+		elif unit["team"] == "enemy":
+			if int(unit["resources"]["hp"]) > 0:
+				payload["remaining_enemies"].append(_unit_result_summary(unit))
+			else:
+				payload["defeated_enemy_ids"].append(unit["id"])
+	return payload
+
+
+static func _reward_result_summary(rewards: Dictionary) -> Dictionary:
+	return {
+		"xp": int(rewards.get("xp", 0)),
+		"gold": int(rewards.get("gold", 0)),
+		"items": rewards.get("items", []).duplicate(true),
+	}
+
+
+static func _unit_result_summary(unit: Dictionary) -> Dictionary:
+	var summary := {
+		"id": unit["id"],
+		"team": unit["team"],
+		"hp": int(unit["resources"].get("hp", 0)),
+		"max_hp": int(unit["stats"].get("max_hp", 0)),
+		"statuses": unit.get("statuses", []).duplicate(true),
+		"position": unit.get("position", {}).duplicate(true),
+	}
+	if unit.get("resources", {}).has("ap"):
+		summary["ap"] = int(unit["resources"].get("ap", 0))
+	if unit.get("resources", {}).has("mp"):
+		summary["mp"] = int(unit["resources"].get("mp", 0))
+	return summary

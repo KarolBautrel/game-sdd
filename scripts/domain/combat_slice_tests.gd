@@ -991,6 +991,134 @@ const SLICES := [
 			"profile_id": "hero_guard_break",
 		},
 	},
+	{
+		"id": "slice_79_terrain_movement_costs",
+		"encounter": "res://resources/data/combat_encounters/slice_79_terrain_movement_costs.json",
+		"commands": "res://tests/data/combat_commands/slice_79_terrain_movement_costs_commands.json",
+		"expected_events": [
+			"combat_started",
+			"turn_started",
+			"action_performed",
+			"unit_moved",
+			"action_performed",
+			"turn_ended",
+			"turn_started",
+			"command_rejected",
+		],
+		"expected_result": "in_progress",
+		"expected_rejection": "not_enough_mp",
+		"expected_active_unit_id": "unit_enemy_001",
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 1, "mp": 1}, "position": {"x": 1, "y": 1}},
+			"unit_enemy_001": {"resources": {"ap": 1, "mp": 1}, "position": {"x": 2, "y": 3}},
+		},
+		"expected_move": {
+			"from": {"x": 0, "y": 1},
+			"to": {"x": 1, "y": 1},
+			"path": [{"x": 1, "y": 1}],
+			"mp_spent": 2,
+		},
+		"expected_action_costs": [
+			{"action_id": "move", "ap_spent": 0, "mp_spent": 2},
+			{"action_id": "end_turn", "ap_spent": 0},
+		],
+	},
+	{
+		"id": "slice_80_highground_ranged_range_bonus",
+		"encounter": "res://resources/data/combat_encounters/slice_80_highground_ranged_range_bonus.json",
+		"commands": "res://tests/data/combat_commands/slice_80_highground_ranged_range_bonus_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"],
+		"expected_result": "in_progress",
+		"expected_hit_roll": {
+			"roll": 1,
+			"base_hit_chance": 70,
+			"accuracy_modifier": 0,
+			"evasion_modifier": 0,
+			"terrain_modifier": 10,
+			"hit_chance": 80,
+			"outcome": "hit",
+		},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"ap": 0}},
+			"unit_enemy_001": {"resources": {"hp": 4}},
+		},
+	},
+	{
+		"id": "slice_81_enemy_archetype_roles_v2",
+		"encounter": "res://resources/data/combat_encounters/slice_81_enemy_archetype_roles_v2.json",
+		"archetype_roles_v2_ai_commands": true,
+		"role_command_expectations": [
+			{"actor_id": "unit_enemy_archer", "action_id": "ranged_attack", "target_unit_id": "unit_player_001"},
+			{"actor_id": "unit_enemy_swordsman", "action_id": "move", "position": {"x": 2, "y": 2}},
+			{"actor_id": "unit_enemy_spider", "action_id": "basic_attack", "target_unit_id": "unit_player_001"},
+		],
+		"expected_events": ["combat_started", "turn_started", "action_performed", "hit_roll_resolved", "damage_applied"],
+		"expected_result": "in_progress",
+		"expected_hit_roll": {
+			"roll": 80,
+			"base_hit_chance": 75,
+			"accuracy_modifier": 5,
+			"evasion_modifier": 0,
+			"hit_chance": 80,
+			"outcome": "hit",
+		},
+		"expected_damage": {
+			"target_unit_id": "unit_player_001",
+			"raw_damage": 2,
+			"damage": 2,
+			"profile_id": "raider_bow_ranged_attack",
+		},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"hp": 16}},
+			"unit_enemy_archer": {"resources": {"ap": 0}},
+		},
+	},
+	{
+		"id": "slice_82_combat_result_contract_victory",
+		"encounter": "res://resources/data/combat_encounters/slice_82_combat_result_contract_victory.json",
+		"commands": "res://tests/data/combat_commands/slice_82_combat_result_contract_victory_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied", "unit_defeated", "combat_ended"],
+		"expected_result": "victory",
+		"expected_combat_ended_result": "victory",
+		"expected_result_payload": {
+			"result": "victory",
+			"combat_id": "slice_82_combat_result_contract_victory",
+			"source_dungeon_id": "debug_cave_001",
+			"source_room_id": "room_guarded_cache",
+			"surviving_players": ["unit_player_001"],
+			"defeated_player_ids": [],
+			"defeated_enemy_ids": ["unit_enemy_001"],
+			"remaining_enemies": [],
+			"rewards": {"xp": 12, "gold": 7, "items": ["rusty_key"]},
+		},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"hp": 9}},
+			"unit_enemy_001": {"resources": {"hp": 0}},
+		},
+	},
+	{
+		"id": "slice_82_combat_result_contract_defeat",
+		"encounter": "res://resources/data/combat_encounters/slice_82_combat_result_contract_defeat.json",
+		"commands": "res://tests/data/combat_commands/slice_82_combat_result_contract_defeat_commands.json",
+		"expected_events": ["combat_started", "turn_started", "action_performed", "damage_applied", "unit_defeated", "combat_ended"],
+		"expected_result": "defeat",
+		"expected_combat_ended_result": "defeat",
+		"expected_result_payload": {
+			"result": "defeat",
+			"combat_id": "slice_82_combat_result_contract_defeat",
+			"source_dungeon_id": "debug_cave_001",
+			"source_room_id": "room_guarded_cache",
+			"surviving_players": [],
+			"defeated_player_ids": ["unit_player_001"],
+			"defeated_enemy_ids": [],
+			"remaining_enemies": ["unit_enemy_001"],
+			"rewards": {"xp": 12, "gold": 7, "items": ["rusty_key"]},
+		},
+		"unit_expectations": {
+			"unit_player_001": {"resources": {"hp": 0}},
+			"unit_enemy_001": {"resources": {"hp": 6}},
+		},
+	},
 ]
 
 
@@ -1013,6 +1141,8 @@ func _init() -> void:
 func _validate_slice(spec: Dictionary) -> Array[String]:
 	var errors: Array[String] = []
 	var encounter: Dictionary = _load_json(spec["encounter"])
+	if spec.has("role_command_expectations"):
+		errors.append_array(_validate_role_command_expectations(spec, encounter))
 	var commands: Array = _commands_for_spec(spec, encounter)
 	var result: Dictionary = CombatResolver.simulate(encounter, commands)
 	var state: Dictionary = result["state"]
@@ -1037,6 +1167,9 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 			errors.append("%s: expected combat_ended event" % spec["id"])
 		elif ended.get("result", "") != spec["expected_combat_ended_result"]:
 			errors.append("%s: expected combat_ended result %s, got %s" % [spec["id"], spec["expected_combat_ended_result"], ended.get("result", "")])
+
+	if spec.has("expected_result_payload"):
+		errors.append_array(_validate_result_payload(spec["id"], result, state, spec["expected_result_payload"]))
 
 	if spec.has("expected_hit_roll"):
 		var hit_roll: Dictionary = _first_event(state, "hit_roll_resolved")
@@ -1121,7 +1254,72 @@ func _validate_slice(spec: Dictionary) -> Array[String]:
 	return errors
 
 
+func _validate_role_command_expectations(spec: Dictionary, encounter: Dictionary) -> Array[String]:
+	var errors: Array[String] = []
+	for expectation: Dictionary in spec["role_command_expectations"]:
+		var active_state: Dictionary = encounter.duplicate(true)
+		active_state["turn_state"]["active_unit_id"] = expectation["actor_id"]
+		var command: Dictionary = CombatResolver.choose_enemy_command(active_state, "cmd_%s" % expectation["actor_id"])
+		if command["action_id"] != expectation["action_id"]:
+			errors.append("%s: expected %s AI action %s, got %s" % [spec["id"], expectation["actor_id"], expectation["action_id"], command["action_id"]])
+		if expectation.has("target_unit_id") and command["target"].get("unit_id", "") != expectation["target_unit_id"]:
+			errors.append("%s: expected %s AI target %s, got %s" % [spec["id"], expectation["actor_id"], expectation["target_unit_id"], command["target"].get("unit_id", "")])
+		if expectation.has("position") and not _positions_equal(command["target"].get("position", {}), expectation["position"]):
+			errors.append("%s: expected %s AI position %s, got %s" % [spec["id"], expectation["actor_id"], expectation["position"], command["target"].get("position", {})])
+	return errors
+
+
+func _validate_result_payload(slice_id: String, result: Dictionary, state: Dictionary, expected: Dictionary) -> Array[String]:
+	var errors: Array[String] = []
+	var payload: Dictionary = result.get("result_payload", {})
+	if payload.is_empty():
+		errors.append("%s: expected simulate result_payload" % slice_id)
+		return errors
+
+	for key: String in ["result", "combat_id", "source_dungeon_id", "source_room_id"]:
+		if payload.get(key, "") != expected[key]:
+			errors.append("%s: expected payload %s %s, got %s" % [slice_id, key, expected[key], payload.get(key, "")])
+
+	if payload.get("rewards", {}) != expected["rewards"]:
+		errors.append("%s: expected rewards %s, got %s" % [slice_id, expected["rewards"], payload.get("rewards", {})])
+	if payload.get("defeated_player_ids", []) != expected["defeated_player_ids"]:
+		errors.append("%s: expected defeated players %s, got %s" % [slice_id, expected["defeated_player_ids"], payload.get("defeated_player_ids", [])])
+	if payload.get("defeated_enemy_ids", []) != expected["defeated_enemy_ids"]:
+		errors.append("%s: expected defeated enemies %s, got %s" % [slice_id, expected["defeated_enemy_ids"], payload.get("defeated_enemy_ids", [])])
+
+	var surviving_player_ids := _summary_ids(payload.get("surviving_players", []))
+	if surviving_player_ids != expected["surviving_players"]:
+		errors.append("%s: expected surviving players %s, got %s" % [slice_id, expected["surviving_players"], surviving_player_ids])
+
+	var remaining_enemy_ids := _summary_ids(payload.get("remaining_enemies", []))
+	if remaining_enemy_ids != expected["remaining_enemies"]:
+		errors.append("%s: expected remaining enemies %s, got %s" % [slice_id, expected["remaining_enemies"], remaining_enemy_ids])
+
+	for summary: Dictionary in payload.get("surviving_players", []) + payload.get("remaining_enemies", []):
+		for key: String in ["id", "team", "hp", "max_hp", "statuses", "position"]:
+			if not summary.has(key):
+				errors.append("%s: result summary missing %s in %s" % [slice_id, key, summary])
+
+	var ended: Dictionary = _first_event(state, "combat_ended")
+	if ended.is_empty():
+		errors.append("%s: expected combat_ended event for result payload" % slice_id)
+	elif ended.get("result_payload", {}) != payload:
+		errors.append("%s: combat_ended result_payload differs from simulate result_payload" % slice_id)
+
+	return errors
+
+
+func _summary_ids(summaries: Array) -> Array:
+	var ids: Array = []
+	for summary: Dictionary in summaries:
+		ids.append(summary["id"])
+	return ids
+
+
 func _commands_for_spec(spec: Dictionary, encounter: Dictionary) -> Array:
+	if spec.get("archetype_roles_v2_ai_commands", false):
+		return [CombatResolver.choose_enemy_command(encounter, "cmd_001")]
+
 	if spec.get("ai_move_then_attack_commands", false):
 		var first_command: Dictionary = CombatResolver.choose_enemy_command(encounter, "cmd_001")
 		if first_command["action_id"] != "move":

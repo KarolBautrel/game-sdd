@@ -24,6 +24,9 @@ The board is the primary gameplay surface. UI should support tactical decisions 
 - The board background is a single generated meadow image for performance and visual continuity.
 - Logic tiles stay aligned to the combat grid, but grass should read as one continuous field rather than separated square clumps.
 - Props, blockers, cover, and units render above the background and remain aligned to logical tile centers.
+- Units standing on `highground` render with a clear elevation cue:
+  - the unit sprite is raised above the normal tile center;
+  - a small ledge/base marker remains below the sprite so low-profile units still read as standing on raised ground.
 
 ## UI Style
 
@@ -38,4 +41,5 @@ The board is the primary gameplay surface. UI should support tactical decisions 
 - The bottom action bar remains visible and clickable.
 - Turn order remains visible in the top-right corner.
 - Unit HP/AP/MP and target preview labels do not replace each other.
+- Low-profile enemy sprites remain visibly elevated when standing on highground.
 - The layout remains playable when the active encounter is reset or reloaded.

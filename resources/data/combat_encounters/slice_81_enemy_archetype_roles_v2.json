@@ -1,0 +1,199 @@
+{
+  "id": "slice_81_enemy_archetype_roles_v2",
+  "seed": 1063,
+  "item_profiles": {
+    "raider_sword": {
+      "id": "raider_sword",
+      "slot": "main_hand",
+      "grants_actions": ["basic_attack"],
+      "action_profiles": {
+        "basic_attack": { "id": "raider_sword_basic_attack", "action_id": "basic_attack", "range": 1, "ap_cost": 1, "damage_bonus": 0 }
+      }
+    },
+    "raider_shield": {
+      "id": "raider_shield",
+      "slot": "off_hand",
+      "grants_actions": ["shield_wall"],
+      "action_profiles": {
+        "shield_wall": { "id": "raider_shield_wall", "action_id": "shield_wall", "ap_cost": 1, "status_id": "shield_wall", "status_remaining_turns": 1, "damage_reduction": 2 }
+      }
+    },
+    "raider_bow": {
+      "id": "raider_bow",
+      "slot": "main_hand",
+      "two_handed": true,
+      "grants_actions": ["ranged_attack"],
+      "action_profiles": {
+        "ranged_attack": { "id": "raider_bow_ranged_attack", "action_id": "ranged_attack", "range": 4, "ap_cost": 1, "base_hit_chance": 75, "damage_bonus": 0 }
+      }
+    },
+    "beast_fangs": {
+      "id": "beast_fangs",
+      "slot": "main_hand",
+      "grants_actions": ["basic_attack"],
+      "action_profiles": {
+        "basic_attack": { "id": "beast_fangs_basic_attack", "action_id": "basic_attack", "range": 1, "ap_cost": 1, "damage_bonus": 0 }
+      }
+    },
+    "beast_claws": {
+      "id": "beast_claws",
+      "slot": "main_hand",
+      "grants_actions": ["basic_attack"],
+      "action_profiles": {
+        "basic_attack": { "id": "beast_claws_basic_attack", "action_id": "basic_attack", "range": 1, "ap_cost": 1, "damage_bonus": 1 }
+      }
+    }
+  },
+  "enemy_archetypes": {
+    "raider_swordsman": {
+      "id": "raider_swordsman",
+      "role": "melee",
+      "family": "humanoid",
+      "display_name": "Raider Swordsman",
+      "available_actions": ["move", "defend", "end_turn"],
+      "loadout": { "main_hand": "raider_sword", "off_hand": null, "armor": null }
+    },
+    "raider_shieldman": {
+      "id": "raider_shieldman",
+      "role": "bruiser",
+      "family": "humanoid",
+      "display_name": "Raider Shieldman",
+      "available_actions": ["move", "defend", "end_turn"],
+      "loadout": { "main_hand": "raider_sword", "off_hand": "raider_shield", "armor": null }
+    },
+    "raider_archer": {
+      "id": "raider_archer",
+      "role": "ranged",
+      "family": "humanoid",
+      "display_name": "Raider Archer",
+      "available_actions": ["move", "end_turn"],
+      "loadout": { "main_hand": "raider_bow", "off_hand": null, "armor": null }
+    },
+    "beast_stalker": {
+      "id": "beast_stalker",
+      "role": "melee",
+      "family": "beast",
+      "display_name": "Beast Stalker",
+      "available_actions": ["move", "end_turn"],
+      "loadout": { "main_hand": "beast_fangs", "off_hand": null, "armor": null }
+    },
+    "beast_bruiser": {
+      "id": "beast_bruiser",
+      "role": "bruiser",
+      "family": "beast",
+      "display_name": "Beast Bruiser",
+      "available_actions": ["move", "end_turn"],
+      "loadout": { "main_hand": "beast_claws", "off_hand": null, "armor": null }
+    }
+  },
+  "grid": {
+    "width": 7,
+    "height": 5,
+    "tiles": [
+      { "x": 0, "y": 0, "type": "floor" },
+      { "x": 1, "y": 0, "type": "floor" },
+      { "x": 2, "y": 0, "type": "floor" },
+      { "x": 3, "y": 0, "type": "floor" },
+      { "x": 4, "y": 0, "type": "floor" },
+      { "x": 5, "y": 0, "type": "floor" },
+      { "x": 6, "y": 0, "type": "floor" },
+      { "x": 0, "y": 1, "type": "floor" },
+      { "x": 1, "y": 1, "type": "floor" },
+      { "x": 2, "y": 1, "type": "floor" },
+      { "x": 3, "y": 1, "type": "floor" },
+      { "x": 4, "y": 1, "type": "floor" },
+      { "x": 5, "y": 1, "type": "floor" },
+      { "x": 6, "y": 1, "type": "floor" },
+      { "x": 0, "y": 2, "type": "floor" },
+      { "x": 1, "y": 2, "type": "floor" },
+      { "x": 2, "y": 2, "type": "floor" },
+      { "x": 3, "y": 2, "type": "floor" },
+      { "x": 4, "y": 2, "type": "floor" },
+      { "x": 5, "y": 2, "type": "floor" },
+      { "x": 6, "y": 2, "type": "floor" },
+      { "x": 0, "y": 3, "type": "floor" },
+      { "x": 1, "y": 3, "type": "floor" },
+      { "x": 2, "y": 3, "type": "floor" },
+      { "x": 3, "y": 3, "type": "floor" },
+      { "x": 4, "y": 3, "type": "floor" },
+      { "x": 5, "y": 3, "type": "floor" },
+      { "x": 6, "y": 3, "type": "floor" },
+      { "x": 0, "y": 4, "type": "floor" },
+      { "x": 1, "y": 4, "type": "floor" },
+      { "x": 2, "y": 4, "type": "floor" },
+      { "x": 3, "y": 4, "type": "floor" },
+      { "x": 4, "y": 4, "type": "floor" },
+      { "x": 5, "y": 4, "type": "floor" },
+      { "x": 6, "y": 4, "type": "floor" }
+    ]
+  },
+  "units": [
+    {
+      "id": "unit_player_001",
+      "team": "player",
+      "position": { "x": 1, "y": 2 },
+      "stats": { "max_hp": 18, "strength": 5, "defense": 1, "initiative": 12, "move_points": 4, "max_ap": 2, "accuracy": 0, "evasion": 0 },
+      "resources": { "hp": 18, "ap": 2, "mp": 4 },
+      "statuses": [],
+      "available_actions": ["basic_attack", "move", "defend", "end_turn"]
+    },
+    {
+      "id": "unit_enemy_archer",
+      "team": "enemy",
+      "archetype_id": "raider_archer",
+      "position": { "x": 5, "y": 2 },
+      "stats": { "max_hp": 7, "strength": 3, "defense": 0, "initiative": 9, "move_points": 3, "max_ap": 1, "accuracy": 5, "evasion": 0 },
+      "resources": { "hp": 7, "ap": 1, "mp": 3 },
+      "statuses": [],
+      "available_actions": []
+    },
+    {
+      "id": "unit_enemy_swordsman",
+      "team": "enemy",
+      "archetype_id": "raider_swordsman",
+      "position": { "x": 5, "y": 4 },
+      "stats": { "max_hp": 9, "strength": 4, "defense": 1, "initiative": 8, "move_points": 3, "max_ap": 1, "accuracy": 0, "evasion": 0 },
+      "resources": { "hp": 9, "ap": 1, "mp": 3 },
+      "statuses": [],
+      "available_actions": []
+    },
+    {
+      "id": "unit_enemy_shieldman",
+      "team": "enemy",
+      "archetype_id": "raider_shieldman",
+      "position": { "x": 2, "y": 1 },
+      "stats": { "max_hp": 12, "strength": 3, "defense": 2, "initiative": 7, "move_points": 3, "max_ap": 1, "accuracy": 0, "evasion": 0 },
+      "resources": { "hp": 12, "ap": 1, "mp": 3 },
+      "statuses": [],
+      "available_actions": []
+    },
+    {
+      "id": "unit_enemy_spider",
+      "team": "enemy",
+      "archetype_id": "beast_stalker",
+      "position": { "x": 2, "y": 3 },
+      "stats": { "max_hp": 6, "strength": 3, "defense": 0, "initiative": 10, "move_points": 4, "max_ap": 1, "accuracy": 0, "evasion": 5 },
+      "resources": { "hp": 6, "ap": 1, "mp": 4 },
+      "statuses": [],
+      "available_actions": [],
+      "visual": { "faction": "villains", "character": "spider_atlas" }
+    },
+    {
+      "id": "unit_enemy_boar",
+      "team": "enemy",
+      "archetype_id": "beast_bruiser",
+      "position": { "x": 6, "y": 4 },
+      "stats": { "max_hp": 11, "strength": 4, "defense": 1, "initiative": 6, "move_points": 3, "max_ap": 1, "accuracy": 0, "evasion": 0 },
+      "resources": { "hp": 11, "ap": 1, "mp": 3 },
+      "statuses": [],
+      "available_actions": [],
+      "visual": { "faction": "villains", "character": "dire_boar" }
+    }
+  ],
+  "turn_state": {
+    "active_unit_id": "unit_enemy_archer",
+    "round": 1,
+    "turn_order": ["unit_player_001", "unit_enemy_archer", "unit_enemy_swordsman", "unit_enemy_shieldman", "unit_enemy_spider", "unit_enemy_boar"]
+  },
+  "event_log": []
+}

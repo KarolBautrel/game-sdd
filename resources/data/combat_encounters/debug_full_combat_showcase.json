@@ -1169,15 +1169,9 @@
 
                                    ],
                       "available_actions":  [
-                                                "move",
-                                                "defend",
-                                                "end_turn"
+
                                             ],
-                      "loadout":  {
-                                      "main_hand":  "raider_sword",
-                                      "off_hand":  null,
-                                      "armor":  null
-                                  }
+                      "archetype_id":  "raider_swordsman"
                   },
                   {
                       "id":  "unit_enemy_002",
@@ -1205,14 +1199,9 @@
 
                                    ],
                       "available_actions":  [
-                                                "move",
-                                                "end_turn"
+
                                             ],
-                      "loadout":  {
-                                      "main_hand":  "raider_bow",
-                                      "off_hand":  null,
-                                      "armor":  null
-                                  }
+                      "archetype_id":  "raider_archer"
                   }
               ],
     "turn_state":  {
@@ -1226,5 +1215,38 @@
                    },
     "event_log":  [
 
-                  ]
+                  ],
+    "enemy_archetypes":  {
+                             "raider_swordsman":  {
+                                                      "id":  "raider_swordsman",
+                                                      "role":  "melee",
+                                                      "family":  "humanoid",
+                                                      "display_name":  "Raider Swordsman",
+                                                      "available_actions":  [
+                                                                                "move",
+                                                                                "defend",
+                                                                                "end_turn"
+                                                                            ],
+                                                      "loadout":  {
+                                                                      "main_hand":  "raider_sword",
+                                                                      "off_hand":  null,
+                                                                      "armor":  null
+                                                                  }
+                                                  },
+                             "raider_archer":  {
+                                                   "id":  "raider_archer",
+                                                   "role":  "ranged",
+                                                   "family":  "humanoid",
+                                                   "display_name":  "Raider Archer",
+                                                   "available_actions":  [
+                                                                             "move",
+                                                                             "end_turn"
+                                                                         ],
+                                                   "loadout":  {
+                                                                   "main_hand":  "raider_bow",
+                                                                   "off_hand":  null,
+                                                                   "armor":  null
+                                                               }
+                                               }
+                         }
 }
