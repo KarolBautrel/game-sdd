@@ -29,6 +29,8 @@ const GRASS_FLOOR_TEXTURE_PATHS := [
 const UNIT_ICON_SIZE := Vector2i(150, 150)
 const UNIT_RESOURCE_LABEL_SIZE := Vector2(112, 36)
 const UNIT_RESOURCE_LABEL_OFFSET_Y := 6.0
+const UNIT_TARGET_PREVIEW_LABEL_SIZE := Vector2(112, 24)
+const UNIT_TARGET_PREVIEW_GAP := 3.0
 const TILE_SIZE := 112
 const GRASS_PATCH_SIZE := 64
 const DECORATION_SIZE_BY_KIND := {
@@ -542,21 +544,56 @@ func _tile_overlay_color(position: Dictionary, unit: Dictionary) -> Color:
 		return Color(1.0, 0.76, 0.18, 0.24)
 	if _is_pending_move_path(position):
 		return Color(0.36, 0.72, 1.0, 0.18)
+	var preview := _target_preview_for_position(position)
+	if not preview.is_empty():
+		if preview.get("rejection", "") == "":
+			return Color(0.25, 0.95, 0.35, 0.20)
+		return Color(0.95, 0.16, 0.10, 0.20)
 	if not unit.is_empty() and unit["team"] == "player":
 		return Color(0.18, 0.45, 0.85, 0.26)
 	if not unit.is_empty():
 		return Color(0.90, 0.16, 0.12, 0.26)
-	if _is_legal_target_for_selected_action(position):
-		return Color(0.25, 0.95, 0.35, 0.14)
 	if _positions_equal(selected_position, position):
 		return Color(0.50, 0.48, 0.90, 0.16)
 	return Color(0, 0, 0, 0)
 
 
 func _tile_preview_label(position: Dictionary) -> String:
-	if not _is_pending_move_destination(position):
+	if _is_pending_move_destination(position):
+		return "MP %s\nOK?" % pending_move_event.get("mp_spent", "?")
+	var preview := _target_preview_for_position(position)
+	if preview.is_empty() or selected_action == "move":
 		return ""
-	return "MP %s\nOK?" % pending_move_event.get("mp_spent", "?")
+	var rejection := str(preview.get("rejection", ""))
+	if rejection != "":
+		return _preview_rejection_short_label(rejection)
+	if preview.has("hit_chance"):
+		return "%s%%\nHIT" % preview.get("hit_chance", "?")
+	if preview.has("damage"):
+		return "DMG\n%s" % preview.get("damage", "?")
+	return "OK"
+
+
+func _preview_rejection_short_label(reason: String) -> String:
+	match reason:
+		"target_out_of_range":
+			return "OUT\nRANGE"
+		"target_not_visible":
+			return "NO\nLOS"
+		"not_enough_ap":
+			return "NO\nAP"
+		"skill_on_cooldown":
+			return "COOL\nDOWN"
+		"target_defeated":
+			return "DOWN"
+		"target_is_ally":
+			return "ALLY"
+		"missing_target":
+			return "NO\nTARGET"
+		"action_not_available":
+			return "NO\nSKILL"
+		_:
+			return "NO"
 
 
 func _tile_text(position: Dictionary) -> String:
@@ -688,6 +725,13 @@ func _render_inspect() -> void:
 				if not move_event.is_empty():
 					lines.append("Route MP: %s" % move_event.get("mp_spent", "?"))
 					lines.append("Route steps: %s" % move_event.get("path", []).size())
+			else:
+				if preview.has("hit_chance"):
+					lines.append("Hit chance: %s%%" % preview.get("hit_chance", "?"))
+					lines.append("Preview roll: %s -> %s" % [preview.get("roll", "?"), str(preview.get("hit_outcome", "?")).capitalize()])
+				if preview.has("damage"):
+					lines.append("Damage on hit: %s" % preview.get("damage", "?"))
+					lines.append("Target HP after: %s" % preview.get("hp_after", "?"))
 		else:
 			lines.append("Selected action: rejected")
 			lines.append("Reason: %s" % rejection)
@@ -789,9 +833,9 @@ func _add_action_button(action_id: String, slot: int = 0) -> void:
 		elif action_id in ["shield_wall", "defend", "end_turn"]:
 			_run_command(_build_command(action_id, {}))
 		else:
+			_prepare_presentation_cache()
 			_set_targeting_banner(action_id)
 			last_feedback = "Select a highlighted target for %s." % ACTION_LABELS.get(action_id, action_id)
-			_prepare_presentation_cache()
 			_render()
 	)
 	command_buttons.add_child(button)
@@ -1092,7 +1136,26 @@ func _load_pixel_ui_texture(path: String) -> Texture2D:
 
 func _set_targeting_banner(action_id: String) -> void:
 	current_action_title = "Targeting: %s" % ACTION_LABELS.get(action_id, action_id)
-	current_action_detail = "Pick a highlighted target on the board."
+	var preview_counts := _target_preview_counts()
+	if preview_counts["total"] > 0:
+		current_action_detail = "Pick a highlighted target. Legal: %s. Blocked: %s." % [preview_counts["legal"], preview_counts["blocked"]]
+	else:
+		current_action_detail = "Pick a highlighted target on the board."
+
+
+func _target_preview_counts() -> Dictionary:
+	var legal := 0
+	var blocked := 0
+	for preview: Dictionary in target_preview_cache.values():
+		if preview.get("rejection", "") == "":
+			legal += 1
+		else:
+			blocked += 1
+	return {
+		"legal": legal,
+		"blocked": blocked,
+		"total": legal + blocked,
+	}
 
 
 func _set_action_banner_from_events(command: Dictionary, events: Array) -> void:
@@ -1493,6 +1556,28 @@ func _create_unit_node(unit_id: String) -> Control:
 	resource_label.add_theme_constant_override("shadow_offset_y", 1)
 	resource_panel.add_child(resource_label)
 	unit_node.add_child(resource_panel)
+
+	var target_preview_panel := PanelContainer.new()
+	target_preview_panel.name = "TargetPreviewPanel"
+	target_preview_panel.custom_minimum_size = UNIT_TARGET_PREVIEW_LABEL_SIZE
+	target_preview_panel.size = UNIT_TARGET_PREVIEW_LABEL_SIZE
+	target_preview_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	target_preview_panel.visible = false
+
+	var target_preview_label := Label.new()
+	target_preview_label.name = "TargetPreview"
+	target_preview_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	target_preview_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	target_preview_label.custom_minimum_size = UNIT_TARGET_PREVIEW_LABEL_SIZE
+	target_preview_label.size = UNIT_TARGET_PREVIEW_LABEL_SIZE
+	target_preview_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	target_preview_label.add_theme_font_size_override("font_size", 10)
+	target_preview_label.add_theme_color_override("font_color", Color(1.0, 0.96, 0.78))
+	target_preview_label.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 1.0))
+	target_preview_label.add_theme_constant_override("shadow_offset_x", 1)
+	target_preview_label.add_theme_constant_override("shadow_offset_y", 1)
+	target_preview_panel.add_child(target_preview_label)
+	unit_node.add_child(target_preview_panel)
 	return unit_node
 
 
@@ -1525,6 +1610,70 @@ func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
 	var resource_label := resource_panel.get_node_or_null("Resources") as Label
 	if resource_label != null:
 		resource_label.text = _unit_resource_text(unit)
+
+	_update_unit_target_preview(unit_node, unit)
+
+
+func _update_unit_target_preview(unit_node: Control, unit: Dictionary) -> void:
+	var target_preview_panel := unit_node.get_node_or_null("TargetPreviewPanel") as PanelContainer
+	if target_preview_panel == null:
+		return
+	var preview_text := _unit_target_preview_text(unit)
+	target_preview_panel.visible = preview_text != ""
+	if preview_text == "":
+		return
+	target_preview_panel.custom_minimum_size = UNIT_TARGET_PREVIEW_LABEL_SIZE
+	target_preview_panel.size = UNIT_TARGET_PREVIEW_LABEL_SIZE
+	target_preview_panel.position = Vector2(
+		(float(UNIT_ICON_SIZE.x) - UNIT_TARGET_PREVIEW_LABEL_SIZE.x) / 2.0,
+		UNIT_RESOURCE_LABEL_OFFSET_Y + UNIT_RESOURCE_LABEL_SIZE.y + UNIT_TARGET_PREVIEW_GAP
+	)
+	target_preview_panel.position.x += _unit_resource_label_nudge(unit)
+	if unit_node.position.y + target_preview_panel.position.y < 0:
+		target_preview_panel.position.y = 0
+	target_preview_panel.add_theme_stylebox_override("panel", _unit_target_preview_style(unit))
+
+	var target_preview_label := target_preview_panel.get_node_or_null("TargetPreview") as Label
+	if target_preview_label != null:
+		target_preview_label.text = preview_text
+
+
+func _unit_target_preview_text(unit: Dictionary) -> String:
+	if selected_action == "move":
+		return ""
+	var position: Dictionary = unit.get("position", {})
+	var preview := _target_preview_for_position(position)
+	if preview.is_empty():
+		return ""
+	var rejection := str(preview.get("rejection", ""))
+	if rejection != "":
+		return _preview_rejection_short_label(rejection).replace("\n", " ")
+	var parts: Array[String] = []
+	if preview.has("hit_chance"):
+		parts.append("%s%% HIT" % preview.get("hit_chance", "?"))
+	if preview.has("damage"):
+		parts.append("DMG %s" % preview.get("damage", "?"))
+	if parts.is_empty():
+		parts.append("OK")
+	return "  ".join(parts)
+
+
+func _unit_target_preview_style(unit: Dictionary) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.05, 0.06, 0.04, 0.94)
+	style.border_color = Color(0.35, 0.95, 0.35)
+	var preview := _target_preview_for_position(unit.get("position", {}))
+	if str(preview.get("rejection", "")) != "":
+		style.border_color = Color(0.95, 0.20, 0.12)
+	style.border_width_left = 2
+	style.border_width_right = 2
+	style.border_width_top = 2
+	style.border_width_bottom = 2
+	style.content_margin_left = 4
+	style.content_margin_right = 4
+	style.content_margin_top = 2
+	style.content_margin_bottom = 2
+	return style
 
 
 func _visual_units_for_render() -> Array[Dictionary]:
@@ -1874,8 +2023,16 @@ func _preview_for_command(command: Dictionary) -> Dictionary:
 		if event["type"] == "command_rejected":
 			preview["rejection"] = event.get("reason", "unknown")
 			return preview
+		if event["type"] == "hit_roll_resolved":
+			preview["hit_chance"] = event.get("hit_chance", "?")
+			preview["hit_outcome"] = event.get("outcome", "")
+			preview["roll"] = event.get("roll", "?")
 		if event["type"] == "unit_moved":
 			preview["move_event"] = event
+		if event["type"] == "damage_applied":
+			preview["damage"] = event.get("damage", "?")
+			preview["raw_damage"] = event.get("raw_damage", "?")
+			preview["hp_after"] = event.get("hp_after", "?")
 	return preview
 
 

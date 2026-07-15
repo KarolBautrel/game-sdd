@@ -33,6 +33,8 @@ docs/specs/combat/
     Weapon profile rules: range, AP cost, base hit chance, damage modifiers.
   ai/
     Enemy decision rules and tactical behavior.
+  presentation/
+    Combat UI, board rendering, previews, animation, and sandbox-to-production presentation rules.
   slices/
     Executable acceptance scenarios, kept chronological.
   milestones/
@@ -43,6 +45,9 @@ docs/specs/combat/
 
 - Put rule specs in the domain folder that owns the mechanic.
 - Keep `slices/` flat and numbered; slices are implementation proofs, not rule ownership folders.
+- A slice may introduce an acceptance scenario, but durable rules must also be captured in the owning domain spec.
+- If a new mechanic has no owning domain spec, create that spec before or alongside the slice.
+- Link slices for new mechanics back to their owning domain spec.
 - When a rule spans domains, place it where the calculation is owned and link to related specs.
 - Update `README.md` when adding a new rule spec.
 - Update the current milestone after a meaningful combat commit.
@@ -58,3 +63,4 @@ docs/specs/combat/
 - `equipment/`: equipped items, slots, and action availability from loadout.
 - `weapons/`: weapon profile ownership for attack tuning data.
 - `ai/`: enemy command selection and tactical behavior.
+- `presentation/`: UI layout, target/move preview, board rendering, visual preparation, and animation behavior.

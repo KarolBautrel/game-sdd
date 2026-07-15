@@ -9,6 +9,12 @@ Stop growing the combat sandbox as one large Godot script and start moving towar
 
 The sandbox can remain the fastest place to test rules, but it should now be composed from reusable presentation modules that can later be used by the real combat screen.
 
+This slice proves the first presentation extraction step. The owning presentation rules live in:
+
+```text
+docs/specs/combat/presentation/069_combat_presentation_architecture.md
+```
+
 ## Acceptance
 
 - `CombatResolver` remains the source of combat legality and outcomes.

@@ -23,6 +23,8 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 
 - `actions/003_actions.md`
 - `actions/048_special_skills_v1.md`
+- `actions/063_aimed_shot_v1.md`
+- `actions/064_learned_actions_v1.md`
 
 ### Attacks
 
@@ -50,6 +52,13 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 - `ai/030_enemy_ai_ranged_v1.md`
 - `ai/031_enemy_ai_pathfinding_v1.md`
 - `ai/032_enemy_ai_ranged_positioning_v1.md`
+- `ai/065_enemy_archetype_loadout_v1.md`
+
+### Presentation
+
+- `presentation/068_combat_interaction_preview.md`
+- `presentation/069_combat_presentation_architecture.md`
+- `presentation/076_combat_sandbox_layout.md`
 
 ## Executable Slices
 

@@ -5,6 +5,12 @@ Date: 2026-07-14
 
 ## Acceptance
 
+This slice proves the learned-action-without-weapon scenario. The owning action rules live in:
+
+```text
+docs/specs/combat/actions/064_learned_actions_v1.md
+```
+
 - units may define `learned_actions`;
 - learned actions are separate from item-granted actions;
 - player does not list `power_strike` in legacy `available_actions`;

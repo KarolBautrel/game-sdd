@@ -4,23 +4,26 @@ This project is built with Spec Driven Development.
 
 ## Default Workflow
 
-1. Read `docs/specs/` before changing gameplay code.
-2. Add or update the relevant spec before implementation.
-3. Add or update schemas and reference data when behavior depends on data.
-4. Add or update executable slices for acceptance scenarios.
-5. Run validation before finishing:
+1. Read `docs/specs/` before changing gameplay or presentation behavior.
+2. Identify the domain spec that owns the rule. If no owner exists, create one in the correct domain folder before implementation.
+3. Add or update the relevant domain spec before implementation.
+4. Add or update schemas and reference data when behavior depends on data.
+5. Add or update executable slices for acceptance scenarios.
+6. Keep slices as proofs/tests only. Do not define durable gameplay, data, AI, UI, or presentation rules only inside `slices/`.
+7. Keep milestones as progress summaries and navigation aids only. Do not use milestones as the only source for implemented rules.
+8. Run validation before finishing:
 
 ```powershell
 python tools\validators\validate_all.py
 ```
 
-6. Run Godot combat slice tests when combat changes:
+9. Run Godot combat slice tests when combat changes:
 
 ```powershell
 & "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd
 ```
 
-7. Always give the user the command for launching the interactive debug scene after combat work:
+10. Always give the user the command for launching the interactive debug scene after combat work:
 
 ```powershell
 cd C:\Users\karol\Desktop\Gierka\game_dir\sdd-game
@@ -39,6 +42,15 @@ The update should include:
 - what the next recommended step is.
 
 Do not leave milestone notes only in chat. Persist them in the repository.
+
+## Spec Ownership Rules
+
+- Domain folders own rules: `overview/`, `grid/`, `turns/`, `actions/`, `attacks/`, `hit_resolution/`, `equipment/`, `weapons/`, `ai/`, `presentation/`, and future domain folders.
+- `slices/` contains chronological executable acceptance scenarios proving that domain rules work.
+- `milestones/` contains implementation summaries, validation notes, and next-step guidance.
+- When adding a slice for a new mechanic, link the slice back to the owning domain spec.
+- When adding a new domain spec, update the relevant `README.md` or structure file that indexes that domain.
+- If implementation reveals a rule not covered by a domain spec, update the spec in the same change before finishing.
 
 ## Git And Push Policy
 

@@ -24,6 +24,7 @@ The project now has:
 - combat debug presentation now separates static grid rendering from dynamic tile overlays and updates unit nodes in place instead of recreating them during actions.
 - combat HUD now uses an 18x11 tactical board at the 112 px combat scale, bottom skillbar action slots, and a pixel-styled top-right turn order panel.
 - combat move targeting preview uses a local BFS cache instead of simulating one command per board tile.
+- combat attack and skill targeting preview now labels targets with hit chance, damage, or blocked reasons before confirmation.
 
 ## Implemented Combat Rules
 
@@ -227,8 +228,18 @@ Rule specs now live in domain folders:
 - `equipment/`
 - `weapons/`
 - `ai/`
+- `presentation/`
 
 Executable slices remain flat in `slices/`.
+
+Current presentation rule specs:
+
+- `presentation/068_combat_interaction_preview.md`
+- `presentation/069_combat_presentation_architecture.md`
+- `presentation/076_combat_sandbox_layout.md`
+- `actions/063_aimed_shot_v1.md`
+- `actions/064_learned_actions_v1.md`
+- `ai/065_enemy_archetype_loadout_v1.md`
 
 See:
 
@@ -304,9 +315,9 @@ Latest verified scope:
 - slice 060 verifies a two-tile move that spends 2 MP and 0 AP while recording `unit_moved.path`.
 - slice 061 verifies a unit can move with MP and then attack with AP in the same turn.
 - slice 062 verifies enemy AI can spend MP to move adjacent and then choose `basic_attack` while AP remains available.
-- slice 063 verifies `aimed_shot` can be granted by a bow profile with higher hit chance, damage bonus, AP cost, and cooldown.
-- slice 064 verifies learned unit skills can grant combat actions without a weapon loadout.
-- slice 065 verifies enemy archetypes can provide loadout and actions before AI command selection.
+- `aimed_shot` item-granted special action is specified in `actions/063_aimed_shot_v1.md` and verified by slice 063.
+- learned unit actions are specified in `actions/064_learned_actions_v1.md` and verified by slice 064.
+- enemy archetype loadouts are specified in `ai/065_enemy_archetype_loadout_v1.md` and verified by slice 065.
 - slice 066 verifies `debug_map_scale_showcase` uses `map_path`, resolves its combat grid from `combat_test_clearing.json`, and no longer duplicates inline grid tiles.
 - slice 068 documents the combat sandbox move interaction: legal movement overlay is softer, first click previews path/MP cost, and second click confirms the move.
 - slice 069 starts the production-facing combat presentation architecture by extracting text formatting, unit art lookup, action visibility, and scenario catalog responsibilities from `combat_debug.gd`.
@@ -332,8 +343,13 @@ Latest verified scope:
 - combat floor rendering was optimized into a single generated board background texture. Grass patches are composited once per encounter into `BoardTerrain`, while per-tile nodes now handle only interaction overlays, terrain props, previews, and units.
 - combat terrain backgrounds are now authored/generated as reusable full-board PNGs in `assets/combat/terrain/backgrounds/`; combat encounters can reference one with `background_path`, and `debug_full_combat_showcase` uses `old_mine_meadow_00_lush.png`.
 - combat background generation now creates two 10x10 continuous meadow surfaces instead of visible per-tile grass blocks. It uses procedural grass texture, soft clumps, and occasional smaller `grass_tuft` accents so the board reads as one field.
-- Validation passed on 2026-07-14:
+- combat debug HUD now uses a bottom pixel skillbar for player actions, a top-right turn order panel, unit-local HP/AP/MP readouts, and a larger 18x11 full-board meadow background so the combat screen reads closer to the target game layout.
+- move preview is now cached from a local BFS reachability pass when the active unit/action changes, removing the repeated resolver simulations that caused a hitch every time `Move` was selected on the larger 18x11 board.
+- attack and skill targeting preview now renders visible unit-local result text for targetable units, so selected melee/ranged/special actions can show damage, hit chance, or rejection reasons above the target instead of only coloring the terrain tile underneath.
+- SDD workflow documentation now explicitly requires durable rules to live in domain specs, slices to remain acceptance proofs, and milestones to remain progress summaries.
+- Validation passed on 2026-07-15:
   - `python tools\validators\validate_all.py`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --quit --resolution 2560x1440`
   - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd`
 
 ## Important Files

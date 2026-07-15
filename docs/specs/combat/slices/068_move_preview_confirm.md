@@ -9,6 +9,12 @@ Make movement selection readable before committing the command in the combat san
 
 The player should not accidentally spend MP by clicking a legal tile once. The first click should show the selected route and cost; the second click on the same destination should execute movement.
 
+This slice proves the movement-preview scenario. The owning presentation rules live in:
+
+```text
+docs/specs/combat/presentation/068_combat_interaction_preview.md
+```
+
 ## Acceptance
 
 - Selecting `Move` shows legal movement destinations with a softer overlay that does not hide terrain art.

@@ -4,16 +4,21 @@ Godot 4.7 project built with Spec Driven Development.
 
 ## Current workflow
 
-1. Update or add a spec in `docs/specs/`.
-2. Add or update data contracts in `resources/schemas/`.
-3. Add reference data in `resources/data/`.
-4. Run validation:
+1. Find the domain spec in `docs/specs/` that owns the rule.
+2. Update or add that domain spec before implementation.
+3. Add or update data contracts in `resources/schemas/`.
+4. Add reference data in `resources/data/`.
+5. Add or update executable slices as acceptance scenarios. Slices prove rules; they do not own durable rules.
+6. Update the active milestone as a summary and pointer to the owning specs.
+7. Run validation:
 
 ```powershell
 python tools/validators/validate_all.py
 ```
 
-5. Implement gameplay only after the spec and data contract pass.
+8. Implement gameplay only after the spec and data contract pass.
+
+`docs/specs/*/milestones/` summarizes progress. `docs/specs/*/slices/` proves behavior. Durable gameplay, data, AI, UI, and presentation rules belong in domain folders such as `actions/`, `equipment/`, `ai/`, or `presentation/`.
 
 ## Manual Commands
 

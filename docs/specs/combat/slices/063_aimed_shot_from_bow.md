@@ -5,6 +5,12 @@ Date: 2026-07-14
 
 ## Acceptance
 
+This slice proves the `aimed_shot` equipment-granted special attack scenario. The owning action rules live in:
+
+```text
+docs/specs/combat/actions/063_aimed_shot_v1.md
+```
+
 - `aimed_shot` can be granted by a bow item profile;
 - player does not list `aimed_shot` in legacy `available_actions`;
 - `hunting_bow` grants `ranged_attack` and `aimed_shot`;
