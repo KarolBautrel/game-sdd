@@ -65,6 +65,7 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 - `presentation/074_combat_action_feedback.md`
 - `presentation/076_unit_animation_state_machine.md`
 - `presentation/076_combat_sandbox_layout.md`
+- `presentation/083_dungeon_combat_board_theme.md`
 
 ## Executable Slices
 

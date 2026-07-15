@@ -77,6 +77,10 @@ from tools.validators.validate_combat_slice import (
     validate_combat_slice_66,
     validate_combat_slice_77,
     validate_combat_slice_78,
+    validate_combat_slice_79,
+    validate_combat_slice_80,
+    validate_combat_slice_81,
+    validate_combat_slice_82,
 )
 from tools.maps.tiled_to_map_json import convert_tmx
 
@@ -127,6 +131,43 @@ def validate_world_region_references() -> list[str]:
         for node in region["nodes"]:
             if not ID_RE.match(node["entry_spec"]):
                 errors.append(f"{path.relative_to(ROOT)}: invalid entry_spec {node['entry_spec']}")
+    return errors
+
+
+def validate_dungeon_references() -> list[str]:
+    errors: list[str] = []
+    for path in sorted((ROOT / "resources/data/dungeons").glob("*.json")):
+        dungeon = load_json(path)
+        room_ids = {room["id"] for room in dungeon["rooms"]}
+        if dungeon["start_room_id"] not in room_ids:
+            errors.append(f"{path.relative_to(ROOT)}: start_room_id references missing room {dungeon['start_room_id']}")
+
+        corridor_ids: set[str] = set()
+        for corridor in dungeon["corridors"]:
+            if corridor["id"] in corridor_ids:
+                errors.append(f"{path.relative_to(ROOT)}: duplicate corridor id {corridor['id']}")
+            corridor_ids.add(corridor["id"])
+            if corridor["from"] not in room_ids:
+                errors.append(f"{path.relative_to(ROOT)}: corridor {corridor['id']} from references missing room {corridor['from']}")
+            if corridor["to"] not in room_ids:
+                errors.append(f"{path.relative_to(ROOT)}: corridor {corridor['id']} to references missing room {corridor['to']}")
+
+        for room in dungeon["rooms"]:
+            for content in room["content"]:
+                content_type = content["type"]
+                encounter_path = content.get("combat_encounter_path")
+                rewards = content.get("rewards")
+                if content_type in {"combat", "guarded_treasure"}:
+                    if not encounter_path:
+                        errors.append(f"{path.relative_to(ROOT)}: room {room['id']} {content_type} content is missing combat_encounter_path")
+                    else:
+                        resolved = ROOT / str(encounter_path).removeprefix("res://")
+                        if not resolved.exists():
+                            errors.append(f"{path.relative_to(ROOT)}: room {room['id']} references missing encounter {encounter_path}")
+                if content_type == "guarded_treasure" and rewards is None:
+                    errors.append(f"{path.relative_to(ROOT)}: room {room['id']} guarded_treasure content is missing rewards")
+                if content_type == "treasure" and rewards is None:
+                    errors.append(f"{path.relative_to(ROOT)}: room {room['id']} treasure content is missing rewards")
     return errors
 
 
@@ -224,6 +265,7 @@ def main() -> int:
         errors.extend(validate_schema(schema_path, data_paths))
 
     errors.extend(validate_world_region_references())
+    errors.extend(validate_dungeon_references())
     errors.extend(validate_map_integrity())
     errors.extend(validate_combat_map_references())
     errors.extend(validate_combat_slice_01())
@@ -286,6 +328,10 @@ def main() -> int:
     errors.extend(validate_combat_slice_66())
     errors.extend(validate_combat_slice_77())
     errors.extend(validate_combat_slice_78())
+    errors.extend(validate_combat_slice_79())
+    errors.extend(validate_combat_slice_80())
+    errors.extend(validate_combat_slice_81())
+    errors.extend(validate_combat_slice_82())
 
     if errors:
         print("Validation failed:")

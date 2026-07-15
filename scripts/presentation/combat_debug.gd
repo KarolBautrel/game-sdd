@@ -46,6 +46,9 @@ const DECORATION_SIZE_BY_KIND := {
 	"tree_stump": Vector2(62, 62),
 	"mossy_boulder": Vector2(76, 76),
 	"fallen_branch": Vector2(84, 84),
+	"dungeon_small": Vector2(72, 72),
+	"dungeon_medium": Vector2(88, 88),
+	"dungeon_large": Vector2(104, 104),
 	"default": Vector2(64, 64),
 }
 const TILE_GAP := 0
@@ -81,6 +84,29 @@ const HIGHLAND_DECORATION_PATHS := [
 	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_8.png",
 	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_12.png",
 ]
+const DUNGEON_BLOCKED_DECORATION_PATHS := [
+	"res://assets/combat/dungeons/props/bone_spike_totem_01.png",
+	"res://assets/combat/dungeons/props/iron_gate_round_01.png",
+	"res://assets/combat/dungeons/props/stone_spike_barricade_01.png",
+	"res://assets/combat/dungeons/props/iron_spike_fence_01.png",
+	"res://assets/combat/dungeons/props/arched_stone_door_01.png",
+]
+const DUNGEON_COVER_DECORATION_PATHS := [
+	"res://assets/combat/dungeons/props/stone_chest_01.png",
+	"res://assets/combat/dungeons/props/wooden_treasure_chest_01.png",
+	"res://assets/combat/dungeons/props/skull_pile_01.png",
+	"res://assets/combat/dungeons/props/stone_coffin_01.png",
+]
+const DUNGEON_HIGHLAND_DECORATION_PATHS := [
+	"res://assets/combat/dungeons/props/ornate_floor_tablet_01.png",
+	"res://assets/combat/dungeons/props/stone_coffin_01.png",
+	"res://assets/combat/dungeons/props/hanging_banner_01.png",
+]
+const DUNGEON_FLOOR_DECORATION_BY_POSITION := {
+	"1,6": "res://assets/combat/dungeons/props/hanging_chains_01.png",
+	"6,6": "res://assets/combat/dungeons/props/wall_torch_01.png",
+	"14,8": "res://assets/combat/dungeons/props/gold_gem_pile_01.png",
+}
 const TERRAIN_BASE_COLORS := {
 	"floor": Color(0.10, 0.30, 0.10, 1.0),
 	"blocked": Color(0.09, 0.25, 0.09, 1.0),
@@ -504,6 +530,16 @@ func _terrain_base_color(terrain_type: String) -> Color:
 func _terrain_tint_color(terrain_type: String, decoration_path: String = "") -> Color:
 	if decoration_path != "" and terrain_type != "highground":
 		return Color(0, 0, 0, 0)
+	if _is_dungeon_board():
+		match terrain_type:
+			"blocked":
+				return Color(0.02, 0.02, 0.03, 0.28)
+			"highground":
+				return Color(0.58, 0.58, 0.50, 0.26)
+			"cover_low":
+				return Color(0.45, 0.43, 0.38, 0.16)
+			_:
+				return Color(0, 0, 0, 0)
 	match terrain_type:
 		"blocked":
 			return Color(0.05, 0.04, 0.03, 0.24)
@@ -535,6 +571,12 @@ func _decoration_size(path: String) -> Vector2:
 
 
 func _decoration_kind(path: String) -> String:
+	if path.contains("/combat/dungeons/props/"):
+		if path.contains("arched_stone_door") or path.contains("iron_spike_fence") or path.contains("bone_spike_totem"):
+			return "dungeon_large"
+		if path.contains("stone_chest") or path.contains("stone_coffin") or path.contains("wooden_treasure_chest") or path.contains("stone_spike_barricade"):
+			return "dungeon_medium"
+		return "dungeon_small"
 	if path.contains("/grass_tuft/"):
 		return "grass_tuft"
 	if path.contains("/tree_stump/"):
@@ -549,6 +591,14 @@ func _decoration_kind(path: String) -> String:
 func _tile_decoration_path(position: Dictionary) -> String:
 	var key := "%s,%s" % [position.get("x", 0), position.get("y", 0)]
 	var terrain_type := _tile_type(position)
+	if _is_dungeon_board():
+		if terrain_type == "blocked":
+			return DUNGEON_BLOCKED_DECORATION_PATHS[_decoration_index(position, DUNGEON_BLOCKED_DECORATION_PATHS.size())]
+		if terrain_type == "cover_low":
+			return DUNGEON_COVER_DECORATION_PATHS[_decoration_index(position, DUNGEON_COVER_DECORATION_PATHS.size())]
+		if terrain_type == "highground":
+			return DUNGEON_HIGHLAND_DECORATION_PATHS[_decoration_index(position, DUNGEON_HIGHLAND_DECORATION_PATHS.size())]
+		return DUNGEON_FLOOR_DECORATION_BY_POSITION.get(key, "")
 	if terrain_type == "blocked":
 		return BLOCKED_DECORATION_PATHS[_decoration_index(position, BLOCKED_DECORATION_PATHS.size())]
 	if terrain_type == "cover_low":
@@ -556,6 +606,10 @@ func _tile_decoration_path(position: Dictionary) -> String:
 	if terrain_type == "highground":
 		return HIGHLAND_DECORATION_PATHS[_decoration_index(position, HIGHLAND_DECORATION_PATHS.size())]
 	return DECORATION_BY_POSITION.get(key, "")
+
+
+func _is_dungeon_board() -> bool:
+	return str(state.get("background_path", "")).contains("old_mine_dungeon_")
 
 
 func _decoration_index(position: Dictionary, count: int) -> int:

@@ -1,6 +1,6 @@
 # Milestone 001: Dungeon Exploration Foundation
 
-Status: planned
+Status: active
 Date: 2026-07-15
 
 ## Summary
@@ -11,8 +11,10 @@ The target feel is an abstract dungeon-crawler exploration layer: the party move
 
 ## Current State
 
-- Dungeon specs exist as planning docs.
-- No dungeon scene, dungeon validator, or executable dungeon slice exists yet.
+- Dungeon specs exist.
+- Dungeon data contract v1 is implemented.
+- `dungeon_old_mine` is authored as a small room/corridor graph.
+- `DungeonDebug.tscn` renders the authored dungeon as an abstract graph.
 - Combat now exposes the stable result payload dungeon needs to consume after a battle.
 
 ## Owning Specs
@@ -20,6 +22,8 @@ The target feel is an abstract dungeon-crawler exploration layer: the party move
 ```text
 docs/specs/dungeon/overview/000_dungeon_exploration_loop.md
 docs/specs/dungeon/overview/001_dungeon_combat_boundary.md
+docs/specs/dungeon/overview/002_dungeon_data_contract_v1.md
+docs/specs/dungeon/presentation/003_dungeon_debug_view_v1.md
 ```
 
 Related combat owner:
@@ -36,7 +40,7 @@ docs/specs/combat/overview/082_combat_result_contract_v1.md
    - Goal: combat can return victory/defeat, surviving player summaries, defeated enemy ids, and reward-shaped data.
    - Proof: Python and Godot combat slice tests.
 
-2. **Next - Dungeon Data Contract V1**
+2. **Done - Dungeon Data Contract V1**
    - Goal: define authored dungeon graph data.
    - Expected data:
      - dungeon id;
@@ -51,7 +55,16 @@ docs/specs/combat/overview/082_combat_result_contract_v1.md
      - one minimal reference dungeon in `resources/data/dungeons/`.
    - Proof: schema validation through `python tools/validators/validate_all.py`.
 
-3. **Dungeon State Model V1**
+3. **Done - Dungeon Debug View V1**
+   - Goal: make the first visible dungeon exploration screen.
+   - Owner spec: `docs/specs/dungeon/presentation/003_dungeon_debug_view_v1.md`
+   - Slice: `docs/specs/dungeon/slices/002_dungeon_debug_view_v1.md`
+   - Implementation:
+     - `scenes/dungeon/DungeonDebug.tscn`
+     - `scripts/presentation/dungeon_debug.gd`
+   - Proof: Godot headless project load plus manual UI verification gap.
+
+4. **Next - Dungeon State Model V1**
    - Goal: create a small deterministic model for current room, visited rooms, cleared rooms, and pending combat request.
    - Expected behavior:
      - enter adjacent room;
@@ -60,7 +73,7 @@ docs/specs/combat/overview/082_combat_result_contract_v1.md
      - mark combat room pending when enemies are present.
    - Proof: Python or Godot unit/domain test.
 
-4. **Dungeon Combat Transition V1**
+5. **Dungeon Combat Transition V1**
    - Goal: prove dungeon can launch a combat request and consume a combat result payload.
    - Expected behavior:
      - combat room creates an encounter request;
@@ -69,7 +82,7 @@ docs/specs/combat/overview/082_combat_result_contract_v1.md
      - defeat does not clear the room.
    - Proof: executable dungeon slice or equivalent domain test.
 
-5. **Dungeon Exploration Scene V1**
+6. **Dungeon Exploration Scene V1**
    - Goal: build the first usable dungeon exploration scene.
    - Expected behavior:
      - render room/corridor graph;
@@ -89,10 +102,10 @@ docs/specs/combat/overview/082_combat_result_contract_v1.md
 
 ## Validation
 
-Current planning-only milestone validation:
+Current validation:
 
 ```powershell
 python tools\validators\validate_all.py
 ```
 
-Dungeon executable tests will be added once a dungeon state model or scene harness exists.
+Dungeon domain tests will be added with Dungeon State Model V1.

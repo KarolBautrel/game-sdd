@@ -17,6 +17,10 @@ docs/specs/dungeon/
   STRUCTURE.md
   overview/
     Dungeon exploration loop and boundaries with combat.
+  presentation/
+    Dungeon exploration debug and production-facing UI rules.
+  slices/
+    Executable dungeon acceptance scenarios once a dungeon validator or scene harness exists.
   milestones/
     Human-readable implementation summaries and next steps.
 ```
@@ -28,10 +32,6 @@ Future folders may be added when implementation needs them:
     Dungeon graph, rooms, corridors, connectivity, and authored content nodes.
   encounters/
     Dungeon encounter trigger and reward rules.
-  presentation/
-    Dungeon exploration UI, room/corridor visualization, and transition feedback.
-  slices/
-    Executable dungeon acceptance scenarios once a dungeon validator or scene harness exists.
 ```
 
 ## Rules

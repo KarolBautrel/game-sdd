@@ -25,6 +25,8 @@ The project now has:
 - combat HUD now uses an 18x11 tactical board at the 112 px combat scale, bottom skillbar action slots, and a pixel-styled top-right turn order panel.
 - combat move targeting preview uses a local BFS cache instead of simulating one command per board tile.
 - combat attack and skill targeting preview now labels targets with hit chance, damage, or blocked reasons before confirmation.
+- combat debug can now load a dungeon-themed stone board using dungeon props for blocked, cover, highground, and floor accents.
+- bleeding turn-start death now automatically skips the defeated unit so combat cannot lock on a dead active actor.
 
 ## Implemented Combat Rules
 
@@ -227,6 +229,8 @@ Current verified slices:
 - `080_highground_ranged_range_bonus.md`
 - `081_enemy_archetype_roles_v2.md`
 - `082_combat_result_contract.md`
+- `083_dungeon_combat_board_theme.md`
+- `084_bleeding_death_skips_turn.md`
 
 ## Spec Organization
 
@@ -251,6 +255,7 @@ Current presentation rule specs:
 - `presentation/069_combat_presentation_architecture.md`
 - `presentation/074_combat_action_feedback.md`
 - `presentation/076_combat_sandbox_layout.md`
+- `presentation/083_dungeon_combat_board_theme.md`
 - `actions/063_aimed_shot_v1.md`
 - `actions/064_learned_actions_v1.md`
 - `ai/065_enemy_archetype_loadout_v1.md`
@@ -381,6 +386,8 @@ Latest verified scope:
 - `debug_full_combat_showcase` now uses enemy `archetype_id` references for its melee and ranged enemies instead of inline enemy action/loadout setup.
 - dungeon exploration target flow is now planned in `docs/specs/dungeon/overview/000_dungeon_exploration_loop.md`, with the dungeon-combat boundary planned in `docs/specs/dungeon/overview/001_dungeon_combat_boundary.md`.
 - combat result contract v1 is specified and verified by slice 082: `simulate()` returns `result_payload`, terminal `combat_ended` events include the same payload, and victory/defeat payloads expose dungeon source ids, surviving player summaries, defeated ids, remaining enemy summaries, and reward-shaped data.
+- dungeon combat board theme is specified by slice 083: `debug_dungeon_combat_showcase` uses a generated grey stone board background, the combat scenario picker exposes it as `Old Mine dungeon`, and dungeon props are used for blocked, cover, highground, and floor accents without changing combat rules.
+- bleeding death turn skipping is specified and verified by slice 084: if a bleeding unit dies at its own turn start while combat remains in progress, the resolver emits death events, auto-ends that dead actor's turn, and advances to the next living unit.
 - Validation passed on 2026-07-15:
   - `python tools\validators\validate_all.py`
   - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --quit --resolution 2560x1440`

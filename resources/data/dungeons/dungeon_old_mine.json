@@ -1,11 +1,83 @@
 {
   "id": "dungeon_old_mine",
-  "map": "res://resources/data/maps/dungeon_old_mine.json",
-  "encounter_table": "encounter_old_mine_v1",
+  "display_name": "Old Mine",
   "recommended_party_level": 1,
+  "start_room_id": "entrance",
+  "rooms": [
+    {
+      "id": "entrance",
+      "display_name": "Mine Entrance",
+      "kind": "entrance",
+      "position": { "x": 0, "y": 1 },
+      "content": [
+        { "type": "empty" }
+      ]
+    },
+    {
+      "id": "dusty_crossing",
+      "display_name": "Dusty Crossing",
+      "kind": "empty",
+      "position": { "x": 1, "y": 1 },
+      "content": [
+        { "type": "empty" }
+      ]
+    },
+    {
+      "id": "collapsed_cache",
+      "display_name": "Collapsed Cache",
+      "kind": "treasure",
+      "position": { "x": 2, "y": 0 },
+      "content": [
+        {
+          "type": "treasure",
+          "rewards": { "xp": 0, "gold": 9, "items": ["old_mine_trinket"] }
+        }
+      ]
+    },
+    {
+      "id": "spider_nest",
+      "display_name": "Spider Nest",
+      "kind": "combat",
+      "position": { "x": 2, "y": 2 },
+      "content": [
+        {
+          "type": "combat",
+          "combat_encounter_path": "res://resources/data/combat_encounters/slice_81_enemy_archetype_roles_v2.json"
+        }
+      ]
+    },
+    {
+      "id": "guarded_cache",
+      "display_name": "Guarded Cache",
+      "kind": "guarded_treasure",
+      "position": { "x": 3, "y": 1 },
+      "content": [
+        {
+          "type": "guarded_treasure",
+          "combat_encounter_path": "res://resources/data/combat_encounters/slice_82_combat_result_contract_victory.json",
+          "rewards": { "xp": 12, "gold": 7, "items": ["rusty_key"] }
+        }
+      ]
+    },
+    {
+      "id": "lower_exit",
+      "display_name": "Lower Exit",
+      "kind": "exit",
+      "position": { "x": 4, "y": 1 },
+      "content": [
+        { "type": "empty" }
+      ]
+    }
+  ],
+  "corridors": [
+    { "id": "entrance_to_crossing", "from": "entrance", "to": "dusty_crossing", "danger": 0.05 },
+    { "id": "crossing_to_cache", "from": "dusty_crossing", "to": "collapsed_cache", "danger": 0.1 },
+    { "id": "crossing_to_nest", "from": "dusty_crossing", "to": "spider_nest", "danger": 0.25 },
+    { "id": "crossing_to_guarded", "from": "dusty_crossing", "to": "guarded_cache", "danger": 0.2 },
+    { "id": "guarded_to_exit", "from": "guarded_cache", "to": "lower_exit", "danger": 0.05 }
+  ],
   "exit_rules": {
     "allow_retreat": true,
     "boss_required": false
   }
 }
-

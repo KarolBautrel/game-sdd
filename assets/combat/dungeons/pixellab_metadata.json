@@ -1,0 +1,548 @@
+{
+  "objects": [
+    {
+      "id": "6098d64b-b3ed-4ad4-a855-5cb73fbc4a21",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "672a077f-4cce-4f28-9db0-0508ae4851f4",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "84912092-d3fe-459a-be24-a73a88be4c2c",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "69f8c00c-dd4a-4c61-ab88-82ad6fe8491a",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "f2e339aa-2869-46ab-a2cf-7c8a0aa6135c",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "272f825c-2249-4457-af68-c7980ee00b94",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "e8c3c095-343a-44ea-9124-64a2e013a37a",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "0be596be-65b8-434e-9c12-c46952d6942d",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "d8a155b2-c5e0-40ca-9f1f-ff59a9fbf1f2",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "fcbc4614-f2ce-48e5-b3fc-0dd26bf348ab",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "54625c87-deba-450f-ba20-76e4a941fbd5",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "55f42e19-ff6a-4011-b5a0-efdc66133667",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "f4ff9ef9-a22e-4daf-9a9e-da247818e16c",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "f4772244-954f-4a07-9822-50f27ff6ae0e",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    },
+    {
+      "id": "034ce03a-6c69-4567-a548-aadd6a3ceed8",
+      "name": null,
+      "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+      "size": {
+        "width": 48,
+        "height": 48
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/unknown.png"
+      },
+      "animations": {}
+    }
+  ],
+  "groups": [
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d",
+      "objects": [
+        {
+          "id": "6098d64b-b3ed-4ad4-a855-5cb73fbc4a21",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_2",
+      "objects": [
+        {
+          "id": "672a077f-4cce-4f28-9db0-0508ae4851f4",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_3",
+      "objects": [
+        {
+          "id": "84912092-d3fe-459a-be24-a73a88be4c2c",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_4",
+      "objects": [
+        {
+          "id": "69f8c00c-dd4a-4c61-ab88-82ad6fe8491a",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_5",
+      "objects": [
+        {
+          "id": "f2e339aa-2869-46ab-a2cf-7c8a0aa6135c",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_6",
+      "objects": [
+        {
+          "id": "272f825c-2249-4457-af68-c7980ee00b94",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_7",
+      "objects": [
+        {
+          "id": "e8c3c095-343a-44ea-9124-64a2e013a37a",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_8",
+      "objects": [
+        {
+          "id": "0be596be-65b8-434e-9c12-c46952d6942d",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_9",
+      "objects": [
+        {
+          "id": "d8a155b2-c5e0-40ca-9f1f-ff59a9fbf1f2",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_10",
+      "objects": [
+        {
+          "id": "fcbc4614-f2ce-48e5-b3fc-0dd26bf348ab",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_11",
+      "objects": [
+        {
+          "id": "54625c87-deba-450f-ba20-76e4a941fbd5",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_12",
+      "objects": [
+        {
+          "id": "55f42e19-ff6a-4011-b5a0-efdc66133667",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_13",
+      "objects": [
+        {
+          "id": "f4ff9ef9-a22e-4daf-9a9e-da247818e16c",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_14",
+      "objects": [
+        {
+          "id": "f4772244-954f-4a07-9822-50f27ff6ae0e",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    },
+    {
+      "group_id": null,
+      "folder": "objects/Objects_simillar_to_RPG_2.5d_d_15",
+      "objects": [
+        {
+          "id": "034ce03a-6c69-4567-a548-aadd6a3ceed8",
+          "name": null,
+          "prompt": "Objects simillar to RPG 2.5d dungeons. Like chains, torches, skull piles etc. All for 128px tiles",
+          "size": {
+            "width": 48,
+            "height": 48
+          },
+          "directions": 1,
+          "view": "low top-down",
+          "rotations": {
+            "unknown": "rotations/unknown.png"
+          },
+          "animations": {}
+        }
+      ]
+    }
+  ],
+  "export_version": "1.0",
+  "export_date": "2026-07-15T21:11:35.315965"
+}

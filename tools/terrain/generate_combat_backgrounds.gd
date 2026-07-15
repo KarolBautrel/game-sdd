@@ -10,6 +10,10 @@ const GRASS_STEP := 26
 const GRASS_EDGE_BLEND := 14
 const TUFT_SIZE := 46
 const SEAM_SOFTEN_PASSES := 2
+const STONE_SIZE := 128
+const STONE_STEP := 104
+const STONE_EDGE_BLEND := 18
+const DUNGEON_PROP_SIZE := 58
 
 const GRASS_PATHS := [
 	"res://assets/combat/terrain/grass/meadow_grass_floor_00.png",
@@ -41,6 +45,18 @@ const TUFT_PATHS := [
 	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_15.png",
 ]
 
+const STONE_PATHS := [
+	"res://assets/combat/terrain/floors/stone/stones1.png",
+	"res://assets/combat/terrain/floors/stone/stones2.png",
+]
+
+const DUNGEON_PROP_PATHS := [
+	"res://assets/combat/dungeons/props/skull_pile_01.png",
+	"res://assets/combat/dungeons/props/hanging_chains_01.png",
+	"res://assets/combat/dungeons/props/ornate_floor_tablet_01.png",
+	"res://assets/combat/dungeons/props/gold_gem_pile_01.png",
+]
+
 const BACKGROUNDS := [
 	{
 		"name": "old_mine_meadow_00_lush",
@@ -64,6 +80,8 @@ const BACKGROUNDS := [
 
 var grass_images: Dictionary = {}
 var tuft_images: Dictionary = {}
+var stone_images: Dictionary = {}
+var dungeon_prop_images: Dictionary = {}
 
 
 func _initialize() -> void:
@@ -72,7 +90,13 @@ func _initialize() -> void:
 	_load_sources()
 	for config: Dictionary in BACKGROUNDS:
 		_generate_background(config)
-	print("Generated %s seamless grass-asset combat backgrounds in %s" % [BACKGROUNDS.size(), OUTPUT_DIR])
+	_generate_dungeon_background({
+		"name": "old_mine_dungeon_00_stone",
+		"seed": 211,
+		"base": Color(0.105, 0.108, 0.112),
+		"prop_count": 12,
+	})
+	print("Generated combat backgrounds in %s" % OUTPUT_DIR)
 	quit()
 
 
@@ -81,7 +105,7 @@ func _remove_old_backgrounds() -> void:
 	if dir == null:
 		return
 	for file_name in dir.get_files():
-		if file_name.begins_with("old_mine_meadow_") and file_name.ends_with(".png"):
+		if (file_name.begins_with("old_mine_meadow_") or file_name.begins_with("old_mine_dungeon_")) and file_name.ends_with(".png"):
 			dir.remove(file_name)
 
 
@@ -101,6 +125,22 @@ func _load_sources() -> void:
 			tuft_images[index] = image
 		else:
 			push_error("Cannot load grass tuft source: %s" % TUFT_PATHS[index])
+
+	for index in range(STONE_PATHS.size()):
+		var image := Image.new()
+		var error := image.load(STONE_PATHS[index])
+		if error == OK:
+			stone_images[index] = image
+		else:
+			push_error("Cannot load stone floor source: %s" % STONE_PATHS[index])
+
+	for index in range(DUNGEON_PROP_PATHS.size()):
+		var image := Image.new()
+		var error := image.load(DUNGEON_PROP_PATHS[index])
+		if error == OK:
+			dungeon_prop_images[index] = image
+		else:
+			push_error("Cannot load dungeon prop source: %s" % DUNGEON_PROP_PATHS[index])
 
 
 func _generate_background(config: Dictionary) -> void:
@@ -154,6 +194,79 @@ func _paint_tuft_accents(target: Image, config: Dictionary) -> void:
 			_hash(index, 41, 43, seed) % maxi(1, target.get_height() - TUFT_SIZE)
 		)
 		_blend_patch_clipped(target, scaled, position)
+
+
+func _generate_dungeon_background(config: Dictionary) -> void:
+	var image := Image.create(WIDTH * TILE_SIZE, HEIGHT * TILE_SIZE, false, Image.FORMAT_RGBA8)
+	image.fill(config["base"])
+	_paint_stone_asset_carpet(image, config)
+	_apply_dungeon_color_wash(image, int(config["seed"]))
+	_paint_dungeon_prop_accents(image, config)
+
+	var output_path := "%s/%s.png" % [OUTPUT_DIR, config["name"]]
+	var error := image.save_png(output_path)
+	if error != OK:
+		push_error("Cannot save combat background: %s" % output_path)
+
+
+func _paint_stone_asset_carpet(target: Image, config: Dictionary) -> void:
+	if stone_images.is_empty():
+		return
+	var seed := int(config["seed"])
+	var columns := int(ceil(float(target.get_width()) / float(STONE_STEP))) + 2
+	var rows := int(ceil(float(target.get_height()) / float(STONE_STEP))) + 2
+
+	for row in range(rows):
+		for column in range(columns):
+			var stone_index := _hash(column, row, 71, seed) % stone_images.size()
+			if not stone_images.has(stone_index):
+				continue
+			var jitter := Vector2i(
+				_hash_signed(column, row, 73, seed, 13),
+				_hash_signed(row, column, 79, seed, 13)
+			)
+			var destination := Vector2i(
+				column * STONE_STEP - 12,
+				row * STONE_STEP - 12
+			) + jitter
+			_blend_patch_feathered_with_edge(target, stone_images[stone_index], destination, STONE_EDGE_BLEND)
+
+
+func _paint_dungeon_prop_accents(target: Image, config: Dictionary) -> void:
+	if dungeon_prop_images.is_empty():
+		return
+	var seed := int(config["seed"])
+	for index in range(int(config["prop_count"])):
+		var prop_index := _hash(index, 83, 89, seed) % dungeon_prop_images.size()
+		if not dungeon_prop_images.has(prop_index):
+			continue
+		var scaled: Image = dungeon_prop_images[prop_index].duplicate()
+		scaled.resize(DUNGEON_PROP_SIZE, DUNGEON_PROP_SIZE, Image.INTERPOLATE_NEAREST)
+		var position := Vector2i(
+			_hash(index, 97, 101, seed) % maxi(1, target.get_width() - DUNGEON_PROP_SIZE),
+			_hash(index, 103, 107, seed) % maxi(1, target.get_height() - DUNGEON_PROP_SIZE)
+		)
+		_blend_patch_clipped(target, scaled, position)
+
+
+func _apply_dungeon_color_wash(target: Image, seed: int) -> void:
+	for y in range(target.get_height()):
+		for x in range(target.get_width()):
+			var color: Color = target.get_pixel(x, y)
+			var variation: float = (
+				sin((float(x) + float(seed * 11)) * 0.010)
+				+ cos((float(y) + float(seed * 17)) * 0.013)
+				+ sin((float(x - y) + float(seed * 3)) * 0.005)
+			) / 3.0
+			var cold_tint := Color(0.10, 0.115, 0.125)
+			var warm_dirt := Color(0.16, 0.14, 0.115)
+			var patch_roll: float = float(_hash(x / 128, y / 128, 109, seed) % 100) / 100.0
+			color = color.lerp(cold_tint.lerp(warm_dirt, patch_roll), 0.07)
+			if variation > 0.2:
+				color = color.lightened(0.025)
+			elif variation < -0.2:
+				color = color.darkened(0.035)
+			target.set_pixel(x, y, color)
 
 
 func _soften_dark_grass_seams(target: Image) -> void:
@@ -229,6 +342,10 @@ func _blend_patch_clipped(target: Image, patch: Image, destination: Vector2i) ->
 
 
 func _blend_patch_feathered(target: Image, patch: Image, destination: Vector2i) -> void:
+	_blend_patch_feathered_with_edge(target, patch, destination, GRASS_EDGE_BLEND)
+
+
+func _blend_patch_feathered_with_edge(target: Image, patch: Image, destination: Vector2i, edge_blend: int) -> void:
 	var src_position := Vector2i.ZERO
 	var dst_position := destination
 	var size := patch.get_size()
@@ -254,7 +371,7 @@ func _blend_patch_feathered(target: Image, patch: Image, destination: Vector2i) 
 			var target_position := dst_position + Vector2i(x, y)
 			var source_color: Color = patch.get_pixelv(source)
 			var edge_distance: int = mini(mini(source.x, source.y), mini(patch.get_width() - 1 - source.x, patch.get_height() - 1 - source.y))
-			var edge_alpha: float = clamp(float(edge_distance) / float(GRASS_EDGE_BLEND), 0.0, 1.0)
+			var edge_alpha: float = clamp(float(edge_distance) / float(edge_blend), 0.0, 1.0)
 			var blend_alpha: float = source_color.a * edge_alpha
 			if blend_alpha <= 0.0:
 				continue

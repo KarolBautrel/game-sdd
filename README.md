@@ -67,7 +67,13 @@ Run the interactive combat debug scene:
 & "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game"
 ```
 
-The current main scene is `scenes/combat/CombatDebug.tscn`.
+The current main scene is `scenes/dungeon/DungeonDebug.tscn`.
+
+Run the interactive combat debug scene directly when combat testing is needed:
+
+```powershell
+& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" "res://scenes/combat/CombatDebug.tscn"
+```
 
 Debug scene controls:
 

@@ -31,6 +31,7 @@ Bleeding should prove that attack profiles can apply statuses, that statuses can
 - Bleeding duration decreases after each own-turn tick.
 - When `remaining_turns` reaches 0, `status_expired` is emitted.
 - Bleeding tick damage can defeat a unit and end combat.
+- If bleeding defeats a unit at the start of its own turn and combat is still in progress, that dead unit's turn ends automatically and turn ownership advances to the next living unit.
 
 ## Presentation
 
@@ -44,6 +45,7 @@ Implemented by:
 
 ```text
 docs/specs/combat/slices/077_bleeding_status_v1.md
+docs/specs/combat/slices/084_bleeding_death_skips_turn.md
 ```
 
 ## Non-Goals

@@ -379,22 +379,6 @@ static func _resolve_end_turn(state: Dictionary, command: Dictionary, sequence: 
 		return _reject(state, sequence, command, rejection)
 
 	var previous_unit_id: String = actor["id"]
-	var next_unit_id := _next_living_unit_id(state, previous_unit_id)
-	if next_unit_id == "":
-		return _reject(state, sequence, command, "no_next_living_unit")
-
-	if _turn_order_wraps(state, previous_unit_id, next_unit_id):
-		state["turn_state"]["round"] += 1
-
-	state["turn_state"]["active_unit_id"] = next_unit_id
-	var next_unit := _unit_by_id(state, next_unit_id)
-	next_unit["resources"]["ap"] = next_unit["stats"]["max_ap"]
-	if next_unit["resources"].has("mp"):
-		next_unit["resources"]["mp"] = next_unit["stats"]["move_points"]
-	var turn_start_status_result := _tick_turn_start_statuses(next_unit)
-	var status_damage_events: Array = turn_start_status_result["damage_events"]
-	var expired_statuses: Array = turn_start_status_result["expired_statuses"]
-
 	sequence = _emit(state, sequence, "action_performed", {
 		"command_id": command["id"],
 		"actor_id": previous_unit_id,
@@ -405,37 +389,69 @@ static func _resolve_end_turn(state: Dictionary, command: Dictionary, sequence: 
 		"command_id": command["id"],
 		"actor_id": previous_unit_id,
 	})
-	sequence = _emit(state, sequence, "turn_started", {
-		"command_id": command["id"],
-		"actor_id": next_unit_id,
-		"round": state["turn_state"]["round"],
-	})
-	for damage_event: Dictionary in status_damage_events:
-		damage_event["command_id"] = command["id"]
-		damage_event["actor_id"] = next_unit_id
-		damage_event["target_unit_id"] = next_unit_id
-		sequence = _emit(state, sequence, "damage_applied", damage_event)
-		if int(damage_event.get("hp_after", 1)) == 0:
-			sequence = _emit(state, sequence, "unit_defeated", {
+	return _start_next_living_turn(state, command, sequence, previous_unit_id)
+
+
+static func _start_next_living_turn(state: Dictionary, command: Dictionary, sequence: int, previous_unit_id: String) -> int:
+	var cursor_unit_id := previous_unit_id
+	while true:
+		var next_unit_id := _next_living_unit_id(state, cursor_unit_id)
+		if next_unit_id == "":
+			return _reject(state, sequence, command, "no_next_living_unit")
+
+		if _turn_order_wraps(state, cursor_unit_id, next_unit_id):
+			state["turn_state"]["round"] += 1
+
+		state["turn_state"]["active_unit_id"] = next_unit_id
+		var next_unit := _unit_by_id(state, next_unit_id)
+		next_unit["resources"]["ap"] = next_unit["stats"]["max_ap"]
+		if next_unit["resources"].has("mp"):
+			next_unit["resources"]["mp"] = next_unit["stats"]["move_points"]
+		var turn_start_status_result := _tick_turn_start_statuses(next_unit)
+		var status_damage_events: Array = turn_start_status_result["damage_events"]
+		var expired_statuses: Array = turn_start_status_result["expired_statuses"]
+
+		sequence = _emit(state, sequence, "turn_started", {
+			"command_id": command["id"],
+			"actor_id": next_unit_id,
+			"round": state["turn_state"]["round"],
+		})
+		for damage_event: Dictionary in status_damage_events:
+			damage_event["command_id"] = command["id"]
+			damage_event["actor_id"] = next_unit_id
+			damage_event["target_unit_id"] = next_unit_id
+			sequence = _emit(state, sequence, "damage_applied", damage_event)
+			if int(damage_event.get("hp_after", 1)) == 0:
+				sequence = _emit(state, sequence, "unit_defeated", {
+					"command_id": command["id"],
+					"actor_id": next_unit_id,
+					"target_unit_id": next_unit_id,
+				})
+				if _combat_result(state) != "in_progress":
+					var result_payload := _combat_result_payload(state)
+					sequence = _emit(state, sequence, "combat_ended", {
+						"command_id": command["id"],
+						"actor_id": next_unit_id,
+						"result": result_payload["result"],
+						"result_payload": result_payload,
+					})
+		for status: Dictionary in expired_statuses:
+			sequence = _emit(state, sequence, "status_expired", {
 				"command_id": command["id"],
 				"actor_id": next_unit_id,
 				"target_unit_id": next_unit_id,
+				"status": status,
 			})
-			if _combat_result(state) != "in_progress":
-				var result_payload := _combat_result_payload(state)
-				sequence = _emit(state, sequence, "combat_ended", {
-					"command_id": command["id"],
-					"actor_id": next_unit_id,
-					"result": result_payload["result"],
-					"result_payload": result_payload,
-				})
-	for status: Dictionary in expired_statuses:
-		sequence = _emit(state, sequence, "status_expired", {
+
+		if _combat_result(state) != "in_progress" or next_unit["resources"]["hp"] > 0:
+			return sequence
+
+		sequence = _emit(state, sequence, "turn_ended", {
 			"command_id": command["id"],
 			"actor_id": next_unit_id,
-			"target_unit_id": next_unit_id,
-			"status": status,
+			"reason": "actor_defeated_at_turn_start",
 		})
+		cursor_unit_id = next_unit_id
 	return sequence
 
 

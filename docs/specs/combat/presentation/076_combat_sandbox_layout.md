@@ -22,6 +22,7 @@ The board is the primary gameplay surface. UI should support tactical decisions 
 
 - The current full-combat showcase uses an 18x11 board.
 - The board background is a single generated meadow image for performance and visual continuity.
+- Dungeon combat showcases may use a generated stone-board background while keeping the same grid alignment, overlays, and tactical rules.
 - Logic tiles stay aligned to the combat grid, but grass should read as one continuous field rather than separated square clumps.
 - Props, blockers, cover, and units render above the background and remain aligned to logical tile centers.
 - Units standing on `highground` render with a clear elevation cue:

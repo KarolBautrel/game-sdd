@@ -1,0 +1,65 @@
+{
+  "id": "slice_84_bleeding_death_skips_turn",
+  "seed": 1084,
+  "grid": {
+    "width": 4,
+    "height": 3,
+    "tiles": [
+      { "x": 0, "y": 0, "type": "floor" },
+      { "x": 1, "y": 0, "type": "floor" },
+      { "x": 2, "y": 0, "type": "floor" },
+      { "x": 3, "y": 0, "type": "floor" },
+      { "x": 0, "y": 1, "type": "floor" },
+      { "x": 1, "y": 1, "type": "floor" },
+      { "x": 2, "y": 1, "type": "floor" },
+      { "x": 3, "y": 1, "type": "floor" },
+      { "x": 0, "y": 2, "type": "floor" },
+      { "x": 1, "y": 2, "type": "floor" },
+      { "x": 2, "y": 2, "type": "floor" },
+      { "x": 3, "y": 2, "type": "floor" }
+    ]
+  },
+  "units": [
+    {
+      "id": "unit_player_001",
+      "team": "player",
+      "position": { "x": 0, "y": 1 },
+      "stats": { "max_hp": 10, "strength": 5, "defense": 1, "initiative": 10, "move_points": 3, "max_ap": 2 },
+      "resources": { "hp": 10, "ap": 1, "mp": 3 },
+      "statuses": [],
+      "available_actions": ["end_turn"]
+    },
+    {
+      "id": "unit_enemy_bleeding",
+      "team": "enemy",
+      "position": { "x": 1, "y": 1 },
+      "stats": { "max_hp": 8, "strength": 3, "defense": 1, "initiative": 8, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 1, "ap": 0, "mp": 0 },
+      "statuses": [
+        {
+          "id": "bleeding",
+          "source_unit_id": "unit_player_001",
+          "remaining_turns": 1,
+          "duration_rule": "own_turn_starts",
+          "tick_damage": 1
+        }
+      ],
+      "available_actions": ["end_turn"]
+    },
+    {
+      "id": "unit_enemy_guard",
+      "team": "enemy",
+      "position": { "x": 2, "y": 1 },
+      "stats": { "max_hp": 8, "strength": 3, "defense": 1, "initiative": 7, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 8, "ap": 0, "mp": 0 },
+      "statuses": [],
+      "available_actions": ["end_turn"]
+    }
+  ],
+  "turn_state": {
+    "active_unit_id": "unit_player_001",
+    "round": 1,
+    "turn_order": ["unit_player_001", "unit_enemy_bleeding", "unit_enemy_guard"]
+  },
+  "event_log": []
+}

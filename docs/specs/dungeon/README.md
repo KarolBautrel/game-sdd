@@ -8,6 +8,16 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 
 - `overview/000_dungeon_exploration_loop.md`
 - `overview/001_dungeon_combat_boundary.md`
+- `overview/002_dungeon_data_contract_v1.md`
+
+### Presentation
+
+- `presentation/003_dungeon_debug_view_v1.md`
+
+## Executable Slices
+
+- `slices/001_dungeon_data_contract_v1.md`
+- `slices/002_dungeon_debug_view_v1.md`
 
 ## Milestones
 
@@ -15,6 +25,6 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 
 ## Current Status
 
-Dungeon mode is planned but not implemented.
+Dungeon mode has an initial data contract and an abstract debug view.
 
-The first dungeon implementation should start only after combat exposes a stable result contract for returning victory, defeat, surviving party state, and reward-shaped data back to dungeon exploration.
+The next implementation step is a deterministic dungeon state model for current room, visited rooms, cleared rooms, and pending combat requests.
