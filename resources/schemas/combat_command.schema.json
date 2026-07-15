@@ -10,7 +10,7 @@
       "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
       "type": { "type": "string", "enum": ["perform_action"] },
       "actor_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-      "action_id": { "type": "string", "enum": ["basic_attack", "ranged_attack", "aimed_shot", "power_strike", "shield_wall", "move", "defend", "end_turn"] },
+      "action_id": { "type": "string", "enum": ["basic_attack", "ranged_attack", "aimed_shot", "power_strike", "deep_cut", "guard_break", "shield_wall", "move", "defend", "end_turn"] },
       "target": {
         "type": "object",
         "required": ["type"],

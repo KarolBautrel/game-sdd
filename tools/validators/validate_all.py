@@ -75,6 +75,8 @@ from tools.validators.validate_combat_slice import (
     validate_combat_slice_64,
     validate_combat_slice_65,
     validate_combat_slice_66,
+    validate_combat_slice_77,
+    validate_combat_slice_78,
 )
 from tools.maps.tiled_to_map_json import convert_tmx
 
@@ -282,6 +284,8 @@ def main() -> int:
     errors.extend(validate_combat_slice_64())
     errors.extend(validate_combat_slice_65())
     errors.extend(validate_combat_slice_66())
+    errors.extend(validate_combat_slice_77())
+    errors.extend(validate_combat_slice_78())
 
     if errors:
         print("Validation failed:")

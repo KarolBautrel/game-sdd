@@ -25,11 +25,13 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 - `actions/048_special_skills_v1.md`
 - `actions/063_aimed_shot_v1.md`
 - `actions/064_learned_actions_v1.md`
+- `actions/078_guard_break_v1.md`
 
 ### Attacks
 
 - `attacks/004_damage_and_statuses.md`
 - `attacks/020_ranged_attacks.md`
+- `attacks/077_bleeding_status_v1.md`
 
 ### Hit Resolution
 
@@ -58,6 +60,8 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 
 - `presentation/068_combat_interaction_preview.md`
 - `presentation/069_combat_presentation_architecture.md`
+- `presentation/074_combat_action_feedback.md`
+- `presentation/076_unit_animation_state_machine.md`
 - `presentation/076_combat_sandbox_layout.md`
 
 ## Executable Slices

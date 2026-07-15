@@ -1,0 +1,60 @@
+{
+  "id": "slice_77_bleeding_status_v1",
+  "seed": 1077,
+  "grid": {
+    "width": 4,
+    "height": 3,
+    "tiles": [
+      { "x": 0, "y": 0, "type": "floor" },
+      { "x": 1, "y": 0, "type": "floor" },
+      { "x": 2, "y": 0, "type": "floor" },
+      { "x": 3, "y": 0, "type": "floor" },
+      { "x": 0, "y": 1, "type": "floor" },
+      { "x": 1, "y": 1, "type": "floor" },
+      { "x": 2, "y": 1, "type": "floor" },
+      { "x": 3, "y": 1, "type": "floor" },
+      { "x": 0, "y": 2, "type": "floor" },
+      { "x": 1, "y": 2, "type": "floor" },
+      { "x": 2, "y": 2, "type": "floor" },
+      { "x": 3, "y": 2, "type": "floor" }
+    ]
+  },
+  "action_profiles": {
+    "deep_cut": {
+      "id": "hero_deep_cut",
+      "action_id": "deep_cut",
+      "range": 1,
+      "ap_cost": 1,
+      "damage_bonus": 0,
+      "status_id": "bleeding",
+      "status_remaining_turns": 2,
+      "status_tick_damage": 1
+    }
+  },
+  "units": [
+    {
+      "id": "unit_player_001",
+      "team": "player",
+      "position": { "x": 0, "y": 1 },
+      "stats": { "max_hp": 10, "strength": 5, "defense": 1, "initiative": 10, "move_points": 3, "max_ap": 2 },
+      "resources": { "hp": 10, "ap": 2, "mp": 3 },
+      "statuses": [],
+      "available_actions": ["deep_cut", "end_turn"]
+    },
+    {
+      "id": "unit_enemy_001",
+      "team": "enemy",
+      "position": { "x": 1, "y": 1 },
+      "stats": { "max_hp": 8, "strength": 3, "defense": 1, "initiative": 8, "move_points": 3, "max_ap": 1 },
+      "resources": { "hp": 8, "ap": 1, "mp": 3 },
+      "statuses": [],
+      "available_actions": ["end_turn"]
+    }
+  ],
+  "turn_state": {
+    "active_unit_id": "unit_player_001",
+    "round": 1,
+    "turn_order": ["unit_player_001", "unit_enemy_001"]
+  },
+  "event_log": []
+}

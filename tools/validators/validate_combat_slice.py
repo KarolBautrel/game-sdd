@@ -2119,6 +2119,141 @@ def validate_combat_slice_66() -> list[str]:
     return errors
 
 
+def validate_combat_slice_77() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_77_bleeding_status_v1.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_77_bleeding_status_v1_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    expected_events = [
+        "combat_started",
+        "turn_started",
+        "action_performed",
+        "damage_applied",
+        "status_applied",
+        "action_performed",
+        "turn_ended",
+        "turn_started",
+        "damage_applied",
+        "action_performed",
+        "turn_ended",
+        "turn_started",
+        "action_performed",
+        "turn_ended",
+        "turn_started",
+        "damage_applied",
+        "status_expired",
+    ]
+    if event_types != expected_events:
+        errors.append(f"slice_77_bleeding_status_v1: expected events {expected_events}, got {event_types}")
+    if result.result != "in_progress":
+        errors.append(f"slice_77_bleeding_status_v1: expected result in_progress, got {result.result}")
+    if player["resources"]["ap"] != 2:
+        errors.append(f"slice_77_bleeding_status_v1: expected player AP refreshed to 2, got {player['resources']['ap']}")
+    if enemy["resources"]["hp"] != 2:
+        errors.append(f"slice_77_bleeding_status_v1: expected enemy HP to be 2, got {enemy['resources']['hp']}")
+    if enemy.get("statuses", []) != []:
+        errors.append(f"slice_77_bleeding_status_v1: expected bleeding to expire, got {enemy.get('statuses', [])}")
+
+    status_events = [event for event in state["event_log"] if event["type"] == "status_applied"]
+    if len(status_events) != 1 or status_events[0].get("status", {}).get("id") != "bleeding":
+        errors.append(f"slice_77_bleeding_status_v1: expected one bleeding status_applied, got {status_events}")
+
+    tick_events = [
+        event
+        for event in state["event_log"]
+        if event["type"] == "damage_applied" and event.get("source_status_id") == "bleeding"
+    ]
+    if len(tick_events) != 2:
+        errors.append(f"slice_77_bleeding_status_v1: expected two bleeding damage ticks, got {tick_events}")
+    else:
+        tick_payloads = [(event.get("damage"), event.get("hp_before"), event.get("hp_after")) for event in tick_events]
+        if tick_payloads != [(1, 4, 3), (1, 3, 2)]:
+            errors.append(f"slice_77_bleeding_status_v1: unexpected bleeding tick payloads {tick_payloads}")
+
+    expired_events = [event for event in state["event_log"] if event["type"] == "status_expired"]
+    if len(expired_events) != 1 or expired_events[0].get("status", {}).get("id") != "bleeding":
+        errors.append(f"slice_77_bleeding_status_v1: expected one bleeding status_expired, got {expired_events}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_77_bleeding_status_v1: replay event log differs")
+
+    return errors
+
+
+def validate_combat_slice_78() -> list[str]:
+    errors: list[str] = []
+    encounter = load_json(ROOT / "resources/data/combat_encounters/slice_78_guard_break_v1.json")
+    commands = load_json(ROOT / "tests/data/combat_commands/slice_78_guard_break_v1_commands.json")
+
+    result = simulate(encounter, commands)
+    state = result.state
+    player = _unit_by_id(state, "unit_player_001")
+    enemy = _unit_by_id(state, "unit_enemy_001")
+    event_types = [event["type"] for event in state["event_log"]]
+
+    expected_events = [
+        "combat_started",
+        "turn_started",
+        "action_performed",
+        "damage_applied",
+        "status_applied",
+        "action_performed",
+        "damage_applied",
+        "action_performed",
+        "turn_ended",
+        "turn_started",
+        "status_expired",
+    ]
+    if event_types != expected_events:
+        errors.append(f"slice_78_guard_break_v1: expected events {expected_events}, got {event_types}")
+    if result.result != "in_progress":
+        errors.append(f"slice_78_guard_break_v1: expected result in_progress, got {result.result}")
+    if player["resources"]["ap"] != 0:
+        errors.append(f"slice_78_guard_break_v1: expected player AP spent to 0, got {player['resources']['ap']}")
+    if enemy["resources"]["ap"] != 1:
+        errors.append(f"slice_78_guard_break_v1: expected enemy AP refreshed to 1, got {enemy['resources']['ap']}")
+    if enemy["resources"]["hp"] != 4:
+        errors.append(f"slice_78_guard_break_v1: expected enemy HP to be 4, got {enemy['resources']['hp']}")
+    if enemy.get("statuses", []) != []:
+        errors.append(f"slice_78_guard_break_v1: expected guard_broken to expire, got {enemy.get('statuses', [])}")
+
+    damage_events = [event for event in state["event_log"] if event["type"] == "damage_applied"]
+    if len(damage_events) != 2:
+        errors.append(f"slice_78_guard_break_v1: expected two damage events, got {damage_events}")
+    else:
+        first = damage_events[0]
+        second = damage_events[1]
+        if first.get("damage") != 2 or first.get("raw_damage") != 2 or first.get("profile_id") != "hero_guard_break":
+            errors.append(f"slice_78_guard_break_v1: unexpected guard_break damage payload {first}")
+        if second.get("damage") != 4 or second.get("raw_damage") != 4:
+            errors.append(f"slice_78_guard_break_v1: expected follow-up damage 4 through lowered defense, got {second}")
+
+    status_events = [event for event in state["event_log"] if event["type"] == "status_applied"]
+    if len(status_events) != 1:
+        errors.append(f"slice_78_guard_break_v1: expected one status_applied, got {status_events}")
+    else:
+        status = status_events[0].get("status", {})
+        if status.get("id") != "guard_broken" or status.get("defense_modifier") != -2:
+            errors.append(f"slice_78_guard_break_v1: expected guard_broken -2 DEF, got {status}")
+
+    expired_events = [event for event in state["event_log"] if event["type"] == "status_expired"]
+    if len(expired_events) != 1 or expired_events[0].get("status", {}).get("id") != "guard_broken":
+        errors.append(f"slice_78_guard_break_v1: expected one guard_broken status_expired, got {expired_events}")
+
+    replay = simulate(encounter, commands)
+    if replay.state["event_log"] != state["event_log"]:
+        errors.append("slice_78_guard_break_v1: replay event log differs")
+
+    return errors
+
+
 def _validate_terminal_combat(slice_id: str, defeated_unit_id: str, expected_result: str) -> list[str]:
     errors: list[str] = []
     encounter = load_json(ROOT / f"resources/data/combat_encounters/{slice_id}.json")
@@ -2325,6 +2460,8 @@ def main() -> int:
     errors.extend(validate_combat_slice_64())
     errors.extend(validate_combat_slice_65())
     errors.extend(validate_combat_slice_66())
+    errors.extend(validate_combat_slice_77())
+    errors.extend(validate_combat_slice_78())
     if errors:
         print("Combat slice validation failed:")
         for error in errors:

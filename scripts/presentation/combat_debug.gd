@@ -5,6 +5,9 @@ const CombatTextUtil := preload("res://scripts/presentation/combat/combat_text.g
 const CombatUnitArtDb := preload("res://scripts/presentation/combat/combat_unit_art.gd")
 const CombatActionModel := preload("res://scripts/presentation/combat/combat_action_model.gd")
 const CombatScenarioCatalog := preload("res://scripts/presentation/combat/combat_scenario_catalog.gd")
+const CombatFloatingText := preload("res://scripts/presentation/combat/combat_floating_text.gd")
+const CombatTargetingPreview := preload("res://scripts/presentation/combat/combat_targeting_preview.gd")
+const CombatUnitVisualState := preload("res://scripts/presentation/combat/combat_unit_visual_state.gd")
 
 const DEFAULT_ENCOUNTER_PATH := CombatScenarioCatalog.DEFAULT_ENCOUNTER_PATH
 const PIXEL_PANEL_TEXTURE_PATH := "res://assets/ui/combat/pixel_panel.png"
@@ -29,7 +32,9 @@ const GRASS_FLOOR_TEXTURE_PATHS := [
 const UNIT_ICON_SIZE := Vector2i(150, 150)
 const UNIT_RESOURCE_LABEL_SIZE := Vector2(112, 36)
 const UNIT_RESOURCE_LABEL_OFFSET_Y := 6.0
-const UNIT_TARGET_PREVIEW_LABEL_SIZE := Vector2(112, 24)
+const UNIT_STATUS_ICON_SIZE := Vector2(20, 20)
+const UNIT_STATUS_ICON_GAP := 2.0
+const UNIT_TARGET_PREVIEW_LABEL_SIZE := Vector2(136, 48)
 const UNIT_TARGET_PREVIEW_GAP := 3.0
 const TILE_SIZE := 112
 const GRASS_PATCH_SIZE := 64
@@ -50,7 +55,7 @@ const HIT_SHAKE_SECONDS := 0.055
 const DEATH_FALL_PIXELS := 16.0
 const DEATH_SECONDS := 0.65
 const DEATH_HOLD_SECONDS := 0.45
-const PRELOAD_UNIT_VISUAL_ACTIONS := ["pose", "combat_idle", "walk", "combat", "hit", "death"]
+const PRELOAD_UNIT_VISUAL_ACTIONS := ["pose", "combat_idle", "walk", "combat", "hit", "death", "status_reaction"]
 const PRELOAD_UNIT_DIRECTIONS := ["north", "north_east", "east", "south_east", "south", "south_west", "west", "north_west"]
 const DECORATION_BY_POSITION := {
 	"1,6": "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_9.png",
@@ -86,6 +91,7 @@ const ACTION_LABELS := CombatTextUtil.ACTION_LABELS
 @onready var board_terrain: TextureRect = %BoardTerrain
 @onready var grid_container: GridContainer = %GridContainer
 @onready var unit_layer: Control = %UnitLayer
+@onready var floating_text_layer: Control = %FloatingTextLayer
 @onready var action_panel: PanelContainer = %ActionPanel
 @onready var bottom_hud: PanelContainer = %BottomHud
 @onready var action_title_label: Label = %ActionTitleLabel
@@ -145,6 +151,7 @@ func _reset_debug_encounter() -> void:
 	unit_visual_action.clear()
 	temporary_visual_units.clear()
 	visual_positions_px.clear()
+	_clear_floating_text()
 	preloaded_unit_visual_keys.clear()
 	rendered_grid_key = ""
 	action_feed.clear()
@@ -566,9 +573,11 @@ func _tile_preview_label(position: Dictionary) -> String:
 		return ""
 	var rejection := str(preview.get("rejection", ""))
 	if rejection != "":
-		return _preview_rejection_short_label(rejection)
+		return ""
 	if preview.has("hit_chance"):
 		return "%s%%\nHIT" % preview.get("hit_chance", "?")
+	if bool(preview.get("guaranteed_hit", false)):
+		return "100%\nHIT"
 	if preview.has("damage"):
 		return "DMG\n%s" % preview.get("damage", "?")
 	return "OK"
@@ -729,6 +738,8 @@ func _render_inspect() -> void:
 				if preview.has("hit_chance"):
 					lines.append("Hit chance: %s%%" % preview.get("hit_chance", "?"))
 					lines.append("Preview roll: %s -> %s" % [preview.get("roll", "?"), str(preview.get("hit_outcome", "?")).capitalize()])
+				elif bool(preview.get("guaranteed_hit", false)):
+					lines.append("Hit chance: 100% (guaranteed)")
 				if preview.has("damage"):
 					lines.append("Damage on hit: %s" % preview.get("damage", "?"))
 					lines.append("Target HP after: %s" % preview.get("hp_after", "?"))
@@ -953,6 +964,20 @@ func _on_tile_pressed(position: Dictionary) -> void:
 			"type": "unit",
 			"unit_id": unit.get("id", ""),
 		}))
+	elif selected_action == "deep_cut":
+		_clear_move_preview()
+		var unit := _living_unit_at(position)
+		_run_command(_build_command("deep_cut", {
+			"type": "unit",
+			"unit_id": unit.get("id", ""),
+		}))
+	elif selected_action == "guard_break":
+		_clear_move_preview()
+		var unit := _living_unit_at(position)
+		_run_command(_build_command("guard_break", {
+			"type": "unit",
+			"unit_id": unit.get("id", ""),
+		}))
 
 
 func _on_move_tile_pressed(position: Dictionary) -> void:
@@ -998,6 +1023,7 @@ func _build_command(action_id: String, target: Dictionary) -> Dictionary:
 func _run_command(command: Dictionary) -> void:
 	if animation_locked:
 		return
+	_clear_floating_text()
 	_clear_move_preview()
 	if _combat_result() != "in_progress":
 		last_feedback = "Combat already ended."
@@ -1303,42 +1329,32 @@ func _schedule_visual_reset() -> void:
 
 
 func _prepare_movement_animation(events: Array) -> bool:
-	var prepared := false
+	var actions := CombatUnitVisualState.movement_actions_from_events(events)
 	for event: Dictionary in events:
 		if event["type"] != "unit_moved":
 			continue
 		var actor_id := str(event.get("actor_id", ""))
-		if actor_id == "":
+		if actor_id == "" or not actions.has(actor_id):
 			continue
 		visual_positions_px[actor_id] = _position_to_unit_top_left(event.get("from", {}))
-		unit_visual_action[actor_id] = "walk"
-		prepared = true
-	return prepared
+		unit_visual_action[actor_id] = actions[actor_id]
+	return not actions.is_empty()
 
 
 func _prepare_combat_flash(events: Array, previous_state: Dictionary) -> bool:
-	var prepared := false
-	for event: Dictionary in events:
-		if event["type"] != "damage_applied" and event["type"] != "hit_roll_resolved":
+	var actions := CombatUnitVisualState.combat_actions_from_events(events)
+	for unit_id: String in actions:
+		unit_visual_action[unit_id] = actions[unit_id]
+
+	for target_id: String in CombatUnitVisualState.defeated_target_ids(events):
+		var defeated_unit := _unit_by_id_in_state(previous_state, target_id)
+		if defeated_unit.is_empty():
 			continue
-		var actor_id := str(event.get("actor_id", ""))
-		if actor_id == "":
-			continue
-		unit_visual_action[actor_id] = "combat"
-		if event["type"] == "damage_applied":
-			var target_id := str(event.get("target_unit_id", ""))
-			if target_id != "":
-				if int(event.get("hp_after", 1)) <= 0:
-					var defeated_unit := _unit_by_id_in_state(previous_state, target_id)
-					if not defeated_unit.is_empty():
-						defeated_unit = defeated_unit.duplicate(true)
-						defeated_unit["resources"]["hp"] = 0
-						temporary_visual_units[target_id] = defeated_unit
-					unit_visual_action[target_id] = "death"
-				else:
-					unit_visual_action[target_id] = "hit"
-		prepared = true
-	return prepared
+		defeated_unit = defeated_unit.duplicate(true)
+		defeated_unit["resources"]["hp"] = 0
+		temporary_visual_units[target_id] = defeated_unit
+
+	return not actions.is_empty()
 
 
 func _play_combat_animation(events: Array) -> void:
@@ -1349,6 +1365,7 @@ func _play_combat_animation(events: Array) -> void:
 	var tween_has_steps := false
 	var animated_actors: Dictionary = {}
 	var animated_targets: Dictionary = {}
+	_spawn_combat_floating_texts(events)
 
 	for event: Dictionary in events:
 		if event["type"] != "damage_applied" and event["type"] != "hit_roll_resolved":
@@ -1410,6 +1427,28 @@ func _finish_combat_animation(current_generation: int) -> void:
 	temporary_visual_units.clear()
 	animation_locked = false
 	_render()
+
+
+func _spawn_combat_floating_texts(events: Array) -> void:
+	var messages: Array[Dictionary] = CombatFloatingText.messages_from_events(events)
+	CombatFloatingText.spawn_messages(floating_text_layer, messages, _floating_text_position_for_unit_id)
+
+
+func _floating_text_position_for_unit_id(unit_id: String) -> Variant:
+	var unit := _unit_by_id(unit_id)
+	if unit.is_empty() and temporary_visual_units.has(unit_id):
+		unit = temporary_visual_units[unit_id]
+	if unit.is_empty():
+		return null
+	var unit_origin := _position_to_unit_top_left(unit["position"])
+	var message_size: Vector2 = CombatFloatingText.DEFAULT_MESSAGE_SIZE
+	var x := unit_origin.x + (float(UNIT_ICON_SIZE.x) - message_size.x) / 2.0
+	var y := unit_origin.y - 8.0
+	return Vector2(maxf(0.0, x), maxf(0.0, y))
+
+
+func _clear_floating_text() -> void:
+	CombatFloatingText.clear(floating_text_layer)
 
 
 func _combat_lunge_offset(actor: Dictionary, target: Dictionary) -> Vector2:
@@ -1499,6 +1538,8 @@ func _resize_board() -> void:
 	grid_container.size = board_size
 	unit_layer.custom_minimum_size = board_size
 	unit_layer.size = board_size
+	floating_text_layer.custom_minimum_size = board_size
+	floating_text_layer.size = board_size
 
 
 func _render_units() -> void:
@@ -1578,6 +1619,12 @@ func _create_unit_node(unit_id: String) -> Control:
 	target_preview_label.add_theme_constant_override("shadow_offset_y", 1)
 	target_preview_panel.add_child(target_preview_label)
 	unit_node.add_child(target_preview_panel)
+
+	var status_icon_row := HBoxContainer.new()
+	status_icon_row.name = "StatusIconRow"
+	status_icon_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	status_icon_row.add_theme_constant_override("separation", int(UNIT_STATUS_ICON_GAP))
+	unit_node.add_child(status_icon_row)
 	return unit_node
 
 
@@ -1611,7 +1658,51 @@ func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
 	if resource_label != null:
 		resource_label.text = _unit_resource_text(unit)
 
+	_update_unit_status_icons(unit_node, unit)
 	_update_unit_target_preview(unit_node, unit)
+
+
+func _update_unit_status_icons(unit_node: Control, unit: Dictionary) -> void:
+	var status_icon_row := unit_node.get_node_or_null("StatusIconRow") as HBoxContainer
+	if status_icon_row == null:
+		return
+	for child in status_icon_row.get_children():
+		child.queue_free()
+
+	var icon_ids := _unit_status_icon_ids(unit)
+	status_icon_row.visible = not icon_ids.is_empty()
+	if icon_ids.is_empty():
+		return
+
+	status_icon_row.position = Vector2(
+		maxf(0.0, (float(UNIT_ICON_SIZE.x) - UNIT_RESOURCE_LABEL_SIZE.x) / 2.0 - UNIT_STATUS_ICON_SIZE.x - UNIT_STATUS_ICON_GAP + _unit_resource_label_nudge(unit)),
+		UNIT_RESOURCE_LABEL_OFFSET_Y
+	)
+	if unit_node.position.y + status_icon_row.position.y < 0:
+		status_icon_row.position.y = 0
+
+	for status_id: String in icon_ids:
+		var panel := PanelContainer.new()
+		panel.custom_minimum_size = UNIT_STATUS_ICON_SIZE
+		panel.size = UNIT_STATUS_ICON_SIZE
+		panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		panel.tooltip_text = _status_icon_tooltip(status_id)
+		panel.add_theme_stylebox_override("panel", _status_icon_style(status_id))
+
+		var label := Label.new()
+		label.text = _status_icon_text(status_id)
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label.custom_minimum_size = UNIT_STATUS_ICON_SIZE
+		label.size = UNIT_STATUS_ICON_SIZE
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		label.add_theme_font_size_override("font_size", 12)
+		label.add_theme_color_override("font_color", Color(1.0, 0.88, 0.78))
+		label.add_theme_color_override("font_shadow_color", Color(0.08, 0.0, 0.0, 1.0))
+		label.add_theme_constant_override("shadow_offset_x", 1)
+		label.add_theme_constant_override("shadow_offset_y", 1)
+		panel.add_child(label)
+		status_icon_row.add_child(panel)
 
 
 func _update_unit_target_preview(unit_node: Control, unit: Dictionary) -> void:
@@ -1642,20 +1733,7 @@ func _unit_target_preview_text(unit: Dictionary) -> String:
 	if selected_action == "move":
 		return ""
 	var position: Dictionary = unit.get("position", {})
-	var preview := _target_preview_for_position(position)
-	if preview.is_empty():
-		return ""
-	var rejection := str(preview.get("rejection", ""))
-	if rejection != "":
-		return _preview_rejection_short_label(rejection).replace("\n", " ")
-	var parts: Array[String] = []
-	if preview.has("hit_chance"):
-		parts.append("%s%% HIT" % preview.get("hit_chance", "?"))
-	if preview.has("damage"):
-		parts.append("DMG %s" % preview.get("damage", "?"))
-	if parts.is_empty():
-		parts.append("OK")
-	return "  ".join(parts)
+	return CombatTargetingPreview.unit_preview_text(_target_preview_for_position(position))
 
 
 func _unit_target_preview_style(unit: Dictionary) -> StyleBoxFlat:
@@ -1673,6 +1751,58 @@ func _unit_target_preview_style(unit: Dictionary) -> StyleBoxFlat:
 	style.content_margin_right = 4
 	style.content_margin_top = 2
 	style.content_margin_bottom = 2
+	return style
+
+
+func _unit_status_icon_ids(unit: Dictionary) -> Array[String]:
+	var icon_ids: Array[String] = []
+	for status: Dictionary in unit.get("statuses", []):
+		var status_id := str(status.get("id", ""))
+		if status_id == "bleeding" or status_id == "guard_broken":
+			icon_ids.append(status_id)
+	return icon_ids
+
+
+func _status_icon_text(status_id: String) -> String:
+	match status_id:
+		"bleeding":
+			return "B"
+		"guard_broken":
+			return "G"
+		_:
+			return "?"
+
+
+func _status_icon_tooltip(status_id: String) -> String:
+	match status_id:
+		"bleeding":
+			return "Bleeding"
+		"guard_broken":
+			return "Guard broken"
+		_:
+			return status_id.capitalize()
+
+
+func _status_icon_style(status_id: String) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	match status_id:
+		"bleeding":
+			style.bg_color = Color(0.42, 0.02, 0.03, 0.96)
+			style.border_color = Color(0.95, 0.24, 0.18)
+		"guard_broken":
+			style.bg_color = Color(0.32, 0.18, 0.02, 0.96)
+			style.border_color = Color(1.0, 0.68, 0.18)
+		_:
+			style.bg_color = Color(0.12, 0.10, 0.08, 0.96)
+			style.border_color = Color(0.90, 0.78, 0.36)
+	style.border_width_left = 2
+	style.border_width_right = 2
+	style.border_width_top = 2
+	style.border_width_bottom = 2
+	style.content_margin_left = 1
+	style.content_margin_right = 1
+	style.content_margin_top = 1
+	style.content_margin_bottom = 1
 	return style
 
 
@@ -2023,6 +2153,8 @@ func _preview_for_command(command: Dictionary) -> Dictionary:
 		if event["type"] == "command_rejected":
 			preview["rejection"] = event.get("reason", "unknown")
 			return preview
+		if event["type"] == "action_performed":
+			preview["ap_cost"] = event.get("ap_spent", "?")
 		if event["type"] == "hit_roll_resolved":
 			preview["hit_chance"] = event.get("hit_chance", "?")
 			preview["hit_outcome"] = event.get("outcome", "")
@@ -2032,7 +2164,10 @@ func _preview_for_command(command: Dictionary) -> Dictionary:
 		if event["type"] == "damage_applied":
 			preview["damage"] = event.get("damage", "?")
 			preview["raw_damage"] = event.get("raw_damage", "?")
+			preview["damage_reduction"] = event.get("damage_reduction", "?")
 			preview["hp_after"] = event.get("hp_after", "?")
+	if str(preview.get("rejection", "")) == "" and preview.has("damage") and not preview.has("hit_chance"):
+		preview["guaranteed_hit"] = true
 	return preview
 
 
@@ -2095,6 +2230,22 @@ func _preview_command_for_position(position: Dictionary) -> Dictionary:
 		return _build_command("power_strike", {
 			"type": "unit",
 			"unit_id": power_unit["id"],
+		})
+	if selected_action == "deep_cut":
+		var bleed_unit := _living_unit_at(position)
+		if bleed_unit.is_empty():
+			return {}
+		return _build_command("deep_cut", {
+			"type": "unit",
+			"unit_id": bleed_unit["id"],
+		})
+	if selected_action == "guard_break":
+		var guard_unit := _living_unit_at(position)
+		if guard_unit.is_empty():
+			return {}
+		return _build_command("guard_break", {
+			"type": "unit",
+			"unit_id": guard_unit["id"],
 		})
 	return {}
 

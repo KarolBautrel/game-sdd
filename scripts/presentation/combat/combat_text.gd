@@ -7,6 +7,8 @@ const ACTION_LABELS := {
 	"ranged_attack": "Ranged attack",
 	"aimed_shot": "Aimed shot",
 	"power_strike": "Power strike",
+	"deep_cut": "Deep cut",
+	"guard_break": "Guard break",
 	"shield_wall": "Shield wall",
 	"defend": "Defend",
 	"end_turn": "End turn",
@@ -167,9 +169,12 @@ static func status_label(status: Dictionary) -> String:
 		return "status"
 	if status.get("id", "") == "skill_cooldown":
 		return "%s cooldown" % action_label(status.get("action_id", "skill"))
+	var status_id := str(status.get("id", "status")).replace("_", " ")
 	if status.has("damage_reduction"):
-		return "%s (%s DR)" % [status.get("id", "status"), status.get("damage_reduction", "?")]
-	return status.get("id", "status")
+		return "%s (%s DR)" % [status_id, status.get("damage_reduction", "?")]
+	if status.has("defense_modifier"):
+		return "%s (%s DEF)" % [status_id, status.get("defense_modifier", "?")]
+	return status_id
 
 
 static func rejection_label(reason: String) -> String:

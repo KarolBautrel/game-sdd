@@ -1,0 +1,553 @@
+{
+    "id":  "debug_raw_wolf_snake_showcase",
+    "seed":  3001,
+    "background_path":  "res://assets/combat/terrain/backgrounds/old_mine_meadow_00_lush.png",
+    "grid":  {
+                 "width":  12,
+                 "height":  7,
+                 "tiles":  [
+                               {
+                                   "x":  0,
+                                   "y":  0,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  1,
+                                   "y":  0,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  2,
+                                   "y":  0,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  3,
+                                   "y":  0,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  4,
+                                   "y":  0,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  5,
+                                   "y":  0,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  6,
+                                   "y":  0,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  7,
+                                   "y":  0,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  8,
+                                   "y":  0,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  9,
+                                   "y":  0,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  10,
+                                   "y":  0,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  11,
+                                   "y":  0,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  0,
+                                   "y":  1,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  1,
+                                   "y":  1,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  2,
+                                   "y":  1,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  3,
+                                   "y":  1,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  4,
+                                   "y":  1,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  5,
+                                   "y":  1,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  6,
+                                   "y":  1,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  7,
+                                   "y":  1,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  8,
+                                   "y":  1,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  9,
+                                   "y":  1,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  10,
+                                   "y":  1,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  11,
+                                   "y":  1,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  0,
+                                   "y":  2,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  1,
+                                   "y":  2,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  2,
+                                   "y":  2,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  3,
+                                   "y":  2,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  4,
+                                   "y":  2,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  5,
+                                   "y":  2,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  6,
+                                   "y":  2,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  7,
+                                   "y":  2,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  8,
+                                   "y":  2,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  9,
+                                   "y":  2,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  10,
+                                   "y":  2,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  11,
+                                   "y":  2,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  0,
+                                   "y":  3,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  1,
+                                   "y":  3,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  2,
+                                   "y":  3,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  3,
+                                   "y":  3,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  4,
+                                   "y":  3,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  5,
+                                   "y":  3,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  6,
+                                   "y":  3,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  7,
+                                   "y":  3,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  8,
+                                   "y":  3,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  9,
+                                   "y":  3,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  10,
+                                   "y":  3,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  11,
+                                   "y":  3,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  0,
+                                   "y":  4,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  1,
+                                   "y":  4,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  2,
+                                   "y":  4,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  3,
+                                   "y":  4,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  4,
+                                   "y":  4,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  5,
+                                   "y":  4,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  6,
+                                   "y":  4,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  7,
+                                   "y":  4,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  8,
+                                   "y":  4,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  9,
+                                   "y":  4,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  10,
+                                   "y":  4,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  11,
+                                   "y":  4,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  0,
+                                   "y":  5,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  1,
+                                   "y":  5,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  2,
+                                   "y":  5,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  3,
+                                   "y":  5,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  4,
+                                   "y":  5,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  5,
+                                   "y":  5,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  6,
+                                   "y":  5,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  7,
+                                   "y":  5,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  8,
+                                   "y":  5,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  9,
+                                   "y":  5,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  10,
+                                   "y":  5,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  11,
+                                   "y":  5,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  0,
+                                   "y":  6,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  1,
+                                   "y":  6,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  2,
+                                   "y":  6,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  3,
+                                   "y":  6,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  4,
+                                   "y":  6,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  5,
+                                   "y":  6,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  6,
+                                   "y":  6,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  7,
+                                   "y":  6,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  8,
+                                   "y":  6,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  9,
+                                   "y":  6,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  10,
+                                   "y":  6,
+                                   "type":  "floor"
+                               },
+                               {
+                                   "x":  11,
+                                   "y":  6,
+                                   "type":  "floor"
+                               }
+                           ]
+             },
+    "units":  [
+                  {
+                      "id":  "unit_player_001",
+                      "team":  "player",
+                      "position":  {
+                                       "x":  4,
+                                       "y":  3
+                                   },
+                      "stats":  {
+                                    "accuracy":  0,
+                                    "max_hp":  14,
+                                    "initiative":  12,
+                                    "evasion":  0,
+                                    "max_ap":  2,
+                                    "strength":  5,
+                                    "move_points":  4,
+                                    "defense":  2
+                                },
+                      "resources":  {
+                                        "hp":  14,
+                                        "ap":  2,
+                                        "mp":  4
+                                    },
+                      "statuses":  [
+
+                                   ],
+                      "available_actions":  [
+                                                "move",
+                                                "basic_attack",
+                                                "defend",
+                                                "end_turn"
+                                            ],
+                      "visual":  {
+                                     "faction":  "heroes",
+                                     "character":  "warrior"
+                                 }
+                  },
+                  {
+                      "id":  "unit_enemy_001",
+                      "team":  "enemy",
+                      "position":  {
+                                       "x":  7,
+                                       "y":  3
+                                   },
+                      "stats":  {
+                                    "accuracy":  0,
+                                    "max_hp":  9,
+                                    "initiative":  8,
+                                    "evasion":  0,
+                                    "max_ap":  1,
+                                    "strength":  4,
+                                    "move_points":  4,
+                                    "defense":  1
+                                },
+                      "resources":  {
+                                        "hp":  9,
+                                        "ap":  1,
+                                        "mp":  4
+                                    },
+                      "statuses":  [
+
+                                   ],
+                      "available_actions":  [
+                                                "move",
+                                                "basic_attack",
+                                                "defend",
+                                                "end_turn"
+                                            ],
+                      "visual":  {
+                                     "faction":  "villains",
+                                     "character":  "wolf_atlas"
+                                 }
+                  },
+                  {
+                      "id":  "unit_enemy_002",
+                      "team":  "enemy",
+                      "position":  {
+                                       "x":  8,
+                                       "y":  4
+                                   },
+                      "stats":  {
+                                    "accuracy":  0,
+                                    "max_hp":  8,
+                                    "initiative":  7,
+                                    "evasion":  0,
+                                    "max_ap":  1,
+                                    "strength":  3,
+                                    "move_points":  4,
+                                    "defense":  1
+                                },
+                      "resources":  {
+                                        "hp":  8,
+                                        "ap":  1,
+                                        "mp":  4
+                                    },
+                      "statuses":  [
+
+                                   ],
+                      "available_actions":  [
+                                                "move",
+                                                "basic_attack",
+                                                "defend",
+                                                "end_turn"
+                                            ],
+                      "visual":  {
+                                     "faction":  "villains",
+                                     "character":  "giant_snake"
+                                 }
+                  }
+              ],
+    "turn_state":  {
+                       "active_unit_id":  "unit_player_001",
+                       "round":  1,
+                       "turn_order":  [
+                                          "unit_player_001",
+                                          "unit_enemy_001",
+                                          "unit_enemy_002"
+                                      ]
+                   },
+    "event_log":  [
+
+                  ]
+}

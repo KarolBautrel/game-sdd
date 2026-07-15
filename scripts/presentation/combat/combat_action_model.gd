@@ -1,7 +1,7 @@
 extends RefCounted
 class_name CombatActionModel
 
-const PRIMARY_ACTION_IDS := ["move", "basic_attack", "ranged_attack", "aimed_shot", "power_strike", "shield_wall", "defend", "end_turn"]
+const PRIMARY_ACTION_IDS := ["move", "basic_attack", "ranged_attack", "aimed_shot", "power_strike", "deep_cut", "guard_break", "shield_wall", "defend", "end_turn"]
 const DEBUG_ACTION_IDS := ["enemy_ai", "enemy_turn"]
 
 
@@ -42,6 +42,10 @@ static func action_can_be_shown_now(state: Dictionary, unit: Dictionary, action_
 			return int(unit["resources"].get("ap", 0)) >= action_ap_cost(state, unit, action_id, 1) and not skill_on_cooldown(unit, action_id)
 		"power_strike":
 			return int(unit["resources"].get("ap", 0)) >= action_ap_cost(state, unit, action_id, 2) and not skill_on_cooldown(unit, action_id)
+		"deep_cut":
+			return int(unit["resources"].get("ap", 0)) >= action_ap_cost(state, unit, action_id, 1) and not skill_on_cooldown(unit, action_id)
+		"guard_break":
+			return int(unit["resources"].get("ap", 0)) >= action_ap_cost(state, unit, action_id, 1) and not skill_on_cooldown(unit, action_id)
 		"aimed_shot":
 			return int(unit["resources"].get("ap", 0)) >= action_ap_cost(state, unit, action_id, 2) and not skill_on_cooldown(unit, action_id)
 		"basic_attack", "ranged_attack":

@@ -9,16 +9,25 @@ Godot 4.7 project built with Spec Driven Development.
 3. Add or update data contracts in `resources/schemas/`.
 4. Add reference data in `resources/data/`.
 5. Add or update executable slices as acceptance scenarios. Slices prove rules; they do not own durable rules.
-6. Update the active milestone as a summary and pointer to the owning specs.
-7. Run validation:
+6. Add or update automated test/validator coverage for the slice. If automation does not exist yet, document the manual verification gap in the slice and milestone.
+7. Update the active milestone as a summary and pointer to the owning specs, slices, and tests.
+8. Run validation:
 
 ```powershell
 python tools/validators/validate_all.py
 ```
 
-8. Implement gameplay only after the spec and data contract pass.
+9. Implement gameplay only after the spec and data contract pass.
+
+Required SDD chain for behavior changes:
+
+```text
+domain/presentation spec -> slice acceptance scenario -> test/validator proof
+```
 
 `docs/specs/*/milestones/` summarizes progress. `docs/specs/*/slices/` proves behavior. Durable gameplay, data, AI, UI, and presentation rules belong in domain folders such as `actions/`, `equipment/`, `ai/`, or `presentation/`.
+
+When a milestone defines an ordered queue, work from the first unfinished item. Mark it complete only after its owner spec, slice, implementation, and validation/test proof are all present.
 
 ## Manual Commands
 

@@ -214,6 +214,9 @@ Current verified slices:
 - `066_map_reference_encounter.md`
 - `068_move_preview_confirm.md`
 - `069_combat_presentation_architecture_v1.md`
+- `074_combat_action_feedback.md`
+- `075_targeting_preview_completion.md`
+- `076_unit_animation_state_machine.md`
 
 ## Spec Organization
 
@@ -236,6 +239,7 @@ Current presentation rule specs:
 
 - `presentation/068_combat_interaction_preview.md`
 - `presentation/069_combat_presentation_architecture.md`
+- `presentation/074_combat_action_feedback.md`
 - `presentation/076_combat_sandbox_layout.md`
 - `actions/063_aimed_shot_v1.md`
 - `actions/064_learned_actions_v1.md`
@@ -347,10 +351,20 @@ Latest verified scope:
 - move preview is now cached from a local BFS reachability pass when the active unit/action changes, removing the repeated resolver simulations that caused a hitch every time `Move` was selected on the larger 18x11 board.
 - attack and skill targeting preview now renders visible unit-local result text for targetable units, so selected melee/ranged/special actions can show damage, hit chance, or rejection reasons above the target instead of only coloring the terrain tile underneath.
 - SDD workflow documentation now explicitly requires durable rules to live in domain specs, slices to remain acceptance proofs, and milestones to remain progress summaries.
+- target preview was clarified so legal melee/special attacks show guaranteed `100% HIT` plus `DMG`, while rejected targets no longer show misleading unit-local damage panels or `0` placeholders.
+- combat action feedback is now specified and implemented in `presentation/074_combat_action_feedback.md`: confirmed hits show floating `-X DMG`, misses show floating `MISS`, and existing lunge/hit/death animations remain event-driven.
+- floating combat text is extracted into `scripts/presentation/combat/combat_floating_text.gd`, so future resolver events such as `status_applied` can reuse the same board-message pipeline.
+- SDD workflow docs now explicitly require every behavior change to follow `domain/presentation spec -> slice acceptance scenario -> test/validator proof`, with manual UI verification gaps documented when automation is not available yet.
+- floating text helper mapping is covered by `scripts/presentation/combat_floating_text_tests.gd`, closing the automated gap for `damage_applied`, miss, and `status_applied` event-to-message conversion.
+- targeting preview formatting is extracted into `scripts/presentation/combat/combat_targeting_preview.gd` and covered by `scripts/presentation/combat_targeting_preview_tests.gd`, including `100% HIT`, `% HIT`, `DMG`, `COST X AP`, and rejected-target suppression.
+- unit visual state selection is extracted into `scripts/presentation/combat/combat_unit_visual_state.gd` and covered by `scripts/presentation/combat_unit_visual_state_tests.gd`, including walk, combat, hit, death, and status reaction mapping.
 - Validation passed on 2026-07-15:
   - `python tools\validators\validate_all.py`
   - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --quit --resolution 2560x1440`
   - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/presentation/combat_floating_text_tests.gd --resolution 2560x1440`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/presentation/combat_targeting_preview_tests.gd --resolution 2560x1440`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/presentation/combat_unit_visual_state_tests.gd --resolution 2560x1440`
 
 ## Important Files
 
@@ -401,82 +415,161 @@ Interactive combat debug scene:
 & "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game"
 ```
 
-## Planned But Not Implemented
+## Combat To Dungeon Roadmap
 
-Status: intentionally paused after the Tiled combat map showcase. The next steps below are recorded so the project can resume with a clear order instead of reopening design questions.
+Status: active queue
+Owner: combat milestone until dungeon transition criteria are met
 
-Combat is not considered finished. The current state is a validated rules prototype plus a sandbox. When work resumes, the priority is not "add another random skill"; the priority is to turn the prototype into an authored, readable combat experience.
+Combat is not considered "done forever"; it is considered "ready for dungeon" when the core battle loop is readable, authored, deterministic, and reusable enough that dungeon encounters can enter and exit combat without reopening combat fundamentals.
 
-Immediate next focus:
+### Queue Workflow
 
-1. Improve combat sandbox UX so movement, targeting, hit chance, AP/MP cost, and blocked reasons are clear before the player clicks.
-2. Push terrain art and presentation toward the current tactical 2.5D direction before adding many more combat rules.
-3. Use `assets/combat/terrain/nature/` and the current sandbox tileset as the visual reference for combat terrain art until a stricter terrain art bible exists.
-4. Add terrain movement costs now that authored map data drives the sandbox grid.
+For every item below:
 
-### Recommended Next Development Order
+1. Add or update the owning domain/presentation spec.
+2. Add or update one chronological slice in `docs/specs/combat/slices/`.
+3. Add or update automated validation/test coverage for the slice.
+4. If no UI automation exists yet, document the manual verification gap in the slice and milestone.
+5. Implement the smallest complete behavior.
+6. Run the named validation commands.
+7. Mark the item `Done` only after spec, slice, implementation, and test/validation proof are all present.
+8. Move to the next unfinished item in order unless the user explicitly reprioritizes.
 
-1. **Map Pipeline V1** - implemented by slice 066.
-   - keep Tiled `.tmx` files as editable map sources;
-   - keep generated `resources/data/maps/*.json` as engine-ready data;
-   - add a validator that every combat encounter using map data matches map width, height, terrain, and spawn constraints.
+### Exit Criteria For Moving To Dungeon
 
-2. **Combat Map Runtime Bridge** - implemented by slice 066.
-   - stop duplicating `grid.tiles` manually inside debug combat encounters;
-   - allow an encounter to reference `map_id` or `map_path`;
-   - resolve terrain/spawns from the generated map JSON before combat starts.
+Move to the dungeon layer only when all required items in this roadmap are `Done` and the following are true:
 
-3. **Combat Sandbox Presentation Pass**
-   - replace pure debug buttons with a more game-like combat viewport;
-   - keep tactical overlays available, but make them secondary;
-   - make the map, units, action banner, and selected action readable at first glance.
+- Combat can start from authored encounter data, not hardcoded scene assumptions.
+- The player can understand movement, targeting, hit chance, cost, damage, miss, and status feedback without reading a debug log.
+- The combat scene has a stable board/HUD layout at 2560x1440 and remains usable at smaller desktop sizes.
+- At least one melee enemy and one ranged enemy use reusable archetype/loadout data.
+- At least one simple status effect is fully specified, sliced, validated, displayed, and resolved over turns.
+- Combat can end with victory/defeat and expose enough result data for a dungeon scene to continue.
+- Full validation passes:
+  - `python tools\validators\validate_all.py`
+  - Godot headless project load at `2560x1440`
+  - Godot combat slice tests
 
-4. **Terrain Art V1**
-   - replace the current placeholder `combat_logic_tiles.png` with intentional terrain tiles;
-   - keep the current 2.5D tactical direction from `assets/combat/terrain/nature/` and the sandbox tileset: slightly side-on, readable height, shadows, and foreground faces;
-   - define source rules for Aseprite terrain tiles and Tiled tileset updates.
+### Ordered Combat Queue
 
-5. **Terrain Gameplay V2**
-   - add terrain movement costs;
-   - define whether cover/highground affect melee, ranged, and movement differently;
-   - verify pathfinding with varied movement costs and blocked chokepoints.
+1. **Done - Presentation Feedback V1**
+   - Owner spec: `presentation/074_combat_action_feedback.md`
+   - Slice: `slices/074_combat_action_feedback.md`
+   - Implementation: `scripts/presentation/combat/combat_floating_text.gd`
+   - Proof: validators and Godot combat slice tests pass; visual floating text still has a documented manual UI verification gap.
 
-6. **Action Targeting UX**
-   - show legal movement range as a soft overlay, not a harsh full-tile recolor;
-   - show attack range and line of sight while an attack action is selected;
-   - show preview text for expected AP/MP cost, hit chance, and blocked reasons.
+2. **Done - Floating Text Helper Test**
+   - Goal: add automated coverage for `CombatFloatingText.messages_from_events`.
+   - Owner spec: `presentation/074_combat_action_feedback.md`
+   - Slice: update `slices/074_combat_action_feedback.md`
+   - Test proof: `scripts/presentation/combat_floating_text_tests.gd` asserts:
+     - `damage_applied` -> `-X DMG`;
+     - miss -> `MISS`;
+     - `status_applied` -> uppercase status text.
+   - Note: visual placement still has a documented manual UI verification gap until a screenshot/UI harness exists.
 
-7. **Special Skills V2**
-   - implement the next small combat skills after `aimed_shot`, likely:
-     - `guard_break` for melee anti-shield/control;
-     - `pinning_shot` or `crippling_shot` for bow control;
-   - make each skill data-driven through action/item profiles where possible.
+3. **Done - Targeting UX Completion V1**
+   - Goal: make selected actions show all needed pre-click information.
+   - Owner spec: `presentation/068_combat_interaction_preview.md`
+   - Slice: `slices/075_targeting_preview_completion.md`
+   - Required behavior:
+     - legal targets show hit chance or guaranteed hit;
+     - legal targets show `DMG`;
+     - action cost is labeled clearly as `COST X AP` or `COST X MP`, not just `AP`;
+     - rejected targets do not show fake damage;
+     - blocked reason is available through inspect/banner.
+   - Test proof: `scripts/presentation/combat_targeting_preview_tests.gd` covers legal melee/special, ranged hit, ranged miss, action cost, and rejected-target suppression.
 
-8. **Enemy Archetype V2**
-   - define reusable archetypes: swordsman, shieldman, archer, bruiser;
-   - move showcase enemies to archetype-driven loadouts;
-   - make AI decisions aware of archetype role instead of only checking available actions.
+4. **Done - Animation State Machine V1**
+   - Goal: replace scattered one-off visual action flags with a small reusable presentation state model.
+   - Owner spec: `presentation/076_combat_sandbox_layout.md` or new `presentation/076_unit_animation_state_machine.md`
+   - Slice: `slices/076_unit_animation_state_machine.md`
+   - Required behavior:
+     - idle, move, attack, hit, death, status reaction states;
+     - deterministic fallback when an animation asset is missing;
+     - no runtime texture stalls during state changes.
+   - Test proof: `scripts/presentation/combat_unit_visual_state_tests.gd` covers movement, attack, hit, death, miss actor combat, and status reaction state selection.
 
-9. **Animation State Machine V1**
-   - replace one-off visual flags with a small unit animation state machine;
-   - support neutral idle, combat idle, walk, attack, hit, death, and status reactions consistently;
-   - keep fallback behavior for missing animation folders.
+5. **Done - Bleeding Status V1**
+   - Goal: implement the first simple over-time status before more complex control effects.
+   - Owner spec: `attacks/077_bleeding_status_v1.md`
+   - Slice: `slices/077_bleeding_status_v1.md`
+   - Required behavior:
+     - a profile can apply `bleeding`;
+     - bleeding deals fixed damage at the affected unit's turn start;
+     - bleeding duration ticks down predictably;
+     - floating text shows `BLEEDING` on application and `-X DMG` on tick;
+     - combat UI shows a compact reusable status icon while bleeding is active;
+     - event log remains deterministic.
+   - Test proof:
+     - `validate_combat_slice_77()` asserts `deep_cut`, `status_applied`, two bleeding tick `damage_applied` events, expiry, final HP, and replay determinism;
+     - `combat_slice_tests.gd` includes `slice_77_bleeding_status_v1`;
+     - `combat_unit_visual_state_tests.gd` asserts status tick damage does not trigger a self-attack visual state.
 
-10. **Combat Encounter Authoring Workflow**
-    - document how to create a new combat test encounter from a Tiled map;
-    - add a generator/helper for encounter scaffolds from map spawns;
-    - make the debug scene load authored scenarios without code changes.
+6. **Done - Guard Break V1**
+   - Goal: implement one simple control/status mechanic after bleeding proves status infrastructure.
+   - Owner spec: `actions/078_guard_break_v1.md`
+   - Slice: `slices/078_guard_break_v1.md`
+   - Required behavior:
+     - `guard_break` applies `guard_broken`;
+     - `guard_broken` lowers effective defense through `defense_modifier`;
+     - follow-up attacks use lowered defense and preview the higher damage;
+     - UI shows `GUARD BROKEN` through reusable floating text and a compact `G` icon;
+     - the status expires on the affected unit's own-turn start.
+   - Test proof:
+     - `validate_combat_slice_78()` asserts status application, follow-up damage increase, expiry, final HP, and replay determinism;
+     - `combat_slice_tests.gd` includes `slice_78_guard_break_v1`;
+     - `combat_floating_text_tests.gd` asserts `guard_broken` renders as `GUARD BROKEN`.
 
-Suggested next slices:
+7. **Next - Terrain Movement Costs V1**
+   - Goal: make authored terrain affect movement without changing the whole map pipeline again.
+   - Owner spec: `grid/024_terrain.md`
+   - Slice: `slices/079_terrain_movement_costs.md`
+   - Required behavior:
+     - terrain can define MP cost;
+     - movement preview and pathfinding use MP cost;
+     - enemy pathfinding handles varied costs;
+     - UI preview shows final MP cost.
+   - Test proof: Python/Godot combat slice tests and map validator updates if data schema changes.
 
-```text
-docs/specs/combat/slices/067_terrain_movement_costs.md
-docs/specs/combat/slices/070_targeting_preview_overlay.md
-docs/specs/combat/slices/071_guard_break_skill.md
-docs/specs/combat/slices/072_pinning_shot_skill.md
-docs/specs/combat/slices/073_enemy_archetype_roles_v2.md
-docs/specs/combat/slices/074_unit_animation_state_machine.md
-docs/specs/combat/slices/075_tiled_spawn_to_encounter_scaffold.md
-docs/specs/combat/slices/076_combat_sandbox_presentation_pass.md
-docs/specs/combat/slices/077_terrain_art_contract_v1.md
-```
+8. **Enemy Archetype Roles V2**
+   - Goal: make enemies reusable enough for dungeon encounters.
+   - Owner spec: `ai/065_enemy_archetype_loadout_v1.md` or new `ai/080_enemy_archetype_roles_v2.md`
+   - Slice: `slices/080_enemy_archetype_roles_v2.md`
+   - Required behavior:
+     - define swordsman, shieldman/bruiser, archer archetypes;
+     - showcase encounter uses archetypes instead of bespoke inline enemy setup;
+     - AI chooses actions consistent with role and loadout.
+   - Test proof: Python/Godot combat slice tests.
+
+9. **Encounter Result Contract V1**
+   - Goal: define what dungeon receives when combat ends.
+   - Owner spec: `overview/` or new `presentation/`/`encounter` boundary spec.
+   - Slice: `slices/081_combat_result_contract.md`
+   - Required behavior:
+     - victory/defeat result is queryable;
+     - surviving units/resources can be summarized;
+     - rewards/loot hooks are intentionally stubbed or data-shaped;
+     - no dungeon implementation required yet.
+   - Test proof: Python/Godot combat slice tests.
+
+10. **Combat Encounter Authoring V1**
+    - Goal: make one new combat encounter from map + archetypes without code changes.
+    - Owner spec: map/encounter authoring docs.
+    - Slice: `slices/082_combat_encounter_authoring_v1.md`
+    - Required behavior:
+      - documented steps for adding a combat map encounter;
+      - validator checks map reference, spawns, archetypes, loadouts, and background;
+      - debug scene scenario catalog can load it without controller edits.
+    - Test proof: validators plus Godot project load.
+
+11. **Combat Readiness Review For Dungeon**
+    - Goal: run the exit criteria as a final checklist.
+    - Owner spec: this milestone plus any transition/boundary spec.
+    - Slice: `slices/083_combat_ready_for_dungeon.md`
+    - Required behavior:
+      - all required roadmap items are done or explicitly deferred;
+      - validation commands pass;
+      - manual UI gaps are listed;
+      - next milestone for dungeon can start without re-planning combat basics.
+    - Test proof: full validation plus documented manual playthrough of the debug combat scene.

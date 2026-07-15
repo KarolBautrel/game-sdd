@@ -129,6 +129,10 @@ def _resolve_command(state: dict[str, Any], command: dict[str, Any], sequence: i
         return _resolve_attack(state, command, sequence, action_id="aimed_shot", max_range=4, uses_hit_chance=True, damage_bonus=1, ap_cost=2)
     if command["action_id"] == "power_strike":
         return _resolve_attack(state, command, sequence, action_id="power_strike", max_range=1, uses_hit_chance=False, damage_bonus=2, ap_cost=2)
+    if command["action_id"] == "deep_cut":
+        return _resolve_attack(state, command, sequence, action_id="deep_cut", max_range=1, uses_hit_chance=False, damage_bonus=0, ap_cost=1)
+    if command["action_id"] == "guard_break":
+        return _resolve_attack(state, command, sequence, action_id="guard_break", max_range=1, uses_hit_chance=False, damage_bonus=0, ap_cost=1)
     if command["action_id"] == "shield_wall":
         return _resolve_self_status_action(state, command, sequence, action_id="shield_wall", ap_cost=1)
     if command["action_id"] == "move":
@@ -259,7 +263,7 @@ def _resolve_attack(
         if outcome == "miss":
             return sequence
 
-    raw_damage = max(1, actor["stats"]["strength"] + attack_damage_bonus - target["stats"]["defense"])
+    raw_damage = max(1, actor["stats"]["strength"] + attack_damage_bonus - _effective_defense(target))
     reduction = _damage_reduction(state, target)
     armor_id = _armor_id(target)
     damage = max(1, raw_damage - reduction)
@@ -284,6 +288,21 @@ def _resolve_attack(
             "hp_after": target["resources"]["hp"],
         },
     )
+
+    if target["resources"]["hp"] > 0 and _profile_applies_status(action_profile):
+        status = _profile_status(actor["id"], action_profile, fallback_status_id=action_profile.get("status_id", action_id))
+        target["statuses"].append(status)
+        sequence = _emit(
+            state,
+            sequence,
+            "status_applied",
+            {
+                "command_id": command["id"],
+                "actor_id": actor["id"],
+                "target_unit_id": target["id"],
+                "status": status,
+            },
+        )
 
     if target["resources"]["hp"] == 0:
         sequence = _emit(
@@ -475,7 +494,9 @@ def _resolve_end_turn(state: dict[str, Any], command: dict[str, Any], sequence: 
     next_unit["resources"]["ap"] = next_unit["stats"]["max_ap"]
     if "mp" in next_unit["resources"]:
         next_unit["resources"]["mp"] = next_unit["stats"]["move_points"]
-    expired_statuses = _tick_turn_start_statuses(next_unit)
+    turn_start_status_result = _tick_turn_start_statuses(next_unit)
+    status_damage_events = turn_start_status_result["damage_events"]
+    expired_statuses = turn_start_status_result["expired_statuses"]
 
     sequence = _emit(
         state,
@@ -507,6 +528,33 @@ def _resolve_end_turn(state: dict[str, Any], command: dict[str, Any], sequence: 
             "round": state["turn_state"]["round"],
         },
     )
+    for damage_event in status_damage_events:
+        damage_event["command_id"] = command["id"]
+        damage_event["actor_id"] = next_unit_id
+        damage_event["target_unit_id"] = next_unit_id
+        sequence = _emit(state, sequence, "damage_applied", damage_event)
+        if damage_event.get("hp_after") == 0:
+            sequence = _emit(
+                state,
+                sequence,
+                "unit_defeated",
+                {
+                    "command_id": command["id"],
+                    "actor_id": next_unit_id,
+                    "target_unit_id": next_unit_id,
+                },
+            )
+            if _combat_result(state) != "in_progress":
+                sequence = _emit(
+                    state,
+                    sequence,
+                    "combat_ended",
+                    {
+                        "command_id": command["id"],
+                        "actor_id": next_unit_id,
+                        "result": _combat_result(state),
+                    },
+                )
     for status in expired_statuses:
         sequence = _emit(
             state,
@@ -823,11 +871,31 @@ def _skill_cooldown_status(source_unit_id: str, action_id: str, remaining_turns:
     }
 
 
-def _tick_turn_start_statuses(unit: dict[str, Any]) -> list[dict[str, Any]]:
+def _tick_turn_start_statuses(unit: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
     kept_statuses: list[dict[str, Any]] = []
     expired_statuses: list[dict[str, Any]] = []
+    damage_events: list[dict[str, Any]] = []
     for status in unit["statuses"]:
         next_status = deepcopy(status)
+        tick_damage = int(next_status.get("tick_damage", 0))
+        if tick_damage > 0 and unit["resources"]["hp"] > 0:
+            old_hp = int(unit["resources"]["hp"])
+            damage = min(tick_damage, old_hp)
+            unit["resources"]["hp"] = max(0, old_hp - damage)
+            damage_events.append(
+                {
+                    "damage": damage,
+                    "raw_damage": tick_damage,
+                    "damage_reduction": 0,
+                    "damage_bonus": 0,
+                    "armor_id": "",
+                    "profile_id": "",
+                    "weapon_id": "",
+                    "hp_before": old_hp,
+                    "hp_after": unit["resources"]["hp"],
+                    "source_status_id": next_status.get("id", ""),
+                }
+            )
         if next_status.get("id") == "skill_cooldown":
             next_status["remaining_turns"] = max(0, int(next_status.get("remaining_turns", 0)) - 1)
             if next_status["remaining_turns"] == 0:
@@ -840,7 +908,10 @@ def _tick_turn_start_statuses(unit: dict[str, Any]) -> list[dict[str, Any]]:
                 continue
         kept_statuses.append(next_status)
     unit["statuses"] = kept_statuses
-    return expired_statuses
+    return {
+        "damage_events": damage_events,
+        "expired_statuses": expired_statuses,
+    }
 
 
 def _attack_range(weapon_profile: dict[str, Any], fallback: int) -> int:
@@ -991,7 +1062,22 @@ def _profile_status(source_unit_id: str, action_profile: dict[str, Any], fallbac
     }
     if "damage_reduction" in action_profile:
         status["damage_reduction"] = int(action_profile["damage_reduction"])
+    if "status_tick_damage" in action_profile:
+        status["tick_damage"] = int(action_profile["status_tick_damage"])
+    if "status_defense_modifier" in action_profile:
+        status["defense_modifier"] = int(action_profile["status_defense_modifier"])
     return status
+
+
+def _profile_applies_status(action_profile: dict[str, Any]) -> bool:
+    return "status_id" in action_profile or "status_tick_damage" in action_profile or "status_defense_modifier" in action_profile
+
+
+def _effective_defense(target: dict[str, Any]) -> int:
+    defense = int(target["stats"].get("defense", 0))
+    for status in target.get("statuses", []):
+        defense += int(status.get("defense_modifier", 0))
+    return max(0, defense)
 
 
 def _damage_reduction(state: dict[str, Any], target: dict[str, Any]) -> int:

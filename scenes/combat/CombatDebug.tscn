@@ -118,6 +118,14 @@ offset_right = 768.0
 offset_bottom = 640.0
 mouse_filter = 2
 
+[node name="FloatingTextLayer" type="Control" parent="RootMargin/RootVBox/BoardRoot"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+offset_right = 768.0
+offset_bottom = 640.0
+mouse_filter = 2
+
 [node name="BottomHud" type="PanelContainer" parent="RootMargin/RootVBox"]
 unique_name_in_owner = true
 layout_mode = 2

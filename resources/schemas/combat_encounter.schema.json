@@ -52,7 +52,9 @@
           "cooldown_turns": { "type": "integer", "minimum": 0 },
           "status_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
           "status_remaining_turns": { "type": "integer", "minimum": 0 },
-          "damage_reduction": { "type": "integer", "minimum": 0 }
+          "damage_reduction": { "type": "integer", "minimum": 0 },
+          "status_tick_damage": { "type": "integer", "minimum": 0 },
+          "status_defense_modifier": { "type": "integer" }
         }
       }
     },
@@ -72,7 +74,9 @@
           "cooldown_turns": { "type": "integer", "minimum": 0 },
           "status_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
           "status_remaining_turns": { "type": "integer", "minimum": 0 },
-          "damage_reduction": { "type": "integer", "minimum": 0 }
+          "damage_reduction": { "type": "integer", "minimum": 0 },
+          "status_tick_damage": { "type": "integer", "minimum": 0 },
+          "status_defense_modifier": { "type": "integer" }
         }
       }
     },
@@ -108,7 +112,9 @@
                 "cooldown_turns": { "type": "integer", "minimum": 0 },
                 "status_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
                 "status_remaining_turns": { "type": "integer", "minimum": 0 },
-                "damage_reduction": { "type": "integer", "minimum": 0 }
+                "damage_reduction": { "type": "integer", "minimum": 0 },
+                "status_tick_damage": { "type": "integer", "minimum": 0 },
+                "status_defense_modifier": { "type": "integer" }
               }
             }
           }
@@ -200,6 +206,15 @@
           },
           "archetype_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
           "equipped_weapon_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "visual": {
+            "type": "object",
+            "required": ["faction", "character"],
+            "additionalProperties": false,
+            "properties": {
+              "faction": { "type": "string", "enum": ["heroes", "villains"] },
+              "character": { "type": "string", "pattern": "^[a-z0-9_]+$" }
+            }
+          },
           "loadout": {
             "type": "object",
             "additionalProperties": false,

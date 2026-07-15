@@ -1,0 +1,30 @@
+[
+  {
+    "id": "cmd_001",
+    "type": "perform_action",
+    "actor_id": "unit_player_001",
+    "action_id": "deep_cut",
+    "target": { "type": "unit", "unit_id": "unit_enemy_001" }
+  },
+  {
+    "id": "cmd_002",
+    "type": "perform_action",
+    "actor_id": "unit_player_001",
+    "action_id": "end_turn",
+    "target": { "type": "none" }
+  },
+  {
+    "id": "cmd_003",
+    "type": "perform_action",
+    "actor_id": "unit_enemy_001",
+    "action_id": "end_turn",
+    "target": { "type": "none" }
+  },
+  {
+    "id": "cmd_004",
+    "type": "perform_action",
+    "actor_id": "unit_player_001",
+    "action_id": "end_turn",
+    "target": { "type": "none" }
+  }
+]

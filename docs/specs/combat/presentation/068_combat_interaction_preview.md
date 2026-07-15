@@ -33,9 +33,15 @@ Presentation may simulate commands against a clean copy of the current state, bu
 - Target preview text should be visible on the unit layer, not only on the terrain tile, because sprites and resource readouts can obscure tile labels.
 - Unit-local target preview should show available outcome data:
   - hit chance when a hit roll is resolved;
+  - guaranteed hit as `100% HIT` when the selected legal action always hits, such as current melee actions;
   - damage when damage is resolved;
-  - target HP after damage when shown in inspect/debug detail;
-  - short rejection label when command is rejected.
+  - action cost as `COST X AP` for legal targeted AP actions;
+- Compact unit-local target preview should label resolved damage as `DMG`, not as target HP.
+- Target HP after damage may still appear in inspect/debug detail.
+- Unit-local damage/outcome panels should only appear for legal target previews.
+- Rejected targets should not show damage values or a `0` damage placeholder.
+- Rejected targets should not show action cost preview panels.
+- Rejected targets may still use a soft terrain highlight or inspect/debug details to explain why the command is blocked.
 
 ## Rejection Labels
 
@@ -56,5 +62,7 @@ Current compact labels:
 
 - Move preview does not spend MP until confirmation.
 - Attack/skill preview shows more than a colored tile when a target unit is in range.
+- Out-of-range or otherwise rejected targets do not show a unit-local damage panel.
+- Legal targeted AP actions show `COST X AP` in the unit-local preview.
 - HP/AP/MP readouts must not be the only visible information above a target during attack preview.
 - Python validation, Godot project load, and Godot combat slice tests pass after presentation changes.

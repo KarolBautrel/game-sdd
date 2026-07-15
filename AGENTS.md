@@ -9,21 +9,22 @@ This project is built with Spec Driven Development.
 3. Add or update the relevant domain spec before implementation.
 4. Add or update schemas and reference data when behavior depends on data.
 5. Add or update executable slices for acceptance scenarios.
-6. Keep slices as proofs/tests only. Do not define durable gameplay, data, AI, UI, or presentation rules only inside `slices/`.
-7. Keep milestones as progress summaries and navigation aids only. Do not use milestones as the only source for implemented rules.
-8. Run validation before finishing:
+6. Add or update the test/validator coverage that proves the slice. If no automated test harness exists yet, record the manual verification gap in the slice and milestone, then add the smallest practical automated coverage when possible.
+7. Keep slices as proofs/tests only. Do not define durable gameplay, data, AI, UI, or presentation rules only inside `slices/`.
+8. Keep milestones as progress summaries and navigation aids only. Do not use milestones as the only source for implemented rules.
+9. Run validation before finishing:
 
 ```powershell
 python tools\validators\validate_all.py
 ```
 
-9. Run Godot combat slice tests when combat changes:
+10. Run Godot combat slice tests when combat changes:
 
 ```powershell
 & "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd
 ```
 
-10. Always give the user the command for launching the interactive debug scene after combat work:
+11. Always give the user the command for launching the interactive debug scene after combat work:
 
 ```powershell
 cd C:\Users\karol\Desktop\Gierka\game_dir\sdd-game
@@ -43,12 +44,21 @@ The update should include:
 
 Do not leave milestone notes only in chat. Persist them in the repository.
 
+When a milestone contains an ordered implementation queue:
+
+- Work on the first unfinished item unless the user explicitly reprioritizes.
+- Do not skip ahead to a more complex feature while a prerequisite item is unfinished.
+- Mark an item done only after the owning spec, slice, implementation, and named validation/test proof are complete.
+- If an item exposes missing prerequisite work, add that prerequisite to the queue instead of burying it in chat.
+
 ## Spec Ownership Rules
 
+- Every behavior change must follow this chain: owning domain/presentation spec -> chronological slice acceptance scenario -> automated test/validator or explicitly documented manual verification gap.
 - Domain folders own rules: `overview/`, `grid/`, `turns/`, `actions/`, `attacks/`, `hit_resolution/`, `equipment/`, `weapons/`, `ai/`, `presentation/`, and future domain folders.
 - `slices/` contains chronological executable acceptance scenarios proving that domain rules work.
 - `milestones/` contains implementation summaries, validation notes, and next-step guidance.
 - When adding a slice for a new mechanic, link the slice back to the owning domain spec.
+- When adding a presentation/UI behavior, still add a presentation spec and a slice. If the proof is a helper/unit test instead of a domain combat slice, name that test/validator in the slice.
 - When adding a new domain spec, update the relevant `README.md` or structure file that indexes that domain.
 - If implementation reveals a rule not covered by a domain spec, update the spec in the same change before finishing.
 

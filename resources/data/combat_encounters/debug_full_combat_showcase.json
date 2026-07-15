@@ -8,7 +8,9 @@
                                              "slot":  "main_hand",
                                              "grants_actions":  [
                                                                     "basic_attack",
-                                                                    "power_strike"
+                                                                    "power_strike",
+                                                                    "deep_cut",
+                                                                    "guard_break"
                                                                 ],
                                              "action_profiles":  {
                                                                      "basic_attack":  {
@@ -25,6 +27,26 @@
                                                                                           "ap_cost":  2,
                                                                                           "damage_bonus":  2,
                                                                                           "cooldown_turns":  2
+                                                                                      },
+                                                                     "deep_cut":  {
+                                                                                      "id":  "hero_sword_deep_cut",
+                                                                                      "action_id":  "deep_cut",
+                                                                                      "range":  1,
+                                                                                      "ap_cost":  1,
+                                                                                      "damage_bonus":  0,
+                                                                                      "status_id":  "bleeding",
+                                                                                      "status_remaining_turns":  2,
+                                                                                      "status_tick_damage":  1
+                                                                                  },
+                                                                     "guard_break":  {
+                                                                                         "id":  "hero_sword_guard_break",
+                                                                                         "action_id":  "guard_break",
+                                                                                         "range":  1,
+                                                                                         "ap_cost":  1,
+                                                                                         "damage_bonus":  0,
+                                                                                         "status_id":  "guard_broken",
+                                                                                         "status_remaining_turns":  1,
+                                                                                         "status_defense_modifier":  -2
                                                                                       }
                                                                  }
                                          },

@@ -114,6 +114,10 @@ static func _resolve_command(state: Dictionary, command: Dictionary, sequence: i
 			return _resolve_attack(state, command, sequence, "aimed_shot", 4, true, 1, 2)
 		"power_strike":
 			return _resolve_attack(state, command, sequence, "power_strike", 1, false, 2, 2)
+		"deep_cut":
+			return _resolve_attack(state, command, sequence, "deep_cut", 1, false, 0, 1)
+		"guard_break":
+			return _resolve_attack(state, command, sequence, "guard_break", 1, false, 0, 1)
 		"shield_wall":
 			return _resolve_self_status_action(state, command, sequence, "shield_wall", 1)
 		"move":
@@ -212,7 +216,7 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 		if outcome == "miss":
 			return sequence
 
-	var raw_damage: int = max(1, actor["stats"]["strength"] + attack_damage_bonus - target["stats"]["defense"])
+	var raw_damage: int = max(1, actor["stats"]["strength"] + attack_damage_bonus - _effective_defense(target))
 	var reduction := _damage_reduction(state, target)
 	var armor_id := _armor_id(target)
 	var damage: int = max(1, raw_damage - reduction)
@@ -233,6 +237,16 @@ static func _resolve_attack(state: Dictionary, command: Dictionary, sequence: in
 		"hp_before": old_hp,
 		"hp_after": target["resources"]["hp"],
 	})
+
+	if target["resources"]["hp"] > 0 and _profile_applies_status(weapon_profile):
+		var status := _profile_status(actor["id"], weapon_profile, str(weapon_profile.get("status_id", action_id)))
+		target["statuses"].append(status)
+		sequence = _emit(state, sequence, "status_applied", {
+			"command_id": command["id"],
+			"actor_id": actor["id"],
+			"target_unit_id": target["id"],
+			"status": status,
+		})
 
 	if target["resources"]["hp"] == 0:
 		sequence = _emit(state, sequence, "unit_defeated", {
@@ -373,7 +387,9 @@ static func _resolve_end_turn(state: Dictionary, command: Dictionary, sequence: 
 	next_unit["resources"]["ap"] = next_unit["stats"]["max_ap"]
 	if next_unit["resources"].has("mp"):
 		next_unit["resources"]["mp"] = next_unit["stats"]["move_points"]
-	var expired_statuses := _tick_turn_start_statuses(next_unit)
+	var turn_start_status_result := _tick_turn_start_statuses(next_unit)
+	var status_damage_events: Array = turn_start_status_result["damage_events"]
+	var expired_statuses: Array = turn_start_status_result["expired_statuses"]
 
 	sequence = _emit(state, sequence, "action_performed", {
 		"command_id": command["id"],
@@ -390,6 +406,23 @@ static func _resolve_end_turn(state: Dictionary, command: Dictionary, sequence: 
 		"actor_id": next_unit_id,
 		"round": state["turn_state"]["round"],
 	})
+	for damage_event: Dictionary in status_damage_events:
+		damage_event["command_id"] = command["id"]
+		damage_event["actor_id"] = next_unit_id
+		damage_event["target_unit_id"] = next_unit_id
+		sequence = _emit(state, sequence, "damage_applied", damage_event)
+		if int(damage_event.get("hp_after", 1)) == 0:
+			sequence = _emit(state, sequence, "unit_defeated", {
+				"command_id": command["id"],
+				"actor_id": next_unit_id,
+				"target_unit_id": next_unit_id,
+			})
+			if _combat_result(state) != "in_progress":
+				sequence = _emit(state, sequence, "combat_ended", {
+					"command_id": command["id"],
+					"actor_id": next_unit_id,
+					"result": _combat_result(state),
+				})
 	for status: Dictionary in expired_statuses:
 		sequence = _emit(state, sequence, "status_expired", {
 			"command_id": command["id"],
@@ -667,11 +700,29 @@ static func _skill_cooldown_status(source_unit_id: String, action_id: String, re
 	}
 
 
-static func _tick_turn_start_statuses(unit: Dictionary) -> Array[Dictionary]:
+static func _tick_turn_start_statuses(unit: Dictionary) -> Dictionary:
 	var kept_statuses: Array[Dictionary] = []
 	var expired_statuses: Array[Dictionary] = []
+	var damage_events: Array[Dictionary] = []
 	for status: Dictionary in unit["statuses"]:
 		var next_status: Dictionary = status.duplicate(true)
+		var tick_damage := int(next_status.get("tick_damage", 0))
+		if tick_damage > 0 and unit["resources"]["hp"] > 0:
+			var old_hp := int(unit["resources"]["hp"])
+			var damage := mini(tick_damage, old_hp)
+			unit["resources"]["hp"] = max(0, old_hp - damage)
+			damage_events.append({
+				"damage": damage,
+				"raw_damage": tick_damage,
+				"damage_reduction": 0,
+				"damage_bonus": 0,
+				"armor_id": "",
+				"profile_id": "",
+				"weapon_id": "",
+				"hp_before": old_hp,
+				"hp_after": unit["resources"]["hp"],
+				"source_status_id": next_status.get("id", ""),
+			})
 		if next_status.get("id", "") == "skill_cooldown":
 			next_status["remaining_turns"] = max(0, int(next_status.get("remaining_turns", 0)) - 1)
 			if int(next_status["remaining_turns"]) == 0:
@@ -684,7 +735,10 @@ static func _tick_turn_start_statuses(unit: Dictionary) -> Array[Dictionary]:
 				continue
 		kept_statuses.append(next_status)
 	unit["statuses"] = kept_statuses
-	return expired_statuses
+	return {
+		"damage_events": damage_events,
+		"expired_statuses": expired_statuses,
+	}
 
 
 static func _attack_range(weapon_profile: Dictionary, fallback: int) -> int:
@@ -832,7 +886,22 @@ static func _profile_status(source_unit_id: String, action_profile: Dictionary, 
 	}
 	if action_profile.has("damage_reduction"):
 		status["damage_reduction"] = int(action_profile["damage_reduction"])
+	if action_profile.has("status_tick_damage"):
+		status["tick_damage"] = int(action_profile["status_tick_damage"])
+	if action_profile.has("status_defense_modifier"):
+		status["defense_modifier"] = int(action_profile["status_defense_modifier"])
 	return status
+
+
+static func _profile_applies_status(action_profile: Dictionary) -> bool:
+	return action_profile.has("status_id") or action_profile.has("status_tick_damage") or action_profile.has("status_defense_modifier")
+
+
+static func _effective_defense(target: Dictionary) -> int:
+	var defense := int(target["stats"].get("defense", 0))
+	for status: Dictionary in target.get("statuses", []):
+		defense += int(status.get("defense_modifier", 0))
+	return max(0, defense)
 
 
 static func _damage_reduction(state: Dictionary, target: Dictionary) -> int:

@@ -23,6 +23,9 @@ The sandbox controller may orchestrate the screen, but reusable presentation con
 - `scripts/presentation/combat/combat_unit_art.gd`
 - `scripts/presentation/combat/combat_action_model.gd`
 - `scripts/presentation/combat/combat_scenario_catalog.gd`
+- `scripts/presentation/combat/combat_floating_text.gd`
+- `scripts/presentation/combat/combat_targeting_preview.gd`
+- `scripts/presentation/combat/combat_unit_visual_state.gd`
 
 ## Runtime Preparation
 

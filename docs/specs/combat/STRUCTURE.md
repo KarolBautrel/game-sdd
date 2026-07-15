@@ -43,14 +43,18 @@ docs/specs/combat/
 
 ## Rules
 
+- Every combat behavior change must have an owning domain/presentation spec, a chronological slice acceptance scenario, and a named test/validator proof.
 - Put rule specs in the domain folder that owns the mechanic.
 - Keep `slices/` flat and numbered; slices are implementation proofs, not rule ownership folders.
 - A slice may introduce an acceptance scenario, but durable rules must also be captured in the owning domain spec.
 - If a new mechanic has no owning domain spec, create that spec before or alongside the slice.
 - Link slices for new mechanics back to their owning domain spec.
+- If a presentation behavior cannot be proven by current domain slice tests, add a helper/unit validator or explicitly document the manual verification gap in the slice and milestone.
 - When a rule spans domains, place it where the calculation is owned and link to related specs.
 - Update `README.md` when adding a new rule spec.
 - Update the current milestone after a meaningful combat commit.
+- When a milestone has an ordered queue, complete the first unfinished item before starting later items unless the user explicitly reprioritizes.
+- Mark a queued milestone item complete only when owner spec, slice, implementation, and named validation/test proof are all present.
 
 ## Current Domain Boundaries
 
