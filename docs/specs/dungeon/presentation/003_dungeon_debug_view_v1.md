@@ -16,8 +16,12 @@ The debug view renders authored dungeon data as an abstract room-and-corridor gr
 - Corridors render between connected rooms.
 - The start room is highlighted.
 - Room labels show the room name and content type.
-- The view must not decide combat results or room clearing.
-- Combat transition buttons are not required in this slice.
+- Clicking a connected room attempts to enter it through the dungeon state model.
+- Clicking a non-connected room keeps the current room and shows a rejection reason.
+- The view highlights visited, cleared, current, pending combat, and reward-unlocked room states.
+- The view may provide debug-only victory/defeat buttons for pending combat requests.
+- Debug victory/defeat buttons must call the dungeon state model instead of mutating room state directly.
+- The view still does not launch the combat scene.
 - Final cave/crypt art is out of scope until dungeon assets are imported.
 
 ## Acceptance Proof

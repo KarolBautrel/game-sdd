@@ -17,6 +17,11 @@ docs/specs/dungeon/presentation/003_dungeon_debug_view_v1.md
 - corridors render from authored corridor references;
 - the start room is visually highlighted;
 - room labels show room name and content summary;
+- clicking a connected room updates current room through the dungeon state model;
+- clicking a non-connected room shows a rejection without moving;
+- pending combat rooms expose debug victory/defeat resolution buttons;
+- debug combat resolution updates cleared and reward-unlocked state through the dungeon state model;
+- the debug view still does not launch the combat scene;
 - the scene is the current Godot main scene for manual testing.
 
 ## Manual Gap

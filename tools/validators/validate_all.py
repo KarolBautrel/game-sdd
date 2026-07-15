@@ -136,6 +136,8 @@ def validate_world_region_references() -> list[str]:
 
 def validate_dungeon_references() -> list[str]:
     errors: list[str] = []
+    min_dungeon_combat_width = 10
+    min_dungeon_combat_height = 8
     for path in sorted((ROOT / "resources/data/dungeons").glob("*.json")):
         dungeon = load_json(path)
         room_ids = {room["id"] for room in dungeon["rooms"]}
@@ -164,11 +166,39 @@ def validate_dungeon_references() -> list[str]:
                         resolved = ROOT / str(encounter_path).removeprefix("res://")
                         if not resolved.exists():
                             errors.append(f"{path.relative_to(ROOT)}: room {room['id']} references missing encounter {encounter_path}")
+                        else:
+                            encounter = load_json(resolved)
+                            if resolved.name.startswith("slice_") or str(encounter.get("id", "")).startswith("slice_"):
+                                errors.append(
+                                    f"{path.relative_to(ROOT)}: room {room['id']} references regression slice encounter {encounter_path}; "
+                                    "dungeon rooms must use presentation-ready combat encounters"
+                                )
+                            if not encounter.get("background_path"):
+                                errors.append(
+                                    f"{path.relative_to(ROOT)}: room {room['id']} encounter {encounter_path} is missing background_path"
+                                )
+                            width, height = _combat_encounter_dimensions(encounter)
+                            if width < min_dungeon_combat_width or height < min_dungeon_combat_height:
+                                errors.append(
+                                    f"{path.relative_to(ROOT)}: room {room['id']} encounter {encounter_path} board is {width}x{height}; "
+                                    f"dungeon combat must be at least {min_dungeon_combat_width}x{min_dungeon_combat_height}"
+                                )
                 if content_type == "guarded_treasure" and rewards is None:
                     errors.append(f"{path.relative_to(ROOT)}: room {room['id']} guarded_treasure content is missing rewards")
                 if content_type == "treasure" and rewards is None:
                     errors.append(f"{path.relative_to(ROOT)}: room {room['id']} treasure content is missing rewards")
     return errors
+
+
+def _combat_encounter_dimensions(encounter: dict) -> tuple[int, int]:
+    if "grid" in encounter:
+        grid = encounter["grid"]
+        return int(grid["width"]), int(grid["height"])
+    map_path = encounter.get("map_path")
+    if map_path:
+        map_data = load_json(ROOT / str(map_path).removeprefix("res://"))
+        return int(map_data["width"]), int(map_data["height"])
+    return 0, 0
 
 
 def validate_map_integrity() -> list[str]:

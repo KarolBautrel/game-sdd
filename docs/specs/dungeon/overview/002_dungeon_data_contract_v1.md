@@ -41,6 +41,8 @@ Dungeon data is a graph of room checkpoints connected by corridors. Rooms own au
   - `guarded_treasure`;
   - `quest`.
 - Combat content references an existing combat encounter resource path.
+- Combat content used by dungeon exploration must reference a presentation-ready combat encounter, not a low-level `slice_*` regression fixture.
+- Presentation-ready dungeon combat encounters must define a generated `background_path` and a board large enough for the combat HUD.
 - Treasure and guarded treasure content may define reward-shaped data:
   - `xp`;
   - `gold`;

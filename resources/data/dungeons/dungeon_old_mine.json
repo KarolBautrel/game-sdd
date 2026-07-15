@@ -42,7 +42,7 @@
       "content": [
         {
           "type": "combat",
-          "combat_encounter_path": "res://resources/data/combat_encounters/slice_81_enemy_archetype_roles_v2.json"
+          "combat_encounter_path": "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json"
         }
       ]
     },
@@ -54,7 +54,7 @@
       "content": [
         {
           "type": "guarded_treasure",
-          "combat_encounter_path": "res://resources/data/combat_encounters/slice_82_combat_result_contract_victory.json",
+          "combat_encounter_path": "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json",
           "rewards": { "xp": 12, "gold": 7, "items": ["rusty_key"] }
         }
       ]

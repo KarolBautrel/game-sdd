@@ -167,11 +167,16 @@ var presentation_cache_ready := false
 
 func _ready() -> void:
 	_apply_pixel_theme()
+	if DungeonRunSession.has_pending_combat_launch():
+		current_encounter_path = DungeonRunSession.combat_encounter_path()
+		selected_scenario_id = "dungeon_launch"
 	_reset_debug_encounter()
 
 
 func _reset_debug_encounter() -> void:
 	state = _load_json(current_encounter_path)
+	if DungeonRunSession.has_pending_combat_launch():
+		state = DungeonRunSession.apply_launch_metadata(state)
 	state["event_log"] = []
 	command_index = 1
 	selected_action = "move"
@@ -855,6 +860,8 @@ func _render_command_buttons() -> void:
 	for action_id in debug_actions:
 		_add_action_button(action_id, slot)
 		slot += 1
+	if DungeonRunSession.has_pending_combat_launch() and _combat_result() != "in_progress":
+		_add_return_to_dungeon_button()
 	_add_scenario_picker()
 
 
@@ -989,8 +996,38 @@ func _add_scenario_picker() -> void:
 	command_buttons.add_child(load_button)
 
 
+func _add_return_to_dungeon_button() -> void:
+	var button := Button.new()
+	button.text = "Return\nto Dungeon"
+	button.custom_minimum_size = Vector2(132, 62)
+	button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	button.add_theme_font_size_override("font_size", 12)
+	_apply_skill_button_style(button, false)
+	button.pressed.connect(func() -> void:
+		_return_to_dungeon()
+	)
+	command_buttons.add_child(button)
+
+
+func _return_to_dungeon() -> void:
+	var result_payload := _combat_result_payload()
+	if result_payload.is_empty():
+		last_feedback = "No combat result payload."
+		_render()
+		return
+	if not DungeonRunSession.finish_combat(result_payload):
+		last_feedback = DungeonRunSession.last_feedback
+		_render()
+		return
+	get_tree().change_scene_to_file(DungeonRunSession.DUNGEON_SCENE_PATH)
+
+
 func _load_selected_scenario() -> void:
 	if animation_locked:
+		return
+	if DungeonRunSession.has_pending_combat_launch():
+		last_feedback = "Scenario picker disabled during dungeon combat."
+		_render()
 		return
 	for option: Dictionary in _scenario_options():
 		if option["id"] == selected_scenario_id:
@@ -2434,3 +2471,12 @@ func _position_to_unit_top_left(position: Dictionary) -> Vector2:
 
 func _combat_result() -> String:
 	return CombatActionModel.combat_result(state)
+
+
+func _combat_result_payload() -> Dictionary:
+	for index in range(state.get("event_log", []).size() - 1, -1, -1):
+		var event: Dictionary = state["event_log"][index]
+		if event.get("type", "") == "combat_ended":
+			return event.get("result_payload", {}).duplicate(true)
+	var payload_result: Dictionary = CombatResolver.simulate(_state_without_log(), [])
+	return payload_result.get("result_payload", {}).duplicate(true)
