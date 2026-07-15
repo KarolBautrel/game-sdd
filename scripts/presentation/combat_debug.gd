@@ -1753,6 +1753,8 @@ func _build_target_preview_cache() -> Dictionary:
 	var cache: Dictionary = {}
 	if _combat_result() != "in_progress":
 		return cache
+	if selected_action == "move":
+		return _build_move_preview_cache()
 	for y in range(int(state["grid"]["height"])):
 		for x in range(int(state["grid"]["width"])):
 			var position := {"x": x, "y": y}
@@ -1761,6 +1763,106 @@ func _build_target_preview_cache() -> Dictionary:
 				continue
 			cache[_position_key(position)] = _preview_for_command(command)
 	return cache
+
+
+func _build_move_preview_cache() -> Dictionary:
+	var cache: Dictionary = {}
+	var actor := _unit_by_id(str(state["turn_state"]["active_unit_id"]))
+	if actor.is_empty() or actor.get("resources", {}).get("hp", 0) <= 0:
+		return cache
+	if not CombatActionModel.action_granted_to_unit(state, actor, "move"):
+		return cache
+	var max_steps := 1
+	if actor.get("resources", {}).has("mp"):
+		max_steps = int(actor["resources"].get("mp", 0))
+	elif int(actor["resources"].get("ap", 0)) < 1:
+		return cache
+	if max_steps < 1:
+		return cache
+
+	var start: Dictionary = actor["position"]
+	var queue: Array[Dictionary] = [{"position": start, "path": []}]
+	var visited := {_position_key(start): true}
+
+	while not queue.is_empty():
+		var item: Dictionary = queue.pop_front()
+		var current: Dictionary = item["position"]
+		var path: Array = item["path"]
+		if path.size() >= max_steps:
+			continue
+		for neighbor: Dictionary in _move_preview_neighbors(actor, current):
+			var key := _position_key(neighbor)
+			if visited.has(key):
+				continue
+			var next_path := path.duplicate(true)
+			next_path.append(neighbor)
+			visited[key] = true
+			cache[key] = {
+				"rejection": "",
+				"move_event": {
+					"type": "unit_moved",
+					"actor_id": actor["id"],
+					"from": start,
+					"to": neighbor,
+					"mp_spent": next_path.size(),
+					"path": next_path,
+				},
+			}
+			queue.append({"position": neighbor, "path": next_path})
+	return cache
+
+
+func _move_preview_neighbors(actor: Dictionary, position: Dictionary) -> Array[Dictionary]:
+	var candidates: Array[Dictionary] = [
+		{"x": position["x"] - 1, "y": position["y"]},
+		{"x": position["x"] + 1, "y": position["y"]},
+		{"x": position["x"], "y": position["y"] - 1},
+		{"x": position["x"], "y": position["y"] + 1},
+		{"x": position["x"] - 1, "y": position["y"] - 1},
+		{"x": position["x"] - 1, "y": position["y"] + 1},
+		{"x": position["x"] + 1, "y": position["y"] - 1},
+		{"x": position["x"] + 1, "y": position["y"] + 1},
+	]
+	var legal: Array[Dictionary] = []
+	for candidate: Dictionary in candidates:
+		if _move_preview_position_is_legal(actor, position, candidate):
+			legal.append(candidate)
+	return legal
+
+
+func _move_preview_position_is_legal(actor: Dictionary, origin: Dictionary, position: Dictionary) -> bool:
+	if not _inside_grid(position):
+		return false
+	if _tile_type(position) == "blocked":
+		return false
+	var occupant := _living_unit_at(position)
+	if not occupant.is_empty() and occupant.get("id", "") != actor.get("id", ""):
+		return false
+	if _is_diagonal_step(origin, position) and not _diagonal_step_allowed(origin, position):
+		return false
+	return true
+
+
+func _inside_grid(position: Dictionary) -> bool:
+	return (
+		int(position.get("x", -1)) >= 0
+		and int(position.get("y", -1)) >= 0
+		and int(position.get("x", -1)) < int(state["grid"]["width"])
+		and int(position.get("y", -1)) < int(state["grid"]["height"])
+	)
+
+
+func _is_diagonal_step(origin: Dictionary, position: Dictionary) -> bool:
+	return (
+		absi(int(origin.get("x", 0)) - int(position.get("x", 0))) == 1
+		and absi(int(origin.get("y", 0)) - int(position.get("y", 0))) == 1
+	)
+
+
+func _diagonal_step_allowed(origin: Dictionary, position: Dictionary) -> bool:
+	var side_a := {"x": int(position["x"]), "y": int(origin["y"])}
+	var side_b := {"x": int(origin["x"]), "y": int(position["y"])}
+	return _tile_type(side_a) != "blocked" and _tile_type(side_b) != "blocked"
 
 
 func _preview_for_command(command: Dictionary) -> Dictionary:

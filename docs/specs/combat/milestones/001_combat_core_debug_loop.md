@@ -22,7 +22,8 @@ The project now has:
 - combat terrain decorations render without square debug tint underneath their transparent PNGs.
 - combat unit art preloads all combat directions/actions once per encounter and caches resolved texture paths to avoid runtime stalls during animations.
 - combat debug presentation now separates static grid rendering from dynamic tile overlays and updates unit nodes in place instead of recreating them during actions.
-- combat HUD now uses a larger 112 px tactical board, bottom skillbar action slots, and a pixel-styled top-right turn order panel.
+- combat HUD now uses an 18x11 tactical board at the 112 px combat scale, bottom skillbar action slots, and a pixel-styled top-right turn order panel.
+- combat move targeting preview uses a local BFS cache instead of simulating one command per board tile.
 
 ## Implemented Combat Rules
 
