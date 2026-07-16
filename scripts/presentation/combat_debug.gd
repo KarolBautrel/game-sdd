@@ -263,10 +263,24 @@ func _render() -> void:
 
 
 func _prepare_presentation_cache() -> void:
+	if not animation_locked:
+		_sync_living_unit_facings_toward_opponents()
 	_sync_selected_action_with_visible_actions(_visible_primary_action_ids())
 	target_preview_cache = _build_target_preview_cache()
 	_preload_presentation_assets()
 	presentation_cache_ready = true
+
+
+func _sync_living_unit_facings_toward_opponents() -> void:
+	for unit: Dictionary in state.get("units", []):
+		var unit_id := str(unit.get("id", ""))
+		if unit_id == "" or int(unit.get("resources", {}).get("hp", 0)) <= 0:
+			continue
+		var nearest := _nearest_living_opponent(unit)
+		if nearest.is_empty():
+			unit_facing.erase(unit_id)
+			continue
+		unit_facing[unit_id] = _direction_between(unit.get("position", {}), nearest.get("position", {}))
 
 
 func _preload_presentation_assets() -> void:
@@ -1844,6 +1858,8 @@ func _capture_unit_facings(events: Array) -> void:
 			var target := _unit_by_id(event.get("target_unit_id", ""))
 			if not actor.is_empty() and not target.is_empty():
 				unit_facing[actor["id"]] = _direction_between(actor["position"], target["position"])
+				if int(event.get("hp_after", 1)) <= 0:
+					unit_facing[target["id"]] = _direction_between(target["position"], actor["position"])
 
 
 func _schedule_visual_reset() -> void:
@@ -2275,6 +2291,7 @@ func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
 	unit_node.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
 	unit_node.position = _unit_visual_pixel_position(unit)
 	var is_dead := int(unit.get("resources", {}).get("hp", 0)) <= 0
+	unit_node.z_index = _unit_render_z_index(unit, is_dead)
 	unit_node.modulate = CORPSE_MODULATE if is_dead else Color(1, 1, 1, 1)
 
 	var on_highground := _tile_type(unit.get("position", {})) == "highground" and not is_dead
@@ -2320,6 +2337,15 @@ func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
 
 	_update_unit_status_icons(unit_node, unit)
 	_update_unit_target_preview(unit_node, unit)
+
+
+func _unit_render_z_index(unit: Dictionary, is_dead: bool) -> int:
+	var position: Dictionary = unit.get("position", {})
+	var x := int(position.get("x", 0))
+	var y := int(position.get("y", 0))
+	if is_dead:
+		return y * 10 + x
+	return 512 + y * 24 + x
 
 
 func _update_unit_status_icons(unit_node: Control, unit: Dictionary) -> void:

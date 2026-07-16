@@ -44,6 +44,12 @@ And processed enemy and mercenary visuals are normalized to the player warrior p
 
 And defeated units remain visible as corpse sprites instead of shrinking into a tiny final fade frame
 
+And stable living units face their nearest living opponent after movement or action resolution
+
+And corpse sprites render below living unit sprites so they cannot cover standing character heads
+
+And corpse sprites keep their death-time facing instead of re-orienting toward living targets
+
 And debug controls remain available without replacing the main action slot layout.
 
 ## Acceptance Checks
@@ -63,6 +69,9 @@ And debug controls remain available without replacing the main action slot layou
 - Processed-sheet units render on a stable canvas across pose, walk, combat, hit, and death frames.
 - Processed-sheet visual scale is derived from the player warrior reference height.
 - Dead processed-sheet units hold a visible corpse frame after the death animation.
+- Living unit facing is re-synced toward nearest living opponents outside active movement animation.
+- Dead unit nodes sort underneath living unit nodes.
+- Dead units retain their captured death-facing and are skipped by stable facing resync.
 - `CombatDebug.tscn` loads headlessly.
 - Manual visual review confirms the HUD is closer to the provided example and remains readable.
 

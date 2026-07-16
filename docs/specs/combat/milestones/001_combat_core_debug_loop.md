@@ -733,6 +733,9 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
       - processed character frames now render on a larger stable foot-anchored canvas so attack, walk, hit, idle, and death frames do not resize units per frame;
       - processed enemy and mercenary visuals are normalized to the player `warrior` pose height, so normal combat characters share the player's visual scale unless a future large-unit override is added;
       - dead processed-sheet units hold a visible corpse frame selected from the death sequence instead of collapsing to a tiny final fade/remnant frame.
+      - stable living units re-sync facing toward their nearest living opponent after movement/action resolution, while movement-facing remains temporary during movement animation;
+      - dead unit nodes now sort underneath living unit nodes, and living units depth-sort by board position so corpse sprites do not cover standing character heads.
+      - corpse sprites now keep their death-time facing and are skipped by stable facing re-sync, so dead units do not rotate toward later targets.
     - Latest validation:
       - `scripts/presentation/combat_mercenary_asset_pipeline_tests.gd` passed;
       - `scripts/presentation/combat_ui_asset_pipeline_tests.gd` passed;

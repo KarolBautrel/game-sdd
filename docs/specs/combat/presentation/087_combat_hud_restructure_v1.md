@@ -37,6 +37,9 @@ The first implementation pass skins existing combat debug controls without chang
 - Processed character animation frames should render on a stable foot-anchored canvas so walk, attack, hit, idle, and death frames do not resize the unit mid-animation.
 - Processed character visuals should be normalized to the player `warrior` pose height, so enemies and mercenaries keep a consistent in-combat scale unless a future unit definition explicitly opts into a different boss/large-creature scale.
 - Defeated processed-sheet units may settle into a slightly smaller corpse pose, but the corpse must remain visibly present and must not collapse to a tiny final fade frame.
+- Stable combat render should orient living units toward their nearest living opponent; movement direction is only a temporary animation-facing state during the movement tween.
+- Corpse visuals should render underneath all living units, while living units are depth-sorted by board position so standing character heads are not covered by dead sprites from adjacent tiles.
+- Corpse visuals should keep the facing captured at death time and must not re-orient toward living targets after death.
 - Debug-only controls remain available, but should not dominate the main battle actions.
 - Text must remain readable and must not overflow the action slot at 2560x1440.
 
