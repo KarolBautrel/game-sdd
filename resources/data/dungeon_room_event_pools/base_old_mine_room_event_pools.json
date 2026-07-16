@@ -1,0 +1,13 @@
+{
+  "id": "base_old_mine_room_event_pools",
+  "pools": [
+    {
+      "id": "old_mine_room_event_pool",
+      "tags": ["mine", "room"],
+      "entries": [
+        { "event_id": "old_mine_abandoned_pack", "weight": 70 },
+        { "event_id": "old_mine_damp_shrine", "weight": 30 }
+      ]
+    }
+  ]
+}

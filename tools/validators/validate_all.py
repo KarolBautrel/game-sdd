@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import copy
 import re
 import sys
 from pathlib import Path
@@ -91,6 +92,11 @@ VALIDATION_TARGETS = [
     ("resources/schemas/world_region.schema.json", "resources/data/world_regions/*.json"),
     ("resources/schemas/town.schema.json", "resources/data/towns/*.json"),
     ("resources/schemas/dungeon.schema.json", "resources/data/dungeons/*.json"),
+    ("resources/schemas/dungeon_event.schema.json", "resources/data/dungeon_events/*.json"),
+    ("resources/schemas/dungeon_event_pool.schema.json", "resources/data/dungeon_event_pools/*.json"),
+    ("resources/schemas/dungeon_room_event.schema.json", "resources/data/dungeon_room_events/*.json"),
+    ("resources/schemas/dungeon_room_event_pool.schema.json", "resources/data/dungeon_room_event_pools/*.json"),
+    ("resources/schemas/dungeon_template.schema.json", "resources/data/dungeon_templates/*.json"),
     ("resources/schemas/dungeon_debuff.schema.json", "resources/data/dungeon_debuffs/*.json"),
     ("resources/schemas/map.schema.json", "resources/data/maps/*.json"),
     ("resources/schemas/combat_action.schema.json", "resources/data/combat_actions/*.json"),
@@ -140,11 +146,26 @@ def validate_dungeon_references() -> list[str]:
     min_dungeon_combat_width = 10
     min_dungeon_combat_height = 8
     debuff_ids = _dungeon_debuff_ids()
+    dungeon_events = _dungeon_event_templates()
+    dungeon_event_pools = _dungeon_event_pools()
+    dungeon_room_events = _dungeon_room_event_templates()
+    dungeon_room_event_pools = _dungeon_room_event_pools()
+    errors.extend(validate_dungeon_event_pool_references(dungeon_events, dungeon_event_pools))
+    errors.extend(validate_dungeon_room_event_pool_references(dungeon_room_events, dungeon_room_event_pools))
     for path in sorted((ROOT / "resources/data/dungeons").glob("*.json")):
         dungeon = load_json(path)
         room_ids = {room["id"] for room in dungeon["rooms"]}
         if dungeon["start_room_id"] not in room_ids:
             errors.append(f"{path.relative_to(ROOT)}: start_room_id references missing room {dungeon['start_room_id']}")
+        party_target_ids = {slot["target_id"] for slot in dungeon.get("default_party_formation", [])}
+        for supply_id, option in dungeon.get("supply_loadout_options", {}).items():
+            minimum = int(option["min"])
+            maximum = int(option["max"])
+            default = int(option["default"])
+            if minimum > maximum:
+                errors.append(f"{path.relative_to(ROOT)}: supply_loadout_options.{supply_id} min exceeds max")
+            if default < minimum or default > maximum:
+                errors.append(f"{path.relative_to(ROOT)}: supply_loadout_options.{supply_id} default is outside min/max")
 
         corridor_ids: set[str] = set()
         for corridor in dungeon["corridors"]:
@@ -155,9 +176,31 @@ def validate_dungeon_references() -> list[str]:
                 errors.append(f"{path.relative_to(ROOT)}: corridor {corridor['id']} from references missing room {corridor['from']}")
             if corridor["to"] not in room_ids:
                 errors.append(f"{path.relative_to(ROOT)}: corridor {corridor['id']} to references missing room {corridor['to']}")
-            for hazard in corridor.get("hazards", []):
+            for hazard_ref in corridor.get("hazard_refs", []):
+                event_id = hazard_ref["event_id"]
+                if event_id not in dungeon_events:
+                    errors.append(f"{path.relative_to(ROOT)}: corridor {corridor['id']} references missing dungeon event {event_id}")
+            for hazard_pool_ref in corridor.get("hazard_pool_refs", []):
+                pool_id = hazard_pool_ref["pool_id"]
+                if pool_id not in dungeon_event_pools:
+                    errors.append(f"{path.relative_to(ROOT)}: corridor {corridor['id']} references missing dungeon event pool {pool_id}")
+            for hazard in list(corridor.get("hazards", [])) + [
+                _materialized_hazard_for_validator(hazard_ref, dungeon_events)
+                for hazard_ref in corridor.get("hazard_refs", [])
+            ] + [
+                _materialized_pool_hazard_for_validator(hazard_pool_ref, dungeon_event_pools, dungeon_events)
+                for hazard_pool_ref in corridor.get("hazard_pool_refs", [])
+            ]:
+                if not hazard:
+                    continue
                 for outcome in hazard.get("outcomes", []):
                     for consequence in outcome.get("consequences", []):
+                        target_id = consequence.get("target_id", "")
+                        if target_id and target_id != "party_member_0" and target_id not in party_target_ids:
+                            errors.append(
+                                f"{path.relative_to(ROOT)}: corridor {corridor['id']} hazard {hazard['id']} "
+                                f"references missing party target {target_id}"
+                            )
                         if consequence.get("type") == "apply_debuff":
                             debuff_id = consequence.get("debuff_id", "")
                             if debuff_id not in debuff_ids:
@@ -199,7 +242,115 @@ def validate_dungeon_references() -> list[str]:
                     errors.append(f"{path.relative_to(ROOT)}: room {room['id']} guarded_treasure content is missing rewards")
                 if content_type == "treasure" and rewards is None:
                     errors.append(f"{path.relative_to(ROOT)}: room {room['id']} treasure content is missing rewards")
+                if content_type == "room_event":
+                    event_id = content.get("event_id", "")
+                    pool_id = content.get("room_event_pool_id", "")
+                    if bool(event_id) == bool(pool_id):
+                        errors.append(f"{path.relative_to(ROOT)}: room {room['id']} room_event content must define exactly one of event_id or room_event_pool_id")
+                    if event_id and event_id not in dungeon_room_events:
+                        errors.append(f"{path.relative_to(ROOT)}: room {room['id']} references missing room event {event_id}")
+                    if pool_id and pool_id not in dungeon_room_event_pools:
+                        errors.append(f"{path.relative_to(ROOT)}: room {room['id']} references missing room event pool {pool_id}")
     return errors
+
+
+def validate_dungeon_event_pool_references(dungeon_events: dict[str, dict], dungeon_event_pools: dict[str, dict]) -> list[str]:
+    errors: list[str] = []
+    for pool_id, pool in dungeon_event_pools.items():
+        danger_min = pool.get("danger_min", 0.0)
+        danger_max = pool.get("danger_max", 1.0)
+        if danger_min > danger_max:
+            errors.append(f"resources/data/dungeon_event_pools: pool {pool_id} has danger_min greater than danger_max")
+        for entry in pool.get("entries", []):
+            event_id = entry.get("event_id", "")
+            if event_id not in dungeon_events:
+                errors.append(f"resources/data/dungeon_event_pools: pool {pool_id} references missing dungeon event {event_id}")
+    return errors
+
+
+def validate_dungeon_room_event_pool_references(dungeon_room_events: dict[str, dict], dungeon_room_event_pools: dict[str, dict]) -> list[str]:
+    errors: list[str] = []
+    for pool_id, pool in dungeon_room_event_pools.items():
+        for entry in pool.get("entries", []):
+            event_id = entry.get("event_id", "")
+            if event_id not in dungeon_room_events:
+                errors.append(f"resources/data/dungeon_room_event_pools: pool {pool_id} references missing room event {event_id}")
+    return errors
+
+
+def _materialized_pool_hazard_for_validator(hazard_pool_ref: dict, dungeon_event_pools: dict[str, dict], dungeon_events: dict[str, dict]) -> dict:
+    pool = dungeon_event_pools.get(hazard_pool_ref.get("pool_id", ""), {})
+    if not pool:
+        return {}
+    entries = pool.get("entries", [])
+    if not entries:
+        return {}
+    event_id = entries[0].get("event_id", "")
+    event = dungeon_events.get(event_id, {})
+    if not event:
+        return {}
+    hazard = copy.deepcopy(event)
+    hazard["id"] = hazard_pool_ref.get("id", hazard.get("id", ""))
+    hazard["trigger"] = hazard_pool_ref.get("trigger", {"mode": "first_traversal"})
+    return hazard
+
+
+def _materialized_hazard_for_validator(hazard_ref: dict, dungeon_events: dict[str, dict]) -> dict:
+    event = dungeon_events.get(hazard_ref.get("event_id", ""), {})
+    if not event:
+        return {}
+    hazard = copy.deepcopy(event)
+    hazard["id"] = hazard_ref.get("id", hazard.get("id", ""))
+    hazard["trigger"] = hazard_ref.get("trigger", {"mode": "first_traversal"})
+    return hazard
+
+
+def _dungeon_event_templates() -> dict[str, dict]:
+    events: dict[str, dict] = {}
+    for path in sorted((ROOT / "resources/data/dungeon_events").glob("*.json")):
+        catalogue = load_json(path)
+        for event in catalogue.get("events", []):
+            event_id = event["id"]
+            if event_id in events:
+                continue
+            events[event_id] = event
+    return events
+
+
+def _dungeon_event_pools() -> dict[str, dict]:
+    pools: dict[str, dict] = {}
+    for path in sorted((ROOT / "resources/data/dungeon_event_pools").glob("*.json")):
+        catalogue = load_json(path)
+        for pool in catalogue.get("pools", []):
+            pool_id = pool["id"]
+            if pool_id in pools:
+                continue
+            pools[pool_id] = pool
+    return pools
+
+
+def _dungeon_room_event_templates() -> dict[str, dict]:
+    events: dict[str, dict] = {}
+    for path in sorted((ROOT / "resources/data/dungeon_room_events").glob("*.json")):
+        catalogue = load_json(path)
+        for event in catalogue.get("events", []):
+            event_id = event["id"]
+            if event_id in events:
+                continue
+            events[event_id] = event
+    return events
+
+
+def _dungeon_room_event_pools() -> dict[str, dict]:
+    pools: dict[str, dict] = {}
+    for path in sorted((ROOT / "resources/data/dungeon_room_event_pools").glob("*.json")):
+        catalogue = load_json(path)
+        for pool in catalogue.get("pools", []):
+            pool_id = pool["id"]
+            if pool_id in pools:
+                continue
+            pools[pool_id] = pool
+    return pools
 
 
 def _dungeon_debuff_ids() -> set[str]:

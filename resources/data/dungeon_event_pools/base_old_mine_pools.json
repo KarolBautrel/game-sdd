@@ -1,0 +1,23 @@
+{
+  "id": "base_old_mine_pools",
+  "pools": [
+    {
+      "id": "old_mine_rubble_pool",
+      "tags": ["mine", "corridor", "rubble"],
+      "danger_min": 0.0,
+      "danger_max": 0.19,
+      "entries": [
+        { "event_id": "rubble_minor", "weight": 100 }
+      ]
+    },
+    {
+      "id": "old_mine_trap_pool",
+      "tags": ["mine", "corridor", "trap"],
+      "danger_min": 0.2,
+      "danger_max": 1.0,
+      "entries": [
+        { "event_id": "needle_trap_basic", "weight": 100 }
+      ]
+    }
+  ]
+}

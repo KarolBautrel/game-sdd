@@ -15,6 +15,14 @@
       "type": "object",
       "additionalProperties": { "type": "integer", "minimum": 0 }
     },
+    "supply_loadout_options": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/supply_loadout_option" }
+    },
+    "default_party_formation": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/party_formation_slot" }
+    },
     "rooms": {
       "type": "array",
       "minItems": 1,
@@ -49,8 +57,11 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["empty", "treasure", "combat", "guarded_treasure", "quest"]
+                  "enum": ["empty", "treasure", "combat", "guarded_treasure", "quest", "room_event"]
                 },
+                "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+                "event_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+                "room_event_pool_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
                 "combat_encounter_path": {
                   "type": "string",
                   "pattern": "^res://resources/data/combat_encounters/.+\\.json$"
@@ -78,6 +89,14 @@
           "hazards": {
             "type": "array",
             "items": { "$ref": "#/$defs/hazard" }
+          },
+          "hazard_refs": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/hazard_ref" }
+          },
+          "hazard_pool_refs": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/hazard_pool_ref" }
           }
         }
       }
@@ -119,6 +138,61 @@
           "minItems": 1,
           "items": { "$ref": "#/$defs/hazard_outcome" }
         }
+      }
+    },
+    "hazard_ref": {
+      "type": "object",
+      "required": ["id", "event_id", "trigger"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "event_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "trigger": {
+          "type": "object",
+          "required": ["mode"],
+          "additionalProperties": false,
+          "properties": {
+            "mode": { "type": "string", "enum": ["first_traversal", "always"] }
+          }
+        }
+      }
+    },
+    "hazard_pool_ref": {
+      "type": "object",
+      "required": ["id", "pool_id", "trigger"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "pool_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "trigger": {
+          "type": "object",
+          "required": ["mode"],
+          "additionalProperties": false,
+          "properties": {
+            "mode": { "type": "string", "enum": ["first_traversal", "always"] }
+          }
+        }
+      }
+    },
+    "supply_loadout_option": {
+      "type": "object",
+      "required": ["min", "max", "default"],
+      "additionalProperties": false,
+      "properties": {
+        "min": { "type": "integer", "minimum": 0 },
+        "max": { "type": "integer", "minimum": 0 },
+        "default": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "party_formation_slot": {
+      "type": "object",
+      "required": ["slot_id", "target_id", "combat_unit_id", "label"],
+      "additionalProperties": false,
+      "properties": {
+        "slot_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "target_id": { "type": "string", "pattern": "^party_slot_[a-z0-9_]+$" },
+        "combat_unit_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "label": { "type": "string", "minLength": 1 }
       }
     },
     "hazard_choice": {

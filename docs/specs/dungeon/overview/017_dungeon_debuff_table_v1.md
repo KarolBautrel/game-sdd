@@ -62,6 +62,8 @@ Dungeon owns the debuff source. Combat receives prepared modifiers/statuses.
 
 Early implementation may keep debuffs only in dungeon run state. Later versions may persist them to party/character state after the run.
 
+Applied dungeon debuffs and per-target effects must persist across ordinary dungeon movement, including backtracking and entering pending corridor events. Traversal does not heal, expire, or clear negative effects by itself. Effects may be removed only by an explicit future recovery/removal system, end-of-run cleanup, or debug/run reset flow.
+
 ## Implementation Notes
 
 Implemented first-pass support in:
@@ -74,7 +76,7 @@ scripts/presentation/dungeon_debug.gd
 tools/validators/validate_all.py
 ```
 
-Dungeon debuff ids now live in validated data. Dungeon hazard consequences that use `apply_debuff` are validated against that catalogue. Runtime dungeon state stores active debuffs in `active_debuffs` with stack counts, and the debug HUD summarizes them as `Debuffs: <id> x<count>`.
+Dungeon debuff ids now live in validated data. Dungeon hazard consequences that use `apply_debuff` are validated against that catalogue. Runtime dungeon state stores active debuffs in `active_debuffs` with stack counts, and the debug HUD summarizes them as `Debuffs: <id> x<count>`. The main progress line also names active effects, so the player/debugger can see that they remain active while moving through the dungeon.
 
 The first implemented applied debuff is `bruised`, produced by forcing passage through the rubble corridor without a pickaxe.
 

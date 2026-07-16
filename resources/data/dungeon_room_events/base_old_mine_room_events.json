@@ -1,0 +1,57 @@
+{
+  "id": "base_old_mine_room_events",
+  "events": [
+    {
+      "id": "old_mine_abandoned_pack",
+      "type": "stash",
+      "tags": ["mine", "room", "stash"],
+      "message": "An abandoned miner's pack lies half buried under damp canvas.",
+      "choices": [
+        { "id": "inspect", "label": "Search pack" },
+        { "id": "ignore", "label": "Leave it" }
+      ],
+      "outcomes": [
+        {
+          "id": "found_miner_coin",
+          "when": { "choice_id": "inspect" },
+          "message": "The party finds a few coins and a bent mining token.",
+          "consequences": [
+            { "type": "reward", "rewards": { "xp": 0, "gold": 2, "items": ["bent_mining_token"] } }
+          ]
+        },
+        {
+          "id": "pack_ignored",
+          "when": { "choice_id": "ignore" },
+          "message": "The party leaves the pack untouched.",
+          "consequences": []
+        }
+      ]
+    },
+    {
+      "id": "old_mine_damp_shrine",
+      "type": "shrine",
+      "tags": ["mine", "room", "shrine"],
+      "message": "A soot-blackened niche holds a cracked lamp icon.",
+      "choices": [
+        { "id": "inspect", "label": "Touch shrine" },
+        { "id": "ignore", "label": "Move on" }
+      ],
+      "outcomes": [
+        {
+          "id": "lamp_blessing",
+          "when": { "choice_id": "inspect" },
+          "message": "A faint warmth rolls through the lamp glass.",
+          "consequences": [
+            { "type": "restore_light", "amount": 1 }
+          ]
+        },
+        {
+          "id": "shrine_ignored",
+          "when": { "choice_id": "ignore" },
+          "message": "The shrine remains silent.",
+          "consequences": []
+        }
+      ]
+    }
+  ]
+}

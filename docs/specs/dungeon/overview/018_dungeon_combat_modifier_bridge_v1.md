@@ -71,8 +71,22 @@ Dungeon pending combat requests now include `dungeon_modifiers` with:
 - `active_debuffs`;
 - `target_effects`;
 - `party_effects`.
+- `party_formation`.
 
 `DungeonRunSession.apply_launch_metadata` passes this payload into the combat encounter. Combat debug displays a compact summary line, but combat resolver rules are not changed yet.
+
+## Implemented Modifier Effects
+
+First supported launch effects:
+
+- `enemy_modifiers` with `type: initiative_bonus` increase enemy unit `stats.initiative` before combat starts.
+- `target_effects.party_slot_front.hp_loss` resolves through `party_formation` and reduces that combat unit's starting HP, clamped above zero for launch safety.
+- `target_effects.party_slot_front.debuffs.limping` resolves through `party_formation` and halves that combat unit's starting MP.
+- `target_effects.party_slot_front.debuffs.bleeding` resolves through `party_formation` and applies the supported combat `bleeding` status.
+
+`party_member_0` is kept only as backwards-compatible debug metadata and maps to the first player unit.
+
+Unsupported future debuffs stay in `dungeon_modifiers` metadata but do not mutate combat state yet.
 
 ## Non-Goals
 

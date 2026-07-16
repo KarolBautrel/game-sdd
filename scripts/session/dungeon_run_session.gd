@@ -51,7 +51,9 @@ func apply_launch_metadata(encounter: Dictionary) -> Dictionary:
 	next_encounter["source_dungeon_id"] = str(pending_combat_request.get("dungeon_id", ""))
 	next_encounter["source_room_id"] = str(pending_combat_request.get("room_id", ""))
 	next_encounter["dungeon_modifiers"] = pending_combat_request.get("dungeon_modifiers", {}).duplicate(true)
-	return randomize_dungeon_enemies(next_encounter, next_combat_seed)
+	next_encounter = randomize_dungeon_enemies(next_encounter, next_combat_seed)
+	_apply_dungeon_modifier_effects(next_encounter)
+	return next_encounter
 
 
 func randomize_dungeon_enemies(encounter: Dictionary, seed: int = 0) -> Dictionary:
@@ -88,6 +90,111 @@ func randomize_dungeon_enemies(encounter: Dictionary, seed: int = 0) -> Dictiona
 		next_encounter["turn_state"]["turn_order"].append(unit["id"])
 	next_encounter["event_log"] = []
 	return next_encounter
+
+
+func _apply_dungeon_modifier_effects(encounter: Dictionary) -> void:
+	var modifiers: Dictionary = encounter.get("dungeon_modifiers", {})
+	if modifiers.is_empty():
+		return
+	_apply_enemy_modifiers(encounter, modifiers.get("enemy_modifiers", []))
+	_apply_target_effects(encounter, modifiers)
+	_rebuild_turn_order_by_initiative(encounter)
+
+
+func _apply_enemy_modifiers(encounter: Dictionary, enemy_modifiers: Array) -> void:
+	for modifier: Dictionary in enemy_modifiers:
+		if str(modifier.get("type", "")) != "initiative_bonus":
+			continue
+		var value := int(modifier.get("value", 0))
+		if value == 0:
+			continue
+		for unit: Dictionary in encounter.get("units", []):
+			if str(unit.get("team", "")) != "enemy":
+				continue
+			var stats: Dictionary = unit.get("stats", {})
+			stats["initiative"] = int(stats.get("initiative", 0)) + value
+			unit["stats"] = stats
+
+
+func _apply_target_effects(encounter: Dictionary, modifiers: Dictionary) -> void:
+	var target_effects: Dictionary = modifiers.get("target_effects", {})
+	for target_id: String in target_effects.keys():
+		var player := _player_unit_for_effect_target(encounter, modifiers, target_id)
+		if player.is_empty():
+			continue
+		var effect: Dictionary = target_effects.get(target_id, {})
+		if effect.is_empty():
+			continue
+		var resources: Dictionary = player.get("resources", {})
+		var hp_loss := int(effect.get("hp_loss", 0))
+		if hp_loss > 0:
+			resources["hp"] = max(1, int(resources.get("hp", 1)) - hp_loss)
+		var debuffs: Dictionary = effect.get("debuffs", {})
+		if int(debuffs.get("limping", 0)) > 0 and resources.has("mp"):
+			resources["mp"] = max(1, int(ceil(float(resources.get("mp", 1)) * 0.5)))
+		player["resources"] = resources
+		if int(debuffs.get("bleeding", 0)) > 0:
+			_add_starting_status(player, {
+				"id": "bleeding",
+				"remaining_turns": 2,
+				"tick_damage": 1,
+				"source": "dungeon",
+			})
+
+
+func _first_player_unit(encounter: Dictionary) -> Dictionary:
+	for unit: Dictionary in encounter.get("units", []):
+		if str(unit.get("team", "")) == "player":
+			return unit
+	return {}
+
+
+func _player_unit_for_effect_target(encounter: Dictionary, modifiers: Dictionary, target_id: String) -> Dictionary:
+	if target_id == "party_member_0":
+		return _first_player_unit(encounter)
+	for slot: Dictionary in modifiers.get("party_formation", []):
+		if str(slot.get("target_id", "")) != target_id:
+			continue
+		var unit := _unit_by_id(encounter, str(slot.get("combat_unit_id", "")))
+		if not unit.is_empty() and str(unit.get("team", "")) == "player":
+			return unit
+	return {}
+
+
+func _unit_by_id(encounter: Dictionary, unit_id: String) -> Dictionary:
+	for unit: Dictionary in encounter.get("units", []):
+		if str(unit.get("id", "")) == unit_id:
+			return unit
+	return {}
+
+
+func _add_starting_status(unit: Dictionary, status: Dictionary) -> void:
+	if not unit.has("statuses"):
+		unit["statuses"] = []
+	for existing: Dictionary in unit["statuses"]:
+		if str(existing.get("id", "")) == str(status.get("id", "")):
+			return
+	unit["statuses"].append(status)
+
+
+func _rebuild_turn_order_by_initiative(encounter: Dictionary) -> void:
+	if not encounter.has("turn_state"):
+		return
+	var units: Array = encounter.get("units", []).duplicate()
+	units.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		var initiative_a := int(a.get("stats", {}).get("initiative", 0))
+		var initiative_b := int(b.get("stats", {}).get("initiative", 0))
+		if initiative_a == initiative_b:
+			return str(a.get("id", "")) < str(b.get("id", ""))
+		return initiative_a > initiative_b
+	)
+	var order: Array[String] = []
+	for unit: Dictionary in units:
+		if int(unit.get("resources", {}).get("hp", 0)) > 0:
+			order.append(str(unit.get("id", "")))
+	encounter["turn_state"]["turn_order"] = order
+	if not order.is_empty():
+		encounter["turn_state"]["active_unit_id"] = order[0]
 
 
 func finish_combat(result_payload: Dictionary) -> bool:

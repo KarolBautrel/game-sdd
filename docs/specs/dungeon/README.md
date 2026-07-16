@@ -22,6 +22,16 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 - `overview/016_dungeon_trap_tools_v1.md`
 - `overview/017_dungeon_debuff_table_v1.md`
 - `overview/018_dungeon_combat_modifier_bridge_v1.md`
+- `overview/019_dungeon_party_targeting_v1.md`
+- `overview/020_dungeon_supply_loadout_v1.md`
+- `overview/021_dungeon_reusable_event_catalogue_v1.md`
+- `overview/022_dungeon_event_pools_v1.md`
+- `overview/023_dungeon_procedural_corridor_plan_v1.md`
+- `overview/024_dungeon_procedural_draft_v1.md`
+- `overview/025_dungeon_procedural_generation_v1.md`
+- `overview/026_dungeon_template_pool_generation_v1.md`
+- `overview/027_dungeon_effect_recovery_v1.md`
+- `overview/028_dungeon_reusable_room_events_v1.md`
 
 ### Presentation
 
@@ -32,6 +42,10 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 - `presentation/010_dungeon_post_run_summary_v1.md`
 - `presentation/011_spatial_dungeon_map_v1.md`
 - `presentation/012_dungeon_event_presentation_v1.md`
+- `presentation/013_dungeon_presentation_vertical_slice_v1.md`
+- `presentation/014_dungeon_debug_generated_toggle_v1.md`
+- `presentation/015_dungeon_debug_generator_controls_v1.md`
+- `presentation/016_dungeon_room_event_presentation_v1.md`
 
 ## Executable Slices
 
@@ -55,6 +69,21 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 - `slices/018_dungeon_debuff_table_v1.md`
 - `slices/019_dungeon_combat_modifier_bridge_v1.md`
 - `slices/020_dungeon_event_presentation_v1.md`
+- `slices/021_dungeon_combat_modifier_effects_v1.md`
+- `slices/022_dungeon_party_targeting_v1.md`
+- `slices/023_dungeon_supply_loadout_v1.md`
+- `slices/024_dungeon_presentation_vertical_slice_v1.md`
+- `slices/025_dungeon_reusable_event_catalogue_v1.md`
+- `slices/026_dungeon_event_pools_v1.md`
+- `slices/027_dungeon_procedural_corridor_plan_v1.md`
+- `slices/028_dungeon_procedural_draft_v1.md`
+- `slices/029_dungeon_debug_generated_toggle_v1.md`
+- `slices/030_dungeon_procedural_generation_v1.md`
+- `slices/031_dungeon_template_pool_generation_v1.md`
+- `slices/032_dungeon_debug_generator_controls_v1.md`
+- `slices/033_dungeon_effect_recovery_v1.md`
+- `slices/034_dungeon_reusable_room_events_v1.md`
+- `slices/035_dungeon_room_event_presentation_v1.md`
 
 ## Milestones
 
@@ -64,4 +93,4 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 
 Dungeon mode has an initial data contract, an abstract debug view, a deterministic state model, and the first domain-level combat result transition.
 
-The next implementation step is improving exploration presentation beyond the temporary graph HUD while preserving the existing dungeon state and combat bridge. Longer term, dungeon mode should gain its own resource-pressure systems such as light, oil, tools, supplies, corridor hazards, and negative traversal events.
+The current dungeon presentation has a first vertical slice: preparation panel, resource tray, framed map, hazard markers, legend, and player-facing route copy. Corridor hazards now support reusable catalogue templates, weighted event pools through `hazard_pool_refs`, a procedural corridor-plan helper, template-pool generated dungeon drafts, and a preparation-time debug toggle/reroll for switching between authored and generated dungeon data. Room exploration now has reusable room event catalogues, room event pools, pending room-event choices, and debug popup presentation. Longer term, dungeon mode should replace debug party formation data with a real roster, persistent party progression, beta combat-loop integration, and final art assets.

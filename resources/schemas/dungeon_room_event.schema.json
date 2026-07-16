@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sdd-game/dungeon_room_event.schema.json",
+  "type": "object",
+  "required": ["id", "events"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/event" }
+    }
+  },
+  "$defs": {
+    "event": {
+      "type": "object",
+      "required": ["id", "type", "message", "choices", "outcomes"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "type": { "type": "string", "enum": ["stash", "shrine", "curio", "generic"] },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "uniqueItems": true
+        },
+        "message": { "type": "string", "minLength": 1 },
+        "choices": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/choice" }
+        },
+        "outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/outcome" }
+        }
+      }
+    },
+    "choice": {
+      "type": "object",
+      "required": ["id", "label"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "enum": ["inspect", "ignore"] },
+        "label": { "type": "string", "minLength": 1 }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["id", "when", "message", "consequences"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "when": {
+          "type": "object",
+          "required": ["choice_id"],
+          "additionalProperties": false,
+          "properties": {
+            "choice_id": { "type": "string", "enum": ["inspect", "ignore"] }
+          }
+        },
+        "weight": { "type": "integer", "minimum": 1 },
+        "message": { "type": "string", "minLength": 1 },
+        "consequences": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/consequence" }
+        }
+      }
+    },
+    "consequence": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["reward", "consume_supply", "reduce_light", "restore_light", "apply_debuff", "hp_loss", "log_only"]
+        },
+        "amount": { "type": "integer", "minimum": 0 },
+        "supply_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "debuff_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "stacks": { "type": "integer", "minimum": 1 },
+        "target_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "rewards": { "$ref": "#/$defs/rewards" }
+      }
+    },
+    "rewards": {
+      "type": "object",
+      "required": ["xp", "gold", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "xp": { "type": "integer", "minimum": 0 },
+        "gold": { "type": "integer", "minimum": 0 },
+        "items": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

@@ -8,8 +8,23 @@
   "starting_supplies": {
     "lamp_oil": 2,
     "pickaxe": 1,
-    "trap_tools": 1
+    "trap_tools": 1,
+    "remedy_kit": 1
   },
+  "supply_loadout_options": {
+    "lamp_oil": { "min": 0, "max": 4, "default": 2 },
+    "pickaxe": { "min": 0, "max": 2, "default": 1 },
+    "trap_tools": { "min": 0, "max": 3, "default": 1 },
+    "remedy_kit": { "min": 0, "max": 2, "default": 1 }
+  },
+  "default_party_formation": [
+    {
+      "slot_id": "front",
+      "target_id": "party_slot_front",
+      "combat_unit_id": "unit_player_001",
+      "label": "Front"
+    }
+  ],
   "rooms": [
     {
       "id": "entrance",
@@ -26,7 +41,12 @@
       "kind": "empty",
       "position": { "x": 1, "y": 1 },
       "content": [
-        { "type": "empty" }
+        { "type": "empty" },
+        {
+          "type": "room_event",
+          "id": "dusty_crossing_damp_shrine",
+          "event_id": "old_mine_damp_shrine"
+        }
       ]
     },
     {
@@ -97,46 +117,11 @@
       "to": "collapsed_cache",
       "danger": 0.1,
       "light_decay": 1,
-      "hazards": [
+      "hazard_pool_refs": [
         {
           "id": "rubble_crossing_cache",
-          "type": "rubble",
-          "message": "A collapsed pile of mine stone blocks the cache passage.",
-          "trigger": { "mode": "first_traversal" },
-          "required_supply_id": "pickaxe",
-          "choices": [
-            { "id": "use_supply", "label": "Use pickaxe", "requires_supply": true },
-            { "id": "force_passage", "label": "Force passage", "requires_supply": false }
-          ],
-          "outcomes": [
-            {
-              "id": "cleared_with_pickaxe",
-              "when": { "choice_id": "use_supply", "has_supply": true },
-              "consume_required_supply": true,
-              "message": "The pickaxe clears the rubble before anyone is hurt.",
-              "consequences": []
-            },
-            {
-              "id": "bruised_by_rubble",
-              "when": { "choice_id": "force_passage" },
-              "weight": 80,
-              "message": "The party forces through the rubble and takes a bruising hit.",
-              "consequences": [
-                { "type": "hp_loss", "amount": 2, "target_id": "party_member_0" },
-                { "type": "apply_debuff", "debuff_id": "bruised", "target_id": "party_member_0" }
-              ]
-            },
-            {
-              "id": "strained_by_rubble",
-              "when": { "choice_id": "force_passage" },
-              "weight": 20,
-              "message": "The party shifts the rubble by hand, but the effort strains someone's back.",
-              "consequences": [
-                { "type": "hp_loss", "amount": 1, "target_id": "party_member_0" },
-                { "type": "apply_debuff", "debuff_id": "strained_back", "target_id": "party_member_0" }
-              ]
-            }
-          ]
+          "pool_id": "old_mine_rubble_pool",
+          "trigger": { "mode": "first_traversal" }
         }
       ]
     },
@@ -146,46 +131,11 @@
       "to": "spider_nest",
       "danger": 0.25,
       "light_decay": 1,
-      "hazards": [
+      "hazard_pool_refs": [
         {
           "id": "needle_trap_crossing_nest",
-          "type": "trap",
-          "message": "A thin tripwire disappears into a rusted needle trap along the tunnel wall.",
-          "trigger": { "mode": "first_traversal" },
-          "required_supply_id": "trap_tools",
-          "choices": [
-            { "id": "use_supply", "label": "Use trap tools", "requires_supply": true },
-            { "id": "force_passage", "label": "Force passage", "requires_supply": false }
-          ],
-          "outcomes": [
-            {
-              "id": "trap_disarmed",
-              "when": { "choice_id": "use_supply", "has_supply": true },
-              "consume_required_supply": true,
-              "message": "The trap tools catch the tripwire and disarm the needle mechanism.",
-              "consequences": []
-            },
-            {
-              "id": "poisoned_by_needle_trap",
-              "when": { "choice_id": "force_passage" },
-              "weight": 70,
-              "message": "The party pushes through and a hidden needle bites into exposed skin.",
-              "consequences": [
-                { "type": "hp_loss", "amount": 1, "target_id": "party_member_0" },
-                { "type": "apply_debuff", "debuff_id": "poisoned", "target_id": "party_member_0" }
-              ]
-            },
-            {
-              "id": "cut_by_needle_trap",
-              "when": { "choice_id": "force_passage" },
-              "weight": 30,
-              "message": "The party avoids the needle reservoir, but the trap blade opens a bleeding cut.",
-              "consequences": [
-                { "type": "hp_loss", "amount": 1, "target_id": "party_member_0" },
-                { "type": "apply_debuff", "debuff_id": "bleeding", "target_id": "party_member_0" }
-              ]
-            }
-          ]
+          "pool_id": "old_mine_trap_pool",
+          "trigger": { "mode": "first_traversal" }
         }
       ]
     },

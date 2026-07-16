@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sdd-game/dungeon_template.schema.json",
+  "type": "object",
+  "required": ["id", "templates"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+    "templates": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/template" }
+    }
+  },
+  "$defs": {
+    "template": {
+      "type": "object",
+      "required": ["id", "difficulty", "display_name", "rooms", "corridors"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "difficulty": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "display_name": { "type": "string", "minLength": 1 },
+        "rooms": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/template_room" }
+        },
+        "corridors": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/template_corridor" }
+        }
+      }
+    },
+    "template_room": {
+      "type": "object",
+      "required": ["id", "display_name", "kind", "position", "content"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "display_name": { "type": "string", "minLength": 1 },
+        "kind": {
+          "type": "string",
+          "enum": ["entrance", "empty", "treasure", "combat", "guarded_treasure", "quest", "exit"]
+        },
+        "position": {
+          "type": "object",
+          "required": ["x", "y"],
+          "additionalProperties": false,
+          "properties": {
+            "x": { "type": "integer" },
+            "y": { "type": "integer" }
+          }
+        },
+        "content": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/template_content" }
+        }
+      }
+    },
+    "template_content": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["empty", "treasure", "combat", "guarded_treasure", "quest", "room_event"]
+        },
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "event_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "room_event_pool_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "combat_encounter_path": {
+          "type": "string",
+          "pattern": "^res://resources/data/combat_encounters/.+\\.json$"
+        },
+        "quest_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "rewards": { "$ref": "#/$defs/template_rewards" }
+      }
+    },
+    "template_rewards": {
+      "type": "object",
+      "required": ["xp", "gold", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "xp": { "type": "integer", "minimum": 0 },
+        "gold": { "type": "integer", "minimum": 0 },
+        "items": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "template_corridor": {
+      "type": "object",
+      "required": ["id", "from", "to"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "from": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "to": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "danger": { "type": "number", "minimum": 0, "maximum": 1 },
+        "light_decay": { "type": "integer", "minimum": 0 },
+        "hazard_profile": { "type": "string", "enum": ["none", "planned"] }
+      }
+    }
+  }
+}

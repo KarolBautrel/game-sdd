@@ -113,7 +113,9 @@ The implemented contract supports corridor `hazards`, deterministic weighted out
 
 First-pass corridor hazards are resolved before the target room is entered. `enter_room` returns `choice_required` with a `corridor_hazard_choice_required` payload when the party finds an unresolved corridor hazard. The caller must resolve that prompt through `resolve_corridor_hazard_choice` before traversal continues. This keeps rubble, traps, darkness checks, and similar traversal events between rooms rather than inside room content.
 
-Hazard outcomes now support weighted variants and target stubs. Consequences may include `target_id`, currently using `party_member_0` until the real party roster exists. Runtime state records both party-level totals and per-target `target_effects`.
+Hazard outcomes now support weighted variants and party slot targets. Consequences may include `target_id`, currently using stable party slot ids such as `party_slot_front` until the real party roster exists. Runtime state records both party-level totals and per-target `target_effects`.
+
+Reusable corridor hazard templates now live in the dungeon event catalogue. Corridors may keep inline `hazards` for one-off authored exceptions, but common/generated hazards should use `hazard_refs` pointing at catalogue event ids.
 
 ## Non-Goals
 
