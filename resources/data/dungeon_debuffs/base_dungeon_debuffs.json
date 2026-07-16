@@ -1,0 +1,93 @@
+{
+  "id": "base_dungeon_debuffs",
+  "debuffs": [
+    {
+      "id": "bleeding",
+      "display_name": "Bleeding",
+      "category": "injury",
+      "summary": "The character is losing blood after a trap, blade, or sharp debris event.",
+      "default_stacks": 1,
+      "combat_bridge": {
+        "status": "existing_bleeding",
+        "notes": "Can later map to the existing combat bleeding status when character-level dungeon state exists."
+      }
+    },
+    {
+      "id": "poisoned",
+      "display_name": "Poisoned",
+      "category": "toxin",
+      "summary": "The character is affected by venom, spores, or tainted dungeon residue.",
+      "default_stacks": 1,
+      "combat_bridge": {
+        "status": "future_poison",
+        "notes": "Deferred until combat poison exists."
+      }
+    },
+    {
+      "id": "limping",
+      "display_name": "Limping",
+      "category": "mobility",
+      "summary": "The character is slowed by an injured leg or twisted ankle.",
+      "default_stacks": 1,
+      "combat_bridge": {
+        "status": "movement_penalty",
+        "notes": "Target bridge is reduced starting MP, initially around -50% when character-level modifiers exist."
+      }
+    },
+    {
+      "id": "bruised",
+      "display_name": "Bruised",
+      "category": "injury",
+      "summary": "The party suffered blunt-force injury while forcing through an obstacle.",
+      "default_stacks": 1,
+      "combat_bridge": {
+        "status": "defense_penalty",
+        "notes": "Deferred until dungeon debuffs can target specific combat units."
+      }
+    },
+    {
+      "id": "fatigued",
+      "display_name": "Fatigued",
+      "category": "fatigue",
+      "summary": "The party is worn down by difficult traversal and poor conditions.",
+      "default_stacks": 1,
+      "combat_bridge": {
+        "status": "initiative_penalty",
+        "notes": "Can later reduce initiative or starting AP/MP."
+      }
+    },
+    {
+      "id": "shaken",
+      "display_name": "Shaken",
+      "category": "morale",
+      "summary": "The party is rattled by stress, darkness, or a frightening dungeon event.",
+      "default_stacks": 1,
+      "combat_bridge": {
+        "status": "accuracy_penalty",
+        "notes": "Deferred until morale/stress or accuracy modifiers are bridged."
+      }
+    },
+    {
+      "id": "strained_back",
+      "display_name": "Strained Back",
+      "category": "injury",
+      "summary": "The character is strained after lifting, climbing, or forcing debris.",
+      "default_stacks": 1,
+      "combat_bridge": {
+        "status": "movement_penalty",
+        "notes": "May later reduce carrying efficiency or combat movement."
+      }
+    },
+    {
+      "id": "burned",
+      "display_name": "Burned",
+      "category": "burn",
+      "summary": "The character is burned by fire, oil, steam, or volatile dungeon hazards.",
+      "default_stacks": 1,
+      "combat_bridge": {
+        "status": "deferred",
+        "notes": "Deferred until fire/burn combat effects exist."
+      }
+    }
+  ]
+}

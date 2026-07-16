@@ -24,7 +24,7 @@ color = Color(0.0352941, 0.0352941, 0.0392157, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 142.0
+offset_bottom = 176.0
 grow_horizontal = 2
 theme_override_constants/margin_left = 48
 theme_override_constants/margin_top = 34
@@ -46,8 +46,15 @@ text = "Dungeon"
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.62, 0.68, 0.66, 1)
-theme_override_font_sizes/font_size = 18
-text = "Loading dungeon..."
+theme_override_font_sizes/font_size = 20
+text = "Preparing expedition..."
+
+[node name="ProgressLabel" type="Label" parent="Header/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.72, 0.58, 1)
+theme_override_font_sizes/font_size = 17
+text = "Rooms visited 0/0 | Secured 0/0 | Rewards 0"
 
 [node name="GraphLayer" type="Control" parent="."]
 unique_name_in_owner = true
@@ -65,8 +72,8 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -530.0
-offset_top = 170.0
+offset_left = -610.0
+offset_top = 192.0
 offset_right = -48.0
 offset_bottom = -80.0
 grow_horizontal = 0
@@ -84,15 +91,16 @@ layout_mode = 2
 theme_override_constants/separation = 14
 
 [node name="PanelTitle" type="Label" parent="DetailPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.86, 0.78, 0.62, 1)
-theme_override_font_sizes/font_size = 24
-text = "Room"
+theme_override_font_sizes/font_size = 30
+text = "Expedition"
 
 [node name="DetailLabel" type="Label" parent="DetailPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.75, 0.78, 0.74, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Select a room."
 autowrap_mode = 3

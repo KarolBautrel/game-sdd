@@ -50,6 +50,7 @@ func apply_launch_metadata(encounter: Dictionary) -> Dictionary:
 		return next_encounter
 	next_encounter["source_dungeon_id"] = str(pending_combat_request.get("dungeon_id", ""))
 	next_encounter["source_room_id"] = str(pending_combat_request.get("room_id", ""))
+	next_encounter["dungeon_modifiers"] = pending_combat_request.get("dungeon_modifiers", {}).duplicate(true)
 	return randomize_dungeon_enemies(next_encounter, next_combat_seed)
 
 

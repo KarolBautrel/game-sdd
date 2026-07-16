@@ -73,6 +73,10 @@ Executable acceptance scenarios live in `slices/`.
 
 They stay flat and chronological because they prove implementation progress across domains.
 
+Recent presentation/debug slices:
+
+- `slices/085_debug_force_victory.md`
+
 ## Milestones
 
 Milestones live in `milestones/`.

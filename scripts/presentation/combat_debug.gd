@@ -167,16 +167,16 @@ var presentation_cache_ready := false
 
 func _ready() -> void:
 	_apply_pixel_theme()
-	if DungeonRunSession.has_pending_combat_launch():
-		current_encounter_path = DungeonRunSession.combat_encounter_path()
+	if _run_session().has_pending_combat_launch():
+		current_encounter_path = _run_session().combat_encounter_path()
 		selected_scenario_id = "dungeon_launch"
 	_reset_debug_encounter()
 
 
 func _reset_debug_encounter() -> void:
 	state = _load_json(current_encounter_path)
-	if DungeonRunSession.has_pending_combat_launch():
-		state = DungeonRunSession.apply_launch_metadata(state)
+	if _run_session().has_pending_combat_launch():
+		state = _run_session().apply_launch_metadata(state)
 	state["event_log"] = []
 	command_index = 1
 	selected_action = "move"
@@ -702,7 +702,7 @@ func _occupied_tile_marker(position: Dictionary) -> String:
 
 func _render_status() -> void:
 	var active := _unit_by_id(state["turn_state"]["active_unit_id"])
-	status_label.text = "Round %s  -  %s\n%s's turn  HP %s  AP %s  MP %s  -  %s" % [
+	status_label.text = "Round %s  -  %s\n%s's turn  HP %s  AP %s  MP %s  -  %s%s" % [
 		state["turn_state"]["round"],
 		_combat_result().capitalize(),
 		_unit_display_name(active.get("id", "missing")),
@@ -710,6 +710,7 @@ func _render_status() -> void:
 		active.get("resources", {}).get("ap", "?"),
 		active.get("resources", {}).get("mp", "-"),
 		ACTION_LABELS.get(selected_action, selected_action),
+		_dungeon_modifier_status_line(),
 	]
 
 
@@ -725,6 +726,17 @@ func _render_action_panel() -> void:
 
 func _render_feedback() -> void:
 	feedback_label.text = last_feedback
+
+
+func _dungeon_modifier_status_line() -> String:
+	var modifiers: Dictionary = state.get("dungeon_modifiers", {})
+	if modifiers.is_empty():
+		return ""
+	return "\nDungeon: light %s | debuffs %s | enemy mods %s" % [
+		str(modifiers.get("light_state", "bright")),
+		modifiers.get("active_debuffs", {}).size(),
+		modifiers.get("enemy_modifiers", []).size(),
+	]
 
 
 func _render_legend() -> void:
@@ -860,7 +872,9 @@ func _render_command_buttons() -> void:
 	for action_id in debug_actions:
 		_add_action_button(action_id, slot)
 		slot += 1
-	if DungeonRunSession.has_pending_combat_launch() and _combat_result() != "in_progress":
+	if _combat_result() == "in_progress":
+		_add_debug_win_button()
+	if _run_session().has_pending_combat_launch() and _combat_result() != "in_progress":
 		_add_return_to_dungeon_button()
 	_add_scenario_picker()
 
@@ -1009,23 +1023,77 @@ func _add_return_to_dungeon_button() -> void:
 	command_buttons.add_child(button)
 
 
+func _add_debug_win_button() -> void:
+	var button := Button.new()
+	button.text = "Debug\nWin"
+	button.custom_minimum_size = Vector2(132, 62)
+	button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	button.add_theme_font_size_override("font_size", 12)
+	_apply_skill_button_style(button, false)
+	button.pressed.connect(func() -> void:
+		_force_debug_victory()
+	)
+	command_buttons.add_child(button)
+
+
+func _force_debug_victory(render_after: bool = true) -> void:
+	if animation_locked:
+		return
+	if _combat_result() != "in_progress":
+		last_feedback = "Combat already ended."
+		if render_after:
+			_render()
+		return
+
+	for unit: Dictionary in state.get("units", []):
+		if unit.get("team", "") == "enemy" and int(unit.get("resources", {}).get("hp", 0)) > 0:
+			unit["resources"]["hp"] = 0
+			state["event_log"].append(_debug_event("unit_defeated", {
+				"unit_id": unit.get("id", ""),
+				"team": "enemy",
+				"source": "debug_win",
+			}))
+
+	var payload := _combat_result_payload()
+	state["event_log"].append(_debug_event("combat_ended", {
+		"result": payload.get("result", "victory"),
+		"result_payload": payload,
+		"source": "debug_win",
+	}))
+	current_action_title = "Debug victory"
+	current_action_detail = "All enemies defeated by debug command."
+	_push_action_feed("Debug victory applied")
+	last_feedback = "Debug victory applied."
+	_clear_move_preview()
+	_prepare_presentation_cache()
+	if render_after:
+		_render()
+
+
+func _debug_event(event_type: String, payload: Dictionary) -> Dictionary:
+	var event := payload.duplicate(true)
+	event["type"] = event_type
+	event["sequence"] = state.get("event_log", []).size() + 1
+	return event
+
+
 func _return_to_dungeon() -> void:
 	var result_payload := _combat_result_payload()
 	if result_payload.is_empty():
 		last_feedback = "No combat result payload."
 		_render()
 		return
-	if not DungeonRunSession.finish_combat(result_payload):
-		last_feedback = DungeonRunSession.last_feedback
+	if not _run_session().finish_combat(result_payload):
+		last_feedback = _run_session().last_feedback
 		_render()
 		return
-	get_tree().change_scene_to_file(DungeonRunSession.DUNGEON_SCENE_PATH)
+	get_tree().change_scene_to_file(_run_session().DUNGEON_SCENE_PATH)
 
 
 func _load_selected_scenario() -> void:
 	if animation_locked:
 		return
-	if DungeonRunSession.has_pending_combat_launch():
+	if _run_session().has_pending_combat_launch():
 		last_feedback = "Scenario picker disabled during dungeon combat."
 		_render()
 		return
@@ -2074,6 +2142,10 @@ func _load_json(path: String) -> Variant:
 		push_error("Cannot parse JSON file: %s" % path)
 		return {}
 	return parsed
+
+
+func _run_session() -> Node:
+	return get_node("/root/DungeonRunSession")
 
 
 func _unit_by_id(unit_id: String) -> Dictionary:

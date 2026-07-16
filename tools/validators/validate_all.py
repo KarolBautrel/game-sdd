@@ -91,6 +91,7 @@ VALIDATION_TARGETS = [
     ("resources/schemas/world_region.schema.json", "resources/data/world_regions/*.json"),
     ("resources/schemas/town.schema.json", "resources/data/towns/*.json"),
     ("resources/schemas/dungeon.schema.json", "resources/data/dungeons/*.json"),
+    ("resources/schemas/dungeon_debuff.schema.json", "resources/data/dungeon_debuffs/*.json"),
     ("resources/schemas/map.schema.json", "resources/data/maps/*.json"),
     ("resources/schemas/combat_action.schema.json", "resources/data/combat_actions/*.json"),
     ("resources/schemas/combat_encounter.schema.json", "resources/data/combat_encounters/*.json"),
@@ -138,6 +139,7 @@ def validate_dungeon_references() -> list[str]:
     errors: list[str] = []
     min_dungeon_combat_width = 10
     min_dungeon_combat_height = 8
+    debuff_ids = _dungeon_debuff_ids()
     for path in sorted((ROOT / "resources/data/dungeons").glob("*.json")):
         dungeon = load_json(path)
         room_ids = {room["id"] for room in dungeon["rooms"]}
@@ -153,6 +155,16 @@ def validate_dungeon_references() -> list[str]:
                 errors.append(f"{path.relative_to(ROOT)}: corridor {corridor['id']} from references missing room {corridor['from']}")
             if corridor["to"] not in room_ids:
                 errors.append(f"{path.relative_to(ROOT)}: corridor {corridor['id']} to references missing room {corridor['to']}")
+            for hazard in corridor.get("hazards", []):
+                for outcome in hazard.get("outcomes", []):
+                    for consequence in outcome.get("consequences", []):
+                        if consequence.get("type") == "apply_debuff":
+                            debuff_id = consequence.get("debuff_id", "")
+                            if debuff_id not in debuff_ids:
+                                errors.append(
+                                    f"{path.relative_to(ROOT)}: corridor {corridor['id']} hazard {hazard['id']} "
+                                    f"references missing dungeon debuff {debuff_id}"
+                                )
 
         for room in dungeon["rooms"]:
             for content in room["content"]:
@@ -187,6 +199,28 @@ def validate_dungeon_references() -> list[str]:
                     errors.append(f"{path.relative_to(ROOT)}: room {room['id']} guarded_treasure content is missing rewards")
                 if content_type == "treasure" and rewards is None:
                     errors.append(f"{path.relative_to(ROOT)}: room {room['id']} treasure content is missing rewards")
+    return errors
+
+
+def _dungeon_debuff_ids() -> set[str]:
+    debuff_ids: set[str] = set()
+    for path in sorted((ROOT / "resources/data/dungeon_debuffs").glob("*.json")):
+        data = load_json(path)
+        for debuff in data["debuffs"]:
+            debuff_ids.add(debuff["id"])
+    return debuff_ids
+
+
+def validate_dungeon_debuff_references() -> list[str]:
+    errors: list[str] = []
+    seen: set[str] = set()
+    for path in sorted((ROOT / "resources/data/dungeon_debuffs").glob("*.json")):
+        data = load_json(path)
+        for debuff in data["debuffs"]:
+            debuff_id = debuff["id"]
+            if debuff_id in seen:
+                errors.append(f"{path.relative_to(ROOT)}: duplicate dungeon debuff id {debuff_id}")
+            seen.add(debuff_id)
     return errors
 
 
@@ -296,6 +330,7 @@ def main() -> int:
 
     errors.extend(validate_world_region_references())
     errors.extend(validate_dungeon_references())
+    errors.extend(validate_dungeon_debuff_references())
     errors.extend(validate_map_integrity())
     errors.extend(validate_combat_map_references())
     errors.extend(validate_combat_slice_01())

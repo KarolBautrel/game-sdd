@@ -10,7 +10,9 @@ func _init() -> void:
 	var dungeon := _load_json("res://resources/data/dungeons/dungeon_old_mine.json")
 	var state: Dictionary = DungeonStateModel.initial_state(dungeon)
 	state = DungeonStateModel.enter_room(dungeon, state, "dusty_crossing")["state"]
-	state = DungeonStateModel.enter_room(dungeon, state, "spider_nest")["state"]
+	var trap_prompt: Dictionary = DungeonStateModel.enter_room(dungeon, state, "spider_nest")
+	_expect_equal(errors, "trap prompt before combat room", trap_prompt["status"], "choice_required")
+	state = DungeonStateModel.resolve_corridor_hazard_choice(dungeon, trap_prompt["state"], "use_supply")["state"]
 
 	_expect_true(errors, "start combat accepted", session.start_combat(dungeon, state))
 	_expect_true(errors, "pending combat launch", session.has_pending_combat_launch())
@@ -20,9 +22,12 @@ func _init() -> void:
 	var stamped: Dictionary = session.apply_launch_metadata(encounter)
 	_expect_equal(errors, "stamped dungeon id", stamped["source_dungeon_id"], "dungeon_old_mine")
 	_expect_equal(errors, "stamped room id", stamped["source_room_id"], "spider_nest")
+	_expect_equal(errors, "stamped dungeon light state", stamped["dungeon_modifiers"]["light_state"], "dim")
+	_expect_equal(errors, "stamped dungeon active debuffs", stamped["dungeon_modifiers"]["active_debuffs"].size(), 0)
 
 	var showcase := _load_json("res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json")
-	var randomized: Dictionary = session.randomize_dungeon_enemies(showcase, 1234)
+	var randomized: Dictionary = session.apply_launch_metadata(showcase)
+	_expect_equal(errors, "randomized keeps dungeon modifiers", randomized["dungeon_modifiers"]["light_state"], "dim")
 	var enemy_units := _units_for_team(randomized, "enemy")
 	_expect_true(errors, "random enemy count 2-3", enemy_units.size() >= 2 and enemy_units.size() <= 3)
 	_expect_equal(errors, "turn order count follows randomized units", randomized["turn_state"]["turn_order"].size(), randomized["units"].size())

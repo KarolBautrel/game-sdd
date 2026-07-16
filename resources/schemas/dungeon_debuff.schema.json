@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sdd-game/dungeon_debuff.schema.json",
+  "type": "object",
+  "required": ["id", "debuffs"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+    "debuffs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/debuff" },
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "debuff": {
+      "type": "object",
+      "required": ["id", "display_name", "category", "summary", "default_stacks", "combat_bridge"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "display_name": { "type": "string", "minLength": 1 },
+        "category": {
+          "type": "string",
+          "enum": ["injury", "toxin", "mobility", "fatigue", "morale", "burn"]
+        },
+        "summary": { "type": "string", "minLength": 1 },
+        "default_stacks": { "type": "integer", "minimum": 1 },
+        "combat_bridge": {
+          "type": "object",
+          "required": ["status", "notes"],
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": ["deferred", "existing_bleeding", "future_poison", "movement_penalty", "initiative_penalty", "accuracy_penalty", "defense_penalty"]
+            },
+            "notes": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

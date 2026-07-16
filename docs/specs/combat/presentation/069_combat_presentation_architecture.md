@@ -33,6 +33,8 @@ The sandbox controller may orchestrate the screen, but reusable presentation con
 - Reused unit textures and common visual states should be cached during presentation preparation.
 - Dynamic overlays and unit nodes should update in place instead of rebuilding the full board every render.
 - Per-action preview data should be cached when selected action or state changes.
+- The combat sandbox may expose debug-only helpers for fast manual flows. These helpers must not change combat legality rules in `CombatResolver`; they may only manipulate sandbox state or call existing result contracts.
+- The debug force-victory helper ends the sandbox fight as `victory`, records defeated enemies, and leaves the normal combat result payload available for dungeon return flow.
 
 ## Still To Extract
 

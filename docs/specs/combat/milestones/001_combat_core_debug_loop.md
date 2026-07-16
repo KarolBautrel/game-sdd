@@ -27,6 +27,7 @@ The project now has:
 - combat attack and skill targeting preview now labels targets with hit chance, damage, or blocked reasons before confirmation.
 - combat debug can now load a dungeon-themed stone board using dungeon props for blocked, cover, highground, and floor accents.
 - bleeding turn-start death now automatically skips the defeated unit so combat cannot lock on a dead active actor.
+- combat debug now has a `Debug Win` helper button for fast dungeon flow testing; it defeats living enemies in sandbox state, emits a victory payload through the existing result contract, and then exposes the normal `Return to Dungeon` path.
 
 ## Implemented Combat Rules
 
@@ -388,6 +389,13 @@ Latest verified scope:
 - combat result contract v1 is specified and verified by slice 082: `simulate()` returns `result_payload`, terminal `combat_ended` events include the same payload, and victory/defeat payloads expose dungeon source ids, surviving player summaries, defeated ids, remaining enemy summaries, and reward-shaped data.
 - dungeon combat board theme is specified by slice 083: `debug_dungeon_combat_showcase` uses a generated grey stone board background, the combat scenario picker exposes it as `Old Mine dungeon`, and dungeon props are used for blocked, cover, highground, and floor accents without changing combat rules.
 - bleeding death turn skipping is specified and verified by slice 084: if a bleeding unit dies at its own turn start while combat remains in progress, the resolver emits death events, auto-ends that dead actor's turn, and advances to the next living unit.
+- debug force victory is specified and verified by slice 085: `CombatDebug.tscn` exposes `Debug Win` while combat is in progress, forces a victory-shaped sandbox state, and keeps the normal result payload available for dungeon return.
+- Validation passed on 2026-07-16:
+  - `python tools\validators\validate_all.py`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/presentation/combat_debug_force_victory_tests.gd`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn --quit --resolution 2560x1440`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/session/dungeon_run_session_tests.gd`
 - Validation passed on 2026-07-15:
   - `python tools\validators\validate_all.py`
   - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --quit --resolution 2560x1440`
@@ -437,6 +445,12 @@ Combat slices in Godot:
 
 ```powershell
 & "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd
+```
+
+Combat debug force victory:
+
+```powershell
+& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/presentation/combat_debug_force_victory_tests.gd
 ```
 
 Interactive combat debug scene:
@@ -610,7 +624,18 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
      - no dungeon implementation required yet.
    - Test proof: Python/Godot combat slice tests.
 
-11. **Next - Combat Encounter Authoring V1**
+11. **Done - Debug Force Victory**
+   - Goal: make dungeon-combat-dungeon testing faster without manually playing out every battle.
+   - Owner spec: `presentation/069_combat_presentation_architecture.md`
+   - Slice: `slices/085_debug_force_victory.md`
+   - Required behavior:
+     - combat debug exposes `Debug Win` while combat is in progress;
+     - debug victory defeats all living enemies in the sandbox state;
+     - combat result becomes `victory`;
+     - existing result payload remains available for dungeon return flow.
+   - Test proof: `scripts/presentation/combat_debug_force_victory_tests.gd`.
+
+12. **Next - Combat Encounter Authoring V1**
     - Goal: make one new combat encounter from map + archetypes without code changes.
     - Owner spec: map/encounter authoring docs.
     - Slice: `slices/083_combat_encounter_authoring_v1.md`
@@ -620,7 +645,7 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
       - debug scene scenario catalog can load it without controller edits.
     - Test proof: validators plus Godot project load.
 
-12. **Combat Readiness Review For Dungeon**
+13. **Combat Readiness Review For Dungeon**
     - Goal: run the exit criteria as a final checklist.
     - Owner spec: this milestone plus any transition/boundary spec.
     - Slice: `slices/084_combat_ready_for_dungeon.md`
