@@ -3,11 +3,93 @@ class_name CombatUnitArt
 
 const RAW_EXTRACTED_TILE_SIZE := 112
 const RAW_EXTRACTED_MAX_SIZE := Vector2i(110, 106)
+const PROCESSED_SHEET_REFERENCE_CHARACTER := "warrior"
 
 const UNIT_VISUALS := {
 	"unit_player_001": {"faction": "heroes", "character": "warrior"},
-	"unit_enemy_001": {"faction": "villains", "character": "goblin_atlas"},
-	"unit_enemy_002": {"faction": "villains", "character": "spider_atlas"},
+	"unit_enemy_001": {"faction": "villains", "character": "axe_bandit"},
+	"unit_enemy_002": {"faction": "villains", "character": "bandit_archer"},
+}
+
+const ARCHETYPE_VISUALS := {
+	"raider_swordsman": {"faction": "villains", "character": "axe_bandit"},
+	"raider_archer": {"faction": "villains", "character": "bandit_archer"},
+	"raider_shieldman": {"faction": "villains", "character": "bandit_brute"},
+}
+
+const PROCESSED_SHEET_VISUALS := {
+	"archer_1": {
+		"root": "res://assets/combat/characters/heroes/mercenaries/processed/archer_1",
+		"prefix": "archer_1",
+		"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
+		"frame_counts": {"pose": 3, "walk": 6, "combat": 6, "hit": 3, "death": 6},
+	},
+	"rogue_1": {
+		"root": "res://assets/combat/characters/heroes/mercenaries/processed/rogue_1",
+		"prefix": "rogue_1",
+		"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
+		"frame_counts": {"pose": 4, "walk": 6, "combat": 6, "hit": 3, "death": 6},
+	},
+	"warrior": {
+		"root": "res://assets/combat/characters/heroes/mercenaries/processed/warrior",
+		"prefix": "warrior",
+		"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
+		"frame_counts": {"pose": 3, "walk": 5, "combat": 6, "hit": 3, "death": 6},
+	},
+	"bandit_spearman": {
+		"root": "res://assets/combat/characters/npc/processed/bandit_spearman",
+		"prefix": "bandit_spearman",
+		"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
+		"frame_counts": {"pose": 4, "walk": 7, "combat": 6, "hit": 3, "death": 5},
+	},
+	"crossbowman": {
+		"root": "res://assets/combat/characters/npc/processed/crossbowman",
+		"prefix": "crossbowman",
+		"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
+		"frame_counts": {"pose": 4, "walk": 6, "combat": 6, "hit": 3, "death": 6},
+	},
+	"guardian": {
+		"root": "res://assets/combat/characters/npc/processed/guardian",
+		"prefix": "guardian",
+		"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
+		"frame_counts": {"pose": 4, "walk": 6, "combat": 6, "hit": 3, "death": 7},
+	},
+	"axe_bandit": {
+		"root": "res://assets/combat/characters/villains/bandits/processed/axe_bandit",
+		"prefix": "axe_bandit",
+		"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
+		"frame_counts": {"pose": 4, "walk": 6, "combat": 6, "hit": 3, "death": 6},
+	},
+	"bandit_archer": {
+		"root": "res://assets/combat/characters/villains/bandits/processed/bandit_archer",
+		"prefix": "bandit_archer",
+		"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
+		"frame_counts": {"pose": 4, "walk": 6, "combat": 6, "hit": 3, "death": 7},
+	},
+	"bandit_brute": {
+		"root": "res://assets/combat/characters/villains/bandits/processed/bandit_brute",
+		"prefix": "bandit_brute",
+		"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
+		"frame_counts": {"pose": 4, "walk": 6, "combat": 6, "hit": 3, "death": 6},
+	},
+	"bandit_carnage": {
+		"root": "res://assets/combat/characters/villains/bandits/processed/bandit_carnage",
+		"prefix": "bandit_carnage",
+		"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
+		"frame_counts": {"pose": 4, "walk": 6, "combat": 6, "hit": 3, "death": 6},
+	},
+	"bandit_marauder": {
+		"root": "res://assets/combat/characters/villains/bandits/processed/bandit_marauder",
+		"prefix": "bandit_marauder",
+		"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
+		"frame_counts": {"pose": 4, "walk": 6, "combat": 5, "hit": 3, "death": 6},
+	},
+	"bandit_rogue": {
+		"root": "res://assets/combat/characters/villains/bandits/processed/bandit_rogue",
+		"prefix": "bandit_rogue",
+		"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
+		"frame_counts": {"pose": 4, "walk": 6, "combat": 6, "hit": 3, "death": 6},
+	},
 }
 
 const RAW_EXTRACTED_VISUALS := {
@@ -133,6 +215,7 @@ const RAW_EXTRACTED_VISUALS := {
 
 var texture_cache: Dictionary = {}
 var texture_path_cache: Dictionary = {}
+var processed_sheet_scale_cache: Dictionary = {}
 
 
 func icon(unit: Dictionary, state: Dictionary, facing: Dictionary, visual_actions: Dictionary, icon_size: Vector2i) -> Texture2D:
@@ -143,7 +226,8 @@ func icon(unit: Dictionary, state: Dictionary, facing: Dictionary, visual_action
 	var character := str(visual["character"])
 	var visual_scale := visual_scale_for_character(character)
 	var use_source_scale := RAW_EXTRACTED_VISUALS.has(character)
-	var cache_key := "%s:%s:%s:%s:%s" % [texture_path, icon_size.x, icon_size.y, visual_scale, use_source_scale]
+	var use_processed_sheet_scale := PROCESSED_SHEET_VISUALS.has(character)
+	var cache_key := "%s:%s:%s:%s:%s:%s" % [texture_path, icon_size.x, icon_size.y, visual_scale, use_source_scale, use_processed_sheet_scale]
 	if texture_cache.has(cache_key):
 		return texture_cache[cache_key]
 
@@ -152,7 +236,7 @@ func icon(unit: Dictionary, state: Dictionary, facing: Dictionary, visual_action
 	if error != OK:
 		push_error("Cannot load unit texture: %s" % texture_path)
 		return null
-	var texture := ImageTexture.create_from_image(scaled_icon_image(image, icon_size, visual_scale, use_source_scale))
+	var texture := ImageTexture.create_from_image(scaled_icon_image(image, icon_size, visual_scale, use_source_scale, use_processed_sheet_scale))
 	texture_cache[cache_key] = texture
 	return texture
 
@@ -177,6 +261,9 @@ func texture_path(unit: Dictionary, direction: String, visual_action: String) ->
 	var legacy_character := legacy_character_prefix(character)
 	var legacy_base_path := "res://assets/combat/characters/%s/%s" % [faction, legacy_character]
 	var candidates: Array[String] = []
+	var processed_path := processed_sheet_texture_path(character, direction, visual_action)
+	if processed_path != "":
+		candidates.append(processed_path)
 	var raw_path := raw_extracted_texture_path(character, direction, visual_action)
 	if raw_path != "":
 		candidates.append(raw_path)
@@ -253,6 +340,83 @@ func texture_path(unit: Dictionary, direction: String, visual_action: String) ->
 	return candidates[-1]
 
 
+func processed_sheet_texture_path(character: String, direction: String, visual_action: String) -> String:
+	if not PROCESSED_SHEET_VISUALS.has(character):
+		return ""
+	var config: Dictionary = PROCESSED_SHEET_VISUALS[character]
+	var action := processed_sheet_action(visual_action)
+	var frames: Dictionary = config.get("frames", {})
+	var frame_index := processed_sheet_frame_index(character, visual_action, int(frames.get(action, 0)))
+	var side := "left" if direction.contains("west") else "right"
+	var path := "%s/%s/%s_%s_%s_%03d.png" % [
+		config["root"],
+		action,
+		config["prefix"],
+		side,
+		action,
+		frame_index,
+	]
+	if ResourceLoader.exists(path) or FileAccess.file_exists(path):
+		return path
+	if action != "pose":
+		return processed_sheet_texture_path(character, direction, "pose")
+	return ""
+
+
+func processed_sheet_frame_index(character: String, visual_action: String, fallback: int) -> int:
+	if not visual_action.contains(":"):
+		return fallback
+	var frame_text := visual_action.get_slice(":", 1)
+	if not frame_text.is_valid_int():
+		return fallback
+	var action := processed_sheet_action(visual_action)
+	var count := processed_sheet_frame_count(character, action)
+	if count <= 0:
+		return fallback
+	return int(frame_text) % count
+
+
+func processed_sheet_frame_count(character: String, visual_action: String) -> int:
+	if not PROCESSED_SHEET_VISUALS.has(character):
+		return 1
+	var action := processed_sheet_action(visual_action)
+	var config: Dictionary = PROCESSED_SHEET_VISUALS[character]
+	var counts: Dictionary = config.get("frame_counts", {})
+	return maxi(1, int(counts.get(action, 1)))
+
+
+func processed_sheet_corpse_visual_action(character: String) -> String:
+	if not PROCESSED_SHEET_VISUALS.has(character):
+		return "death:%s" % maxi(0, processed_sheet_frame_count(character, "death") - 1)
+	var best_frame := 0
+	var best_width := -1
+	var frame_count := processed_sheet_frame_count(character, "death")
+	for frame_index in range(frame_count):
+		var path := processed_sheet_texture_path(character, "east", "death:%s" % frame_index)
+		if path == "":
+			continue
+		var image := Image.new()
+		if image.load(path) != OK:
+			continue
+		if image.get_width() > best_width:
+			best_width = image.get_width()
+			best_frame = frame_index
+	return "death:%s" % best_frame
+
+
+func processed_sheet_action(visual_action: String) -> String:
+	var base_action := visual_action
+	if visual_action.contains(":"):
+		base_action = visual_action.get_slice(":", 0)
+	if base_action == "combat_idle":
+		return "pose"
+	if base_action == "status_reaction":
+		return "hit"
+	if base_action == "walk" or base_action == "combat" or base_action == "hit" or base_action == "death" or base_action == "pose":
+		return base_action
+	return "pose"
+
+
 func raw_extracted_texture_path(character: String, direction: String, visual_action: String) -> String:
 	if not RAW_EXTRACTED_VISUALS.has(character):
 		return ""
@@ -269,12 +433,47 @@ func raw_extracted_texture_path(character: String, direction: String, visual_act
 
 
 func visual_scale_for_character(character: String) -> float:
+	if PROCESSED_SHEET_VISUALS.has(character):
+		return processed_sheet_visual_scale(character)
 	if RAW_EXTRACTED_VISUALS.has(character):
 		return float(RAW_EXTRACTED_VISUALS[character].get("scale", 1.0))
 	return 1.0
 
 
-func scaled_icon_image(source: Image, icon_size: Vector2i, visual_scale: float, use_source_scale: bool) -> Image:
+func processed_sheet_visual_scale(character: String) -> float:
+	if processed_sheet_scale_cache.has(character):
+		return float(processed_sheet_scale_cache[character])
+	if not PROCESSED_SHEET_VISUALS.has(character):
+		processed_sheet_scale_cache[character] = 1.0
+		return 1.0
+	var reference_height := processed_sheet_reference_height()
+	var character_height := processed_sheet_pose_height(character)
+	var scale := 1.0
+	if reference_height > 0 and character_height > 0:
+		scale = float(reference_height) / float(character_height)
+	processed_sheet_scale_cache[character] = scale
+	return scale
+
+
+func processed_sheet_reference_height() -> int:
+	if processed_sheet_scale_cache.has("_reference_height"):
+		return int(processed_sheet_scale_cache["_reference_height"])
+	var reference_height := processed_sheet_pose_height(PROCESSED_SHEET_REFERENCE_CHARACTER)
+	processed_sheet_scale_cache["_reference_height"] = reference_height
+	return reference_height
+
+
+func processed_sheet_pose_height(character: String) -> int:
+	var path := processed_sheet_texture_path(character, "east", "pose:0")
+	if path == "":
+		return 0
+	var image := Image.new()
+	if image.load(path) != OK:
+		return 0
+	return image.get_height()
+
+
+func scaled_icon_image(source: Image, icon_size: Vector2i, visual_scale: float, use_source_scale: bool, use_processed_sheet_scale: bool = false) -> Image:
 	var output := Image.create(icon_size.x, icon_size.y, false, Image.FORMAT_RGBA8)
 	output.fill(Color(0, 0, 0, 0))
 	var source_width := source.get_width()
@@ -282,7 +481,11 @@ func scaled_icon_image(source: Image, icon_size: Vector2i, visual_scale: float, 
 	if source_width <= 0 or source_height <= 0:
 		return output
 	var scale := visual_scale
-	if not use_source_scale:
+	if use_processed_sheet_scale:
+		scale = visual_scale
+		if source_width > icon_size.x or source_height > icon_size.y:
+			scale = minf(scale, minf(float(icon_size.x) / float(source_width), float(icon_size.y) / float(source_height)))
+	elif not use_source_scale:
 		scale = minf(float(icon_size.x) / float(source_width), float(icon_size.y) / float(source_height)) * visual_scale
 	else:
 		var max_width_scale := float(RAW_EXTRACTED_MAX_SIZE.x) / float(source_width)
@@ -311,6 +514,9 @@ func default_visual_action(unit: Dictionary, state: Dictionary) -> String:
 func unit_visual_config(unit: Dictionary) -> Dictionary:
 	if unit.has("visual"):
 		return unit["visual"]
+	var archetype_id := str(unit.get("archetype_id", ""))
+	if ARCHETYPE_VISUALS.has(archetype_id):
+		return ARCHETYPE_VISUALS[archetype_id]
 	if UNIT_VISUALS.has(unit["id"]):
 		return UNIT_VISUALS[unit["id"]]
 	if unit.get("team", "enemy") == "player":

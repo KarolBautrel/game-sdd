@@ -873,6 +873,31 @@ static func _apply_enemy_archetypes(state: Dictionary) -> void:
 			for slot: String in unit.get("loadout", {}):
 				loadout[slot] = unit["loadout"][slot]
 			unit["loadout"] = loadout
+		if not unit.has("visual") and archetype.has("visual_pool"):
+			var visual := _archetype_visual_from_pool(archetype, unit)
+			if not visual.is_empty():
+				unit["visual"] = visual
+
+
+static func _archetype_visual_from_pool(archetype: Dictionary, unit: Dictionary) -> Dictionary:
+	var visual_pool: Array = archetype.get("visual_pool", [])
+	if visual_pool.is_empty():
+		return {}
+	var stable_key := "%s:%s" % [unit.get("id", ""), unit.get("archetype_id", "")]
+	var index := _stable_visual_pool_index(stable_key, visual_pool.size())
+	var visual: Variant = visual_pool[index]
+	if typeof(visual) != TYPE_DICTIONARY:
+		return {}
+	return (visual as Dictionary).duplicate(true)
+
+
+static func _stable_visual_pool_index(stable_key: String, pool_size: int) -> int:
+	if pool_size <= 0:
+		return 0
+	var total := 0
+	for index in range(stable_key.length()):
+		total += stable_key.unicode_at(index)
+	return total % pool_size
 
 
 static func _loadout_items(state: Dictionary, actor: Dictionary) -> Array[Dictionary]:

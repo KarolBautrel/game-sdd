@@ -1,0 +1,278 @@
+{
+    "generated_by":  "tools/ui/extract_combat_ui_assets.ps1",
+    "source":  "assets/ui/combat/assets/call_9exrXDuBoixt7ysV19RVDrhl.png",
+    "output_root":  "assets/ui/combat/processed",
+    "crops":  [
+                  {
+                      "id":  "bar_hp",
+                      "y":  42,
+                      "h":  101,
+                      "x":  52,
+                      "w":  687,
+                      "file":  "bars/bar_hp.png"
+                  },
+                  {
+                      "id":  "bar_ap",
+                      "y":  174,
+                      "h":  100,
+                      "x":  52,
+                      "w":  686,
+                      "file":  "bars/bar_ap.png"
+                  },
+                  {
+                      "id":  "bar_mp",
+                      "y":  310,
+                      "h":  99,
+                      "x":  52,
+                      "w":  686,
+                      "file":  "bars/bar_mp.png"
+                  },
+                  {
+                      "id":  "slot_bar",
+                      "y":  45,
+                      "h":  101,
+                      "x":  797,
+                      "w":  691,
+                      "file":  "frames/slot_bar.png"
+                  },
+                  {
+                      "id":  "panel_small",
+                      "y":  184,
+                      "h":  229,
+                      "x":  798,
+                      "w":  247,
+                      "file":  "frames/panel_small.png"
+                  },
+                  {
+                      "id":  "panel_large",
+                      "y":  184,
+                      "h":  605,
+                      "x":  1093,
+                      "w":  398,
+                      "file":  "frames/panel_large.png"
+                  },
+                  {
+                      "id":  "slot_normal",
+                      "y":  458,
+                      "h":  184,
+                      "x":  55,
+                      "w":  173,
+                      "file":  "slots/slot_normal.png"
+                  },
+                  {
+                      "id":  "slot_selected",
+                      "y":  458,
+                      "h":  185,
+                      "x":  256,
+                      "w":  177,
+                      "file":  "slots/slot_selected.png"
+                  },
+                  {
+                      "id":  "slot_disabled",
+                      "y":  461,
+                      "h":  181,
+                      "x":  457,
+                      "w":  174,
+                      "file":  "slots/slot_disabled.png"
+                  },
+                  {
+                      "id":  "slot_end",
+                      "y":  461,
+                      "h":  185,
+                      "x":  661,
+                      "w":  173,
+                      "file":  "slots/slot_end.png"
+                  },
+                  {
+                      "id":  "slot_dark",
+                      "y":  461,
+                      "h":  182,
+                      "x":  868,
+                      "w":  178,
+                      "file":  "slots/slot_dark.png"
+                  },
+                  {
+                      "id":  "corner_gold",
+                      "y":  690,
+                      "h":  108,
+                      "x":  56,
+                      "w":  116,
+                      "file":  "corners/corner_gold.png"
+                  },
+                  {
+                      "id":  "corner_iron",
+                      "y":  691,
+                      "h":  107,
+                      "x":  223,
+                      "w":  104,
+                      "file":  "corners/corner_iron.png"
+                  },
+                  {
+                      "id":  "corner_wood_iron",
+                      "y":  690,
+                      "h":  108,
+                      "x":  390,
+                      "w":  126,
+                      "file":  "corners/corner_wood_iron.png"
+                  },
+                  {
+                      "id":  "corner_wood",
+                      "y":  690,
+                      "h":  108,
+                      "x":  583,
+                      "w":  154,
+                      "file":  "corners/corner_wood.png"
+                  },
+                  {
+                      "id":  "icon_heart",
+                      "y":  843,
+                      "h":  129,
+                      "x":  63,
+                      "w":  129,
+                      "file":  "icons/icon_heart.png"
+                  },
+                  {
+                      "id":  "icon_shield",
+                      "y":  842,
+                      "h":  130,
+                      "x":  244,
+                      "w":  132,
+                      "file":  "icons/icon_shield.png"
+                  },
+                  {
+                      "id":  "icon_boot",
+                      "y":  842,
+                      "h":  130,
+                      "x":  422,
+                      "w":  132,
+                      "file":  "icons/icon_boot.png"
+                  },
+                  {
+                      "id":  "icon_sword",
+                      "y":  842,
+                      "h":  130,
+                      "x":  604,
+                      "w":  132,
+                      "file":  "icons/icon_sword.png"
+                  },
+                  {
+                      "id":  "icon_bow",
+                      "y":  842,
+                      "h":  130,
+                      "x":  782,
+                      "w":  132,
+                      "file":  "icons/icon_bow.png"
+                  },
+                  {
+                      "id":  "icon_hourglass",
+                      "y":  842,
+                      "h":  130,
+                      "x":  962,
+                      "w":  132,
+                      "file":  "icons/icon_hourglass.png"
+                  },
+                  {
+                      "id":  "icon_bag",
+                      "y":  842,
+                      "h":  130,
+                      "x":  1140,
+                      "w":  132,
+                      "file":  "icons/icon_bag.png"
+                  },
+                  {
+                      "id":  "icon_settings",
+                      "y":  842,
+                      "h":  130,
+                      "x":  1320,
+                      "w":  132,
+                      "file":  "icons/icon_settings.png"
+                  },
+                  {
+                      "id":  "icon_heart_inner",
+                      "y":  872,
+                      "h":  72,
+                      "x":  88,
+                      "w":  80,
+                      "file":  "icons/inner/icon_heart.png"
+                  },
+                  {
+                      "id":  "icon_shield_inner",
+                      "y":  862,
+                      "h":  82,
+                      "x":  280,
+                      "w":  62,
+                      "file":  "icons/inner/icon_shield.png"
+                  },
+                  {
+                      "id":  "icon_boot_inner",
+                      "y":  856,
+                      "h":  88,
+                      "x":  454,
+                      "w":  56,
+                      "file":  "icons/inner/icon_boot.png"
+                  },
+                  {
+                      "id":  "icon_sword_inner",
+                      "y":  854,
+                      "h":  88,
+                      "x":  638,
+                      "w":  70,
+                      "file":  "icons/inner/icon_sword.png"
+                  },
+                  {
+                      "id":  "icon_bow_inner",
+                      "y":  860,
+                      "h":  82,
+                      "x":  810,
+                      "w":  76,
+                      "file":  "icons/inner/icon_bow.png"
+                  },
+                  {
+                      "id":  "icon_hourglass_inner",
+                      "y":  854,
+                      "h":  88,
+                      "x":  1000,
+                      "w":  62,
+                      "file":  "icons/inner/icon_hourglass.png"
+                  },
+                  {
+                      "id":  "icon_bag_inner",
+                      "y":  854,
+                      "h":  88,
+                      "x":  1173,
+                      "w":  76,
+                      "file":  "icons/inner/icon_bag.png"
+                  },
+                  {
+                      "id":  "icon_settings_inner",
+                      "y":  856,
+                      "h":  82,
+                      "x":  1348,
+                      "w":  76,
+                      "file":  "icons/inner/icon_settings.png"
+                  }
+              ],
+    "derived":  [
+                    {
+                        "w":  384,
+                        "source":  "bars/bar_hp.png",
+                        "h":  56,
+                        "id":  "mini_bar_hp",
+                        "file":  "bars/mini_bar_hp.png"
+                    },
+                    {
+                        "w":  384,
+                        "source":  "bars/bar_ap.png",
+                        "h":  56,
+                        "id":  "mini_bar_ap",
+                        "file":  "bars/mini_bar_ap.png"
+                    },
+                    {
+                        "w":  384,
+                        "source":  "bars/bar_mp.png",
+                        "h":  56,
+                        "id":  "mini_bar_mp",
+                        "file":  "bars/mini_bar_mp.png"
+                    }
+                ]
+}

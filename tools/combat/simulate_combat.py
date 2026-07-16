@@ -1011,6 +1011,26 @@ def _apply_enemy_archetypes(state: dict[str, Any]) -> None:
             loadout = dict(archetype["loadout"])
             loadout.update(unit.get("loadout", {}))
             unit["loadout"] = loadout
+        if "visual" not in unit and "visual_pool" in archetype:
+            visual = _archetype_visual_from_pool(archetype, unit)
+            if visual:
+                unit["visual"] = visual
+
+
+def _archetype_visual_from_pool(archetype: dict[str, Any], unit: dict[str, Any]) -> dict[str, Any]:
+    visual_pool = archetype.get("visual_pool", [])
+    if not visual_pool:
+        return {}
+    stable_key = f"{unit.get('id', '')}:{unit.get('archetype_id', '')}"
+    index = _stable_visual_pool_index(stable_key, len(visual_pool))
+    visual = visual_pool[index]
+    return dict(visual) if isinstance(visual, dict) else {}
+
+
+def _stable_visual_pool_index(stable_key: str, pool_size: int) -> int:
+    if pool_size <= 0:
+        return 0
+    return sum(ord(character) for character in stable_key) % pool_size
 
 
 def _loadout_items(state: dict[str, Any], actor: dict[str, Any]) -> list[dict[str, Any]]:

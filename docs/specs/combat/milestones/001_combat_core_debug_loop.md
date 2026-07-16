@@ -390,6 +390,38 @@ Latest verified scope:
 - dungeon combat board theme is specified by slice 083: `debug_dungeon_combat_showcase` uses a generated grey stone board background, the combat scenario picker exposes it as `Old Mine dungeon`, and dungeon props are used for blocked, cover, highground, and floor accents without changing combat rules.
 - bleeding death turn skipping is specified and verified by slice 084: if a bleeding unit dies at its own turn start while combat remains in progress, the resolver emits death events, auto-ends that dead actor's turn, and advances to the next living unit.
 - debug force victory is specified and verified by slice 085: `CombatDebug.tscn` exposes `Debug Win` while combat is in progress, forces a victory-shaped sandbox state, and keeps the normal result payload available for dungeon return.
+- combat UI restructure is the next planned combat presentation track: new/processed assets should feed a cleaner in-game HUD, board frame, skillbar, unit panels, turn order, and combat feedback pass before deeper encounter authoring.
+- combat asset intake V1 is specified and verified by slice 086: green-background character sheets from hero mercenaries, NPCs, and bandit villains are extracted into transparent processed PNG frames with mirrored left/right variants and manifests.
+- combat debug now resolves the player warrior and two bandit enemies from processed sheet assets; the board keeps a 2.5D screen-aligned tactical layout with 128x96 movement cells and 192 px unit bounds rather than an isometric/diamond projection.
+- combat units now use foot-anchored positioning so the character stands on the bottom of the movement cell instead of being centered inside a square overlay.
+- combat movement now cycles through processed `walk` frames with frame-suffixed visual actions such as `walk:1`, so moving units no longer slide across the board on one frozen lifted-leg sprite.
+- after movement finishes, the moved unit faces the nearest living opponent again instead of staying locked to the direction of travel.
+- debug showcase model/loadout alignment was tightened: the axe bandit uses a melee axe profile, while the bandit archer remains on the bow/ranged profile.
+- unit HP/AP/MP labels were raised above the sprite body so they no longer cover character heads at the larger 2.5D scale.
+- combat HUD restructure V1 is specified and verified by slice 087: `assets/ui/combat/assets` is cut into named processed PNGs, action buttons use atlas slot frames/icons, and core combat panels use the processed fantasy frame where practical.
+- Validation passed on 2026-07-16:
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/presentation/combat_ui_asset_pipeline_tests.gd`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn --quit --resolution 2560x1440`
+  - `python tools\validators\validate_all.py`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd`
+- Validation passed on 2026-07-16:
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn --quit --resolution 2560x1440`
+  - `python tools\validators\validate_all.py`
+- Validation passed on 2026-07-16:
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/presentation/combat_mercenary_asset_pipeline_tests.gd`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn --quit --resolution 2560x1440`
+  - `python tools\validators\validate_all.py`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd`
+- Validation passed on 2026-07-16:
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/presentation/combat_mercenary_asset_pipeline_tests.gd`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn --quit --resolution 2560x1440`
+  - `python tools\validators\validate_all.py`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd`
+- Validation passed on 2026-07-16:
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/presentation/combat_mercenary_asset_pipeline_tests.gd`
+  - `python tools\validators\validate_all.py`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd`
+  - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn --quit --resolution 2560x1440`
 - Validation passed on 2026-07-16:
   - `python tools\validators\validate_all.py`
   - `& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd`
@@ -635,23 +667,136 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
      - existing result payload remains available for dungeon return flow.
    - Test proof: `scripts/presentation/combat_debug_force_victory_tests.gd`.
 
-12. **Next - Combat Encounter Authoring V1**
+12. **Done - Combat UI Asset Intake V1**
+    - Goal: prepare the new combat UI/image assets for implementation without mixing raw references, processed variants, and in-game imports.
+    - Owner spec: `presentation/086_combat_ui_asset_pipeline_v1.md`.
+    - Slice: `slices/086_combat_ui_asset_pipeline_v1.md`.
+    - Implementation:
+      - `tools/characters/extract_mercenary_combat_heroes.ps1`
+      - `assets/combat/characters/heroes/mercenaries/processed/`
+      - `assets/combat/characters/npc/processed/`
+      - `assets/combat/characters/villains/bandits/processed/`
+      - `assets/combat/characters/processed_character_sheets_manifest.json`
+      - `scripts/presentation/combat/combat_unit_art.gd`
+      - `scripts/presentation/combat_debug.gd`
+    - Test proof:
+      - `scripts/presentation/combat_mercenary_asset_pipeline_tests.gd`;
+      - `python tools\validators\validate_all.py`;
+      - Godot combat slice tests;
+      - Godot headless combat scene load;
+      - manual visual review gap documented for image quality.
+
+13. **Done - Combat HUD Restructure V1**
+    - Goal: reorganize the combat screen from debug-useful layout into a cleaner game-facing battle HUD.
+    - Owner spec: `presentation/087_combat_hud_restructure_v1.md`.
+    - Slice: `slices/087_combat_hud_restructure_v1.md`.
+    - Implementation:
+      - `tools/ui/extract_combat_ui_assets.ps1`
+      - `assets/ui/combat/processed/`
+      - `scripts/presentation/combat_debug.gd`
+      - `scripts/presentation/combat_ui_asset_pipeline_tests.gd`
+    - Test proof:
+      - `scripts/presentation/combat_ui_asset_pipeline_tests.gd`;
+      - Godot headless scene load;
+      - `python tools\validators\validate_all.py`;
+      - Godot combat slice tests;
+      - manual screenshot review gap documented in the slice.
+    - Follow-up completed:
+      - main action slots are now enlarged and icon-only to avoid action-name overflow;
+      - bottom HUD height was increased to fit the new slots;
+      - new `bandit_brute`, `bandit_carnage`, and `bandit_marauder` sheets were processed and registered in `CombatUnitArt`;
+      - `scripts/presentation/combat_mercenary_asset_pipeline_tests.gd` now covers the new bandit assets and action slot sizing.
+    - Latest follow-up completed:
+      - action hover updates the action detail panel without putting text back into the icon slots;
+      - action feed and turn-order labels are wrapped/clipped so copy stays inside framed UI;
+      - the top HUD now summarizes active unit HP/AP/MP while overhead labels remain on units;
+      - enemy visuals now resolve from `archetype_id` before generated unit id fallback, preventing archer/melee visual swaps in randomized dungeon combat;
+      - enemy archetypes can now define role-compatible `visual_pool` entries; resolver preparation deterministically assigns a visual from that pool unless the unit has explicit `visual`;
+      - defeated units now play death frames and remain visible as non-blocking corpse visuals.
+    - Latest presentation pass completed:
+      - attack, hit, and death beats now cycle through processed sprite frames instead of holding one static combat frame;
+      - processed `bar_hp`, `bar_ap`, and `bar_mp` assets are used for active-unit overlay resources;
+      - a board-overlay resource panel and visible action/log panel were added so important combat state is visible even when debug panels are hidden;
+      - movement cells increased to `140x104` with `208x208` unit bounds so the board claims more of the available combat screen;
+      - the bottom skillbar now shrinks toward its contents instead of forcing a full-width debug strip.
+    - Correction completed:
+      - processed HP/AP/MP bars are now limited to the active-unit board overlay UI;
+      - unit-overhead board resource info returned to compact text labels, matching the earlier readable per-unit board markers.
+    - Latest scale/layout correction completed:
+      - active-unit HP/AP/MP bars now use generated mini bar PNGs at `384x56` inside a readable `394x176` top-left board overlay, with no expanding text and no native-scale bar atlas/panel frame;
+      - the board-overlay combat log/feed was moved into its own compact panel away from the active-unit resource bars.
+      - board-overlay/action log panels now render recent feed/event lines or fallback feedback text, so framed log boxes are not empty after scene load.
+    - Latest animation scale correction completed:
+      - processed character frames now render on a larger stable foot-anchored canvas so attack, walk, hit, idle, and death frames do not resize units per frame;
+      - processed enemy and mercenary visuals are normalized to the player `warrior` pose height, so normal combat characters share the player's visual scale unless a future large-unit override is added;
+      - dead processed-sheet units hold a visible corpse frame selected from the death sequence instead of collapsing to a tiny final fade/remnant frame.
+    - Latest validation:
+      - `scripts/presentation/combat_mercenary_asset_pipeline_tests.gd` passed;
+      - `scripts/presentation/combat_ui_asset_pipeline_tests.gd` passed;
+      - Godot headless combat scene load passed at 2560x1440;
+      - `python tools\validators\validate_all.py` passed;
+      - Godot combat slice tests passed.
+
+14. **Next - Combat Board Frame And Panel Skin V1**
+    - Goal: replace the current rough battle chrome with asset-backed framed panels that match the tactical fantasy direction.
+    - Owner spec: new `presentation/088_combat_board_frame_skin_v1.md`.
+    - Slice: `slices/088_combat_board_frame_skin_v1.md`.
+    - Required behavior:
+      - board frame, side/top panels, event feed, and modal/tooltip surfaces use the new visual language;
+      - no text overlaps panel borders at target resolutions;
+      - board visibility remains strong under movement/target overlays;
+      - fallback StyleBox rendering still works if an asset is missing.
+    - Test proof:
+      - Godot headless scene load;
+      - layout helper assertions where practical;
+      - manual screenshot review.
+
+15. **Planned - Combat Unit And Resource Icon Pass V1**
+    - Goal: use processed combat assets to improve unit readability and resource communication.
+    - Owner spec: new `presentation/089_combat_unit_resource_assets_v1.md`.
+    - Slice: `slices/089_combat_unit_resource_assets_v1.md`.
+    - Required behavior:
+      - unit portraits/sprites and combat posture assets are resolved from stable paths;
+      - HP/AP/MP/resource icons replace or support plain text where readable;
+      - active unit, hovered unit, damaged unit, dead unit, and status-bearing unit states remain visually distinct;
+      - missing unit/icon assets fall back deterministically.
+    - Test proof:
+      - existing unit visual state tests updated if path/state logic changes;
+      - Godot headless scene load;
+      - manual visual review.
+
+16. **Planned - Combat Feedback Polish V2**
+    - Goal: make action feedback feel game-like after the HUD and asset skin are in place.
+    - Owner spec: update `presentation/074_combat_action_feedback.md` or create `presentation/090_combat_feedback_polish_v2.md`.
+    - Slice: `slices/090_combat_feedback_polish_v2.md`.
+    - Required behavior:
+      - floating damage/miss/status text matches the new UI style;
+      - selected action, target preview, hit chance, damage, AP/MP cost, and rejection reasons are visually consistent;
+      - combat result/victory/defeat presentation is readable for dungeon return testing;
+      - feedback remains event-driven and does not duplicate resolver rules in presentation.
+    - Test proof:
+      - floating text and targeting preview helper tests;
+      - Godot headless scene load;
+      - manual screenshot/playthrough review.
+
+17. **Planned - Combat Encounter Authoring V1**
     - Goal: make one new combat encounter from map + archetypes without code changes.
     - Owner spec: map/encounter authoring docs.
-    - Slice: `slices/083_combat_encounter_authoring_v1.md`
+    - Slice: `slices/091_combat_encounter_authoring_v1.md`.
     - Required behavior:
       - documented steps for adding a combat map encounter;
       - validator checks map reference, spawns, archetypes, loadouts, and background;
       - debug scene scenario catalog can load it without controller edits.
     - Test proof: validators plus Godot project load.
 
-13. **Combat Readiness Review For Dungeon**
-    - Goal: run the exit criteria as a final checklist.
+18. **Planned - Combat Readiness Review For Dungeon**
+    - Goal: run the exit criteria as a final checklist after the UI/asset pass and encounter authoring work.
     - Owner spec: this milestone plus any transition/boundary spec.
-    - Slice: `slices/084_combat_ready_for_dungeon.md`
+    - Slice: `slices/092_combat_ready_for_dungeon.md`.
     - Required behavior:
       - all required roadmap items are done or explicitly deferred;
       - validation commands pass;
       - manual UI gaps are listed;
+      - combat scene is readable enough for beta dungeon-combat testing without relying on debug logs;
       - next milestone for dungeon can start without re-planning combat basics.
     - Test proof: full validation plus documented manual playthrough of the debug combat scene.

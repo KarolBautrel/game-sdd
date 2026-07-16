@@ -23,6 +23,10 @@ This builds on `ai/065_enemy_archetype_loadout_v1.md`.
 - Beast archetypes may use natural-weapon item profiles, such as fangs or claws, through the same `loadout` contract as humanoids.
 - Units keep unit-local stats, resources, position, team, visual art, and explicit overrides.
 - Archetype metadata such as `role`, `family`, and `display_name` is allowed for validators, authoring tools, and debug UI.
+- Archetypes may define `visual_pool`, an ordered list of compatible visual configs such as `{ "faction": "villains", "character": "bandit_archer" }`.
+- If an enemy unit references an archetype with `visual_pool` and does not define explicit `visual`, combat preparation assigns one deterministic visual from that pool based on unit identity.
+- Unit-local `visual` always overrides the archetype visual pool.
+- Visual pools must match the archetype's weapon role; for example, `raider_archer` may use archer/bow bandit visuals, while melee or shield archetypes must use melee/shield visuals.
 - AI action choice remains driven by the concrete actions made available after archetype application:
   - melee roles close distance or attack adjacent players;
   - ranged roles shoot legal visible targets before moving;

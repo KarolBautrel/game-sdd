@@ -1,0 +1,28 @@
+{
+    "generated_by":  "tools/characters/extract_mercenary_combat_heroes.ps1",
+    "category":  "hero_mercenaries",
+    "processed_root":  "assets\\combat\\characters\\heroes\\mercenaries\\processed",
+    "items":  [
+                  {
+                      "category":  "hero_mercenaries",
+                      "character_id":  "archer_1",
+                      "source":  "assets\\combat\\characters\\heroes\\mercenaries\\archer\\archer_1\\call_mn0hy4hjxqFSb8wRQEJ327VH.png",
+                      "output":  "assets\\combat\\characters\\heroes\\mercenaries\\processed\\archer_1",
+                      "frame_count":  24
+                  },
+                  {
+                      "category":  "hero_mercenaries",
+                      "character_id":  "rogue_1",
+                      "source":  "assets\\combat\\characters\\heroes\\mercenaries\\rogue\\rogue_1\\call_eY72QD2n5Fokm0YD1aNSB1Kr.png",
+                      "output":  "assets\\combat\\characters\\heroes\\mercenaries\\processed\\rogue_1",
+                      "frame_count":  25
+                  },
+                  {
+                      "category":  "hero_mercenaries",
+                      "character_id":  "warrior",
+                      "source":  "assets\\combat\\characters\\heroes\\mercenaries\\warrior\\call_2cPvOEj1TIZnry8eXzsPqMpW.png",
+                      "output":  "assets\\combat\\characters\\heroes\\mercenaries\\processed\\warrior",
+                      "frame_count":  23
+                  }
+              ]
+}

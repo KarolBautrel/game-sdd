@@ -1099,7 +1099,8 @@ const SLICES := [
 		},
 		"unit_expectations": {
 			"unit_player_001": {"resources": {"hp": 16}},
-			"unit_enemy_archer": {"resources": {"ap": 0}},
+			"unit_enemy_archer": {"resources": {"ap": 0}, "visual": {"faction": "villains", "character": "bandit_archer"}},
+			"unit_enemy_spider": {"visual": {"faction": "villains", "character": "spider_atlas"}},
 		},
 	},
 	{
@@ -1457,6 +1458,13 @@ func _validate_unit_expectation(slice_id: String, unit: Dictionary, expectation:
 			status_ids.append(status["id"])
 		if status_ids != expectation["statuses"]:
 			errors.append("%s: expected statuses %s, got %s" % [slice_id, expectation["statuses"], status_ids])
+
+	if expectation.has("visual"):
+		var expected_visual: Dictionary = expectation["visual"]
+		var actual_visual: Dictionary = unit.get("visual", {})
+		for key: String in expected_visual:
+			if actual_visual.get(key, null) != expected_visual[key]:
+				errors.append("%s: expected visual %s=%s, got %s" % [slice_id, key, expected_visual[key], actual_visual.get(key, null)])
 
 	return errors
 

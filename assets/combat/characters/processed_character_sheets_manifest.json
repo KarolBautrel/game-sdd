@@ -1,0 +1,103 @@
+{
+    "generated_by":  "tools/characters/extract_mercenary_combat_heroes.ps1",
+    "items":  [
+                  {
+                      "category":  "hero_mercenaries",
+                      "character_id":  "archer_1",
+                      "source":  "assets\\combat\\characters\\heroes\\mercenaries\\archer\\archer_1\\call_mn0hy4hjxqFSb8wRQEJ327VH.png",
+                      "output":  "assets\\combat\\characters\\heroes\\mercenaries\\processed\\archer_1",
+                      "frame_count":  24
+                  },
+                  {
+                      "category":  "hero_mercenaries",
+                      "character_id":  "rogue_1",
+                      "source":  "assets\\combat\\characters\\heroes\\mercenaries\\rogue\\rogue_1\\call_eY72QD2n5Fokm0YD1aNSB1Kr.png",
+                      "output":  "assets\\combat\\characters\\heroes\\mercenaries\\processed\\rogue_1",
+                      "frame_count":  25
+                  },
+                  {
+                      "category":  "hero_mercenaries",
+                      "character_id":  "warrior",
+                      "source":  "assets\\combat\\characters\\heroes\\mercenaries\\warrior\\call_2cPvOEj1TIZnry8eXzsPqMpW.png",
+                      "output":  "assets\\combat\\characters\\heroes\\mercenaries\\processed\\warrior",
+                      "frame_count":  23
+                  },
+                  {
+                      "category":  "npc",
+                      "character_id":  "bandit_spearman",
+                      "source":  "assets\\combat\\characters\\npc\\bandit_spearman\\call_i87vibUnCXFEozPh1zmPFoD5.png",
+                      "output":  "assets\\combat\\characters\\npc\\processed\\bandit_spearman",
+                      "frame_count":  25
+                  },
+                  {
+                      "category":  "npc",
+                      "character_id":  "crossbowman",
+                      "source":  "assets\\combat\\characters\\npc\\crossbowman\\call_i1uz4cBE1giGl8zLxg5uAvtn.png",
+                      "output":  "assets\\combat\\characters\\npc\\processed\\crossbowman",
+                      "frame_count":  25
+                  },
+                  {
+                      "category":  "npc",
+                      "character_id":  "guardian",
+                      "source":  "assets\\combat\\characters\\npc\\guardian\\call_BAZ0M2o5C7SXV8AxH3Dq6Oaf.png",
+                      "output":  "assets\\combat\\characters\\npc\\processed\\guardian",
+                      "frame_count":  26
+                  },
+                  {
+                      "category":  "npc",
+                      "character_id":  "wolf",
+                      "source":  "assets\\combat\\characters\\npc\\wolf\\wold_1\\call_FOvq9oTjRnU6oADidVIcugET.png",
+                      "output":  "assets\\combat\\characters\\npc\\processed\\wolf",
+                      "frame_count":  25
+                  },
+                  {
+                      "category":  "npc",
+                      "character_id":  "wolf",
+                      "source":  "assets\\combat\\characters\\npc\\wolf\\wolf_2\\call_fsUnuEoLUp0StqIrBYgTENFJ.png",
+                      "output":  "assets\\combat\\characters\\npc\\processed\\wolf",
+                      "frame_count":  23
+                  },
+                  {
+                      "category":  "villain_bandits",
+                      "character_id":  "axe_bandit",
+                      "source":  "assets\\combat\\characters\\villains\\bandits\\axe_bandit\\call_JUsL4KzldWbqhzx7LTlgYSQB.png",
+                      "output":  "assets\\combat\\characters\\villains\\bandits\\processed\\axe_bandit",
+                      "frame_count":  25
+                  },
+                  {
+                      "category":  "villain_bandits",
+                      "character_id":  "bandit_archer",
+                      "source":  "assets\\combat\\characters\\villains\\bandits\\bandit_archer\\call_SNRwEgdyZR2lttox8dth0iTK.png",
+                      "output":  "assets\\combat\\characters\\villains\\bandits\\processed\\bandit_archer",
+                      "frame_count":  26
+                  },
+                  {
+                      "category":  "villain_bandits",
+                      "character_id":  "bandit_brute",
+                      "source":  "assets\\combat\\characters\\villains\\bandits\\bandit_brute\\call_SfhWNsH0DgK9AdvTAzo9r6r4.png",
+                      "output":  "assets\\combat\\characters\\villains\\bandits\\processed\\bandit_brute",
+                      "frame_count":  25
+                  },
+                  {
+                      "category":  "villain_bandits",
+                      "character_id":  "bandit_carnage",
+                      "source":  "assets\\combat\\characters\\villains\\bandits\\bandit_carnage\\call_6TLvZopqqYwHVY5KxCU0A6zf.png",
+                      "output":  "assets\\combat\\characters\\villains\\bandits\\processed\\bandit_carnage",
+                      "frame_count":  25
+                  },
+                  {
+                      "category":  "villain_bandits",
+                      "character_id":  "bandit_marauder",
+                      "source":  "assets\\combat\\characters\\villains\\bandits\\bandit_marauder\\call_h8IdqPS4auvoyi3qQu8vMHFc.png",
+                      "output":  "assets\\combat\\characters\\villains\\bandits\\processed\\bandit_marauder",
+                      "frame_count":  24
+                  },
+                  {
+                      "category":  "villain_bandits",
+                      "character_id":  "bandit_rogue",
+                      "source":  "assets\\combat\\characters\\villains\\bandits\\bandit_rogue\\call_eDrkRqduZvVDyOpwapAB54SN.png",
+                      "output":  "assets\\combat\\characters\\villains\\bandits\\processed\\bandit_rogue",
+                      "frame_count":  25
+                  }
+              ]
+}

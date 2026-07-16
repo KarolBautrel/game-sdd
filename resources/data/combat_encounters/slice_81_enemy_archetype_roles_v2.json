@@ -50,6 +50,11 @@
       "role": "melee",
       "family": "humanoid",
       "display_name": "Raider Swordsman",
+      "visual_pool": [
+        { "faction": "villains", "character": "axe_bandit" },
+        { "faction": "villains", "character": "bandit_marauder" },
+        { "faction": "villains", "character": "bandit_rogue" }
+      ],
       "available_actions": ["move", "defend", "end_turn"],
       "loadout": { "main_hand": "raider_sword", "off_hand": null, "armor": null }
     },
@@ -58,6 +63,10 @@
       "role": "bruiser",
       "family": "humanoid",
       "display_name": "Raider Shieldman",
+      "visual_pool": [
+        { "faction": "villains", "character": "bandit_brute" },
+        { "faction": "villains", "character": "bandit_spearman" }
+      ],
       "available_actions": ["move", "defend", "end_turn"],
       "loadout": { "main_hand": "raider_sword", "off_hand": "raider_shield", "armor": null }
     },
@@ -66,6 +75,9 @@
       "role": "ranged",
       "family": "humanoid",
       "display_name": "Raider Archer",
+      "visual_pool": [
+        { "faction": "villains", "character": "bandit_archer" }
+      ],
       "available_actions": ["move", "end_turn"],
       "loadout": { "main_hand": "raider_bow", "off_hand": null, "armor": null }
     },

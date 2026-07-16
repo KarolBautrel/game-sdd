@@ -76,15 +76,15 @@
 
                                                                     ]
                                              },
-                          "raider_sword":  {
-                                               "id":  "raider_sword",
+                          "raider_axe":  {
+                                               "id":  "raider_axe",
                                                "slot":  "main_hand",
                                                "grants_actions":  [
                                                                       "basic_attack"
                                                                   ],
                                                "action_profiles":  {
                                                                        "basic_attack":  {
-                                                                                            "id":  "raider_sword_basic_attack",
+                                                                                            "id":  "raider_axe_basic_attack",
                                                                                             "action_id":  "basic_attack",
                                                                                             "range":  1,
                                                                                             "ap_cost":  1,
@@ -1222,13 +1222,27 @@
                                                       "role":  "melee",
                                                       "family":  "humanoid",
                                                       "display_name":  "Raider Swordsman",
+                                                      "visual_pool":  [
+                                                                          {
+                                                                              "faction":  "villains",
+                                                                              "character":  "axe_bandit"
+                                                                          },
+                                                                          {
+                                                                              "faction":  "villains",
+                                                                              "character":  "bandit_marauder"
+                                                                          },
+                                                                          {
+                                                                              "faction":  "villains",
+                                                                              "character":  "bandit_rogue"
+                                                                          }
+                                                                      ],
                                                       "available_actions":  [
                                                                                 "move",
                                                                                 "defend",
                                                                                 "end_turn"
                                                                             ],
                                                       "loadout":  {
-                                                                      "main_hand":  "raider_sword",
+                                                                      "main_hand":  "raider_axe",
                                                                       "off_hand":  null,
                                                                       "armor":  null
                                                                   }
@@ -1238,6 +1252,12 @@
                                                    "role":  "ranged",
                                                    "family":  "humanoid",
                                                    "display_name":  "Raider Archer",
+                                                   "visual_pool":  [
+                                                                       {
+                                                                           "faction":  "villains",
+                                                                           "character":  "bandit_archer"
+                                                                       }
+                                                                   ],
                                                    "available_actions":  [
                                                                              "move",
                                                                              "end_turn"

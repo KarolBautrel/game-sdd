@@ -1,0 +1,49 @@
+{
+    "generated_by":  "tools/characters/extract_mercenary_combat_heroes.ps1",
+    "category":  "villain_bandits",
+    "processed_root":  "assets\\combat\\characters\\villains\\bandits\\processed",
+    "items":  [
+                  {
+                      "category":  "villain_bandits",
+                      "character_id":  "axe_bandit",
+                      "source":  "assets\\combat\\characters\\villains\\bandits\\axe_bandit\\call_JUsL4KzldWbqhzx7LTlgYSQB.png",
+                      "output":  "assets\\combat\\characters\\villains\\bandits\\processed\\axe_bandit",
+                      "frame_count":  25
+                  },
+                  {
+                      "category":  "villain_bandits",
+                      "character_id":  "bandit_archer",
+                      "source":  "assets\\combat\\characters\\villains\\bandits\\bandit_archer\\call_SNRwEgdyZR2lttox8dth0iTK.png",
+                      "output":  "assets\\combat\\characters\\villains\\bandits\\processed\\bandit_archer",
+                      "frame_count":  26
+                  },
+                  {
+                      "category":  "villain_bandits",
+                      "character_id":  "bandit_brute",
+                      "source":  "assets\\combat\\characters\\villains\\bandits\\bandit_brute\\call_SfhWNsH0DgK9AdvTAzo9r6r4.png",
+                      "output":  "assets\\combat\\characters\\villains\\bandits\\processed\\bandit_brute",
+                      "frame_count":  25
+                  },
+                  {
+                      "category":  "villain_bandits",
+                      "character_id":  "bandit_carnage",
+                      "source":  "assets\\combat\\characters\\villains\\bandits\\bandit_carnage\\call_6TLvZopqqYwHVY5KxCU0A6zf.png",
+                      "output":  "assets\\combat\\characters\\villains\\bandits\\processed\\bandit_carnage",
+                      "frame_count":  25
+                  },
+                  {
+                      "category":  "villain_bandits",
+                      "character_id":  "bandit_marauder",
+                      "source":  "assets\\combat\\characters\\villains\\bandits\\bandit_marauder\\call_h8IdqPS4auvoyi3qQu8vMHFc.png",
+                      "output":  "assets\\combat\\characters\\villains\\bandits\\processed\\bandit_marauder",
+                      "frame_count":  24
+                  },
+                  {
+                      "category":  "villain_bandits",
+                      "character_id":  "bandit_rogue",
+                      "source":  "assets\\combat\\characters\\villains\\bandits\\bandit_rogue\\call_eDrkRqduZvVDyOpwapAB54SN.png",
+                      "output":  "assets\\combat\\characters\\villains\\bandits\\processed\\bandit_rogue",
+                      "frame_count":  25
+                  }
+              ]
+}

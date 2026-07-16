@@ -129,7 +129,7 @@ mouse_filter = 2
 [node name="BottomHud" type="PanelContainer" parent="RootMargin/RootVBox"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(0, 118)
+custom_minimum_size = Vector2(0, 142)
 size_flags_horizontal = 3
 
 [node name="BottomHBox" type="HBoxContainer" parent="RootMargin/RootVBox/BottomHud"]

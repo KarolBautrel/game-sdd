@@ -11,6 +11,32 @@ const CombatUnitVisualState := preload("res://scripts/presentation/combat/combat
 
 const DEFAULT_ENCOUNTER_PATH := CombatScenarioCatalog.DEFAULT_ENCOUNTER_PATH
 const PIXEL_PANEL_TEXTURE_PATH := "res://assets/ui/combat/pixel_panel.png"
+const COMBAT_UI_PANEL_TEXTURE_PATH := "res://assets/ui/combat/processed/frames/panel_small.png"
+const COMBAT_UI_SLOT_NORMAL_PATH := "res://assets/ui/combat/processed/slots/slot_normal.png"
+const COMBAT_UI_SLOT_SELECTED_PATH := "res://assets/ui/combat/processed/slots/slot_selected.png"
+const COMBAT_UI_SLOT_DISABLED_PATH := "res://assets/ui/combat/processed/slots/slot_disabled.png"
+const COMBAT_UI_BAR_HP_PATH := "res://assets/ui/combat/processed/bars/mini_bar_hp.png"
+const COMBAT_UI_BAR_AP_PATH := "res://assets/ui/combat/processed/bars/mini_bar_ap.png"
+const COMBAT_UI_BAR_MP_PATH := "res://assets/ui/combat/processed/bars/mini_bar_mp.png"
+const OVERLAY_RESOURCE_PANEL_SIZE := Vector2(394, 176)
+const OVERLAY_RESOURCE_BAR_SIZE := Vector2(384, 56)
+const OVERLAY_LOG_PANEL_SIZE := Vector2(460, 132)
+const OVERLAY_MARGIN := 14.0
+const ACTION_BUTTON_SIZE := Vector2(132, 118)
+const ACTION_BUTTON_ICON_MAX_WIDTH := 66
+const BOTTOM_HUD_MIN_HEIGHT := 142
+const ACTION_ICON_PATHS := {
+	"move": "res://assets/ui/combat/processed/icons/inner/icon_boot.png",
+	"basic_attack": "res://assets/ui/combat/processed/icons/inner/icon_sword.png",
+	"power_strike": "res://assets/ui/combat/processed/icons/inner/icon_sword.png",
+	"deep_cut": "res://assets/ui/combat/processed/icons/inner/icon_sword.png",
+	"guard_break": "res://assets/ui/combat/processed/icons/inner/icon_shield.png",
+	"ranged_attack": "res://assets/ui/combat/processed/icons/inner/icon_bow.png",
+	"aimed_shot": "res://assets/ui/combat/processed/icons/inner/icon_bow.png",
+	"shield_wall": "res://assets/ui/combat/processed/icons/inner/icon_shield.png",
+	"defend": "res://assets/ui/combat/processed/icons/inner/icon_shield.png",
+	"end_turn": "res://assets/ui/combat/processed/icons/inner/icon_hourglass.png",
+}
 const GRASS_FLOOR_TEXTURE_PATHS := [
 	"res://assets/combat/terrain/grass/meadow_grass_floor_00.png",
 	"res://assets/combat/terrain/grass/meadow_grass_floor_01.png",
@@ -29,17 +55,18 @@ const GRASS_FLOOR_TEXTURE_PATHS := [
 	"res://assets/combat/terrain/grass/meadow_grass_floor_14.png",
 	"res://assets/combat/terrain/grass/meadow_grass_floor_15.png",
 ]
-const UNIT_ICON_SIZE := Vector2i(150, 150)
+const UNIT_ICON_SIZE := Vector2i(384, 240)
 const UNIT_RESOURCE_LABEL_SIZE := Vector2(112, 36)
-const UNIT_RESOURCE_LABEL_OFFSET_Y := 6.0
+const UNIT_RESOURCE_LABEL_OFFSET_Y := -56.0
 const UNIT_STATUS_ICON_SIZE := Vector2(20, 20)
 const UNIT_STATUS_ICON_GAP := 2.0
 const UNIT_TARGET_PREVIEW_LABEL_SIZE := Vector2(136, 48)
 const UNIT_TARGET_PREVIEW_GAP := 3.0
-const TILE_SIZE := 112
+const TILE_WIDTH := 140
+const TILE_HEIGHT := 104
 const HIGHGROUND_UNIT_OFFSET_Y := -30.0
-const HIGHGROUND_UNIT_BASE_SIZE := Vector2(104, 22)
-const HIGHGROUND_UNIT_BASE_OFFSET := Vector2(23, 118)
+const HIGHGROUND_UNIT_BASE_SIZE := Vector2(116, 24)
+const HIGHGROUND_UNIT_BASE_OFFSET := Vector2(46, 168)
 const GRASS_PATCH_SIZE := 64
 const DECORATION_SIZE_BY_KIND := {
 	"grass_tuft": Vector2(52, 52),
@@ -53,14 +80,19 @@ const DECORATION_SIZE_BY_KIND := {
 }
 const TILE_GAP := 0
 const MOVE_STEP_SECONDS := 0.52
-const COMBAT_LUNGE_PIXELS := 18.0
-const COMBAT_WINDUP_SECONDS := 0.09
-const COMBAT_RETURN_SECONDS := 0.14
+const WALK_CYCLE_SECONDS := 0.11
+const COMBAT_LUNGE_PIXELS := 20.0
+const COMBAT_WINDUP_SECONDS := 0.28
+const COMBAT_RETURN_SECONDS := 0.28
+const COMBAT_CYCLE_SECONDS := 0.09
 const HIT_SHAKE_PIXELS := 7.0
 const HIT_SHAKE_SECONDS := 0.055
+const HIT_CYCLE_SECONDS := 0.08
 const DEATH_FALL_PIXELS := 16.0
 const DEATH_SECONDS := 0.65
 const DEATH_HOLD_SECONDS := 0.45
+const DEATH_CYCLE_SECONDS := 0.12
+const CORPSE_MODULATE := Color(0.74, 0.68, 0.62, 0.86)
 const PRELOAD_UNIT_VISUAL_ACTIONS := ["pose", "combat_idle", "walk", "combat", "hit", "death", "status_reaction"]
 const PRELOAD_UNIT_DIRECTIONS := ["north", "north_east", "east", "south_east", "south", "south_west", "west", "north_west"]
 const DECORATION_BY_POSITION := {
@@ -136,6 +168,12 @@ const ACTION_LABELS := CombatTextUtil.ACTION_LABELS
 @onready var turn_order_panel: PanelContainer = %TurnOrderPanel
 @onready var turn_order_label: Label = %TurnOrderLabel
 
+var board_overlay_layer: Control = null
+var overlay_resource_panel: PanelContainer = null
+var overlay_resource_label: Label = null
+var overlay_resource_bars: Dictionary = {}
+var overlay_log_panel: PanelContainer = null
+var overlay_log_label: Label = null
 var state: Dictionary = {}
 var command_index := 1
 var selected_action := "move"
@@ -149,6 +187,8 @@ var unit_facing: Dictionary = {}
 var unit_visual_action: Dictionary = {}
 var unit_texture_cache: Dictionary = {}
 var tile_texture_cache: Dictionary = {}
+var ui_texture_cache: Dictionary = {}
+var ui_style_cache: Dictionary = {}
 var grass_image_cache: Dictionary = {}
 var terrain_decoration_texture_cache: Dictionary = {}
 var preloaded_unit_visual_keys: Dictionary = {}
@@ -166,6 +206,7 @@ var presentation_cache_ready := false
 
 
 func _ready() -> void:
+	_ensure_board_overlay_controls()
 	_apply_pixel_theme()
 	if _run_session().has_pending_combat_launch():
 		current_encounter_path = _run_session().combat_encounter_path()
@@ -205,6 +246,7 @@ func _render() -> void:
 	_render_units()
 
 	_render_action_panel()
+	_render_board_overlay()
 	_render_status()
 	_render_feedback()
 	_render_legend()
@@ -296,8 +338,8 @@ func _grid_render_key() -> String:
 func _build_tile(position: Dictionary) -> Button:
 	var tile := Button.new()
 	tile.disabled = animation_locked
-	tile.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
-	tile.size = Vector2(TILE_SIZE, TILE_SIZE)
+	tile.custom_minimum_size = Vector2(TILE_WIDTH, TILE_HEIGHT)
+	tile.size = Vector2(TILE_WIDTH, TILE_HEIGHT)
 	tile.flat = true
 	tile.text = ""
 	tile.tooltip_text = _tile_tooltip(position)
@@ -313,8 +355,8 @@ func _build_tile(position: Dictionary) -> Button:
 		var tint := ColorRect.new()
 		tint.name = "TerrainTint"
 		tint.color = terrain_tint
-		tint.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
-		tint.size = Vector2(TILE_SIZE, TILE_SIZE)
+		tint.custom_minimum_size = Vector2(TILE_WIDTH, TILE_HEIGHT)
+		tint.size = Vector2(TILE_WIDTH, TILE_HEIGHT)
 		tint.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tile.add_child(tint)
 
@@ -322,18 +364,18 @@ func _build_tile(position: Dictionary) -> Button:
 		var ledge_shadow := ColorRect.new()
 		ledge_shadow.name = "HighgroundLedgeShadow"
 		ledge_shadow.color = Color(0.05, 0.035, 0.015, 0.42)
-		ledge_shadow.position = Vector2(10, TILE_SIZE - 28)
-		ledge_shadow.custom_minimum_size = Vector2(TILE_SIZE - 20, 18)
-		ledge_shadow.size = Vector2(TILE_SIZE - 20, 18)
+		ledge_shadow.position = Vector2(10, TILE_HEIGHT - 28)
+		ledge_shadow.custom_minimum_size = Vector2(TILE_WIDTH - 20, 18)
+		ledge_shadow.size = Vector2(TILE_WIDTH - 20, 18)
 		ledge_shadow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tile.add_child(ledge_shadow)
 
 		var ledge_rim := ColorRect.new()
 		ledge_rim.name = "HighgroundLedgeRim"
 		ledge_rim.color = Color(0.86, 0.70, 0.26, 0.54)
-		ledge_rim.position = Vector2(12, TILE_SIZE - 32)
-		ledge_rim.custom_minimum_size = Vector2(TILE_SIZE - 24, 4)
-		ledge_rim.size = Vector2(TILE_SIZE - 24, 4)
+		ledge_rim.position = Vector2(12, TILE_HEIGHT - 32)
+		ledge_rim.custom_minimum_size = Vector2(TILE_WIDTH - 24, 4)
+		ledge_rim.size = Vector2(TILE_WIDTH - 24, 4)
 		ledge_rim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tile.add_child(ledge_rim)
 
@@ -345,7 +387,7 @@ func _build_tile(position: Dictionary) -> Button:
 		decoration.texture = decoration_texture
 		decoration.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		decoration.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		decoration.position = (Vector2(TILE_SIZE, TILE_SIZE) - decoration_size) / 2.0
+		decoration.position = (Vector2(TILE_WIDTH, TILE_HEIGHT) - decoration_size) / 2.0
 		decoration.custom_minimum_size = decoration_size
 		decoration.size = decoration_size
 		decoration.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -367,8 +409,8 @@ func _update_tile_dynamic(tile: Button, position: Dictionary) -> void:
 		var overlay := ColorRect.new()
 		overlay.name = "Overlay"
 		overlay.color = overlay_color
-		overlay.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
-		overlay.size = Vector2(TILE_SIZE, TILE_SIZE)
+		overlay.custom_minimum_size = Vector2(TILE_WIDTH, TILE_HEIGHT)
+		overlay.size = Vector2(TILE_WIDTH, TILE_HEIGHT)
 		overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tile.add_child(overlay)
 
@@ -379,8 +421,8 @@ func _update_tile_dynamic(tile: Button, position: Dictionary) -> void:
 		preview_label.text = preview_label_text
 		preview_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		preview_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		preview_label.custom_minimum_size = Vector2(TILE_SIZE, TILE_SIZE)
-		preview_label.size = Vector2(TILE_SIZE, TILE_SIZE)
+		preview_label.custom_minimum_size = Vector2(TILE_WIDTH, TILE_HEIGHT)
+		preview_label.size = Vector2(TILE_WIDTH, TILE_HEIGHT)
 		preview_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		preview_label.add_theme_font_size_override("font_size", 10)
 		preview_label.add_theme_color_override("font_color", Color(1.0, 0.92, 0.48))
@@ -415,15 +457,15 @@ func _board_terrain_texture() -> Texture2D:
 	if tile_texture_cache.has(cache_key):
 		return tile_texture_cache[cache_key]
 
-	var width := int(state["grid"]["width"]) * TILE_SIZE
-	var height := int(state["grid"]["height"]) * TILE_SIZE
+	var width := int(state["grid"]["width"]) * TILE_WIDTH
+	var height := int(state["grid"]["height"]) * TILE_HEIGHT
 	var image := Image.create(width, height, false, Image.FORMAT_RGBA8)
 	image.fill(TERRAIN_BASE_COLORS["floor"])
 
 	for tile_data: Dictionary in state["grid"]["tiles"]:
 		var position := {"x": int(tile_data["x"]), "y": int(tile_data["y"])}
-		var tile_origin := Vector2i(position["x"] * TILE_SIZE, position["y"] * TILE_SIZE)
-		image.fill_rect(Rect2i(tile_origin, Vector2i(TILE_SIZE, TILE_SIZE)), _terrain_base_color(str(tile_data["type"])))
+		var tile_origin := Vector2i(position["x"] * TILE_WIDTH, position["y"] * TILE_HEIGHT)
+		image.fill_rect(Rect2i(tile_origin, Vector2i(TILE_WIDTH, TILE_HEIGHT)), _terrain_base_color(str(tile_data["type"])))
 		for patch_index in range(5):
 			var patch_image := _grass_patch_image(position, patch_index)
 			var patch_position := tile_origin + Vector2i(_grass_patch_position(position, patch_index))
@@ -444,11 +486,11 @@ func _static_board_background_texture(path: String) -> Texture2D:
 		push_error("Cannot load combat board background: %s" % path)
 		return null
 	var expected_size := Vector2i(
-		int(state["grid"]["width"]) * TILE_SIZE,
-		int(state["grid"]["height"]) * TILE_SIZE
+		int(state["grid"]["width"]) * TILE_WIDTH,
+		int(state["grid"]["height"]) * TILE_HEIGHT
 	)
 	if image.get_size() != expected_size:
-		push_error("Combat board background %s has size %s, expected %s" % [path, image.get_size(), expected_size])
+		image.resize(expected_size.x, expected_size.y, Image.INTERPOLATE_NEAREST)
 	var texture := ImageTexture.create_from_image(image)
 	tile_texture_cache[cache_key] = texture
 	return texture
@@ -460,7 +502,8 @@ func _board_terrain_cache_key() -> String:
 		str(state.get("id", "unknown")),
 		str(state.get("grid", {}).get("width", 0)),
 		str(state.get("grid", {}).get("height", 0)),
-		str(TILE_SIZE),
+		str(TILE_WIDTH),
+		str(TILE_HEIGHT),
 	]
 	for tile_data: Dictionary in state.get("grid", {}).get("tiles", []):
 		parts.append("%s,%s,%s" % [tile_data.get("x", 0), tile_data.get("y", 0), tile_data.get("type", "")])
@@ -702,14 +745,16 @@ func _occupied_tile_marker(position: Dictionary) -> String:
 
 func _render_status() -> void:
 	var active := _unit_by_id(state["turn_state"]["active_unit_id"])
-	status_label.text = "Round %s  -  %s\n%s's turn  HP %s  AP %s  MP %s  -  %s%s" % [
+	status_label.text = "Round %s  |  %s\nACTIVE: %s  |  HP %s/%s  AP %s/%s  MP %s/%s%s" % [
 		state["turn_state"]["round"],
 		_combat_result().capitalize(),
 		_unit_display_name(active.get("id", "missing")),
 		active.get("resources", {}).get("hp", "?"),
+		active.get("stats", {}).get("max_hp", "?"),
 		active.get("resources", {}).get("ap", "?"),
+		active.get("stats", {}).get("max_ap", "?"),
 		active.get("resources", {}).get("mp", "-"),
-		ACTION_LABELS.get(selected_action, selected_action),
+		active.get("stats", {}).get("move_points", "-"),
 		_dungeon_modifier_status_line(),
 	]
 
@@ -718,10 +763,48 @@ func _render_action_panel() -> void:
 	action_title_label.text = current_action_title
 	action_detail_label.text = current_action_detail
 	if action_feed.is_empty():
-		action_feed_label.text = "No blows traded yet."
+		action_feed_label.text = _combat_log_fallback_line()
 	else:
-		var recent_feed := action_feed.slice(0, mini(3, action_feed.size()))
-		action_feed_label.text = "  |  ".join(recent_feed)
+		var recent_feed := action_feed.slice(0, mini(2, action_feed.size()))
+		action_feed_label.text = "\n".join(recent_feed)
+
+
+func _render_board_overlay() -> void:
+	if overlay_resource_panel == null or overlay_log_label == null:
+		return
+	var active := _unit_by_id(state.get("turn_state", {}).get("active_unit_id", ""))
+	overlay_resource_panel.visible = not active.is_empty()
+	if not active.is_empty():
+		overlay_resource_label.text = ""
+		_update_resource_bar(overlay_resource_bars["hp"], active.get("resources", {}).get("hp", 0), active.get("stats", {}).get("max_hp", 1))
+		_update_resource_bar(overlay_resource_bars["ap"], active.get("resources", {}).get("ap", 0), active.get("stats", {}).get("max_ap", 1))
+		_update_resource_bar(overlay_resource_bars["mp"], active.get("resources", {}).get("mp", 0), active.get("stats", {}).get("move_points", 1))
+
+	var log_lines := _overlay_combat_log_lines()
+	overlay_log_label.text = "\n".join(log_lines)
+
+
+func _overlay_combat_log_lines() -> Array[String]:
+	var log_lines: Array[String] = []
+	if not action_feed.is_empty():
+		log_lines.append_array(action_feed.slice(0, mini(4, action_feed.size())))
+	var events: Array = state.get("event_log", []).duplicate(true)
+	events.reverse()
+	for event: Dictionary in events:
+		if log_lines.size() >= 5:
+			break
+		if event.get("type", "") in ["combat_started", "turn_started"]:
+			continue
+		log_lines.append(_event_timeline_line(event))
+	if log_lines.is_empty():
+		log_lines.append(_combat_log_fallback_line())
+	return log_lines
+
+
+func _combat_log_fallback_line() -> String:
+	if last_feedback.strip_edges() != "":
+		return last_feedback
+	return "Combat ready."
 
 
 func _render_feedback() -> void:
@@ -769,7 +852,7 @@ func _render_turn_order() -> void:
 		if unit.is_empty() or unit.get("resources", {}).get("hp", 0) <= 0:
 			continue
 		var marker := ">" if str(unit_id) == active_id else " "
-		labels.append("%s %s  HP %s  AP %s  MP %s" % [
+		labels.append("%s %s\nHP %s  AP %s  MP %s" % [
 			marker,
 			_unit_display_name(str(unit_id)),
 			unit["resources"].get("hp", "-"),
@@ -917,16 +1000,24 @@ func _add_button_section(title: String) -> void:
 func _add_action_button(action_id: String, slot: int = 0) -> void:
 	var button := Button.new()
 	var label: String = ACTION_LABELS.get(action_id, action_id)
-	button.text = "%s\n%s" % [slot, label] if slot > 0 and slot <= 9 else label
-	button.custom_minimum_size = Vector2(132, 62)
+	button.text = ""
+	button.tooltip_text = "%s%s" % [label, " [%s]" % slot if slot > 0 and slot <= 9 else ""]
+	button.custom_minimum_size = ACTION_BUTTON_SIZE
 	button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	button.add_theme_font_size_override("font_size", 12)
+	button.add_theme_font_size_override("font_size", 1)
 	button.add_theme_color_override("font_color", Color(0.94, 0.88, 0.72))
 	button.add_theme_color_override("font_pressed_color", Color(1.0, 0.86, 0.38))
 	button.add_theme_color_override("font_hover_color", Color(1.0, 0.94, 0.68))
+	button.add_theme_color_override("font_disabled_color", Color(0.44, 0.42, 0.38))
+	var icon := _combat_ui_texture(str(ACTION_ICON_PATHS.get(action_id, "")))
+	if icon != null:
+		button.icon = icon
+		button.expand_icon = true
+		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		button.vertical_icon_alignment = VERTICAL_ALIGNMENT_CENTER
 	button.toggle_mode = true
 	button.button_pressed = selected_action == action_id
-	button.modulate = Color(1.0, 0.88, 0.46) if selected_action == action_id else Color(0.92, 0.88, 0.78)
+	button.modulate = Color(1.0, 0.95, 0.72) if selected_action == action_id else Color(0.94, 0.90, 0.82)
 	button.disabled = animation_locked or _combat_result() != "in_progress"
 	_apply_skill_button_style(button, selected_action == action_id)
 	button.pressed.connect(func() -> void:
@@ -946,10 +1037,44 @@ func _add_action_button(action_id: String, slot: int = 0) -> void:
 			last_feedback = "Select a highlighted target for %s." % ACTION_LABELS.get(action_id, action_id)
 			_render()
 	)
+	button.mouse_entered.connect(func() -> void:
+		_show_action_hover(action_id, slot)
+	)
+	button.mouse_exited.connect(func() -> void:
+		_render_action_panel()
+	)
 	command_buttons.add_child(button)
 
 
+func _show_action_hover(action_id: String, slot: int) -> void:
+	var active := _unit_by_id(state.get("turn_state", {}).get("active_unit_id", ""))
+	var label: String = ACTION_LABELS.get(action_id, action_id)
+	var slot_text := "Slot %s" % slot if slot > 0 and slot <= 9 else "Action"
+	var resources := "AP %s/%s  MP %s/%s" % [
+		active.get("resources", {}).get("ap", "?"),
+		active.get("stats", {}).get("max_ap", "?"),
+		active.get("resources", {}).get("mp", "-"),
+		active.get("stats", {}).get("move_points", "-"),
+	]
+	action_title_label.text = "%s: %s" % [slot_text, label]
+	action_detail_label.text = "%s. Click to select; then choose a highlighted board target." % resources
+
+
 func _apply_skill_button_style(button: Button, selected: bool) -> void:
+	var normal_texture_path := COMBAT_UI_SLOT_SELECTED_PATH if selected else COMBAT_UI_SLOT_NORMAL_PATH
+	var normal_style := _combat_ui_stylebox(normal_texture_path, 24, 18)
+	var hover_style := _combat_ui_stylebox(COMBAT_UI_SLOT_SELECTED_PATH, 24, 18)
+	var disabled_style := _combat_ui_stylebox(COMBAT_UI_SLOT_DISABLED_PATH, 24, 18)
+	if normal_style != null and hover_style != null and disabled_style != null:
+		button.add_theme_stylebox_override("normal", normal_style)
+		button.add_theme_stylebox_override("hover", hover_style)
+		button.add_theme_stylebox_override("pressed", hover_style)
+		button.add_theme_stylebox_override("disabled", disabled_style)
+		button.add_theme_stylebox_override("focus", hover_style)
+		button.add_theme_constant_override("icon_max_width", ACTION_BUTTON_ICON_MAX_WIDTH)
+		button.add_theme_constant_override("h_separation", 0)
+		return
+
 	var normal := StyleBoxFlat.new()
 	normal.bg_color = Color(0.06, 0.07, 0.045, 0.96)
 	normal.border_color = Color(0.44, 0.34, 0.16) if not selected else Color(1.0, 0.76, 0.22)
@@ -975,6 +1100,8 @@ func _apply_skill_button_style(button: Button, selected: bool) -> void:
 	button.add_theme_stylebox_override("pressed", pressed)
 	button.add_theme_stylebox_override("disabled", normal)
 	button.add_theme_stylebox_override("focus", pressed)
+	button.add_theme_constant_override("icon_max_width", ACTION_BUTTON_ICON_MAX_WIDTH)
+	button.add_theme_constant_override("h_separation", 0)
 
 
 func _add_scenario_picker() -> void:
@@ -1304,6 +1431,9 @@ func _events_after_startup(events: Array) -> Array:
 
 
 func _apply_pixel_theme() -> void:
+	bottom_hud.custom_minimum_size = Vector2(0, BOTTOM_HUD_MIN_HEIGHT)
+	bottom_hud.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_ensure_board_overlay_controls()
 	var title_label := get_node_or_null("RootMargin/RootScroll/RootHBox/LeftPanel/TitleLabel") as Label
 	if title_label != null:
 		title_label.add_theme_color_override("font_color", Color(1.0, 0.80, 0.32))
@@ -1311,21 +1441,28 @@ func _apply_pixel_theme() -> void:
 		title_label.add_theme_constant_override("shadow_offset_x", 2)
 		title_label.add_theme_constant_override("shadow_offset_y", 2)
 
-	var panel_texture := _load_pixel_ui_texture(PIXEL_PANEL_TEXTURE_PATH)
-	if panel_texture != null:
-		var panel_style := StyleBoxTexture.new()
-		panel_style.texture = panel_texture
-		panel_style.texture_margin_left = 8
-		panel_style.texture_margin_top = 8
-		panel_style.texture_margin_right = 8
-		panel_style.texture_margin_bottom = 8
-		panel_style.content_margin_left = 12
-		panel_style.content_margin_top = 8
-		panel_style.content_margin_right = 12
-		panel_style.content_margin_bottom = 8
+	var panel_style := _combat_ui_stylebox(COMBAT_UI_PANEL_TEXTURE_PATH, 28, 18)
+	if panel_style == null:
+		var panel_texture := _load_pixel_ui_texture(PIXEL_PANEL_TEXTURE_PATH)
+		if panel_texture != null:
+			panel_style = StyleBoxTexture.new()
+			panel_style.texture = panel_texture
+			panel_style.texture_margin_left = 8
+			panel_style.texture_margin_top = 8
+			panel_style.texture_margin_right = 8
+			panel_style.texture_margin_bottom = 8
+			panel_style.content_margin_left = 12
+			panel_style.content_margin_top = 8
+			panel_style.content_margin_right = 12
+			panel_style.content_margin_bottom = 8
+	if panel_style != null:
 		action_panel.add_theme_stylebox_override("panel", panel_style)
 		bottom_hud.add_theme_stylebox_override("panel", panel_style)
 		turn_order_panel.add_theme_stylebox_override("panel", panel_style)
+		if overlay_log_panel != null:
+			overlay_log_panel.add_theme_stylebox_override("panel", panel_style)
+	if overlay_resource_panel != null:
+		overlay_resource_panel.add_theme_stylebox_override("panel", _compact_resource_panel_style())
 
 	var action_title_color := Color(1.0, 0.86, 0.38)
 	var action_text_color := Color(0.96, 0.92, 0.80)
@@ -1335,8 +1472,120 @@ func _apply_pixel_theme() -> void:
 		label.add_theme_color_override("font_shadow_color", shadow_color)
 		label.add_theme_constant_override("shadow_offset_x", 1)
 		label.add_theme_constant_override("shadow_offset_y", 1)
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.clip_text = true
 	action_title_label.add_theme_color_override("font_color", action_title_color)
 	turn_order_label.add_theme_color_override("font_color", action_title_color)
+	action_feed_label.max_lines_visible = 3
+	turn_order_label.max_lines_visible = 6
+	event_log_label.max_lines_visible = 10
+	status_label.max_lines_visible = 3
+	if overlay_log_label != null:
+		overlay_log_label.add_theme_color_override("font_color", action_text_color)
+		overlay_log_label.add_theme_color_override("font_shadow_color", shadow_color)
+		overlay_log_label.add_theme_constant_override("shadow_offset_x", 1)
+		overlay_log_label.add_theme_constant_override("shadow_offset_y", 1)
+	if overlay_resource_label != null:
+		overlay_resource_label.add_theme_color_override("font_color", action_title_color)
+		overlay_resource_label.add_theme_color_override("font_shadow_color", shadow_color)
+		overlay_resource_label.add_theme_constant_override("shadow_offset_x", 1)
+		overlay_resource_label.add_theme_constant_override("shadow_offset_y", 1)
+
+
+func _ensure_board_overlay_controls() -> void:
+	if board_overlay_layer != null:
+		return
+	board_overlay_layer = Control.new()
+	board_overlay_layer.name = "BoardOverlayLayer"
+	board_overlay_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	board_overlay_layer.z_index = 20
+	board_root.add_child(board_overlay_layer)
+
+	overlay_resource_panel = PanelContainer.new()
+	overlay_resource_panel.name = "OverlayResourcePanel"
+	overlay_resource_panel.custom_minimum_size = OVERLAY_RESOURCE_PANEL_SIZE
+	overlay_resource_panel.size = OVERLAY_RESOURCE_PANEL_SIZE
+	overlay_resource_panel.position = Vector2(16, 14)
+	overlay_resource_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	board_overlay_layer.add_child(overlay_resource_panel)
+
+	var resource_vbox := VBoxContainer.new()
+	resource_vbox.name = "OverlayResourceVBox"
+	resource_vbox.add_theme_constant_override("separation", 1)
+	overlay_resource_panel.add_child(resource_vbox)
+
+	overlay_resource_label = Label.new()
+	overlay_resource_label.name = "OverlayResourceLabel"
+	overlay_resource_label.add_theme_font_size_override("font_size", 5)
+	overlay_resource_label.clip_text = true
+	overlay_resource_label.visible = false
+	resource_vbox.add_child(overlay_resource_label)
+
+	overlay_resource_bars["hp"] = _create_resource_bar(COMBAT_UI_BAR_HP_PATH, OVERLAY_RESOURCE_BAR_SIZE)
+	overlay_resource_bars["ap"] = _create_resource_bar(COMBAT_UI_BAR_AP_PATH, OVERLAY_RESOURCE_BAR_SIZE)
+	overlay_resource_bars["mp"] = _create_resource_bar(COMBAT_UI_BAR_MP_PATH, OVERLAY_RESOURCE_BAR_SIZE)
+	resource_vbox.add_child(overlay_resource_bars["hp"])
+	resource_vbox.add_child(overlay_resource_bars["ap"])
+	resource_vbox.add_child(overlay_resource_bars["mp"])
+
+	overlay_log_panel = PanelContainer.new()
+	overlay_log_panel.name = "OverlayLogPanel"
+	overlay_log_panel.custom_minimum_size = OVERLAY_LOG_PANEL_SIZE
+	overlay_log_panel.size = OVERLAY_LOG_PANEL_SIZE
+	overlay_log_panel.position = Vector2(16, 136)
+	overlay_log_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	board_overlay_layer.add_child(overlay_log_panel)
+
+	overlay_log_label = Label.new()
+	overlay_log_label.name = "OverlayLogLabel"
+	overlay_log_label.add_theme_font_size_override("font_size", 11)
+	overlay_log_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	overlay_log_label.clip_text = true
+	overlay_log_label.custom_minimum_size = OVERLAY_LOG_PANEL_SIZE - Vector2(36, 30)
+	overlay_log_label.size = OVERLAY_LOG_PANEL_SIZE - Vector2(36, 30)
+	overlay_log_label.max_lines_visible = 5
+	overlay_log_panel.add_child(overlay_log_label)
+
+
+func _create_resource_bar(texture_path: String, bar_size: Vector2) -> TextureProgressBar:
+	var bar := TextureProgressBar.new()
+	var texture := _combat_ui_texture_scaled(texture_path, Vector2i(int(bar_size.x), int(bar_size.y)))
+	bar.custom_minimum_size = bar_size
+	bar.size = bar_size
+	bar.min_value = 0
+	bar.max_value = 1
+	bar.value = 1
+	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if texture != null:
+		bar.texture_under = texture
+		bar.texture_progress = texture
+		bar.tint_under = Color(0.18, 0.16, 0.14, 0.72)
+		bar.tint_progress = Color(1, 1, 1, 1)
+	return bar
+
+
+func _combat_ui_texture_scaled(path: String, texture_size: Vector2i) -> Texture2D:
+	if path == "":
+		return null
+	var cache_key := "%s:%sx%s" % [path, texture_size.x, texture_size.y]
+	if ui_texture_cache.has(cache_key):
+		return ui_texture_cache[cache_key]
+	var image := Image.new()
+	var error := image.load(path)
+	if error != OK:
+		return null
+	image.resize(maxi(1, texture_size.x), maxi(1, texture_size.y), Image.INTERPOLATE_NEAREST)
+	var texture := ImageTexture.create_from_image(image)
+	ui_texture_cache[cache_key] = texture
+	return texture
+
+
+func _update_resource_bar(bar: TextureProgressBar, value: Variant, max_value: Variant) -> void:
+	if bar == null:
+		return
+	var numeric_max := maxf(1.0, float(max_value))
+	bar.max_value = numeric_max
+	bar.value = clampf(float(value), 0.0, numeric_max)
 
 
 func _load_pixel_ui_texture(path: String) -> Texture2D:
@@ -1346,6 +1595,53 @@ func _load_pixel_ui_texture(path: String) -> Texture2D:
 		push_error("Cannot load pixel UI texture: %s" % path)
 		return null
 	return ImageTexture.create_from_image(image)
+
+
+func _combat_ui_texture(path: String) -> Texture2D:
+	if path == "":
+		return null
+	if ui_texture_cache.has(path):
+		return ui_texture_cache[path]
+	var image := Image.new()
+	var error := image.load(path)
+	if error != OK:
+		return null
+	var texture := ImageTexture.create_from_image(image)
+	ui_texture_cache[path] = texture
+	return texture
+
+
+func _combat_ui_stylebox(path: String, texture_margin: int, content_margin: int) -> StyleBoxTexture:
+	var cache_key := "%s:%s:%s" % [path, texture_margin, content_margin]
+	if ui_style_cache.has(cache_key):
+		return ui_style_cache[cache_key]
+	var texture := _combat_ui_texture(path)
+	if texture == null:
+		return null
+	var style := StyleBoxTexture.new()
+	style.texture = texture
+	style.texture_margin_left = texture_margin
+	style.texture_margin_top = texture_margin
+	style.texture_margin_right = texture_margin
+	style.texture_margin_bottom = texture_margin
+	style.content_margin_left = content_margin
+	style.content_margin_top = content_margin
+	style.content_margin_right = content_margin
+	style.content_margin_bottom = content_margin
+	ui_style_cache[cache_key] = style
+	return style
+
+
+func _compact_resource_panel_style() -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.04, 0.035, 0.03, 0.78)
+	style.border_color = Color(0.90, 0.66, 0.20, 0.90)
+	style.set_border_width_all(1)
+	style.content_margin_left = 2
+	style.content_margin_top = 2
+	style.content_margin_right = 2
+	style.content_margin_bottom = 2
+	return style
 
 
 func _set_targeting_banner(action_id: String) -> void:
@@ -1525,7 +1821,7 @@ func _prepare_movement_animation(events: Array) -> bool:
 		if actor_id == "" or not actions.has(actor_id):
 			continue
 		visual_positions_px[actor_id] = _position_to_unit_top_left(event.get("from", {}))
-		unit_visual_action[actor_id] = actions[actor_id]
+		unit_visual_action[actor_id] = "walk:0" if str(actions[actor_id]) == "walk" else actions[actor_id]
 	return not actions.is_empty()
 
 
@@ -1570,6 +1866,7 @@ func _play_combat_animation(events: Array) -> void:
 		var target := _unit_by_id(str(event.get("target_unit_id", "")))
 		var origin := _unit_visual_pixel_position(actor)
 		var lunge := _combat_lunge_offset(actor, target)
+		_start_visual_cycle(actor_id, "combat", current_generation, COMBAT_CYCLE_SECONDS)
 		tween.tween_property(unit_node, "position", origin + lunge, COMBAT_WINDUP_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tween.tween_property(unit_node, "position", origin, COMBAT_RETURN_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		animated_actors[actor_id] = true
@@ -1590,10 +1887,12 @@ func _play_combat_animation(events: Array) -> void:
 			continue
 		var target_origin := _unit_visual_pixel_position(target_unit)
 		if int(event.get("hp_after", 1)) <= 0:
+			_start_visual_cycle(target_id, "death", current_generation, DEATH_CYCLE_SECONDS, false)
 			tween.tween_property(target_node, "position", target_origin + Vector2(0, DEATH_FALL_PIXELS), DEATH_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 			tween.parallel().tween_property(target_node, "modulate:a", 0.72, DEATH_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 			tween.tween_interval(DEATH_HOLD_SECONDS)
 		else:
+			_start_visual_cycle(target_id, "hit", current_generation, HIT_CYCLE_SECONDS, false)
 			tween.tween_property(target_node, "position", target_origin + _hit_shake_offset(actor, target_unit), HIT_SHAKE_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 			tween.tween_property(target_node, "position", target_origin, HIT_SHAKE_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		animated_targets[target_id] = true
@@ -1672,6 +1971,7 @@ func _play_movement_animation(events: Array, next_state: Dictionary, next_log: A
 		var unit_node := unit_layer.get_node_or_null(actor_id)
 		if unit_node == null:
 			continue
+		_start_walk_cycle(actor_id, current_generation)
 		for step: Dictionary in path:
 			var target_position := _position_to_unit_top_left(step)
 			tween.tween_property(unit_node, "position", target_position, MOVE_STEP_SECONDS).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
@@ -1696,10 +1996,83 @@ func _finish_movement_animation(events: Array, current_generation: int, next_sta
 	temporary_visual_units.clear()
 	state = next_state
 	state["event_log"] = next_log
+	_face_moved_units_toward_nearest_opponent(events)
 	animation_locked = false
 	_prepare_presentation_cache()
 	_render()
 	_schedule_visual_reset()
+
+
+func _start_walk_cycle(actor_id: String, current_generation: int) -> void:
+	var frame := 0
+	var frame_count := _walk_frame_count(actor_id)
+	while current_generation == visual_generation and animation_locked and str(unit_visual_action.get(actor_id, "")).begins_with("walk"):
+		unit_visual_action[actor_id] = "walk:%s" % frame
+		_refresh_unit_sprite(actor_id)
+		frame = (frame + 1) % frame_count
+		await get_tree().create_timer(WALK_CYCLE_SECONDS).timeout
+
+
+func _walk_frame_count(actor_id: String) -> int:
+	var unit := _unit_by_id(actor_id)
+	if unit.is_empty() and temporary_visual_units.has(actor_id):
+		unit = temporary_visual_units[actor_id]
+	if unit.is_empty():
+		return 1
+	var visual := _unit_visual_config(unit)
+	return unit_art.processed_sheet_frame_count(str(visual.get("character", "")), "walk")
+
+
+func _start_visual_cycle(unit_id: String, action: String, current_generation: int, frame_seconds: float, loop: bool = false) -> void:
+	var frame := 0
+	var frame_count := _visual_frame_count(unit_id, action)
+	while current_generation == visual_generation and animation_locked and str(unit_visual_action.get(unit_id, "")).begins_with(action):
+		unit_visual_action[unit_id] = "%s:%s" % [action, frame]
+		_refresh_unit_sprite(unit_id)
+		if not loop and frame >= frame_count - 1:
+			return
+		frame = (frame + 1) % frame_count
+		await get_tree().create_timer(frame_seconds).timeout
+
+
+func _visual_frame_count(unit_id: String, action: String) -> int:
+	var unit := _unit_by_id(unit_id)
+	if unit.is_empty() and temporary_visual_units.has(unit_id):
+		unit = temporary_visual_units[unit_id]
+	if unit.is_empty():
+		return 1
+	var visual := _unit_visual_config(unit)
+	return unit_art.processed_sheet_frame_count(str(visual.get("character", "")), action)
+
+
+func _refresh_unit_sprite(actor_id: String) -> void:
+	var unit := _unit_by_id(actor_id)
+	if unit.is_empty() and temporary_visual_units.has(actor_id):
+		unit = temporary_visual_units[actor_id]
+	if unit.is_empty():
+		return
+	var unit_node := unit_layer.get_node_or_null(actor_id) as Control
+	if unit_node == null:
+		return
+	var sprite := unit_node.get_node_or_null("Sprite") as TextureRect
+	if sprite == null:
+		return
+	sprite.texture = _unit_icon(unit)
+
+
+func _face_moved_units_toward_nearest_opponent(events: Array) -> void:
+	for event: Dictionary in events:
+		if event["type"] != "unit_moved":
+			continue
+		var actor_id := str(event.get("actor_id", ""))
+		var actor := _unit_by_id(actor_id)
+		if actor.is_empty():
+			continue
+		var nearest := _nearest_living_opponent(actor)
+		if nearest.is_empty():
+			unit_facing.erase(actor_id)
+			continue
+		unit_facing[actor_id] = _direction_between(actor["position"], nearest["position"])
 
 
 func _clear_grid() -> void:
@@ -1713,8 +2086,8 @@ func _clear_units() -> void:
 
 
 func _resize_board() -> void:
-	var width: int = int(state["grid"]["width"]) * TILE_SIZE + maxi(0, int(state["grid"]["width"]) - 1) * TILE_GAP
-	var height: int = int(state["grid"]["height"]) * TILE_SIZE + maxi(0, int(state["grid"]["height"]) - 1) * TILE_GAP
+	var width: int = int(state["grid"]["width"]) * TILE_WIDTH + maxi(0, int(state["grid"]["width"]) - 1) * TILE_GAP
+	var height: int = int(state["grid"]["height"]) * TILE_HEIGHT + maxi(0, int(state["grid"]["height"]) - 1) * TILE_GAP
 	var board_size := Vector2(width, height)
 	board_root.custom_minimum_size = board_size
 	board_backdrop.position = Vector2(-6, -6)
@@ -1728,14 +2101,29 @@ func _resize_board() -> void:
 	unit_layer.size = board_size
 	floating_text_layer.custom_minimum_size = board_size
 	floating_text_layer.size = board_size
+	if board_overlay_layer != null:
+		board_overlay_layer.custom_minimum_size = board_size
+		board_overlay_layer.size = board_size
+		_position_board_overlays(board_size)
+
+
+func _position_board_overlays(board_size: Vector2) -> void:
+	if overlay_resource_panel != null:
+		overlay_resource_panel.custom_minimum_size = OVERLAY_RESOURCE_PANEL_SIZE
+		overlay_resource_panel.size = OVERLAY_RESOURCE_PANEL_SIZE
+		overlay_resource_panel.position = Vector2(OVERLAY_MARGIN, OVERLAY_MARGIN)
+	if overlay_log_panel != null:
+		overlay_log_panel.custom_minimum_size = OVERLAY_LOG_PANEL_SIZE
+		overlay_log_panel.size = OVERLAY_LOG_PANEL_SIZE
+		overlay_log_panel.position = Vector2(
+			OVERLAY_MARGIN,
+			maxf(OVERLAY_RESOURCE_PANEL_SIZE.y + OVERLAY_MARGIN * 2.0, board_size.y - OVERLAY_LOG_PANEL_SIZE.y - OVERLAY_MARGIN)
+		)
 
 
 func _render_units() -> void:
 	var desired_unit_ids: Dictionary = {}
 	for unit: Dictionary in _visual_units_for_render():
-		var is_temporary := temporary_visual_units.has(unit["id"])
-		if unit["resources"]["hp"] <= 0 and not is_temporary:
-			continue
 		var unit_id := str(unit["id"])
 		desired_unit_ids[unit_id] = true
 		var unit_node := unit_layer.get_node_or_null(unit_id) as Control
@@ -1838,9 +2226,10 @@ func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
 	unit_node.custom_minimum_size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
 	unit_node.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
 	unit_node.position = _unit_visual_pixel_position(unit)
-	unit_node.modulate = Color(1, 1, 1, 1)
+	var is_dead := int(unit.get("resources", {}).get("hp", 0)) <= 0
+	unit_node.modulate = CORPSE_MODULATE if is_dead else Color(1, 1, 1, 1)
 
-	var on_highground := _tile_type(unit.get("position", {})) == "highground"
+	var on_highground := _tile_type(unit.get("position", {})) == "highground" and not is_dead
 	var elevation_shadow := unit_node.get_node_or_null("HighgroundUnitBaseShadow") as ColorRect
 	if elevation_shadow != null:
 		elevation_shadow.visible = on_highground
@@ -1867,6 +2256,7 @@ func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
 		return
 	resource_panel.custom_minimum_size = UNIT_RESOURCE_LABEL_SIZE
 	resource_panel.size = UNIT_RESOURCE_LABEL_SIZE
+	resource_panel.visible = not is_dead
 	resource_panel.position = Vector2(
 		(float(UNIT_ICON_SIZE.x) - UNIT_RESOURCE_LABEL_SIZE.x) / 2.0,
 		UNIT_RESOURCE_LABEL_OFFSET_Y
@@ -1890,6 +2280,9 @@ func _update_unit_status_icons(unit_node: Control, unit: Dictionary) -> void:
 		return
 	for child in status_icon_row.get_children():
 		child.queue_free()
+	if int(unit.get("resources", {}).get("hp", 0)) <= 0:
+		status_icon_row.visible = false
+		return
 
 	var icon_ids := _unit_status_icon_ids(unit)
 	status_icon_row.visible = not icon_ids.is_empty()
@@ -1952,6 +2345,8 @@ func _update_unit_target_preview(unit_node: Control, unit: Dictionary) -> void:
 
 
 func _unit_target_preview_text(unit: Dictionary) -> String:
+	if int(unit.get("resources", {}).get("hp", 0)) <= 0:
+		return ""
 	if selected_action == "move":
 		return ""
 	var position: Dictionary = unit.get("position", {})
@@ -2097,7 +2492,17 @@ func _unit_resource_label_nudge(unit: Dictionary) -> float:
 
 
 func _unit_icon(unit: Dictionary) -> Texture2D:
-	return unit_art.icon(unit, state, unit_facing, unit_visual_action, UNIT_ICON_SIZE)
+	var visual_actions := unit_visual_action
+	var unit_id := str(unit.get("id", ""))
+	if int(unit.get("resources", {}).get("hp", 0)) <= 0 and unit_id != "" and not unit_visual_action.has(unit_id):
+		visual_actions = unit_visual_action.duplicate()
+		visual_actions[unit_id] = _death_final_visual_action(unit)
+	return unit_art.icon(unit, state, unit_facing, visual_actions, UNIT_ICON_SIZE)
+
+
+func _death_final_visual_action(unit: Dictionary) -> String:
+	var visual := _unit_visual_config(unit)
+	return unit_art.processed_sheet_corpse_visual_action(str(visual.get("character", "")))
 
 
 func _unit_direction(unit: Dictionary) -> String:
@@ -2534,11 +2939,11 @@ func _unit_visual_pixel_position(unit: Dictionary) -> Vector2:
 
 func _position_to_unit_top_left(position: Dictionary) -> Vector2:
 	var tile_origin := Vector2(
-		int(position["x"]) * (TILE_SIZE + TILE_GAP),
-		int(position["y"]) * (TILE_SIZE + TILE_GAP)
+		int(position["x"]) * (TILE_WIDTH + TILE_GAP),
+		int(position["y"]) * (TILE_HEIGHT + TILE_GAP)
 	)
 	var elevation_offset := Vector2(0, HIGHGROUND_UNIT_OFFSET_Y) if _tile_type(position) == "highground" else Vector2.ZERO
-	return tile_origin + Vector2(TILE_SIZE - UNIT_ICON_SIZE.x, TILE_SIZE - UNIT_ICON_SIZE.y) / 2.0 + elevation_offset
+	return tile_origin + Vector2((float(TILE_WIDTH) - float(UNIT_ICON_SIZE.x)) / 2.0, float(TILE_HEIGHT) - float(UNIT_ICON_SIZE.y)) + elevation_offset
 
 
 func _combat_result() -> String:
