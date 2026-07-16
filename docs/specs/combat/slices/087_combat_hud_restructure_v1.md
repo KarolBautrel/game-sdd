@@ -14,9 +14,15 @@ Then the action bar and core panels use fantasy UI frames from processed assets
 
 And primary action buttons show enlarged atlas-backed icons without visible action-name text
 
+And named skills use their specific processed icons before falling back to generic action icons
+
+And standard skillbar actions use full-size processed `icons/icon_*` exports instead of smaller inner crops for consistent slot scale
+
 And hovering an action icon updates the action detail panel with readable action context
 
 And log, feed, and turn order copy stay inside their framed panel bounds
+
+And report/feed typography uses compact font sizes and bounded lines so text does not spill out of the report frame
 
 And the active unit HP/AP/MP is visible in the board overlay HUD
 
@@ -44,9 +50,11 @@ And debug controls remain available without replacing the main action slot layou
 
 - `assets/ui/combat/processed/manifest.json` exists.
 - Processed action slot, selected slot, panel, and icon PNGs exist.
+- Processed skill-specific icons exist for `aimed_shot`, `deep_cut`, `guard_break`, `power_strike`, and `shield_wall`.
 - Primary action buttons do not overflow with text labels because labels are moved to tooltip/detail surfaces.
 - Action hover updates detail copy without requiring the action to be selected.
 - Action feed and turn order text use bounded wrapping/clipping.
+- Report/feed labels use compact font sizing and bounded visible line counts.
 - Processed `bar_hp`, `bar_ap`, and `bar_mp` assets are loaded by the active-unit overlay HUD.
 - Unit-overhead resource panels use compact text labels.
 - The board overlay log/action feed remains visible during combat and does not share the resource bar corner.

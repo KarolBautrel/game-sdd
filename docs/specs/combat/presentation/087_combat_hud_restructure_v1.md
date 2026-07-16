@@ -20,6 +20,8 @@ The first implementation pass skins existing combat debug controls without chang
 - Processed UI assets must include a manifest with crop rectangles and stable IDs.
 - Combat debug V1 may skin the existing HUD rather than fully matching the example layout.
 - Action buttons use atlas-backed slot frames and action icons when available.
+- Skill-specific icons from `assets/ui/combat/processed/icons/` should be used before generic fallback icons for named abilities such as `power_strike`, `deep_cut`, `guard_break`, `aimed_shot`, and `shield_wall`.
+- Standard action icons should use the full-size processed `icons/icon_*` exports rather than smaller `icons/inner/*` crops when they appear in the main skillbar, so all action buttons share a consistent visual scale.
 - Main action slots are icon-first: visible action names are omitted from the slot when an icon exists, with tooltips/detail panel carrying the text label.
 - Hovering an action slot updates the action detail panel with the action name, shortcut slot, and current AP/MP context.
 - Primary combat panels use atlas-backed fantasy frames or deterministic fallback StyleBoxes.
@@ -29,6 +31,7 @@ The first implementation pass skins existing combat debug controls without chang
 - Active-unit resource bars should be a readable top-left board overlay using generated `384x56` mini bar PNGs; they must stay smaller than the oversized native `bar_hp/bar_ap/bar_mp` atlas exports and must not include text that expands the panel.
 - Board-overlay log/feed should occupy a separate compact panel away from the active resource bars.
 - Board-overlay log/feed and framed log panels must always render fallback or recent event text; empty framed log boxes are not acceptable.
+- Report/log typography should use compact font sizes, bounded line counts, and clipped/wrapped text so copy stays inside fantasy frames.
 - Combat debug may use board-overlay HUD panels instead of stretching every UI surface across the full viewport.
 - The board should claim the available screen area after overlay HUD placement; UI panels must not unnecessarily shrink the board.
 - Processed character animation frames should render on a stable foot-anchored canvas so walk, attack, hit, idle, and death frames do not resize the unit mid-animation.

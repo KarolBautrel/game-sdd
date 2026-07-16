@@ -726,6 +726,9 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
       - active-unit HP/AP/MP bars now use generated mini bar PNGs at `384x56` inside a readable `394x176` top-left board overlay, with no expanding text and no native-scale bar atlas/panel frame;
       - the board-overlay combat log/feed was moved into its own compact panel away from the active-unit resource bars.
       - board-overlay/action log panels now render recent feed/event lines or fallback feedback text, so framed log boxes are not empty after scene load.
+      - skill-specific processed icons are now used for `power_strike`, `deep_cut`, `guard_break`, `aimed_shot`, and `shield_wall` instead of generic sword/bow/shield fallbacks;
+      - main skillbar fallback icons now use full-size `assets/ui/combat/processed/icons/icon_*` exports instead of smaller `icons/inner/*` crops, keeping slot icon scale consistent;
+      - report/feed label typography was tightened with smaller fonts, bounded visible lines, and compact event text to keep copy inside framed UI panels.
     - Latest animation scale correction completed:
       - processed character frames now render on a larger stable foot-anchored canvas so attack, walk, hit, idle, and death frames do not resize units per frame;
       - processed enemy and mercenary visuals are normalized to the player `warrior` pose height, so normal combat characters share the player's visual scale unless a future large-unit override is added;

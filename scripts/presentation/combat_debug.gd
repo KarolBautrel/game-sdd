@@ -26,16 +26,21 @@ const ACTION_BUTTON_SIZE := Vector2(132, 118)
 const ACTION_BUTTON_ICON_MAX_WIDTH := 66
 const BOTTOM_HUD_MIN_HEIGHT := 142
 const ACTION_ICON_PATHS := {
-	"move": "res://assets/ui/combat/processed/icons/inner/icon_boot.png",
-	"basic_attack": "res://assets/ui/combat/processed/icons/inner/icon_sword.png",
-	"power_strike": "res://assets/ui/combat/processed/icons/inner/icon_sword.png",
-	"deep_cut": "res://assets/ui/combat/processed/icons/inner/icon_sword.png",
-	"guard_break": "res://assets/ui/combat/processed/icons/inner/icon_shield.png",
-	"ranged_attack": "res://assets/ui/combat/processed/icons/inner/icon_bow.png",
-	"aimed_shot": "res://assets/ui/combat/processed/icons/inner/icon_bow.png",
-	"shield_wall": "res://assets/ui/combat/processed/icons/inner/icon_shield.png",
-	"defend": "res://assets/ui/combat/processed/icons/inner/icon_shield.png",
-	"end_turn": "res://assets/ui/combat/processed/icons/inner/icon_hourglass.png",
+	"move": "res://assets/ui/combat/processed/icons/icon_boot.png",
+	"basic_attack": "res://assets/ui/combat/processed/icons/icon_sword.png",
+	"power_strike": "res://assets/ui/combat/processed/icons/icon_power_attack.png",
+	"deep_cut": "res://assets/ui/combat/processed/icons/icon_cur_deep.png",
+	"guard_break": "res://assets/ui/combat/processed/icons/icon_guard_break.png",
+	"ranged_attack": "res://assets/ui/combat/processed/icons/icon_bow.png",
+	"aimed_shot": "res://assets/ui/combat/processed/icons/icon_aimed_shot.png",
+	"shield_wall": "res://assets/ui/combat/processed/icons/icon_shield_wall.png",
+	"defend": "res://assets/ui/combat/processed/icons/icon_shield.png",
+	"end_turn": "res://assets/ui/combat/processed/icons/icon_hourglass.png",
+}
+const ACTION_ICON_FALLBACK_PATHS := {
+	"power_strike": "res://assets/ui/combat/processed/icons/icon_sword.png",
+	"aimed_shot": "res://assets/ui/combat/processed/icons/icon_bow.png",
+	"shield_wall": "res://assets/ui/combat/processed/icons/icon_shield.png",
 }
 const GRASS_FLOOR_TEXTURE_PATHS := [
 	"res://assets/combat/terrain/grass/meadow_grass_floor_00.png",
@@ -765,7 +770,7 @@ func _render_action_panel() -> void:
 	if action_feed.is_empty():
 		action_feed_label.text = _combat_log_fallback_line()
 	else:
-		var recent_feed := action_feed.slice(0, mini(2, action_feed.size()))
+		var recent_feed := action_feed.slice(0, mini(3, action_feed.size()))
 		action_feed_label.text = "\n".join(recent_feed)
 
 
@@ -795,10 +800,17 @@ func _overlay_combat_log_lines() -> Array[String]:
 			break
 		if event.get("type", "") in ["combat_started", "turn_started"]:
 			continue
-		log_lines.append(_event_timeline_line(event))
+		log_lines.append(_compact_report_line(_event_timeline_line(event)))
 	if log_lines.is_empty():
 		log_lines.append(_combat_log_fallback_line())
 	return log_lines
+
+
+func _compact_report_line(line: String) -> String:
+	var compact := line.replace("\n", " ").strip_edges()
+	if compact.length() > 86:
+		return "%s..." % compact.substr(0, 83)
+	return compact
 
 
 func _combat_log_fallback_line() -> String:
@@ -1009,7 +1021,7 @@ func _add_action_button(action_id: String, slot: int = 0) -> void:
 	button.add_theme_color_override("font_pressed_color", Color(1.0, 0.86, 0.38))
 	button.add_theme_color_override("font_hover_color", Color(1.0, 0.94, 0.68))
 	button.add_theme_color_override("font_disabled_color", Color(0.44, 0.42, 0.38))
-	var icon := _combat_ui_texture(str(ACTION_ICON_PATHS.get(action_id, "")))
+	var icon := _action_icon_texture(action_id)
 	if icon != null:
 		button.icon = icon
 		button.expand_icon = true
@@ -1476,7 +1488,10 @@ func _apply_pixel_theme() -> void:
 		label.clip_text = true
 	action_title_label.add_theme_color_override("font_color", action_title_color)
 	turn_order_label.add_theme_color_override("font_color", action_title_color)
-	action_feed_label.max_lines_visible = 3
+	action_detail_label.add_theme_font_size_override("font_size", 10)
+	action_detail_label.max_lines_visible = 3
+	action_feed_label.add_theme_font_size_override("font_size", 9)
+	action_feed_label.max_lines_visible = 4
 	turn_order_label.max_lines_visible = 6
 	event_log_label.max_lines_visible = 10
 	status_label.max_lines_visible = 3
@@ -1485,6 +1500,8 @@ func _apply_pixel_theme() -> void:
 		overlay_log_label.add_theme_color_override("font_shadow_color", shadow_color)
 		overlay_log_label.add_theme_constant_override("shadow_offset_x", 1)
 		overlay_log_label.add_theme_constant_override("shadow_offset_y", 1)
+		overlay_log_label.add_theme_font_size_override("font_size", 9)
+		overlay_log_label.max_lines_visible = 5
 	if overlay_resource_label != null:
 		overlay_resource_label.add_theme_color_override("font_color", action_title_color)
 		overlay_resource_label.add_theme_color_override("font_shadow_color", shadow_color)
@@ -1538,7 +1555,7 @@ func _ensure_board_overlay_controls() -> void:
 
 	overlay_log_label = Label.new()
 	overlay_log_label.name = "OverlayLogLabel"
-	overlay_log_label.add_theme_font_size_override("font_size", 11)
+	overlay_log_label.add_theme_font_size_override("font_size", 9)
 	overlay_log_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	overlay_log_label.clip_text = true
 	overlay_log_label.custom_minimum_size = OVERLAY_LOG_PANEL_SIZE - Vector2(36, 30)
@@ -1609,6 +1626,37 @@ func _combat_ui_texture(path: String) -> Texture2D:
 	var texture := ImageTexture.create_from_image(image)
 	ui_texture_cache[path] = texture
 	return texture
+
+
+func _action_icon_texture(action_id: String) -> Texture2D:
+	var path := str(ACTION_ICON_PATHS.get(action_id, ""))
+	if path != "" and _combat_ui_texture_has_visible_pixels(path):
+		return _combat_ui_texture(path)
+	var fallback_path := str(ACTION_ICON_FALLBACK_PATHS.get(action_id, ""))
+	if fallback_path != "":
+		return _combat_ui_texture(fallback_path)
+	return _combat_ui_texture(path)
+
+
+func _combat_ui_texture_has_visible_pixels(path: String) -> bool:
+	if path == "":
+		return false
+	var cache_key := "%s:visible" % path
+	if ui_texture_cache.has(cache_key):
+		return bool(ui_texture_cache[cache_key])
+	var image := Image.new()
+	if image.load(path) != OK:
+		ui_texture_cache[cache_key] = false
+		return false
+	var step_x := maxi(1, int(image.get_width() / 64))
+	var step_y := maxi(1, int(image.get_height() / 64))
+	for y in range(0, image.get_height(), step_y):
+		for x in range(0, image.get_width(), step_x):
+			if image.get_pixel(x, y).a > 0.05:
+				ui_texture_cache[cache_key] = true
+				return true
+	ui_texture_cache[cache_key] = false
+	return false
 
 
 func _combat_ui_stylebox(path: String, texture_margin: int, content_margin: int) -> StyleBoxTexture:

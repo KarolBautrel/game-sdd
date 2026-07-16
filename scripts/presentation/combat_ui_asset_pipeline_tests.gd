@@ -1,5 +1,7 @@
 extends SceneTree
 
+const CombatDebugScript := preload("res://scripts/presentation/combat_debug.gd")
+
 
 func _init() -> void:
 	var failures: Array[String] = []
@@ -22,6 +24,14 @@ func _init() -> void:
 	_assert_file("res://assets/ui/combat/processed/icons/inner/icon_bow.png", failures)
 	_assert_file("res://assets/ui/combat/processed/icons/inner/icon_shield.png", failures)
 	_assert_file("res://assets/ui/combat/processed/icons/inner/icon_hourglass.png", failures)
+	_assert_file("res://assets/ui/combat/processed/icons/icon_aimed_shot.png", failures)
+	_assert_file("res://assets/ui/combat/processed/icons/icon_cur_deep.png", failures)
+	_assert_file("res://assets/ui/combat/processed/icons/icon_guard_break.png", failures)
+	_assert_file("res://assets/ui/combat/processed/icons/icon_power_attack.png", failures)
+	_assert_file("res://assets/ui/combat/processed/icons/icon_shield_wall.png", failures)
+	_assert_equal(CombatDebugScript.ACTION_ICON_PATHS.get("guard_break", ""), "res://assets/ui/combat/processed/icons/icon_guard_break.png", "guard break icon path", failures)
+	_assert_equal(CombatDebugScript.ACTION_ICON_PATHS.get("move", ""), "res://assets/ui/combat/processed/icons/icon_boot.png", "move icon path", failures)
+	_assert_equal(CombatDebugScript.ACTION_ICON_PATHS.get("basic_attack", ""), "res://assets/ui/combat/processed/icons/icon_sword.png", "basic attack icon path", failures)
 	if not failures.is_empty():
 		for failure in failures:
 			push_error(failure)
@@ -44,3 +54,8 @@ func _assert_png_size(path: String, expected: Vector2i, failures: Array[String])
 	var actual := Vector2i(image.get_width(), image.get_height())
 	if actual != expected:
 		failures.append("Expected %s to be %sx%s, got %sx%s" % [path, expected.x, expected.y, actual.x, actual.y])
+
+
+func _assert_equal(actual: Variant, expected: Variant, label: String, failures: Array[String]) -> void:
+	if actual != expected:
+		failures.append("Expected %s to be `%s`, got `%s`" % [label, expected, actual])
