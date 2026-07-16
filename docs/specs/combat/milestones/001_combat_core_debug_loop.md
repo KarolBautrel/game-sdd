@@ -28,6 +28,7 @@ The project now has:
 - combat debug can now load a dungeon-themed stone board using dungeon props for blocked, cover, highground, and floor accents.
 - bleeding turn-start death now automatically skips the defeated unit so combat cannot lock on a dead active actor.
 - combat debug now has a `Debug Win` helper button for fast dungeon flow testing; it defeats living enemies in sandbox state, emits a victory payload through the existing result contract, and then exposes the normal `Return to Dungeon` path.
+- combat terrain atlases from `assets/combat/terrain/to_process/` now have a Godot extraction pipeline that produces transparent processed props and grass/dungeon terrain showcase encounters.
 
 ## Implemented Combat Rules
 
@@ -232,6 +233,7 @@ Current verified slices:
 - `082_combat_result_contract.md`
 - `083_dungeon_combat_board_theme.md`
 - `084_bleeding_death_skips_turn.md`
+- `088_combat_terrain_asset_showcase_v1.md`
 
 ## Spec Organization
 
@@ -257,6 +259,7 @@ Current presentation rule specs:
 - `presentation/074_combat_action_feedback.md`
 - `presentation/076_combat_sandbox_layout.md`
 - `presentation/083_dungeon_combat_board_theme.md`
+- `presentation/088_combat_terrain_asset_showcase_v1.md`
 - `actions/063_aimed_shot_v1.md`
 - `actions/064_learned_actions_v1.md`
 - `ai/065_enemy_archetype_loadout_v1.md`
@@ -736,17 +739,44 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
       - stable living units re-sync facing toward their nearest living opponent after movement/action resolution, while movement-facing remains temporary during movement animation;
       - dead unit nodes now sort underneath living unit nodes, and living units depth-sort by board position so corpse sprites do not cover standing character heads.
       - corpse sprites now keep their death-time facing and are skipped by stable facing re-sync, so dead units do not rotate toward later targets.
+      - active-unit and overhead resource displays now support temporary animation-time values, so movement MP ticks down per step, AP drops when an action begins, and HP drops at the damage impact before final resolver state is committed.
+      - damage/miss/status floating text now renders on a dedicated layer above unit overhead resource/status panels, so combat feedback is not hidden behind HP/AP/MP labels.
+      - permanent team-colored tile squares under units were removed; movement/targeting feedback now uses subtler translucent fills and borders, with no yellow highground base under standing units.
     - Latest validation:
       - `scripts/presentation/combat_mercenary_asset_pipeline_tests.gd` passed;
       - `scripts/presentation/combat_ui_asset_pipeline_tests.gd` passed;
+      - `scripts/presentation/combat_floating_text_tests.gd` passed;
       - Godot headless combat scene load passed at 2560x1440;
       - `python tools\validators\validate_all.py` passed;
       - Godot combat slice tests passed.
 
-14. **Next - Combat Board Frame And Panel Skin V1**
+14. **Done - Combat Terrain Asset Showcase V1**
+    - Goal: process the new terrain atlases and create grass/dungeon combat map showcases at the current 2.5D combat scale.
+    - Owner spec: `presentation/088_combat_terrain_asset_showcase_v1.md`.
+    - Slice: `slices/088_combat_terrain_asset_showcase_v1.md`.
+    - Implementation:
+      - `tools/terrain/extract_combat_terrain_assets.gd`;
+      - `assets/combat/terrain/processed/`;
+      - `assets/combat/terrain/processed/processed_terrain_manifest.json`;
+      - `resources/data/combat_encounters/debug_terrain_grass_showcase.json`;
+      - `resources/data/combat_encounters/debug_terrain_dungeon_showcase.json`;
+      - `scripts/presentation/combat_debug.gd`;
+      - `scripts/presentation/combat/combat_scenario_catalog.gd`.
+    - Latest layout correction completed:
+      - showcase encounters now define explicit `terrain_decorations` placements, so nature and dungeon props are arranged as handmade scene dressing instead of automatic repeated clusters;
+      - when `terrain_decorations` exists, unlisted tiles do not receive fallback auto props;
+      - future random combat boards should choose from handmade layout variants per biome/difficulty, with randomness applied to variant selection and encounter setup rather than nonsensical prop scattering.
+    - Test proof:
+      - `scripts/presentation/combat_terrain_asset_pipeline_tests.gd`;
+      - `python tools\validators\validate_all.py`;
+      - Godot headless combat scene load.
+    - Manual review:
+      - select `New terrain grass` and `New terrain dungeon` in the combat scenario picker and verify prop scale against the warrior/enemy sprites.
+
+15. **Next - Combat Board Frame And Panel Skin V1**
     - Goal: replace the current rough battle chrome with asset-backed framed panels that match the tactical fantasy direction.
-    - Owner spec: new `presentation/088_combat_board_frame_skin_v1.md`.
-    - Slice: `slices/088_combat_board_frame_skin_v1.md`.
+    - Owner spec: new `presentation/089_combat_board_frame_skin_v1.md`.
+    - Slice: `slices/089_combat_board_frame_skin_v1.md`.
     - Required behavior:
       - board frame, side/top panels, event feed, and modal/tooltip surfaces use the new visual language;
       - no text overlaps panel borders at target resolutions;
@@ -757,10 +787,10 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
       - layout helper assertions where practical;
       - manual screenshot review.
 
-15. **Planned - Combat Unit And Resource Icon Pass V1**
+16. **Planned - Combat Unit And Resource Icon Pass V1**
     - Goal: use processed combat assets to improve unit readability and resource communication.
-    - Owner spec: new `presentation/089_combat_unit_resource_assets_v1.md`.
-    - Slice: `slices/089_combat_unit_resource_assets_v1.md`.
+    - Owner spec: new `presentation/090_combat_unit_resource_assets_v1.md`.
+    - Slice: `slices/090_combat_unit_resource_assets_v1.md`.
     - Required behavior:
       - unit portraits/sprites and combat posture assets are resolved from stable paths;
       - HP/AP/MP/resource icons replace or support plain text where readable;
@@ -771,10 +801,10 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
       - Godot headless scene load;
       - manual visual review.
 
-16. **Planned - Combat Feedback Polish V2**
+17. **Planned - Combat Feedback Polish V2**
     - Goal: make action feedback feel game-like after the HUD and asset skin are in place.
-    - Owner spec: update `presentation/074_combat_action_feedback.md` or create `presentation/090_combat_feedback_polish_v2.md`.
-    - Slice: `slices/090_combat_feedback_polish_v2.md`.
+    - Owner spec: update `presentation/074_combat_action_feedback.md` or create `presentation/091_combat_feedback_polish_v2.md`.
+    - Slice: `slices/091_combat_feedback_polish_v2.md`.
     - Required behavior:
       - floating damage/miss/status text matches the new UI style;
       - selected action, target preview, hit chance, damage, AP/MP cost, and rejection reasons are visually consistent;
@@ -785,20 +815,20 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
       - Godot headless scene load;
       - manual screenshot/playthrough review.
 
-17. **Planned - Combat Encounter Authoring V1**
+18. **Planned - Combat Encounter Authoring V1**
     - Goal: make one new combat encounter from map + archetypes without code changes.
     - Owner spec: map/encounter authoring docs.
-    - Slice: `slices/091_combat_encounter_authoring_v1.md`.
+    - Slice: `slices/092_combat_encounter_authoring_v1.md`.
     - Required behavior:
       - documented steps for adding a combat map encounter;
       - validator checks map reference, spawns, archetypes, loadouts, and background;
       - debug scene scenario catalog can load it without controller edits.
     - Test proof: validators plus Godot project load.
 
-18. **Planned - Combat Readiness Review For Dungeon**
+19. **Planned - Combat Readiness Review For Dungeon**
     - Goal: run the exit criteria as a final checklist after the UI/asset pass and encounter authoring work.
     - Owner spec: this milestone plus any transition/boundary spec.
-    - Slice: `slices/092_combat_ready_for_dungeon.md`.
+    - Slice: `slices/093_combat_ready_for_dungeon.md`.
     - Required behavior:
       - all required roadmap items are done or explicitly deferred;
       - validation commands pass;
@@ -806,3 +836,23 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
       - combat scene is readable enough for beta dungeon-combat testing without relying on debug logs;
       - next milestone for dungeon can start without re-planning combat basics.
     - Test proof: full validation plus documented manual playthrough of the debug combat scene.
+
+20. **Done - Combat Map Editor V1**
+    - Goal: provide a lightweight Godot debug tool for visually editing combat board tile types and terrain decorations instead of manually writing every JSON entry.
+    - Owner spec: `presentation/094_combat_map_editor_v1.md`.
+    - Slice: `slices/094_combat_map_editor_v1.md`.
+    - Implementation:
+      - `scenes/combat/CombatMapEditor.tscn`;
+      - `scripts/presentation/combat_map_editor.gd`;
+      - `scripts/presentation/combat_map_editor_tests.gd`;
+      - `docs/helper_for_developer.md`.
+    - Behavior:
+      - loads an encounter JSON path;
+      - paints `floor`, `blocked`, `cover_low`, and `highground`;
+      - places processed terrain props from `assets/combat/terrain/processed/`;
+      - supports tile-only, decoration-only, tile-plus-decoration, and erase-decoration brushes;
+      - saves full `grid.tiles` and explicit `terrain_decorations`.
+    - Test proof:
+      - `scripts/presentation/combat_map_editor_tests.gd`;
+      - `python tools\validators\validate_all.py`;
+      - Godot headless `CombatMapEditor.tscn` load.

@@ -1,0 +1,412 @@
+{
+	"asset_count": 45,
+	"assets": [
+		{
+			"area": 94998,
+			"height": 504,
+			"id": "dung_1_00",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_00.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_1.png",
+			"theme": "dungeon",
+			"width": 262
+		},
+		{
+			"area": 19951,
+			"height": 482,
+			"id": "dung_1_01",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_1.png",
+			"theme": "dungeon",
+			"width": 125
+		},
+		{
+			"area": 35854,
+			"height": 230,
+			"id": "dung_1_02",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_1.png",
+			"theme": "dungeon",
+			"width": 323
+		},
+		{
+			"area": 42935,
+			"height": 337,
+			"id": "dung_1_03",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_03.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_1.png",
+			"theme": "dungeon",
+			"width": 201
+		},
+		{
+			"area": 15262,
+			"height": 124,
+			"id": "dung_1_04",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_04.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_1.png",
+			"theme": "dungeon",
+			"width": 237
+		},
+		{
+			"area": 50471,
+			"height": 397,
+			"id": "dung_1_05",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_05.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_1.png",
+			"theme": "dungeon",
+			"width": 181
+		},
+		{
+			"area": 40213,
+			"height": 286,
+			"id": "dung_1_06",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_1.png",
+			"theme": "dungeon",
+			"width": 276
+		},
+		{
+			"area": 39509,
+			"height": 318,
+			"id": "dung_1_07",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_07.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_1.png",
+			"theme": "dungeon",
+			"width": 226
+		},
+		{
+			"area": 41881,
+			"height": 249,
+			"id": "dung_1_08",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_08.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_1.png",
+			"theme": "dungeon",
+			"width": 230
+		},
+		{
+			"area": 46124,
+			"height": 257,
+			"id": "dung_1_09",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_09.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_1.png",
+			"theme": "dungeon",
+			"width": 258
+		},
+		{
+			"area": 16835,
+			"height": 113,
+			"id": "dung_1_10",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_10.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_1.png",
+			"theme": "dungeon",
+			"width": 282
+		},
+		{
+			"area": 74286,
+			"height": 414,
+			"id": "dung_2_00",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_00.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_2.png",
+			"theme": "dungeon",
+			"width": 393
+		},
+		{
+			"area": 49716,
+			"height": 290,
+			"id": "dung_2_01",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_01.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_2.png",
+			"theme": "dungeon",
+			"width": 340
+		},
+		{
+			"area": 52115,
+			"height": 260,
+			"id": "dung_2_02",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_02.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_2.png",
+			"theme": "dungeon",
+			"width": 313
+		},
+		{
+			"area": 35935,
+			"height": 205,
+			"id": "dung_2_03",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_03.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_2.png",
+			"theme": "dungeon",
+			"width": 287
+		},
+		{
+			"area": 75794,
+			"height": 574,
+			"id": "dung_2_04",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_04.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_2.png",
+			"theme": "dungeon",
+			"width": 307
+		},
+		{
+			"area": 24240,
+			"height": 287,
+			"id": "dung_2_05",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_05.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_2.png",
+			"theme": "dungeon",
+			"width": 184
+		},
+		{
+			"area": 75065,
+			"height": 270,
+			"id": "dung_2_06",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_06.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_2.png",
+			"theme": "dungeon",
+			"width": 424
+		},
+		{
+			"area": 24000,
+			"height": 227,
+			"id": "dung_2_07",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_07.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_2.png",
+			"theme": "dungeon",
+			"width": 187
+		},
+		{
+			"area": 47650,
+			"height": 267,
+			"id": "dung_2_08",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_08.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_2.png",
+			"theme": "dungeon",
+			"width": 344
+		},
+		{
+			"area": 45300,
+			"height": 232,
+			"id": "dung_2_09",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_09.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_2.png",
+			"theme": "dungeon",
+			"width": 325
+		},
+		{
+			"area": 27002,
+			"height": 253,
+			"id": "dung_2_10",
+			"path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_10.png",
+			"source": "res://assets/combat/terrain/to_process/dungeon/underground/dung_2.png",
+			"theme": "dungeon",
+			"width": 179
+		},
+		{
+			"area": 228143,
+			"height": 921,
+			"id": "nature_1_00",
+			"path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_1.png",
+			"theme": "nature",
+			"width": 442
+		},
+		{
+			"area": 44594,
+			"height": 240,
+			"id": "nature_1_01",
+			"path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_1.png",
+			"theme": "nature",
+			"width": 280
+		},
+		{
+			"area": 48270,
+			"height": 254,
+			"id": "nature_1_02",
+			"path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_02.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_1.png",
+			"theme": "nature",
+			"width": 303
+		},
+		{
+			"area": 10559,
+			"height": 130,
+			"id": "nature_1_03",
+			"path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_03.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_1.png",
+			"theme": "nature",
+			"width": 166
+		},
+		{
+			"area": 8759,
+			"height": 118,
+			"id": "nature_1_04",
+			"path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_04.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_1.png",
+			"theme": "nature",
+			"width": 151
+		},
+		{
+			"area": 24114,
+			"height": 177,
+			"id": "nature_1_05",
+			"path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_05.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_1.png",
+			"theme": "nature",
+			"width": 221
+		},
+		{
+			"area": 60750,
+			"height": 217,
+			"id": "nature_1_06",
+			"path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_1.png",
+			"theme": "nature",
+			"width": 460
+		},
+		{
+			"area": 16952,
+			"height": 143,
+			"id": "nature_1_07",
+			"path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_07.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_1.png",
+			"theme": "nature",
+			"width": 193
+		},
+		{
+			"area": 50717,
+			"height": 253,
+			"id": "nature_1_08",
+			"path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_1.png",
+			"theme": "nature",
+			"width": 312
+		},
+		{
+			"area": 30025,
+			"height": 200,
+			"id": "nature_1_09",
+			"path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_09.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_1.png",
+			"theme": "nature",
+			"width": 235
+		},
+		{
+			"area": 44214,
+			"height": 204,
+			"id": "nature_1_10",
+			"path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_10.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_1.png",
+			"theme": "nature",
+			"width": 378
+		},
+		{
+			"area": 83389,
+			"height": 295,
+			"id": "nature_2_00",
+			"path": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_00.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_2.png",
+			"theme": "nature",
+			"width": 518
+		},
+		{
+			"area": 38973,
+			"height": 198,
+			"id": "nature_2_01",
+			"path": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_01.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_2.png",
+			"theme": "nature",
+			"width": 360
+		},
+		{
+			"area": 13039,
+			"height": 114,
+			"id": "nature_2_02",
+			"path": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_02.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_2.png",
+			"theme": "nature",
+			"width": 223
+		},
+		{
+			"area": 38098,
+			"height": 232,
+			"id": "nature_2_03",
+			"path": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_03.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_2.png",
+			"theme": "nature",
+			"width": 327
+		},
+		{
+			"area": 33755,
+			"height": 155,
+			"id": "nature_2_04",
+			"path": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_04.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_2.png",
+			"theme": "nature",
+			"width": 375
+		},
+		{
+			"area": 23546,
+			"height": 123,
+			"id": "nature_2_05",
+			"path": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_05.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_2.png",
+			"theme": "nature",
+			"width": 315
+		},
+		{
+			"area": 60637,
+			"height": 306,
+			"id": "nature_2_06",
+			"path": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_06.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_2.png",
+			"theme": "nature",
+			"width": 433
+		},
+		{
+			"area": 28312,
+			"height": 274,
+			"id": "nature_2_07",
+			"path": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_07.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_2.png",
+			"theme": "nature",
+			"width": 220
+		},
+		{
+			"area": 59476,
+			"height": 208,
+			"id": "nature_2_08",
+			"path": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_08.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_2.png",
+			"theme": "nature",
+			"width": 518
+		},
+		{
+			"area": 34375,
+			"height": 169,
+			"id": "nature_2_09",
+			"path": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_09.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_2.png",
+			"theme": "nature",
+			"width": 483
+		},
+		{
+			"area": 26116,
+			"height": 157,
+			"id": "nature_2_10",
+			"path": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_10.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_2.png",
+			"theme": "nature",
+			"width": 327
+		},
+		{
+			"area": 20989,
+			"height": 161,
+			"id": "nature_2_11",
+			"path": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_11.png",
+			"source": "res://assets/combat/terrain/to_process/nature/nature_2.png",
+			"theme": "nature",
+			"width": 234
+		}
+	],
+	"output_root": "res://assets/combat/terrain/processed",
+	"source_root": "res://assets/combat/terrain/to_process"
+}

@@ -94,6 +94,7 @@ static func _spawn_message(layer: Control, start_position: Vector2, message: Dic
 	panel.size = message_size
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.modulate = Color(1, 1, 1, 1)
+	panel.z_index = 10
 	panel.add_theme_stylebox_override("panel", _style(color))
 
 	var label := Label.new()

@@ -10,6 +10,7 @@ func _init() -> void:
 	errors.append_array(_test_status_message())
 	errors.append_array(_test_status_message_with_word_separator())
 	errors.append_array(_test_damage_suppresses_miss_for_same_target())
+	errors.append_array(_test_spawned_message_draws_above_layer_content())
 
 	if errors.is_empty():
 		print("Godot combat floating text validation passed.")
@@ -84,6 +85,29 @@ func _test_damage_suppresses_miss_for_same_target() -> Array[String]:
 		errors.append("combined: expected one message, got %s" % messages.size())
 		return errors
 	errors.append_array(_expect_message("combined", messages, 0, "unit_enemy_001", "-4 DMG", CombatFloatingText.DAMAGE_COLOR))
+	return errors
+
+
+func _test_spawned_message_draws_above_layer_content() -> Array[String]:
+	var errors: Array[String] = []
+	var layer := Control.new()
+	CombatFloatingText.spawn_messages(
+		layer,
+		[{"unit_id": "unit_enemy_001", "text": "-3 DMG", "color": CombatFloatingText.DAMAGE_COLOR, "order": 0}],
+		func(unit_id: String) -> Variant:
+			return Vector2(12, 18),
+		{"duration_seconds": 0.01}
+	)
+	if layer.get_child_count() != 1:
+		errors.append("spawn layer: expected one floating text, got %s" % layer.get_child_count())
+		layer.free()
+		return errors
+	var panel := layer.get_child(0) as Control
+	if panel == null:
+		errors.append("spawn layer: floating text is not a Control")
+	elif panel.z_index <= 0:
+		errors.append("spawn layer: expected floating text z_index above 0, got %s" % panel.z_index)
+	layer.free()
 	return errors
 
 

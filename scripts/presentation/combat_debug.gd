@@ -78,6 +78,14 @@ const DECORATION_SIZE_BY_KIND := {
 	"tree_stump": Vector2(62, 62),
 	"mossy_boulder": Vector2(76, 76),
 	"fallen_branch": Vector2(84, 84),
+	"processed_nature_small": Vector2(104, 82),
+	"processed_nature_medium": Vector2(148, 118),
+	"processed_nature_wide": Vector2(210, 112),
+	"processed_nature_tall": Vector2(220, 330),
+	"processed_dungeon_small": Vector2(110, 92),
+	"processed_dungeon_medium": Vector2(156, 128),
+	"processed_dungeon_wide": Vector2(190, 112),
+	"processed_dungeon_tall": Vector2(150, 280),
 	"dungeon_small": Vector2(72, 72),
 	"dungeon_medium": Vector2(88, 88),
 	"dungeon_large": Vector2(104, 104),
@@ -100,49 +108,52 @@ const DEATH_CYCLE_SECONDS := 0.12
 const CORPSE_MODULATE := Color(0.74, 0.68, 0.62, 0.86)
 const PRELOAD_UNIT_VISUAL_ACTIONS := ["pose", "combat_idle", "walk", "combat", "hit", "death", "status_reaction"]
 const PRELOAD_UNIT_DIRECTIONS := ["north", "north_east", "east", "south_east", "south", "south_west", "west", "north_west"]
+const UNIT_LAYER_Z_INDEX := 100
+const FLOATING_TEXT_LAYER_Z_INDEX := 2000
+const BOARD_OVERLAY_LAYER_Z_INDEX := 3000
 const DECORATION_BY_POSITION := {
-	"1,6": "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_9.png",
-	"6,6": "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_13.png",
+	"1,6": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_03.png",
+	"6,6": "res://assets/combat/terrain/processed/nature/nature_2/nature_2_02.png",
 }
 const BLOCKED_DECORATION_PATHS := [
-	"res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_3.png",
-	"res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_10.png",
-	"res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_11.png",
-	"res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_12.png",
+	"res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png",
+	"res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png",
+	"res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png",
+	"res://assets/combat/terrain/processed/nature/nature_2/nature_2_06.png",
 ]
 const COVER_DECORATION_PATHS := [
-	"res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_2.png",
-	"res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_8.png",
-	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_5.png",
-	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_15.png",
+	"res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png",
+	"res://assets/combat/terrain/processed/nature/nature_1/nature_1_02.png",
+	"res://assets/combat/terrain/processed/nature/nature_1/nature_1_05.png",
+	"res://assets/combat/terrain/processed/nature/nature_1/nature_1_07.png",
 ]
 const HIGHLAND_DECORATION_PATHS := [
-	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_1.png",
-	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_8.png",
-	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_12.png",
+	"res://assets/combat/terrain/processed/nature/nature_1/nature_1_09.png",
+	"res://assets/combat/terrain/processed/nature/nature_1/nature_1_10.png",
+	"res://assets/combat/terrain/processed/nature/nature_2/nature_2_04.png",
 ]
 const DUNGEON_BLOCKED_DECORATION_PATHS := [
-	"res://assets/combat/dungeons/props/bone_spike_totem_01.png",
-	"res://assets/combat/dungeons/props/iron_gate_round_01.png",
-	"res://assets/combat/dungeons/props/stone_spike_barricade_01.png",
-	"res://assets/combat/dungeons/props/iron_spike_fence_01.png",
-	"res://assets/combat/dungeons/props/arched_stone_door_01.png",
+	"res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_00.png",
+	"res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png",
+	"res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_04.png",
+	"res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_06.png",
+	"res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_08.png",
 ]
 const DUNGEON_COVER_DECORATION_PATHS := [
-	"res://assets/combat/dungeons/props/stone_chest_01.png",
-	"res://assets/combat/dungeons/props/wooden_treasure_chest_01.png",
-	"res://assets/combat/dungeons/props/skull_pile_01.png",
-	"res://assets/combat/dungeons/props/stone_coffin_01.png",
+	"res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png",
+	"res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_07.png",
+	"res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_08.png",
+	"res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_03.png",
 ]
 const DUNGEON_HIGHLAND_DECORATION_PATHS := [
-	"res://assets/combat/dungeons/props/ornate_floor_tablet_01.png",
-	"res://assets/combat/dungeons/props/stone_coffin_01.png",
-	"res://assets/combat/dungeons/props/hanging_banner_01.png",
+	"res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_03.png",
+	"res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_05.png",
+	"res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_04.png",
 ]
 const DUNGEON_FLOOR_DECORATION_BY_POSITION := {
-	"1,6": "res://assets/combat/dungeons/props/hanging_chains_01.png",
-	"6,6": "res://assets/combat/dungeons/props/wall_torch_01.png",
-	"14,8": "res://assets/combat/dungeons/props/gold_gem_pile_01.png",
+	"1,6": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png",
+	"6,6": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_10.png",
+	"14,8": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_09.png",
 }
 const TERRAIN_BASE_COLORS := {
 	"floor": Color(0.10, 0.30, 0.10, 1.0),
@@ -200,6 +211,7 @@ var preloaded_unit_visual_keys: Dictionary = {}
 var rendered_grid_key := ""
 var temporary_visual_units: Dictionary = {}
 var visual_positions_px: Dictionary = {}
+var temporary_resource_overrides: Dictionary = {}
 var visual_generation := 0
 var animation_locked := false
 var current_action_title := "Combat ready"
@@ -212,6 +224,7 @@ var presentation_cache_ready := false
 
 func _ready() -> void:
 	_ensure_board_overlay_controls()
+	_configure_board_layers()
 	_apply_pixel_theme()
 	if _run_session().has_pending_combat_launch():
 		current_encounter_path = _run_session().combat_encounter_path()
@@ -231,6 +244,7 @@ func _reset_debug_encounter() -> void:
 	unit_visual_action.clear()
 	temporary_visual_units.clear()
 	visual_positions_px.clear()
+	temporary_resource_overrides.clear()
 	_clear_floating_text()
 	preloaded_unit_visual_keys.clear()
 	rendered_grid_key = ""
@@ -425,12 +439,12 @@ func _update_tile_dynamic(tile: Button, position: Dictionary) -> void:
 	var unit := _living_unit_at(position)
 	var overlay_color := _tile_overlay_color(position, unit)
 	if overlay_color.a > 0.001:
-		var overlay := ColorRect.new()
+		var overlay := PanelContainer.new()
 		overlay.name = "Overlay"
-		overlay.color = overlay_color
 		overlay.custom_minimum_size = Vector2(TILE_WIDTH, TILE_HEIGHT)
 		overlay.size = Vector2(TILE_WIDTH, TILE_HEIGHT)
 		overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		overlay.add_theme_stylebox_override("panel", _tile_overlay_style(position, unit, overlay_color))
 		tile.add_child(overlay)
 
 	var preview_label_text := _tile_preview_label(position)
@@ -602,7 +616,7 @@ func _terrain_tint_color(terrain_type: String, decoration_path: String = "") -> 
 			"blocked":
 				return Color(0.02, 0.02, 0.03, 0.28)
 			"highground":
-				return Color(0.58, 0.58, 0.50, 0.26)
+				return Color(0, 0, 0, 0)
 			"cover_low":
 				return Color(0.45, 0.43, 0.38, 0.16)
 			_:
@@ -611,7 +625,7 @@ func _terrain_tint_color(terrain_type: String, decoration_path: String = "") -> 
 		"blocked":
 			return Color(0.05, 0.04, 0.03, 0.24)
 		"highground":
-			return Color(0.78, 0.58, 0.16, 0.30)
+			return Color(0, 0, 0, 0)
 		"cover_low":
 			return Color(0.55, 0.39, 0.20, 0.13)
 		_:
@@ -634,10 +648,36 @@ func _tile_decoration_texture(path: String) -> Texture2D:
 
 
 func _decoration_size(path: String) -> Vector2:
-	return DECORATION_SIZE_BY_KIND.get(_decoration_kind(path), DECORATION_SIZE_BY_KIND["default"])
+	var max_size: Vector2 = DECORATION_SIZE_BY_KIND.get(_decoration_kind(path), DECORATION_SIZE_BY_KIND["default"])
+	if path.contains("/terrain/processed/"):
+		var texture := _tile_decoration_texture(path)
+		if texture == null:
+			return max_size
+		var source_size := texture.get_size()
+		if source_size.x <= 0.0 or source_size.y <= 0.0:
+			return max_size
+		var scale: float = minf(max_size.x / source_size.x, max_size.y / source_size.y)
+		return Vector2(source_size.x * scale, source_size.y * scale)
+	return max_size
 
 
 func _decoration_kind(path: String) -> String:
+	if path.contains("/terrain/processed/nature/"):
+		if path.contains("nature_1_00"):
+			return "processed_nature_tall"
+		if path.contains("nature_1_06") or path.contains("nature_2_00") or path.contains("nature_2_08") or path.contains("nature_2_09"):
+			return "processed_nature_wide"
+		if path.contains("nature_1_03") or path.contains("nature_1_04") or path.contains("nature_2_02"):
+			return "processed_nature_small"
+		return "processed_nature_medium"
+	if path.contains("/terrain/processed/dungeon/"):
+		if path.contains("dung_1_00") or path.contains("dung_1_01") or path.contains("dung_1_05") or path.contains("dung_2_04"):
+			return "processed_dungeon_tall"
+		if path.contains("dung_1_02") or path.contains("dung_1_04") or path.contains("dung_1_10") or path.contains("dung_2_06"):
+			return "processed_dungeon_wide"
+		if path.contains("dung_2_03") or path.contains("dung_2_07") or path.contains("dung_2_10"):
+			return "processed_dungeon_small"
+		return "processed_dungeon_medium"
 	if path.contains("/combat/dungeons/props/"):
 		if path.contains("arched_stone_door") or path.contains("iron_spike_fence") or path.contains("bone_spike_totem"):
 			return "dungeon_large"
@@ -657,6 +697,11 @@ func _decoration_kind(path: String) -> String:
 
 func _tile_decoration_path(position: Dictionary) -> String:
 	var key := "%s,%s" % [position.get("x", 0), position.get("y", 0)]
+	if state.has("terrain_decorations"):
+		for decoration: Dictionary in state.get("terrain_decorations", []):
+			if int(decoration.get("x", -1)) == int(position.get("x", 0)) and int(decoration.get("y", -1)) == int(position.get("y", 0)):
+				return str(decoration.get("path", ""))
+		return ""
 	var terrain_type := _tile_type(position)
 	if _is_dungeon_board():
 		if terrain_type == "blocked":
@@ -676,7 +721,16 @@ func _tile_decoration_path(position: Dictionary) -> String:
 
 
 func _is_dungeon_board() -> bool:
-	return str(state.get("background_path", "")).contains("old_mine_dungeon_")
+	return _terrain_theme() == "dungeon"
+
+
+func _terrain_theme() -> String:
+	var explicit_theme := str(state.get("terrain_theme", ""))
+	if explicit_theme != "":
+		return explicit_theme
+	if str(state.get("background_path", "")).contains("old_mine_dungeon_"):
+		return "dungeon"
+	return "nature"
 
 
 func _decoration_index(position: Dictionary, count: int) -> int:
@@ -689,23 +743,64 @@ func _decoration_index(position: Dictionary, count: int) -> int:
 
 func _tile_overlay_color(position: Dictionary, unit: Dictionary) -> Color:
 	if _is_active_unit_at(position):
-		return Color(1.0, 0.83, 0.18, 0.34)
+		return Color(1.0, 0.80, 0.22, 0.12)
 	if _is_pending_move_destination(position):
-		return Color(1.0, 0.76, 0.18, 0.24)
+		return Color(1.0, 0.72, 0.22, 0.16)
 	if _is_pending_move_path(position):
-		return Color(0.36, 0.72, 1.0, 0.18)
+		return Color(0.42, 0.78, 1.0, 0.10)
 	var preview := _target_preview_for_position(position)
 	if not preview.is_empty():
 		if preview.get("rejection", "") == "":
-			return Color(0.25, 0.95, 0.35, 0.20)
-		return Color(0.95, 0.16, 0.10, 0.20)
-	if not unit.is_empty() and unit["team"] == "player":
-		return Color(0.18, 0.45, 0.85, 0.26)
-	if not unit.is_empty():
-		return Color(0.90, 0.16, 0.12, 0.26)
+			if selected_action == "move":
+				return Color(0.32, 0.86, 0.62, 0.10)
+			return Color(0.30, 0.92, 0.42, 0.12)
+		if selected_action == "move":
+			return Color(0, 0, 0, 0)
+		return Color(0.95, 0.20, 0.14, 0.10)
 	if _positions_equal(selected_position, position):
-		return Color(0.50, 0.48, 0.90, 0.16)
+		return Color(0.60, 0.58, 0.95, 0.10)
 	return Color(0, 0, 0, 0)
+
+
+func _tile_overlay_style(position: Dictionary, unit: Dictionary, overlay_color: Color) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = overlay_color
+	style.border_width_left = 0
+	style.border_width_top = 0
+	style.border_width_right = 0
+	style.border_width_bottom = 0
+	if _is_active_unit_at(position):
+		style.border_color = Color(1.0, 0.78, 0.24, 0.78)
+		_set_tile_overlay_border(style, 3)
+	elif _is_pending_move_destination(position):
+		style.border_color = Color(1.0, 0.72, 0.22, 0.88)
+		_set_tile_overlay_border(style, 3)
+	elif _is_pending_move_path(position):
+		style.border_color = Color(0.52, 0.82, 1.0, 0.55)
+		_set_tile_overlay_border(style, 2)
+	else:
+		var preview := _target_preview_for_position(position)
+		if not preview.is_empty() and preview.get("rejection", "") == "":
+			style.border_color = Color(0.42, 1.0, 0.58, 0.52) if selected_action != "move" else Color(0.42, 0.94, 0.70, 0.42)
+			_set_tile_overlay_border(style, 2)
+		elif not preview.is_empty():
+			style.border_color = Color(1.0, 0.26, 0.18, 0.48)
+			_set_tile_overlay_border(style, 2)
+		elif _positions_equal(selected_position, position):
+			style.border_color = Color(0.72, 0.70, 1.0, 0.50)
+			_set_tile_overlay_border(style, 2)
+	style.content_margin_left = 0
+	style.content_margin_top = 0
+	style.content_margin_right = 0
+	style.content_margin_bottom = 0
+	return style
+
+
+func _set_tile_overlay_border(style: StyleBoxFlat, width: int) -> void:
+	style.border_width_left = width
+	style.border_width_top = width
+	style.border_width_right = width
+	style.border_width_bottom = width
 
 
 func _tile_preview_label(position: Dictionary) -> String:
@@ -795,9 +890,10 @@ func _render_board_overlay() -> void:
 	overlay_resource_panel.visible = not active.is_empty()
 	if not active.is_empty():
 		overlay_resource_label.text = ""
-		_update_resource_bar(overlay_resource_bars["hp"], active.get("resources", {}).get("hp", 0), active.get("stats", {}).get("max_hp", 1))
-		_update_resource_bar(overlay_resource_bars["ap"], active.get("resources", {}).get("ap", 0), active.get("stats", {}).get("max_ap", 1))
-		_update_resource_bar(overlay_resource_bars["mp"], active.get("resources", {}).get("mp", 0), active.get("stats", {}).get("move_points", 1))
+		var active_resources := _display_resources(active)
+		_update_resource_bar(overlay_resource_bars["hp"], active_resources.get("hp", 0), active.get("stats", {}).get("max_hp", 1))
+		_update_resource_bar(overlay_resource_bars["ap"], active_resources.get("ap", 0), active.get("stats", {}).get("max_ap", 1))
+		_update_resource_bar(overlay_resource_bars["mp"], active_resources.get("mp", 0), active.get("stats", {}).get("move_points", 1))
 
 	var log_lines := _overlay_combat_log_lines()
 	overlay_log_label.text = "\n".join(log_lines)
@@ -1366,6 +1462,7 @@ func _run_command(command: Dictionary) -> void:
 		return
 	_clear_floating_text()
 	_clear_move_preview()
+	temporary_resource_overrides.clear()
 	if _combat_result() != "in_progress":
 		last_feedback = "Combat already ended."
 		_render()
@@ -1387,7 +1484,16 @@ func _run_command(command: Dictionary) -> void:
 		last_feedback = next_feedback
 		animation_locked = true
 		_render()
-		_play_movement_animation(new_events, next_state, next_log)
+		_play_movement_animation(new_events, previous_state, next_state, next_log)
+		return
+
+	if has_combat_flash:
+		last_feedback = next_feedback
+		animation_locked = true
+		temporary_visual_units.clear()
+		_prepare_presentation_cache()
+		_render()
+		_play_combat_animation(new_events, previous_state, next_state, next_log)
 		return
 
 	state = next_state
@@ -1395,10 +1501,7 @@ func _run_command(command: Dictionary) -> void:
 	last_feedback = next_feedback
 	_prepare_presentation_cache()
 	_render()
-	if has_combat_flash:
-		_play_combat_animation(new_events)
-	else:
-		_schedule_visual_reset()
+	_schedule_visual_reset()
 
 
 func _run_enemy_turn_helper() -> void:
@@ -1529,7 +1632,7 @@ func _ensure_board_overlay_controls() -> void:
 	board_overlay_layer = Control.new()
 	board_overlay_layer.name = "BoardOverlayLayer"
 	board_overlay_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	board_overlay_layer.z_index = 20
+	board_overlay_layer.z_index = BOARD_OVERLAY_LAYER_Z_INDEX
 	board_root.add_child(board_overlay_layer)
 
 	overlay_resource_panel = PanelContainer.new()
@@ -1576,6 +1679,13 @@ func _ensure_board_overlay_controls() -> void:
 	overlay_log_label.size = OVERLAY_LOG_PANEL_SIZE - Vector2(36, 30)
 	overlay_log_label.max_lines_visible = 5
 	overlay_log_panel.add_child(overlay_log_label)
+
+
+func _configure_board_layers() -> void:
+	unit_layer.z_index = UNIT_LAYER_Z_INDEX
+	floating_text_layer.z_index = FLOATING_TEXT_LAYER_Z_INDEX
+	if board_overlay_layer != null:
+		board_overlay_layer.z_index = BOARD_OVERLAY_LAYER_Z_INDEX
 
 
 func _create_resource_bar(texture_path: String, bar_size: Vector2) -> TextureProgressBar:
@@ -1905,8 +2015,7 @@ func _prepare_combat_flash(events: Array, previous_state: Dictionary) -> bool:
 	return not actions.is_empty()
 
 
-func _play_combat_animation(events: Array) -> void:
-	animation_locked = true
+func _play_combat_animation(events: Array, previous_state: Dictionary, next_state: Dictionary, next_log: Array) -> void:
 	visual_generation += 1
 	var current_generation := visual_generation
 	var tween := create_tween()
@@ -1931,7 +2040,15 @@ func _play_combat_animation(events: Array) -> void:
 		var origin := _unit_visual_pixel_position(actor)
 		var lunge := _combat_lunge_offset(actor, target)
 		_start_visual_cycle(actor_id, "combat", current_generation, COMBAT_CYCLE_SECONDS)
+		tween.tween_callback(func() -> void:
+			_apply_action_resource_spend(actor_id, events, previous_state)
+		)
 		tween.tween_property(unit_node, "position", origin + lunge, COMBAT_WINDUP_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		if event["type"] == "damage_applied":
+			var damage_event := event.duplicate(true)
+			tween.tween_callback(func() -> void:
+				_apply_damage_resource_result(damage_event)
+			)
 		tween.tween_property(unit_node, "position", origin, COMBAT_RETURN_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		animated_actors[actor_id] = true
 		tween_has_steps = true
@@ -1963,21 +2080,26 @@ func _play_combat_animation(events: Array) -> void:
 		tween_has_steps = true
 
 	if not tween_has_steps:
-		_finish_combat_animation(current_generation)
+		_finish_combat_animation(current_generation, next_state, next_log)
 		return
 
 	tween.finished.connect(func() -> void:
-		_finish_combat_animation(current_generation)
+		_finish_combat_animation(current_generation, next_state, next_log)
 	)
 
 
-func _finish_combat_animation(current_generation: int) -> void:
+func _finish_combat_animation(current_generation: int, next_state: Dictionary, next_log: Array) -> void:
 	if current_generation != visual_generation:
 		return
 	unit_visual_action.clear()
 	temporary_visual_units.clear()
+	temporary_resource_overrides.clear()
+	state = next_state
+	state["event_log"] = next_log
 	animation_locked = false
+	_prepare_presentation_cache()
 	_render()
+	_schedule_visual_reset()
 
 
 func _spawn_combat_floating_texts(events: Array) -> void:
@@ -2022,7 +2144,7 @@ func _hit_shake_offset(actor: Dictionary, target: Dictionary) -> Vector2:
 	return direction.normalized() * HIT_SHAKE_PIXELS
 
 
-func _play_movement_animation(events: Array, next_state: Dictionary, next_log: Array) -> void:
+func _play_movement_animation(events: Array, previous_state: Dictionary, next_state: Dictionary, next_log: Array) -> void:
 	visual_generation += 1
 	var current_generation := visual_generation
 	var tween := create_tween()
@@ -2036,9 +2158,14 @@ func _play_movement_animation(events: Array, next_state: Dictionary, next_log: A
 		if unit_node == null:
 			continue
 		_start_walk_cycle(actor_id, current_generation)
+		var remaining_mp := int(_unit_by_id_in_state(previous_state, actor_id).get("resources", {}).get("mp", 0))
 		for step: Dictionary in path:
 			var target_position := _position_to_unit_top_left(step)
 			tween.tween_property(unit_node, "position", target_position, MOVE_STEP_SECONDS).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+			var step_cost := _terrain_movement_cost(step)
+			remaining_mp = maxi(0, remaining_mp - step_cost)
+			var display_mp := remaining_mp
+			tween.tween_callback(_resource_override_callback(actor_id, "mp", display_mp))
 			tween_has_steps = true
 	if not tween_has_steps:
 		_finish_movement_animation(events, current_generation, next_state, next_log)
@@ -2058,6 +2185,7 @@ func _finish_movement_animation(events: Array, current_generation: int, next_sta
 		visual_positions_px.erase(actor_id)
 		unit_visual_action.erase(actor_id)
 	temporary_visual_units.clear()
+	temporary_resource_overrides.clear()
 	state = next_state
 	state["event_log"] = next_log
 	_face_moved_units_toward_nearest_opponent(events)
@@ -2294,7 +2422,7 @@ func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
 	unit_node.z_index = _unit_render_z_index(unit, is_dead)
 	unit_node.modulate = CORPSE_MODULATE if is_dead else Color(1, 1, 1, 1)
 
-	var on_highground := _tile_type(unit.get("position", {})) == "highground" and not is_dead
+	var on_highground := false
 	var elevation_shadow := unit_node.get_node_or_null("HighgroundUnitBaseShadow") as ColorRect
 	if elevation_shadow != null:
 		elevation_shadow.visible = on_highground
@@ -2515,12 +2643,76 @@ func _visual_units_for_render() -> Array[Dictionary]:
 
 
 func _unit_resource_text(unit: Dictionary) -> String:
+	var resources := _display_resources(unit)
 	return "HP %s/%s\nAP %s  MP %s" % [
-		unit["resources"].get("hp", "-"),
+		resources.get("hp", "-"),
 		unit["stats"].get("max_hp", "-"),
-		unit["resources"].get("ap", "-"),
-		unit["resources"].get("mp", "-"),
+		resources.get("ap", "-"),
+		resources.get("mp", "-"),
 	]
+
+
+func _display_resources(unit: Dictionary) -> Dictionary:
+	var resources: Dictionary = unit.get("resources", {}).duplicate(true)
+	var unit_id := str(unit.get("id", ""))
+	if temporary_resource_overrides.has(unit_id):
+		var overrides: Dictionary = temporary_resource_overrides.get(unit_id, {})
+		for resource_id in overrides.keys():
+			resources[resource_id] = overrides[resource_id]
+	return resources
+
+
+func _resource_override_callback(unit_id: String, resource_id: String, value: Variant) -> Callable:
+	return func() -> void:
+		_set_resource_override(unit_id, resource_id, value)
+
+
+func _set_resource_override(unit_id: String, resource_id: String, value: Variant) -> void:
+	if unit_id == "":
+		return
+	var overrides: Dictionary = temporary_resource_overrides.get(unit_id, {})
+	overrides[resource_id] = value
+	temporary_resource_overrides[unit_id] = overrides
+	_refresh_resource_display(unit_id)
+
+
+func _apply_action_resource_spend(actor_id: String, events: Array, previous_state: Dictionary) -> void:
+	var actor := _unit_by_id_in_state(previous_state, actor_id)
+	if actor.is_empty():
+		return
+	for event: Dictionary in events:
+		if event.get("type", "") != "action_performed" or str(event.get("actor_id", "")) != actor_id:
+			continue
+		var resources: Dictionary = actor.get("resources", {})
+		if int(event.get("ap_spent", 0)) > 0:
+			_set_resource_override(actor_id, "ap", maxi(0, int(resources.get("ap", 0)) - int(event.get("ap_spent", 0))))
+		if int(event.get("mp_spent", 0)) > 0:
+			_set_resource_override(actor_id, "mp", maxi(0, int(resources.get("mp", 0)) - int(event.get("mp_spent", 0))))
+		return
+
+
+func _apply_damage_resource_result(event: Dictionary) -> void:
+	var target_id := str(event.get("target_unit_id", ""))
+	if target_id == "":
+		return
+	_set_resource_override(target_id, "hp", int(event.get("hp_after", 0)))
+
+
+func _refresh_resource_display(unit_id: String) -> void:
+	var active_id := str(state.get("turn_state", {}).get("active_unit_id", ""))
+	if unit_id == active_id:
+		_render_board_overlay()
+	var unit := _unit_by_id(unit_id)
+	if unit.is_empty() and temporary_visual_units.has(unit_id):
+		unit = temporary_visual_units[unit_id]
+	if unit.is_empty():
+		return
+	var unit_node := unit_layer.get_node_or_null(unit_id) as Control
+	if unit_node == null:
+		return
+	var resource_label := unit_node.get_node_or_null("ResourcePanel/Resources") as Label
+	if resource_label != null:
+		resource_label.text = _unit_resource_text(unit)
 
 
 func _unit_resource_style(unit: Dictionary) -> StyleBoxFlat:

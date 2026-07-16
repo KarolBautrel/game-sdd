@@ -31,6 +31,12 @@ The first implementation pass skins existing combat debug controls without chang
 - Active-unit resource bars should be a readable top-left board overlay using generated `384x56` mini bar PNGs; they must stay smaller than the oversized native `bar_hp/bar_ap/bar_mp` atlas exports and must not include text that expands the panel.
 - Board-overlay log/feed should occupy a separate compact panel away from the active resource bars.
 - Board-overlay log/feed and framed log panels must always render fallback or recent event text; empty framed log boxes are not acceptable.
+- During animated command presentation, active-unit and overhead resource displays may use temporary presentation overrides so MP/AP/HP visibly change at the moment the action spends or applies them. The combat resolver remains the source of truth and final state is committed when the animation finishes.
+- Movement MP should tick down step by step during the movement tween, using the terrain movement cost of each traversed tile.
+- Combat AP should drop when the attack/action animation starts, and target HP should drop at impact/damage timing.
+- Damage, miss, and status floating text must render above unit overhead resource/status panels so attack feedback is never hidden behind HP/AP/MP labels.
+- Combat board tiles should not show permanent team-colored debug squares under units. Tile highlights are reserved for active unit selection, pending movement paths, legal targets, selected tiles, and targeting feedback.
+- Movement range highlights should use subtle translucent fills with thin borders rather than heavy flat debug blocks.
 - Report/log typography should use compact font sizes, bounded line counts, and clipped/wrapped text so copy stays inside fantasy frames.
 - Combat debug may use board-overlay HUD panels instead of stretching every UI surface across the full viewport.
 - The board should claim the available screen area after overlay HUD placement; UI panels must not unnecessarily shrink the board.

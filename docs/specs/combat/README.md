@@ -68,6 +68,8 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 - `presentation/083_dungeon_combat_board_theme.md`
 - `presentation/086_combat_ui_asset_pipeline_v1.md`
 - `presentation/087_combat_hud_restructure_v1.md`
+- `presentation/088_combat_terrain_asset_showcase_v1.md`
+- `presentation/094_combat_map_editor_v1.md`
 
 ## Executable Slices
 
@@ -80,6 +82,8 @@ Recent presentation/debug slices:
 - `slices/085_debug_force_victory.md`
 - `slices/086_combat_ui_asset_pipeline_v1.md`
 - `slices/087_combat_hud_restructure_v1.md`
+- `slices/088_combat_terrain_asset_showcase_v1.md`
+- `slices/094_combat_map_editor_v1.md`
 
 ## Milestones
 

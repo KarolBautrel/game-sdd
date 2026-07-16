@@ -14,6 +14,21 @@
     "source_dungeon_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
     "source_room_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
     "background_path": { "type": "string", "pattern": "^res://assets/combat/terrain/backgrounds/.+\\.png$" },
+    "terrain_theme": { "type": "string", "enum": ["nature", "dungeon"] },
+    "terrain_decorations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["x", "y", "path"],
+        "additionalProperties": false,
+        "properties": {
+          "x": { "type": "integer", "minimum": 0 },
+          "y": { "type": "integer", "minimum": 0 },
+          "path": { "type": "string", "pattern": "^res://assets/combat/terrain/processed/.+\\.png$" },
+          "kind": { "type": "string", "pattern": "^[a-z0-9_]+$" }
+        }
+      }
+    },
     "map_path": { "type": "string", "pattern": "^res://resources/data/maps/.+\\.json$" },
     "rewards": {
       "type": "object",
