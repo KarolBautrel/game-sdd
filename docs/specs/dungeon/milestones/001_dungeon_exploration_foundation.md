@@ -62,6 +62,7 @@ Long term, dungeon exploration should have its own mechanics rather than being o
 - Dungeon room exploration now supports reusable room event catalogues and weighted room event pools.
 - `Old Mine` now has a first authored room event in `Dusty Crossing`, shown through the debug event popup and resolved before further actions.
 - Generated Old Mine templates now attach seed-driven room event pool refs to eligible rooms, separate from corridor trap/rubble generation.
+- Dungeon combat return now stores readable session feedback for normal victories, guarded reward victories, and defeats so the dungeon scene explains the result after returning from combat.
 
 ## Owning Specs
 
@@ -98,6 +99,7 @@ docs/specs/dungeon/overview/025_dungeon_procedural_generation_v1.md
 docs/specs/dungeon/overview/026_dungeon_template_pool_generation_v1.md
 docs/specs/dungeon/overview/027_dungeon_effect_recovery_v1.md
 docs/specs/dungeon/overview/028_dungeon_reusable_room_events_v1.md
+docs/specs/dungeon/overview/029_dungeon_beta_combat_loop_v1.md
 docs/specs/dungeon/presentation/012_dungeon_event_presentation_v1.md
 docs/specs/dungeon/presentation/013_dungeon_presentation_vertical_slice_v1.md
 docs/specs/dungeon/presentation/014_dungeon_debug_generated_toggle_v1.md
@@ -517,16 +519,29 @@ docs/specs/combat/overview/082_combat_result_contract_v1.md
      - resolving a room event refreshes room cleared state and last event feedback.
    - Proof: `scripts/presentation/dungeon_exploration_hud_tests.gd` and headless `DungeonDebug.tscn` load.
 
+38. **Done - Dungeon Beta Combat Loop V1**
+   - Goal: make returning from combat readable during the first playable dungeon beta loop.
+   - Owner spec: `docs/specs/dungeon/overview/029_dungeon_beta_combat_loop_v1.md`
+   - Slice: `docs/specs/dungeon/slices/036_dungeon_beta_combat_loop_v1.md`
+   - Implemented:
+     - `DungeonRunSession.finish_combat` now produces player-facing return feedback after accepted combat results;
+     - normal victory feedback names the room, confirms it was secured, and tells the player to continue;
+     - guarded treasure victory feedback names the room and summarizes the unlocked reward;
+     - defeat feedback names the room and confirms the room remains dangerous.
+   - Proof: `scripts/session/dungeon_run_session_tests.gd`.
+
 ## Long-Term Dungeon Roadmap
 
 This queue captures the next agreed dungeon direction after the exploration foundation work. Treat it as the forward plan for future agents: work top-down unless a user explicitly reprioritizes, and keep the usual spec -> slice -> implementation -> proof workflow for each item.
 
-1. **Planned - Beta Dungeon-Combat Loop**
+1. **In Progress - Beta Dungeon-Combat Loop**
    - Goal: make one playable loop feel coherent end to end: enter dungeon, explore, hit corridor hazards, resolve room events, enter combat, return to dungeon, claim rewards, finish or reset.
    - Expected work:
      - harden dungeon session handoff into combat and back;
      - verify room/corridor pending state survives scene changes;
      - make post-combat dungeon feedback understandable without debug-only assumptions.
+   - Current progress:
+     - session-level combat return feedback is implemented for victory, guarded reward victory, and defeat.
    - Proof target: dungeon state tests, session bridge tests, HUD tests, manual click-through.
 
 2. **Planned - Stable Dungeon Entry Selection**
@@ -685,4 +700,4 @@ python tools\validators\validate_all.py
 & "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn --quit --resolution 2560x1440
 ```
 
-Next dungeon work should start with roadmap item 1, **Beta Dungeon-Combat Loop**, unless the user explicitly reprioritizes UI/assets or generated content variety.
+Next dungeon work should continue roadmap item 1, **Beta Dungeon-Combat Loop**, by testing/polishing pending state across scene transitions and then moving toward stable dungeon entry selection, unless the user explicitly reprioritizes UI/assets or generated content variety.

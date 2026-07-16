@@ -209,10 +209,7 @@ func finish_combat(result_payload: Dictionary) -> bool:
 		last_feedback = "Combat result rejected: %s." % result.get("rejection", "unknown")
 		return false
 	dungeon_state = result["state"]
-	last_feedback = "Combat %s applied to %s." % [
-		result_payload.get("result", "unknown"),
-		result_payload.get("source_room_id", ""),
-	]
+	last_feedback = _combat_return_feedback(result.get("event", {}), result_payload)
 	pending_combat_request = {}
 	return true
 
@@ -291,3 +288,71 @@ func _enemy_stats_for_archetype(archetype_id: String) -> Dictionary:
 
 func _position_key(position: Dictionary) -> String:
 	return "%s,%s" % [position.get("x", 0), position.get("y", 0)]
+
+
+func _combat_return_feedback(event: Dictionary, result_payload: Dictionary) -> String:
+	var room_id := str(event.get("room_id", result_payload.get("source_room_id", "")))
+	var room_name := _room_display_name(room_id)
+	var result := str(event.get("result", result_payload.get("result", "unknown")))
+	if result == "victory":
+		var parts: Array[String] = ["Victory in %s." % room_name]
+		if bool(event.get("room_cleared", false)):
+			parts.append("Room secured.")
+		if bool(event.get("reward_unlocked", false)):
+			parts.append("Reward unlocked: %s." % _reward_summary_for_room(room_id))
+		elif _room_has_claimable_reward(room_id):
+			parts.append("Claim the reward or choose an exit.")
+		else:
+			parts.append("Choose an exit to continue.")
+		return " ".join(parts)
+	if result == "defeat":
+		return "Defeat in %s. Room remains dangerous; reset or return later." % room_name
+	return "Combat %s returned from %s." % [result, room_name]
+
+
+func _room_display_name(room_id: String) -> String:
+	for room: Dictionary in dungeon_data.get("rooms", []):
+		if str(room.get("id", "")) == room_id:
+			return str(room.get("display_name", room_id))
+	return room_id
+
+
+func _room_has_claimable_reward(room_id: String) -> bool:
+	if DungeonStateModel.room_reward_is_claimed(dungeon_state, room_id):
+		return false
+	for room: Dictionary in dungeon_data.get("rooms", []):
+		if str(room.get("id", "")) != room_id:
+			continue
+		for content: Dictionary in room.get("content", []):
+			var content_type := str(content.get("type", ""))
+			if not content.has("rewards"):
+				continue
+			if content_type == "treasure":
+				return true
+			if content_type == "guarded_treasure" and DungeonStateModel.room_reward_is_unlocked(dungeon_state, room_id):
+				return true
+	return false
+
+
+func _reward_summary_for_room(room_id: String) -> String:
+	for room: Dictionary in dungeon_data.get("rooms", []):
+		if str(room.get("id", "")) != room_id:
+			continue
+		for content: Dictionary in room.get("content", []):
+			if not content.has("rewards"):
+				continue
+			var rewards: Dictionary = content.get("rewards", {})
+			var parts: Array[String] = []
+			var gold := int(rewards.get("gold", 0))
+			var xp := int(rewards.get("xp", 0))
+			var items: Array = rewards.get("items", [])
+			if gold > 0:
+				parts.append("%sg" % gold)
+			if xp > 0:
+				parts.append("%s XP" % xp)
+			if not items.is_empty():
+				parts.append(", ".join(items))
+			if parts.is_empty():
+				return "available"
+			return " + ".join(parts)
+	return "available"

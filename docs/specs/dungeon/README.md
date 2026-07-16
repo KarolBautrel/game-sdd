@@ -32,6 +32,7 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 - `overview/026_dungeon_template_pool_generation_v1.md`
 - `overview/027_dungeon_effect_recovery_v1.md`
 - `overview/028_dungeon_reusable_room_events_v1.md`
+- `overview/029_dungeon_beta_combat_loop_v1.md`
 
 ### Presentation
 
@@ -84,6 +85,7 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 - `slices/033_dungeon_effect_recovery_v1.md`
 - `slices/034_dungeon_reusable_room_events_v1.md`
 - `slices/035_dungeon_room_event_presentation_v1.md`
+- `slices/036_dungeon_beta_combat_loop_v1.md`
 
 ## Milestones
 
@@ -93,4 +95,4 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 
 Dungeon mode has an initial data contract, an abstract debug view, a deterministic state model, and the first domain-level combat result transition.
 
-The current dungeon presentation has a first vertical slice: preparation panel, resource tray, framed map, hazard markers, legend, and player-facing route copy. Corridor hazards now support reusable catalogue templates, weighted event pools through `hazard_pool_refs`, a procedural corridor-plan helper, template-pool generated dungeon drafts, and a preparation-time debug toggle/reroll for switching between authored and generated dungeon data. Room exploration now has reusable room event catalogues, room event pools, pending room-event choices, and debug popup presentation. Longer term, dungeon mode should replace debug party formation data with a real roster, persistent party progression, beta combat-loop integration, and final art assets.
+The current dungeon presentation has a first vertical slice: preparation panel, resource tray, framed map, hazard markers, legend, and player-facing route copy. Corridor hazards now support reusable catalogue templates, weighted event pools through `hazard_pool_refs`, a procedural corridor-plan helper, template-pool generated dungeon drafts, and a preparation-time debug toggle/reroll for switching between authored and generated dungeon data. Room exploration now has reusable room event catalogues, room event pools, pending room-event choices, and debug popup presentation. The dungeon-combat session bridge now returns readable post-combat feedback for normal victories, guarded reward victories, and defeats. Longer term, dungeon mode should replace debug party formation data with a real roster, persistent party progression, fuller beta combat-loop integration, and final art assets.

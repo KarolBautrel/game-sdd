@@ -94,7 +94,30 @@ func _init() -> void:
 	_expect_true(errors, "finish combat accepted", session.finish_combat(_combat_payload("victory", "dungeon_old_mine", "spider_nest")))
 	_expect_false(errors, "pending cleared", session.has_pending_combat_launch())
 	_expect_true(errors, "room cleared", DungeonStateModel.room_is_cleared(session.dungeon_state, "spider_nest"))
+	_expect_equal(errors, "victory return feedback", session.last_feedback, "Victory in Spider Nest. Room secured. Choose an exit to continue.")
 	session.free()
+
+	var guarded_session := DungeonRunSessionScript.new()
+	var guarded_state: Dictionary = DungeonStateModel.initial_state(dungeon)
+	guarded_state = DungeonStateModel.enter_room(dungeon, guarded_state, "dusty_crossing")["state"]
+	guarded_state = DungeonStateModel.resolve_room_event_choice(dungeon, guarded_state, "ignore")["state"]
+	guarded_state = DungeonStateModel.enter_room(dungeon, guarded_state, "guarded_cache")["state"]
+	_expect_true(errors, "guarded combat start accepted", guarded_session.start_combat(dungeon, guarded_state))
+	_expect_true(errors, "guarded combat finish accepted", guarded_session.finish_combat(_combat_payload("victory", "dungeon_old_mine", "guarded_cache")))
+	_expect_true(errors, "guarded reward unlocked", DungeonStateModel.room_reward_is_unlocked(guarded_session.dungeon_state, "guarded_cache"))
+	_expect_equal(errors, "guarded return feedback", guarded_session.last_feedback, "Victory in Guarded Cache. Room secured. Reward unlocked: 7g + 12 XP + rusty_key.")
+	guarded_session.free()
+
+	var defeat_session := DungeonRunSessionScript.new()
+	var defeat_state: Dictionary = DungeonStateModel.initial_state(dungeon)
+	defeat_state = DungeonStateModel.enter_room(dungeon, defeat_state, "dusty_crossing")["state"]
+	defeat_state = DungeonStateModel.resolve_room_event_choice(dungeon, defeat_state, "ignore")["state"]
+	defeat_state = DungeonStateModel.enter_room(dungeon, defeat_state, "guarded_cache")["state"]
+	_expect_true(errors, "defeat combat start accepted", defeat_session.start_combat(dungeon, defeat_state))
+	_expect_true(errors, "defeat combat finish accepted", defeat_session.finish_combat(_combat_payload("defeat", "dungeon_old_mine", "guarded_cache")))
+	_expect_false(errors, "defeat room not cleared", DungeonStateModel.room_is_cleared(defeat_session.dungeon_state, "guarded_cache"))
+	_expect_equal(errors, "defeat return feedback", defeat_session.last_feedback, "Defeat in Guarded Cache. Room remains dangerous; reset or return later.")
+	defeat_session.free()
 	if errors.is_empty():
 		print("Dungeon run session validation passed.")
 	else:
