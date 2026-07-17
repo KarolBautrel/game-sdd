@@ -6,6 +6,9 @@ const CombatDebugScript := preload("res://scripts/presentation/combat_debug.gd")
 const MANIFEST_PATH := "res://assets/combat/terrain/processed/processed_terrain_manifest.json"
 const GRASS_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_terrain_grass_showcase.json"
 const DUNGEON_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_terrain_dungeon_showcase.json"
+const NATURE_BACKGROUND_PATH := "res://assets/combat/terrain/backgrounds/old_mine_meadow_01_deep_green.png"
+const DUNGEON_BACKGROUND_PATH := "res://assets/combat/terrain/backgrounds/old_mine_dungeon_00_stone.png"
+const EXPECTED_BACKGROUND_SIZE := Vector2i(2520, 1144)
 
 
 func _init() -> void:
@@ -14,12 +17,15 @@ func _init() -> void:
 	_expect_true(errors, "terrain manifest count", int(manifest.get("asset_count", 0)) >= 40)
 	_expect_true(errors, "nature terrain assets exist", _theme_count(manifest, "nature") >= 20)
 	_expect_true(errors, "dungeon terrain assets exist", _theme_count(manifest, "dungeon") >= 20)
+	_expect_true(errors, "floor terrain assets exist", _category_count(manifest, "floor") >= 48)
 	_expect_true(errors, "manifest has tall nature asset", _has_asset_at_least(manifest, "nature", 200, 300))
 	_expect_true(errors, "manifest has tall dungeon asset", _has_asset_at_least(manifest, "dungeon", 120, 250))
-	for asset: Dictionary in manifest.get("assets", []).slice(0, mini(8, manifest.get("assets", []).size())):
+	_expect_true(errors, "processed prop transparency", _transparent_non_floor_count(manifest) >= 40)
+	_expect_equal(errors, "nature background combat scale", _image_size(NATURE_BACKGROUND_PATH), EXPECTED_BACKGROUND_SIZE)
+	_expect_equal(errors, "dungeon background combat scale", _image_size(DUNGEON_BACKGROUND_PATH), EXPECTED_BACKGROUND_SIZE)
+	for asset: Dictionary in manifest.get("assets", []):
 		var path := str(asset.get("path", ""))
 		_expect_true(errors, "asset exists %s" % path, FileAccess.file_exists(path))
-		_expect_true(errors, "asset has alpha %s" % path, _image_has_transparency(path))
 
 	var grass_showcase := _load_json(GRASS_SHOWCASE_PATH)
 	var dungeon_showcase := _load_json(DUNGEON_SHOWCASE_PATH)
@@ -66,6 +72,24 @@ func _theme_count(manifest: Dictionary, theme: String) -> int:
 	return count
 
 
+func _category_count(manifest: Dictionary, category: String) -> int:
+	var count := 0
+	for asset: Dictionary in manifest.get("assets", []):
+		if str(asset.get("category", "")) == category:
+			count += 1
+	return count
+
+
+func _transparent_non_floor_count(manifest: Dictionary) -> int:
+	var count := 0
+	for asset: Dictionary in manifest.get("assets", []):
+		if str(asset.get("category", "")) == "floor":
+			continue
+		if _image_has_transparency(str(asset.get("path", ""))):
+			count += 1
+	return count
+
+
 func _has_asset_at_least(manifest: Dictionary, theme: String, width: int, height: int) -> bool:
 	for asset: Dictionary in manifest.get("assets", []):
 		if str(asset.get("theme", "")) != theme:
@@ -90,6 +114,13 @@ func _image_has_transparency(path: String) -> bool:
 		if image.get_pixel(sample.x, sample.y).a < 0.1:
 			return true
 	return false
+
+
+func _image_size(path: String) -> Vector2i:
+	var image := Image.load_from_file(path)
+	if image == null or image.is_empty():
+		return Vector2i.ZERO
+	return image.get_size()
 
 
 func _load_json(path: String) -> Dictionary:

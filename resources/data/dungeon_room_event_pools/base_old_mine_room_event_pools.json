@@ -6,7 +6,12 @@
       "tags": ["mine", "room"],
       "entries": [
         { "event_id": "old_mine_abandoned_pack", "weight": 70 },
-        { "event_id": "old_mine_damp_shrine", "weight": 30 }
+        { "event_id": "old_mine_damp_shrine", "weight": 30 },
+        { "event_id": "old_mine_rusted_lockbox", "weight": 45 },
+        { "event_id": "old_mine_lost_surveyor", "weight": 35 },
+        { "event_id": "old_mine_warning_note", "weight": 40 },
+        { "event_id": "old_mine_odd_idol", "weight": 25 },
+        { "event_id": "old_mine_hidden_cache", "weight": 30 }
       ]
     }
   ]

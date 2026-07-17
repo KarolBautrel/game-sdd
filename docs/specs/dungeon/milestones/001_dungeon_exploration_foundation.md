@@ -63,6 +63,35 @@ Long term, dungeon exploration should have its own mechanics rather than being o
 - `Old Mine` now has a first authored room event in `Dusty Crossing`, shown through the debug event popup and resolved before further actions.
 - Generated Old Mine templates now attach seed-driven room event pool refs to eligible rooms, separate from corridor trap/rubble generation.
 - Dungeon combat return now stores readable session feedback for normal victories, guarded reward victories, and defeats so the dungeon scene explains the result after returning from combat.
+- Dungeon entry selection now has a stable payload contract for authored/generated source, generated seed, and generated difficulty; the debug preparation panel rebuilds previews from that payload instead of owning the entry contract directly.
+- Dungeon run completion now produces a stable `dungeon_run_result` payload with outcome, claimed rewards, persistent effects, and a next-scene return hook stored on the dungeon session.
+- Dungeon loot resolution now separates claimed run loot into `run_inventory` and marks end-of-run payload rewards as kept or lost with an `inventory_delta` for future durable inventory integration.
+- Room event system now supports expanded reusable event families and records run-level room event history by event id, type, and tag.
+- Room event outcomes now support supply-gated choices, outcome tone, weighted risk examples, party-targeted consequences through existing consequence targeting, and future-facing skill-check metadata.
+- Corridor hazards now support varied rubble, trap, darkness, noise, and blockage families, including traversal-blocking outcomes and darkness hazards that use lamp oil through the existing supply-choice flow.
+
+## Implemented Capability Summary
+
+The milestone currently delivers a debug-playable dungeon exploration foundation rather than only isolated data contracts. The party can enter a dungeon from a stable entry payload, explore an authored or generated room/corridor graph, resolve corridor hazards, resolve room events, launch combat from dungeon rooms, return from combat with readable feedback, claim rewards, finish or fail a run, and produce a structured return payload for future world-map integration.
+
+Implemented capability groups:
+
+- **Dungeon data and state:** validated dungeon schemas, authored Old Mine data, deterministic room/corridor traversal, visited/cleared room tracking, room content state, pending combat state, pending room-event state, completion state, retreat/failure payloads, and run-result summaries.
+- **Presentation and debug flow:** `DungeonDebug.tscn`, preparation/loadout step, authored/generated source toggle, seed/difficulty/reroll controls, framed map view, room markers, route copy, resource tray, numbered exits, event popup choices, combat entry action, reward claim action, finish expedition action, and post-run HUD summary.
+- **Combat boundary:** dungeon creates combat launch requests, combat returns stable result payloads, victories clear combat rooms or unlock guarded rewards, defeats keep rooms dangerous, and post-combat feedback is stored through `DungeonRunSession`.
+- **Expedition resources:** light, lamp oil, pickaxe, trap tools, remedy kits, persistent debuffs/effects, targetable party consequences, and combat launch metadata influenced by dungeon state.
+- **Corridor hazards:** reusable hazard catalogues, weighted event pools, hazard pool refs, rubble/trap/darkness/noise/blockage families, traversal-blocking outcomes, supply-mitigated choices, weighted consequences, and structured hazard logs.
+- **Room events:** reusable room-event catalogues, weighted room-event pools, expanded event families, pending room choices, supply-gated choices, weighted outcomes, tone metadata, future skill-check metadata, reward/supply/effect consequences, and run-level room-event history.
+- **Generated dungeons:** curated finite Old Mine template pool, seed/difficulty-based template selection, generated graph drafts that enter the same state model, seed-driven hazard candidate placement, seed-driven room event pool placement, and debug preview metadata.
+- **Run loot and return:** run inventory for claimed XP/gold/items, kept/lost loot resolution, `inventory_delta`, persistent effects in the return payload, and a `next_scene` hook for future global-map/world return.
+
+Current explicit boundaries:
+
+- Dungeon owns only carried expedition supplies and their in-dungeon use/loss. Buying, pricing, crafting, restocking, and long-term ownership of supplies are future town/world/inventory responsibilities.
+- Dungeon still uses debug party formation and debug presentation chrome.
+- Generated dungeons use curated finite templates, not full free-form procedural generation.
+- Combat encounter selection is still early and should later become dungeon/theme/difficulty-aware.
+- Final art, production UI skin, persistent roster, durable inventory application, and town/global-map integration are not part of the completed foundation yet.
 
 ## Owning Specs
 
@@ -100,6 +129,12 @@ docs/specs/dungeon/overview/026_dungeon_template_pool_generation_v1.md
 docs/specs/dungeon/overview/027_dungeon_effect_recovery_v1.md
 docs/specs/dungeon/overview/028_dungeon_reusable_room_events_v1.md
 docs/specs/dungeon/overview/029_dungeon_beta_combat_loop_v1.md
+docs/specs/dungeon/overview/030_stable_dungeon_entry_selection_v1.md
+docs/specs/dungeon/overview/031_dungeon_run_result_world_return_v1.md
+docs/specs/dungeon/overview/032_dungeon_inventory_loot_resolution_v2.md
+docs/specs/dungeon/overview/033_room_event_system_v2.md
+docs/specs/dungeon/overview/034_room_event_outcomes_v2.md
+docs/specs/dungeon/overview/035_corridor_hazard_variety_v2.md
 docs/specs/dungeon/presentation/012_dungeon_event_presentation_v1.md
 docs/specs/dungeon/presentation/013_dungeon_presentation_vertical_slice_v1.md
 docs/specs/dungeon/presentation/014_dungeon_debug_generated_toggle_v1.md
@@ -534,77 +569,95 @@ docs/specs/combat/overview/082_combat_result_contract_v1.md
 
 This queue captures the next agreed dungeon direction after the exploration foundation work. Treat it as the forward plan for future agents: work top-down unless a user explicitly reprioritizes, and keep the usual spec -> slice -> implementation -> proof workflow for each item.
 
-1. **In Progress - Beta Dungeon-Combat Loop**
+1. **Done - Beta Dungeon-Combat Loop**
    - Goal: make one playable loop feel coherent end to end: enter dungeon, explore, hit corridor hazards, resolve room events, enter combat, return to dungeon, claim rewards, finish or reset.
-   - Expected work:
-     - harden dungeon session handoff into combat and back;
-     - verify room/corridor pending state survives scene changes;
-     - make post-combat dungeon feedback understandable without debug-only assumptions.
-   - Current progress:
-     - session-level combat return feedback is implemented for victory, guarded reward victory, and defeat.
-   - Proof target: dungeon state tests, session bridge tests, HUD tests, manual click-through.
+   - Owner spec: `docs/specs/dungeon/overview/029_dungeon_beta_combat_loop_v1.md`
+   - Slice: `docs/specs/dungeon/slices/036_dungeon_beta_combat_loop_v1.md`
+   - Implemented:
+     - dungeon session handoff into combat and back is covered by session tests;
+     - room and corridor pending state remains owned by dungeon state before combat launch;
+     - post-combat feedback is stored in `DungeonRunSession.last_feedback` for the restored dungeon scene.
+   - Proof: `scripts/session/dungeon_run_session_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-2. **Planned - Stable Dungeon Entry Selection**
+2. **Done - Stable Dungeon Entry Selection**
    - Goal: move generated difficulty/seed/source out of the debug preparation panel and into a pre-entry contract.
-   - Expected work:
-     - define an entry payload from world map/node/progression systems;
-     - generated dungeon difficulty is predefined before entering;
-     - debug controls remain only as local test helpers.
-   - Proof target: data contract validation plus dungeon debug test helpers.
+   - Owner spec: `docs/specs/dungeon/overview/030_stable_dungeon_entry_selection_v1.md`
+   - Slice: `docs/specs/dungeon/slices/037_stable_dungeon_entry_selection_v1.md`
+   - Implemented:
+     - `DungeonEntrySelection` normalizes authored/generated entry payloads;
+     - generated seed and difficulty now live in the payload used to build preview dungeon data;
+     - debug source, reroll, and difficulty controls update that payload instead of being the owning contract.
+   - Proof: `scripts/domain/dungeon_entry_selection_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-3. **Planned - Run Result And World Return**
+3. **Done - Run Result And World Return**
    - Goal: turn `Finish Expedition` into a return payload that can be consumed by the wider game.
-   - Expected work:
-     - completed/retreated/failed result states;
-     - claimed gold/items/XP summary;
-     - persistent injuries/debuffs summary;
-     - next-scene/world-map return hook.
-   - Proof target: dungeon state tests and session tests.
+   - Owner spec: `docs/specs/dungeon/overview/031_dungeon_run_result_world_return_v1.md`
+   - Slice: `docs/specs/dungeon/slices/038_dungeon_run_result_world_return_v1.md`
+   - Implemented:
+     - `DungeonStateModel.run_result_payload` creates completed, retreated, failed, and in-progress payloads;
+     - exit-room completion stores a `completed` payload in dungeon state;
+     - retreat and failed flows produce first contract payloads for future UI/session use;
+     - `DungeonRunSession.finish_run` stores `pending_world_return_payload` and exposes a next-scene return hook;
+     - post-run HUD summary shows result outcome and return hook.
+   - Proof: `scripts/domain/dungeon_state_model_tests.gd`; `scripts/session/dungeon_run_session_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-4. **Planned - Dungeon Inventory And Loot Resolution**
+4. **Done - Dungeon Inventory And Loot Resolution**
    - Goal: separate temporary run loot from durable player inventory.
-   - Expected work:
-     - run inventory bucket;
-     - loot confirmation on completion;
-     - lost/kept loot rules for retreat or defeat;
-     - item ids prepared for a real inventory service.
-   - Proof target: dungeon state tests and validator checks.
+   - Owner spec: `docs/specs/dungeon/overview/032_dungeon_inventory_loot_resolution_v2.md`
+   - Slice: `docs/specs/dungeon/slices/039_dungeon_inventory_loot_resolution_v2.md`
+   - Implemented:
+     - dungeon state now tracks `run_inventory` with gold, XP, item ids, and reward records;
+     - reward claims write to `run_inventory` while `reward_totals` remains a compatibility summary;
+     - run result payloads include `claimed_run_inventory`, `kept_rewards`, `lost_rewards`, and `inventory_delta`;
+     - completed and retreated runs keep claimed loot in this beta rule;
+     - failed runs lose claimed loot while preserving persistent effects.
+   - Proof: `scripts/domain/dungeon_state_model_tests.gd`; `scripts/session/dungeon_run_session_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-5. **Planned - Room Event System V2**
+5. **Done - Room Event System V2**
    - Goal: expand room content beyond the first shrine/stash examples.
-   - Expected work:
-     - chests, locked chests, corpses, notes, shrines, curios, blocked objects, hidden caches;
-     - event tags by theme and room kind;
-     - event history so repeated rooms do not feel arbitrary.
-   - Proof target: room event schema validation, domain tests, HUD tests.
+   - Owner spec: `docs/specs/dungeon/overview/033_room_event_system_v2.md`
+   - Slice: `docs/specs/dungeon/slices/040_room_event_system_v2.md`
+   - Implemented:
+     - room event schema now accepts chest, locked chest, corpse, note, curio, blocked object, hidden cache, and generic event families;
+     - Old Mine room event catalogue now includes chest, corpse, note, curio, and hidden-cache examples;
+     - Old Mine room event pool references the expanded catalogue;
+     - dungeon state records `room_event_history` with resolved count, event ids, type counts, and tag counts;
+     - HUD last room event feedback includes the resolved-event count.
+   - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_state_model_tests.gd`; `scripts/domain/dungeon_procedural_draft_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-6. **Planned - Room Event Outcomes V2**
+6. **Done - Room Event Outcomes V2**
    - Goal: make room event choices tactically interesting.
-   - Expected work:
-     - supply costs;
-     - weighted risk;
-     - party-targeted consequences;
-     - skill/stat hooks once roster skills exist;
-     - positive, neutral, and negative outcomes.
-   - Proof target: domain tests for each consequence family.
+   - Owner spec: `docs/specs/dungeon/overview/034_room_event_outcomes_v2.md`
+   - Slice: `docs/specs/dungeon/slices/041_room_event_outcomes_v2.md`
+   - Implemented:
+     - room event choices may declare `requires_supply`, and unavailable choices are rejected by the domain model;
+     - room event outcomes may declare `tone` as positive, neutral, or negative;
+     - weighted outcomes are used for risky curio inspection;
+     - skill-check metadata is accepted and preserved for future roster/stat resolution;
+     - room event logs and history count outcome tone;
+     - HUD room event panel summarizes missing/available required supplies.
+   - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_state_model_tests.gd`; `scripts/domain/dungeon_procedural_draft_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-7. **Planned - Corridor Hazard Variety V2**
+7. **Done - Corridor Hazard Variety V2**
    - Goal: broaden traversal pressure beyond the first rubble/trap examples.
-   - Expected work:
-     - multiple rubble severities;
-     - trap variants;
-     - darkness/ambush/noise events;
-     - temporary blocked paths;
-     - theme-specific pools.
-   - Proof target: reusable event/pool validation and traversal tests.
+   - Owner spec: `docs/specs/dungeon/overview/035_corridor_hazard_variety_v2.md`
+   - Slice: `docs/specs/dungeon/slices/042_corridor_hazard_variety_v2.md`
+   - Implemented:
+     - corridor hazard schemas now accept `noise` and `blockage` families in addition to rubble, trap, darkness, and generic;
+     - Old Mine hazard catalogue now includes major cave-in blockage, snare trap, dark pocket, and echoing alarm hazards;
+     - Old Mine pools include multiple rubble/trap entries and new darkness/noise pools;
+     - major cave-in can block traversal through the existing `blocks_traversal` result contract;
+     - darkness hazards can consume lamp oil through the existing `use_supply` choice flow;
+     - fixed `consume_required_supply` so required supply is consumed once through the normal consequence path.
+   - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_state_model_tests.gd`; `scripts/domain/dungeon_procedural_draft_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-8. **Planned - Supply Economy V2**
-   - Goal: make loadout choices matter across a whole expedition.
+8. **Planned - Expedition Loadout Capacity V2**
+   - Goal: make pre-dungeon packing choices matter without owning town/world supply economy.
    - Expected work:
-     - balance oil, pickaxe, trap tools, remedy;
-     - add candidates such as bandages, antidote, food, rope, camping kit;
-     - define carry limits and cost/source of supplies;
-     - expose clearer supply consequences in UI.
+     - define carry limits or expedition packing points for supplies brought into a dungeon;
+     - keep buying, pricing, restocking, and persistent supply ownership in future town/world/inventory specs;
+     - add candidates such as bandages, antidote, food, rope, and camping kit as carried supply types only;
+     - expose clearer loadout tradeoffs and supply consequences in UI.
    - Proof target: loadout tests and manual balance notes.
 
 9. **Planned - Recovery And Camping**
@@ -700,4 +753,4 @@ python tools\validators\validate_all.py
 & "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn --quit --resolution 2560x1440
 ```
 
-Next dungeon work should continue roadmap item 1, **Beta Dungeon-Combat Loop**, by testing/polishing pending state across scene transitions and then moving toward stable dungeon entry selection, unless the user explicitly reprioritizes UI/assets or generated content variety.
+Next dungeon work should continue roadmap item 8, **Expedition Loadout Capacity V2**, unless the user explicitly reprioritizes UI/assets, generated content variety, or combat encounter selection.

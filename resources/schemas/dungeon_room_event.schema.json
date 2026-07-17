@@ -19,7 +19,21 @@
       "additionalProperties": false,
       "properties": {
         "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-        "type": { "type": "string", "enum": ["stash", "shrine", "curio", "generic"] },
+        "type": {
+          "type": "string",
+          "enum": [
+            "stash",
+            "shrine",
+            "chest",
+            "locked_chest",
+            "corpse",
+            "note",
+            "curio",
+            "blocked_object",
+            "hidden_cache",
+            "generic"
+          ]
+        },
         "tags": {
           "type": "array",
           "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
@@ -44,7 +58,8 @@
       "additionalProperties": false,
       "properties": {
         "id": { "type": "string", "enum": ["inspect", "ignore"] },
-        "label": { "type": "string", "minLength": 1 }
+        "label": { "type": "string", "minLength": 1 },
+        "requires_supply": { "type": "string", "pattern": "^[a-z0-9_]+$" }
       }
     },
     "outcome": {
@@ -62,11 +77,23 @@
           }
         },
         "weight": { "type": "integer", "minimum": 1 },
+        "tone": { "type": "string", "enum": ["positive", "neutral", "negative"] },
+        "skill_check": { "$ref": "#/$defs/skill_check" },
         "message": { "type": "string", "minLength": 1 },
         "consequences": {
           "type": "array",
           "items": { "$ref": "#/$defs/consequence" }
         }
+      }
+    },
+    "skill_check": {
+      "type": "object",
+      "required": ["skill_id", "difficulty"],
+      "additionalProperties": false,
+      "properties": {
+        "skill_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "difficulty": { "type": "integer", "minimum": 1 },
+        "target_id": { "type": "string", "pattern": "^[a-z0-9_]+$" }
       }
     },
     "consequence": {

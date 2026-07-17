@@ -88,10 +88,15 @@ func _init() -> void:
 	hud.selected_room_id = "dusty_crossing"
 	_expect_true(errors, "room event route state", hud._route_state_text().contains("Room event: Dusty Crossing"))
 	_expect_true(errors, "room event popup text", hud._room_event_popup_text(hud.run_state["pending_room_event"]).contains("inside Dusty Crossing"))
+	_expect_equal(errors, "plain room event supply summary", hud._room_event_supply_summary(hud.run_state["pending_room_event"]), "Room discovery")
+	_expect_equal(errors, "required room event supply summary", hud._room_event_supply_summary({
+		"choices": [{"id": "inspect", "requires_supply": "pickaxe", "available": false}]
+	}), "Requires: Pickaxe missing")
 	var room_event_lines := "\n".join(hud._detail_lines_for_room(_room_by_id(dungeon, "dusty_crossing")))
 	_expect_true(errors, "room event shown in detail", room_event_lines.contains("Room event:"))
 	hud.run_state = DungeonStateModel.resolve_room_event_choice(dungeon, hud.run_state, "ignore")["state"]
 	_expect_true(errors, "room event resolved", hud.run_state["resolved_room_event_ids"].has("dusty_crossing_damp_shrine"))
+	_expect_true(errors, "room event history summary", hud._last_room_event_summary().contains("Events resolved: 1"))
 	var crossing_exits := hud._connected_room_options("dusty_crossing")
 	_expect_equal(errors, "crossing exit count", crossing_exits.size(), 4)
 	_expect_equal(errors, "crossing first exit", crossing_exits[0].get("id", ""), "entrance")
@@ -109,6 +114,7 @@ func _init() -> void:
 	_expect_true(errors, "treasure reward claimable", hud._current_room_has_claimable_reward())
 	hud.run_state = DungeonStateModel.claim_current_reward(dungeon, hud.run_state)["state"]
 	_expect_false(errors, "claimed reward no longer claimable", hud._current_room_has_claimable_reward())
+	_expect_equal(errors, "hud run inventory gold", DungeonStateModel.run_inventory(hud.run_state)["gold"], 9)
 	_expect_equal(errors, "claimed reward progress summary", hud._progress_summary(), "Rooms visited 3/7 | Secured 3/7 | Light 2/4 dim | Oil 2 | Pickaxe 0 | Trap Tools 1 | Effects none | Gold 9 | Items 1 | XP 0")
 	_expect_true(errors, "oil action available after light decay", hud._can_use_lamp_oil())
 	var hazard_lines := "\n".join(hud._detail_lines_for_room(_room_by_id(dungeon, "collapsed_cache")))
@@ -177,9 +183,11 @@ func _init() -> void:
 	_expect_false(errors, "completed run hides finish action", hud._current_room_can_finish_expedition())
 	_expect_true(errors, "completed status copy", hud._status_summary().contains("Expedition complete"))
 	var summary := "\n".join(hud._post_run_summary_lines())
+	_expect_true(errors, "post run summary has outcome", summary.contains("Expedition result: completed."))
 	_expect_true(errors, "post run summary has completed room", summary.contains("Completed at: Lower Exit"))
 	_expect_true(errors, "post run summary has gold", summary.contains("Gold claimed: 7"))
 	_expect_true(errors, "post run summary has item", summary.contains("rusty_key"))
+	_expect_true(errors, "post run summary has return hook", summary.contains("Return hook: res://scenes/app/App.tscn"))
 	var armory_room := _room_by_id(dungeon, "sealed_armory")
 	_expect_equal(errors, "spatial room marker", hud._room_map_label(armory_room), "[$] Sealed Armory")
 	_expect_equal(errors, "spatial room position", hud._room_position_summary(armory_room), "x4 y0")

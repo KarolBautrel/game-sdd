@@ -7,7 +7,8 @@
       "danger_min": 0.0,
       "danger_max": 0.19,
       "entries": [
-        { "event_id": "rubble_minor", "weight": 100 }
+        { "event_id": "rubble_minor", "weight": 80 },
+        { "event_id": "rubble_major_cavein", "weight": 20 }
       ]
     },
     {
@@ -16,7 +17,26 @@
       "danger_min": 0.2,
       "danger_max": 1.0,
       "entries": [
-        { "event_id": "needle_trap_basic", "weight": 100 }
+        { "event_id": "needle_trap_basic", "weight": 65 },
+        { "event_id": "snare_trap_basic", "weight": 35 }
+      ]
+    },
+    {
+      "id": "old_mine_darkness_pool",
+      "tags": ["mine", "darkness"],
+      "danger_min": 0.1,
+      "danger_max": 1.0,
+      "entries": [
+        { "event_id": "dark_pocket", "weight": 100 }
+      ]
+    },
+    {
+      "id": "old_mine_noise_pool",
+      "tags": ["mine", "noise"],
+      "danger_min": 0.15,
+      "danger_max": 1.0,
+      "entries": [
+        { "event_id": "echoing_alarm", "weight": 100 }
       ]
     }
   ]

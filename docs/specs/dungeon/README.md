@@ -2,6 +2,43 @@
 
 Dungeon specs describe the exploration layer that connects authored rooms, corridor movement, expedition supplies, corridor hazards, encounter triggers, rewards, and tactical combat transitions.
 
+## Implemented Snapshot
+
+Dungeon mode is currently a playable debug-stage exploration loop. It can start from an authored Old Mine dungeon or a generated Old Mine draft, show the dungeon map, move through connected rooms, resolve corridor hazards and room events, enter combat, return from combat, claim rewards, finish the expedition, and produce a stable run-result payload for a future world-map return.
+
+The implemented foundation includes:
+
+- an authored dungeon data contract with validated room and corridor graphs;
+- a deterministic `DungeonStateModel` for movement, visited rooms, cleared rooms, pending combat, pending room events, rewards, hazards, supplies, effects, and run completion;
+- a `DungeonRunSession` bridge that hands dungeon combat requests to combat and consumes combat/result/run-return payloads;
+- a debug dungeon scene with preparation, source selection, generated seed/difficulty controls, map view, resource tray, event popups, room panels, numbered exits, combat entry, reward claiming, finish flow, and post-run summary;
+- reusable corridor hazard catalogues and weighted hazard pools;
+- reusable room event catalogues and weighted room event pools;
+- generated dungeon drafts selected from curated finite Old Mine templates with seed-driven hazard and room-event placement;
+- first expedition resources: light, lamp oil, pickaxe, trap tools, and remedy kit;
+- persistent dungeon effects/debuffs that can affect later traversal and combat launch metadata;
+- run inventory and loot resolution that separate temporary run loot from future durable inventory integration;
+- stable entry selection and run-result payload contracts for future world/global-map integration.
+
+## Current Boundaries
+
+Dungeon mode owns exploration pressure inside the expedition: carried supplies, light, corridor hazards, room events, temporary run loot, persistent expedition effects, and combat handoff metadata.
+
+Dungeon mode does not own the wider supply economy. Buying, pricing, crafting, restocking, and long-term ownership of supplies belong to future town, world-map, and inventory systems. The next dungeon-facing supply step is loadout capacity: deciding how much of already-owned equipment the party carries into the dungeon.
+
+Combat remains a separate domain. Dungeon can launch combat with context and consume combat results, but combat still owns tactical legality, turn resolution, damage, victory, and defeat.
+
+## Current Entry Points
+
+- Debug dungeon scene: `scenes/dungeon/DungeonDebug.tscn`
+- Main dungeon domain model: `scripts/domain/dungeon_state_model.gd`
+- Dungeon entry payload helper: `scripts/domain/dungeon_entry_selection.gd`
+- Dungeon session bridge: `scripts/session/dungeon_run_session.gd`
+- Authored reference dungeon: `resources/data/dungeons/dungeon_old_mine.json`
+- Generated template pool: `resources/data/dungeon_templates/generated_old_mine_templates.json`
+- Corridor hazard catalogue and pools: `resources/data/dungeon_events/`, `resources/data/dungeon_event_pools/`
+- Room event catalogue and pools: `resources/data/dungeon_room_events/`, `resources/data/dungeon_room_event_pools/`
+
 ## Domain Specs
 
 ### Overview
@@ -33,6 +70,12 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 - `overview/027_dungeon_effect_recovery_v1.md`
 - `overview/028_dungeon_reusable_room_events_v1.md`
 - `overview/029_dungeon_beta_combat_loop_v1.md`
+- `overview/030_stable_dungeon_entry_selection_v1.md`
+- `overview/031_dungeon_run_result_world_return_v1.md`
+- `overview/032_dungeon_inventory_loot_resolution_v2.md`
+- `overview/033_room_event_system_v2.md`
+- `overview/034_room_event_outcomes_v2.md`
+- `overview/035_corridor_hazard_variety_v2.md`
 
 ### Presentation
 
@@ -86,6 +129,12 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 - `slices/034_dungeon_reusable_room_events_v1.md`
 - `slices/035_dungeon_room_event_presentation_v1.md`
 - `slices/036_dungeon_beta_combat_loop_v1.md`
+- `slices/037_stable_dungeon_entry_selection_v1.md`
+- `slices/038_dungeon_run_result_world_return_v1.md`
+- `slices/039_dungeon_inventory_loot_resolution_v2.md`
+- `slices/040_room_event_system_v2.md`
+- `slices/041_room_event_outcomes_v2.md`
+- `slices/042_corridor_hazard_variety_v2.md`
 
 ## Milestones
 
@@ -93,6 +142,8 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 
 ## Current Status
 
-Dungeon mode has an initial data contract, an abstract debug view, a deterministic state model, and the first domain-level combat result transition.
+Dungeon mode has moved beyond a pure graph prototype into a debug-playable beta foundation. It has a data contract, deterministic state model, debug presentation, reusable hazard/event content, generated dungeon templates, combat handoff, run inventory, end-of-run result payloads, and the first resource-pressure systems.
 
-The current dungeon presentation has a first vertical slice: preparation panel, resource tray, framed map, hazard markers, legend, and player-facing route copy. Corridor hazards now support reusable catalogue templates, weighted event pools through `hazard_pool_refs`, a procedural corridor-plan helper, template-pool generated dungeon drafts, and a preparation-time debug toggle/reroll for switching between authored and generated dungeon data. Room exploration now has reusable room event catalogues, room event pools, pending room-event choices, and debug popup presentation. The dungeon-combat session bridge now returns readable post-combat feedback for normal victories, guarded reward victories, and defeats. Longer term, dungeon mode should replace debug party formation data with a real roster, persistent party progression, fuller beta combat-loop integration, and final art assets.
+The current dungeon presentation has a first vertical slice: preparation panel, resource tray, framed map, hazard markers, legend, and player-facing route copy. Corridor hazards support reusable catalogue templates, weighted event pools through `hazard_pool_refs`, varied rubble/trap/darkness/noise/blockage families, a procedural corridor-plan helper, template-pool generated dungeon drafts, and a stable entry payload for authored/generated source selection. Room exploration has reusable room event catalogues, expanded room event families, room event history, supply-gated room choices, weighted room outcomes, room event pools, pending room-event choices, and debug popup presentation. The dungeon-combat session bridge returns readable post-combat feedback for normal victories, guarded reward victories, and defeats. Dungeon completion produces a stable run-result payload with claimed rewards, kept/lost loot resolution, persistent effects, and a next-scene return hook.
+
+The next planned dungeon-owned work is `Expedition Loadout Capacity V2`: making pre-dungeon packing choices matter without implementing town/world supply buying or pricing in dungeon mode.

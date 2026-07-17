@@ -4,6 +4,10 @@ const DEFAULT_ENCOUNTER_PATH := "res://resources/data/combat_encounters/debug_du
 const TILE_TYPES := ["floor", "blocked", "cover_low", "highground"]
 const BRUSH_MODES := ["Tile + Decoration", "Tile", "Decoration", "Erase Decoration"]
 const TERRAIN_ROOT := "res://assets/combat/terrain/processed"
+const FLOOR_BACKGROUND_PATHS := {
+	"floor_nature": "res://assets/combat/terrain/backgrounds/old_mine_meadow_01_deep_green.png",
+	"floor_dungeon": "res://assets/combat/terrain/backgrounds/old_mine_dungeon_00_stone.png",
+}
 const CELL_SIZE := Vector2(76, 56)
 const CELL_GAP := 2
 const DECORATION_PREVIEW_SIZE := Vector2(44, 34)
@@ -25,10 +29,12 @@ var encounter: Dictionary = {}
 var tile_by_key: Dictionary = {}
 var decoration_by_key: Dictionary = {}
 var decoration_paths: Array[String] = []
+var floor_asset_paths: Array[String] = []
 var decoration_texture_cache: Dictionary = {}
 var selected_tile_type := "floor"
 var selected_brush_mode := "Tile + Decoration"
 var selected_decoration_path := ""
+var selected_floor_asset_path := ""
 var is_dragging := false
 
 var path_edit: LineEdit
@@ -36,6 +42,8 @@ var status_label: Label
 var tile_type_option: OptionButton
 var brush_mode_option: OptionButton
 var decoration_option: OptionButton
+var floor_option: OptionButton
+var background_path_label: Label
 var grid_container: GridContainer
 var board_scroll: ScrollContainer
 var selected_decoration_preview: TextureRect
@@ -46,6 +54,7 @@ func _ready() -> void:
 	_build_ui()
 	_load_decoration_paths()
 	_populate_decoration_option()
+	_populate_floor_option()
 	_load_encounter(encounter_path)
 
 
@@ -99,9 +108,11 @@ func _build_ui() -> void:
 	var reload_assets_button := Button.new()
 	reload_assets_button.text = "Reload Assets"
 	reload_assets_button.pressed.connect(func() -> void:
+		is_dragging = false
 		_load_decoration_paths()
 		_populate_decoration_option()
-		_set_status("Reloaded %s terrain decoration assets." % decoration_paths.size())
+		_populate_floor_option()
+		_set_status("Reloaded %s decoration assets and %s floor assets." % [decoration_paths.size(), floor_asset_paths.size()])
 	)
 	path_buttons.add_child(reload_assets_button)
 
@@ -121,8 +132,30 @@ func _build_ui() -> void:
 	)
 	tools.add_child(_labeled_control("Tile type", tile_type_option))
 
+	floor_option = OptionButton.new()
+	floor_option.item_selected.connect(func(index: int) -> void:
+		is_dragging = false
+		selected_floor_asset_path = str(floor_option.get_item_metadata(index))
+	)
+	tools.add_child(_labeled_control("Board floor", floor_option))
+
+	var apply_floor_button := Button.new()
+	apply_floor_button.text = "Apply Board Floor"
+	apply_floor_button.pressed.connect(func() -> void:
+		is_dragging = false
+		_apply_selected_floor_background()
+	)
+	tools.add_child(apply_floor_button)
+
+	background_path_label = Label.new()
+	background_path_label.text = "Background: none"
+	background_path_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	background_path_label.add_theme_font_size_override("font_size", 11)
+	tools.add_child(background_path_label)
+
 	decoration_option = OptionButton.new()
 	decoration_option.item_selected.connect(func(index: int) -> void:
+		is_dragging = false
 		selected_decoration_path = str(decoration_option.get_item_metadata(index))
 		if selected_decoration_path != "" and selected_brush_mode == "Tile":
 			selected_brush_mode = "Tile + Decoration"
@@ -145,7 +178,7 @@ func _build_ui() -> void:
 	tools.add_child(selected_decoration_path_label)
 
 	var help := Label.new()
-	help.text = "Left click/drag paints selected brush.\nRight click clears decoration on a tile.\nTile types affect gameplay. Decorations are visual props.\nTile mode ignores selected assets. Use Tile + Decoration for blockers/cover with exact art."
+	help.text = "Left click/drag paints selected brush.\nRight click clears decoration on a tile.\nBoard floor changes the encounter background. Decorations are visual props.\nTile mode ignores selected assets. Use Tile + Decoration for blockers/cover with exact art."
 	help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	help.add_theme_font_size_override("font_size", 13)
 	tools.add_child(help)
@@ -195,6 +228,7 @@ func _load_encounter(path: String) -> void:
 	encounter = parsed
 	_rebuild_lookup_tables()
 	_render_board()
+	_update_background_path_label()
 	_set_status("Loaded %s. Board %sx%s, %s decorations." % [
 		encounter_path,
 		int(encounter.get("grid", {}).get("width", 0)),
@@ -282,8 +316,10 @@ func _create_cell(position: Dictionary) -> Button:
 		_on_cell_gui_input(event, position)
 	)
 	cell.mouse_entered.connect(func() -> void:
-		if is_dragging:
+		if is_dragging and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			_apply_brush(position)
+		elif is_dragging:
+			is_dragging = false
 	)
 	return cell
 
@@ -315,10 +351,16 @@ func _apply_brush(position: Dictionary) -> void:
 			_set_tile_type(position, selected_tile_type)
 			_set_status("Painted tile %s at %s. Selected decoration was ignored because brush mode is Tile." % [selected_tile_type, _position_key(position)])
 		"Decoration":
-			_set_decoration(position, selected_decoration_path)
+			if _selected_decoration_is_floor_asset():
+				_apply_selected_floor_background()
+			else:
+				_set_decoration(position, selected_decoration_path)
 		"Tile + Decoration":
 			_set_tile_type(position, selected_tile_type)
-			_set_decoration(position, selected_decoration_path)
+			if _selected_decoration_is_floor_asset():
+				_apply_selected_floor_background()
+			else:
+				_set_decoration(position, selected_decoration_path)
 		"Erase Decoration":
 			_clear_decoration(position)
 	_refresh_cell(position)
@@ -455,8 +497,16 @@ func _position_key(position: Dictionary) -> String:
 
 func _load_decoration_paths() -> void:
 	decoration_paths.clear()
-	_collect_png_paths(TERRAIN_ROOT, decoration_paths)
+	floor_asset_paths.clear()
+	var terrain_paths: Array[String] = []
+	_collect_png_paths(TERRAIN_ROOT, terrain_paths)
+	for path: String in terrain_paths:
+		if _is_floor_asset_path(path):
+			floor_asset_paths.append(path)
+		else:
+			decoration_paths.append(path)
 	decoration_paths.sort()
+	floor_asset_paths.sort()
 
 
 func _collect_png_paths(root: String, output: Array[String]) -> void:
@@ -492,8 +542,59 @@ func _populate_decoration_option() -> void:
 	_update_selected_decoration_preview()
 
 
+func _populate_floor_option() -> void:
+	floor_option.clear()
+	floor_option.add_item("(no floor selected)")
+	floor_option.set_item_metadata(0, "")
+	for path: String in floor_asset_paths:
+		var index := floor_option.item_count
+		floor_option.add_item(_asset_label(path))
+		floor_option.set_item_metadata(index, path)
+	if floor_option.item_count > 0:
+		floor_option.select(0)
+	selected_floor_asset_path = ""
+
+
 func _asset_label(path: String) -> String:
 	return path.replace("res://assets/combat/terrain/processed/", "")
+
+
+func _is_floor_asset_path(path: String) -> bool:
+	return path.contains("/floor_")
+
+
+func _selected_decoration_is_floor_asset() -> bool:
+	return selected_decoration_path != "" and _is_floor_asset_path(selected_decoration_path)
+
+
+func _apply_selected_floor_background() -> void:
+	if selected_floor_asset_path == "":
+		if _selected_decoration_is_floor_asset():
+			selected_floor_asset_path = selected_decoration_path
+		else:
+			_set_status("No board floor selected.")
+			return
+	var floor_id := _floor_id_from_path(selected_floor_asset_path)
+	var background_path := str(FLOOR_BACKGROUND_PATHS.get(floor_id, ""))
+	if background_path == "":
+		_set_status("No generated board background is available for %s yet." % floor_id)
+		return
+	encounter["background_path"] = background_path
+	_update_background_path_label()
+	_set_status("Applied board floor %s via %s." % [floor_id, background_path])
+
+
+func _floor_id_from_path(path: String) -> String:
+	for part: String in path.split("/"):
+		if part.begins_with("floor_"):
+			return part
+	return path.get_file().get_basename()
+
+
+func _update_background_path_label() -> void:
+	if background_path_label == null:
+		return
+	background_path_label.text = "Background: %s" % str(encounter.get("background_path", "none"))
 
 
 func _short_asset_label(path: String) -> String:

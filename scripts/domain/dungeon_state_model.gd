@@ -1,6 +1,8 @@
 extends RefCounted
 class_name DungeonStateModel
 
+const DEFAULT_RETURN_SCENE_PATH := "res://scenes/app/App.tscn"
+
 
 static func initial_state(dungeon: Dictionary, selected_supply_loadout: Dictionary = {}) -> Dictionary:
 	var start_room_id := str(dungeon.get("start_room_id", ""))
@@ -14,6 +16,7 @@ static func initial_state(dungeon: Dictionary, selected_supply_loadout: Dictiona
 		"unlocked_reward_room_ids": [],
 		"claimed_reward_room_ids": [],
 		"claimed_rewards": [],
+		"run_inventory": _empty_run_inventory(),
 		"reward_totals": {"xp": 0, "gold": 0, "items": []},
 		"unlocked_room_ids": [],
 		"pending_combat_request": {},
@@ -21,6 +24,8 @@ static func initial_state(dungeon: Dictionary, selected_supply_loadout: Dictiona
 		"last_combat_result": {},
 		"completed": false,
 		"completed_at_room_id": "",
+		"run_outcome": "in_progress",
+		"run_result_payload": {},
 		"supplies": starting_supplies.duplicate(true),
 		"selected_supply_loadout": starting_supplies.duplicate(true),
 		"max_light_level": max_light_level,
@@ -33,6 +38,7 @@ static func initial_state(dungeon: Dictionary, selected_supply_loadout: Dictiona
 		"resolved_room_event_ids": [],
 		"hazard_log": [],
 		"room_event_log": [],
+		"room_event_history": _empty_room_event_history(),
 		"party_formation": _default_party_formation(dungeon),
 		"party_effects": {"hp_loss": 0, "debuffs": []},
 		"target_effects": {},
@@ -100,13 +106,17 @@ static func resolve_room_event_choice(dungeon: Dictionary, state: Dictionary, ch
 		"event_id": str(pending.get("event_id", "")),
 		"pool_id": str(pending.get("pool_id", "")),
 		"event_type": str(event.get("type", "")),
+		"tags": event.get("tags", []).duplicate(true),
 		"room_id": str(pending.get("room_id", "")),
 		"choice_id": choice_id,
 		"outcome_id": str(outcome.get("id", "")),
+		"outcome_tone": str(outcome.get("tone", "neutral")),
+		"skill_check": outcome.get("skill_check", {}).duplicate(true),
 		"consequences": consequences,
 		"message": str(outcome.get("message", event.get("message", ""))),
 	}
 	next_state["room_event_log"].append(room_event)
+	_record_room_event_history(next_state, room_event)
 	return _result(next_state, "accepted", "", room_event)
 
 
@@ -187,7 +197,7 @@ static func claim_current_reward(dungeon: Dictionary, state: Dictionary) -> Dict
 	}
 	_add_unique(next_state["claimed_reward_room_ids"], room_id)
 	next_state["claimed_rewards"].append(reward_record)
-	_apply_reward_totals(next_state, reward_payload)
+	_apply_reward_to_run_inventory(next_state, reward_record)
 	_add_unique(next_state["cleared_room_ids"], room_id)
 	return _result(next_state, "accepted", "", {
 		"type": "reward_claimed",
@@ -210,15 +220,119 @@ static func complete_current_room(dungeon: Dictionary, state: Dictionary) -> Dic
 		return _result(next_state, "rejected", "not_exit_room", {})
 	next_state["completed"] = true
 	next_state["completed_at_room_id"] = room_id
+	next_state["run_outcome"] = "completed"
 	_add_unique(next_state["cleared_room_ids"], room_id)
+	var payload := run_result_payload(dungeon, next_state, "completed")
+	next_state["run_result_payload"] = payload.duplicate(true)
 	return _result(next_state, "accepted", "", {
 		"type": "dungeon_completed",
 		"room_id": room_id,
+		"run_result_payload": payload,
 	})
 
 
+static func retreat_run(dungeon: Dictionary, state: Dictionary) -> Dictionary:
+	var next_state: Dictionary = state.duplicate(true)
+	if not bool(dungeon.get("exit_rules", {}).get("allow_retreat", false)):
+		return _result(next_state, "rejected", "retreat_not_allowed", {})
+	if not next_state.get("pending_combat_request", {}).is_empty():
+		return _result(next_state, "rejected", "pending_combat", {})
+	if not next_state.get("pending_corridor_hazard", {}).is_empty():
+		return _result(next_state, "rejected", "corridor_hazard_pending", next_state["pending_corridor_hazard"])
+	if not next_state.get("pending_room_event", {}).is_empty():
+		return _result(next_state, "rejected", "room_event_pending", next_state["pending_room_event"])
+	next_state["completed"] = true
+	next_state["completed_at_room_id"] = str(next_state.get("current_room_id", ""))
+	next_state["run_outcome"] = "retreated"
+	var payload := run_result_payload(dungeon, next_state, "retreated")
+	next_state["run_result_payload"] = payload.duplicate(true)
+	return _result(next_state, "accepted", "", {
+		"type": "dungeon_run_finished",
+		"outcome": "retreated",
+		"room_id": str(next_state.get("current_room_id", "")),
+		"run_result_payload": payload,
+	})
+
+
+static func fail_run(dungeon: Dictionary, state: Dictionary) -> Dictionary:
+	var next_state: Dictionary = state.duplicate(true)
+	next_state["completed"] = true
+	next_state["completed_at_room_id"] = str(next_state.get("current_room_id", ""))
+	next_state["run_outcome"] = "failed"
+	var payload := run_result_payload(dungeon, next_state, "failed")
+	next_state["run_result_payload"] = payload.duplicate(true)
+	return _result(next_state, "accepted", "", {
+		"type": "dungeon_run_finished",
+		"outcome": "failed",
+		"room_id": str(next_state.get("current_room_id", "")),
+		"run_result_payload": payload,
+	})
+
+
+static func run_result_payload(dungeon: Dictionary, state: Dictionary, outcome: String = "") -> Dictionary:
+	var resolved_outcome := str(outcome)
+	if resolved_outcome == "":
+		resolved_outcome = str(state.get("run_outcome", "completed" if bool(state.get("completed", false)) else "in_progress"))
+	if not resolved_outcome in ["completed", "retreated", "failed", "in_progress"]:
+		resolved_outcome = "failed"
+	var totals := reward_totals(state)
+	var claimed_inventory := run_inventory(state)
+	var kept_rewards := _kept_rewards_for_outcome(claimed_inventory, resolved_outcome)
+	var lost_rewards := _lost_rewards_for_outcome(claimed_inventory, resolved_outcome)
+	return {
+		"type": "dungeon_run_result",
+		"outcome": resolved_outcome,
+		"dungeon_id": str(dungeon.get("id", state.get("dungeon_id", ""))),
+		"dungeon_display_name": str(dungeon.get("display_name", "")),
+		"current_room_id": str(state.get("current_room_id", "")),
+		"completed_at_room_id": str(state.get("completed_at_room_id", "")),
+		"visited_room_ids": state.get("visited_room_ids", []).duplicate(true),
+		"cleared_room_ids": state.get("cleared_room_ids", []).duplicate(true),
+		"claimed_rewards": state.get("claimed_rewards", []).duplicate(true),
+		"claimed_run_inventory": claimed_inventory,
+		"reward_totals": totals,
+		"kept_rewards": kept_rewards,
+		"lost_rewards": lost_rewards,
+		"inventory_delta": kept_rewards.duplicate(true),
+		"persistent_effects": {
+			"active_debuffs": state.get("active_debuffs", {}).duplicate(true),
+			"party_effects": state.get("party_effects", {}).duplicate(true),
+			"target_effects": state.get("target_effects", {}).duplicate(true),
+		},
+		"next_scene_path": DEFAULT_RETURN_SCENE_PATH,
+	}
+
+
 static func reward_totals(state: Dictionary) -> Dictionary:
+	if state.has("run_inventory"):
+		var inventory := run_inventory(state)
+		return {
+			"xp": int(inventory.get("xp", 0)),
+			"gold": int(inventory.get("gold", 0)),
+			"items": inventory.get("items", []).duplicate(true),
+		}
 	return state.get("reward_totals", {"xp": 0, "gold": 0, "items": []}).duplicate(true)
+
+
+static func run_inventory(state: Dictionary) -> Dictionary:
+	var inventory: Dictionary = state.get("run_inventory", _empty_run_inventory())
+	return {
+		"xp": int(inventory.get("xp", 0)),
+		"gold": int(inventory.get("gold", 0)),
+		"items": inventory.get("items", []).duplicate(true),
+		"reward_records": inventory.get("reward_records", []).duplicate(true),
+	}
+
+
+static func room_event_history(state: Dictionary) -> Dictionary:
+	var history: Dictionary = state.get("room_event_history", _empty_room_event_history())
+	return {
+		"resolved_count": int(history.get("resolved_count", 0)),
+		"event_ids": history.get("event_ids", []).duplicate(true),
+		"type_counts": history.get("type_counts", {}).duplicate(true),
+		"tag_counts": history.get("tag_counts", {}).duplicate(true),
+		"tone_counts": history.get("tone_counts", {}).duplicate(true),
+	}
 
 
 static func use_lamp_oil(state: Dictionary) -> Dictionary:
@@ -455,7 +569,7 @@ static func _evaluate_room_entry(dungeon: Dictionary, state: Dictionary, room_id
 	var content: Array = room.get("content", [])
 	var room_event := _first_pending_room_event_content(room_id, content, state)
 	if not room_event.is_empty():
-		state["pending_room_event"] = _room_event_prompt(room_id, room_event)
+		state["pending_room_event"] = _room_event_prompt(state, room_id, room_event)
 		return
 
 	if _content_has_pending_combat(state, room_id, content):
@@ -492,14 +606,16 @@ static func _first_pending_room_event_content(room_id: String, content: Array, s
 	return {}
 
 
-static func _room_event_prompt(room_id: String, event: Dictionary) -> Dictionary:
+static func _room_event_prompt(state: Dictionary, room_id: String, event: Dictionary) -> Dictionary:
 	var choices: Array[Dictionary] = []
 	for choice: Dictionary in event.get("choices", []):
 		var choice_id := str(choice.get("id", ""))
+		var required_supply_id := str(choice.get("requires_supply", ""))
 		choices.append({
 			"id": choice_id,
 			"label": str(choice.get("label", choice_id)),
-			"available": true,
+			"requires_supply": required_supply_id,
+			"available": required_supply_id == "" or supply_count(state, required_supply_id) > 0,
 		})
 	return {
 		"type": "room_event_choice_required",
@@ -605,16 +721,88 @@ static func _claimable_reward_content(state: Dictionary, room_id: String, conten
 	return {}
 
 
-static func _apply_reward_totals(state: Dictionary, reward_payload: Dictionary) -> void:
-	if not state.has("reward_totals"):
-		state["reward_totals"] = {"xp": 0, "gold": 0, "items": []}
-	var totals: Dictionary = state["reward_totals"]
-	totals["xp"] = int(totals.get("xp", 0)) + int(reward_payload.get("xp", 0))
-	totals["gold"] = int(totals.get("gold", 0)) + int(reward_payload.get("gold", 0))
-	if not totals.has("items"):
-		totals["items"] = []
+static func _apply_reward_to_run_inventory(state: Dictionary, reward_record: Dictionary) -> void:
+	if not state.has("run_inventory"):
+		state["run_inventory"] = _empty_run_inventory()
+	var inventory: Dictionary = state["run_inventory"]
+	if not inventory.has("items"):
+		inventory["items"] = []
+	if not inventory.has("reward_records"):
+		inventory["reward_records"] = []
+	var reward_payload: Dictionary = reward_record.get("rewards", {})
+	inventory["xp"] = int(inventory.get("xp", 0)) + int(reward_payload.get("xp", 0))
+	inventory["gold"] = int(inventory.get("gold", 0)) + int(reward_payload.get("gold", 0))
 	for item_id: String in reward_payload.get("items", []):
-		totals["items"].append(item_id)
+		inventory["items"].append(item_id)
+	inventory["reward_records"].append(reward_record.duplicate(true))
+	state["run_inventory"] = inventory
+	state["reward_totals"] = {
+		"xp": int(inventory.get("xp", 0)),
+		"gold": int(inventory.get("gold", 0)),
+		"items": inventory.get("items", []).duplicate(true),
+	}
+
+
+static func _empty_run_inventory() -> Dictionary:
+	return {
+		"xp": 0,
+		"gold": 0,
+		"items": [],
+		"reward_records": [],
+	}
+
+
+static func _kept_rewards_for_outcome(inventory: Dictionary, outcome: String) -> Dictionary:
+	if outcome == "failed":
+		return _empty_run_inventory()
+	return inventory.duplicate(true)
+
+
+static func _lost_rewards_for_outcome(inventory: Dictionary, outcome: String) -> Dictionary:
+	if outcome == "failed":
+		return inventory.duplicate(true)
+	return _empty_run_inventory()
+
+
+static func _empty_room_event_history() -> Dictionary:
+	return {
+		"resolved_count": 0,
+		"event_ids": [],
+		"type_counts": {},
+		"tag_counts": {},
+		"tone_counts": {},
+	}
+
+
+static func _record_room_event_history(state: Dictionary, room_event: Dictionary) -> void:
+	if not state.has("room_event_history"):
+		state["room_event_history"] = _empty_room_event_history()
+	var history: Dictionary = state["room_event_history"]
+	if not history.has("event_ids"):
+		history["event_ids"] = []
+	if not history.has("type_counts"):
+		history["type_counts"] = {}
+	if not history.has("tag_counts"):
+		history["tag_counts"] = {}
+	if not history.has("tone_counts"):
+		history["tone_counts"] = {}
+	history["resolved_count"] = int(history.get("resolved_count", 0)) + 1
+	var event_id := str(room_event.get("event_id", ""))
+	if event_id != "":
+		history["event_ids"].append(event_id)
+	var event_type := str(room_event.get("event_type", "generic"))
+	var type_counts: Dictionary = history["type_counts"]
+	type_counts[event_type] = int(type_counts.get(event_type, 0)) + 1
+	history["type_counts"] = type_counts
+	var tag_counts: Dictionary = history["tag_counts"]
+	for tag: String in room_event.get("tags", []):
+		tag_counts[tag] = int(tag_counts.get(tag, 0)) + 1
+	history["tag_counts"] = tag_counts
+	var outcome_tone := str(room_event.get("outcome_tone", "neutral"))
+	var tone_counts: Dictionary = history["tone_counts"]
+	tone_counts[outcome_tone] = int(tone_counts.get(outcome_tone, 0)) + 1
+	history["tone_counts"] = tone_counts
+	state["room_event_history"] = history
 
 
 static func _room_is_locked_for_state(state: Dictionary, room: Dictionary) -> bool:
@@ -738,7 +926,6 @@ static func _resolve_hazard(state: Dictionary, corridor: Dictionary, hazard: Dic
 	var consequences: Array = outcome.get("consequences", []).duplicate(true)
 	var supply_consumed := ""
 	if has_supply and required_supply_id != "" and bool(outcome.get("consume_required_supply", false)):
-		_consume_supply(state, required_supply_id, 1)
 		supply_consumed = required_supply_id
 		consequences.append({"type": "consume_supply", "supply_id": required_supply_id, "amount": 1})
 	_apply_consequences(state, consequences)
@@ -800,12 +987,13 @@ static func _apply_consequences(state: Dictionary, consequences: Array) -> void:
 	for consequence: Dictionary in consequences:
 		match str(consequence.get("type", "")):
 			"reward":
-				_apply_reward_totals(state, consequence.get("rewards", {"xp": 0, "gold": 0, "items": []}))
-				state["claimed_rewards"].append({
+				var reward_record := {
 					"room_id": str(state.get("current_room_id", "")),
 					"content_type": "room_event",
 					"rewards": consequence.get("rewards", {"xp": 0, "gold": 0, "items": []}),
-				})
+				}
+				state["claimed_rewards"].append(reward_record)
+				_apply_reward_to_run_inventory(state, reward_record)
 			"consume_supply":
 				_consume_supply(state, str(consequence.get("supply_id", "")), int(consequence.get("amount", 1)))
 			"hp_loss":

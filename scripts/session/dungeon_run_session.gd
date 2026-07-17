@@ -11,6 +11,7 @@ const ENEMY_ARCHETYPE_POOL := ["raider_swordsman", "raider_archer"]
 var dungeon_data: Dictionary = {}
 var dungeon_state: Dictionary = {}
 var pending_combat_request: Dictionary = {}
+var pending_world_return_payload: Dictionary = {}
 var last_feedback := ""
 var next_combat_seed := 0
 
@@ -214,10 +215,43 @@ func finish_combat(result_payload: Dictionary) -> bool:
 	return true
 
 
+func finish_run(next_dungeon_data: Dictionary, next_dungeon_state: Dictionary, outcome: String = "completed") -> bool:
+	if next_dungeon_data.is_empty() or next_dungeon_state.is_empty():
+		last_feedback = "Dungeon run state missing."
+		return false
+	var result: Dictionary = {}
+	match outcome:
+		"completed":
+			result = DungeonStateModel.complete_current_room(next_dungeon_data, next_dungeon_state)
+		"retreated":
+			result = DungeonStateModel.retreat_run(next_dungeon_data, next_dungeon_state)
+		"failed":
+			result = DungeonStateModel.fail_run(next_dungeon_data, next_dungeon_state)
+		_:
+			last_feedback = "Unsupported dungeon run outcome: %s." % outcome
+			return false
+	if result.get("status", "") != "accepted":
+		last_feedback = "Dungeon run finish rejected: %s." % result.get("rejection", "unknown")
+		return false
+	set_dungeon_run(next_dungeon_data, result["state"])
+	pending_world_return_payload = result.get("event", {}).get("run_result_payload", {}).duplicate(true)
+	last_feedback = _run_return_feedback(pending_world_return_payload)
+	return true
+
+
+func has_pending_world_return() -> bool:
+	return not pending_world_return_payload.is_empty()
+
+
+func world_return_scene_path() -> String:
+	return str(pending_world_return_payload.get("next_scene_path", DungeonStateModel.DEFAULT_RETURN_SCENE_PATH))
+
+
 func clear() -> void:
 	dungeon_data.clear()
 	dungeon_state.clear()
 	pending_combat_request.clear()
+	pending_world_return_payload.clear()
 	last_feedback = ""
 	next_combat_seed = 0
 
@@ -356,3 +390,23 @@ func _reward_summary_for_room(room_id: String) -> String:
 				return "available"
 			return " + ".join(parts)
 	return "available"
+
+
+func _run_return_feedback(payload: Dictionary) -> String:
+	var outcome := str(payload.get("outcome", "completed"))
+	var totals: Dictionary = payload.get("reward_totals", {})
+	var items: Array = totals.get("items", [])
+	var item_count := items.size()
+	match outcome:
+		"completed":
+			return "Expedition completed. Return payload ready: %sg, %s XP, %s items." % [
+				int(totals.get("gold", 0)),
+				int(totals.get("xp", 0)),
+				item_count,
+			]
+		"retreated":
+			return "Expedition retreated. Return payload ready with kept rewards."
+		"failed":
+			return "Expedition failed. Return payload ready with persistent effects."
+		_:
+			return "Expedition %s. Return payload ready." % outcome

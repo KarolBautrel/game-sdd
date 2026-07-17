@@ -118,6 +118,25 @@ func _init() -> void:
 	_expect_false(errors, "defeat room not cleared", DungeonStateModel.room_is_cleared(defeat_session.dungeon_state, "guarded_cache"))
 	_expect_equal(errors, "defeat return feedback", defeat_session.last_feedback, "Defeat in Guarded Cache. Room remains dangerous; reset or return later.")
 	defeat_session.free()
+
+	var finish_session := DungeonRunSessionScript.new()
+	var finish_state: Dictionary = DungeonStateModel.initial_state(dungeon)
+	finish_state = DungeonStateModel.enter_room(dungeon, finish_state, "dusty_crossing")["state"]
+	finish_state = DungeonStateModel.resolve_room_event_choice(dungeon, finish_state, "ignore")["state"]
+	finish_state = DungeonStateModel.enter_room(dungeon, finish_state, "guarded_cache")["state"]
+	finish_state = DungeonStateModel.apply_combat_result(dungeon, finish_state, _combat_payload("victory", "dungeon_old_mine", "guarded_cache"))["state"]
+	finish_state = DungeonStateModel.claim_current_reward(dungeon, finish_state)["state"]
+	finish_state = DungeonStateModel.enter_room(dungeon, finish_state, "lower_exit")["state"]
+	_expect_true(errors, "finish run accepted", finish_session.finish_run(dungeon, finish_state, "completed"))
+	_expect_true(errors, "world return pending", finish_session.has_pending_world_return())
+	_expect_equal(errors, "world return outcome", finish_session.pending_world_return_payload["outcome"], "completed")
+	_expect_equal(errors, "world return gold", finish_session.pending_world_return_payload["reward_totals"]["gold"], 7)
+	_expect_equal(errors, "world return kept gold", finish_session.pending_world_return_payload["kept_rewards"]["gold"], 7)
+	_expect_equal(errors, "world return inventory delta item", finish_session.pending_world_return_payload["inventory_delta"]["items"][0], "rusty_key")
+	_expect_equal(errors, "world return lost gold", finish_session.pending_world_return_payload["lost_rewards"]["gold"], 0)
+	_expect_equal(errors, "world return scene path", finish_session.world_return_scene_path(), DungeonStateModel.DEFAULT_RETURN_SCENE_PATH)
+	_expect_true(errors, "finish feedback summary", finish_session.last_feedback.contains("Return payload ready"))
+	finish_session.free()
 	if errors.is_empty():
 		print("Dungeon run session validation passed.")
 	else:

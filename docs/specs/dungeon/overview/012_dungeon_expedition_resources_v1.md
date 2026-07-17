@@ -21,6 +21,8 @@ This spec is intentionally planned. It records target design direction before im
 
 ## Expedition Supplies
 
+Dungeon mode owns only what the party carries into the expedition and how those supplies are spent or lost inside the dungeon. Buying, crafting, pricing, restocking, and long-term ownership of supplies belong to town/world-map/inventory systems.
+
 Planned supply examples:
 
 - `lamp_oil`: keeps expedition light stable during corridor traversal;
@@ -31,7 +33,7 @@ Planned supply examples:
 - `rope`: mitigates pits, climbs, broken bridges, or vertical shafts;
 - `holy_water` or similar warding item: mitigates cursed shrines, crypt events, or corruption hazards.
 
-Exact item names and balancing are future work.
+Exact item names and dungeon carry limits are future work. Economic cost/source balancing is not dungeon-owned.
 
 ## Light Pressure
 
@@ -132,6 +134,7 @@ Recommended future implementation order:
 
 - full supply shop;
 - economy balancing;
+- town purchase flow;
 - procedural hazard generation;
 - camping system;
 - stress/morale implementation;

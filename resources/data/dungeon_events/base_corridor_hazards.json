@@ -80,6 +80,136 @@
           ]
         }
       ]
+    },
+    {
+      "id": "rubble_major_cavein",
+      "type": "blockage",
+      "tags": ["mine", "corridor", "rubble", "blockage", "tool_check"],
+      "message": "A fresh cave-in fills the corridor from wall to wall.",
+      "required_supply_id": "pickaxe",
+      "choices": [
+        { "id": "use_supply", "label": "Use pickaxe", "requires_supply": true },
+        { "id": "force_passage", "label": "Force passage", "requires_supply": false }
+      ],
+      "outcomes": [
+        {
+          "id": "cavein_cleared_with_pickaxe",
+          "when": { "choice_id": "use_supply", "has_supply": true },
+          "consume_required_supply": true,
+          "message": "The pickaxe opens a narrow crawl through the cave-in.",
+          "consequences": [
+            { "type": "reduce_light", "amount": 1 }
+          ]
+        },
+        {
+          "id": "cavein_blocks_passage",
+          "when": { "choice_id": "force_passage" },
+          "blocks_traversal": true,
+          "message": "The cave-in will not move by hand. The party must find another way or return with tools.",
+          "consequences": [
+            { "type": "apply_debuff", "debuff_id": "fatigued", "target_id": "party_slot_front" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "snare_trap_basic",
+      "type": "trap",
+      "tags": ["mine", "corridor", "trap", "snare", "tool_check"],
+      "message": "A loop of cable waits beneath loose gravel.",
+      "required_supply_id": "trap_tools",
+      "choices": [
+        { "id": "use_supply", "label": "Use trap tools", "requires_supply": true },
+        { "id": "force_passage", "label": "Step through carefully", "requires_supply": false }
+      ],
+      "outcomes": [
+        {
+          "id": "snare_disarmed",
+          "when": { "choice_id": "use_supply", "has_supply": true },
+          "consume_required_supply": true,
+          "message": "The trap tools pin the cable before it can tighten.",
+          "consequences": []
+        },
+        {
+          "id": "snare_catches_front",
+          "when": { "choice_id": "force_passage" },
+          "weight": 75,
+          "message": "The cable snaps tight around the lead explorer's leg.",
+          "consequences": [
+            { "type": "apply_debuff", "debuff_id": "limping", "target_id": "party_slot_front" }
+          ]
+        },
+        {
+          "id": "snare_startles_party",
+          "when": { "choice_id": "force_passage" },
+          "weight": 25,
+          "message": "The cable whips free with a sharp crack, rattling the party.",
+          "consequences": [
+            { "type": "apply_debuff", "debuff_id": "shaken", "target_id": "party_slot_front" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dark_pocket",
+      "type": "darkness",
+      "tags": ["mine", "corridor", "darkness", "light"],
+      "message": "The tunnel bends through a dead pocket where the lamp flame gutters low.",
+      "required_supply_id": "lamp_oil",
+      "choices": [
+        { "id": "use_supply", "label": "Use lamp oil", "requires_supply": true },
+        { "id": "force_passage", "label": "Push through dark", "requires_supply": false }
+      ],
+      "outcomes": [
+        {
+          "id": "oil_burns_bright",
+          "when": { "choice_id": "use_supply", "has_supply": true },
+          "consume_required_supply": true,
+          "message": "Fresh oil steadies the lamp through the dead air.",
+          "consequences": [
+            { "type": "restore_light", "amount": 1 }
+          ]
+        },
+        {
+          "id": "darkness_rattles_party",
+          "when": { "choice_id": "force_passage" },
+          "message": "Shapes move at the edge of the lamp glow and the party hurries on shaken.",
+          "consequences": [
+            { "type": "reduce_light", "amount": 1 },
+            { "type": "apply_debuff", "debuff_id": "shaken", "target_id": "party_slot_front" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "echoing_alarm",
+      "type": "noise",
+      "tags": ["mine", "corridor", "noise", "alarm"],
+      "message": "A loose chain of warning bells hangs across the passage.",
+      "required_supply_id": "",
+      "choices": [
+        { "id": "force_passage", "label": "Slip through", "requires_supply": false }
+      ],
+      "outcomes": [
+        {
+          "id": "bells_stay_quiet",
+          "when": { "choice_id": "force_passage" },
+          "weight": 35,
+          "message": "The party steadies the bells and slips through quietly.",
+          "consequences": [
+            { "type": "log_only" }
+          ]
+        },
+        {
+          "id": "bells_ring_out",
+          "when": { "choice_id": "force_passage" },
+          "weight": 65,
+          "message": "The bells ring down the mine. Something deeper answers.",
+          "consequences": [
+            { "type": "apply_debuff", "debuff_id": "shaken", "target_id": "party_slot_front" }
+          ]
+        }
+      ]
     }
   ]
 }

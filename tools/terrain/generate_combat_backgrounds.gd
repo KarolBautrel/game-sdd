@@ -2,36 +2,35 @@ extends SceneTree
 
 const WIDTH := 18
 const HEIGHT := 11
-const TILE_SIZE := 112
+const TILE_WIDTH := 140
+const TILE_HEIGHT := 104
 const OUTPUT_DIR := "res://assets/combat/terrain/backgrounds"
 
-const GRASS_SIZE := 64
-const GRASS_STEP := 26
-const GRASS_EDGE_BLEND := 14
+const FLOOR_PATCH_SIZE := 180
+const FLOOR_STEP_X := 124
+const FLOOR_STEP_Y := 92
+const FLOOR_EDGE_BLEND := 18
 const TUFT_SIZE := 46
 const SEAM_SOFTEN_PASSES := 2
-const STONE_SIZE := 128
-const STONE_STEP := 104
-const STONE_EDGE_BLEND := 18
 const DUNGEON_PROP_SIZE := 58
 
-const GRASS_PATHS := [
-	"res://assets/combat/terrain/grass/meadow_grass_floor_00.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_01.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_02.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_03.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_04.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_05.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_06.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_07.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_08.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_09.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_10.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_11.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_12.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_13.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_14.png",
-	"res://assets/combat/terrain/grass/meadow_grass_floor_15.png",
+const NATURE_FLOOR_PATHS := [
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_00.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_01.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_02.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_03.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_04.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_05.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_06.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_07.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_08.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_09.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_10.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_11.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_12.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_13.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_14.png",
+	"res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_15.png",
 ]
 
 const TUFT_PATHS := [
@@ -45,9 +44,23 @@ const TUFT_PATHS := [
 	"res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_15.png",
 ]
 
-const STONE_PATHS := [
-	"res://assets/combat/terrain/floors/stone/stones1.png",
-	"res://assets/combat/terrain/floors/stone/stones2.png",
+const DUNGEON_FLOOR_PATHS := [
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_00.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_01.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_02.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_03.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_04.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_05.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_06.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_07.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_08.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_09.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_10.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_11.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_12.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_13.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_14.png",
+	"res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_15.png",
 ]
 
 const DUNGEON_PROP_PATHS := [
@@ -62,25 +75,25 @@ const BACKGROUNDS := [
 		"name": "old_mine_meadow_00_lush",
 		"seed": 101,
 		"base": Color(0.055, 0.215, 0.065),
-		"primary": [3],
-		"accent": [4, 5, 8, 10],
-		"accent_rate": 4,
+		"primary": [0, 1, 6, 12, 14],
+		"accent": [2, 4, 8, 9, 10],
+		"accent_rate": 10,
 		"tuft_count": 7,
 	},
 	{
 		"name": "old_mine_meadow_01_deep_green",
 		"seed": 137,
 		"base": Color(0.040, 0.170, 0.060),
-		"primary": [5],
-		"accent": [3, 8, 10, 11],
-		"accent_rate": 4,
+		"primary": [0, 1, 6, 12, 14],
+		"accent": [2, 4, 8, 9, 10],
+		"accent_rate": 10,
 		"tuft_count": 7,
 	},
 ]
 
-var grass_images: Dictionary = {}
+var nature_floor_images: Dictionary = {}
 var tuft_images: Dictionary = {}
-var stone_images: Dictionary = {}
+var dungeon_floor_images: Dictionary = {}
 var dungeon_prop_images: Dictionary = {}
 
 
@@ -94,6 +107,9 @@ func _initialize() -> void:
 		"name": "old_mine_dungeon_00_stone",
 		"seed": 211,
 		"base": Color(0.105, 0.108, 0.112),
+		"primary": [1, 2, 5, 6, 9, 14],
+		"accent": [3, 4, 7, 8, 10, 12, 15],
+		"accent_rate": 18,
 		"prop_count": 12,
 	})
 	print("Generated combat backgrounds in %s" % OUTPUT_DIR)
@@ -110,13 +126,13 @@ func _remove_old_backgrounds() -> void:
 
 
 func _load_sources() -> void:
-	for index in range(GRASS_PATHS.size()):
+	for index in range(NATURE_FLOOR_PATHS.size()):
 		var image := Image.new()
-		var error := image.load(GRASS_PATHS[index])
+		var error := image.load(NATURE_FLOOR_PATHS[index])
 		if error == OK:
-			grass_images[index] = image
+			nature_floor_images[index] = image
 		else:
-			push_error("Cannot load grass source: %s" % GRASS_PATHS[index])
+			push_error("Cannot load nature floor source: %s" % NATURE_FLOOR_PATHS[index])
 
 	for index in range(TUFT_PATHS.size()):
 		var image := Image.new()
@@ -126,13 +142,13 @@ func _load_sources() -> void:
 		else:
 			push_error("Cannot load grass tuft source: %s" % TUFT_PATHS[index])
 
-	for index in range(STONE_PATHS.size()):
+	for index in range(DUNGEON_FLOOR_PATHS.size()):
 		var image := Image.new()
-		var error := image.load(STONE_PATHS[index])
+		var error := image.load(DUNGEON_FLOOR_PATHS[index])
 		if error == OK:
-			stone_images[index] = image
+			dungeon_floor_images[index] = image
 		else:
-			push_error("Cannot load stone floor source: %s" % STONE_PATHS[index])
+			push_error("Cannot load dungeon floor source: %s" % DUNGEON_FLOOR_PATHS[index])
 
 	for index in range(DUNGEON_PROP_PATHS.size()):
 		var image := Image.new()
@@ -144,9 +160,9 @@ func _load_sources() -> void:
 
 
 func _generate_background(config: Dictionary) -> void:
-	var image := Image.create(WIDTH * TILE_SIZE, HEIGHT * TILE_SIZE, false, Image.FORMAT_RGBA8)
+	var image := Image.create(WIDTH * TILE_WIDTH, HEIGHT * TILE_HEIGHT, false, Image.FORMAT_RGBA8)
 	image.fill(config["base"])
-	_paint_grass_asset_carpet(image, config)
+	_paint_floor_asset_carpet(image, config, nature_floor_images)
 	_soften_dark_grass_seams(image)
 	_apply_meadow_color_wash(image, int(config["seed"]))
 	_paint_tuft_accents(image, config)
@@ -157,26 +173,30 @@ func _generate_background(config: Dictionary) -> void:
 		push_error("Cannot save combat background: %s" % output_path)
 
 
-func _paint_grass_asset_carpet(target: Image, config: Dictionary) -> void:
+func _paint_floor_asset_carpet(target: Image, config: Dictionary, source_images: Dictionary) -> void:
+	if source_images.is_empty():
+		return
 	var seed := int(config["seed"])
-	var columns := int(ceil(float(target.get_width()) / float(GRASS_STEP))) + 3
-	var rows := int(ceil(float(target.get_height()) / float(GRASS_STEP))) + 3
+	var columns := int(ceil(float(target.get_width()) / float(FLOOR_STEP_X))) + 3
+	var rows := int(ceil(float(target.get_height()) / float(FLOOR_STEP_Y))) + 3
 
 	for row in range(rows):
 		for column in range(columns):
-			var grass_index := _pick_grass_index(column, row, config)
-			if not grass_images.has(grass_index):
+			var floor_index := _pick_floor_index(column, row, config, source_images.size())
+			if not source_images.has(floor_index):
 				continue
-			var stagger := 0 if row % 2 == 0 else int(GRASS_STEP / 2)
+			var scaled: Image = source_images[floor_index].duplicate()
+			scaled.resize(FLOOR_PATCH_SIZE, FLOOR_PATCH_SIZE, Image.INTERPOLATE_NEAREST)
+			var stagger := 0 if row % 2 == 0 else int(FLOOR_STEP_X / 2)
 			var jitter := Vector2i(
 				_hash_signed(column, row, 11, seed, 9),
 				_hash_signed(row, column, 17, seed, 9)
 			)
 			var destination := Vector2i(
-				column * GRASS_STEP - GRASS_SIZE + stagger,
-				row * GRASS_STEP - GRASS_SIZE
+				column * FLOOR_STEP_X - FLOOR_PATCH_SIZE + stagger,
+				row * FLOOR_STEP_Y - FLOOR_PATCH_SIZE
 			) + jitter
-			_blend_patch_feathered(target, grass_images[grass_index], destination)
+			_blend_patch_feathered(target, scaled, destination)
 
 
 func _paint_tuft_accents(target: Image, config: Dictionary) -> void:
@@ -197,9 +217,9 @@ func _paint_tuft_accents(target: Image, config: Dictionary) -> void:
 
 
 func _generate_dungeon_background(config: Dictionary) -> void:
-	var image := Image.create(WIDTH * TILE_SIZE, HEIGHT * TILE_SIZE, false, Image.FORMAT_RGBA8)
+	var image := Image.create(WIDTH * TILE_WIDTH, HEIGHT * TILE_HEIGHT, false, Image.FORMAT_RGBA8)
 	image.fill(config["base"])
-	_paint_stone_asset_carpet(image, config)
+	_paint_floor_asset_carpet(image, config, dungeon_floor_images)
 	_apply_dungeon_color_wash(image, int(config["seed"]))
 	_paint_dungeon_prop_accents(image, config)
 
@@ -207,29 +227,6 @@ func _generate_dungeon_background(config: Dictionary) -> void:
 	var error := image.save_png(output_path)
 	if error != OK:
 		push_error("Cannot save combat background: %s" % output_path)
-
-
-func _paint_stone_asset_carpet(target: Image, config: Dictionary) -> void:
-	if stone_images.is_empty():
-		return
-	var seed := int(config["seed"])
-	var columns := int(ceil(float(target.get_width()) / float(STONE_STEP))) + 2
-	var rows := int(ceil(float(target.get_height()) / float(STONE_STEP))) + 2
-
-	for row in range(rows):
-		for column in range(columns):
-			var stone_index := _hash(column, row, 71, seed) % stone_images.size()
-			if not stone_images.has(stone_index):
-				continue
-			var jitter := Vector2i(
-				_hash_signed(column, row, 73, seed, 13),
-				_hash_signed(row, column, 79, seed, 13)
-			)
-			var destination := Vector2i(
-				column * STONE_STEP - 12,
-				row * STONE_STEP - 12
-			) + jitter
-			_blend_patch_feathered_with_edge(target, stone_images[stone_index], destination, STONE_EDGE_BLEND)
 
 
 func _paint_dungeon_prop_accents(target: Image, config: Dictionary) -> void:
@@ -308,14 +305,16 @@ func _apply_meadow_color_wash(target: Image, seed: int) -> void:
 			target.set_pixel(x, y, color)
 
 
-func _pick_grass_index(column: int, row: int, config: Dictionary) -> int:
+func _pick_floor_index(column: int, row: int, config: Dictionary, source_count: int) -> int:
+	if source_count <= 0:
+		return 0
 	var seed := int(config["seed"])
 	var roll := _hash(column, row, 47, seed) % 100
 	var source: Array = config["primary"]
 	if roll < int(config["accent_rate"]):
 		source = config["accent"]
 	var source_index := _hash(row + 3, column + 7, 53, seed) % source.size()
-	return int(source[source_index])
+	return int(source[source_index]) % source_count
 
 
 func _blend_patch_clipped(target: Image, patch: Image, destination: Vector2i) -> void:
@@ -342,7 +341,7 @@ func _blend_patch_clipped(target: Image, patch: Image, destination: Vector2i) ->
 
 
 func _blend_patch_feathered(target: Image, patch: Image, destination: Vector2i) -> void:
-	_blend_patch_feathered_with_edge(target, patch, destination, GRASS_EDGE_BLEND)
+	_blend_patch_feathered_with_edge(target, patch, destination, FLOOR_EDGE_BLEND)
 
 
 func _blend_patch_feathered_with_edge(target: Image, patch: Image, destination: Vector2i, edge_blend: int) -> void:

@@ -14,6 +14,7 @@
         {
           "id": "found_miner_coin",
           "when": { "choice_id": "inspect" },
+          "tone": "positive",
           "message": "The party finds a few coins and a bent mining token.",
           "consequences": [
             { "type": "reward", "rewards": { "xp": 0, "gold": 2, "items": ["bent_mining_token"] } }
@@ -22,6 +23,7 @@
         {
           "id": "pack_ignored",
           "when": { "choice_id": "ignore" },
+          "tone": "neutral",
           "message": "The party leaves the pack untouched.",
           "consequences": []
         }
@@ -40,6 +42,7 @@
         {
           "id": "lamp_blessing",
           "when": { "choice_id": "inspect" },
+          "tone": "positive",
           "message": "A faint warmth rolls through the lamp glass.",
           "consequences": [
             { "type": "restore_light", "amount": 1 }
@@ -48,7 +51,162 @@
         {
           "id": "shrine_ignored",
           "when": { "choice_id": "ignore" },
+          "tone": "neutral",
           "message": "The shrine remains silent.",
+          "consequences": []
+        }
+      ]
+    },
+    {
+      "id": "old_mine_rusted_lockbox",
+      "type": "chest",
+      "tags": ["mine", "room", "treasure", "chest"],
+      "message": "A rusted lockbox sits wedged beneath a cracked timber brace.",
+      "choices": [
+        { "id": "inspect", "label": "Open lockbox" },
+        { "id": "ignore", "label": "Leave it" }
+      ],
+      "outcomes": [
+        {
+          "id": "lockbox_opened",
+          "when": { "choice_id": "inspect" },
+          "tone": "positive",
+          "message": "The hinges squeal open around a purse of old mine scrip.",
+          "consequences": [
+            { "type": "reward", "rewards": { "xp": 0, "gold": 4, "items": ["old_mine_scrip"] } }
+          ]
+        },
+        {
+          "id": "lockbox_ignored",
+          "when": { "choice_id": "ignore" },
+          "tone": "neutral",
+          "message": "The lockbox remains under the timber.",
+          "consequences": []
+        }
+      ]
+    },
+    {
+      "id": "old_mine_lost_surveyor",
+      "type": "corpse",
+      "tags": ["mine", "room", "corpse", "lore"],
+      "message": "A long-dead surveyor rests against the wall with a snapped measuring chain.",
+      "choices": [
+        { "id": "inspect", "label": "Search surveyor" },
+        { "id": "ignore", "label": "Move on" }
+      ],
+      "outcomes": [
+        {
+          "id": "surveyor_notes_found",
+          "when": { "choice_id": "inspect" },
+          "tone": "positive",
+          "message": "The party recovers a damp route note and a usable brass marker.",
+          "consequences": [
+            { "type": "reward", "rewards": { "xp": 2, "gold": 0, "items": ["brass_route_marker"] } }
+          ]
+        },
+        {
+          "id": "surveyor_left",
+          "when": { "choice_id": "ignore" },
+          "tone": "neutral",
+          "message": "The surveyor's rest is left undisturbed.",
+          "consequences": []
+        }
+      ]
+    },
+    {
+      "id": "old_mine_warning_note",
+      "type": "note",
+      "tags": ["mine", "room", "note", "lore"],
+      "message": "A warning slate hangs from a bent nail beside the passage.",
+      "choices": [
+        { "id": "inspect", "label": "Read slate" },
+        { "id": "ignore", "label": "Ignore slate" }
+      ],
+      "outcomes": [
+        {
+          "id": "warning_read",
+          "when": { "choice_id": "inspect" },
+          "tone": "positive",
+          "skill_check": { "skill_id": "mining_lore", "difficulty": 2, "target_id": "party_slot_front" },
+          "message": "The slate warns of weak beams ahead. The party moves more carefully.",
+          "consequences": [
+            { "type": "log_only" }
+          ]
+        },
+        {
+          "id": "warning_ignored",
+          "when": { "choice_id": "ignore" },
+          "tone": "neutral",
+          "message": "The warning is ignored.",
+          "consequences": []
+        }
+      ]
+    },
+    {
+      "id": "old_mine_odd_idol",
+      "type": "curio",
+      "tags": ["mine", "room", "curio", "risk"],
+      "message": "A thumb-sized stone idol watches from a drill hole in the wall.",
+      "choices": [
+        { "id": "inspect", "label": "Examine idol" },
+        { "id": "ignore", "label": "Leave idol" }
+      ],
+      "outcomes": [
+        {
+          "id": "idol_secret_found",
+          "when": { "choice_id": "inspect" },
+          "weight": 35,
+          "tone": "positive",
+          "skill_check": { "skill_id": "occult_lore", "difficulty": 3, "target_id": "party_slot_front" },
+          "message": "The idol twists loose and reveals a tiny amber chip.",
+          "consequences": [
+            { "type": "reward", "rewards": { "xp": 1, "gold": 0, "items": ["amber_idol_chip"] } }
+          ]
+        },
+        {
+          "id": "idol_disturbed",
+          "when": { "choice_id": "inspect" },
+          "weight": 65,
+          "tone": "negative",
+          "skill_check": { "skill_id": "occult_lore", "difficulty": 3, "target_id": "party_slot_front" },
+          "message": "Cold grit spills from the drill hole and the lamp gutters.",
+          "consequences": [
+            { "type": "reduce_light", "amount": 1 }
+          ]
+        },
+        {
+          "id": "idol_left",
+          "when": { "choice_id": "ignore" },
+          "tone": "neutral",
+          "message": "The idol remains in the wall.",
+          "consequences": []
+        }
+      ]
+    },
+    {
+      "id": "old_mine_hidden_cache",
+      "type": "hidden_cache",
+      "tags": ["mine", "room", "cache", "hidden"],
+      "message": "Scuffed dust marks a loose stone near the floor.",
+      "choices": [
+        { "id": "inspect", "label": "Pry stone", "requires_supply": "pickaxe" },
+        { "id": "ignore", "label": "Leave stone" }
+      ],
+      "outcomes": [
+        {
+          "id": "cache_opened",
+          "when": { "choice_id": "inspect" },
+          "tone": "positive",
+          "message": "Behind the stone is a dry twist of cloth with emergency oil.",
+          "consequences": [
+            { "type": "reward", "rewards": { "xp": 1, "gold": 0, "items": ["sealed_oil_twist"] } }
+          ]
+        },
+        {
+          "id": "cache_missed",
+          "when": { "choice_id": "ignore" },
+          "tone": "neutral",
+          "message": "The loose stone is left alone.",
           "consequences": []
         }
       ]

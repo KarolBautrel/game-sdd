@@ -1,17 +1,32 @@
 extends Control
 
 const DungeonStateModel := preload("res://scripts/domain/dungeon_state_model.gd")
+const DungeonEntrySelection := preload("res://scripts/domain/dungeon_entry_selection.gd")
 
-const DUNGEON_PATH := "res://resources/data/dungeons/dungeon_old_mine.json"
-const DUNGEON_SOURCE_AUTHORED := "authored"
-const DUNGEON_SOURCE_GENERATED := "generated"
-const DEFAULT_GENERATED_DUNGEON_DIFFICULTY := 2
-const ROOM_SIZE := Vector2(196, 96)
+const DUNGEON_PATH := DungeonEntrySelection.DUNGEON_PATH
+const DUNGEON_SOURCE_AUTHORED := DungeonEntrySelection.SOURCE_AUTHORED
+const DUNGEON_SOURCE_GENERATED := DungeonEntrySelection.SOURCE_GENERATED
+const DEFAULT_GENERATED_DUNGEON_DIFFICULTY := DungeonEntrySelection.DEFAULT_GENERATED_DUNGEON_DIFFICULTY
+const ROOM_SIZE := Vector2(220, 172)
 const ENTER_COMBAT_LABEL := "Enter Combat"
 const FINISH_EXPEDITION_LABEL := "Finish Expedition"
 const FALLBACK_VIEWPORT_SIZE := Vector2(2048, 1152)
+const DUNGEON_UI_MAP_FRAME_PATH := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_08.png"
+const DUNGEON_UI_DETAIL_PANEL_PATH := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_07.png"
+const DUNGEON_UI_MODAL_PATH := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_10.png"
+const DUNGEON_UI_PARTY_PANEL_PATH := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_10.png"
+const DUNGEON_UI_PORTRAIT_FRAME_PATH := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_20.png"
+const DUNGEON_UI_PORTRAIT_PATH := "res://assets/ui/dungeon/processed/mercenary_pose_for_portrait/mercenary_pose_for_portrait_head.png"
+const DUNGEON_UI_CORRIDOR_PATH := "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_56.png"
+const DUNGEON_UI_CORRIDOR_DIAMOND_PATH := "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_18.png"
+const DUNGEON_UI_TILE_PREFIX := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_"
+const DUNGEON_ICON_PREFIX := "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_"
+const DUNGEON_ROOM_FRAME_PREFIX := "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_"
+const DUNGEON_LAYOUT_OVERRIDE_PATH := "res://resources/debug/dungeon_debug_layout_overrides.json"
+const LAYOUT_EDIT_HANDLE_SIZE := 24.0
 
 var dungeon: Dictionary = {}
+var entry_payload: Dictionary = DungeonEntrySelection.default_payload()
 var dungeon_source := DUNGEON_SOURCE_AUTHORED
 var generated_dungeon_seed := 0
 var generated_dungeon_difficulty := DEFAULT_GENERATED_DUNGEON_DIFFICULTY
@@ -29,7 +44,7 @@ var last_feedback := ""
 @onready var detail_panel: PanelContainer = $DetailPanel
 @onready var detail_box: VBoxContainer = $DetailPanel/MarginContainer/VBoxContainer
 
-var action_row: HBoxContainer
+var action_row: GridContainer
 var start_combat_button: Button
 var exit_row: VBoxContainer
 var reward_button: Button
@@ -50,8 +65,9 @@ var map_title_label: Label
 var route_state_label: Label
 var resource_tray_panel: PanelContainer
 var resource_tile_labels: Dictionary = {}
-var map_legend_panel: PanelContainer
 var loadout_panel: PanelContainer
+var party_panel: PanelContainer
+var party_log_label: Label
 var loadout_summary_label: Label
 var generator_summary_label: Label
 var source_toggle_button: Button
@@ -62,13 +78,28 @@ var selected_supply_loadout: Dictionary = {}
 var expedition_started := false
 var map_area := Rect2(24, 178, 1320, 920)
 var resource_tray_area := Rect2(24, 104, 1320, 58)
-var legend_area := Rect2(48, 1022, 600, 54)
+var party_area := Rect2(24, 988, 920, 140)
 var detail_area := Rect2(1584, 150, 440, 966)
 var loadout_area := Rect2(1608, 368, 392, 520)
 var graph_origin := Vector2(140, 360)
 var graph_step := Vector2(258, 168)
 var room_node_size := ROOM_SIZE
 var graph_node_scale := 1.0
+var dungeon_ui_texture_cache: Dictionary = {}
+var dungeon_ui_style_cache: Dictionary = {}
+var layout_overrides: Dictionary = {}
+var layout_edit_enabled := false
+var layout_edit_target_id := ""
+var layout_edit_operation := ""
+var layout_edit_drag_offset := Vector2.ZERO
+var layout_edit_start_mouse := Vector2.ZERO
+var layout_edit_start_rect := Rect2()
+var layout_edit_preview_popup := false
+
+
+func _input(event: InputEvent) -> void:
+	if _handle_layout_edit_input(event):
+		return
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -92,15 +123,17 @@ func _unhandled_input(event: InputEvent) -> void:
 func _ready() -> void:
 	if _run_session().has_dungeon_run():
 		dungeon = _run_session().dungeon_data.duplicate(true)
-		dungeon_source = _source_for_dungeon(dungeon)
-		generated_dungeon_seed = int(dungeon.get("hazard_seed", 0)) if dungeon_source == DUNGEON_SOURCE_GENERATED else 0
+		entry_payload = DungeonEntrySelection.payload_for_dungeon(dungeon)
+		_apply_entry_payload_fields()
 		run_state = _run_session().dungeon_state.duplicate(true)
 		selected_supply_loadout = run_state.get("selected_supply_loadout", DungeonStateModel.default_supply_loadout(dungeon)).duplicate(true)
 		expedition_started = true
 		if _run_session().last_feedback != "":
 			last_feedback = _run_session().last_feedback
 	else:
-		dungeon = _dungeon_data_for_source(dungeon_source)
+		entry_payload = DungeonEntrySelection.default_payload()
+		_apply_entry_payload_fields()
+		dungeon = _dungeon_data_for_entry_payload()
 		if dungeon.is_empty():
 			title_label.text = "Dungeon data missing"
 			status_label.text = "Could not load %s" % DUNGEON_PATH
@@ -110,11 +143,12 @@ func _ready() -> void:
 		expedition_started = false
 	selected_room_id = str(run_state.get("current_room_id", dungeon.get("start_room_id", "")))
 	title_label.text = dungeon.get("display_name", "Dungeon")
+	_load_layout_overrides()
 	_apply_responsive_layout()
 	_apply_hud_visual_style()
 	_create_map_chrome()
 	_create_resource_tray()
-	_create_map_legend()
+	_create_party_status_panel()
 	_create_loadout_panel()
 	_create_action_buttons()
 	_create_corridor_event_panel()
@@ -154,15 +188,20 @@ func _apply_responsive_layout() -> void:
 	var viewport_size := FALLBACK_VIEWPORT_SIZE
 	if is_inside_tree():
 		viewport_size = get_viewport_rect().size
+	if not layout_edit_enabled:
+		_load_layout_overrides()
 	var margin: float = 24.0
 	var detail_width: float = clampf(viewport_size.x * 0.23, 420.0, 520.0)
 	var detail_x: float = viewport_size.x - detail_width - margin
-	var detail_top: float = 148.0
-	detail_area = Rect2(detail_x, detail_top, detail_width, max(520.0, viewport_size.y - detail_top - 36.0))
+	var detail_top: float = 102.0
+	detail_area = Rect2(detail_x, detail_top, detail_width, max(520.0, viewport_size.y - detail_top - 24.0))
 	resource_tray_area = Rect2(margin, 102.0, detail_x - margin * 2.0, 58.0)
-	map_area = Rect2(margin, 178.0, detail_x - margin * 2.0, max(560.0, viewport_size.y - 210.0))
-	legend_area = Rect2(map_area.position + Vector2(18, map_area.size.y - 70), Vector2(min(620.0, map_area.size.x - 36.0), 54))
+	var party_height := clampf(viewport_size.y * 0.16, 164.0, 190.0)
+	var party_width: float = minf(620.0, detail_x - margin * 2.0)
+	party_area = Rect2(margin, viewport_size.y - party_height - 24.0, party_width, party_height)
+	map_area = Rect2(margin, 158.0, detail_x - margin * 2.0, max(520.0, party_area.position.y - 158.0))
 	loadout_area = Rect2(detail_area.position + Vector2(22, 226), Vector2(detail_area.size.x - 44, 520))
+	_apply_layout_overrides()
 	_apply_detail_panel_layout()
 	_recalculate_graph_transform()
 
@@ -185,26 +224,39 @@ func _apply_positioned_chrome() -> void:
 		resource_tray_panel.position = resource_tray_area.position
 		resource_tray_panel.custom_minimum_size = resource_tray_area.size
 		resource_tray_panel.size = resource_tray_area.size
-	if map_legend_panel != null:
-		map_legend_panel.position = legend_area.position
-		map_legend_panel.custom_minimum_size = legend_area.size
-		map_legend_panel.size = legend_area.size
+	if party_panel != null:
+		party_panel.position = party_area.position
+		party_panel.custom_minimum_size = party_area.size
+		party_panel.size = party_area.size
 	if loadout_panel != null:
 		loadout_panel.position = loadout_area.position
 		loadout_panel.custom_minimum_size = loadout_area.size
 		loadout_panel.size = loadout_area.size
+	if corridor_event_panel != null:
+		if layout_overrides.has("event_popup"):
+			_apply_control_rect(corridor_event_panel, _rect_from_dict(layout_overrides["event_popup"], _default_event_popup_rect()))
+		else:
+			_center_corridor_event_panel()
+
+
+func _apply_layout_overrides() -> void:
+	map_area = _rect_from_dict(layout_overrides.get("map", {}), map_area)
+	resource_tray_area = _rect_from_dict(layout_overrides.get("resources", {}), resource_tray_area)
+	party_area = _rect_from_dict(layout_overrides.get("party", {}), party_area)
+	detail_area = _rect_from_dict(layout_overrides.get("detail", {}), detail_area)
+	loadout_area = _rect_from_dict(layout_overrides.get("loadout", {}), loadout_area)
 
 
 func _recalculate_graph_transform() -> void:
 	var bounds := _authored_room_bounds()
-	var graph_rect := Rect2(map_area.position + Vector2(80, 126), map_area.size - Vector2(160, 250))
+	var graph_rect := Rect2(map_area.position + Vector2(74, 70), map_area.size - Vector2(148, 142))
 	var range_x = max(1.0, float(bounds["max_x"] - bounds["min_x"]))
 	var range_y = max(1.0, float(bounds["max_y"] - bounds["min_y"]))
 	var columns: float = range_x + 1.0
 	var rows: float = range_y + 1.0
 	var available_cell := Vector2(graph_rect.size.x / columns, graph_rect.size.y / rows)
-	var fit_scale: float = min(1.0, min(available_cell.x / ROOM_SIZE.x, available_cell.y / ROOM_SIZE.y) * 0.82)
-	graph_node_scale = clampf(fit_scale, 0.64, 1.0)
+	var fit_scale: float = min(1.0, min(available_cell.x / ROOM_SIZE.x, available_cell.y / ROOM_SIZE.y) * 0.94)
+	graph_node_scale = clampf(fit_scale, 0.72, 1.0)
 	room_node_size = Vector2(
 		floor(ROOM_SIZE.x * graph_node_scale),
 		floor(ROOM_SIZE.y * graph_node_scale)
@@ -251,8 +303,8 @@ func _build_corridors() -> void:
 			continue
 		var from_pos: Vector2 = _room_screen_position(from_room) + room_node_size * 0.5
 		var to_pos: Vector2 = _room_screen_position(to_room) + room_node_size * 0.5
-		graph_layer.add_child(_create_corridor_line(from_pos, to_pos, Color(0.08, 0.075, 0.065), 16.0 * graph_node_scale))
-		graph_layer.add_child(_create_corridor_line(from_pos, to_pos, _corridor_color(corridor), 8.0 * graph_node_scale))
+		graph_layer.add_child(_create_corridor_ornament_line(from_pos, to_pos, Color(0.12, 0.08, 0.035, 0.82), 12.0 * graph_node_scale))
+		graph_layer.add_child(_create_corridor_ornament_line(from_pos, to_pos, _corridor_color(corridor), 5.0 * graph_node_scale))
 		var marker := _corridor_marker_label(corridor)
 		if marker != "":
 			graph_layer.add_child(_create_corridor_marker(marker, from_pos.lerp(to_pos, 0.5)))
@@ -269,6 +321,32 @@ func _create_corridor_line(from_pos: Vector2, to_pos: Vector2, color: Color, wid
 	line.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	line.end_cap_mode = Line2D.LINE_CAP_ROUND
 	return line
+
+
+func _create_corridor_ornament_line(from_pos: Vector2, to_pos: Vector2, color: Color, width: float) -> Node2D:
+	var delta := to_pos - from_pos
+	var group := Node2D.new()
+	var normal := delta.normalized()
+	var diamond_radius := 22.0 * graph_node_scale
+	var center := from_pos.lerp(to_pos, 0.5)
+	var first_end := center - normal * diamond_radius
+	var second_start := center + normal * diamond_radius
+	group.add_child(_create_corridor_line(from_pos, first_end, color, width))
+	group.add_child(_create_corridor_line(second_start, to_pos, color, width))
+	if width <= 6.0 * graph_node_scale:
+		var diamond_texture := _dungeon_ui_texture(DUNGEON_UI_CORRIDOR_DIAMOND_PATH)
+		if diamond_texture != null:
+			var diamond := Sprite2D.new()
+			diamond.texture = diamond_texture
+			var diamond_size := Vector2(34, 34) * graph_node_scale
+			diamond.position = center
+			diamond.scale = Vector2(
+				diamond_size.x / float(diamond_texture.get_width()),
+				diamond_size.y / float(diamond_texture.get_height())
+			)
+			diamond.modulate = Color(0.96, 0.84, 0.42)
+			group.add_child(diamond)
+	return group
 
 
 func _create_corridor_marker(text: String, center: Vector2) -> PanelContainer:
@@ -299,29 +377,35 @@ func _create_room_panel(room: Dictionary) -> PanelContainer:
 	panel.add_theme_stylebox_override("panel", _room_style(room_id, str(room.get("kind", ""))))
 
 	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", max(8, int(12.0 * graph_node_scale)))
-	margin.add_theme_constant_override("margin_top", max(7, int(10.0 * graph_node_scale)))
-	margin.add_theme_constant_override("margin_right", max(8, int(12.0 * graph_node_scale)))
-	margin.add_theme_constant_override("margin_bottom", max(7, int(10.0 * graph_node_scale)))
+	margin.add_theme_constant_override("margin_left", max(13, int(20.0 * graph_node_scale)))
+	margin.add_theme_constant_override("margin_top", max(34, int(44.0 * graph_node_scale)))
+	margin.add_theme_constant_override("margin_right", max(13, int(20.0 * graph_node_scale)))
+	margin.add_theme_constant_override("margin_bottom", max(10, int(14.0 * graph_node_scale)))
 	panel.add_child(margin)
 
 	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 5)
+	box.add_theme_constant_override("separation", max(5, int(8.0 * graph_node_scale)))
+	box.alignment = BoxContainer.ALIGNMENT_CENTER
+	box.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	margin.add_child(box)
 
+	var icon := TextureRect.new()
+	icon.texture = _dungeon_ui_texture(_room_icon_path(room))
+	icon.custom_minimum_size = Vector2(66, 66) * graph_node_scale
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	box.add_child(icon)
+
 	var name_label := Label.new()
-	name_label.text = _room_map_label(room)
-	name_label.add_theme_font_size_override("font_size", max(13, int(18.0 * graph_node_scale)))
+	name_label.text = _short_room_map_label(room)
+	name_label.add_theme_font_size_override("font_size", max(13, int(17.0 * graph_node_scale)))
 	name_label.add_theme_color_override("font_color", Color(0.92, 0.86, 0.72))
 	name_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(name_label)
-
-	var content_label := Label.new()
-	content_label.text = _content_summary(room)
-	content_label.add_theme_font_size_override("font_size", max(10, int(13.0 * graph_node_scale)))
-	content_label.add_theme_color_override("font_color", Color(0.72, 0.78, 0.76))
-	content_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	box.add_child(content_label)
 
 	var button := Button.new()
 	button.text = ""
@@ -338,16 +422,18 @@ func _create_room_panel(room: Dictionary) -> PanelContainer:
 
 
 func _create_action_buttons() -> void:
-	action_row = HBoxContainer.new()
-	action_row.add_theme_constant_override("separation", 10)
+	action_row = GridContainer.new()
+	action_row.columns = 2
+	action_row.add_theme_constant_override("h_separation", 8)
+	action_row.add_theme_constant_override("v_separation", 8)
 	action_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	detail_box.add_child(action_row)
 
 	start_combat_button = Button.new()
 	start_combat_button.text = ENTER_COMBAT_LABEL
-	start_combat_button.custom_minimum_size = Vector2(0, 58)
+	start_combat_button.custom_minimum_size = Vector2(0, 44)
 	start_combat_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	start_combat_button.add_theme_font_size_override("font_size", 22)
+	start_combat_button.add_theme_font_size_override("font_size", 15)
 	start_combat_button.add_theme_stylebox_override("normal", _button_style(Color(0.58, 0.18, 0.12), Color(0.95, 0.62, 0.36)))
 	start_combat_button.add_theme_stylebox_override("hover", _button_style(Color(0.7, 0.22, 0.14), Color(1.0, 0.76, 0.44)))
 	start_combat_button.add_theme_stylebox_override("pressed", _button_style(Color(0.42, 0.12, 0.1), Color(0.86, 0.44, 0.28)))
@@ -358,9 +444,9 @@ func _create_action_buttons() -> void:
 
 	reward_button = Button.new()
 	reward_button.text = "Claim Reward"
-	reward_button.custom_minimum_size = Vector2(0, 48)
+	reward_button.custom_minimum_size = Vector2(0, 42)
 	reward_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	reward_button.add_theme_font_size_override("font_size", 18)
+	reward_button.add_theme_font_size_override("font_size", 14)
 	reward_button.add_theme_stylebox_override("normal", _button_style(Color(0.22, 0.25, 0.10), Color(0.88, 0.72, 0.30)))
 	reward_button.add_theme_stylebox_override("hover", _button_style(Color(0.30, 0.32, 0.12), Color(1.0, 0.84, 0.38)))
 	reward_button.add_theme_stylebox_override("pressed", _button_style(Color(0.16, 0.18, 0.08), Color(0.74, 0.54, 0.20)))
@@ -371,9 +457,9 @@ func _create_action_buttons() -> void:
 
 	finish_button = Button.new()
 	finish_button.text = FINISH_EXPEDITION_LABEL
-	finish_button.custom_minimum_size = Vector2(0, 48)
+	finish_button.custom_minimum_size = Vector2(0, 42)
 	finish_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	finish_button.add_theme_font_size_override("font_size", 18)
+	finish_button.add_theme_font_size_override("font_size", 14)
 	finish_button.add_theme_stylebox_override("normal", _button_style(Color(0.10, 0.25, 0.20), Color(0.54, 0.86, 0.62)))
 	finish_button.add_theme_stylebox_override("hover", _button_style(Color(0.12, 0.34, 0.26), Color(0.68, 1.0, 0.78)))
 	finish_button.add_theme_stylebox_override("pressed", _button_style(Color(0.08, 0.18, 0.15), Color(0.42, 0.70, 0.52)))
@@ -384,9 +470,9 @@ func _create_action_buttons() -> void:
 
 	oil_button = Button.new()
 	oil_button.text = "Use Oil"
-	oil_button.custom_minimum_size = Vector2(0, 48)
+	oil_button.custom_minimum_size = Vector2(0, 42)
 	oil_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	oil_button.add_theme_font_size_override("font_size", 18)
+	oil_button.add_theme_font_size_override("font_size", 14)
 	oil_button.add_theme_stylebox_override("normal", _button_style(Color(0.18, 0.18, 0.08), Color(0.86, 0.68, 0.24)))
 	oil_button.add_theme_stylebox_override("hover", _button_style(Color(0.26, 0.24, 0.10), Color(1.0, 0.82, 0.34)))
 	oil_button.add_theme_stylebox_override("pressed", _button_style(Color(0.12, 0.12, 0.06), Color(0.70, 0.52, 0.18)))
@@ -397,9 +483,9 @@ func _create_action_buttons() -> void:
 
 	recovery_button = Button.new()
 	recovery_button.text = "Use Remedy"
-	recovery_button.custom_minimum_size = Vector2(0, 48)
+	recovery_button.custom_minimum_size = Vector2(0, 42)
 	recovery_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	recovery_button.add_theme_font_size_override("font_size", 18)
+	recovery_button.add_theme_font_size_override("font_size", 14)
 	recovery_button.add_theme_stylebox_override("normal", _button_style(Color(0.12, 0.20, 0.20), Color(0.46, 0.76, 0.70)))
 	recovery_button.add_theme_stylebox_override("hover", _button_style(Color(0.16, 0.28, 0.28), Color(0.62, 0.96, 0.86)))
 	recovery_button.add_theme_stylebox_override("pressed", _button_style(Color(0.08, 0.14, 0.14), Color(0.36, 0.62, 0.58)))
@@ -410,9 +496,9 @@ func _create_action_buttons() -> void:
 
 	reset_button = Button.new()
 	reset_button.text = "Reset Run"
-	reset_button.custom_minimum_size = Vector2(0, 48)
+	reset_button.custom_minimum_size = Vector2(0, 42)
 	reset_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	reset_button.add_theme_font_size_override("font_size", 18)
+	reset_button.add_theme_font_size_override("font_size", 14)
 	reset_button.add_theme_stylebox_override("normal", _button_style(Color(0.16, 0.12, 0.12), Color(0.62, 0.34, 0.28)))
 	reset_button.add_theme_stylebox_override("hover", _button_style(Color(0.24, 0.16, 0.14), Color(0.82, 0.46, 0.34)))
 	reset_button.add_theme_stylebox_override("pressed", _button_style(Color(0.10, 0.08, 0.08), Color(0.48, 0.26, 0.22)))
@@ -436,27 +522,8 @@ func _create_map_chrome() -> void:
 	add_child(map_frame_panel)
 	move_child(map_frame_panel, graph_layer.get_index())
 
-	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 18)
-	margin.add_theme_constant_override("margin_top", 14)
-	margin.add_theme_constant_override("margin_right", 18)
-	margin.add_theme_constant_override("margin_bottom", 14)
-	map_frame_panel.add_child(margin)
-
-	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 6)
-	margin.add_child(box)
-
-	map_title_label = Label.new()
-	map_title_label.text = "Old Mine Route Map"
-	map_title_label.add_theme_font_size_override("font_size", 25)
-	map_title_label.add_theme_color_override("font_color", Color(0.92, 0.78, 0.46))
-	box.add_child(map_title_label)
-
-	route_state_label = Label.new()
-	route_state_label.add_theme_font_size_override("font_size", 16)
-	route_state_label.add_theme_color_override("font_color", Color(0.68, 0.74, 0.68))
-	box.add_child(route_state_label)
+	map_title_label = null
+	route_state_label = null
 
 
 func _create_resource_tray() -> void:
@@ -480,43 +547,124 @@ func _create_resource_tray() -> void:
 
 	resource_tile_labels.clear()
 	for tile_id: String in ["light", "oil", "pickaxe", "trap_tools", "remedy_kit", "effects"]:
-		var label := _create_resource_tile_label()
+		var tile := _create_resource_tile(tile_id)
+		var label: Label = tile.get_meta("value_label") as Label
 		resource_tile_labels[tile_id] = label
-		row.add_child(label)
+		row.add_child(tile)
 
 
 func _create_resource_tile_label() -> Label:
 	var label := Label.new()
-	label.custom_minimum_size = Vector2(196, 38)
+	label.custom_minimum_size = Vector2(132, 38)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", 15)
 	label.add_theme_color_override("font_color", Color(0.90, 0.82, 0.62))
-	label.add_theme_stylebox_override("normal", _fantasy_panel_style(Color(0.075, 0.067, 0.052), Color(0.42, 0.30, 0.14), 1, 4))
 	return label
 
 
-func _create_map_legend() -> void:
-	map_legend_panel = PanelContainer.new()
-	map_legend_panel.position = legend_area.position
-	map_legend_panel.custom_minimum_size = legend_area.size
-	map_legend_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	map_legend_panel.add_theme_stylebox_override("panel", _fantasy_panel_style(Color(0.045, 0.040, 0.032, 0.96), Color(0.42, 0.31, 0.16), 1, 5))
-	add_child(map_legend_panel)
+func _create_resource_tile(tile_id: String) -> PanelContainer:
+	var tile := PanelContainer.new()
+	tile.custom_minimum_size = Vector2(198, 46)
+	tile.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	tile.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	tile.add_theme_stylebox_override("panel", _dungeon_ui_stylebox(
+		_resource_tile_frame_path(tile_id),
+		Vector4(34, 18, 34, 18),
+		Vector4(16, 7, 16, 7),
+		_fantasy_panel_style(Color(0.075, 0.067, 0.052), Color(0.42, 0.30, 0.14), 1, 4)
+	))
 
 	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 14)
-	margin.add_theme_constant_override("margin_top", 10)
-	margin.add_theme_constant_override("margin_right", 14)
-	margin.add_theme_constant_override("margin_bottom", 10)
-	map_legend_panel.add_child(margin)
+	margin.add_theme_constant_override("margin_left", 10)
+	margin.add_theme_constant_override("margin_top", 5)
+	margin.add_theme_constant_override("margin_right", 10)
+	margin.add_theme_constant_override("margin_bottom", 5)
+	tile.add_child(margin)
 
-	var label := Label.new()
-	label.text = " | ".join(_map_legend_lines())
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label.add_theme_font_size_override("font_size", 15)
-	label.add_theme_color_override("font_color", Color(0.76, 0.74, 0.62))
-	margin.add_child(label)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 7)
+	margin.add_child(row)
+
+	var icon := TextureRect.new()
+	icon.texture = _dungeon_ui_texture(_resource_icon_path(tile_id))
+	icon.custom_minimum_size = Vector2(36, 36)
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	row.add_child(icon)
+
+	var label := _create_resource_tile_label()
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(label)
+	tile.set_meta("value_label", label)
+	return tile
+
+func _create_party_status_panel() -> void:
+	party_panel = PanelContainer.new()
+	party_panel.position = party_area.position
+	party_panel.custom_minimum_size = party_area.size
+	party_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	party_panel.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+	add_child(party_panel)
+
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 0)
+	margin.add_theme_constant_override("margin_top", 0)
+	margin.add_theme_constant_override("margin_right", 0)
+	margin.add_theme_constant_override("margin_bottom", 0)
+	party_panel.add_child(margin)
+
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 16)
+	margin.add_child(row)
+
+	row.add_child(_create_party_portrait_slot(0))
+
+	party_log_label = Label.new()
+	party_log_label.custom_minimum_size = Vector2(360, 0)
+	party_log_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	party_log_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	party_log_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	party_log_label.add_theme_font_size_override("font_size", 16)
+	party_log_label.add_theme_color_override("font_color", Color(0.82, 0.78, 0.64))
+	row.add_child(party_log_label)
+
+
+func _create_party_portrait_slot(slot_index: int) -> PanelContainer:
+	var slot := PanelContainer.new()
+	slot.custom_minimum_size = Vector2(196, 158)
+	slot.add_theme_stylebox_override("panel", _dungeon_ui_stylebox(
+		DUNGEON_UI_PORTRAIT_FRAME_PATH,
+		Vector4(38, 34, 38, 34),
+		Vector4(16, 14, 16, 14),
+		_fantasy_panel_style(Color(0.060, 0.052, 0.045), Color(0.46, 0.34, 0.18), 1, 4)
+	))
+
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 16)
+	margin.add_theme_constant_override("margin_top", 14)
+	margin.add_theme_constant_override("margin_right", 16)
+	margin.add_theme_constant_override("margin_bottom", 14)
+	slot.add_child(margin)
+
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 8)
+	box.alignment = BoxContainer.ALIGNMENT_CENTER
+	margin.add_child(box)
+
+	var portrait := TextureRect.new()
+	portrait.texture = _dungeon_ui_texture(DUNGEON_UI_PORTRAIT_PATH)
+	portrait.custom_minimum_size = Vector2(132, 102)
+	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	portrait.modulate = _party_slot_tint(slot_index)
+	box.add_child(portrait)
+
+	var bar := ColorRect.new()
+	bar.custom_minimum_size = Vector2(132, 10)
+	bar.color = _party_slot_bar_color(slot_index)
+	box.add_child(bar)
+	return slot
 
 
 func _create_loadout_panel() -> void:
@@ -673,18 +821,23 @@ func _create_loadout_row(supply_id: String) -> HBoxContainer:
 func _create_corridor_event_panel() -> void:
 	corridor_event_panel = PanelContainer.new()
 	corridor_event_panel.visible = false
-	corridor_event_panel.custom_minimum_size = Vector2(620, 260)
+	corridor_event_panel.custom_minimum_size = Vector2(640, 324)
 	corridor_event_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	corridor_event_panel.set_anchors_preset(Control.PRESET_CENTER)
-	corridor_event_panel.position = Vector2(650, 320)
-	corridor_event_panel.add_theme_stylebox_override("panel", _button_style(Color(0.055, 0.06, 0.055), Color(0.82, 0.62, 0.28)))
+	corridor_event_panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	corridor_event_panel.add_theme_stylebox_override("panel", _dungeon_ui_stylebox(
+		DUNGEON_UI_MODAL_PATH,
+		Vector4(54, 42, 54, 42),
+		Vector4(46, 38, 46, 34),
+		_button_style(Color(0.055, 0.06, 0.055), Color(0.82, 0.62, 0.28))
+	))
 	add_child(corridor_event_panel)
+	_center_corridor_event_panel()
 
 	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 18)
-	margin.add_theme_constant_override("margin_top", 16)
-	margin.add_theme_constant_override("margin_right", 18)
-	margin.add_theme_constant_override("margin_bottom", 16)
+	margin.add_theme_constant_override("margin_left", 46)
+	margin.add_theme_constant_override("margin_top", 38)
+	margin.add_theme_constant_override("margin_right", 46)
+	margin.add_theme_constant_override("margin_bottom", 34)
 	corridor_event_panel.add_child(margin)
 
 	var box := VBoxContainer.new()
@@ -693,34 +846,240 @@ func _create_corridor_event_panel() -> void:
 
 	corridor_event_title_label = Label.new()
 	corridor_event_title_label.text = "Corridor Event"
-	corridor_event_title_label.add_theme_font_size_override("font_size", 26)
+	corridor_event_title_label.add_theme_font_size_override("font_size", 22)
 	corridor_event_title_label.add_theme_color_override("font_color", Color(0.96, 0.80, 0.42))
 	box.add_child(corridor_event_title_label)
 
 	corridor_event_type_label = Label.new()
-	corridor_event_type_label.add_theme_font_size_override("font_size", 17)
+	corridor_event_type_label.add_theme_font_size_override("font_size", 15)
 	corridor_event_type_label.add_theme_color_override("font_color", Color(0.70, 0.78, 0.74))
 	box.add_child(corridor_event_type_label)
 
 	corridor_event_message_label = Label.new()
 	corridor_event_message_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	corridor_event_message_label.add_theme_font_size_override("font_size", 18)
+	corridor_event_message_label.add_theme_font_size_override("font_size", 15)
 	box.add_child(corridor_event_message_label)
 
 	corridor_event_supply_label = Label.new()
-	corridor_event_supply_label.add_theme_font_size_override("font_size", 16)
+	corridor_event_supply_label.add_theme_font_size_override("font_size", 14)
 	corridor_event_supply_label.add_theme_color_override("font_color", Color(0.86, 0.82, 0.68))
 	box.add_child(corridor_event_supply_label)
 
 	corridor_event_result_label = Label.new()
 	corridor_event_result_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	corridor_event_result_label.add_theme_font_size_override("font_size", 16)
+	corridor_event_result_label.add_theme_font_size_override("font_size", 14)
 	corridor_event_result_label.add_theme_color_override("font_color", Color(0.94, 0.66, 0.48))
 	box.add_child(corridor_event_result_label)
 
 	corridor_event_choice_row = HBoxContainer.new()
 	corridor_event_choice_row.add_theme_constant_override("separation", 10)
 	box.add_child(corridor_event_choice_row)
+
+
+func _center_corridor_event_panel() -> void:
+	if corridor_event_panel == null:
+		return
+	var panel_rect := _default_event_popup_rect()
+	if layout_overrides.has("event_popup"):
+		panel_rect = _rect_from_dict(layout_overrides["event_popup"], panel_rect)
+	_apply_control_rect(corridor_event_panel, panel_rect)
+
+
+func _default_event_popup_rect() -> Rect2:
+	var viewport_size := FALLBACK_VIEWPORT_SIZE
+	if is_inside_tree():
+		viewport_size = get_viewport_rect().size
+	var panel_size := Vector2(640, 324)
+	return Rect2((viewport_size - panel_size) * 0.5, panel_size)
+
+
+func _handle_layout_edit_input(event: InputEvent) -> bool:
+	if event is InputEventKey:
+		var key_event := event as InputEventKey
+		if not key_event.pressed or key_event.echo:
+			return false
+		if key_event.keycode == KEY_F9:
+			_set_layout_edit_enabled(not layout_edit_enabled)
+			get_viewport().set_input_as_handled()
+			return true
+		if layout_edit_enabled and key_event.keycode == KEY_S and key_event.ctrl_pressed:
+			_save_layout_overrides()
+			get_viewport().set_input_as_handled()
+			return true
+	if not layout_edit_enabled:
+		return false
+	if event is InputEventMouseButton:
+		return _handle_layout_edit_mouse_button(event as InputEventMouseButton)
+	if event is InputEventMouseMotion:
+		return _handle_layout_edit_mouse_motion(event as InputEventMouseMotion)
+	return false
+
+
+func _handle_layout_edit_mouse_button(event: InputEventMouseButton) -> bool:
+	if event.button_index != MOUSE_BUTTON_LEFT:
+		return false
+	if not event.pressed:
+		layout_edit_target_id = ""
+		layout_edit_operation = ""
+		get_viewport().set_input_as_handled()
+		return true
+	var target := _layout_edit_target_at(event.position)
+	if target.is_empty():
+		return false
+	layout_edit_target_id = str(target.get("id", ""))
+	layout_edit_start_rect = target.get("rect", Rect2())
+	layout_edit_start_mouse = event.position
+	layout_edit_drag_offset = event.position - layout_edit_start_rect.position
+	layout_edit_operation = "resize" if _layout_resize_handle_rect(layout_edit_start_rect).has_point(event.position) else "move"
+	get_viewport().set_input_as_handled()
+	return true
+
+
+func _handle_layout_edit_mouse_motion(event: InputEventMouseMotion) -> bool:
+	if layout_edit_target_id == "":
+		return false
+	var next_rect := layout_edit_start_rect
+	if layout_edit_operation == "resize":
+		var delta := event.position - layout_edit_start_mouse
+		next_rect.size = Vector2(
+			maxf(120.0, layout_edit_start_rect.size.x + delta.x),
+			maxf(80.0, layout_edit_start_rect.size.y + delta.y)
+		)
+	else:
+		next_rect.position = event.position - layout_edit_drag_offset
+	_set_layout_rect(layout_edit_target_id, next_rect)
+	get_viewport().set_input_as_handled()
+	return true
+
+
+func _set_layout_edit_enabled(enabled: bool) -> void:
+	layout_edit_enabled = enabled
+	layout_edit_target_id = ""
+	layout_edit_operation = ""
+	if enabled:
+		last_feedback = "Layout edit enabled. Drag panels, resize from bottom-right, Ctrl+S saves."
+		if corridor_event_panel != null and not corridor_event_panel.visible:
+			layout_edit_preview_popup = true
+			corridor_event_title_label.text = "Layout Preview"
+			corridor_event_type_label.text = "F9 toggles edit mode"
+			corridor_event_message_label.text = "Drag this popup or resize it from the bottom-right corner."
+			corridor_event_supply_label.text = "Ctrl+S saves to %s" % DUNGEON_LAYOUT_OVERRIDE_PATH
+			corridor_event_result_label.text = ""
+			corridor_event_panel.show()
+	else:
+		last_feedback = "Layout edit disabled."
+		if layout_edit_preview_popup and corridor_event_panel != null:
+			corridor_event_panel.hide()
+		layout_edit_preview_popup = false
+	_update_detail()
+
+
+func _layout_edit_target_at(point: Vector2) -> Dictionary:
+	for item: Dictionary in _layout_edit_items():
+		var rect: Rect2 = item.get("rect", Rect2())
+		if rect.has_point(point):
+			return item
+	return {}
+
+
+func _layout_edit_items() -> Array[Dictionary]:
+	var items: Array[Dictionary] = []
+	if corridor_event_panel != null and corridor_event_panel.visible:
+		items.append({"id": "event_popup", "rect": Rect2(corridor_event_panel.position, corridor_event_panel.size)})
+	items.append({"id": "detail", "rect": detail_area})
+	items.append({"id": "loadout", "rect": loadout_area})
+	items.append({"id": "party", "rect": party_area})
+	items.append({"id": "resources", "rect": resource_tray_area})
+	items.append({"id": "map", "rect": map_area})
+	return items
+
+
+func _layout_resize_handle_rect(rect: Rect2) -> Rect2:
+	return Rect2(rect.position + rect.size - Vector2(LAYOUT_EDIT_HANDLE_SIZE, LAYOUT_EDIT_HANDLE_SIZE), Vector2(LAYOUT_EDIT_HANDLE_SIZE, LAYOUT_EDIT_HANDLE_SIZE))
+
+
+func _set_layout_rect(id: String, rect: Rect2) -> void:
+	layout_overrides[id] = _rect_to_dict(rect)
+	match id:
+		"map":
+			map_area = rect
+			_recalculate_graph_transform()
+			_apply_positioned_chrome()
+			_build_graph()
+		"resources":
+			resource_tray_area = rect
+			_apply_positioned_chrome()
+		"party":
+			party_area = rect
+			_apply_positioned_chrome()
+		"detail":
+			detail_area = rect
+			_apply_detail_panel_layout()
+		"loadout":
+			loadout_area = rect
+			_apply_positioned_chrome()
+		"event_popup":
+			if corridor_event_panel != null:
+				_apply_control_rect(corridor_event_panel, rect)
+
+
+func _apply_control_rect(control: Control, rect: Rect2) -> void:
+	control.position = rect.position
+	control.size = rect.size
+	control.custom_minimum_size = rect.size
+
+
+func _load_layout_overrides() -> void:
+	if not is_inside_tree():
+		layout_overrides = {}
+		return
+	if not FileAccess.file_exists(DUNGEON_LAYOUT_OVERRIDE_PATH):
+		layout_overrides = {}
+		return
+	var file := FileAccess.open(DUNGEON_LAYOUT_OVERRIDE_PATH, FileAccess.READ)
+	if file == null:
+		layout_overrides = {}
+		return
+	var parsed = JSON.parse_string(file.get_as_text())
+	layout_overrides = parsed if parsed is Dictionary else {}
+
+
+func _save_layout_overrides() -> void:
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(DUNGEON_LAYOUT_OVERRIDE_PATH.get_base_dir()))
+	layout_overrides["map"] = _rect_to_dict(map_area)
+	layout_overrides["resources"] = _rect_to_dict(resource_tray_area)
+	layout_overrides["party"] = _rect_to_dict(party_area)
+	layout_overrides["detail"] = _rect_to_dict(detail_area)
+	layout_overrides["loadout"] = _rect_to_dict(loadout_area)
+	if corridor_event_panel != null:
+		layout_overrides["event_popup"] = _rect_to_dict(Rect2(corridor_event_panel.position, corridor_event_panel.size))
+	var file := FileAccess.open(DUNGEON_LAYOUT_OVERRIDE_PATH, FileAccess.WRITE)
+	if file == null:
+		last_feedback = "Could not save layout overrides."
+		_update_detail()
+		return
+	file.store_string(JSON.stringify(layout_overrides, "\t"))
+	last_feedback = "Layout saved to %s." % DUNGEON_LAYOUT_OVERRIDE_PATH
+	_update_detail()
+
+
+func _rect_to_dict(rect: Rect2) -> Dictionary:
+	return {
+		"x": snappedf(rect.position.x, 0.1),
+		"y": snappedf(rect.position.y, 0.1),
+		"w": snappedf(rect.size.x, 0.1),
+		"h": snappedf(rect.size.y, 0.1),
+	}
+
+
+func _rect_from_dict(value: Variant, fallback: Rect2) -> Rect2:
+	if not value is Dictionary:
+		return fallback
+	var data := value as Dictionary
+	return Rect2(
+		Vector2(float(data.get("x", fallback.position.x)), float(data.get("y", fallback.position.y))),
+		Vector2(float(data.get("w", fallback.size.x)), float(data.get("h", fallback.size.y)))
+	)
 
 
 func _try_enter_room(room_id: String) -> void:
@@ -798,6 +1157,7 @@ func _use_recovery_supply() -> void:
 
 func _reset_expedition() -> void:
 	_run_session().clear()
+	dungeon = _dungeon_data_for_entry_payload()
 	selected_supply_loadout = DungeonStateModel.default_supply_loadout(dungeon)
 	run_state = DungeonStateModel.initial_state(dungeon, selected_supply_loadout)
 	expedition_started = false
@@ -841,13 +1201,11 @@ func _resolve_pending_room_event(choice_id: String) -> void:
 
 
 func _finish_expedition() -> void:
-	var result: Dictionary = DungeonStateModel.complete_current_room(dungeon, run_state)
-	if result["status"] == "accepted":
-		run_state = result["state"]
-		_run_session().set_dungeon_run(dungeon, run_state)
-		last_feedback = "Expedition completed at %s." % _room_display_name(selected_room_id)
+	if _run_session().finish_run(dungeon, run_state, "completed"):
+		run_state = _run_session().dungeon_state.duplicate(true)
+		last_feedback = _run_session().last_feedback
 	else:
-		last_feedback = "Cannot finish expedition: %s." % result["rejection"]
+		last_feedback = _run_session().last_feedback
 	_refresh_room_styles()
 	_update_detail()
 
@@ -947,17 +1305,19 @@ func _detail_lines_for_room(room: Dictionary) -> PackedStringArray:
 
 
 func _post_run_summary_lines() -> PackedStringArray:
-	var totals := DungeonStateModel.reward_totals(run_state)
+	var payload: Dictionary = run_state.get("run_result_payload", DungeonStateModel.run_result_payload(dungeon, run_state))
+	var totals: Dictionary = payload.get("reward_totals", DungeonStateModel.reward_totals(run_state))
 	var items: Array = totals.get("items", [])
 	var item_text := "none" if items.is_empty() else ", ".join(items)
 	return PackedStringArray([
-		"Expedition complete.",
+		"Expedition result: %s." % str(payload.get("outcome", "completed")),
 		"Completed at: %s" % _room_display_name(str(run_state.get("completed_at_room_id", ""))),
 		"Rooms visited: %s/%s" % [run_state.get("visited_room_ids", []).size(), dungeon.get("rooms", []).size()],
 		"Rooms secured: %s/%s" % [run_state.get("cleared_room_ids", []).size(), dungeon.get("rooms", []).size()],
 		"Gold claimed: %s" % int(totals.get("gold", 0)),
 		"XP claimed: %s" % int(totals.get("xp", 0)),
 		"Items claimed: %s" % item_text,
+		"Return hook: %s" % str(payload.get("next_scene_path", DungeonStateModel.DEFAULT_RETURN_SCENE_PATH)),
 	])
 
 
@@ -1006,7 +1366,7 @@ func _refresh_exit_buttons() -> void:
 		button.text = "%s. %s" % [option.get("slot", 0), option.get("label", "")]
 		button.custom_minimum_size = Vector2(0, 42)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.add_theme_font_size_override("font_size", 16)
+		button.add_theme_font_size_override("font_size", 14)
 		button.add_theme_stylebox_override("normal", _button_style(Color(0.095, 0.105, 0.09), Color(0.40, 0.36, 0.22)))
 		button.add_theme_stylebox_override("hover", _button_style(Color(0.13, 0.15, 0.11), Color(0.78, 0.62, 0.30)))
 		button.add_theme_stylebox_override("pressed", _button_style(Color(0.07, 0.08, 0.06), Color(0.64, 0.48, 0.24)))
@@ -1047,6 +1407,20 @@ func _connected_room_options(room_id: String) -> Array[Dictionary]:
 
 func _room_map_label(room: Dictionary) -> String:
 	return "%s %s" % [_room_kind_marker(str(room.get("kind", ""))), str(room.get("display_name", room.get("id", "")))]
+
+
+func _short_room_map_label(room: Dictionary) -> String:
+	var room_id := str(room.get("id", ""))
+	if room_id == str(run_state.get("current_room_id", "")):
+		return "HERE"
+	if DungeonStateModel.room_is_cleared(run_state, room_id):
+		return "SECURE"
+	if DungeonStateModel.room_is_visited(run_state, room_id):
+		return "VISITED"
+	var label := str(room.get("display_name", room.get("id", ""))).to_upper()
+	if label.length() > 18:
+		return "%s..." % label.substr(0, 15)
+	return label
 
 
 func _exit_label_for_room(room: Dictionary) -> String:
@@ -1114,6 +1488,7 @@ func _show_corridor_hazard_popup(prompt: Dictionary) -> void:
 		)
 		corridor_event_choice_row.add_child(button)
 		corridor_hazard_choice_buttons.append(button)
+	_center_corridor_event_panel()
 	corridor_event_panel.show()
 
 
@@ -1130,7 +1505,7 @@ func _show_room_event_popup(prompt: Dictionary) -> void:
 		_room_display_name(str(prompt.get("room_id", ""))),
 	]
 	corridor_event_message_label.text = str(prompt.get("message", ""))
-	corridor_event_supply_label.text = "Room discovery"
+	corridor_event_supply_label.text = _room_event_supply_summary(prompt)
 	corridor_event_result_label.text = "Choose how the party handles this room event."
 	for choice: Dictionary in prompt.get("choices", []):
 		var action := str(choice.get("id", ""))
@@ -1139,7 +1514,7 @@ func _show_room_event_popup(prompt: Dictionary) -> void:
 		button.disabled = not bool(choice.get("available", false))
 		button.custom_minimum_size = Vector2(0, 44)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.add_theme_font_size_override("font_size", 16)
+		button.add_theme_font_size_override("font_size", 14)
 		button.add_theme_stylebox_override("normal", _button_style(Color(0.12, 0.13, 0.10), Color(0.62, 0.48, 0.24)))
 		button.add_theme_stylebox_override("hover", _button_style(Color(0.18, 0.18, 0.12), Color(0.90, 0.68, 0.30)))
 		button.add_theme_stylebox_override("pressed", _button_style(Color(0.08, 0.09, 0.07), Color(0.72, 0.50, 0.20)))
@@ -1148,6 +1523,7 @@ func _show_room_event_popup(prompt: Dictionary) -> void:
 		)
 		corridor_event_choice_row.add_child(button)
 		corridor_hazard_choice_buttons.append(button)
+	_center_corridor_event_panel()
 	corridor_event_panel.show()
 
 
@@ -1156,6 +1532,19 @@ func _room_event_popup_text(prompt: Dictionary) -> String:
 		str(prompt.get("message", "")),
 		_room_display_name(str(prompt.get("room_id", ""))),
 	]
+
+
+func _room_event_supply_summary(prompt: Dictionary) -> String:
+	var requirements: Array[String] = []
+	for choice: Dictionary in prompt.get("choices", []):
+		var supply_id := str(choice.get("requires_supply", ""))
+		if supply_id == "":
+			continue
+		var state_text := "available" if bool(choice.get("available", false)) else "missing"
+		requirements.append("%s %s" % [_supply_display_name(supply_id), state_text])
+	if requirements.is_empty():
+		return "Room discovery"
+	return "Requires: %s" % ", ".join(requirements)
 
 
 func _corridor_hazard_popup_text(prompt: Dictionary) -> String:
@@ -1192,10 +1581,12 @@ func _last_room_event_summary() -> String:
 		return ""
 	var event: Dictionary = log[log.size() - 1]
 	var outcome := str(event.get("outcome_id", ""))
+	var history := DungeonStateModel.room_event_history(run_state)
+	var resolved_count := int(history.get("resolved_count", log.size()))
 	var consequence_text := _consequence_summary(event.get("consequences", []))
 	if consequence_text == "":
-		return "Last room event: %s." % outcome
-	return "Last room event: %s (%s)." % [outcome, consequence_text]
+		return "Last room event: %s. Events resolved: %s." % [outcome, resolved_count]
+	return "Last room event: %s (%s). Events resolved: %s." % [outcome, consequence_text, resolved_count]
 
 
 func _consequence_summary(consequences: Array) -> String:
@@ -1280,17 +1671,6 @@ func _corridor_color(corridor: Dictionary) -> Color:
 	if danger >= 0.1:
 		return Color(0.58, 0.48, 0.24)
 	return Color(0.34, 0.43, 0.32)
-
-
-func _map_legend_lines() -> Array[String]:
-	return [
-		"[IN] entrance",
-		"[!] combat",
-		"[$] treasure",
-		"[G] guarded",
-		"[OUT] exit",
-		"red path danger",
-	]
 
 
 func _rooms_by_id() -> Dictionary:
@@ -1430,9 +1810,12 @@ func _toggle_dungeon_source() -> void:
 func _set_dungeon_source(next_source: String) -> void:
 	if not _loadout_pending():
 		return
-	dungeon_source = next_source
-	generated_dungeon_seed = _new_generated_seed() if dungeon_source == DUNGEON_SOURCE_GENERATED else 0
-	dungeon = _dungeon_data_for_source(dungeon_source)
+	if next_source == DUNGEON_SOURCE_GENERATED:
+		entry_payload = DungeonEntrySelection.generated_payload(_new_generated_seed(), generated_dungeon_difficulty)
+	else:
+		entry_payload = DungeonEntrySelection.authored_payload()
+	_apply_entry_payload_fields()
+	dungeon = _dungeon_data_for_entry_payload()
 	_recalculate_graph_transform()
 	selected_supply_loadout = DungeonStateModel.default_supply_loadout(dungeon)
 	run_state = DungeonStateModel.initial_state(dungeon, selected_supply_loadout)
@@ -1454,10 +1837,13 @@ func _set_dungeon_source(next_source: String) -> void:
 func _reroll_generated_dungeon() -> void:
 	if not _loadout_pending():
 		return
-	dungeon_source = DUNGEON_SOURCE_GENERATED
 	var previous_seed := generated_dungeon_seed
-	generated_dungeon_seed = (previous_seed % 999999) + 1 if previous_seed > 0 else _new_generated_seed()
-	dungeon = _dungeon_data_for_source(dungeon_source)
+	entry_payload = DungeonEntrySelection.generated_payload(
+		(previous_seed % 999999) + 1 if previous_seed > 0 else _new_generated_seed(),
+		generated_dungeon_difficulty
+	)
+	_apply_entry_payload_fields()
+	dungeon = _dungeon_data_for_entry_payload()
 	_recalculate_graph_transform()
 	selected_supply_loadout = DungeonStateModel.default_supply_loadout(dungeon)
 	run_state = DungeonStateModel.initial_state(dungeon, selected_supply_loadout)
@@ -1481,11 +1867,17 @@ func _set_generated_difficulty(difficulty: int) -> void:
 		return
 	generated_dungeon_difficulty = clampi(difficulty, 1, 3)
 	if dungeon_source != DUNGEON_SOURCE_GENERATED:
+		entry_payload = DungeonEntrySelection.normalize_payload({
+			"source": dungeon_source,
+			"generated_difficulty": generated_dungeon_difficulty,
+		})
 		_refresh_loadout_panel()
 		return
 	if generated_dungeon_seed == 0:
 		generated_dungeon_seed = _new_generated_seed()
-	dungeon = _dungeon_data_for_source(dungeon_source)
+	entry_payload = DungeonEntrySelection.generated_payload(generated_dungeon_seed, generated_dungeon_difficulty)
+	_apply_entry_payload_fields()
+	dungeon = _dungeon_data_for_entry_payload()
 	_recalculate_graph_transform()
 	selected_supply_loadout = DungeonStateModel.default_supply_loadout(dungeon)
 	run_state = DungeonStateModel.initial_state(dungeon, selected_supply_loadout)
@@ -1504,22 +1896,31 @@ func _set_generated_difficulty(difficulty: int) -> void:
 	_refresh_loadout_panel()
 
 
+func _dungeon_data_for_entry_payload() -> Dictionary:
+	entry_payload = DungeonEntrySelection.normalize_payload(entry_payload)
+	return DungeonEntrySelection.dungeon_for_payload(entry_payload)
+
+
 func _dungeon_data_for_source(source: String) -> Dictionary:
 	if source == DUNGEON_SOURCE_GENERATED:
 		if generated_dungeon_seed == 0:
 			generated_dungeon_seed = _new_generated_seed()
-		return DungeonStateModel.procedural_dungeon_draft({
-			"seed": generated_dungeon_seed,
-			"difficulty": generated_dungeon_difficulty,
-		})
-	return _load_json(DUNGEON_PATH)
+		entry_payload = DungeonEntrySelection.generated_payload(generated_dungeon_seed, generated_dungeon_difficulty)
+	else:
+		entry_payload = DungeonEntrySelection.authored_payload()
+	_apply_entry_payload_fields()
+	return _dungeon_data_for_entry_payload()
+
+
+func _apply_entry_payload_fields() -> void:
+	entry_payload = DungeonEntrySelection.normalize_payload(entry_payload)
+	dungeon_source = str(entry_payload.get("source", DUNGEON_SOURCE_AUTHORED))
+	generated_dungeon_seed = int(entry_payload.get("generated_seed", 0))
+	generated_dungeon_difficulty = int(entry_payload.get("generated_difficulty", DEFAULT_GENERATED_DUNGEON_DIFFICULTY))
 
 
 func _source_for_dungeon(next_dungeon: Dictionary) -> String:
-	var dungeon_id := str(next_dungeon.get("id", ""))
-	if dungeon_id.begins_with("generated_"):
-		return DUNGEON_SOURCE_GENERATED
-	return DUNGEON_SOURCE_AUTHORED
+	return DungeonEntrySelection.source_for_dungeon(next_dungeon)
 
 
 func _other_dungeon_source() -> String:
@@ -1528,10 +1929,8 @@ func _other_dungeon_source() -> String:
 
 func _source_display_name(source: String) -> String:
 	if source == DUNGEON_SOURCE_GENERATED:
-		if generated_dungeon_seed > 0:
-			return "Generated D%s S%s" % [generated_dungeon_difficulty, generated_dungeon_seed]
-		return "Generated Draft"
-	return "Old Mine"
+		return DungeonEntrySelection.display_name(DungeonEntrySelection.generated_payload(maxi(1, generated_dungeon_seed), generated_dungeon_difficulty)) if generated_dungeon_seed > 0 else "Generated Draft"
+	return DungeonEntrySelection.display_name(DungeonEntrySelection.authored_payload())
 
 
 func _refresh_generator_difficulty_buttons() -> void:
@@ -1623,7 +2022,11 @@ func _status_summary() -> String:
 	if not pending.is_empty():
 		return "%s is not safe. Enter combat to push deeper." % _room_display_name(current_room_id)
 	if bool(run_state.get("completed", false)):
-		return "Expedition complete. Future world-map return flow can start here."
+		var payload: Dictionary = run_state.get("run_result_payload", {})
+		return "Expedition %s. Return payload is ready for %s." % [
+			str(payload.get("outcome", "completed")),
+			str(payload.get("next_scene_path", DungeonStateModel.DEFAULT_RETURN_SCENE_PATH)),
+		]
 	var exits := _connected_room_labels(current_room_id)
 	if DungeonStateModel.room_is_cleared(run_state, current_room_id):
 		return "%s is secure. Choose an exit to continue." % _room_display_name(current_room_id)
@@ -1635,6 +2038,8 @@ func _status_summary() -> String:
 func _refresh_presentation_chrome() -> void:
 	if route_state_label != null:
 		route_state_label.text = _route_state_text()
+	if party_log_label != null:
+		party_log_label.text = _party_log_text()
 	if resource_tile_labels.is_empty():
 		return
 	var tile_texts := _resource_tile_texts()
@@ -1683,12 +2088,12 @@ func _route_state_text() -> String:
 	return "Exploring from: %s" % _room_display_name(str(run_state.get("current_room_id", "")))
 
 
-func _map_frame_style() -> StyleBoxFlat:
-	var style := _fantasy_panel_style(Color(0.035, 0.033, 0.028, 0.94), Color(0.42, 0.32, 0.16), 2, 6)
-	style.shadow_color = Color(0, 0, 0, 0.42)
-	style.shadow_size = 10
-	style.shadow_offset = Vector2(0, 3)
-	return style
+func _map_frame_style() -> StyleBox:
+	var fallback := _fantasy_panel_style(Color(0.035, 0.033, 0.028, 0.94), Color(0.42, 0.32, 0.16), 2, 6)
+	fallback.shadow_color = Color(0, 0, 0, 0.42)
+	fallback.shadow_size = 10
+	fallback.shadow_offset = Vector2(0, 3)
+	return _dungeon_ui_stylebox(DUNGEON_UI_MAP_FRAME_PATH, Vector4(72, 64, 72, 64), Vector4(22, 18, 22, 18), fallback)
 
 
 func _progress_summary() -> String:
@@ -1761,7 +2166,22 @@ func _apply_hud_visual_style() -> void:
 	panel_style.shadow_color = Color(0, 0, 0, 0.50)
 	panel_style.shadow_size = 12
 	panel_style.shadow_offset = Vector2(0, 4)
-	detail_panel.add_theme_stylebox_override("panel", panel_style)
+	detail_panel.add_theme_stylebox_override("panel", _dungeon_ui_stylebox(
+		DUNGEON_UI_DETAIL_PANEL_PATH,
+		Vector4(54, 54, 54, 54),
+		Vector4(34, 52, 34, 30),
+		panel_style
+	))
+	var detail_margin := detail_panel.get_node_or_null("MarginContainer") as MarginContainer
+	if detail_margin != null:
+		detail_margin.add_theme_constant_override("margin_left", 34)
+		detail_margin.add_theme_constant_override("margin_top", 52)
+		detail_margin.add_theme_constant_override("margin_right", 34)
+		detail_margin.add_theme_constant_override("margin_bottom", 30)
+	panel_title.add_theme_font_size_override("font_size", 22)
+	detail_label.add_theme_font_size_override("font_size", 15)
+	status_label.add_theme_font_size_override("font_size", 17)
+	progress_label.add_theme_font_size_override("font_size", 14)
 
 
 func _button_style(bg_color: Color, border_color: Color) -> StyleBoxFlat:
@@ -1782,6 +2202,135 @@ func _fantasy_panel_style(bg_color: Color, border_color: Color, border_width: in
 	style.content_margin_right = 10
 	style.content_margin_bottom = 10
 	return style
+
+
+func _dungeon_ui_texture(path: String) -> Texture2D:
+	if path == "":
+		return null
+	if dungeon_ui_texture_cache.has(path):
+		return dungeon_ui_texture_cache[path]
+	var texture := load(path) as Texture2D
+	dungeon_ui_texture_cache[path] = texture
+	return texture
+
+
+func _dungeon_ui_stylebox(path: String, texture_margins: Vector4, content_margins: Vector4, fallback: StyleBox) -> StyleBox:
+	var cache_key := "%s|%s|%s" % [path, texture_margins, content_margins]
+	if dungeon_ui_style_cache.has(cache_key):
+		return dungeon_ui_style_cache[cache_key]
+	var texture := _dungeon_ui_texture(path)
+	if texture == null:
+		return fallback
+	var style := StyleBoxTexture.new()
+	style.texture = texture
+	style.texture_margin_left = texture_margins.x
+	style.texture_margin_top = texture_margins.y
+	style.texture_margin_right = texture_margins.z
+	style.texture_margin_bottom = texture_margins.w
+	style.content_margin_left = content_margins.x
+	style.content_margin_top = content_margins.y
+	style.content_margin_right = content_margins.z
+	style.content_margin_bottom = content_margins.w
+	dungeon_ui_style_cache[cache_key] = style
+	return style
+
+
+func _asset_index_path(prefix: String, index: int) -> String:
+	return "%s%02d.png" % [prefix, index]
+
+
+func _resource_tile_frame_path(tile_id: String) -> String:
+	var index := 1
+	match tile_id:
+		"oil":
+			index = 2
+		"pickaxe":
+			index = 3
+		"trap_tools":
+			index = 4
+		"remedy_kit":
+			index = 5
+		"effects":
+			index = 6
+	return _asset_index_path(DUNGEON_UI_TILE_PREFIX, index)
+
+
+func _resource_icon_path(tile_id: String) -> String:
+	match tile_id:
+		"oil":
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 1)
+		"pickaxe":
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 2)
+		"trap_tools":
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 3)
+		"remedy_kit":
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 4)
+		"effects":
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 5)
+		_:
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 0)
+
+
+func _room_icon_path(room: Dictionary) -> String:
+	var kind := str(room.get("kind", ""))
+	match kind:
+		"treasure":
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 6)
+		"combat":
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 7)
+		"guarded_treasure":
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 8)
+		"exit":
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 10)
+		_:
+			if str(room.get("id", "")) == str(dungeon.get("start_room_id", "")):
+				return _asset_index_path(DUNGEON_ICON_PREFIX, 11)
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 15)
+
+
+func _room_frame_path(room_id: String, kind: String) -> String:
+	var index := 0
+	if room_id == str(run_state.get("current_room_id", "")):
+		index = 1
+	elif kind == "combat" or kind == "guarded_treasure":
+		index = 2
+	elif kind == "treasure":
+		index = 3
+	elif kind == "exit":
+		index = 4
+	elif DungeonStateModel.room_is_cleared(run_state, room_id):
+		index = 5
+	elif DungeonStateModel.room_is_visited(run_state, room_id):
+		index = 6
+	return _asset_index_path(DUNGEON_ROOM_FRAME_PREFIX, index)
+
+
+func _party_slot_tint(slot_index: int) -> Color:
+	var tints := [
+		Color(1.0, 0.94, 0.84),
+		Color(0.86, 0.94, 1.0),
+		Color(1.0, 0.86, 0.82),
+		Color(0.84, 1.0, 0.88),
+	]
+	return tints[slot_index % tints.size()]
+
+
+func _party_slot_bar_color(slot_index: int) -> Color:
+	var colors := [
+		Color(0.55, 0.18, 0.13),
+		Color(0.50, 0.38, 0.18),
+		Color(0.20, 0.46, 0.34),
+		Color(0.22, 0.34, 0.58),
+	]
+	return colors[slot_index % colors.size()]
+
+
+func _party_log_text() -> String:
+	if _loadout_pending():
+		return "Prepare the expedition loadout before entering the mine."
+	if last_feedback != "":
+		return last_feedback
+	return "%s\n%s" % [_route_state_text(), _progress_summary()]
 
 
 func _number_key_slot(event: InputEventKey) -> int:
@@ -1808,7 +2357,7 @@ func _number_key_slot(event: InputEventKey) -> int:
 			return 0
 
 
-func _room_style(room_id: String, kind: String) -> StyleBoxFlat:
+func _room_style(room_id: String, kind: String) -> StyleBox:
 	var is_current: bool = room_id == str(run_state.get("current_room_id", ""))
 	var is_start: bool = room_id == str(dungeon.get("start_room_id", ""))
 	var is_visited: bool = DungeonStateModel.room_is_visited(run_state, room_id)
@@ -1848,7 +2397,7 @@ func _room_style(room_id: String, kind: String) -> StyleBoxFlat:
 	style.shadow_color = Color(0, 0, 0, 0.38)
 	style.shadow_size = 5
 	style.shadow_offset = Vector2(0, 2)
-	return style
+	return _dungeon_ui_stylebox(_room_frame_path(room_id, kind), Vector4(32, 30, 32, 30), Vector4(10, 10, 10, 10), style)
 
 
 func _state_list_or_none(items: Array) -> String:

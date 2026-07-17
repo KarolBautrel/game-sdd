@@ -5,6 +5,8 @@ const OUTPUT_ROOT := "res://assets/combat/terrain/processed"
 const MANIFEST_PATH := "res://assets/combat/terrain/processed/processed_terrain_manifest.json"
 const MIN_COMPONENT_AREA := 900
 const MARGIN := 4
+const FLOOR_ATLAS_COLUMNS := 4
+const FLOOR_ATLAS_ROWS := 4
 
 
 func _init() -> void:
@@ -35,6 +37,10 @@ func _process_sheet(sheet_path: String, theme: String) -> Array[Dictionary]:
 		push_error("Cannot load terrain sheet: %s" % sheet_path)
 		return []
 	image.convert(Image.FORMAT_RGBA8)
+	var sheet_id := sheet_path.get_file().get_basename()
+	if sheet_id.begins_with("floor_"):
+		return _process_floor_atlas(image, sheet_path, theme, sheet_id)
+
 	var width := image.get_width()
 	var height := image.get_height()
 	var mask: Array[bool] = []
@@ -43,7 +49,6 @@ func _process_sheet(sheet_path: String, theme: String) -> Array[Dictionary]:
 		for x in range(width):
 			mask[y * width + x] = not _is_green_screen(image.get_pixel(x, y))
 	var bounds := _component_bounds(mask, width, height)
-	var sheet_id := sheet_path.get_file().get_basename()
 	var output_dir := "%s/%s/%s" % [OUTPUT_ROOT, theme, sheet_id]
 	_ensure_dir(output_dir)
 	var records: Array[Dictionary] = []
@@ -64,6 +69,40 @@ func _process_sheet(sheet_path: String, theme: String) -> Array[Dictionary]:
 			"height": crop.get_height(),
 			"area": int(bound["area"]),
 		})
+	return records
+
+
+func _process_floor_atlas(image: Image, sheet_path: String, theme: String, sheet_id: String) -> Array[Dictionary]:
+	var output_dir := "%s/%s/%s" % [OUTPUT_ROOT, theme, sheet_id]
+	_ensure_dir(output_dir)
+	var tile_width := image.get_width() / FLOOR_ATLAS_COLUMNS
+	var tile_height := image.get_height() / FLOOR_ATLAS_ROWS
+	var records: Array[Dictionary] = []
+	for row in range(FLOOR_ATLAS_ROWS):
+		for column in range(FLOOR_ATLAS_COLUMNS):
+			var index := row * FLOOR_ATLAS_COLUMNS + column
+			var source_rect := Rect2i(
+				Vector2i(column * tile_width, row * tile_height),
+				Vector2i(tile_width, tile_height)
+			)
+			var crop := image.get_region(source_rect)
+			var output_path := "%s/%s_%02d.png" % [output_dir, sheet_id, index]
+			var error := crop.save_png(output_path)
+			if error != OK:
+				push_error("Cannot save floor asset: %s" % output_path)
+				continue
+			records.append({
+				"id": "%s_%02d" % [sheet_id, index],
+				"theme": theme,
+				"category": "floor",
+				"source": sheet_path,
+				"path": output_path,
+				"width": crop.get_width(),
+				"height": crop.get_height(),
+				"area": crop.get_width() * crop.get_height(),
+				"atlas_column": column,
+				"atlas_row": row,
+			})
 	return records
 
 

@@ -118,7 +118,7 @@
       "additionalProperties": false,
       "properties": {
         "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-        "type": { "type": "string", "enum": ["rubble", "darkness", "trap", "generic"] },
+        "type": { "type": "string", "enum": ["rubble", "darkness", "trap", "noise", "blockage", "generic"] },
         "message": { "type": "string" },
         "trigger": {
           "type": "object",

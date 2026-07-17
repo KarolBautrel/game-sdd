@@ -52,13 +52,15 @@ scripts/presentation/dungeon_debug.gd
 
 ## Future Work
 
-- Connect supply choices to persistent inventory/costs.
+- Connect supply choices to persistent inventory availability from town/world systems.
+- Add carry limits or expedition packing points that control how much of the available inventory can be brought inside.
 - Add party/character loadout on the same preparation screen.
 - Replace debug steppers with the future polished dungeon preparation UI.
 
 ## Non-Goals
 
 - economy/cost balancing;
+- supply buying, pricing, or restocking;
 - permanent inventory ownership;
 - final UI art;
-- weight/carry capacity.
+- world-map or town acquisition flow.

@@ -110,3 +110,14 @@ Debug scene controls:
 - `docs/specs/dungeon/` dungeon exploration and encounter triggers.
 - `docs/specs/world/` world map, towns, travel, and services.
 - `docs/specs/data/` shared data contracts and validation rules.
+
+
+
+
+#FOR DEVELOPER - DO NOT CHECK 
+& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn
+
+& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/dungeon/DungeonDebug.tscn
+
+
+& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatMapEditor.tscn
