@@ -34,6 +34,8 @@ func _init() -> void:
 	_expect_true(errors, "short profile has template variety", _selected_template_count_for_profile("short_mine") >= 3)
 	_expect_true(errors, "medium profile has template variety", _selected_template_count_for_profile("medium_mine") >= 3)
 	_expect_true(errors, "deep profile has template variety", _selected_template_count_for_profile("deep_mine") >= 3)
+	_expect_true(errors, "deep profile has three combat rooms", _combat_room_count(deep_profile) >= 3)
+	_expect_true(errors, "deep profile has long route span", max(_room_position_span(deep_profile, "x"), _room_position_span(deep_profile, "y")) >= 6)
 	_expect_true(errors, "generated has treasure", _has_room_kind(easy, "treasure"))
 	_expect_true(errors, "generated has combat", _has_room_kind(easy, "combat"))
 	_expect_true(errors, "generated has exit", _has_room_kind(easy, "exit"))
@@ -173,6 +175,31 @@ func _first_room_kind(dungeon: Dictionary, kind: String) -> String:
 		if str(room.get("kind", "")) == kind:
 			return str(room.get("id", ""))
 	return ""
+
+
+func _combat_room_count(dungeon: Dictionary) -> int:
+	var count := 0
+	for room: Dictionary in dungeon.get("rooms", []):
+		if str(room.get("kind", "")) == "combat":
+			count += 1
+	return count
+
+
+func _room_position_span(dungeon: Dictionary, axis: String) -> int:
+	var first := true
+	var minimum := 0
+	var maximum := 0
+	for room: Dictionary in dungeon.get("rooms", []):
+		var position: Dictionary = room.get("position", {})
+		var value := int(position.get(axis, 0))
+		if first:
+			minimum = value
+			maximum = value
+			first = false
+		else:
+			minimum = mini(minimum, value)
+			maximum = maxi(maximum, value)
+	return maximum - minimum
 
 
 func _has_any_hazard_pool_ref(dungeon: Dictionary) -> bool:

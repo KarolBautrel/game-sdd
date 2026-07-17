@@ -46,15 +46,35 @@ func _init() -> void:
 	_expect_true(errors, "generated source status copy", loadout_hud._status_summary().contains("Medium Mine"))
 	_expect_true(errors, "generated summary includes difficulty", loadout_hud._generator_summary_text().contains("Generated: Medium Mine | D2"))
 	_expect_true(errors, "generated summary includes rooms", loadout_hud._generator_summary_text().contains("Rooms"))
+	_expect_true(errors, "generated D2 map content is horizontally scrollable", loadout_hud.graph_content_size.x > loadout_hud._map_scroll_rect().size.x)
 	loadout_hud._set_generated_difficulty(3)
 	_expect_equal(errors, "generated difficulty changed", loadout_hud.generated_dungeon_difficulty, 3)
 	_expect_true(errors, "generated difficulty summary changed", loadout_hud._generator_summary_text().contains("Generated: Deep Mine | D3"))
+	_expect_equal(errors, "generated D3 keeps readable room size", loadout_hud.room_node_size, DungeonDebugScript.ROOM_SIZE)
+	_expect_true(errors, "generated D3 map content is horizontally scrollable", loadout_hud.graph_content_size.x > loadout_hud._map_scroll_rect().size.x)
+	_expect_true(errors, "generated D3 display goes right more than down", loadout_hud._display_room_position_span("x") > loadout_hud._display_room_position_span("y"))
+	_expect_true(errors, "generated D3 has at least three combat rooms", _combat_room_count(loadout_hud.dungeon) >= 3)
+	var scroll_hud := DungeonDebugScript.new()
+	scroll_hud.dungeon = loadout_hud.dungeon
+	scroll_hud.run_state = DungeonStateModel.initial_state(scroll_hud.dungeon)
+	scroll_hud.selected_room_id = "generated_entrance"
+	root.add_child(scroll_hud)
+	scroll_hud.graph_layer = Control.new()
+	scroll_hud.add_child(scroll_hud.graph_layer)
+	scroll_hud._apply_responsive_layout()
+	scroll_hud._create_map_chrome()
+	scroll_hud._apply_positioned_chrome()
+	_expect_equal(errors, "generated D3 horizontal scrollbar mode", scroll_hud.map_scroll_container.horizontal_scroll_mode, ScrollContainer.SCROLL_MODE_SHOW_ALWAYS)
+	_expect_true(errors, "generated D3 graph child wider than scroll viewport", scroll_hud.graph_layer.custom_minimum_size.x > scroll_hud.map_scroll_container.size.x)
+	scroll_hud._scroll_map_horizontal(220)
+	_expect_true(errors, "generated D3 mouse wheel can move horizontal scroll", scroll_hud.map_scroll_container.scroll_horizontal > 0)
+	scroll_hud.free()
 	for room: Dictionary in loadout_hud.dungeon.get("rooms", []):
 		var room_position := loadout_hud._room_screen_position(room)
-		_expect_true(errors, "generated D3 room fits map x %s" % str(room.get("id", "")), room_position.x >= loadout_hud.map_area.position.x)
-		_expect_true(errors, "generated D3 room fits map y %s" % str(room.get("id", "")), room_position.y >= loadout_hud.map_area.position.y)
-		_expect_true(errors, "generated D3 room fits map width %s" % str(room.get("id", "")), room_position.x + loadout_hud.room_node_size.x <= loadout_hud.map_area.position.x + loadout_hud.map_area.size.x)
-		_expect_true(errors, "generated D3 room fits map height %s" % str(room.get("id", "")), room_position.y + loadout_hud.room_node_size.y <= loadout_hud.map_area.position.y + loadout_hud.map_area.size.y)
+		_expect_true(errors, "generated D3 room has positive graph x %s" % str(room.get("id", "")), room_position.x >= 0.0)
+		_expect_true(errors, "generated D3 room has positive graph y %s" % str(room.get("id", "")), room_position.y >= 0.0)
+		_expect_true(errors, "generated D3 room fits scroll content width %s" % str(room.get("id", "")), room_position.x + loadout_hud.room_node_size.x <= loadout_hud.graph_content_size.x)
+		_expect_true(errors, "generated D3 room fits scroll content height %s" % str(room.get("id", "")), room_position.y + loadout_hud.room_node_size.y <= loadout_hud.graph_content_size.y)
 	_expect_equal(errors, "generated toggle text target", loadout_hud._source_display_name(loadout_hud._other_dungeon_source()), "Old Mine")
 	var first_generated_seed := loadout_hud.generated_dungeon_seed
 	var first_generated_hazards := _hazard_signature(loadout_hud.dungeon)
@@ -100,7 +120,7 @@ func _init() -> void:
 	_expect_dungeon_icon_exists(errors, "room event icon", hud._room_icon_path(_room_by_id(dungeon, "dusty_crossing")), "icon_room_event.png")
 	_expect_true(errors, "route state exploring", hud._route_state_text().contains("Exploring from: Mine Entrance"))
 	var sealed_position := hud._room_screen_position(_room_by_id(dungeon, "sealed_armory"))
-	_expect_true(errors, "map room layout stays inside map", sealed_position.x + DungeonDebugScript.ROOM_SIZE.x <= hud.map_area.position.x + hud.map_area.size.x)
+	_expect_true(errors, "map room layout stays inside scroll content", sealed_position.x + DungeonDebugScript.ROOM_SIZE.x <= hud.graph_content_size.x)
 	_expect_true(errors, "loadout panel stays outside map", hud.loadout_area.position.x >= hud.detail_area.position.x)
 
 	hud.run_state = DungeonStateModel.enter_room(dungeon, hud.run_state, "dusty_crossing")["state"]
@@ -276,6 +296,14 @@ func _room_by_id(dungeon: Dictionary, room_id: String) -> Dictionary:
 		if room.get("id", "") == room_id:
 			return room
 	return {}
+
+
+func _combat_room_count(dungeon: Dictionary) -> int:
+	var count := 0
+	for room: Dictionary in dungeon.get("rooms", []):
+		if str(room.get("kind", "")) == "combat":
+			count += 1
+	return count
 
 
 func _corridor_by_id(dungeon: Dictionary, corridor_id: String) -> Dictionary:

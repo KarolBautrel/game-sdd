@@ -67,6 +67,7 @@ var corridor_event_result_label: Label
 var corridor_event_choice_row: HBoxContainer
 var corridor_hazard_choice_buttons: Array[Button] = []
 var map_frame_panel: PanelContainer
+var map_scroll_container: ScrollContainer
 var map_title_label: Label
 var route_state_label: Label
 var resource_tray_panel: PanelContainer
@@ -92,6 +93,8 @@ var graph_origin := Vector2(140, 360)
 var graph_step := Vector2(258, 168)
 var room_node_size := ROOM_SIZE
 var graph_node_scale := 1.0
+var graph_content_size := Vector2(1320, 920)
+var graph_axis_swap := false
 var dungeon_ui_texture_cache: Dictionary = {}
 var dungeon_ui_style_cache: Dictionary = {}
 var layout_overrides: Dictionary = {}
@@ -227,6 +230,17 @@ func _apply_positioned_chrome() -> void:
 		map_frame_panel.position = map_area.position
 		map_frame_panel.custom_minimum_size = map_area.size
 		map_frame_panel.size = map_area.size
+	if map_scroll_container != null:
+		var scroll_rect := _map_scroll_rect()
+		map_scroll_container.position = scroll_rect.position
+		map_scroll_container.custom_minimum_size = scroll_rect.size
+		map_scroll_container.size = scroll_rect.size
+		map_scroll_container.clip_contents = true
+	if graph_layer != null:
+		graph_layer.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+		graph_layer.position = Vector2.ZERO
+		graph_layer.custom_minimum_size = graph_content_size
+		graph_layer.size = graph_content_size
 	if resource_tray_panel != null:
 		resource_tray_panel.position = resource_tray_area.position
 		resource_tray_panel.custom_minimum_size = resource_tray_area.size
@@ -252,21 +266,23 @@ func _apply_layout_overrides() -> void:
 
 
 func _recalculate_graph_transform() -> void:
+	graph_axis_swap = _should_swap_graph_axes()
 	var bounds := _authored_room_bounds()
-	var graph_rect := Rect2(map_area.position + Vector2(74, 70), map_area.size - Vector2(148, 142))
+	var graph_rect := Rect2(Vector2(32, 28), _map_scroll_rect().size - Vector2(64, 56))
 	var range_x = max(1.0, float(bounds["max_x"] - bounds["min_x"]))
 	var range_y = max(1.0, float(bounds["max_y"] - bounds["min_y"]))
-	var columns: float = range_x + 1.0
-	var rows: float = range_y + 1.0
-	var available_cell := Vector2(graph_rect.size.x / columns, graph_rect.size.y / rows)
-	var fit_scale: float = min(1.0, min(available_cell.x / ROOM_SIZE.x, available_cell.y / ROOM_SIZE.y) * 0.94)
-	graph_node_scale = clampf(fit_scale, 0.72, 1.0)
-	room_node_size = Vector2(
-		floor(ROOM_SIZE.x * graph_node_scale),
-		floor(ROOM_SIZE.y * graph_node_scale)
+	var minimum_step := Vector2(270, 196)
+	if _generated_dungeon_scroll_tier() >= 2:
+		minimum_step.x = 520.0
+	graph_node_scale = 1.0
+	room_node_size = ROOM_SIZE
+	var required_graph_size := Vector2(
+		room_node_size.x + range_x * minimum_step.x,
+		room_node_size.y + range_y * minimum_step.y
 	)
-	graph_rect.size.x = max(room_node_size.x + 16, graph_rect.size.x)
-	graph_rect.size.y = max(room_node_size.y + 16, graph_rect.size.y)
+	graph_rect.size.x = max(graph_rect.size.x, required_graph_size.x)
+	graph_rect.size.y = max(graph_rect.size.y, required_graph_size.y)
+	graph_content_size = graph_rect.size + Vector2(64, 56)
 	graph_step = Vector2(
 		(graph_rect.size.x - room_node_size.x) / range_x,
 		(graph_rect.size.y - room_node_size.y) / range_y
@@ -274,7 +290,46 @@ func _recalculate_graph_transform() -> void:
 	graph_origin = graph_rect.position - Vector2(float(bounds["min_x"]), float(bounds["min_y"])) * graph_step
 
 
+func _map_scroll_rect() -> Rect2:
+	var inset := Vector2(30, 42)
+	var size := map_area.size - Vector2(inset.x * 2.0, inset.y + 24.0)
+	return Rect2(map_area.position + inset, Vector2(maxf(120.0, size.x), maxf(120.0, size.y)))
+
+
 func _authored_room_bounds() -> Dictionary:
+	var min_x := 0
+	var min_y := 0
+	var max_x := 0
+	var max_y := 0
+	var first := true
+	for room: Dictionary in dungeon.get("rooms", []):
+		var map_position := _room_map_position(room)
+		var x := int(map_position.x)
+		var y := int(map_position.y)
+		if first:
+			min_x = x
+			max_x = x
+			min_y = y
+			max_y = y
+			first = false
+		else:
+			min_x = mini(min_x, x)
+			max_x = maxi(max_x, x)
+			min_y = mini(min_y, y)
+			max_y = maxi(max_y, y)
+	return {"min_x": min_x, "max_x": max_x, "min_y": min_y, "max_y": max_y}
+
+
+func _should_swap_graph_axes() -> bool:
+	if _generated_dungeon_scroll_tier() < 2:
+		return false
+	var raw_bounds := _raw_room_bounds()
+	var span_x := int(raw_bounds["max_x"] - raw_bounds["min_x"])
+	var span_y := int(raw_bounds["max_y"] - raw_bounds["min_y"])
+	return span_y > span_x
+
+
+func _raw_room_bounds() -> Dictionary:
 	var min_x := 0
 	var min_y := 0
 	var max_x := 0
@@ -296,6 +351,13 @@ func _authored_room_bounds() -> Dictionary:
 			min_y = mini(min_y, y)
 			max_y = maxi(max_y, y)
 	return {"min_x": min_x, "max_x": max_x, "min_y": min_y, "max_y": max_y}
+
+
+func _generated_dungeon_scroll_tier() -> int:
+	if not dungeon.has("generated_profile"):
+		return 0
+	var profile: Dictionary = dungeon.get("generated_profile", {})
+	return clampi(int(profile.get("difficulty", dungeon.get("recommended_party_level", 1))), 1, 3)
 
 
 func _build_corridors() -> void:
@@ -539,8 +601,51 @@ func _create_map_chrome() -> void:
 	add_child(map_frame_panel)
 	move_child(map_frame_panel, graph_layer.get_index())
 
+	_create_map_scroll_container()
 	map_title_label = null
 	route_state_label = null
+
+
+func _create_map_scroll_container() -> void:
+	map_scroll_container = ScrollContainer.new()
+	map_scroll_container.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_ALWAYS
+	map_scroll_container.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	map_scroll_container.mouse_filter = Control.MOUSE_FILTER_PASS
+	map_scroll_container.clip_contents = true
+	map_scroll_container.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+	map_scroll_container.gui_input.connect(_handle_map_scroll_input)
+	add_child(map_scroll_container)
+	move_child(map_scroll_container, map_frame_panel.get_index() + 1)
+
+	var previous_parent := graph_layer.get_parent()
+	if previous_parent != null:
+		previous_parent.remove_child(graph_layer)
+	map_scroll_container.add_child(graph_layer)
+	graph_layer.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	graph_layer.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	graph_layer.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	graph_layer.mouse_filter = Control.MOUSE_FILTER_PASS
+
+
+func _handle_map_scroll_input(event: InputEvent) -> void:
+	if not event is InputEventMouseButton:
+		return
+	var mouse_event := event as InputEventMouseButton
+	if not mouse_event.pressed:
+		return
+	if mouse_event.button_index == MOUSE_BUTTON_WHEEL_DOWN or mouse_event.button_index == MOUSE_BUTTON_WHEEL_RIGHT:
+		_scroll_map_horizontal(180)
+		get_viewport().set_input_as_handled()
+	elif mouse_event.button_index == MOUSE_BUTTON_WHEEL_UP or mouse_event.button_index == MOUSE_BUTTON_WHEEL_LEFT:
+		_scroll_map_horizontal(-180)
+		get_viewport().set_input_as_handled()
+
+
+func _scroll_map_horizontal(delta: int) -> void:
+	if map_scroll_container == null:
+		return
+	var max_scroll := maxi(0, int(graph_content_size.x - map_scroll_container.size.x))
+	map_scroll_container.scroll_horizontal = clampi(map_scroll_container.scroll_horizontal + delta, 0, max_scroll)
 
 
 func _create_resource_tray() -> void:
@@ -1807,8 +1912,32 @@ func _rooms_by_id() -> Dictionary:
 
 
 func _room_screen_position(room: Dictionary) -> Vector2:
+	return graph_origin + _room_map_position(room) * graph_step
+
+
+func _room_map_position(room: Dictionary) -> Vector2:
 	var position: Dictionary = room.get("position", {})
-	return graph_origin + Vector2(float(position.get("x", 0)), float(position.get("y", 0))) * graph_step
+	var raw_position := Vector2(float(position.get("x", 0)), float(position.get("y", 0)))
+	if graph_axis_swap:
+		return Vector2(raw_position.y, raw_position.x)
+	return raw_position
+
+
+func _display_room_position_span(axis: String) -> float:
+	var first := true
+	var minimum := 0.0
+	var maximum := 0.0
+	for room: Dictionary in dungeon.get("rooms", []):
+		var map_position := _room_map_position(room)
+		var value := map_position.x if axis == "x" else map_position.y
+		if first:
+			minimum = value
+			maximum = value
+			first = false
+		else:
+			minimum = minf(minimum, value)
+			maximum = maxf(maximum, value)
+	return maximum - minimum
 
 
 func _content_summary(room: Dictionary) -> String:

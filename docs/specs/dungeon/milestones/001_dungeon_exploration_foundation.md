@@ -77,6 +77,7 @@ Long term, dungeon exploration should have its own mechanics rather than being o
 - Tactical combat map selection now has explicit design rules for coherent floors, believable blockers, readable cover, justified high ground, and worldbuilding-driven tactical spaces.
 - Dungeon HUD now uses dedicated semantic pixel-art icons for carried resources and core room markers instead of temporary indexed atlas reuse.
 - Resource balance now tightens Old Mine and generated profile packing capacity, gives bandages an HP-loss recovery use, and makes camping consume food as well as a camping kit.
+- Generated D2/D3 maps now use horizontal scrollable presentation instead of shrinking dense maps into one screen, and D3/deep-mine templates carry at least three combat rooms.
 
 ## Implemented Capability Summary
 
@@ -92,7 +93,7 @@ Implemented capability groups:
 - **Room events:** reusable room-event catalogues, weighted room-event pools, expanded event families, pending room choices, supply-gated choices, weighted outcomes, tone metadata, future skill-check metadata, reward/supply/effect consequences, and run-level room-event history.
 - **Loadout and camping:** packing-point loadout capacity, per-supply packing costs, carried-only supply candidates, camping kit usage, HP-loss recovery, debuff clearing, and camp light cost.
 - **Icon coverage:** dedicated processed dungeon HUD icons for torch oil, pickaxe, trap tools, bandage, camping kit, food, gold, light states, hazards, room events, treasure, combat, exits, and locked rooms.
-- **Generated dungeons:** curated finite Old Mine template pool, seed/difficulty/profile-based template selection, generated graph drafts that enter the same state model, seed-driven hazard candidate placement, seed-driven room event pool placement, and debug preview metadata.
+- **Generated dungeons:** curated finite Old Mine template pool, seed/difficulty/profile-based template selection, generated graph drafts that enter the same state model, seed-driven hazard candidate placement, seed-driven room event pool placement, deep D3 layouts with at least three combat rooms, horizontal scrollable map presentation for longer D2/D3 graphs, and debug preview metadata.
 - **Run loot and return:** run inventory for claimed XP/gold/items, kept/lost loot resolution, `inventory_delta`, persistent effects in the return payload, and a `next_scene` hook for future global-map/world return.
 
 Current explicit boundaries:
@@ -157,6 +158,7 @@ docs/specs/dungeon/presentation/014_dungeon_debug_generated_toggle_v1.md
 docs/specs/dungeon/presentation/015_dungeon_debug_generator_controls_v1.md
 docs/specs/dungeon/presentation/016_dungeon_room_event_presentation_v1.md
 docs/specs/dungeon/presentation/017_pixel_art_dungeon_ui_assets_v1.md
+docs/specs/dungeon/overview/044_large_d3_scrollable_dungeon_maps_v1.md
 ```
 
 Related combat owner:
@@ -757,6 +759,7 @@ This queue captures the next agreed dungeon direction after the exploration foun
       - shared party roster defines Bran the Warrior and Torin the Archer;
       - dungeon HUD renders both party members from roster data instead of one hardcoded portrait;
       - combat launch and combat text resolve player visuals/names from the same roster.
+      - generated D2/D3 maps are horizontally scrollable, and D3/deep-mine layouts carry at least three combat rooms.
     - Expected work:
       - manual smoke playthrough from generated dungeon entry;
       - verify supplies, capacity, hazards, room events, combat, rewards, and finish/return flow as one loop;
@@ -805,7 +808,17 @@ This checkpoint preserves the current dungeon direction after the loadout/resour
      - combat text names player units through the roster.
    - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_state_model_tests.gd`; `scripts/session/dungeon_run_session_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`; `scripts/presentation/combat_mercenary_asset_pipeline_tests.gd`; headless `DungeonDebug.tscn`; headless `CombatDebug.tscn`.
 
-5. **World/Town Integration Prep**
+5. **Done - Large Horizontal Dungeon Maps**
+   - Owner spec: `docs/specs/dungeon/overview/044_large_d3_scrollable_dungeon_maps_v1.md`
+   - Slice: `docs/specs/dungeon/slices/052_large_d3_scrollable_dungeon_maps_v1.md`
+   - Implemented:
+     - generated D2 and D3 maps use longer rightward presentation;
+     - D3 templates now carry at least three combat rooms;
+     - dungeon graph content has its own horizontal scrollable viewport;
+     - room cards keep normal readable size instead of being compressed to fit the visible frame.
+   - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_procedural_draft_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`; headless `DungeonDebug.tscn`.
+
+6. **World/Town Integration Prep**
    - Define the future boundary where town/global map owns supply purchase and durable inventory.
    - Dungeon should continue to receive only the carried loadout payload and return run results/inventory deltas.
    - Proof target: spec and slice first; implementation only after the global-map/town contract exists.
@@ -833,4 +846,4 @@ python tools\validators\validate_all.py
 & "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn --quit --resolution 2560x1440
 ```
 
-Next dungeon work should continue with **Playable Dungeon Beta**, unless the user explicitly reprioritizes world/town integration or bespoke tactical combat map authoring.
+After the large D3 scrollable-map pass, dungeon is ready to pause as the current beta foundation unless playtesting finds blocking bugs. The next planned layer is **World/Town Integration Prep** and then the global/world exploration mode.
