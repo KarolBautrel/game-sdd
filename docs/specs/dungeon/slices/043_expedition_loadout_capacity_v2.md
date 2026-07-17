@@ -10,7 +10,7 @@ Date: 2026-07-17
 - `DungeonStateModel.clamp_supply_loadout` rejects overpacked loadouts by reducing counts back inside capacity.
 - Debug preparation copy shows packing usage.
 - Dungeon HUD resource tray uses compact icon/count tiles with tooltip text.
-- Visible carried resources are torch oil, pickaxe, bandages, antidote, camping kit, and food.
+- Visible carried resources are torch oil, pickaxe, trap tools, bandages, camping kit, and food.
 - Buying, pricing, and restocking remain outside dungeon mode.
 
 ## Proof

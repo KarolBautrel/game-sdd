@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db0dahur2dq2g"
-path="res://.godot/imported/rogue.png-0fb8c514de5d1a1ba5b378bb77c11897.ctex"
+uid="uid://36ecubcsyeu6"
+path="res://.godot/imported/icon_rubble.png-3fc54e5e7825311f192309569e3e9438.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/dungeon/to_process/portraits/rogue.png"
-dest_files=["res://.godot/imported/rogue.png-0fb8c514de5d1a1ba5b378bb77c11897.ctex"]
+source_file="res://assets/ui/dungeon/processed/icons/icon_rubble.png"
+dest_files=["res://.godot/imported/icon_rubble.png-3fc54e5e7825311f192309569e3e9438.ctex"]
 
 [params]
 

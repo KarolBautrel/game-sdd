@@ -15,7 +15,7 @@ The player is assumed to own or have access to supplies before entering the dung
 - Each `supply_loadout_options` entry may define `packing_cost`.
 - Selected supply counts are clamped by min/max and total packing capacity.
 - Capacity applies only to the carried expedition loadout, not to persistent ownership.
-- Current carried supply candidates shown in dungeon UI are torch oil, pickaxe, bandages, antidote, camping kit, and food.
+- Current carried supply candidates shown in dungeon UI are torch oil, pickaxe, trap tools, bandages, camping kit, and food.
 
 ## Presentation
 

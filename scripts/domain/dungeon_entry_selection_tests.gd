@@ -6,11 +6,13 @@ const DungeonEntrySelection := preload("res://scripts/domain/dungeon_entry_selec
 func _init() -> void:
 	var errors: Array[String] = []
 
-	var authored_payload := DungeonEntrySelection.default_payload()
-	var authored_dungeon := DungeonEntrySelection.dungeon_for_payload(authored_payload)
-	_expect_equal(errors, "default source", authored_payload["source"], DungeonEntrySelection.SOURCE_AUTHORED)
-	_expect_equal(errors, "authored dungeon id", authored_dungeon["id"], "dungeon_old_mine")
-	_expect_equal(errors, "authored display", DungeonEntrySelection.display_name(authored_payload), "Old Mine")
+	var default_payload := DungeonEntrySelection.default_payload()
+	var default_dungeon := DungeonEntrySelection.dungeon_for_payload(default_payload)
+	_expect_equal(errors, "default source", default_payload["source"], DungeonEntrySelection.SOURCE_GENERATED)
+	_expect_equal(errors, "default generated seed", default_payload["generated_seed"], 170717)
+	_expect_equal(errors, "default generated difficulty", default_payload["generated_difficulty"], 2)
+	_expect_equal(errors, "default dungeon id", default_dungeon["id"], "generated_old_mine_draft")
+	_expect_equal(errors, "default display", DungeonEntrySelection.display_name(default_payload), "Medium Mine D2 S170717")
 
 	var generated_payload := DungeonEntrySelection.generated_payload(222, 3)
 	var generated_dungeon := DungeonEntrySelection.dungeon_for_payload(generated_payload)

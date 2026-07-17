@@ -394,23 +394,48 @@ func _build_tile(position: Dictionary) -> Button:
 		tile.add_child(tint)
 
 	if terrain_type == "highground":
+		var ledge_back := ColorRect.new()
+		ledge_back.name = "HighgroundBackPlate"
+		ledge_back.color = Color(0.70, 0.55, 0.24, 0.24)
+		ledge_back.position = Vector2(8, 10)
+		ledge_back.custom_minimum_size = Vector2(TILE_WIDTH - 16, TILE_HEIGHT - 24)
+		ledge_back.size = Vector2(TILE_WIDTH - 16, TILE_HEIGHT - 24)
+		ledge_back.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		tile.add_child(ledge_back)
+
 		var ledge_shadow := ColorRect.new()
 		ledge_shadow.name = "HighgroundLedgeShadow"
-		ledge_shadow.color = Color(0.05, 0.035, 0.015, 0.42)
-		ledge_shadow.position = Vector2(10, TILE_HEIGHT - 28)
-		ledge_shadow.custom_minimum_size = Vector2(TILE_WIDTH - 20, 18)
-		ledge_shadow.size = Vector2(TILE_WIDTH - 20, 18)
+		ledge_shadow.color = Color(0.03, 0.025, 0.015, 0.68)
+		ledge_shadow.position = Vector2(6, TILE_HEIGHT - 30)
+		ledge_shadow.custom_minimum_size = Vector2(TILE_WIDTH - 12, 22)
+		ledge_shadow.size = Vector2(TILE_WIDTH - 12, 22)
 		ledge_shadow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tile.add_child(ledge_shadow)
 
 		var ledge_rim := ColorRect.new()
 		ledge_rim.name = "HighgroundLedgeRim"
-		ledge_rim.color = Color(0.86, 0.70, 0.26, 0.54)
-		ledge_rim.position = Vector2(12, TILE_HEIGHT - 32)
-		ledge_rim.custom_minimum_size = Vector2(TILE_WIDTH - 24, 4)
-		ledge_rim.size = Vector2(TILE_WIDTH - 24, 4)
+		ledge_rim.color = Color(1.0, 0.78, 0.24, 0.86)
+		ledge_rim.position = Vector2(6, TILE_HEIGHT - 36)
+		ledge_rim.custom_minimum_size = Vector2(TILE_WIDTH - 12, 7)
+		ledge_rim.size = Vector2(TILE_WIDTH - 12, 7)
 		ledge_rim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tile.add_child(ledge_rim)
+
+		var high_label := Label.new()
+		high_label.name = "HighgroundLabel"
+		high_label.text = "HIGH"
+		high_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		high_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		high_label.custom_minimum_size = Vector2(54, 18)
+		high_label.size = Vector2(54, 18)
+		high_label.position = Vector2(TILE_WIDTH - 62, 8)
+		high_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		high_label.add_theme_font_size_override("font_size", 9)
+		high_label.add_theme_color_override("font_color", Color(1.0, 0.86, 0.35, 0.96))
+		high_label.add_theme_color_override("font_shadow_color", Color(0.04, 0.03, 0.01, 1.0))
+		high_label.add_theme_constant_override("shadow_offset_x", 1)
+		high_label.add_theme_constant_override("shadow_offset_y", 1)
+		tile.add_child(high_label)
 
 	var decoration_texture := _tile_decoration_texture(decoration_path)
 	if decoration_texture != null:
@@ -1996,6 +2021,9 @@ func _prepare_movement_animation(events: Array) -> bool:
 			continue
 		visual_positions_px[actor_id] = _position_to_unit_top_left(event.get("from", {}))
 		unit_visual_action[actor_id] = "walk:0" if str(actions[actor_id]) == "walk" else actions[actor_id]
+		var step_facings := CombatUnitVisualState.movement_step_facings(event)
+		if not step_facings.is_empty():
+			unit_facing[actor_id] = str(step_facings[0].get("direction", ""))
 	return not actions.is_empty()
 
 
@@ -2159,13 +2187,18 @@ func _play_movement_animation(events: Array, previous_state: Dictionary, next_st
 			continue
 		_start_walk_cycle(actor_id, current_generation)
 		var remaining_mp := int(_unit_by_id_in_state(previous_state, actor_id).get("resources", {}).get("mp", 0))
+		var step_facings := CombatUnitVisualState.movement_step_facings(event)
+		var step_index := 0
 		for step: Dictionary in path:
+			if step_index < step_facings.size():
+				tween.tween_callback(_movement_facing_callback(actor_id, str(step_facings[step_index].get("direction", ""))))
 			var target_position := _position_to_unit_top_left(step)
 			tween.tween_property(unit_node, "position", target_position, MOVE_STEP_SECONDS).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 			var step_cost := _terrain_movement_cost(step)
 			remaining_mp = maxi(0, remaining_mp - step_cost)
 			var display_mp := remaining_mp
 			tween.tween_callback(_resource_override_callback(actor_id, "mp", display_mp))
+			step_index += 1
 			tween_has_steps = true
 	if not tween_has_steps:
 		_finish_movement_animation(events, current_generation, next_state, next_log)
@@ -2665,6 +2698,14 @@ func _display_resources(unit: Dictionary) -> Dictionary:
 func _resource_override_callback(unit_id: String, resource_id: String, value: Variant) -> Callable:
 	return func() -> void:
 		_set_resource_override(unit_id, resource_id, value)
+
+
+func _movement_facing_callback(unit_id: String, direction: String) -> Callable:
+	return func() -> void:
+		if unit_id == "" or direction == "":
+			return
+		unit_facing[unit_id] = direction
+		_refresh_unit_sprite(unit_id)
 
 
 func _set_resource_override(unit_id: String, resource_id: String, value: Variant) -> void:

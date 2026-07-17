@@ -2,6 +2,7 @@ extends Control
 
 const DungeonStateModel := preload("res://scripts/domain/dungeon_state_model.gd")
 const DungeonEntrySelection := preload("res://scripts/domain/dungeon_entry_selection.gd")
+const PartyRoster := preload("res://scripts/domain/party_roster.gd")
 
 const DUNGEON_PATH := DungeonEntrySelection.DUNGEON_PATH
 const DUNGEON_SOURCE_AUTHORED := DungeonEntrySelection.SOURCE_AUTHORED
@@ -16,11 +17,11 @@ const DUNGEON_UI_DETAIL_PANEL_PATH := "res://assets/ui/dungeon/processed/dungeon
 const DUNGEON_UI_MODAL_PATH := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_10.png"
 const DUNGEON_UI_PARTY_PANEL_PATH := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_10.png"
 const DUNGEON_UI_PORTRAIT_FRAME_PATH := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_20.png"
-const DUNGEON_UI_PORTRAIT_PATH := "res://assets/ui/dungeon/processed/mercenary_pose_for_portrait/mercenary_pose_for_portrait_head.png"
 const DUNGEON_UI_CORRIDOR_PATH := "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_56.png"
 const DUNGEON_UI_CORRIDOR_DIAMOND_PATH := "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_18.png"
 const DUNGEON_UI_TILE_PREFIX := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_"
 const DUNGEON_ICON_PREFIX := "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_"
+const DUNGEON_DEDICATED_ICON_DIR := "res://assets/ui/dungeon/processed/icons/"
 const DUNGEON_ROOM_FRAME_PREFIX := "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_"
 const DUNGEON_LAYOUT_OVERRIDE_PATH := "res://resources/debug/dungeon_debug_layout_overrides.json"
 const LAYOUT_EDIT_HANDLE_SIZE := 24.0
@@ -30,8 +31,8 @@ const EVENT_POPUP_MAX_SIZE := Vector2(760, 420)
 
 var dungeon: Dictionary = {}
 var entry_payload: Dictionary = DungeonEntrySelection.default_payload()
-var dungeon_source := DUNGEON_SOURCE_AUTHORED
-var generated_dungeon_seed := 0
+var dungeon_source := DUNGEON_SOURCE_GENERATED
+var generated_dungeon_seed := int(entry_payload.get("generated_seed", 0))
 var generated_dungeon_difficulty := DEFAULT_GENERATED_DUNGEON_DIFFICULTY
 var generated_profile_id := DungeonEntrySelection.DEFAULT_GENERATED_PROFILE_ID
 var run_state: Dictionary = {}
@@ -485,7 +486,7 @@ func _create_action_buttons() -> void:
 	action_row.add_child(oil_button)
 
 	recovery_button = Button.new()
-	recovery_button.text = "Use Antidote"
+	recovery_button.text = "Use Recovery"
 	recovery_button.custom_minimum_size = Vector2(0, 42)
 	recovery_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	recovery_button.add_theme_font_size_override("font_size", 14)
@@ -636,10 +637,12 @@ func _create_party_status_panel() -> void:
 	row.add_theme_constant_override("separation", 16)
 	margin.add_child(row)
 
-	row.add_child(_create_party_portrait_slot(0))
+	var party_members := _party_members_for_ui()
+	for index in range(party_members.size()):
+		row.add_child(_create_party_portrait_slot(party_members[index], index))
 
 	party_log_label = Label.new()
-	party_log_label.custom_minimum_size = Vector2(360, 0)
+	party_log_label.custom_minimum_size = Vector2(300, 0)
 	party_log_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	party_log_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	party_log_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -648,9 +651,9 @@ func _create_party_status_panel() -> void:
 	row.add_child(party_log_label)
 
 
-func _create_party_portrait_slot(slot_index: int) -> PanelContainer:
+func _create_party_portrait_slot(hero: Dictionary, slot_index: int) -> PanelContainer:
 	var slot := PanelContainer.new()
-	slot.custom_minimum_size = Vector2(196, 158)
+	slot.custom_minimum_size = Vector2(174, 158)
 	slot.add_theme_stylebox_override("panel", _dungeon_ui_stylebox(
 		DUNGEON_UI_PORTRAIT_FRAME_PATH,
 		Vector4(38, 34, 38, 34),
@@ -671,15 +674,30 @@ func _create_party_portrait_slot(slot_index: int) -> PanelContainer:
 	margin.add_child(box)
 
 	var portrait := TextureRect.new()
-	portrait.texture = _dungeon_ui_texture(DUNGEON_UI_PORTRAIT_PATH)
-	portrait.custom_minimum_size = Vector2(132, 102)
+	portrait.texture = _dungeon_ui_texture(str(hero.get("portrait_path", "")))
+	portrait.custom_minimum_size = Vector2(118, 82)
 	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	portrait.modulate = _party_slot_tint(slot_index)
 	box.add_child(portrait)
 
+	var name_label := Label.new()
+	name_label.text = str(hero.get("display_name", "Hero"))
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_label.add_theme_font_size_override("font_size", 15)
+	name_label.add_theme_color_override("font_color", Color(0.94, 0.82, 0.54))
+	name_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	box.add_child(name_label)
+
+	var class_label := Label.new()
+	class_label.text = _party_member_summary(hero)
+	class_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	class_label.add_theme_font_size_override("font_size", 12)
+	class_label.add_theme_color_override("font_color", Color(0.74, 0.76, 0.66))
+	class_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	box.add_child(class_label)
+
 	var bar := ColorRect.new()
-	bar.custom_minimum_size = Vector2(132, 10)
+	bar.custom_minimum_size = Vector2(118, 8)
 	bar.color = _party_slot_bar_color(slot_index)
 	box.add_child(bar)
 	return slot
@@ -1168,9 +1186,6 @@ func _try_enter_room(room_id: String) -> void:
 		_run_session().set_dungeon_run(dungeon, run_state)
 		selected_room_id = str(run_state["current_room_id"])
 		last_feedback = _movement_feedback(result, selected_room_id)
-		var pending_room_event: Dictionary = run_state.get("pending_room_event", {})
-		if not pending_room_event.is_empty():
-			_show_room_event_popup(pending_room_event)
 	elif result["status"] == "choice_required":
 		run_state = result["state"]
 		_run_session().set_dungeon_run(dungeon, run_state)
@@ -1178,9 +1193,9 @@ func _try_enter_room(room_id: String) -> void:
 			_room_display_name(str(result["event"].get("from_room_id", ""))),
 			_room_display_name(str(result["event"].get("to_room_id", ""))),
 		]
-		_show_corridor_hazard_popup(result["event"])
 	else:
 		last_feedback = "Cannot enter %s: %s." % [_room_display_name(room_id), result["rejection"]]
+	_refresh_pending_event_popup()
 	_refresh_room_styles()
 	_update_detail()
 
@@ -1218,14 +1233,15 @@ func _use_lamp_oil() -> void:
 
 
 func _use_recovery_supply() -> void:
-	var result: Dictionary = DungeonStateModel.use_recovery_supply(run_state, "antidote")
+	var supply_id := _preferred_recovery_supply_id()
+	var result: Dictionary = DungeonStateModel.use_bandage(run_state, supply_id) if supply_id == "bandage" else DungeonStateModel.use_recovery_supply(run_state, supply_id)
 	if result["status"] == "accepted":
 		run_state = result["state"]
 		if is_inside_tree():
 			_run_session().set_dungeon_run(dungeon, run_state)
 		last_feedback = str(result["event"].get("message", "Recovery used."))
 	else:
-		last_feedback = "Cannot use antidote: %s." % result["rejection"]
+		last_feedback = "Cannot use %s: %s." % [_supply_display_name(supply_id), result["rejection"]]
 	_refresh_room_styles()
 	_update_detail()
 
@@ -1262,13 +1278,19 @@ func _resolve_pending_corridor_hazard(choice_id: String) -> void:
 	var result: Dictionary = DungeonStateModel.resolve_corridor_hazard_choice(dungeon, run_state, choice_id)
 	if result["status"] == "accepted":
 		run_state = result["state"]
-		_run_session().set_dungeon_run(dungeon, run_state)
+		if is_inside_tree():
+			_run_session().set_dungeon_run(dungeon, run_state)
 		selected_room_id = str(run_state["current_room_id"])
 		last_feedback = _movement_feedback(result, selected_room_id)
+	elif result["rejection"] == "hazard_blocked":
+		run_state = result["state"]
+		if is_inside_tree():
+			_run_session().set_dungeon_run(dungeon, run_state)
+		selected_room_id = str(run_state["current_room_id"])
+		last_feedback = str(result.get("event", {}).get("message", "The passage remains blocked."))
 	else:
 		last_feedback = "Cannot resolve corridor event: %s." % result["rejection"]
-	if corridor_event_panel != null:
-		corridor_event_panel.hide()
+	_refresh_pending_event_popup()
 	_refresh_room_styles()
 	_update_detail()
 
@@ -1282,8 +1304,7 @@ func _resolve_pending_room_event(choice_id: String) -> void:
 		last_feedback = "Room event resolved: %s." % str(result["event"].get("outcome_id", "resolved"))
 	else:
 		last_feedback = "Cannot resolve room event: %s." % result["rejection"]
-	if corridor_event_panel != null:
-		corridor_event_panel.hide()
+	_refresh_pending_event_popup()
 	_refresh_room_styles()
 	_update_detail()
 
@@ -1356,14 +1377,14 @@ func _detail_lines_for_room(room: Dictionary) -> PackedStringArray:
 		"State: %s" % _room_state_summary(room_id),
 		"Position: %s" % _room_position_summary(room),
 		"Content: %s" % _content_summary(room),
-		"Light: %s %s/%s | Torch: %s | Pickaxe: %s | Bandage: %s | Antidote: %s" % [
+		"Light: %s %s/%s | Torch: %s | Pickaxe: %s | Trap Tools: %s | Bandage: %s" % [
 			str(run_state.get("light_state", "bright")),
 			int(run_state.get("light_level", 0)),
 			int(run_state.get("max_light_level", 0)),
 			DungeonStateModel.supply_count(run_state, "lamp_oil"),
 			DungeonStateModel.supply_count(run_state, "pickaxe"),
+			DungeonStateModel.supply_count(run_state, "trap_tools"),
 			DungeonStateModel.supply_count(run_state, "bandage"),
-			DungeonStateModel.supply_count(run_state, "antidote"),
 		],
 		"Camping Kit: %s | Food: %s | %s" % [
 			DungeonStateModel.supply_count(run_state, "camping_kit"),
@@ -1439,6 +1460,7 @@ func _refresh_action_buttons() -> void:
 	oil_button.visible = has_oil
 	recovery_button.disabled = not has_recovery
 	recovery_button.visible = has_recovery
+	recovery_button.text = "Use %s" % _supply_display_name(_preferred_recovery_supply_id()) if has_recovery else "Use Recovery"
 	camp_button.disabled = not has_camp
 	camp_button.visible = has_camp
 	reset_button.disabled = false
@@ -1579,9 +1601,7 @@ func _show_corridor_hazard_popup(prompt: Dictionary) -> void:
 		button.add_theme_stylebox_override("normal", _button_style(Color(0.12, 0.13, 0.10), Color(0.62, 0.48, 0.24)))
 		button.add_theme_stylebox_override("hover", _button_style(Color(0.18, 0.18, 0.12), Color(0.90, 0.68, 0.30)))
 		button.add_theme_stylebox_override("pressed", _button_style(Color(0.08, 0.09, 0.07), Color(0.72, 0.50, 0.20)))
-		button.pressed.connect(func() -> void:
-			_resolve_pending_corridor_hazard(action)
-		)
+		button.pressed.connect(_resolve_pending_corridor_hazard.bind(action))
 		corridor_event_choice_row.add_child(button)
 		corridor_hazard_choice_buttons.append(button)
 	_show_event_popup_panel()
@@ -1613,12 +1633,24 @@ func _show_room_event_popup(prompt: Dictionary) -> void:
 		button.add_theme_stylebox_override("normal", _button_style(Color(0.12, 0.13, 0.10), Color(0.62, 0.48, 0.24)))
 		button.add_theme_stylebox_override("hover", _button_style(Color(0.18, 0.18, 0.12), Color(0.90, 0.68, 0.30)))
 		button.add_theme_stylebox_override("pressed", _button_style(Color(0.08, 0.09, 0.07), Color(0.72, 0.50, 0.20)))
-		button.pressed.connect(func() -> void:
-			_resolve_pending_room_event(action)
-		)
+		button.pressed.connect(_resolve_pending_room_event.bind(action))
 		corridor_event_choice_row.add_child(button)
 		corridor_hazard_choice_buttons.append(button)
 	_show_event_popup_panel()
+
+
+func _refresh_pending_event_popup() -> void:
+	if corridor_event_panel == null:
+		return
+	var pending_hazard: Dictionary = run_state.get("pending_corridor_hazard", {})
+	if not pending_hazard.is_empty():
+		_show_corridor_hazard_popup(pending_hazard)
+		return
+	var pending_room_event: Dictionary = run_state.get("pending_room_event", {})
+	if not pending_room_event.is_empty():
+		_show_room_event_popup(pending_room_event)
+		return
+	corridor_event_panel.hide()
 
 
 func _room_event_popup_text(prompt: Dictionary) -> String:
@@ -2133,8 +2165,8 @@ func _supply_display_name(supply_id: String) -> String:
 			return "Pickaxe"
 		"bandage":
 			return "Bandage"
-		"antidote":
-			return "Antidote"
+		"trap_tools":
+			return "Trap Tools"
 		"camping_kit":
 			return "Camping Kit"
 		"food":
@@ -2192,14 +2224,14 @@ func _resource_tile_texts() -> Dictionary:
 		"torch": str(_resource_tile_count("torch")),
 		"pickaxe": str(_resource_tile_count("pickaxe")),
 		"bandage": str(_resource_tile_count("bandage")),
-		"antidote": str(_resource_tile_count("antidote")),
+		"trap_tools": str(_resource_tile_count("trap_tools")),
 		"camping_kit": str(_resource_tile_count("camping_kit")),
 		"food": str(_resource_tile_count("food")),
 	}
 
 
 func _resource_tile_ids() -> Array[String]:
-	return ["torch", "pickaxe", "bandage", "antidote", "camping_kit", "food"]
+	return ["torch", "pickaxe", "trap_tools", "bandage", "camping_kit", "food"]
 
 
 func _resource_tile_count(tile_id: String) -> int:
@@ -2219,8 +2251,8 @@ func _resource_tile_supply_id(tile_id: String) -> String:
 			return "pickaxe"
 		"bandage":
 			return "bandage"
-		"antidote":
-			return "antidote"
+		"trap_tools":
+			return "trap_tools"
 		"camping_kit":
 			return "camping_kit"
 		"food":
@@ -2242,13 +2274,13 @@ func _resource_tooltip_text(tile_id: String) -> String:
 		"pickaxe":
 			return "Pickaxe: %s carried. Clears rubble and cave-ins." % count
 		"bandage":
-			return "Bandages: %s carried. Reserved for injury recovery." % count
-		"antidote":
-			return "Antidote: %s carried. Mitigates poison and toxic traps." % count
+			return "Bandages: %s carried. Patches one injury." % count
+		"trap_tools":
+			return "Trap tools: %s carried. Disarms corridor traps." % count
 		"camping_kit":
-			return "Camping kit: %s carried. Enables camp recovery." % count
+			return "Camping kit: %s carried. Enables camp recovery with food." % count
 		"food":
-			return "Food: %s carried. Reserved for camping and longer expeditions." % count
+			return "Food: %s carried. Spent when the party camps." % count
 		_:
 			return ""
 
@@ -2284,7 +2316,7 @@ func _progress_summary() -> String:
 	var visited_count: int = run_state.get("visited_room_ids", []).size()
 	var cleared_count: int = run_state.get("cleared_room_ids", []).size()
 	var totals := DungeonStateModel.reward_totals(run_state)
-	return "Rooms visited %s/%s | Secured %s/%s | Light %s/%s %s | Torch %s | Pickaxe %s | Bandage %s | Antidote %s | Camp %s | Food %s | Effects %s | Gold %s | Items %s | XP %s" % [
+	return "Rooms visited %s/%s | Secured %s/%s | Light %s/%s %s | Torch %s | Pickaxe %s | Trap Tools %s | Bandage %s | Camp %s | Food %s | Effects %s | Gold %s | Items %s | XP %s" % [
 		visited_count,
 		room_count,
 		cleared_count,
@@ -2294,8 +2326,8 @@ func _progress_summary() -> String:
 		str(run_state.get("light_state", "")),
 		DungeonStateModel.supply_count(run_state, "lamp_oil"),
 		DungeonStateModel.supply_count(run_state, "pickaxe"),
+		DungeonStateModel.supply_count(run_state, "trap_tools"),
 		DungeonStateModel.supply_count(run_state, "bandage"),
-		DungeonStateModel.supply_count(run_state, "antidote"),
 		DungeonStateModel.supply_count(run_state, "camping_kit"),
 		DungeonStateModel.supply_count(run_state, "food"),
 		_active_debuff_summary_text(),
@@ -2342,15 +2374,23 @@ func _can_use_lamp_oil() -> bool:
 func _can_use_recovery_supply() -> bool:
 	if bool(run_state.get("completed", false)):
 		return false
-	if DungeonStateModel.supply_count(run_state, "antidote") <= 0:
-		return false
-	return not DungeonStateModel.active_debuff_summary(run_state).is_empty()
+	return _preferred_recovery_supply_id() != ""
+
+
+func _preferred_recovery_supply_id() -> String:
+	if not DungeonStateModel.active_debuff_summary(run_state).is_empty() and DungeonStateModel.supply_count(run_state, "antidote") > 0:
+		return "antidote"
+	if int(run_state.get("party_effects", {}).get("hp_loss", 0)) > 0 and DungeonStateModel.supply_count(run_state, "bandage") > 0:
+		return "bandage"
+	return ""
 
 
 func _can_use_camp() -> bool:
 	if bool(run_state.get("completed", false)):
 		return false
 	if DungeonStateModel.supply_count(run_state, "camping_kit") <= 0:
+		return false
+	if DungeonStateModel.supply_count(run_state, "food") <= 0:
 		return false
 	if int(run_state.get("party_effects", {}).get("hp_loss", 0)) > 0:
 		return true
@@ -2444,7 +2484,7 @@ func _resource_tile_frame_path(tile_id: String) -> String:
 			index = 3
 		"bandage":
 			index = 4
-		"antidote":
+		"trap_tools":
 			index = 5
 		"camping_kit":
 			index = 5
@@ -2458,38 +2498,47 @@ func _resource_tile_frame_path(tile_id: String) -> String:
 func _resource_icon_path(tile_id: String) -> String:
 	match tile_id:
 		"torch":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 1)
+			return _dedicated_icon_path("icon_lamp_oil")
 		"pickaxe":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 2)
+			return _dedicated_icon_path("icon_pickaxe")
 		"bandage":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 3)
-		"antidote":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 4)
+			return _dedicated_icon_path("icon_bandage")
+		"trap_tools":
+			return _dedicated_icon_path("icon_trap")
 		"camping_kit":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 4)
+			return _dedicated_icon_path("icon_camping_kit")
 		"food":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 5)
+			return _dedicated_icon_path("icon_food")
 		"effects":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 5)
+			return _dedicated_icon_path("icon_room_event")
 		_:
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 0)
+			return _dedicated_icon_path("icon_light_source")
 
 
 func _room_icon_path(room: Dictionary) -> String:
+	if room.has("locked_by_item_id"):
+		return _dedicated_icon_path("icon_locked_room")
 	var kind := str(room.get("kind", ""))
 	match kind:
 		"treasure":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 6)
+			return _dedicated_icon_path("icon_treasure")
 		"combat":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 7)
+			return _dedicated_icon_path("icon_combat_room")
 		"guarded_treasure":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 8)
+			return _dedicated_icon_path("icon_treasure")
 		"exit":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 10)
+			return _dedicated_icon_path("icon_exit_room")
 		_:
 			if str(room.get("id", "")) == str(dungeon.get("start_room_id", "")):
-				return _asset_index_path(DUNGEON_ICON_PREFIX, 11)
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 15)
+				return _dedicated_icon_path("icon_light_source")
+			for content: Dictionary in room.get("content", []):
+				if str(content.get("type", "")) == "room_event":
+					return _dedicated_icon_path("icon_room_event")
+			return _dedicated_icon_path("icon_light_source")
+
+
+func _dedicated_icon_path(icon_name: String) -> String:
+	return "%s%s.png" % [DUNGEON_DEDICATED_ICON_DIR, icon_name]
 
 
 func _room_frame_path(room_id: String, kind: String) -> String:
@@ -2527,6 +2576,23 @@ func _party_slot_bar_color(slot_index: int) -> Color:
 		Color(0.22, 0.34, 0.58),
 	]
 	return colors[slot_index % colors.size()]
+
+
+func _party_members_for_ui() -> Array:
+	var formation: Array = run_state.get("party_formation", [])
+	if formation.is_empty():
+		formation = PartyRoster.default_party_formation()
+	return PartyRoster.heroes_for_formation(formation)
+
+
+func _party_member_summary(hero: Dictionary) -> String:
+	var stats: Dictionary = hero.get("stats", {})
+	return "%s | HP %s | AP %s | MP %s" % [
+		str(hero.get("class_name", "Hero")),
+		int(stats.get("max_hp", 0)),
+		int(stats.get("max_ap", 0)),
+		int(stats.get("move_points", 0)),
+	]
 
 
 func _party_log_text() -> String:

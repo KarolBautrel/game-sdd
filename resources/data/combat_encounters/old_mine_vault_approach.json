@@ -1,0 +1,1369 @@
+{
+  "background_path": "res://assets/combat/terrain/backgrounds/old_mine_dungeon_00_stone.png",
+  "enemy_archetypes": {
+    "raider_archer": {
+      "available_actions": [
+        "move",
+        "end_turn"
+      ],
+      "display_name": "Raider Archer",
+      "family": "humanoid",
+      "id": "raider_archer",
+      "loadout": {
+        "armor": null,
+        "main_hand": "raider_bow",
+        "off_hand": null
+      },
+      "role": "ranged",
+      "visual_pool": [
+        {
+          "character": "bandit_archer",
+          "faction": "villains"
+        }
+      ]
+    },
+    "raider_swordsman": {
+      "available_actions": [
+        "move",
+        "defend",
+        "end_turn"
+      ],
+      "display_name": "Raider Swordsman",
+      "family": "humanoid",
+      "id": "raider_swordsman",
+      "loadout": {
+        "armor": null,
+        "main_hand": "raider_axe",
+        "off_hand": null
+      },
+      "role": "melee",
+      "visual_pool": [
+        {
+          "character": "axe_bandit",
+          "faction": "villains"
+        },
+        {
+          "character": "bandit_marauder",
+          "faction": "villains"
+        },
+        {
+          "character": "bandit_rogue",
+          "faction": "villains"
+        }
+      ]
+    }
+  },
+  "event_log": [],
+  "grid": {
+    "width": 18,
+    "height": 11,
+    "tiles": [
+      {
+        "x": 0,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 1,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 2,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 3,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 4,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 5,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 6,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 7,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 8,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 9,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 10,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 11,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 12,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 13,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 14,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 15,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 16,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 17,
+        "y": 0,
+        "type": "blocked"
+      },
+      {
+        "x": 0,
+        "y": 1,
+        "type": "blocked"
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 10,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 11,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 12,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 13,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 14,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 15,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 16,
+        "y": 1,
+        "type": "floor"
+      },
+      {
+        "x": 17,
+        "y": 1,
+        "type": "blocked"
+      },
+      {
+        "x": 0,
+        "y": 2,
+        "type": "blocked"
+      },
+      {
+        "x": 1,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 10,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 11,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 12,
+        "y": 2,
+        "type": "highground"
+      },
+      {
+        "x": 13,
+        "y": 2,
+        "type": "highground"
+      },
+      {
+        "x": 14,
+        "y": 2,
+        "type": "highground"
+      },
+      {
+        "x": 15,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 16,
+        "y": 2,
+        "type": "floor"
+      },
+      {
+        "x": 17,
+        "y": 2,
+        "type": "blocked"
+      },
+      {
+        "x": 0,
+        "y": 3,
+        "type": "blocked"
+      },
+      {
+        "x": 1,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 3,
+        "type": "blocked"
+      },
+      {
+        "x": 6,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 10,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 11,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 12,
+        "y": 3,
+        "type": "blocked"
+      },
+      {
+        "x": 13,
+        "y": 3,
+        "type": "highground"
+      },
+      {
+        "x": 14,
+        "y": 3,
+        "type": "highground"
+      },
+      {
+        "x": 15,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 16,
+        "y": 3,
+        "type": "floor"
+      },
+      {
+        "x": 17,
+        "y": 3,
+        "type": "blocked"
+      },
+      {
+        "x": 0,
+        "y": 4,
+        "type": "blocked"
+      },
+      {
+        "x": 1,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 10,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 11,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 12,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 13,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 14,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 15,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 16,
+        "y": 4,
+        "type": "floor"
+      },
+      {
+        "x": 17,
+        "y": 4,
+        "type": "blocked"
+      },
+      {
+        "x": 0,
+        "y": 5,
+        "type": "blocked"
+      },
+      {
+        "x": 1,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 5,
+        "type": "cover_low"
+      },
+      {
+        "x": 5,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 5,
+        "type": "cover_low"
+      },
+      {
+        "x": 7,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 5,
+        "type": "blocked"
+      },
+      {
+        "x": 9,
+        "y": 5,
+        "type": "blocked"
+      },
+      {
+        "x": 10,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 11,
+        "y": 5,
+        "type": "cover_low"
+      },
+      {
+        "x": 12,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 13,
+        "y": 5,
+        "type": "cover_low"
+      },
+      {
+        "x": 14,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 15,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 16,
+        "y": 5,
+        "type": "floor"
+      },
+      {
+        "x": 17,
+        "y": 5,
+        "type": "blocked"
+      },
+      {
+        "x": 0,
+        "y": 6,
+        "type": "blocked"
+      },
+      {
+        "x": 1,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 10,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 11,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 12,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 13,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 14,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 15,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 16,
+        "y": 6,
+        "type": "floor"
+      },
+      {
+        "x": 17,
+        "y": 6,
+        "type": "blocked"
+      },
+      {
+        "x": 0,
+        "y": 7,
+        "type": "blocked"
+      },
+      {
+        "x": 1,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 7,
+        "type": "blocked"
+      },
+      {
+        "x": 6,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 7,
+        "type": "cover_low"
+      },
+      {
+        "x": 8,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 10,
+        "y": 7,
+        "type": "cover_low"
+      },
+      {
+        "x": 11,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 12,
+        "y": 7,
+        "type": "blocked"
+      },
+      {
+        "x": 13,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 14,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 15,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 16,
+        "y": 7,
+        "type": "floor"
+      },
+      {
+        "x": 17,
+        "y": 7,
+        "type": "blocked"
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "type": "blocked"
+      },
+      {
+        "x": 1,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 10,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 11,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 12,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 13,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 14,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 15,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 16,
+        "y": 8,
+        "type": "floor"
+      },
+      {
+        "x": 17,
+        "y": 8,
+        "type": "blocked"
+      },
+      {
+        "x": 0,
+        "y": 9,
+        "type": "blocked"
+      },
+      {
+        "x": 1,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 2,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 3,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 4,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 5,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 6,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 8,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 9,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 10,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 11,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 12,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 13,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 14,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 15,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 16,
+        "y": 9,
+        "type": "floor"
+      },
+      {
+        "x": 17,
+        "y": 9,
+        "type": "blocked"
+      },
+      {
+        "x": 0,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 1,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 2,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 3,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 4,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 5,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 6,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 7,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 8,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 9,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 10,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 11,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 12,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 13,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 14,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 15,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 16,
+        "y": 10,
+        "type": "blocked"
+      },
+      {
+        "x": 17,
+        "y": 10,
+        "type": "blocked"
+      }
+    ]
+  },
+  "id": "old_mine_vault_approach",
+  "item_profiles": {
+    "hero_chainmail": {
+      "armor_reduction": 1.0,
+      "grants_actions": [],
+      "id": "hero_chainmail",
+      "slot": "armor"
+    },
+    "hero_shield": {
+      "action_profiles": {
+        "shield_wall": {
+          "action_id": "shield_wall",
+          "ap_cost": 1.0,
+          "cooldown_turns": 2.0,
+          "damage_reduction": 2.0,
+          "id": "hero_shield_wall",
+          "status_id": "shield_wall",
+          "status_remaining_turns": 1.0
+        }
+      },
+      "grants_actions": [
+        "shield_wall"
+      ],
+      "id": "hero_shield",
+      "slot": "off_hand"
+    },
+    "hero_sword": {
+      "action_profiles": {
+        "basic_attack": {
+          "action_id": "basic_attack",
+          "ap_cost": 1.0,
+          "damage_bonus": 0.0,
+          "id": "hero_sword_basic_attack",
+          "range": 1.0
+        },
+        "deep_cut": {
+          "action_id": "deep_cut",
+          "ap_cost": 1.0,
+          "damage_bonus": 0.0,
+          "id": "hero_sword_deep_cut",
+          "range": 1.0,
+          "status_id": "bleeding",
+          "status_remaining_turns": 2.0,
+          "status_tick_damage": 1.0
+        },
+        "guard_break": {
+          "action_id": "guard_break",
+          "ap_cost": 1.0,
+          "damage_bonus": 0.0,
+          "id": "hero_sword_guard_break",
+          "range": 1.0,
+          "status_defense_modifier": -2.0,
+          "status_id": "guard_broken",
+          "status_remaining_turns": 1.0
+        },
+        "power_strike": {
+          "action_id": "power_strike",
+          "ap_cost": 2.0,
+          "cooldown_turns": 2.0,
+          "damage_bonus": 2.0,
+          "id": "hero_sword_power_strike",
+          "range": 1.0
+        }
+      },
+      "grants_actions": [
+        "basic_attack",
+        "power_strike",
+        "deep_cut",
+        "guard_break"
+      ],
+      "id": "hero_sword",
+      "slot": "main_hand"
+    },
+    "raider_axe": {
+      "action_profiles": {
+        "basic_attack": {
+          "action_id": "basic_attack",
+          "ap_cost": 1.0,
+          "damage_bonus": 0.0,
+          "id": "raider_axe_basic_attack",
+          "range": 1.0
+        }
+      },
+      "grants_actions": [
+        "basic_attack"
+      ],
+      "id": "raider_axe",
+      "slot": "main_hand"
+    },
+    "raider_bow": {
+      "action_profiles": {
+        "ranged_attack": {
+          "action_id": "ranged_attack",
+          "ap_cost": 1.0,
+          "base_hit_chance": 75.0,
+          "damage_bonus": 0.0,
+          "id": "raider_bow_ranged_attack",
+          "range": 4.0
+        }
+      },
+      "grants_actions": [
+        "ranged_attack"
+      ],
+      "id": "raider_bow",
+      "slot": "main_hand"
+    }
+  },
+  "seed": 3103,
+  "turn_state": {
+    "active_unit_id": "unit_player_001",
+    "round": 1,
+    "turn_order": [
+      "unit_player_001",
+      "unit_enemy_001",
+      "unit_enemy_002"
+    ]
+  },
+  "units": [
+    {
+      "available_actions": [
+        "move",
+        "defend",
+        "end_turn"
+      ],
+      "id": "unit_player_001",
+      "loadout": {
+        "armor": "hero_chainmail",
+        "main_hand": "hero_sword",
+        "off_hand": "hero_shield"
+      },
+      "position": {
+        "x": 4,
+        "y": 8
+      },
+      "resources": {
+        "ap": 2.0,
+        "hp": 14.0,
+        "mp": 4.0
+      },
+      "stats": {
+        "accuracy": 5.0,
+        "defense": 2.0,
+        "evasion": 5.0,
+        "initiative": 12.0,
+        "max_ap": 2.0,
+        "max_hp": 14.0,
+        "move_points": 4.0,
+        "strength": 5.0
+      },
+      "statuses": [],
+      "team": "player"
+    },
+    {
+      "archetype_id": "raider_swordsman",
+      "available_actions": [],
+      "id": "unit_enemy_001",
+      "position": {
+        "x": 10,
+        "y": 6
+      },
+      "resources": {
+        "ap": 1.0,
+        "hp": 9.0,
+        "mp": 4.0
+      },
+      "stats": {
+        "accuracy": 0.0,
+        "defense": 1.0,
+        "evasion": 0.0,
+        "initiative": 8.0,
+        "max_ap": 1.0,
+        "max_hp": 9.0,
+        "move_points": 4.0,
+        "strength": 4.0
+      },
+      "statuses": [],
+      "team": "enemy"
+    },
+    {
+      "archetype_id": "raider_archer",
+      "available_actions": [],
+      "id": "unit_enemy_002",
+      "position": {
+        "x": 13,
+        "y": 2
+      },
+      "resources": {
+        "ap": 1.0,
+        "hp": 7.0,
+        "mp": 3.0
+      },
+      "stats": {
+        "accuracy": 10.0,
+        "defense": 0.0,
+        "evasion": 0.0,
+        "initiative": 7.0,
+        "max_ap": 1.0,
+        "max_hp": 7.0,
+        "move_points": 3.0,
+        "strength": 3.0
+      },
+      "statuses": [],
+      "team": "enemy"
+    }
+  ],
+  "terrain_theme": "dungeon",
+  "terrain_decorations": [
+    {
+      "x": 5,
+      "y": 3,
+      "path": "res://assets/combat/terrain/processed/dungeon/columns/columns_05.png",
+      "kind": "vault_column"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "path": "res://assets/combat/terrain/processed/dungeon/columns/columns_05.png",
+      "kind": "vault_column"
+    },
+    {
+      "x": 12,
+      "y": 3,
+      "path": "res://assets/combat/terrain/processed/dungeon/columns/columns_05.png",
+      "kind": "vault_column"
+    },
+    {
+      "x": 12,
+      "y": 7,
+      "path": "res://assets/combat/terrain/processed/dungeon/columns/columns_05.png",
+      "kind": "vault_column"
+    },
+    {
+      "x": 8,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_10.png",
+      "kind": "sealed_vault_rubble"
+    },
+    {
+      "x": 9,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_10.png",
+      "kind": "sealed_vault_rubble"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_06.png",
+      "kind": "vault_low_cover"
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_06.png",
+      "kind": "vault_low_cover"
+    },
+    {
+      "x": 11,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_06.png",
+      "kind": "vault_low_cover"
+    },
+    {
+      "x": 13,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_06.png",
+      "kind": "vault_low_cover"
+    },
+    {
+      "x": 7,
+      "y": 7,
+      "path": "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_06.png",
+      "kind": "vault_low_cover"
+    },
+    {
+      "x": 10,
+      "y": 7,
+      "path": "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_06.png",
+      "kind": "vault_low_cover"
+    },
+    {
+      "x": 12,
+      "y": 2,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_04.png",
+      "kind": "raised_vault_shelf"
+    },
+    {
+      "x": 13,
+      "y": 2,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_04.png",
+      "kind": "raised_vault_shelf"
+    },
+    {
+      "x": 14,
+      "y": 2,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_04.png",
+      "kind": "raised_vault_shelf"
+    },
+    {
+      "x": 12,
+      "y": 3,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_04.png",
+      "kind": "raised_vault_shelf"
+    },
+    {
+      "x": 13,
+      "y": 3,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_04.png",
+      "kind": "raised_vault_shelf"
+    },
+    {
+      "x": 14,
+      "y": 3,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_04.png",
+      "kind": "raised_vault_shelf"
+    }
+  ]
+}

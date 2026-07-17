@@ -11,7 +11,7 @@ const DEFAULT_GENERATED_PROFILE_ID := "medium_mine"
 
 
 static func default_payload() -> Dictionary:
-	return authored_payload()
+	return generated_payload(170717, DEFAULT_GENERATED_DUNGEON_DIFFICULTY, DEFAULT_GENERATED_PROFILE_ID)
 
 
 static func authored_payload() -> Dictionary:

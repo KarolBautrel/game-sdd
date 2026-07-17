@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgsojsq25wc77"
-path="res://.godot/imported/archer_portrait.png-a3119a74e6ed448ac0c0816be30259cf.ctex"
+uid="uid://enbegc6ggpvp"
+path="res://.godot/imported/icon_exit_room.png-342c2bad8be5240e59a169b86157de85.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/dungeon/to_process/portraits/archer_portrait.png"
-dest_files=["res://.godot/imported/archer_portrait.png-a3119a74e6ed448ac0c0816be30259cf.ctex"]
+source_file="res://assets/ui/dungeon/processed/icons/icon_exit_room.png"
+dest_files=["res://.godot/imported/icon_exit_room.png-342c2bad8be5240e59a169b86157de85.ctex"]
 
 [params]
 

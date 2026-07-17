@@ -46,9 +46,9 @@
       "type": "trap",
       "tags": ["mine", "corridor", "trap", "tool_check"],
       "message": "A thin tripwire disappears into a rusted needle trap along the tunnel wall.",
-      "required_supply_id": "antidote",
+      "required_supply_id": "trap_tools",
       "choices": [
-        { "id": "use_supply", "label": "Use antidote", "requires_supply": true },
+        { "id": "use_supply", "label": "Use trap tools", "requires_supply": true },
         { "id": "force_passage", "label": "Force passage", "requires_supply": false }
       ],
       "outcomes": [
@@ -56,7 +56,7 @@
           "id": "trap_toxin_neutralized",
           "when": { "choice_id": "use_supply", "has_supply": true },
           "consume_required_supply": true,
-          "message": "The antidote is prepared before the party crosses the needle trap.",
+          "message": "The trap tools pin the wire and empty the needle reservoir safely.",
           "consequences": []
         },
         {
@@ -117,9 +117,9 @@
       "type": "trap",
       "tags": ["mine", "corridor", "trap", "snare", "tool_check"],
       "message": "A loop of cable waits beneath loose gravel.",
-      "required_supply_id": "antidote",
+      "required_supply_id": "trap_tools",
       "choices": [
-        { "id": "use_supply", "label": "Use antidote", "requires_supply": true },
+        { "id": "use_supply", "label": "Use trap tools", "requires_supply": true },
         { "id": "force_passage", "label": "Step through carefully", "requires_supply": false }
       ],
       "outcomes": [
@@ -127,7 +127,7 @@
           "id": "snare_treated",
           "when": { "choice_id": "use_supply", "has_supply": true },
           "consume_required_supply": true,
-          "message": "The party crosses ready to treat any venom or rust-tainted cut.",
+          "message": "The trap tools loosen the cable loop before it can snap shut.",
           "consequences": []
         },
         {

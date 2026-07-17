@@ -1,6 +1,8 @@
 extends RefCounted
 class_name CombatText
 
+const PartyRoster := preload("res://scripts/domain/party_roster.gd")
+
 const ACTION_LABELS := {
 	"move": "Move",
 	"basic_attack": "Melee attack",
@@ -150,6 +152,9 @@ static func feedback_from_events(events: Array) -> String:
 static func unit_display_name(state: Dictionary, unit_id: String) -> String:
 	if unit_id == "":
 		return "Unknown"
+	var hero_name := PartyRoster.display_name_for_combat_unit(unit_id)
+	if hero_name != "":
+		return hero_name
 	for unit: Dictionary in state.get("units", []):
 		if unit["id"] == unit_id:
 			if unit["team"] == "player":

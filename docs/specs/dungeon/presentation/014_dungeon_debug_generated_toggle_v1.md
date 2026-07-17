@@ -12,7 +12,7 @@ The generated draft is not production content yet. The debug scene should let de
 ## Rules
 
 - `DungeonDebug.tscn` remains the playable dungeon scene.
-- The default source is the authored `Old Mine`.
+- The debug screen originally shipped with authored `Old Mine` as the default source; current beta testing now starts from generated medium-mine content while keeping `Old Mine` available through the source toggle.
 - During expedition preparation, the player can switch between authored and generated dungeon data.
 - Switching into generated data should create a fresh generated seed.
 - Clicking the generated source action while already on generated data should reroll the generated draft during preparation.

@@ -1,12 +1,14 @@
 extends RefCounted
 class_name CombatUnitArt
 
+const PartyRoster := preload("res://scripts/domain/party_roster.gd")
 const RAW_EXTRACTED_TILE_SIZE := 112
 const RAW_EXTRACTED_MAX_SIZE := Vector2i(110, 106)
 const PROCESSED_SHEET_REFERENCE_CHARACTER := "warrior"
 
 const UNIT_VISUALS := {
 	"unit_player_001": {"faction": "heroes", "character": "warrior"},
+	"unit_player_002": {"faction": "heroes", "character": "archer_1"},
 	"unit_enemy_001": {"faction": "villains", "character": "axe_bandit"},
 	"unit_enemy_002": {"faction": "villains", "character": "bandit_archer"},
 }
@@ -514,6 +516,9 @@ func default_visual_action(unit: Dictionary, state: Dictionary) -> String:
 func unit_visual_config(unit: Dictionary) -> Dictionary:
 	if unit.has("visual"):
 		return unit["visual"]
+	var hero := PartyRoster.hero_for_combat_unit(str(unit.get("id", "")))
+	if not hero.is_empty():
+		return hero.get("visual", {"faction": "heroes", "character": "warrior"})
 	var archetype_id := str(unit.get("archetype_id", ""))
 	if ARCHETYPE_VISUALS.has(archetype_id):
 		return ARCHETYPE_VISUALS[archetype_id]

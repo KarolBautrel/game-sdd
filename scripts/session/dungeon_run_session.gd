@@ -1,12 +1,15 @@
 extends Node
 
 const DungeonStateModel := preload("res://scripts/domain/dungeon_state_model.gd")
+const PartyRoster := preload("res://scripts/domain/party_roster.gd")
 
 const DUNGEON_SCENE_PATH := "res://scenes/dungeon/DungeonDebug.tscn"
 const COMBAT_SCENE_PATH := "res://scenes/combat/CombatDebug.tscn"
 const MIN_RANDOM_ENEMIES := 2
 const MAX_RANDOM_ENEMIES := 3
 const ENEMY_ARCHETYPE_POOL := ["raider_swordsman", "raider_archer"]
+const WARRIOR_UNIT_ID := "unit_player_001"
+const ARCHER_UNIT_ID := "unit_player_002"
 
 var dungeon_data: Dictionary = {}
 var dungeon_state: Dictionary = {}
@@ -52,6 +55,7 @@ func apply_launch_metadata(encounter: Dictionary) -> Dictionary:
 	next_encounter["source_dungeon_id"] = str(pending_combat_request.get("dungeon_id", ""))
 	next_encounter["source_room_id"] = str(pending_combat_request.get("room_id", ""))
 	next_encounter["dungeon_modifiers"] = pending_combat_request.get("dungeon_modifiers", {}).duplicate(true)
+	_ensure_beta_party(next_encounter)
 	next_encounter = randomize_dungeon_enemies(next_encounter, next_combat_seed)
 	_apply_dungeon_modifier_effects(next_encounter)
 	return next_encounter
@@ -198,6 +202,153 @@ func _rebuild_turn_order_by_initiative(encounter: Dictionary) -> void:
 		encounter["turn_state"]["active_unit_id"] = order[0]
 
 
+func _ensure_beta_party(encounter: Dictionary) -> void:
+	if not encounter.has("grid") or not encounter.has("units") or not encounter.has("turn_state"):
+		return
+	var units: Array = encounter.get("units", [])
+	var warrior := _unit_by_id(encounter, WARRIOR_UNIT_ID)
+	if warrior.is_empty():
+		warrior = _warrior_unit(_fallback_player_position(encounter))
+		units.append(warrior)
+	else:
+		_normalize_warrior_unit(warrior)
+	if _unit_by_id(encounter, ARCHER_UNIT_ID).is_empty():
+		units.append(_archer_unit(_backline_player_position(encounter, warrior.get("position", {}))))
+	encounter["units"] = units
+	_ensure_beta_item_profiles(encounter)
+
+
+func _normalize_warrior_unit(unit: Dictionary) -> void:
+	unit["id"] = WARRIOR_UNIT_ID
+	unit["team"] = "player"
+	var hero := PartyRoster.hero_for_combat_unit(WARRIOR_UNIT_ID)
+	if not hero.is_empty():
+		unit["stats"] = hero.get("stats", unit.get("stats", {})).duplicate(true)
+		unit["resources"] = hero.get("resources", unit.get("resources", {})).duplicate(true)
+		unit["loadout"] = hero.get("loadout", unit.get("loadout", {})).duplicate(true)
+		unit["visual"] = hero.get("visual", unit.get("visual", {})).duplicate(true)
+	if not unit.has("available_actions") or unit["available_actions"].is_empty():
+		unit["available_actions"] = hero.get("available_actions", ["move", "defend", "end_turn"]).duplicate(true) if not hero.is_empty() else ["move", "defend", "end_turn"]
+	if not unit.has("statuses"):
+		unit["statuses"] = []
+	if not unit.has("visual"):
+		unit["visual"] = {"faction": "heroes", "character": "warrior"}
+
+
+func _warrior_unit(position: Dictionary) -> Dictionary:
+	return PartyRoster.combat_unit(WARRIOR_UNIT_ID, position)
+
+
+func _archer_unit(position: Dictionary) -> Dictionary:
+	return PartyRoster.combat_unit(ARCHER_UNIT_ID, position)
+
+
+func _ensure_beta_item_profiles(encounter: Dictionary) -> void:
+	var item_profiles: Dictionary = encounter.get("item_profiles", {})
+	if not item_profiles.has("hero_sword"):
+		item_profiles["hero_sword"] = _hero_sword_profile()
+	if item_profiles.has("hero_bow"):
+		encounter["item_profiles"] = item_profiles
+		return
+	item_profiles["hero_bow"] = _hero_bow_profile()
+	encounter["item_profiles"] = item_profiles
+
+
+func _hero_sword_profile() -> Dictionary:
+	return {
+		"id": "hero_sword",
+		"slot": "main_hand",
+		"grants_actions": ["basic_attack", "power_strike", "deep_cut", "guard_break"],
+		"action_profiles": {
+			"basic_attack": {
+				"id": "hero_sword_basic_attack",
+				"action_id": "basic_attack",
+				"range": 1,
+				"ap_cost": 1,
+				"damage_bonus": 0,
+			},
+			"power_strike": {
+				"id": "hero_sword_power_strike",
+				"action_id": "power_strike",
+				"range": 1,
+				"ap_cost": 2,
+				"damage_bonus": 2,
+				"cooldown_turns": 2,
+			},
+			"deep_cut": {
+				"id": "hero_sword_deep_cut",
+				"action_id": "deep_cut",
+				"range": 1,
+				"ap_cost": 1,
+				"damage_bonus": 1,
+				"cooldown_turns": 2,
+				"status_id": "bleeding",
+				"status_remaining_turns": 2,
+				"status_tick_damage": 1,
+			},
+			"guard_break": {
+				"id": "hero_sword_guard_break",
+				"action_id": "guard_break",
+				"range": 1,
+				"ap_cost": 1,
+				"damage_bonus": 0,
+				"cooldown_turns": 2,
+				"status_id": "guard_broken",
+				"status_remaining_turns": 1,
+				"status_defense_modifier": -1,
+			},
+		},
+	}
+
+
+func _hero_bow_profile() -> Dictionary:
+	return {
+		"id": "hero_bow",
+		"slot": "main_hand",
+		"grants_actions": ["ranged_attack", "aimed_shot"],
+		"action_profiles": {
+			"ranged_attack": {
+				"id": "hero_bow_ranged_attack",
+				"action_id": "ranged_attack",
+				"range": 5,
+				"ap_cost": 1,
+				"base_hit_chance": 75,
+				"damage_bonus": 0,
+			},
+			"aimed_shot": {
+				"id": "hero_bow_aimed_shot",
+				"action_id": "aimed_shot",
+				"range": 5,
+				"ap_cost": 2,
+				"base_hit_chance": 90,
+				"damage_bonus": 1,
+				"cooldown_turns": 2,
+			},
+		},
+	}
+
+
+func _fallback_player_position(encounter: Dictionary) -> Dictionary:
+	for tile: Dictionary in encounter.get("grid", {}).get("tiles", []):
+		var position := {"x": int(tile.get("x", 0)), "y": int(tile.get("y", 0))}
+		if str(tile.get("type", "")) != "blocked" and not _unit_at(encounter, position):
+			return position
+	return {"x": 0, "y": 0}
+
+
+func _backline_player_position(encounter: Dictionary, front_position: Dictionary) -> Dictionary:
+	var candidates: Array[Dictionary] = [
+		{"x": int(front_position.get("x", 0)) - 1, "y": int(front_position.get("y", 0))},
+		{"x": int(front_position.get("x", 0)), "y": int(front_position.get("y", 0)) + 1},
+		{"x": int(front_position.get("x", 0)), "y": int(front_position.get("y", 0)) - 1},
+		{"x": int(front_position.get("x", 0)) + 1, "y": int(front_position.get("y", 0))},
+	]
+	for candidate: Dictionary in candidates:
+		if _tile_type_at(encounter, candidate) != "blocked" and _tile_type_at(encounter, candidate) != "missing" and not _unit_at(encounter, candidate):
+			return candidate
+	return _fallback_player_position(encounter)
+
+
 func finish_combat(result_payload: Dictionary) -> bool:
 	if pending_combat_request.is_empty():
 		last_feedback = "No pending combat launch to finish."
@@ -322,6 +473,21 @@ func _enemy_stats_for_archetype(archetype_id: String) -> Dictionary:
 
 func _position_key(position: Dictionary) -> String:
 	return "%s,%s" % [position.get("x", 0), position.get("y", 0)]
+
+
+func _tile_type_at(encounter: Dictionary, position: Dictionary) -> String:
+	for tile: Dictionary in encounter.get("grid", {}).get("tiles", []):
+		if int(tile.get("x", -1)) == int(position.get("x", -2)) and int(tile.get("y", -1)) == int(position.get("y", -2)):
+			return str(tile.get("type", "missing"))
+	return "missing"
+
+
+func _unit_at(encounter: Dictionary, position: Dictionary) -> bool:
+	var key := _position_key(position)
+	for unit: Dictionary in encounter.get("units", []):
+		if _position_key(unit.get("position", {})) == key:
+			return true
+	return false
 
 
 func _combat_return_feedback(event: Dictionary, result_payload: Dictionary) -> String:

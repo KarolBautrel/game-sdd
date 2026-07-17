@@ -97,6 +97,7 @@ VALIDATION_TARGETS = [
     ("resources/schemas/dungeon_room_event.schema.json", "resources/data/dungeon_room_events/*.json"),
     ("resources/schemas/dungeon_room_event_pool.schema.json", "resources/data/dungeon_room_event_pools/*.json"),
     ("resources/schemas/dungeon_template.schema.json", "resources/data/dungeon_templates/*.json"),
+    ("resources/schemas/dungeon_combat_encounter_pool.schema.json", "resources/data/dungeon_combat_encounter_pools/*.json"),
     ("resources/schemas/dungeon_debuff.schema.json", "resources/data/dungeon_debuffs/*.json"),
     ("resources/schemas/map.schema.json", "resources/data/maps/*.json"),
     ("resources/schemas/combat_action.schema.json", "resources/data/combat_actions/*.json"),
@@ -150,8 +151,10 @@ def validate_dungeon_references() -> list[str]:
     dungeon_event_pools = _dungeon_event_pools()
     dungeon_room_events = _dungeon_room_event_templates()
     dungeon_room_event_pools = _dungeon_room_event_pools()
+    dungeon_combat_encounter_pools = _dungeon_combat_encounter_pools()
     errors.extend(validate_dungeon_event_pool_references(dungeon_events, dungeon_event_pools))
     errors.extend(validate_dungeon_room_event_pool_references(dungeon_room_events, dungeon_room_event_pools))
+    errors.extend(validate_dungeon_combat_encounter_pool_references(dungeon_combat_encounter_pools))
     for path in sorted((ROOT / "resources/data/dungeons").glob("*.json")):
         dungeon = load_json(path)
         room_ids = {room["id"] for room in dungeon["rooms"]}
@@ -215,8 +218,12 @@ def validate_dungeon_references() -> list[str]:
                 encounter_path = content.get("combat_encounter_path")
                 rewards = content.get("rewards")
                 if content_type in {"combat", "guarded_treasure"}:
+                    pool_id = content.get("combat_encounter_pool_id", "")
+                    if pool_id and pool_id not in dungeon_combat_encounter_pools:
+                        errors.append(f"{path.relative_to(ROOT)}: room {room['id']} references missing combat encounter pool {pool_id}")
                     if not encounter_path:
-                        errors.append(f"{path.relative_to(ROOT)}: room {room['id']} {content_type} content is missing combat_encounter_path")
+                        if not pool_id:
+                            errors.append(f"{path.relative_to(ROOT)}: room {room['id']} {content_type} content is missing combat_encounter_path or combat_encounter_pool_id")
                     else:
                         resolved = ROOT / str(encounter_path).removeprefix("res://")
                         if not resolved.exists():
@@ -275,6 +282,36 @@ def validate_dungeon_room_event_pool_references(dungeon_room_events: dict[str, d
             event_id = entry.get("event_id", "")
             if event_id not in dungeon_room_events:
                 errors.append(f"resources/data/dungeon_room_event_pools: pool {pool_id} references missing room event {event_id}")
+    return errors
+
+
+def validate_dungeon_combat_encounter_pool_references(dungeon_combat_encounter_pools: dict[str, dict]) -> list[str]:
+    errors: list[str] = []
+    min_dungeon_combat_width = 10
+    min_dungeon_combat_height = 8
+    for pool_id, pool in dungeon_combat_encounter_pools.items():
+        for entry in pool.get("entries", []):
+            if int(entry.get("difficulty_min", 1)) > int(entry.get("difficulty_max", 3)):
+                errors.append(f"resources/data/dungeon_combat_encounter_pools: pool {pool_id} entry {entry.get('id', '')} difficulty_min exceeds difficulty_max")
+            encounter_path = entry.get("encounter_path", "")
+            resolved = ROOT / str(encounter_path).removeprefix("res://")
+            if not resolved.exists():
+                errors.append(f"resources/data/dungeon_combat_encounter_pools: pool {pool_id} entry {entry.get('id', '')} references missing encounter {encounter_path}")
+                continue
+            encounter = load_json(resolved)
+            if resolved.name.startswith("slice_") or str(encounter.get("id", "")).startswith("slice_"):
+                errors.append(
+                    f"resources/data/dungeon_combat_encounter_pools: pool {pool_id} entry {entry.get('id', '')} "
+                    f"references regression slice encounter {encounter_path}"
+                )
+            if not encounter.get("background_path"):
+                errors.append(f"resources/data/dungeon_combat_encounter_pools: pool {pool_id} entry {entry.get('id', '')} encounter is missing background_path")
+            width, height = _combat_encounter_dimensions(encounter)
+            if width < min_dungeon_combat_width or height < min_dungeon_combat_height:
+                errors.append(
+                    f"resources/data/dungeon_combat_encounter_pools: pool {pool_id} entry {entry.get('id', '')} "
+                    f"encounter board is {width}x{height}; dungeon combat must be at least {min_dungeon_combat_width}x{min_dungeon_combat_height}"
+                )
     return errors
 
 
@@ -344,6 +381,18 @@ def _dungeon_room_event_templates() -> dict[str, dict]:
 def _dungeon_room_event_pools() -> dict[str, dict]:
     pools: dict[str, dict] = {}
     for path in sorted((ROOT / "resources/data/dungeon_room_event_pools").glob("*.json")):
+        catalogue = load_json(path)
+        for pool in catalogue.get("pools", []):
+            pool_id = pool["id"]
+            if pool_id in pools:
+                continue
+            pools[pool_id] = pool
+    return pools
+
+
+def _dungeon_combat_encounter_pools() -> dict[str, dict]:
+    pools: dict[str, dict] = {}
+    for path in sorted((ROOT / "resources/data/dungeon_combat_encounter_pools").glob("*.json")):
         catalogue = load_json(path)
         for pool in catalogue.get("pools", []):
             pool_id = pool["id"]

@@ -29,6 +29,8 @@ func _init() -> void:
 	_assert_contains(player_left_path, "heroes/mercenaries/processed/warrior/pose/warrior_left_pose_000.png", failures)
 	var player_walk_path := art.texture_path({"id": "unit_player_001", "team": "player"}, "east", "walk:1")
 	_assert_contains(player_walk_path, "heroes/mercenaries/processed/warrior/walk/warrior_right_walk_001.png", failures)
+	var archer_path := art.texture_path({"id": "unit_player_002", "team": "player"}, "east", "pose")
+	_assert_contains(archer_path, "heroes/mercenaries/processed/archer_1/pose/archer_1_right_pose_000.png", failures)
 	_assert_equal(art.processed_sheet_frame_count("warrior", "walk"), 5, "warrior walk frame count", failures)
 	var melee_enemy_path := art.texture_path({"id": "unit_enemy_001", "team": "enemy"}, "west", "combat")
 	_assert_contains(melee_enemy_path, "villains/bandits/processed/axe_bandit/combat/axe_bandit_left_combat_000.png", failures)

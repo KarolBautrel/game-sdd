@@ -5,11 +5,13 @@
       "id": "old_mine_short_loop",
       "difficulty": 1,
       "display_name": "Generated Old Mine - Short Loop",
+      "profile_ids": ["short_mine"],
+      "pacing": { "route_length": 3, "branch_count": 2, "treasure_count": 1, "combat_count": 1, "room_event_slots": 1, "corridor_hazard_candidates": 3 },
       "rooms": [
         { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 0, "y": 1 }, "content": [{ "type": "empty" }] },
         { "id": "generated_crossing", "display_name": "Timber Crossing", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },
         { "id": "generated_cache", "display_name": "Collapsed Cache", "kind": "treasure", "position": { "x": 2, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 1, "gold": 7, "items": ["generated_old_mine_trinket"] } }] },
-        { "id": "generated_nest", "display_name": "Spider Pocket", "kind": "combat", "position": { "x": 2, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_path": "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json" }] },
+        { "id": "generated_nest", "display_name": "Spider Pocket", "kind": "combat", "position": { "x": 2, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_pool_id": "old_mine_generated_combat_pool" }] },
         { "id": "generated_exit", "display_name": "Rope Descent", "kind": "exit", "position": { "x": 3, "y": 1 }, "content": [{ "type": "empty" }] }
       ],
       "corridors": [
@@ -23,12 +25,14 @@
       "id": "old_mine_bent_shaft",
       "difficulty": 1,
       "display_name": "Generated Old Mine - Bent Shaft",
+      "profile_ids": ["short_mine"],
+      "pacing": { "route_length": 4, "branch_count": 1, "treasure_count": 1, "combat_count": 1, "room_event_slots": 2, "corridor_hazard_candidates": 4 },
       "rooms": [
         { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 0, "y": 1 }, "content": [{ "type": "empty" }] },
         { "id": "generated_slope", "display_name": "Sloping Track", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },
         { "id": "generated_cache", "display_name": "Tool Cache", "kind": "treasure", "position": { "x": 1, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 1, "gold": 5, "items": ["generated_old_mine_trinket"] } }] },
         { "id": "generated_turn", "display_name": "Bent Gallery", "kind": "empty", "position": { "x": 2, "y": 1 }, "content": [{ "type": "empty" }] },
-        { "id": "generated_nest", "display_name": "Webbed Winch", "kind": "combat", "position": { "x": 3, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_path": "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json" }] },
+        { "id": "generated_nest", "display_name": "Webbed Winch", "kind": "combat", "position": { "x": 3, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_pool_id": "old_mine_generated_combat_pool" }] },
         { "id": "generated_exit", "display_name": "Air Crack", "kind": "exit", "position": { "x": 4, "y": 1 }, "content": [{ "type": "empty" }] }
       ],
       "corridors": [
@@ -43,13 +47,15 @@
       "id": "old_mine_twin_caches",
       "difficulty": 2,
       "display_name": "Generated Old Mine - Twin Caches",
+      "profile_ids": ["medium_mine"],
+      "pacing": { "route_length": 4, "branch_count": 2, "treasure_count": 2, "combat_count": 1, "room_event_slots": 2, "corridor_hazard_candidates": 5 },
       "rooms": [
         { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 0, "y": 1 }, "content": [{ "type": "empty" }] },
         { "id": "generated_crossing", "display_name": "Ore Crossing", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },
         { "id": "generated_cache", "display_name": "Collapsed Cache", "kind": "treasure", "position": { "x": 2, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 2, "gold": 9, "items": ["generated_old_mine_trinket"] } }] },
         { "id": "generated_gallery", "display_name": "Broken Gallery", "kind": "empty", "position": { "x": 2, "y": 1 }, "content": [{ "type": "empty" }] },
         { "id": "generated_deep_cache", "display_name": "Deep Cache", "kind": "treasure", "position": { "x": 3, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 2, "gold": 11, "items": ["generated_old_mine_relic"] } }] },
-        { "id": "generated_nest", "display_name": "Spider Sump", "kind": "combat", "position": { "x": 3, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_path": "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json" }] },
+        { "id": "generated_nest", "display_name": "Spider Sump", "kind": "combat", "position": { "x": 3, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_pool_id": "old_mine_generated_combat_pool" }] },
         { "id": "generated_exit", "display_name": "Lower Ladder", "kind": "exit", "position": { "x": 4, "y": 1 }, "content": [{ "type": "empty" }] }
       ],
       "corridors": [
@@ -65,11 +71,13 @@
       "id": "old_mine_guarded_spur",
       "difficulty": 2,
       "display_name": "Generated Old Mine - Guarded Spur",
+      "profile_ids": ["medium_mine"],
+      "pacing": { "route_length": 4, "branch_count": 2, "treasure_count": 2, "combat_count": 1, "room_event_slots": 1, "corridor_hazard_candidates": 4 },
       "rooms": [
         { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 0, "y": 1 }, "content": [{ "type": "empty" }] },
         { "id": "generated_switchback", "display_name": "Switchback", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },
         { "id": "generated_cache", "display_name": "Loose Ore Cache", "kind": "treasure", "position": { "x": 1, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 2, "gold": 8, "items": ["generated_old_mine_trinket"] } }] },
-        { "id": "generated_guard", "display_name": "Guarded Spur", "kind": "combat", "position": { "x": 2, "y": 1 }, "content": [{ "type": "combat", "combat_encounter_path": "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json" }] },
+        { "id": "generated_guard", "display_name": "Guarded Spur", "kind": "combat", "position": { "x": 2, "y": 1 }, "content": [{ "type": "combat", "combat_encounter_pool_id": "old_mine_generated_combat_pool" }] },
         { "id": "generated_deep_cache", "display_name": "Survey Chest", "kind": "treasure", "position": { "x": 3, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 2, "gold": 12, "items": ["generated_old_mine_relic"] } }] },
         { "id": "generated_exit", "display_name": "Drainage Exit", "kind": "exit", "position": { "x": 4, "y": 1 }, "content": [{ "type": "empty" }] }
       ],
@@ -85,14 +93,16 @@
       "id": "old_mine_deep_branch",
       "difficulty": 3,
       "display_name": "Generated Old Mine - Deep Branch",
+      "profile_ids": ["deep_mine"],
+      "pacing": { "route_length": 5, "branch_count": 2, "treasure_count": 2, "combat_count": 2, "room_event_slots": 2, "corridor_hazard_candidates": 6 },
       "rooms": [
         { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 0, "y": 1 }, "content": [{ "type": "empty" }] },
         { "id": "generated_crossing", "display_name": "Old Crossing", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },
         { "id": "generated_cache", "display_name": "Collapsed Cache", "kind": "treasure", "position": { "x": 2, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 3, "gold": 10, "items": ["generated_old_mine_trinket"] } }] },
         { "id": "generated_midshaft", "display_name": "Midshaft", "kind": "empty", "position": { "x": 2, "y": 1 }, "content": [{ "type": "empty" }] },
-        { "id": "generated_nest", "display_name": "Spider Nest", "kind": "combat", "position": { "x": 2, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_path": "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json" }] },
+        { "id": "generated_nest", "display_name": "Spider Nest", "kind": "combat", "position": { "x": 2, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_pool_id": "old_mine_generated_combat_pool" }] },
         { "id": "generated_deep_cache", "display_name": "Deep Cache", "kind": "treasure", "position": { "x": 3, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 3, "gold": 14, "items": ["generated_old_mine_relic"] } }] },
-        { "id": "generated_deep_nest", "display_name": "Deep Nest", "kind": "combat", "position": { "x": 4, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_path": "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json" }] },
+        { "id": "generated_deep_nest", "display_name": "Deep Nest", "kind": "combat", "position": { "x": 4, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_pool_id": "old_mine_generated_combat_pool" }] },
         { "id": "generated_exit", "display_name": "Lower Exit", "kind": "exit", "position": { "x": 5, "y": 1 }, "content": [{ "type": "empty" }] }
       ],
       "corridors": [
@@ -103,6 +113,113 @@
         { "id": "generated_midshaft_deep_cache", "from": "generated_midshaft", "to": "generated_deep_cache", "danger": 0.18, "light_decay": 1, "hazard_profile": "planned" },
         { "id": "generated_deep_cache_deep_nest", "from": "generated_deep_cache", "to": "generated_deep_nest", "danger": 0.36, "light_decay": 1, "hazard_profile": "planned" },
         { "id": "generated_deep_nest_exit", "from": "generated_deep_nest", "to": "generated_exit", "danger": 0.16, "light_decay": 1, "hazard_profile": "planned" }
+      ]
+    },
+    {
+      "id": "old_mine_short_split",
+      "difficulty": 1,
+      "display_name": "Generated Old Mine - Short Split",
+      "profile_ids": ["short_mine"],
+      "pacing": { "route_length": 3, "branch_count": 2, "treasure_count": 1, "combat_count": 1, "room_event_slots": 2, "corridor_hazard_candidates": 4 },
+      "rooms": [
+        { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 0, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_lift", "display_name": "Broken Lift", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_cache", "display_name": "Survey Cache", "kind": "treasure", "position": { "x": 1, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 1, "gold": 6, "items": ["generated_old_mine_trinket"] } }] },
+        { "id": "generated_chamber", "display_name": "Cracked Chamber", "kind": "empty", "position": { "x": 2, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_nest", "display_name": "Spider Alcove", "kind": "combat", "position": { "x": 2, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_pool_id": "old_mine_generated_combat_pool" }] },
+        { "id": "generated_exit", "display_name": "Timber Crawl", "kind": "exit", "position": { "x": 3, "y": 1 }, "content": [{ "type": "empty" }] }
+      ],
+      "corridors": [
+        { "id": "generated_entrance_lift", "from": "generated_entrance", "to": "generated_lift", "danger": 0.05, "light_decay": 1, "hazard_profile": "none" },
+        { "id": "generated_lift_cache", "from": "generated_lift", "to": "generated_cache", "danger": 0.12, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_lift_chamber", "from": "generated_lift", "to": "generated_chamber", "danger": 0.17, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_chamber_nest", "from": "generated_chamber", "to": "generated_nest", "danger": 0.29, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_chamber_exit", "from": "generated_chamber", "to": "generated_exit", "danger": 0.2, "light_decay": 1, "hazard_profile": "planned" }
+      ]
+    },
+    {
+      "id": "old_mine_medium_ring",
+      "difficulty": 2,
+      "display_name": "Generated Old Mine - Medium Ring",
+      "profile_ids": ["medium_mine"],
+      "pacing": { "route_length": 5, "branch_count": 2, "treasure_count": 2, "combat_count": 1, "room_event_slots": 3, "corridor_hazard_candidates": 6 },
+      "rooms": [
+        { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 0, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_landing", "display_name": "Cart Landing", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_upper_cache", "display_name": "Upper Cache", "kind": "treasure", "position": { "x": 2, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 2, "gold": 8, "items": ["generated_old_mine_trinket"] } }] },
+        { "id": "generated_gallery", "display_name": "Ore Gallery", "kind": "empty", "position": { "x": 2, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_sump", "display_name": "Cold Sump", "kind": "empty", "position": { "x": 2, "y": 2 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_nest", "display_name": "Spider Hoist", "kind": "combat", "position": { "x": 3, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_pool_id": "old_mine_generated_combat_pool" }] },
+        { "id": "generated_deep_cache", "display_name": "Ledger Chest", "kind": "treasure", "position": { "x": 4, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 2, "gold": 13, "items": ["generated_old_mine_relic"] } }] },
+        { "id": "generated_exit", "display_name": "Drain Tunnel", "kind": "exit", "position": { "x": 4, "y": 1 }, "content": [{ "type": "empty" }] }
+      ],
+      "corridors": [
+        { "id": "generated_entrance_landing", "from": "generated_entrance", "to": "generated_landing", "danger": 0.05, "light_decay": 1, "hazard_profile": "none" },
+        { "id": "generated_landing_upper_cache", "from": "generated_landing", "to": "generated_upper_cache", "danger": 0.12, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_landing_gallery", "from": "generated_landing", "to": "generated_gallery", "danger": 0.17, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_gallery_sump", "from": "generated_gallery", "to": "generated_sump", "danger": 0.2, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_sump_nest", "from": "generated_sump", "to": "generated_nest", "danger": 0.33, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_nest_exit", "from": "generated_nest", "to": "generated_exit", "danger": 0.22, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_gallery_deep_cache", "from": "generated_gallery", "to": "generated_deep_cache", "danger": 0.19, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_deep_cache_exit", "from": "generated_deep_cache", "to": "generated_exit", "danger": 0.24, "light_decay": 1, "hazard_profile": "planned" }
+      ]
+    },
+    {
+      "id": "old_mine_deep_switchbacks",
+      "difficulty": 3,
+      "display_name": "Generated Old Mine - Deep Switchbacks",
+      "profile_ids": ["deep_mine"],
+      "pacing": { "route_length": 6, "branch_count": 2, "treasure_count": 2, "combat_count": 2, "room_event_slots": 3, "corridor_hazard_candidates": 7 },
+      "rooms": [
+        { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 0, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_switchback", "display_name": "Upper Switchback", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_cache", "display_name": "Foreman's Cache", "kind": "treasure", "position": { "x": 1, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 3, "gold": 10, "items": ["generated_old_mine_trinket"] } }] },
+        { "id": "generated_midshaft", "display_name": "Lower Switchback", "kind": "empty", "position": { "x": 2, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_guard", "display_name": "Webbed Guardroom", "kind": "combat", "position": { "x": 2, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_pool_id": "old_mine_generated_combat_pool" }] },
+        { "id": "generated_ore_room", "display_name": "Ore Room", "kind": "empty", "position": { "x": 3, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_deep_cache", "display_name": "Sealed Crate", "kind": "treasure", "position": { "x": 4, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 3, "gold": 16, "items": ["generated_old_mine_relic"] } }] },
+        { "id": "generated_deep_nest", "display_name": "Deep Webbing", "kind": "combat", "position": { "x": 4, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_pool_id": "old_mine_generated_combat_pool" }] },
+        { "id": "generated_exit", "display_name": "Lower Air Shaft", "kind": "exit", "position": { "x": 5, "y": 1 }, "content": [{ "type": "empty" }] }
+      ],
+      "corridors": [
+        { "id": "generated_entrance_switchback", "from": "generated_entrance", "to": "generated_switchback", "danger": 0.06, "light_decay": 1, "hazard_profile": "none" },
+        { "id": "generated_switchback_cache", "from": "generated_switchback", "to": "generated_cache", "danger": 0.14, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_switchback_midshaft", "from": "generated_switchback", "to": "generated_midshaft", "danger": 0.18, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_midshaft_guard", "from": "generated_midshaft", "to": "generated_guard", "danger": 0.32, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_midshaft_ore_room", "from": "generated_midshaft", "to": "generated_ore_room", "danger": 0.21, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_ore_room_deep_cache", "from": "generated_ore_room", "to": "generated_deep_cache", "danger": 0.24, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_ore_room_deep_nest", "from": "generated_ore_room", "to": "generated_deep_nest", "danger": 0.37, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_deep_nest_exit", "from": "generated_deep_nest", "to": "generated_exit", "danger": 0.19, "light_decay": 1, "hazard_profile": "planned" }
+      ]
+    },
+    {
+      "id": "old_mine_deep_vault",
+      "difficulty": 3,
+      "display_name": "Generated Old Mine - Deep Vault",
+      "profile_ids": ["deep_mine"],
+      "pacing": { "route_length": 6, "branch_count": 3, "treasure_count": 3, "combat_count": 2, "room_event_slots": 3, "corridor_hazard_candidates": 8 },
+      "rooms": [
+        { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 0, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_crossing", "display_name": "Brace Crossing", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_left_cache", "display_name": "Left-Hand Cache", "kind": "treasure", "position": { "x": 2, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 3, "gold": 9, "items": ["generated_old_mine_trinket"] } }] },
+        { "id": "generated_gallery", "display_name": "Brace Gallery", "kind": "empty", "position": { "x": 2, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_guard", "display_name": "Vault Guard", "kind": "combat", "position": { "x": 2, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_pool_id": "old_mine_generated_combat_pool" }] },
+        { "id": "generated_vault", "display_name": "Survey Vault", "kind": "treasure", "position": { "x": 3, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 4, "gold": 18, "items": ["generated_old_mine_relic"] } }] },
+        { "id": "generated_drop", "display_name": "Rope Drop", "kind": "empty", "position": { "x": 4, "y": 1 }, "content": [{ "type": "empty" }] },
+        { "id": "generated_deep_nest", "display_name": "Deep Nest", "kind": "combat", "position": { "x": 4, "y": 2 }, "content": [{ "type": "combat", "combat_encounter_pool_id": "old_mine_generated_combat_pool" }] },
+        { "id": "generated_final_cache", "display_name": "Miner's Strongbox", "kind": "treasure", "position": { "x": 5, "y": 0 }, "content": [{ "type": "treasure", "rewards": { "xp": 3, "gold": 13, "items": ["generated_old_mine_relic"] } }] },
+        { "id": "generated_exit", "display_name": "Collapsed Outlet", "kind": "exit", "position": { "x": 5, "y": 1 }, "content": [{ "type": "empty" }] }
+      ],
+      "corridors": [
+        { "id": "generated_entrance_crossing", "from": "generated_entrance", "to": "generated_crossing", "danger": 0.06, "light_decay": 1, "hazard_profile": "none" },
+        { "id": "generated_crossing_left_cache", "from": "generated_crossing", "to": "generated_left_cache", "danger": 0.13, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_crossing_gallery", "from": "generated_crossing", "to": "generated_gallery", "danger": 0.18, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_gallery_guard", "from": "generated_gallery", "to": "generated_guard", "danger": 0.31, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_gallery_vault", "from": "generated_gallery", "to": "generated_vault", "danger": 0.22, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_gallery_drop", "from": "generated_gallery", "to": "generated_drop", "danger": 0.23, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_drop_deep_nest", "from": "generated_drop", "to": "generated_deep_nest", "danger": 0.38, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_drop_final_cache", "from": "generated_drop", "to": "generated_final_cache", "danger": 0.25, "light_decay": 1, "hazard_profile": "planned" },
+        { "id": "generated_drop_exit", "from": "generated_drop", "to": "generated_exit", "danger": 0.2, "light_decay": 1, "hazard_profile": "planned" }
       ]
     }
   ]

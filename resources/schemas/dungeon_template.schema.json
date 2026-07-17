@@ -15,12 +15,22 @@
   "$defs": {
     "template": {
       "type": "object",
-      "required": ["id", "difficulty", "display_name", "rooms", "corridors"],
+      "required": ["id", "difficulty", "display_name", "profile_ids", "pacing", "rooms", "corridors"],
       "additionalProperties": false,
       "properties": {
         "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
         "difficulty": { "type": "integer", "minimum": 1, "maximum": 3 },
         "display_name": { "type": "string", "minLength": 1 },
+        "profile_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": ["short_mine", "medium_mine", "deep_mine"]
+          },
+          "uniqueItems": true
+        },
+        "pacing": { "$ref": "#/$defs/template_pacing" },
         "rooms": {
           "type": "array",
           "minItems": 1,
@@ -30,6 +40,19 @@
           "type": "array",
           "items": { "$ref": "#/$defs/template_corridor" }
         }
+      }
+    },
+    "template_pacing": {
+      "type": "object",
+      "required": ["route_length", "branch_count", "treasure_count", "combat_count", "room_event_slots", "corridor_hazard_candidates"],
+      "additionalProperties": false,
+      "properties": {
+        "route_length": { "type": "integer", "minimum": 1 },
+        "branch_count": { "type": "integer", "minimum": 0 },
+        "treasure_count": { "type": "integer", "minimum": 0 },
+        "combat_count": { "type": "integer", "minimum": 0 },
+        "room_event_slots": { "type": "integer", "minimum": 0 },
+        "corridor_hazard_candidates": { "type": "integer", "minimum": 0 }
       }
     },
     "template_room": {
@@ -75,8 +98,20 @@
           "type": "string",
           "pattern": "^res://resources/data/combat_encounters/.+\\.json$"
         },
+        "combat_encounter_pool_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "combat_encounter_selection": { "$ref": "#/$defs/combat_encounter_selection" },
         "quest_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
         "rewards": { "$ref": "#/$defs/template_rewards" }
+      }
+    },
+    "combat_encounter_selection": {
+      "type": "object",
+      "required": ["pool_id", "entry_id", "tactical_role"],
+      "additionalProperties": false,
+      "properties": {
+        "pool_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "entry_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "tactical_role": { "type": "string", "pattern": "^[a-z0-9_]+$" }
       }
     },
     "template_rewards": {

@@ -68,6 +68,8 @@
                   "type": "string",
                   "pattern": "^res://resources/data/combat_encounters/.+\\.json$"
                 },
+                "combat_encounter_pool_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+                "combat_encounter_selection": { "$ref": "#/$defs/combat_encounter_selection" },
                 "quest_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
                 "rewards": { "$ref": "#/$defs/rewards" }
               }
@@ -260,6 +262,16 @@
         "supply_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
         "debuff_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
         "target_id": { "type": "string", "pattern": "^[a-z0-9_]+$" }
+      }
+    },
+    "combat_encounter_selection": {
+      "type": "object",
+      "required": ["pool_id", "entry_id", "tactical_role"],
+      "additionalProperties": false,
+      "properties": {
+        "pool_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "entry_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "tactical_role": { "type": "string", "pattern": "^[a-z0-9_]+$" }
       }
     },
     "rewards": {

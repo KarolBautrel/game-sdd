@@ -29,6 +29,17 @@ func _init() -> void:
 	var showcase := _load_json("res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json")
 	var randomized: Dictionary = session.apply_launch_metadata(showcase)
 	_expect_equal(errors, "randomized keeps dungeon modifiers", randomized["dungeon_modifiers"]["light_state"], "dim")
+	var player_units := _units_for_team(randomized, "player")
+	_expect_equal(errors, "beta party player count", player_units.size(), 2)
+	_expect_true(errors, "beta party has warrior", not _unit_by_id(randomized, "unit_player_001").is_empty())
+	_expect_true(errors, "beta party has archer", not _unit_by_id(randomized, "unit_player_002").is_empty())
+	_expect_equal(errors, "warrior visual resolves existing character", _unit_by_id(randomized, "unit_player_001")["visual"]["character"], "warrior")
+	_expect_equal(errors, "archer visual resolves existing character", _unit_by_id(randomized, "unit_player_002")["visual"]["character"], "archer_1")
+	_expect_true(errors, "warrior sword profile available", randomized["item_profiles"].has("hero_sword"))
+	_expect_true(errors, "warrior power strike profile available", randomized["item_profiles"]["hero_sword"]["action_profiles"].has("power_strike"))
+	_expect_equal(errors, "archer bow equipped", _unit_by_id(randomized, "unit_player_002")["loadout"]["main_hand"], "hero_bow")
+	_expect_true(errors, "archer bow profile injected", randomized["item_profiles"].has("hero_bow"))
+	_expect_true(errors, "archer aimed shot profile available", randomized["item_profiles"]["hero_bow"]["action_profiles"].has("aimed_shot"))
 	var enemy_units := _units_for_team(randomized, "enemy")
 	_expect_true(errors, "random enemy count 2-3", enemy_units.size() >= 2 and enemy_units.size() <= 3)
 	_expect_equal(errors, "turn order count follows randomized units", randomized["turn_state"]["turn_order"].size(), randomized["units"].size())
@@ -49,7 +60,13 @@ func _init() -> void:
 				"slot_id": "front",
 				"target_id": "party_slot_front",
 				"combat_unit_id": "unit_player_001",
-				"label": "Front",
+				"label": "Warrior",
+			},
+			{
+				"slot_id": "back",
+				"target_id": "party_slot_back",
+				"combat_unit_id": "unit_player_002",
+				"label": "Archer",
 			}],
 			"target_effects": {
 				"party_slot_front": {
@@ -67,6 +84,7 @@ func _init() -> void:
 	_expect_equal(errors, "dungeon hp loss applies to player", modified_player["resources"]["hp"], 11)
 	_expect_equal(errors, "limping halves player mp", modified_player["resources"]["mp"], 2)
 	_expect_true(errors, "bleeding starts on player", _unit_has_status(modified_player, "bleeding"))
+	_expect_equal(errors, "backline archer avoids front hp loss", _unit_by_id(modified, "unit_player_002")["resources"]["hp"], 10)
 	var modified_enemy_units := _units_for_team(modified, "enemy")
 	_expect_true(errors, "enemy initiative bonus applied", int(modified_enemy_units[0]["stats"]["initiative"]) >= 12)
 	_expect_true(errors, "blackout can put enemy first", str(modified["turn_state"]["active_unit_id"]).begins_with("unit_enemy_"))
