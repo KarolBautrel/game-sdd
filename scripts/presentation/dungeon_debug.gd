@@ -24,6 +24,9 @@ const DUNGEON_ICON_PREFIX := "res://assets/ui/dungeon/processed/dungeon_icons/du
 const DUNGEON_ROOM_FRAME_PREFIX := "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_"
 const DUNGEON_LAYOUT_OVERRIDE_PATH := "res://resources/debug/dungeon_debug_layout_overrides.json"
 const LAYOUT_EDIT_HANDLE_SIZE := 24.0
+const EVENT_POPUP_DEFAULT_SIZE := Vector2(700, 353)
+const EVENT_POPUP_MIN_SIZE := Vector2(560, 280)
+const EVENT_POPUP_MAX_SIZE := Vector2(760, 420)
 
 var dungeon: Dictionary = {}
 var entry_payload: Dictionary = DungeonEntrySelection.default_payload()
@@ -52,7 +55,7 @@ var finish_button: Button
 var oil_button: Button
 var recovery_button: Button
 var reset_button: Button
-var corridor_event_panel: PanelContainer
+var corridor_event_panel: Control
 var corridor_event_title_label: Label
 var corridor_event_type_label: Label
 var corridor_event_message_label: Label
@@ -233,10 +236,7 @@ func _apply_positioned_chrome() -> void:
 		loadout_panel.custom_minimum_size = loadout_area.size
 		loadout_panel.size = loadout_area.size
 	if corridor_event_panel != null:
-		if layout_overrides.has("event_popup"):
-			_apply_control_rect(corridor_event_panel, _rect_from_dict(layout_overrides["event_popup"], _default_event_popup_rect()))
-		else:
-			_center_corridor_event_panel()
+		_center_corridor_event_panel()
 
 
 func _apply_layout_overrides() -> void:
@@ -819,25 +819,32 @@ func _create_loadout_row(supply_id: String) -> HBoxContainer:
 
 
 func _create_corridor_event_panel() -> void:
-	corridor_event_panel = PanelContainer.new()
+	corridor_event_panel = Control.new()
 	corridor_event_panel.visible = false
-	corridor_event_panel.custom_minimum_size = Vector2(640, 324)
+	corridor_event_panel.custom_minimum_size = EVENT_POPUP_MIN_SIZE
+	corridor_event_panel.clip_contents = true
 	corridor_event_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	corridor_event_panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	corridor_event_panel.add_theme_stylebox_override("panel", _dungeon_ui_stylebox(
-		DUNGEON_UI_MODAL_PATH,
-		Vector4(54, 42, 54, 42),
-		Vector4(46, 38, 46, 34),
-		_button_style(Color(0.055, 0.06, 0.055), Color(0.82, 0.62, 0.28))
-	))
 	add_child(corridor_event_panel)
 	_center_corridor_event_panel()
 
+	var background := NinePatchRect.new()
+	background.texture = _dungeon_ui_texture(DUNGEON_UI_MODAL_PATH)
+	background.patch_margin_left = 54
+	background.patch_margin_top = 42
+	background.patch_margin_right = 54
+	background.patch_margin_bottom = 42
+	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	background.set_anchors_preset(Control.PRESET_FULL_RECT)
+	corridor_event_panel.add_child(background)
+
 	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 46)
-	margin.add_theme_constant_override("margin_top", 38)
-	margin.add_theme_constant_override("margin_right", 46)
-	margin.add_theme_constant_override("margin_bottom", 34)
+	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	margin.set_anchors_preset(Control.PRESET_FULL_RECT)
+	margin.offset_left = 46
+	margin.offset_top = 38
+	margin.offset_right = -46
+	margin.offset_bottom = -34
 	corridor_event_panel.add_child(margin)
 
 	var box := VBoxContainer.new()
@@ -881,16 +888,29 @@ func _center_corridor_event_panel() -> void:
 		return
 	var panel_rect := _default_event_popup_rect()
 	if layout_overrides.has("event_popup"):
-		panel_rect = _rect_from_dict(layout_overrides["event_popup"], panel_rect)
-	_apply_control_rect(corridor_event_panel, panel_rect)
+		panel_rect = _clamp_event_popup_rect(_rect_from_dict(layout_overrides["event_popup"], panel_rect))
+	_apply_event_popup_rect(panel_rect)
+
+
+func _show_event_popup_panel() -> void:
+	if corridor_event_panel == null:
+		return
+	_center_corridor_event_panel()
+	corridor_event_panel.show()
+	call_deferred("_force_event_popup_rect")
+
+
+func _force_event_popup_rect() -> void:
+	if corridor_event_panel == null or not corridor_event_panel.visible:
+		return
+	_center_corridor_event_panel()
 
 
 func _default_event_popup_rect() -> Rect2:
 	var viewport_size := FALLBACK_VIEWPORT_SIZE
 	if is_inside_tree():
 		viewport_size = get_viewport_rect().size
-	var panel_size := Vector2(640, 324)
-	return Rect2((viewport_size - panel_size) * 0.5, panel_size)
+	return Rect2((viewport_size - EVENT_POPUP_DEFAULT_SIZE) * 0.5, EVENT_POPUP_DEFAULT_SIZE)
 
 
 func _handle_layout_edit_input(event: InputEvent) -> bool:
@@ -947,6 +967,8 @@ func _handle_layout_edit_mouse_motion(event: InputEventMouseMotion) -> bool:
 		)
 	else:
 		next_rect.position = event.position - layout_edit_drag_offset
+	if layout_edit_target_id == "event_popup":
+		next_rect = _clamp_event_popup_rect(next_rect)
 	_set_layout_rect(layout_edit_target_id, next_rect)
 	get_viewport().set_input_as_handled()
 	return true
@@ -965,7 +987,7 @@ func _set_layout_edit_enabled(enabled: bool) -> void:
 			corridor_event_message_label.text = "Drag this popup or resize it from the bottom-right corner."
 			corridor_event_supply_label.text = "Ctrl+S saves to %s" % DUNGEON_LAYOUT_OVERRIDE_PATH
 			corridor_event_result_label.text = ""
-			corridor_event_panel.show()
+			_show_event_popup_panel()
 	else:
 		last_feedback = "Layout edit disabled."
 		if layout_edit_preview_popup and corridor_event_panel != null:
@@ -999,6 +1021,8 @@ func _layout_resize_handle_rect(rect: Rect2) -> Rect2:
 
 
 func _set_layout_rect(id: String, rect: Rect2) -> void:
+	if id == "event_popup":
+		rect = _clamp_event_popup_rect(rect)
 	layout_overrides[id] = _rect_to_dict(rect)
 	match id:
 		"map":
@@ -1020,13 +1044,46 @@ func _set_layout_rect(id: String, rect: Rect2) -> void:
 			_apply_positioned_chrome()
 		"event_popup":
 			if corridor_event_panel != null:
-				_apply_control_rect(corridor_event_panel, rect)
+				_apply_event_popup_rect(rect)
 
 
 func _apply_control_rect(control: Control, rect: Rect2) -> void:
 	control.position = rect.position
 	control.size = rect.size
 	control.custom_minimum_size = rect.size
+
+
+func _apply_event_popup_rect(rect: Rect2) -> void:
+	if corridor_event_panel == null:
+		return
+	rect = _clamp_event_popup_rect(rect)
+	corridor_event_panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	corridor_event_panel.custom_minimum_size = EVENT_POPUP_MIN_SIZE
+	corridor_event_panel.position = rect.position
+	corridor_event_panel.size = rect.size
+
+
+func _clamp_event_popup_rect(rect: Rect2) -> Rect2:
+	var viewport_size := FALLBACK_VIEWPORT_SIZE
+	if is_inside_tree():
+		viewport_size = get_viewport_rect().size
+	var max_size := Vector2(
+		minf(EVENT_POPUP_MAX_SIZE.x, maxf(EVENT_POPUP_MIN_SIZE.x, viewport_size.x - 64.0)),
+		minf(EVENT_POPUP_MAX_SIZE.y, maxf(EVENT_POPUP_MIN_SIZE.y, viewport_size.y - 64.0))
+	)
+	var clamped_size := Vector2(
+		clampf(rect.size.x, EVENT_POPUP_MIN_SIZE.x, max_size.x),
+		clampf(rect.size.y, EVENT_POPUP_MIN_SIZE.y, max_size.y)
+	)
+	var max_position := Vector2(
+		maxf(24.0, viewport_size.x - clamped_size.x - 24.0),
+		maxf(24.0, viewport_size.y - clamped_size.y - 24.0)
+	)
+	var clamped_position := Vector2(
+		clampf(rect.position.x, 24.0, max_position.x),
+		clampf(rect.position.y, 24.0, max_position.y)
+	)
+	return Rect2(clamped_position, clamped_size)
 
 
 func _load_layout_overrides() -> void:
@@ -1052,7 +1109,7 @@ func _save_layout_overrides() -> void:
 	layout_overrides["detail"] = _rect_to_dict(detail_area)
 	layout_overrides["loadout"] = _rect_to_dict(loadout_area)
 	if corridor_event_panel != null:
-		layout_overrides["event_popup"] = _rect_to_dict(Rect2(corridor_event_panel.position, corridor_event_panel.size))
+		layout_overrides["event_popup"] = _rect_to_dict(_clamp_event_popup_rect(Rect2(corridor_event_panel.position, corridor_event_panel.size)))
 	var file := FileAccess.open(DUNGEON_LAYOUT_OVERRIDE_PATH, FileAccess.WRITE)
 	if file == null:
 		last_feedback = "Could not save layout overrides."
@@ -1488,8 +1545,7 @@ func _show_corridor_hazard_popup(prompt: Dictionary) -> void:
 		)
 		corridor_event_choice_row.add_child(button)
 		corridor_hazard_choice_buttons.append(button)
-	_center_corridor_event_panel()
-	corridor_event_panel.show()
+	_show_event_popup_panel()
 
 
 func _show_room_event_popup(prompt: Dictionary) -> void:
@@ -1523,8 +1579,7 @@ func _show_room_event_popup(prompt: Dictionary) -> void:
 		)
 		corridor_event_choice_row.add_child(button)
 		corridor_hazard_choice_buttons.append(button)
-	_center_corridor_event_panel()
-	corridor_event_panel.show()
+	_show_event_popup_panel()
 
 
 func _room_event_popup_text(prompt: Dictionary) -> String:
