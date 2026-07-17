@@ -16,21 +16,25 @@ func _init() -> void:
 	_expect_equal(errors, "initial light bright", state["light_state"], "bright")
 	_expect_equal(errors, "initial oil supply", DungeonStateModel.supply_count(state, "lamp_oil"), 2)
 	_expect_equal(errors, "initial pickaxe supply", DungeonStateModel.supply_count(state, "pickaxe"), 1)
-	_expect_equal(errors, "initial trap tools supply", DungeonStateModel.supply_count(state, "trap_tools"), 1)
-	_expect_equal(errors, "initial remedy supply", DungeonStateModel.supply_count(state, "remedy_kit"), 1)
+	_expect_equal(errors, "initial bandage supply", DungeonStateModel.supply_count(state, "bandage"), 1)
+	_expect_equal(errors, "initial antidote supply", DungeonStateModel.supply_count(state, "antidote"), 1)
+	_expect_equal(errors, "initial food supply", DungeonStateModel.supply_count(state, "food"), 1)
+	_expect_equal(errors, "initial camping supply", DungeonStateModel.supply_count(state, "camping_kit"), 0)
 	_expect_equal(errors, "initial party formation target", state["party_formation"][0]["target_id"], "party_slot_front")
 	_expect_equal(errors, "initial party formation combat unit", state["party_formation"][0]["combat_unit_id"], "unit_player_001")
 	_expect_equal(errors, "default loadout oil", DungeonStateModel.default_supply_loadout(dungeon)["lamp_oil"], 2)
-	var custom_loadout_state := DungeonStateModel.initial_state(dungeon, {"lamp_oil": 4, "pickaxe": 0, "trap_tools": 2})
+	_expect_equal(errors, "default loadout inside capacity", DungeonStateModel.loadout_packing_summary(dungeon, DungeonStateModel.default_supply_loadout(dungeon))["over_capacity"], false)
+	var custom_loadout_state := DungeonStateModel.initial_state(dungeon, {"lamp_oil": 4, "pickaxe": 0, "bandage": 1, "antidote": 1, "food": 1})
 	_expect_equal(errors, "custom loadout oil", DungeonStateModel.supply_count(custom_loadout_state, "lamp_oil"), 4)
 	_expect_equal(errors, "custom loadout pickaxe", DungeonStateModel.supply_count(custom_loadout_state, "pickaxe"), 0)
-	_expect_equal(errors, "custom loadout trap tools", DungeonStateModel.supply_count(custom_loadout_state, "trap_tools"), 2)
+	_expect_equal(errors, "custom loadout antidote", DungeonStateModel.supply_count(custom_loadout_state, "antidote"), 1)
 	_expect_equal(errors, "selected loadout recorded", custom_loadout_state["selected_supply_loadout"]["pickaxe"], 0)
-	var clamped_loadout := DungeonStateModel.clamp_supply_loadout(dungeon, {"lamp_oil": 99, "pickaxe": -4, "trap_tools": 99})
+	var clamped_loadout := DungeonStateModel.clamp_supply_loadout(dungeon, {"lamp_oil": 99, "pickaxe": -4, "bandage": 99, "antidote": 99, "food": 99})
 	_expect_equal(errors, "loadout oil clamps max", clamped_loadout["lamp_oil"], 4)
 	_expect_equal(errors, "loadout pickaxe clamps min", clamped_loadout["pickaxe"], 0)
-	_expect_equal(errors, "loadout trap tools clamps max", clamped_loadout["trap_tools"], 3)
-	_expect_equal(errors, "loadout remedy clamps default", clamped_loadout["remedy_kit"], 1)
+	_expect_equal(errors, "loadout bandage reduced by capacity", clamped_loadout["bandage"], 1)
+	_expect_equal(errors, "loadout antidote reduced by capacity", clamped_loadout["antidote"], 0)
+	_expect_equal(errors, "loadout capacity used", DungeonStateModel.loadout_packing_summary(dungeon, clamped_loadout)["used"], 8)
 	var low_danger_plan: Dictionary = DungeonStateModel.procedural_corridor_plan(
 		{"id": "generated_mine_low", "danger": 0.1},
 		{"required_tags": ["mine", "corridor"], "id": "generated_low_hazard"}
@@ -128,14 +132,14 @@ func _init() -> void:
 	var darkness_result: Dictionary = DungeonStateModel.resolve_corridor_hazard_choice(darkness_dungeon, darkness_prompt["state"], "use_supply")
 	_expect_equal(errors, "darkness oil accepted", darkness_result["status"], "accepted")
 	_expect_equal(errors, "darkness consumes oil", DungeonStateModel.supply_count(darkness_result["state"], "lamp_oil"), 1)
-	var blocked_dungeon := _corridor_hazard_test_dungeon("rubble_major_cavein", {"lamp_oil": 0, "pickaxe": 0, "trap_tools": 0, "remedy_kit": 0})
-	var blocked_prompt: Dictionary = DungeonStateModel.enter_room(blocked_dungeon, DungeonStateModel.initial_state(blocked_dungeon, {"lamp_oil": 0, "pickaxe": 0, "trap_tools": 0, "remedy_kit": 0}), "target")
+	var blocked_dungeon := _corridor_hazard_test_dungeon("rubble_major_cavein", {"lamp_oil": 0, "pickaxe": 0, "antidote": 0})
+	var blocked_prompt: Dictionary = DungeonStateModel.enter_room(blocked_dungeon, DungeonStateModel.initial_state(blocked_dungeon, {"lamp_oil": 0, "pickaxe": 0, "antidote": 0}), "target")
 	var blocked_result: Dictionary = DungeonStateModel.resolve_corridor_hazard_choice(blocked_dungeon, blocked_prompt["state"], "force_passage")
 	_expect_equal(errors, "blockage rejects traversal", blocked_result["status"], "rejected")
 	_expect_equal(errors, "blockage rejection reason", blocked_result["rejection"], "hazard_blocked")
 	_expect_equal(errors, "blockage keeps current room", blocked_result["state"]["current_room_id"], "start")
-	var no_pickaxe_cache_dungeon := _room_event_test_dungeon("old_mine_hidden_cache", {"lamp_oil": 0, "pickaxe": 0, "trap_tools": 0})
-	var no_pickaxe_cache_state := DungeonStateModel.initial_state(no_pickaxe_cache_dungeon, {"lamp_oil": 0, "pickaxe": 0, "trap_tools": 0})
+	var no_pickaxe_cache_dungeon := _room_event_test_dungeon("old_mine_hidden_cache", {"lamp_oil": 0, "pickaxe": 0, "antidote": 0})
+	var no_pickaxe_cache_state := DungeonStateModel.initial_state(no_pickaxe_cache_dungeon, {"lamp_oil": 0, "pickaxe": 0, "antidote": 0})
 	var no_pickaxe_cache_prompt: Dictionary = DungeonStateModel.enter_room(no_pickaxe_cache_dungeon, no_pickaxe_cache_state, "event_room")
 	_expect_equal(errors, "supply gated room event prompt", no_pickaxe_cache_prompt["status"], "accepted")
 	_expect_equal(errors, "supply gated inspect unavailable", no_pickaxe_cache_prompt["state"]["pending_room_event"]["choices"][0]["available"], false)
@@ -225,7 +229,7 @@ func _init() -> void:
 
 	var no_pickaxe_dungeon: Dictionary = dungeon.duplicate(true)
 	no_pickaxe_dungeon["starting_supplies"] = {"lamp_oil": 0, "pickaxe": 0}
-	var no_pickaxe_state := DungeonStateModel.initial_state(no_pickaxe_dungeon, {"lamp_oil": 0, "pickaxe": 0, "trap_tools": 0})
+	var no_pickaxe_state := DungeonStateModel.initial_state(no_pickaxe_dungeon, {"lamp_oil": 0, "pickaxe": 0, "antidote": 0})
 	no_pickaxe_state = _resolve_room_event_if_pending(no_pickaxe_dungeon, DungeonStateModel.enter_room(no_pickaxe_dungeon, no_pickaxe_state, "dusty_crossing")["state"])
 	var no_pickaxe_result: Dictionary = DungeonStateModel.enter_room(no_pickaxe_dungeon, no_pickaxe_state, "collapsed_cache")
 	_expect_equal(errors, "no pickaxe rubble requires choice", no_pickaxe_result["status"], "choice_required")
@@ -245,7 +249,7 @@ func _init() -> void:
 	_expect_equal(errors, "trap hazard type", combat_result["event"]["hazard_type"], "trap")
 	_expect_equal(errors, "trap hazard event template", combat_result["event"]["event_id"], "needle_trap_basic")
 	_expect_equal(errors, "trap hazard pool", combat_result["event"]["pool_id"], "old_mine_trap_pool")
-	_expect_equal(errors, "trap hazard supply", combat_result["event"]["required_supply_id"], "trap_tools")
+	_expect_equal(errors, "trap hazard supply", combat_result["event"]["required_supply_id"], "antidote")
 	_expect_true(errors, "trap tools choice available", combat_result["event"]["choices"][0]["available"])
 	combat_result = DungeonStateModel.resolve_corridor_hazard_choice(dungeon, combat_result["state"], "use_supply")
 	_expect_equal(errors, "combat room accepted", combat_result["status"], "accepted")
@@ -258,7 +262,7 @@ func _init() -> void:
 	_expect_equal(errors, "pending combat content type", combat_state["pending_combat_request"]["content_type"], "combat")
 	_expect_equal(errors, "pending combat path", combat_state["pending_combat_request"]["combat_encounter_path"], "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json")
 	_expect_equal(errors, "pending combat dungeon modifier light", combat_state["pending_combat_request"]["dungeon_modifiers"]["light_state"], "bright")
-	_expect_equal(errors, "trap tools consumed", DungeonStateModel.supply_count(combat_state, "trap_tools"), 0)
+	_expect_equal(errors, "antidote consumed", DungeonStateModel.supply_count(combat_state, "antidote"), 0)
 	_expect_false(errors, "trap disarm avoids poisoned", DungeonStateModel.active_debuff_summary(combat_state).has("poisoned x1"))
 
 	var forced_trap_state := DungeonStateModel.initial_state(dungeon)
@@ -270,19 +274,37 @@ func _init() -> void:
 	_expect_equal(errors, "forced trap hp loss", forced_trap_result["state"]["party_effects"]["hp_loss"], 1)
 	_expect_true(errors, "forced trap applies poisoned", DungeonStateModel.active_debuff_summary(forced_trap_result["state"]).has("poisoned x1"))
 	_expect_equal(errors, "forced trap target poisoned stacks", forced_trap_result["state"]["target_effects"]["party_slot_front"]["debuffs"]["poisoned"], 1)
-	var recovery_result: Dictionary = DungeonStateModel.use_recovery_supply(forced_trap_result["state"], "remedy_kit")
+	var recovery_result: Dictionary = DungeonStateModel.use_recovery_supply(forced_trap_result["state"], "antidote")
 	_expect_equal(errors, "recovery accepted", recovery_result["status"], "accepted")
-	_expect_equal(errors, "recovery consumes remedy", DungeonStateModel.supply_count(recovery_result["state"], "remedy_kit"), 0)
+	_expect_equal(errors, "recovery consumes antidote", DungeonStateModel.supply_count(recovery_result["state"], "antidote"), 0)
 	_expect_true(errors, "recovery clears active debuffs", DungeonStateModel.active_debuff_summary(recovery_result["state"]).is_empty())
 	_expect_true(errors, "recovery clears party debuffs", recovery_result["state"]["party_effects"]["debuffs"].is_empty())
 	_expect_true(errors, "recovery clears target debuffs", recovery_result["state"]["target_effects"]["party_slot_front"]["debuffs"].is_empty())
 	_expect_equal(errors, "recovery keeps hp loss", recovery_result["state"]["target_effects"]["party_slot_front"]["hp_loss"], 1)
-	var recovery_without_debuff: Dictionary = DungeonStateModel.use_recovery_supply(recovery_result["state"], "remedy_kit")
+	var recovery_without_debuff: Dictionary = DungeonStateModel.use_recovery_supply(recovery_result["state"], "antidote")
 	_expect_equal(errors, "recovery without supply rejected first", recovery_without_debuff["status"], "rejected")
 	_expect_equal(errors, "recovery without supply reason", recovery_without_debuff["rejection"], "missing_recovery_supply")
-	var no_debuff_recovery: Dictionary = DungeonStateModel.use_recovery_supply(state, "remedy_kit")
+	var no_debuff_recovery: Dictionary = DungeonStateModel.use_recovery_supply(state, "antidote")
 	_expect_equal(errors, "recovery without debuff rejected", no_debuff_recovery["status"], "rejected")
 	_expect_equal(errors, "recovery without debuff reason", no_debuff_recovery["rejection"], "no_active_debuff")
+	var camp_state: Dictionary = no_pickaxe_result["state"].duplicate(true)
+	var camp_supplies: Dictionary = camp_state.get("supplies", {})
+	camp_supplies["camping_kit"] = 1
+	camp_state["supplies"] = camp_supplies
+	var camp_result: Dictionary = DungeonStateModel.use_camp(camp_state, "camping_kit")
+	_expect_equal(errors, "camp accepted", camp_result["status"], "accepted")
+	_expect_equal(errors, "camp consumes kit", DungeonStateModel.supply_count(camp_result["state"], "camping_kit"), 0)
+	_expect_equal(errors, "camp reduces hp loss", camp_result["state"]["party_effects"]["hp_loss"], 0)
+	_expect_true(errors, "camp clears debuffs", DungeonStateModel.active_debuff_summary(camp_result["state"]).is_empty())
+	_expect_equal(errors, "camp reduces light", camp_result["state"]["light_level"], 1)
+	_expect_equal(errors, "camp log recorded", camp_result["state"]["camp_log"][0]["type"], "camp_used")
+	var no_need_camp_state: Dictionary = state.duplicate(true)
+	var no_need_supplies: Dictionary = no_need_camp_state.get("supplies", {})
+	no_need_supplies["camping_kit"] = 1
+	no_need_camp_state["supplies"] = no_need_supplies
+	var no_need_camp: Dictionary = DungeonStateModel.use_camp(no_need_camp_state, "camping_kit")
+	_expect_equal(errors, "camp without recovery rejected", no_need_camp["status"], "rejected")
+	_expect_equal(errors, "camp without recovery reason", no_need_camp["rejection"], "no_recovery_needed")
 
 	var in_progress_result: Dictionary = DungeonStateModel.apply_combat_result(dungeon, combat_state, _combat_payload("in_progress", "dungeon_old_mine", "spider_nest"))
 	_expect_equal(errors, "in progress result rejected", in_progress_result["status"], "rejected")
@@ -484,7 +506,7 @@ func _corridor_to_room(dungeon: Dictionary, room_id: String) -> Dictionary:
 	return {}
 
 
-func _room_event_test_dungeon(event_id: String, starting_supplies: Dictionary = {"lamp_oil": 2, "pickaxe": 1, "trap_tools": 1, "remedy_kit": 1}) -> Dictionary:
+func _room_event_test_dungeon(event_id: String, starting_supplies: Dictionary = {"lamp_oil": 2, "pickaxe": 1, "antidote": 1, "bandage": 1, "food": 1}) -> Dictionary:
 	return {
 		"id": "test_room_event_dungeon",
 		"display_name": "Test Room Event Dungeon",
@@ -503,7 +525,7 @@ func _room_event_test_dungeon(event_id: String, starting_supplies: Dictionary = 
 	}
 
 
-func _corridor_hazard_test_dungeon(event_id: String, starting_supplies: Dictionary = {"lamp_oil": 2, "pickaxe": 1, "trap_tools": 1, "remedy_kit": 1}) -> Dictionary:
+func _corridor_hazard_test_dungeon(event_id: String, starting_supplies: Dictionary = {"lamp_oil": 2, "pickaxe": 1, "antidote": 1, "bandage": 1, "food": 1}) -> Dictionary:
 	return {
 		"id": "test_corridor_hazard_dungeon",
 		"display_name": "Test Corridor Hazard Dungeon",

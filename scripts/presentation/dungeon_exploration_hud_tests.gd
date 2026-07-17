@@ -25,7 +25,7 @@ func _init() -> void:
 	_expect_true(errors, "loadout status copy", loadout_hud._status_summary().contains("Prepare expedition supplies"))
 	loadout_hud._adjust_loadout_supply("pickaxe", -1)
 	_expect_equal(errors, "loadout pickaxe adjusted", int(loadout_hud.selected_supply_loadout["pickaxe"]), 0)
-	_expect_equal(errors, "loadout resource tray pickaxe", loadout_hud._resource_tile_texts()["pickaxe"], "Pickaxe 0")
+	_expect_equal(errors, "loadout resource tray pickaxe", loadout_hud._resource_tile_texts()["pickaxe"], "0")
 	_expect_true(errors, "loadout route copy", loadout_hud._route_state_text().contains("Preparation:"))
 	_expect_equal(errors, "default dungeon source", loadout_hud.dungeon_source, DungeonDebugScript.DUNGEON_SOURCE_AUTHORED)
 	_expect_true(errors, "loadout summary includes source", loadout_hud._status_summary().contains("Old Mine"))
@@ -35,12 +35,12 @@ func _init() -> void:
 	_expect_equal(errors, "generated source selected room", loadout_hud.selected_room_id, "generated_entrance")
 	_expect_true(errors, "generated source has template room count", loadout_hud.dungeon.get("rooms", []).size() >= 6)
 	_expect_true(errors, "generated source has seed", loadout_hud.generated_dungeon_seed > 0)
-	_expect_true(errors, "generated source status copy", loadout_hud._status_summary().contains("Generated Old Mine"))
-	_expect_true(errors, "generated summary includes difficulty", loadout_hud._generator_summary_text().contains("Generated: D2"))
+	_expect_true(errors, "generated source status copy", loadout_hud._status_summary().contains("Medium Mine"))
+	_expect_true(errors, "generated summary includes difficulty", loadout_hud._generator_summary_text().contains("Generated: Medium Mine | D2"))
 	_expect_true(errors, "generated summary includes rooms", loadout_hud._generator_summary_text().contains("Rooms"))
 	loadout_hud._set_generated_difficulty(3)
 	_expect_equal(errors, "generated difficulty changed", loadout_hud.generated_dungeon_difficulty, 3)
-	_expect_true(errors, "generated difficulty summary changed", loadout_hud._generator_summary_text().contains("Generated: D3"))
+	_expect_true(errors, "generated difficulty summary changed", loadout_hud._generator_summary_text().contains("Generated: Deep Mine | D3"))
 	for room: Dictionary in loadout_hud.dungeon.get("rooms", []):
 		var room_position := loadout_hud._room_screen_position(room)
 		_expect_true(errors, "generated D3 room fits map x %s" % str(room.get("id", "")), room_position.x >= loadout_hud.map_area.position.x)
@@ -63,14 +63,14 @@ func _init() -> void:
 	loadout_hud._start_expedition_with_loadout()
 	_expect_false(errors, "loadout no longer pending after start", loadout_hud._loadout_pending())
 	_expect_equal(errors, "loadout start uses selected pickaxe", DungeonStateModel.supply_count(loadout_hud.run_state, "pickaxe"), 0)
-	_expect_equal(errors, "loadout start has remedy", DungeonStateModel.supply_count(loadout_hud.run_state, "remedy_kit"), 1)
+	_expect_equal(errors, "loadout start has antidote", DungeonStateModel.supply_count(loadout_hud.run_state, "antidote"), 1)
 	loadout_hud.free()
 
 	var entrance_lines := "\n".join(hud._detail_lines_for_room(_room_by_id(dungeon, "entrance")))
 	_expect_false(errors, "detail omits visited ids", entrance_lines.contains("Visited:"))
 	_expect_false(errors, "detail omits cleared ids", entrance_lines.contains("Cleared:"))
 	_expect_false(errors, "detail omits internal dungeon id", entrance_lines.contains("dungeon_old_mine"))
-	_expect_true(errors, "detail shows light and supplies", entrance_lines.contains("Light: bright 4/4 | Oil: 2 | Pickaxe: 1 | Trap Tools: 1"))
+	_expect_true(errors, "detail shows light and supplies", entrance_lines.contains("Light: bright 4/4 | Torch: 2 | Pickaxe: 1 | Bandage: 1 | Antidote: 1"))
 	var entrance_exits := hud._connected_room_options("entrance")
 	_expect_equal(errors, "entrance exit count", entrance_exits.size(), 1)
 	_expect_equal(errors, "entrance exit slot", entrance_exits[0].get("slot", 0), 1)
@@ -78,7 +78,7 @@ func _init() -> void:
 	_expect_true(errors, "map legend includes combat", hud._map_legend_lines().has("[!] combat"))
 	_expect_true(errors, "rubble corridor uses hazard pool ref", _corridor_by_id(dungeon, "crossing_to_cache").has("hazard_pool_refs"))
 	_expect_equal(errors, "rubble corridor marker", hud._corridor_marker_label(_corridor_by_id(dungeon, "crossing_to_cache")), "Rubble")
-	_expect_true(errors, "resource tray includes effects", str(hud._resource_tile_texts()["effects"]).begins_with("Effects"))
+	_expect_equal(errors, "resource tray includes torch count", hud._resource_tile_texts()["torch"], "2")
 	_expect_true(errors, "route state exploring", hud._route_state_text().contains("Exploring from: Mine Entrance"))
 	var sealed_position := hud._room_screen_position(_room_by_id(dungeon, "sealed_armory"))
 	_expect_true(errors, "map room layout stays inside map", sealed_position.x + DungeonDebugScript.ROOM_SIZE.x <= hud.map_area.position.x + hud.map_area.size.x)
@@ -115,17 +115,17 @@ func _init() -> void:
 	hud.run_state = DungeonStateModel.claim_current_reward(dungeon, hud.run_state)["state"]
 	_expect_false(errors, "claimed reward no longer claimable", hud._current_room_has_claimable_reward())
 	_expect_equal(errors, "hud run inventory gold", DungeonStateModel.run_inventory(hud.run_state)["gold"], 9)
-	_expect_equal(errors, "claimed reward progress summary", hud._progress_summary(), "Rooms visited 3/7 | Secured 3/7 | Light 2/4 dim | Oil 2 | Pickaxe 0 | Trap Tools 1 | Effects none | Gold 9 | Items 1 | XP 0")
+	_expect_equal(errors, "claimed reward progress summary", hud._progress_summary(), "Rooms visited 3/7 | Secured 3/7 | Light 2/4 dim | Torch 2 | Pickaxe 0 | Bandage 1 | Antidote 1 | Camp 0 | Food 1 | Effects none | Gold 9 | Items 1 | XP 0")
 	_expect_true(errors, "oil action available after light decay", hud._can_use_lamp_oil())
 	var hazard_lines := "\n".join(hud._detail_lines_for_room(_room_by_id(dungeon, "collapsed_cache")))
 	_expect_true(errors, "rubble feedback summarized", hazard_lines.contains("Last hazard: cleared_with_pickaxe"))
 	hud.run_state = DungeonStateModel.use_lamp_oil(hud.run_state)["state"]
-	_expect_equal(errors, "oil restores progress light", hud._progress_summary(), "Rooms visited 3/7 | Secured 3/7 | Light 4/4 bright | Oil 1 | Pickaxe 0 | Trap Tools 1 | Effects none | Gold 9 | Items 1 | XP 0")
+	_expect_equal(errors, "oil restores progress light", hud._progress_summary(), "Rooms visited 3/7 | Secured 3/7 | Light 4/4 bright | Torch 1 | Pickaxe 0 | Bandage 1 | Antidote 1 | Camp 0 | Food 1 | Effects none | Gold 9 | Items 1 | XP 0")
 	var bruised_dungeon: Dictionary = dungeon.duplicate(true)
 	bruised_dungeon["starting_supplies"] = {"lamp_oil": 0, "pickaxe": 0}
 	var bruised_hud := DungeonDebugScript.new()
 	bruised_hud.dungeon = bruised_dungeon
-	bruised_hud.run_state = DungeonStateModel.initial_state(bruised_dungeon, {"lamp_oil": 0, "pickaxe": 0, "trap_tools": 0})
+	bruised_hud.run_state = DungeonStateModel.initial_state(bruised_dungeon, {"lamp_oil": 0, "pickaxe": 0, "antidote": 1, "bandage": 0, "food": 0})
 	bruised_hud.expedition_started = true
 	bruised_hud.run_state = DungeonStateModel.enter_room(bruised_dungeon, bruised_hud.run_state, "dusty_crossing")["state"]
 	bruised_hud.run_state = DungeonStateModel.resolve_room_event_choice(bruised_dungeon, bruised_hud.run_state, "ignore")["state"]
@@ -140,7 +140,7 @@ func _init() -> void:
 	bruised_hud._use_recovery_supply()
 	_expect_false(errors, "recovery action unavailable after use", bruised_hud._can_use_recovery_supply())
 	_expect_true(errors, "recovery clears progress effect", bruised_hud._progress_summary().contains("Effects none"))
-	_expect_equal(errors, "recovery consumes remedy in hud", DungeonStateModel.supply_count(bruised_hud.run_state, "remedy_kit"), 0)
+	_expect_equal(errors, "recovery consumes antidote in hud", DungeonStateModel.supply_count(bruised_hud.run_state, "antidote"), 0)
 	bruised_hud.free()
 	hud.run_state = DungeonStateModel.enter_room(dungeon, hud.run_state, "dusty_crossing")["state"]
 	var trap_prompt: Dictionary = DungeonStateModel.enter_room(dungeon, hud.run_state, "spider_nest")
@@ -157,7 +157,7 @@ func _init() -> void:
 	_expect_true(errors, "pending combat warning shown", combat_lines.contains("Threat: enemies are waiting here."))
 	_expect_false(errors, "pending path hidden after combat room", combat_lines.contains("res://"))
 	_expect_equal(errors, "combat action label", DungeonDebugScript.ENTER_COMBAT_LABEL, "Enter Combat")
-	_expect_equal(errors, "progress summary", hud._progress_summary(), "Rooms visited 4/7 | Secured 3/7 | Light 2/4 dim | Oil 1 | Pickaxe 0 | Trap Tools 0 | Effects none | Gold 9 | Items 1 | XP 0")
+	_expect_equal(errors, "progress summary", hud._progress_summary(), "Rooms visited 4/7 | Secured 3/7 | Light 2/4 dim | Torch 1 | Pickaxe 0 | Bandage 1 | Antidote 0 | Camp 0 | Food 1 | Effects none | Gold 9 | Items 1 | XP 0")
 
 	var exit_state: Dictionary = DungeonStateModel.initial_state(dungeon)
 	exit_state = DungeonStateModel.enter_room(dungeon, exit_state, "dusty_crossing")["state"]

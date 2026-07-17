@@ -40,17 +40,26 @@ func _process_sheet(sheet_path: String) -> Array[Dictionary]:
 	var height := image.get_height()
 	var mask: Array[bool] = []
 	mask.resize(width * height)
+	var uses_dark_background := _uses_dark_background(sheet_path)
+	var dark_background_mask: Array[bool] = []
+	if uses_dark_background:
+		dark_background_mask = _dark_background_mask(image)
 	for y in range(height):
 		for x in range(width):
-			mask[y * width + x] = not _is_green_screen(image.get_pixel(x, y))
-	var bounds := _component_bounds(mask, width, height)
+			var pixel := image.get_pixel(x, y)
+			if uses_dark_background:
+				mask[y * width + x] = not dark_background_mask[y * width + x]
+			else:
+				mask[y * width + x] = not _is_green_screen(pixel)
+	var bounds := _foreground_bounds(mask, width, height) if uses_dark_background else _component_bounds(mask, width, height)
 	var sheet_id := sheet_path.get_file().get_basename()
 	var output_dir := "%s/%s" % [OUTPUT_ROOT, sheet_id]
+	_clear_dir(output_dir)
 	_ensure_dir(output_dir)
 	var records: Array[Dictionary] = []
 	for index in range(bounds.size()):
 		var bound: Dictionary = bounds[index]
-		var crop := _transparent_crop(image, bound)
+		var crop := _transparent_crop(image, bound, uses_dark_background)
 		var category := _category_for(sheet_id, crop.get_width(), crop.get_height())
 		var output_path := "%s/%s_%02d.png" % [output_dir, sheet_id, index]
 		var error := crop.save_png(output_path)
@@ -79,6 +88,10 @@ func _save_portrait_head_crop(sheet_id: String, portrait: Image, output_dir: Str
 	var crop_y := 0
 	var crop_w := int(round(float(portrait.get_width()) * 0.36))
 	var crop_h := int(round(float(portrait.get_height()) * 0.31))
+	if sheet_id == "archer_portrait":
+		crop_x = int(round(float(portrait.get_width()) * 0.22))
+		crop_w = int(round(float(portrait.get_width()) * 0.58))
+		crop_h = int(round(float(portrait.get_height()) * 0.55))
 	var head := portrait.get_region(Rect2i(crop_x, crop_y, crop_w, crop_h))
 	var output_path := "%s/%s_head.png" % [output_dir, sheet_id]
 	var error := head.save_png(output_path)
@@ -96,7 +109,7 @@ func _save_portrait_head_crop(sheet_id: String, portrait: Image, output_dir: Str
 
 
 func _category_for(sheet_id: String, width: int, height: int) -> String:
-	if sheet_id.contains("portrait") or sheet_id.contains("mercenary"):
+	if sheet_id.contains("portrait") or sheet_id.contains("mercenary") or sheet_id in ["archer", "rogue"]:
 		return "portrait"
 	if sheet_id.contains("icons"):
 		if width >= 110 and height >= 110:
@@ -171,23 +184,102 @@ func _component_bounds(mask: Array[bool], width: int, height: int) -> Array[Dict
 	return bounds
 
 
-func _transparent_crop(image: Image, bound: Dictionary) -> Image:
+func _foreground_bounds(mask: Array[bool], width: int, height: int) -> Array[Dictionary]:
+	var min_x := width
+	var min_y := height
+	var max_x := -1
+	var max_y := -1
+	var area := 0
+	for y in range(height):
+		for x in range(width):
+			if not mask[y * width + x]:
+				continue
+			min_x = mini(min_x, x)
+			min_y = mini(min_y, y)
+			max_x = maxi(max_x, x)
+			max_y = maxi(max_y, y)
+			area += 1
+	if area < MIN_COMPONENT_AREA:
+		return []
+	return [{
+		"min_x": min_x,
+		"min_y": min_y,
+		"max_x": max_x,
+		"max_y": max_y,
+		"area": area,
+	}]
+
+
+func _transparent_crop(image: Image, bound: Dictionary, uses_dark_background: bool) -> Image:
 	var min_x: int = maxi(0, int(bound["min_x"]) - MARGIN)
 	var min_y: int = maxi(0, int(bound["min_y"]) - MARGIN)
 	var max_x: int = mini(image.get_width() - 1, int(bound["max_x"]) + MARGIN)
 	var max_y: int = mini(image.get_height() - 1, int(bound["max_y"]) + MARGIN)
 	var crop := image.get_region(Rect2i(min_x, min_y, max_x - min_x + 1, max_y - min_y + 1))
+	var dark_background_mask: Array[bool] = []
+	if uses_dark_background:
+		dark_background_mask = _dark_background_mask(crop)
 	for y in range(crop.get_height()):
 		for x in range(crop.get_width()):
-			if _is_green_screen(crop.get_pixel(x, y)) or _is_green_fringe(crop.get_pixel(x, y)):
+			if uses_dark_background and dark_background_mask[y * crop.get_width() + x]:
+				crop.set_pixel(x, y, Color(0, 0, 0, 0))
+			elif not uses_dark_background and (_is_green_screen(crop.get_pixel(x, y)) or _is_green_fringe(crop.get_pixel(x, y))):
 				crop.set_pixel(x, y, Color(0, 0, 0, 0))
 	return crop
+
+
+func _uses_dark_background(sheet_path: String) -> bool:
+	var file_name := sheet_path.get_file().get_basename()
+	return sheet_path.contains("/portraits/") and (file_name in ["archer", "archer_portrait", "rogue"])
 
 
 func _is_green_screen(pixel: Color) -> bool:
 	if pixel.a <= 0.01:
 		return true
 	return pixel.g >= 0.56 and pixel.r <= 0.42 and pixel.b <= 0.42 and pixel.g - maxf(pixel.r, pixel.b) >= 0.18
+
+
+func _is_dark_background(pixel: Color) -> bool:
+	if pixel.a <= 0.01:
+		return true
+	return pixel.r <= 0.045 and pixel.g <= 0.045 and pixel.b <= 0.045
+
+
+func _dark_background_mask(image: Image) -> Array[bool]:
+	var width := image.get_width()
+	var height := image.get_height()
+	var background: Array[bool] = []
+	background.resize(width * height)
+	var queue: Array[Vector2i] = []
+	for x in range(width):
+		_seed_dark_background_pixel(image, background, queue, x, 0)
+		_seed_dark_background_pixel(image, background, queue, x, height - 1)
+	for y in range(height):
+		_seed_dark_background_pixel(image, background, queue, 0, y)
+		_seed_dark_background_pixel(image, background, queue, width - 1, y)
+	var cursor := 0
+	while cursor < queue.size():
+		var current := queue[cursor]
+		cursor += 1
+		for neighbor: Vector2i in [
+			Vector2i(current.x - 1, current.y),
+			Vector2i(current.x + 1, current.y),
+			Vector2i(current.x, current.y - 1),
+			Vector2i(current.x, current.y + 1),
+		]:
+			if neighbor.x < 0 or neighbor.y < 0 or neighbor.x >= width or neighbor.y >= height:
+				continue
+			_seed_dark_background_pixel(image, background, queue, neighbor.x, neighbor.y)
+	return background
+
+
+func _seed_dark_background_pixel(image: Image, background: Array[bool], queue: Array[Vector2i], x: int, y: int) -> void:
+	var width := image.get_width()
+	var index := y * width + x
+	if background[index] or not _is_dark_background(image.get_pixel(x, y)):
+		return
+	background[index] = true
+	queue.append(Vector2i(x, y))
 
 
 func _is_green_fringe(pixel: Color) -> bool:
@@ -220,3 +312,22 @@ func _png_files_recursive(root: String) -> Array[String]:
 
 func _ensure_dir(path: String) -> void:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(path))
+
+
+func _clear_dir(path: String) -> void:
+	if not path.begins_with(OUTPUT_ROOT + "/"):
+		return
+	var dir := DirAccess.open(path)
+	if dir == null:
+		return
+	dir.list_dir_begin()
+	var name := dir.get_next()
+	while name != "":
+		var child_path := "%s/%s" % [path, name]
+		if dir.current_is_dir():
+			_clear_dir(child_path)
+			DirAccess.remove_absolute(ProjectSettings.globalize_path(child_path))
+		else:
+			DirAccess.remove_absolute(ProjectSettings.globalize_path(child_path))
+		name = dir.get_next()
+	dir.list_dir_end()

@@ -38,7 +38,7 @@ Long term, dungeon exploration should have its own mechanics rather than being o
 - Dungeon HUD now shows light, oil, pickaxe count, last corridor/hazard feedback, and exposes a `Use Oil` action when the lamp is not full.
 - Corridor hazards now stop traversal before the target room and require a player choice in a debug popup, so rubble/traps-style events happen between rooms rather than as room content.
 - Dungeon debuffs now have a validated data catalogue and active run-state stack summary.
-- `dungeon_old_mine` now includes a needle trap corridor hazard before `Spider Nest`, mitigated by `trap_tools` or resolved through `poisoned`.
+- `dungeon_old_mine` now includes a needle trap corridor hazard before `Spider Nest`, mitigated by carried antidote or resolved through `poisoned`.
 - Corridor event presentation now uses a custom debug event panel with hazard type, corridor endpoints, supply availability, and choice buttons.
 - Hazard outcomes now support weighted variants and party slot targets for HP/debuff effects.
 - Dungeon combat launch metadata now carries `dungeon_modifiers` into combat encounters, including light, party effects, target effects, and active debuffs.
@@ -69,6 +69,9 @@ Long term, dungeon exploration should have its own mechanics rather than being o
 - Room event system now supports expanded reusable event families and records run-level room event history by event id, type, and tag.
 - Room event outcomes now support supply-gated choices, outcome tone, weighted risk examples, party-targeted consequences through existing consequence targeting, and future-facing skill-check metadata.
 - Corridor hazards now support varied rubble, trap, darkness, noise, and blockage families, including traversal-blocking outcomes and darkness hazards that use lamp oil through the existing supply-choice flow.
+- Expedition loadout now uses packing capacity and per-supply packing costs, so the party cannot carry every supply candidate at once.
+- Dungeon state now supports a first `camping_kit` camp action that reduces accumulated dungeon HP loss, clears active dungeon debuffs, consumes a kit, and costs light.
+- Generated dungeon entry now supports named profiles: `short_mine`, `medium_mine`, and `deep_mine`, while still using the curated Old Mine template pool.
 
 ## Implemented Capability Summary
 
@@ -79,10 +82,11 @@ Implemented capability groups:
 - **Dungeon data and state:** validated dungeon schemas, authored Old Mine data, deterministic room/corridor traversal, visited/cleared room tracking, room content state, pending combat state, pending room-event state, completion state, retreat/failure payloads, and run-result summaries.
 - **Presentation and debug flow:** `DungeonDebug.tscn`, preparation/loadout step, authored/generated source toggle, seed/difficulty/reroll controls, framed map view, room markers, route copy, resource tray, numbered exits, event popup choices, combat entry action, reward claim action, finish expedition action, and post-run HUD summary.
 - **Combat boundary:** dungeon creates combat launch requests, combat returns stable result payloads, victories clear combat rooms or unlock guarded rewards, defeats keep rooms dangerous, and post-combat feedback is stored through `DungeonRunSession`.
-- **Expedition resources:** light, lamp oil, pickaxe, trap tools, remedy kits, persistent debuffs/effects, targetable party consequences, and combat launch metadata influenced by dungeon state.
+- **Expedition resources:** light, torch oil, pickaxe, bandages, antidote, camping kit, food, persistent debuffs/effects, targetable party consequences, and combat launch metadata influenced by dungeon state.
 - **Corridor hazards:** reusable hazard catalogues, weighted event pools, hazard pool refs, rubble/trap/darkness/noise/blockage families, traversal-blocking outcomes, supply-mitigated choices, weighted consequences, and structured hazard logs.
 - **Room events:** reusable room-event catalogues, weighted room-event pools, expanded event families, pending room choices, supply-gated choices, weighted outcomes, tone metadata, future skill-check metadata, reward/supply/effect consequences, and run-level room-event history.
-- **Generated dungeons:** curated finite Old Mine template pool, seed/difficulty-based template selection, generated graph drafts that enter the same state model, seed-driven hazard candidate placement, seed-driven room event pool placement, and debug preview metadata.
+- **Loadout and camping:** packing-point loadout capacity, per-supply packing costs, carried-only supply candidates, camping kit usage, HP-loss recovery, debuff clearing, and camp light cost.
+- **Generated dungeons:** curated finite Old Mine template pool, seed/difficulty/profile-based template selection, generated graph drafts that enter the same state model, seed-driven hazard candidate placement, seed-driven room event pool placement, and debug preview metadata.
 - **Run loot and return:** run inventory for claimed XP/gold/items, kept/lost loot resolution, `inventory_delta`, persistent effects in the return payload, and a `next_scene` hook for future global-map/world return.
 
 Current explicit boundaries:
@@ -135,6 +139,9 @@ docs/specs/dungeon/overview/032_dungeon_inventory_loot_resolution_v2.md
 docs/specs/dungeon/overview/033_room_event_system_v2.md
 docs/specs/dungeon/overview/034_room_event_outcomes_v2.md
 docs/specs/dungeon/overview/035_corridor_hazard_variety_v2.md
+docs/specs/dungeon/overview/036_expedition_loadout_capacity_v2.md
+docs/specs/dungeon/overview/037_recovery_and_camping_v1.md
+docs/specs/dungeon/overview/038_generated_dungeon_profiles_v1.md
 docs/specs/dungeon/presentation/012_dungeon_event_presentation_v1.md
 docs/specs/dungeon/presentation/013_dungeon_presentation_vertical_slice_v1.md
 docs/specs/dungeon/presentation/014_dungeon_debug_generated_toggle_v1.md
@@ -651,33 +658,42 @@ This queue captures the next agreed dungeon direction after the exploration foun
      - fixed `consume_required_supply` so required supply is consumed once through the normal consequence path.
    - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_state_model_tests.gd`; `scripts/domain/dungeon_procedural_draft_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-8. **Planned - Expedition Loadout Capacity V2**
+8. **Done - Expedition Loadout Capacity V2**
    - Goal: make pre-dungeon packing choices matter without owning town/world supply economy.
-   - Expected work:
+   - Owner spec: `docs/specs/dungeon/overview/036_expedition_loadout_capacity_v2.md`
+   - Slice: `docs/specs/dungeon/slices/043_expedition_loadout_capacity_v2.md`
+   - Implemented:
      - define carry limits or expedition packing points for supplies brought into a dungeon;
      - keep buying, pricing, restocking, and persistent supply ownership in future town/world/inventory specs;
-     - add candidates such as bandages, antidote, food, rope, and camping kit as carried supply types only;
+     - restrict the visible carried resource set to torch oil, pickaxe, bandages, antidote, camping kit, and food;
+     - show compact icon/count resource tiles with tooltip names and usage;
      - expose clearer loadout tradeoffs and supply consequences in UI.
-   - Proof target: loadout tests and manual balance notes.
+   - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_state_model_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-9. **Planned - Recovery And Camping**
+9. **Done - Recovery And Camping**
    - Goal: add an explicit in-dungeon recovery layer instead of only instant remedy usage.
-   - Expected work:
-     - rest/camp action;
-     - partial HP recovery;
-     - debuff treatment;
-     - supply consumption;
-     - ambush or time/light risk while resting.
-   - Proof target: state tests and HUD action tests.
+   - Owner spec: `docs/specs/dungeon/overview/037_recovery_and_camping_v1.md`
+   - Slice: `docs/specs/dungeon/slices/044_recovery_and_camping_v1.md`
+   - Implemented:
+     - `camping_kit` is a carried supply candidate;
+     - camp action consumes one kit;
+     - camp reduces accumulated dungeon HP loss;
+     - camp clears active dungeon debuffs;
+     - camp costs one light level;
+     - camp is blocked while combat, corridor hazards, or room events are pending.
+   - Proof: `scripts/domain/dungeon_state_model_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-10. **Planned - Generated Dungeon Profiles**
+10. **Done - Generated Dungeon Profiles**
     - Goal: make generated dungeons select from named profiles rather than only difficulty.
-    - Expected work:
-      - short/medium/deep profiles;
-      - mine/crypt/ruins themes;
-      - profile-specific template pools, room event pools, corridor hazard pools, combat encounter pools;
-      - constraints for route length and branch count.
-    - Proof target: procedural draft tests and schema validation.
+    - Owner spec: `docs/specs/dungeon/overview/038_generated_dungeon_profiles_v1.md`
+    - Slice: `docs/specs/dungeon/slices/045_generated_dungeon_profiles_v1.md`
+    - Implemented:
+      - `short_mine`, `medium_mine`, and `deep_mine` profiles;
+      - generated entry payload preserves `generated_profile`;
+      - profile metadata is exposed on generated dungeon drafts;
+      - profiles set first beta difficulty, light budget, and loadout capacity;
+      - debug difficulty buttons act as profile shortcuts.
+    - Proof: `scripts/domain/dungeon_entry_selection_tests.gd`; `scripts/domain/dungeon_procedural_draft_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
 11. **Planned - Generated Template Pool Expansion**
     - Goal: grow curated finite layouts before returning to freer procedural generation.
@@ -697,26 +713,17 @@ This queue captures the next agreed dungeon direction after the exploration foun
       - combat launch metadata includes dungeon context.
     - Proof target: validator checks and session/combat launch tests.
 
-13. **Planned - Dungeon UI Game Skin**
-    - Goal: replace the current debug-like chrome with a first game UI skin.
-    - Expected work:
-      - styled resource bar;
-      - event cards;
-      - map frame and room nodes;
-      - clearer combat/reward/exit buttons;
-      - hover/disabled/active states.
-    - Proof target: presentation tests plus manual screenshot review.
-
-14. **Planned - Pixel-Art Dungeon UI Assets**
+13. **Planned - Pixel-Art Dungeon UI Assets**
     - Goal: create or integrate small readable pixel-art UI assets for dungeon play.
     - Expected work:
-      - oil, pickaxe, trap tools, remedy, gold, light state, room event, trap, rubble icons;
+      - torch oil, pickaxe, bandage, antidote, camping kit, food, gold, light state, room event, trap, and rubble icons;
+      - dedicated icon coverage for each compact resource tile instead of temporary atlas reuse;
       - source assets under `assets_src/` where practical;
       - exported assets under `assets/`;
       - repeatable asset workflow documented.
    - Proof target: asset import check and manual visual review.
 
-15. **Planned - Playable Dungeon Beta**
+14. **Planned - Playable Dungeon Beta**
     - Goal: ship one coherent beta dungeon pass for hands-on testing.
     - Expected work:
       - pre-entry setup;
@@ -727,8 +734,41 @@ This queue captures the next agreed dungeon direction after the exploration foun
       - multiple combat encounter choices;
       - rewards/inventory result;
       - finish/return flow;
-      - first-pass game UI.
+      - current dungeon UI polish and assets as available.
     - Proof target: automated smoke tests plus manual playthrough checklist.
+
+## End-Of-Day Backlog
+
+This checkpoint preserves the current dungeon direction after the loadout/resource UI pass. The immediate next work should stay on the established spec -> slice -> implementation -> proof workflow.
+
+1. **Generated Template Pool Expansion**
+   - Add more curated Old Mine templates per `short_mine`, `medium_mine`, and `deep_mine` profile.
+   - Give each template authored pacing metadata for route length, branch count, treasure pressure, combat count, room-event slots, and corridor-hazard candidates.
+   - Keep generated dungeons finite-template based for now; avoid free-form procedural graph generation until the curated pool feels good.
+   - Proof target: procedural draft tests plus headless `DungeonDebug.tscn` visual-fit checks for dense maps.
+
+2. **Combat Encounter Selection Per Dungeon**
+   - Replace the single debug combat reference with encounter pools by dungeon theme, profile, difficulty, and room kind.
+   - Keep authored rooms able to pin a specific encounter.
+   - Let generated rooms choose encounter refs deterministically from seed/profile context.
+   - Proof target: dungeon state/session tests verifying launch metadata and selected encounter refs.
+
+3. **Resource Balance Pass**
+   - Tune packing costs, defaults, and profile capacity for torch oil, pickaxe, bandage, antidote, camping kit, and food.
+   - Check that every resource has at least one meaningful in-dungeon use before wider economy integration.
+   - Keep purchase, ownership, pricing, and restocking outside dungeon; those belong to future town/global-map inventory work.
+   - Proof target: loadout capacity tests and manual short/medium/deep playthrough notes.
+
+4. **Dungeon Icon Coverage**
+   - Add or process dedicated icons for the six visible carried resources.
+   - Keep the compact resource tray behavior: icon plus number, tooltip for name/usage.
+   - Do not block domain work on final art; placeholder atlas frames are acceptable until the asset pass is ready.
+   - Proof target: asset import check and manual UI pass at 2560x1440 plus one narrower viewport.
+
+5. **World/Town Integration Prep**
+   - Define the future boundary where town/global map owns supply purchase and durable inventory.
+   - Dungeon should continue to receive only the carried loadout payload and return run results/inventory deltas.
+   - Proof target: spec and slice first; implementation only after the global-map/town contract exists.
 
 ## First Implementation Guidance
 
@@ -753,4 +793,4 @@ python tools\validators\validate_all.py
 & "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn --quit --resolution 2560x1440
 ```
 
-Next dungeon work should continue roadmap item 8, **Expedition Loadout Capacity V2**, unless the user explicitly reprioritizes UI/assets, generated content variety, or combat encounter selection.
+Next dungeon work should continue roadmap item 11, **Generated Template Pool Expansion**, unless the user explicitly reprioritizes combat encounter selection, assets, or world/town integration.

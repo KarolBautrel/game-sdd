@@ -33,6 +33,7 @@ var entry_payload: Dictionary = DungeonEntrySelection.default_payload()
 var dungeon_source := DUNGEON_SOURCE_AUTHORED
 var generated_dungeon_seed := 0
 var generated_dungeon_difficulty := DEFAULT_GENERATED_DUNGEON_DIFFICULTY
+var generated_profile_id := DungeonEntrySelection.DEFAULT_GENERATED_PROFILE_ID
 var run_state: Dictionary = {}
 var room_nodes: Dictionary = {}
 var selected_room_id := ""
@@ -54,6 +55,7 @@ var reward_button: Button
 var finish_button: Button
 var oil_button: Button
 var recovery_button: Button
+var camp_button: Button
 var reset_button: Button
 var corridor_event_panel: Control
 var corridor_event_title_label: Label
@@ -67,6 +69,7 @@ var map_frame_panel: PanelContainer
 var map_title_label: Label
 var route_state_label: Label
 var resource_tray_panel: PanelContainer
+var resource_tiles: Dictionary = {}
 var resource_tile_labels: Dictionary = {}
 var loadout_panel: PanelContainer
 var party_panel: PanelContainer
@@ -482,7 +485,7 @@ func _create_action_buttons() -> void:
 	action_row.add_child(oil_button)
 
 	recovery_button = Button.new()
-	recovery_button.text = "Use Remedy"
+	recovery_button.text = "Use Antidote"
 	recovery_button.custom_minimum_size = Vector2(0, 42)
 	recovery_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	recovery_button.add_theme_font_size_override("font_size", 14)
@@ -493,6 +496,19 @@ func _create_action_buttons() -> void:
 		_use_recovery_supply()
 	)
 	action_row.add_child(recovery_button)
+
+	camp_button = Button.new()
+	camp_button.text = "Camp"
+	camp_button.custom_minimum_size = Vector2(0, 42)
+	camp_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	camp_button.add_theme_font_size_override("font_size", 14)
+	camp_button.add_theme_stylebox_override("normal", _button_style(Color(0.16, 0.14, 0.10), Color(0.70, 0.54, 0.30)))
+	camp_button.add_theme_stylebox_override("hover", _button_style(Color(0.24, 0.20, 0.13), Color(0.94, 0.72, 0.40)))
+	camp_button.add_theme_stylebox_override("pressed", _button_style(Color(0.11, 0.10, 0.08), Color(0.56, 0.42, 0.24)))
+	camp_button.pressed.connect(func() -> void:
+		_use_camp()
+	)
+	action_row.add_child(camp_button)
 
 	reset_button = Button.new()
 	reset_button.text = "Reset Run"
@@ -545,29 +561,32 @@ func _create_resource_tray() -> void:
 	row.add_theme_constant_override("separation", 8)
 	margin.add_child(row)
 
+	resource_tiles.clear()
 	resource_tile_labels.clear()
-	for tile_id: String in ["light", "oil", "pickaxe", "trap_tools", "remedy_kit", "effects"]:
+	for tile_id: String in _resource_tile_ids():
 		var tile := _create_resource_tile(tile_id)
 		var label: Label = tile.get_meta("value_label") as Label
+		resource_tiles[tile_id] = tile
 		resource_tile_labels[tile_id] = label
 		row.add_child(tile)
 
 
 func _create_resource_tile_label() -> Label:
 	var label := Label.new()
-	label.custom_minimum_size = Vector2(132, 38)
+	label.custom_minimum_size = Vector2(34, 38)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", 15)
+	label.add_theme_font_size_override("font_size", 18)
 	label.add_theme_color_override("font_color", Color(0.90, 0.82, 0.62))
 	return label
 
 
 func _create_resource_tile(tile_id: String) -> PanelContainer:
 	var tile := PanelContainer.new()
-	tile.custom_minimum_size = Vector2(198, 46)
-	tile.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	tile.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	tile.custom_minimum_size = Vector2(92, 46)
+	tile.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	tile.mouse_filter = Control.MOUSE_FILTER_STOP
+	tile.tooltip_text = _resource_tooltip_text(tile_id)
 	tile.add_theme_stylebox_override("panel", _dungeon_ui_stylebox(
 		_resource_tile_frame_path(tile_id),
 		Vector4(34, 18, 34, 18),
@@ -583,7 +602,7 @@ func _create_resource_tile(tile_id: String) -> PanelContainer:
 	tile.add_child(margin)
 
 	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 7)
+	row.add_theme_constant_override("separation", 4)
 	margin.add_child(row)
 
 	var icon := TextureRect.new()
@@ -594,7 +613,6 @@ func _create_resource_tile(tile_id: String) -> PanelContainer:
 	row.add_child(icon)
 
 	var label := _create_resource_tile_label()
-	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(label)
 	tile.set_meta("value_label", label)
 	return tile
@@ -1200,14 +1218,27 @@ func _use_lamp_oil() -> void:
 
 
 func _use_recovery_supply() -> void:
-	var result: Dictionary = DungeonStateModel.use_recovery_supply(run_state, "remedy_kit")
+	var result: Dictionary = DungeonStateModel.use_recovery_supply(run_state, "antidote")
 	if result["status"] == "accepted":
 		run_state = result["state"]
 		if is_inside_tree():
 			_run_session().set_dungeon_run(dungeon, run_state)
 		last_feedback = str(result["event"].get("message", "Recovery used."))
 	else:
-		last_feedback = "Cannot use remedy: %s." % result["rejection"]
+		last_feedback = "Cannot use antidote: %s." % result["rejection"]
+	_refresh_room_styles()
+	_update_detail()
+
+
+func _use_camp() -> void:
+	var result: Dictionary = DungeonStateModel.use_camp(run_state, "camping_kit")
+	if result["status"] == "accepted":
+		run_state = result["state"]
+		if is_inside_tree():
+			_run_session().set_dungeon_run(dungeon, run_state)
+		last_feedback = str(result["event"].get("message", "Camp used."))
+	else:
+		last_feedback = "Cannot camp: %s." % result["rejection"]
 	_refresh_room_styles()
 	_update_detail()
 
@@ -1325,14 +1356,19 @@ func _detail_lines_for_room(room: Dictionary) -> PackedStringArray:
 		"State: %s" % _room_state_summary(room_id),
 		"Position: %s" % _room_position_summary(room),
 		"Content: %s" % _content_summary(room),
-		"Light: %s %s/%s | Oil: %s | Pickaxe: %s | Trap Tools: %s | Remedy: %s" % [
+		"Light: %s %s/%s | Torch: %s | Pickaxe: %s | Bandage: %s | Antidote: %s" % [
 			str(run_state.get("light_state", "bright")),
 			int(run_state.get("light_level", 0)),
 			int(run_state.get("max_light_level", 0)),
 			DungeonStateModel.supply_count(run_state, "lamp_oil"),
 			DungeonStateModel.supply_count(run_state, "pickaxe"),
-			DungeonStateModel.supply_count(run_state, "trap_tools"),
-			DungeonStateModel.supply_count(run_state, "remedy_kit"),
+			DungeonStateModel.supply_count(run_state, "bandage"),
+			DungeonStateModel.supply_count(run_state, "antidote"),
+		],
+		"Camping Kit: %s | Food: %s | %s" % [
+			DungeonStateModel.supply_count(run_state, "camping_kit"),
+			DungeonStateModel.supply_count(run_state, "food"),
+			_loadout_packing_text(run_state.get("selected_supply_loadout", {})),
 		],
 		"Exits: %s" % _state_list_or_none(_connected_room_labels(room_id)),
 	]
@@ -1391,6 +1427,7 @@ func _refresh_action_buttons() -> void:
 	var has_finish := not blocked_by_event and _current_room_can_finish_expedition()
 	var has_oil := not blocked_by_event and _can_use_lamp_oil()
 	var has_recovery := not blocked_by_event and _can_use_recovery_supply()
+	var has_camp := not blocked_by_event and _can_use_camp()
 	action_row.visible = true
 	start_combat_button.disabled = not has_pending
 	start_combat_button.visible = has_pending
@@ -1402,6 +1439,8 @@ func _refresh_action_buttons() -> void:
 	oil_button.visible = has_oil
 	recovery_button.disabled = not has_recovery
 	recovery_button.visible = has_recovery
+	camp_button.disabled = not has_camp
+	camp_button.visible = has_camp
 	reset_button.disabled = false
 	reset_button.visible = true
 
@@ -1775,6 +1814,16 @@ func _room_state_summary(room_id: String) -> String:
 	return "unexplored"
 
 
+func _map_legend_lines() -> PackedStringArray:
+	return PackedStringArray([
+		"[*] entrance",
+		"[ ] empty",
+		"[$] treasure",
+		"[!] combat",
+		"[>] exit",
+	])
+
+
 func _reward_summary(room: Dictionary) -> String:
 	var room_id := str(room.get("id", ""))
 	for content: Dictionary in room.get("content", []):
@@ -1813,7 +1862,7 @@ func _adjust_loadout_supply(supply_id: String, delta: int) -> void:
 		selected_supply_loadout = DungeonStateModel.default_supply_loadout(dungeon)
 	var next_loadout := selected_supply_loadout.duplicate(true)
 	next_loadout[supply_id] = int(next_loadout.get(supply_id, 0)) + delta
-	selected_supply_loadout = DungeonStateModel.clamp_supply_loadout(dungeon, next_loadout)
+	selected_supply_loadout = DungeonStateModel.clamp_supply_loadout(dungeon, next_loadout, supply_id)
 	run_state = DungeonStateModel.initial_state(dungeon, selected_supply_loadout)
 	selected_room_id = str(run_state.get("current_room_id", dungeon.get("start_room_id", "")))
 	if detail_label != null:
@@ -1828,7 +1877,11 @@ func _refresh_loadout_panel() -> void:
 	if selected_supply_loadout.is_empty():
 		selected_supply_loadout = DungeonStateModel.default_supply_loadout(dungeon)
 	if loadout_summary_label != null:
-		loadout_summary_label.text = "Source: %s\nSelected: %s" % [_source_display_name(dungeon_source), _loadout_summary_text(selected_supply_loadout)]
+		loadout_summary_label.text = "Source: %s\nSelected: %s\n%s" % [
+			_source_display_name(dungeon_source),
+			_loadout_summary_text(selected_supply_loadout),
+			_loadout_packing_text(selected_supply_loadout),
+		]
 	if generator_summary_label != null:
 		generator_summary_label.text = _generator_summary_text()
 	if source_toggle_button != null:
@@ -1851,7 +1904,11 @@ func _refresh_loadout_panel() -> void:
 			minus_button.disabled = value <= int(option.get("min", 0))
 		var plus_button: Button = row.get("plus_button", null)
 		if plus_button != null:
-			plus_button.disabled = value >= int(option.get("max", value))
+			var packing_summary := DungeonStateModel.loadout_packing_summary(dungeon, selected_supply_loadout)
+			var capacity := int(packing_summary.get("capacity", 0))
+			var remaining := int(packing_summary.get("remaining", 0))
+			var cost := DungeonStateModel.supply_packing_cost(dungeon, supply_id)
+			plus_button.disabled = value >= int(option.get("max", value)) or (capacity > 0 and remaining < cost)
 
 
 func _loadout_pending() -> bool:
@@ -1866,7 +1923,7 @@ func _set_dungeon_source(next_source: String) -> void:
 	if not _loadout_pending():
 		return
 	if next_source == DUNGEON_SOURCE_GENERATED:
-		entry_payload = DungeonEntrySelection.generated_payload(_new_generated_seed(), generated_dungeon_difficulty)
+		entry_payload = DungeonEntrySelection.generated_payload(_new_generated_seed(), generated_dungeon_difficulty, generated_profile_id)
 	else:
 		entry_payload = DungeonEntrySelection.authored_payload()
 	_apply_entry_payload_fields()
@@ -1895,7 +1952,8 @@ func _reroll_generated_dungeon() -> void:
 	var previous_seed := generated_dungeon_seed
 	entry_payload = DungeonEntrySelection.generated_payload(
 		(previous_seed % 999999) + 1 if previous_seed > 0 else _new_generated_seed(),
-		generated_dungeon_difficulty
+		generated_dungeon_difficulty,
+		generated_profile_id
 	)
 	_apply_entry_payload_fields()
 	dungeon = _dungeon_data_for_entry_payload()
@@ -1921,6 +1979,7 @@ func _set_generated_difficulty(difficulty: int) -> void:
 	if not _loadout_pending():
 		return
 	generated_dungeon_difficulty = clampi(difficulty, 1, 3)
+	generated_profile_id = str(DungeonStateModel.generated_dungeon_profile("", generated_dungeon_difficulty).get("id", generated_profile_id))
 	if dungeon_source != DUNGEON_SOURCE_GENERATED:
 		entry_payload = DungeonEntrySelection.normalize_payload({
 			"source": dungeon_source,
@@ -1930,7 +1989,7 @@ func _set_generated_difficulty(difficulty: int) -> void:
 		return
 	if generated_dungeon_seed == 0:
 		generated_dungeon_seed = _new_generated_seed()
-	entry_payload = DungeonEntrySelection.generated_payload(generated_dungeon_seed, generated_dungeon_difficulty)
+	entry_payload = DungeonEntrySelection.generated_payload(generated_dungeon_seed, generated_dungeon_difficulty, generated_profile_id)
 	_apply_entry_payload_fields()
 	dungeon = _dungeon_data_for_entry_payload()
 	_recalculate_graph_transform()
@@ -1960,7 +2019,7 @@ func _dungeon_data_for_source(source: String) -> Dictionary:
 	if source == DUNGEON_SOURCE_GENERATED:
 		if generated_dungeon_seed == 0:
 			generated_dungeon_seed = _new_generated_seed()
-		entry_payload = DungeonEntrySelection.generated_payload(generated_dungeon_seed, generated_dungeon_difficulty)
+		entry_payload = DungeonEntrySelection.generated_payload(generated_dungeon_seed, generated_dungeon_difficulty, generated_profile_id)
 	else:
 		entry_payload = DungeonEntrySelection.authored_payload()
 	_apply_entry_payload_fields()
@@ -1972,6 +2031,7 @@ func _apply_entry_payload_fields() -> void:
 	dungeon_source = str(entry_payload.get("source", DUNGEON_SOURCE_AUTHORED))
 	generated_dungeon_seed = int(entry_payload.get("generated_seed", 0))
 	generated_dungeon_difficulty = int(entry_payload.get("generated_difficulty", DEFAULT_GENERATED_DUNGEON_DIFFICULTY))
+	generated_profile_id = str(entry_payload.get("generated_profile", DungeonEntrySelection.DEFAULT_GENERATED_PROFILE_ID))
 
 
 func _source_for_dungeon(next_dungeon: Dictionary) -> String:
@@ -1984,7 +2044,7 @@ func _other_dungeon_source() -> String:
 
 func _source_display_name(source: String) -> String:
 	if source == DUNGEON_SOURCE_GENERATED:
-		return DungeonEntrySelection.display_name(DungeonEntrySelection.generated_payload(maxi(1, generated_dungeon_seed), generated_dungeon_difficulty)) if generated_dungeon_seed > 0 else "Generated Draft"
+		return DungeonEntrySelection.display_name(DungeonEntrySelection.generated_payload(maxi(1, generated_dungeon_seed), generated_dungeon_difficulty, generated_profile_id)) if generated_dungeon_seed > 0 else "Generated Draft"
 	return DungeonEntrySelection.display_name(DungeonEntrySelection.authored_payload())
 
 
@@ -2006,7 +2066,9 @@ func _generator_summary_text() -> String:
 	var corridor_count: int = dungeon.get("corridors", []).size()
 	var hazard_count := _generated_hazard_count(dungeon)
 	if dungeon_source == DUNGEON_SOURCE_GENERATED:
-		return "Generated: D%s | Seed %s | Rooms %s | Corridors %s | Hazards %s" % [
+		var profile: Dictionary = dungeon.get("generated_profile", {})
+		return "Generated: %s | D%s | Seed %s | Rooms %s | Corridors %s | Hazards %s" % [
+			str(profile.get("display_name", "Profile")),
 			generated_dungeon_difficulty,
 			generated_dungeon_seed,
 			room_count,
@@ -2049,16 +2111,34 @@ func _loadout_summary_text(loadout: Dictionary) -> String:
 	return ", ".join(labels)
 
 
+func _loadout_packing_text(loadout: Dictionary) -> String:
+	var summary := DungeonStateModel.loadout_packing_summary(dungeon, loadout)
+	if int(summary.get("capacity", 0)) <= 0:
+		return "Packing: unlimited"
+	return "Packing: %s/%s points, %s left" % [
+		int(summary.get("used", 0)),
+		int(summary.get("capacity", 0)),
+		int(summary.get("remaining", 0)),
+	]
+
+
 func _supply_display_name(supply_id: String) -> String:
+	var option: Dictionary = dungeon.get("supply_loadout_options", {}).get(supply_id, {})
+	if str(option.get("label", "")) != "":
+		return str(option.get("label", ""))
 	match supply_id:
 		"lamp_oil":
-			return "Oil"
+			return "Torch"
 		"pickaxe":
 			return "Pickaxe"
-		"trap_tools":
-			return "Trap Tools"
-		"remedy_kit":
-			return "Remedy"
+		"bandage":
+			return "Bandage"
+		"antidote":
+			return "Antidote"
+		"camping_kit":
+			return "Camping Kit"
+		"food":
+			return "Food"
 		_:
 			return supply_id.capitalize()
 
@@ -2102,27 +2182,75 @@ func _refresh_presentation_chrome() -> void:
 		var label: Label = resource_tile_labels.get(tile_id, null)
 		if label != null:
 			label.text = str(tile_texts.get(tile_id, ""))
+		var tile: Control = resource_tiles.get(tile_id, null)
+		if tile != null:
+			tile.tooltip_text = _resource_tooltip_text(tile_id)
 
 
 func _resource_tile_texts() -> Dictionary:
+	return {
+		"torch": str(_resource_tile_count("torch")),
+		"pickaxe": str(_resource_tile_count("pickaxe")),
+		"bandage": str(_resource_tile_count("bandage")),
+		"antidote": str(_resource_tile_count("antidote")),
+		"camping_kit": str(_resource_tile_count("camping_kit")),
+		"food": str(_resource_tile_count("food")),
+	}
+
+
+func _resource_tile_ids() -> Array[String]:
+	return ["torch", "pickaxe", "bandage", "antidote", "camping_kit", "food"]
+
+
+func _resource_tile_count(tile_id: String) -> int:
+	var supply_id := _resource_tile_supply_id(tile_id)
+	if supply_id == "":
+		return int(run_state.get("light_level", 0))
 	var loadout := selected_supply_loadout
 	var state_supplies: Dictionary = run_state.get("supplies", {})
-	var oil := int(loadout.get("lamp_oil", state_supplies.get("lamp_oil", 0))) if _loadout_pending() else DungeonStateModel.supply_count(run_state, "lamp_oil")
-	var pickaxe := int(loadout.get("pickaxe", state_supplies.get("pickaxe", 0))) if _loadout_pending() else DungeonStateModel.supply_count(run_state, "pickaxe")
-	var trap_tools := int(loadout.get("trap_tools", state_supplies.get("trap_tools", 0))) if _loadout_pending() else DungeonStateModel.supply_count(run_state, "trap_tools")
-	var remedy_kit := int(loadout.get("remedy_kit", state_supplies.get("remedy_kit", 0))) if _loadout_pending() else DungeonStateModel.supply_count(run_state, "remedy_kit")
-	return {
-		"light": "Light %s/%s %s" % [
-			int(run_state.get("light_level", 0)),
-			int(run_state.get("max_light_level", 0)),
-			str(run_state.get("light_state", "")),
-		],
-		"oil": "Oil %s" % oil,
-		"pickaxe": "Pickaxe %s" % pickaxe,
-		"trap_tools": "Trap Tools %s" % trap_tools,
-		"remedy_kit": "Remedy %s" % remedy_kit,
-		"effects": "Effects %s" % _active_debuff_summary_text(),
-	}
+	return int(loadout.get(supply_id, state_supplies.get(supply_id, 0))) if _loadout_pending() else DungeonStateModel.supply_count(run_state, supply_id)
+
+
+func _resource_tile_supply_id(tile_id: String) -> String:
+	match tile_id:
+		"torch":
+			return "lamp_oil"
+		"pickaxe":
+			return "pickaxe"
+		"bandage":
+			return "bandage"
+		"antidote":
+			return "antidote"
+		"camping_kit":
+			return "camping_kit"
+		"food":
+			return "food"
+		_:
+			return ""
+
+
+func _resource_tooltip_text(tile_id: String) -> String:
+	var count := _resource_tile_count(tile_id)
+	match tile_id:
+		"torch":
+			return "Torch oil: %s carried. Light: %s/%s %s." % [
+				count,
+				int(run_state.get("light_level", 0)),
+				int(run_state.get("max_light_level", 0)),
+				str(run_state.get("light_state", "")),
+			]
+		"pickaxe":
+			return "Pickaxe: %s carried. Clears rubble and cave-ins." % count
+		"bandage":
+			return "Bandages: %s carried. Reserved for injury recovery." % count
+		"antidote":
+			return "Antidote: %s carried. Mitigates poison and toxic traps." % count
+		"camping_kit":
+			return "Camping kit: %s carried. Enables camp recovery." % count
+		"food":
+			return "Food: %s carried. Reserved for camping and longer expeditions." % count
+		_:
+			return ""
 
 
 func _route_state_text() -> String:
@@ -2156,7 +2284,7 @@ func _progress_summary() -> String:
 	var visited_count: int = run_state.get("visited_room_ids", []).size()
 	var cleared_count: int = run_state.get("cleared_room_ids", []).size()
 	var totals := DungeonStateModel.reward_totals(run_state)
-	return "Rooms visited %s/%s | Secured %s/%s | Light %s/%s %s | Oil %s | Pickaxe %s | Trap Tools %s | Effects %s | Gold %s | Items %s | XP %s" % [
+	return "Rooms visited %s/%s | Secured %s/%s | Light %s/%s %s | Torch %s | Pickaxe %s | Bandage %s | Antidote %s | Camp %s | Food %s | Effects %s | Gold %s | Items %s | XP %s" % [
 		visited_count,
 		room_count,
 		cleared_count,
@@ -2166,7 +2294,10 @@ func _progress_summary() -> String:
 		str(run_state.get("light_state", "")),
 		DungeonStateModel.supply_count(run_state, "lamp_oil"),
 		DungeonStateModel.supply_count(run_state, "pickaxe"),
-		DungeonStateModel.supply_count(run_state, "trap_tools"),
+		DungeonStateModel.supply_count(run_state, "bandage"),
+		DungeonStateModel.supply_count(run_state, "antidote"),
+		DungeonStateModel.supply_count(run_state, "camping_kit"),
+		DungeonStateModel.supply_count(run_state, "food"),
 		_active_debuff_summary_text(),
 		int(totals.get("gold", 0)),
 		totals.get("items", []).size(),
@@ -2211,8 +2342,18 @@ func _can_use_lamp_oil() -> bool:
 func _can_use_recovery_supply() -> bool:
 	if bool(run_state.get("completed", false)):
 		return false
-	if DungeonStateModel.supply_count(run_state, "remedy_kit") <= 0:
+	if DungeonStateModel.supply_count(run_state, "antidote") <= 0:
 		return false
+	return not DungeonStateModel.active_debuff_summary(run_state).is_empty()
+
+
+func _can_use_camp() -> bool:
+	if bool(run_state.get("completed", false)):
+		return false
+	if DungeonStateModel.supply_count(run_state, "camping_kit") <= 0:
+		return false
+	if int(run_state.get("party_effects", {}).get("hp_loss", 0)) > 0:
+		return true
 	return not DungeonStateModel.active_debuff_summary(run_state).is_empty()
 
 
@@ -2297,14 +2438,18 @@ func _asset_index_path(prefix: String, index: int) -> String:
 func _resource_tile_frame_path(tile_id: String) -> String:
 	var index := 1
 	match tile_id:
-		"oil":
+		"torch":
 			index = 2
 		"pickaxe":
 			index = 3
-		"trap_tools":
+		"bandage":
 			index = 4
-		"remedy_kit":
+		"antidote":
 			index = 5
+		"camping_kit":
+			index = 5
+		"food":
+			index = 6
 		"effects":
 			index = 6
 	return _asset_index_path(DUNGEON_UI_TILE_PREFIX, index)
@@ -2312,14 +2457,18 @@ func _resource_tile_frame_path(tile_id: String) -> String:
 
 func _resource_icon_path(tile_id: String) -> String:
 	match tile_id:
-		"oil":
+		"torch":
 			return _asset_index_path(DUNGEON_ICON_PREFIX, 1)
 		"pickaxe":
 			return _asset_index_path(DUNGEON_ICON_PREFIX, 2)
-		"trap_tools":
+		"bandage":
 			return _asset_index_path(DUNGEON_ICON_PREFIX, 3)
-		"remedy_kit":
+		"antidote":
 			return _asset_index_path(DUNGEON_ICON_PREFIX, 4)
+		"camping_kit":
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 4)
+		"food":
+			return _asset_index_path(DUNGEON_ICON_PREFIX, 5)
 		"effects":
 			return _asset_index_path(DUNGEON_ICON_PREFIX, 5)
 		_:
