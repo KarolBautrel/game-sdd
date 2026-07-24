@@ -33,9 +33,6 @@ When a milestone defines an ordered queue, work from the first unfinished item. 
 
 Run these commands from the project directory:
 
-```powershell
-cd C:\Users\karol\Desktop\Gierka\game_dir\sdd-game
-```
 
 Validate all specs, schemas, reference data, and executable slices:
 
@@ -49,31 +46,8 @@ Validate only combat executable slices:
 python -m tools.validators.validate_combat_slice
 ```
 
-Check that Godot can load the project without opening a window:
-
-```powershell
-& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --quit
-```
-
-Run the Godot combat domain slices:
-
-```powershell
-& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" --script res://scripts/domain/combat_slice_tests.gd
-```
-
-Run the interactive combat debug scene:
-
-```powershell
-& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game"
-```
-
 The current main scene is `scenes/dungeon/DungeonDebug.tscn`.
 
-Run the interactive combat debug scene directly when combat testing is needed:
-
-```powershell
-& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" "res://scenes/combat/CombatDebug.tscn"
-```
 
 Debug scene controls:
 
@@ -112,12 +86,3 @@ Debug scene controls:
 - `docs/specs/data/` shared data contracts and validation rules.
 
 
-
-
-#FOR DEVELOPER - DO NOT CHECK 
-& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn
-
-& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/dungeon/DungeonDebug.tscn
-
-
-& "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatMapEditor.tscn
