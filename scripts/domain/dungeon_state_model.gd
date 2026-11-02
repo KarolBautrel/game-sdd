@@ -2,6 +2,7 @@ extends RefCounted
 class_name DungeonStateModel
 
 const PartyRoster := preload("res://scripts/domain/party_roster.gd")
+const GraphQuality := preload("res://scripts/domain/dungeon_graph_quality.gd")
 const DEFAULT_RETURN_SCENE_PATH := "res://scenes/app/App.tscn"
 
 
@@ -54,6 +55,10 @@ static func initial_state(dungeon: Dictionary, selected_supply_loadout: Dictiona
 
 static func enter_room(dungeon: Dictionary, state: Dictionary, target_room_id: String) -> Dictionary:
 	var next_state: Dictionary = state.duplicate(true)
+	if bool(next_state.get("completed", false)):
+		return _result(next_state, "rejected", "run_completed", {})
+	if not next_state.get("pending_combat_request", {}).is_empty():
+		return _result(next_state, "rejected", "pending_combat", {})
 	if not next_state.get("pending_corridor_hazard", {}).is_empty():
 		return _result(next_state, "rejected", "corridor_hazard_pending", next_state["pending_corridor_hazard"])
 	if not next_state.get("pending_room_event", {}).is_empty():
@@ -483,8 +488,11 @@ static func apply_combat_result(dungeon: Dictionary, state: Dictionary, result_p
 		return _result(next_state, "rejected", "wrong_dungeon", {})
 	if str(result_payload.get("source_room_id", "")) != str(pending.get("room_id", "")):
 		return _result(next_state, "rejected", "wrong_room", {})
+	if str(result_payload.get("result", "")) not in ["victory", "defeat"]:
+		return _result(next_state, "rejected", "unsupported_combat_result", {})
 
 	var room_id := str(pending.get("room_id", ""))
+	_apply_returned_party_hp(next_state, result_payload)
 	next_state["pending_combat_request"] = {}
 	next_state["last_combat_result"] = result_payload.duplicate(true)
 	if str(result_payload.get("result", "")) == "victory":
@@ -507,6 +515,62 @@ static func apply_combat_result(dungeon: Dictionary, state: Dictionary, result_p
 			"reward_unlocked": false,
 		})
 	return _result(next_state, "rejected", "unsupported_combat_result", {})
+
+
+static func _apply_returned_party_hp(state: Dictionary, payload: Dictionary) -> void:
+	var survivors := {}
+	for unit: Dictionary in payload.get("surviving_players", []):
+		survivors[str(unit.get("id", ""))] = unit
+	var targets: Dictionary = state.get("target_effects", {})
+	for slot: Dictionary in state.get("party_formation", []):
+		var unit_id := str(slot.get("combat_unit_id", ""))
+		var hero := PartyRoster.hero_for_combat_unit(unit_id)
+		if hero.is_empty():
+			continue
+		var fallen: bool = payload.get("defeated_player_ids", []).has(unit_id)
+		if not survivors.has(unit_id) and not fallen:
+			continue # Older result fixtures may omit party summaries.
+		var max_hp := int(hero.get("stats", {}).get("max_hp", 1))
+		var hp := 0 if fallen else clampi(int(survivors[unit_id].get("hp", max_hp)), 1, max_hp)
+		var target_id := str(slot.get("target_id", ""))
+		var target: Dictionary = targets.get(target_id, {"id": target_id, "debuffs": {}})
+		target["hp_loss"] = max_hp - hp
+		target["incapacitated"] = fallen
+		targets[target_id] = target
+	state["target_effects"] = targets
+	var total := 0
+	for target: Dictionary in targets.values():
+		total += int(target.get("hp_loss", 0))
+	state["party_effects"]["hp_loss"] = total
+
+
+static func returned_party_effects(effects: Dictionary, payload: Dictionary) -> Dictionary:
+	var next := effects.duplicate(true)
+	next.party_formation = PartyRoster.default_party_formation()
+	_apply_returned_party_hp(next, payload)
+	for slot: Dictionary in next.party_formation:
+		var target: Dictionary = next.target_effects.get(slot.target_id, {})
+		if bool(target.get("incapacitated", false)):
+			target.hp_loss = int(PartyRoster.hero_for_combat_unit(slot.combat_unit_id).stats.max_hp) - 1
+			target.incapacitated = false
+	var total := 0
+	for target: Dictionary in next.target_effects.values():
+		total += int(target.get("hp_loss", 0))
+	next.party_effects.hp_loss = total
+	next.erase("party_formation")
+	return next
+
+
+static func party_member_hp(state: Dictionary, unit_id: String) -> int:
+	var hero := PartyRoster.hero_for_combat_unit(unit_id)
+	var max_hp := int(hero.get("stats", {}).get("max_hp", 0))
+	for slot: Dictionary in state.get("party_formation", []):
+		if str(slot.get("combat_unit_id", "")) == unit_id:
+			var effect: Dictionary = state.get("target_effects", {}).get(str(slot.get("target_id", "")), {})
+			if bool(effect.get("incapacitated", false)):
+				return 0
+			return maxi(1, max_hp - int(effect.get("hp_loss", 0)))
+	return max_hp
 
 
 static func room_is_visited(state: Dictionary, room_id: String) -> bool:
@@ -660,6 +724,8 @@ static func procedural_dungeon_draft(config: Dictionary = {}) -> Dictionary:
 	var theme_tags: Array = config.get("theme_tags", ["mine", "corridor"])
 	var combat_encounter_path := str(config.get("combat_encounter_path", ""))
 	var generated_graph := _procedural_graph(seed, difficulty, profile, theme_tags, combat_encounter_path)
+	if not GraphQuality.errors(generated_graph, str(profile.get("id", "")) == "deep_mine").is_empty():
+		return {}
 	var profile_label := str(profile.get("display_name", "Generated Mine"))
 	var display_name := str(config.get("display_name", "%s D%s S%s" % [profile_label, difficulty, seed]))
 	return {
@@ -1212,6 +1278,8 @@ static func _reduce_target_hp_loss(state: Dictionary, amount: int) -> void:
 		var current: int = int(target.get("hp_loss", 0))
 		var recovered: int = mini(current, remaining)
 		target["hp_loss"] = max(0, current - recovered)
+		if recovered > 0:
+			target["incapacitated"] = false
 		target_effects[target_id] = target
 		remaining -= recovered
 	state["target_effects"] = target_effects
@@ -1468,20 +1536,26 @@ static func _selected_template_hazard_pool_ids(seed: int, template: Dictionary) 
 
 
 static func _select_dungeon_template(seed: int, difficulty: int, profile_id: String = "") -> Dictionary:
+	return select_accepted_template(seed, difficulty, profile_id, _all_dungeon_templates())
+
+
+static func select_accepted_template(seed: int, difficulty: int, profile_id: String, templates: Array) -> Dictionary:
 	var candidates: Array[Dictionary] = []
-	for template: Dictionary in _all_dungeon_templates():
+	for template: Dictionary in templates:
+		if template.get("acceptance_state", "candidate") != "accepted":
+			continue
 		if profile_id != "" and not template.get("profile_ids", []).has(profile_id):
 			continue
 		if int(template.get("difficulty", 1)) == difficulty:
 			candidates.append(template)
 	if candidates.is_empty():
-		for template: Dictionary in _all_dungeon_templates():
+		for template: Dictionary in templates:
+			if template.get("acceptance_state", "candidate") != "accepted":
+				continue
 			if profile_id != "" and not template.get("profile_ids", []).has(profile_id):
 				continue
 			if int(template.get("difficulty", 1)) <= difficulty:
 				candidates.append(template)
-	if candidates.is_empty() and profile_id != "":
-		return _select_dungeon_template(seed, difficulty, "")
 	if candidates.is_empty():
 		return {}
 	var selected_index := _seeded_int(seed, "template", 0, candidates.size() - 1)

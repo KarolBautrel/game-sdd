@@ -3,6 +3,10 @@
 Status: implemented
 Owner: combat presentation tooling
 
+V2 extension: `../../tooling/003_map_authoring_v2.md` owns reference materialization,
+unit start editing, validation and Play Draft. Save forks a referenced encounter
+to inline data; TMX remains authoritative for its generated map JSON.
+
 ## Purpose
 
 Combat maps need a lightweight authoring tool so map layout can be edited visually instead of by manually writing every `grid.tiles` and `terrain_decorations` entry in JSON.

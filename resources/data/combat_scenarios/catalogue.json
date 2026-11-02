@@ -1,0 +1,60 @@
+{
+  "schema": "sdd.combat-scenarios-v1",
+  "scenarios": [
+    {
+      "id": "full_combat_showcase",
+      "label": "Old Mine skirmish",
+      "path": "res://resources/data/combat_encounters/debug_full_combat_showcase.json"
+    },
+    {
+      "id": "dungeon_combat_showcase",
+      "label": "Old Mine dungeon",
+      "path": "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json"
+    },
+    {
+      "id": "terrain_grass_showcase",
+      "label": "New terrain grass",
+      "path": "res://resources/data/combat_encounters/debug_terrain_grass_showcase.json"
+    },
+    {
+      "id": "terrain_dungeon_showcase",
+      "label": "New terrain dungeon",
+      "path": "res://resources/data/combat_encounters/debug_terrain_dungeon_showcase.json"
+    },
+    {
+      "id": "map_scale_showcase",
+      "label": "Map test arena",
+      "path": "res://resources/data/combat_encounters/debug_map_scale_showcase.json"
+    },
+    {
+      "id": "raw_goblin_spider_showcase",
+      "label": "Raw Goblin + Spider",
+      "path": "res://resources/data/combat_encounters/debug_raw_goblin_spider_showcase.json"
+    },
+    {
+      "id": "raw_brute_ogre_showcase",
+      "label": "Raw Brute + Ogre",
+      "path": "res://resources/data/combat_encounters/debug_raw_brute_ogre_showcase.json"
+    },
+    {
+      "id": "raw_wolf_snake_showcase",
+      "label": "Raw Wolf + Snake",
+      "path": "res://resources/data/combat_encounters/debug_raw_wolf_snake_showcase.json"
+    },
+    {
+      "id": "raw_undead_showcase",
+      "label": "Raw Undead",
+      "path": "res://resources/data/combat_encounters/debug_raw_undead_showcase.json"
+    },
+    {
+      "id": "raw_beasts_showcase",
+      "label": "Raw Beasts",
+      "path": "res://resources/data/combat_encounters/debug_raw_beasts_showcase.json"
+    },
+    {
+      "id": "clearing_crossfire",
+      "label": "Clearing crossfire",
+      "path": "res://resources/data/combat_encounters/clearing_crossfire.json"
+    }
+  ]
+}

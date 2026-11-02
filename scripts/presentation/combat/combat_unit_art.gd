@@ -1,6 +1,8 @@
 extends RefCounted
 class_name CombatUnitArt
 
+const AssetCatalog := preload("res://scripts/presentation/shared/asset_catalog.gd")
+
 const PartyRoster := preload("res://scripts/domain/party_roster.gd")
 const RAW_EXTRACTED_TILE_SIZE := 112
 const RAW_EXTRACTED_MAX_SIZE := Vector2i(110, 106)
@@ -229,15 +231,20 @@ func icon(unit: Dictionary, state: Dictionary, facing: Dictionary, visual_action
 	var visual_scale := visual_scale_for_character(character)
 	var use_source_scale := RAW_EXTRACTED_VISUALS.has(character)
 	var use_processed_sheet_scale := PROCESSED_SHEET_VISUALS.has(character)
-	var cache_key := "%s:%s:%s:%s:%s:%s" % [texture_path, icon_size.x, icon_size.y, visual_scale, use_source_scale, use_processed_sheet_scale]
+	var cache_key := "%s:%s:%s:%s:%s:%s:%s" % [texture_path, icon_size.x, icon_size.y, visual_scale, use_source_scale, use_processed_sheet_scale, unit.get("team", "enemy")]
 	if texture_cache.has(cache_key):
 		return texture_cache[cache_key]
 
-	var image := Image.new()
-	var error := image.load(texture_path)
-	if error != OK:
-		push_error("Cannot load unit texture: %s" % texture_path)
-		return null
+	var image := AssetCatalog.image_copy(texture_path)
+	if image == null:
+		var fallback_character := "warrior" if unit.get("team", "enemy") == "player" else "axe_bandit"
+		if character == fallback_character:
+			return null
+		var fallback_unit := unit.duplicate(true)
+		fallback_unit.visual = {"faction": "heroes" if unit.get("team", "enemy") == "player" else "villains", "character": fallback_character}
+		var fallback := icon(fallback_unit, state, facing, visual_actions, icon_size)
+		texture_cache[cache_key] = fallback
+		return fallback
 	var texture := ImageTexture.create_from_image(scaled_icon_image(image, icon_size, visual_scale, use_source_scale, use_processed_sheet_scale))
 	texture_cache[cache_key] = texture
 	return texture
@@ -397,8 +404,8 @@ func processed_sheet_corpse_visual_action(character: String) -> String:
 		var path := processed_sheet_texture_path(character, "east", "death:%s" % frame_index)
 		if path == "":
 			continue
-		var image := Image.new()
-		if image.load(path) != OK:
+		var image := AssetCatalog.image_copy(path)
+		if image == null:
 			continue
 		if image.get_width() > best_width:
 			best_width = image.get_width()
@@ -469,8 +476,8 @@ func processed_sheet_pose_height(character: String) -> int:
 	var path := processed_sheet_texture_path(character, "east", "pose:0")
 	if path == "":
 		return 0
-	var image := Image.new()
-	if image.load(path) != OK:
+	var image := AssetCatalog.image_copy(path)
+	if image == null:
 		return 0
 	return image.get_height()
 

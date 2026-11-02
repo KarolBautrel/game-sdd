@@ -975,6 +975,9 @@ def _apply_map_reference(state: dict[str, Any]) -> None:
     if not map_path:
         return
     map_data = _load_map_json(str(map_path))
+    for key in ("background_path", "terrain_theme", "terrain_decorations"):
+        if key not in state and key in map_data:
+            state[key] = deepcopy(map_data[key])
     state["grid"] = {
         "width": map_data["width"],
         "height": map_data["height"],

@@ -2,25 +2,66 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "sdd-game/map.schema.json",
   "type": "object",
-  "required": ["id", "source", "tile_size", "width", "height", "tiles", "test_spawns"],
+  "required": [
+    "id",
+    "source",
+    "tile_size",
+    "width",
+    "height",
+    "tiles",
+    "test_spawns"
+  ],
   "additionalProperties": false,
   "properties": {
-    "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-    "source": { "type": "string", "pattern": "^res://resources/tiled/maps/.+\\.tmx$" },
-    "tile_size": { "type": "integer", "minimum": 1 },
-    "width": { "type": "integer", "minimum": 1 },
-    "height": { "type": "integer", "minimum": 1 },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "source": {
+      "type": "string",
+      "pattern": "^res://resources/tiled/maps/.+\\.tmx$"
+    },
+    "tile_size": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 1
+    },
     "tiles": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["x", "y", "type"],
+        "required": [
+          "x",
+          "y",
+          "type"
+        ],
         "additionalProperties": false,
         "properties": {
-          "x": { "type": "integer", "minimum": 0 },
-          "y": { "type": "integer", "minimum": 0 },
-          "type": { "type": "string", "enum": ["floor", "blocked", "highground", "cover_low"] }
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "floor",
+              "blocked",
+              "highground",
+              "cover_low"
+            ]
+          }
         }
       }
     },
@@ -28,13 +69,74 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "role", "x", "y"],
+        "required": [
+          "id",
+          "role",
+          "x",
+          "y"
+        ],
         "additionalProperties": false,
         "properties": {
-          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "role": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "x": { "type": "integer", "minimum": 0 },
-          "y": { "type": "integer", "minimum": 0 }
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "role": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "schema_version": {
+      "const": 2
+    },
+    "background_path": {
+      "type": "string",
+      "pattern": "^res://assets/combat/terrain/backgrounds/.+\\.png$"
+    },
+    "terrain_theme": {
+      "type": "string",
+      "enum": [
+        "nature",
+        "dungeon"
+      ]
+    },
+    "terrain_decorations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "x",
+          "y",
+          "path"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^res://assets/combat/terrain/processed/.+\\.png$"
+          },
+          "kind": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          }
         }
       }
     }

@@ -4,7 +4,11 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 
 ## Implemented Snapshot
 
-Dungeon mode is currently a playable debug-stage exploration loop. It can start from an authored Old Mine dungeon or a generated Old Mine draft, show the dungeon map, move through connected rooms, resolve corridor hazards and room events, enter combat, return from combat, claim rewards, finish the expedition, and produce a stable run-result payload for a future world-map return.
+Dungeon mode is a playable exploration loop. It can start from an authored or
+generated Old Mine, resolve events/combat/rewards, finish or retreat. The
+[world boundary](../world/001_campaign_boundary.md) adds Ravenford supplies,
+durable inventory/injuries, checkpoint/resume and single-application settlement.
+Direct DungeonDebug entry remains a free sandbox; F7 opens the campaign hub.
 
 The implemented foundation includes:
 
@@ -31,7 +35,10 @@ The implemented foundation includes:
 
 Dungeon mode owns exploration pressure inside the expedition: carried supplies, light, corridor hazards, room events, temporary run loot, persistent expedition effects, and combat handoff metadata.
 
-Dungeon mode does not own the wider supply economy. Buying, pricing, crafting, restocking, and long-term ownership of supplies belong to future town, world-map, and inventory systems. Dungeon now owns only the carried loadout capacity and in-expedition supply use; future supply work should focus on balance and integration with real inventory availability.
+Dungeon mode does not own the wider supply economy. CampaignSession and Ravenford
+now own buying, prices and durable supplies through world001. Dungeon owns carried
+loadout capacity and in-expedition use. Crafting, broader inventory/equipment and
+world travel remain future systems; see [continuation](../../CONTINUE_HERE.md).
 
 Combat remains a separate domain. Dungeon can launch combat with context and consume combat results, but combat still owns tactical legality, turn resolution, damage, victory, and defeat.
 
@@ -91,6 +98,9 @@ Combat remains a separate domain. Dungeon can launch combat with context and con
 - `overview/041_resource_balance_pass_v1.md`
 - `overview/042_playable_generated_beta_party_v1.md`
 - `overview/043_party_roster_contract_v1.md`
+- `overview/044_large_d3_scrollable_dungeon_maps_v1.md`
+- `overview/045_beta_full_loop_qa_v1.md`
+- `overview/046_generation_quality_gates.md`
 
 ### Presentation
 
@@ -160,6 +170,9 @@ Combat remains a separate domain. Dungeon can launch combat with context and con
 - `slices/049_resource_balance_pass_v1.md`
 - `slices/050_playable_generated_beta_party_v1.md`
 - `slices/051_party_roster_contract_v1.md`
+- `slices/052_large_d3_scrollable_dungeon_maps_v1.md`
+- `slices/053_beta_full_loop_qa_v1.md`
+- `slices/054_generation_quality_gates.md`
 
 ## Milestones
 
@@ -171,4 +184,9 @@ Dungeon mode has moved beyond a pure graph prototype into a debug-playable beta 
 
 The current dungeon presentation has a first vertical slice: preparation panel, packing-point loadout, resource tray, framed map, hazard markers, legend, and player-facing route copy. Corridor hazards support reusable catalogue templates, weighted event pools through `hazard_pool_refs`, varied rubble/trap/darkness/noise/blockage families, a procedural corridor-plan helper, template-pool generated dungeon drafts, and a stable entry payload for authored/generated/profile source selection. Room exploration has reusable room event catalogues, expanded room event families, room event history, supply-gated room choices, weighted room outcomes, room event pools, pending room-event choices, and debug popup presentation. The dungeon-combat session bridge returns readable post-combat feedback for normal victories, guarded reward victories, and defeats. Dungeon completion produces a stable run-result payload with claimed rewards, kept/lost loot resolution, persistent effects, and a next-scene return hook.
 
-The current dungeon-owned work is `Playable Dungeon Beta`: generated dungeon is now the default entry, dungeon combat launches with Warrior plus Archer, and the next step is a smoke-tested hands-on pass through preparation, hazards, room events, combat, rewards, and finish/return flow.
+Playable Dungeon Beta, town/campaign integration and final source/exported
+acceptance passed in stages0..7. The generated default entry launches combat with
+Warrior plus Archer. All per-stage automated and actual play evidence is indexed
+in [QA reports](../../qa/README.md). Combat queue15..19/stages8..12 now have
+automated PASS and await accumulated actual play; see
+[continuation](../../CONTINUE_HERE.md) for current status and the live registry.

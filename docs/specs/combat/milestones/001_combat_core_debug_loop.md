@@ -5,6 +5,58 @@ Date: 2026-07-14
 
 ## Summary
 
+Stage18/19 (2026-11-01): world007/combat103 adds frozen campaign advancement
+stats before existing injuries, with fixed max HP and sandbox isolation. Shared
+presentation002 redesigns campaign interfaces. Final stage19-verified-20261101
+45/45,1219 UI assertions, strict checker2022 and stage19-release-final-20261101
+EXE probe PASS,0 diagnostics. Next:24 actual-play cases in live-test-scenarios.md,
+all NOT_RUN. Stage19 report/CONTINUE_HERE is current; no desktop input yet.
+
+Stage16 campaign extension (2026-11-01): world005/combat slice102 freezes owned
+equipment for managed dungeon/road launches and delegates all combat rules to
+equipment053/058/resolver. Full stage16-headless-20261101 passes42/42,50 equipment
+checks, strict scene checker1997 and stage16-release-20261101 extended EXE probe
+PASS with zero diagnostics. Actual stages8..16 acceptance is18 NOT_RUN cases in
+docs/qa/live-test-scenarios.md. Next: that live session when user releases desktop
+controls, not more implementation. Stage16 report/CONTINUE_HERE hold build identity.
+
+Stage2 accepted (2026-11-01): shared imported AssetCatalog replaces raw PNG
+loading, editor lists use 1846-entry deterministic catalogue, full verification
+27/27 with zero errors/warnings; clean standalone export probe and actual EXE
+movement/attack PASS. Owner tooling002/slice002; report in docs/qa/stages.
+Stage3 accepted: passive PartyCard/ResourceMeter and PixelSkin; 28/28 checks with
+zero diagnostics, actual trap injury/recovery and normal combat move/shot PASS.
+Report: docs/qa/stages/2026-11-01-stage-3.md.
+Stage4 accepted: tooling003/slice003, map metadata and playable workbench,
+29/29 checks, actual edit/save/reload/play/return; stage4 report. Stages5..7 are
+also accepted; combat rules remain owned by the resolver and Python mirror.
+
+### 2026-11-01 hands-on regression
+
+Stage7 exported playtesting found empty Tweens on Defend/status-only feedback.
+Owner presentation074, chronological slice096: cancel unused combat/movement
+Tweens before the immediate state/unlock fallback. The regression suite reproduces
+four empty-Tween cases before the repair. Targeted regression and full34/34 checks
+pass with zero errors/warnings; fresh corrected export/probe passes. The corrected
+EXE passed two Defend actions, ordinary three-enemy victory in round3 and injury
+return (Bran6/14, Torin10/10). Bandage, full expedition and settlement/restart
+passed; closed runtime log has zero errors/warnings. A temporary capture failure
+was recovered without restarting the battle. Stage7 accepted; exact evidence:
+docs/qa/stages/2026-11-01-stage-7.md. Queue15..19 (stages8..12) now have
+implementation/technical review and automated PASS, with actual play deferred
+by explicit user instruction. Next: the accumulated live session in
+docs/qa/live-test-scenarios.md; do not mark these items accepted yet. AI movement
+polish is a later candidate. See docs/CONTINUE_HERE.md for current status.
+Documentation handoff verified with `tools/validators/validate_all.py`,
+`git diff --check` and local link checks; gameplay/build unchanged.
+
+Stage-0 playtesting found clipped/wrapped HUD labels collapsed to one pixel.
+Owner: presentation/087; acceptance: slices/095. The new
+`combat_hud_layout_tests.gd` reproduces failure before repair and passes after
+reserving font-derived line heights. Actual repaired-build review passed for
+movement preview, animation, action count changes and end turn;
+see `docs/qa/stages/2026-11-01-stage-0.md`. Combat rules remain unchanged.
+
 Combat has a verified core loop in both Python and Godot.
 
 The project now has:
@@ -773,10 +825,19 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
     - Manual review:
       - select `New terrain grass` and `New terrain dungeon` in the combat scenario picker and verify prop scale against the warrior/enemy sprites.
 
-15. **Next - Combat Board Frame And Panel Skin V1**
+15. **In progress - Combat Board Frame And Panel Skin V1**
     - Goal: replace the current rough battle chrome with asset-backed framed panels that match the tactical fantasy direction.
-    - Owner spec: new `presentation/089_combat_board_frame_skin_v1.md`.
-    - Slice: `slices/089_combat_board_frame_skin_v1.md`.
+    - Owner spec: `presentation/089_combat_board_frame_skin_v1.md`.
+    - Slice: `slices/097_combat_board_frame_skin_v1.md` (chronological after096).
+    - Stage8 authorized for background implementation/headless tests. Actual
+      DISPLAY1 review waits until the user releases desktop controls; not accepted.
+    - Implemented CombatPanelSkin, framed encounter header/board, local popup and
+      tooltip theme, bounded long text and board viewport fitting. Full verifier
+      `stage8-headless-20261101`35/35 PASS, new skin suite238 checks; strict scene
+      checker1967 files and `stage8-release-20261101` export/probe PASS, zero
+      errors/warnings. No visible window/input used. Original handoff deferred
+      stage9; the user's subsequent batch override authorized stages9..12, now
+      automated PASS. Actual S8-07 remains open. Report in docs/qa/stages.
     - Required behavior:
       - board frame, side/top panels, event feed, and modal/tooltip surfaces use the new visual language;
       - no text overlaps panel borders at target resolutions;
@@ -787,10 +848,15 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
       - layout helper assertions where practical;
       - manual screenshot review.
 
-16. **Planned - Combat Unit And Resource Icon Pass V1**
+16. **In progress - Combat Unit And Resource Icon Pass V1**
     - Goal: use processed combat assets to improve unit readability and resource communication.
-    - Owner spec: new `presentation/090_combat_unit_resource_assets_v1.md`.
-    - Slice: `slices/090_combat_unit_resource_assets_v1.md`.
+    - Owner spec: `presentation/090_combat_unit_resource_assets_v1.md`.
+    - Slice: `slices/098_combat_unit_resource_assets_v1.md`.
+    - User-authorized batch: automate in order, defer L9-01/02 live checks.
+    - Implemented identity/numeric resources, hover/active/wounded states and
+      safe missing-art fallback. `stage9-headless-20261101`36/36 PASS, zero
+      diagnostics; readability suite25 checks. Live NOT_RUN. Next: stage10
+      background implementation. Report docs/qa/stages/2026-11-01-stage-9.md.
     - Required behavior:
       - unit portraits/sprites and combat posture assets are resolved from stable paths;
       - HP/AP/MP/resource icons replace or support plain text where readable;
@@ -801,10 +867,14 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
       - Godot headless scene load;
       - manual visual review.
 
-17. **Planned - Combat Feedback Polish V2**
+17. **In progress - Combat Feedback Polish V2**
     - Goal: make action feedback feel game-like after the HUD and asset skin are in place.
-    - Owner spec: update `presentation/074_combat_action_feedback.md` or create `presentation/091_combat_feedback_polish_v2.md`.
-    - Slice: `slices/091_combat_feedback_polish_v2.md`.
+    - Owner spec: `presentation/091_combat_feedback_polish_v2.md`, extending068/074/087.
+    - Slice: `slices/099_combat_feedback_polish_v2.md`.
+    - Implemented costs/rejection/result feedback and top-edge preview layout.
+      `stage10-headless-20261101`37/37 PASS, zero diagnostics; new feedback
+      suite20 checks including normal resolver-driven animated victory/defeat.
+      Live L10-01/02 NOT_RUN. Next: stage11 authoring. Stage10 report in docs/qa.
     - Required behavior:
       - floating damage/miss/status text matches the new UI style;
       - selected action, target preview, hit chance, damage, AP/MP cost, and rejection reasons are visually consistent;
@@ -815,20 +885,32 @@ Move to the dungeon layer only when all required items in this roadmap are `Done
       - Godot headless scene load;
       - manual screenshot/playthrough review.
 
-18. **Planned - Combat Encounter Authoring V1**
+18. **In progress - Combat Encounter Authoring V1**
     - Goal: make one new combat encounter from map + archetypes without code changes.
-    - Owner spec: map/encounter authoring docs.
-    - Slice: `slices/092_combat_encounter_authoring_v1.md`.
+    - Owner spec: `overview/092_combat_encounter_authoring_v1.md` and tooling003.
+    - Slice: `slices/100_combat_encounter_authoring_v1.md`.
+    - Implemented exported JSON scenario catalogue, authored clearing_crossfire,
+      semantic reference validation and authoring instructions. Full
+      `stage11-headless-20261101`38/38 PASS, zero diagnostics;17 Godot checks and8
+      Python negative tests added. Live L11-01/02 NOT_RUN. Next: stage12 technical
+      review/export. Report docs/qa/stages/2026-11-01-stage-11.md.
     - Required behavior:
       - documented steps for adding a combat map encounter;
       - validator checks map reference, spawns, archetypes, loadouts, and background;
       - debug scene scenario catalog can load it without controller edits.
     - Test proof: validators plus Godot project load.
 
-19. **Planned - Combat Readiness Review For Dungeon**
+19. **In progress - Combat Readiness Review For Dungeon**
     - Goal: run the exit criteria as a final checklist after the UI/asset pass and encounter authoring work.
-    - Owner spec: this milestone plus any transition/boundary spec.
-    - Slice: `slices/093_combat_ready_for_dungeon.md`.
+    - Owner spec: `overview/093_combat_readiness_for_dungeon.md`, tooling004.
+    - Slice: `slices/101_combat_readiness_for_dungeon.md`.
+    - Technical review complete: `stage12-final-headless-20261101`38/38 PASS,
+      strict checker1973 files, zero errors/warnings. Fresh
+      `stage12-release-20261101` export/probe PASS, including the new authored
+      encounter, numeric UI and ordinary movement. Readiness/gap matrix and
+      hashes: docs/qa/stages/2026-11-01-stage-12.md. All11 live scenarios remain
+      NOT_RUN. Next: user-released desktop session, then fix/retest/accept;
+      no new gameplay stage should replace that pending work.
     - Required behavior:
       - all required roadmap items are done or explicitly deferred;
       - validation commands pass;

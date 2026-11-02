@@ -1,0 +1,467 @@
+{
+  "schema": "sdd.campaign-art-v1",
+  "production_date": "2026-11-02",
+  "selected_concept": "A",
+  "generated_source_brief": "assets_src/campaign_ui/prompts.md",
+  "pixel_editor": "Aseprite 1.3.17.2",
+  "recipe": "tools/aseprite/campaign_ui_assets.lua",
+  "dependencies": "tools/assets/ui_dependencies.json",
+  "licenses": "resources/licenses/campaign-ui.txt",
+  "files": [
+    {
+      "path": "assets/ui/campaign/button.png",
+      "bytes": 21080,
+      "sha256": "0d9d14c11dce972675e80fd7c2c7294bd731d79800c0b4219c0df8619186e88b"
+    },
+    {
+      "path": "assets/ui/campaign/divider.png",
+      "bytes": 167,
+      "sha256": "639d9c66174e68b89b778eb7e58f3c0d93fc241c19e6d8e714bd528f4fed0796"
+    },
+    {
+      "path": "assets/ui/campaign/frame_dark.png",
+      "bytes": 149073,
+      "sha256": "aa51ceaea002b0d9000a6c24b7b1d638feeb21d3cf539e559000ff477bda6640"
+    },
+    {
+      "path": "assets/ui/campaign/frame_metal.png",
+      "bytes": 158728,
+      "sha256": "ac7e2fe08e703cc3aa5db6756f3f572a8fe5c803130f880e18eb48b36e6224c2"
+    },
+    {
+      "path": "assets/ui/campaign/frame_paper.png",
+      "bytes": 148035,
+      "sha256": "e2a13ae829a78dbdb8a4ecd7cc45d85d5f3977ef295111259945b4a316e90a22"
+    },
+    {
+      "path": "assets/ui/campaign/glyphs/bandage.png",
+      "bytes": 452,
+      "sha256": "065cbfa71a1f8cc2d9610eed6f025122436fe686adaf8c16aee09f2fcec165b3"
+    },
+    {
+      "path": "assets/ui/campaign/glyphs/book.png",
+      "bytes": 608,
+      "sha256": "a5bb0e81d628d5b31db5885555b51d3830052f4ed82a1d25f94b9e33ad7ed69d"
+    },
+    {
+      "path": "assets/ui/campaign/glyphs/coin.png",
+      "bytes": 546,
+      "sha256": "bfc1ff4e04a6bd30d08d5b987f2dc26d7c34db7dcb3c54e9555e5e6290ae75a2"
+    },
+    {
+      "path": "assets/ui/campaign/glyphs/food.png",
+      "bytes": 703,
+      "sha256": "1fd4c71e5cd59a2e0ff44ada6fb08ae90ff1f8a2f664191434854473deccce2c"
+    },
+    {
+      "path": "assets/ui/campaign/glyphs/hammer.png",
+      "bytes": 469,
+      "sha256": "c86f610b7bc2002fb20148166445e78146c790e7243597d1f4a61e428da29f96"
+    },
+    {
+      "path": "assets/ui/campaign/glyphs/heart.png",
+      "bytes": 638,
+      "sha256": "39df608b0e80d345a959315d2dcbd4489e8f8a97e175bff69f7610b35849071d"
+    },
+    {
+      "path": "assets/ui/campaign/glyphs/oil.png",
+      "bytes": 655,
+      "sha256": "f2e8b97bd477ee3f84ec327d9bca53c4c8aa467674e01e35f1335df0f6865b48"
+    },
+    {
+      "path": "assets/ui/campaign/glyphs/pickaxe.png",
+      "bytes": 558,
+      "sha256": "b207839cf3c047119382297dac361f72cf3ec2a9c06926f8fd5979837dbe218d"
+    },
+    {
+      "path": "assets/ui/campaign/glyphs/tent.png",
+      "bytes": 426,
+      "sha256": "4ee5373adbfdfa6dc98f8e47de2279e2909dfb2202602d09ec5d6e6e6efd80f4"
+    },
+    {
+      "path": "assets/ui/campaign/glyphs/trap.png",
+      "bytes": 572,
+      "sha256": "c6e6b05a6113f025f833aff2a69916e3f08940b4acb0feea64ac7f78c0a82a45"
+    },
+    {
+      "path": "assets/ui/campaign/items/amber_idol_chip.png",
+      "bytes": 11345,
+      "sha256": "2e14a4bd5224213adaa654c113f76ba95458f370398a0ae1dfbfbfa25c8af8c0"
+    },
+    {
+      "path": "assets/ui/campaign/items/bent_mining_token.png",
+      "bytes": 13647,
+      "sha256": "b6e7852324134f59a443e8d68b08307ab293ba25dec00e75ade1a22b1b63347e"
+    },
+    {
+      "path": "assets/ui/campaign/items/brass_route_marker.png",
+      "bytes": 14227,
+      "sha256": "7dfa98c6e4cd495f026c9d70484f4ab651a8d3fd02db457aa810f26d1abb6a05"
+    },
+    {
+      "path": "assets/ui/campaign/items/generated_old_mine_relic.png",
+      "bytes": 12676,
+      "sha256": "9f5e7c21fc8828e0a99a3d432e157cd52d4f9d8f188c5e69137cdca7550e7b42"
+    },
+    {
+      "path": "assets/ui/campaign/items/generated_old_mine_trinket.png",
+      "bytes": 10358,
+      "sha256": "61c91a4ae389c02830a95358c7d1d1f5ecaffc76e0a02902bcdce33003b48d0d"
+    },
+    {
+      "path": "assets/ui/campaign/items/hero_bow.png",
+      "bytes": 6562,
+      "sha256": "e1e86a6a081af1d7f8f5f7570d0bbbdfd9276e145f4553e451f38b5f38f7cce4"
+    },
+    {
+      "path": "assets/ui/campaign/items/hero_sword.png",
+      "bytes": 7039,
+      "sha256": "cfe5c9b2a574eb9f8472c38c6e10120dfca60d4182b7b6e68905219904120624"
+    },
+    {
+      "path": "assets/ui/campaign/items/legacy_unknown.png",
+      "bytes": 16849,
+      "sha256": "a76530bf3fb9b8bb756bd38c5733ebe9ea407f247f53c363cb08cb9d0a739258"
+    },
+    {
+      "path": "assets/ui/campaign/items/old_mine_blade.png",
+      "bytes": 7289,
+      "sha256": "da681460356fce54d2b9b4d9a16c7ed84c755fca3da883cb825820a4b5a754d2"
+    },
+    {
+      "path": "assets/ui/campaign/items/old_mine_scrip.png",
+      "bytes": 16829,
+      "sha256": "2ea923885ecb401d29271d19517ab0c5cded17391f2f4306a3ecc272c29b6fcc"
+    },
+    {
+      "path": "assets/ui/campaign/items/old_mine_trinket.png",
+      "bytes": 8330,
+      "sha256": "a0a2ff87f28bb6cd99ab42ceffac7376105118fe3d157ee3ac3fb244f44fb6c7"
+    },
+    {
+      "path": "assets/ui/campaign/items/patched_leather.png",
+      "bytes": 18969,
+      "sha256": "4837481c2bd0031c64649b1c261f254cef13d01f190f0fb6742265c4ff9f77d9"
+    },
+    {
+      "path": "assets/ui/campaign/items/rusty_key.png",
+      "bytes": 9120,
+      "sha256": "59ebb2585ca221caa8a39ff53f6df3e431e9a63d45775f2bcb8016264342f926"
+    },
+    {
+      "path": "assets/ui/campaign/items/salvaged_blade.png",
+      "bytes": 7967,
+      "sha256": "e4d6572f88228f7ce5577d9f21fc29912f4822550ba8d1b8a595600f35af54c5"
+    },
+    {
+      "path": "assets/ui/campaign/items/salvaged_shield.png",
+      "bytes": 16861,
+      "sha256": "e93bf1144737b0636824ba179afdff28ceb231ca6e65362836ad91a9710fc249"
+    },
+    {
+      "path": "assets/ui/campaign/items/sealed_oil_twist.png",
+      "bytes": 14493,
+      "sha256": "a77934713ceebb7eff5754bf101a1cf733e26719af76e9f5e4e9ef764a574699"
+    },
+    {
+      "path": "assets/ui/campaign/leather.png",
+      "bytes": 173050,
+      "sha256": "2090af1719798d14a16a2bc474ba4e551d147ae57766e6bd5eccd6ec6c1efd53"
+    },
+    {
+      "path": "assets/ui/campaign/marches_map.png",
+      "bytes": 2521090,
+      "sha256": "b8029885a2561260972c55043bb68dccb54ce7002fff204af9b34fadb78fa4a3"
+    },
+    {
+      "path": "assets/ui/campaign/ravenford.png",
+      "bytes": 718914,
+      "sha256": "80aa9ca892c107a1700a5e0e79c5e37d53c5c82c719e5923ca43a2a8e03b2ccd"
+    },
+    {
+      "path": "assets/ui/campaign/rooms/entrance.png",
+      "bytes": 40173,
+      "sha256": "d821d6ed49153215d8e6f15ec32491418f2394ccb4f49d1b458224700b16504d"
+    },
+    {
+      "path": "assets/ui/campaign/rooms/exit.png",
+      "bytes": 44362,
+      "sha256": "c9bd7f2a3b94040c9770232ffda03f45faad36ed269c483501d9866551ac5cf7"
+    },
+    {
+      "path": "assets/ui/campaign/rooms/guarded_treasure.png",
+      "bytes": 42096,
+      "sha256": "6cc8bf5157e33672f3f747f52c563ea09b78e058a55a9ec56afca6c9fec06ec0"
+    },
+    {
+      "path": "assets/ui/campaign/rooms/locked.png",
+      "bytes": 43746,
+      "sha256": "52ccf3bc632447df683763ebe8e52815f712c2bc5f93f9d188a96efa3fefd06a"
+    },
+    {
+      "path": "assets/ui/campaign/rooms/shrine.png",
+      "bytes": 36216,
+      "sha256": "8f1c2ca4889e5ef35497ea57565450a301b9aa83b56ba3df37e4bc015a0f3db8"
+    },
+    {
+      "path": "assets/ui/campaign/rooms/spider.png",
+      "bytes": 43462,
+      "sha256": "7a9eb8d5a7586693a5b965cc7549ba3d24c799693a9aee7afcc44391e4de22e5"
+    },
+    {
+      "path": "assets/ui/campaign/rooms/treasure.png",
+      "bytes": 34179,
+      "sha256": "895af3acece8b4513b168d6b4ba02fa2f225a705486f1c1812a858221d4ecbb4"
+    },
+    {
+      "path": "assets/ui/campaign/rooms/tunnel.png",
+      "bytes": 43122,
+      "sha256": "f12382f8e338b35dc70a1388354f3dfc52ab04e506c9c6db072e6072d2b43721"
+    },
+    {
+      "path": "assets/ui/campaign/slot.png",
+      "bytes": 216,
+      "sha256": "f71f7eff45ed084e789405bbbb691758ee09ddbdc29e820b5ade4acaf41032ed"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/button.aseprite",
+      "bytes": 22014,
+      "sha256": "597f9546f85c32a2ecf3c96f34d04d3c8c84b3aab5224a95104da58b9ca627eb"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/divider.aseprite",
+      "bytes": 1078,
+      "sha256": "041d3e3d4072a512a6013abffe76588e1815f8f7b7da4330e4ce548e4f4155c1"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/frame_dark.aseprite",
+      "bytes": 130080,
+      "sha256": "cd07e63e63f858818975eb1940f9e714d69200c9b54ce9a1ad6c6709f1f87735"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/frame_metal.aseprite",
+      "bytes": 157226,
+      "sha256": "15074af824e13bcfca19f564d198fc9a09a91a8442c8156cf22e7078fa8df0ad"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/frame_paper.aseprite",
+      "bytes": 155436,
+      "sha256": "11889247df357aeb171fde607d971986fd80bc27e543d90fe89d92809050e10b"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/glyphs_bandage.aseprite",
+      "bytes": 1225,
+      "sha256": "ba06aaef47eb619a7952cf4e37b938d9b750d11c8cefcdc1f48dc56b7fc08207"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/glyphs_book.aseprite",
+      "bytes": 1291,
+      "sha256": "ed359fabdd4fa31f0d969ae44964e03cde5dfc75791307e74f238ee233c9e959"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/glyphs_coin.aseprite",
+      "bytes": 1258,
+      "sha256": "a091d9b9bbb55cbee0b6d4f9b3f2fa2647efe6a771a38aeb8ae8c9c340ba18be"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/glyphs_food.aseprite",
+      "bytes": 1302,
+      "sha256": "ccccfe07398ead593a4f309dfa7adaa4c6b63085bde0a4aae3574319e4d52aab"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/glyphs_hammer.aseprite",
+      "bytes": 1220,
+      "sha256": "fd6ec7c3cb0caddf7d6b8055de7981a2242ed006c29cd511280509bd79fb38e8"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/glyphs_heart.aseprite",
+      "bytes": 1313,
+      "sha256": "d7bf25c50e14095a39acd32ed2d994ba6843801b6aa66a79951ced5841a15352"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/glyphs_oil.aseprite",
+      "bytes": 1286,
+      "sha256": "fef9385a253a5015baea0e7cfdfb49018d3c5634ac3d3f82ace8763018d98d69"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/glyphs_pickaxe.aseprite",
+      "bytes": 1239,
+      "sha256": "532914ac062ff6a89840d484f7963b3e4abc117b8af0bc09f9a06ab2eaf15337"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/glyphs_tent.aseprite",
+      "bytes": 1210,
+      "sha256": "a264384c4034f7cc1fe1e8c765f2625fa43fca9c367c7bef379c916e8409074d"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/glyphs_trap.aseprite",
+      "bytes": 1274,
+      "sha256": "bff516743064a317d656a626bf7da1e0d64e7c724e2f45eb5a7ad186170ba5f2"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_amber_idol_chip.aseprite",
+      "bytes": 12492,
+      "sha256": "1d73a760696dce8a632a87ed136ba73f3bc306a74475e572bf16ef49103b86e5"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_bent_mining_token.aseprite",
+      "bytes": 14767,
+      "sha256": "35aebb9699609262026a95be5743ab37c40a53a12d0b34b6ccb14abceed676e3"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_brass_route_marker.aseprite",
+      "bytes": 15647,
+      "sha256": "eb12a3751c91d6bb50dddec4583ef40a03d1e56460ecbcb9560bf3b60578b4a7"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_generated_old_mine_relic.aseprite",
+      "bytes": 13524,
+      "sha256": "76619371eaed2a69ec8aaaa356c335bd8ad3f0093ee81570b9cc7b6732cf9be6"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_generated_old_mine_trinket.aseprite",
+      "bytes": 11146,
+      "sha256": "38797d49b0e861d8fd6c4dd3f81173143e5bd7afacb192d10b197d93f120fe93"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_hero_bow.aseprite",
+      "bytes": 7154,
+      "sha256": "781206d172ba23ccf60be0ee3d3eb5aa7d25d00dbdfda2ca63c387e247f25b54"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_hero_sword.aseprite",
+      "bytes": 7571,
+      "sha256": "b6ab4b9e35f518f7a4d170af40776e7ca792dc1c4e4250b57188e18aac5117fe"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_legacy_unknown.aseprite",
+      "bytes": 17892,
+      "sha256": "d9e08f0ecad768eed220053d9dcafa91ebf8ee178ba4a746c5d11e10feecaaf1"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_old_mine_blade.aseprite",
+      "bytes": 7864,
+      "sha256": "ffc14005658724a1728ecb2d74084fec82cb579adde72430bcb0cfe318f1591e"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_old_mine_scrip.aseprite",
+      "bytes": 18331,
+      "sha256": "0d633080bd698ac4d95fa7f1ed196e7cc2fb95da635f0332ea7df45a8593e2c8"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_old_mine_trinket.aseprite",
+      "bytes": 9065,
+      "sha256": "3faf02918af2e1743be57f6c8578f436168b2540c8694dcde3aec5ff21713b41"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_patched_leather.aseprite",
+      "bytes": 19627,
+      "sha256": "e280e89ffde3de0e52a8bae32ce7199c399e39b326f0a128e5cf827193eff146"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_rusty_key.aseprite",
+      "bytes": 9814,
+      "sha256": "4c578ad02d80d2047eb639a88d716c19df2ab850dd6cd8eb833f413376eb3501"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_salvaged_blade.aseprite",
+      "bytes": 8592,
+      "sha256": "95db9f7a8ead5b8b4147af0d020d408d453c0bfb5e07817bb248962be29ba6f5"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_salvaged_shield.aseprite",
+      "bytes": 18065,
+      "sha256": "001ea427ca9898d9136abdb30db56a1931774329e332ab2545fdb1648c3b4aa5"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/items_sealed_oil_twist.aseprite",
+      "bytes": 15121,
+      "sha256": "372865ff070bd4e32952926d6057a900d76027c36bb5870cbd81a04311888d83"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/leather.aseprite",
+      "bytes": 147149,
+      "sha256": "a4be6bbf57a7376357d315eb56f5e18c63646b9d7ae8862282073c84916372aa"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/marches_map.aseprite",
+      "bytes": 2917125,
+      "sha256": "cd52ec52a261c2992a74ce05db805a8910b6f1d21c6b83b1badae3b78b623997"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/ravenford.aseprite",
+      "bytes": 832004,
+      "sha256": "09e7522799a0c1de6714d68be195e6a3b0abcaa33065c0977acfcde95a404ce5"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/rooms_entrance.aseprite",
+      "bytes": 47919,
+      "sha256": "2d0e7e84b2b7db90ebb8110d61a9fcca01912e7558e0882e9676a017d5d1cbeb"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/rooms_exit.aseprite",
+      "bytes": 53083,
+      "sha256": "d65d9c54995ade266485449777b1539a9fd641fe265d185e17a2b8173a3c9b6a"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/rooms_guarded_treasure.aseprite",
+      "bytes": 49314,
+      "sha256": "203cf3276f139bcf13a7556d3621e0ff4f8d38e2db9326ca32b559779c47935a"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/rooms_locked.aseprite",
+      "bytes": 51761,
+      "sha256": "0f7e504ab0eede6fa3b885d03139b12d304fbc8b1c984cba94a5b0af83764c56"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/rooms_shrine.aseprite",
+      "bytes": 44486,
+      "sha256": "b09c7348131299d5c598a64be66207a3ab6207f6bf3dae050652f9804a26ded5"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/rooms_spider.aseprite",
+      "bytes": 48965,
+      "sha256": "e37fc3f9581f7f7f8b91c90aceb0963473b2ff85d9b2fdd2fd9aa8ce4145abac"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/rooms_treasure.aseprite",
+      "bytes": 41712,
+      "sha256": "a9618c39ac9baff800a6a365c294a375f78a157060fdaa8d65c1f7398d830637"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/rooms_tunnel.aseprite",
+      "bytes": 50747,
+      "sha256": "96e7de56ed30e6613ed5687bb59b2aeeb4bdacaf9b14f2babfd745109ebcec96"
+    },
+    {
+      "path": "assets_src/aseprite/campaign_ui/slot.aseprite",
+      "bytes": 1094,
+      "sha256": "ab37657881aec65968e82220bb97778f5d462a3e0cb72759915bafc7d3ef096f"
+    },
+    {
+      "path": "assets_src/campaign_ui/inventory-concepts.png",
+      "bytes": 2795505,
+      "sha256": "6d74737f6864ae2ab6156c706a3ada3b99c7de45c2da5d00f8405bc0acab5f0c"
+    },
+    {
+      "path": "assets_src/campaign_ui/items-source.png",
+      "bytes": 1807693,
+      "sha256": "f2592fe644741f89c93026a7b92f0a92a4d2d632ba9837864d709b00512fef32"
+    },
+    {
+      "path": "assets_src/campaign_ui/marches-map-source.png",
+      "bytes": 4210065,
+      "sha256": "c3773c814ef4847d55f52b8a7148fc8198c31e88b6bd895c34b616278efe762e"
+    },
+    {
+      "path": "assets_src/campaign_ui/materials-source.png",
+      "bytes": 3249445,
+      "sha256": "d18ea1bcd2a38656a21ed7948b9f8fa67494340ea9d3ec0600e83348b4233f33"
+    },
+    {
+      "path": "assets_src/campaign_ui/rooms-source.png",
+      "bytes": 2787541,
+      "sha256": "e570af4275830192fc8f6121b84367f25adab9469d123ebbdce99d8e0b04d93c"
+    }
+  ]
+}

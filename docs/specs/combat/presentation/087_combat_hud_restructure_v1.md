@@ -23,6 +23,7 @@ The first implementation pass skins existing combat debug controls without chang
 - Skill-specific icons from `assets/ui/combat/processed/icons/` should be used before generic fallback icons for named abilities such as `power_strike`, `deep_cut`, `guard_break`, `aimed_shot`, and `shield_wall`.
 - Standard action icons should use the full-size processed `icons/icon_*` exports rather than smaller `icons/inner/*` crops when they appear in the main skillbar, so all action buttons share a consistent visual scale.
 - Main action slots are icon-first: visible action names are omitted from the slot when an icon exists, with tooltips/detail panel carrying the text label.
+- A slot with no icon must show its readable action label; debug AI/next-turn controls must not be blank.
 - Hovering an action slot updates the action detail panel with the action name, shortcut slot, and current AP/MP context.
 - Primary combat panels use atlas-backed fantasy frames or deterministic fallback StyleBoxes.
 - Combat log, action feed, and turn order text must wrap or clip inside their panel bounds and must not spill outside frames.
@@ -78,6 +79,19 @@ The first implementation pass skins existing combat debug controls without chang
 - Scene still loads headlessly.
 
 ## Proof
+
+### Readable text layout regression (2026-11-01)
+
+Action title/detail/feed, combat status and turn order must have nonzero layout
+height after container layout. Wrapping and clipping must not let a Label collapse
+to zero height. The action context reserves space for a title, three detail lines
+and four feed lines. Turn order reserves six readable lines. This applies after
+resizing a window and when the visible action count changes during a turn.
+Actions without an available icon use a readable text label, including the
+AI and next-turn controls. An empty icon-only slot is not an acceptable fallback.
+
+Proof: slice `095_combat_hud_text_layout.md` and
+`scripts/presentation/combat_hud_layout_tests.gd`, plus actual game review.
 
 - Slice: `docs/specs/combat/slices/087_combat_hud_restructure_v1.md`
 - Godot headless scene load.

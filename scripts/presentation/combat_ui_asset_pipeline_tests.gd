@@ -1,5 +1,7 @@
 extends SceneTree
 
+const AssetCatalog := preload("res://scripts/presentation/shared/asset_catalog.gd")
+
 const CombatDebugScript := preload("res://scripts/presentation/combat_debug.gd")
 
 
@@ -51,8 +53,8 @@ func _assert_file(path: String, failures: Array[String]) -> void:
 
 
 func _assert_png_size(path: String, expected: Vector2i, failures: Array[String]) -> void:
-	var image := Image.new()
-	if image.load(path) != OK:
+	var image := AssetCatalog.image_copy(path)
+	if image == null:
 		failures.append("Could not load combat UI asset for size check: %s" % path)
 		return
 	var actual := Vector2i(image.get_width(), image.get_height())
@@ -61,8 +63,8 @@ func _assert_png_size(path: String, expected: Vector2i, failures: Array[String])
 
 
 func _assert_png_has_visible_pixels(path: String, failures: Array[String]) -> void:
-	var image := Image.new()
-	if image.load(path) != OK:
+	var image := AssetCatalog.image_copy(path)
+	if image == null:
 		failures.append("Could not load combat UI asset for pixel check: %s" % path)
 		return
 	for y in image.get_height():

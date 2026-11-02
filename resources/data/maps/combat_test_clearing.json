@@ -1,4 +1,5 @@
 {
+  "schema_version": 2,
   "id": "combat_test_clearing",
   "source": "res://resources/tiled/maps/combat_test_clearing.tmx",
   "tile_size": 76,
@@ -624,6 +625,16 @@
       "role": "enemy_ranged",
       "x": 10,
       "y": 7
+    }
+  ],
+  "background_path": "res://assets/combat/terrain/backgrounds/old_mine_meadow_01_deep_green.png",
+  "terrain_theme": "nature",
+  "terrain_decorations": [
+    {
+      "x": 1,
+      "y": 2,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png",
+      "kind": "boulder"
     }
   ]
 }

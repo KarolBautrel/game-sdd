@@ -23,6 +23,10 @@ Preview explains what should happen before confirmation. Action feedback explain
 - Floating text styling and timing should be centralized so future status, buff, debuff, heal, or resource messages do not duplicate node/tween setup.
 - Actor lunge, target hit shake, death fall, and floating text should run as one readable combat beat.
 - Floating text must be temporary and cleaned up after the animation finishes or the encounter is re-rendered.
+- A feedback event without a lunge/hit/death track (for example Defend), or a
+  movement event without a surviving visual/path, completes presentation and
+  unlocks input immediately. Kill an unused Tween before returning; never leave
+  it scheduled with no Tweeners. This fallback preserves the resolver result.
 
 ## Style
 
@@ -37,4 +41,6 @@ Preview explains what should happen before confirmation. Action feedback explain
 - The combat sandbox uses the shared floating text helper rather than owning damage/miss/status message construction directly.
 - `CombatFloatingText.messages_from_events` is covered by a Godot headless helper test.
 - Existing combat animations still play.
+- Slice096 and `combat_animation_lifecycle_tests.gd` cover status-only feedback
+  and absent movement/actor visuals, including input unlock and no empty Tween.
 - Python validation, Godot project load, and Godot combat slice tests pass.

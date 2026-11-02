@@ -13,6 +13,19 @@ Long term, dungeon exploration should have its own mechanics rather than being o
 
 ## Current State
 
+Stage18/19 (2026-11-01): managed run and road handoff now freezes advancement
+alongside equipment; base max HP/injuries and sandbox remain unchanged. World007,
+combat103 and shared presentation002 own progression/new campaign interfaces.
+Final45/45/source and extended EXE probe PASS; actual equipped/trained expedition
+and restart L18-02/L19-02 remain NOT_RUN. Next is24-case live acceptance.
+
+Stage16 campaign handoff (2026-11-01): managed begin/checkpoint freezes owned
+equipment; DungeonRunSession injects catalogue loadouts/actions before existing
+injury modifiers, without changing dungeon resolution or sandbox. Owner world005,
+combat slice102; full42/42 and final extended EXE probe PASS, zero diagnostics.
+Next: actual equipped expedition/return/restart L16-02 and the accumulated18 live
+cases when desktop controls are available; all NOT_RUN. See stage16 QA report.
+
 - Dungeon specs exist.
 - Dungeon data contract v1 is implemented.
 - `dungeon_old_mine` is authored as a small room/corridor graph.
@@ -769,6 +782,30 @@ This queue captures the next agreed dungeon direction after the exploration foun
 
 ## End-Of-Day Backlog
 
+### 2026-11-01 cross-project implementation gate
+
+The user approved the cross-project plan with sequential stage gates and actual
+playthroughs after every stage. The first prerequisite is recorded in
+`docs/specs/tooling/001_stage_verification.md` and its acceptance slice
+`docs/specs/tooling/slices/001_environment_baseline.md`.
+
+Stage 0 adds local Python setup, full-suite validation orchestration and a
+DISPLAY1-only interactive launcher. Its report is
+`docs/qa/stages/2026-11-01-stage-0.md`. Computer Use access now works; actual
+playtesting found collapsed combat HUD labels (combat slice 095), now repaired
+and retested in-game. Stage 0 is accepted: 23/23 checks plus a real completed
+expedition. Stage 1 is next: full-loop QA and the newly observed combat HP return
+regression (Bran 8 HP in combat became 14 in dungeon). Repair this prerequisite
+before exportable assets (stage 2) or later features.
+
+Stage 1 implementation (subsequently accepted below): overview 045 / slice 053 add absolute combat injury
+return, recovery of incapacitated members, current HP cards, pending/completed
+navigation guards, and a deterministic full-loop runner using ordinary resolver
+commands. `stage1-first-20261101` passes all 25 checks, including two identical
+seeded expeditions and boundary regressions. Scene checker: 0 errors/warnings
+in 1926 files. Actual repaired-build expedition is the current gate.
+The existing Playable Dungeon Beta item remains in progress.
+
 This checkpoint preserves the current dungeon direction after the loadout/resource UI pass. The immediate next work should stay on the established spec -> slice -> implementation -> proof workflow.
 
 1. **Done - Resource Balance Pass**
@@ -788,7 +825,7 @@ This checkpoint preserves the current dungeon direction after the loadout/resour
    - Processed semantic icons now live under `assets/ui/dungeon/processed/icons/`.
    - Proof: `scripts/presentation/dungeon_exploration_hud_tests.gd` and green-pixel scan.
 
-3. **In Progress - Playable Generated Beta Party**
+3. **Done - Playable Generated Beta Party**
    - Owner spec: `docs/specs/dungeon/overview/042_playable_generated_beta_party_v1.md`
    - Slice: `docs/specs/dungeon/slices/050_playable_generated_beta_party_v1.md`
    - Implemented:
@@ -818,12 +855,46 @@ This checkpoint preserves the current dungeon direction after the loadout/resour
      - room cards keep normal readable size instead of being compressed to fit the visible frame.
    - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_procedural_draft_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`; headless `DungeonDebug.tscn`.
 
-6. **World/Town Integration Prep**
+6. **Done - World/Town Integration Prep**
    - Define the future boundary where town/global map owns supply purchase and durable inventory.
    - Dungeon should continue to receive only the carried loadout payload and return run results/inventory deltas.
    - Proof target: spec and slice first; implementation only after the global-map/town contract exists.
+   - Implemented world001/slice001: App/Ravenford, owned supplies, durable campaign,
+     checkpoint/resume and idempotent return settlement; stage6 accepted33/33 plus
+     actual purchase/restart/retreat/inn. Report docs/qa/stages/2026-11-01-stage-6.md.
+
+Stage 1 final acceptance (2026-11-01): `stage1-final-20261101` passed 26/26
+checks, no errors. Actual normal victory retained Bran 9/14 on dungeon return;
+bandage refreshed 10/14. Finished 6/6 rooms with 20g, 7 XP, four items; further
+movement rejected. Fresh-process HP bar layout verified. Report:
+`docs/qa/stages/2026-11-01-stage-1.md`. Next ordered task: stage 2 exportable assets.
 
 ## First Implementation Guidance
+
+Stage2 accepted: deterministic AssetCatalog, ResourceLoader runtime and isolated
+Windows export smoke, 27/27 checks with zero errors/warnings, real source/EXE
+move/attack and dungeon event verified. Report `docs/qa/stages/2026-11-01-stage-2.md`.
+Stage3 accepted: passive PartyCard/ResourceMeter scenes and PixelSkin helper,
+28/28 checks, actual injury/recovery and combat resources verified.
+Report `docs/qa/stages/2026-11-01-stage-3.md`. Stage4 accepted: tooling003/slice003,
+29/29 checks and actual map-reference edit/save/reload/play/return; report stage4.
+Stage5 accepted: overview046/slice054, explicit template acceptance, graph
+quality and 300-seed deterministic sweep. Four stale hazard slot counts repaired.
+stage5-final-20261101 passed30/30 with zero errors/warnings; actual D1/D2/D3,
+reroll and ordinary event/exploration passed. Report docs/qa/stages/2026-11-01-stage-5.md.
+Stage6 accepted: world/town boundary and durable inventory/effects,33/33 plus
+actual checkpoint/restart/retreat/recovery. Stage7 final exported acceptance also
+passed as recorded below.
+
+Stage7 accepted: all34 source checks and fresh corrected export/probe PASS with
+zero diagnostics. Actual play exposed a Defend Tween error, repaired under
+combat074/slice096 and retested with full regression and a new export. Corrected
+EXE passed ordinary three-enemy victory, HP return6/14, bandage7/14,6/6 finish
+and20g/7XP/four items. Settlement75g/16XP/nine items and party HP persisted on
+restart without duplication; the closed interactive log is clean. Temporary
+capture failure was recovered and the same battle continued. Full evidence in
+docs/qa/stages/2026-11-01-stage-7.md. Further work can extend global travel,
+encounters and presentation through new owning specs and acceptance slices.
 
 - Keep the first dungeon map small: start room, one empty room, one treasure room, and one combat room.
 - Use authored data before procedural generation.
@@ -846,4 +917,9 @@ python tools\validators\validate_all.py
 & "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn --quit --resolution 2560x1440
 ```
 
-After the large D3 scrollable-map pass, dungeon is ready to pause as the current beta foundation unless playtesting finds blocking bugs. The next planned layer is **World/Town Integration Prep** and then the global/world exploration mode.
+The world/town foundation and final corrected-release acceptance passed in
+stages6..7. Broader global travel remains future work. Combat queue15..19 now
+has implementation/technical review and automated PASS in stages8..12; all live
+acceptance is deferred by user instruction to docs/qa/live-test-scenarios.md.
+Next: accumulated DISPLAY1 play on the stage12 build, fix/retest and acceptance.
+Current status/evidence is linked from docs/CONTINUE_HERE.md.

@@ -840,6 +840,9 @@ static func _apply_map_reference(state: Dictionary) -> void:
 		push_error("Combat map is not a JSON object: %s" % map_path)
 		return
 	var map_data: Dictionary = parsed
+	for key: String in ["background_path", "terrain_theme", "terrain_decorations"]:
+		if not state.has(key) and map_data.has(key):
+			state[key] = map_data[key].duplicate(true) if map_data[key] is Array else map_data[key]
 	state["grid"] = {
 		"width": map_data["width"],
 		"height": map_data["height"],

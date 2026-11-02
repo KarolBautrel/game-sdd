@@ -1,5 +1,7 @@
 extends SceneTree
 
+const AssetCatalog := preload("res://scripts/presentation/shared/asset_catalog.gd")
+
 const CombatScenarioCatalog := preload("res://scripts/presentation/combat/combat_scenario_catalog.gd")
 const CombatDebugScript := preload("res://scripts/presentation/combat_debug.gd")
 
@@ -100,7 +102,7 @@ func _has_asset_at_least(manifest: Dictionary, theme: String, width: int, height
 
 
 func _image_has_transparency(path: String) -> bool:
-	var image := Image.load_from_file(path)
+	var image := AssetCatalog.image_copy(path)
 	if image == null or image.is_empty():
 		return false
 	image.convert(Image.FORMAT_RGBA8)
@@ -117,7 +119,7 @@ func _image_has_transparency(path: String) -> bool:
 
 
 func _image_size(path: String) -> Vector2i:
-	var image := Image.load_from_file(path)
+	var image := AssetCatalog.image_copy(path)
 	if image == null or image.is_empty():
 		return Vector2i.ZERO
 	return image.get_size()

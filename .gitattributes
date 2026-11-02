@@ -7,3 +7,11 @@
 *.wav filter=lfs diff=lfs merge=lfs -text
 *.ogg filter=lfs diff=lfs merge=lfs -text
 *.mp3 filter=lfs diff=lfs merge=lfs -text
+
+# Preserve upstream formatting in vendored code and original license notices.
+assets_src/vendor/** -whitespace
+addons/theme_gen/** -whitespace
+addons/theme_gen_save_sync/** -whitespace
+assets/ui/fonts/*-OFL.txt -whitespace
+resources/licenses/shikashi-original.txt -whitespace
+resources/licenses/kenney-*.txt -whitespace

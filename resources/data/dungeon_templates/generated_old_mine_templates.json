@@ -3,6 +3,7 @@
   "templates": [
     {
       "id": "old_mine_short_loop",
+      "acceptance_state": "accepted",
       "difficulty": 1,
       "display_name": "Generated Old Mine - Short Loop",
       "profile_ids": ["short_mine"],
@@ -23,6 +24,7 @@
     },
     {
       "id": "old_mine_bent_shaft",
+      "acceptance_state": "accepted",
       "difficulty": 1,
       "display_name": "Generated Old Mine - Bent Shaft",
       "profile_ids": ["short_mine"],
@@ -45,6 +47,7 @@
     },
     {
       "id": "old_mine_twin_caches",
+      "acceptance_state": "accepted",
       "difficulty": 2,
       "display_name": "Generated Old Mine - Twin Caches",
       "profile_ids": ["medium_mine"],
@@ -69,6 +72,7 @@
     },
     {
       "id": "old_mine_guarded_spur",
+      "acceptance_state": "accepted",
       "difficulty": 2,
       "display_name": "Generated Old Mine - Guarded Spur",
       "profile_ids": ["medium_mine"],
@@ -91,10 +95,11 @@
     },
     {
       "id": "old_mine_deep_branch",
+      "acceptance_state": "accepted",
       "difficulty": 3,
       "display_name": "Generated Old Mine - Deep Branch",
       "profile_ids": ["deep_mine"],
-      "pacing": { "route_length": 7, "branch_count": 3, "treasure_count": 2, "combat_count": 3, "room_event_slots": 3, "corridor_hazard_candidates": 9 },
+      "pacing": { "route_length": 7, "branch_count": 3, "treasure_count": 2, "combat_count": 3, "room_event_slots": 3, "corridor_hazard_candidates": 8 },
       "rooms": [
         { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 1, "y": 0 }, "content": [{ "type": "empty" }] },
         { "id": "generated_crossing", "display_name": "Old Crossing", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },
@@ -121,6 +126,7 @@
     },
     {
       "id": "old_mine_short_split",
+      "acceptance_state": "accepted",
       "difficulty": 1,
       "display_name": "Generated Old Mine - Short Split",
       "profile_ids": ["short_mine"],
@@ -143,10 +149,11 @@
     },
     {
       "id": "old_mine_medium_ring",
+      "acceptance_state": "accepted",
       "difficulty": 2,
       "display_name": "Generated Old Mine - Medium Ring",
       "profile_ids": ["medium_mine"],
-      "pacing": { "route_length": 5, "branch_count": 2, "treasure_count": 2, "combat_count": 1, "room_event_slots": 3, "corridor_hazard_candidates": 6 },
+      "pacing": { "route_length": 5, "branch_count": 2, "treasure_count": 2, "combat_count": 1, "room_event_slots": 3, "corridor_hazard_candidates": 7 },
       "rooms": [
         { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 0, "y": 1 }, "content": [{ "type": "empty" }] },
         { "id": "generated_landing", "display_name": "Cart Landing", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },
@@ -170,10 +177,11 @@
     },
     {
       "id": "old_mine_deep_switchbacks",
+      "acceptance_state": "accepted",
       "difficulty": 3,
       "display_name": "Generated Old Mine - Deep Switchbacks",
       "profile_ids": ["deep_mine"],
-      "pacing": { "route_length": 8, "branch_count": 3, "treasure_count": 2, "combat_count": 3, "room_event_slots": 4, "corridor_hazard_candidates": 10 },
+      "pacing": { "route_length": 8, "branch_count": 3, "treasure_count": 2, "combat_count": 3, "room_event_slots": 4, "corridor_hazard_candidates": 8 },
       "rooms": [
         { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 0, "y": 0 }, "content": [{ "type": "empty" }] },
         { "id": "generated_switchback", "display_name": "Upper Switchback", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },
@@ -200,10 +208,11 @@
     },
     {
       "id": "old_mine_deep_vault",
+      "acceptance_state": "accepted",
       "difficulty": 3,
       "display_name": "Generated Old Mine - Deep Vault",
       "profile_ids": ["deep_mine"],
-      "pacing": { "route_length": 8, "branch_count": 3, "treasure_count": 3, "combat_count": 3, "room_event_slots": 4, "corridor_hazard_candidates": 10 },
+      "pacing": { "route_length": 8, "branch_count": 3, "treasure_count": 3, "combat_count": 3, "room_event_slots": 4, "corridor_hazard_candidates": 9 },
       "rooms": [
         { "id": "generated_entrance", "display_name": "Mine Mouth", "kind": "entrance", "position": { "x": 1, "y": 0 }, "content": [{ "type": "empty" }] },
         { "id": "generated_crossing", "display_name": "Brace Crossing", "kind": "empty", "position": { "x": 1, "y": 1 }, "content": [{ "type": "empty" }] },

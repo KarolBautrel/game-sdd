@@ -2,6 +2,8 @@ extends Node
 
 const DungeonStateModel := preload("res://scripts/domain/dungeon_state_model.gd")
 const PartyRoster := preload("res://scripts/domain/party_roster.gd")
+const Gear := preload("res://scripts/domain/campaign_equipment.gd")
+const Advancement := preload("res://scripts/domain/party_advancement.gd")
 
 const DUNGEON_SCENE_PATH := "res://scenes/dungeon/DungeonDebug.tscn"
 const COMBAT_SCENE_PATH := "res://scenes/combat/CombatDebug.tscn"
@@ -17,6 +19,9 @@ var pending_combat_request: Dictionary = {}
 var pending_world_return_payload: Dictionary = {}
 var last_feedback := ""
 var next_combat_seed := 0
+var managed_run := false
+var town_preparation := false
+var road_combat := false
 
 
 func has_dungeon_run() -> bool:
@@ -26,16 +31,51 @@ func has_dungeon_run() -> bool:
 func set_dungeon_run(next_dungeon_data: Dictionary, next_dungeon_state: Dictionary) -> void:
 	dungeon_data = next_dungeon_data.duplicate(true)
 	dungeon_state = next_dungeon_state.duplicate(true)
+	checkpoint_campaign()
 
 
-func start_combat(next_dungeon_data: Dictionary, next_dungeon_state: Dictionary) -> bool:
+func checkpoint_campaign() -> bool:
+	if not managed_run or not is_inside_tree():
+		return true
+	var campaign := get_node("/root/CampaignSession")
+	var saved: bool = campaign.checkpoint(dungeon_data, dungeon_state, next_combat_seed)
+	if not saved:
+		last_feedback = campaign.last_feedback
+	return saved
+
+
+func restore_campaign() -> bool:
+	var campaign := get_node("/root/CampaignSession")
+	if not campaign.loaded or campaign.state.active_run.is_empty():
+		return false
+	var active: Dictionary = campaign.state.active_run
+	dungeon_data = active.data.duplicate(true)
+	dungeon_state = active.state.duplicate(true)
+	next_combat_seed = int(active.combat_seed)
+	pending_combat_request = dungeon_state.get("pending_combat_request", {}).duplicate(true)
+	pending_world_return_payload = dungeon_state.get("run_result_payload", {}).duplicate(true)
+	if not pending_world_return_payload.is_empty():
+		pending_world_return_payload["run_id"] = active.id
+	managed_run = true
+	town_preparation = false
+	return true
+
+
+func start_combat(next_dungeon_data: Dictionary, next_dungeon_state: Dictionary, combat_seed: int = 0) -> bool:
 	var pending: Dictionary = next_dungeon_state.get("pending_combat_request", {})
 	if pending.is_empty():
 		last_feedback = "No pending combat to start."
 		return false
 	set_dungeon_run(next_dungeon_data, next_dungeon_state)
+	var same_encounter := pending_combat_request == pending
 	pending_combat_request = pending.duplicate(true)
-	next_combat_seed = Time.get_ticks_msec()
+	var requested_seed := combat_seed
+	if requested_seed <= 0 and managed_run and next_combat_seed > 0 and same_encounter:
+		requested_seed = next_combat_seed
+	if requested_seed <= 0 and OS.is_debug_build():
+		requested_seed = int(ProjectSettings.get_setting("debug/qa/combat_seed", 0))
+	next_combat_seed = requested_seed if requested_seed > 0 else maxi(1, Time.get_ticks_msec())
+	checkpoint_campaign()
 	last_feedback = "Combat started from %s." % pending.get("room_id", "")
 	return true
 
@@ -56,7 +96,17 @@ func apply_launch_metadata(encounter: Dictionary) -> Dictionary:
 	next_encounter["source_room_id"] = str(pending_combat_request.get("room_id", ""))
 	next_encounter["dungeon_modifiers"] = pending_combat_request.get("dungeon_modifiers", {}).duplicate(true)
 	_ensure_beta_party(next_encounter)
-	next_encounter = randomize_dungeon_enemies(next_encounter, next_combat_seed)
+	if (managed_run or road_combat) and is_inside_tree():
+		var campaign := get_node("/root/CampaignSession")
+		if campaign.loaded:
+			var snapshot: Dictionary = campaign.state.world.pending_event.get("equipment_snapshot", {}) if road_combat else campaign.state.active_run.get("equipment_snapshot", {})
+			next_encounter = Gear.apply(next_encounter, snapshot)
+			var training: Dictionary = campaign.state.world.pending_event.get("advancement_snapshot", {}) if road_combat else campaign.state.active_run.get("advancement_snapshot", {})
+			next_encounter = Advancement.apply(next_encounter, training)
+	if road_combat:
+		next_encounter.seed = next_combat_seed
+	else:
+		next_encounter = randomize_dungeon_enemies(next_encounter, next_combat_seed)
 	_apply_dungeon_modifier_effects(next_encounter)
 	return next_encounter
 
@@ -134,6 +184,8 @@ func _apply_target_effects(encounter: Dictionary, modifiers: Dictionary) -> void
 		var hp_loss := int(effect.get("hp_loss", 0))
 		if hp_loss > 0:
 			resources["hp"] = max(1, int(resources.get("hp", 1)) - hp_loss)
+		if bool(effect.get("incapacitated", false)):
+			resources["hp"] = 0
 		var debuffs: Dictionary = effect.get("debuffs", {})
 		if int(debuffs.get("limping", 0)) > 0 and resources.has("mp"):
 			resources["mp"] = max(1, int(ceil(float(resources.get("mp", 1)) * 0.5)))
@@ -350,6 +402,13 @@ func _backline_player_position(encounter: Dictionary, front_position: Dictionary
 
 
 func finish_combat(result_payload: Dictionary) -> bool:
+	if road_combat:
+		var campaign := get_node("/root/CampaignSession")
+		if not campaign.finish_road_combat(result_payload):
+			last_feedback = campaign.last_feedback
+			return false
+		clear()
+		return true
 	if pending_combat_request.is_empty():
 		last_feedback = "No pending combat launch to finish."
 		return false
@@ -363,6 +422,7 @@ func finish_combat(result_payload: Dictionary) -> bool:
 	dungeon_state = result["state"]
 	last_feedback = _combat_return_feedback(result.get("event", {}), result_payload)
 	pending_combat_request = {}
+	checkpoint_campaign()
 	return true
 
 
@@ -386,6 +446,8 @@ func finish_run(next_dungeon_data: Dictionary, next_dungeon_state: Dictionary, o
 		return false
 	set_dungeon_run(next_dungeon_data, result["state"])
 	pending_world_return_payload = result.get("event", {}).get("run_result_payload", {}).duplicate(true)
+	if managed_run and is_inside_tree():
+		pending_world_return_payload["run_id"] = get_node("/root/CampaignSession").state.active_run.id
 	last_feedback = _run_return_feedback(pending_world_return_payload)
 	return true
 
@@ -399,12 +461,35 @@ func world_return_scene_path() -> String:
 
 
 func clear() -> void:
+	road_combat = false
 	dungeon_data.clear()
 	dungeon_state.clear()
 	pending_combat_request.clear()
 	pending_world_return_payload.clear()
 	last_feedback = ""
 	next_combat_seed = 0
+	managed_run = false
+	town_preparation = false
+
+
+func restore_road_combat() -> bool:
+	var campaign := get_node("/root/CampaignSession")
+	if not campaign.loaded:
+		return false
+	var pending: Dictionary = campaign.state.world.pending_event
+	if pending.get("kind") != "ambush" or pending.get("phase") != "combat" or not campaign.state.active_run.is_empty():
+		return false
+	clear()
+	road_combat = true
+	next_combat_seed = int(pending.seed)
+	var effects: Dictionary = campaign.state.effects.duplicate(true)
+	effects.party_formation = PartyRoster.default_party_formation()
+	pending_combat_request = {"dungeon_id":"road_region_001","room_id":pending.id,"combat_encounter_path":campaign.Travel.event_definitions().ambush.encounter_path,"dungeon_modifiers":effects}
+	return true
+
+
+func return_scene_path() -> String:
+	return "res://scenes/app/App.tscn" if road_combat else DUNGEON_SCENE_PATH
 
 
 func _enemy_spawn_positions(encounter: Dictionary) -> Array[Dictionary]:

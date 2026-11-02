@@ -1,5 +1,11 @@
 extends Control
 
+const AssetCatalog := preload("res://scripts/presentation/shared/asset_catalog.gd")
+const PixelSkin := preload("res://scripts/presentation/shared/pixel_skin.gd")
+const PartyCardScene := preload("res://scenes/ui/PartyCard.tscn")
+var pixel_skin := PixelSkin.new()
+var party_cards: Dictionary = {}
+
 const DungeonStateModel := preload("res://scripts/domain/dungeon_state_model.gd")
 const DungeonEntrySelection := preload("res://scripts/domain/dungeon_entry_selection.gd")
 const PartyRoster := preload("res://scripts/domain/party_roster.gd")
@@ -8,7 +14,9 @@ const DUNGEON_PATH := DungeonEntrySelection.DUNGEON_PATH
 const DUNGEON_SOURCE_AUTHORED := DungeonEntrySelection.SOURCE_AUTHORED
 const DUNGEON_SOURCE_GENERATED := DungeonEntrySelection.SOURCE_GENERATED
 const DEFAULT_GENERATED_DUNGEON_DIFFICULTY := DungeonEntrySelection.DEFAULT_GENERATED_DUNGEON_DIFFICULTY
-const ROOM_SIZE := Vector2(220, 172)
+const ROOM_SIZE := Vector2(256, 232)
+const ExpeditionChrome := preload("res://scripts/presentation/dungeon/expedition_chrome.gd")
+var expedition_chrome: RefCounted
 const ENTER_COMBAT_LABEL := "Enter Combat"
 const FINISH_EXPEDITION_LABEL := "Finish Expedition"
 const FALLBACK_VIEWPORT_SIZE := Vector2(2048, 1152)
@@ -58,6 +66,8 @@ var oil_button: Button
 var recovery_button: Button
 var camp_button: Button
 var reset_button: Button
+var retreat_button: Button
+var world_button: Button
 var corridor_event_panel: Control
 var corridor_event_title_label: Label
 var corridor_event_type_label: Label
@@ -75,6 +85,8 @@ var resource_tiles: Dictionary = {}
 var resource_tile_labels: Dictionary = {}
 var loadout_panel: PanelContainer
 var party_panel: PanelContainer
+var party_hp_labels: Dictionary = {}
+var party_hp_bars: Dictionary = {}
 var party_log_label: Label
 var loadout_summary_label: Label
 var generator_summary_label: Label
@@ -96,7 +108,6 @@ var graph_node_scale := 1.0
 var graph_content_size := Vector2(1320, 920)
 var graph_axis_swap := false
 var dungeon_ui_texture_cache: Dictionary = {}
-var dungeon_ui_style_cache: Dictionary = {}
 var layout_overrides: Dictionary = {}
 var layout_edit_enabled := false
 var layout_edit_target_id := ""
@@ -105,9 +116,21 @@ var layout_edit_drag_offset := Vector2.ZERO
 var layout_edit_start_mouse := Vector2.ZERO
 var layout_edit_start_rect := Rect2()
 var layout_edit_preview_popup := false
+var qa_input_trace_enabled := OS.get_cmdline_user_args().has("--qa-input-trace")
 
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F7:
+		_open_world()
+		return
+	if OS.is_debug_build() and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F6:
+		if _run_session().managed_run or _run_session().town_preparation:
+			return
+		_run_session().set_dungeon_run(dungeon, run_state)
+		get_tree().change_scene_to_file("res://scenes/combat/CombatMapEditor.tscn")
+		return
+	if qa_input_trace_enabled and (event is InputEventMouseButton or event is InputEventKey):
+		print("QA_INPUT ", JSON.stringify({"event": event.as_text(), "pressed": event.is_pressed(), "viewport_mouse": str(get_viewport().get_mouse_position())}))
 	if _handle_layout_edit_input(event):
 		return
 
@@ -131,6 +154,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _ready() -> void:
+	if qa_input_trace_enabled:
+		var qa_screen := DisplayServer.window_get_current_screen()
+		print("QA_WINDOW ", JSON.stringify({"mode": DisplayServer.window_get_mode(), "window_position": str(DisplayServer.window_get_position()), "window_size": str(DisplayServer.window_get_size()), "screen": qa_screen, "screen_position": str(DisplayServer.screen_get_position(qa_screen)), "screen_size": str(DisplayServer.screen_get_size(qa_screen))}))
 	if _run_session().has_dungeon_run():
 		dungeon = _run_session().dungeon_data.duplicate(true)
 		entry_payload = DungeonEntrySelection.payload_for_dungeon(dungeon)
@@ -160,12 +186,26 @@ func _ready() -> void:
 	_create_resource_tray()
 	_create_party_status_panel()
 	_create_loadout_panel()
+	world_button = Button.new()
+	world_button.text = "World / Ravenford [F7]"
+	world_button.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	world_button.offset_left = -360
+	world_button.offset_right = -40
+	world_button.offset_top = 38
+	world_button.offset_bottom = 88
+	world_button.add_theme_font_size_override("font_size", 20)
+	world_button.pressed.connect(_open_world)
+	add_child(world_button)
 	_create_action_buttons()
 	_create_corridor_event_panel()
 	_apply_positioned_chrome()
 	_build_graph()
 	_update_detail()
 	_refresh_loadout_panel()
+	expedition_chrome = ExpeditionChrome.new()
+	expedition_chrome.setup(self)
+	_build_graph()
+	_refresh_presentation_chrome()
 
 
 func _notification(what: int) -> void:
@@ -195,6 +235,9 @@ func _build_graph() -> void:
 
 
 func _apply_responsive_layout() -> void:
+	if expedition_chrome!=null and not layout_edit_enabled:
+		expedition_chrome.layout(self)
+		return
 	var viewport_size := FALLBACK_VIEWPORT_SIZE
 	if is_inside_tree():
 		viewport_size = get_viewport_rect().size
@@ -226,6 +269,9 @@ func _apply_detail_panel_layout() -> void:
 
 
 func _apply_positioned_chrome() -> void:
+	if expedition_chrome!=null:
+		expedition_chrome.layout(self)
+		return
 	if map_frame_panel != null:
 		map_frame_panel.position = map_area.position
 		map_frame_panel.custom_minimum_size = map_area.size
@@ -271,7 +317,7 @@ func _recalculate_graph_transform() -> void:
 	var graph_rect := Rect2(Vector2(32, 28), _map_scroll_rect().size - Vector2(64, 56))
 	var range_x = max(1.0, float(bounds["max_x"] - bounds["min_x"]))
 	var range_y = max(1.0, float(bounds["max_y"] - bounds["min_y"]))
-	var minimum_step := Vector2(270, 196)
+	var minimum_step := Vector2(312, 272)
 	if _generated_dungeon_scroll_tier() >= 2:
 		minimum_step.x = 520.0
 	graph_node_scale = 1.0
@@ -291,6 +337,7 @@ func _recalculate_graph_transform() -> void:
 
 
 func _map_scroll_rect() -> Rect2:
+	if expedition_chrome!=null: return expedition_chrome.map_scroll_rect(self)
 	var inset := Vector2(30, 42)
 	var size := map_area.size - Vector2(inset.x * 2.0, inset.y + 24.0)
 	return Rect2(map_area.position + inset, Vector2(maxf(120.0, size.x), maxf(120.0, size.y)))
@@ -417,7 +464,7 @@ func _create_corridor_ornament_line(from_pos: Vector2, to_pos: Vector2, color: C
 
 func _create_corridor_marker(text: String, center: Vector2) -> PanelContainer:
 	var panel := PanelContainer.new()
-	var marker_size := Vector2(92, 32) * graph_node_scale
+	var marker_size := Vector2(140, 52) * graph_node_scale
 	panel.position = center - marker_size * 0.5
 	panel.custom_minimum_size = marker_size
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -427,13 +474,14 @@ func _create_corridor_marker(text: String, center: Vector2) -> PanelContainer:
 	label.text = text
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", max(10, int(13.0 * graph_node_scale)))
+	label.add_theme_font_size_override("font_size", max(24, int(24.0 * graph_node_scale)))
 	label.add_theme_color_override("font_color", Color(0.95, 0.78, 0.44))
 	panel.add_child(label)
 	return panel
 
 
 func _create_room_panel(room: Dictionary) -> PanelContainer:
+	if expedition_chrome!=null: return expedition_chrome.room_panel(self,room)
 	var room_id: String = str(room["id"])
 	var panel := PanelContainer.new()
 	panel.position = _room_screen_position(room)
@@ -585,6 +633,14 @@ func _create_action_buttons() -> void:
 		_reset_expedition()
 	)
 	action_row.add_child(reset_button)
+	retreat_button = Button.new()
+	retreat_button.text = "Retreat to Ravenford"
+	retreat_button.custom_minimum_size = Vector2(0, 42)
+	retreat_button.add_theme_font_size_override("font_size", 14)
+	retreat_button.add_theme_stylebox_override("normal", _button_style(Color(0.10, 0.16, 0.16), Color(0.50, 0.65, 0.60)))
+	retreat_button.add_theme_stylebox_override("hover", _button_style(Color(0.16, 0.24, 0.22), Color(0.78, 0.86, 0.60)))
+	retreat_button.pressed.connect(_retreat_to_world)
+	action_row.add_child(retreat_button)
 
 	exit_row = VBoxContainer.new()
 	exit_row.add_theme_constant_override("separation", 8)
@@ -757,54 +813,18 @@ func _create_party_status_panel() -> void:
 
 
 func _create_party_portrait_slot(hero: Dictionary, slot_index: int) -> PanelContainer:
-	var slot := PanelContainer.new()
-	slot.custom_minimum_size = Vector2(174, 158)
-	slot.add_theme_stylebox_override("panel", _dungeon_ui_stylebox(
+	var slot := PartyCardScene.instantiate()
+	var frame := _dungeon_ui_stylebox(
 		DUNGEON_UI_PORTRAIT_FRAME_PATH,
 		Vector4(38, 34, 38, 34),
 		Vector4(16, 14, 16, 14),
 		_fantasy_panel_style(Color(0.060, 0.052, 0.045), Color(0.46, 0.34, 0.18), 1, 4)
-	))
-
-	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 16)
-	margin.add_theme_constant_override("margin_top", 14)
-	margin.add_theme_constant_override("margin_right", 16)
-	margin.add_theme_constant_override("margin_bottom", 14)
-	slot.add_child(margin)
-
-	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 8)
-	box.alignment = BoxContainer.ALIGNMENT_CENTER
-	margin.add_child(box)
-
-	var portrait := TextureRect.new()
-	portrait.texture = _dungeon_ui_texture(str(hero.get("portrait_path", "")))
-	portrait.custom_minimum_size = Vector2(118, 82)
-	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	box.add_child(portrait)
-
-	var name_label := Label.new()
-	name_label.text = str(hero.get("display_name", "Hero"))
-	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	name_label.add_theme_font_size_override("font_size", 15)
-	name_label.add_theme_color_override("font_color", Color(0.94, 0.82, 0.54))
-	name_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	box.add_child(name_label)
-
-	var class_label := Label.new()
-	class_label.text = _party_member_summary(hero)
-	class_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	class_label.add_theme_font_size_override("font_size", 12)
-	class_label.add_theme_color_override("font_color", Color(0.74, 0.76, 0.66))
-	class_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	box.add_child(class_label)
-
-	var bar := ColorRect.new()
-	bar.custom_minimum_size = Vector2(118, 8)
-	bar.color = _party_slot_bar_color(slot_index)
-	box.add_child(bar)
+	)
+	var unit_id := str(hero.get("combat_unit_id", ""))
+	slot.configure(hero, DungeonStateModel.party_member_hp(run_state, unit_id), _party_slot_bar_color(slot_index), frame)
+	party_cards[unit_id] = slot
+	party_hp_labels[unit_id] = slot.hp_label
+	party_hp_bars[unit_id] = slot.hp_bar
 	return slot
 
 
@@ -1025,6 +1045,9 @@ func _create_corridor_event_panel() -> void:
 
 
 func _center_corridor_event_panel() -> void:
+	if expedition_chrome!=null:
+		expedition_chrome.center_event(self)
+		return
 	if corridor_event_panel == null:
 		return
 	var panel_rect := _default_event_popup_rect()
@@ -1150,7 +1173,7 @@ func _layout_edit_items() -> Array[Dictionary]:
 	if corridor_event_panel != null and corridor_event_panel.visible:
 		items.append({"id": "event_popup", "rect": Rect2(corridor_event_panel.position, corridor_event_panel.size)})
 	items.append({"id": "detail", "rect": detail_area})
-	items.append({"id": "loadout", "rect": loadout_area})
+	if expedition_chrome==null: items.append({"id": "loadout", "rect": loadout_area})
 	items.append({"id": "party", "rect": party_area})
 	items.append({"id": "resources", "rect": resource_tray_area})
 	items.append({"id": "map", "rect": map_area})
@@ -1365,6 +1388,8 @@ func _use_camp() -> void:
 
 
 func _reset_expedition() -> void:
+	if _run_session().managed_run:
+		return
 	_run_session().clear()
 	dungeon = _dungeon_data_for_entry_payload()
 	selected_supply_loadout = DungeonStateModel.default_supply_loadout(dungeon)
@@ -1441,6 +1466,41 @@ func _apply_debug_combat_result(result: String) -> void:
 	_update_detail()
 
 
+func _retreat_to_world() -> void:
+	if not _run_session().managed_run:
+		return
+	if _run_session().finish_run(dungeon, run_state, "retreated"):
+		run_state = _run_session().dungeon_state.duplicate(true)
+		_open_world()
+	else:
+		last_feedback = _run_session().last_feedback
+		_update_detail()
+
+
+func _open_world() -> void:
+	var session := _run_session()
+	if session.managed_run:
+		if bool(run_state.get("completed", false)):
+			var campaign := get_node("/root/CampaignSession")
+			if not campaign.settle(session.pending_world_return_payload):
+				last_feedback = campaign.last_feedback
+				_update_detail()
+				return
+			session.clear()
+		else:
+			if not session.checkpoint_campaign():
+				last_feedback = session.last_feedback
+				_update_detail()
+				return
+	elif expedition_started and not bool(run_state.get("completed", false)):
+		last_feedback = "Finish or reset this sandbox before opening the campaign."
+		_update_detail()
+		return
+	else:
+		session.clear()
+	get_tree().change_scene_to_file("res://scenes/app/App.tscn")
+
+
 func _refresh_room_styles() -> void:
 	for room: Dictionary in dungeon.get("rooms", []):
 		var panel: PanelContainer = room_nodes.get(room["id"])
@@ -1449,6 +1509,10 @@ func _refresh_room_styles() -> void:
 
 
 func _update_detail() -> void:
+	if is_inside_tree() and not expedition_started and _run_session().town_preparation:
+		var campaign := get_node("/root/CampaignSession")
+		for key in ["party_effects", "target_effects", "active_debuffs"]:
+			run_state[key] = campaign.state.effects.get(key, {}).duplicate(true)
 	if detail_label == null or panel_title == null or status_label == null or progress_label == null:
 		return
 	var room: Dictionary = _rooms_by_id().get(selected_room_id, {})
@@ -1570,6 +1634,10 @@ func _refresh_action_buttons() -> void:
 	camp_button.visible = has_camp
 	reset_button.disabled = false
 	reset_button.visible = true
+	if is_inside_tree() and _run_session().managed_run:
+		reset_button.visible = false
+	if retreat_button != null:
+		retreat_button.visible = is_inside_tree() and _run_session().managed_run and not bool(run_state.get("completed", false)) and bool(dungeon.get("exit_rules", {}).get("allow_retreat", false)) and not has_pending and not blocked_by_event
 
 
 func _refresh_exit_buttons() -> void:
@@ -1598,6 +1666,7 @@ func _refresh_exit_buttons() -> void:
 			_try_enter_room(target_room_id)
 		)
 		exit_row.add_child(button)
+		if expedition_chrome!=null: expedition_chrome.style_button(button)
 
 
 func _connected_room_labels(room_id: String) -> Array[String]:
@@ -2004,8 +2073,22 @@ func _reward_summary(room: Dictionary) -> String:
 
 
 func _start_expedition_with_loadout() -> void:
+	if dungeon.get("rooms", []).is_empty():
+		last_feedback = "Cannot start: no accepted dungeon layout is available."
+		if status_label != null:
+			status_label.text = last_feedback
+		return
 	selected_supply_loadout = DungeonStateModel.clamp_supply_loadout(dungeon, selected_supply_loadout)
 	run_state = DungeonStateModel.initial_state(dungeon, selected_supply_loadout)
+	if is_inside_tree() and _run_session().town_preparation:
+		var campaign := get_node("/root/CampaignSession")
+		if not campaign.begin_run(dungeon, run_state):
+			last_feedback = campaign.last_feedback
+			status_label.text = last_feedback
+			return
+		run_state = campaign.state.active_run.state.duplicate(true)
+		_run_session().managed_run = true
+		_run_session().town_preparation = false
 	if is_inside_tree():
 		_run_session().set_dungeon_run(dungeon, run_state)
 	expedition_started = true
@@ -2059,6 +2142,8 @@ func _refresh_loadout_panel() -> void:
 		var value_label: Label = row.get("value_label", null)
 		if value_label != null:
 			value_label.text = str(value)
+			if is_inside_tree() and _run_session().town_preparation:
+				value_label.tooltip_text = "Owned in Ravenford: %s" % get_node("/root/CampaignSession").state.supplies.get(supply_id, 0)
 		var option: Dictionary = options.get(supply_id, {"min": 0, "max": value})
 		var minus_button: Button = row.get("minus_button", null)
 		if minus_button != null:
@@ -2070,6 +2155,7 @@ func _refresh_loadout_panel() -> void:
 			var remaining := int(packing_summary.get("remaining", 0))
 			var cost := DungeonStateModel.supply_packing_cost(dungeon, supply_id)
 			plus_button.disabled = value >= int(option.get("max", value)) or (capacity > 0 and remaining < cost)
+	if expedition_chrome!=null: expedition_chrome.refresh(self)
 
 
 func _loadout_pending() -> bool:
@@ -2332,10 +2418,15 @@ func _status_summary() -> String:
 
 
 func _refresh_presentation_chrome() -> void:
+	if expedition_chrome!=null: expedition_chrome.refresh(self)
 	if route_state_label != null:
 		route_state_label.text = _route_state_text()
 	if party_log_label != null:
 		party_log_label.text = _party_log_text()
+	for hero: Dictionary in _party_members_for_ui():
+		var unit_id := str(hero.get("combat_unit_id", ""))
+		if party_hp_labels.has(unit_id):
+			party_cards[unit_id].set_hp(DungeonStateModel.party_member_hp(run_state, unit_id))
 	if resource_tile_labels.is_empty():
 		return
 	var tile_texts := _resource_tile_texts()
@@ -2554,19 +2645,7 @@ func _button_style(bg_color: Color, border_color: Color) -> StyleBoxFlat:
 
 
 func _fantasy_panel_style(bg_color: Color, border_color: Color, border_width: int, radius: int) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = bg_color
-	style.border_color = border_color
-	style.set_border_width_all(border_width)
-	style.corner_radius_top_left = radius
-	style.corner_radius_top_right = radius
-	style.corner_radius_bottom_left = radius
-	style.corner_radius_bottom_right = radius
-	style.content_margin_left = 10
-	style.content_margin_top = 10
-	style.content_margin_right = 10
-	style.content_margin_bottom = 10
-	return style
+	return PixelSkin.flat_frame(bg_color, border_color, border_width, radius)
 
 
 func _dungeon_ui_texture(path: String) -> Texture2D:
@@ -2574,30 +2653,13 @@ func _dungeon_ui_texture(path: String) -> Texture2D:
 		return null
 	if dungeon_ui_texture_cache.has(path):
 		return dungeon_ui_texture_cache[path]
-	var texture := load(path) as Texture2D
+	var texture := AssetCatalog.texture(path)
 	dungeon_ui_texture_cache[path] = texture
 	return texture
 
 
 func _dungeon_ui_stylebox(path: String, texture_margins: Vector4, content_margins: Vector4, fallback: StyleBox) -> StyleBox:
-	var cache_key := "%s|%s|%s" % [path, texture_margins, content_margins]
-	if dungeon_ui_style_cache.has(cache_key):
-		return dungeon_ui_style_cache[cache_key]
-	var texture := _dungeon_ui_texture(path)
-	if texture == null:
-		return fallback
-	var style := StyleBoxTexture.new()
-	style.texture = texture
-	style.texture_margin_left = texture_margins.x
-	style.texture_margin_top = texture_margins.y
-	style.texture_margin_right = texture_margins.z
-	style.texture_margin_bottom = texture_margins.w
-	style.content_margin_left = content_margins.x
-	style.content_margin_top = content_margins.y
-	style.content_margin_right = content_margins.z
-	style.content_margin_bottom = content_margins.w
-	dungeon_ui_style_cache[cache_key] = style
-	return style
+	return pixel_skin.frame(path, texture_margins, content_margins, fallback)
 
 
 func _asset_index_path(prefix: String, index: int) -> String:
@@ -2714,16 +2776,6 @@ func _party_members_for_ui() -> Array:
 	return PartyRoster.heroes_for_formation(formation)
 
 
-func _party_member_summary(hero: Dictionary) -> String:
-	var stats: Dictionary = hero.get("stats", {})
-	return "%s | HP %s | AP %s | MP %s" % [
-		str(hero.get("class_name", "Hero")),
-		int(stats.get("max_hp", 0)),
-		int(stats.get("max_ap", 0)),
-		int(stats.get("move_points", 0)),
-	]
-
-
 func _party_log_text() -> String:
 	if _loadout_pending():
 		return "Prepare the expedition loadout before entering the mine."
@@ -2757,6 +2809,7 @@ func _number_key_slot(event: InputEventKey) -> int:
 
 
 func _room_style(room_id: String, kind: String) -> StyleBox:
+	if expedition_chrome!=null: return expedition_chrome.room_style(self,room_id,kind)
 	var is_current: bool = room_id == str(run_state.get("current_room_id", ""))
 	var is_start: bool = room_id == str(dungeon.get("start_room_id", ""))
 	var is_visited: bool = DungeonStateModel.room_is_visited(run_state, room_id)

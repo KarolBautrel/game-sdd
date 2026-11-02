@@ -1,0 +1,56 @@
+﻿{
+    "schema":  "sdd.ui-dependencies-v1",
+    "downloaded_utc":  "2026-11-02T00:29:01.7167715Z",
+    "themegen_commit":  "30b94203277cdf8ce76e5deff8cf2bd0979a9e4d",
+    "dependencies":  [
+                         {
+                             "name":  "kenney_fantasy_ui_borders",
+                             "source":  "https://kenney.nl/assets/fantasy-ui-borders",
+                             "license":  "CC0-1.0",
+                             "archive":  "assets_src/vendor/kenney_fantasy_ui_borders.zip",
+                             "sha256":  "59532da3bd61195a425585455b40baa6cbf1eda8227c42adcef31a535a737769"
+                         },
+                         {
+                             "name":  "kenney_pixel_ui_pack",
+                             "source":  "https://kenney.nl/assets/pixel-ui-pack",
+                             "license":  "CC0-1.0",
+                             "archive":  "assets_src/vendor/kenney_pixel_ui_pack.zip",
+                             "sha256":  "b76f2f60f2be76eb8e66511038fa4d48faec11e638316fa37d06084878cdf0c7"
+                         },
+                         {
+                             "name":  "shikashi_fantasy_icons",
+                             "source":  "https://shikashipx.itch.io/shikashis-fantasy-icons-pack",
+                             "license":  "CC-BY-3.0 in downloaded archive; author page now CC-BY-4.0; credit Matt Firth (shikashipx) and game-icons.net",
+                             "archive":  "assets_src/vendor/shikashi_fantasy_icons.zip",
+                             "sha256":  "eb3725a63ec7afa04c8942057717758cc0a9388ceb1d4348a7e8487dfbc0492e"
+                         },
+                         {
+                             "name":  "themegen",
+                             "source":  "https://github.com/Inspiaaa/ThemeGen",
+                             "license":  "MIT",
+                             "archive":  "assets_src/vendor/themegen.zip",
+                             "sha256":  "25bb2ded8ea4a4d420853c8450281234dacafcd2f25dbeea27a73a98c3d201cd"
+                         },
+                         {
+                             "name":  "Cinzel",
+                             "source":  "https://github.com/google/fonts/tree/main/ofl/cinzel",
+                             "license":  "OFL-1.1",
+                             "file":  "assets/ui/fonts/Cinzel.ttf",
+                             "sha256":  "f4d83d34d1f6c741193e4acf4b3dff9531e5a67b6aa65228d00a7db72a4e0f34"
+                         },
+                         {
+                             "name":  "SourceSans3",
+                             "source":  "https://github.com/google/fonts/tree/main/ofl/sourcesans3",
+                             "license":  "OFL-1.1",
+                             "file":  "assets/ui/fonts/SourceSans3.ttf",
+                             "sha256":  "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+                         },
+                         {
+                             "name":  "SourceSans3 Semibold",
+                             "source":  "https://raw.githubusercontent.com/adobe-fonts/source-sans/release/TTF/SourceSans3-Semibold.ttf",
+                             "license":  "OFL-1.1",
+                             "file":  "assets/ui/fonts/SourceSans3-Semibold.ttf",
+                             "sha256":  "a3f4f8dcf343a8f24dc61951de93f3ba1558b15cd250ba24af8a40e957081b7d"
+                         }
+                     ]
+}

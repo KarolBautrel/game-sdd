@@ -2,6 +2,30 @@
 
 This project is built with Spec Driven Development.
 
+## Session Start And Continuation
+
+Read `docs/CONTINUE_HERE.md` before choosing the next implementation task. It
+links accepted stage reports and the active ordered milestone. Read the owning
+specs and inspect current Git changes; preserve existing uncommitted work.
+
+The default stage loop is: owning spec and acceptance scenarios -> implementation
+-> automated acceptance -> actual visible gameplay -> persisted report -> next
+stage. Fix failures and repeat affected checks before closing a stage. Headless
+checks and Debug Win do not replace normal hands-on victory.
+
+Current explicit user override (extended2026-11-02 to expedition/battle stages27..29): implement the authorized stages in order with
+automated checks while the user uses the computer, then perform the accumulated
+actual play scenarios together when the user releases desktop controls. Stages8..12
+also awaits that session. Record every deferred scenario and its result in
+`docs/qa/live-test-scenarios.md`; report stages as AWAITING_INTERACTIVE, not
+accepted. Automated PASS permits the next background implementation stage in
+this batch; automated failure does not. Full acceptance still needs actual play.
+
+Interactive tests must use a window on the larger left Windows DISPLAY1 on this
+workstation. Use `tools/qa/start_game.ps1` and the placement/verification contract
+in `docs/specs/tooling/001_stage_verification.md`. Check current monitor mapping;
+do not silently launch on the other monitor or overwrite a player's save for QA.
+
 ## Default Workflow
 
 1. Read `docs/specs/` before changing gameplay or presentation behavior.
@@ -47,6 +71,8 @@ Do not leave milestone notes only in chat. Persist them in the repository.
 When a milestone contains an ordered implementation queue:
 
 - Work on the first unfinished item unless the user explicitly reprioritizes.
+- For the current authorized batch, an implemented/automated-PASS item awaiting
+  live tests permits work on the next queued item; preserve its acceptance gap.
 - Do not skip ahead to a more complex feature while a prerequisite item is unfinished.
 - Mark an item done only after the owning spec, slice, implementation, and named validation/test proof are complete.
 - If an item exposes missing prerequisite work, add that prerequisite to the queue instead of burying it in chat.

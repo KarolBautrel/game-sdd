@@ -2,6 +2,26 @@
 
 This file explains how to manually design combat maps and terrain decoration layouts.
 
+## Add a playable scenario without controller edits
+
+Use `resources/data/combat_encounters/clearing_crossfire.json` as the map-reference
+example. It combines `combat_test_clearing.json` (generated from TMX), two heroes,
+melee/archer archetypes and item profiles. Choose explicit unique unit starts on
+walkable cells; map test-spawn markers do not relocate units automatically.
+
+1. Create/copy the encounter JSON, retaining required id/seed/units/turn_state/
+   event_log and valid profiles. For a referenced map, omit an inline grid.
+2. Add its id, label and `res://resources/data/combat_encounters/<name>.json` path
+   to `resources/data/combat_scenarios/catalogue.json`. Preserve existing rows.
+3. Run `.venv/Scripts/python.exe tools/validators/validate_all.py`, then the full
+   verifier. It checks catalogue/map/spawns/archetypes/loadout/visual references.
+4. Restart the game to refresh the catalogue cache; choose the new label and Load.
+   No `combat_debug.gd` or scenario-catalog script edit is needed.
+5. F6 from dungeon sandbox opens the workbench. Load the encounter, choose a
+   `user://` copy destination, Save JSON, reload, F5 play and F6 return. This
+   forks the referenced map inline and does not write back to TMX or its JSON.
+6. Perform the live scenarios and record results in `docs/qa/live-test-scenarios.md`.
+
 ## Where Combat Maps Live
 
 Combat encounters are JSON files in:
@@ -502,4 +522,12 @@ Target editor behavior:
 - right-click tile to remove decoration
 - save encounter JSON
 
-Until that editor exists, editing JSON manually is the source of truth.
+V2 workflow (tooling003): F6 from DungeonDebug opens the workbench. Load an
+encounter with map_path to materialize its TMX-generated grid and visual defaults.
+Unit start brush moves the selected existing unit. Put a copy path (for example
+user://my_encounter.json) in the path field, Save JSON, then Load to check it.
+Save forks inline data without map_path and never rewrites TMX. Blocked/overlapping
+starts block Save/Play. F5 runs the in-memory draft with ordinary combat rules;
+F6 in draft combat returns to the same copy and save destination. F6 in the
+workbench returns to the retained dungeon session. Tile and decoration brushes
+still work independently. TMX object origins must be aligned top-left cells.

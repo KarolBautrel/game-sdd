@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 DungeonRunSession="*res://scripts/session/dungeon_run_session.gd"
+CampaignSession="*res://scripts/session/campaign_session.gd"
+ExportProbe="*res://scripts/qa/export_probe.gd"
 
 [display]
 
@@ -29,6 +31,10 @@ window/stretch/aspect="expand"
 [physics]
 
 3d/physics_engine="Jolt Physics"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/theme_gen_save_sync/plugin.cfg", "res://addons/campaign_ui_theme/plugin.cfg")
 
 [rendering]
 

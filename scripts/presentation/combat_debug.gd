@@ -1,5 +1,16 @@
 extends Control
 
+const AssetCatalog := preload("res://scripts/presentation/shared/asset_catalog.gd")
+const PixelSkin := preload("res://scripts/presentation/shared/pixel_skin.gd")
+const CombatPanelSkin := preload("res://scripts/presentation/combat/combat_panel_skin.gd")
+const ResourceMeterScene := preload("res://scenes/ui/ResourceMeter.tscn")
+const AuthoringDraft := preload("res://scripts/presentation/combat/authoring_draft.gd")
+var authoring_draft: Dictionary = {}
+var pixel_skin := PixelSkin.new()
+var panel_skin := CombatPanelSkin.new()
+const BattleChrome := preload("res://scripts/presentation/combat/battle_chrome.gd")
+var battle_chrome: RefCounted
+
 const CombatResolver := preload("res://scripts/domain/combat_resolver.gd")
 const CombatTextUtil := preload("res://scripts/presentation/combat/combat_text.gd")
 const CombatUnitArtDb := preload("res://scripts/presentation/combat/combat_unit_art.gd")
@@ -10,15 +21,13 @@ const CombatTargetingPreview := preload("res://scripts/presentation/combat/comba
 const CombatUnitVisualState := preload("res://scripts/presentation/combat/combat_unit_visual_state.gd")
 
 const DEFAULT_ENCOUNTER_PATH := CombatScenarioCatalog.DEFAULT_ENCOUNTER_PATH
-const PIXEL_PANEL_TEXTURE_PATH := "res://assets/ui/combat/pixel_panel.png"
-const COMBAT_UI_PANEL_TEXTURE_PATH := "res://assets/ui/combat/processed/frames/panel_small.png"
 const COMBAT_UI_SLOT_NORMAL_PATH := "res://assets/ui/combat/processed/slots/slot_normal.png"
 const COMBAT_UI_SLOT_SELECTED_PATH := "res://assets/ui/combat/processed/slots/slot_selected.png"
 const COMBAT_UI_SLOT_DISABLED_PATH := "res://assets/ui/combat/processed/slots/slot_disabled.png"
 const COMBAT_UI_BAR_HP_PATH := "res://assets/ui/combat/processed/bars/mini_bar_hp.png"
 const COMBAT_UI_BAR_AP_PATH := "res://assets/ui/combat/processed/bars/mini_bar_ap.png"
 const COMBAT_UI_BAR_MP_PATH := "res://assets/ui/combat/processed/bars/mini_bar_mp.png"
-const OVERLAY_RESOURCE_PANEL_SIZE := Vector2(394, 176)
+const OVERLAY_RESOURCE_PANEL_SIZE := Vector2(394, 202)
 const OVERLAY_RESOURCE_BAR_SIZE := Vector2(384, 56)
 const OVERLAY_LOG_PANEL_SIZE := Vector2(460, 132)
 const OVERLAY_MARGIN := 14.0
@@ -61,11 +70,11 @@ const GRASS_FLOOR_TEXTURE_PATHS := [
 	"res://assets/combat/terrain/grass/meadow_grass_floor_15.png",
 ]
 const UNIT_ICON_SIZE := Vector2i(384, 240)
-const UNIT_RESOURCE_LABEL_SIZE := Vector2(112, 36)
+const UNIT_RESOURCE_LABEL_SIZE := Vector2(128, 54)
 const UNIT_RESOURCE_LABEL_OFFSET_Y := -56.0
 const UNIT_STATUS_ICON_SIZE := Vector2(20, 20)
 const UNIT_STATUS_ICON_GAP := 2.0
-const UNIT_TARGET_PREVIEW_LABEL_SIZE := Vector2(136, 48)
+const UNIT_TARGET_PREVIEW_LABEL_SIZE := Vector2(152, 60)
 const UNIT_TARGET_PREVIEW_GAP := 3.0
 const TILE_WIDTH := 140
 const TILE_HEIGHT := 104
@@ -164,7 +173,9 @@ const TERRAIN_BASE_COLORS := {
 const ACTION_LABELS := CombatTextUtil.ACTION_LABELS
 
 @onready var board_root: Control = %BoardRoot
-@onready var board_backdrop: ColorRect = %BoardBackdrop
+@onready var board_backdrop: Panel = %BoardBackdrop
+@onready var board_viewport: Control = %BoardViewport
+@onready var encounter_panel: PanelContainer = %EncounterPanel
 @onready var board_terrain: TextureRect = %BoardTerrain
 @onready var grid_container: GridContainer = %GridContainer
 @onready var unit_layer: Control = %UnitLayer
@@ -197,6 +208,7 @@ var last_feedback := "Select an action."
 var current_encounter_path := DEFAULT_ENCOUNTER_PATH
 var selected_scenario_id := "full_combat_showcase"
 var selected_position: Dictionary = {}
+var hovered_unit_id := ""
 var pending_move_position: Dictionary = {}
 var pending_move_event: Dictionary = {}
 var unit_facing: Dictionary = {}
@@ -204,7 +216,6 @@ var unit_visual_action: Dictionary = {}
 var unit_texture_cache: Dictionary = {}
 var tile_texture_cache: Dictionary = {}
 var ui_texture_cache: Dictionary = {}
-var ui_style_cache: Dictionary = {}
 var grass_image_cache: Dictionary = {}
 var terrain_decoration_texture_cache: Dictionary = {}
 var preloaded_unit_visual_keys: Dictionary = {}
@@ -223,22 +234,29 @@ var presentation_cache_ready := false
 
 
 func _ready() -> void:
+	board_viewport.resized.connect(_resize_board)
+	if get_tree().has_meta(AuthoringDraft.DRAFT_META):
+		authoring_draft = get_tree().get_meta(AuthoringDraft.DRAFT_META).duplicate(true)
+		get_tree().remove_meta(AuthoringDraft.DRAFT_META)
 	_ensure_board_overlay_controls()
 	_configure_board_layers()
 	_apply_pixel_theme()
-	if _run_session().has_pending_combat_launch():
+	if authoring_draft.is_empty() and _run_session().has_pending_combat_launch():
 		current_encounter_path = _run_session().combat_encounter_path()
 		selected_scenario_id = "dungeon_launch"
 	_reset_debug_encounter()
+	battle_chrome = BattleChrome.new()
+	battle_chrome.setup(self)
 
 
 func _reset_debug_encounter() -> void:
-	state = _load_json(current_encounter_path)
-	if _run_session().has_pending_combat_launch():
+	state = _load_json(current_encounter_path) if authoring_draft.is_empty() else authoring_draft.duplicate(true)
+	if authoring_draft.is_empty() and _run_session().has_pending_combat_launch():
 		state = _run_session().apply_launch_metadata(state)
 	state["event_log"] = []
 	command_index = 1
 	selected_action = "move"
+	hovered_unit_id = ""
 	_clear_move_preview()
 	unit_facing.clear()
 	unit_visual_action.clear()
@@ -260,6 +278,12 @@ func _reset_debug_encounter() -> void:
 	_render()
 
 
+func _input(event: InputEvent) -> void:
+	if not authoring_draft.is_empty() and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F6:
+		get_tree().set_meta(AuthoringDraft.DRAFT_META, authoring_draft.duplicate(true))
+		get_tree().change_scene_to_file("res://scenes/combat/CombatMapEditor.tscn")
+
+
 func _render() -> void:
 	_render_grid()
 	_render_units()
@@ -274,6 +298,7 @@ func _render() -> void:
 	_render_inspect()
 	_render_event_log()
 	_render_command_buttons()
+	if battle_chrome!=null: battle_chrome.refresh(self)
 
 
 func _prepare_presentation_cache() -> void:
@@ -379,6 +404,12 @@ func _build_tile(position: Dictionary) -> Button:
 	_apply_tile_button_style(tile)
 	tile.pressed.connect(func() -> void:
 		_on_tile_pressed(position)
+	)
+	tile.mouse_entered.connect(func() -> void:
+		_set_hovered_unit(str(_tooltip_unit_at(position).get("id", "")))
+	)
+	tile.mouse_exited.connect(func() -> void:
+		_set_hovered_unit("")
 	)
 
 	var terrain_type := _tile_type(position)
@@ -538,9 +569,8 @@ func _static_board_background_texture(path: String) -> Texture2D:
 	var cache_key := "static_board_background:%s" % path
 	if tile_texture_cache.has(cache_key):
 		return tile_texture_cache[cache_key]
-	var image := Image.new()
-	var error := image.load(path)
-	if error != OK:
+	var image := AssetCatalog.image_copy(path)
+	if image == null:
 		push_error("Cannot load combat board background: %s" % path)
 		return null
 	var expected_size := Vector2i(
@@ -575,10 +605,9 @@ func _grass_patch_image(position: Dictionary, patch_index: int) -> Image:
 	})
 	if grass_image_cache.has(index):
 		return grass_image_cache[index]
-	var image := Image.new()
 	var path: String = GRASS_FLOOR_TEXTURE_PATHS[index]
-	var error := image.load(path)
-	if error != OK:
+	var image := AssetCatalog.image_copy(path)
+	if image == null:
 		push_error("Cannot load grass floor image: %s" % path)
 		return Image.create(GRASS_PATCH_SIZE, GRASS_PATCH_SIZE, false, Image.FORMAT_RGBA8)
 	grass_image_cache[index] = image
@@ -662,12 +691,7 @@ func _tile_decoration_texture(path: String) -> Texture2D:
 		return null
 	if terrain_decoration_texture_cache.has(path):
 		return terrain_decoration_texture_cache[path]
-	var image := Image.new()
-	var error := image.load(path)
-	if error != OK:
-		push_error("Cannot load terrain decoration texture: %s" % path)
-		return null
-	var texture := ImageTexture.create_from_image(image)
+	var texture := AssetCatalog.texture(path)
 	terrain_decoration_texture_cache[path] = texture
 	return texture
 
@@ -884,15 +908,16 @@ func _occupied_tile_marker(position: Dictionary) -> String:
 
 func _render_status() -> void:
 	var active := _unit_by_id(state["turn_state"]["active_unit_id"])
+	var displayed := _display_resources(active)
 	status_label.text = "Round %s  |  %s\nACTIVE: %s  |  HP %s/%s  AP %s/%s  MP %s/%s%s" % [
-		state["turn_state"]["round"],
+		int(state["turn_state"]["round"]),
 		_combat_result().capitalize(),
 		_unit_display_name(active.get("id", "missing")),
-		active.get("resources", {}).get("hp", "?"),
+		displayed.get("hp", "?"),
 		active.get("stats", {}).get("max_hp", "?"),
-		active.get("resources", {}).get("ap", "?"),
+		displayed.get("ap", "?"),
 		active.get("stats", {}).get("max_ap", "?"),
-		active.get("resources", {}).get("mp", "-"),
+		displayed.get("mp", "-"),
 		active.get("stats", {}).get("move_points", "-"),
 		_dungeon_modifier_status_line(),
 	]
@@ -901,6 +926,15 @@ func _render_status() -> void:
 func _render_action_panel() -> void:
 	action_title_label.text = current_action_title
 	action_detail_label.text = current_action_detail
+	var result := _combat_result()
+	if result != "in_progress":
+		action_title_label.text = result.capitalize()
+		if not authoring_draft.is_empty():
+			action_detail_label.text = "Battle over. Press F6 to return to the workbench."
+		elif _run_session().has_pending_combat_launch():
+			action_detail_label.text = "Battle over. Return to the region to settle the ambush." if _run_session().road_combat else "Battle over. Return to the dungeon to resolve the expedition."
+		else:
+			action_detail_label.text = "Battle over. Open Tools, choose a scenario and Load to play again."
 	if action_feed.is_empty():
 		action_feed_label.text = _combat_log_fallback_line()
 	else:
@@ -914,7 +948,7 @@ func _render_board_overlay() -> void:
 	var active := _unit_by_id(state.get("turn_state", {}).get("active_unit_id", ""))
 	overlay_resource_panel.visible = not active.is_empty()
 	if not active.is_empty():
-		overlay_resource_label.text = ""
+		overlay_resource_label.text = "%s  /  %s" % [_unit_display_name(active.id), str(active.get("team", "")).capitalize()]
 		var active_resources := _display_resources(active)
 		_update_resource_bar(overlay_resource_bars["hp"], active_resources.get("hp", 0), active.get("stats", {}).get("max_hp", 1))
 		_update_resource_bar(overlay_resource_bars["ap"], active_resources.get("ap", 0), active.get("stats", {}).get("max_ap", 1))
@@ -1104,7 +1138,7 @@ func _render_command_buttons() -> void:
 		slot += 1
 	if _combat_result() == "in_progress":
 		_add_debug_win_button()
-	if _run_session().has_pending_combat_launch() and _combat_result() != "in_progress":
+	if authoring_draft.is_empty() and _run_session().has_pending_combat_launch() and _combat_result() != "in_progress":
 		_add_return_to_dungeon_button()
 	_add_scenario_picker()
 
@@ -1148,7 +1182,7 @@ func _add_action_button(action_id: String, slot: int = 0) -> void:
 	var button := Button.new()
 	var label: String = ACTION_LABELS.get(action_id, action_id)
 	button.text = ""
-	button.tooltip_text = "%s%s" % [label, " [%s]" % slot if slot > 0 and slot <= 9 else ""]
+	button.tooltip_text = panel_skin.wrap_tooltip("%s%s" % [label, " [%s]" % slot if slot > 0 and slot <= 9 else ""], get_theme_font("font", "TooltipLabel"))
 	button.custom_minimum_size = ACTION_BUTTON_SIZE
 	button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	button.add_theme_font_size_override("font_size", 1)
@@ -1157,6 +1191,10 @@ func _add_action_button(action_id: String, slot: int = 0) -> void:
 	button.add_theme_color_override("font_hover_color", Color(1.0, 0.94, 0.68))
 	button.add_theme_color_override("font_disabled_color", Color(0.44, 0.42, 0.38))
 	var icon := _action_icon_texture(action_id)
+	if icon == null:
+		button.text = label
+		button.add_theme_font_size_override("font_size", 12)
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	if icon != null:
 		button.icon = icon
 		button.expand_icon = true
@@ -1191,20 +1229,30 @@ func _add_action_button(action_id: String, slot: int = 0) -> void:
 		_render_action_panel()
 	)
 	command_buttons.add_child(button)
+	if battle_chrome!=null: battle_chrome.decorate_action(self,button,action_id,slot)
 
 
 func _show_action_hover(action_id: String, slot: int) -> void:
+	if animation_locked or _combat_result() != "in_progress":
+		_render_action_panel()
+		return
 	var active := _unit_by_id(state.get("turn_state", {}).get("active_unit_id", ""))
+	var displayed := _display_resources(active)
 	var label: String = ACTION_LABELS.get(action_id, action_id)
 	var slot_text := "Slot %s" % slot if slot > 0 and slot <= 9 else "Action"
 	var resources := "AP %s/%s  MP %s/%s" % [
-		active.get("resources", {}).get("ap", "?"),
+		displayed.get("ap", "?"),
 		active.get("stats", {}).get("max_ap", "?"),
-		active.get("resources", {}).get("mp", "-"),
+		displayed.get("mp", "-"),
 		active.get("stats", {}).get("move_points", "-"),
 	]
 	action_title_label.text = "%s: %s" % [slot_text, label]
-	action_detail_label.text = "%s. Click to select; then choose a highlighted board target." % resources
+	var cost := "COST %s AP" % _action_ap_cost(active, action_id, 0 if action_id == "end_turn" else 1)
+	if action_id == "move" and active.get("resources", {}).has("mp"):
+		cost = "COST depends on destination MP"
+	elif action_id in ["enemy_ai", "enemy_turn", "reset"]:
+		cost = "Debug control"
+	action_detail_label.text = "%s. %s. Click to select." % [cost, resources]
 
 
 func _apply_skill_button_style(button: Button, selected: bool) -> void:
@@ -1286,7 +1334,7 @@ func _add_scenario_picker() -> void:
 
 func _add_return_to_dungeon_button() -> void:
 	var button := Button.new()
-	button.text = "Return\nto Dungeon"
+	button.text = "Return\nto Region" if _run_session().road_combat else "Return\nto Dungeon"
 	button.custom_minimum_size = Vector2(132, 62)
 	button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	button.add_theme_font_size_override("font_size", 12)
@@ -1352,16 +1400,19 @@ func _debug_event(event_type: String, payload: Dictionary) -> Dictionary:
 
 
 func _return_to_dungeon() -> void:
+	if not authoring_draft.is_empty():
+		return
 	var result_payload := _combat_result_payload()
 	if result_payload.is_empty():
 		last_feedback = "No combat result payload."
 		_render()
 		return
+	var return_scene: String = _run_session().return_scene_path()
 	if not _run_session().finish_combat(result_payload):
 		last_feedback = _run_session().last_feedback
 		_render()
 		return
-	get_tree().change_scene_to_file(_run_session().DUNGEON_SCENE_PATH)
+	get_tree().change_scene_to_file(return_scene)
 
 
 func _load_selected_scenario() -> void:
@@ -1588,40 +1639,28 @@ func _apply_pixel_theme() -> void:
 	bottom_hud.custom_minimum_size = Vector2(0, BOTTOM_HUD_MIN_HEIGHT)
 	bottom_hud.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	_ensure_board_overlay_controls()
-	var title_label := get_node_or_null("RootMargin/RootScroll/RootHBox/LeftPanel/TitleLabel") as Label
+	theme = panel_skin.popup_theme()
+	var title_label := %TitleLabel as Label
 	if title_label != null:
 		title_label.add_theme_color_override("font_color", Color(1.0, 0.80, 0.32))
 		title_label.add_theme_color_override("font_shadow_color", Color(0.04, 0.03, 0.02, 1.0))
 		title_label.add_theme_constant_override("shadow_offset_x", 2)
 		title_label.add_theme_constant_override("shadow_offset_y", 2)
 
-	var panel_style := _combat_ui_stylebox(COMBAT_UI_PANEL_TEXTURE_PATH, 28, 18)
-	if panel_style == null:
-		var panel_texture := _load_pixel_ui_texture(PIXEL_PANEL_TEXTURE_PATH)
-		if panel_texture != null:
-			panel_style = StyleBoxTexture.new()
-			panel_style.texture = panel_texture
-			panel_style.texture_margin_left = 8
-			panel_style.texture_margin_top = 8
-			panel_style.texture_margin_right = 8
-			panel_style.texture_margin_bottom = 8
-			panel_style.content_margin_left = 12
-			panel_style.content_margin_top = 8
-			panel_style.content_margin_right = 12
-			panel_style.content_margin_bottom = 8
-	if panel_style != null:
-		action_panel.add_theme_stylebox_override("panel", panel_style)
-		bottom_hud.add_theme_stylebox_override("panel", panel_style)
-		turn_order_panel.add_theme_stylebox_override("panel", panel_style)
-		if overlay_log_panel != null:
-			overlay_log_panel.add_theme_stylebox_override("panel", panel_style)
+	encounter_panel.add_theme_stylebox_override("panel", panel_skin.style("panel"))
+	action_panel.add_theme_stylebox_override("panel", panel_skin.style("inset"))
+	bottom_hud.add_theme_stylebox_override("panel", panel_skin.style("bar"))
+	turn_order_panel.add_theme_stylebox_override("panel", panel_skin.style("panel"))
+	board_backdrop.add_theme_stylebox_override("panel", panel_skin.style("board"))
+	if overlay_log_panel != null:
+		overlay_log_panel.add_theme_stylebox_override("panel", panel_skin.style("panel"))
 	if overlay_resource_panel != null:
 		overlay_resource_panel.add_theme_stylebox_override("panel", _compact_resource_panel_style())
 
 	var action_title_color := Color(1.0, 0.86, 0.38)
 	var action_text_color := Color(0.96, 0.92, 0.80)
 	var shadow_color := Color(0.05, 0.04, 0.03, 1.0)
-	for label: Label in [action_title_label, action_detail_label, action_feed_label, status_label, feedback_label, legend_label, unit_list_label, inspect_label, event_log_label, turn_order_label]:
+	for label: Label in [title_label, action_title_label, action_detail_label, action_feed_label, status_label, feedback_label, legend_label, unit_list_label, inspect_label, event_log_label, turn_order_label]:
 		label.add_theme_color_override("font_color", action_text_color)
 		label.add_theme_color_override("font_shadow_color", shadow_color)
 		label.add_theme_constant_override("shadow_offset_x", 1)
@@ -1629,6 +1668,7 @@ func _apply_pixel_theme() -> void:
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.clip_text = true
 	action_title_label.add_theme_color_override("font_color", action_title_color)
+	title_label.add_theme_color_override("font_color", action_title_color)
 	turn_order_label.add_theme_color_override("font_color", action_title_color)
 	action_detail_label.add_theme_font_size_override("font_size", 10)
 	action_detail_label.max_lines_visible = 3
@@ -1637,6 +1677,14 @@ func _apply_pixel_theme() -> void:
 	turn_order_label.max_lines_visible = 6
 	event_log_label.max_lines_visible = 10
 	status_label.max_lines_visible = 3
+	title_label.max_lines_visible = 1
+	# Clipped, wrapped labels can report a one-pixel minimum height. Reserve
+	# real line space so containers cannot hide the HUD copy.
+	for entry in [[title_label, 1], [action_title_label, 1], [action_detail_label, 3], [action_feed_label, 4], [status_label, 3], [turn_order_label, 6]]:
+		var text_label := entry[0] as Label
+		var font := text_label.get_theme_font("font")
+		var line_height := font.get_height(text_label.get_theme_font_size("font_size"))
+		text_label.custom_minimum_size.y = ceilf(line_height * int(entry[1]))
 	if overlay_log_label != null:
 		overlay_log_label.add_theme_color_override("font_color", action_text_color)
 		overlay_log_label.add_theme_color_override("font_shadow_color", shadow_color)
@@ -1650,6 +1698,7 @@ func _apply_pixel_theme() -> void:
 		overlay_resource_label.add_theme_constant_override("shadow_offset_x", 1)
 		overlay_resource_label.add_theme_constant_override("shadow_offset_y", 1)
 
+	if battle_chrome!=null: battle_chrome.style_hud(self)
 
 func _ensure_board_overlay_controls() -> void:
 	if board_overlay_layer != null:
@@ -1675,9 +1724,10 @@ func _ensure_board_overlay_controls() -> void:
 
 	overlay_resource_label = Label.new()
 	overlay_resource_label.name = "OverlayResourceLabel"
-	overlay_resource_label.add_theme_font_size_override("font_size", 5)
+	overlay_resource_label.add_theme_font_size_override("font_size", 14)
 	overlay_resource_label.clip_text = true
-	overlay_resource_label.visible = false
+	overlay_resource_label.max_lines_visible = 1
+	overlay_resource_label.custom_minimum_size.y = 20
 	resource_vbox.add_child(overlay_resource_label)
 
 	overlay_resource_bars["hp"] = _create_resource_bar(COMBAT_UI_BAR_HP_PATH, OVERLAY_RESOURCE_BAR_SIZE)
@@ -1700,8 +1750,7 @@ func _ensure_board_overlay_controls() -> void:
 	overlay_log_label.add_theme_font_size_override("font_size", 9)
 	overlay_log_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	overlay_log_label.clip_text = true
-	overlay_log_label.custom_minimum_size = OVERLAY_LOG_PANEL_SIZE - Vector2(36, 30)
-	overlay_log_label.size = OVERLAY_LOG_PANEL_SIZE - Vector2(36, 30)
+	overlay_log_label.custom_minimum_size = Vector2(0, 60)
 	overlay_log_label.max_lines_visible = 5
 	overlay_log_panel.add_child(overlay_log_label)
 
@@ -1714,53 +1763,32 @@ func _configure_board_layers() -> void:
 
 
 func _create_resource_bar(texture_path: String, bar_size: Vector2) -> TextureProgressBar:
-	var bar := TextureProgressBar.new()
-	var texture := _combat_ui_texture_scaled(texture_path, Vector2i(int(bar_size.x), int(bar_size.y)))
-	bar.custom_minimum_size = bar_size
-	bar.size = bar_size
-	bar.min_value = 0
-	bar.max_value = 1
-	bar.value = 1
-	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	if texture != null:
-		bar.texture_under = texture
-		bar.texture_progress = texture
-		bar.tint_under = Color(0.18, 0.16, 0.14, 0.72)
-		bar.tint_progress = Color(1, 1, 1, 1)
+	var bar := ResourceMeterScene.instantiate()
+	bar.configure(pixel_skin.scaled_texture(texture_path, Vector2i(bar_size)), bar_size)
+	bar.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	var amount := Label.new()
+	amount.name = "AmountLabel"
+	amount.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	amount.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	amount.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	amount.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	amount.add_theme_font_size_override("font_size", 16)
+	amount.add_theme_color_override("font_color", Color.WHITE)
+	amount.add_theme_color_override("font_outline_color", Color.BLACK)
+	amount.add_theme_constant_override("outline_size", 3)
+	amount.clip_text = true
+	bar.add_child(amount)
+	bar.set_meta("resource_label", "HP" if texture_path == COMBAT_UI_BAR_HP_PATH else ("AP" if texture_path == COMBAT_UI_BAR_AP_PATH else "MP"))
 	return bar
-
-
-func _combat_ui_texture_scaled(path: String, texture_size: Vector2i) -> Texture2D:
-	if path == "":
-		return null
-	var cache_key := "%s:%sx%s" % [path, texture_size.x, texture_size.y]
-	if ui_texture_cache.has(cache_key):
-		return ui_texture_cache[cache_key]
-	var image := Image.new()
-	var error := image.load(path)
-	if error != OK:
-		return null
-	image.resize(maxi(1, texture_size.x), maxi(1, texture_size.y), Image.INTERPOLATE_NEAREST)
-	var texture := ImageTexture.create_from_image(image)
-	ui_texture_cache[cache_key] = texture
-	return texture
 
 
 func _update_resource_bar(bar: TextureProgressBar, value: Variant, max_value: Variant) -> void:
 	if bar == null:
 		return
-	var numeric_max := maxf(1.0, float(max_value))
-	bar.max_value = numeric_max
-	bar.value = clampf(float(value), 0.0, numeric_max)
-
-
-func _load_pixel_ui_texture(path: String) -> Texture2D:
-	var image := Image.new()
-	var error := image.load(path)
-	if error != OK:
-		push_error("Cannot load pixel UI texture: %s" % path)
-		return null
-	return ImageTexture.create_from_image(image)
+	bar.set_amount(float(value), float(max_value))
+	var amount := bar.get_node_or_null("AmountLabel") as Label
+	if amount != null:
+		amount.text = "%s %s / %s" % [bar.get_meta("resource_label", ""), int(bar.value), int(max_value)]
 
 
 func _combat_ui_texture(path: String) -> Texture2D:
@@ -1768,11 +1796,7 @@ func _combat_ui_texture(path: String) -> Texture2D:
 		return null
 	if ui_texture_cache.has(path):
 		return ui_texture_cache[path]
-	var image := Image.new()
-	var error := image.load(path)
-	if error != OK:
-		return null
-	var texture := ImageTexture.create_from_image(image)
+	var texture := AssetCatalog.texture(path)
 	ui_texture_cache[path] = texture
 	return texture
 
@@ -1793,8 +1817,8 @@ func _combat_ui_texture_has_visible_pixels(path: String) -> bool:
 	var cache_key := "%s:visible" % path
 	if ui_texture_cache.has(cache_key):
 		return bool(ui_texture_cache[cache_key])
-	var image := Image.new()
-	if image.load(path) != OK:
+	var image := AssetCatalog.image_copy(path)
+	if image == null:
 		ui_texture_cache[cache_key] = false
 		return false
 	var step_x := maxi(1, int(image.get_width() / 64))
@@ -1809,36 +1833,11 @@ func _combat_ui_texture_has_visible_pixels(path: String) -> bool:
 
 
 func _combat_ui_stylebox(path: String, texture_margin: int, content_margin: int) -> StyleBoxTexture:
-	var cache_key := "%s:%s:%s" % [path, texture_margin, content_margin]
-	if ui_style_cache.has(cache_key):
-		return ui_style_cache[cache_key]
-	var texture := _combat_ui_texture(path)
-	if texture == null:
-		return null
-	var style := StyleBoxTexture.new()
-	style.texture = texture
-	style.texture_margin_left = texture_margin
-	style.texture_margin_top = texture_margin
-	style.texture_margin_right = texture_margin
-	style.texture_margin_bottom = texture_margin
-	style.content_margin_left = content_margin
-	style.content_margin_top = content_margin
-	style.content_margin_right = content_margin
-	style.content_margin_bottom = content_margin
-	ui_style_cache[cache_key] = style
-	return style
+	return pixel_skin.frame(path, Vector4.ONE * texture_margin, Vector4.ONE * content_margin) as StyleBoxTexture
 
 
 func _compact_resource_panel_style() -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.04, 0.035, 0.03, 0.78)
-	style.border_color = Color(0.90, 0.66, 0.20, 0.90)
-	style.set_border_width_all(1)
-	style.content_margin_left = 2
-	style.content_margin_top = 2
-	style.content_margin_right = 2
-	style.content_margin_bottom = 2
-	return style
+	return panel_skin.style("resource") as StyleBoxFlat
 
 
 func _set_targeting_banner(action_id: String) -> void:
@@ -1878,7 +1877,7 @@ func _set_action_banner_from_events(command: Dictionary, events: Array) -> void:
 				ACTION_LABELS.get(command.get("action_id", ""), command.get("action_id", "")),
 				_rejection_label(event.get("reason", "unknown")),
 			]
-			feed_line = "Rejected %s" % ACTION_LABELS.get(command.get("action_id", ""), command.get("action_id", "action"))
+			feed_line = "Rejected %s: %s" % [ACTION_LABELS.get(command.get("action_id", ""), command.get("action_id", "action")), _rejection_label(event.get("reason", "unknown"))]
 			break
 
 	for event: Dictionary in events:
@@ -2108,6 +2107,7 @@ func _play_combat_animation(events: Array, previous_state: Dictionary, next_stat
 		tween_has_steps = true
 
 	if not tween_has_steps:
+		tween.kill()
 		_finish_combat_animation(current_generation, next_state, next_log)
 		return
 
@@ -2201,6 +2201,7 @@ func _play_movement_animation(events: Array, previous_state: Dictionary, next_st
 			step_index += 1
 			tween_has_steps = true
 	if not tween_has_steps:
+		tween.kill()
 		_finish_movement_animation(events, current_generation, next_state, next_log)
 		return
 	tween.finished.connect(func() -> void:
@@ -2302,22 +2303,33 @@ func _face_moved_units_toward_nearest_opponent(events: Array) -> void:
 
 func _clear_grid() -> void:
 	for child in grid_container.get_children():
+		grid_container.remove_child(child)
 		child.queue_free()
 
 
 func _clear_units() -> void:
 	for child in unit_layer.get_children():
+		unit_layer.remove_child(child)
 		child.queue_free()
 
 
 func _resize_board() -> void:
+	if state.is_empty():
+		return
 	var width: int = int(state["grid"]["width"]) * TILE_WIDTH + maxi(0, int(state["grid"]["width"]) - 1) * TILE_GAP
 	var height: int = int(state["grid"]["height"]) * TILE_HEIGHT + maxi(0, int(state["grid"]["height"]) - 1) * TILE_GAP
 	var board_size := Vector2(width, height)
 	board_root.custom_minimum_size = board_size
-	board_backdrop.position = Vector2(-6, -6)
-	board_backdrop.custom_minimum_size = board_size + Vector2(12, 12)
-	board_backdrop.size = board_size + Vector2(12, 12)
+	board_root.size = board_size
+	var margin := CombatPanelSkin.BOARD_FRAME_MARGIN
+	board_backdrop.position = Vector2.ONE * -margin
+	board_backdrop.custom_minimum_size = board_size + Vector2.ONE * margin * 2
+	board_backdrop.size = board_backdrop.custom_minimum_size
+	var available := (board_viewport.size - Vector2.ONE * margin * 2).max(Vector2.ONE)
+	var headroom := 120.0 if battle_chrome!=null else 0.0
+	var board_scale := minf(1.0, minf(available.x / board_size.x, available.y / (board_size.y+headroom)))
+	board_root.scale = Vector2.ONE * board_scale
+	board_root.position = (board_viewport.size - (board_size+Vector2(0,headroom)) * board_scale) / 2.0+Vector2(0,headroom*board_scale)
 	board_terrain.custom_minimum_size = board_size
 	board_terrain.size = board_size
 	grid_container.custom_minimum_size = board_size
@@ -2333,6 +2345,7 @@ func _resize_board() -> void:
 
 
 func _position_board_overlays(board_size: Vector2) -> void:
+	if battle_chrome!=null: return
 	if overlay_resource_panel != null:
 		overlay_resource_panel.custom_minimum_size = OVERLAY_RESOURCE_PANEL_SIZE
 		overlay_resource_panel.size = OVERLAY_RESOURCE_PANEL_SIZE
@@ -2395,6 +2408,14 @@ func _create_unit_node(unit_id: String) -> Control:
 	sprite.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
 	sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	unit_node.add_child(sprite)
+	var fallback_label := Label.new()
+	fallback_label.name = "VisualFallbackLabel"
+	fallback_label.size = Vector2(UNIT_ICON_SIZE)
+	fallback_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	fallback_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	fallback_label.add_theme_font_size_override("font_size", 18)
+	fallback_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	unit_node.add_child(fallback_label)
 
 	var resource_panel := PanelContainer.new()
 	resource_panel.name = "ResourcePanel"
@@ -2406,10 +2427,10 @@ func _create_unit_node(unit_id: String) -> Control:
 	resource_label.name = "Resources"
 	resource_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	resource_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	resource_label.custom_minimum_size = UNIT_RESOURCE_LABEL_SIZE
-	resource_label.size = UNIT_RESOURCE_LABEL_SIZE
+	resource_label.custom_minimum_size = UNIT_RESOURCE_LABEL_SIZE - Vector2(6, 2)
+	resource_label.size = resource_label.custom_minimum_size
 	resource_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	resource_label.add_theme_font_size_override("font_size", 10)
+	resource_label.add_theme_font_size_override("font_size", 18)
 	resource_label.add_theme_color_override("font_color", Color(1.0, 0.96, 0.78))
 	resource_label.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 1.0))
 	resource_label.add_theme_constant_override("shadow_offset_x", 1)
@@ -2428,10 +2449,10 @@ func _create_unit_node(unit_id: String) -> Control:
 	target_preview_label.name = "TargetPreview"
 	target_preview_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	target_preview_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	target_preview_label.custom_minimum_size = UNIT_TARGET_PREVIEW_LABEL_SIZE
-	target_preview_label.size = UNIT_TARGET_PREVIEW_LABEL_SIZE
+	target_preview_label.custom_minimum_size = UNIT_TARGET_PREVIEW_LABEL_SIZE - Vector2(8, 4)
+	target_preview_label.size = target_preview_label.custom_minimum_size
 	target_preview_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	target_preview_label.add_theme_font_size_override("font_size", 10)
+	target_preview_label.add_theme_font_size_override("font_size", 11)
 	target_preview_label.add_theme_color_override("font_color", Color(1.0, 0.96, 0.78))
 	target_preview_label.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 1.0))
 	target_preview_label.add_theme_constant_override("shadow_offset_x", 1)
@@ -2476,6 +2497,10 @@ func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
 		sprite.texture = _unit_icon(unit)
 		sprite.custom_minimum_size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
 		sprite.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
+	var fallback_label := unit_node.get_node_or_null("VisualFallbackLabel") as Label
+	if fallback_label != null:
+		fallback_label.visible = sprite == null or sprite.texture == null
+		fallback_label.text = "%s\n%s" % [_unit_display_name(unit.id), str(unit.get("team", "")).capitalize()]
 
 	var resource_panel := unit_node.get_node_or_null("ResourcePanel") as PanelContainer
 	if resource_panel == null:
@@ -2489,7 +2514,7 @@ func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
 	)
 	resource_panel.position.x += _unit_resource_label_nudge(unit)
 	if unit_node.position.y + resource_panel.position.y < 0:
-		resource_panel.position.y = 0
+		resource_panel.position.y = -unit_node.position.y
 	resource_panel.add_theme_stylebox_override("panel", _unit_resource_style(unit))
 
 	var resource_label := resource_panel.get_node_or_null("Resources") as Label
@@ -2529,7 +2554,7 @@ func _update_unit_status_icons(unit_node: Control, unit: Dictionary) -> void:
 		UNIT_RESOURCE_LABEL_OFFSET_Y
 	)
 	if unit_node.position.y + status_icon_row.position.y < 0:
-		status_icon_row.position.y = 0
+		status_icon_row.position.y = -unit_node.position.y
 
 	for status_id: String in icon_ids:
 		var panel := PanelContainer.new()
@@ -2569,9 +2594,12 @@ func _update_unit_target_preview(unit_node: Control, unit: Dictionary) -> void:
 		(float(UNIT_ICON_SIZE.x) - UNIT_TARGET_PREVIEW_LABEL_SIZE.x) / 2.0,
 		UNIT_RESOURCE_LABEL_OFFSET_Y + UNIT_RESOURCE_LABEL_SIZE.y + UNIT_TARGET_PREVIEW_GAP
 	)
+	var resource_panel := unit_node.get_node_or_null("ResourcePanel") as Control
+	if resource_panel != null:
+		target_preview_panel.position.y = resource_panel.position.y + resource_panel.size.y + UNIT_TARGET_PREVIEW_GAP
 	target_preview_panel.position.x += _unit_resource_label_nudge(unit)
 	if unit_node.position.y + target_preview_panel.position.y < 0:
-		target_preview_panel.position.y = 0
+		target_preview_panel.position.y = -unit_node.position.y
 	target_preview_panel.add_theme_stylebox_override("panel", _unit_target_preview_style(unit))
 
 	var target_preview_label := target_preview_panel.get_node_or_null("TargetPreview") as Label
@@ -2678,10 +2706,10 @@ func _visual_units_for_render() -> Array[Dictionary]:
 func _unit_resource_text(unit: Dictionary) -> String:
 	var resources := _display_resources(unit)
 	return "HP %s/%s\nAP %s  MP %s" % [
-		resources.get("hp", "-"),
-		unit["stats"].get("max_hp", "-"),
-		resources.get("ap", "-"),
-		resources.get("mp", "-"),
+		int(resources.get("hp", 0)),
+		int(unit["stats"].get("max_hp", 0)),
+		int(resources.get("ap", 0)),
+		int(resources.get("mp", 0)),
 	]
 
 
@@ -2743,6 +2771,7 @@ func _refresh_resource_display(unit_id: String) -> void:
 	var active_id := str(state.get("turn_state", {}).get("active_unit_id", ""))
 	if unit_id == active_id:
 		_render_board_overlay()
+		_render_status()
 	var unit := _unit_by_id(unit_id)
 	if unit.is_empty() and temporary_visual_units.has(unit_id):
 		unit = temporary_visual_units[unit_id]
@@ -2754,6 +2783,9 @@ func _refresh_resource_display(unit_id: String) -> void:
 	var resource_label := unit_node.get_node_or_null("ResourcePanel/Resources") as Label
 	if resource_label != null:
 		resource_label.text = _unit_resource_text(unit)
+	var resource_panel := unit_node.get_node_or_null("ResourcePanel") as PanelContainer
+	if resource_panel != null:
+		resource_panel.add_theme_stylebox_override("panel", _unit_resource_style(unit))
 
 
 func _unit_resource_style(unit: Dictionary) -> StyleBoxFlat:
@@ -2764,6 +2796,16 @@ func _unit_resource_style(unit: Dictionary) -> StyleBoxFlat:
 	style.border_width_right = 2
 	style.border_width_bottom = 2
 	style.border_color = Color(0.36, 0.62, 0.90) if unit.get("team", "") == "player" else Color(0.82, 0.30, 0.24)
+	if int(_display_resources(unit).get("hp", 0)) < int(unit.get("stats", {}).get("max_hp", 0)):
+		style.bg_color = Color("361b19")
+	if str(unit.get("id", "")) == str(state.get("turn_state", {}).get("active_unit_id", "")):
+		style.border_color = CombatPanelSkin.GOLD_COLOR
+		style.set_border_width_all(3)
+	if str(unit.get("id", "")) == hovered_unit_id:
+		style.bg_color = style.bg_color.lightened(0.2)
+		if str(unit.get("id", "")) != str(state.get("turn_state", {}).get("active_unit_id", "")):
+			style.border_color = Color("fff4d7")
+		style.set_border_width_all(3)
 	style.corner_radius_top_left = 0
 	style.corner_radius_top_right = 0
 	style.corner_radius_bottom_left = 0
@@ -2939,10 +2981,36 @@ func _tile_tooltip(position: Dictionary) -> String:
 		"terrain: %s" % _tile_type(position),
 		"move cost: %s MP" % _terrain_movement_cost(position),
 	]
+	var unit := _tooltip_unit_at(position)
+	if not unit.is_empty():
+		lines.append("%s / %s" % [_unit_display_name(unit.id), str(unit.get("team", "")).capitalize()])
+		lines.append(_unit_resource_text(unit))
+		lines.append("Status: " + _status_summary(unit))
 	var preview := _target_preview_for_position(position)
 	if not preview.is_empty():
 		lines.append("selected action: legal" if preview.get("rejection", "") == "" else "rejected: %s" % preview.get("rejection", "unknown"))
-	return "\n".join(lines)
+	return panel_skin.wrap_tooltip("\n".join(lines), get_theme_font("font", "TooltipLabel"))
+
+
+func _tooltip_unit_at(position: Dictionary) -> Dictionary:
+	var living := _living_unit_at(position)
+	if not living.is_empty():
+		return living
+	for unit: Dictionary in state.get("units", []):
+		if _positions_equal(unit.get("position", {}), position):
+			return unit
+	return {}
+
+
+func _set_hovered_unit(unit_id: String) -> void:
+	if hovered_unit_id == unit_id:
+		return
+	hovered_unit_id = unit_id
+	for node: Control in unit_layer.get_children():
+		var unit := _unit_by_id(str(node.name))
+		var panel := node.get_node_or_null("ResourcePanel") as PanelContainer
+		if panel != null and not unit.is_empty():
+			panel.add_theme_stylebox_override("panel", _unit_resource_style(unit))
 
 
 func _is_active_unit_at(position: Dictionary) -> bool:

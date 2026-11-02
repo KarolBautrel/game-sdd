@@ -1,0 +1,29 @@
+CAMPAIGN UI — THIRD-PARTY NOTICES
+
+Selected glyphs from Shikashi's Fantasy Icons Pack v2 by Matt Firth (shikashipx),
+with attribution to game-icons.net, are used and modified (cropped, palette warmed
+and desaturated). https://shikashipx.itch.io/shikashis-fantasy-icons-pack
+https://game-icons.net/
+The downloaded v2 archive identifies Creative Commons Attribution 3.0:
+https://creativecommons.org/licenses/by/3.0/
+The author's current page identifies CC BY 4.0. We retain the downloaded original
+README and satisfy attribution/change notices for both versions.
+
+Selected divider/slot art from Kenney Fantasy UI Borders and Pixel UI Pack,
+Kenney (https://kenney.nl), CC0 1.0. Divider recolored for this project.
+https://kenney.nl/assets/fantasy-ui-borders
+https://kenney.nl/assets/pixel-ui-pack
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Cinzel by Natanael Gama and Source Sans 3 by Adobe are licensed under the
+SIL Open Font License 1.1. Full copyright and license notices are packaged in
+assets/ui/fonts/Cinzel-OFL.txt and SourceSans3-OFL.txt.
+
+ThemeGen by Inspiaaa, MIT, is an editor-only development dependency.
+Original license: resources/licenses/themegen-MIT.txt.
+https://github.com/Inspiaaa/ThemeGen
+
+Original campaign material, map and item illustrations were AI-generated for
+this project with the connected OpenAI image-generation tool, then normalized
+and exported through Aseprite. They are not Kenney or Shikashi assets.
+Provenance and production specifications: assets_src/campaign_ui/prompts.md.
