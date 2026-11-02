@@ -1,0 +1,289 @@
+{
+  "status": "PASS",
+  "models": [
+    {
+      "id": "archer_1",
+      "parts": 21,
+      "bones": 65,
+      "long_weapon_min_z": {
+        "bow/pose": 0.84965,
+        "bow/walk": 0.82955,
+        "bow/combat": 0.85003,
+        "bow/hit": 0.82955,
+        "bow/death": 0.035,
+        "crossbow/pose": 1.07971,
+        "crossbow/walk": 1.05592,
+        "crossbow/combat": 1.07153,
+        "crossbow/hit": 1.05592,
+        "crossbow/death": 0.035,
+        "spear/pose": 0.92698,
+        "spear/walk": 0.90494,
+        "spear/combat": 0.92776,
+        "spear/hit": 0.90494,
+        "spear/death": 0.035
+      },
+      "status": "PASS",
+      "glb_sha256": "b0b8ccf53c950a2bff9dc14cdd895d35dbca9b0568918d8d88f7563b22c0ba68"
+    },
+    {
+      "id": "armored_brute",
+      "parts": 5,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "a783979d4f36270ff6cf648fe6cc556c3ccbb9927111bb498cba17b6ba45dc12"
+    },
+    {
+      "id": "ash_raider",
+      "parts": 5,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "a287bb4debb0bb846c0a7e68434003d09f7b8155e4b37f1e8f917f73f4b9cadb"
+    },
+    {
+      "id": "axe_bandit",
+      "parts": 5,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "043e1dc06ab41b6f4b3ca616ce6a47b12e6b9ec8bf153e19081e702d917438af"
+    },
+    {
+      "id": "bandit",
+      "parts": 5,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "dc96dbba3a70207f11fb04d5841603265e021816ffaef0e85c5192fc5a4e1cb8"
+    },
+    {
+      "id": "bandit_archer",
+      "parts": 6,
+      "bones": 65,
+      "long_weapon_min_z": {
+        "bow/pose": 0.84115,
+        "bow/walk": 0.82125,
+        "bow/combat": 0.84153,
+        "bow/hit": 0.82125,
+        "bow/death": 0.03465
+      },
+      "status": "PASS",
+      "glb_sha256": "544d63f9f74487b86b74d74959baffc0ae92135bee031620592b014d86a01267"
+    },
+    {
+      "id": "bandit_brute",
+      "parts": 5,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "c51cb6a28d40df972d372efb35f395bee57a3d500ca3fe188799b70b04e3a36e"
+    },
+    {
+      "id": "bandit_carnage",
+      "parts": 6,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "ba64edde68827bbf915be44dac40310c36c17f445a84fd984a09d2438616db8e"
+    },
+    {
+      "id": "bandit_marauder",
+      "parts": 6,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "1effcb1f74fa4ca1a16e4d37608aa80deb018d64a0f3772043a37e2fe14487cb"
+    },
+    {
+      "id": "bandit_rogue",
+      "parts": 5,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "c3e82d88a0e35d9e8319932a7414baef60908199dff5edc8e7ef2018c024a0f2"
+    },
+    {
+      "id": "bandit_spearman",
+      "parts": 5,
+      "bones": 65,
+      "long_weapon_min_z": {
+        "spear/pose": 0.92698,
+        "spear/walk": 0.90494,
+        "spear/combat": 0.92776,
+        "spear/hit": 0.90494,
+        "spear/death": 0.035
+      },
+      "status": "PASS",
+      "glb_sha256": "ea83e07b35d41ba499769c04eee41669fa542cfcb078fd57253982d085cbc81c"
+    },
+    {
+      "id": "bat",
+      "parts": 1,
+      "bones": 7,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "39ae2973f0836e559b68a3f93659520f838bef8890bd328cc8b85d389b3ca8cb"
+    },
+    {
+      "id": "crossbowman",
+      "parts": 5,
+      "bones": 65,
+      "long_weapon_min_z": {
+        "crossbow/pose": 1.07971,
+        "crossbow/walk": 1.05592,
+        "crossbow/combat": 1.07153,
+        "crossbow/hit": 1.05592,
+        "crossbow/death": 0.035
+      },
+      "status": "PASS",
+      "glb_sha256": "f2d55a2cb996e90af62ca8d02f06e4c2177a42dfd93d3a42c31c36ea36226239"
+    },
+    {
+      "id": "dire_boar",
+      "parts": 1,
+      "bones": 13,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "a3bacd76682c862b9a16d446af0ecd9f0911f69639f91c4d38800ce61ba09515"
+    },
+    {
+      "id": "giant_snake",
+      "parts": 1,
+      "bones": 11,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "950714fc427c342cddecca56a266a8a30e50e8e4890d883ff0b01c5be6593fbe"
+    },
+    {
+      "id": "goblin_atlas",
+      "parts": 4,
+      "bones": 65,
+      "long_weapon_min_z": {
+        "spear/pose": 0.66743,
+        "spear/walk": 0.65156,
+        "spear/combat": 0.66799,
+        "spear/hit": 0.65156,
+        "spear/death": 0.0252
+      },
+      "status": "PASS",
+      "glb_sha256": "68809b364748476f85c6b29a3e0c3e24b4e23b539d75ff93f61b2f42a4392947"
+    },
+    {
+      "id": "guardian",
+      "parts": 6,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "88f0469b5421bd1114eead7f57416300308f2aa47764764e2d3dd2765e12b43d"
+    },
+    {
+      "id": "hell_hound",
+      "parts": 1,
+      "bones": 13,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "a00f3b5c4769411274bb6e0088045e9431acf52b0c6dc4a1504011a88e4a6580"
+    },
+    {
+      "id": "lizardman",
+      "parts": 4,
+      "bones": 65,
+      "long_weapon_min_z": {
+        "spear/pose": 0.94552,
+        "spear/walk": 0.92304,
+        "spear/combat": 0.94631,
+        "spear/hit": 0.92304,
+        "spear/death": 0.0357
+      },
+      "status": "PASS",
+      "glb_sha256": "25cbe161df9b5b011ff1888661196075a313a749dd6b42b530d13bf5b97598c4"
+    },
+    {
+      "id": "ogre",
+      "parts": 4,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "a6495472b5e051b5f7f44086f6388c72a474eae61b321df63decfca0384ce423"
+    },
+    {
+      "id": "rogue_1",
+      "parts": 6,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "a8050a93b9e85a105ea5203cd97d11d01e0522b3154d11663dc3bc9845da21f7"
+    },
+    {
+      "id": "skeleton_archer",
+      "parts": 4,
+      "bones": 65,
+      "long_weapon_min_z": {
+        "bow/pose": 0.84965,
+        "bow/walk": 0.82955,
+        "bow/combat": 0.85003,
+        "bow/hit": 0.82955,
+        "bow/death": 0.035
+      },
+      "status": "PASS",
+      "glb_sha256": "38163965294f8968aecfa8817bc78bca86d45611f4aa999f6a5e5fedc2ebb7a6"
+    },
+    {
+      "id": "skeleton_warrior",
+      "parts": 3,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "336e63409d42bb666609c8c51313e7a05f9cb58fb8d7e2cb8c0f5f5b6bcc9d29"
+    },
+    {
+      "id": "spider_atlas",
+      "parts": 1,
+      "bones": 22,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "4bcfc9cd32f00153f2903e02a863539694a02da44f0bd6b6a5b5ad46e1e0bf67"
+    },
+    {
+      "id": "warrior",
+      "parts": 21,
+      "bones": 65,
+      "long_weapon_min_z": {
+        "bow/pose": 0.84965,
+        "bow/walk": 0.82955,
+        "bow/combat": 0.85003,
+        "bow/hit": 0.82955,
+        "bow/death": 0.035,
+        "crossbow/pose": 1.07971,
+        "crossbow/walk": 1.05592,
+        "crossbow/combat": 1.07153,
+        "crossbow/hit": 1.05592,
+        "crossbow/death": 0.035,
+        "spear/pose": 0.92698,
+        "spear/walk": 0.90494,
+        "spear/combat": 0.92776,
+        "spear/hit": 0.90494,
+        "spear/death": 0.035
+      },
+      "status": "PASS",
+      "glb_sha256": "87e9fca1a159cdfd481e3d1c96cf4daf5d21dd69bf15b55e0a05a61782f9318a"
+    },
+    {
+      "id": "wolf_atlas",
+      "parts": 1,
+      "bones": 13,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "22d52aaabbc1ef7206432419ea625622f890ba013a5d5fbb7142858533c2634e"
+    },
+    {
+      "id": "wraith",
+      "parts": 2,
+      "bones": 65,
+      "long_weapon_min_z": {},
+      "status": "PASS",
+      "glb_sha256": "3412bd4eb0769c2474ccf83e219d99bf3dbfd687d1d4b56ad50c16f642477684"
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Original tactical roster",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "camera",
+    "frame_counts",
+    "aliases",
+    "characters",
+    "frame_seconds"
+  ],
+  "properties": {
+    "schema": {
+      "const": "sdd.original-roster-v1"
+    },
+    "camera": {
+      "type": "object",
+      "required": [
+        "elevation",
+        "ortho_width",
+        "size",
+        "pivot",
+        "yaw",
+        "pixels_per_metre"
+      ],
+      "properties": {
+        "elevation": {
+          "const": 18
+        },
+        "ortho_width": {
+          "const": 5.12
+        },
+        "size": {
+          "const": [
+            512,
+            384
+          ]
+        },
+        "pivot": {
+          "const": [
+            256,
+            282
+          ]
+        },
+        "pixels_per_metre": {
+          "const": 100
+        },
+        "yaw": {
+          "type": "object",
+          "minProperties": 8,
+          "maxProperties": 8,
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0,
+            "exclusiveMaximum": 360
+          }
+        }
+      }
+    },
+    "frame_counts": {
+      "const": {
+        "pose": 4,
+        "walk": 8,
+        "combat": 8,
+        "hit": 4,
+        "death": 8
+      }
+    },
+    "aliases": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "characters": {
+      "type": "array",
+      "minItems": 27,
+      "maxItems": 27,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "label",
+          "weapon",
+          "offhand",
+          "headwear",
+          "accent",
+          "scale",
+          "face"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "weapon": {
+            "type": "string",
+            "minLength": 1
+          },
+          "offhand": {
+            "type": "string",
+            "minLength": 1
+          },
+          "headwear": {
+            "type": "string",
+            "minLength": 1
+          },
+          "accent": {
+            "type": "string",
+            "minLength": 1
+          },
+          "face": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scale": {
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 1.5
+          }
+        }
+      }
+    },
+    "frame_seconds": {
+      "const": {
+        "pose": 0.2,
+        "walk": 0.065,
+        "combat": 0.07,
+        "hit": 0.06,
+        "death": 0.08
+      }
+    }
+  }
+}

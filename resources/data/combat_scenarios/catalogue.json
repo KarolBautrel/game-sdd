@@ -7,6 +7,11 @@
       "path": "res://resources/data/combat_encounters/debug_full_combat_showcase.json"
     },
     {
+      "id": "ash_road_raiders",
+      "label": "Ash-road raiders",
+      "path": "res://resources/data/combat_encounters/ash_road_raiders.json"
+    },
+    {
       "id": "dungeon_combat_showcase",
       "label": "Old Mine dungeon",
       "path": "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json"

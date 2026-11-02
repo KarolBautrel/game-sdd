@@ -1,0 +1,43 @@
+{
+  "character": "ash_raider",
+  "triangles": 5287,
+  "vertices": 2729,
+  "bones": 65,
+  "visible_source": "original authored mesh; no mannequin",
+  "actions": {
+    "pose": {
+      "clip": "Sword_Idle",
+      "frames": 4
+    },
+    "walk": {
+      "clip": "Walk_Loop",
+      "frames": 8
+    },
+    "combat": {
+      "clip": "Sword_Attack",
+      "frames": 8
+    },
+    "hit": {
+      "clip": "Hit_Chest",
+      "frames": 4
+    },
+    "death": {
+      "clip": "Death01",
+      "frames": 8
+    }
+  },
+  "texture": "textures/ash_raider_albedo.png",
+  "reference": "reference.png",
+  "source_motion": "Quaternius UAL1 Standard CC0",
+  "frame_size": [
+    448,
+    352
+  ],
+  "pivot": [
+    224,
+    266
+  ],
+  "orthographic_scale": 4.2,
+  "camera_elevation": 27,
+  "frame_count": 256
+}

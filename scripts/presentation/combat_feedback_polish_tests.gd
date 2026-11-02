@@ -41,17 +41,26 @@ func _run() -> void:
 	active.position = {"x":0,"y":0}
 	scene.selected_action = "basic_attack"
 	scene.target_preview_cache = {"0,0":{"rejection":"","guaranteed_hit":true,"damage":3,"ap_cost":1}}
-	scene._render_units()
-	for frame in range(3):
-		await process_frame
-	var node: Control = scene.unit_layer.get_node(NodePath(active.id))
-	var resource := node.get_node("ResourcePanel") as Control
-	var preview := node.get_node("TargetPreviewPanel") as Control
-	_check(preview.visible, "S10-03 target preview hidden")
-	_check(preview.position.y >= resource.position.y + resource.size.y, "S10-03 preview overlaps resources at top edge")
-	_check(node.position.y + resource.position.y >= 0, "S10-03 resource readout outside board top")
-	var label := preview.get_node("TargetPreview") as Label
-	_check(preview.get_global_rect().grow(1).encloses(label.get_global_rect()), "S10-03 preview text outside padded frame")
+	var profiles: Array=JSON.parse_string(FileAccess.get_file_as_string("res://resources/data/presentation/original_roster.json")).characters
+	for profile: Dictionary in profiles:
+		active.visual={"faction":"original","character":profile.id}
+		scene.selected_action="basic_attack"
+		scene.target_preview_cache={"0,0":{"rejection":"","guaranteed_hit":true,"damage":3,"ap_cost":1}}
+		scene._render_units()
+		scene._resize_board()
+		for frame in range(3):
+			await process_frame
+		var node: Control = scene.unit_layer.get_node(NodePath(active.id))
+		var resource := node.get_node("ResourcePanel") as Control
+		var preview := node.get_node("TargetPreviewPanel") as Control
+		_check(preview.visible, "S10-03 target preview hidden: %s action=%s pos=%s cache=%s" % [profile.id,scene.selected_action,active.position,scene.target_preview_cache])
+		_check(preview.position.y+preview.size.y <= resource.position.y, "S10-03 preview clears resources above actor: "+str(profile.id))
+		var board_bounds: Rect2=scene.board_viewport.get_global_rect().grow(1)
+		_check(board_bounds.encloses(resource.get_global_rect()), "S10-03 resource readout outside visible board/headroom")
+		_check(board_bounds.encloses(preview.get_global_rect()), "S10-03 target preview outside visible board/headroom: %s in %s" % [preview.get_global_rect(),board_bounds])
+		_check(resource.position.y+resource.size.y<scene.unit_art.idle_top(active,scene.UNIT_ICON_SIZE),"S10-03 labels clear actor silhouette")
+		var label := preview.get_node("TargetPreview") as Label
+		_check(preview.get_global_rect().grow(1).encloses(label.get_global_rect()), "S10-03 preview text outside padded frame")
 	for winning_team in ["player", "enemy"]:
 		scene._reset_debug_encounter()
 		var hero: Dictionary = scene._unit_by_id("unit_player_001").duplicate(true)

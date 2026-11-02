@@ -230,7 +230,11 @@
       },
       "statuses": [],
       "available_actions": [],
-      "archetype_id": "raider_swordsman"
+      "archetype_id": "raider_swordsman",
+      "visual": {
+        "faction": "villains",
+        "character": "ash_raider"
+      }
     },
     {
       "id": "unit_enemy_002",

@@ -1,10 +1,10 @@
 # Accumulated live test scenarios
 
-Policy extended2026-11-02 by explicit user instruction: stages9..29 may be
+Policy extended2026-11-02 by explicit user instruction: stages9..36 may be
 implemented with automated tests while the user uses the computer. Implementation
-is ready; actual gameplay for stages8..29 will run together later. All46 scenarios
+is ready; actual gameplay for stages8..36 will run together later. All61 scenarios
 below remain NOT_RUN. No actual-play PASS is inferred from headless tests or a
-prior build. Use the final stage29 build recorded below.
+prior build. Use the latest completed batch build recorded below.
 
 Do not launch/activate visible windows or inject desktop input until the user
 releases controls. Use larger left DISPLAY1, windowed. Preserve existing saves;
@@ -14,10 +14,37 @@ before repeating live acceptance. Stage reports retain AWAITING_INTERACTIVE.
 
 ## Final build for the session
 
-Technical stages13..29 implemented; all46 live cases still NOT_RUN. Use
-`artifacts/export-smoke/stage29-release-20261102/sdd-game.exe` with its adjacent
+Latest override: stage37 selective model rollback. User rejected the modular
+characters/weapon refinements; restore our stage33 animated roster, retaining
+new world art/portraits/icons. Stage37 export/package proof PASS: use
+`artifacts/export-smoke/stage37-model-rollback-release-20261102/sdd-game.exe`
+with adjacent PCK/windowed profile/notices. PCK SHA-256
+`68003d8509e53dd6cc830d95f4f25f7f3c8b276f1d29f328b9230de4762cbfec`.
+Final EXE318 checks/49 engine-local clicks/43 captures PASS; actual movement showed
+7 distinct restored walk frames (8 in source). [Rollback report](stages/2026-11-02-stage-37.md).
+The stage36 package below is historical and contains rejected character changes.
+L34-01/L35-01 now check the restored behavior; no modular-appearance claim remains.
+
+Current batch presentation010/stages34..36: models/grips, modular equipment,
+independent pixel portraits and coherent environment. All three stages have
+automated/native PASS; physical status remains AWAITING_INTERACTIVE. Use
+`artifacts/export-smoke/stage36-final-release-20261102/sdd-game.exe` with its
+adjacent PCK/windowed App profile/notices. PCK211336044 bytes, SHA-256
+`8457ce277fb27b264b70d9bb6df83c5e4c16a94326ba87b2ebb4a87fd2585c3b`.
+[Stage36 report](stages/2026-11-02-stage-36.md):56/56 source checks,50 Python
+tests and final EXE3181 native checks/168 engine-local clicks/147 captures PASS,
+zero diagnostics. All61 physical cases remain NOT_RUN. No desktop release.
+The following stage30 notes are historical, superseded by this final package.
+
+Priority update2026-11-02: user requested visual production tooling before this
+session. See [character tools proof](2026-11-02-character-art-tooling.md). Toolchain
+smokes did not change the earlier46 cases. The subsequent stage30 raider pilot
+adds L30-01..03, all NOT_RUN, for a total of49.
+
+Technical stages13..30 implemented; all49 live cases still NOT_RUN. Use
+`artifacts/export-smoke/stage30-raider-release-20261102/sdd-game.exe` with its adjacent
 PCK and owned windowed App profile. Build identity and source/native/export evidence:
-[stage29 report](stages/2026-11-02-stage-29.md).
+[stage30 report](stages/2026-11-02-stage-30.md).
 Native minimized GPU fixtures exercise real Controls without acquiring desktop
 focus, and do not constitute a physical live session. No desktop input was injected.
 
@@ -81,6 +108,34 @@ focus, and do not constitute a physical live session. No desktop input was injec
 | L28-03 | 28 | Play ordinary victory and defeat/return scenarios; inspect actors on board edges and terminal instructions. | No sprite/HUD occlusion; correct outcome and return/checkpoint behavior. | NOT_RUN |
 | L29-01 | 29 | Final EXE full campaign/town/equip/train/travel/dungeon/battle/settlement/restart session, followed by closed-log audit. | All three UI modes coherent and durable; no duplicated rewards or engine diagnostics. | NOT_RUN |
 | L29-02 | 29 | Confirm larger left DISPLAY1/windowed mapping and physical mouse/keyboard; complete acceptance and hand desktop back. | Correct monitor/input, protected player saves and no leftover test windows/profiles. | NOT_RUN |
+
+| L30-01 | 30 | Tools -> Ash-road raiders -> Load; move/turn and trigger enemy turns; watch idle/walk/attack/hit/death at normal speed and resize1080p/1440p/4K. | Clear identity/weapon/role, consistent ground pivot and grip, eight real facings, complete transitions, no canvas/body clipping or stuck input. | NOT_RUN |
+| L30-02 | 30 | Play an ordinary roadmap roadside ambush with the original raider, without boosted stats/Debug Win; win/lose, return, settle and restart. | Normal AI/costs/injuries/rewards remain correct; new artwork survives the campaign route and final death hold. | NOT_RUN |
+| L30-03 | 30 | In the final EXE inspect the actor at board edges, during interruption/death/reload and alongside the other original roster models; close and audit the full log. | No lost actors, stale pose, swapped equipment, visual regressions or runtime warnings/errors; record visual approval or concrete defects. | NOT_RUN |
+
+| L31-01 | 31 | Compare retained legacy sheet and original gallery at ordinary battle zoom; inspect face, blue hero identities, bandit palettes, equipment and eight views. | Readable tactical exposure, consistent ground scale, recognizable old designs; record visual approval or defects. | NOT_RUN |
+| L32-01 | 32 | Tools -> Character gallery: all human pages, facing/action selectors, pause/resume, scroll, keyboard focus and Close/Escape; resize1080p/1440p/4K/narrow. | All15 human variants reachable; no clipping, stale textures, layout or battle-shortcut leakage. | NOT_RUN |
+| L32-02 | 32 | Watch normal-speed melee, bow draw/release, crossbow recoil, spear thrust, walk, hit and death in ordinary encounters; inspect hero portraits in campaign, equipment, dungeon and battle. | Correct grips, shield side, timing, ground anchors and matching identities; no stuck input or changed simulation. | NOT_RUN |
+| L33-01 | 33 | Inspect all12 creature families in the gallery and actual encounters, including wings, eight spider legs, coils/tail/tusks, skeleton weapons and wraith dissolve. | Species readable at ordinary zoom; full silhouettes, natural normal-speed motion, complete death hold and no cut appendages. | NOT_RUN |
+| L33-02 | 33 | Play crowded and board-edge encounters with mixed small/large species; use all directions, interruption, reset and reload. | Correct sorting, pivots, selection/hit areas and readable occlusion; original art for every old ID. | NOT_RUN |
+| L33-03 | 33 | Final EXE ordinary campaign/expedition victory and defeat, return, settlement, restart and closed-log audit on larger left DISPLAY1/windowed. | Models/portraits survive the real flow and saves, no duplicated rewards, missing art or runtime diagnostics. | NOT_RUN |
+
+Stage30 physical cases now target the latest roster replacement; the original
+pilot builds remain historical comparison evidence. All55 cases remain NOT_RUN.
+
+## Equipment/portrait/environment batch (presentation010)
+
+These are additional deferred physical scenarios; background/native evidence
+does not satisfy them. All55 previous cases also remain NOT_RUN.
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L34-01 | 34/37 | Compare all27 actors with our stage33 roster, before grip/helmet refinement; inspect eight directions and normal-speed idle/walk/attack/hit/death. | Earlier models/weapons restored, visible walking/attacking, new terrain retained; no modular atlas in playable views. | NOT_RUN |
+| L34-02 | 34 | Inspect Bran/Torin portraits throughout campaign, inventory, dungeon and battle at1080p/1440p/4K. | Distinct illustrated pixel portraits, recognizable identity and readable crops. | NOT_RUN |
+| L35-01 | 35/37 | Equip/unequip retained items, swap sword/bow, enter battle and restart; inspect the separate illustrated portrait. | Ownership/save safety preserved, prior weapon-selected sprite family shown; rejected3D preview absent. Modular armour/boots/helmet appearance is deferred. | NOT_RUN |
+| L35-02 | 35 | Load a protected legacy three-slot save and pending expedition; try two-handed/shield conflict, unavailable copies and equipment lock. | Compatible migration, unchanged combat bonuses/wounds/checkpoints and clear rejection feedback. | NOT_RUN |
+| L36-01 | 36 | Play authored/generated outdoor and dungeon maps, inspect floors, cover, elevation, walls and nature props at ordinary zoom/edges. | Coherent art palette/materials with actors/UI; calm floors, readable collision/cover/elevation and reliable targeting. | NOT_RUN |
+| L36-02 | 36 | Final EXE ordinary campaign victory/defeat, immediate post-turn action selection, return/settlement/restart and closed-log audit on larger left DISPLAY1/windowed. | Cohesive complete loop, no lost post-turn clicks, missing models/art or duplicated progress, no engine diagnostics; return desktop controls. | NOT_RUN |
 
 ## Results and defects
 

@@ -75,6 +75,47 @@
                 ]
               }
             }
+          },
+          "appearance": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "weapon": {
+                "enum": [
+                  "sword",
+                  "bow",
+                  "axe",
+                  "mace",
+                  "dagger",
+                  "cleaver",
+                  "spear",
+                  "crossbow"
+                ]
+              },
+              "offhand": {
+                "enum": [
+                  "shield"
+                ]
+              },
+              "armor": {
+                "enum": [
+                  "leather",
+                  "plate"
+                ]
+              },
+              "boots": {
+                "enum": [
+                  "leather",
+                  "steel"
+                ]
+              },
+              "helmet": {
+                "enum": [
+                  "cap",
+                  "closed"
+                ]
+              }
+            }
           }
         },
         "allOf": [

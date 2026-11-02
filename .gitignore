@@ -9,6 +9,8 @@ artifacts/
 override.cfg
 *.tmp
 *.log
+*.blend1
+*.blend2
 
 # Python tooling
 __pycache__/

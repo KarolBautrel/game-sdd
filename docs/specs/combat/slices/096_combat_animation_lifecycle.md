@@ -11,6 +11,9 @@ while Defend produced status feedback without an attack animation.
 - Attack feedback whose actor visual is absent applies the next state/log and
   unlocks input without scheduling an empty Tween.
 - Movement with an empty path or missing actor visual has the same fallback.
+- Stage36 regression: the delayed pose reset clears temporary animation while
+  retaining the exact live action buttons; native post-turn selection followed
+  by an illegal ranged target still reaches the resolver and rejects atomically.
 - Real movement, attacks, death and return continue working in the fresh EXE.
 
 Proof: `scripts/presentation/combat_animation_lifecycle_tests.gd`, combat domain

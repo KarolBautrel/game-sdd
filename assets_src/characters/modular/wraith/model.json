@@ -1,0 +1,20 @@
+{
+  "id": "wraith",
+  "resource": "res://assets/combat/models/wraith.glb",
+  "channels": [
+    "body",
+    "headwear_default"
+  ],
+  "actions": {
+    "none": {
+      "pose": "none_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Wraith_Dissolve"
+    }
+  },
+  "default_weapon": "none",
+  "hero": false,
+  "bones": 65
+}

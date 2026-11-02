@@ -1,0 +1,10 @@
+{
+  "mode": "built-in imagegen",
+  "source": "hero-portraits-generated.png",
+  "prompt": "PROMPT.txt",
+  "normalization": "tools/aseprite/hero_portraits.lua",
+  "outputs": ["assets/ui/portraits/bran.png", "assets/ui/portraits/torin.png"],
+  "size": [128, 128],
+  "purpose": "Independent illustrated character portraits, distinct from runtime rigged actors",
+  "external_paid_services": false
+}

@@ -51,6 +51,14 @@ class CatalogueTests(unittest.TestCase):
         self.asset.write_bytes(b"broken PNG")
         self.assertTrue(catalogue_errors(self.root))
 
+    def test_archived_tree_is_not_shipped_as_runtime_texture(self):
+        archive = self.root / "assets/legacy/nested"
+        archive.mkdir(parents=True)
+        (archive / "old.png").write_bytes(self.asset.read_bytes())
+        (archive.parent / ".gdignore").write_text("Retained reference only\n")
+        paths = [entry["path"] for entry in build_catalogue(self.root)["textures"]]
+        self.assertEqual(paths, ["res://assets/test.png"])
+
 
 if __name__ == "__main__":
     unittest.main()

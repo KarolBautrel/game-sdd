@@ -1,6 +1,7 @@
 extends Control
 
 const AssetCatalog := preload("res://scripts/presentation/shared/asset_catalog.gd")
+const EnvironmentArt := preload("res://scripts/presentation/combat/environment_art.gd")
 const AuthoringDraft := preload("res://scripts/presentation/combat/authoring_draft.gd")
 
 const DEFAULT_ENCOUNTER_PATH := "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json"
@@ -682,7 +683,7 @@ func _decoration_texture(path: String) -> Texture2D:
 		return null
 	if decoration_texture_cache.has(path):
 		return decoration_texture_cache[path]
-	var texture := AssetCatalog.texture(path)
+	var texture := EnvironmentArt.texture(path)
 	decoration_texture_cache[path] = texture
 	return texture
 

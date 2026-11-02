@@ -132,7 +132,7 @@ func _run() -> void:
 	var swapped: Dictionary = no_weapon.duplicate(true)
 	swapped[BRAN].off_hand = null
 	swapped[BRAN].main_hand = "hero_bow"
-	check(unit(Gear.apply(launched,swapped),BRAN).visual.character == "archer_1", "weapon visual matches transferred bow")
+	check(unit(Gear.apply(launched,swapped),BRAN).visual.character == "archer_1", "restored sprite family matches transferred bow")
 	var broken: Dictionary = singleton.state.duplicate(true)
 	broken.active_run.equipment_snapshot[BRAN].armor = null
 	write(path,broken)

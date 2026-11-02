@@ -1,0 +1,8 @@
+{
+  "id": "grass",
+  "pixels_per_metre": 100,
+  "camera_elevation": 18,
+  "triangles": 176,
+  "uv": true,
+  "original": true
+}

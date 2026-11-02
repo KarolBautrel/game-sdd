@@ -3,7 +3,16 @@ extends RefCounted
 
 const Items := preload("res://scripts/domain/item_catalog.gd")
 const Party := preload("res://scripts/domain/party_roster.gd")
-const SLOTS := ["main_hand", "off_hand", "armor"]
+const SLOTS := ["main_hand", "off_hand", "armor", "boots", "helmet"]
+const LEGACY_SLOTS := ["main_hand", "off_hand", "armor"]
+
+
+static func normalized(equipment: Dictionary) -> Dictionary:
+	var next:=equipment.duplicate(true)
+	for loadout: Dictionary in next.values():
+		for slot: String in SLOTS:
+			if not loadout.has(slot):loadout[slot]=null
+	return next
 
 
 static func defaults() -> Dictionary:
@@ -28,9 +37,10 @@ static func valid(equipment: Variant, owned: Array) -> bool:
 	var counts: Dictionary = {}
 	for hero: Dictionary in Party.default_party():
 		var loadout: Variant = equipment.get(hero.combat_unit_id)
-		if not loadout is Dictionary or loadout.size() != SLOTS.size():
+		if not loadout is Dictionary or loadout.size() not in [LEGACY_SLOTS.size(),SLOTS.size()]:
 			return false
-		for slot: String in SLOTS:
+		var slots: Array=SLOTS if loadout.size()==SLOTS.size() else LEGACY_SLOTS
+		for slot: String in slots:
 			if not loadout.has(slot):
 				return false
 			var id: Variant = loadout[slot]
@@ -56,14 +66,14 @@ static func apply(encounter: Dictionary, equipment: Dictionary) -> Dictionary:
 		var hero := Party.hero_for_combat_unit(str(unit.id))
 		if hero.is_empty() or not equipment.has(unit.id):
 			continue
-		unit.loadout = equipment[unit.id].duplicate(true)
+		unit.loadout = normalized(equipment)[unit.id]
 		unit.available_actions = hero.available_actions.duplicate(true)
 		for id in unit.loadout.values():
 			if id != null:
 				profiles[id] = Items.item(id).combat_profile.duplicate(true)
 		if unit.loadout.main_hand != null:
-			unit.visual = Items.item(unit.loadout.main_hand).get("visual", hero.visual).duplicate(true)
+			unit.visual=Items.item(unit.loadout.main_hand).get("visual",hero.visual).duplicate(true)
 		else:
-			unit.visual = hero.visual.duplicate(true)
+			unit.visual=hero.visual.duplicate(true)
 	next.item_profiles = profiles
 	return next

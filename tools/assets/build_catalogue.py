@@ -14,6 +14,9 @@ CATALOGUE = Path("resources/catalogues/textures.json")
 def build_catalogue(root: Path) -> dict:
     entries = []
     for path in sorted((root / "assets").rglob("*.png")):
+        # Match Godot's archived-directory boundary; keep references on disk.
+        if any((parent / ".gdignore").exists() for parent in path.parents if parent != root and root in parent.parents):
+            continue
         data = path.read_bytes()
         if len(data) < 24 or data[:8] != b"\x89PNG\r\n\x1a\n" or data[12:16] != b"IHDR":
             raise ValueError(f"Invalid PNG header: {path.relative_to(root)}")

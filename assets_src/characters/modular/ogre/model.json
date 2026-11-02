@@ -1,0 +1,22 @@
+{
+  "id": "ogre",
+  "resource": "res://assets/combat/models/ogre.glb",
+  "channels": [
+    "armor_default",
+    "body",
+    "boots_default",
+    "weapon_club"
+  ],
+  "actions": {
+    "club": {
+      "pose": "club_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    }
+  },
+  "default_weapon": "club",
+  "hero": false,
+  "bones": 65
+}

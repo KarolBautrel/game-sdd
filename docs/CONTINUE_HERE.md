@@ -4,7 +4,135 @@ Last handoff: 2026-11-02. This is a status/navigation document; owning domain
 specs define behavior. This handoff does not authorize additional implementation
 when the user has only requested an explanation or plan.
 
-## Current task: stages27..29 implemented; next is physical acceptance
+## Current status: stage33 characters restored; new environment retained
+
+Latest user instruction2026-11-02: REJECT the recent model/grip/pose/helmet
+refinements. Restore OUR complete original stage33 roster, after the general
+27-family replacement but before the later weapon refinements. Do not restore
+vendor art, regenerate characters or re-enable the modular GLB atlas.
+Native/headless battle/gallery now use the exact original animated PNGs; the3D
+inventory actor preview is removed. Prior weapon-selected sprite families return.
+Keep new terrain/props/contact shadows, illustrated pixel portraits, icons/items,
+five-slot save compatibility and the unrelated post-turn input fix. Modular
+armour/boots/helmet appearance is deferred, not delivered by the restored sprites.
+
+Source rollback PASS:56/56 project checks,27 models/6912 frames/8223 hashed files;
+native261 checks/20 engine-local clicks/41 captures, including all8 distinct walk
+frames during real resolver-driven movement. Environment source hashes unchanged.
+Final release/export/native proof PASS:
+`artifacts/export-smoke/stage37-model-rollback-release-20261102/sdd-game.exe`
+with adjacent PCK/windowed App profile/notices. PCK211334940 bytes, SHA-256
+`68003d8509e53dd6cc830d95f4f25f7f3c8b276f1d29f328b9230de4762cbfec`.
+Final EXE318 native checks/49 engine-local clicks/43 captures PASS, zero diagnostics;
+7 distinct walk frames observed during packaged movement (8 in source). Read
+[stage37 report](qa/stages/2026-11-02-stage-37.md). Prior stage36 packages contain
+the rejected models; do not use them for current review.
+No OS input/player save/visible launch was used. Rollback is finished. Next work:
+user review/physical tests after explicit desktop release, larger left DISPLAY1/
+windowed/protected saves. Source preview: `tools/qa/start_game.ps1 -Scene combat`.
+No new features or renewed model refinements without a new user instruction.
+
+## Historical stages34..36 (character changes rejected by user)
+
+User2026-11-02 requested improved grips/bow visibility, dynamic spearman poses,
+fully enclosed brute helmet, separate generated pixel portraits, visible equipped
+armour/boots/helmet/weapons, and a coherent environment/floor replacement.
+Owner [presentation010](specs/presentation/010_equipment_art_world.md),
+[slice010](specs/presentation/slices/010_equipment_art_world.md) and
+[ordered stages34..36](specs/presentation/milestones/005_equipment_art_world.md).
+Stage34 automated/native PASS (54/54 checks,27 models, native226 checks/43 captures).
+Stage35 automated/native PASS (55/55 checks, five-slot migration/live preview,
+native184 checks/87 clicks/6 captures at1080p/1440p/4K). Reports:
+`docs/qa/stages/2026-11-02-stage-34.md` and `2026-11-02-stage-35.md`.
+Stage36 automated/native PASS:28 Blender/FBX props,4 seamless painted floors,
+textured ledges and contact shadows;255 prop/69 floor routes preserve map/domain.
+Final regression56/56 and50 Python tests PASS; strict7849 files,0 diagnostics.
+Actual FBX reimports27 actors/28 props and2160 native GPU pose-bounds cases PASS.
+Final EXE3181 native checks/168 engine-local clicks/147 captures at1080p/1440p/4K
+PASS,0 engine diagnostics. Read [stage36 report](qa/stages/2026-11-02-stage-36.md)
+and [production guide](design/character-art/EQUIPMENT_WORLD.md), including the
+fixed post-turn pointer/pose-reset race and legacy local-weapon compatibility.
+
+Use `artifacts/export-smoke/stage36-final-release-20261102/sdd-game.exe` with its
+adjacent PCK, owned windowed App profile and notices. PCK211336044 bytes, SHA-256
+`8457ce277fb27b264b70d9bb6df83c5e4c16a94326ba87b2ebb4a87fd2585c3b`.
+Older stage30/33/36 candidate packages are superseded for this batch.
+Source preview: `tools/qa/start_game.ps1 -Scene combat` (or `-Scene app` for gear).
+
+All stages remain AWAITING_INTERACTIVE. Next unfinished work is explicit desktop
+release, protected saves, larger left DISPLAY1/windowed and all61 NOT_RUN cases
+in `docs/qa/live-test-scenarios.md`: physical input, normal-speed animation/grips,
+gear/environment readability, ordinary campaign victory/defeat/settlement/restart
+and closed-log audit. Native engine-local fixtures do not constitute hands-on play
+or user visual approval. No visible launch/OS input until release. No paid services.
+Do not automatically begin another feature batch; continue only requested scope.
+Preserve all dirty work; no commit/push requested for this batch.
+
+## Previous baseline: all27 original models implemented; physical acceptance pending
+
+User2026-11-02 authorized replacement of ALL configured characters, retaining
+old design identities and improving tactical exposure. Presentation009/slice009
+and milestone004 own stages31..33. All three stages have automated/native PASS;
+physical status remains AWAITING_INTERACTIVE. Read
+[the final report](qa/stages/2026-11-02-stage-33.md) and
+[the production guide](design/character-art/ROSTER.md).
+
+Complete delivery:27 Blender/FBX/baked-texture models,6912 action PNGs,27 matching
+portraits and1107 editable Aseprite files. Eight real views/five clips per family;
+all old IDs/three aliases route to originals. Lower camera/front-biased diagonals,
+stable ground pivots and fitted long-weapon tracks improve exposure. Tools ->
+Character gallery shows every family/action; legacy artwork remains as references.
+
+Final proof:53/53 project checks,48 Python tests, strict7743 files and27 actual
+FBX reimports PASS. Persistent8223-file source manifest, sprite bounds, saved
+clip timings and hashed FBX proof validate without ignored artifacts after clone.
+The final packaged play fixture passed699 checks/81 engine-local clicks/162
+captures at1080p/1440p/4K; campaign portraits/equipment fixture40 checks/20 clicks/
+3 captures PASS. Zero engine diagnostics. All hosts were minimized/unfocused,
+without desktop input or player saves. Normal physical play is not established.
+
+Use only the final review build:
+`artifacts/export-smoke/stage33-roster-release-fixed-20261102/sdd-game.exe`
+with its adjacent PCK, owned App/windowed profile and notices. Earlier stage33
+builds are superseded after the long-weapon floor-clearance correction. The final
+report records exact hashes and all failure/retest evidence.
+
+Source preview from this repository:
+`tools/qa/start_game.ps1 -Scene combat`, then Tools -> Character gallery.
+Do not launch a visible GUI while the user uses the computer. Next unfinished
+work: explicit desktop control release, larger left DISPLAY1/windowed, protected
+saves, all55 NOT_RUN cases in `docs/qa/live-test-scenarios.md`, normal-speed gait/
+grip/readability, ordinary victory/defeat, return/restart and closed-log audit.
+The user has not yet approved the final roster's look/feel in physical play.
+
+Preserve all existing dirty launcher/tooling/art/gameplay work. No commit/push
+requested for this baseline batch. The environment/prop batch is now explicitly
+authorized by the newer task above.
+
+## Previous task: visual production tools prepared
+
+User reprioritized2026-11-02: prepare visual tools, skills, libraries and MCP before
+the physical test session, including our own enemies/models/animations. Tooling005/
+slice005 and tooling milestone001 own this preparation. Read
+[the production guide](design/character-art/TOOLING.md) and
+[setup proof](qa/2026-11-02-character-art-tooling.md) before character work.
+
+Installed/tested Blender5.2.3 LTS, Rigify, Retarget5.2.0, background Blender MCP
+(9 tools; actual edit/save/query), two free CC0 Quaternius Standard libraries
+(43 actions each), godot-animation and meshy-3d-generation skills. Meshy MCP0.6.7
+(28-tool discovery) and CLI0.7.3 installed without account/paid calls. PixelLab and
+Tripo researched; no cloud key/credit authorization. Existing integrations preserved.
+
+Recommended next production step: one original raider pilot -> fitted rig/motion
+-> eight-direction renders -> Aseprite export -> opt-in actual Godot preview.
+This pilot/roster integration has NOT been implemented by the tooling task.
+Use the current eight-direction renderer; no full3D engine migration. Follow the
+guide's art acceptance checklist and specs before implementation. No GUI/input
+release;46 previous live cases stay NOT_RUN. Stage29 game/export unchanged.
+Preserve the uncommitted preview launcher fix and these tooling/docs changes;
+no new commit/push was requested.
+
+## Previous task: stages27..29 implemented; physical acceptance still pending
 
 User resumed2026-11-02 and requested completing outstanding work and the earlier
 repository push. Stage26 campaign appearance was approved. Presentation007/slice007
@@ -12,6 +140,12 @@ and milestone002 own the completed dungeon/battle extension. Read
 [stage29 report](qa/stages/2026-11-02-stage-29.md):51/51 source checks, strict2094 files,
 final release and packaged native play/campaign104 clicks/51 captures all PASS.
 Runtime catalogue1889 PNGs;91-file editable/source/export art manifest.
+
+Follow-up: user could not see the supplied preview launch. The local interactive
+launcher now uses Normal window state and reports early exits (it had used Hidden).
+AST/configure-only/direct headless combat startup PASS; physical visibility still
+unverified. Read [preview-launch fix](qa/2026-11-02-preview-launch-fix.md). These local
+launcher/docs changes follow the pushed1636318 checkpoint; game/PCK are unchanged.
 
 Latest build: artifacts/export-smoke/stage29-release-20261102/sdd-game.exe plus
 adjacent PCK/owned windowed App profile/notices. Native previews and commands:
@@ -23,7 +157,8 @@ Next unfinished work is46 NOT_RUN [live cases](qa/live-test-scenarios.md). Wait 
 explicit physical mouse/keyboard/focus release, then windowed larger left DISPLAY1,
 protected saves, physical input/resize, ordinary battles, normal return/settlement/
 restart and closed-log audit. Native fixtures do not count as ordinary play.
-Do not start another UI rewrite or content batch first. The user authorized
+The user's newer visual-tool preparation priority above supersedes the former
+instruction to do physical acceptance first. The user authorized
 commit/push after checks; exact checkpoint is in Git/tracking and final handoff audit.
 
 ## Prior task: dark fantasy UI stages23..26 implemented; live acceptance pending

@@ -8,7 +8,8 @@ const Items := preload("res://scripts/domain/item_catalog.gd")
 const Gear := preload("res://scripts/domain/campaign_equipment.gd")
 const Party := preload("res://scripts/domain/party_roster.gd")
 const Presentation := preload("res://scripts/presentation/world/item_presentation.gd")
-const SLOT_NAMES := {"main_hand":"Weapon","off_hand":"Off hand","armor":"Armor"}
+const SLOT_NAMES := {"main_hand":"Weapon","off_hand":"Off hand","armor":"Armor","boots":"Boots","helmet":"Helmet"}
+const EMPTY_ICONS := {"main_hand":"hero_sword","off_hand":"salvaged_shield","armor":"patched_leather","boots":"leather_boots","helmet":"closed_helm"}
 var hero_buttons: Dictionary = {}
 var slot_buttons: Dictionary = {}
 var equip_button: Button
@@ -32,10 +33,11 @@ func _ready() -> void:
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	resized.connect(_fit)
 	_fit()
+	if layout!=null:_render()
 
 func configure(owned: Array,equipment: Dictionary,locked: bool,selection: Dictionary = {},details: Dictionary = {}) -> void:
 	_owned = owned.duplicate(true)
-	_equipment = equipment.duplicate(true)
+	_equipment = Gear.normalized(equipment)
 	_details = details.duplicate(true)
 	_locked = locked
 	selected_hero = str(selection.get("hero",selected_hero))
@@ -91,8 +93,9 @@ func _render() -> void:
 	var info: Dictionary = _details.get(selected_hero,{"level":1,"hp":hero.stats.max_hp,"stats":hero.stats})
 	UI.label(loadout,hero.display_name,38,UI.GOLD)
 	UI.label(loadout,"%s  /  Level %s" % [hero.class_name,info.level],24,UI.MUTED)
-	hero_portrait = UI.portrait(loadout,hero.portrait_path,260)
-	hero_portrait.custom_minimum_size.y = 300
+	hero_portrait = UI.portrait(loadout,hero.portrait_path,200)
+	hero_portrait.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	hero_portrait.custom_minimum_size.y=200
 	var health := ProgressBar.new()
 	health.custom_minimum_size.y = 14
 	health.max_value = hero.stats.max_hp
@@ -108,7 +111,7 @@ func _render() -> void:
 		var text := "%s  /  %s" % [SLOT_NAMES[slot],"Empty" if worn == null else Items.item(worn).name]
 		var button := UI.button(text,slot == selected_slot)
 		button.add_theme_font_size_override("font_size",24)
-		button.icon = Presentation.icon_for(Items.item(worn)) if worn != null else Presentation.icon_for(Items.item("hero_sword" if slot == "main_hand" else ("patched_leather" if slot == "armor" else "salvaged_shield")))
+		button.icon = Presentation.icon_for(Items.item(worn)) if worn != null else Presentation.icon_for(Items.item(EMPTY_ICONS[slot]))
 		button.add_theme_constant_override("icon_max_width",44)
 		loadout.add_child(button)
 		button.pressed.connect(func() -> void:
@@ -168,7 +171,7 @@ func _render() -> void:
 func _fit() -> void:
 	if layout == null: return
 	layout.columns = 3 if size.x >= 1700 else 1
-	if hero_portrait != null: hero_portrait.custom_minimum_size.y = 350 if get_viewport_rect().size.y >= 1200 else 230
+	if hero_portrait != null: hero_portrait.custom_minimum_size.y = 200
 	if item_art != null: item_art.custom_minimum_size.y = 250 if get_viewport_rect().size.y >= 1200 else 128
 	for panel: Control in layout.get_children():
 		panel.custom_minimum_size.x = 400 if layout.columns == 3 else 0

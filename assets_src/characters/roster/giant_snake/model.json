@@ -1,0 +1,36 @@
+{
+  "id": "giant_snake",
+  "kind": "snake",
+  "label": "Giant snake",
+  "canvas_size": [
+    512,
+    384
+  ],
+  "pivot": [
+    256,
+    282
+  ],
+  "camera_elevation": 18,
+  "pixels_per_metre": 100,
+  "triangles": 1724,
+  "vertices": 896,
+  "bones": 11,
+  "uv": true,
+  "weighted": true,
+  "actions": {
+    "pose": "snake_pose",
+    "walk": "snake_walk",
+    "combat": "snake_combat",
+    "hit": "snake_hit",
+    "death": "snake_death"
+  },
+  "frame_counts": {
+    "pose": 4,
+    "walk": 8,
+    "combat": 8,
+    "hit": 4,
+    "death": 8
+  },
+  "preview_only": false,
+  "legacy_reference": "../references/giant_snake.png"
+}

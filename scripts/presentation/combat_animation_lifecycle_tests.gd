@@ -12,6 +12,14 @@ func _run() -> void:
 	root.add_child(scene)
 	await process_frame
 	var actor_id: String = scene.state.turn_state.active_unit_id
+	var action_button: Button=scene.command_buttons.get_child(0)
+	scene.unit_visual_action[actor_id]="hit:1"
+	scene._schedule_visual_reset()
+	await create_timer(.6).timeout
+	if not is_instance_valid(action_button) or scene.command_buttons.get_child(0)!=action_button:
+		failures.append("Delayed pose reset replaced a live action button")
+	if str(scene.unit_visual_action.get(actor_id,"pose")).begins_with("hit"):
+		failures.append("Delayed pose reset did not clear temporary animation")
 	var ap_before: int = scene._unit_by_id(actor_id).resources.ap
 	scene._run_command(scene._build_command("defend", {}))
 	await _expect_fallback(scene, "Defend")

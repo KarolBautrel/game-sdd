@@ -5,6 +5,10 @@ Date: 2026-11-01
 
 ## Ownership
 
+Prepared UI releases always start App.tscn, regardless of the source launcher's
+current dungeon/combat/map-editor preview. Rewrite only the owned release profile;
+preserve the source profile and report the actual launch scene in metadata.
+
 `tools/qa/verify_project.py` orchestrates existing checks. It does not implement
 game rules. Use the repository's `.venv` and Godot 4.7 stable. The binary may be
 supplied with `--godot`; the existing workspace installation is the default.
@@ -39,6 +43,10 @@ mixed DPI. Instead, use Godot's own screen centering and size settings through a
 local ignored `override.cfg`. DISPLAY1 must be the leftmost display, matching
 Godot screen 0 on this workstation; fail if this known layout changes. This
 workstation-specific launcher is not a general monitor mapping library.
+An explicitly requested interactive preview must launch with normal visible window
+state, never WindowStyle Hidden. Background GPU fixtures keep their separate
+minimized/no_focus settings. The interactive launcher must record an early process
+exit and its log paths, rather than imply that a preview is still running.
 `-ConfigureOnly` prepares the same settings for the Project Manager's Run action,
 which permits an ordinary, non-elevated game when this CLI is elevated. Refuse to
 overwrite an override file not owned by this launcher. The window is windowed.

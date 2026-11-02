@@ -1,0 +1,23 @@
+{
+  "id": "ash_raider",
+  "resource": "res://assets/combat/models/ash_raider.glb",
+  "channels": [
+    "armor_default",
+    "body",
+    "boots_default",
+    "headwear_default",
+    "weapon_cleaver"
+  ],
+  "actions": {
+    "cleaver": {
+      "pose": "cleaver_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    }
+  },
+  "default_weapon": "cleaver",
+  "hero": false,
+  "bones": 65
+}

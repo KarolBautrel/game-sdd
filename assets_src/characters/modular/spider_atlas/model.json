@@ -1,0 +1,20 @@
+{
+  "id": "spider_atlas",
+  "resource": "res://assets/combat/models/spider_atlas.glb",
+  "channels": [
+    "body"
+  ],
+  "actions": {
+    "fangs": {
+      "pose": "spider_pose",
+      "walk": "spider_walk",
+      "combat": "spider_combat",
+      "hit": "spider_hit",
+      "death": "spider_death"
+    }
+  },
+  "default_weapon": "fangs",
+  "hero": false,
+  "bones": 22,
+  "original_source": "assets_src/characters/roster/spider_atlas"
+}

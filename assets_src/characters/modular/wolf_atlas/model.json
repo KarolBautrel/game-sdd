@@ -1,0 +1,20 @@
+{
+  "id": "wolf_atlas",
+  "resource": "res://assets/combat/models/wolf_atlas.glb",
+  "channels": [
+    "body"
+  ],
+  "actions": {
+    "fangs": {
+      "pose": "wolf_pose",
+      "walk": "wolf_walk",
+      "combat": "wolf_combat",
+      "hit": "wolf_hit",
+      "death": "wolf_death"
+    }
+  },
+  "default_weapon": "fangs",
+  "hero": false,
+  "bones": 13,
+  "original_source": "assets_src/characters/roster/wolf_atlas"
+}

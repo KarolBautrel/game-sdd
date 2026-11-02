@@ -60,8 +60,17 @@ New-Item -ItemType Directory -Path $evidenceDir | Out-Null
 $arguments = @('--path', ('"' + $repoRoot + '"'), '--windowed', '--screen', '0', '--resolution', "${Width}x${Height}", $scenes[$Scene])
 if ($TraceInput) { $arguments += @('--', '--qa-input-trace') }
 $qaProcess = $null
+$startupState = 'configured_only'
+$startupExitCode = $null
 if (-not $ConfigureOnly) {
-    $qaProcess = Start-Process -FilePath $GodotPath -ArgumentList $arguments -WorkingDirectory $repoRoot -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $evidenceDir 'stdout.log') -RedirectStandardError (Join-Path $evidenceDir 'stderr.log')
+    $qaProcess = Start-Process -FilePath $GodotPath -ArgumentList $arguments -WorkingDirectory $repoRoot -WindowStyle Normal -PassThru -RedirectStandardOutput (Join-Path $evidenceDir 'stdout.log') -RedirectStandardError (Join-Path $evidenceDir 'stderr.log')
+    $qaProcessHandle = $qaProcess.Handle
+    $startupState = 'running'
+    if ($qaProcess.WaitForExit(2000)) {
+        $qaProcess.WaitForExit()
+        $startupState = 'exited'
+        $startupExitCode = $qaProcess.ExitCode
+    }
 }
 $launch = [ordered]@{
     schema = 'sdd.interactive-launch-v1'
@@ -75,6 +84,9 @@ $launch = [ordered]@{
     godot_screen = 0
     placement = 'Godot other-screen center; mixed DPI handled by engine'
     configure_only = [bool]$ConfigureOnly
+    startup_state = $startupState
+    startup_exit_code = $startupExitCode
+    window_style = 'Normal'
     requested_window_size = @($Width, $Height)
     requested_mode = 'windowed'
     trace_input = [bool]$TraceInput
@@ -83,3 +95,6 @@ $launch = [ordered]@{
 }
 $launch | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $evidenceDir 'launch.json') -Encoding UTF8
 $launch | ConvertTo-Json -Depth 4
+if ($startupState -eq 'exited') {
+    throw "Godot closed during startup (exit $startupExitCode). Logs: $evidenceDir"
+}

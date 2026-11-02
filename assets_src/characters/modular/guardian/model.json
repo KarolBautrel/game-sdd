@@ -1,0 +1,24 @@
+{
+  "id": "guardian",
+  "resource": "res://assets/combat/models/guardian.glb",
+  "channels": [
+    "armor_default",
+    "body",
+    "boots_default",
+    "headwear_default",
+    "weapon_mace",
+    "offhand_default"
+  ],
+  "actions": {
+    "mace": {
+      "pose": "mace_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    }
+  },
+  "default_weapon": "mace",
+  "hero": false,
+  "bones": 65
+}

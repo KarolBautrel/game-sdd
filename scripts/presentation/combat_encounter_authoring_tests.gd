@@ -18,7 +18,7 @@ func _check(ok: bool, message: String) -> void:
 
 func _run() -> void:
 	var options := Catalog.options()
-	_check(options.size() == 11, "S11-01 scenario count differs")
+	_check(options.size() == 12, "S11-01 scenario count differs")
 	options[0].label = "local change"
 	_check(Catalog.options()[0].label != "local change", "S11-01 catalogue cache leaked mutation")
 	_check(not Catalog.validation_errors(null).is_empty(), "S11-02 bad shape accepted")

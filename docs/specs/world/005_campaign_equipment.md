@@ -1,5 +1,11 @@
 # Persistent campaign equipment
 
+Current presentation rollback2026-11-02: retain five-slot ownership/save safety,
+new item/icon assets and illustrated portraits, but restore the stage33 weapon-
+selected sprite family and remove the modular3D inventory preview. Cosmetic
+boots/helmets no longer change the displayed model. The later identity-preserving
+modular-appearance paragraphs below are superseded by presentation010's rollback.
+
 Status: implemented, automated PASS; AWAITING_INTERACTIVE. Stage16,2026-11-01.
 Combat rules remain equipment053 (actions/loadout/two-handed) and058 (armor).
 
@@ -41,6 +47,22 @@ loadout and resets available_actions to roster base actions, preventing stale
 template weapon grants after unequip. Identity/base stats/max HP stay unchanged;
 weapon metadata selects matching existing warrior/archer visual. Injury modifiers
 apply afterwards. Sandbox/authoring retains its own encounter loadouts.
+
+Presentation010/stage35 supersedes that visual swap and extends equipment with
+helmet/boots. Each hero keeps its roster identity while the native actor's five
+gear channels reflect equipped catalogue appearance metadata. Empty slots retain
+tunic/trousers/soft shoes, remove equipment and keep the portrait independent.
+Helmet/boots are cosmetic only; existing damage/armour profiles remain unchanged.
+The smith offers leather/steel boots, leather cap, closed helmet and a cuirass
+with the same reduction1 as patched leather. Buying still does not equip.
+
+Save v4 accepts exactly the legacy three slots or canonical five slots (never
+unknown/partial slot sets). Load validates ownership and raw snapshot equality
+before adding null helmet/boots in memory to equipment and matching active-run/
+pending-road snapshots. No file rewrite or item grant occurs. Existing v1..v3
+migrations remain; next successful transaction saves canonical five-slot v4.
+Tests must prove invalid saves remain protected, cosmetic gear has no combat
+effect, transfers/locks/snapshots survive and hero identity remains stable.
 
 Available upgrades: cart salvage yields shield (Shield Wall) and patched leather
 (armor reduction1); road victory yields salvaged blade (+1 to sword attack damage

@@ -13,7 +13,8 @@ The default stage loop is: owning spec and acceptance scenarios -> implementatio
 stage. Fix failures and repeat affected checks before closing a stage. Headless
 checks and Debug Win do not replace normal hands-on victory.
 
-Current explicit user override (extended2026-11-02 to expedition/battle stages27..29): implement the authorized stages in order with
+Current explicit user override (extended2026-11-02 to expedition/battle stages27..29
+and the original-enemy pilot stage30, extended to full-roster stages31..33 and equipment/world refinement stages34..36): implement the authorized stages in order with
 automated checks while the user uses the computer, then perform the accumulated
 actual play scenarios together when the user releases desktop controls. Stages8..12
 also awaits that session. Record every deferred scenario and its result in
@@ -109,6 +110,11 @@ tools/combat/simulate_combat.py
 Presentation code must not decide combat legality or outcomes. It sends commands to the resolver and displays events.
 
 ## Art Creation Rules
+
+For original characters/enemies/models/animation, first read
+`docs/design/character-art/TOOLING.md` and tooling005/slice005. The user prioritized
+this visual preparation before physical tests on2026-11-02. Background Blender
+MCP is available; viewport/UI tools still need a later interactive session.
 
 Read `agents/README.md` before creating or editing pixel art.
 

@@ -59,7 +59,7 @@ static func validation_errors(data: Variant) -> Array[String]:
 			errors.append("Invalid item category")
 		if row.get("category") == "equipment":
 			var profile: Variant = row.get("combat_profile")
-			if not profile is Dictionary or profile.get("id") != row.id or profile.get("slot") not in ["main_hand", "off_hand", "armor"] or not profile.get("grants_actions") is Array:
+			if not profile is Dictionary or profile.get("id") != row.id or profile.get("slot") not in ["main_hand", "off_hand", "armor", "boots", "helmet"] or not profile.get("grants_actions") is Array:
 				errors.append("Invalid equipment combat profile")
 		var value: Variant = row.get("value")
 		if not (value is int or value is float) or not is_finite(float(value)) or value < 0 or value > 1000000000 or float(value) != floor(float(value)):

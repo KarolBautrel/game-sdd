@@ -59,6 +59,11 @@ func load_profile(path: String = "user://campaign_v1.json", in_memory: bool = fa
 			if not state.world.pending_event.is_empty() and state.world.pending_event.phase == "combat":
 				state.world.pending_event.advancement_snapshot = state.advancement.duplicate(true)
 			state.version = 4
+	# Validate the raw legacy snapshot first, then extend matching slots in memory.
+	state.equipment=Gear.normalized(state.equipment)
+	if not state.active_run.is_empty():state.active_run.equipment_snapshot=Gear.normalized(state.active_run.equipment_snapshot)
+	if not state.world.pending_event.is_empty() and state.world.pending_event.phase=="combat":
+		state.world.pending_event.equipment_snapshot=Gear.normalized(state.world.pending_event.equipment_snapshot)
 	loaded = true
 	last_feedback = "Campaign ready."
 	return true

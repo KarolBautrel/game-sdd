@@ -1,0 +1,20 @@
+{
+  "id": "hell_hound",
+  "resource": "res://assets/combat/models/hell_hound.glb",
+  "channels": [
+    "body"
+  ],
+  "actions": {
+    "fangs": {
+      "pose": "hound_pose",
+      "walk": "hound_walk",
+      "combat": "hound_combat",
+      "hit": "hound_hit",
+      "death": "hound_death"
+    }
+  },
+  "default_weapon": "fangs",
+  "hero": false,
+  "bones": 13,
+  "original_source": "assets_src/characters/roster/hell_hound"
+}

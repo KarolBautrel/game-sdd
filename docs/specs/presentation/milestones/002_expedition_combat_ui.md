@@ -13,7 +13,12 @@ Owners presentation007/slice007 extending006; dungeon/combat rules unchanged.
 3. Stage29 integrated native/release/handoff: automated PASS,
    AWAITING_INTERACTIVE.51/51, strict2094 files, release/probe and final EXE native
    play/campaign104 clicks/51 captures PASS, zero diagnostics. See stage29 report.
-   Next:46 physical cases after explicit desktop release; no further feature batch.
+   Physical acceptance:46 cases after explicit desktop release. User subsequently
+   prioritized visual production tools; see tooling005 and its milestone001.
+
+Preview follow-up: repaired start_game.ps1 Hidden window state and added early-exit
+diagnostics. AST, configure-only and direct headless combat launch pass; actual
+visibility still needs the user's confirmation. Details in QA preview-launch report.
 
 Each increment requires automated PASS and reviewed actual GPU output. User's
 background-work policy permits the next increment while actual play remains

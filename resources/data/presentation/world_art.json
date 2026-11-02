@@ -1,0 +1,651 @@
+{
+  "schema": "sdd.world-art-v1",
+  "assets": {
+    "oak": {
+      "path": "res://assets/combat/environment/props/oak.png",
+      "size": [
+        253,
+        364
+      ],
+      "pivot": [
+        127,
+        349
+      ]
+    },
+    "pine": {
+      "path": "res://assets/combat/environment/props/pine.png",
+      "size": [
+        188,
+        343
+      ],
+      "pivot": [
+        94,
+        328
+      ]
+    },
+    "dead_tree": {
+      "path": "res://assets/combat/environment/props/dead_tree.png",
+      "size": [
+        149,
+        301
+      ],
+      "pivot": [
+        73,
+        286
+      ]
+    },
+    "bush": {
+      "path": "res://assets/combat/environment/props/bush.png",
+      "size": [
+        124,
+        103
+      ],
+      "pivot": [
+        62,
+        90
+      ]
+    },
+    "stump": {
+      "path": "res://assets/combat/environment/props/stump.png",
+      "size": [
+        82,
+        69
+      ],
+      "pivot": [
+        41,
+        53
+      ]
+    },
+    "fallen_log": {
+      "path": "res://assets/combat/environment/props/fallen_log.png",
+      "size": [
+        137,
+        70
+      ],
+      "pivot": [
+        65,
+        51
+      ]
+    },
+    "branches": {
+      "path": "res://assets/combat/environment/props/branches.png",
+      "size": [
+        140,
+        66
+      ],
+      "pivot": [
+        74,
+        47
+      ]
+    },
+    "boulder": {
+      "path": "res://assets/combat/environment/props/boulder.png",
+      "size": [
+        103,
+        88
+      ],
+      "pivot": [
+        42,
+        70
+      ]
+    },
+    "rock_cluster": {
+      "path": "res://assets/combat/environment/props/rock_cluster.png",
+      "size": [
+        105,
+        66
+      ],
+      "pivot": [
+        58,
+        51
+      ]
+    },
+    "grass": {
+      "path": "res://assets/combat/environment/props/grass.png",
+      "size": [
+        70,
+        49
+      ],
+      "pivot": [
+        31,
+        36
+      ]
+    },
+    "flowers": {
+      "path": "res://assets/combat/environment/props/flowers.png",
+      "size": [
+        77,
+        57
+      ],
+      "pivot": [
+        44,
+        42
+      ]
+    },
+    "mushrooms": {
+      "path": "res://assets/combat/environment/props/mushrooms.png",
+      "size": [
+        100,
+        56
+      ],
+      "pivot": [
+        52,
+        39
+      ]
+    },
+    "crate": {
+      "path": "res://assets/combat/environment/props/crate.png",
+      "size": [
+        104,
+        106
+      ],
+      "pivot": [
+        52,
+        85
+      ]
+    },
+    "barrel": {
+      "path": "res://assets/combat/environment/props/barrel.png",
+      "size": [
+        68,
+        95
+      ],
+      "pivot": [
+        34,
+        82
+      ]
+    },
+    "chest": {
+      "path": "res://assets/combat/environment/props/chest.png",
+      "size": [
+        108,
+        92
+      ],
+      "pivot": [
+        54,
+        72
+      ]
+    },
+    "coffin": {
+      "path": "res://assets/combat/environment/props/coffin.png",
+      "size": [
+        160,
+        115
+      ],
+      "pivot": [
+        80,
+        83
+      ]
+    },
+    "pillar": {
+      "path": "res://assets/combat/environment/props/pillar.png",
+      "size": [
+        110,
+        199
+      ],
+      "pivot": [
+        55,
+        178
+      ]
+    },
+    "broken_pillar": {
+      "path": "res://assets/combat/environment/props/broken_pillar.png",
+      "size": [
+        141,
+        146
+      ],
+      "pivot": [
+        69,
+        125
+      ]
+    },
+    "arch": {
+      "path": "res://assets/combat/environment/props/arch.png",
+      "size": [
+        176,
+        270
+      ],
+      "pivot": [
+        88,
+        247
+      ]
+    },
+    "wall": {
+      "path": "res://assets/combat/environment/props/wall.png",
+      "size": [
+        174,
+        150
+      ],
+      "pivot": [
+        83,
+        128
+      ]
+    },
+    "rubble": {
+      "path": "res://assets/combat/environment/props/rubble.png",
+      "size": [
+        133,
+        69
+      ],
+      "pivot": [
+        71,
+        49
+      ]
+    },
+    "brazier": {
+      "path": "res://assets/combat/environment/props/brazier.png",
+      "size": [
+        68,
+        170
+      ],
+      "pivot": [
+        34,
+        157
+      ]
+    },
+    "altar": {
+      "path": "res://assets/combat/environment/props/altar.png",
+      "size": [
+        140,
+        130
+      ],
+      "pivot": [
+        70,
+        106
+      ]
+    },
+    "statue": {
+      "path": "res://assets/combat/environment/props/statue.png",
+      "size": [
+        132,
+        216
+      ],
+      "pivot": [
+        66,
+        192
+      ]
+    },
+    "bones": {
+      "path": "res://assets/combat/environment/props/bones.png",
+      "size": [
+        74,
+        48
+      ],
+      "pivot": [
+        32,
+        33
+      ]
+    },
+    "spike_fence": {
+      "path": "res://assets/combat/environment/props/spike_fence.png",
+      "size": [
+        136,
+        124
+      ],
+      "pivot": [
+        68,
+        109
+      ]
+    },
+    "bone_totem": {
+      "path": "res://assets/combat/environment/props/bone_totem.png",
+      "size": [
+        80,
+        159
+      ],
+      "pivot": [
+        40,
+        146
+      ]
+    },
+    "sacks": {
+      "path": "res://assets/combat/environment/props/sacks.png",
+      "size": [
+        94,
+        96
+      ],
+      "pivot": [
+        50,
+        81
+      ]
+    }
+  },
+  "legacy_routes": {
+    "res://assets/combat/dungeons/props/arched_stone_door_01.png": "arch",
+    "res://assets/combat/dungeons/props/bone_spike_totem_01.png": "bone_totem",
+    "res://assets/combat/dungeons/props/gold_gem_pile_01.png": "rubble",
+    "res://assets/combat/dungeons/props/hanging_banner_01.png": "rubble",
+    "res://assets/combat/dungeons/props/hanging_chains_01.png": "rubble",
+    "res://assets/combat/dungeons/props/iron_gate_round_01.png": "rubble",
+    "res://assets/combat/dungeons/props/iron_spike_fence_01.png": "spike_fence",
+    "res://assets/combat/dungeons/props/ornate_floor_tablet_01.png": "rubble",
+    "res://assets/combat/dungeons/props/skull_pile_01.png": "rubble",
+    "res://assets/combat/dungeons/props/stone_chest_01.png": "chest",
+    "res://assets/combat/dungeons/props/stone_coffin_01.png": "coffin",
+    "res://assets/combat/dungeons/props/stone_spike_barricade_01.png": "spike_fence",
+    "res://assets/combat/dungeons/props/wall_torch_01.png": "brazier",
+    "res://assets/combat/dungeons/props/wooden_spike_rack_01.png": "rubble",
+    "res://assets/combat/dungeons/props/wooden_treasure_chest_01.png": "chest",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_0.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_1.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_10.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_11.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_12.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_13.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_14.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_15.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_2.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_3.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_4.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_5.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_6.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_7.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_8.png": "branches",
+    "res://assets/combat/terrain/nature/fallen_branch/fallen_branch_frame_9.png": "branches",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_0.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_1.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_10.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_11.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_12.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_13.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_14.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_15.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_2.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_3.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_4.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_5.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_6.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_7.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_8.png": "grass",
+    "res://assets/combat/terrain/nature/grass_tuft/grass_tuft_frame_9.png": "grass",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_0.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_1.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_10.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_11.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_12.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_13.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_14.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_15.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_2.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_3.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_4.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_5.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_6.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_7.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_8.png": "boulder",
+    "res://assets/combat/terrain/nature/mossy_boulder/mossy_boulder_frame_9.png": "boulder",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_0.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_1.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_10.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_11.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_12.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_13.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_14.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_15.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_2.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_3.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_4.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_5.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_6.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_7.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_8.png": "stump",
+    "res://assets/combat/terrain/nature/tree_stump/tree_stump_frame_9.png": "stump",
+    "res://assets/combat/terrain/processed/dungeon/columns/columns_00.png": "pillar",
+    "res://assets/combat/terrain/processed/dungeon/columns/columns_01.png": "pillar",
+    "res://assets/combat/terrain/processed/dungeon/columns/columns_02.png": "pillar",
+    "res://assets/combat/terrain/processed/dungeon/columns/columns_03.png": "pillar",
+    "res://assets/combat/terrain/processed/dungeon/columns/columns_04.png": "pillar",
+    "res://assets/combat/terrain/processed/dungeon/columns/columns_05.png": "pillar",
+    "res://assets/combat/terrain/processed/dungeon/columns/columns_06.png": "pillar",
+    "res://assets/combat/terrain/processed/dungeon/columns/columns_07.png": "pillar",
+    "res://assets/combat/terrain/processed/dungeon/columns/columns_08.png": "pillar",
+    "res://assets/combat/terrain/processed/dungeon/columns/columns_09.png": "pillar",
+    "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_00.png": "statue",
+    "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png": "brazier",
+    "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_03.png": "broken_pillar",
+    "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_04.png": "bones",
+    "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_05.png": "pillar",
+    "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png": "crate",
+    "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_07.png": "chest",
+    "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_08.png": "altar",
+    "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_09.png": "statue",
+    "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_10.png": "bones",
+    "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_00.png": "arch",
+    "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_01.png": "crate",
+    "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_02.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_03.png": "branches",
+    "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_04.png": "pillar",
+    "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_05.png": "bone_totem",
+    "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_06.png": "coffin",
+    "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_07.png": "brazier",
+    "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_08.png": "spike_fence",
+    "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_09.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_10.png": "broken_pillar",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_00.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_01.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_02.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_03.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_04.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_05.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_06.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_07.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_08.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_09.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_10.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_11.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_12.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_13.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/dung_stones/dung_stones_14.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/dungeon/organic_faun/organic_faun_00.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_00.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_01.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_02.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_03.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_04.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_05.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_06.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_07.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_08.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_09.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_10.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/rubbles/rubbles_11.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/statues/statues_00.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/statues/statues_01.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/statues/statues_02.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/statues/statues_03.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/statues/statues_04.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/statues/statues_05.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/statues/statues_06.png": "rubble",
+    "res://assets/combat/terrain/processed/dungeon/statues/statues_07.png": "rubble",
+    "res://assets/combat/terrain/processed/nature/bushes/bushes_00.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/bushes/bushes_01.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/bushes/bushes_02.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/bushes/bushes_03.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/bushes/bushes_04.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/bushes/bushes_05.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/bushes/bushes_06.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/bushes/bushes_07.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/bushes/bushes_08.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/bushes/bushes_09.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/bushes/bushes_10.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/bushes/bushes_11.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/klody_pienie_png/klody_pienie_png_00.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/klody_pienie_png/klody_pienie_png_01.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/klody_pienie_png/klody_pienie_png_02.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/klody_pienie_png/klody_pienie_png_03.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/klody_pienie_png/klody_pienie_png_04.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/klody_pienie_png/klody_pienie_png_05.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/klody_pienie_png/klody_pienie_png_06.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/klody_pienie_png/klody_pienie_png_07.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/klody_pienie_png/klody_pienie_png_08.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png": "oak",
+    "res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png": "bush",
+    "res://assets/combat/terrain/processed/nature/nature_1/nature_1_02.png": "bush",
+    "res://assets/combat/terrain/processed/nature/nature_1/nature_1_03.png": "flowers",
+    "res://assets/combat/terrain/processed/nature/nature_1/nature_1_04.png": "branches",
+    "res://assets/combat/terrain/processed/nature/nature_1/nature_1_05.png": "stump",
+    "res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png": "fallen_log",
+    "res://assets/combat/terrain/processed/nature/nature_1/nature_1_07.png": "stump",
+    "res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png": "boulder",
+    "res://assets/combat/terrain/processed/nature/nature_1/nature_1_09.png": "boulder",
+    "res://assets/combat/terrain/processed/nature/nature_1/nature_1_10.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_2/nature_2_00.png": "fallen_log",
+    "res://assets/combat/terrain/processed/nature/nature_2/nature_2_01.png": "bush",
+    "res://assets/combat/terrain/processed/nature/nature_2/nature_2_02.png": "grass",
+    "res://assets/combat/terrain/processed/nature/nature_2/nature_2_03.png": "boulder",
+    "res://assets/combat/terrain/processed/nature/nature_2/nature_2_04.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_2/nature_2_05.png": "grass",
+    "res://assets/combat/terrain/processed/nature/nature_2/nature_2_06.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_2/nature_2_07.png": "bush",
+    "res://assets/combat/terrain/processed/nature/nature_2/nature_2_08.png": "grass",
+    "res://assets/combat/terrain/processed/nature/nature_2/nature_2_09.png": "branches",
+    "res://assets/combat/terrain/processed/nature/nature_2/nature_2_10.png": "branches",
+    "res://assets/combat/terrain/processed/nature/nature_2/nature_2_11.png": "mushrooms",
+    "res://assets/combat/terrain/processed/nature/nature_stones/nature_stones_00.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_stones/nature_stones_01.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_stones/nature_stones_02.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_stones/nature_stones_03.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_stones/nature_stones_04.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_stones/nature_stones_05.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_stones/nature_stones_06.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_stones/nature_stones_07.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_stones/nature_stones_08.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_stones/nature_stones_09.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_stones/nature_stones_10.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/nature_stones/nature_stones_11.png": "rock_cluster",
+    "res://assets/combat/terrain/processed/nature/trees/tree_1.png": "oak",
+    "res://assets/combat/terrain/processed/nature/trees/trees_00.png": "oak",
+    "res://assets/combat/terrain/processed/nature/trees/trees_01.png": "oak",
+    "res://assets/combat/terrain/processed/nature/trees/trees_02.png": "oak",
+    "res://assets/combat/terrain/to_process/dungeon/finished/dungeon/underground/dung_1.png": "rubble",
+    "res://assets/combat/terrain/to_process/dungeon/finished/dungeon/underground/dung_2.png": "rubble",
+    "res://assets/combat/terrain/to_process/dungeon/underground/columns.png": "pillar",
+    "res://assets/combat/terrain/to_process/dungeon/underground/dung_stones.png": "rock_cluster",
+    "res://assets/combat/terrain/to_process/dungeon/underground/floor_dungeon.png": "rubble",
+    "res://assets/combat/terrain/to_process/dungeon/underground/floor_underground.png": "rubble",
+    "res://assets/combat/terrain/to_process/dungeon/underground/organic_faun.png": "rubble",
+    "res://assets/combat/terrain/to_process/dungeon/underground/rubbles.png": "rubble",
+    "res://assets/combat/terrain/to_process/dungeon/underground/statues.png": "rubble",
+    "res://assets/combat/terrain/to_process/nature/bushes.png": "rock_cluster",
+    "res://assets/combat/terrain/to_process/nature/finished/nature/nature_1.png": "rock_cluster",
+    "res://assets/combat/terrain/to_process/nature/finished/nature/nature_2.png": "rock_cluster",
+    "res://assets/combat/terrain/to_process/nature/floor_nature.png": "rock_cluster",
+    "res://assets/combat/terrain/to_process/nature/klody_pienie_png.png": "rock_cluster",
+    "res://assets/combat/terrain/to_process/nature/nature_stones.png": "rock_cluster",
+    "res://assets/combat/terrain/to_process/nature/trees.png": "oak",
+    "res://assets/combat/terrain/trash/fallen_branch/terrain_fallen_branch_east.png": "branches",
+    "res://assets/combat/terrain/trash/fallen_branch/terrain_fallen_branch_north.png": "branches",
+    "res://assets/combat/terrain/trash/fallen_branch/terrain_fallen_branch_north_east.png": "branches",
+    "res://assets/combat/terrain/trash/fallen_branch/terrain_fallen_branch_north_west.png": "branches",
+    "res://assets/combat/terrain/trash/fallen_branch/terrain_fallen_branch_south.png": "branches",
+    "res://assets/combat/terrain/trash/fallen_branch/terrain_fallen_branch_south_east.png": "branches",
+    "res://assets/combat/terrain/trash/fallen_branch/terrain_fallen_branch_south_west.png": "branches",
+    "res://assets/combat/terrain/trash/fallen_branch/terrain_fallen_branch_west.png": "branches",
+    "res://assets/combat/terrain/trash/grass_clump/terrain_grass_clump_east.png": "rock_cluster",
+    "res://assets/combat/terrain/trash/grass_clump/terrain_grass_clump_north.png": "rock_cluster",
+    "res://assets/combat/terrain/trash/grass_clump/terrain_grass_clump_north_east.png": "rock_cluster",
+    "res://assets/combat/terrain/trash/grass_clump/terrain_grass_clump_north_west.png": "rock_cluster",
+    "res://assets/combat/terrain/trash/grass_clump/terrain_grass_clump_south.png": "rock_cluster",
+    "res://assets/combat/terrain/trash/grass_clump/terrain_grass_clump_south_east.png": "rock_cluster",
+    "res://assets/combat/terrain/trash/grass_clump/terrain_grass_clump_south_west.png": "rock_cluster",
+    "res://assets/combat/terrain/trash/grass_clump/terrain_grass_clump_west.png": "rock_cluster",
+    "res://assets/combat/terrain/trash/mossy_boulder/terrain_mossy_boulder_east.png": "boulder",
+    "res://assets/combat/terrain/trash/mossy_boulder/terrain_mossy_boulder_north.png": "boulder",
+    "res://assets/combat/terrain/trash/mossy_boulder/terrain_mossy_boulder_north_east.png": "boulder",
+    "res://assets/combat/terrain/trash/mossy_boulder/terrain_mossy_boulder_north_west.png": "boulder",
+    "res://assets/combat/terrain/trash/mossy_boulder/terrain_mossy_boulder_south.png": "boulder",
+    "res://assets/combat/terrain/trash/mossy_boulder/terrain_mossy_boulder_south_east.png": "boulder",
+    "res://assets/combat/terrain/trash/mossy_boulder/terrain_mossy_boulder_south_west.png": "boulder",
+    "res://assets/combat/terrain/trash/mossy_boulder/terrain_mossy_boulder_west.png": "boulder",
+    "res://assets/combat/terrain/trash/tree_stump/terrain_tree_stump_east.png": "stump",
+    "res://assets/combat/terrain/trash/tree_stump/terrain_tree_stump_north.png": "stump",
+    "res://assets/combat/terrain/trash/tree_stump/terrain_tree_stump_north_east.png": "stump",
+    "res://assets/combat/terrain/trash/tree_stump/terrain_tree_stump_north_west.png": "stump",
+    "res://assets/combat/terrain/trash/tree_stump/terrain_tree_stump_south.png": "stump",
+    "res://assets/combat/terrain/trash/tree_stump/terrain_tree_stump_south_east.png": "stump",
+    "res://assets/combat/terrain/trash/tree_stump/terrain_tree_stump_south_west.png": "stump",
+    "res://assets/combat/terrain/trash/tree_stump/terrain_tree_stump_west.png": "stump"
+  },
+  "floor_routes": {
+    "res://assets/combat/terrain/backgrounds/old_mine_dungeon_00_stone.png": "flagstone",
+    "res://assets/combat/terrain/backgrounds/old_mine_meadow_00_lush.png": "woodland",
+    "res://assets/combat/terrain/backgrounds/old_mine_meadow_01_deep_green.png": "woodland",
+    "res://assets/combat/terrain/floors/stone/stones1.png": "woodland",
+    "res://assets/combat/terrain/floors/stone/stones2.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_00.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_01.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_02.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_03.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_04.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_05.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_06.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_07.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_08.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_09.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_10.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_11.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_12.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_13.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_14.png": "woodland",
+    "res://assets/combat/terrain/grass/meadow_grass_floor_15.png": "woodland",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_00.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_01.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_02.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_03.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_04.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_05.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_06.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_07.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_08.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_09.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_10.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_11.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_12.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_13.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_14.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_dungeon/floor_dungeon_15.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_00.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_01.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_02.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_03.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_04.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_05.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_06.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_07.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_08.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_09.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_10.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_11.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_12.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_13.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_14.png": "flagstone",
+    "res://assets/combat/terrain/processed/dungeon/floor_underground/floor_underground_15.png": "flagstone",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_00.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_01.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_02.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_03.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_04.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_05.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_06.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_07.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_08.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_09.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_10.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_11.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_12.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_13.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_14.png": "woodland",
+    "res://assets/combat/terrain/processed/nature/floor_nature/floor_nature_15.png": "woodland"
+  },
+  "floors": {
+    "woodland": "res://assets/combat/environment/floors/woodland.png",
+    "earth": "res://assets/combat/environment/floors/earth.png",
+    "flagstone": "res://assets/combat/environment/floors/flagstone.png",
+    "cave": "res://assets/combat/environment/floors/cave.png"
+  },
+  "ledges": {
+    "nature": "res://assets/combat/environment/ledge_nature.png",
+    "dungeon": "res://assets/combat/environment/ledge_dungeon.png"
+  }
+}

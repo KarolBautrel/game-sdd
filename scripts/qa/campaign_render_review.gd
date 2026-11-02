@@ -25,6 +25,9 @@ func check(ok: bool,message: String) -> void:
 	checks.append({"pass":ok,"scenario":message})
 	if not ok: errors.append(message)
 func click(button: Button) -> void:
+	if not is_instance_valid(button):
+		check(false,"native click target exists")
+		return
 	check(not button.disabled,"enabled native click: "+button.text)
 	if button.disabled: return
 	var ancestor := button.get_parent()
@@ -37,11 +40,18 @@ func click(button: Button) -> void:
 	var point := button.get_global_rect().get_center()
 	var motion := InputEventMouseMotion.new()
 	motion.position=point
+	motion.global_position=point
 	viewport.push_input(motion,true)
+	await frames(2)
+	var hovered:=viewport.gui_get_hovered_control()
+	if hovered!=button and (hovered==null or not button.is_ancestor_of(hovered)):
+		print("NATIVE_HIT_TRACE ",button.text," at ",point," hovered=",hovered.get_path() if hovered!=null else "none"," button=",button.get_path())
 	for pressed in [true,false]:
 		var event := InputEventMouseButton.new()
 		event.position=point
+		event.global_position=point
 		event.button_index=MOUSE_BUTTON_LEFT
+		event.button_mask=MOUSE_BUTTON_MASK_LEFT if pressed else 0
 		event.pressed=pressed
 		viewport.push_input(event,true)
 		await frames(2)
@@ -79,6 +89,9 @@ func _run() -> void:
 		viewport.add_child(app)
 		await frames(12)
 		for tab in views.split(","):
+			if tab=="gear":
+				await exercise_equipment(campaign,pixels)
+				continue
 			await click(app.shell.nav_buttons[tab])
 			check(app.shell.selected_tab==tab,"native navigation: "+tab)
 			if app.shell.selected_tab!=tab:
@@ -148,3 +161,37 @@ func exercise_campaign(campaign: Node,pixels: Vector2i) -> void:
 	map=app.find_child("RegionMap",true,false)
 	await click(map.marker_buttons.town_ravenford)
 	check(campaign.state.world.location_id=="town_ravenford","native road event return")
+
+
+func exercise_equipment(campaign: Node,pixels: Vector2i) -> void:
+	campaign.state.items.append_array(["leather_boots","steel_boots","leather_cap","closed_helm","weathered_cuirass"])
+	await click(app.shell.nav_buttons.stash)
+	var effects: Dictionary=campaign.state.effects.duplicate(true)
+	for id: String in ["patched_leather","leather_boots","leather_cap","weathered_cuirass","steel_boots","closed_helm","salvaged_shield"]:
+		var inventory:=app.find_child("InventoryView",true,false)
+		await click(inventory.grid.item_buttons[id])
+		var gear:=app.find_child("EquipmentView",true,false)
+		await click(gear.equip_button)
+		gear=app.find_child("EquipmentView",true,false)
+		var item: Dictionary=load("res://scripts/domain/item_catalog.gd").item(id)
+		check(campaign.state.equipment.unit_player_001[item.combat_profile.slot]==id,"native five-slot equip: "+id)
+		check(gear.hero_portrait.texture!=null and gear.find_child("EquippedActorPreview",true,false)==null,"retained illustrated portrait and no rejected3D preview: "+id)
+		await frames(6)
+	await capture("gear-all-slots",pixels)
+	for slot: String in ["armor","boots","helmet","off_hand"]:
+		var gear:=app.find_child("EquipmentView",true,false)
+		await click(gear.slot_buttons[slot]);gear=app.find_child("EquipmentView",true,false)
+		await click(gear.unequip_button)
+		check(campaign.state.equipment.unit_player_001[slot]==null,"native five-slot unequip: "+slot)
+	var gear:=app.find_child("EquipmentView",true,false)
+	await click(gear.hero_buttons.unit_player_002);gear=app.find_child("EquipmentView",true,false)
+	await click(gear.slot_buttons.main_hand);gear=app.find_child("EquipmentView",true,false)
+	await click(gear.unequip_button)
+	gear=app.find_child("EquipmentView",true,false)
+	await click(gear.hero_buttons.unit_player_001)
+	var inventory:=app.find_child("InventoryView",true,false)
+	await click(inventory.grid.item_buttons.hero_bow);gear=app.find_child("EquipmentView",true,false)
+	await click(gear.equip_button);gear=app.find_child("EquipmentView",true,false)
+	check(campaign.state.equipment.unit_player_001.main_hand=="hero_bow" and gear.hero_portrait.texture.resource_path.ends_with("/bran.png"),"weapon transfer retains hero portrait without rejected3D preview")
+	check(campaign.state.effects==effects,"native equipment changes preserve wounds")
+	await capture("gear-bran-bow",pixels)

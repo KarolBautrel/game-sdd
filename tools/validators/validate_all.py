@@ -93,6 +93,7 @@ from tools.validators.dungeon_quality import catalogue_errors as dungeon_quality
 ID_RE = re.compile(r"^[a-z0-9_]+$")
 
 VALIDATION_TARGETS = [
+    ("resources/schemas/original_roster.schema.json", "resources/data/presentation/original_roster.json"),
     ("resources/schemas/party_levels.schema.json", "resources/data/progression/*.json"),
     ("resources/schemas/town_trade.schema.json", "resources/data/town_trade/*.json"),
     ("resources/schemas/campaign_item_catalogue.schema.json", "resources/data/items/*.json"),

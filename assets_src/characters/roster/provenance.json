@@ -1,0 +1,19 @@
+{
+  "geometry": "Project-authored parametric Blender geometry; imported mannequin meshes are deleted. Original species rigs and clips for wolf/hound/boar/bat/snake/spider.",
+  "reference": "references.json retains every old design and SHA256; unknown surfaces inferred.",
+  "motion": {
+    "provider": "Quaternius Universal Animation Library1 Standard",
+    "license": "CC0",
+    "source": "https://quaternius.itch.io/universal-animation-library",
+    "use": "65-bone rig and compatible humanoid motion only; authored bow/crossbow/spear clips and wraith dissolve."
+  },
+  "atlas": {
+    "mode": "built-in imagegen",
+    "prompt": "MATERIAL-PROMPT.txt",
+    "file": "material-atlas.png",
+    "generated_file": "C:/Users/karol/.codex/generated_images/01a19761-2454-7ff1-93c1-7ddf2cb0309b/exec-aaad181f-e03a-4b7a-8f49-9099edd00171.png",
+    "paid_external_generation": false
+  },
+  "normalization": "Aseprite1.3.17.2 background, tools/aseprite/roster.lua",
+  "camera": "resources/data/presentation/original_roster.json"
+}

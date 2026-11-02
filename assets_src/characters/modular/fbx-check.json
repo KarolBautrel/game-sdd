@@ -1,0 +1,452 @@
+{
+  "status": "PASS",
+  "models": [
+    {
+      "id": "archer_1",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/archer_1/archer_1.fbx",
+      "sha256": "9cba08baa4f8b0fc49302f4839a7f71eec5c9fb295555765711628849393d8b2",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|bow_pose",
+        "walk": "Armature|Armature|bow_walk",
+        "combat": "Armature|Armature|bow_combat",
+        "hit": "Armature|Armature|bow_hit",
+        "death": "Armature|Armature|bow_death"
+      },
+      "long_weapon_min_z": {
+        "pose": 0.84962,
+        "walk": 0.82953,
+        "combat": 0.85002,
+        "hit": 0.82946,
+        "death": 0.03446
+      }
+    },
+    {
+      "id": "armored_brute",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/armored_brute/armored_brute.fbx",
+      "sha256": "846a7252fe603710637882dca6b5340d028a93b40e1979d45d59aff19ef53139",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|axe_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "ash_raider",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/ash_raider/ash_raider.fbx",
+      "sha256": "7eb49b0d14742e1d2b17b21147e9d340c7a73bbf12cdf90fdad9fb296db6abd3",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|cleaver_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "axe_bandit",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/axe_bandit/axe_bandit.fbx",
+      "sha256": "a871a063c309ea979281efca5d6b28545283cecb9c92a9a8c8afe61b6abbde4c",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|axe_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "bandit",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/bandit/bandit.fbx",
+      "sha256": "c0391ac3417711c7273de5631fe52a957cb46555cb00521e039400518c69e25d",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|sword_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "bandit_archer",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/bandit_archer/bandit_archer.fbx",
+      "sha256": "97adeccaf74240302a171c3becce5ed82568142a84e9794f7c83933db67fc195",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|bow_pose",
+        "walk": "Armature|Armature|bow_walk",
+        "combat": "Armature|Armature|bow_combat",
+        "hit": "Armature|Armature|bow_hit",
+        "death": "Armature|Armature|bow_death"
+      },
+      "long_weapon_min_z": {
+        "pose": 0.84113,
+        "walk": 0.82123,
+        "combat": 0.84152,
+        "hit": 0.82117,
+        "death": 0.03412
+      }
+    },
+    {
+      "id": "bandit_brute",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/bandit_brute/bandit_brute.fbx",
+      "sha256": "1744567fa684eb2ae21c561551a93c73945fc69fc0f131ce0b8e078985c528ee",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|cleaver_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "bandit_carnage",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/bandit_carnage/bandit_carnage.fbx",
+      "sha256": "6a3f2427483882a1a017c358a8728da1088f5155def10bf46137e184aeae84cf",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|dagger_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "bandit_marauder",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/bandit_marauder/bandit_marauder.fbx",
+      "sha256": "0701a19e34088abbdb2d83163721a28e0ea29af6e60950f16b9eb4c1b7e032a3",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|axe_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "bandit_rogue",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/bandit_rogue/bandit_rogue.fbx",
+      "sha256": "0c4a669ca11491b3cf3d490f8b047adb74f1211f197603287a866c53e1ff14f7",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|dagger_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "bandit_spearman",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/bandit_spearman/bandit_spearman.fbx",
+      "sha256": "2fbf71950c3f4431355947826f95e12210d2963ec5618678d32734e9f8ce834a",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|spear_pose",
+        "walk": "Armature|Armature|spear_walk",
+        "combat": "Armature|Armature|spear_combat",
+        "hit": "Armature|Armature|spear_hit",
+        "death": "Armature|Armature|spear_death"
+      },
+      "long_weapon_min_z": {
+        "pose": 0.92683,
+        "walk": 0.90488,
+        "combat": 0.92775,
+        "hit": 0.90486,
+        "death": 0.03454
+      }
+    },
+    {
+      "id": "bat",
+      "status": "PASS",
+      "source": "assets_src/characters/roster/bat/bat.fbx",
+      "sha256": "223ef4defbb1c8ef707cb50ff03035b9c12b86afbbd43a2bae5d5bcf86e681b1",
+      "bones": 7,
+      "clips": {
+        "pose": "bat_Rig|bat_Rig|bat_pose",
+        "walk": "bat_Rig|bat_Rig|bat_walk",
+        "combat": "bat_Rig|bat_Rig|bat_combat",
+        "hit": "bat_Rig|bat_Rig|bat_hit",
+        "death": "bat_Rig|bat_Rig|bat_death"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "crossbowman",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/crossbowman/crossbowman.fbx",
+      "sha256": "80df9b0d2b4357ac7a7f1e135a2cc4f1f19ea31b217222fd893beb7e57ebcb14",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|crossbow_pose",
+        "walk": "Armature|Armature|crossbow_walk",
+        "combat": "Armature|Armature|crossbow_combat",
+        "hit": "Armature|Armature|crossbow_hit",
+        "death": "Armature|Armature|crossbow_death"
+      },
+      "long_weapon_min_z": {
+        "pose": 1.07972,
+        "walk": 1.05591,
+        "combat": 1.07153,
+        "hit": 1.05592,
+        "death": 0.035
+      }
+    },
+    {
+      "id": "dire_boar",
+      "status": "PASS",
+      "source": "assets_src/characters/roster/dire_boar/dire_boar.fbx",
+      "sha256": "72b7278978954973aa9f7eda3e7e19a194d870d4ee7c319708977729f7275963",
+      "bones": 13,
+      "clips": {
+        "pose": "dire_boar_Rig|dire_boar_Rig|boar_pose",
+        "walk": "dire_boar_Rig|dire_boar_Rig|boar_walk",
+        "combat": "dire_boar_Rig|dire_boar_Rig|boar_combat",
+        "hit": "dire_boar_Rig|dire_boar_Rig|boar_hit",
+        "death": "dire_boar_Rig|dire_boar_Rig|boar_death"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "giant_snake",
+      "status": "PASS",
+      "source": "assets_src/characters/roster/giant_snake/giant_snake.fbx",
+      "sha256": "36c9fbd82cb77899ead1d26f978aa657a4240968cec0785289da27ab0691ab6d",
+      "bones": 11,
+      "clips": {
+        "pose": "giant_snake_Rig|giant_snake_Rig|snake_pose",
+        "walk": "giant_snake_Rig|giant_snake_Rig|snake_walk",
+        "combat": "giant_snake_Rig|giant_snake_Rig|snake_combat",
+        "hit": "giant_snake_Rig|giant_snake_Rig|snake_hit",
+        "death": "giant_snake_Rig|giant_snake_Rig|snake_death"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "goblin_atlas",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/goblin_atlas/goblin_atlas.fbx",
+      "sha256": "797f780e8e0e0b4cb9b333b3b28bb1d12366aee541c0eb5719b64ac7442dd4f6",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|spear_pose",
+        "walk": "Armature|Armature|spear_walk",
+        "combat": "Armature|Armature|spear_combat",
+        "hit": "Armature|Armature|spear_hit",
+        "death": "Armature|Armature|spear_death"
+      },
+      "long_weapon_min_z": {
+        "pose": 0.66732,
+        "walk": 0.65151,
+        "combat": 0.66798,
+        "hit": 0.6515,
+        "death": 0.02487
+      }
+    },
+    {
+      "id": "guardian",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/guardian/guardian.fbx",
+      "sha256": "b418ee3fbb6366f8c153f78d995d7504e7ae5e900daed496902491d5c8d4f0ab",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|mace_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "hell_hound",
+      "status": "PASS",
+      "source": "assets_src/characters/roster/hell_hound/hell_hound.fbx",
+      "sha256": "63d2e14a4cac9370a4a9af9ceceda201e6c76e956b81af82a9183f4b0eb0e6be",
+      "bones": 13,
+      "clips": {
+        "pose": "hell_hound_Rig|hell_hound_Rig|hound_pose",
+        "walk": "hell_hound_Rig|hell_hound_Rig|hound_walk",
+        "combat": "hell_hound_Rig|hell_hound_Rig|hound_combat",
+        "hit": "hell_hound_Rig|hell_hound_Rig|hound_hit",
+        "death": "hell_hound_Rig|hell_hound_Rig|hound_death"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "lizardman",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/lizardman/lizardman.fbx",
+      "sha256": "f559e70bdd4e49df0f046086e76ce40137a5bb141e6c5c6f1313f61ba1d21ad0",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|spear_pose",
+        "walk": "Armature|Armature|spear_walk",
+        "combat": "Armature|Armature|spear_combat",
+        "hit": "Armature|Armature|spear_hit",
+        "death": "Armature|Armature|spear_death"
+      },
+      "long_weapon_min_z": {
+        "pose": 0.94537,
+        "walk": 0.92298,
+        "combat": 0.9463,
+        "hit": 0.92296,
+        "death": 0.03523
+      }
+    },
+    {
+      "id": "ogre",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/ogre/ogre.fbx",
+      "sha256": "1e47e8d60c99a2cfd3ee1df96db1576f434e7b52da5846b2add5b80b972cb027",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|club_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "rogue_1",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/rogue_1/rogue_1.fbx",
+      "sha256": "f92db93dc831bb77b925c14deb803e7fb2758b3dd86943abba853284fbdcaca7",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|dagger_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "skeleton_archer",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/skeleton_archer/skeleton_archer.fbx",
+      "sha256": "2671af3799cd02576c78f0c3e681dce72e1dff297b6c7a4ff10a86616be584d3",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|bow_pose",
+        "walk": "Armature|Armature|bow_walk",
+        "combat": "Armature|Armature|bow_combat",
+        "hit": "Armature|Armature|bow_hit",
+        "death": "Armature|Armature|bow_death"
+      },
+      "long_weapon_min_z": {
+        "pose": 0.84962,
+        "walk": 0.82953,
+        "combat": 0.85002,
+        "hit": 0.82946,
+        "death": 0.03446
+      }
+    },
+    {
+      "id": "skeleton_warrior",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/skeleton_warrior/skeleton_warrior.fbx",
+      "sha256": "98590527162fbe119112ce7c7d6106ddcaff410466cfe38302a13d21cd235b0a",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|sword_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "spider_atlas",
+      "status": "PASS",
+      "source": "assets_src/characters/roster/spider_atlas/spider_atlas.fbx",
+      "sha256": "aad5121bd4c7ddcd738d7dd9a1e18706c19875d7bc50ffcc946f1a8e90d4fcc3",
+      "bones": 22,
+      "clips": {
+        "pose": "spider_atlas_Rig|spider_atlas_Rig|spider_pose",
+        "walk": "spider_atlas_Rig|spider_atlas_Rig|spider_walk",
+        "combat": "spider_atlas_Rig|spider_atlas_Rig|spider_combat",
+        "hit": "spider_atlas_Rig|spider_atlas_Rig|spider_hit",
+        "death": "spider_atlas_Rig|spider_atlas_Rig|spider_death"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "warrior",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/warrior/warrior.fbx",
+      "sha256": "98bdbf4d62ce09e5382e28ddb34f204a771341368f29ec74579af78e940b0d24",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|sword_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Death01"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "wolf_atlas",
+      "status": "PASS",
+      "source": "assets_src/characters/roster/wolf_atlas/wolf_atlas.fbx",
+      "sha256": "aed0232f49b1c09914750df9c0cff0549662be03c4179584841ef91298cd9415",
+      "bones": 13,
+      "clips": {
+        "pose": "wolf_atlas_Rig|wolf_atlas_Rig|wolf_pose",
+        "walk": "wolf_atlas_Rig|wolf_atlas_Rig|wolf_walk",
+        "combat": "wolf_atlas_Rig|wolf_atlas_Rig|wolf_combat",
+        "hit": "wolf_atlas_Rig|wolf_atlas_Rig|wolf_hit",
+        "death": "wolf_atlas_Rig|wolf_atlas_Rig|wolf_death"
+      },
+      "long_weapon_min_z": {}
+    },
+    {
+      "id": "wraith",
+      "status": "PASS",
+      "source": "assets_src/characters/modular/wraith/wraith.fbx",
+      "sha256": "6ea20e72574ebdab7eb22addd591a8e09e6cf7136800839b9e9a9b98a10e68f4",
+      "bones": 65,
+      "clips": {
+        "pose": "Armature|Armature|none_pose",
+        "walk": "Armature|Armature|Walk_Loop",
+        "combat": "Armature|Armature|Sword_Attack",
+        "hit": "Armature|Armature|Hit_Chest",
+        "death": "Armature|Armature|Wraith_Dissolve"
+      },
+      "long_weapon_min_z": {}
+    }
+  ]
+}

@@ -16,7 +16,7 @@ static func validate() -> Array[String]:
 			failures.append("Missing, duplicated or unordered texture: %s" % path)
 		previous = path
 	var representatives: Array[String] = []
-	for prefix in ["res://assets/ui/dungeon", "res://assets/ui/combat", "res://assets/combat/terrain/processed", "res://assets/combat/characters/heroes/mercenaries/processed"]:
+	for prefix in ["res://assets/ui/dungeon", "res://assets/ui/combat", "res://assets/combat/terrain/processed", "res://assets/combat/characters/original"]:
 		var paths := Catalog.paths_under(prefix)
 		if paths.is_empty():
 			failures.append("Empty shipped asset category: %s" % prefix)

@@ -73,6 +73,9 @@
       "visual": {
         "faction": "heroes",
         "character": "archer_1"
+      },
+      "appearance": {
+        "weapon": "bow"
       }
     },
     {
@@ -131,6 +134,9 @@
       "visual": {
         "faction": "heroes",
         "character": "warrior"
+      },
+      "appearance": {
+        "weapon": "sword"
       }
     },
     {
@@ -165,6 +171,9 @@
         "slot": "armor",
         "armor_reduction": 1,
         "grants_actions": []
+      },
+      "appearance": {
+        "armor": "leather"
       }
     },
     {
@@ -230,6 +239,9 @@
       "visual": {
         "faction": "heroes",
         "character": "warrior"
+      },
+      "appearance": {
+        "weapon": "sword"
       }
     },
     {
@@ -255,6 +267,9 @@
             "cooldown_turns": 2
           }
         }
+      },
+      "appearance": {
+        "offhand": "shield"
       }
     },
     {
@@ -263,6 +278,82 @@
       "description": "A sealed packet of miner oil kept with the expedition loot.",
       "category": "valuable",
       "value": 2
+    },
+    {
+      "id": "leather_boots",
+      "name": "Ranger boots",
+      "description": "Sturdy travelling boots. Cosmetic equipment; no combat bonus.",
+      "category": "equipment",
+      "value": 3,
+      "combat_profile": {
+        "id": "leather_boots",
+        "slot": "boots",
+        "grants_actions": []
+      },
+      "appearance": {
+        "boots": "leather"
+      }
+    },
+    {
+      "id": "steel_boots",
+      "name": "Iron greaves",
+      "description": "Reinforced iron greaves. Cosmetic equipment; no combat bonus.",
+      "category": "equipment",
+      "value": 5,
+      "combat_profile": {
+        "id": "steel_boots",
+        "slot": "boots",
+        "grants_actions": []
+      },
+      "appearance": {
+        "boots": "steel"
+      }
+    },
+    {
+      "id": "leather_cap",
+      "name": "Leather cap",
+      "description": "A worn leather cap. Cosmetic equipment; no combat bonus.",
+      "category": "equipment",
+      "value": 4,
+      "combat_profile": {
+        "id": "leather_cap",
+        "slot": "helmet",
+        "grants_actions": []
+      },
+      "appearance": {
+        "helmet": "cap"
+      }
+    },
+    {
+      "id": "closed_helm",
+      "name": "Closed iron helm",
+      "description": "A closed iron helm. Cosmetic equipment; no combat bonus.",
+      "category": "equipment",
+      "value": 7,
+      "combat_profile": {
+        "id": "closed_helm",
+        "slot": "helmet",
+        "grants_actions": []
+      },
+      "appearance": {
+        "helmet": "closed"
+      }
+    },
+    {
+      "id": "weathered_cuirass",
+      "name": "Weathered cuirass",
+      "description": "Worn steel armour. Reduces incoming damage by 1, like patched leather.",
+      "category": "equipment",
+      "value": 9,
+      "combat_profile": {
+        "id": "weathered_cuirass",
+        "slot": "armor",
+        "grants_actions": [],
+        "armor_reduction": 1
+      },
+      "appearance": {
+        "armor": "plate"
+      }
     }
   ]
 }

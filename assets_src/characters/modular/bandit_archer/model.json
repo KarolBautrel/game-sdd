@@ -1,0 +1,24 @@
+{
+  "id": "bandit_archer",
+  "resource": "res://assets/combat/models/bandit_archer.glb",
+  "channels": [
+    "armor_default",
+    "body",
+    "boots_default",
+    "headwear_default",
+    "weapon_bow",
+    "offhand_default"
+  ],
+  "actions": {
+    "bow": {
+      "pose": "bow_pose",
+      "walk": "bow_walk",
+      "combat": "bow_combat",
+      "hit": "bow_hit",
+      "death": "bow_death"
+    }
+  },
+  "default_weapon": "bow",
+  "hero": false,
+  "bones": 65
+}

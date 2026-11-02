@@ -1,6 +1,7 @@
 extends Control
 
 const AssetCatalog := preload("res://scripts/presentation/shared/asset_catalog.gd")
+const EnvironmentArt := preload("res://scripts/presentation/combat/environment_art.gd")
 const PixelSkin := preload("res://scripts/presentation/shared/pixel_skin.gd")
 const CombatPanelSkin := preload("res://scripts/presentation/combat/combat_panel_skin.gd")
 const ResourceMeterScene := preload("res://scenes/ui/ResourceMeter.tscn")
@@ -247,6 +248,25 @@ func _ready() -> void:
 	_reset_debug_encounter()
 	battle_chrome = BattleChrome.new()
 	battle_chrome.setup(self)
+	var idle_timer := Timer.new()
+	idle_timer.wait_time = 0.2
+	idle_timer.timeout.connect(_advance_original_idle)
+	add_child(idle_timer)
+	idle_timer.start()
+
+
+func _advance_original_idle() -> void:
+	if animation_locked:
+		return
+	for unit: Dictionary in state.get("units", []):
+		if int(unit.resources.hp) <= 0 or unit_art.sprite_size(unit, UNIT_ICON_SIZE) == UNIT_ICON_SIZE:
+			continue
+		var current := str(unit_visual_action.get(unit.id, "pose:0"))
+		if not current.begins_with("pose") and not current.begins_with("combat_idle"):
+			continue
+		var count := unit_art.processed_sheet_frame_count(str(_unit_visual_config(unit).character), "pose")
+		unit_visual_action[unit.id] = "pose:%s" % ((int(current.get_slice(":", 1)) + 1) % count)
+		_refresh_unit_sprite(unit.id)
 
 
 func _reset_debug_encounter() -> void:
@@ -285,6 +305,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _render() -> void:
+	%TitleLabel.text = "Ash-road Raiders" if str(state.get("id", "")) == "ash_road_raiders" else "Old Mine Skirmish"
 	_render_grid()
 	_render_units()
 
@@ -425,48 +446,13 @@ func _build_tile(position: Dictionary) -> Button:
 		tile.add_child(tint)
 
 	if terrain_type == "highground":
-		var ledge_back := ColorRect.new()
-		ledge_back.name = "HighgroundBackPlate"
-		ledge_back.color = Color(0.70, 0.55, 0.24, 0.24)
-		ledge_back.position = Vector2(8, 10)
-		ledge_back.custom_minimum_size = Vector2(TILE_WIDTH - 16, TILE_HEIGHT - 24)
-		ledge_back.size = Vector2(TILE_WIDTH - 16, TILE_HEIGHT - 24)
-		ledge_back.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		tile.add_child(ledge_back)
-
-		var ledge_shadow := ColorRect.new()
-		ledge_shadow.name = "HighgroundLedgeShadow"
-		ledge_shadow.color = Color(0.03, 0.025, 0.015, 0.68)
-		ledge_shadow.position = Vector2(6, TILE_HEIGHT - 30)
-		ledge_shadow.custom_minimum_size = Vector2(TILE_WIDTH - 12, 22)
-		ledge_shadow.size = Vector2(TILE_WIDTH - 12, 22)
-		ledge_shadow.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		tile.add_child(ledge_shadow)
-
-		var ledge_rim := ColorRect.new()
-		ledge_rim.name = "HighgroundLedgeRim"
-		ledge_rim.color = Color(1.0, 0.78, 0.24, 0.86)
-		ledge_rim.position = Vector2(6, TILE_HEIGHT - 36)
-		ledge_rim.custom_minimum_size = Vector2(TILE_WIDTH - 12, 7)
-		ledge_rim.size = Vector2(TILE_WIDTH - 12, 7)
-		ledge_rim.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		tile.add_child(ledge_rim)
-
-		var high_label := Label.new()
-		high_label.name = "HighgroundLabel"
-		high_label.text = "HIGH"
-		high_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		high_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		high_label.custom_minimum_size = Vector2(54, 18)
-		high_label.size = Vector2(54, 18)
-		high_label.position = Vector2(TILE_WIDTH - 62, 8)
-		high_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		high_label.add_theme_font_size_override("font_size", 9)
-		high_label.add_theme_color_override("font_color", Color(1.0, 0.86, 0.35, 0.96))
-		high_label.add_theme_color_override("font_shadow_color", Color(0.04, 0.03, 0.01, 1.0))
-		high_label.add_theme_constant_override("shadow_offset_x", 1)
-		high_label.add_theme_constant_override("shadow_offset_y", 1)
-		tile.add_child(high_label)
+		var ledge:=TextureRect.new()
+		ledge.name="RaisedTerrainArt"
+		ledge.texture=EnvironmentArt.ledge(_terrain_theme())
+		ledge.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+		ledge.size=Vector2(TILE_WIDTH,TILE_HEIGHT)
+		ledge.mouse_filter=Control.MOUSE_FILTER_IGNORE
+		tile.add_child(ledge)
 
 	var decoration_texture := _tile_decoration_texture(decoration_path)
 	if decoration_texture != null:
@@ -477,10 +463,25 @@ func _build_tile(position: Dictionary) -> Button:
 		decoration.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		decoration.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		decoration.position = (Vector2(TILE_WIDTH, TILE_HEIGHT) - decoration_size) / 2.0
+		var prop:=EnvironmentArt.prop(decoration_path)
+		if not prop.is_empty():
+			var ground_y:=TILE_HEIGHT+int(HIGHGROUND_UNIT_OFFSET_Y if terrain_type=="highground" else 0)
+			decoration.position=Vector2(TILE_WIDTH/2.0,ground_y)-Vector2(prop.pivot[0],prop.pivot[1])
 		decoration.custom_minimum_size = decoration_size
 		decoration.size = decoration_size
 		decoration.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tile.add_child(decoration)
+	elif terrain_type in ["blocked","cover_low"]:
+		var key: String=("wall" if terrain_type=="blocked" else "crate") if _is_dungeon_board() else ("boulder" if terrain_type=="blocked" else "fallen_log")
+		var prop: Dictionary=EnvironmentArt.data().assets[key]
+		var silhouette:=TextureRect.new()
+		silhouette.name="SemanticTerrainArt"
+		silhouette.texture=AssetCatalog.texture(prop.path)
+		silhouette.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+		silhouette.size=Vector2(prop.size[0],prop.size[1])
+		silhouette.position=Vector2(TILE_WIDTH/2.0,TILE_HEIGHT)-Vector2(prop.pivot[0],prop.pivot[1])
+		silhouette.mouse_filter=Control.MOUSE_FILTER_IGNORE
+		tile.add_child(silhouette)
 
 	_update_tile_dynamic(tile, position)
 	return tile
@@ -538,6 +539,10 @@ func _apply_tile_button_style(tile: Button) -> void:
 
 
 func _board_terrain_texture() -> Texture2D:
+	return EnvironmentArt.board(state,Vector2i(int(state.grid.width)*TILE_WIDTH,int(state.grid.height)*TILE_HEIGHT),_terrain_theme())
+
+
+func _legacy_board_terrain_texture() -> Texture2D:
 	var background_path := str(state.get("background_path", ""))
 	if background_path != "":
 		return _static_board_background_texture(background_path)
@@ -663,6 +668,7 @@ func _terrain_base_color(terrain_type: String) -> Color:
 
 
 func _terrain_tint_color(terrain_type: String, decoration_path: String = "") -> Color:
+	if terrain_type in ["blocked","cover_low"] and decoration_path.is_empty():return Color.TRANSPARENT
 	if decoration_path != "" and terrain_type != "highground":
 		return Color(0, 0, 0, 0)
 	if _is_dungeon_board():
@@ -691,12 +697,14 @@ func _tile_decoration_texture(path: String) -> Texture2D:
 		return null
 	if terrain_decoration_texture_cache.has(path):
 		return terrain_decoration_texture_cache[path]
-	var texture := AssetCatalog.texture(path)
+	var texture := EnvironmentArt.texture(path)
 	terrain_decoration_texture_cache[path] = texture
 	return texture
 
 
 func _decoration_size(path: String) -> Vector2:
+	var prop:=EnvironmentArt.prop(path)
+	if not prop.is_empty():return Vector2(prop.size[0],prop.size[1])
 	var max_size: Vector2 = DECORATION_SIZE_BY_KIND.get(_decoration_kind(path), DECORATION_SIZE_BY_KIND["default"])
 	if path.contains("/terrain/processed/"):
 		var texture := _tile_decoration_texture(path)
@@ -1141,6 +1149,7 @@ func _render_command_buttons() -> void:
 	if authoring_draft.is_empty() and _run_session().has_pending_combat_launch() and _combat_result() != "in_progress":
 		_add_return_to_dungeon_button()
 	_add_scenario_picker()
+	if battle_chrome != null: battle_chrome.add_gallery_button(self)
 
 
 func _visible_primary_action_ids() -> Array[String]:
@@ -2006,7 +2015,7 @@ func _schedule_visual_reset() -> void:
 			return
 		unit_visual_action.clear()
 		temporary_visual_units.clear()
-		_render()
+		_render_units()
 	)
 
 
@@ -2236,7 +2245,7 @@ func _start_walk_cycle(actor_id: String, current_generation: int) -> void:
 		unit_visual_action[actor_id] = "walk:%s" % frame
 		_refresh_unit_sprite(actor_id)
 		frame = (frame + 1) % frame_count
-		await get_tree().create_timer(WALK_CYCLE_SECONDS).timeout
+		await get_tree().create_timer(unit_art.frame_seconds(_unit_by_id(actor_id), "walk", WALK_CYCLE_SECONDS)).timeout
 
 
 func _walk_frame_count(actor_id: String) -> int:
@@ -2252,6 +2261,7 @@ func _walk_frame_count(actor_id: String) -> int:
 func _start_visual_cycle(unit_id: String, action: String, current_generation: int, frame_seconds: float, loop: bool = false) -> void:
 	var frame := 0
 	var frame_count := _visual_frame_count(unit_id, action)
+	frame_seconds = unit_art.frame_seconds(_unit_by_id(unit_id), action, frame_seconds)
 	while current_generation == visual_generation and animation_locked and str(unit_visual_action.get(unit_id, "")).begins_with(action):
 		unit_visual_action[unit_id] = "%s:%s" % [action, frame]
 		_refresh_unit_sprite(unit_id)
@@ -2326,7 +2336,7 @@ func _resize_board() -> void:
 	board_backdrop.custom_minimum_size = board_size + Vector2.ONE * margin * 2
 	board_backdrop.size = board_backdrop.custom_minimum_size
 	var available := (board_viewport.size - Vector2.ONE * margin * 2).max(Vector2.ONE)
-	var headroom := 120.0 if battle_chrome!=null else 0.0
+	var headroom := 300.0 if battle_chrome!=null else 0.0
 	var board_scale := minf(1.0, minf(available.x / board_size.x, available.y / (board_size.y+headroom)))
 	board_root.scale = Vector2.ONE * board_scale
 	board_root.position = (board_viewport.size - (board_size+Vector2(0,headroom)) * board_scale) / 2.0+Vector2(0,headroom*board_scale)
@@ -2381,6 +2391,14 @@ func _create_unit_node(unit_id: String) -> Control:
 	unit_node.custom_minimum_size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
 	unit_node.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
 	unit_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var contact:=TextureRect.new()
+	contact.name="ContactShadow"
+	contact.texture=AssetCatalog.texture("res://assets/combat/environment/contact_shadow.png")
+	contact.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+	contact.size=Vector2(96,28)
+	contact.position=Vector2(UNIT_ICON_SIZE.x/2.0-48,UNIT_ICON_SIZE.y-14)
+	contact.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	unit_node.add_child(contact)
 
 	var elevation_shadow := ColorRect.new()
 	elevation_shadow.name = "HighgroundUnitBaseShadow"
@@ -2495,8 +2513,10 @@ func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
 	var sprite := unit_node.get_node_or_null("Sprite") as TextureRect
 	if sprite != null:
 		sprite.texture = _unit_icon(unit)
-		sprite.custom_minimum_size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
-		sprite.size = Vector2(UNIT_ICON_SIZE.x, UNIT_ICON_SIZE.y)
+		var sprite_dimensions := unit_art.sprite_size(unit, UNIT_ICON_SIZE)
+		sprite.custom_minimum_size = Vector2(sprite_dimensions)
+		sprite.size = Vector2(sprite_dimensions)
+		sprite.position = unit_art.sprite_offset(unit, UNIT_ICON_SIZE)
 	var fallback_label := unit_node.get_node_or_null("VisualFallbackLabel") as Label
 	if fallback_label != null:
 		fallback_label.visible = sprite == null or sprite.texture == null
@@ -2513,13 +2533,13 @@ func _update_unit_node(unit_node: Control, unit: Dictionary) -> void:
 		UNIT_RESOURCE_LABEL_OFFSET_Y
 	)
 	resource_panel.position.x += _unit_resource_label_nudge(unit)
-	if unit_node.position.y + resource_panel.position.y < 0:
-		resource_panel.position.y = -unit_node.position.y
 	resource_panel.add_theme_stylebox_override("panel", _unit_resource_style(unit))
 
 	var resource_label := resource_panel.get_node_or_null("Resources") as Label
 	if resource_label != null:
 		resource_label.text = _unit_resource_text(unit)
+	resource_panel.size=UNIT_RESOURCE_LABEL_SIZE.max(resource_panel.get_combined_minimum_size())
+	resource_panel.position.y=unit_art.idle_top(unit,UNIT_ICON_SIZE)-resource_panel.size.y-12.0
 
 	_update_unit_status_icons(unit_node, unit)
 	_update_unit_target_preview(unit_node, unit)
@@ -2553,8 +2573,10 @@ func _update_unit_status_icons(unit_node: Control, unit: Dictionary) -> void:
 		maxf(0.0, (float(UNIT_ICON_SIZE.x) - UNIT_RESOURCE_LABEL_SIZE.x) / 2.0 - UNIT_STATUS_ICON_SIZE.x - UNIT_STATUS_ICON_GAP + _unit_resource_label_nudge(unit)),
 		UNIT_RESOURCE_LABEL_OFFSET_Y
 	)
-	if unit_node.position.y + status_icon_row.position.y < 0:
-		status_icon_row.position.y = -unit_node.position.y
+	status_icon_row.position.y=unit_node.get_node("ResourcePanel").position.y
+	if unit_node.position.x+status_icon_row.position.x<0:
+		var readout: Control=unit_node.get_node("ResourcePanel")
+		status_icon_row.position.x=readout.position.x+readout.size.x+UNIT_STATUS_ICON_GAP
 
 	for status_id: String in icon_ids:
 		var panel := PanelContainer.new()
@@ -2596,15 +2618,17 @@ func _update_unit_target_preview(unit_node: Control, unit: Dictionary) -> void:
 	)
 	var resource_panel := unit_node.get_node_or_null("ResourcePanel") as Control
 	if resource_panel != null:
-		target_preview_panel.position.y = resource_panel.position.y + resource_panel.size.y + UNIT_TARGET_PREVIEW_GAP
+		target_preview_panel.position.y = resource_panel.position.y - target_preview_panel.size.y - UNIT_TARGET_PREVIEW_GAP
 	target_preview_panel.position.x += _unit_resource_label_nudge(unit)
-	if unit_node.position.y + target_preview_panel.position.y < 0:
-		target_preview_panel.position.y = -unit_node.position.y
 	target_preview_panel.add_theme_stylebox_override("panel", _unit_target_preview_style(unit))
 
 	var target_preview_label := target_preview_panel.get_node_or_null("TargetPreview") as Label
 	if target_preview_label != null:
 		target_preview_label.text = preview_text
+	target_preview_panel.size=UNIT_TARGET_PREVIEW_LABEL_SIZE.max(target_preview_panel.get_combined_minimum_size())
+	if resource_panel!=null:
+		target_preview_panel.position.y=resource_panel.position.y-target_preview_panel.size.y-UNIT_TARGET_PREVIEW_GAP
+	target_preview_panel.position.x=clampf(target_preview_panel.position.x,-unit_node.position.x,board_root.size.x-unit_node.position.x-target_preview_panel.size.x)
 
 
 func _unit_target_preview_text(unit: Dictionary) -> String:

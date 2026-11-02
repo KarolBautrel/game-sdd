@@ -9,6 +9,9 @@ interactive QA launch. Gameplay rules remain in the combat and dungeon domains.
 - `slices/002_exportable_asset_catalogue.md`: acceptance scenarios for stage 2.
 - `003_map_authoring_v2.md` and `slices/003_map_authoring_v2.md`: Tiled metadata and playable workbench.
 - `004_final_acceptance.md` and `slices/004_final_acceptance.md`: integrated release regression.
+- `005_character_art_pipeline.md` and `slices/005_character_art_pipeline.md`: original
+  character/animation production tools, dependency provenance and background smoke checks.
+- `milestones/001_character_art_tools.md`: preparation results and the next original-character pilot.
 
 Stage results are recorded in `docs/qa/stages/`. Raw logs and machine reports live
 in ignored `artifacts/qa-runs/`.

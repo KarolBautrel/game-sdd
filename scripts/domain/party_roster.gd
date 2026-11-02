@@ -11,7 +11,7 @@ const HEROES := {
 		"class_name": "Warrior",
 		"slot_id": "front",
 		"target_id": "party_slot_front",
-		"portrait_path": "res://assets/ui/dungeon/processed/mercenary_pose_for_portrait/mercenary_pose_for_portrait_head.png",
+		"portrait_path": "res://assets/ui/portraits/bran.png",
 		"visual": {"faction": "heroes", "character": "warrior"},
 		"stats": {
 			"max_hp": 14,
@@ -25,7 +25,7 @@ const HEROES := {
 		},
 		"resources": {"hp": 14, "ap": 2, "mp": 4},
 		"available_actions": ["move", "defend", "end_turn"],
-		"loadout": {"armor": null, "main_hand": "hero_sword", "off_hand": null},
+		"loadout": {"armor": null, "main_hand": "hero_sword", "off_hand": null, "boots":null, "helmet":null},
 	},
 	"hero_torin": {
 		"id": "hero_torin",
@@ -34,7 +34,7 @@ const HEROES := {
 		"class_name": "Archer",
 		"slot_id": "back",
 		"target_id": "party_slot_back",
-		"portrait_path": "res://assets/ui/dungeon/processed/archer_portrait/archer_portrait_head.png",
+		"portrait_path": "res://assets/ui/portraits/torin.png",
 		"visual": {"faction": "heroes", "character": "archer_1"},
 		"stats": {
 			"max_hp": 10,
@@ -48,7 +48,7 @@ const HEROES := {
 		},
 		"resources": {"hp": 10, "ap": 2, "mp": 4},
 		"available_actions": ["move", "defend", "end_turn"],
-		"loadout": {"armor": null, "main_hand": "hero_bow", "off_hand": null},
+		"loadout": {"armor": null, "main_hand": "hero_bow", "off_hand": null, "boots":null, "helmet":null},
 	},
 }
 
@@ -95,7 +95,7 @@ static func heroes_for_formation(formation: Array) -> Array:
 				"class_name": "Hero",
 				"slot_id": str(slot.get("slot_id", "")),
 				"target_id": str(slot.get("target_id", "")),
-				"portrait_path": "res://assets/ui/dungeon/processed/mercenary_pose_for_portrait/mercenary_pose_for_portrait_head.png",
+				"portrait_path": "res://assets/ui/portraits/bran.png",
 				"visual": {"faction": "heroes", "character": "warrior"},
 				"stats": {},
 				"resources": {},

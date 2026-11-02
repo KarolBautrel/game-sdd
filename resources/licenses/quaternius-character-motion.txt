@@ -1,0 +1,18 @@
+Quaternius Universal Animation Library Standard
+Author: Quaternius (with animation contributions credited on the author's page)
+Source: https://quaternius.itch.io/universal-animation-library
+License: CC0 1.0 Universal Public Domain Dedication
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Ash-road Raider uses the compatible humanoid skeleton and these motion sources:
+Sword_Idle, Walk_Loop, Sword_Attack, Hit_Chest, Death01.
+The visible raider mesh, UV layout and cleaver were authored for this project.
+Its reference/albedo atlas was generated with the built-in image generation tool.
+The downloaded mannequin mesh is not part of the visible raider or game export.
+
+The complete original tactical roster also reuses the compatible65-bone rig and
+Idle_Loop, Walk_Loop, Sword_Attack, Hit_Chest and Death01 for humanoids. Visible
+meshes are project-authored. Bow/crossbow/spear handling, grounded spear death,
+wraith collapse and all nonhumanoid creature rigs/actions are authored for this
+project. Shared material-atlas provenance is retained under
+assets_src/characters/roster/. No Quaternius visible mannequin mesh is shipped.

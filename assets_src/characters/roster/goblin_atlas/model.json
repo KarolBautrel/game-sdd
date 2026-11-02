@@ -1,0 +1,36 @@
+{
+  "id": "goblin_atlas",
+  "kind": "goblin",
+  "label": "Goblin",
+  "canvas_size": [
+    640,
+    448
+  ],
+  "pivot": [
+    320,
+    314
+  ],
+  "camera_elevation": 18,
+  "pixels_per_metre": 100,
+  "triangles": 2912,
+  "vertices": 1524,
+  "bones": 65,
+  "uv": true,
+  "weighted": true,
+  "actions": {
+    "pose": "spearReady",
+    "walk": "Spear_CarryWalk",
+    "combat": "spearRelease",
+    "hit": "Spear_CarryHit",
+    "death": "Spear_GroundedDeath"
+  },
+  "frame_counts": {
+    "pose": 4,
+    "walk": 8,
+    "combat": 8,
+    "hit": 4,
+    "death": 8
+  },
+  "preview_only": false,
+  "legacy_reference": "../references/goblin_atlas.png"
+}

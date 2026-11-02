@@ -217,7 +217,27 @@
                             "string",
                             "null"
                           ]
+                        },
+                        "boots": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "helmet": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
                         }
+                      },
+                      "dependentRequired": {
+                        "boots": [
+                          "helmet"
+                        ],
+                        "helmet": [
+                          "boots"
+                        ]
                       }
                     },
                     "unit_player_002": {
@@ -246,7 +266,27 @@
                             "string",
                             "null"
                           ]
+                        },
+                        "boots": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "helmet": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
                         }
+                      },
+                      "dependentRequired": {
+                        "boots": [
+                          "helmet"
+                        ],
+                        "helmet": [
+                          "boots"
+                        ]
                       }
                     }
                   }
@@ -321,7 +361,27 @@
                 "string",
                 "null"
               ]
+            },
+            "boots": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "helmet": {
+              "type": [
+                "string",
+                "null"
+              ]
             }
+          },
+          "dependentRequired": {
+            "boots": [
+              "helmet"
+            ],
+            "helmet": [
+              "boots"
+            ]
           }
         },
         "unit_player_002": {
@@ -350,7 +410,27 @@
                 "string",
                 "null"
               ]
+            },
+            "boots": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "helmet": {
+              "type": [
+                "string",
+                "null"
+              ]
             }
+          },
+          "dependentRequired": {
+            "boots": [
+              "helmet"
+            ],
+            "helmet": [
+              "boots"
+            ]
           }
         }
       }

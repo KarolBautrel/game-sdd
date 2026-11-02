@@ -1,0 +1,8 @@
+{
+  "id": "arch",
+  "pixels_per_metre": 100,
+  "camera_elevation": 18,
+  "triangles": 276,
+  "uv": true,
+  "original": true
+}

@@ -1,0 +1,8 @@
+{
+  "id": "pine",
+  "pixels_per_metre": 100,
+  "camera_elevation": 18,
+  "triangles": 996,
+  "uv": true,
+  "original": true
+}

@@ -39,12 +39,16 @@
     "unit_player_001": {
       "main_hand": "hero_sword",
       "off_hand": null,
-      "armor": null
+      "armor": null,
+      "boots": null,
+      "helmet": null
     },
     "unit_player_002": {
       "main_hand": "hero_bow",
       "off_hand": null,
-      "armor": null
+      "armor": null,
+      "boots": null,
+      "helmet": null
     }
   },
   "advancement": {

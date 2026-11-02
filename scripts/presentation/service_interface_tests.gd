@@ -18,7 +18,7 @@ func _run() -> void:
 	app.action_buttons.trade.pressed.emit()
 	await frames()
 	var trade := app.find_child("TradingView",true,false)
-	check(trade.buy_grid.item_buttons.size() == 5 and trade.sell_grid.item_buttons.is_empty(),"visual merchant stock and protected starters")
+	check(trade.buy_grid.item_buttons.size() == 10 and trade.buy_grid.item_buttons.has("closed_helm") and trade.buy_grid.item_buttons.has("steel_boots") and trade.sell_grid.item_buttons.is_empty(),"visual merchant includes appearance gear and protects starters")
 	trade.buy_grid.item_buttons.salvaged_blade.pressed.emit()
 	check(campaign.state == before,"merchant tile selection no save")
 	trade.buy_button.pressed.emit()

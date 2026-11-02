@@ -25,9 +25,11 @@ def main() -> int:
     parser.add_argument('--views',default='stash')
     parser.add_argument('--sizes',default='1920x1080')
     parser.add_argument('--exercise',action='store_true')
+    parser.add_argument('--timeout',type=int,default=180)
     parser.add_argument('--exe',type=Path)
     parser.add_argument('--suite',choices=['campaign','play'],default='campaign')
     args=parser.parse_args()
+    if not 1<=args.timeout<=600:parser.error('Timeout must be1..600seconds')
     if not re.fullmatch(r'[A-Za-z0-9_-]+',args.run_id): parser.error('Invalid run id')
     out=ROOT/'artifacts/qa-runs'/args.run_id
     if out.exists(): parser.error('Run already exists; use a fresh id')
@@ -74,7 +76,7 @@ window/stretch/mode="disabled"
     if args.exercise: command.append('--review-exercise')
     with (out/'stdout.log').open('w',encoding='utf-8') as stdout,(out/'stderr.log').open('w',encoding='utf-8') as stderr:
         try:
-            result=subprocess.run(command,cwd=project,stdout=stdout,stderr=stderr,timeout=180)
+            result=subprocess.run(command,cwd=project,stdout=stdout,stderr=stderr,timeout=args.timeout)
         except subprocess.TimeoutExpired:
             print('Native render timed out; its process was stopped')
             return 1

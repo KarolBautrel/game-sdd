@@ -1,0 +1,24 @@
+{
+  "id": "bandit_carnage",
+  "resource": "res://assets/combat/models/bandit_carnage.glb",
+  "channels": [
+    "armor_default",
+    "body",
+    "boots_default",
+    "headwear_default",
+    "weapon_dagger",
+    "offhand_default"
+  ],
+  "actions": {
+    "dagger": {
+      "pose": "dagger_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    }
+  },
+  "default_weapon": "dagger",
+  "hero": false,
+  "bones": 65
+}

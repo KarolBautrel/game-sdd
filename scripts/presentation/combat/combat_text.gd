@@ -159,6 +159,8 @@ static func unit_display_name(state: Dictionary, unit_id: String) -> String:
 		if unit["id"] == unit_id:
 			if unit["team"] == "player":
 				return "Hero"
+			if str(unit.get("visual", {}).get("character", "")) == "ash_raider":
+				return "Ash-road Raider"
 			return "Enemy %s" % unit_id.trim_prefix("unit_enemy_")
 	return unit_id
 

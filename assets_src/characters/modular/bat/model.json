@@ -1,0 +1,20 @@
+{
+  "id": "bat",
+  "resource": "res://assets/combat/models/bat.glb",
+  "channels": [
+    "body"
+  ],
+  "actions": {
+    "fangs": {
+      "pose": "bat_pose",
+      "walk": "bat_walk",
+      "combat": "bat_combat",
+      "hit": "bat_hit",
+      "death": "bat_death"
+    }
+  },
+  "default_weapon": "fangs",
+  "hero": false,
+  "bones": 7,
+  "original_source": "assets_src/characters/roster/bat"
+}

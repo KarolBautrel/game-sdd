@@ -12,6 +12,9 @@ This keeps movement, attack, hit, death, and future status reactions predictable
 ## Rules
 
 - Presentation state is derived from resolver events.
+- Presentation010/stage36: delayed pose cleanup refreshes unit visuals only.
+  It must retain live action/tile controls and an in-progress pointer press;
+  a post-turn action must not disappear between mouse-down and mouse-up.
 - Combat presentation must not invent gameplay outcomes.
 - `unit_moved` maps the actor to `walk`.
 - `damage_applied` maps the actor to `combat`.

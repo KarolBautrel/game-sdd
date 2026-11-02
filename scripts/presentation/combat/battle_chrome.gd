@@ -210,3 +210,12 @@ func refresh(hud) -> void:
 				child.add_theme_font_size_override("font_size",24)
 				child.custom_minimum_size=Vector2(164,64)
 			if child is OptionButton: child.custom_minimum_size.x=260
+
+func add_gallery_button(hud) -> void:
+	var gallery_button := UI.button("Character gallery")
+	gallery_button.name = "CharacterGalleryButton"
+	gallery_button.pressed.connect(func() -> void:
+		if hud.get_node_or_null("OriginalRosterGallery") == null:
+			hud.add_child(load("res://scripts/presentation/combat/roster_gallery.gd").new())
+	)
+	hud.command_buttons.add_child(gallery_button)

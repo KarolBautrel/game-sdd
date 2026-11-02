@@ -1,0 +1,8 @@
+{
+  "id": "spike_fence",
+  "pixels_per_metre": 100,
+  "camera_elevation": 18,
+  "triangles": 220,
+  "uv": true,
+  "original": true
+}

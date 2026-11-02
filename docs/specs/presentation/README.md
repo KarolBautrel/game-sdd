@@ -16,3 +16,9 @@ Shared UI composition owns passive visual components, never gameplay decisions.
   authorized stages23..26, coherent inventory art and illustrated parchment map.
 - `007_expedition_combat_art_direction.md` / `slices/007_expedition_combat_art_direction.md`:
   authorized stages27..29, approved campaign family extended to dungeon and battle.
+- `008_original_raider.md` / `slices/008_original_raider.md`: stage30 original
+  Blender character, eight-direction Aseprite exports and native combat integration.
+- `009_original_roster.md` / `slices/009_original_roster.md`: authorized full cast
+  replacement and tactical camera/design consistency, stages31..33.
+
+- [010 Equipment, portraits and world art](010_equipment_art_world.md) ? grips, modular gear and coherent environments.

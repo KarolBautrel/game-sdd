@@ -13,7 +13,8 @@ class CombatAuthoringTests(unittest.TestCase):
     def test_valid_catalogue_and_reference(self):
         self.assertEqual(catalogue_errors(), [])
         self.assertEqual(encounter_errors(self.encounter), [])
-        self.assertEqual(len(self.catalogue['scenarios']), 11)
+        self.assertEqual(len(self.catalogue['scenarios']), 12)
+        self.assertIn('ash_road_raiders', {row['id'] for row in self.catalogue['scenarios']})
 
     def test_duplicate_and_invalid_catalogue(self):
         self.catalogue['scenarios'].append(copy.deepcopy(self.catalogue['scenarios'][0]))
