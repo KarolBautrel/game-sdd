@@ -1,0 +1,192 @@
+{
+  "schema": "sdd.character-style-delivery-v1",
+  "status": "TECHNICAL_PASS",
+  "art_acceptance": "AWAITING_STYLE_CHOICE",
+  "files": [
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/a_painterly_veteran/a_painterly_veteran.blend",
+      "bytes": 9164985,
+      "sha256": "2d4918571e7adfb92f705843908e4881e4dce8c24cfcd2f8290048c53ef69e0a"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/a_painterly_veteran/a_painterly_veteran.fbx",
+      "bytes": 3613724,
+      "sha256": "9e8017c897deb1d2c0c94ac028f6c06824eb73b0a7cb794ed9a7244fd7f7840d"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/a_painterly_veteran/model.json",
+      "bytes": 1785,
+      "sha256": "3c609be0c130712212c194cfa7be63b14f06e7069a39a41d06283089164025f5"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/a_painterly_veteran/renders/face.png",
+      "bytes": 682883,
+      "sha256": "6b5762dc5ef13722b5ad732313c18158a445949e3ef5a3272372988698977a97"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/a_painterly_veteran/renders/front.png",
+      "bytes": 474311,
+      "sha256": "c0f2277a2d9da618ef49f9d0adff4faac5bd355d53aa7674c0fedb7fead6f2b0"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/a_painterly_veteran/renders/rear.png",
+      "bytes": 453372,
+      "sha256": "fe9919c9d011d6a84374701d73205b396a0b3f5e0723e31f24b1417740d93360"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/a_painterly_veteran/renders/side.png",
+      "bytes": 400772,
+      "sha256": "6db18355b5b8e49527f5e850164764b722f978e769dd1bb33a55b979f04dcb8c"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/a_painterly_veteran/renders/tactical_100ppm.png",
+      "bytes": 80263,
+      "sha256": "0c4d786b0ae96892dbc108c82cf02349af74b40005bdcec88b2aa97bfbe312be"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/a_painterly_veteran/renders/three_quarter.png",
+      "bytes": 467520,
+      "sha256": "47fac87e06aff8d582e4f36e6b922ff211a9ca4843db4ea610659e5e9f019bb9"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/a_painterly_veteran/textures/a_painterly_veteran_albedo.png",
+      "bytes": 3554558,
+      "sha256": "a89a07361b515c787cfdc600f9a79422d3726b3f3a47dc946537910e68a1051e"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/all_views.aseprite",
+      "bytes": 825257,
+      "sha256": "ffd7a14765e917e3d1546c84c358daf9b4947d921f5cb6cf059035b226dd1544"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/all_views.png",
+      "bytes": 652919,
+      "sha256": "5e07863f9fea22edeb4736ba0583644d3a514351a59f81c6474c8ddc6d8c650e"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/b_ink_warden/b_ink_warden.blend",
+      "bytes": 13191271,
+      "sha256": "ae39b207324884df19f9954f24028258b2e07b2dc4de412b02b5d77bc6e28bdd"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/b_ink_warden/b_ink_warden.fbx",
+      "bytes": 3541260,
+      "sha256": "ff69604391f47db5a84c6d318ba1641a5e29c8127d16a4bced2a3dacb12f3ccc"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/b_ink_warden/model.json",
+      "bytes": 1752,
+      "sha256": "5d4d1e38a79ab5f17a4de49b42872db5066e9e9dea7f25d5a30331aa95b5e414"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/b_ink_warden/renders/face.png",
+      "bytes": 767490,
+      "sha256": "555629cad9dd4de0f9af24f19233eabf4fe48dc891609cefd1e73749cdfb23e3"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/b_ink_warden/renders/front.png",
+      "bytes": 480757,
+      "sha256": "7185d4291b9fefa34d61b65991302fd3d47d6d1865a158fe6ffbfdb969864c74"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/b_ink_warden/renders/rear.png",
+      "bytes": 434015,
+      "sha256": "2a3b2e2873458187c955ebe802d4aa3372bf52c0888d1580ea608a2300ddb797"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/b_ink_warden/renders/side.png",
+      "bytes": 393295,
+      "sha256": "ad5671ce61d564035eadc4e74caa30ac2d9aa7adca4415586970552f829db5e2"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/b_ink_warden/renders/tactical_100ppm.png",
+      "bytes": 78888,
+      "sha256": "f98582912d14813a14da2593a9934c6561d623cbae0d783720533f0620d060d1"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/b_ink_warden/renders/three_quarter.png",
+      "bytes": 475365,
+      "sha256": "4d66baed7bfe3450203663a0ce8be63aefcc233f2ea522b1eef4254722349c0c"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/b_ink_warden/textures/b_ink_warden_albedo.png",
+      "bytes": 4735073,
+      "sha256": "3ec6d49700e9cbbaf16c401313fb394fa7afe970c7da3b9e564208286946e4a2"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/c_heroic_miniature/c_heroic_miniature.blend",
+      "bytes": 9596197,
+      "sha256": "4d1f9b50021d1245d2fa58c266de696e8001267344f91e7e55316b499a775fee"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/c_heroic_miniature/c_heroic_miniature.fbx",
+      "bytes": 3747388,
+      "sha256": "539e6132cbfe3bd8867f2bf029c384e287d59b69511f36e053a92113e63ce9ec"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/c_heroic_miniature/model.json",
+      "bytes": 1781,
+      "sha256": "89d3c7fa179a2d4a80d1952d81214e23dc2caf12e280bbd7b72ee90612b21b5a"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/c_heroic_miniature/renders/face.png",
+      "bytes": 732977,
+      "sha256": "ce564aacf9e1bc04eb07db093bffd669b8bd1272fde7fee18561220fd7c4a055"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/c_heroic_miniature/renders/front.png",
+      "bytes": 495361,
+      "sha256": "4594babed92984adb378463d8b098ee2101817b3cedc4f737359f62b09ea109c"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/c_heroic_miniature/renders/rear.png",
+      "bytes": 479510,
+      "sha256": "ec0d4f1d81ba20d131057d8a8f37d898e8ee466325d3355f6d56c950dd030c54"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/c_heroic_miniature/renders/side.png",
+      "bytes": 407594,
+      "sha256": "e29df874bed9f6b5456619ddf8fa9f11de1e5175cf6924aded542afdb2acf335"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/c_heroic_miniature/renders/tactical_100ppm.png",
+      "bytes": 83038,
+      "sha256": "cdf6d6e796c904a8e2c754d5be4f0b93acf2c260cddc4421efb8ae3378c7db9b"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/c_heroic_miniature/renders/three_quarter.png",
+      "bytes": 489589,
+      "sha256": "dada73b8331dac28f0812a41bcb45cc46f6ff5c18de27be300fc087b4958c23c"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/c_heroic_miniature/textures/c_heroic_miniature_albedo.png",
+      "bytes": 3805843,
+      "sha256": "313cd31a5c52259fa533dbd4a377db1b81671eb45c8c94f252296f24cc338a3a"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/comparison.aseprite",
+      "bytes": 951708,
+      "sha256": "fdd5a0f5e6a50143788c2b145f0cfca43a775450def203157f7dc620a9ea63b8"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/comparison.png",
+      "bytes": 735563,
+      "sha256": "77a7e49444710eefe0e8b98c5dcac945c8242e06409337f79c888f27314a943b"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/provenance.json",
+      "bytes": 2554,
+      "sha256": "cec90f52bef440b65268da202bebb32c9e0248a1d5a80d7073e65b592e7786c2"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/README.md",
+      "bytes": 1228,
+      "sha256": "8f065e2afc1b45cd8c59a73e59f3fce82461b8df7770750f2e2656bda7034ebc"
+    },
+    {
+      "path": "assets_src/characters/style_studies/2026-11-02/verification.json",
+      "bytes": 7579,
+      "sha256": "5a67c8ca8e15ff84f973e8e71d241563e009bab8de749dd45a8eb6c809a9e7a0"
+    }
+  ]
+}

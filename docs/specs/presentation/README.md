@@ -22,3 +22,5 @@ Shared UI composition owns passive visual components, never gameplay decisions.
   replacement and tactical camera/design consistency, stages31..33.
 
 - [010 Equipment, portraits and world art](010_equipment_art_world.md) ? grips, modular gear and coherent environments.
+- [011 Character style studies](011_character_style_studies.md): isolated actual
+  model comparisons and research, before the user's art-direction choice.

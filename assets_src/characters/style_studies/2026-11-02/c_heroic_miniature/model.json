@@ -1,0 +1,47 @@
+{
+  "id": "c_heroic_miniature",
+  "title": "C / Malowana figurka",
+  "scaffold": "stylized",
+  "base_library_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+  "static": true,
+  "rigged": false,
+  "animated": false,
+  "integrated": false,
+  "vertices": 65483,
+  "triangles": 130354,
+  "bounds": [
+    [
+      -0.7072383165359497,
+      0.7643330693244934
+    ],
+    [
+      -0.24543069303035736,
+      0.254104346036911
+    ],
+    [
+      0.014000002294778824,
+      1.8382389545440674
+    ]
+  ],
+  "camera": {
+    "elevation": 18,
+    "three_quarter_yaw": 330,
+    "close_ortho": 2.8,
+    "tactical_ortho": 3.84,
+    "tactical_pixels": 384,
+    "pixels_per_meter": 100
+  },
+  "render_only_ink_hull": false,
+  "authoring_materials": "procedural directional brush variation; baked albedo in portable FBX",
+  "files": {
+    "c_heroic_miniature.blend": "4d1f9b50021d1245d2fa58c266de696e8001267344f91e7e55316b499a775fee",
+    "c_heroic_miniature.fbx": "539e6132cbfe3bd8867f2bf029c384e287d59b69511f36e053a92113e63ce9ec",
+    "renders/face.png": "ce564aacf9e1bc04eb07db093bffd669b8bd1272fde7fee18561220fd7c4a055",
+    "renders/front.png": "4594babed92984adb378463d8b098ee2101817b3cedc4f737359f62b09ea109c",
+    "renders/rear.png": "ec0d4f1d81ba20d131057d8a8f37d898e8ee466325d3355f6d56c950dd030c54",
+    "renders/side.png": "e29df874bed9f6b5456619ddf8fa9f11de1e5175cf6924aded542afdb2acf335",
+    "renders/tactical_100ppm.png": "cdf6d6e796c904a8e2c754d5be4f0b93acf2c260cddc4421efb8ae3378c7db9b",
+    "renders/three_quarter.png": "dada73b8331dac28f0812a41bcb45cc46f6ff5c18de27be300fc087b4958c23c",
+    "textures/c_heroic_miniature_albedo.png": "313cd31a5c52259fa533dbd4a377db1b81671eb45c8c94f252296f24cc338a3a"
+  }
+}

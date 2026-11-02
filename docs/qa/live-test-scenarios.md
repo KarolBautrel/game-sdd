@@ -14,6 +14,12 @@ before repeating live acceptance. Stage reports retain AWAITING_INTERACTIVE.
 
 ## Final build for the session
 
+Stage38 character-style studies are static source-art experiments only, pending
+the user's A/B/C choice. They are not integrated or animated, add no runtime
+acceptance claim, and do not supersede the stage37 EXE below. Research/renders/FBX
+reimports do not close any of these61 physical cases. See stage38's report and
+presentation011 before any separate pilot/integration task.
+
 Latest override: stage37 selective model rollback. User rejected the modular
 characters/weapon refinements; restore our stage33 animated roster, retaining
 new world art/portraits/icons. Stage37 export/package proof PASS: use

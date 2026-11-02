@@ -4,7 +4,30 @@ Last handoff: 2026-11-02. This is a status/navigation document; owning domain
 specs define behavior. This handoff does not authorize additional implementation
 when the user has only requested an explanation or plan.
 
-## Current status: stage33 characters restored; new environment retained
+## Current task: static style studies delivered; user choice pending
+
+User2026-11-02 asked to push everything, research art skills/sources, then build
+several actual character models to choose a future style. Rollback checkpoint
+`619237db` was pushed to `origin/feature/dungeon-eod-checkpoint-2026-07-17`, including
+7850 LFS objects/679MB. Preserve the stage37 production state described below.
+
+Owner [presentation011](specs/presentation/011_character_style_studies.md),
+[slice011](specs/presentation/slices/011_character_style_studies.md),
+[milestone006](specs/presentation/milestones/006_character_style_studies.md).
+Three isolated actual 3D studies live under
+`assets_src/characters/style_studies/2026-11-02/`: A painterly veteran, B graphic
+ink warden, C heroic miniature. Open `comparison.png` or `all_views.png`; editable
+Aseprite sources, .blend/FBX/albedo and18 renders are included. Research/source
+licenses: [STYLE_RESEARCH](design/character-art/STYLE_RESEARCH.md).
+
+Technical scope: static, not rigged/animated/integrated. Actual fresh-scene FBX
+reimports and baseline hash checks PASS; report [stage38](qa/stages/2026-11-02-stage-38.md).
+The next step is the user's A/B/C choice, possibly specific combined qualities.
+Do not automatically replace the roster or begin a rigging/animation batch.
+No OS input or visible launch used.61 physical cases remain NOT_RUN; use stage37
+release for later gameplay tests after explicit control release. No paid service.
+
+## Production status: stage33 characters restored; new environment retained
 
 Latest user instruction2026-11-02: REJECT the recent model/grip/pose/helmet
 refinements. Restore OUR complete original stage33 roster, after the general
