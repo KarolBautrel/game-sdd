@@ -10,7 +10,10 @@ Publication2026-11-03: user selects the accepted painted batch as the main game
 direction and explicitly requests all current work on the default branch. Active
 branch is now `master`; full source checkpoint `9edbd4a32286586ba6f3053d1ca60d41d5003a63`
 from2d-art-research is merged while preserving origin/master's README cleanup.
-No historical author rewrite. See [publication record](qa/2026-11-03-drawn-main-publication.md).
+Publication confirmed: merge167e2e22 is on origin/master,4069LFS objects/404MB
+uploaded, GitHub verifies author/committer KarolBautrel. A receipt commit follows
+that game merge. No historical author rewrite. See
+[publication record](qa/2026-11-03-drawn-main-publication.md).
 The user also asks for a proposal to preserve the reusable art workflow across
 future projects. Proposal only: no separate skill repository/package is created
 or published yet. Existing sources/prompts/tooling already remain in this repo.

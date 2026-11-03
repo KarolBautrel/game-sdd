@@ -9,8 +9,10 @@ attack now lasts1800ms and releases at1260ms. Original physical gameplay gaps re
 
 Owner: presentation022 / slice022 / milestone017. The user accepted the knight's
 12-clip front-right motion and requested this complete six-role batch. Directional
-and in-game visual acceptance is still pending. Branch: `2d-art-research`; local
-work only, no commit/push/history change.
+and in-game physical scenarios remain open. Developed on `2d-art-research` and
+published on default branch `master` in merge167e2e22 after explicit user approval.
+The accepted imagegen/Aseprite workflow, original sources and baselines are kept
+in Git/LFS. See `docs/qa/2026-11-03-drawn-main-publication.md` for the receipt.
 
 | Profile | Equipment appearance | Runtime clips per facing | Facings | Runtime frames |
 | --- | --- | --- | --- | --- |

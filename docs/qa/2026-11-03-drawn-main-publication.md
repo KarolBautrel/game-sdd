@@ -34,9 +34,14 @@ No gameplay or source assets conflict. Publication uses ordinary fast-forward
 remote push after this merge, without force, history replacement or protection
 changes. The old author-repair preview refs remain unexecuted.
 
-Actual publication receipt is the default-branch Git commit/ref and the final
-remote verification. Local audit/push receipts: artifacts/publication/. This
-pre-publication record does not claim that a not-yet-confirmed push succeeded.
+Publication CONFIRMED2026-11-03: normal push advanced origin/master from a851ca87
+to merge167e2e22e07dfb52422c1f545b7b64aabc8c339e. Git LFS uploaded4069objects /
+404MB successfully. `git ls-remote` returned that exact master SHA. GitHub REST
+confirmed both author.login and committer.login as KarolBautrel, and both intended
+parents (old main and complete source checkpoint). Local master was clean.
+This receipt is subsequently committed on top of that published merge; the final
+tip is the receipt commit, while167e2e22 is the complete accepted game merge.
+Local audit/push receipts: artifacts/publication/.
 All61 earlier physical cases and L53/L54 game cases remain NOT_RUN; stage55 preview
 is explicitly USER_ACCEPTED. Source backups and the rejected3D archive are retained.
 

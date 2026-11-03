@@ -58,3 +58,10 @@ retained;125 before/after samples supplied. Explicit user approval "Tak ma byc".
 Native7368checks/0failures; full roster/lifecycle/equipment/combat/feedback suites,
 offline3579checks and repository validator PASS. See stage55 and newest handoff.
 Next: user's next task; no further visual iteration is currently requested.
+
+Subsequent explicit publication request completed: full source checkpoint9edbd4a3
+merged into default master as167e2e22, ordinary push confirmed;4069LFS objects /
+404MB uploaded. Source audit4626files PASS, author/committer linked to KarolBautrel.
+Existing main README cleanup preserved; historical author repair not executed.
+Receipt: docs/qa/2026-11-03-drawn-main-publication.md. Cross-project skill/package
+is currently a requested proposal, not an installed or published separate repo.
