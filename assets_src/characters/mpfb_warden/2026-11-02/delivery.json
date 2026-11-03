@@ -1,0 +1,208 @@
+{
+  "schema": "sdd.mpfb-warden-delivery-v1",
+  "date": "2026-11-02",
+  "status": "TECHNICAL_PASS_AWAITING_USER_REVIEW",
+  "file_count": 38,
+  "total_bytes": 61373018,
+  "files": [
+    {
+      "path": "all_views.aseprite",
+      "sha256": "6a7710df1e847b9684e64ea0a806ffb67175e2f0ffc39fd6d581e0b1077ec33b",
+      "bytes": 865440
+    },
+    {
+      "path": "all_views.png",
+      "sha256": "10a739f67ad606c0ea2e7cbe0628c80a25ed2bb0d9bc0927139efdf3863f4684",
+      "bytes": 601252
+    },
+    {
+      "path": "comparison.aseprite",
+      "sha256": "a24dc635bbf49e5d5e8869d29136fe167f1e08666114d7fe2913c27aa2ed39fe",
+      "bytes": 1615997
+    },
+    {
+      "path": "comparison.png",
+      "sha256": "f22d53f582c74bc735ab41f34ac83717649917c149131e1f92df76ff1398f107",
+      "bytes": 925557
+    },
+    {
+      "path": "licenses/makehuman_system_assets.json",
+      "sha256": "e86f1572432cfd062f372adddba4eb7c2e2e31280e96c29291a970320e0a5df0",
+      "bytes": 39220
+    },
+    {
+      "path": "licenses/MPFB-LICENSE.md",
+      "sha256": "5cefb60680cb9efd4550a2e65d719021cfbec9dad3658481d11d48ae863ce04d",
+      "bytes": 3188
+    },
+    {
+      "path": "licenses/skins02.json",
+      "sha256": "35c4e7d05d882537b6312cbbc95830347eb547941248dbdb5f5595e6d9e1e705",
+      "bytes": 7907
+    },
+    {
+      "path": "licenses/system_eye_materials01.json",
+      "sha256": "df0104d87cda2b381328099e6f2b830ed9f26999ff6bed4682287c143b8a8097",
+      "bytes": 6440
+    },
+    {
+      "path": "mesh-audit.json",
+      "sha256": "78526979d467921523cd2fccea68afd5886ff79a61abfb2efb72da3fa01d97cb",
+      "bytes": 1610
+    },
+    {
+      "path": "model.json",
+      "sha256": "f80a1b86697a570abb36f824bf4791ef3b557176dc6189fb003b251db4820ecf",
+      "bytes": 4882
+    },
+    {
+      "path": "mpfb_warden.blend",
+      "sha256": "0365891e93d6f1fa888850d6d641305a8d75a42273e687ad4fe45dd88d1d7f1a",
+      "bytes": 31549592
+    },
+    {
+      "path": "mpfb_warden.fbx",
+      "sha256": "47dcac293e77fdec9558ea0f0bb8e7bccb5ef1b5b3eec77ff203044263194c82",
+      "bytes": 2972908
+    },
+    {
+      "path": "proposal.aseprite",
+      "sha256": "552c096aca9bf99d33b9b9fc85ef95ffeba850934b19ac96f2f2a92b58c9d29f",
+      "bytes": 1050733
+    },
+    {
+      "path": "proposal.png",
+      "sha256": "03f7919c13718d0c25f1a1bff04bdfb42276ea9af654c2058782e3aa13c60dff",
+      "bytes": 755347
+    },
+    {
+      "path": "provenance.json",
+      "sha256": "70e415b8718de07dbc1ff3b5b07391b2c77f434e1f9b3e488f48bcba3022cd41",
+      "bytes": 5507
+    },
+    {
+      "path": "reference.json",
+      "sha256": "ff1646d192694d3ca395d88d7c656c8b22f02427a382826ab489e1377d5b7b05",
+      "bytes": 1168
+    },
+    {
+      "path": "renders/face_albedo.png",
+      "sha256": "cb5b0a10d89800123fe422580ad34694bc0a71092d33fc210f4823c594e183a7",
+      "bytes": 737464
+    },
+    {
+      "path": "renders/face_changed_light.png",
+      "sha256": "9c0c24acaada6b6db4fbbef9acd6fd0f7ec09c54bcbeb40a6771f1331f59e0e3",
+      "bytes": 691659
+    },
+    {
+      "path": "renders/face_front.png",
+      "sha256": "bb8659104cb037a13f4b7e13a37bb9c9909298acd972725bc282a3347f65e255",
+      "bytes": 751912
+    },
+    {
+      "path": "renders/face_profile.png",
+      "sha256": "d93e73978e1e638738b3790613eb8741fe96b41099e21765a4470dea09de63cf",
+      "bytes": 646613
+    },
+    {
+      "path": "renders/face_three_quarter.png",
+      "sha256": "e336543704a776ebe09242aea1d7f32b2badc80a0c37c6efb2cdeee81992dce9",
+      "bytes": 736861
+    },
+    {
+      "path": "renders/face_uv_checker.png",
+      "sha256": "b54f6a519ba80e19767ca2e2a9759d40ccce47733604a095213e6583e625b2fe",
+      "bytes": 755838
+    },
+    {
+      "path": "renders/fbx_body.png",
+      "sha256": "d9a36064befc792be96de4c57c6e49ae3231a5c93c7be27ad6d2b93fe26a63c9",
+      "bytes": 463488
+    },
+    {
+      "path": "renders/fbx_face.png",
+      "sha256": "ae03b038794ffd35a6f37eaa52e96a540fbe70cf96d5bb0efcd596763d2465c6",
+      "bytes": 735665
+    },
+    {
+      "path": "renders/front.png",
+      "sha256": "ad49630e4e7748e02ea2c8610fa50f27d2c6d0e4cf9bf8f1579628c75becd9df",
+      "bytes": 473796
+    },
+    {
+      "path": "renders/isometric35.png",
+      "sha256": "eabeb7cf21d9b30d7748a39a5996a90942584f2cf55f8cdc3534b395f3c365f9",
+      "bytes": 440866
+    },
+    {
+      "path": "renders/rear.png",
+      "sha256": "07b80a4bd29170d2d3459c4656e17358947a78c694e26207bb6e5c9bb8fce32a",
+      "bytes": 448219
+    },
+    {
+      "path": "renders/side.png",
+      "sha256": "2c2ca21f0093e01529a97c981bc07335d774554819032cfe94792d4db78912a1",
+      "bytes": 412378
+    },
+    {
+      "path": "renders/tactical.png",
+      "sha256": "3c3b14ba60981db882a7c25ce8176d8c832490f806088e20a4a654080d6fc932",
+      "bytes": 75578
+    },
+    {
+      "path": "renders/three_quarter.png",
+      "sha256": "a1e5efce7f55a2e9cb50120aba80ebba2f9db2ffb7ed4f1ec73db4d3e6d0760f",
+      "bytes": 463650
+    },
+    {
+      "path": "textures/02_warden_albedo.png",
+      "sha256": "a6f3c490980d2b0ebf28f4ddacf2b40357a9138bd34a1a3e5c79a5d8947babd7",
+      "bytes": 4176142
+    },
+    {
+      "path": "textures/brown_eye_02.png",
+      "sha256": "fae2cf1e45fd4df3bc07ea4ea0f26883c78cbeae03585fa6754dc3e54c03c3dd",
+      "bytes": 795873
+    },
+    {
+      "path": "textures/eyebrow001.png",
+      "sha256": "9940f7d0b1b223709a19b05156ba6f6e9e4dbdbced02d7574f4d51d72c58967b",
+      "bytes": 89619
+    },
+    {
+      "path": "textures/eyebrow003.png",
+      "sha256": "e98837d77247f2c11a8259f8b265243b9053ba55683bd70223c668110e7dfb62",
+      "bytes": 92174
+    },
+    {
+      "path": "textures/Jartur_mid_old_Slavic_Male_with_Genitals_and_Beard_lsdif_lighter.png",
+      "sha256": "0f1a86d78af8bc1e55ae21cfaca0e7308384f789796adc77a78e4d22ccaf419c",
+      "bytes": 5615645
+    },
+    {
+      "path": "textures/short01_diffuse.png",
+      "sha256": "f34a0957184e3d1e911ed59245f874f8d4843f61ee44ff49f43edb4be0196949",
+      "bytes": 2354146
+    },
+    {
+      "path": "verification.json",
+      "sha256": "b29dfaba2e472bead998b680f7465b6c345c51ed543dac33a70d36a86cfaceba",
+      "bytes": 6254
+    },
+    {
+      "path": "visual-review.json",
+      "sha256": "f1a8f4230c5bb429f921e0c05688983811219fdf73ecbbc79c0c0cf27d122724",
+      "bytes": 2430
+    }
+  ],
+  "tools": {
+    "tools/blender/setup_mpfb.py": "687b3e36c5f8daf16bd0df472059557cd11471420743da29fcc3fb7d4a5f7889",
+    "tools/blender/mpfb_runtime.py": "31ce009bde7af28b8b7f89385dfb0f64a8911475b8a14cf5491041ba85dde1ba",
+    "tools/blender/smoke_mpfb.py": "ff4f979ddb956e826c9329d05591c01231bacd41ab1bddb0b5d6f0a9a5d6d4d1",
+    "tools/blender/build_mpfb_warden.py": "74ca843b2a2449cec07f6d03e72401801056d5f781f88cf200ba2584aa23282e",
+    "tools/blender/verify_mpfb_warden.py": "7c5cac99b287a662d7ed05f9aaae7593974c0e0632e0d80fb86c4f314b65b058",
+    "tools/aseprite/mpfb_warden.lua": "d5191964ed1b305b1e62c3161ae474852eec8f37765e1abd6a5a28061e3c172c",
+    "tools/assets/mpfb_dependencies.json": "949d99510791e4981fe441f34ea191465a14b242b429db8a56358d1b57501cdd"
+  }
+}

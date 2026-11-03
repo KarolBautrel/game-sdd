@@ -1,0 +1,705 @@
+{
+  "Retained_authored_warden_costume": {
+    "vertices": 34645,
+    "coordinates_sha256": "6e336dfbfa56bf542dc3d1dd665939b7d7e032f8b85d9c901fcd211e71049c2b",
+    "structure": {
+      "uv": [
+        [
+          "BakedAtlas",
+          "b767731c48b5da66c595b12df45b1fa161d9f6cb145d709fc2ec9c6b674a312e"
+        ]
+      ],
+      "topology": "16f13077dd38069663e5ed6b050ea28cb7977dcd91bc80f49458f4bfcab3247d",
+      "materials": [
+        [
+          "Retained_painted_costume_Painted_reference_Head",
+          [
+            [
+              "pbr",
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.800000011920929,
+                  1.0
+                ],
+                0.0,
+                0.8600000143051147,
+                1.0,
+                0.0,
+                0.006000000052154064
+              ]
+            ],
+            [
+              "image",
+              "02_warden_albedo.png",
+              "sRGB"
+            ]
+          ],
+          [
+            [
+              "Image Texture",
+              "Color",
+              "Principled BSDF",
+              "Base Color"
+            ],
+            [
+              "Principled BSDF",
+              "BSDF",
+              "Material Output",
+              "Surface"
+            ]
+          ]
+        ],
+        [
+          "Retained_painted_costume_Painted_reference_Body",
+          [
+            [
+              "pbr",
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.800000011920929,
+                  1.0
+                ],
+                0.0,
+                0.8600000143051147,
+                1.0,
+                0.0,
+                0.006000000052154064
+              ]
+            ],
+            [
+              "image",
+              "02_warden_albedo.png",
+              "sRGB"
+            ]
+          ],
+          [
+            [
+              "Image Texture",
+              "Color",
+              "Principled BSDF",
+              "Base Color"
+            ],
+            [
+              "Principled BSDF",
+              "BSDF",
+              "Material Output",
+              "Surface"
+            ]
+          ]
+        ],
+        [
+          "Retained_painted_costume_Dark_wool",
+          [
+            [
+              "pbr",
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.800000011920929,
+                  1.0
+                ],
+                0.0,
+                0.8600000143051147,
+                1.0,
+                0.0,
+                0.006000000052154064
+              ]
+            ],
+            [
+              "image",
+              "02_warden_albedo.png",
+              "sRGB"
+            ]
+          ],
+          [
+            [
+              "Image Texture",
+              "Color",
+              "Principled BSDF",
+              "Base Color"
+            ],
+            [
+              "Principled BSDF",
+              "BSDF",
+              "Material Output",
+              "Surface"
+            ]
+          ]
+        ],
+        [
+          "Retained_painted_costume_Collar",
+          [
+            [
+              "pbr",
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.800000011920929,
+                  1.0
+                ],
+                0.0,
+                0.8600000143051147,
+                1.0,
+                0.0,
+                0.006000000052154064
+              ]
+            ],
+            [
+              "image",
+              "02_warden_albedo.png",
+              "sRGB"
+            ]
+          ],
+          [
+            [
+              "Image Texture",
+              "Color",
+              "Principled BSDF",
+              "Base Color"
+            ],
+            [
+              "Principled BSDF",
+              "BSDF",
+              "Material Output",
+              "Surface"
+            ]
+          ]
+        ],
+        [
+          "Retained_painted_costume_Brass",
+          [
+            [
+              "pbr",
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.800000011920929,
+                  1.0
+                ],
+                0.44999998807907104,
+                0.699999988079071,
+                1.0,
+                0.0,
+                0.006000000052154064
+              ]
+            ],
+            [
+              "image",
+              "02_warden_albedo.png",
+              "sRGB"
+            ]
+          ],
+          [
+            [
+              "Image Texture",
+              "Color",
+              "Principled BSDF",
+              "Base Color"
+            ],
+            [
+              "Principled BSDF",
+              "BSDF",
+              "Material Output",
+              "Surface"
+            ]
+          ]
+        ],
+        [
+          "Retained_painted_costume_Painted_reference_Boot",
+          [
+            [
+              "pbr",
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.800000011920929,
+                  1.0
+                ],
+                0.0,
+                0.8600000143051147,
+                1.0,
+                0.0,
+                0.006000000052154064
+              ]
+            ],
+            [
+              "image",
+              "02_warden_albedo.png",
+              "sRGB"
+            ]
+          ],
+          [
+            [
+              "Image Texture",
+              "Color",
+              "Principled BSDF",
+              "Base Color"
+            ],
+            [
+              "Principled BSDF",
+              "BSDF",
+              "Material Output",
+              "Surface"
+            ]
+          ]
+        ],
+        [
+          "Retained_painted_costume_Painted_reference_Metal",
+          [
+            [
+              "pbr",
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.800000011920929,
+                  1.0
+                ],
+                0.30000001192092896,
+                0.699999988079071,
+                1.0,
+                0.0,
+                0.006000000052154064
+              ]
+            ],
+            [
+              "image",
+              "02_warden_albedo.png",
+              "sRGB"
+            ]
+          ],
+          [
+            [
+              "Image Texture",
+              "Color",
+              "Principled BSDF",
+              "Base Color"
+            ],
+            [
+              "Principled BSDF",
+              "BSDF",
+              "Material Output",
+              "Surface"
+            ]
+          ]
+        ],
+        [
+          "Retained_painted_costume_Painted_reference_Cloak",
+          [
+            [
+              "pbr",
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.800000011920929,
+                  1.0
+                ],
+                0.0,
+                0.8600000143051147,
+                1.0,
+                0.0,
+                0.006000000052154064
+              ]
+            ],
+            [
+              "image",
+              "02_warden_albedo.png",
+              "sRGB"
+            ]
+          ],
+          [
+            [
+              "Image Texture",
+              "Color",
+              "Principled BSDF",
+              "Base Color"
+            ],
+            [
+              "Principled BSDF",
+              "BSDF",
+              "Material Output",
+              "Surface"
+            ]
+          ]
+        ]
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  },
+  "MPFB_coherent_head_and_neck": {
+    "vertices": 17815,
+    "coordinates_sha256": "cc90218e4b8b824f3015cf54272f85116d7043570039271702dbf20c3d373cf9",
+    "structure": {
+      "uv": [
+        [
+          "UVMap",
+          "695cb2cc31d2187ed5f3ab22b80c307f63636773c31b5c16d9e14a43ba10d7cd"
+        ]
+      ],
+      "topology": "dbe9c38c64124eecfd23ac53cd332a2a268516d5b4afde5eab12492acec8da5c",
+      "materials": [
+        [
+          "MPFB_skin_matching_native_UV",
+          [
+            [
+              "pbr",
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.800000011920929,
+                  1.0
+                ],
+                0.0,
+                0.6700000166893005,
+                1.0,
+                0.054999999701976776,
+                0.006000000052154064
+              ]
+            ],
+            [
+              "image",
+              "Jartur_mid_old_Slavic_Male_with_Genitals_and_Beard_lsdif_lighter.png",
+              "sRGB"
+            ]
+          ],
+          [
+            [
+              "Image Texture",
+              "Color",
+              "Principled BSDF",
+              "Base Color"
+            ],
+            [
+              "Principled BSDF",
+              "BSDF",
+              "Material Output",
+              "Surface"
+            ]
+          ]
+        ]
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  },
+  "MPFB_eyes": {
+    "vertices": 1064,
+    "coordinates_sha256": "677eb5f57fba9d5862c9f2fc8c843796728e976b0f8fd1c51d333b32b550f09d",
+    "structure": {
+      "uv": [
+        [
+          "UVMap",
+          "8e13e7dd7fdfdc909f3ce78e852e05adae7daf8a054d360eb9db3056d29770fe"
+        ]
+      ],
+      "topology": "6d0f8bb26b231b27fd3bfb538b0955e58373ae31e5ddea805af7290dd89ddae5",
+      "materials": [
+        [
+          "MPFB_separate_brown_iris_and_sclera",
+          [
+            [
+              "pbr",
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.800000011920929,
+                  1.0
+                ],
+                0.0,
+                0.25,
+                1.0,
+                0.0,
+                0.006000000052154064
+              ]
+            ],
+            [
+              "image",
+              "brown_eye_02.png",
+              "sRGB"
+            ]
+          ],
+          [
+            [
+              "Image Texture",
+              "Alpha",
+              "Principled BSDF",
+              "Alpha"
+            ],
+            [
+              "Image Texture",
+              "Color",
+              "Principled BSDF",
+              "Base Color"
+            ],
+            [
+              "Principled BSDF",
+              "BSDF",
+              "Material Output",
+              "Surface"
+            ]
+          ]
+        ]
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  },
+  "MPFB_hair": {
+    "vertices": 2984,
+    "coordinates_sha256": "9222efb8a98d18a141b6a2990b584ca3879471399556de4e6491216165ef3b4f",
+    "structure": {
+      "uv": [
+        [
+          "UVMap",
+          "1f9c35d31afee503fbfeb8adfa14be7d5d732e66dd5ae218b5bd7f128d7429c6"
+        ]
+      ],
+      "topology": "6fae3a14b6515c311b3942df8d0a709cb4a4fa0970e9ac0c4a7e9ce6f9ad771c",
+      "materials": [
+        [
+          "MPFB_separate_dark_hair",
+          [
+            [
+              "pbr",
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.800000011920929,
+                  1.0
+                ],
+                0.0,
+                0.7200000286102295,
+                1.0,
+                0.0,
+                0.006000000052154064
+              ]
+            ],
+            [
+              "image",
+              "short01_diffuse.png",
+              "sRGB"
+            ]
+          ],
+          [
+            [
+              "Image Texture",
+              "Alpha",
+              "Principled BSDF",
+              "Alpha"
+            ],
+            [
+              "Image Texture",
+              "Color",
+              "Principled BSDF",
+              "Base Color"
+            ],
+            [
+              "Principled BSDF",
+              "BSDF",
+              "Material Output",
+              "Surface"
+            ]
+          ]
+        ]
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  },
+  "MPFB_eyebrows": {
+    "vertices": 124,
+    "coordinates_sha256": "099adcd227bd257962ee8215df1dedab8c880723b3df330eaff09290f192034e",
+    "structure": {
+      "uv": [
+        [
+          "UVMap",
+          "4cfc6de2f65f7f99cc3e8b3ec59b57df73654bb41bd73b16b636541ee9f451dc"
+        ]
+      ],
+      "topology": "a82513f58b94ca7cab26e64c00d97c59284f591ae694dd099b1097d9f2daa13a",
+      "materials": [
+        [
+          "MPFB_separate_eyebrows",
+          [
+            [
+              "pbr",
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.800000011920929,
+                  1.0
+                ],
+                0.0,
+                0.800000011920929,
+                1.0,
+                0.0,
+                0.006000000052154064
+              ]
+            ],
+            [
+              "image",
+              "eyebrow001.png",
+              "sRGB"
+            ]
+          ],
+          [
+            [
+              "Image Texture",
+              "Alpha",
+              "Principled BSDF",
+              "Alpha"
+            ],
+            [
+              "Image Texture",
+              "Color",
+              "Principled BSDF",
+              "Base Color"
+            ],
+            [
+              "Principled BSDF",
+              "BSDF",
+              "Material Output",
+              "Surface"
+            ]
+          ]
+        ]
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  }
+}

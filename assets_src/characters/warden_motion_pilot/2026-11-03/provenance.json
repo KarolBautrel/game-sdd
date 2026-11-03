@@ -1,0 +1,26 @@
+{
+  "owner": "presentation018 / slice018 / milestone013",
+  "baseline": "assets_src/characters/mpfb_warden_boots_only/2026-11-02/warden_restored.blend",
+  "baseline_blend_sha256": "9c06bf7b63b80ebf538eabc51168fbf6b1a704a1623e747708f3e7652fbfeeda",
+  "tools": {
+    "blender": "5.2.3 LTS",
+    "aseprite": "1.3.17.2"
+  },
+  "method": "Manual fitted29-bone FK rig, explicit semantic weights, authored analytic FK motion; no purchased/generated external motion",
+  "retained_maps_and_licences": "Byte-identical selected stage43 maps; inherited licences copied in licenses/",
+  "sword": "Original code-authored separate prop in build_warden_motion.py",
+  "scripts_sha256": {
+    "tools/blender/build_warden_motion.py": "1e8485aff59920b6d1a02569760da4711853508cc04b769443acdf99ca5ce60e",
+    "tools/blender/verify_warden_motion.py": "49118622ec65ed5fff05ff2f0c1406b2e99805a3088762b8cce579fd1c80be99",
+    "tools/aseprite/warden_motion.lua": "63d6a3a024fbd3768622bd768ede92f0744fcad0dc5fdbaf4ae34b05aaefa286",
+    "tools/qa/build_warden_motion_preview.py": "597ddd7569065f976462ada91b461e5c86ddcbe903e989f8a6e9491dfad54006",
+    "tools/qa/warden_motion_player.html": "ca1ee794255b6be95bd2b00d24065065cf316fb38d6bf90d73ada303d42998cb",
+    "tools/qa/warden_motion_player.js": "0e46af568c7a6923115c9181eaa6992db914a8e43614f92817076cb00238aeb4",
+    "tools/qa/start_warden_motion_preview.ps1": "5785b6cba1c197d5f4b2ccc677337f7213f9176a065ba2c479bcca602481b3af",
+    "tools/qa/finalize_warden_motion.py": "b115ae79a397b9d66b22db4bb4ecf12fd49e1b9aa4d3a79742ba15e695cdcf88"
+  },
+  "runtime_changed": false,
+  "paid_calls": 0,
+  "downloads": 0,
+  "os_input_used": false
+}

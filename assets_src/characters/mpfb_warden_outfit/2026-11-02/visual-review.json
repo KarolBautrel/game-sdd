@@ -1,0 +1,46 @@
+{
+  "status": "OBSERVED_STATIC_REVIEW_AWAITING_USER",
+  "reviewer": "Codex",
+  "source_sha256": "7bddd04626a794662431a0abd55baeac34030622c529bd7e7401575484e2464a",
+  "observations": [
+    "front/profile/rear and native stance inspected",
+    "smaller feet and cuff fit compared at matched camera",
+    "actual strap/buckle/plate volume inspected with neutral material and changed light",
+    "shoulder crown/cloth-mask and exterior boot-seam corrections inspected",
+    "actual FBX body/belt imported and inspected"
+  ],
+  "remaining": [
+    "static assembly warnings retained",
+    "no rig, pose deformation, weapon or live-game proof",
+    "new material simplification awaits user preference"
+  ],
+  "head_maps_unchanged": {
+    "Jartur_mid_old_Slavic_Male_with_Genitals_and_Beard_lsdif_lighter.png": "0f1a86d78af8bc1e55ae21cfaca0e7308384f789796adc77a78e4d22ccaf419c",
+    "brown_eye_02.png": "fae2cf1e45fd4df3bc07ea4ea0f26883c78cbeae03585fa6754dc3e54c03c3dd",
+    "short01_diffuse.png": "f34a0957184e3d1e911ed59245f874f8d4843f61ee44ff49f43edb4be0196949",
+    "eyebrow001.png": "9940f7d0b1b223709a19b05156ba6f6e9e4dbdbced02d7574f4d51d72c58967b"
+  },
+  "images": {
+    "renders/before_boots.png": "f3a4175f62f2010b203dfa0913fb3b580108827aaa063c602ea5fe14aeae82c7",
+    "renders/belt.png": "d4e43e466b30dcec1e94a6d54d4f1a07d8059f59bec1177c613ffddbffe0b25a",
+    "renders/boots.png": "8ad694debdf03f9e5a20747b323048866481b71b036442c47b9b5ec49ecaaa92",
+    "renders/changed_light.png": "14ca30b114dd99fbb860027adde1bd1299134628ee93cfe6c2fd9e6c4ac43f27",
+    "renders/face.png": "c0e8d0f057ba18fcbfcb00ea037c9c5a5a02ce58386bac3052e5109e067245d1",
+    "renders/fbx_belt.png": "4e3e6e2d3376895d92de2ea62ca24e9d48f3a320ea1063b5b5dfe8fa181238e1",
+    "renders/fbx_body.png": "e7aeb4409af293fd20253c1d67907769b129e908248a561b2258d6406888067b",
+    "renders/front.png": "df2455765847069b06f605df85bde66b7c956f591a29641c0aa7ce241f7b796b",
+    "renders/geometry_belt.png": "2dab175f5f22d0515f204addcd1afcfbfcdefb9073caf37ca2fe63ce756a6dc7",
+    "renders/geometry_body.png": "475ed82f2dc8052aac73fdde85258a2979828fb90651d57c9683da94ec50f214",
+    "renders/rear.png": "a52073dfd3e052ace4ac3832d705fd1aecf4fd058d46eabea7181faca9314e83",
+    "renders/side.png": "80e5f49c44ff0a7d63b632728ad9a241fb15c0dfde925db843b7435f7ddfc9d8",
+    "renders/source_body.png": "7f27dbe7e7e86bcd7b57b8741feccaaad46e5bf88943ac025b7e195964e49596",
+    "renders/source_front.png": "0bc50bacf57fcf571e112518ff7047f87cf2e33b8a768336d2ffd3d8ca866f04",
+    "renders/tactical.png": "a55c88a75117c47e43eab248fdf091cff176df9cec60318fd9a7f043ea5123ce",
+    "renders/three_quarter.png": "0ed4fbd4103a3fac4c3d0767bdcab84727fc57bed0be6c62632da54a6ae6a4dd"
+  },
+  "boards": {
+    "proposal.png": "f16c547d361d7f4800bb738a607305ccdb0dc7e6fe09511ba7a70b864770294d",
+    "comparison.png": "bbfe3f63f066d534ce8f6b264f6f7d57c74cffe00b2964547da8ae553a96f81d",
+    "all_views.png": "7d6c80acd75822c4ec1570e78aede566c65b537397b80a63b58f074bf48ee39a"
+  }
+}

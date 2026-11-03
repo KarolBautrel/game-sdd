@@ -1,0 +1,237 @@
+{
+  "id": "03_wayfarer",
+  "title": "III / Wedrowiec",
+  "static": true,
+  "rigged": false,
+  "animated": false,
+  "integrated": false,
+  "triangles": 92826,
+  "source_parts": 26,
+  "bounds": [
+    [
+      -0.4419361650943756,
+      0.4388289153575897
+    ],
+    [
+      -0.2024141103029251,
+      0.2621832489967346
+    ],
+    [
+      0.00800000037997961,
+      1.8464761972427368
+    ]
+  ],
+  "audit": {
+    "profile": "render",
+    "eps": 0.000209,
+    "tol": 0.004182,
+    "gap": 0.020908,
+    "pass": true,
+    "errors": [],
+    "warnings": [
+      "03_wayfarer_static_actor: 5 detached fragments (41% of its faces), nearest 0.0103 from the rest"
+    ],
+    "per_object": {
+      "03_wayfarer_static_actor": {
+        "tris": 92826,
+        "parts": 22,
+        "errors": [],
+        "warnings": [
+          "03_wayfarer_static_actor: 5 detached fragments (41% of its faces), nearest 0.0103 from the rest"
+        ]
+      }
+    },
+    "skipped": []
+  },
+  "ucupaint": {
+    "version": "3.0.0",
+    "workspace": "PAINT_WORKSPACE_03_wayfarer",
+    "layers": 1,
+    "image": "03_wayfarer_painted_albedo",
+    "gui_brush_strokes": false
+  },
+  "method": "CC0 anatomical scaffold; authored tailored/forged geometry; original AI-painted multiview projection with baked diffuse atlas; controlled curved profiles, local cage subdivision, leather/cloth edge finishing",
+  "limits": [
+    "static visual prototype",
+    "projection contains designed/baked lighting",
+    "inferred geometry and view seams need later animation polish",
+    "no live GUI sculpt/paint strokes"
+  ],
+  "camera": {
+    "elevation": 18,
+    "yaw": 330,
+    "ortho": 2.7,
+    "render_size": 900,
+    "tactical_pixels_per_metre": 100
+  },
+  "files": {
+    "03_wayfarer.blend": "e939c041bd6d238dc61c6b9594b46ed230a8fbcb24be4446563d1ada4e54025e",
+    "03_wayfarer.fbx": "c76683ca5b7309be845f014de8615e10f2f958f7cd43cb0382aed5df7d7fbb82",
+    "concept.png": "6b1129c5a18be7cf10fb8d84ab40bf2a0e8be757ef13021016ea89c31161f741",
+    "projection-padded.png": "b6f1d91480318659dc94c8c3bbb7a6e6c4a475847e846f099947638f601b0600",
+    "geometry_review/matcap_back.png": "cdb2e5e14c74159f6fbefc3eaa07b0c6bf050b25d79c20a4e683b1a4f779a9b3",
+    "geometry_review/matcap_front.png": "6a16f8b3f7223f02e70ed7b88c1a71d08b4cd4073b79c3d016d9066da18899fc",
+    "geometry_review/matcap_right.png": "92b9b83c3e5466e2a75de5c91bad945dc07433cc619d9604164fa11f7ad01883",
+    "geometry_review/matcap_threequarter.png": "3a038ade5212e5bafa604a0a613f5158b28d58f184b8e6c105ec73e163d86c13",
+    "geometry_review/review_sheet.png": "dffa4eecae43db1aa20cd766557029decce1226867d5419527915d2f7a193168",
+    "geometry_review/silhouette_back.png": "c0786c25ac1bec17963d65e09d73a4fc9d429003cb754064955cbe3ebaba893a",
+    "geometry_review/silhouette_front.png": "6402b798f185d695ec0ee2a4b4bd1062716515b02e7754470f12b111fd75f080",
+    "geometry_review/silhouette_right.png": "5d1bf09b530404ecd46ac0094dbb8ef89d7d9268228631d8f4a1a8e01ba8c815",
+    "geometry_review/silhouette_threequarter.png": "35dcd029096fa71908490baba409098ee308753baeba85429397d2307cf2d83d",
+    "geometry_review/wire_back.png": "7b1a01fef5e2c2c935d93c2d1eb4502a897936c901658df7e9394f54298050e9",
+    "geometry_review/wire_front.png": "fdd45ab4360b32b8546ef354b583e07ea8fb554e1f1ade874235c52503931fa1",
+    "geometry_review/wire_right.png": "d626ec351b47dc586acde47462f74ceb1d3f98d4bf88308dca9c5f8b4eba7355",
+    "geometry_review/wire_threequarter.png": "79fea7a2696fb7c819369b9b230181f07bac465cc850ea31252eb92849065f04",
+    "renders/face.png": "ec26fa5e5c06e218be5974d2b71591be22b17972551c9d2809c7f17d9cc7609f",
+    "renders/front.png": "9b0bcae044e8c206577359d6fe8c2d8e9620ef100c38eb2fab98c336422e75b8",
+    "renders/rear.png": "0ec9c0eb924580580141f636bff70ddc922f1bc65fc29eb5959e0802297ef4cc",
+    "renders/side.png": "76d4d02e3c95a79cdae3e73b79a7ff8dce954de4f73163063f9049d0354041ba",
+    "renders/tactical.png": "5d6ab944c290bce4f51e1d696d1a5a8195b93eb3b8e46ea71b76024846af92a3",
+    "renders/three_quarter.png": "bdc17a562a775bcbf3b4005f227c065533070f4f3745e7cabd0c9499768f1248",
+    "textures/03_wayfarer_albedo.png": "070db85e4b49fbe44c0f5a4ebca55fa87622463b380a15d984a2cdd912501225",
+    "renders/fbx_roundtrip.png": "4b448024496e407ad30ab7e192965826ef909b8b96cf76d8792a1cf5bbeec6e7"
+  },
+  "refinement": {
+    "baseline": "assets_src\\characters\\painted_candidates\\2026-11-02\\03_wayfarer",
+    "baseline_model_sha256": "35e826284140e0eda37fbcabcffab171f4f9c3b9cf78b20345b6ea41f40deb13",
+    "baseline_delivery_sha256": "ad6eb0d01082abdfd54edb2ce7c070566f878c0d001b1b4bd1cf39e2009cc1bb",
+    "changes": [
+      {
+        "part": "Cloak",
+        "operation": "low-contrast original cloth grain with real fold lighting",
+        "palette": "retained navy",
+        "reason": "soften angular reference-light patches; no bitmap blur"
+      },
+      {
+        "part": "CC0_derived_anatomical_face_and_neck",
+        "operation": "Catmull-Clark before shell thickness",
+        "levels": 1,
+        "triangles_before": 7660,
+        "triangles_after": 30680
+      },
+      {
+        "part": "Fitted_gambeson_core",
+        "operation": "monotone curved profile",
+        "rings_before": 8,
+        "rings_after": 22,
+        "radial_segments_before": 32,
+        "radial_segments_after": 48,
+        "profile_control_points_preserved": true
+      },
+      {
+        "part": "Split_tailored_coat_-1",
+        "operation": "Catmull-Clark before shell thickness",
+        "levels": 1,
+        "triangles_before": 432,
+        "triangles_after": 1728
+      },
+      {
+        "part": "Split_tailored_coat_1",
+        "operation": "Catmull-Clark before shell thickness",
+        "levels": 1,
+        "triangles_before": 432,
+        "triangles_after": 1728
+      },
+      {
+        "part": "Structured_leather_brigandine",
+        "operation": "monotone curved profile",
+        "rings_before": 5,
+        "rings_after": 13,
+        "radial_segments_before": 32,
+        "radial_segments_after": 48,
+        "profile_control_points_preserved": true
+      },
+      {
+        "part": "Leather_belt_with_real_thickness",
+        "operation": "monotone curved profile",
+        "rings_before": 4,
+        "rings_after": 10,
+        "radial_segments_before": 48,
+        "radial_segments_after": 48,
+        "profile_control_points_preserved": true
+      },
+      {
+        "part": "Belt_pouch_real_volume",
+        "operation": "rounded leather corners",
+        "radius_metres": 0.006,
+        "segments": 4
+      },
+      {
+        "part": "Fitted_boot_-1",
+        "operation": "monotone curved profile",
+        "rings_before": 9,
+        "rings_after": 25,
+        "radial_segments_before": 32,
+        "radial_segments_after": 48,
+        "profile_control_points_preserved": true
+      },
+      {
+        "part": "Fitted_wrist_cuff_-1",
+        "operation": "monotone curved profile",
+        "rings_before": 3,
+        "rings_after": 7,
+        "radial_segments_before": 24,
+        "radial_segments_after": 48,
+        "profile_control_points_preserved": true
+      },
+      {
+        "part": "Fitted_boot_1",
+        "operation": "monotone curved profile",
+        "rings_before": 9,
+        "rings_after": 25,
+        "radial_segments_before": 32,
+        "radial_segments_after": 48,
+        "profile_control_points_preserved": true
+      },
+      {
+        "part": "Fitted_wrist_cuff_1",
+        "operation": "monotone curved profile",
+        "rings_before": 3,
+        "rings_after": 7,
+        "radial_segments_before": 24,
+        "radial_segments_after": 48,
+        "profile_control_points_preserved": true
+      },
+      {
+        "part": "Forged_shoulder_lame",
+        "operation": "Catmull-Clark before shell thickness",
+        "levels": 1,
+        "triangles_before": 160,
+        "triangles_after": 640
+      },
+      {
+        "part": "Thin_woven_half_cloak",
+        "operation": "Catmull-Clark before shell thickness",
+        "levels": 1,
+        "triangles_before": 1248,
+        "triangles_after": 4992
+      },
+      {
+        "part": "Coherent_swept_hair_mass",
+        "operation": "local hairline boundary relax",
+        "iterations": 2,
+        "max_step_metres": 0.0015000000489916532
+      },
+      {
+        "part": "Closed_anatomical_glove_-1",
+        "operation": "glove local surface relax",
+        "factor": 0.28,
+        "iterations": 2
+      },
+      {
+        "part": "Closed_anatomical_glove_1",
+        "operation": "glove local surface relax",
+        "factor": 0.28,
+        "iterations": 2
+      },
+      {
+        "part": "Rolled_wool_neckline_seam",
+        "operation": "sewn rounded edge",
+        "radius_metres": 0.0022
+      }
+    ],
+    "texture_design_preserved": true,
+    "camera_pose_preserved": true,
+    "triangle_budget": 120000
+  }
+}

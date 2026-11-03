@@ -1,0 +1,25 @@
+{
+  "schema": "sdd.mpfb-warden-reference-v1",
+  "status": "READY_FOR_STATIC_PILOT",
+  "reference": "assets_src/characters/surface_refinement/2026-11-02/02_warden/concept.png",
+  "sha256": "1cbe614de2da6dfac3a515a8bd62cd4d84980b19e10361c10f04ad658c937964",
+  "reviewer": "Codex",
+  "views": [
+    "front",
+    "profile",
+    "rear"
+  ],
+  "review": "Viewed original turnaround and stage40 actual bust. Costume/palette is the retained direction; new coherent MPFB anatomy replaces the rejected projected skin.",
+  "brief": {
+    "palette": [
+      "muted blue steel",
+      "navy cloth",
+      "brown leather",
+      "muted brass"
+    ],
+    "anatomy": "adult male, broad but natural jaw, restrained brow, short dark hair, weathered skin",
+    "camera": "retained18deg elevation/yaw330 for comparisons; native100px/m; optional35deg isometric study explicitly labelled",
+    "inference": "New face identity and unseen facial geometry follow MPFB coherent anatomy, not independent AI-view paint. Exact portrait likeness is not required."
+  },
+  "scope": "one static pilot; no animation, enemy roster or runtime replacement until user agreement"
+}

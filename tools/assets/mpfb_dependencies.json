@@ -1,0 +1,60 @@
+{
+  "schema": "sdd.mpfb-dependencies-v1",
+  "addon_version": "2.0.18",
+  "source_tag": "v2.0.18",
+  "install": "C:\\Users\\karol\\.codex\\tools\\character-art\\mpfb-2.0.18",
+  "addon": "C:\\Users\\karol\\.codex\\tools\\character-art\\mpfb-2.0.18\\addons\\mpfb",
+  "packs_license": "CC0; retain individual asset license files",
+  "addon_license": "GPL-3.0-or-later; see downloaded LICENSE.md",
+  "downloads": [
+    {
+      "name": "mpfb-2.0.18",
+      "origin": "https://codeload.github.com/makehumancommunity/mpfb2/zip/refs/tags/v2.0.18",
+      "mirrors": [
+        "https://codeload.github.com/makehumancommunity/mpfb2/zip/refs/tags/v2.0.18"
+      ],
+      "bytes": 45601989,
+      "sha256": "ada7c4ff11e79cf6ed9b441bccabc52c9359f2848b988f66e89c14c30b21fed7"
+    },
+    {
+      "name": "makehuman_system_assets",
+      "origin": "https://files.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip",
+      "mirrors": [
+        "https://files.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip",
+        "https://files2.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip"
+      ],
+      "bytes": 280737770,
+      "sha256": "b542127a8e25547c7c29c19f2d1d2adb9a664c80396ecd694095dbc8028a0107"
+    },
+    {
+      "name": "skins02",
+      "origin": "https://files.makehumancommunity.org/asset_packs/skins02/skins02_cc0.zip",
+      "mirrors": [
+        "https://files.makehumancommunity.org/asset_packs/skins02/skins02_cc0.zip",
+        "https://files2.makehumancommunity.org/asset_packs/skins02/skins02_cc0.zip"
+      ],
+      "bytes": 76112708,
+      "sha256": "1613f1ef3afca53094511d26620ed7cf1d2dedc29ed3d384d60bdebe250698ae"
+    },
+    {
+      "name": "system_eye_materials01",
+      "origin": "https://files.makehumancommunity.org/asset_packs/system_eye_materials01/system_eye_materials01_cc0.zip",
+      "mirrors": [
+        "https://files.makehumancommunity.org/asset_packs/system_eye_materials01/system_eye_materials01_cc0.zip",
+        "https://files2.makehumancommunity.org/asset_packs/system_eye_materials01/system_eye_materials01_cc0.zip"
+      ],
+      "bytes": 14310685,
+      "sha256": "acad4636c08ff96ac8a27775cfa071052c8cba9b21e0029b649bdd6ec7aeb332"
+    }
+  ],
+  "compatibility": {
+    "status": "TESTED_PASS",
+    "blender": "5.2.3 LTS",
+    "module": "bl_ext.sdd_mpfb.mpfb",
+    "isolated_user_data": "C:\\Users\\karol\\.codex\\tools\\character-art\\mpfb-2.0.18\\extension-user\\.user\\sdd_mpfb\\mpfb\\data",
+    "actual_human_creation": true,
+    "actual_asset_imports": true,
+    "actual_fbx_reimport": true,
+    "proof": "assets_src/characters/mpfb_warden/2026-11-02/verification.json"
+  }
+}

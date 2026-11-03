@@ -1,0 +1,38 @@
+{
+  "status": "OBSERVED_STATIC_REVIEW_AWAITING_USER",
+  "reviewer": "Codex",
+  "source_sha256": "0365891e93d6f1fa888850d6d641305a8d75a42273e687ad4fe45dd88d1d7f1a",
+  "observations": [
+    "face front/profile/three-quarter has coherent features without old view overlays",
+    "checker/albedo inspected; no gross face projection stretch",
+    "eye alpha visible in source and actual FBX import",
+    "neck profile correction inspected",
+    "whole-body and native100px/m/2x ground boards inspected"
+  ],
+  "limits": [
+    "hair cards and painted costume remain modest",
+    "static assemblies and retained audit warnings need later fit/deformation work",
+    "not a Godot gameplay capture or user approval"
+  ],
+  "images": {
+    "renders/face_albedo.png": "cb5b0a10d89800123fe422580ad34694bc0a71092d33fc210f4823c594e183a7",
+    "renders/face_changed_light.png": "9c0c24acaada6b6db4fbbef9acd6fd0f7ec09c54bcbeb40a6771f1331f59e0e3",
+    "renders/face_front.png": "bb8659104cb037a13f4b7e13a37bb9c9909298acd972725bc282a3347f65e255",
+    "renders/face_profile.png": "d93e73978e1e638738b3790613eb8741fe96b41099e21765a4470dea09de63cf",
+    "renders/face_three_quarter.png": "e336543704a776ebe09242aea1d7f32b2badc80a0c37c6efb2cdeee81992dce9",
+    "renders/face_uv_checker.png": "b54f6a519ba80e19767ca2e2a9759d40ccce47733604a095213e6583e625b2fe",
+    "renders/fbx_body.png": "d9a36064befc792be96de4c57c6e49ae3231a5c93c7be27ad6d2b93fe26a63c9",
+    "renders/fbx_face.png": "ae03b038794ffd35a6f37eaa52e96a540fbe70cf96d5bb0efcd596763d2465c6",
+    "renders/front.png": "ad49630e4e7748e02ea2c8610fa50f27d2c6d0e4cf9bf8f1579628c75becd9df",
+    "renders/isometric35.png": "eabeb7cf21d9b30d7748a39a5996a90942584f2cf55f8cdc3534b395f3c365f9",
+    "renders/rear.png": "07b80a4bd29170d2d3459c4656e17358947a78c694e26207bb6e5c9bb8fce32a",
+    "renders/side.png": "2c2ca21f0093e01529a97c981bc07335d774554819032cfe94792d4db78912a1",
+    "renders/tactical.png": "3c3b14ba60981db882a7c25ce8176d8c832490f806088e20a4a654080d6fc932",
+    "renders/three_quarter.png": "a1e5efce7f55a2e9cb50120aba80ebba2f9db2ffb7ed4f1ec73db4d3e6d0760f"
+  },
+  "boards": {
+    "proposal.png": "03f7919c13718d0c25f1a1bff04bdfb42276ea9af654c2058782e3aa13c60dff",
+    "comparison.png": "f22d53f582c74bc735ab41f34ac83717649917c149131e1f92df76ff1398f107",
+    "all_views.png": "10a739f67ad606c0ea2e7cbe0628c80a25ed2bb0d9bc0927139efdf3863f4684"
+  }
+}

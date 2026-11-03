@@ -1,0 +1,68 @@
+{
+  "schema": "sdd.warden-modelled-outfit-v1",
+  "static": true,
+  "rigged": false,
+  "animated": false,
+  "integrated": false,
+  "parts": [
+    {
+      "name": "Warden_modelled_outfit",
+      "triangles": 153308
+    },
+    {
+      "name": "MPFB_coherent_head_and_neck",
+      "triangles": 35520
+    },
+    {
+      "name": "MPFB_eyes",
+      "triangles": 2040
+    },
+    {
+      "name": "MPFB_hair",
+      "triangles": 3678
+    },
+    {
+      "name": "MPFB_eyebrows",
+      "triangles": 192
+    }
+  ],
+  "source_parts": 105,
+  "head_source": "assets_src\\characters\\mpfb_warden\\2026-11-02",
+  "head_source_sha256": "0365891e93d6f1fa888850d6d641305a8d75a42273e687ad4fe45dd88d1d7f1a",
+  "method": "coherent MPFB rest stance; authored physical armor/harness/cloth; three portable PBR maps; exact retained face meshes/UV",
+  "camera": {
+    "elevation": 18,
+    "yaw": 330,
+    "ortho": 2.7,
+    "tactical_pixels_per_metre": 100
+  },
+  "limits": [
+    "static outfit prototype, no deformation proof",
+    "source procedural materials baked to portable UV maps",
+    "future cast needs distinct head recipes"
+  ],
+  "files": {
+    "warden_outfit.blend": "7bddd04626a794662431a0abd55baeac34030622c529bd7e7401575484e2464a",
+    "warden_outfit.fbx": "b66050320a7aaca6e2ed71b1a3b15d62b6b086a80408662251cb4c038e6bbe96",
+    "renders/belt.png": "d4e43e466b30dcec1e94a6d54d4f1a07d8059f59bec1177c613ffddbffe0b25a",
+    "renders/boots.png": "8ad694debdf03f9e5a20747b323048866481b71b036442c47b9b5ec49ecaaa92",
+    "renders/changed_light.png": "14ca30b114dd99fbb860027adde1bd1299134628ee93cfe6c2fd9e6c4ac43f27",
+    "renders/face.png": "c0e8d0f057ba18fcbfcb00ea037c9c5a5a02ce58386bac3052e5109e067245d1",
+    "renders/front.png": "df2455765847069b06f605df85bde66b7c956f591a29641c0aa7ce241f7b796b",
+    "renders/geometry_belt.png": "2dab175f5f22d0515f204addcd1afcfbfcdefb9073caf37ca2fe63ce756a6dc7",
+    "renders/geometry_body.png": "475ed82f2dc8052aac73fdde85258a2979828fb90651d57c9683da94ec50f214",
+    "renders/rear.png": "a52073dfd3e052ace4ac3832d705fd1aecf4fd058d46eabea7181faca9314e83",
+    "renders/side.png": "80e5f49c44ff0a7d63b632728ad9a241fb15c0dfde925db843b7435f7ddfc9d8",
+    "renders/source_body.png": "7f27dbe7e7e86bcd7b57b8741feccaaad46e5bf88943ac025b7e195964e49596",
+    "renders/source_front.png": "0bc50bacf57fcf571e112518ff7047f87cf2e33b8a768336d2ffd3d8ca866f04",
+    "renders/tactical.png": "a55c88a75117c47e43eab248fdf091cff176df9cec60318fd9a7f043ea5123ce",
+    "renders/three_quarter.png": "0ed4fbd4103a3fac4c3d0767bdcab84727fc57bed0be6c62632da54a6ae6a4dd",
+    "textures/brown_eye_02.png": "fae2cf1e45fd4df3bc07ea4ea0f26883c78cbeae03585fa6754dc3e54c03c3dd",
+    "textures/eyebrow001.png": "9940f7d0b1b223709a19b05156ba6f6e9e4dbdbced02d7574f4d51d72c58967b",
+    "textures/Jartur_mid_old_Slavic_Male_with_Genitals_and_Beard_lsdif_lighter.png": "0f1a86d78af8bc1e55ae21cfaca0e7308384f789796adc77a78e4d22ccaf419c",
+    "textures/short01_diffuse.png": "f34a0957184e3d1e911ed59245f874f8d4843f61ee44ff49f43edb4be0196949",
+    "textures/warden_outfit_albedo.png": "3beb665f8b95c78f422fe1576ecfec669195f581005f0cde1e2669cb77160c85",
+    "textures/warden_outfit_metallic.png": "5127dc49658afa6252cd38b396d6f0e0a5d8741de954261b73c035319bf519d3",
+    "textures/warden_outfit_roughness.png": "e657e9844936fa26c264a99c20c54096d863dc65da79c9fb3553b7f7bf1e865c"
+  }
+}

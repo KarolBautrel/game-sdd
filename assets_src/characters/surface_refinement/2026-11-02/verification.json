@@ -1,0 +1,372 @@
+{
+  "status": "TECHNICAL_PASS",
+  "art_acceptance": "AWAITING_USER_REVIEW",
+  "checks": 8838,
+  "models": [
+    {
+      "id": "01_mercenary",
+      "status": "PASS",
+      "checks": 79,
+      "triangles": 92186,
+      "actual_fbx_reimport": true,
+      "ucupaint_layer_reopened": true,
+      "textures": [
+        "assets_src\\characters\\surface_refinement\\2026-11-02\\01_mercenary\\textures\\01_mercenary_albedo.png"
+      ],
+      "renders": {
+        "front": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            301,
+            136,
+            597,
+            738
+          ],
+          "mean_linear_rgb": 0.15233
+        },
+        "three_quarter": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            323,
+            128,
+            590,
+            738
+          ],
+          "mean_linear_rgb": 0.15082
+        },
+        "side": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            379,
+            128,
+            537,
+            737
+          ],
+          "mean_linear_rgb": 0.16324
+        },
+        "rear": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            302,
+            145,
+            598,
+            739
+          ],
+          "mean_linear_rgb": 0.18331
+        },
+        "face": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            29,
+            0,
+            839,
+            726
+          ],
+          "mean_linear_rgb": 0.20896
+        },
+        "tactical": {
+          "size": [
+            384,
+            384
+          ],
+          "alpha_bounds": [
+            154,
+            95,
+            234,
+            278
+          ],
+          "mean_linear_rgb": 0.15319
+        },
+        "fbx_roundtrip": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            323,
+            128,
+            590,
+            738
+          ],
+          "mean_linear_rgb": 0.14815
+        }
+      },
+      "audit_warnings": [
+        "01_mercenary_static_actor: 5 detached fragments (41% of its faces), nearest 0.0103 from the rest"
+      ]
+    },
+    {
+      "id": "02_warden",
+      "status": "PASS",
+      "checks": 79,
+      "triangles": 105742,
+      "actual_fbx_reimport": true,
+      "ucupaint_layer_reopened": true,
+      "textures": [
+        "assets_src\\characters\\surface_refinement\\2026-11-02\\02_warden\\textures\\02_warden_albedo.png"
+      ],
+      "renders": {
+        "front": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            298,
+            136,
+            601,
+            738
+          ],
+          "mean_linear_rgb": 0.18724
+        },
+        "three_quarter": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            321,
+            128,
+            593,
+            738
+          ],
+          "mean_linear_rgb": 0.18262
+        },
+        "side": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            379,
+            128,
+            537,
+            737
+          ],
+          "mean_linear_rgb": 0.19224
+        },
+        "rear": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            298,
+            145,
+            602,
+            739
+          ],
+          "mean_linear_rgb": 0.18296
+        },
+        "face": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            21,
+            0,
+            848,
+            726
+          ],
+          "mean_linear_rgb": 0.24148
+        },
+        "tactical": {
+          "size": [
+            384,
+            384
+          ],
+          "alpha_bounds": [
+            153,
+            95,
+            235,
+            278
+          ],
+          "mean_linear_rgb": 0.18511
+        },
+        "fbx_roundtrip": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            321,
+            128,
+            593,
+            738
+          ],
+          "mean_linear_rgb": 0.17917
+        }
+      },
+      "audit_warnings": [
+        "02_warden_static_actor: 5 detached fragments (36% of its faces), nearest 0.0102 from the rest"
+      ]
+    },
+    {
+      "id": "03_wayfarer",
+      "status": "PASS",
+      "checks": 79,
+      "triangles": 92826,
+      "actual_fbx_reimport": true,
+      "ucupaint_layer_reopened": true,
+      "textures": [
+        "assets_src\\characters\\surface_refinement\\2026-11-02\\03_wayfarer\\textures\\03_wayfarer_albedo.png"
+      ],
+      "renders": {
+        "front": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            302,
+            136,
+            596,
+            738
+          ],
+          "mean_linear_rgb": 0.1571
+        },
+        "three_quarter": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            325,
+            128,
+            589,
+            738
+          ],
+          "mean_linear_rgb": 0.15441
+        },
+        "side": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            382,
+            128,
+            537,
+            737
+          ],
+          "mean_linear_rgb": 0.16331
+        },
+        "rear": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            303,
+            145,
+            597,
+            739
+          ],
+          "mean_linear_rgb": 0.17924
+        },
+        "face": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            33,
+            0,
+            835,
+            726
+          ],
+          "mean_linear_rgb": 0.20911
+        },
+        "tactical": {
+          "size": [
+            384,
+            384
+          ],
+          "alpha_bounds": [
+            154,
+            95,
+            233,
+            278
+          ],
+          "mean_linear_rgb": 0.15743
+        },
+        "fbx_roundtrip": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            325,
+            128,
+            589,
+            738
+          ],
+          "mean_linear_rgb": 0.15136
+        }
+      },
+      "audit_warnings": [
+        "03_wayfarer_static_actor: 5 detached fragments (41% of its faces), nearest 0.0103 from the rest"
+      ]
+    }
+  ],
+  "production_manifests": [
+    {
+      "manifest": "assets_src/characters/roster/manifest.json",
+      "files": 8223,
+      "status": "PASS"
+    },
+    {
+      "manifest": "assets_src/environment/manifest.json",
+      "files": 215,
+      "status": "PASS"
+    }
+  ],
+  "os_input_used": false,
+  "gameplay_tested": false,
+  "refinement_additional_checks": 136,
+  "original_stage39_delivery_files": 101,
+  "comparisons": [
+    {
+      "id": "01_mercenary",
+      "before_triangles": 39248,
+      "after_triangles": 92186,
+      "maximum_bounds_drift_metres": 0.004541546106338501,
+      "camera_matched": true,
+      "baseline_preserved": true
+    },
+    {
+      "id": "02_warden",
+      "before_triangles": 43676,
+      "after_triangles": 105742,
+      "maximum_bounds_drift_metres": 0.004541546106338501,
+      "camera_matched": true,
+      "baseline_preserved": true
+    },
+    {
+      "id": "03_wayfarer",
+      "before_triangles": 39428,
+      "after_triangles": 92826,
+      "maximum_bounds_drift_metres": 0.004541546106338501,
+      "camera_matched": true,
+      "baseline_preserved": true
+    }
+  ],
+  "independent_reviewer": false,
+  "user_art_acceptance": "PENDING"
+}

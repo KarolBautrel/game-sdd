@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$GodotPath = '',
-    [ValidateSet('dungeon', 'combat', 'map-editor', 'app')]
+    [ValidateSet('dungeon', 'combat', 'map-editor', 'app', 'styles')]
     [string]$Scene = 'dungeon',
     [ValidateRange(800, 2560)][int]$Width = 1920,
     [ValidateRange(600, 1440)][int]$Height = 1080,
@@ -35,6 +35,7 @@ $scenes = @{
     'combat' = 'res://scenes/combat/CombatDebug.tscn'
     'map-editor' = 'res://scenes/combat/CombatMapEditor.tscn'
     'app' = 'res://scenes/app/App.tscn'
+    'styles' = 'res://scenes/combat/CharacterStylePreview.tscn'
 }
 $overridePath = Join-Path $repoRoot 'override.cfg'
 $profileMarker = '; sdd QA launcher local profile'

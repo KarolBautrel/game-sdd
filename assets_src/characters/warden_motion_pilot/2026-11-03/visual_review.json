@@ -1,0 +1,24 @@
+{
+  "status": "STILL_REVIEW_COMPLETE_AWAITING_USER_MOTION_REVIEW",
+  "reviewed": "2026-11-03",
+  "method": "Actual rendered images opened with the image reader; pose strips and full-resolution details. Numeric every-frame evidence is separate.",
+  "opened_boards": ["motion_review.png", "direction_review.png"],
+  "opened_rig_images": ["placement_front", "placement_side", "placement_top", "rest_three_quarter", "ready_three_quarter", "ready_elbow", "squat_arm_raise", "squat_knee_side", "head_turn"],
+  "opened_details": ["motion_Idle_00", "motion_Walk_08", "motion_Sword_08", "motion_Sword_17", "motion_Sword_22", "fbx_Idle", "fbx_Sword"],
+  "additional_native_frames": ["Walk/front/008", "Walk/front/024", "Sword/front/017", "Sword/three_quarter/011", "Sword/three_quarter/026", "Idle/side/000", "Walk/side/000", "Walk/side/008", "Walk/side/016", "Walk/side/024"],
+  "findings": [
+    "Rest appearance matches the accepted painted costume and MPFB head; original topology/UV/maps also checked numerically.",
+    "Boot cuff now follows the shin; the sole stays planted during stance. Knee folds remain coarse at large bends.",
+    "Sword grip, pommel and crossguard are separate visible forms around the closed fist. Ready blade projects outside the silhouette.",
+    "Cuirass and pauldrons retain rigid forms in inspected pilot poses. Face, eyes, brows and hair remain coherent.",
+    "Coat and cape react to the limbs/torso. Thin skirt edges appear in side stride views; a deep squat exposes a small rear opening outside the delivered pilot range.",
+    "A fast forearm recovery flip was corrected with an outward blade arc and periodic quaternion smoothing; all source frames pass continuity and blade-path checks.",
+    "Four-view boards show the actual model and source motion. Rear views naturally occlude parts of the forward-facing sword."
+  ],
+  "continuous_playback_reviewed": false,
+  "browser_ui_tested": false,
+  "browser_blocker": "CUA createBrowserTab(iab, about:blank, visible:false) returned: The browser access host is unavailable",
+  "gameplay_tested": false,
+  "os_input_used": false,
+  "next_gate": "M018-01 browser controls/layout and M018-02 normal-speed user motion approval. No full set or runtime replacement before review."
+}

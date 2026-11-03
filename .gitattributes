@@ -11,6 +11,15 @@
 *.ogg filter=lfs diff=lfs merge=lfs -text
 *.mp3 filter=lfs diff=lfs merge=lfs -text
 
+# Preserve checksummed source deliveries byte-for-byte (including upstream EOL).
+# Binary extension rules above continue to use Git LFS.
+assets_src/characters/painted_candidates/** -text -whitespace
+assets_src/characters/surface_refinement/** -text -whitespace
+assets_src/characters/mpfb_warden/** -text -whitespace
+assets_src/characters/mpfb_warden_outfit/** -text -whitespace
+assets_src/characters/mpfb_warden_boots_only/** -text -whitespace
+assets_src/characters/warden_motion_pilot/** -text -whitespace
+
 # Preserve upstream formatting in vendored code and original license notices.
 assets_src/vendor/** -whitespace
 addons/theme_gen/** -whitespace

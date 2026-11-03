@@ -51648,6 +51648,111 @@
       "height": 44
     },
     {
+      "path": "res://assets/ui/character_studies/a_painterly_veteran/face.png",
+      "bytes": 158748,
+      "sha256": "8d85bb6f6cc6c5b4e7c961a5533eb97cb2a68a1ccacaeabf9e7b029a53498514",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "path": "res://assets/ui/character_studies/a_painterly_veteran/front.png",
+      "bytes": 17655,
+      "sha256": "b2973d7bde7b14602cb8071ced6342a43810c7d8f25c5357b89adad38d29d087",
+      "width": 280,
+      "height": 280
+    },
+    {
+      "path": "res://assets/ui/character_studies/a_painterly_veteran/rear.png",
+      "bytes": 16069,
+      "sha256": "494aa95e3f42c0fd59aff0707059723049fed3416368429f48189c20b1cf616f",
+      "width": 280,
+      "height": 280
+    },
+    {
+      "path": "res://assets/ui/character_studies/a_painterly_veteran/side.png",
+      "bytes": 10575,
+      "sha256": "e2a09e7403a454ec7bf67443d79953435aa4b2136ca35338833d25e699255d87",
+      "width": 280,
+      "height": 280
+    },
+    {
+      "path": "res://assets/ui/character_studies/a_painterly_veteran/three_quarter.png",
+      "bytes": 17173,
+      "sha256": "b2c14c15ab933e8c7071c06d69daa9e7dcfa1fb8ffac0470639f513ff5e23a36",
+      "width": 280,
+      "height": 280
+    },
+    {
+      "path": "res://assets/ui/character_studies/b_ink_warden/face.png",
+      "bytes": 192953,
+      "sha256": "eeba2bdef7245e9e198fc8f6588751d831b23db70a1dbfbc1db4d4c3bc4bf30e",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "path": "res://assets/ui/character_studies/b_ink_warden/front.png",
+      "bytes": 17640,
+      "sha256": "d64d1e16613071b62b71772f55445ba8a984cdc69832d8a2367a9b884cd00655",
+      "width": 280,
+      "height": 280
+    },
+    {
+      "path": "res://assets/ui/character_studies/b_ink_warden/rear.png",
+      "bytes": 11173,
+      "sha256": "f84b6b61cfca5a3919bebc358c99edd77867d3c574463181f1fef5e7d0b1c586",
+      "width": 280,
+      "height": 280
+    },
+    {
+      "path": "res://assets/ui/character_studies/b_ink_warden/side.png",
+      "bytes": 9014,
+      "sha256": "139866ad95b8933cf1f4c84cb62697add666bae18dbe529087e3d3543f7bdcd8",
+      "width": 280,
+      "height": 280
+    },
+    {
+      "path": "res://assets/ui/character_studies/b_ink_warden/three_quarter.png",
+      "bytes": 17543,
+      "sha256": "2d9b4f2fc2bab47eb3b06ab03d6cbc363c4a1c4b066756e21dfdc7a61adaed82",
+      "width": 280,
+      "height": 280
+    },
+    {
+      "path": "res://assets/ui/character_studies/c_heroic_miniature/face.png",
+      "bytes": 178921,
+      "sha256": "68467d30b4213af70b4c47b669772e0c0981f3caa65cf5482925790ddd5b4e0f",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "path": "res://assets/ui/character_studies/c_heroic_miniature/front.png",
+      "bytes": 19469,
+      "sha256": "fbb2698be3e056b21a9796de53cfab31f036ec1fdf88374f802509a009d62422",
+      "width": 280,
+      "height": 280
+    },
+    {
+      "path": "res://assets/ui/character_studies/c_heroic_miniature/rear.png",
+      "bytes": 18140,
+      "sha256": "3ed2eac7d4c10dec8e1e9a8ad4400dbed3e23ead5b7d2a1f0f06ff1eb856ae43",
+      "width": 280,
+      "height": 280
+    },
+    {
+      "path": "res://assets/ui/character_studies/c_heroic_miniature/side.png",
+      "bytes": 11335,
+      "sha256": "52a8f5ca2bd45a6e16b569397c048abf12f6e7d0279724ca124a2e74462d7d1b",
+      "width": 280,
+      "height": 280
+    },
+    {
+      "path": "res://assets/ui/character_studies/c_heroic_miniature/three_quarter.png",
+      "bytes": 18945,
+      "sha256": "90dd2809975f32afaec982aef78ae37f68e2c88e9fbb527405d7843787bd022e",
+      "width": 280,
+      "height": 280
+    },
+    {
       "path": "res://assets/ui/combat/assets/call_9exrXDuBoixt7ysV19RVDrhl.png",
       "bytes": 1884767,
       "sha256": "bad0bf60ae752f0d14295b98f4ff8056d1d4f06aae3bd9ccd8647f038d97b9ba",

@@ -219,3 +219,10 @@ func add_gallery_button(hud) -> void:
 			hud.add_child(load("res://scripts/presentation/combat/roster_gallery.gd").new())
 	)
 	hud.command_buttons.add_child(gallery_button)
+	var studies_button := UI.button("Style A/B/C")
+	studies_button.name = "CharacterStylePreviewButton"
+	studies_button.pressed.connect(func() -> void:
+		if hud.get_node_or_null("CharacterStylePreview") == null:
+			hud.add_child(load("res://scenes/combat/CharacterStylePreview.tscn").instantiate())
+	)
+	hud.command_buttons.add_child(studies_button)

@@ -14,6 +14,47 @@ before repeating live acceptance. Stage reports retain AWAITING_INTERACTIVE.
 
 ## Final build for the session
 
+Latest2026-11-03: the user rejects stage45's motion/leg/hand quality and requests
+the complete current state archived to `3d-models`, then drawn2.5D research.
+M018-02 is USER_REJECTED (not a PASS); M018-01 remains NOT_RUN. Stop the 3D rollout.
+The original61 native game cases and production game build remain unchanged.
+
+Stages44–45 source-art follow-up2026-11-03: approved stage43 appearance receives
+an isolated rig/idle/walk/sword pilot. No runtime replacement or game build change;
+the original61 physical cases remain NOT_RUN. Source review is tracked separately:
+
+| Case | Action / expected result | Status |
+| --- | --- | --- |
+| M018-01 | Open warden_motion_pilot/2026-11-03/preview.html; three simultaneous24fps loops, four angles, pause/step/timelines/half speed/2x work without missing frames or layout obstruction. | NOT_RUN — isolated browser host unavailable; native desktop controls unreleased |
+| M018-02 | Watch at least three full cycles at1x in all four directions; approve foot contact, cloth, grip, attack timing and retained appearance before full sets/cast. | USER_REJECTED2026-11-03 — crooked legs/gait, wrist-driven sword action, poor hands; no rollout |
+
+Read [motion guide](../design/character-art/WARDEN_MOTION_PILOT.md) and
+presentation018. These are source-review gaps, not passed gameplay cases.
+
+Stage43: stage42's outfit was rejected. Current source direction is restored
+stage41 with only a modest existing-foot reduction. No game build or physical
+case changed;61 remain NOT_RUN. See [stage43](stages/2026-11-02-stage-43.md).
+
+Stage42 follow-up: anatomical stance/boots and actual modelled outfit are isolated
+source-art corrections of the reviewed MPFB pilot. No runtime route or build
+changes; none of the61 physical cases is closed. Rig/motion and actual gameplay
+remain separate. See [stage42](stages/2026-11-02-stage-42.md).
+
+Stage41 follow-up: MPFB warden is a static source-art pilot for user review before
+animation/enemy expansion. It adds no game route, changes no packaged build and
+closes none of the61 cases. Offline tactical compositions and FBX checks do not
+replace live acceptance. See [stage41](stages/2026-11-02-stage-41.md).
+
+Stage40 follow-up: softer static source variants are in `surface_refinement/`.
+Matched source/FBX/Aseprite checks do not establish motion or physical play; no
+runtime route or game-test build changed. All61 cases remain NOT_RUN and desktop
+controls are still unreleased. See [stage40](stages/2026-11-02-stage-40.md).
+
+Follow-up stage39: Knight-painted static candidates and new authoring tools are
+isolated source-art proposals, pending user review. They add no rigged/runtime
+acceptance claim and close none of the61 cases. No visible launch or desktop
+input occurred. See [stage39](stages/2026-11-02-stage-39.md) and presentation012.
+
 Stage38 character-style studies are static source-art experiments only, pending
 the user's A/B/C choice. They are not integrated or animated, add no runtime
 acceptance claim, and do not supersede the stage37 EXE below. Research/renders/FBX

@@ -1,0 +1,36 @@
+{
+  "source": "assets_src/characters/surface_refinement/2026-11-02/02_warden/02_warden.blend",
+  "source_sha256": "174333f9fb3fedefee351b51847d5e509db179515fb9c69707f8d92ef590d048",
+  "source_image_name": "projection-padded.png",
+  "source_image_size": [
+    1536,
+    1024
+  ],
+  "selected_region": "front-facing head faces z1.61..1.79m, abs(x)<0.07m; approximate central-face ROI, not a full anatomical segmentation",
+  "source_pixel_bounds": [
+    [
+      255.85684204101562,
+      42.09930419921875
+    ],
+    [
+      314.18030548095703,
+      127.2559814453125
+    ]
+  ],
+  "source_pixel_span": [
+    58.323463439941406,
+    85.15667724609375
+  ],
+  "projection_uv_maps": [
+    "Reference_front",
+    "Reference_back",
+    "Reference_side"
+  ],
+  "shared_head_material_parts": [
+    "SOURCE_CC0_Anatomical_eye_R",
+    "SOURCE_CC0_Anatomical_eye_L",
+    "SOURCE_CC0_derived_anatomical_face_and_neck",
+    "SOURCE_Coherent_swept_hair_mass"
+  ],
+  "scope": "read-only diagnosis; no source model saved"
+}

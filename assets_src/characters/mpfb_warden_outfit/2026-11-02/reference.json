@@ -1,0 +1,25 @@
+{
+  "schema": "sdd.warden-outfit-reference-v1",
+  "status": "READY_FOR_STATIC_PILOT",
+  "baseline": "assets_src/characters/mpfb_warden/2026-11-02",
+  "baseline_delivery_sha256": "cfbf34e338008ef155eff97c78723189f0b44f0f2f5a77594db5c3765e219827",
+  "approved_head_source_sha256": "0365891e93d6f1fa888850d6d641305a8d75a42273e687ad4fe45dd88d1d7f1a",
+  "design_reference": "assets_src/characters/surface_refinement/2026-11-02/02_warden/concept.png",
+  "reference_sha256": "1cbe614de2da6dfac3a515a8bd62cd4d84980b19e10361c10f04ad658c937964",
+  "reviewed_views": [
+    "original concept front/profile/rear",
+    "actual stage41 all_views and full body"
+  ],
+  "user_corrections": [
+    "straight natural legs",
+    "smaller boots",
+    "actual3D harness/buckle/armor volume",
+    "future cast must have distinct facial anatomy"
+  ],
+  "inference": "Hidden armor construction and cloth/metal thickness, corrected stance and boot fit; preserve approved face geometry/UV.",
+  "brief": {
+    "palette": "navy cloth, muted steel, dark brown leather, restrained brass",
+    "camera": "retained18deg/yaw330; front/profile and native100px/m",
+    "scope": "one corrected static warden, no animation/cast rollout"
+  }
+}

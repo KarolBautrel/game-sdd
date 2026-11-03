@@ -17,3 +17,14 @@ Proof: the study manifest and `tools/blender/verify_style_studies.py`, plus the
 persisted QA report. User art choice remains pending; these static prototypes
 cannot establish animation or interactive acceptance. Existing61 physical cases
 remain NOT_RUN.
+
+## Live preview follow-up
+
+1. Export12 native100px/m full-body views +3 face PNGs through Aseprite.
+2. Preview scene loads all three cards, synchronized direction/zoom/floor/face
+   controls work, and the battle Tools entry opens/closes without state mutation.
+3. Headless UI assertions and project validation PASS, then launch visibly via
+   `start_game.ps1 -Scene styles` on larger left DISPLAY1/windowed. Observe actual
+   window placement and exercise the normal controls; persist evidence/limits.
+4. Leave the preview open for the user's A/B/C selection. Production character
+   animation/routing and existing61 gameplay acceptance cases remain unchanged.

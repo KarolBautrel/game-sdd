@@ -1,0 +1,234 @@
+{
+  "schema": "sdd.modelled-warden-delivery-v1",
+  "date": "2026-11-02",
+  "status": "TECHNICAL_PASS_AWAITING_USER_REVIEW",
+  "file_count": 44,
+  "total_bytes": 68354692,
+  "files": [
+    {
+      "path": "all_views.aseprite",
+      "sha256": "562bb32c45ffde505125ddb4f0607a26415e7a038d62e9f3ed5102dfdd3e9b4e",
+      "bytes": 822341
+    },
+    {
+      "path": "all_views.png",
+      "sha256": "7d6c80acd75822c4ec1570e78aede566c65b537397b80a63b58f074bf48ee39a",
+      "bytes": 600107
+    },
+    {
+      "path": "body-measurements-before.json",
+      "sha256": "bd678d1c0d888fb7a62410e576b340b20ded34f6eb4741f3c5ab4d1eb1fbd081",
+      "bytes": 16870
+    },
+    {
+      "path": "comparison.aseprite",
+      "sha256": "c850300e61d3e643e0b64493471b3e6384d4cfa1d2e2c17d01d02f78d0d95f65",
+      "bytes": 748569
+    },
+    {
+      "path": "comparison.png",
+      "sha256": "bbfe3f63f066d534ce8f6b264f6f7d57c74cffe00b2964547da8ae553a96f81d",
+      "bytes": 531535
+    },
+    {
+      "path": "licenses/makehuman_system_assets.json",
+      "sha256": "e86f1572432cfd062f372adddba4eb7c2e2e31280e96c29291a970320e0a5df0",
+      "bytes": 39220
+    },
+    {
+      "path": "licenses/MPFB-LICENSE.md",
+      "sha256": "5cefb60680cb9efd4550a2e65d719021cfbec9dad3658481d11d48ae863ce04d",
+      "bytes": 3188
+    },
+    {
+      "path": "licenses/skins02.json",
+      "sha256": "35c4e7d05d882537b6312cbbc95830347eb547941248dbdb5f5595e6d9e1e705",
+      "bytes": 7907
+    },
+    {
+      "path": "licenses/system_eye_materials01.json",
+      "sha256": "df0104d87cda2b381328099e6f2b830ed9f26999ff6bed4682287c143b8a8097",
+      "bytes": 6440
+    },
+    {
+      "path": "measurements.json",
+      "sha256": "9a41794177b3b4d7b8e1aee51a844b2c69fde5b1234c4b5b9bd0c81dcd640f48",
+      "bytes": 2916
+    },
+    {
+      "path": "mesh-audit.json",
+      "sha256": "1b2fe4dea8e7af947ed5661322d5e579c5311e46d983983fac5e9c3a2170511e",
+      "bytes": 1580
+    },
+    {
+      "path": "model.json",
+      "sha256": "da5ae47511b441a4120be0a3e9c8021f5bcc8088495e990b9b1b0d815f107204",
+      "bytes": 3427
+    },
+    {
+      "path": "proposal.aseprite",
+      "sha256": "4581ffb1e3b4425217ce45834c180907f9313979090a6dfe9bbb712b4d7a8505",
+      "bytes": 1191330
+    },
+    {
+      "path": "proposal.png",
+      "sha256": "f16c547d361d7f4800bb738a607305ccdb0dc7e6fe09511ba7a70b864770294d",
+      "bytes": 856480
+    },
+    {
+      "path": "provenance.json",
+      "sha256": "967657915b81f7ce942dd7b9ec24f49463a159701b17de376184ff2b0ed75ed5",
+      "bytes": 2631
+    },
+    {
+      "path": "reference.json",
+      "sha256": "03e26a6ffe9c1ff74a86721ca1641c822a4111a90a4e38e7399cb9735735412f",
+      "bytes": 1229
+    },
+    {
+      "path": "renders/before_boots.png",
+      "sha256": "f3a4175f62f2010b203dfa0913fb3b580108827aaa063c602ea5fe14aeae82c7",
+      "bytes": 653063
+    },
+    {
+      "path": "renders/belt.png",
+      "sha256": "d4e43e466b30dcec1e94a6d54d4f1a07d8059f59bec1177c613ffddbffe0b25a",
+      "bytes": 928214
+    },
+    {
+      "path": "renders/boots.png",
+      "sha256": "8ad694debdf03f9e5a20747b323048866481b71b036442c47b9b5ec49ecaaa92",
+      "bytes": 529819
+    },
+    {
+      "path": "renders/changed_light.png",
+      "sha256": "14ca30b114dd99fbb860027adde1bd1299134628ee93cfe6c2fd9e6c4ac43f27",
+      "bytes": 771759
+    },
+    {
+      "path": "renders/face.png",
+      "sha256": "c0e8d0f057ba18fcbfcb00ea037c9c5a5a02ce58386bac3052e5109e067245d1",
+      "bytes": 680087
+    },
+    {
+      "path": "renders/fbx_belt.png",
+      "sha256": "4e3e6e2d3376895d92de2ea62ca24e9d48f3a320ea1063b5b5dfe8fa181238e1",
+      "bytes": 928538
+    },
+    {
+      "path": "renders/fbx_body.png",
+      "sha256": "e7aeb4409af293fd20253c1d67907769b129e908248a561b2258d6406888067b",
+      "bytes": 408938
+    },
+    {
+      "path": "renders/front.png",
+      "sha256": "df2455765847069b06f605df85bde66b7c956f591a29641c0aa7ce241f7b796b",
+      "bytes": 417437
+    },
+    {
+      "path": "renders/geometry_belt.png",
+      "sha256": "2dab175f5f22d0515f204addcd1afcfbfcdefb9073caf37ca2fe63ce756a6dc7",
+      "bytes": 915016
+    },
+    {
+      "path": "renders/geometry_body.png",
+      "sha256": "475ed82f2dc8052aac73fdde85258a2979828fb90651d57c9683da94ec50f214",
+      "bytes": 418272
+    },
+    {
+      "path": "renders/rear.png",
+      "sha256": "a52073dfd3e052ace4ac3832d705fd1aecf4fd058d46eabea7181faca9314e83",
+      "bytes": 399880
+    },
+    {
+      "path": "renders/side.png",
+      "sha256": "80e5f49c44ff0a7d63b632728ad9a241fb15c0dfde925db843b7435f7ddfc9d8",
+      "bytes": 377882
+    },
+    {
+      "path": "renders/source_body.png",
+      "sha256": "7f27dbe7e7e86bcd7b57b8741feccaaad46e5bf88943ac025b7e195964e49596",
+      "bytes": 328134
+    },
+    {
+      "path": "renders/source_front.png",
+      "sha256": "0bc50bacf57fcf571e112518ff7047f87cf2e33b8a768336d2ffd3d8ca866f04",
+      "bytes": 334974
+    },
+    {
+      "path": "renders/tactical.png",
+      "sha256": "a55c88a75117c47e43eab248fdf091cff176df9cec60318fd9a7f043ea5123ce",
+      "bytes": 70695
+    },
+    {
+      "path": "renders/three_quarter.png",
+      "sha256": "0ed4fbd4103a3fac4c3d0767bdcab84727fc57bed0be6c62632da54a6ae6a4dd",
+      "bytes": 409120
+    },
+    {
+      "path": "source-audit.json",
+      "sha256": "94a88e729172a5d4c78f3024afadca76a29c9a28739b01e03d32227559000e21",
+      "bytes": 14642
+    },
+    {
+      "path": "textures/brown_eye_02.png",
+      "sha256": "fae2cf1e45fd4df3bc07ea4ea0f26883c78cbeae03585fa6754dc3e54c03c3dd",
+      "bytes": 795873
+    },
+    {
+      "path": "textures/eyebrow001.png",
+      "sha256": "9940f7d0b1b223709a19b05156ba6f6e9e4dbdbced02d7574f4d51d72c58967b",
+      "bytes": 89619
+    },
+    {
+      "path": "textures/Jartur_mid_old_Slavic_Male_with_Genitals_and_Beard_lsdif_lighter.png",
+      "sha256": "0f1a86d78af8bc1e55ae21cfaca0e7308384f789796adc77a78e4d22ccaf419c",
+      "bytes": 5615645
+    },
+    {
+      "path": "textures/short01_diffuse.png",
+      "sha256": "f34a0957184e3d1e911ed59245f874f8d4843f61ee44ff49f43edb4be0196949",
+      "bytes": 2354146
+    },
+    {
+      "path": "textures/warden_outfit_albedo.png",
+      "sha256": "3beb665f8b95c78f422fe1576ecfec669195f581005f0cde1e2669cb77160c85",
+      "bytes": 2935945
+    },
+    {
+      "path": "textures/warden_outfit_metallic.png",
+      "sha256": "5127dc49658afa6252cd38b396d6f0e0a5d8741de954261b73c035319bf519d3",
+      "bytes": 416953
+    },
+    {
+      "path": "textures/warden_outfit_roughness.png",
+      "sha256": "e657e9844936fa26c264a99c20c54096d863dc65da79c9fb3553b7f7bf1e865c",
+      "bytes": 2891636
+    },
+    {
+      "path": "verification.json",
+      "sha256": "c61d9e92a243b34d843a9bd6e662baf6cd7319f2e218b285e5dfd819fb4eed19",
+      "bytes": 8349
+    },
+    {
+      "path": "visual-review.json",
+      "sha256": "0a1d2827a743a0d344d7e9b4b82a567eff90d1e4bd41dc802db8e0e2acb304bd",
+      "bytes": 3047
+    },
+    {
+      "path": "warden_outfit.blend",
+      "sha256": "7bddd04626a794662431a0abd55baeac34030622c529bd7e7401575484e2464a",
+      "bytes": 34571819
+    },
+    {
+      "path": "warden_outfit.fbx",
+      "sha256": "b66050320a7aaca6e2ed71b1a3b15d62b6b086a80408662251cb4c038e6bbe96",
+      "bytes": 5249420
+    }
+  ],
+  "tools": {
+    "tools/blender/build_warden_outfit.py": "c8d10d7f219211f7cdb33a9fa182815ba4210c0e3fd18bb7ade7d88d34e158f7",
+    "tools/blender/verify_warden_outfit.py": "027da762516d359490506eee11a20103f0cfbeb0b787b826585348230d801516",
+    "tools/aseprite/warden_outfit.lua": "caa37520c71ff819f0ec8df320e4275cdd0564dedccd6053b32ed2ba7aecfae3"
+  }
+}

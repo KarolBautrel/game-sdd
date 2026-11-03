@@ -1,10 +1,284 @@
 # Continue development here
 
-Last handoff: 2026-11-02. This is a status/navigation document; owning domain
+Last handoff: 2026-11-03. This is a status/navigation document; owning domain
 specs define behavior. This handoff does not authorize additional implementation
 when the user has only requested an explanation or plan.
 
-## Current task: static style studies delivered; user choice pending
+## Current status: 3D motion rejected; archive to 3d-models, then drawn2.5D research
+
+Latest user2026-11-03 reviewed the motion and rejects the result: crooked-looking
+legs, wide/stiff gait, wrist-driven sword twirling instead of a natural cut,
+unconvincing hands (gloves desired). Technical checks did not establish convincing
+motion. Do not continue the 3D pilot/full-set queue or describe it as accepted.
+
+User explicitly requests a complete current-state commit/push to `3d-models`,
+then internet research for detailed drawn/painted2.5D characters and animation,
+using BG1/2 and Pillars of Eternity2 as visual references. Preserve all existing
+sources and production work. No destructive rollback, new cast/model work,
+installation/purchase, runtime change or unreleased desktop input is authorized.
+Read [archive/rejection note](qa/2026-11-03-3d-models-archive.md).
+
+The status below is historical technical evidence, superseded by this rejection.
+
+## Historical source-art pilot (visually rejected)
+
+User2026-11-03 reviewed the stage43 preview and says it is good. The restored
+painted outfit/MPFB face/original stance with modestly smaller boots is the
+accepted static appearance. Preserve that source/delivery as the next visual
+baseline. Stage42's replacement armor remains rejected.
+
+User's subsequent2026-11-03 "No to dawaj" authorizes this proposed source-art
+pilot. Owner [presentation018](specs/presentation/018_warden_motion_pilot.md),
+[slice018](specs/presentation/slices/018_warden_motion_pilot.md), ordered
+[milestone013](specs/presentation/milestones/013_warden_motion_pilot.md).
+Stages44–45 are technically delivered, with persisted acceptance and limits:
+[stage44](qa/stages/2026-11-03-stage-44.md),
+[stage45](qa/stages/2026-11-03-stage-45.md),
+[guide](design/character-art/WARDEN_MOTION_PILOT.md).
+Open `assets_src/characters/warden_motion_pilot/2026-11-03/preview.html`, or run
+`tools/qa/start_warden_motion_preview.ps1` yourself. Three24fps loops, pause/frame
+step/timelines/half speed/2x and four angles. The game still shows the existing
+runtime roster; this source pilot is intentionally separate.
+
+29 bones; exact five approved rest meshes/maps retained; new sword, idle48/walk32/
+sword40 source frames,480 native PNGs,12 Aseprite animations, actual animated FBX.
+All123 frames incl. closure measured; complete contact intervals drift<0.002mm,
+no blade-path hits, bent knees/pose closure/rigid grip/four-view margins PASS.
+Actual FBX six meshes/three clips pose drift<0.000002m after documented Blender
+auto-connect flag normalization. Boards/joint/detail/FBX stills opened; validator
+PASS. Approved stage43 and8223 roster +215 world hashes retained.
+
+Next unfinished gate: M018-01 player controls/layout and M018-02 continuous1x
+motion/user approval. The isolated browser host was unavailable; no desktop
+input was used. Stills/measurements do not establish watched continuous playback.
+Deep squat stress has coarse folds/a small rear skirt opening outside the three
+delivered actions. No finger/face rig or full-range deformation claim.
+After pilot approval, separately authorize full actions/eight directions and
+distinct-face enemy families. No automatic continuation, runtime replacement or
+unreleased desktop control; never resume rejected stage42.
+
+Static art approval is not motion or normal-play acceptance.61 accumulated
+physical cases remain NOT_RUN. No cast or outfit redesign is authorized.
+
+## Completed rollback: stage42 rejected; stage41 restored with smaller boots only
+
+Latest user2026-11-02 explicitly rejected the modelled armor/outfit and requests
+the model from before that prompt, with only slightly smaller existing boots.
+This cancels stage42's new body/stance/outfit and its automatic continuation queue.
+Owner [presentation017](specs/presentation/017_warden_boots_only_rollback.md),
+[slice017](specs/presentation/slices/017_warden_boots_only_rollback.md),
+[milestone012](specs/presentation/milestones/012_warden_boots_only_rollback.md),
+[stage43](qa/stages/2026-11-02-stage-43.md).
+
+Open `assets_src/characters/mpfb_warden_boots_only/2026-11-02/proposal.png`.
+Actual source is the exact stage41 `mpfb_warden.blend`; original painted costume,
+MPFB face/eyes/hair/brows, original leg/body pose, UVs and materials retained.
+Only the original low boot foot/ankle XY is reduced6%, smoothly returning to
+unchanged upper shaft above0.32m. Height/ground and all non-boot vertices match.
+There is no stage42 armor, PBR material simplification or rest-stance correction.
+
+Technical PASS:65209 assertions dominated by exact actual-file vertex comparison,
+original110384 triangles/5 meshes, all original5 texture files byte-identical,
+actual FBX reimport/maps/UV/bounds, audit PASS with known static-assembly warnings.
+38 stage41 +44 rejected-stage42 +8223 roster +215 world hashes preserved.
+Matched restored/boot review board inspected; validator PASS. Reproduce with
+background `tools/blender/restore_warden_boots_only.py` and hidden Aseprite
+`tools/aseprite/warden_boots_only.lua`.
+
+User accepted the static result2026-11-03. Do not automatically resume modelled-outfit, full-body
+redesign, animation or cast work from historical queues. Stage42 sources remain
+only as rejected evidence; do not present them as the selected style. No runtime,
+save, visible launch, desktop input, paid generation, installation, commit or push.
+61 physical game cases remain NOT_RUN. Preserve all prior dirty work/deliveries.
+
+## Rejected previous task: corrected body and real3D outfit
+
+User2026-11-02 accepted the improved face/direction, requested less crooked-looking
+legs, smaller boots, actual armor/strap volume and distinct future faces. Owner
+[presentation016](specs/presentation/016_mpfb_warden_modelled_outfit.md),
+[slice016](specs/presentation/slices/016_mpfb_warden_modelled_outfit.md),
+[milestone011](specs/presentation/milestones/011_mpfb_modelled_outfit.md).
+Read [construction guide](design/character-art/MPFB_MODELLED_OUTFIT.md),
+[stage42](qa/stages/2026-11-02-stage-42.md) and
+[variation plan](design/character-art/CHARACTER_VARIATION_PLAN.md).
+
+Open `assets_src/characters/mpfb_warden_outfit/2026-11-02/proposal.png`,
+`comparison.png`, `all_views.png`. These are actual source-model renders and
+Aseprite boards. Knee/ankle axes align; main boot footprint depth is about18%
+smaller. Whole MPFB body/rest stance,105 modelled costume parts, real armor,
+straps/framed buckles and new cloth/leather/metal materials replace the projected
+costume. The exact approved head/eye/hair/brow geometry, UV and shaders remain.
+
+Technical PASS:8906 assertions, actual FBX import,5 meshes/194738 offline triangles,
+three baked PBR maps plus4 retained face-related maps, correct scalar color spaces,
+eye alpha and bounds drift0.000000164m. Source/final mesh audits have zero errors;
+5 static-assembly warnings retained.3 Aseprite boards and16 rendered views
+inspected.38 stage41 +202 older model +8223 roster +215 world hashes unchanged.
+Validator PASS. Source/editable posed master, separate parts, FBX/maps and evidence
+are local; old sources/game assets are preserved.
+
+Next: user review of this corrected body/outfit, then rig/weights and a short
+normal-speed idle/walk/attack proof before the full set. Use the recorded
+`anatomy_source_to_costume_matrix` to align a rig with the visible costume. Future
+faces must differ in anatomy/age/skin/hair and gear/body silhouette. No additional
+faces or cast batch is delivered yet. Some material/style simplification versus
+the old painted costume is intentional and awaits user review.
+
+No runtime replacement, visible app launch, desktop input, paid generation,
+installation, commit or push. Existing61 physical game cases remain NOT_RUN.
+Do not launch the old `-Scene styles` preview as though it showed this outfit.
+Preserve all dirty work and the exact prior deliveries.
+
+## Previous task: MPFB warden pilot delivered
+
+User2026-11-02 selected MPFB/MakeHuman and authorized designing/showing one model
+before agreement to animation and new enemies. Owner
+[presentation015](specs/presentation/015_mpfb_warden_pilot.md),
+[slice015](specs/presentation/slices/015_mpfb_warden_pilot.md),
+[milestone010](specs/presentation/milestones/010_mpfb_warden_pilot.md).
+Read [pilot guide](design/character-art/MPFB_WARDEN_PILOT.md) and
+[stage41](qa/stages/2026-11-02-stage-41.md).
+
+Open `assets_src/characters/mpfb_warden/2026-11-02/proposal.png`,
+`comparison.png`, `all_views.png`. These are actual static-model renders with
+editable Aseprite boards, not AI concepts or Godot captures. New source
+`.blend`/FBX/local texture maps, coherent MPFB head/native skin UV, separate
+eyes/hair/brows and retained authored warden costume. No old skin-view blend.
+The old `-Scene styles` preview still shows the earlier A/B/C studies.
+
+Official MPFB2.0.18 and system/Skins02/eye01 CC0 packs are installed and tested
+with Blender5.2.3 in `~/.codex/tools/character-art/mpfb-2.0.18/`. Sources/hashes:
+`tools/assets/mpfb_dependencies.json`; scripts and repeatable commands in guide.
+No global Blender preference save. Factory-startup/offline CLI, no desktop input.
+
+Technical PASS:8823 assertions, actual FBX import,5 meshes/110384 triangles,
+all5 maps and eye alpha, bounds drift0.000000179m; mesh audit zero errors and5
+recorded static-assembly warnings.202 earlier model +8223 roster +215 world
+hashes unchanged. Three boards/all-view diagnostics inspected; validator PASS.
+Clothing retains earlier paint/baked-light and overlap limits; hair is alpha
+cards. This is not a rigged/deformation-ready or optimized-runtime3D asset.
+
+Next is **user visual review**, not automatic animation or enemy generation.
+After agreement: full-body outfit fit and rig/deformation, short idle/walk/attack
+proof, then full actions/directions and varied enemies.61 physical game cases
+remain NOT_RUN. No runtime replacement, visible launch, paid calls, commit or
+push. Preserve all prior dirty work and source deliveries.
+
+## Previous task: face-quality diagnosis and realistic pipeline research
+
+User2026-11-02 reports stage40 faces are blurred, stretched and apparently
+overlaid; asks for causes and external materials/workflows. Read
+[realism research](design/character-art/REALISM_PIPELINE_RESEARCH.md),
+[presentation014](specs/presentation/014_realistic_character_pipeline.md),
+[slice014](specs/presentation/slices/014_realistic_character_pipeline.md),
+[milestone009](specs/presentation/milestones/009_realistic_character_pipeline.md).
+
+Read-only actual warden source diagnosis: approximate central face ROI58.3x85.2
+pixels in a1536x1024 whole-body sheet; normal-weighted front/back/profile blend;
+the same projected material is used for head, eyes and hair. Larger final atlas
+or more subdivision cannot recover missing detail or fix view registration.
+Source hash and evidence are persisted. Stage39/40 technical PASS remains valid,
+but the user has identified insufficient facial quality; do not claim art approval.
+
+Recommended next implementation, when requested: one coherent head/UV/skin pilot,
+separate eye/hair materials, neutral/changed-light and native tactical review.
+MPFB core/Skins02/eye materials01 is the free feasibility route; licensed HumGen
+or Character Creator5 are alternatives. None was installed or tested locally by
+this research. Preserve Knight-inspired costume direction and the3D-to-sprite
+Godot workflow. Do not start another smoothing or full-roster batch.
+
+Research/diagnostic only: no model changes, visible launch, desktop input,
+paid calls, install, commit or push.61 physical cases remain NOT_RUN. Preserve
+all previous sources and dirty work. A single approved method/template precedes
+outfit, rigging/motion, export/integration and cast expansion.
+
+## Previous task: softer painted candidates delivered
+
+User2026-11-02: stage39 looks much better; make the models less angular. Owner
+[presentation013](specs/presentation/013_character_surface_refinement.md),
+[slice013](specs/presentation/slices/013_character_surface_refinement.md),
+[milestone008](specs/presentation/milestones/008_character_surface_refinement.md).
+Read [surface-refinement guide](design/character-art/SURFACE_REFINEMENT.md) and
+[stage40 proof](qa/stages/2026-11-02-stage-40.md).
+
+New isolated sources: `assets_src/characters/surface_refinement/2026-11-02/`.
+Open `comparison.png` (all3 before/after pairs), `details.png` (warden bust at
+original resolution), `all_views.png`. Editable Aseprite, .blend/FBX/2048px atlas,
+source parts and Ucupaint layers included. Curved profiles, local subdivision,
+rounded leather/cloth edges and softer cape-light treatment refine the same
+identities. Stage39's101-file source package and original tools are unchanged.
+
+Technical PASS:8838 assertions,3 actual FBX reimports/renders, source/Ucupaint,
+atlas/UV/bounds, all retained roster/world/old-study/stage39 hashes. Bounding
+extremes change at most4.542mm; this is not a full per-vertex metric. Source meshes
+are92186/105742/92826 triangles for offline sprite exploration, not optimized
+runtime3D. Delivery audits PASS with close disconnected-fragment warnings retained.
+Project validator PASS. All boards, colour/geometry and imported views inspected.
+
+Follow-up: user reports insufficient facial quality; see current research above.
+No rig, actions, equipment swapping, Godot integration, visible launch or desktop
+input in stage40.61 physical cases remain NOT_RUN. Some projection/paint/hair/cloth
+limits remain documented. Do not automatically replace the roster or start a
+rigging batch. No new paid/generation calls or installation. Preserve all earlier
+dirty work; stage40 is local/uncommitted, no push requested.
+
+## Previous task: Knight-painted proposals delivered
+
+User2026-11-02 selected Knight's painted technique and authorized stronger tools
+and several new actual-model proposals. Owner [presentation012](specs/presentation/012_painted_character_candidates.md),
+[slice012](specs/presentation/slices/012_painted_character_candidates.md),
+[milestone007](specs/presentation/milestones/007_painted_character_candidates.md).
+Read [production guide](design/character-art/PAINTED_CANDIDATES.md) and
+[stage39 proof](qa/stages/2026-11-02-stage-39.md).
+
+Installed/tested15 Scenario Blender Expert skills, pinned7f4b801c, and Ucupaint3.0.0
+no-auto-update in the owned art profile. Dependencies/smoke evidence:
+`tools/assets/painted_character_dependencies.json`. Future agents can use these
+installed skills; the existing background Blender MCP is unchanged.
+
+Three actual static sources,25/30/25 authoring parts, .blend/FBX/2048px albedo,
+working Ucupaint layers and multi-view/geometry-only reviews live under
+`assets_src/characters/painted_candidates/2026-11-02/`.
+Open `comparison.png`, `before_after.png`, `all_views.png` (editable Aseprite
+sources included). I leather mercenary, II steel warden, III long-coat wayfarer.
+`concept.png` files are separately labelled original AI design references.
+The old `-Scene styles` preview still displays previous A/B/C; new proposals
+are source-art boards, not a runtime replacement.
+
+Technical PASS:8705 assertions,3 actual fresh FBX imports/renders, working paint
+layers, source hashes,8223 roster +215 world +27 old-study files unchanged,
+project validator and roster check PASS. Audits PASS with non-fatal close
+disconnected-fragment warnings retained. Static anatomy/clothing/material
+comparison is delivered; no rig/actions/grips/equipment swapping claimed.
+
+Next unfinished task is user review of I/II/III or combined qualities. Do not
+automatically rig/integrate or replace the27-family roster. A selected pilot
+needs a separately scoped topology/paint/motion/native pass. Some projected
+side/cuff/overlap seams and plain collar/cape treatment remain documented.
+No OS input or visible app launch occurred;61 physical game cases remain NOT_RUN.
+No desktop controls were released by this modelling request. Preserve earlier
+preview/research dirty work. All stage39 changes are local/uncommitted; no push
+was requested for this increment.
+
+## Previous task: A selected; refinement reference research
+
+Latest user choice2026-11-02: A / Painterly veteran is the direction, but its
+clay-like finish needs refinement. User asks to review advanced skills/MCP/tools
+and examples FIRST. Read [A refinement research](design/character-art/A_REFINEMENT_RESEARCH.md).
+Research inspected Scenario Labs' Blender Expert family, Ucupaint, Malt, drawn2D
+alternatives and artist-authored painted knight examples. No model edits,
+installations or paid calls in this research step. Next is user reference review,
+not automatic modelling/rigging/integration or a roster rollout.
+
+Prior follow-up added local `start_game.ps1 -Scene styles` and battle Tools ->
+Style A/B/C.42 headless preview assertions, combat slices and validator PASS.
+Visible DISPLAY1/windowed preview showed all three bodies. User stopped desktop
+control with Escape before full physical controls acceptance; do not resume UI
+input from this research request. See [preview evidence](qa/2026-11-02-style-preview-followup.md).
+Preserve this uncommitted work. Existing61 normal-play cases remain NOT_RUN.
+Study sources were pushed as `de83f87b`; later local preview/research is uncommitted.
+
+## Previous task: static style studies delivered
 
 User2026-11-02 asked to push everything, research art skills/sources, then build
 several actual character models to choose a future style. Rollback checkpoint
@@ -22,7 +296,7 @@ licenses: [STYLE_RESEARCH](design/character-art/STYLE_RESEARCH.md).
 
 Technical scope: static, not rigged/animated/integrated. Actual fresh-scene FBX
 reimports and baseline hash checks PASS; report [stage38](qa/stages/2026-11-02-stage-38.md).
-The next step is the user's A/B/C choice, possibly specific combined qualities.
+The subsequent user choice is A, with refinement references pending as above.
 Do not automatically replace the roster or begin a rigging/animation batch.
 No OS input or visible launch used.61 physical cases remain NOT_RUN; use stage37
 release for later gameplay tests after explicit control release. No paid service.

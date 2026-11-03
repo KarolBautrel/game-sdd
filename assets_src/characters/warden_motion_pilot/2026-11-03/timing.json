@@ -1,0 +1,55 @@
+{
+  "fps": 24,
+  "clips": {
+    "Idle": {
+      "render_frames": 48,
+      "closure_frame": 48,
+      "seconds": 2.0
+    },
+    "Walk": {
+      "render_frames": 32,
+      "closure_frame": 32,
+      "seconds": 1.3333333333333333
+    },
+    "Sword": {
+      "render_frames": 40,
+      "closure_frame": 40,
+      "seconds": 1.6666666666666667
+    }
+  },
+  "walk": {
+    "root_travel_m": 0.64,
+    "stance_fraction": 0.6,
+    "lift_m": 0.075
+  },
+  "sword_beats": [
+    {
+      "frame": 0,
+      "beat": "ready"
+    },
+    {
+      "frame": 8,
+      "beat": "anticipation"
+    },
+    {
+      "frame": 12,
+      "beat": "raised blade"
+    },
+    {
+      "frame": 17,
+      "beat": "strike"
+    },
+    {
+      "frame": 22,
+      "beat": "follow through"
+    },
+    {
+      "frame": 29,
+      "beat": "recovery"
+    },
+    {
+      "frame": 40,
+      "beat": "ready closure"
+    }
+  ]
+}

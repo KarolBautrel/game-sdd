@@ -1,0 +1,64 @@
+{
+  "schema": "sdd.painted-character-provenance-v1",
+  "date": "2026-11-02",
+  "anatomy": {
+    "name": "Blender Studio Human Base Meshes v1.4.1",
+    "license": "CC0-1.0",
+    "source": "https://www.blender.org/download/demo-files/",
+    "archive": "https://download.blender.org/demo/asset-bundles/human-base-meshes/human-base-meshes-bundle-v1.4.1.zip",
+    "archive_sha256": "811f43accbb31a88266d932f8f5563b2d13586fca0ba2693aad1f5fe582b3515",
+    "blend_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+    "used": [
+      "GEO-body_male_realistic",
+      "corresponding anatomical eyes"
+    ],
+    "scope": "Face/neck/eyes and derived fitted garment anatomy; underlying scaffold is third-party CC0, not authored from scratch."
+  },
+  "reference": {
+    "title": "Knight",
+    "author": "Tommy Gunardi Teguh",
+    "url": "https://tommygt.artstation.com/projects/EEv98",
+    "concept_credit": "Kyoung Hwan Kim/Tahra",
+    "usage": "Technique reference only; no art/mesh copied"
+  },
+  "original_design_plates": {
+    "tool": "built-in image_gen",
+    "prompts": "concept-prompts.json",
+    "format": "1536x1024 front/profile/back",
+    "not_model_renders": true
+  },
+  "texture_method": "Original AI-painted reference projection, Aseprite connected-background matte/48px padding/silhouette, Blender portable atlas bake; no live paint brush strokes",
+  "geometry_method": "CC0 anatomical scaffold plus authored garments, continuous gloves, boots, cloak, fitted armour and belt gear; selected new helper modules",
+  "tools": {
+    "blender": "5.2.3 LTS",
+    "aseprite": "1.3.17.2",
+    "ucupaint": "3.0.0",
+    "skill_revision": "7f4b801c7248d51b093ec365aceb114bd06139e6",
+    "dependency_manifest": "tools/assets/painted_character_dependencies.json",
+    "existing_background_mcp": true,
+    "new_mcp": false
+  },
+  "scope": {
+    "static": true,
+    "rigged": false,
+    "animated": false,
+    "integrated": false,
+    "production_replacement": false,
+    "paid_cloud_geometry_jobs": 0,
+    "desktop_input": false,
+    "art_acceptance": "AWAITING_USER_REVIEW"
+  },
+  "comparison": {
+    "main": "comparison.png",
+    "baseline": "before_after.png",
+    "views": "all_views.png",
+    "pixel_scale": "100px/m tactical;200px/m before/after close;18-degree elevation,yaw330",
+    "runtime": false
+  },
+  "limits": [
+    "Not final animation/retopology/game assets.",
+    "Inferred side/back geometry; some reference seams/stretches remain.",
+    "Some surface folds/seams are painted, not geometric.",
+    "No claim that installing skills itself establishes professional visual quality."
+  ]
+}

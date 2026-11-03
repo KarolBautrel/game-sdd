@@ -1,5 +1,11 @@
 # Original characters and animation: production tools
 
+Follow-up2026-11-02: installed/tested Scenario Blender Expert family15 skills and
+Ucupaint3.0.0 in the owned profile for the user-selected Knight painted direction.
+See [painted candidates](PAINTED_CANDIDATES.md) and
+`tools/assets/painted_character_dependencies.json`. These sources are static
+proposals, with no rigged-production or GUI brush-stroke claim.
+
 Verified 2026-11-02. Owner: tooling005 / slice005. The user moved visual tooling
 ahead of the physical gameplay session. Setup is complete. The subsequent
 [stage30 raider pilot](RAIDER.md) is now implemented, with physical acceptance

@@ -1,0 +1,94 @@
+{
+  "id": "03_wayfarer",
+  "title": "III / Wedrowiec",
+  "static": true,
+  "rigged": false,
+  "animated": false,
+  "integrated": false,
+  "triangles": 39428,
+  "source_parts": 25,
+  "bounds": [
+    [
+      -0.44197896122932434,
+      0.4388289153575897
+    ],
+    [
+      -0.20404697954654694,
+      0.2667247951030731
+    ],
+    [
+      0.00800000037997961,
+      1.846993088722229
+    ]
+  ],
+  "audit": {
+    "profile": "render",
+    "eps": 0.000209,
+    "tol": 0.004185,
+    "gap": 0.020927,
+    "pass": true,
+    "errors": [],
+    "warnings": [
+      "03_wayfarer_static_actor: 5 detached fragments (30% of its faces), nearest 0.0105 from the rest"
+    ],
+    "per_object": {
+      "03_wayfarer_static_actor": {
+        "tris": 39428,
+        "parts": 21,
+        "errors": [],
+        "warnings": [
+          "03_wayfarer_static_actor: 5 detached fragments (30% of its faces), nearest 0.0105 from the rest"
+        ]
+      }
+    },
+    "skipped": []
+  },
+  "ucupaint": {
+    "version": "3.0.0",
+    "workspace": "PAINT_WORKSPACE_03_wayfarer",
+    "layers": 1,
+    "image": "03_wayfarer_painted_albedo",
+    "gui_brush_strokes": false
+  },
+  "method": "CC0 anatomical scaffold; authored tailored/forged geometry; original AI-painted multiview projection with baked diffuse atlas",
+  "limits": [
+    "static visual prototype",
+    "projection contains designed/baked lighting",
+    "inferred geometry and view seams need later animation polish",
+    "no live GUI sculpt/paint strokes"
+  ],
+  "camera": {
+    "elevation": 18,
+    "yaw": 330,
+    "ortho": 2.7,
+    "render_size": 900,
+    "tactical_pixels_per_metre": 100
+  },
+  "files": {
+    "03_wayfarer.blend": "4cca1ee2bc6b7f720b675b125d2677d7b127e52022341ca518811d47ebc32184",
+    "03_wayfarer.fbx": "a598812991a079cfd5dd50317b94e9eceeb307aacb3f5058cd5bd8aba77ba099",
+    "concept.png": "6b1129c5a18be7cf10fb8d84ab40bf2a0e8be757ef13021016ea89c31161f741",
+    "projection-padded.png": "b6f1d91480318659dc94c8c3bbb7a6e6c4a475847e846f099947638f601b0600",
+    "geometry_review/matcap_back.png": "210269cd811a698a91c73cf057c4cafa5bfede48bcf3b53b045e978adb7c9ea3",
+    "geometry_review/matcap_front.png": "c85776111d20d5ecfb9feaaccbbd1f17cb2070b058ba6542ea826bb3f6da167c",
+    "geometry_review/matcap_right.png": "a9c02d7105f7aa306d30cdc35ed36ee3feb677cba077a065e618eb6064cfe525",
+    "geometry_review/matcap_threequarter.png": "ec42f26ca32cd217f5f1383db3ca151a6f4b77ae6716845c3164914f75910ea8",
+    "geometry_review/review_sheet.png": "3dbd760fd70de3d30fb4034f8862b6ffc2e6632be6129db2184128a65fffd2ed",
+    "geometry_review/silhouette_back.png": "6aa8a6dcdec0acdce16be96dbf72b513c321142fc63aee78b5df3f21b3d5e3cd",
+    "geometry_review/silhouette_front.png": "75a83e24d57dcc9d10ac97d80b2ed8f52e91c9fc8f229e716d99521c6515c65d",
+    "geometry_review/silhouette_right.png": "66766db01e2efcbbe2d9704910b02a16fd81e4dc8e9dcae6510c56c9c7fcf5a4",
+    "geometry_review/silhouette_threequarter.png": "c6eff80bdf6c9e8249e4cad45de10b15ddc66caf238565973b87b637a43779c3",
+    "geometry_review/wire_back.png": "96d59606c9de65f357a595bc2a20112d4eea5bf15b429a8c739ec68cd707d409",
+    "geometry_review/wire_front.png": "e444f3a009142eb825fd1aa8b29e4183accf0519f40762baa6ec688bb2772cb8",
+    "geometry_review/wire_right.png": "553dde039b98f50ac1c858ca865473b574db1c79ee859fca7247cf3fd3ec6ac6",
+    "geometry_review/wire_threequarter.png": "cfd402c6345763e6ab2dc51f234a0a9882d633ba5ce86f015f7ea3afbe9ac8a5",
+    "renders/face.png": "2515d173bce5799bdfcf1562189dbec80a1194eee1ea0137f718ba3853f0dd46",
+    "renders/fbx_roundtrip.png": "f36a035caa7cb41f6d0e572970d070be1f499872e8d88dee93fd7b7b1caf4e3b",
+    "renders/front.png": "5a08fc6913d94d33452e986aff7ad45455d2ea18029d4f14598248b3ce1a3e06",
+    "renders/rear.png": "82a301d4b029a8a597f57e950453f4693fc613a304f41fe9e369b03807462494",
+    "renders/side.png": "9018f96a2ae4a1a1df894e7b8f3aaa5d0ed782663421ade6e051245fce2fa396",
+    "renders/tactical.png": "eb346aee24548c8e29d947a00aade0c3181152eb9a0501e6a8667577c51822bc",
+    "renders/three_quarter.png": "483c4a3359feaa5d9d7904484f6bf76a66713f84eb462f1f980168b964e26c22",
+    "textures/03_wayfarer_albedo.png": "81837cd71774100f70e6bebae1abde761c02e715762056f0e2acc18524cdef3d"
+  }
+}

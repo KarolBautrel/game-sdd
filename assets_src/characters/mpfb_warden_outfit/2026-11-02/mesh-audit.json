@@ -1,0 +1,58 @@
+{
+  "profile": "render",
+  "eps": 0.00021,
+  "tol": 0.004196,
+  "gap": 0.02098,
+  "pass": true,
+  "errors": [],
+  "warnings": [
+    "Warden_modelled_outfit: 1 detached fragment (1.6% of its faces), nearest 0.0066 from the rest",
+    "MPFB_coherent_head_and_neck: not touching, 0.0066 from the nearest part",
+    "MPFB_eyes: not touching, 0.0066 from the nearest part",
+    "MPFB_hair: not touching, 0.0066 from the nearest part",
+    "MPFB_eyebrows: not touching, 0.0066 from the nearest part"
+  ],
+  "per_object": {
+    "Warden_modelled_outfit": {
+      "tris": 153308,
+      "parts": 104,
+      "errors": [],
+      "warnings": [
+        "Warden_modelled_outfit: 1 detached fragment (1.6% of its faces), nearest 0.0066 from the rest"
+      ]
+    },
+    "MPFB_coherent_head_and_neck": {
+      "tris": 35520,
+      "parts": 1,
+      "errors": [],
+      "warnings": [
+        "MPFB_coherent_head_and_neck: not touching, 0.0066 from the nearest part"
+      ]
+    },
+    "MPFB_eyes": {
+      "tris": 2040,
+      "parts": 4,
+      "errors": [],
+      "warnings": [
+        "MPFB_eyes: not touching, 0.0066 from the nearest part"
+      ]
+    },
+    "MPFB_hair": {
+      "tris": 3678,
+      "parts": 200,
+      "errors": [],
+      "warnings": [
+        "MPFB_hair: not touching, 0.0066 from the nearest part"
+      ]
+    },
+    "MPFB_eyebrows": {
+      "tris": 192,
+      "parts": 2,
+      "errors": [],
+      "warnings": [
+        "MPFB_eyebrows: not touching, 0.0066 from the nearest part"
+      ]
+    }
+  },
+  "skipped": []
+}

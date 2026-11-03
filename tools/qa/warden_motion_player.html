@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strażnik — próba animacji</title>
+<style>
+:root{color-scheme:dark;--bg:#101619;--panel:#182124;--line:#384346;--gold:#d6b879;--text:#e5e2d9;--muted:#a6b5b7}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#283238,var(--bg) 68%);font:15px/1.5 system-ui,sans-serif;color:var(--text)}
+header,main,footer{max-width:1600px;margin:auto;padding:24px 32px}header{padding-bottom:12px}.eyebrow{color:var(--gold);letter-spacing:.16em;text-transform:uppercase;font-size:11px;font-weight:700}h1{font:500 clamp(26px,3vw,40px)/1.15 Georgia,serif;margin:10px 0}p{margin:8px 0;color:var(--muted)}
+.tools{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:22px 0 4px;padding:16px 0;border-block:1px solid var(--line)}
+button,select{color:var(--text);font:inherit;background:#263237;border:1px solid #506064;border-radius:5px;min-height:38px;padding:6px 14px;cursor:pointer}button:hover,select:hover{border-color:var(--gold)}button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:4px}button[aria-pressed=true]{background:var(--gold);color:#181c1e;border-color:var(--gold)}button.primary{background:#d6b879;color:#182124;font-weight:700;border-color:#dfc791;min-width:112px}
+label{display:flex;align-items:center;gap:8px}.views{display:flex;gap:4px;flex-wrap:wrap}small,.caption{color:var(--muted);font-size:12px}main{padding-top:14px}.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.card{border:1px solid var(--line);border-radius:8px;background:linear-gradient(#1d282d,#151d21);overflow:hidden}.card-top{padding:18px 20px 0;display:flex;justify-content:space-between;align-items:start;gap:12px}h2{font:500 24px Georgia,serif;margin:0 0 3px}.number{color:var(--gold);font:18px Georgia,serif}.screen{width:100%;overflow:auto;text-align:center;padding:0 4px;min-height:384px}canvas{display:block;width:384px;height:384px;margin:auto;image-rendering:pixelated;max-width:none}.foot{padding:0 20px 18px}.timeline{width:100%;accent-color:var(--gold);cursor:pointer}.readout{display:flex;justify-content:space-between;font:12px ui-monospace,monospace;color:var(--muted)}.caption{margin-top:12px}.zoom .gallery{grid-template-columns:repeat(auto-fit,minmax(min(100%,780px),1fr))}.zoom canvas{width:768px;height:768px}.zoom .screen{min-height:768px}a{color:var(--gold)}.evidence{display:flex;gap:20px;flex-wrap:wrap;margin:24px 0 0}.status{font-size:12px;color:var(--gold);min-height:20px}footer{border-top:1px solid var(--line);margin-top:12px;font-size:12px;color:var(--muted)}.keys{margin-left:auto}kbd{padding:1px 5px;border:1px solid #465358;border-radius:3px;font:12px ui-monospace,monospace}
+@media(max-width:1150px){.gallery{grid-template-columns:repeat(auto-fit,minmax(370px,1fr))}.keys{display:none}}@media(max-width:480px){header,main,footer{padding:18px 12px}.gallery{display:block}.card{margin-bottom:18px}.screen{overflow:auto}.views button{padding:5px 8px}}
+</style>
+<header>
+  <div class="eyebrow">Próba ruchu / 01</div>
+  <h1>Ten sam strażnik. Pierwsze trzy animacje.</h1>
+  <p>Zaakceptowany strój i twarz, dopasowany szkielet oraz osobny miecz. Podgląd źródłowych renderów Blendera.</p>
+  <div class="tools">
+    <button id="play" class="primary">Pauza</button><button id="step" title="Przesuń o jedną klatkę">Klatka →</button>
+    <label>Tempo <select id="speed"><option value="1">1× · 24 kl./s</option><option value="0.5">½×</option></select></label>
+    <button id="zoom" aria-pressed="false">Powiększenie 2×</button>
+    <label><input type="checkbox" id="ground" checked> Podłoże</label>
+    <span class="keys"><kbd>Spacja</kbd> pauza &nbsp; <kbd>→</kbd> klatka</span>
+  </div>
+  <div class="tools" style="border-top:0;margin-top:0;padding-top:10px">
+    <span class="eyebrow">Kierunek</span>
+    <nav class="views" aria-label="Kierunek kamery">
+      <button data-view="three_quarter" aria-pressed="true">Trzy czwarte</button><button data-view="front" aria-pressed="false">Przód</button><button data-view="side" aria-pressed="false">Bok</button><button data-view="rear" aria-pressed="false">Tył</button>
+    </nav>
+    <span id="status" class="status" role="status">Wczytywanie klatek…</span>
+  </div>
+</header>
+<main>
+  <div id="gallery" class="gallery"></div>
+  <p class="caption">Skala 1×: 100 pikseli na metr, kamera taktyczna 18°. Cień i siatka w odtwarzaczu pomagają ocenić kontakt stóp. Wersja 2× powiększa te same klatki.</p>
+  <div class="evidence"><a href="motion_review.png">Plansza kluczowych póz</a><a href="rig_review/ready_elbow.png">Łokieć i strój</a><a href="motion_verification.json">Pomiary i eksport</a><a href="README.md">Źródła i ograniczenia</a></div>
+</main>
+<footer>Etapy 44–45 · trzy klipy pilotażowe · cztery kierunki podglądu. Pełne zestawy, osiem kierunków i integracja z Godotem nastąpią po ocenie ruchu.</footer>
+<script id="motion-data" type="application/json">__MOTION_DATA__</script>
+<script src="player.js"></script>
+</html>

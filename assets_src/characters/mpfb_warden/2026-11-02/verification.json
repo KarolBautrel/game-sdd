@@ -1,0 +1,310 @@
+{
+  "status": "TECHNICAL_PASS",
+  "art_acceptance": "AWAITING_USER_REVIEW",
+  "checks": 8823,
+  "source_triangles": 110384,
+  "source_bounds": [
+    [
+      -0.4558661878108978,
+      0.45369425415992737
+    ],
+    [
+      -0.21231894195079803,
+      0.2621832489967346
+    ],
+    [
+      0.00800000037997961,
+      1.8604687452316284
+    ]
+  ],
+  "actual_fbx_reimport": true,
+  "maximum_fbx_bounds_drift_metres": 1.7881393432617188e-07,
+  "images": {
+    "02_warden_albedo.png": [
+      2048,
+      2048
+    ],
+    "Jartur_mid_old_Slavic_Male_with_Genitals_and_Beard_lsdif_lighter.png": [
+      2048,
+      2048
+    ],
+    "brown_eye_02.png": [
+      1024,
+      1024
+    ],
+    "short01_diffuse.png": [
+      2048,
+      2048
+    ],
+    "eyebrow001.png": [
+      512,
+      512
+    ]
+  },
+  "renders": {
+    "face_albedo.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        21,
+        0,
+        848,
+        745
+      ],
+      "mean_linear_rgb": 0.3208459032858239
+    },
+    "face_changed_light.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        21,
+        0,
+        848,
+        745
+      ],
+      "mean_linear_rgb": 0.172275457644248
+    },
+    "face_front.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        0,
+        0,
+        899,
+        745
+      ],
+      "mean_linear_rgb": 0.331694901322694
+    },
+    "face_profile.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        210,
+        0,
+        780,
+        745
+      ],
+      "mean_linear_rgb": 0.3475898038770222
+    },
+    "face_three_quarter.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        21,
+        0,
+        848,
+        745
+      ],
+      "mean_linear_rgb": 0.2960451898168318
+    },
+    "face_uv_checker.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        21,
+        0,
+        848,
+        745
+      ],
+      "mean_linear_rgb": 0.2927788784029045
+    },
+    "fbx_body.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        321,
+        128,
+        593,
+        742
+      ],
+      "mean_linear_rgb": 0.1774125706093676
+    },
+    "fbx_face.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        21,
+        0,
+        848,
+        745
+      ],
+      "mean_linear_rgb": 0.2958685238981149
+    },
+    "front.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        298,
+        136,
+        601,
+        743
+      ],
+      "mean_linear_rgb": 0.20295820156746142
+    },
+    "isometric35.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        321,
+        147,
+        593,
+        705
+      ],
+      "mean_linear_rgb": 0.19052518499230198
+    },
+    "rear.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        298,
+        145,
+        602,
+        747
+      ],
+      "mean_linear_rgb": 0.25417256268105093
+    },
+    "side.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        379,
+        128,
+        537,
+        742
+      ],
+      "mean_linear_rgb": 0.24992140111202985
+    },
+    "tactical.png": {
+      "size": [
+        384,
+        384
+      ],
+      "alpha_bounds": [
+        153,
+        95,
+        235,
+        279
+      ],
+      "mean_linear_rgb": 0.17986408482685606
+    },
+    "three_quarter.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        321,
+        128,
+        593,
+        742
+      ],
+      "mean_linear_rgb": 0.1774498963516459
+    }
+  },
+  "mesh_audit": {
+    "profile": "render",
+    "eps": 0.000212,
+    "tol": 0.004235,
+    "gap": 0.021176,
+    "pass": true,
+    "errors": [],
+    "warnings": [
+      "Retained_authored_warden_costume: 1 detached fragment (1.1% of its faces), nearest 0.0102 from the rest",
+      "MPFB_coherent_head_and_neck: not touching, 0.0114 from the nearest part",
+      "MPFB_eyes: not touching, 0.0114 from the nearest part",
+      "MPFB_hair: not touching, 0.0114 from the nearest part",
+      "MPFB_eyebrows: not touching, 0.0114 from the nearest part"
+    ],
+    "per_object": {
+      "Retained_authored_warden_costume": {
+        "tris": 68954,
+        "parts": 23,
+        "errors": [],
+        "warnings": [
+          "Retained_authored_warden_costume: 1 detached fragment (1.1% of its faces), nearest 0.0102 from the rest"
+        ]
+      },
+      "MPFB_coherent_head_and_neck": {
+        "tris": 35520,
+        "parts": 1,
+        "errors": [],
+        "warnings": [
+          "MPFB_coherent_head_and_neck: not touching, 0.0114 from the nearest part"
+        ]
+      },
+      "MPFB_eyes": {
+        "tris": 2040,
+        "parts": 4,
+        "errors": [],
+        "warnings": [
+          "MPFB_eyes: not touching, 0.0114 from the nearest part"
+        ]
+      },
+      "MPFB_hair": {
+        "tris": 3678,
+        "parts": 200,
+        "errors": [],
+        "warnings": [
+          "MPFB_hair: not touching, 0.0114 from the nearest part"
+        ]
+      },
+      "MPFB_eyebrows": {
+        "tris": 192,
+        "parts": 2,
+        "errors": [],
+        "warnings": [
+          "MPFB_eyebrows: not touching, 0.0114 from the nearest part"
+        ]
+      }
+    },
+    "skipped": []
+  },
+  "preserved": [
+    {
+      "package": "painted_candidates",
+      "files": 101
+    },
+    {
+      "package": "surface_refinement",
+      "files": 101
+    },
+    {
+      "package": "assets_src/characters/roster/manifest.json",
+      "files": 8223
+    },
+    {
+      "package": "assets_src/environment/manifest.json",
+      "files": 215
+    }
+  ],
+  "os_input_used": false,
+  "gameplay_tested": false,
+  "limits": [
+    "static mesh proof, not rig/animation acceptance",
+    "FBX does not retain all Blender skin shading parameters"
+  ]
+}
