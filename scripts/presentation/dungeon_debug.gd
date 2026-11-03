@@ -121,6 +121,9 @@ var qa_input_trace_enabled := OS.get_cmdline_user_args().has("--qa-input-trace")
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F7:
+		if _expedition_decision_pending():
+			get_viewport().set_input_as_handled()
+			return
 		_open_world()
 		return
 	if OS.is_debug_build() and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F6:
@@ -133,6 +136,10 @@ func _input(event: InputEvent) -> void:
 		print("QA_INPUT ", JSON.stringify({"event": event.as_text(), "pressed": event.is_pressed(), "viewport_mouse": str(get_viewport().get_mouse_position())}))
 	if _handle_layout_edit_input(event):
 		return
+
+
+func _expedition_decision_pending() -> bool:
+	return not run_state.get("pending_corridor_hazard", {}).is_empty() or not run_state.get("pending_room_event", {}).is_empty()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -150,7 +157,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if slot > exits.size():
 		return
 	get_viewport().set_input_as_handled()
-	_try_enter_room(str(exits[slot - 1].get("id", "")))
+	var target := str(exits[slot - 1].get("id", ""))
+	if expedition_chrome != null:
+		expedition_chrome.preview_room(self, target)
+	else:
+		_try_enter_room(target)
 
 
 func _ready() -> void:
@@ -227,6 +238,8 @@ func _build_graph() -> void:
 	for child in graph_layer.get_children():
 		child.queue_free()
 	room_nodes.clear()
+	if expedition_chrome != null:
+		expedition_chrome.build_backdrop(self)
 	_build_corridors()
 	for room: Dictionary in dungeon.get("rooms", []):
 		var room_panel: PanelContainer = _create_room_panel(room)
@@ -312,6 +325,12 @@ func _apply_layout_overrides() -> void:
 
 
 func _recalculate_graph_transform() -> void:
+	if expedition_chrome != null and expedition_chrome.use_mine_chart(self):
+		graph_axis_swap = false
+		graph_node_scale = 1.0
+		room_node_size = Vector2(224,136)
+		graph_content_size = Vector2(1720,766)
+		return
 	graph_axis_swap = _should_swap_graph_axes()
 	var bounds := _authored_room_bounds()
 	var graph_rect := Rect2(Vector2(32, 28), _map_scroll_rect().size - Vector2(64, 56))
@@ -408,6 +427,9 @@ func _generated_dungeon_scroll_tier() -> int:
 
 
 func _build_corridors() -> void:
+	# Passage choices carry the topology in the campaign HUD; avoid decorative pipes.
+	if expedition_chrome != null:
+		return
 	var rooms_by_id: Dictionary = _rooms_by_id()
 	for corridor: Dictionary in dungeon.get("corridors", []):
 		var from_room: Dictionary = rooms_by_id.get(corridor.get("from", ""), {})
@@ -1478,6 +1500,8 @@ func _retreat_to_world() -> void:
 
 
 func _open_world() -> void:
+	if _expedition_decision_pending():
+		return
 	var session := _run_session()
 	if session.managed_run:
 		if bool(run_state.get("completed", false)):
@@ -1662,11 +1686,21 @@ func _refresh_exit_buttons() -> void:
 		button.add_theme_stylebox_override("hover", _button_style(Color(0.13, 0.15, 0.11), Color(0.78, 0.62, 0.30)))
 		button.add_theme_stylebox_override("pressed", _button_style(Color(0.07, 0.08, 0.06), Color(0.64, 0.48, 0.24)))
 		var target_room_id := str(option.get("id", ""))
+		if expedition_chrome != null:
+			var passage: Dictionary = expedition_chrome._corridor(self,target_room_id)
+			button.text = "%s. Inspect %s\nLight -%s" % [option.get("slot",0),option.get("label",""),int(passage.get("light_decay",0))]
+			button.tooltip_text = "Preview this passage before confirming travel."
 		button.pressed.connect(func() -> void:
-			_try_enter_room(target_room_id)
+			if expedition_chrome != null:
+				expedition_chrome.preview_room(self, target_room_id)
+			else:
+				_try_enter_room(target_room_id)
 		)
 		exit_row.add_child(button)
-		if expedition_chrome!=null: expedition_chrome.style_button(button)
+		if expedition_chrome!=null:
+			expedition_chrome.style_button(button)
+			button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			button.custom_minimum_size.y = 92
 
 
 func _connected_room_labels(room_id: String) -> Array[String]:
@@ -1981,6 +2015,8 @@ func _rooms_by_id() -> Dictionary:
 
 
 func _room_screen_position(room: Dictionary) -> Vector2:
+	if expedition_chrome != null and expedition_chrome.use_mine_chart(self):
+		return expedition_chrome.chart_room_position(self,str(room.get("id","")))
 	return graph_origin + _room_map_position(room) * graph_step
 
 

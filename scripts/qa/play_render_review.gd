@@ -38,7 +38,11 @@ func _run() -> void:
 			await frames(8)
 			await capture("dungeon-route",pixels)
 			if exercise:
+				var before_preview: Dictionary=app.run_state.duplicate(true)
 				await click(app.room_nodes.dusty_crossing.find_children("*","Button",true,false)[0])
+				check(app.run_state==before_preview,"native room preview spends no resources")
+				await capture("dungeon-preview",pixels)
+				await click(app.expedition_chrome.travel_button)
 			else: app._try_enter_room("dusty_crossing")
 			await frames(8)
 			await capture("dungeon-event",pixels)
@@ -50,6 +54,7 @@ func _run() -> void:
 				await click(app.oil_button)
 				check(app.run_state.supplies.lamp_oil==oil-1 and app.run_state.light_level==4,"native oil action spends exactly one supply")
 				await click(app.room_nodes.collapsed_cache.find_children("*","Button",true,false)[0])
+				await click(app.expedition_chrome.travel_button)
 				check(not app.run_state.pending_corridor_hazard.is_empty(),"native room input opens real corridor hazard")
 				await capture("dungeon-hazard",pixels)
 				for choice: Button in app.corridor_hazard_choice_buttons:

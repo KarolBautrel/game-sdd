@@ -72557,6 +72557,13 @@
       "height": 185
     },
     {
+      "path": "res://assets/ui/dungeon/illustrated/old_mine_chart.png",
+      "bytes": 2035908,
+      "sha256": "07a9bf2bfacab0011431ee989acd1453705b863e0436d041b9a1caf7f3cceb2f",
+      "width": 1280,
+      "height": 570
+    },
+    {
       "path": "res://assets/ui/dungeon/processed/archer/archer_00.png",
       "bytes": 1052629,
       "sha256": "09a190f28ba944b4df3c57aa0d10317e41391c9072d69a3c82eceb6306fd1a43",

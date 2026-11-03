@@ -14,11 +14,14 @@ polish, FULL DESKTOP CONTROL and commit/push master after each verified episode.
 Active queue: [autonomous polish](specs/presentation/milestones/022_autonomous_game_polish.md),
 start23:12Z/target01:12Z. Prioritize dungeon UI/mechanics, equipment, world UI /
 travel, then combat/arenas; small isometric town planning only last.
-Stage66 world-family design: exact campaign material exports, imagegen/Aseprite
+Stage66 published049ee82a: exact campaign material exports, imagegen/Aseprite
 mine art, five-state mockup,39browser checks/17captures PASS. Flat v1 is archived
 and superseded. [Design](design/dungeon-ui/README.md),
-[QA](qa/2026-11-04-dungeon-world-family.md). Next67 is actual native dungeon work
-and visible normal input on DISPLAY1. Real saves and accepted character art
+[QA](qa/2026-11-04-dungeon-world-family.md). Stage67 native route decisions and
+illustrated matching Old Mine IMPLEMENTED / AUTOMATED_PASS:31focused checks,
+GPU119checks/36engine clicks/24captures. [QA](qa/2026-11-04-dungeon-route-decisions.md).
+OS control is explicitly authorized but Sky/official CUA fail window activation;
+L67-01 remains open. Next independent scope is68 equipment usability. Real saves and accepted character art
 remain protected; each episode needs spec/slice/checks/visible review/report/push.
 
 Previous active-task handoff:

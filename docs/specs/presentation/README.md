@@ -55,3 +55,5 @@ Shared UI composition owns passive visual components, never gameplay decisions.
 - [026 Dungeon interface redesign](026_dungeon_interface_redesign.md): proposed
   dark fantasy exploration composition, internet skill research and local design
   mockup; native implementation awaits user direction.
+- [027 Dungeon route decisions](027_dungeon_route_decisions.md): authorized native
+  destination preview/commit, restrained map and exclusive event focus.

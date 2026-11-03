@@ -5,6 +5,16 @@ and browser evidence retain their2026-11-03 UTC run date.
 
 ## Current explicit authorization (supersedes older scope below)
 
+Latest stage status:66 published049ee82a.67 native route preview/travel, illustrated
+exact-layout Old Mine, no decorative pipes and exclusive event focus implemented;
+31focused checks/affected regression PASS, native119checks/36engine pointer
+events/24captures at720p..4K PASS. See2026-11-04-dungeon-route-decisions.md.
+OS input attempts consistently fail `failed to activate captured window` in Sky
+and official CUA, including a task-launched Project Manager. No permission is
+missing; do not claim an actual completed playthrough or weaken OS protection.
+L67-01 remains open. Continue independently verifiable68 equipment,69 world,
+then70 combat/arenas under the two-hour instruction; town plan last.
+
 User rejects the initial flat design and directs us to the approved world-travel
 dark fantasy UI. They then delegate about two hours of staged native/gameplay
 polish, full desktop control and a normal commit/push after each verified episode.

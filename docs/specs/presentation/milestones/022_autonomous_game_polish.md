@@ -46,3 +46,13 @@ Aseprite1280x570 chart/320x240 cave-in vignette and editable files. Browser39
 checks/17captures PASS including actual approved frame/button asset use. Native
 implementation follows in67. Detailed QA and publication receipts are persisted
 as the episodes close; final human acceptance remains distinct.
+
+Stage66 published049ee82ad5ecb0b0e69ee729bb6519332fcdb3ab; remote and11new LFS
+objects/20MB verified. Stage67 implemented native illustrated exact-layout Old
+Mine, route preview/confirm, no decorative connectors and exclusive event focus.
+31focused checks; existing affected suites PASS; native GPU119checks/36pointer
+events/24captures at720p..4K PASS. Physical acceptance remains open: Sky and
+official CUA return `failed to activate captured window` despite explicit desktop
+permission. No successful OS input or full play acceptance is claimed. Continue
+the user's authorized unattended independent equipment/world scope with this
+external limitation preserved, not by silently marking physical gates passed.

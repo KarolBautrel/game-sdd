@@ -248,3 +248,10 @@ reported. Add further observed results per scenario here, link screenshots/logs
 when available and record each defect's owner/slice/fix/retest evidence.
 Future stage specs may refine their scenarios before implementation; keep this
 registry synchronized without erasing failed attempts or marking unplayed cases.
+
+
+## Native dungeon route decisions (stage67)
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L67-01 | 67 | On DISPLAY1 start an isolated expedition, inspect/confirm a passage, resolve shrine/rubble, use oil, claim loot, inspect generated fallback and keyboard focus. | Readable world-family art, no decorative pipes, preview spends nothing, one-cost travel, forced modal cannot be bypassed. | AWAITING_INTERACTIVE; native119checks/36engine clicks and31focused checks PASS; Sky/official CUA activation fails despite explicit desktop permission. |

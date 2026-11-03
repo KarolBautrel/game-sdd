@@ -17,6 +17,10 @@ Design screenshots: [exploration](exploration-1920x1080.png),
 [corridor obstacle](corridor-event-1920x1080.png), [packing](packing-1920x1080.png),
 [low light](low-light-1920x1080.png), [reward](reward-1920x1080.png).
 Browser evidence: [dated QA record](../../qa/2026-11-03-dungeon-ui-design.md).
+Native stage67 GPU captures: [Old Mine](native-route.png) and
+[destination preview](native-preview.png). The illustrated native backing is
+enabled only for the exact matching authored graph; generated dungeons keep
+data-driven room layouts and passage lists. Heavy decorative connectors are gone.
 
 ```powershell
 Start-Process -FilePath "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game\docs\design\dungeon-ui\prototype.html"
