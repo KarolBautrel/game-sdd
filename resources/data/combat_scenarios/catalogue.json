@@ -7,6 +7,11 @@
       "path": "res://resources/data/combat_encounters/debug_full_combat_showcase.json"
     },
     {
+      "id": "drawn_roster_skirmish",
+      "label": "Painted Six - Old Mine",
+      "path": "res://resources/data/combat_encounters/drawn_roster_skirmish.json"
+    },
+    {
       "id": "drawn_knight_sandbox",
       "label": "Rycerz — próba animacji",
       "path": "res://resources/data/combat_encounters/drawn_knight_sandbox.json"

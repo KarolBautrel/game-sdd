@@ -1,5 +1,40 @@
 # Painted tactical character batch
 
+User acceptance2026-11-03: current stage60 neutral stance and walking are accepted
+FOR NOW and authorized for publication in the main game repo. Retain this version
+for development; future posture/locomotion polish is deferred until explicitly
+requested. The decision is preserved in refinements/native_neutral/user_acceptance.json.
+Rejected58 and unreported terminal/campaign results remain separate.
+
+CURRENT stage60: newly authorized after rollback. Native shield-warrior-based
+neutral standing pose, exact original knight heads/boots;24 neutral PNG edits,
+2280 other graphics unchanged. Calm gait:1000ms/160px/160px/s in all96 walk clips.
+301 backups and28 comparison/reference samples under `refinements/native_neutral`.
+Open `tools/qa/start_native_neutral_preview.ps1`. Technical checks PASS; visual
+review pending. Stage58 remains rejected. Historical rollback/candidate notes follow.
+
+CURRENT: user rejects stage58 and explicitly requests rollback/stopping. Stage59
+restores the exact pre58/stage57 model/poses/neutral carry and400ms/80px gait.
+861 source/metadata files and2304 runtime PNG hashes match the retained baseline.
+Rejected58 sources are archived; its entry points are blocked. Do not regenerate
+or continue visual iteration without a new task. Historical candidate notes follow.
+
+Stage58 supersedes57 cadence after user feedback:800ms gait/160px stride gives the
+same200px/s travel with half the cycling. Knight neutral/combat idles and neutral
+walks have a broader fighting base/lowered held sword in all8views. Other actions
+and the prior shield-warrior rear correction are retained.861 baseline files,
+128 scoped PNG edits,36 before/after samples: `refinements/motion_balance/`.
+Open `tools/qa/start_drawn_motion_balance_preview.ps1`. Technical checks pass;
+continuous user visual retest pending. The rejected57 cadence is historical below.
+
+Stage57 battle-feedback candidate: all96 walk clips now use50ms cels (400ms cycle,
+80px stride), twice the previous travel/cadence speed. Only warrior/north appearance
+is redrawn with wider standing feet and held sword occluded by the torso; its death
+and all other facings/roles' drawing PNGs are preserved. Non-walk timing unchanged.
+313 baseline files/proofs and18 before/after samples: `refinements/battle_feedback/`.
+Open `tools/qa/start_drawn_battle_feedback_preview.ps1`. Native7386/battle307 checks
+PASS; user visual retest pending. The earlier stage55 acceptance below is retained.
+
 Latest correction2026-11-03: user explicitly accepts planted idle feet, corrected
 rear shield interiors and stronger/slower bow draw/aim. Open the focused125-case
 before/after player with `tools/qa/start_drawn_refinement_preview.ps1`. Baseline938

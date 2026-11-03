@@ -5,6 +5,9 @@ local source=root..'/assets_src/aseprite/characters/drawn_animation/2026-11-03'
 local pc=app.pixelColor
 local W,H,PX,PY,LOCK_Y=384,320,192,270,232
 local result={status='PASS',lock_y=LOCK_Y,views={}}
+local ids=app.params.id and {app.params.id} or {'knight','warrior','archer_1','rogue_1','axe_bandit','bandit_spearman'}
+local views=app.params.view and {app.params.view} or {'south_east','south','east','north_east','north'}
+local clips_done=0
 local function metrics(im)
  local x0,y0,x1,y1=W,H,-1,-1;local pixels=0
  for it in im:pixels() do if pc.rgbaA(it())>=48 then
@@ -13,8 +16,8 @@ local function metrics(im)
  assert(x0>=3 and y0>=3 and x1<W-3 and y1<H-3,'Idle clipping')
  return {bounds={x0,y0,x1,y1},pixels=pixels}
 end
-for _,id in ipairs({'knight','warrior','archer_1','rogue_1','axe_bandit','bandit_spearman'}) do
- for _,view in ipairs({'south_east','south','east','north_east','north'}) do
+for _,id in ipairs(ids) do
+ for _,view in ipairs(views) do
   local suffix=id..(view=='south_east' and '' or '/directions/'..view)
   local proof={id=id,view=view,clips={}}
   for _,action in ipairs({'neutral_idle','combat_idle'}) do
@@ -60,6 +63,7 @@ for _,id in ipairs({'knight','warrior','archer_1','rogue_1','axe_bandit','bandit
     for it in actual:pixels() do assert(it()==expected:getPixel(it.x,it.y),'Idle source reopen pixel mismatch') end
    end
    check:close();proof.clips[action]={frames=entries,source_roundtrip='PASS',lower_contact_pixels='EXACT_FRAME_ZERO'}
+   clips_done=clips_done+1
   end
   local input=assert(io.open(base..'/'..suffix..'/manifest.json'));local manifest=json.decode(input:read('*a'));input:close()
   local count=0;for _ in ipairs(manifest.clips) do count=count+1 end
@@ -73,5 +77,5 @@ for _,id in ipairs({'knight','warrior','archer_1','rogue_1','axe_bandit','bandit
  end
  print('DRAWN_IDLE_CONTACT_ROLE_PASS '..id)
 end
-local f=assert(io.open(base..'/refinements/idle_contact_report.json','w'));f:write(json.encode(result));f:close()
-print('DRAWN_IDLE_CONTACT_PASS 60 clips, 30 drawn views; mirrored views follow')
+local f=assert(io.open(base..'/'..(app.params.report or 'refinements/idle_contact_report.json'),'w'));f:write(json.encode(result));f:close()
+print('DRAWN_IDLE_CONTACT_PASS '..clips_done..' clips, '..#result.views..' drawn views')

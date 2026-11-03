@@ -1,0 +1,76 @@
+{
+  "status": "SOURCE_AND_SCOPE_PASS",
+  "baseline_files_preserved": 313,
+  "walk_clips_retimed": 96,
+  "walk_cycle_before_ms": 800,
+  "walk_cycle_after_ms": 400,
+  "walk_stride_pixels": 80,
+  "non_walk_durations": "UNCHANGED_ALL_48_VIEWS",
+  "changed_runtime_pngs": [
+    "assets/combat/characters/drawn/warrior/attack/warrior_north_attack_000.png",
+    "assets/combat/characters/drawn/warrior/attack/warrior_north_attack_001.png",
+    "assets/combat/characters/drawn/warrior/attack/warrior_north_attack_002.png",
+    "assets/combat/characters/drawn/warrior/attack/warrior_north_attack_003.png",
+    "assets/combat/characters/drawn/warrior/attack/warrior_north_attack_004.png",
+    "assets/combat/characters/drawn/warrior/attack/warrior_north_attack_005.png",
+    "assets/combat/characters/drawn/warrior/attack/warrior_north_attack_006.png",
+    "assets/combat/characters/drawn/warrior/attack/warrior_north_attack_007.png",
+    "assets/combat/characters/drawn/warrior/combat_idle/warrior_north_combat_idle_000.png",
+    "assets/combat/characters/drawn/warrior/combat_idle/warrior_north_combat_idle_001.png",
+    "assets/combat/characters/drawn/warrior/combat_idle/warrior_north_combat_idle_002.png",
+    "assets/combat/characters/drawn/warrior/combat_idle/warrior_north_combat_idle_003.png",
+    "assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_000.png",
+    "assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_001.png",
+    "assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_002.png",
+    "assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_003.png",
+    "assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_004.png",
+    "assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_005.png",
+    "assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_006.png",
+    "assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_007.png",
+    "assets/combat/characters/drawn/warrior/hit/warrior_north_hit_000.png",
+    "assets/combat/characters/drawn/warrior/hit/warrior_north_hit_001.png",
+    "assets/combat/characters/drawn/warrior/hit/warrior_north_hit_002.png",
+    "assets/combat/characters/drawn/warrior/hit/warrior_north_hit_003.png",
+    "assets/combat/characters/drawn/warrior/neutral_idle/warrior_north_neutral_idle_000.png",
+    "assets/combat/characters/drawn/warrior/neutral_idle/warrior_north_neutral_idle_001.png",
+    "assets/combat/characters/drawn/warrior/neutral_idle/warrior_north_neutral_idle_002.png",
+    "assets/combat/characters/drawn/warrior/neutral_idle/warrior_north_neutral_idle_003.png",
+    "assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_000.png",
+    "assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_001.png",
+    "assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_002.png",
+    "assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_003.png",
+    "assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_004.png",
+    "assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_005.png",
+    "assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_006.png",
+    "assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_007.png"
+  ],
+  "other_runtime_pngs_unchanged": 2268,
+  "north_warrior_death": "BYTE_IDENTICAL_SOURCE_AND_EXPORTS",
+  "rear_pose_metrics": [
+    {
+      "action": "neutral_idle",
+      "after": {
+        "exposed_side_blade_pixels": 0,
+        "foot_centres_apart_px": 54.5
+      },
+      "before": {
+        "exposed_side_blade_pixels": 0,
+        "foot_centres_apart_px": 38.5
+      }
+    },
+    {
+      "action": "combat_idle",
+      "after": {
+        "exposed_side_blade_pixels": 0,
+        "foot_centres_apart_px": 64
+      },
+      "before": {
+        "exposed_side_blade_pixels": 276,
+        "foot_centres_apart_px": 42.5
+      }
+    }
+  ],
+  "source_roundtrip": "PASS",
+  "visual_retest": "NOT_RUN",
+  "desktop_input_used": false
+}

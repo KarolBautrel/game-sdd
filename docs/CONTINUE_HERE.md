@@ -6,6 +6,70 @@ when the user has only requested an explanation or plan.
 
 ## Next-session entry: read this first
 
+Latest active-task handoff:
+[accepted checkpoint and publication](handoffs/2026-11-03-painted-game-publication.md).
+User accepts stage60 FOR NOW and requests the accepted work in the main game repo.
+Publication target is default master; see the handoff/publication receipt for
+commit verification. Future posture/locomotion polish is deferred, not an active
+art task. L60-01 PASS_USER_REPORTED_FOR_NOW; terminal/campaign cases remain open.
+Next proposed scope is identity/weapon agreement before more human roster work
+and a creature pilot; this is advice only, not authorized implementation.
+
+Accepted source details:
+[native neutral reference and calm gait](handoffs/2026-11-03-native-neutral.md).
+User explicitly reopens only two tasks after rollback: neutral standing based
+closely on the sword/shield warrior and slower stepping. Stage60 IMPLEMENTED /
+AUTOMATED_PASS / USER_ACCEPTED_FOR_NOW: native pixel composition preserves
+exact knight heads/boots;24 neutral_idle PNG edits only,2280 other graphics unchanged.
+All96 walks125ms cels/1000ms cycles/160px stride,160px/s.301 before files retained;
+native7386/0, battle313/0, full regressions/offline3579/validator PASS.28-case player:
+`tools/qa/start_native_neutral_preview.ps1`. Rejected58 remains blocked. Publication
+to game master is authorized; no new roster/workshop/desktop scope is inferred.
+
+Previous rollback, now followed by the new narrow authorization above:
+[explicit rollback; leave previous version](handoffs/2026-11-03-drawn-rollback.md).
+User rejects58's blurred model/fighting stance and says to revert and leave it
+alone for now. Stage59 restores exact pre58/stage57:861 source/metadata/registry
+files and2304 runtime PNG hashes match. Original knight poses/neutral carry and
+400ms/80px cadence are restored; earlier stage56/57 work retained. Rejected58 is
+archived and its reapply/preview entry points blocked. No further iteration,
+new roster, publication or desktop scope is authorized. Await user's next task.
+
+Rejected and rolled back:
+[natural cadence and two-handed swordsman](handoffs/2026-11-03-drawn-motion-balance.md).
+User rejects57's frantic foot cycling and asks a wider fighting stance/lowered
+neutral sword for the distinct two-handed knight. Stage58 IMPLEMENTED /
+AUTOMATED_PASS / AWAITING_USER_RETEST:800ms gait/160px stride keeps200px/s travel,
+halves cycling; knight-only neutral/combat idles and neutral walks redrawn in8views
+(5 drawn/3 reflections).128 PNG edits,2176 other PNGs and non-walk timings unchanged.
+861 before files; source/reopen/foot planting PASS. Native7386/0, battle307/0,
+full regressions/offline3579/validator PASS.36-case distance-aware preview:
+`tools/qa/start_drawn_motion_balance_preview.ps1`. L57-01 partial/rejected cadence;
+L58-01 pending. All work local on master; no next batch/publication authorized.
+
+Previous candidate (cadence superseded):
+[brisk walking and rear stance correction](handoffs/2026-11-03-drawn-battle-feedback.md).
+User reports actual battle feedback: movement much too slow, one-handed warrior
+north stance narrow and sword too exposed; they explicitly request more body
+occlusion. Remaining animation/movement looks okay, but no terminal result given.
+Stage57 IMPLEMENTED / AUTOMATED_PASS / AWAITING_USER_RETEST: all96 walk clips2x
+faster (400ms/80px), warrior/north wider feet/occluded held sword, other timings/
+facings and death preserved.313 baseline files, exactly36 changed runtime PNGs.
+Native7386/0, battle307/0, full regressions/validator PASS.18 before/after samples:
+`tools/qa/start_drawn_battle_feedback_preview.ps1`. L56-01 partial; L57-01 pending.
+Changes remain local on master; no next production batch/publication authorized.
+
+Previous battle preparation:
+[six-role battle review](handoffs/2026-11-03-painted-battle-review.md).
+User explicitly selects point1: test the current six painted roles in ordinary
+battle. Stage56 IMPLEMENTED / AUTOMATED_PASS / AWAITING_INTERACTIVE: isolated
+four-versus-four encounter, matching existing-rule gear and direct launcher.
+301native battle checks/0; full legal Godot simulations victory69commands and
+defeat96commands; drawn7368/0 plus relevant regressions/validator PASS. Command
+supplied in chat; subsequent partial feedback/corrections are recorded above.
+See stage56 and L56-01/L56-02. Changes
+remain local on master; no new publication or next art batch is authorized.
+
 Latest reusable-workflow handoff:
 [painted character workshop v1.0.1](handoffs/2026-11-03-painted-workshop.md).
 User explicitly authorized creating/publishing the separate reusable package.
@@ -17,8 +81,8 @@ The approved game art and all outstanding physical-test scenarios are unchanged.
 The user requests English for reusable packages. Documentation, default labels,
 previews and current release materials are English; exact original prompts remain
 provenance. The user is discussing the next production scope; full-roster
-conversion has not been started. Suggested next step is actual battle review of
-the current six roles, then a small early-encounter human batch and creature pilot.
+conversion has not been started. The current six-role battle review is now
+authorized as above; later human/creature production remains a proposal.
 
 Publication2026-11-03: user selects the accepted painted batch as the main game
 direction and explicitly requests all current work on the default branch. Active

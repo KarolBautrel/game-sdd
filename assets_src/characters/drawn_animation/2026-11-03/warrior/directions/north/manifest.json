@@ -18,9 +18,9 @@
       "id": "neutral_idle",
       "loop": true,
       "mode": "neutral",
-      "scale": 1,
+      "scale": 1.0118343195266273,
       "source_first": 1,
-      "source_sheet": "sequence_shield_inside",
+      "source_sheet": "sequence_rear_stance_clean",
       "title": "Spoczynek",
       "idle_contact": {
         "lock_y": 232,
@@ -40,9 +40,9 @@
       "id": "combat_idle",
       "loop": true,
       "mode": "combat",
-      "scale": 1.0426829268292683,
+      "scale": 1.049079754601227,
       "source_first": 5,
-      "source_sheet": "sequence_shield_inside",
+      "source_sheet": "sequence_rear_stance_clean",
       "title": "Gotowość bojowa",
       "idle_contact": {
         "lock_y": 232,
@@ -52,45 +52,45 @@
     {
       "atlas": "neutral_walk.png",
       "durations": [
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125
       ],
       "frame_source": "redrawn",
       "frames": 8,
       "id": "neutral_walk",
       "loop": true,
       "mode": "neutral",
-      "scale": 1.1103896103896105,
+      "scale": 1.062111801242236,
       "source_first": 9,
-      "source_sheet": "sequence_shield_inside",
+      "source_sheet": "sequence_rear_stance_clean",
       "title": "Chód spokojny"
     },
     {
       "atlas": "combat_walk.png",
       "durations": [
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125
       ],
       "frame_source": "redrawn",
       "frames": 8,
       "id": "combat_walk",
       "loop": true,
       "mode": "combat",
-      "scale": 1.1712328767123288,
+      "scale": 1.14,
       "source_first": 17,
-      "source_sheet": "sequence_shield_inside",
+      "source_sheet": "sequence_rear_stance_clean",
       "title": "Chód w gotowości"
     },
     {
@@ -110,9 +110,9 @@
       "id": "attack",
       "loop": false,
       "mode": "combat",
-      "scale": 1.2391304347826086,
+      "scale": 1.2127659574468086,
       "source_first": 25,
-      "source_sheet": "sequence_shield_inside",
+      "source_sheet": "sequence_rear_stance_clean",
       "title": "Cięcie zza tarczy"
     },
     {
@@ -130,7 +130,7 @@
       "mode": "combat",
       "scale": 1.2666666666666666,
       "source_first": 33,
-      "source_sheet": "sequence_shield_inside",
+      "source_sheet": "sequence_rear_stance_clean",
       "title": "Reakcja na trafienie"
     },
     {
@@ -166,5 +166,6 @@
   ],
   "pixels_per_metre": 100,
   "title": "Bran · miecz i tarcza",
-  "view": "north"
+  "view": "north",
+  "walk_stride_pixels": 160
 }

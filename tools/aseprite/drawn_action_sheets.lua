@@ -3,12 +3,13 @@ local root=assert(app.params.root)
 local id=app.params.id or 'knight'
 local view=app.params.view or 'three_quarter'
 local suffix=id..(view~='three_quarter' and '/directions/'..view or '')
-local base=root..'/assets_src/characters/drawn_animation/2026-11-03/'..suffix
-local source=root..'/assets_src/aseprite/characters/drawn_animation/2026-11-03/'..suffix
+local base=app.params.base or root..'/assets_src/characters/drawn_animation/2026-11-03/'..suffix
+local source=app.params.source or root..'/assets_src/aseprite/characters/drawn_animation/2026-11-03/'..suffix
 local pc=app.pixelColor
 local function read(path) local f=assert(io.open(path,'r'));local s=f:read('*a');f:close();return json.decode(s) end
 local function save(path,value) local f=assert(io.open(path,'w'));f:write(json.encode(value));f:close() end
 local cfg=read(base..'/clips_source.json')
+app.fs.makeAllDirectories(source)
 local W,H,PX,PY=384,320,192,270
 local function neon(p)
  local r,g,b=pc.rgbaR(p),pc.rgbaG(p),pc.rgbaB(p)
@@ -17,9 +18,9 @@ local function neon(p)
  end
  return (r>150 and g<75 and b<85) or (g>120 and g>r*1.35 and g>b*1.5) or (r>150 and b>150 and g<65)
 end
-local function clean_sheet(im,matte)
+local function clean_sheet(im,matte,alpha_floor)
  for it in im:pixels() do local p=it();local a=pc.rgbaA(p)
-  if a<32 or neon(p) then it(0)
+  if a<(alpha_floor or 32) or neon(p) then it(0)
   elseif matte then
    local r,g,b=pc.rgbaR(p),pc.rgbaG(p),pc.rgbaB(p)
    if a<=196 or (math.min(r,g,b)>205 and math.max(r,g,b)-math.min(r,g,b)<25 and a<250) then it(0)
@@ -60,12 +61,17 @@ end
 local sheets={}
 for name,spec in pairs(cfg.sheets) do
  local im=Image{fromFile=base..'/raw/'..name..'.png'}
- clean_sheet(im,spec.matte or false)
+ clean_sheet(im,spec.matte or false,spec.alpha_floor)
  local rows={};local details={}
  -- Generated row spacing is not mathematically uniform. Segment entire figures
  -- before assigning grid order; an equal-height crop can silently cut off boots.
  local cs,width=components(im,0,im.height-1)
  local expected=spec.cols*spec.rows
+ if #cs<expected then
+  for n=1,math.min(6,#cs) do
+   local c=cs[n];print('DRAWN_MISSING_FIGURE_COMPONENT '..name..' '..n..' '..json.encode({c.x0,c.y0,c.x1,c.y1,c.count}))
+  end
+ end
  assert(#cs>=expected,'Missing figures '..name..' '..#cs)
  local main={};for n=1,expected do main[n]=cs[n] end
  table.sort(main,function(a,b)return a.cy<b.cy end)
@@ -138,7 +144,7 @@ local report={status='TECHNICAL_SOURCE_EXPORT_PASS_VISUAL_REVIEW_PENDING',id=id,
  canvas={W,H},pivot={PX,PY},body_height_target=171,view=view,
  frame_source='redrawn imagegen keyframes; Aseprite segmentation/normalization',clips={},clipping={}}
 local manifest={id=id,title=cfg.title,view=view,canvas={W,H},pivot={PX,PY},
- pixels_per_metre=100,body_height=171,clips={},exported_views={view}}
+ pixels_per_metre=100,body_height=171,walk_stride_pixels=cfg.walk_stride_pixels or 80,clips={},exported_views={view}}
 local contact=Image(W*4,H*math.ceil(#cfg.clips/4),ColorMode.RGB)
 for clipIndex,clip in ipairs(cfg.clips) do
  local frames={};for n=1,clip.count do frames[n]=sheets[clip.sheet][clip.indices and tonumber(clip.indices[n]) or clip.start+n-1] end
@@ -155,7 +161,7 @@ for clipIndex,clip in ipairs(cfg.clips) do
   if clip.align_head then sourceRoot=head_center(frame,refHeight)-(headX-(first.col*first.width+root)) end
   if clip.align_feet then sourceRoot=foot_center(frame) end
   local resized=Image(frame.image)
-  resized:resize{width=math.floor(frame.image.width*scale+.5),height=math.floor(frame.image.height*scale+.5),method='bilinear'}
+  resized:resize{width=math.floor(frame.image.width*scale+.5),height=math.floor(frame.image.height*scale+.5),method=clip.resample or cfg.resample or 'bilinear'}
   local target=Image(W,H,ColorMode.RGB)
   local offset=Point(math.floor(PX-sourceRoot*scale+.5)+(clip.offset_x or 0),math.floor(PY-(frame.bounds[2]+frame.bounds[4]-1)*scale+.5))
   target:drawImage(resized,offset)

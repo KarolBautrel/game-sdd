@@ -1,0 +1,1 @@
+{"status": "PASS", "views": [{"action": "neutral_idle", "after": {"exposed_side_blade_pixels": 0, "foot_centres_apart_px": 54.5}, "before": {"exposed_side_blade_pixels": 0, "foot_centres_apart_px": 38.5}}, {"action": "combat_idle", "after": {"exposed_side_blade_pixels": 0, "foot_centres_apart_px": 64}, "before": {"exposed_side_blade_pixels": 276, "foot_centres_apart_px": 42.5}}]}

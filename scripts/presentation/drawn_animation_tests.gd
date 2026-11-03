@@ -23,7 +23,10 @@ func _run() -> void:
 		check(art.processed_sheet_texture_path(p.id,"east","combat_idle:0")!=art.processed_sheet_texture_path(p.id,"east","pose:0"),p.id+" distinct ready stance")
 		check(art.processed_sheet_corpse_visual_action(p.id)=="death:7",p.id+" last corpse frame")
 		check(art.clip_seconds(unit,"combat",0.0)>art.impact_seconds(unit,0.0),p.id+" anticipation plus recovery")
-		check(is_equal_approx(art.movement_seconds(unit,80.0,0.0),0.8),p.id+" declared stride duration")
+		check(is_equal_approx(art.movement_seconds(unit,80.0,0.0),0.5),p.id+" calm half-stride travel")
+		check(is_equal_approx(art.movement_seconds(unit,320.0,0.0),2.0),p.id+" 320px travel follows natural stride")
+		for walking: String in ["neutral_walk","combat_walk"]:
+			check(is_equal_approx(art.clip_seconds(unit,walking,0.0),1.0),p.id+walking+" one-second walking cycle")
 		var actions: Array=Catalog.ACTIONS.duplicate()
 		if p.id=="knight":
 			for extra: String in Catalog.KNIGHT_EXTRAS:

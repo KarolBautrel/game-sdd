@@ -53,6 +53,15 @@ overwrite an override file not owned by this launcher. The window is windowed.
 This records launch intent;
 it does not establish visual or gameplay acceptance.
 
+For a direct isolated battle review, `-Scene combat -CombatScenario <catalogue-id>`
+validates the ID against the existing combat scenario catalogue before writing the
+owned override or launching. Reject this option for another scene or an unknown
+ID. Store the opt-in ID as `debug/qa/combat_scenario` in that local profile and
+record it in launch evidence. A regular launch writes an empty ID. CombatDebug
+resolves it through the catalogue only when no pending expedition or authoring
+draft owns the launch. This option does not change the project's normal encounter
+or write a campaign save. It follows the same DISPLAY1/no-input permission rules.
+
 For input-delivery diagnosis, `start_game.ps1 -TraceInput` may pass
 `--qa-input-trace` to DungeonDebug. The scene logs its actual window mode,
 screen, physical position/size and received key/mouse-button events to stdout.

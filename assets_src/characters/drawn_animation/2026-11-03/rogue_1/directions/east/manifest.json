@@ -52,14 +52,14 @@
     {
       "atlas": "neutral_walk.png",
       "durations": [
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125
       ],
       "frame_source": "redrawn",
       "frames": 8,
@@ -74,14 +74,14 @@
     {
       "atlas": "combat_walk.png",
       "durations": [
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125
       ],
       "frame_source": "redrawn",
       "frames": 8,
@@ -166,5 +166,6 @@
   ],
   "pixels_per_metre": 100,
   "title": "Łotr · dwa sztylety",
-  "view": "east"
+  "view": "east",
+  "walk_stride_pixels": 160
 }

@@ -5,6 +5,10 @@
     "sequence_shield_inside": {
       "cols": 4,
       "rows": 11
+    },
+    "sequence_rear_stance_clean": {
+      "cols": 4,
+      "rows": 11
     }
   },
   "clips": [
@@ -12,7 +16,7 @@
       "id": "neutral_idle",
       "title": "Spoczynek",
       "mode": "neutral",
-      "sheet": "sequence_shield_inside",
+      "sheet": "sequence_rear_stance_clean",
       "start": 1,
       "count": 4,
       "durations": 250,
@@ -22,7 +26,7 @@
       "id": "combat_idle",
       "title": "Gotowość bojowa",
       "mode": "combat",
-      "sheet": "sequence_shield_inside",
+      "sheet": "sequence_rear_stance_clean",
       "start": 5,
       "count": 4,
       "durations": 250,
@@ -32,10 +36,10 @@
       "id": "neutral_walk",
       "title": "Chód spokojny",
       "mode": "neutral",
-      "sheet": "sequence_shield_inside",
+      "sheet": "sequence_rear_stance_clean",
       "start": 9,
       "count": 8,
-      "durations": 100,
+      "durations": 125,
       "loop": true,
       "align_head": true
     },
@@ -43,10 +47,10 @@
       "id": "combat_walk",
       "title": "Chód w gotowości",
       "mode": "combat",
-      "sheet": "sequence_shield_inside",
+      "sheet": "sequence_rear_stance_clean",
       "start": 17,
       "count": 8,
-      "durations": 100,
+      "durations": 125,
       "loop": true,
       "align_head": true
     },
@@ -54,7 +58,7 @@
       "id": "attack",
       "title": "Cięcie zza tarczy",
       "mode": "combat",
-      "sheet": "sequence_shield_inside",
+      "sheet": "sequence_rear_stance_clean",
       "start": 25,
       "count": 8,
       "durations": [
@@ -73,7 +77,7 @@
       "id": "hit",
       "title": "Reakcja na trafienie",
       "mode": "combat",
-      "sheet": "sequence_shield_inside",
+      "sheet": "sequence_rear_stance_clean",
       "start": 33,
       "count": 4,
       "durations": [
@@ -104,5 +108,7 @@
       "loop": false,
       "reference_index": 33
     }
-  ]
+  ],
+  "cleanup_neon": true,
+  "walk_stride_pixels": 160
 }

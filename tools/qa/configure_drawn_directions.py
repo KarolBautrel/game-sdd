@@ -17,11 +17,11 @@ def main():
         for view in DIRECTIONS:
             folder=BASE/role/'directions'/view
             folder.mkdir(parents=True,exist_ok=True)
-            cfg={'title':title,'body_scale':True,'sheets':{'sequence':{'cols':4,'rows':11}},'clips':[
+            cfg={'title':title,'body_scale':True,'walk_stride_pixels':160,'sheets':{'sequence':{'cols':4,'rows':11}},'clips':[
                 clip('neutral_idle','Spoczynek','neutral','sequence',1,4,250,True),
                 clip('combat_idle','Gotowość bojowa','combat','sequence',5,4,250,True),
-                clip('neutral_walk','Chód spokojny','neutral','sequence',9,8,100,True,align_head=True),
-                clip('combat_walk','Chód w gotowości','combat','sequence',17,8,100,True,align_head=True),
+                clip('neutral_walk','Chód spokojny','neutral','sequence',9,8,125,True,align_head=True),
+                clip('combat_walk','Chód w gotowości','combat','sequence',17,8,125,True,align_head=True),
                 clip('attack',ATTACKS.get(role,'Cięcie · całe ciało'),'combat','sequence',25,8,
                      [160,120,100,70,60,100,170,190] if role=='knight' else [160,130,110,90,80,100,160,170]),
                 clip('hit','Reakcja na trafienie','combat','sequence',33,4,[90,90,130,180]),
@@ -50,6 +50,11 @@ def main():
             if role=='warrior' and (folder/'raw/sequence_shield_inside.png').is_file():
                 cfg['sheets']={'sequence_shield_inside':{'cols':4,'rows':11}}
                 for entry in cfg['clips']:entry['sheet']='sequence_shield_inside'
+            if role=='warrior' and view=='north' and (folder/'raw/sequence_rear_stance_clean.png').is_file():
+                cfg['sheets']['sequence_rear_stance_clean']={'cols':4,'rows':11}
+                cfg['cleanup_neon']=True
+                for entry in cfg['clips']:
+                    if entry['id']!='death':entry['sheet']='sequence_rear_stance_clean'
             (folder/'clips_source.json').write_text(json.dumps(cfg,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print('DRAWN_DIRECTION_CONFIG_PASS',len(args.profiles),len(DIRECTIONS))
 

@@ -10307,29 +10307,29 @@
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_east_neutral_idle_000.png",
-      "bytes": 17685,
-      "sha256": "45d4a81e14134358c74545bc40cb411e9c4a391f2e8cc9cb58f366ece9edeb91",
+      "bytes": 19292,
+      "sha256": "e5e6d390fc2df0d4fec8a0b15a57a2e390b5c268864233d80d2b891862f1ca84",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_east_neutral_idle_001.png",
-      "bytes": 17352,
-      "sha256": "418d91d4dda5ad44d5f7d8f8d93861d2a9ced8faceb8400abd2fd4d6c279fa42",
+      "bytes": 18946,
+      "sha256": "462dae82f9def780cd8c616f115995871a0592990b13cd4986686f658edce2f4",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_east_neutral_idle_002.png",
-      "bytes": 17579,
-      "sha256": "1c462d06ac7e71549f291e1469096dc6fb1c7e9ff17ebb02208e3f91a03524e3",
+      "bytes": 19204,
+      "sha256": "c49a93def620709373664c2b3c31f63c80dd346b9672a49a4168752e2e5b7610",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_east_neutral_idle_003.png",
-      "bytes": 17244,
-      "sha256": "44e161eb8490abd88fc4d36fd33e85c439cb59f9df3be1b4bf5eea0cae6650ac",
+      "bytes": 18907,
+      "sha256": "1af84064936509a81dd56846a676abf92f333b4e9106a692c4cfaa2bca21d764",
       "width": 384,
       "height": 320
     },
@@ -10363,29 +10363,29 @@
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_north_neutral_idle_000.png",
-      "bytes": 21087,
-      "sha256": "da52a8c2c332a9559f38a89868deb7ef41c73aded35a4d17d49b9f4ca196b881",
+      "bytes": 24855,
+      "sha256": "bebaf9d0b4c51faf07d1d973059c8a923b2fa8fbed5043c2c5fd139702b450d0",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_north_neutral_idle_001.png",
-      "bytes": 21117,
-      "sha256": "59b010fefb722a6f53bf8e42b7482ca4ea5e1acef838196207363885d977deed",
+      "bytes": 24776,
+      "sha256": "61f8d4560b9531b847270bed2cee9902c57242c6046b5eb1707a863aabfa3332",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_north_neutral_idle_002.png",
-      "bytes": 20848,
-      "sha256": "ed5444927b71fb698cc13eae184eacf95f52d5505219014b945ec531b6d32b15",
+      "bytes": 24539,
+      "sha256": "f73b8b70e413bf723193e3fe8144db5c923706c860d5ae9aac58ee3a9a7133fc",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_north_neutral_idle_003.png",
-      "bytes": 20730,
-      "sha256": "23e350f370cd72689fd8e0ee0a366752c2e7f92177b88d4d3b27862fef1468ef",
+      "bytes": 24494,
+      "sha256": "a569db9d439e1dc5c13b8c1e3b85e69f301ab9c5fdc02ee3c523f1d7e6bebf83",
       "width": 384,
       "height": 320
     },
@@ -10419,113 +10419,113 @@
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_south_east_neutral_idle_000.png",
-      "bytes": 23382,
-      "sha256": "86edd83f12db55c02a04e3a1b353e30bc2c4edbc868cc6526ccd617b7a2c6c9b",
+      "bytes": 24531,
+      "sha256": "9801c7fe7a75e707b5ad912e05bc88862b7b4698099ea3bd91c3723814dc7058",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_south_east_neutral_idle_001.png",
-      "bytes": 23132,
-      "sha256": "4a7e98c76b822e8a460843e82d3c8aec9c48106d6b5458933dcf9d4a7d1f974d",
+      "bytes": 24346,
+      "sha256": "4e29d7dddfaf2c766f2a2dcf6a94e1a58dd831d34215406fa471b684f78c91e7",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_south_east_neutral_idle_002.png",
-      "bytes": 23488,
-      "sha256": "a1f44df2ebaafc1948234c098a0b036550de41e5489c6b4d06b205a18758ebad",
+      "bytes": 24686,
+      "sha256": "7ae12fc46e2b631fab2e8f4a302995a525809e1c35d454ee7cbc047a1e0ae5b7",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_south_east_neutral_idle_003.png",
-      "bytes": 23126,
-      "sha256": "75b4f2773c3ef310bd8211d32975d53358aa7053a5af03a59f6a01b07101439b",
+      "bytes": 24238,
+      "sha256": "e0b5d1d57b0bf1acc4c7f07dbc8be69106241245ff1196777f710ad677cec28b",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_south_neutral_idle_000.png",
-      "bytes": 23052,
-      "sha256": "165a52068ea9cdbd722d7c6fbe675b84217a20752de46179f47ee8a26311274e",
+      "bytes": 26017,
+      "sha256": "726d7d5a01d59bf6ebeab3d8189a262b08b2f18cca8d2e531b68aa450383c8e2",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_south_neutral_idle_001.png",
-      "bytes": 23133,
-      "sha256": "7437be2d23cc652e4d72a0e737d4aa083dd49a4b1701128371371d14b69d126d",
+      "bytes": 26317,
+      "sha256": "3520aed3acff16c6575c228cfee4d6970bd46f11e331b6d1c4f1294e15d7d7a7",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_south_neutral_idle_002.png",
-      "bytes": 22902,
-      "sha256": "3f657cf23ad175929014d87c4234c282fb32eac798cedef4073531226ed9dd44",
+      "bytes": 26025,
+      "sha256": "496e432630bf118e964af2e7693706a4a4ed45be958dbb47883c218ff9287926",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_south_neutral_idle_003.png",
-      "bytes": 22896,
-      "sha256": "a38591f6de0a92104e9431eb8dfb73be46cb87d03e9c4e92005afba5fc1e13ec",
+      "bytes": 26088,
+      "sha256": "e37773a5a62efec258fce08881b244ee53fd5cc0befa0f91bc50c718d1ae563a",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_south_west_neutral_idle_000.png",
-      "bytes": 23410,
-      "sha256": "130fd3decfc414e0847b5b67e68a5c96b0a49e7c840bf1f01156acfbe15c05d5",
+      "bytes": 24437,
+      "sha256": "c1d25c8699711a8cef6f94e3ca6932d755097d6e18fc2ad45d10b4ef7c3aea0f",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_south_west_neutral_idle_001.png",
-      "bytes": 23190,
-      "sha256": "37ab1fc77b4ae1f250d80c41042c5879d848f64eb775cc78466d81233176a39d",
+      "bytes": 24263,
+      "sha256": "20ca92ed55ba5dc0a5fdc7232e2897bed1df232de1ae3557e4ede1a6710a1bca",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_south_west_neutral_idle_002.png",
-      "bytes": 23443,
-      "sha256": "ccd8dfd78e5147b07c64bfe9fcf45174839a0c32560d925db55438133cbbc518",
+      "bytes": 24485,
+      "sha256": "54ecdecaeab1aadd02ea1e0199663345f9767f944cd5bab2682a33e233f54fb6",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_south_west_neutral_idle_003.png",
-      "bytes": 23075,
-      "sha256": "de5adf1d09cb291a3ccb9185f42de0b0288706b4e112d199eb97ac8fe545121a",
+      "bytes": 24108,
+      "sha256": "84164c7765a43c3597ad9fa2a46c7522c2036f3eacf9927faca87d8f9784510f",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_west_neutral_idle_000.png",
-      "bytes": 17779,
-      "sha256": "4b80d7d085625cf69e112c657aa4185e5f2abcd6423db22e480ab242f769a7a4",
+      "bytes": 19250,
+      "sha256": "aa11592b1d9941253230331544bec166ae3f2e74afb2f5399d902f5e8253ce8c",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_west_neutral_idle_001.png",
-      "bytes": 17357,
-      "sha256": "eed8257394d7e08a8eb81cc7f7b764bda9fb32dcf49de1b1869dbf41fa8c7099",
+      "bytes": 18800,
+      "sha256": "bf8d61bf3cb0ab05f7f2bd2f12b80f06d7ad08f8b785da98dc3ed0e537851264",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_west_neutral_idle_002.png",
-      "bytes": 17586,
-      "sha256": "cd79dfe406892eb5baeada288989f17325a766ea4915d6ef50facaf83d60f0d2",
+      "bytes": 19079,
+      "sha256": "e062793e5d54490e0e164a4a174e7a17daeada6b38134f1452a02341d8670164",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/knight/neutral_idle/knight_west_neutral_idle_003.png",
-      "bytes": 17405,
-      "sha256": "a3c0ea1b6050131043ba5808f0320995cf5c98c5d7a58b7aac8346ba0c32f3ae",
+      "bytes": 18877,
+      "sha256": "1150df0f3b96f05f69798190afca2ec24fcbaa5c02c1a3094592a3390f400a45",
       "width": 384,
       "height": 320
     },
@@ -13723,57 +13723,57 @@
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/attack/warrior_north_attack_000.png",
-      "bytes": 34407,
-      "sha256": "f06554f43074beec389bfd65fec9f5961bed05174d1f455cff68de66ffebbc00",
+      "bytes": 34429,
+      "sha256": "3f9075f1ba796f984fe03f027d8f515a4b7f1eb8a2f246d38b6cd5ee29d9467c",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/attack/warrior_north_attack_001.png",
-      "bytes": 36803,
-      "sha256": "41508ee30eab653a42d53556e69c834a00ebd5c34fe92d148d889f1dd2ff3478",
+      "bytes": 35745,
+      "sha256": "7245748832eeec5e90962d07eb006502be6cab4648d4a0e4e495131da1eae9b0",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/attack/warrior_north_attack_002.png",
-      "bytes": 38100,
-      "sha256": "65c987bb3db8788ad3767c334992438160ca1ec4d5c6ea543ae708cfb34f6756",
+      "bytes": 37712,
+      "sha256": "3fd30245ed53340a9e7a5cf36f72f8edfa34df19f9db29a6a88191ce0f604842",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/attack/warrior_north_attack_003.png",
-      "bytes": 36370,
-      "sha256": "497d5df2284dab6411ca0b5944ecdbcc7f25dfe47b7c8116461d73b131dc322d",
+      "bytes": 37310,
+      "sha256": "c1ae5053a133a9d51027366c80fef489cd6d3a60dc04bad8116fe4e7d262790c",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/attack/warrior_north_attack_004.png",
-      "bytes": 37963,
-      "sha256": "254dbb137580b34170b345b225e2d6cfffeabb6762a7ce35ca315d473d742a36",
+      "bytes": 36497,
+      "sha256": "920742fe7d26d60d2b7e980e80728879c81534e6d56bfa38eb9f3346a31f209c",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/attack/warrior_north_attack_005.png",
-      "bytes": 37903,
-      "sha256": "3a7ab271b4f642509f73318ace4a565a50048271a14cf2df87ea8fd2ca5368bb",
+      "bytes": 36397,
+      "sha256": "d9925cdd742ff838a9698b5212e4fece26d62b9b08677798b2910144b01d082f",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/attack/warrior_north_attack_006.png",
-      "bytes": 36013,
-      "sha256": "a8920ff1fb52b0e8b1ce157961116ef908b109be9ea8ee2d1ae7567e8e04074a",
+      "bytes": 33962,
+      "sha256": "bc9bd7d7cb3f0b0d2500e8cb9b78fe6bb106097fa1417eb9b52338228307d413",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/attack/warrior_north_attack_007.png",
-      "bytes": 34636,
-      "sha256": "93dcce6eab4f81c8a051afe92e0132db6de7d30590e83a21421b97714d920620",
+      "bytes": 32783,
+      "sha256": "a4ff55b07f083412599c5329abfea47bb2f84ef7be13cd2013c65e4516a14945",
       "width": 384,
       "height": 320
     },
@@ -14143,29 +14143,29 @@
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/combat_idle/warrior_north_combat_idle_000.png",
-      "bytes": 33738,
-      "sha256": "352495774c5b7225bcd7be046db9d4d17c1ebaa601c7ee0b44f916ec00e928cc",
+      "bytes": 32217,
+      "sha256": "8c1d30d009ccf666be1d959db37662d28fc28258b681c6c9ee3bcfe496a6932f",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/combat_idle/warrior_north_combat_idle_001.png",
-      "bytes": 32914,
-      "sha256": "6354a0ea20e935629e3c42cb7138a5c9d7686c92620c5309431bd504beb03229",
+      "bytes": 32253,
+      "sha256": "8f536abec907e1e221cd1e86fcdb25546013f3a0a0b7a43530cecd87c9c0548b",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/combat_idle/warrior_north_combat_idle_002.png",
-      "bytes": 32579,
-      "sha256": "fdead3fc6ba372806e5a1a77dc6fcc4383530aeb394140af1e06a49aadd58185",
+      "bytes": 32615,
+      "sha256": "e3ad543a166a7b3628309870a1b36c452c713eab4b31788a83a50bd6e7b2d164",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/combat_idle/warrior_north_combat_idle_003.png",
-      "bytes": 32524,
-      "sha256": "6fb74fe38277d8f66f46dddb9422463d5ec9828a211822858fb874c91088a9ee",
+      "bytes": 32011,
+      "sha256": "f660d64c31e1a49785ebe3d1f6ffc73b5b7f95179ed31f0a722e0ccf21d86438",
       "width": 384,
       "height": 320
     },
@@ -14395,57 +14395,57 @@
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_000.png",
-      "bytes": 30291,
-      "sha256": "ab3abb09a1e9dbd0484f3d90d8a442bece6f10b6c6c212b9854acda2cb8cffff",
+      "bytes": 29592,
+      "sha256": "4657448980cafa86db6042a220d6f6c1c091567736ce29440b295d32b37c3a11",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_001.png",
-      "bytes": 29800,
-      "sha256": "403f805cb18b6a12c5194ab8d142eb64aea2bb1e2a85ecbbf1433c79e8211ba6",
+      "bytes": 29560,
+      "sha256": "100316b7a6e79842a411b3bcb261fe6123e0e02155b4934501567f5a3507a65a",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_002.png",
-      "bytes": 31637,
-      "sha256": "ef6f4471a999deeb93382995066b56dd6638884d656ba9bf4027fb395fdd1f54",
+      "bytes": 30058,
+      "sha256": "e78f393f33c20a6cc4324f97120ed4e996a17c6f9c90e186d6509c2165b4138b",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_003.png",
-      "bytes": 30321,
-      "sha256": "cc2ce8c8e034a899ceca535d9116e93975bf4294427223aefb51de74d01d67a4",
+      "bytes": 29957,
+      "sha256": "cc2906717bf1df00e93f8c151f19a39f4bb9e6633080354cffbd1db54db488ef",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_004.png",
-      "bytes": 30744,
-      "sha256": "440fc34030403a9b97257c54fe159e7c9c832545f362576e9607b7240b0a0515",
+      "bytes": 30521,
+      "sha256": "6b825ec4ac40362a9906a92d4d5cd14b4c3b96a2df02f72084a44412b282fb98",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_005.png",
-      "bytes": 31053,
-      "sha256": "2e5b6d0b32b196bc734fbd33c3d8fa547fdbc0420f66dc5d950b3eb628a6cc64",
+      "bytes": 30453,
+      "sha256": "abe6b19848c24e8361aa990a78628639d3137532c59750de7074b55b2ae23183",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_006.png",
-      "bytes": 31081,
-      "sha256": "fac438277d0fabaf2b844a39b3ba6b26c98c7ee71d9ca06f6af6934ec336b8e4",
+      "bytes": 30615,
+      "sha256": "037a144250054dcc05fe674559d38d241dd08970ebbb934944c93c78ca5815a6",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/combat_walk/warrior_north_combat_walk_007.png",
-      "bytes": 31501,
-      "sha256": "aed5ac094bd831f9b94cf5ef01073b86a5c985d96f35d3fbc4902d0b11f76357",
+      "bytes": 30368,
+      "sha256": "e964e40c99f122a5fc08d5b933812fe07a2ec978a224422a907e970e57b72d70",
       "width": 384,
       "height": 320
     },
@@ -15291,29 +15291,29 @@
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/hit/warrior_north_hit_000.png",
-      "bytes": 36818,
-      "sha256": "bccfc6dd067c08fbea7bf9138e0f5474c401f718748c6b400dc9ff127a3410e3",
+      "bytes": 36340,
+      "sha256": "55926d73870d0268e8d084c5cb144890a4a57275a8b974a3ccbaa5f9e7aca31d",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/hit/warrior_north_hit_001.png",
-      "bytes": 37987,
-      "sha256": "08133d66329ef26c1742f28a2c1efb7bf56498cd2b49dd62bb17e1053b31a572",
+      "bytes": 36927,
+      "sha256": "1ca1c7c4996b59352ee39271768fe880dd6c941363299c0f0a362e57d3e5fbcb",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/hit/warrior_north_hit_002.png",
-      "bytes": 37558,
-      "sha256": "5fde34e51562ea24d793d265c93135361448eb1f720ae01c93dd69ead0b91e0c",
+      "bytes": 35908,
+      "sha256": "2c2f03c0ff9ab4a40fadf96a80c012dc3a1745a3465a5c794af7222d4b05c8dc",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/hit/warrior_north_hit_003.png",
-      "bytes": 35807,
-      "sha256": "2828f77f3d8e4d0f374e0eaaecae198c1b3cb0ef24867dfd121c83be72b9436b",
+      "bytes": 34389,
+      "sha256": "2037955661dae3ee187461a9a1379365bba37de14035712637884f8602e8e976",
       "width": 384,
       "height": 320
     },
@@ -15515,29 +15515,29 @@
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/neutral_idle/warrior_north_neutral_idle_000.png",
-      "bytes": 33999,
-      "sha256": "ba3be943d5b506b2dd955d35fafb1b8ca956ec6b95bd5f1da1900d49db062829",
+      "bytes": 31206,
+      "sha256": "c6f4f45a8164b63d061d74e509301890c9e0da1f58e26511c0f32bb87f66af48",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/neutral_idle/warrior_north_neutral_idle_001.png",
-      "bytes": 33829,
-      "sha256": "edaa06ea86fa97b47dbd0f5b598f17c0fedf1b5a692584ed398cb8353937173a",
+      "bytes": 31063,
+      "sha256": "d56f1e31452d4266601e0f88f690660a6afa4f87221924e66f786aef9a36d96f",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/neutral_idle/warrior_north_neutral_idle_002.png",
-      "bytes": 33090,
-      "sha256": "ef8af9abffeae2653840ce2d2f16cd7ec5a665a8f275fe3956bb54c9ba892d10",
+      "bytes": 30858,
+      "sha256": "ef549abae61fe83ca4b82779879776e6ffb271ca8c47ad3a2bc608440f25b7af",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/neutral_idle/warrior_north_neutral_idle_003.png",
-      "bytes": 32970,
-      "sha256": "1ff24eb0a6b212da46ec7dadaa39d6f868eb7c11e62c738180aab8785972f9dc",
+      "bytes": 30591,
+      "sha256": "4e1ab39960016ab53fa592cc278ea304d8a09b63fd60ecd8df0a21d49c1fbb9f",
       "width": 384,
       "height": 320
     },
@@ -15795,57 +15795,57 @@
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_000.png",
-      "bytes": 32523,
-      "sha256": "a1dc8ab2ab7f72ee1b57cb70ca77782538a0443a83bcd485451dffdb264cfd30",
+      "bytes": 29399,
+      "sha256": "3b4f60781879cc0671045bc0884f46a01d72e6786fb22490184fe8c3d17fb1de",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_001.png",
-      "bytes": 31585,
-      "sha256": "2443e9dda60982340aa00f2202287aaa48a0a17f6b60c3524116027eb05072fd",
+      "bytes": 29518,
+      "sha256": "1868d7816c404686711dac2b224c9a0cd089ca18bf5c68fb78e10fedf15a932f",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_002.png",
-      "bytes": 31075,
-      "sha256": "b19894caf9e02be8b04765aee729e42906df86771302b69822e27e1d4a1686a8",
+      "bytes": 29323,
+      "sha256": "7c1b6eb6776e643d8e734608cf726477119c523a01831be64f38fa8a174dff78",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_003.png",
-      "bytes": 31172,
-      "sha256": "6f703f77a1b1e534c69e13c04b7ac28da2dd3fb08eab5aeff54344a9e769034c",
+      "bytes": 29295,
+      "sha256": "a80a9e6de7ca118052310507262de28d66763f3905610c18504088fd9861aa8c",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_004.png",
-      "bytes": 30852,
-      "sha256": "1ab51ec6abb2715f06aed5e6eba2555edccb1cb3f21080ca45f8ec6404abf837",
+      "bytes": 28807,
+      "sha256": "f7bd2548b233a00ddc5b519f10af364d5583620719358656619ca29a29196818",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_005.png",
-      "bytes": 30714,
-      "sha256": "284581ccf30d67e863138943ac754454b3a7ae15081d7ba762287999d5f7b840",
+      "bytes": 28872,
+      "sha256": "104e8dd1d0acc47c4c0d3c3862371e6961412a9011534b02bb7c4d489ef85746",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_006.png",
-      "bytes": 31656,
-      "sha256": "81574cb586b7f606e66b8fa08a7a93d84ee2eaada9acffa408ca4b986cc31077",
+      "bytes": 29311,
+      "sha256": "26e7f843ce7172f73fbd1f96295e67a3794c213a90684b35b5db251861eaf171",
       "width": 384,
       "height": 320
     },
     {
       "path": "res://assets/combat/characters/drawn/warrior/neutral_walk/warrior_north_neutral_walk_007.png",
-      "bytes": 30215,
-      "sha256": "68d6246cf5cf58f379087a3491a041fc98770cf452831d46cb0271a05c023443",
+      "bytes": 28782,
+      "sha256": "7122b7fe38864d00f8ac656bf503d2d4ce91c4b5f6a21b56df41557680b685b3",
       "width": 384,
       "height": 320
     },

@@ -23,7 +23,7 @@ def inspect(profile):
         canvas=main['canvas'],pivot=main['pivot'],facings=list(VIEWS),
         frame_counts={a:clips[a]['frames'] for a in actions},
         durations_ms={a:clips[a]['durations'] for a in actions},
-        impact_frame=5 if profile=='archer_1' else 4,walk_stride_pixels=80,
+        impact_frame=5 if profile=='archer_1' else 4,walk_stride_pixels=main.get('walk_stride_pixels',80),
         pixels_per_metre=100,source_roundtrip=True,view_sources={})
     files=[];first_hashes=[]
     for view in VIEWS:

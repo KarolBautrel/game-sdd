@@ -1,0 +1,8 @@
+{
+  "status": "LOGIC_AND_ASSET_LOAD_PASS",
+  "samples": 36,
+  "canvas_draws": 6844,
+  "checks": "Executed packaged viewer JavaScript with local PNG loading, both topic selectors, every sample, timed playback, native/2x canvas crop bounds and forward/back frame controls.",
+  "continuous_motion_observed_by_agent": false,
+  "physical_gameplay": "NOT_RUN"
+}

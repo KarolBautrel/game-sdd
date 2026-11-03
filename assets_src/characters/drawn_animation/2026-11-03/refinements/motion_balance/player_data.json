@@ -1,0 +1,1229 @@
+{
+  "cases": [
+    {
+      "topic": "gait",
+      "label": "Rycerz · miecz dwuręczny / south_east / neutral_walk",
+      "note": "Ta sama prędkość przemieszczania, dwa razy spokojniejszy rytm nóg. Podłoże pokazuje przebyty dystans.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../knight/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Rycerz · miecz dwuręczny / south_east / combat_walk",
+      "note": "Ta sama prędkość przemieszczania, dwa razy spokojniejszy rytm nóg. Podłoże pokazuje przebyty dystans.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../knight/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Bran · miecz i tarcza / south_east / neutral_walk",
+      "note": "Ta sama prędkość przemieszczania, dwa razy spokojniejszy rytm nóg. Podłoże pokazuje przebyty dystans.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/warrior/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../warrior/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Bran · miecz i tarcza / south_east / combat_walk",
+      "note": "Ta sama prędkość przemieszczania, dwa razy spokojniejszy rytm nóg. Podłoże pokazuje przebyty dystans.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/warrior/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../warrior/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Torin · łuk / south_east / neutral_walk",
+      "note": "Ta sama prędkość przemieszczania, dwa razy spokojniejszy rytm nóg. Podłoże pokazuje przebyty dystans.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/archer_1/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../archer_1/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Torin · łuk / south_east / combat_walk",
+      "note": "Ta sama prędkość przemieszczania, dwa razy spokojniejszy rytm nóg. Podłoże pokazuje przebyty dystans.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/archer_1/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../archer_1/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Łotr · dwa sztylety / south_east / neutral_walk",
+      "note": "Ta sama prędkość przemieszczania, dwa razy spokojniejszy rytm nóg. Podłoże pokazuje przebyty dystans.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/rogue_1/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../rogue_1/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Łotr · dwa sztylety / south_east / combat_walk",
+      "note": "Ta sama prędkość przemieszczania, dwa razy spokojniejszy rytm nóg. Podłoże pokazuje przebyty dystans.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/rogue_1/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../rogue_1/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Rabuś · topór / south_east / neutral_walk",
+      "note": "Ta sama prędkość przemieszczania, dwa razy spokojniejszy rytm nóg. Podłoże pokazuje przebyty dystans.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/axe_bandit/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../axe_bandit/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Rabuś · topór / south_east / combat_walk",
+      "note": "Ta sama prędkość przemieszczania, dwa razy spokojniejszy rytm nóg. Podłoże pokazuje przebyty dystans.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/axe_bandit/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../axe_bandit/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Włócznik · włócznia / south_east / neutral_walk",
+      "note": "Ta sama prędkość przemieszczania, dwa razy spokojniejszy rytm nóg. Podłoże pokazuje przebyty dystans.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/bandit_spearman/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../bandit_spearman/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Włócznik · włócznia / south_east / combat_walk",
+      "note": "Ta sama prędkość przemieszczania, dwa razy spokojniejszy rytm nóg. Podłoże pokazuje przebyty dystans.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/bandit_spearman/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../bandit_spearman/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / south / combat_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/south/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/south/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / south / neutral_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/south/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/south/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / south / neutral_walk",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/south/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south"
+      },
+      "new": {
+        "atlas": "../../knight/directions/south/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south"
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / south_west / combat_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/south_west/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/south_west/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / south_west / neutral_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/south_west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/south_west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / south_west / neutral_walk",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/south_west/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_west"
+      },
+      "new": {
+        "atlas": "../../knight/directions/south_west/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_west"
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / west / combat_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/west/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/west/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / west / neutral_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / west / neutral_walk",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/west/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "west"
+      },
+      "new": {
+        "atlas": "../../knight/directions/west/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "west"
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / north_west / combat_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/north_west/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/north_west/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / north_west / neutral_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/north_west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/north_west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / north_west / neutral_walk",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/north_west/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "north_west"
+      },
+      "new": {
+        "atlas": "../../knight/directions/north_west/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "north_west"
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / north / combat_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/north/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/north/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / north / neutral_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/north/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/north/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / north / neutral_walk",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/north/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "north"
+      },
+      "new": {
+        "atlas": "../../knight/directions/north/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "north"
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / north_east / combat_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/north_east/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/north_east/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / north_east / neutral_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/north_east/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/north_east/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / north_east / neutral_walk",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/north_east/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "north_east"
+      },
+      "new": {
+        "atlas": "../../knight/directions/north_east/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "north_east"
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / east / combat_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/east/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/east/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / east / neutral_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/east/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/east/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / east / neutral_walk",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/east/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "east"
+      },
+      "new": {
+        "atlas": "../../knight/directions/east/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "east"
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / south_east / combat_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / south_east / neutral_idle",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "knight",
+      "label": "Szermierz / south_east / neutral_walk",
+      "note": "Szersza wykroczna postawa bojowa; neutralnie miecz jest opuszczony i trzymany w dłoni.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../knight/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    }
+  ],
+  "initial_topic": "gait",
+  "topics": [
+    [
+      "gait",
+      "Naturalniejszy chód"
+    ],
+    [
+      "knight",
+      "Szermierz: postawy i miecz"
+    ]
+  ],
+  "floor": "../../../../../../assets/combat/environment/floors/woodland.png",
+  "shadow": "../../../../../../assets/combat/environment/contact_shadow.png"
+}

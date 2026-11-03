@@ -1,0 +1,53 @@
+{
+  "canvas": [
+    384,
+    320
+  ],
+  "clipping": [],
+  "clips": {
+    "attack": {
+      "frame_count": 8,
+      "mirror_of": "east"
+    },
+    "combat_idle": {
+      "frame_count": 4,
+      "mirror_of": "east"
+    },
+    "combat_walk": {
+      "frame_count": 8,
+      "mirror_of": "east"
+    },
+    "death": {
+      "frame_count": 8,
+      "mirror_of": "east"
+    },
+    "hit": {
+      "frame_count": 4,
+      "mirror_of": "east"
+    },
+    "neutral_idle": {
+      "frame_count": 4,
+      "mirror_of": "east"
+    },
+    "neutral_walk": {
+      "frame_count": 8,
+      "mirror_of": "east"
+    }
+  },
+  "handedness": "reflected with costume asymmetry; presentation only",
+  "id": "axe_bandit",
+  "mirror_of": "east",
+  "pivot": [
+    192,
+    270
+  ],
+  "saved_source_roundtrip": "PASS",
+  "status": "TECHNICAL_MIRROR_PASS_VISUAL_REVIEW_PENDING",
+  "view": "west",
+  "walk_timing": {
+    "cycle_ms": 400,
+    "stride_pixels": 80,
+    "source_roundtrip": "PASS",
+    "retiming_preserves_pixels": true
+  }
+}

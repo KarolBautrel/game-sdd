@@ -42,3 +42,51 @@ retain before/after samples. PASS:7368 native checks,3579 offline checks, full
 regression suites and validator. Imported idle comparisons ignore only RGB at
 alpha0 (Godot fills invisible border colors); visible RGBA and alpha match exactly.
 User explicitly accepts the corrections2026-11-03; ordinary gameplay gaps remain.
+
+Stage56: load `drawn_roster_skirmish` through the scenario catalogue and the opt-in
+launcher setting. Verify four allies/four enemies, all six explicit painted
+profiles, matching equipment and distinct UI names. Execute each role's movement,
+attack, hit and complete death through CombatDebug/resolver; check bow release,
+normal input unlock and reset during pending playback. Exercise full legal-command
+battles to victory and defeat without Debug Win. Proof:
+`scripts/presentation/drawn_battle_review_tests.gd`, combat slices, existing drawn
+runtime/equipment suites and repository validator. User-run normal-speed ordinary
+victory/defeat and board readability remain L56-01/L56-02, not automated acceptance.
+
+Stage57: record user defects for slow movement, narrow warrior rear stance and
+explicitly requested sword occlusion. Back up affected source/runtime identities.
+Set only neutral_walk/combat_walk cels to50ms in all96 source clips and manifests;
+prove matching400ms runtime cycles and80px/400ms travel, with unaffected idle/
+attack/hit/death timings. Redraw warrior north standing/locomotion/attack/reaction
+poses with shoulder-width standing feet, interior shield and held sword mostly
+hidden in front of the torso; retain death and other facings. Aseprite idle lower
+contact must remain exact across the loop, with upper-body breathing retained.
+Run source reopen/pixel/tag/duration proof, current battle/runtime/combat checks
+and repository validator. Provide native/enlarged comparisons and the real battle
+command; continuous visual retest is L57-01, separate from numerical proof.
+
+Stage58 supersedes57 cadence: back up the current candidate, restore96 walk clips
+to100ms cels, publish160px stride and prove800ms gait/200px/s travel in runtime and
+preview. New knight-only idles and neutral walks must show a broad/staggered combat
+base and lowered held neutral sword in all eight facings (five drawings/three
+reflections), with planted breathing feet and original other actions preserved.
+Verify source reopen/pixels/tags/timing, loaded renderer routing, phase/travel,
+attack/hit/death/reset and validator. Supply a comparison that shows movement
+against the floor at normal speed. L58-01 is the visual retest; no terminal result
+or new roster production is inferred from this correction request.
+
+Stage59: explicit user rollback of58. Restore its retained pre-change861-file
+baseline byte-for-byte and copy restored source PNGs back to runtime. All2304
+runtime PNG hashes must match pre58, and registry must return to400ms/80px. Preserve
+unrelated stage56/57 work, record rejection and block automatic58 reapplication.
+Run restored runtime/battle/combat checks and repository validator. Stop visual
+iteration; no new approval or character production is requested.
+
+Stage60 is newly authorized after rollback: native-pixel neutral pose matching the
+shield warrior, preserving knight head/boots/combat appearance; all96 walks125ms
+per cel/1000ms cycle and160px stride. Back up the restored state, verify Aseprite
+sources/exports/idle contact, unchanged other raster actions and all non-walk
+durations. Actual CombatDebug movement must follow160px/s with no more than a
+partial slow cycle for a104px step. Run runtime/battle/combat checks and validator;
+provide native-scale pose samples and normal-speed distance-aware preview. L60-01
+is visual retest, and prior rejected58 remains blocked.

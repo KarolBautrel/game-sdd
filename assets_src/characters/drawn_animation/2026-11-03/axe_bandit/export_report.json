@@ -389,7 +389,7 @@
             238,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             98,
             92
@@ -410,7 +410,7 @@
             242,
             269
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             -82,
             91
@@ -431,7 +431,7 @@
             244,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             -265,
             98
@@ -452,7 +452,7 @@
             246,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             -447,
             95
@@ -473,7 +473,7 @@
             244,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             99,
             89
@@ -494,7 +494,7 @@
             242,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             -85,
             93
@@ -515,7 +515,7 @@
             242,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             -267,
             95
@@ -536,7 +536,7 @@
             242,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             -449,
             96
@@ -937,7 +937,7 @@
             238,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             103,
             89
@@ -958,7 +958,7 @@
             236,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             -82,
             93
@@ -979,7 +979,7 @@
             230,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             -265,
             92
@@ -1000,7 +1000,7 @@
             225,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             -451,
             93
@@ -1021,7 +1021,7 @@
             249,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             100,
             99
@@ -1042,7 +1042,7 @@
             230,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             -84,
             94
@@ -1063,7 +1063,7 @@
             233,
             270
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             -267,
             94
@@ -1084,7 +1084,7 @@
             227,
             269
           ],
-          "duration_ms": 100,
+          "duration_ms": 125,
           "offset": [
             -449,
             92
@@ -1116,5 +1116,11 @@
     "lock_y": 232,
     "status": "PASS",
     "source_roundtrip": "PASS"
+  },
+  "walk_timing": {
+    "cycle_ms": 1000,
+    "stride_pixels": 160,
+    "source_roundtrip": "PASS",
+    "retiming_preserves_pixels": true
   }
 }

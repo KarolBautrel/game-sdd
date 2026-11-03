@@ -20,7 +20,8 @@
       "start": 1,
       "count": 4,
       "durations": 250,
-      "loop": true
+      "loop": true,
+      "native_postprocess": "tools/aseprite/knight_neutral_native.lua"
     },
     {
       "id": "combat_idle",
@@ -39,7 +40,7 @@
       "sheet": "sequence",
       "start": 9,
       "count": 8,
-      "durations": 100,
+      "durations": 125,
       "loop": true,
       "align_head": true
     },
@@ -50,7 +51,7 @@
       "sheet": "sequence",
       "start": 17,
       "count": 8,
-      "durations": 100,
+      "durations": 125,
       "loop": true,
       "align_head": true
     },
@@ -187,5 +188,6 @@
       ],
       "loop": false
     }
-  ]
+  ],
+  "walk_stride_pixels": 160
 }

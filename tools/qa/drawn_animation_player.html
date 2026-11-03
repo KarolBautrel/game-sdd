@@ -30,7 +30,7 @@ function tick(dt){if(!playing)return;const c=clip();elapsed+=dt;phase+=dt;
  let guard=0;while(phase>=duration()&&guard++<30){phase-=duration();if(frame<c.frames-1)frame++;else if(c.loop||$('repeat').checked){frame=0;tourLoops++;if(tour&&tourLoops>=2){tourWait=500;phase=0;break;}}else if(tour){tourWait=c.id==='death'?1500:650;phase=0;break;}else{playing=false;phase=0;break;}}
  $('timeline').value=frame;$('play').textContent=playing?'Pauza':'Odtwarzaj';}
 function render(context,z){const p=profile(),c=clip(),w=p.canvas[0],h=p.canvas[1];context.canvas.width=w*z;context.canvas.height=h*z;context.imageSmoothingEnabled=false;context.setTransform(z,0,0,z,0,0);context.fillStyle='#252b2c';context.fillRect(0,0,w,h);
- const g=grounds.get($('ground').value),walking=c.id.includes('walk'),total=c.durations.reduce((a,b)=>a+b,0),travel=walking&&$('track').checked?elapsed/total*80:0;
+ const g=grounds.get($('ground').value),walking=c.id.includes('walk'),total=c.durations.reduce((a,b)=>a+b,0),travel=walking&&$('track').checked?elapsed/total*(p.walk_stride_pixels||80):0;
  if(g&&g.complete&&g.naturalWidth){const axis={south:[0,1],south_west:[-.707,.707],west:[-1,0],north_west:[-.707,-.707],north:[0,-1],north_east:[.707,-.707],east:[1,0],south_east:[.707,.707]}[p.id]||[1,0];const gx=(((-travel*axis[0])%512)+512)%512-512,gy=(((-travel*axis[1])%512)+512)%512-512;for(let y=gy;y<h;y+=512)for(let x=gx;x<w;x+=512)context.drawImage(g,x,y);context.fillStyle='rgba(0,0,0,.12)';context.fillRect(0,0,w,h);}
  const px=p.pivot[0],py=p.pivot[1];if(shadow.complete&&shadow.naturalWidth)context.drawImage(shadow,px-45,py-11,90,26);
  const image=images.get(p.asset_base+c.atlas);if(image&&image.complete&&image.naturalWidth)context.drawImage(image,frame*w,0,w,h,0,0,w,h);

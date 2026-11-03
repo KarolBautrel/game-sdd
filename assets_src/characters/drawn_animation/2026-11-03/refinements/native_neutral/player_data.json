@@ -1,0 +1,937 @@
+{
+  "cases": [
+    {
+      "topic": "gait",
+      "label": "Rycerz · miecz dwuręczny / neutral_walk",
+      "note": "Spokojniejszy rytm: dwa kroki na sekundę. Podłoże pokazuje rzeczywisty dystans: 160 px/s zamiast 200 px/s.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../knight/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Rycerz · miecz dwuręczny / combat_walk",
+      "note": "Spokojniejszy rytm: dwa kroki na sekundę. Podłoże pokazuje rzeczywisty dystans: 160 px/s zamiast 200 px/s.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../knight/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Bran · miecz i tarcza / neutral_walk",
+      "note": "Spokojniejszy rytm: dwa kroki na sekundę. Podłoże pokazuje rzeczywisty dystans: 160 px/s zamiast 200 px/s.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/warrior/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../warrior/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Bran · miecz i tarcza / combat_walk",
+      "note": "Spokojniejszy rytm: dwa kroki na sekundę. Podłoże pokazuje rzeczywisty dystans: 160 px/s zamiast 200 px/s.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/warrior/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../warrior/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Torin · łuk / neutral_walk",
+      "note": "Spokojniejszy rytm: dwa kroki na sekundę. Podłoże pokazuje rzeczywisty dystans: 160 px/s zamiast 200 px/s.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/archer_1/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../archer_1/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Torin · łuk / combat_walk",
+      "note": "Spokojniejszy rytm: dwa kroki na sekundę. Podłoże pokazuje rzeczywisty dystans: 160 px/s zamiast 200 px/s.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/archer_1/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../archer_1/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Łotr · dwa sztylety / neutral_walk",
+      "note": "Spokojniejszy rytm: dwa kroki na sekundę. Podłoże pokazuje rzeczywisty dystans: 160 px/s zamiast 200 px/s.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/rogue_1/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../rogue_1/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Łotr · dwa sztylety / combat_walk",
+      "note": "Spokojniejszy rytm: dwa kroki na sekundę. Podłoże pokazuje rzeczywisty dystans: 160 px/s zamiast 200 px/s.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/rogue_1/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../rogue_1/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Rabuś · topór / neutral_walk",
+      "note": "Spokojniejszy rytm: dwa kroki na sekundę. Podłoże pokazuje rzeczywisty dystans: 160 px/s zamiast 200 px/s.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/axe_bandit/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../axe_bandit/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Rabuś · topór / combat_walk",
+      "note": "Spokojniejszy rytm: dwa kroki na sekundę. Podłoże pokazuje rzeczywisty dystans: 160 px/s zamiast 200 px/s.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/axe_bandit/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../axe_bandit/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Włócznik · włócznia / neutral_walk",
+      "note": "Spokojniejszy rytm: dwa kroki na sekundę. Podłoże pokazuje rzeczywisty dystans: 160 px/s zamiast 200 px/s.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/bandit_spearman/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../bandit_spearman/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "gait",
+      "label": "Włócznik · włócznia / combat_walk",
+      "note": "Spokojniejszy rytm: dwa kroki na sekundę. Podłoże pokazuje rzeczywisty dystans: 160 px/s zamiast 200 px/s.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/bandit_spearman/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true,
+        "stride_pixels": 80,
+        "direction": "south_east"
+      },
+      "new": {
+        "atlas": "../../bandit_spearman/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "loop": true,
+        "stride_pixels": 160,
+        "direction": "south_east"
+      }
+    },
+    {
+      "topic": "neutral",
+      "label": "Szermierz / south",
+      "note": "Ta sama ostra twarz i buty; neutralna ręka z opuszczonym mieczem.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/south/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/south/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "reference",
+      "label": "Wzorzec tarczownika / south",
+      "note": "Po lewej wzorzec pozy rycerza z tarczą. Po prawej neutralna poza rycerza dwuręcznego.",
+      "old_label": "Wzorzec: miecz i tarcza",
+      "new_label": "Rycerz dwuręczny",
+      "old": {
+        "atlas": "../../warrior/directions/south/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/south/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "neutral",
+      "label": "Szermierz / south_west",
+      "note": "Ta sama ostra twarz i buty; neutralna ręka z opuszczonym mieczem.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/south_west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/south_west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "reference",
+      "label": "Wzorzec tarczownika / south_west",
+      "note": "Po lewej wzorzec pozy rycerza z tarczą. Po prawej neutralna poza rycerza dwuręcznego.",
+      "old_label": "Wzorzec: miecz i tarcza",
+      "new_label": "Rycerz dwuręczny",
+      "old": {
+        "atlas": "../../warrior/directions/south_west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/south_west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "neutral",
+      "label": "Szermierz / west",
+      "note": "Ta sama ostra twarz i buty; neutralna ręka z opuszczonym mieczem.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "reference",
+      "label": "Wzorzec tarczownika / west",
+      "note": "Po lewej wzorzec pozy rycerza z tarczą. Po prawej neutralna poza rycerza dwuręcznego.",
+      "old_label": "Wzorzec: miecz i tarcza",
+      "new_label": "Rycerz dwuręczny",
+      "old": {
+        "atlas": "../../warrior/directions/west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "neutral",
+      "label": "Szermierz / north_west",
+      "note": "Ta sama ostra twarz i buty; neutralna ręka z opuszczonym mieczem.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/north_west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/north_west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "reference",
+      "label": "Wzorzec tarczownika / north_west",
+      "note": "Po lewej wzorzec pozy rycerza z tarczą. Po prawej neutralna poza rycerza dwuręcznego.",
+      "old_label": "Wzorzec: miecz i tarcza",
+      "new_label": "Rycerz dwuręczny",
+      "old": {
+        "atlas": "../../warrior/directions/north_west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/north_west/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "neutral",
+      "label": "Szermierz / north",
+      "note": "Ta sama ostra twarz i buty; neutralna ręka z opuszczonym mieczem.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/north/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/north/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "reference",
+      "label": "Wzorzec tarczownika / north",
+      "note": "Po lewej wzorzec pozy rycerza z tarczą. Po prawej neutralna poza rycerza dwuręcznego.",
+      "old_label": "Wzorzec: miecz i tarcza",
+      "new_label": "Rycerz dwuręczny",
+      "old": {
+        "atlas": "../../warrior/directions/north/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/north/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "neutral",
+      "label": "Szermierz / north_east",
+      "note": "Ta sama ostra twarz i buty; neutralna ręka z opuszczonym mieczem.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/north_east/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/north_east/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "reference",
+      "label": "Wzorzec tarczownika / north_east",
+      "note": "Po lewej wzorzec pozy rycerza z tarczą. Po prawej neutralna poza rycerza dwuręcznego.",
+      "old_label": "Wzorzec: miecz i tarcza",
+      "new_label": "Rycerz dwuręczny",
+      "old": {
+        "atlas": "../../warrior/directions/north_east/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/north_east/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "neutral",
+      "label": "Szermierz / east",
+      "note": "Ta sama ostra twarz i buty; neutralna ręka z opuszczonym mieczem.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/directions/east/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/east/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "reference",
+      "label": "Wzorzec tarczownika / east",
+      "note": "Po lewej wzorzec pozy rycerza z tarczą. Po prawej neutralna poza rycerza dwuręcznego.",
+      "old_label": "Wzorzec: miecz i tarcza",
+      "new_label": "Rycerz dwuręczny",
+      "old": {
+        "atlas": "../../warrior/directions/east/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/directions/east/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "neutral",
+      "label": "Szermierz / south_east",
+      "note": "Ta sama ostra twarz i buty; neutralna ręka z opuszczonym mieczem.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "reference",
+      "label": "Wzorzec tarczownika / south_east",
+      "note": "Po lewej wzorzec pozy rycerza z tarczą. Po prawej neutralna poza rycerza dwuręcznego.",
+      "old_label": "Wzorzec: miecz i tarcza",
+      "new_label": "Rycerz dwuręczny",
+      "old": {
+        "atlas": "../../warrior/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    }
+  ],
+  "initial_topic": "reference",
+  "topics": [
+    [
+      "reference",
+      "Wzorzec i rycerz"
+    ],
+    [
+      "neutral",
+      "Poza przed i po"
+    ],
+    [
+      "gait",
+      "Spokojniejszy chód"
+    ]
+  ],
+  "floor": "../../../../../../assets/combat/environment/floors/woodland.png",
+  "shadow": "../../../../../../assets/combat/environment/contact_shadow.png"
+}

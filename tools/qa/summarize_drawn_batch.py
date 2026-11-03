@@ -19,8 +19,11 @@ def main():
     registry = read(ROOT/'resources/data/presentation/drawn_roster.json')
     preview = read(BASE/'preview_verification.json')
     package = read(BASE/'runtime_package_verification.json')
-    native = read(ROOT/'artifacts/drawn-animation/result.json')
-    assert native['status'] == 'PASS' and native['require_all'] and native['regression']
+    native_neutral_active=(BASE/'refinements/native_neutral/verification.json').is_file()
+    rollback_active=(BASE/'refinements/motion_balance/rollback.json').is_file() and not native_neutral_active
+    native = read(ROOT/('artifacts/drawn-animation/result-selected.json' if rollback_active else 'artifacts/drawn-animation/result.json'))
+    assert native['status'] == 'PASS' and native['require_all']
+    assert native['regression'] or (rollback_active and {'runtime','battle','combat'} <= set(native['suites']))
     assert package['frames'] == 2304 and preview['frames'] == 2344
     for name, sha in package['identities'].items():
         assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest() == sha, name
@@ -50,7 +53,7 @@ def main():
     for suite in native['suites']:
         lines = (ROOT/'artifacts/drawn-animation'/(suite+'.log')).read_text(encoding='utf-8').splitlines()
         summaries[suite] = next((line for line in lines if any(marker in line for marker in
-            ['Drawn animation:', 'Original roster:', 'combat_animation_lifecycle_tests: OK',
+            ['Drawn animation:', 'Drawn battle review:', 'Original roster:', 'combat_animation_lifecycle_tests: OK',
              'Equipment appearance:', 'Godot combat slice validation passed.',
              'combat_feedback_polish_tests:'])), 'Godot asset import PASS')
     source = ROOT/'assets_src/aseprite/characters/drawn_animation/2026-11-03'
@@ -88,6 +91,50 @@ def main():
             baseline_files_preserved=len(retained),before_after_samples=len(samples['cases']),
             preview='refinements/preview.html',user_acceptance='USER_ACCEPTED_PREVIEW_2026-11-03')
         write(BASE/'refinements/verification.json',result['refinements'])
+    feedback = BASE/'refinements/battle_feedback/verification.json'
+    if feedback.is_file():
+        verified=read(feedback)
+        assert verified['status']=='SOURCE_AND_SCOPE_PASS' and verified['walk_clips_retimed']==96
+        assert 'battle' in native['suites'] and 'Drawn battle review:' in summaries['battle']
+        result['battle_feedback']=dict(status='TECHNICAL_PASS_AWAITING_USER_RETEST',
+            walk_clips=96,walk_cycle_ms=400,stride_pixels=80,
+            baseline_files_preserved=verified['baseline_files_preserved'],
+            changed_runtime_pngs=len(verified['changed_runtime_pngs']),
+            unchanged_runtime_pngs=verified['other_runtime_pngs_unchanged'],
+            north_warrior_death=verified['north_warrior_death'],
+            preview='refinements/battle_feedback/preview.html',
+            visual_retest='NOT_RUN',user_feedback='Stage56 partial: slow movement, narrow rear stance, exposed sword; other animation positive')
+        result['physical_scenarios']+='; L56-01 partial with defects; L56-02/L57-01 NOT_RUN'
+    balance=BASE/'refinements/motion_balance/verification.json'
+    rolled_back=BASE/'refinements/motion_balance/rollback.json'
+    if balance.is_file() and not rolled_back.is_file():
+        verified=read(balance)
+        assert verified['status']=='SOURCE_AND_SCOPE_PASS' and verified['walk_clips']==96
+        assert all(p['walk_stride_pixels']==160 and p['durations_ms']['neutral_walk']==[100]*8 for p in registry['profiles'])
+        if 'battle_feedback' in result:result['battle_feedback']['status']='HISTORICAL_CADENCE_REJECTED_SUPERSEDED_BY_58'
+        result['motion_balance']=dict(status='TECHNICAL_PASS_AWAITING_USER_RETEST',
+            walk_clips=96,gait_cycle_ms=800,stride_pixels=160,root_pixels_per_second=200,
+            baseline_files_preserved=verified['baseline_files_preserved'],
+            changed_runtime_pngs=len(verified['changed_runtime_pngs']),
+            changed_art='knight neutral/combat idle and neutral walk only, eight facings',
+            preview='refinements/motion_balance/preview.html',samples=36,visual_retest='NOT_RUN')
+        result['physical_scenarios']+='; L57-01 cadence rejected by user; L58-01 NOT_RUN'
+    if rolled_back.is_file():
+        rollback=read(rolled_back)
+        assert rollback['status']=='USER_REJECTED_ROLLED_BACK'
+        result['motion_balance']=dict(status='USER_REJECTED_ROLLED_BACK',restored_baseline_files=rollback['restored_baseline_files'],
+            runtime_pngs_match_pre58=rollback['runtime_pngs_match_pre58'],further_iteration_authorized=False)
+    if native_neutral_active:
+        verified=read(BASE/'refinements/native_neutral/verification.json')
+        assert verified['status']=='SOURCE_AND_SCOPE_PASS' and verified['walk_clips']==96
+        assert all(p['walk_stride_pixels']==160 and p['durations_ms']['neutral_walk']==[125]*8 for p in registry['profiles'])
+        acceptance_path=BASE/'refinements/native_neutral/user_acceptance.json'
+        acceptance=read(acceptance_path)['status'] if acceptance_path.is_file() else 'PENDING'
+        result['native_neutral']=dict(status='TECHNICAL_PASS_USER_ACCEPTED_FOR_NOW' if acceptance=='USER_ACCEPTED_FOR_NOW' else 'TECHNICAL_PASS_AWAITING_USER_REVIEW',
+            gait_cycle_ms=1000,stride_pixels=160,root_pixels_per_second=160,
+            changed_runtime_pngs=len(verified['changed_runtime_pngs']),head_boot_pixels='EXACT_NATIVE',
+            walking_and_combat_art='UNCHANGED',preview='refinements/native_neutral/preview.html',visual_acceptance=acceptance)
+        result['physical_scenarios']+='; L60-01 temporary user acceptance; terminal cases unreported' if acceptance=='USER_ACCEPTED_FOR_NOW' else '; new authorized L60-01 pending after rollback'
     write(BASE/'direction_plan.json', dict(status='SOURCE_BATCH_COMPLETE', views=views,
           unused_candidates='raw/sequence_candidate.png retained; never activated',
           next='User gallery/game review; do not regenerate the superseded pending queue'))

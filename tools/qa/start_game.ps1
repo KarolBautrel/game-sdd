@@ -7,11 +7,18 @@ param(
     [ValidateRange(600, 1440)][int]$Height = 1080,
     [switch]$TraceInput,
     [switch]$ConfigureOnly,
-    [ValidateRange(0, 2147483647)][int]$CombatSeed = 0
+    [ValidateRange(0, 2147483647)][int]$CombatSeed = 0,
+    [string]$CombatScenario = ''
 )
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
+if ($CombatScenario) {
+    if ($Scene -ne 'combat') { throw '-CombatScenario requires -Scene combat.' }
+    $catalogue = Get-Content -LiteralPath (Join-Path $repoRoot 'resources\data\combat_scenarios\catalogue.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+    $matchingScenarios = @($catalogue.scenarios | Where-Object { $_.id -ceq $CombatScenario })
+    if ($matchingScenarios.Count -ne 1) { throw "Unknown combat scenario: $CombatScenario" }
+}
 if ([string]::IsNullOrWhiteSpace($GodotPath)) {
     $GodotPath = Join-Path (Split-Path -Parent (Split-Path -Parent $repoRoot)) 'installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64.exe'
 }
@@ -55,6 +62,7 @@ window/size/window_width_override=$Width
 window/size/window_height_override=$Height
 [debug]
 qa/combat_seed=$CombatSeed
+qa/combat_scenario="$CombatScenario"
 "@ | Set-Content -LiteralPath $overridePath -Encoding UTF8
 $runId = [DateTime]::UtcNow.ToString('yyyyMMddTHHmmssfffffffZ')
 $evidenceDir = Join-Path $repoRoot "artifacts\qa-runs\launch-$runId"
@@ -78,6 +86,7 @@ $launch = [ordered]@{
     schema = 'sdd.interactive-launch-v1'
     process_id = $qaProcess.Id
     scene = $scenes[$Scene]
+    combat_scenario = $CombatScenario
     requested_display = $qaDisplay.DeviceName
     display_primary = $qaDisplay.Primary
     physical_resolution = @($qaDisplay.Width, $qaDisplay.Height)

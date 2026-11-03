@@ -1,0 +1,206 @@
+{
+  "title": "Rycerz · miecz dwuręczny",
+  "sheets": {
+    "walk_neutral": {
+      "cols": 4,
+      "rows": 2
+    },
+    "walk_combat": {
+      "cols": 4,
+      "rows": 2,
+      "matte": true
+    },
+    "attacks": {
+      "cols": 4,
+      "rows": 4
+    },
+    "reactions": {
+      "cols": 4,
+      "rows": 4
+    },
+    "transitions": {
+      "cols": 4,
+      "rows": 4
+    },
+    "dodge": {
+      "cols": 2,
+      "rows": 2
+    }
+  },
+  "clips": [
+    {
+      "id": "neutral_idle",
+      "title": "Spoczynek",
+      "mode": "neutral",
+      "sheet": "transitions",
+      "start": 1,
+      "count": 4,
+      "durations": 250,
+      "loop": true
+    },
+    {
+      "id": "neutral_walk",
+      "title": "Chód spokojny",
+      "mode": "neutral",
+      "sheet": "walk_neutral",
+      "start": 1,
+      "count": 8,
+      "durations": 50,
+      "loop": true,
+      "align_head": true
+    },
+    {
+      "id": "combat_idle",
+      "title": "Gotowość bojowa A",
+      "mode": "combat",
+      "sheet": "transitions",
+      "start": 5,
+      "count": 4,
+      "durations": 250,
+      "loop": true
+    },
+    {
+      "id": "combat_walk",
+      "title": "Chód w gotowości",
+      "mode": "combat",
+      "sheet": "walk_combat",
+      "start": 1,
+      "count": 8,
+      "durations": 50,
+      "loop": true,
+      "align_head": true
+    },
+    {
+      "id": "draw",
+      "title": "Dobycie miecza",
+      "mode": "transition",
+      "sheet": "transitions",
+      "start": 9,
+      "count": 4,
+      "durations": [
+        170,
+        170,
+        170,
+        190
+      ],
+      "loop": false
+    },
+    {
+      "id": "sheathe",
+      "title": "Schowanie miecza",
+      "mode": "transition",
+      "sheet": "transitions",
+      "start": 13,
+      "count": 4,
+      "durations": [
+        170,
+        170,
+        170,
+        190
+      ],
+      "loop": false
+    },
+    {
+      "id": "attack",
+      "title": "Cięcie · całe ciało",
+      "mode": "combat",
+      "sheet": "attacks",
+      "start": 1,
+      "count": 8,
+      "durations": [
+        160,
+        120,
+        100,
+        70,
+        60,
+        100,
+        170,
+        190
+      ],
+      "loop": false
+    },
+    {
+      "id": "attack_alt",
+      "title": "Pchnięcie",
+      "mode": "combat",
+      "sheet": "attacks",
+      "start": 9,
+      "count": 8,
+      "durations": [
+        160,
+        100,
+        100,
+        80,
+        80,
+        120,
+        130,
+        170
+      ],
+      "loop": false
+    },
+    {
+      "id": "block",
+      "title": "Parowanie",
+      "mode": "combat",
+      "sheet": "reactions",
+      "start": 1,
+      "count": 4,
+      "durations": [
+        140,
+        100,
+        120,
+        180
+      ],
+      "loop": false
+    },
+    {
+      "id": "dodge",
+      "title": "Unik / krótki odskok",
+      "mode": "combat",
+      "sheet": "dodge",
+      "start": 1,
+      "count": 4,
+      "durations": [
+        140,
+        120,
+        140,
+        180
+      ],
+      "loop": false
+    },
+    {
+      "id": "hit",
+      "title": "Reakcja na trafienie",
+      "mode": "combat",
+      "sheet": "reactions",
+      "start": 5,
+      "count": 4,
+      "durations": [
+        90,
+        90,
+        130,
+        180
+      ],
+      "loop": false
+    },
+    {
+      "id": "death",
+      "title": "Upadek / śmierć",
+      "mode": "combat",
+      "sheet": "reactions",
+      "start": 9,
+      "count": 8,
+      "durations": [
+        150,
+        150,
+        140,
+        130,
+        130,
+        150,
+        200,
+        1000
+      ],
+      "loop": false
+    }
+  ]
+}

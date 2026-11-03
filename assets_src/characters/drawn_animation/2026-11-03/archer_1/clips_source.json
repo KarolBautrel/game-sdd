@@ -44,7 +44,7 @@
       "sheet": "locomotion",
       "start": 5,
       "count": 8,
-      "durations": 100,
+      "durations": 125,
       "loop": true,
       "align_head": true
     },
@@ -65,7 +65,7 @@
       "sheet": "actions",
       "start": 1,
       "count": 8,
-      "durations": 100,
+      "durations": 125,
       "loop": true,
       "align_head": true
     },
@@ -139,5 +139,6 @@
       "loop": false,
       "reference_index": 5
     }
-  ]
+  ],
+  "walk_stride_pixels": 160
 }

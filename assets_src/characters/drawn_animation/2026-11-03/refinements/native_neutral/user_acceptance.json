@@ -1,0 +1,9 @@
+{
+  "status": "USER_ACCEPTED_FOR_NOW",
+  "date": "2026-11-03",
+  "scope": ["two-handed knight neutral stance based on the shield warrior", "current walking cadence and travel calibration"],
+  "statement": "Dobra, na ta chwile zatwierdzam, ale na pewn ow przyslzosci wrocimy, dodaj do glownego repo i daj znac co robimy dalej",
+  "future_revisit": "Retain this version for development. Revisit character posture and locomotion polish in a later user-authorized art pass.",
+  "publication_authorized": "game-sdd default branch only",
+  "terminal_battle_or_campaign_acceptance": "not reported"
+}

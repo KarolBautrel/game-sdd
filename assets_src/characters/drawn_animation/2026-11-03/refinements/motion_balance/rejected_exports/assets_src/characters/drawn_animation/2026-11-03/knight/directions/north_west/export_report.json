@@ -1,0 +1,82 @@
+{
+  "canvas": [
+    384,
+    320
+  ],
+  "clipping": [],
+  "clips": {
+    "attack": {
+      "frame_count": 8,
+      "mirror_of": "north_east",
+      "preserved_unmodified": true
+    },
+    "attack_alt": {
+      "frame_count": 8,
+      "mirror_of": "north_east",
+      "preserved_unmodified": true
+    },
+    "block": {
+      "frame_count": 4,
+      "mirror_of": "north_east",
+      "preserved_unmodified": true
+    },
+    "combat_idle": {
+      "frame_count": 4,
+      "mirror_of": "north_east"
+    },
+    "combat_walk": {
+      "frame_count": 8,
+      "mirror_of": "north_east",
+      "preserved_unmodified": true
+    },
+    "death": {
+      "frame_count": 8,
+      "mirror_of": "north_east",
+      "preserved_unmodified": true
+    },
+    "dodge": {
+      "frame_count": 4,
+      "mirror_of": "north_east",
+      "preserved_unmodified": true
+    },
+    "draw": {
+      "frame_count": 4,
+      "mirror_of": "north_east",
+      "preserved_unmodified": true
+    },
+    "hit": {
+      "frame_count": 4,
+      "mirror_of": "north_east",
+      "preserved_unmodified": true
+    },
+    "neutral_idle": {
+      "frame_count": 4,
+      "mirror_of": "north_east"
+    },
+    "neutral_walk": {
+      "frame_count": 8,
+      "mirror_of": "north_east"
+    },
+    "sheathe": {
+      "frame_count": 4,
+      "mirror_of": "north_east",
+      "preserved_unmodified": true
+    }
+  },
+  "handedness": "reflected with costume asymmetry; presentation only",
+  "id": "knight",
+  "mirror_of": "north_east",
+  "pivot": [
+    192,
+    270
+  ],
+  "saved_source_roundtrip": "PASS",
+  "status": "TECHNICAL_MIRROR_PASS_VISUAL_REVIEW_PENDING",
+  "view": "north_west",
+  "walk_timing": {
+    "cycle_ms": 800,
+    "stride_pixels": 160,
+    "source_roundtrip": "PASS",
+    "retiming_preserves_pixels": true
+  }
+}

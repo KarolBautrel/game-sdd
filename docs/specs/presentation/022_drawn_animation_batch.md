@@ -145,3 +145,127 @@ enlarged before/after motion samples. Subsequent explicit user feedback2026-11-0
 accepts these corrections ("Tak ma byc"); this is preview acceptance, not ordinary
 campaign play. No new roster, weapon rule, paid provider, Git or desktop-input
 scope is introduced.
+
+## Six-role ordinary battle review (stage56)
+
+User2026-11-03 explicitly selects point1 of the proposed next steps: review the
+current six painted roles in ordinary combat before expanding the roster. Provide
+one isolated Tools encounter, `drawn_roster_skirmish`, on the existing Old Mine
+terrain: four controllable allies (knight, warrior, archer_1, rogue_1) against four
+AI opponents (two axe_bandit and two bandit_spearman). Use normal AP/MP, hit rolls,
+damage, turn advancement and terminal conditions. No Debug Win or injected death
+counts as an ordinary victory/defeat. Do not write campaign saves or add rewards.
+
+Every actor explicitly selects its approved painted profile. Encounter-local
+equipment agrees with the baked weapon: existing sword/shield and bow profiles,
+the already supported two-handed greatsword profile, and ordinary melee profiles
+named for daggers, axe and spear. Daggers use the existing single basic attack;
+spear uses the existing adjacent melee range. These are art-review fixtures, not
+new dual-wield/reach mechanics or campaign inventory items. The two-handed knight
+and bow have empty off hands. Keep the previous knight sandbox and normal default.
+
+An explicit launcher scenario option may start this encounter directly through
+the validated scenario catalogue. Pending expedition combat and map-authoring
+drafts retain priority. Show a recognizable encounter title and distinct actor
+names in the existing combat UI. Reset/reload restores this encounter and cancels
+pending animation commits. Default launch behavior remains unchanged.
+
+Automated proof must exercise all six profiles through the actual CombatDebug
+movement/attack/hit/death presentation and resolver, including bow anticipation,
+full final frames and reset cancellation. Run a bounded full encounter through
+legal commands to terminal results; label this a simulation, never hands-on play.
+L56-01 records the user's ordinary battle at board scale and L56-02 its defeat/
+restart counterpart. Keep each NOT_RUN until evidence arrives. Readability,
+grips, shield surfaces, aim, feet and crowded sorting require actual visual review.
+This scope does not authorize new character art, equipment-system redesign or Git
+publication. Earlier L53/L54 and61 physical cases remain independently open.
+
+## Battle feedback: brisk walking and rear sword/shield stance (stage57)
+
+User2026-11-03 reports that movement in the six-role battle is much too slow.
+Retain the80px authored stride and all existing walk drawings, but halve neutral
+and combat walk cels from100ms to50ms across all six roles/eight views. This makes
+both root travel and step cadence twice as fast:400ms per80px rather than800ms.
+Do not speed up attacks, bow aiming, hit/death, idle breathing or authoritative
+AP/MP/turn rules. Keep Aseprite sources, manifests, player and runtime in agreement.
+
+User also requests a wider natural standing stance for the one-handed warrior
+viewed exactly from behind (north), and explicitly clarifies that the sword must
+be more occluded by the body. Keep the same character, proportional boots, armor,
+shield interior, blade length and one-handed grip. Move the held sword/hand toward
+the front of the torso in depth; conceal the occluded parts rather than painting
+the entire long blade along the side of the rear silhouette. A deliberate attack
+sweep can reveal the blade. Widen planted standing feet to a stable shoulder-width
+stance without bowed knees. Preserve natural alternating steps in walking and
+the complete existing death. No other facing or character appearance is requested.
+
+Preserve stage56 source/runtime baselines with hashes. Use imagegen for redrawn
+rear poses and Aseprite for native-scale cleanup, idle planting, editable sources
+and exports. Retain the exact prompt/raw candidate and before/after samples.
+Verify source roundtrip,96 walk clips at400ms, unchanged non-walk timings,
+foot planting and actual CombatDebug travel/attack/death/reset. The user's report
+is positive for remaining animation/movement, but gives no terminal battle result;
+do not close ordinary victory/defeat or later production scope by inference.
+
+## Natural cadence and two-handed swordsman stance (stage58)
+
+User rejects stage57's rapid leg cadence: faster root travel is useful but the
+feet cycle unnaturally fast. Restore8x100ms walking cels and calibrate a160px full
+stride instead of80px, retaining the current200px/s root speed with half as many
+cycles. Update all96 neutral/combat walk sources, manifests, runtime and preview
+ground travel together. Preserve attacks, bow aim, idles, hit/death and AP/MP rules.
+Use actual movement/contact-phase evidence and a native-speed user retest; a shorter
+timer alone does not prove natural locomotion. Stage57's800ms→400ms cadence is
+superseded, and remains retained as a rejected comparison baseline.
+
+The swordsman here is the distinct two-handed `knight`, compared by the user with
+the sword/shield warrior and axe role. Broaden and stagger his combat standing
+base with relaxed knees and a credible fighting weight shift, preserving selected
+forward guard A and two-handed grip. In neutral idle AND neutral locomotion he
+must visibly carry the same sword lowered at his side, rather than empty hands
+or the ready guard. Keep identity, body scale, modest boots and coherent weapon
+length/occlusion in five drawn views plus three disclosed reflections. Preserve
+existing combat walk/attacks/reactions/death/extras; redraw only neutral/combat
+idles and neutral walking. Replant idle feet after export. The sword/shield north
+correction from57 remains in place. Preserve the previous sources and provide
+native/enlarged comparison plus a distance-aware walking sample before acceptance.
+
+## Explicit rollback of58 (stage59)
+
+User rejects58's blurred replacement model and fighting posture and explicitly
+requests returning to the previous version and stopping iteration. Restore the
+exact pre58 source/metadata/registry baseline, including knight drawings, original
+stances/neutral carry and stage57's400ms/80px gait. This rollback does not approve
+that earlier cadence or resolve known issues; it is the user's selected temporary
+state. Preserve stage56/57 work and the rejected58 evidence. Verify all861 baseline
+files and2304 runtime PNG identities; do not regenerate art. Disable reapplication
+of the rejected recipe and record no further production authorization.
+
+## Shield-warrior neutral reference and measured walking (stage60)
+
+The user now explicitly reopens two narrow tasks after59: make the two-handed
+knight's neutral standing pose closely follow the sword/shield warrior, and calm
+the horse-like rapid stepping. This revokes the pause only for these tasks. Keep
+the restored sharp character, combat pose and all other action drawings. Reuse
+native accepted character/weapon pixels in Aseprite rather than regenerating or
+rescaling the whole model. Preserve the knight's head/face and boots, use the
+warrior's relaxed lowered sword arm as the pose reference, and keep the two-handed
+blade rigid. New neutral source/exports must retain planted feet and breathing.
+
+Use eight125ms walking cels (1000ms cycle) and160px stride:160px/s travel, with two
+foot contacts per second rather than five. This is60% faster than the original
+100px/s but deliberately20% below57's200px/s for a natural walking cadence. All96
+neutral/combat walking sources, manifests, renderer and distance-aware previews
+must agree. Walking pixels, attacks, bow aim, reactions, death and resolver/AP/MP
+rules stay unchanged. Keep full backups and prove the native pixel scope, source
+roundtrip, timing/stride/root speed and actual battle lifecycle. Acceptance of
+natural motion remains a user visual review, not a headless claim.
+
+Subsequent explicit user decision2026-11-03: stage60's neutral pose and walking
+are USER_ACCEPTED_FOR_NOW. Retain this working version for development, with a
+future user-authorized posture/locomotion polish pass; do not reopen art iteration
+automatically. The user requests committing/pushing the accepted current work to
+the main game repository/default branch. This does not publish a new workshop
+release, approve rejected58, rewrite Git history or close unreported terminal
+battle/campaign cases. No next implementation is authorized by the request for
+advice on next steps.

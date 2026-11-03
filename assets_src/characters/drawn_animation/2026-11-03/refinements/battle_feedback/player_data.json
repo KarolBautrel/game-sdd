@@ -1,0 +1,623 @@
+{
+  "cases": [
+    {
+      "topic": "walk",
+      "label": "Rycerz · miecz dwuręczny / Chód spokojny",
+      "note": "Chód jest dwa razy szybszy: cykl 0,40 s zamiast 0,80 s, z taką samą długością kroku.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "walk",
+      "label": "Rycerz · miecz dwuręczny / Chód w gotowości",
+      "note": "Chód jest dwa razy szybszy: cykl 0,40 s zamiast 0,80 s, z taką samą długością kroku.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/knight/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../knight/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "walk",
+      "label": "Bran · miecz i tarcza / Chód spokojny",
+      "note": "Chód jest dwa razy szybszy: cykl 0,40 s zamiast 0,80 s, z taką samą długością kroku.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/warrior/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../warrior/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "walk",
+      "label": "Bran · miecz i tarcza / Chód w gotowości",
+      "note": "Chód jest dwa razy szybszy: cykl 0,40 s zamiast 0,80 s, z taką samą długością kroku.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/warrior/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../warrior/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "walk",
+      "label": "Torin · łuk / Chód spokojny",
+      "note": "Chód jest dwa razy szybszy: cykl 0,40 s zamiast 0,80 s, z taką samą długością kroku.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/archer_1/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../archer_1/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "walk",
+      "label": "Torin · łuk / Chód w gotowości",
+      "note": "Chód jest dwa razy szybszy: cykl 0,40 s zamiast 0,80 s, z taką samą długością kroku.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/archer_1/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../archer_1/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "walk",
+      "label": "Łotr · dwa sztylety / Chód spokojny",
+      "note": "Chód jest dwa razy szybszy: cykl 0,40 s zamiast 0,80 s, z taką samą długością kroku.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/rogue_1/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../rogue_1/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "walk",
+      "label": "Łotr · dwa sztylety / Chód w gotowości",
+      "note": "Chód jest dwa razy szybszy: cykl 0,40 s zamiast 0,80 s, z taką samą długością kroku.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/rogue_1/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../rogue_1/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "walk",
+      "label": "Rabuś · topór / Chód spokojny",
+      "note": "Chód jest dwa razy szybszy: cykl 0,40 s zamiast 0,80 s, z taką samą długością kroku.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/axe_bandit/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../axe_bandit/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "walk",
+      "label": "Rabuś · topór / Chód w gotowości",
+      "note": "Chód jest dwa razy szybszy: cykl 0,40 s zamiast 0,80 s, z taką samą długością kroku.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/axe_bandit/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../axe_bandit/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "walk",
+      "label": "Włócznik · włócznia / Chód spokojny",
+      "note": "Chód jest dwa razy szybszy: cykl 0,40 s zamiast 0,80 s, z taką samą długością kroku.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/bandit_spearman/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../bandit_spearman/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "walk",
+      "label": "Włócznik · włócznia / Chód w gotowości",
+      "note": "Chód jest dwa razy szybszy: cykl 0,40 s zamiast 0,80 s, z taką samą długością kroku.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/bandit_spearman/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../bandit_spearman/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "rear",
+      "label": "Bran / tył / Spoczynek",
+      "note": "Tylko widok od tyłu: szersza postawa i miecz zasłonięty tułowiem. Wnętrze tarczy zachowane.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/warrior/directions/north/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../warrior/directions/north/neutral_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "rear",
+      "label": "Bran / tył / Gotowość bojowa",
+      "note": "Tylko widok od tyłu: szersza postawa i miecz zasłonięty tułowiem. Wnętrze tarczy zachowane.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/warrior/directions/north/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../warrior/directions/north/combat_idle.png",
+        "frames": 4,
+        "durations": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "rear",
+      "label": "Bran / tył / Chód spokojny",
+      "note": "Tylko widok od tyłu: szersza postawa i miecz zasłonięty tułowiem. Wnętrze tarczy zachowane.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/warrior/directions/north/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../warrior/directions/north/neutral_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "rear",
+      "label": "Bran / tył / Chód w gotowości",
+      "note": "Tylko widok od tyłu: szersza postawa i miecz zasłonięty tułowiem. Wnętrze tarczy zachowane.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/warrior/directions/north/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": true
+      },
+      "new": {
+        "atlas": "../../warrior/directions/north/combat_walk.png",
+        "frames": 8,
+        "durations": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "loop": true
+      }
+    },
+    {
+      "topic": "rear",
+      "label": "Bran / tył / Cięcie zza tarczy",
+      "note": "Tylko widok od tyłu: szersza postawa i miecz zasłonięty tułowiem. Wnętrze tarczy zachowane.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/warrior/directions/north/attack.png",
+        "frames": 8,
+        "durations": [
+          160,
+          130,
+          110,
+          90,
+          80,
+          100,
+          160,
+          170
+        ],
+        "loop": false
+      },
+      "new": {
+        "atlas": "../../warrior/directions/north/attack.png",
+        "frames": 8,
+        "durations": [
+          160,
+          130,
+          110,
+          90,
+          80,
+          100,
+          160,
+          170
+        ],
+        "loop": false
+      }
+    },
+    {
+      "topic": "rear",
+      "label": "Bran / tył / Reakcja na trafienie",
+      "note": "Tylko widok od tyłu: szersza postawa i miecz zasłonięty tułowiem. Wnętrze tarczy zachowane.",
+      "old": {
+        "atlas": "before/assets_src/characters/drawn_animation/2026-11-03/warrior/directions/north/hit.png",
+        "frames": 4,
+        "durations": [
+          90,
+          90,
+          130,
+          180
+        ],
+        "loop": false
+      },
+      "new": {
+        "atlas": "../../warrior/directions/north/hit.png",
+        "frames": 4,
+        "durations": [
+          90,
+          90,
+          130,
+          180
+        ],
+        "loop": false
+      }
+    }
+  ],
+  "topics": [
+    [
+      "walk",
+      "Szybszy chód"
+    ],
+    [
+      "rear",
+      "Rycerz od tyłu"
+    ]
+  ],
+  "initial_topic": "walk",
+  "floor": "../../../../../../assets/combat/environment/floors/woodland.png",
+  "shadow": "../../../../../../assets/combat/environment/contact_shadow.png"
+}

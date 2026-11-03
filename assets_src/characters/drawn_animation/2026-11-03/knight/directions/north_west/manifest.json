@@ -1,1 +1,272 @@
-{"body_height": 171, "canvas": [384, 320], "clips": [{"atlas": "neutral_idle.png", "durations": [250, 250, 250, 250], "frame_source": "mirrored north_east", "frames": 4, "id": "neutral_idle", "loop": true, "mirror_of": "north_east", "mode": "neutral", "scale": 0.96610169491525422, "source_first": 1, "source_sheet": "sequence", "title": "Spoczynek"}, {"atlas": "combat_idle.png", "durations": [250, 250, 250, 250], "frame_source": "mirrored north_east", "frames": 4, "id": "combat_idle", "loop": true, "mirror_of": "north_east", "mode": "combat", "scale": 1.0058823529411764, "source_first": 5, "source_sheet": "sequence", "title": "Gotowość bojowa"}, {"atlas": "neutral_walk.png", "durations": [100, 100, 100, 100, 100, 100, 100, 100], "frame_source": "mirrored north_east", "frames": 8, "id": "neutral_walk", "loop": true, "mirror_of": "north_east", "mode": "neutral", "scale": 1.0555555555555556, "source_first": 9, "source_sheet": "sequence", "title": "Chód spokojny"}, {"atlas": "combat_walk.png", "durations": [100, 100, 100, 100, 100, 100, 100, 100], "frame_source": "mirrored north_east", "frames": 8, "id": "combat_walk", "loop": true, "mirror_of": "north_east", "mode": "combat", "scale": 1.1176470588235294, "source_first": 17, "source_sheet": "sequence", "title": "Chód w gotowości"}, {"atlas": "attack.png", "durations": [160, 120, 100, 70, 60, 100, 170, 190], "frame_source": "mirrored north_east", "frames": 8, "id": "attack", "loop": false, "mirror_of": "north_east", "mode": "combat", "scale": 1.2302158273381294, "source_first": 25, "source_sheet": "sequence", "title": "Cięcie · całe ciało"}, {"atlas": "hit.png", "durations": [90, 90, 130, 180], "frame_source": "mirrored north_east", "frames": 4, "id": "hit", "loop": false, "mirror_of": "north_east", "mode": "combat", "scale": 1.2573529411764706, "source_first": 33, "source_sheet": "sequence", "title": "Reakcja na trafienie"}, {"atlas": "death.png", "durations": [150, 150, 140, 130, 130, 150, 200, 1000], "frame_source": "mirrored north_east", "frames": 8, "id": "death", "loop": false, "mirror_of": "north_east", "mode": "combat", "scale": 1.2573529411764706, "source_first": 37, "source_sheet": "sequence", "title": "Upadek / śmierć"}, {"atlas": "draw.png", "durations": [170, 170, 170, 190], "frame_source": "mirrored north_east", "frames": 4, "id": "draw", "loop": false, "mirror_of": "north_east", "mode": "transition", "scale": 0.71848739495798319, "source_first": 1, "source_sheet": "showcase", "title": "Dobycie miecza"}, {"atlas": "sheathe.png", "durations": [170, 170, 170, 190], "frame_source": "mirrored north_east", "frames": 4, "id": "sheathe", "loop": false, "mirror_of": "north_east", "mode": "transition", "scale": 0.72457627118644063, "source_first": 5, "source_sheet": "showcase", "title": "Schowanie miecza"}, {"atlas": "attack_alt.png", "durations": [160, 100, 100, 80, 80, 120, 130, 170], "frame_source": "mirrored north_east", "frames": 8, "id": "attack_alt", "loop": false, "mirror_of": "north_east", "mode": "combat", "scale": 0.72765957446808516, "source_first": 9, "source_sheet": "showcase", "title": "Pchnięcie"}, {"atlas": "block.png", "durations": [140, 100, 120, 180], "frame_source": "mirrored north_east", "frames": 4, "id": "block", "loop": false, "mirror_of": "north_east", "mode": "combat", "scale": 0.72765957446808516, "source_first": 17, "source_sheet": "showcase", "title": "Parowanie"}, {"atlas": "dodge.png", "durations": [140, 120, 140, 180], "frame_source": "mirrored north_east", "frames": 4, "id": "dodge", "loop": false, "mirror_of": "north_east", "mode": "combat", "scale": 0.72765957446808516, "source_first": 21, "source_sheet": "showcase", "title": "Unik / krótki odskok"}], "direction_note": "Odbicie: odwraca asymetrię stroju i stronę trzymania broni.", "exported_views": ["north_west"], "id": "knight", "mirror_of": "north_east", "pivot": [192, 270], "pixels_per_metre": 100, "title": "Rycerz · miecz dwuręczny", "view": "north_west"}
+{
+  "body_height": 171,
+  "canvas": [
+    384,
+    320
+  ],
+  "clips": [
+    {
+      "atlas": "neutral_idle.png",
+      "durations": [
+        250,
+        250,
+        250,
+        250
+      ],
+      "frame_source": "native Aseprite pose composition",
+      "frames": 4,
+      "id": "neutral_idle",
+      "loop": true,
+      "mirror_of": "north_east",
+      "mode": "neutral",
+      "scale": 0.9661016949152542,
+      "source_first": 1,
+      "source_sheet": "sequence",
+      "title": "Spoczynek",
+      "native_postprocess": "tools/aseprite/knight_neutral_native.lua"
+    },
+    {
+      "atlas": "combat_idle.png",
+      "durations": [
+        250,
+        250,
+        250,
+        250
+      ],
+      "frame_source": "mirrored north_east",
+      "frames": 4,
+      "id": "combat_idle",
+      "loop": true,
+      "mirror_of": "north_east",
+      "mode": "combat",
+      "scale": 1.0058823529411764,
+      "source_first": 5,
+      "source_sheet": "sequence",
+      "title": "Gotowość bojowa"
+    },
+    {
+      "atlas": "neutral_walk.png",
+      "durations": [
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125
+      ],
+      "frame_source": "mirrored north_east",
+      "frames": 8,
+      "id": "neutral_walk",
+      "loop": true,
+      "mirror_of": "north_east",
+      "mode": "neutral",
+      "scale": 1.0555555555555556,
+      "source_first": 9,
+      "source_sheet": "sequence",
+      "title": "Chód spokojny"
+    },
+    {
+      "atlas": "combat_walk.png",
+      "durations": [
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125
+      ],
+      "frame_source": "mirrored north_east",
+      "frames": 8,
+      "id": "combat_walk",
+      "loop": true,
+      "mirror_of": "north_east",
+      "mode": "combat",
+      "scale": 1.1176470588235294,
+      "source_first": 17,
+      "source_sheet": "sequence",
+      "title": "Chód w gotowości"
+    },
+    {
+      "atlas": "attack.png",
+      "durations": [
+        160,
+        120,
+        100,
+        70,
+        60,
+        100,
+        170,
+        190
+      ],
+      "frame_source": "mirrored north_east",
+      "frames": 8,
+      "id": "attack",
+      "loop": false,
+      "mirror_of": "north_east",
+      "mode": "combat",
+      "scale": 1.2302158273381294,
+      "source_first": 25,
+      "source_sheet": "sequence",
+      "title": "Cięcie · całe ciało"
+    },
+    {
+      "atlas": "hit.png",
+      "durations": [
+        90,
+        90,
+        130,
+        180
+      ],
+      "frame_source": "mirrored north_east",
+      "frames": 4,
+      "id": "hit",
+      "loop": false,
+      "mirror_of": "north_east",
+      "mode": "combat",
+      "scale": 1.2573529411764706,
+      "source_first": 33,
+      "source_sheet": "sequence",
+      "title": "Reakcja na trafienie"
+    },
+    {
+      "atlas": "death.png",
+      "durations": [
+        150,
+        150,
+        140,
+        130,
+        130,
+        150,
+        200,
+        1000
+      ],
+      "frame_source": "mirrored north_east",
+      "frames": 8,
+      "id": "death",
+      "loop": false,
+      "mirror_of": "north_east",
+      "mode": "combat",
+      "scale": 1.2573529411764706,
+      "source_first": 37,
+      "source_sheet": "sequence",
+      "title": "Upadek / śmierć"
+    },
+    {
+      "atlas": "draw.png",
+      "durations": [
+        170,
+        170,
+        170,
+        190
+      ],
+      "frame_source": "mirrored north_east",
+      "frames": 4,
+      "id": "draw",
+      "loop": false,
+      "mirror_of": "north_east",
+      "mode": "transition",
+      "scale": 0.7184873949579832,
+      "source_first": 1,
+      "source_sheet": "showcase",
+      "title": "Dobycie miecza"
+    },
+    {
+      "atlas": "sheathe.png",
+      "durations": [
+        170,
+        170,
+        170,
+        190
+      ],
+      "frame_source": "mirrored north_east",
+      "frames": 4,
+      "id": "sheathe",
+      "loop": false,
+      "mirror_of": "north_east",
+      "mode": "transition",
+      "scale": 0.7245762711864406,
+      "source_first": 5,
+      "source_sheet": "showcase",
+      "title": "Schowanie miecza"
+    },
+    {
+      "atlas": "attack_alt.png",
+      "durations": [
+        160,
+        100,
+        100,
+        80,
+        80,
+        120,
+        130,
+        170
+      ],
+      "frame_source": "mirrored north_east",
+      "frames": 8,
+      "id": "attack_alt",
+      "loop": false,
+      "mirror_of": "north_east",
+      "mode": "combat",
+      "scale": 0.7276595744680852,
+      "source_first": 9,
+      "source_sheet": "showcase",
+      "title": "Pchnięcie"
+    },
+    {
+      "atlas": "block.png",
+      "durations": [
+        140,
+        100,
+        120,
+        180
+      ],
+      "frame_source": "mirrored north_east",
+      "frames": 4,
+      "id": "block",
+      "loop": false,
+      "mirror_of": "north_east",
+      "mode": "combat",
+      "scale": 0.7276595744680852,
+      "source_first": 17,
+      "source_sheet": "showcase",
+      "title": "Parowanie"
+    },
+    {
+      "atlas": "dodge.png",
+      "durations": [
+        140,
+        120,
+        140,
+        180
+      ],
+      "frame_source": "mirrored north_east",
+      "frames": 4,
+      "id": "dodge",
+      "loop": false,
+      "mirror_of": "north_east",
+      "mode": "combat",
+      "scale": 0.7276595744680852,
+      "source_first": 21,
+      "source_sheet": "showcase",
+      "title": "Unik / krótki odskok"
+    }
+  ],
+  "direction_note": "Odbicie: odwraca asymetrię stroju i stronę trzymania broni.",
+  "exported_views": [
+    "north_west"
+  ],
+  "id": "knight",
+  "mirror_of": "north_east",
+  "pivot": [
+    192,
+    270
+  ],
+  "pixels_per_metre": 100,
+  "title": "Rycerz · miecz dwuręczny",
+  "view": "north_west",
+  "walk_stride_pixels": 160
+}

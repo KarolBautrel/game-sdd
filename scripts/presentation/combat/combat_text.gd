@@ -152,6 +152,15 @@ static func feedback_from_events(events: Array) -> String:
 static func unit_display_name(state: Dictionary, unit_id: String) -> String:
 	if unit_id == "":
 		return "Unknown"
+	if str(state.get("id", "")) == "drawn_roster_skirmish":
+		var review_names := {
+			"unit_knight_pilot": "Knight", "unit_player_001": "Bran", "unit_player_002": "Torin",
+			"unit_rogue_pilot": "Rogue", "unit_enemy_axe_1": "Axe Raider I",
+			"unit_enemy_axe_2": "Axe Raider II", "unit_enemy_spear_1": "Spearman I",
+			"unit_enemy_spear_2": "Spearman II",
+		}
+		if review_names.has(unit_id):
+			return review_names[unit_id]
 	var hero_name := PartyRoster.display_name_for_combat_unit(unit_id)
 	if hero_name != "":
 		return hero_name

@@ -19,12 +19,12 @@ def main():
     for role,title in ROLES.items():
         profile = BASE/role
         profile.mkdir(parents=True, exist_ok=True)
-        cfg={'title':title,'body_scale':True,'sheets':{name:{'cols':4,'rows':4}
+        cfg={'title':title,'body_scale':True,'walk_stride_pixels':160,'sheets':{name:{'cols':4,'rows':4}
              for name in ('locomotion','actions','reactions')},'clips':[
           clip('neutral_idle','Spoczynek','neutral','locomotion',1,4,250,True,indices=[1,1,2,2]),
-          clip('neutral_walk','Chód spokojny','neutral','locomotion',5,8,100,True,align_head=True),
+          clip('neutral_walk','Chód spokojny','neutral','locomotion',5,8,125,True,align_head=True),
           clip('combat_idle','Gotowość bojowa','combat','locomotion',13,4,250,True),
-          clip('combat_walk','Chód w gotowości','combat','actions',1,8,100,True,align_head=True),
+          clip('combat_walk','Chód w gotowości','combat','actions',1,8,125,True,align_head=True),
           clip('attack',ATTACKS[role],'combat','actions',9,8,[160,130,110,90,80,100,160,170]),
           clip('block','Osłona / unik','combat','reactions',1,4,[140,100,120,180]),
           clip('hit','Reakcja na trafienie','combat','reactions',5,4,[90,90,130,180]),

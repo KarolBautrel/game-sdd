@@ -35,7 +35,7 @@
       "sheet": "sequence_shield_inside",
       "start": 9,
       "count": 8,
-      "durations": 100,
+      "durations": 125,
       "loop": true,
       "align_head": true
     },
@@ -46,7 +46,7 @@
       "sheet": "sequence_shield_inside",
       "start": 17,
       "count": 8,
-      "durations": 100,
+      "durations": 125,
       "loop": true,
       "align_head": true
     },
@@ -104,5 +104,6 @@
       "loop": false,
       "reference_index": 33
     }
-  ]
+  ],
+  "walk_stride_pixels": 160
 }

@@ -201,12 +201,17 @@ a completed ordinary campaign or close the deferred physical scenarios.
 | L53-01 | 53 | Native drawn gallery: all six roles, seven primary clips plus five additional knight clips, eight directions, pause/step/restart and floors at1080p/1440p/4K. | Readable face/gloves/gear, natural movement, ground pivots, no clipping; explicitly review mirrored costume/weapon handedness. | NOT_RUN |
 | L54-01 | 54 | Ordinary battle: neutral/near-enemy guard, movement, attack anticipation/impact/recovery, hit/death, interruption/reset/reload and normal victory/defeat. | Complete timings and final corpse hold, correct aim/grips/feet/sorting, no stuck input; resolver unchanged. | NOT_RUN |
 | L54-02 | 54 | Campaign equip sword/bow and restart; ordinary expedition battle/return/settlement with the replaced subset and remaining old families. | Correct weapon-selected profiles, unchanged saves/ownership/costs/rewards and coherent portraits/world/UI; close and audit log. | NOT_RUN |
-
 | L55-V01 | 55 | User reviews idle contact, rear shield interior and stronger/slower bow draw in focused before/after preview. | Corrections match requested appearance and motion. | PASS_USER_REPORTED2026-11-03: explicitly approves the corrections, "Tak ma byc". |
+| L56-01 | 56 | User plays Painted Six - Old Mine with four allies versus four AI opponents to ordinary victory; uses every allied role and observes enemy axe/spear. | Board-scale identity/gear/grips, planted idle feet, neutral/ready/walk, bow anticipation/impact/recovery, hit/death, crowd sorting and unlocked input. No Debug Win. | PARTIAL_USER_REPORTED_WITH_DEFECTS2026-11-03: movement too slow, warrior north stance too narrow and sword too exposed; remaining animation/movement looks okay. Terminal result not reported. Corrections in stage57 await retest. |
+| L56-02 | 56 | Reload same encounter, end allied turns and let ordinary AI cause defeat; reload again. | Complete deaths, real defeat, eight actors restored, no stale damage/input lock; campaign save unaffected. | NOT_RUN; automated full defeat/reset PASS only. |
+| L57-01 | 57 | Retest six-role battle with2x walk cadence/travel and warrior/north wider stance/occluded held sword; review native before/after samples. | Brisk natural movement without new sliding, planted idle feet, coherent rear sword/shield/legs and attack transition. | PARTIAL_USER_REPORTED_WITH_DEFECTS2026-11-03: root travel faster but foot cycling frantic; two-handed swordsman combat stance still narrow and neutral sword should be lowered. Cadence superseded by58; no terminal result. |
+| L58-01 | 58 | Retest800ms/160px gait at unchanged200px/s root speed and new knight neutral/combat standing/neutral walking in all views. | Natural cadence relative to travel, planted broad/staggered guard A, lowered held neutral sword and coherent transitions. | USER_REJECTED_AND_ROLLED_BACK2026-11-03: blurred model and unwanted posture; user requests exact previous version and stopping. Stage59 restores pre58, no new iteration. |
+| L60-01 | 60 | New authorized neutral standing pose based on shield-warrior native pixels, plus1000ms/160px gait at160px/s; direct reference and normal-speed battle. | Sharp original head/boots, lowered held sword, planted neutral breathing, calm cadence relative to travel and unchanged combat appearance. | PASS_USER_REPORTED_FOR_NOW2026-11-03: "na ta chwile zatwierdzam"; future art/motion polish requested, publication to game repo authorized. No terminal/campaign result reported. |
 
 ## Results and defects (continued)
 
-No live session started. Add observed results per scenario here, link screenshots
-or logs when available, and record any defect's owner/slice/fix/retest evidence.
+User supplied partial battle feedback in L56-01 and L57-01; no terminal result is
+reported. Add further observed results per scenario here, link screenshots/logs
+when available and record each defect's owner/slice/fix/retest evidence.
 Future stage specs may refine their scenarios before implementation; keep this
 registry synchronized without erasing failed attempts or marking unplayed cases.

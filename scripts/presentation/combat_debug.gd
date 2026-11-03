@@ -248,6 +248,12 @@ func _ready() -> void:
 	if authoring_draft.is_empty() and _run_session().has_pending_combat_launch():
 		current_encounter_path = _run_session().combat_encounter_path()
 		selected_scenario_id = "dungeon_launch"
+	elif authoring_draft.is_empty():
+		var requested_scenario := str(ProjectSettings.get_setting("debug/qa/combat_scenario", ""))
+		var requested_path := CombatScenarioCatalog.path_for_id(requested_scenario)
+		if requested_path != "":
+			current_encounter_path = requested_path
+			selected_scenario_id = requested_scenario
 	_reset_debug_encounter()
 	battle_chrome = BattleChrome.new()
 	battle_chrome.setup(self)
@@ -323,6 +329,8 @@ func _input(event: InputEvent) -> void:
 
 func _render() -> void:
 	%TitleLabel.text = "Ash-road Raiders" if str(state.get("id", "")) == "ash_road_raiders" else "Old Mine Skirmish"
+	if str(state.get("id", "")) == "drawn_roster_skirmish":
+		%TitleLabel.text = "Painted Six - Old Mine"
 	_render_grid()
 	_render_units()
 

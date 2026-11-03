@@ -1,0 +1,67 @@
+{
+  "title": "Rycerz · miecz dwuręczny",
+  "body_scale": true,
+  "cleanup_neon": true,
+  "walk_stride_pixels": 160,
+  "sheets": {
+    "stances58": {
+      "cols": 4,
+      "rows": 5
+    },
+    "neutral_carry58": {
+      "cols": 4,
+      "rows": 10,
+      "alpha_floor": 96
+    }
+  },
+  "clips": [
+    {
+      "id": "neutral_idle",
+      "title": "Spoczynek",
+      "mode": "neutral",
+      "sheet": "stances58",
+      "start": 17,
+      "indices": [
+        17,
+        17,
+        18,
+        18
+      ],
+      "reference_index": 17,
+      "count": 4,
+      "durations": 250,
+      "loop": true,
+      "resample": "nearest"
+    },
+    {
+      "id": "combat_idle",
+      "title": "Gotowość bojowa A",
+      "mode": "combat",
+      "sheet": "stances58",
+      "start": 19,
+      "indices": [
+        19,
+        19,
+        20,
+        20
+      ],
+      "reference_index": 17,
+      "count": 4,
+      "durations": 250,
+      "loop": true,
+      "resample": "nearest"
+    },
+    {
+      "id": "neutral_walk",
+      "title": "Chód spokojny",
+      "mode": "neutral",
+      "sheet": "neutral_carry58",
+      "start": 33,
+      "count": 8,
+      "durations": 100,
+      "loop": true,
+      "align_head": true,
+      "resample": "nearest"
+    }
+  ]
+}

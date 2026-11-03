@@ -111,7 +111,9 @@
   "earlier_source_identities_preserved": 119,
   "offline_player": "3579 deterministic timing/canvas checks PASS",
   "native_summaries": {
-    "runtime": "Drawn animation: 7368 checks, 0 failures",
+    "import": "Godot asset import PASS",
+    "runtime": "Drawn animation: 7386 checks, 0 failures",
+    "battle": "Drawn battle review: 313 checks, 0 failures",
     "original_roster": "Original roster: 15679 checks, 0 failures",
     "lifecycle": "combat_animation_lifecycle_tests: OK",
     "equipment": "Equipment appearance: 31 checks, 0 failures",
@@ -126,7 +128,7 @@
   "continuous_motion_observed_by_agent": false,
   "desktop_input_used": false,
   "browser_render": "NOT_RUN: browser access host unavailable",
-  "physical_scenarios": "61 earlier cases and L53-01/L54-01/L54-02 remain NOT_RUN",
+  "physical_scenarios": "61 earlier cases and L53-01/L54-01/L54-02 remain NOT_RUN; L56-01 partial with defects; L56-02/L57-01 NOT_RUN; L60-01 temporary user acceptance; terminal cases unreported",
   "refinements": {
     "status": "TECHNICAL_PASS_USER_ACCEPTED_PREVIEW",
     "corrected_idle_clips": 96,
@@ -144,5 +146,35 @@
     "before_after_samples": 125,
     "preview": "refinements/preview.html",
     "user_acceptance": "USER_ACCEPTED_PREVIEW_2026-11-03"
+  },
+  "battle_feedback": {
+    "status": "TECHNICAL_PASS_AWAITING_USER_RETEST",
+    "walk_clips": 96,
+    "walk_cycle_ms": 400,
+    "stride_pixels": 80,
+    "baseline_files_preserved": 313,
+    "changed_runtime_pngs": 36,
+    "unchanged_runtime_pngs": 2268,
+    "north_warrior_death": "BYTE_IDENTICAL_SOURCE_AND_EXPORTS",
+    "preview": "refinements/battle_feedback/preview.html",
+    "visual_retest": "NOT_RUN",
+    "user_feedback": "Stage56 partial: slow movement, narrow rear stance, exposed sword; other animation positive"
+  },
+  "motion_balance": {
+    "status": "USER_REJECTED_ROLLED_BACK",
+    "restored_baseline_files": 861,
+    "runtime_pngs_match_pre58": 2304,
+    "further_iteration_authorized": false
+  },
+  "native_neutral": {
+    "status": "TECHNICAL_PASS_USER_ACCEPTED_FOR_NOW",
+    "gait_cycle_ms": 1000,
+    "stride_pixels": 160,
+    "root_pixels_per_second": 160,
+    "changed_runtime_pngs": 24,
+    "head_boot_pixels": "EXACT_NATIVE",
+    "walking_and_combat_art": "UNCHANGED",
+    "preview": "refinements/native_neutral/preview.html",
+    "visual_acceptance": "USER_ACCEPTED_FOR_NOW"
   }
 }
