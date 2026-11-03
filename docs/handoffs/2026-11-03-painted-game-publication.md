@@ -6,9 +6,11 @@ deferred for a later user-authorized pass. Decision source:
 assets_src/characters/drawn_animation/2026-11-03/refinements/native_neutral/user_acceptance.json.
 
 Repository https://github.com/KarolBautrel/game-sdd, default branch master.
-Publication is authorized; source/author/remote audit completed before commit.
-The publication receipt in docs/qa/2026-11-03-painted-battle-publication.md will
-record the verified pushed source commit. No rewrite/force push or workshop release.
+PUBLISHED source checkpoint a9fbcfb279cfa834164d535e58b8f90e15b5030f on origin/master;
+565 new LFS objects/94MB uploaded. Remote ref and GitHub-linked author/committer
+KarolBautrel verified; post-push LFS dry-run has no pending objects. Read the
+receipt docs/qa/2026-11-03-painted-battle-publication.md. No rewrite/force push or
+workshop release. A documentation receipt follows the source checkpoint.
 
 Accepted current state: six painted roles, isolated eight-actor Painted Six review
 encounter and direct -CombatScenario launch; warrior/north shield/sword correction;

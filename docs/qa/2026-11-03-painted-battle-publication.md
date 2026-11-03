@@ -26,4 +26,17 @@ LFS pointer objects. Every indexed LFS size/SHA256 matches its working file.
 Audited change set is limited to the discussed stages56..60 and source/archives.
 Ignored audit logs: artifacts/painted-publication/index-audit.json and stage.log.
 
-Publication verification is recorded below after the ordinary master push.
+## Verified publication
+
+Source checkpoint a9fbcfb279cfa834164d535e58b8f90e15b5030f is published on
+origin/master: https://github.com/KarolBautrel/game-sdd/commit/a9fbcfb279cfa834164d535e58b8f90e15b5030f.
+Ordinary push succeeded from ec10c539;565 new LFS objects/94MB uploaded. Git
+ls-remote confirms that source SHA on refs/heads/master. GitHub's commit API
+confirms author and committer login KarolBautrel. Post-push LFS dry-run reports no
+pending objects; working tree is clean after the source push. This receipt is
+recorded in a follow-up documentation commit on the same branch.
+
+Current art/motion stays USER_ACCEPTED_FOR_NOW. Future polish is recorded, but
+there is no new active art iteration. Next-step advice is identity/weapon agreement
+with one hero/two loadouts and equip→battle→return proof, then remaining early
+humans and a separate creature pilot. No additional implementation is authorized.

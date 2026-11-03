@@ -132,3 +132,11 @@ posture/locomotion polish item; do not iterate further now. Rejected58 and open
 terminal/campaign cases remain distinct. Suggested next scope is the character
 identity/weapon contract before the remaining human roster, then a creature pilot;
 this is advice, not a newly authorized implementation batch.
+
+Publication completed: accepted source checkpointa9fbcfb279cfa834164d535e58b8f90e15b5030f
+on origin/master,565 new LFS objects/94MB, exact pointer/file audit1794paths/1320
+unique LFS pointer objects PASS. Remote ref and GitHub KarolBautrel attribution
+verified; no pending LFS objects. Source/validator/player checks PASS before commit;
+receipt at docs/qa/2026-11-03-painted-battle-publication.md. Current version stays
+USER_ACCEPTED_FOR_NOW; character identity/weapon work is the next recommendation,
+not an authorized new production batch. A documentation receipt follows the source.

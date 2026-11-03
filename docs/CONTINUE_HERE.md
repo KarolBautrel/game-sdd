@@ -9,8 +9,9 @@ when the user has only requested an explanation or plan.
 Latest active-task handoff:
 [accepted checkpoint and publication](handoffs/2026-11-03-painted-game-publication.md).
 User accepts stage60 FOR NOW and requests the accepted work in the main game repo.
-Publication target is default master; see the handoff/publication receipt for
-commit verification. Future posture/locomotion polish is deferred, not an active
+Published source checkpoint a9fbcfb279cfa834164d535e58b8f90e15b5030f on default
+master;565 new LFS objects/94MB uploaded, remote ref/author verified. See the
+handoff/publication receipt. Future posture/locomotion polish is deferred, not an active
 art task. L60-01 PASS_USER_REPORTED_FOR_NOW; terminal/campaign cases remain open.
 Next proposed scope is identity/weapon agreement before more human roster work
 and a creature pilot; this is advice only, not authorized implementation.
