@@ -1,5 +1,20 @@
 # Reusable painted character workshop: published and installed
 
+Current package: English releasev1.0.1, commit52c91e090e2f3102683e6c1d39b198f92d825c9f.
+The user explicitly requests English across reusable packages. README, fixture/
+action/view labels, offline previews and release materials are translated; artwork,
+timing and exact prompts are unchanged. The installed skill is updated tov1.0.1.
+New ZIP:278files/51985974bytes, SHA256
+d196f394d3bb002be7d36fce8cc0486d7bf95352d8b6afb49baa32ec9f33d79f.
+All package/golden/player/Godot/official skill checks PASS again. The original
+v1.0.0 tag/archive below is retained as historical evidence.
+
+Current discussion: user asks whether to convert the full old roster. Suggested
+order: actual battle review of the six painted roles; weapon/identity contract;
+first-encounter human profiles; a separate creature motion pilot. This is advice,
+not an authorized new implementation queue. No additional character production
+has started after the accepted batch/workshop.
+
 User explicitly approved creating the proposed separate repository and publishing
 the reusable workflow. Completed2026-11-03. The active game remains on master;
 its accepted art/rendering/gameplay are unchanged by packaging.

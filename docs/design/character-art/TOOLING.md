@@ -2,7 +2,7 @@
 
 Current accepted painted2D workflow2026-11-03 is preserved in the separate
 [painted character workshop](https://github.com/KarolBautrel/painted-character-workshop),
-releasev1.0.0, and locally installed skill `$painted-tactical-characters`.
+English releasev1.0.1 (artwork baselinev1.0.0), and locally installed skill `$painted-tactical-characters`.
 Read [workshop handoff](../../handoffs/2026-11-03-painted-workshop.md) and
 presentation022. It includes style references, final edited Aseprite sources,
 raw sheets/prompts, portable scripts, native golden comparison and an optional

@@ -7,13 +7,18 @@ when the user has only requested an explanation or plan.
 ## Next-session entry: read this first
 
 Latest reusable-workflow handoff:
-[painted character workshop v1.0.0](handoffs/2026-11-03-painted-workshop.md).
+[painted character workshop v1.0.1](handoffs/2026-11-03-painted-workshop.md).
 User explicitly authorized creating/publishing the separate reusable package.
 It is now published at https://github.com/KarolBautrel/painted-character-workshop
-(private, default main, releasev1.0.0) and installed locally as
+(private, default main, English releasev1.0.1) and installed locally as
 `$painted-tactical-characters`. Package tests and an independent new-character
 forward test passed; the new hammer guard is a test candidate, not a game change.
 The approved game art and all outstanding physical-test scenarios are unchanged.
+The user requests English for reusable packages. Documentation, default labels,
+previews and current release materials are English; exact original prompts remain
+provenance. The user is discussing the next production scope; full-roster
+conversion has not been started. Suggested next step is actual battle review of
+the current six roles, then a small early-encounter human batch and creature pilot.
 
 Publication2026-11-03: user selects the accepted painted batch as the main game
 direction and explicitly requests all current work on the default branch. Active

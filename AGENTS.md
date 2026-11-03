@@ -125,7 +125,7 @@ For the accepted painted2D character/animation workflow, use
 `$painted-tactical-characters` when installed. Its user-level entry point is
 `~/.agents/skills/painted-tactical-characters/SKILL.md`. The reusable workshop is
 versioned at https://github.com/KarolBautrel/painted-character-workshop, baseline
-`v1.0.0`; it contains the approved style, edited Aseprite sources, raw prompts,
+`v1.0.0` artwork baseline / `v1.0.1` English package; it contains the approved style, edited Aseprite sources, raw prompts,
 portable export/idle/mirror tools and reproducible tests. See the
 `docs/handoffs/2026-11-03-painted-workshop.md` handoff for installation and scope.
 If the skill is unavailable, the in-repo fallback is
