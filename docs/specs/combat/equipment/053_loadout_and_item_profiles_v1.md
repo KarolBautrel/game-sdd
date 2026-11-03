@@ -16,6 +16,9 @@ This is the first step toward real inventory rules without building the full inv
   - `main_hand`;
   - `off_hand`;
   - `armor`.
+  - presentation010 also permits `helmet` and `boots`; their catalogue profiles
+    grant no actions or hidden combat bonuses. Existing legacy three-slot data
+    remains valid. Managed campaign handoff carries all five matching item slots.
 - An item profile defines:
   - item `id`;
   - equipment `slot`;

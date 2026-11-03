@@ -1,0 +1,22 @@
+{
+  "id": "skeleton_archer",
+  "resource": "res://assets/combat/models/skeleton_archer.glb",
+  "channels": [
+    "body",
+    "boots_default",
+    "weapon_bow",
+    "offhand_default"
+  ],
+  "actions": {
+    "bow": {
+      "pose": "bow_pose",
+      "walk": "bow_walk",
+      "combat": "bow_combat",
+      "hit": "bow_hit",
+      "death": "bow_death"
+    }
+  },
+  "default_weapon": "bow",
+  "hero": false,
+  "bones": 65
+}

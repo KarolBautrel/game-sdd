@@ -1,0 +1,22 @@
+{
+  "id": "goblin_atlas",
+  "resource": "res://assets/combat/models/goblin_atlas.glb",
+  "channels": [
+    "armor_default",
+    "body",
+    "boots_default",
+    "weapon_spear"
+  ],
+  "actions": {
+    "spear": {
+      "pose": "spear_pose",
+      "walk": "spear_walk",
+      "combat": "spear_combat",
+      "hit": "spear_hit",
+      "death": "spear_death"
+    }
+  },
+  "default_weapon": "spear",
+  "hero": false,
+  "bones": 65
+}

@@ -1,0 +1,1533 @@
+{
+  "schema": "sdd.original-character-v1",
+  "id": "ash_raider",
+  "status": "IMPLEMENTED_AWAITING_INTERACTIVE",
+  "user_visual_approval": false,
+  "source_reference_tool": "built-in image_gen",
+  "prompt": "PROMPT.txt",
+  "mesh_source": "original Blender builder, no visible mannequin",
+  "motion_license": "CC0-1.0",
+  "motion_source": "https://quaternius.itch.io/universal-animation-library",
+  "runtime_frame_count": 256,
+  "editable_sprites": 40,
+  "frame_size": [
+    448,
+    352
+  ],
+  "pivot": [
+    224,
+    266
+  ],
+  "files": [
+    {
+      "path": "assets_src/characters/ash_raider/reference.png",
+      "bytes": 1829104,
+      "sha256": "56e0c26ed382c472d7d8f58f35002baaff3624d628965c93498d12c279233be6"
+    },
+    {
+      "path": "assets_src/characters/ash_raider/textures/ash_raider_albedo.png",
+      "bytes": 1829104,
+      "sha256": "56e0c26ed382c472d7d8f58f35002baaff3624d628965c93498d12c279233be6"
+    },
+    {
+      "path": "assets_src/characters/ash_raider/ash_raider.blend",
+      "bytes": 1612911,
+      "sha256": "7781455e870393022aa68aef8b70c42f30834f97a067d2649c33688e50447724"
+    },
+    {
+      "path": "assets_src/characters/ash_raider/ash_raider.fbx",
+      "bytes": 1956684,
+      "sha256": "fc5838b36ae50c2c4005858d2ea19a1ecf1fdca8541e937d1c8ac5d76ad0f48d"
+    },
+    {
+      "path": "assets_src/characters/ash_raider/PROMPT.txt",
+      "bytes": 1570,
+      "sha256": "5a9cb4a38be97febd57c816c615cf748086cc20711d71b90466be4ea8bbfaf19"
+    },
+    {
+      "path": "assets_src/characters/ash_raider/model-manifest.json",
+      "bytes": 826,
+      "sha256": "fe4cdcbcb36e9b144c497e8071b481b9f125d3913ff49b94c234d62bb2731241"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_east_combat_000.png",
+      "bytes": 11653,
+      "sha256": "e3afe94c8c53e199f863ae2ef68b6aa1d99be2d644cc3d73005b342afd38b690"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_east_combat_001.png",
+      "bytes": 12457,
+      "sha256": "7dae57723ac541685ce2791675e5d1dcaeb14f51610d675465ced44c0288386b"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_east_combat_002.png",
+      "bytes": 11915,
+      "sha256": "9676bb75c35ec71de43109ddb975da236262efc5ec7b9e087e525ed8d6842756"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_east_combat_003.png",
+      "bytes": 11044,
+      "sha256": "b794bc3c095b9c9f89b86ccfae0501f929e66ce2da3a8c9b4d7613fa5c80f4af"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_east_combat_004.png",
+      "bytes": 12513,
+      "sha256": "19961da49dab3d1b8f87cedbfb459960bf9b108a7e5c83369b18b8b6d8a602b7"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_east_combat_005.png",
+      "bytes": 9684,
+      "sha256": "d0576a6bf59a8e57bc04faf5d3183ee13eb17d55c178428b3d0691e0366079b2"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_east_combat_006.png",
+      "bytes": 11699,
+      "sha256": "d15646dfbe39e4f622851c4e613fa1e64dcabea3a117d057f360ae29dc5cc733"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_east_combat_007.png",
+      "bytes": 11653,
+      "sha256": "e3afe94c8c53e199f863ae2ef68b6aa1d99be2d644cc3d73005b342afd38b690"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_combat_000.png",
+      "bytes": 10949,
+      "sha256": "d9084b4d2888b50db7467f38d48ce2c6a57b86e798ecf27bc36013223447dbfa"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_combat_001.png",
+      "bytes": 11584,
+      "sha256": "fe4dcaa393a53717ce7340e216212ff60777aca6fb6ee583f42a3449f04f79c9"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_combat_002.png",
+      "bytes": 9513,
+      "sha256": "ee789bdded0e1c084acb66035d3babeab562aec689be9f224c27d22c31a18f60"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_combat_003.png",
+      "bytes": 10719,
+      "sha256": "e5a9037f9f65cac87fa0fcadb7a31eb65d3e8f61b711ece9902525db7820fb08"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_combat_004.png",
+      "bytes": 9976,
+      "sha256": "02e1d7da38854b813ec2d64fdc22067986cfafb611f185006c1be0aeb2f3b4ef"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_combat_005.png",
+      "bytes": 11854,
+      "sha256": "579f4b5b4938819d4d35ae7dad8c23d07f7949e0dcf8a367fb9370218b6b2b59"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_combat_006.png",
+      "bytes": 10950,
+      "sha256": "203e88ba9bb99e39195802d1d15d0b4ad0329af204c668bd05b2bda3e95bae14"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_combat_007.png",
+      "bytes": 10949,
+      "sha256": "d9084b4d2888b50db7467f38d48ce2c6a57b86e798ecf27bc36013223447dbfa"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_east_combat_000.png",
+      "bytes": 9319,
+      "sha256": "f7db77c919f4865e77b987a6d1e05487f180beccd0b87a48fbb74d82612e8c5a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_east_combat_001.png",
+      "bytes": 9709,
+      "sha256": "043c3d1bb523032e143b7993796d1a41b025b0abfc758278da619e2f1fa5d835"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_east_combat_002.png",
+      "bytes": 11557,
+      "sha256": "29cb36b35759f4956df3c35b06dfb59d8e46f6322e031f946ca933f515069ed3"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_east_combat_003.png",
+      "bytes": 10584,
+      "sha256": "0d711a8a3899a5f49329b4b446584890f19631ebc456d2527d860c2b10cafc84"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_east_combat_004.png",
+      "bytes": 12113,
+      "sha256": "3b99b123ecc1bcd69387f1b160e508b7f92b66437b0cde2fc820a277aa81490d"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_east_combat_005.png",
+      "bytes": 11134,
+      "sha256": "096af9064257074de960a73fe1b2bc5184c5340b0de9971156d64a448b7a631b"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_east_combat_006.png",
+      "bytes": 9169,
+      "sha256": "8e8d6bdcc7f44dca13f709507b81a2616cb4bb6695635490a25114130a1afa5f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_east_combat_007.png",
+      "bytes": 9319,
+      "sha256": "f7db77c919f4865e77b987a6d1e05487f180beccd0b87a48fbb74d82612e8c5a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_west_combat_000.png",
+      "bytes": 12640,
+      "sha256": "c30142e7dec73dc0f67ef3f0a54155cc7f658c89fa6d818492b19997fd3c1447"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_west_combat_001.png",
+      "bytes": 12807,
+      "sha256": "5b15d7d14cf2452d9302bdf04890392e6ddec622701a657e6d297b9f7c15e94e"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_west_combat_002.png",
+      "bytes": 11170,
+      "sha256": "007fc33917c076152e7004bdfc09e7b0081c5ae4280fd7ded8b5ed6c7355dff7"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_west_combat_003.png",
+      "bytes": 12968,
+      "sha256": "ad4ba549b7230c25cadf2b616470c4d7095f40fcd30f3ed2830d0291394f19d3"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_west_combat_004.png",
+      "bytes": 10966,
+      "sha256": "7a96d6530e4f11433f0e70ba64810ccf41d51c1cf54063b408f695a257ccce68"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_west_combat_005.png",
+      "bytes": 11415,
+      "sha256": "4dc36ce86dea1cf8b3b9df5ccfa9d1f79c25660ad863a3ea319060a05ce70d6f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_west_combat_006.png",
+      "bytes": 12914,
+      "sha256": "cb990fff2050f86abf170cfde7be2410c8c8cd9cea7b1f52370abaf3c79f8211"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_north_west_combat_007.png",
+      "bytes": 12648,
+      "sha256": "7641033812080fa44a096f825b89ef71b538c72eb0ef50c052cd183483349ef0"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_combat_000.png",
+      "bytes": 10949,
+      "sha256": "78ba33590849249f69c7c916188a07c63085ea9545b990ebbe0d06a459898feb"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_combat_001.png",
+      "bytes": 11438,
+      "sha256": "30a5acbae4f42a36d602215bad41295f3ce94caa2031afe649252cc527f66731"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_combat_002.png",
+      "bytes": 9332,
+      "sha256": "e71b26de01f6bb670e7efe0504adc447519ef255b4c22f653c550debd3622b54"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_combat_003.png",
+      "bytes": 10274,
+      "sha256": "570eee93877595b06a7ac5ecdc5d0ae991d4abbf4f2c0ccb424cc4e48b8223c4"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_combat_004.png",
+      "bytes": 8805,
+      "sha256": "445d5e87dc950eb180ce74ec230fb6b50a08efe99f39c4efbb3cad0f1da966e1"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_combat_005.png",
+      "bytes": 12131,
+      "sha256": "93af51b9114aa0e2303e1e49b3a2ab1d83f72056124873d7de03d413a9f6bdb7"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_combat_006.png",
+      "bytes": 10928,
+      "sha256": "925fa3d0815c26b114692645ac29ade779394f2ceb0a9ee6db3b5dfb2fa2eaee"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_combat_007.png",
+      "bytes": 10949,
+      "sha256": "78ba33590849249f69c7c916188a07c63085ea9545b990ebbe0d06a459898feb"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_east_combat_000.png",
+      "bytes": 12451,
+      "sha256": "2374924796de2c86b806141b40a5c3a802326b30ac355ad5dfda5d67948bf38a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_east_combat_001.png",
+      "bytes": 13144,
+      "sha256": "d02aa48aa8f56e845fec4321a14684578b91164308f64be7c52f73800aae4568"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_east_combat_002.png",
+      "bytes": 11243,
+      "sha256": "98caa683e6a2a1a276ed862e42a1f25445c58fd7f52de99fa55e29dec084ae65"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_east_combat_003.png",
+      "bytes": 11502,
+      "sha256": "c0e1b0247f2fcb212a8b057ed5b7f9f49d1a4c5740aaf4294f3e672d8cb3eedb"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_east_combat_004.png",
+      "bytes": 11627,
+      "sha256": "ba37f5c3b822ccd2ae435163dd68b858c84f62bd9ec9aa3321880bfd111fdc28"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_east_combat_005.png",
+      "bytes": 12125,
+      "sha256": "5af6fa809357415c20cd315fdc4c499e35a0fe5ac0dfc493df10b4b4d8ee2811"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_east_combat_006.png",
+      "bytes": 12392,
+      "sha256": "290f7975bb3c05ef44bc63e30a93c98229b69894e725e87e9716711e13c24927"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_east_combat_007.png",
+      "bytes": 12451,
+      "sha256": "2374924796de2c86b806141b40a5c3a802326b30ac355ad5dfda5d67948bf38a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_west_combat_000.png",
+      "bytes": 9076,
+      "sha256": "97caa1204c22b71634a16abf1bca9cf5318ae62ae6328b7af03db733be5f5057"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_west_combat_001.png",
+      "bytes": 10592,
+      "sha256": "d107d4881c6b43ba0182c4c7a7d0fb782fbf00851e3fd9e42f58248544364eb4"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_west_combat_002.png",
+      "bytes": 12195,
+      "sha256": "e55c63cf4447f73151c09a79224d6facb1bcd4acaad159dabd1fc7aefc4658b4"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_west_combat_003.png",
+      "bytes": 10274,
+      "sha256": "52217e9eb2d7cdba40f27f0124d8b3065c64b48e567bd44cc2beb4484303ff8b"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_west_combat_004.png",
+      "bytes": 12322,
+      "sha256": "7f289d07635a2ae2b28b16f76a64912beee7f101ccfc9d4c8d83f076d2d7a14e"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_west_combat_005.png",
+      "bytes": 11171,
+      "sha256": "4d1272470a2c8da97d5748594b7df91eb76f3f125beee2c23320a8476d24f0f6"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_west_combat_006.png",
+      "bytes": 9141,
+      "sha256": "f5fa59f55ec05c0fe856972770d50a174e67163c31de36bce0c32f47d538e879"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_south_west_combat_007.png",
+      "bytes": 9076,
+      "sha256": "97caa1204c22b71634a16abf1bca9cf5318ae62ae6328b7af03db733be5f5057"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_west_combat_000.png",
+      "bytes": 12470,
+      "sha256": "f8259a385d8a82ae827f2547f736d32d0caaaf7c8dc6c75a29c3fcb012717fb3"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_west_combat_001.png",
+      "bytes": 13147,
+      "sha256": "97a47f2c966f060faa8ab9ebee0574901629feefaa46332bfc92c264fe02ec00"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_west_combat_002.png",
+      "bytes": 13111,
+      "sha256": "722431e89f7a4c01e2b16900f4921f6c9cdf9b671d51ffb126e831e5b6394d99"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_west_combat_003.png",
+      "bytes": 12173,
+      "sha256": "ec3ad3b6b5ca5a01ee3035d523f14a762f5fc8bad388c9217bbbef53f7755483"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_west_combat_004.png",
+      "bytes": 13549,
+      "sha256": "b75d5248495cb3e95821789a98c12ecba4668f8643ed197ad2f5f31dc0453d6c"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_west_combat_005.png",
+      "bytes": 9220,
+      "sha256": "634645789117edabb6602497aca88c604aa969f5dd3f2f75bc6435651d80f5de"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_west_combat_006.png",
+      "bytes": 12573,
+      "sha256": "3c500d87738c4d2dda53a35cda43a1d2cd3dd0c3331b66a96a1c2407ee37d6bb"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/combat/ash_raider_west_combat_007.png",
+      "bytes": 12473,
+      "sha256": "4ee0f00283ff2a21c154f9102cea993f459589f3de47619efc60e8fed7a65c99"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_east_death_000.png",
+      "bytes": 9659,
+      "sha256": "4eea8d0f108c897fbf8a3c84c173d7b1420a8a5733c4e33fecf7612648cce4d6"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_east_death_001.png",
+      "bytes": 10294,
+      "sha256": "b78ef4af31c85f44a2e91e1008c3ecc3e4c24a61680a94ac136084ce7ef8ca7d"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_east_death_002.png",
+      "bytes": 10274,
+      "sha256": "49caa7291f2993704bafccf93dcc27a57b49b23d665a0b3bd027a0a3931ef613"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_east_death_003.png",
+      "bytes": 10478,
+      "sha256": "eda88973f6073431c08f516b12696db4ec3072afd9792e4542297cbd9657cdc3"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_east_death_004.png",
+      "bytes": 9800,
+      "sha256": "3a8ff5ff988e06834e27762a944d9fbd44d2256349d80211b1af6bdb9e813292"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_east_death_005.png",
+      "bytes": 10558,
+      "sha256": "8cd4efb597b7a0421c4d9e914d109b075d3cc8659cd5331f5753ca6060dc284d"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_east_death_006.png",
+      "bytes": 10587,
+      "sha256": "f8377689c141aba6323de6823737cc3b904e78ccfac4c92b17076350a9180ec8"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_east_death_007.png",
+      "bytes": 10557,
+      "sha256": "02823b7ed6a7e0b1c41ae36f203f1de21227d3c647f2d4f183ee216c01f34e31"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_death_000.png",
+      "bytes": 11865,
+      "sha256": "2d5f946889a5fc6c161844a13aa9a971d70838f005e224471a435005cc9f5cf4"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_death_001.png",
+      "bytes": 11609,
+      "sha256": "75a4e04906a9735c9128d3bd5f1db37fdd9cb3adcd51dbf80840c510ae7a9e6c"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_death_002.png",
+      "bytes": 10174,
+      "sha256": "a9679cf721c03a12409502fc61b75879f85617ddda2f4af3b81c15e2af679a05"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_death_003.png",
+      "bytes": 8249,
+      "sha256": "f7bb7d8c5bca5ad47e594eb756127427703c12d9f9e74d48c1c9e0e84e9c9567"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_death_004.png",
+      "bytes": 10365,
+      "sha256": "5392c8f64fc4f18b59871afc24ab5ca5b1890f149774aa05c8e366b0b7992f06"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_death_005.png",
+      "bytes": 10139,
+      "sha256": "096fcc5a3d301ac7c2708f6dd5748953460b612cc194319d8dd09e7ceaaf044f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_death_006.png",
+      "bytes": 10113,
+      "sha256": "b99821973739af65e04aaf61396a2d273c436e57633b71ec0f8355fccdfe36f1"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_death_007.png",
+      "bytes": 10118,
+      "sha256": "fc7f907477bae17500b79acea607249510b25a96f91d6b548f080da922a511e9"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_east_death_000.png",
+      "bytes": 9511,
+      "sha256": "9b2ffec3d9184547defc6ff83c9ae4920a7905d146cafb41174dc1140098ea56"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_east_death_001.png",
+      "bytes": 9423,
+      "sha256": "cf7de83b08f913f0efbbc1cd595b5eae951f04a2e9b6334d67c9952913058fe0"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_east_death_002.png",
+      "bytes": 9335,
+      "sha256": "63539e72e5443c2e65aaf598034505756bfd88e7d83eb29bda0d8a7839ea23f8"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_east_death_003.png",
+      "bytes": 9913,
+      "sha256": "5076e88ec4ae6d1421404955ffbad51765d6f81c418b580a378752e1cf188298"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_east_death_004.png",
+      "bytes": 10533,
+      "sha256": "999876040cb3949bcbfcf54464ae24eb5c6878ee61e0726d7aa7463f52fc293e"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_east_death_005.png",
+      "bytes": 11092,
+      "sha256": "2c24a14abd3dab5e79ef9aa1f483624d9d4c77a88c27955604e2eff4865fa05e"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_east_death_006.png",
+      "bytes": 11399,
+      "sha256": "6b3df81118978443a453edf5766f2ff4f2a4c5bdcb57e81828b14ac75ddad1d2"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_east_death_007.png",
+      "bytes": 11396,
+      "sha256": "036668497550a69f3229ec18dc4f8d3f61aa8441c7e8d9a4ef2efa7b75d1ba81"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_west_death_000.png",
+      "bytes": 11697,
+      "sha256": "4a818a6766cfdaeadc7d72587e6a561fe5293d2b5bf71dda8528117972302f36"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_west_death_001.png",
+      "bytes": 11538,
+      "sha256": "0ff5b008ce9ee93ef9480819eeb6a9cb85354958fe63a018b42f23ed9c1a2d95"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_west_death_002.png",
+      "bytes": 9910,
+      "sha256": "f169194ef763b8e744338fa630bad4603a8414e087d25203adeb0e41ee3c5eb6"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_west_death_003.png",
+      "bytes": 10417,
+      "sha256": "a288835540b1806fcb6ff69e9ff96f66b4af6175c9cd685dc12e0bc16386980a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_west_death_004.png",
+      "bytes": 12600,
+      "sha256": "cd909bb145b6f51721d3562a68dd67bed79cd40ebdd2f600c9e77fedfe0a4a01"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_west_death_005.png",
+      "bytes": 12094,
+      "sha256": "d256819a72a42117c8d7601360b9dee23e4637b4b40e20a986c0573171e29d34"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_west_death_006.png",
+      "bytes": 12209,
+      "sha256": "a3fcdec4accf9e144858ea58f5fe2622e0b5688ead37e6ca94934bc6e0dde55a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_north_west_death_007.png",
+      "bytes": 12184,
+      "sha256": "ad542e76829160c23a3b58a9e62eec07460f1cf4fbcd97309ed1f9532d82052f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_death_000.png",
+      "bytes": 11441,
+      "sha256": "6a0fbdc25ebde33ce2f3339c267995bea6abfca7e52747154e4c1cb1fd588e52"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_death_001.png",
+      "bytes": 11400,
+      "sha256": "b5ca780eab1fc254391eaa1584fa6d28462519d10c8b87288a0e40924369630a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_death_002.png",
+      "bytes": 11693,
+      "sha256": "45bb2bcbbceecd0f90c6092b14d5a408a557132a06aa7539f2e615d892b45b9c"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_death_003.png",
+      "bytes": 10601,
+      "sha256": "ff4552302d86df7d733377205d7e745061225fdebfa6aa49d82c2bf4eb396692"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_death_004.png",
+      "bytes": 9617,
+      "sha256": "e6d69565e89fd81e2c650fc319dd37b64ea809ffdb1d733d18461236af3131ed"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_death_005.png",
+      "bytes": 10083,
+      "sha256": "e04276d2f9812f7da38c9fcc79c49a3dca2cf8959523deba36f382e38e470a59"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_death_006.png",
+      "bytes": 10028,
+      "sha256": "ec901fdb1f80c13b8aa2ed3d0652653a95da91b9e32f641285946039ac8ce152"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_death_007.png",
+      "bytes": 10008,
+      "sha256": "284650ef05542ea6141d9c0e0345eb95df6a4c008fc0f11018693ff462be9781"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_east_death_000.png",
+      "bytes": 11294,
+      "sha256": "a3cd6d76205d488c2b390bd7af4eadd19c487af5576c21fc969b118d99a9b332"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_east_death_001.png",
+      "bytes": 11884,
+      "sha256": "566c2eb8a86a5f9860329a94255c252f8934eb849add710ac1d3621cd9013d52"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_east_death_002.png",
+      "bytes": 11890,
+      "sha256": "6ed020dddccff6a0e70185a9d8c05029518c11d29620e2d0a82536c53adc9585"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_east_death_003.png",
+      "bytes": 11219,
+      "sha256": "d4850fb79b3324fadc84a07bd7ff025dc7f71a6d3398b558ab1eebc60180d253"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_east_death_004.png",
+      "bytes": 9688,
+      "sha256": "b239f10b56b6f1eb52f7560ba4d71fc0c744421b439b780399cd6d45f005dfd6"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_east_death_005.png",
+      "bytes": 10451,
+      "sha256": "db4b98731d2cb98a5440707429342e09467c196691916c11190b2d85c72b9359"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_east_death_006.png",
+      "bytes": 10502,
+      "sha256": "0c5111e1847dd2f341aa9983329626797165ca7702be529dcf989115715b4629"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_east_death_007.png",
+      "bytes": 10468,
+      "sha256": "d7fd5a60403581cd176e29d6559a29a0a19fe26f082822916550fd96e0840be2"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_west_death_000.png",
+      "bytes": 9652,
+      "sha256": "026168eb3434383c0f2a8e0881b15f445ef4cf3b943b81a741beb8e4acc2da9d"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_west_death_001.png",
+      "bytes": 9351,
+      "sha256": "4df6273e91501b1977a14a0791587528e3670163d4ec1c18035b974e8728b24a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_west_death_002.png",
+      "bytes": 9935,
+      "sha256": "fdbb3f2ad1325f1251ff34b8865d064b930da17e5bb9d5209dd5b86412096c8a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_west_death_003.png",
+      "bytes": 11495,
+      "sha256": "b50d4487c9d1f401b8e0459f32a5088b784eb48d20634c538b35719e68643437"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_west_death_004.png",
+      "bytes": 11195,
+      "sha256": "52044b4646684e571f17a1a53976c1147917fb3d0c5cf0fa6b10b4339ddf5184"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_west_death_005.png",
+      "bytes": 11323,
+      "sha256": "b5608b90bb2f14aabd7624d17306d9ae68637ed1af25e0afd8ee7dcdc5f4ed99"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_west_death_006.png",
+      "bytes": 11278,
+      "sha256": "57fb00460ddc8cbdfda499f9f23fd09be9bb6acd57a0779e1bcd939b8688ae1a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_south_west_death_007.png",
+      "bytes": 11394,
+      "sha256": "ce53d201c5d3e795bb9d6631c996914c0c357e6d2e95c238f79226d0a0899f39"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_west_death_000.png",
+      "bytes": 9694,
+      "sha256": "fa7bd2e557ddd7a3ea82b831c26b22e767a77670d2dfc6d340ebbccf3995dd73"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_west_death_001.png",
+      "bytes": 10051,
+      "sha256": "ea05ef064d352a82c08b54c6b196400f7223b76ace3ef3d86eb66d17daa41630"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_west_death_002.png",
+      "bytes": 9538,
+      "sha256": "811da9770966b3a158f8bd608252f469d823f804fe3899cfa0b6948ee0d0b291"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_west_death_003.png",
+      "bytes": 11029,
+      "sha256": "38c0355b4100d9e1b7baf13a32b7360cf30e712dbc4148dd449a3eca955fd282"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_west_death_004.png",
+      "bytes": 11756,
+      "sha256": "270a10f85fe2d02e801fdeca12f3dd46a9f55cde13d1c22e8e29331b2a2d38bc"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_west_death_005.png",
+      "bytes": 11579,
+      "sha256": "aba06f2b4af2d4c4397ae816e62a08bd9af4a5a0a841b5502ccbf886d07a6fea"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_west_death_006.png",
+      "bytes": 11571,
+      "sha256": "3dff49480015073c159f047a0c8addb28eff9387dbe37a9b8c2f673ba45f7350"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/death/ash_raider_west_death_007.png",
+      "bytes": 11571,
+      "sha256": "3dff49480015073c159f047a0c8addb28eff9387dbe37a9b8c2f673ba45f7350"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_east_hit_000.png",
+      "bytes": 10466,
+      "sha256": "92ea9b1bce38ad699e5f465cf5b71b203c15e81eee09fe0b40cff9235a316e66"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_east_hit_001.png",
+      "bytes": 10282,
+      "sha256": "05f8dca841b25bc20990f23a4dcb92456d8daaf71b0d52d1a89ecfcca7b5e4f7"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_east_hit_002.png",
+      "bytes": 9651,
+      "sha256": "2f869674f2cdd210159e38e99f4feeb2cd16ba74dc7dc5c7a612154d3928709a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_east_hit_003.png",
+      "bytes": 9653,
+      "sha256": "117e9510780fd270de2cc365d6d96f0855518ad61c9b592392e9f9f006e23b9f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_north_east_hit_000.png",
+      "bytes": 8097,
+      "sha256": "8dd6a4d9d9438564a6da585b9646a9018d264705361022f8b1117368fe2e0cad"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_north_east_hit_001.png",
+      "bytes": 8238,
+      "sha256": "000c08c75d136fb2d2d20d22d7808bbc92a3505594d4b9d40d0d1cff1c596e54"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_north_east_hit_002.png",
+      "bytes": 8940,
+      "sha256": "eec8f4408a7e0b36613d4d829abd1a055e05aab093ce368339d32eec851994dd"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_north_east_hit_003.png",
+      "bytes": 9355,
+      "sha256": "7c2c2cf6f3dcc84e65f73f7604d7ef1afcfcea2e370ced2fda35d3b04583a014"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_north_hit_000.png",
+      "bytes": 10008,
+      "sha256": "b3efc3957eb3a17b0bf5da8b24cda9f7ec5eb3bdf3957013fb0b09809bcafa3f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_north_hit_001.png",
+      "bytes": 10293,
+      "sha256": "e1c853ce207d45cb01ae802dad498ccc1385e287a6e3e10a814cd02cd80d5944"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_north_hit_002.png",
+      "bytes": 11208,
+      "sha256": "9d796e2539df16cbb8ec0273d9737499e295b005ec0fbbb73a6683557ce296a3"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_north_hit_003.png",
+      "bytes": 11736,
+      "sha256": "4caa7948709664a7bbe4a71a72abf95681f386d6ab129a27174fb30911f0d0f3"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_north_west_hit_000.png",
+      "bytes": 10484,
+      "sha256": "e31b2f9a897bb679022349d31037d00dd693f1c94842977cbfe20aa51c5ce621"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_north_west_hit_001.png",
+      "bytes": 10610,
+      "sha256": "14024419241f4cce3ef8f9677f81cb7fad56eb298ff3bf499fbbc0d0e3b84eea"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_north_west_hit_002.png",
+      "bytes": 11290,
+      "sha256": "97ebdc808896fd858702d6f22c8f509d8ef4a7ca7e7edb61895f6402f748519b"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_north_west_hit_003.png",
+      "bytes": 11754,
+      "sha256": "a581fa5b3a976260da9f6b5554b833008de1ddb0a9d02a42a281ffab568789cb"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_south_east_hit_000.png",
+      "bytes": 12863,
+      "sha256": "4f62d94d1143a2f199692ff6de040fcde694429096b3aa80813a24cfd0bed1f7"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_south_east_hit_001.png",
+      "bytes": 12834,
+      "sha256": "d716722d41aea00747ac0a7b9fb652894018ff3e951a4e232e90d1e31eafe349"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_south_east_hit_002.png",
+      "bytes": 11883,
+      "sha256": "ff5b82cdce45526eb486e3b3837ee5d40c699328cdae5bf82a8850a2376d8bfa"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_south_east_hit_003.png",
+      "bytes": 11640,
+      "sha256": "6006ac85367f1c37714dda72db653a483182154240d2b773babc4ec4d0a408d6"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_south_hit_000.png",
+      "bytes": 12302,
+      "sha256": "4848f6529bbcfc2a5f39d0fc72bbfa8ce98fc3cfc7e1d0f7cc60cbb2ad0f34ec"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_south_hit_001.png",
+      "bytes": 12289,
+      "sha256": "b9838485de4186ad7a2e43769059942ee0a6ee2a8b56658014fb5b9a35a4a39e"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_south_hit_002.png",
+      "bytes": 11911,
+      "sha256": "73048357b7e6500d2441f696a9c74acbba950098676abc28509bc77baf5ef247"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_south_hit_003.png",
+      "bytes": 11547,
+      "sha256": "c6cc05ae07162ec7f851efa0ad12f0793cffdc274bc5a01e3ac583ee716d37a4"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_south_west_hit_000.png",
+      "bytes": 10258,
+      "sha256": "158383285dd108d2f1280b0acd38e2fda53f73fcb7bf0aaf474b87cd011377a1"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_south_west_hit_001.png",
+      "bytes": 10152,
+      "sha256": "80ab5a020c98b07831830c2c4e8d6cc632560c5b08d39f955b8293fafde1fef6"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_south_west_hit_002.png",
+      "bytes": 9273,
+      "sha256": "cb6b0f4c81adde99bf05ca7259ec0e972a7080dcb35f67943da2897084f4883f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_south_west_hit_003.png",
+      "bytes": 9336,
+      "sha256": "d650347b49cf54889b64827bdd518069700824e849af2060d6b99d81d48adbbf"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_west_hit_000.png",
+      "bytes": 9717,
+      "sha256": "80adf259d606b8f00ff204673cd91f3b75d720d37190c444be61d5082da1a158"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_west_hit_001.png",
+      "bytes": 10106,
+      "sha256": "92e51d2b22f0fc31dae96fdb1411692e772656a1120b543e52db0b3f6fac8833"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_west_hit_002.png",
+      "bytes": 9545,
+      "sha256": "7267b507d9173aff5be422d8893d51167727de13756a0a8128178bb889705f9e"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/hit/ash_raider_west_hit_003.png",
+      "bytes": 10160,
+      "sha256": "0358cfd2b7571da9e68b4046887d9db830e063ae3c32469a0cd60d199f03b99d"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_east_pose_000.png",
+      "bytes": 11770,
+      "sha256": "74187c07dea10d180293349e2ec922a436538b6c35a32ff05175fdabce0318ec"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_east_pose_001.png",
+      "bytes": 11980,
+      "sha256": "8c55fc35ae7d936faf24897159ff21b64ed613a8c2cf20aaaf6ac72849c925f1"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_east_pose_002.png",
+      "bytes": 11691,
+      "sha256": "ebd03f93314dfe3bd94f7c0ae0dcc7ba74deb5f950a0d725f27be7246eeaa5af"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_east_pose_003.png",
+      "bytes": 11986,
+      "sha256": "7152b3e3fb0390e7e911cbd724ada37a3d83d2a1edd3049a8eda9f518d54447e"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_north_east_pose_000.png",
+      "bytes": 9220,
+      "sha256": "d75dc9ad2e6ea7a16743d310e172ef2364a201cfad06ff0b9ee44af80203fe52"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_north_east_pose_001.png",
+      "bytes": 9232,
+      "sha256": "79453394cf9e3713f85d2c97a38505d7a4b34e7b322bd7b3e05beeed9d8fe03d"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_north_east_pose_002.png",
+      "bytes": 9070,
+      "sha256": "8750c938e7a61b160f1e39a1863f06c073ffcbb0f4b6582ad05196d84c3ca922"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_north_east_pose_003.png",
+      "bytes": 9337,
+      "sha256": "777287f787924696488caa3c93ae2c8f185c4f446cf2c21e923a23d289c9be15"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_north_pose_000.png",
+      "bytes": 10736,
+      "sha256": "6f407ae372a0ac778eabd642a33f13c0a2a644287158e6da1caff4a5412dfebc"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_north_pose_001.png",
+      "bytes": 10670,
+      "sha256": "14c1665ac6d8cef87054e91689d491dbbed867b08b6514b8a25b4cd5c8772217"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_north_pose_002.png",
+      "bytes": 10870,
+      "sha256": "1191adf76ac944b86fd68d2f42cc4c5fe5804edf40a7b3af47216f795d888d7f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_north_pose_003.png",
+      "bytes": 10603,
+      "sha256": "667b3f918a171d1396e8eafbc7c079151d5d72f9f7ed708ddb78933cbd36b812"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_north_west_pose_000.png",
+      "bytes": 12865,
+      "sha256": "bb9f8c0ea8fdcae1373e05120d0281a81d0c30c997dfd175ff2175b6b4878318"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_north_west_pose_001.png",
+      "bytes": 13032,
+      "sha256": "7ba343fbf364685533a94761821f654f2e6e06a0e4391289f623cc95e997e373"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_north_west_pose_002.png",
+      "bytes": 13036,
+      "sha256": "68136193e7675e0d4463dd3436f41ba5d21e2d36f5c514bcdfacb521c6114024"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_north_west_pose_003.png",
+      "bytes": 13032,
+      "sha256": "d5b33f6b2ecd327e2f6764fe2b0cf11322aa0ddfd80c8d42898679135f3cf845"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_south_east_pose_000.png",
+      "bytes": 12449,
+      "sha256": "08959a7b7648ac0ef5010a1e985b4f9f29b9abe237f83e0d973eac1299f97c31"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_south_east_pose_001.png",
+      "bytes": 12479,
+      "sha256": "1dd106e6bd7989fb6746a2f9f872fa8099c7d6cbb2f67f3626fb4d6ae3d72da3"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_south_east_pose_002.png",
+      "bytes": 12308,
+      "sha256": "4a71f2961fed5ffc78f208610e358ca294ec32b95fa2b3742ea232be4e5a918f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_south_east_pose_003.png",
+      "bytes": 12479,
+      "sha256": "1839085e01d20928a251687720b2ba3a8c824bb8dd63fcff4f4cf645a7963d2f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_south_pose_000.png",
+      "bytes": 10873,
+      "sha256": "218fa7bffef2b74f86df4c79430ae2cffca379db1a1ade8929f5e59a7e928405"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_south_pose_001.png",
+      "bytes": 10808,
+      "sha256": "84c474bd201226eaa2ba90ebc3082e899750513baece20a09cddff93801f328c"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_south_pose_002.png",
+      "bytes": 11097,
+      "sha256": "6101cd82627c80c3594cbc2026136869f9933e719aa0fe63571f4e799a1fb018"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_south_pose_003.png",
+      "bytes": 10791,
+      "sha256": "832d01577ebdd78803bcd414e7712c1e68d1727fe0dd977d9215ce4f52abe58b"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_south_west_pose_000.png",
+      "bytes": 9051,
+      "sha256": "c66d1e342f0da7af2cd8a7950bf110bf569c5fe0010d0430e21d5e31f1505b05"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_south_west_pose_001.png",
+      "bytes": 9106,
+      "sha256": "384098241518a9c727dccf59fc876da0fb9f7687d777b916715d3b8eeb42d3cb"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_south_west_pose_002.png",
+      "bytes": 9220,
+      "sha256": "cb80ec3a4a397e0e3b7a30dd40d6376af8348ad6e1b91e0791b638e9ebcf7a8f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_south_west_pose_003.png",
+      "bytes": 9200,
+      "sha256": "a22979995b756a6c583d5188a7a3e85cbf6283e9a28a8df3697ed0a1fb35f6db"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_west_pose_000.png",
+      "bytes": 12256,
+      "sha256": "b0c140157d5fe4e05cb674c7cee8b435e3dc049b7ea1f85d7b855c0f5ce853c6"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_west_pose_001.png",
+      "bytes": 12250,
+      "sha256": "a9b911aec549cde8189b29fc7c028800800c7bb0eeb241b88f54803b61144883"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_west_pose_002.png",
+      "bytes": 12298,
+      "sha256": "891f0f2e43b69e2a8c5178b98ba7d5d894cd712174b2bb20448805dfd3c05ce4"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/pose/ash_raider_west_pose_003.png",
+      "bytes": 12408,
+      "sha256": "7807fa07096d469b3e02cb71848ce378822fe21a5b33d1a750d253e4325e2a56"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_east_walk_000.png",
+      "bytes": 10124,
+      "sha256": "5f24ae04b99afcc7fa980bf5620be3bc5c405c27be873d54581abd45f4256598"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_east_walk_001.png",
+      "bytes": 9882,
+      "sha256": "641f94de942452777f7e3cff53ad19e12bf7191e51adf54edb386dd310117ef4"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_east_walk_002.png",
+      "bytes": 8446,
+      "sha256": "2951f8f35c5c1a4e2fa6572cc6726e2fe79bcdd38a8e84c71d702a4f766c25ad"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_east_walk_003.png",
+      "bytes": 9176,
+      "sha256": "1df846c5f8022ebd1cf2988605a0c15824bde71fd151cb71d31d85b7235792a6"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_east_walk_004.png",
+      "bytes": 9767,
+      "sha256": "3400ce7d519690ae363e4a52801104ecfdec18682c9338bc24dd8d10e33f7e68"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_east_walk_005.png",
+      "bytes": 9470,
+      "sha256": "77c36d9f4e9c2978f7d84825156884555f28b72034c8e17cbf085d48acbda837"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_east_walk_006.png",
+      "bytes": 8727,
+      "sha256": "5212d654ba1a1893393635857bb8988de35b2825187170cf2b758254ec592d8a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_east_walk_007.png",
+      "bytes": 9385,
+      "sha256": "4f230a0fc159ed850c7f513224d9b9b827b91c26d8df50c0d3331258f4523b4b"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_east_walk_000.png",
+      "bytes": 10821,
+      "sha256": "b4a1ba0a9518165d947b9d887804366b981ab0d902c0c393ce531af66d320bf8"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_east_walk_001.png",
+      "bytes": 10597,
+      "sha256": "f7ae8837e7dfd5aa475d00199d6e42b5700aa2998d5e2632b91f7ff60ce7aad4"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_east_walk_002.png",
+      "bytes": 9900,
+      "sha256": "d3e0513daa056880daba45b0267886e2ac9656a93ed68dea27d7d67476331d71"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_east_walk_003.png",
+      "bytes": 9926,
+      "sha256": "361c12cacdea5a2bf925c122ab7c1f45f05d5996f45fffc31146c41ec0a054b1"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_east_walk_004.png",
+      "bytes": 9948,
+      "sha256": "706ba08f9cf5c31757e4e6d736268ffd6a276bf5a2fff22d711c71d86c31743b"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_east_walk_005.png",
+      "bytes": 10090,
+      "sha256": "2a329ec928c6722c789754156ce71d551bacd7552ffaf5768f78acc0f9927c39"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_east_walk_006.png",
+      "bytes": 9796,
+      "sha256": "5000e2e361f4f060d6b7595c59afa31f5b27996d0e9a830c8a8f83ef9e019c5c"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_east_walk_007.png",
+      "bytes": 9646,
+      "sha256": "85ce4b3c5680cee31169ca118275f002cf6b6404445a08d4afa16ef5e1be452a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_walk_000.png",
+      "bytes": 10518,
+      "sha256": "d7888177bb3fa00082acc5ee1ad5472153994cfcecac1592f9ffabb74bc366d9"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_walk_001.png",
+      "bytes": 10838,
+      "sha256": "6d80f07fdb28b4b7a3233a77752bc50f4e52f22135b006857e00a709c17e9d43"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_walk_002.png",
+      "bytes": 10949,
+      "sha256": "ee968b7e214c5cf9a1f25d3490b3f209efb5571bd95f463ed937c44ff1fdb1fa"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_walk_003.png",
+      "bytes": 10812,
+      "sha256": "016eba51fd3a2fe9f690745c3f92b834e9c285776ec144443952179ff826aeff"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_walk_004.png",
+      "bytes": 10820,
+      "sha256": "c2add2fae2ef8fb3e044a1afa856f487b425d370396d5221a2f85622a2027762"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_walk_005.png",
+      "bytes": 11201,
+      "sha256": "090bc9281d7c29d8f1dbac55a9a3156d5d143aa5e4ac8a12d76365fb544e6f6c"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_walk_006.png",
+      "bytes": 11294,
+      "sha256": "382dda9ed2b0deb661aec2df7c2b8df8d622faad99fb81088c64fc9ea10536f7"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_walk_007.png",
+      "bytes": 10798,
+      "sha256": "39dc6372ff84812c1a15b2fbf7ef0f47450f47aae4705e1a2c69e7e744ce6e8c"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_west_walk_000.png",
+      "bytes": 10412,
+      "sha256": "92ea1015ac3077af6ccdde71c66e2a2765b7d7adb9e82ed62ca97e45125410bc"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_west_walk_001.png",
+      "bytes": 10471,
+      "sha256": "208d99aea1ada97f07e9b25b3c65662efdeda219d718aaaf7a306f3b95778eaa"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_west_walk_002.png",
+      "bytes": 10071,
+      "sha256": "2d4ad9081076db188ec5192d2370f79db4e94ca11e72640af35ca72e71fb0dd9"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_west_walk_003.png",
+      "bytes": 10194,
+      "sha256": "99be20a59e68e11a2575f4551e50af6c4e36e847106adb63ad1870de2c118b2a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_west_walk_004.png",
+      "bytes": 11212,
+      "sha256": "c12f30fd8346a13b84ab437c814ddb0e6ce122a5b97a2347683087138d2089e8"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_west_walk_005.png",
+      "bytes": 11347,
+      "sha256": "6c096feeb403e625e48fe1c2956b2c17928f566c8823ba49ab1765eb49b825fb"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_west_walk_006.png",
+      "bytes": 10237,
+      "sha256": "d442ae19a1bfa1cf540c60622d0956dd39fac5489d888dd0c47ddbd2d857e5ea"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_north_west_walk_007.png",
+      "bytes": 9961,
+      "sha256": "60b3a67a43000dd8ffda99d3dc1827f35fbcf16996e188fd6595dfd417e767e9"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_east_walk_000.png",
+      "bytes": 10421,
+      "sha256": "35c386829b0f6d525079f7d3eaca16464a4bdc1d5b60c6e58cf1a683a99aefaa"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_east_walk_001.png",
+      "bytes": 10178,
+      "sha256": "7c8cbfa6bebd7d0844502033389b8b5d6a6bc60976dbfc4cdc88588a50378efe"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_east_walk_002.png",
+      "bytes": 10094,
+      "sha256": "027abc41f50b723ee0eea5274bf7e3da761283276716cde8ca13fbb4e7a7fb9c"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_east_walk_003.png",
+      "bytes": 10523,
+      "sha256": "d493c1ebb4261f7011d50a788192095c9c05da8e245a312d7084e88384198fdc"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_east_walk_004.png",
+      "bytes": 10945,
+      "sha256": "dee04ba79012c7498f8dd33b9ca3c80e1913537ab62459208913ff7c63e7cd32"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_east_walk_005.png",
+      "bytes": 10802,
+      "sha256": "fcc1160994020cc4623c28bb71988ba3cf65618dedde0f9865a4d1821515ba7a"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_east_walk_006.png",
+      "bytes": 10067,
+      "sha256": "f4ca6b2b53206728bb9de4f1dbd27098f157b2c1c3c8803668fda2840efee0df"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_east_walk_007.png",
+      "bytes": 10344,
+      "sha256": "c09dbf65cbbc0eca4dd94fc9a958df71026cf0ac3d79dbecfa7ced06e1766a24"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_walk_000.png",
+      "bytes": 11653,
+      "sha256": "1124087912caa098ef70e001ad841bed6954ab1ebadc3c1bca810a6ad1e258a9"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_walk_001.png",
+      "bytes": 11429,
+      "sha256": "88c9e75cd566417f39f778f7ceeb0dc37ef4974d4c496117438c85bc8bad5293"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_walk_002.png",
+      "bytes": 11132,
+      "sha256": "4017f915509695525c4c10bbe5f4eb5f72e97580e5570ff53160d2c2b6e5548b"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_walk_003.png",
+      "bytes": 10826,
+      "sha256": "a065a7dd27e9ab809db18f16e85b437ef618f8060b96dadb9231365ddf16db2d"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_walk_004.png",
+      "bytes": 10628,
+      "sha256": "e5226df8fc89b04978c4272b479a58ec2894b6d7dddf625f56f2092b092e8aa1"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_walk_005.png",
+      "bytes": 10273,
+      "sha256": "1491dd529eb7c02acafb8e818f40a82c4881c26d05ac5a05e6027fb19ec12bfb"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_walk_006.png",
+      "bytes": 10568,
+      "sha256": "e10d14ce5b49a35caf37332dbead05bdb4a010e04c0c0bd3ba7a027f7f739b2e"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_walk_007.png",
+      "bytes": 11120,
+      "sha256": "701365298e63de19ba8e322192e40051d66abf743882a4f7288b799f3476014f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_west_walk_000.png",
+      "bytes": 11870,
+      "sha256": "2d26c885417b26774fac4dd07800524a6360e6dfd0cf2b5d09888648c0463ad3"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_west_walk_001.png",
+      "bytes": 11604,
+      "sha256": "d372263bf2458b7f5fd44c293e7ebe4685e698301fdc8d7a555c6ff9b3e50e72"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_west_walk_002.png",
+      "bytes": 9966,
+      "sha256": "7dffbf73ee63bd4287122132e554e724cfd9ea68df49949201c107c77da1202f"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_west_walk_003.png",
+      "bytes": 10215,
+      "sha256": "d029c15e958ae0dafcc7da5acda335b70ccf1ebf4eda8b7e31616b3fe5a0a2ee"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_west_walk_004.png",
+      "bytes": 9979,
+      "sha256": "b5cfa8a34b47261dd0854a3f650d364078db7bc305fd8c2b68cfa4295a7c934c"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_west_walk_005.png",
+      "bytes": 9755,
+      "sha256": "bfcd31751865501099c829365edba03558efb835339cbc2dc47002fee60bd3c3"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_west_walk_006.png",
+      "bytes": 9672,
+      "sha256": "2150303f16958c803ed02f1bca8510905bd4f2ace02370ae998ce948e9db81eb"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_south_west_walk_007.png",
+      "bytes": 10811,
+      "sha256": "856f1353f6a4b92778376be9e6a0de0164e9ce5a513395be9a35f8cb34486b6c"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_west_walk_000.png",
+      "bytes": 10828,
+      "sha256": "a84741645cb86c1253b597da99c5449f4ef84d2efbfd1bf149277b675622d7bb"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_west_walk_001.png",
+      "bytes": 10686,
+      "sha256": "cb0a54600d6830d919cf7e7a0bfb57fdf495643111e869e9961b72b5f129aa50"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_west_walk_002.png",
+      "bytes": 8976,
+      "sha256": "518030ce21a5aa64af42ad4b65364a46854310a775b3314878f10fefa9178bbf"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_west_walk_003.png",
+      "bytes": 9596,
+      "sha256": "450c38efe7ca2ad60157c0ae93020f7ef22c1f28a3bac8c85950cec023225503"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_west_walk_004.png",
+      "bytes": 9965,
+      "sha256": "7610262b8bd6c3f8e88e1a16032fbeb66906a78bd95d10d8526f7e33c3f62b66"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_west_walk_005.png",
+      "bytes": 9813,
+      "sha256": "e4557174c2a06be80e888259555d5a538d16a19a6677c98f5e3debf497316442"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_west_walk_006.png",
+      "bytes": 8630,
+      "sha256": "22e158f52135158c21fd1d02317c6771d5feb1c07e4781d9bfa5ec0bf658b37c"
+    },
+    {
+      "path": "assets/combat/characters/original/ash_raider/walk/ash_raider_west_walk_007.png",
+      "bytes": 9530,
+      "sha256": "5d947369c0910ea7dd4f3d693f5fff493b7720b844ff8795c27e471283883bd9"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/combat_east.aseprite",
+      "bytes": 84159,
+      "sha256": "0c0eb514616c4ca0a8e640d8f0e0f67c34ba6f4e78b9ec757b740c8c883ae34a"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/combat_north.aseprite",
+      "bytes": 79683,
+      "sha256": "2a01118726a90605ccf5b5eaf4385c6f88790979295d7f4862069aaee1b9e9d4"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/combat_north_east.aseprite",
+      "bytes": 75643,
+      "sha256": "9313a14369e5dc12b9256c9e510ede48d2c39f54409d791fc61d57a8c7be2eb7"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/combat_north_west.aseprite",
+      "bytes": 88800,
+      "sha256": "804ceac6f3a88c915a267834bf6864f3ad637e2c64644f985d526f59ddb6428b"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/combat_south.aseprite",
+      "bytes": 76866,
+      "sha256": "bacc8e9d2ee579f84b00f7b64138e21e5270747c6c29f05aea5f447b3098030c"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/combat_south_east.aseprite",
+      "bytes": 87468,
+      "sha256": "24b6fab13035ed968a0d4a93f064774a223154baf9598981943ebdacbef80369"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/combat_south_west.aseprite",
+      "bytes": 76907,
+      "sha256": "0812cdb06f4500d1bf362902e4fbb26ef0dbb9f996d8498fbab9be77cf2b9a9c"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/combat_west.aseprite",
+      "bytes": 90243,
+      "sha256": "55b3e48e3cae4283ff9a2138ffd1b76f47c12f1f6c02029d0c7cecc61a3a0dce"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/death_east.aseprite",
+      "bytes": 78213,
+      "sha256": "49908e320aa468ee8e2827d85356afb88258b2e1e92e064313ef80deea361016"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/death_north.aseprite",
+      "bytes": 76459,
+      "sha256": "7a6b9122e2656c2cad1dacdb32fd25eb19914b986f500cd772fabaf8d2062d61"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/death_north_east.aseprite",
+      "bytes": 75845,
+      "sha256": "01396db109c9980deea65d595a3b03426f2dc78189b11378484219313d60103b"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/death_north_west.aseprite",
+      "bytes": 86044,
+      "sha256": "fd651ac2d09359c901102f387fcc0a9731f184f4aa56137de4d11b837a475eed"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/death_south.aseprite",
+      "bytes": 78519,
+      "sha256": "dc8b9175d1c080a5cb681e5d46e2547c9e3ff8419bec7abb81a9d4b77ce74954"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/death_south_east.aseprite",
+      "bytes": 80504,
+      "sha256": "862cdb817a42a3e19e580e2a53e430ca1c5900ce76330d7f79da306cc949781c"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/death_south_west.aseprite",
+      "bytes": 78828,
+      "sha256": "90e50e1b508b3826ec7ce6b17c9f5399dae55d16e5c443e76f86495f6a1efa79"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/death_west.aseprite",
+      "bytes": 81853,
+      "sha256": "7db4f95f163f41121d89a13f537d696d82918649ed1d1a210d2feb24edcf13d1"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/hit_east.aseprite",
+      "bytes": 37606,
+      "sha256": "bb839c72d88a022d9b3cac87e15a7f1151ffe293ad953112916c3bf897a3e993"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/hit_north.aseprite",
+      "bytes": 40709,
+      "sha256": "469fb6ea1a3e50ad79623f3b0d15d8b3d53932982330c667303493b5b2517644"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/hit_north_east.aseprite",
+      "bytes": 33338,
+      "sha256": "a79af6dfee8e3064ba056c97199bf616f4e95d8438ecdde7c5117f312f390a56"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/hit_north_west.aseprite",
+      "bytes": 41445,
+      "sha256": "d1ec57d7e47d759d5803f288114daafcd69309fb6e527566fa0996ea73cf3410"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/hit_south.aseprite",
+      "bytes": 44868,
+      "sha256": "cfab3f2c7cf577ffee416e4e6dc945c50dbd01646a801a0714d6d38784507abf"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/hit_south_east.aseprite",
+      "bytes": 45567,
+      "sha256": "21d79ce77e7985ca367e3d4d6ee431ca1291edc12448c70119585ccc46039cc4"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/hit_south_west.aseprite",
+      "bytes": 36806,
+      "sha256": "979dbad981f545df07c9779220ee1f64de5484480c9c810c44b3ffdf3e9131b0"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/hit_west.aseprite",
+      "bytes": 36872,
+      "sha256": "764f86ea4f0c965fcff706c7ad38fc9342a8a60348bc04a158bfee0b540d31a5"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/pose_east.aseprite",
+      "bytes": 43231,
+      "sha256": "29ce623c92380563df0a5bbd9aac606d0411be1b443af73c0be685652137edac"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/pose_north.aseprite",
+      "bytes": 40767,
+      "sha256": "ad57341de4d54fbfaac318f729af1faa8c91f53e4055c167dcac673d696c837f"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/pose_north_east.aseprite",
+      "bytes": 34764,
+      "sha256": "bd14f62d113d1184d9c43a11c846dff50ec5ce9e617d9ed8ae6fad48e7f7647b"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/pose_north_west.aseprite",
+      "bytes": 47595,
+      "sha256": "00b9f15f517d06af64afa1f7897e70b2299e366dd5b4f1881f33b04047284b26"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/pose_south.aseprite",
+      "bytes": 39845,
+      "sha256": "8cd6ae2c3e4c0dd1e181b5cd01b8350db1c9434d5fd1e89bdda707711d41a177"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/pose_south_east.aseprite",
+      "bytes": 45258,
+      "sha256": "6f1c5050c462ae111cbea151ae15a640d4d3aa63ec8caecae407f814e81b3bb8"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/pose_south_west.aseprite",
+      "bytes": 34473,
+      "sha256": "e628a5175e3850cd20806b2ef058726ea2cd14ca437825503be2b06345011ffb"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/pose_west.aseprite",
+      "bytes": 45748,
+      "sha256": "2616637bb3459c9b715f415013f71f322a9d8f17327d004a45f344b95ea72233"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/walk_east.aseprite",
+      "bytes": 69353,
+      "sha256": "61b664b1d506800da8211154b5ead47476be261e485be006072a24d2e448623f"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/walk_north.aseprite",
+      "bytes": 82315,
+      "sha256": "3a7ceac51ac94d9eeba4f9e2c11fedd1350a372905f03ed06f763092d17027d4"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/walk_north_east.aseprite",
+      "bytes": 76293,
+      "sha256": "95d2a167cf93b474e7a871c9e75d57db4ff11373ca5a7958b94f73db80a10e9e"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/walk_north_west.aseprite",
+      "bytes": 78667,
+      "sha256": "d1a6cb29930ef388ffabf3516b48764b4a8f2f2b93dae655ad8947548c94ba3f"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/walk_south.aseprite",
+      "bytes": 81311,
+      "sha256": "071e3b0d3e604fc2243f5d19ef601ea27388d03195e313fa9daece994e7067b8"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/walk_south_east.aseprite",
+      "bytes": 76593,
+      "sha256": "6e316a7d4f10c9de5d38030f449e930e2018baf829b095db80c3e267aaf1318c"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/walk_south_west.aseprite",
+      "bytes": 77576,
+      "sha256": "0ebf7bf9f885f4ba8656f0e9eb0dbdfb665b76fe0433b0bba380a2e95235fd7f"
+    },
+    {
+      "path": "assets_src/aseprite/combat/characters/ash_raider/walk_west.aseprite",
+      "bytes": 72389,
+      "sha256": "3af5256cc0ddadb256a0394c2635778d7b702c5b6da8035e480cae80d3fc675e"
+    }
+  ]
+}

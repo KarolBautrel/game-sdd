@@ -1,0 +1,20 @@
+{
+  "id": "dire_boar",
+  "resource": "res://assets/combat/models/dire_boar.glb",
+  "channels": [
+    "body"
+  ],
+  "actions": {
+    "tusks": {
+      "pose": "boar_pose",
+      "walk": "boar_walk",
+      "combat": "boar_combat",
+      "hit": "boar_hit",
+      "death": "boar_death"
+    }
+  },
+  "default_weapon": "tusks",
+  "hero": false,
+  "bones": 13,
+  "original_source": "assets_src/characters/roster/dire_boar"
+}

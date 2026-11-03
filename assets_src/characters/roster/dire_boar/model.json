@@ -1,0 +1,36 @@
+{
+  "id": "dire_boar",
+  "kind": "boar",
+  "label": "Dire boar",
+  "canvas_size": [
+    512,
+    384
+  ],
+  "pivot": [
+    256,
+    282
+  ],
+  "camera_elevation": 18,
+  "pixels_per_metre": 100,
+  "triangles": 3420,
+  "vertices": 1788,
+  "bones": 13,
+  "uv": true,
+  "weighted": true,
+  "actions": {
+    "pose": "boar_pose",
+    "walk": "boar_walk",
+    "combat": "boar_combat",
+    "hit": "boar_hit",
+    "death": "boar_death"
+  },
+  "frame_counts": {
+    "pose": 4,
+    "walk": 8,
+    "combat": 8,
+    "hit": 4,
+    "death": 8
+  },
+  "preview_only": false,
+  "legacy_reference": "../references/dire_boar.png"
+}

@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "items"
+  ],
+  "properties": {
+    "schema": {
+      "const": "sdd.campaign-items-v1"
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "description",
+          "category",
+          "value"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "enum": [
+              "valuable",
+              "quest",
+              "equipment"
+            ]
+          },
+          "value": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000
+          },
+          "combat_profile": {
+            "type": "object",
+            "required": [
+              "id",
+              "slot",
+              "grants_actions"
+            ],
+            "description": "Validated against combat_encounter item_profiles by validate_campaign_items."
+          },
+          "visual": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "faction",
+              "character"
+            ],
+            "properties": {
+              "faction": {
+                "const": "heroes"
+              },
+              "character": {
+                "enum": [
+                  "warrior",
+                  "archer_1"
+                ]
+              }
+            }
+          },
+          "appearance": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "weapon": {
+                "enum": [
+                  "sword",
+                  "bow",
+                  "axe",
+                  "mace",
+                  "dagger",
+                  "cleaver",
+                  "spear",
+                  "crossbow"
+                ]
+              },
+              "offhand": {
+                "enum": [
+                  "shield"
+                ]
+              },
+              "armor": {
+                "enum": [
+                  "leather",
+                  "plate"
+                ]
+              },
+              "boots": {
+                "enum": [
+                  "leather",
+                  "steel"
+                ]
+              },
+              "helmet": {
+                "enum": [
+                  "cap",
+                  "closed"
+                ]
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "category": {
+                  "const": "equipment"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "combat_profile"
+              ]
+            },
+            "else": {
+              "not": {
+                "required": [
+                  "combat_profile"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

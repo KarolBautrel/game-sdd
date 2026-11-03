@@ -1,0 +1,36 @@
+{
+  "id": "hell_hound",
+  "kind": "hound",
+  "label": "Hell hound",
+  "canvas_size": [
+    512,
+    384
+  ],
+  "pivot": [
+    256,
+    282
+  ],
+  "camera_elevation": 18,
+  "pixels_per_metre": 100,
+  "triangles": 3792,
+  "vertices": 2014,
+  "bones": 13,
+  "uv": true,
+  "weighted": true,
+  "actions": {
+    "pose": "hound_pose",
+    "walk": "hound_walk",
+    "combat": "hound_combat",
+    "hit": "hound_hit",
+    "death": "hound_death"
+  },
+  "frame_counts": {
+    "pose": 4,
+    "walk": 8,
+    "combat": 8,
+    "hit": 4,
+    "death": 8
+  },
+  "preview_only": false,
+  "legacy_reference": "../references/hell_hound.png"
+}

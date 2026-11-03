@@ -1,0 +1,8 @@
+{
+  "id": "stump",
+  "pixels_per_metre": 100,
+  "camera_elevation": 18,
+  "triangles": 312,
+  "uv": true,
+  "original": true
+}

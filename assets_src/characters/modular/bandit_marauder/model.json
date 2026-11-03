@@ -1,0 +1,24 @@
+{
+  "id": "bandit_marauder",
+  "resource": "res://assets/combat/models/bandit_marauder.glb",
+  "channels": [
+    "armor_default",
+    "body",
+    "boots_default",
+    "headwear_default",
+    "weapon_axe",
+    "offhand_default"
+  ],
+  "actions": {
+    "axe": {
+      "pose": "axe_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    }
+  },
+  "default_weapon": "axe",
+  "hero": false,
+  "bones": 65
+}

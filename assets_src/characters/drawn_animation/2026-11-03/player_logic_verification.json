@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "checks": 3579,
+  "profiles": 6,
+  "canvas_draw_calls": 3088,
+  "browser_render_check": "NOT_RUN: browser access host unavailable",
+  "continuous_motion_reviewed": false
+}

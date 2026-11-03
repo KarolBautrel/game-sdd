@@ -13,6 +13,19 @@ Long term, dungeon exploration should have its own mechanics rather than being o
 
 ## Current State
 
+Stage18/19 (2026-11-01): managed run and road handoff now freezes advancement
+alongside equipment; base max HP/injuries and sandbox remain unchanged. World007,
+combat103 and shared presentation002 own progression/new campaign interfaces.
+Final45/45/source and extended EXE probe PASS; actual equipped/trained expedition
+and restart L18-02/L19-02 remain NOT_RUN. Next is24-case live acceptance.
+
+Stage16 campaign handoff (2026-11-01): managed begin/checkpoint freezes owned
+equipment; DungeonRunSession injects catalogue loadouts/actions before existing
+injury modifiers, without changing dungeon resolution or sandbox. Owner world005,
+combat slice102; full42/42 and final extended EXE probe PASS, zero diagnostics.
+Next: actual equipped expedition/return/restart L16-02 and the accumulated18 live
+cases when desktop controls are available; all NOT_RUN. See stage16 QA report.
+
 - Dungeon specs exist.
 - Dungeon data contract v1 is implemented.
 - `dungeon_old_mine` is authored as a small room/corridor graph.
@@ -38,7 +51,7 @@ Long term, dungeon exploration should have its own mechanics rather than being o
 - Dungeon HUD now shows light, oil, pickaxe count, last corridor/hazard feedback, and exposes a `Use Oil` action when the lamp is not full.
 - Corridor hazards now stop traversal before the target room and require a player choice in a debug popup, so rubble/traps-style events happen between rooms rather than as room content.
 - Dungeon debuffs now have a validated data catalogue and active run-state stack summary.
-- `dungeon_old_mine` now includes a needle trap corridor hazard before `Spider Nest`, mitigated by `trap_tools` or resolved through `poisoned`.
+- `dungeon_old_mine` now includes a needle trap corridor hazard before `Spider Nest`, mitigated by carried trap tools or resolved through `poisoned`.
 - Corridor event presentation now uses a custom debug event panel with hazard type, corridor endpoints, supply availability, and choice buttons.
 - Hazard outcomes now support weighted variants and party slot targets for HP/debuff effects.
 - Dungeon combat launch metadata now carries `dungeon_modifiers` into combat encounters, including light, party effects, target effects, and active debuffs.
@@ -69,6 +82,15 @@ Long term, dungeon exploration should have its own mechanics rather than being o
 - Room event system now supports expanded reusable event families and records run-level room event history by event id, type, and tag.
 - Room event outcomes now support supply-gated choices, outcome tone, weighted risk examples, party-targeted consequences through existing consequence targeting, and future-facing skill-check metadata.
 - Corridor hazards now support varied rubble, trap, darkness, noise, and blockage families, including traversal-blocking outcomes and darkness hazards that use lamp oil through the existing supply-choice flow.
+- Expedition loadout now uses packing capacity and per-supply packing costs, so the party cannot carry every supply candidate at once.
+- Dungeon state now supports a first `camping_kit` camp action that reduces accumulated dungeon HP loss, clears active dungeon debuffs, consumes a kit, and costs light.
+- Generated dungeon entry now supports named profiles: `short_mine`, `medium_mine`, and `deep_mine`, while still using the curated Old Mine template pool.
+- Generated Old Mine templates now declare profile ownership and pacing metadata, and each generated mine profile has at least three selectable curated layouts.
+- Generated dungeon combat rooms now select presentation-ready combat encounters from a validated Old Mine pool by seed, profile, difficulty, and room kind.
+- Tactical combat map selection now has explicit design rules for coherent floors, believable blockers, readable cover, justified high ground, and worldbuilding-driven tactical spaces.
+- Dungeon HUD now uses dedicated semantic pixel-art icons for carried resources and core room markers instead of temporary indexed atlas reuse.
+- Resource balance now tightens Old Mine and generated profile packing capacity, gives bandages an HP-loss recovery use, and makes camping consume food as well as a camping kit.
+- Generated D2/D3 maps now use horizontal scrollable presentation instead of shrinking dense maps into one screen, and D3/deep-mine templates carry at least three combat rooms.
 
 ## Implemented Capability Summary
 
@@ -79,10 +101,12 @@ Implemented capability groups:
 - **Dungeon data and state:** validated dungeon schemas, authored Old Mine data, deterministic room/corridor traversal, visited/cleared room tracking, room content state, pending combat state, pending room-event state, completion state, retreat/failure payloads, and run-result summaries.
 - **Presentation and debug flow:** `DungeonDebug.tscn`, preparation/loadout step, authored/generated source toggle, seed/difficulty/reroll controls, framed map view, room markers, route copy, resource tray, numbered exits, event popup choices, combat entry action, reward claim action, finish expedition action, and post-run HUD summary.
 - **Combat boundary:** dungeon creates combat launch requests, combat returns stable result payloads, victories clear combat rooms or unlock guarded rewards, defeats keep rooms dangerous, and post-combat feedback is stored through `DungeonRunSession`.
-- **Expedition resources:** light, lamp oil, pickaxe, trap tools, remedy kits, persistent debuffs/effects, targetable party consequences, and combat launch metadata influenced by dungeon state.
+- **Expedition resources:** light, torch oil, pickaxe, trap tools, bandages, camping kit, food, persistent debuffs/effects, targetable party consequences, and combat launch metadata influenced by dungeon state.
 - **Corridor hazards:** reusable hazard catalogues, weighted event pools, hazard pool refs, rubble/trap/darkness/noise/blockage families, traversal-blocking outcomes, supply-mitigated choices, weighted consequences, and structured hazard logs.
 - **Room events:** reusable room-event catalogues, weighted room-event pools, expanded event families, pending room choices, supply-gated choices, weighted outcomes, tone metadata, future skill-check metadata, reward/supply/effect consequences, and run-level room-event history.
-- **Generated dungeons:** curated finite Old Mine template pool, seed/difficulty-based template selection, generated graph drafts that enter the same state model, seed-driven hazard candidate placement, seed-driven room event pool placement, and debug preview metadata.
+- **Loadout and camping:** packing-point loadout capacity, per-supply packing costs, carried-only supply candidates, camping kit usage, HP-loss recovery, debuff clearing, and camp light cost.
+- **Icon coverage:** dedicated processed dungeon HUD icons for torch oil, pickaxe, trap tools, bandage, camping kit, food, gold, light states, hazards, room events, treasure, combat, exits, and locked rooms.
+- **Generated dungeons:** curated finite Old Mine template pool, seed/difficulty/profile-based template selection, generated graph drafts that enter the same state model, seed-driven hazard candidate placement, seed-driven room event pool placement, deep D3 layouts with at least three combat rooms, horizontal scrollable map presentation for longer D2/D3 graphs, and debug preview metadata.
 - **Run loot and return:** run inventory for claimed XP/gold/items, kept/lost loot resolution, `inventory_delta`, persistent effects in the return payload, and a `next_scene` hook for future global-map/world return.
 
 Current explicit boundaries:
@@ -135,11 +159,19 @@ docs/specs/dungeon/overview/032_dungeon_inventory_loot_resolution_v2.md
 docs/specs/dungeon/overview/033_room_event_system_v2.md
 docs/specs/dungeon/overview/034_room_event_outcomes_v2.md
 docs/specs/dungeon/overview/035_corridor_hazard_variety_v2.md
+docs/specs/dungeon/overview/036_expedition_loadout_capacity_v2.md
+docs/specs/dungeon/overview/037_recovery_and_camping_v1.md
+docs/specs/dungeon/overview/038_generated_dungeon_profiles_v1.md
+docs/specs/dungeon/overview/039_generated_template_pool_expansion_v1.md
+docs/specs/dungeon/overview/040_dungeon_combat_encounter_selection_v1.md
+docs/specs/dungeon/overview/041_resource_balance_pass_v1.md
 docs/specs/dungeon/presentation/012_dungeon_event_presentation_v1.md
 docs/specs/dungeon/presentation/013_dungeon_presentation_vertical_slice_v1.md
 docs/specs/dungeon/presentation/014_dungeon_debug_generated_toggle_v1.md
 docs/specs/dungeon/presentation/015_dungeon_debug_generator_controls_v1.md
 docs/specs/dungeon/presentation/016_dungeon_room_event_presentation_v1.md
+docs/specs/dungeon/presentation/017_pixel_art_dungeon_ui_assets_v1.md
+docs/specs/dungeon/overview/044_large_d3_scrollable_dungeon_maps_v1.md
 ```
 
 Related combat owner:
@@ -651,86 +683,218 @@ This queue captures the next agreed dungeon direction after the exploration foun
      - fixed `consume_required_supply` so required supply is consumed once through the normal consequence path.
    - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_state_model_tests.gd`; `scripts/domain/dungeon_procedural_draft_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-8. **Planned - Expedition Loadout Capacity V2**
+8. **Done - Expedition Loadout Capacity V2**
    - Goal: make pre-dungeon packing choices matter without owning town/world supply economy.
-   - Expected work:
+   - Owner spec: `docs/specs/dungeon/overview/036_expedition_loadout_capacity_v2.md`
+   - Slice: `docs/specs/dungeon/slices/043_expedition_loadout_capacity_v2.md`
+   - Implemented:
      - define carry limits or expedition packing points for supplies brought into a dungeon;
      - keep buying, pricing, restocking, and persistent supply ownership in future town/world/inventory specs;
-     - add candidates such as bandages, antidote, food, rope, and camping kit as carried supply types only;
+     - restrict the visible carried resource set to torch oil, pickaxe, trap tools, bandages, camping kit, and food;
+     - show compact icon/count resource tiles with tooltip names and usage;
      - expose clearer loadout tradeoffs and supply consequences in UI.
-   - Proof target: loadout tests and manual balance notes.
+   - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_state_model_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-9. **Planned - Recovery And Camping**
+9. **Done - Recovery And Camping**
    - Goal: add an explicit in-dungeon recovery layer instead of only instant remedy usage.
-   - Expected work:
-     - rest/camp action;
-     - partial HP recovery;
-     - debuff treatment;
-     - supply consumption;
-     - ambush or time/light risk while resting.
-   - Proof target: state tests and HUD action tests.
+   - Owner spec: `docs/specs/dungeon/overview/037_recovery_and_camping_v1.md`
+   - Slice: `docs/specs/dungeon/slices/044_recovery_and_camping_v1.md`
+   - Implemented:
+     - `camping_kit` is a carried supply candidate;
+     - camp action consumes one kit;
+     - camp reduces accumulated dungeon HP loss;
+     - camp clears active dungeon debuffs;
+     - camp costs one light level;
+     - camp is blocked while combat, corridor hazards, or room events are pending.
+   - Proof: `scripts/domain/dungeon_state_model_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-10. **Planned - Generated Dungeon Profiles**
+10. **Done - Generated Dungeon Profiles**
     - Goal: make generated dungeons select from named profiles rather than only difficulty.
-    - Expected work:
-      - short/medium/deep profiles;
-      - mine/crypt/ruins themes;
-      - profile-specific template pools, room event pools, corridor hazard pools, combat encounter pools;
-      - constraints for route length and branch count.
-    - Proof target: procedural draft tests and schema validation.
+    - Owner spec: `docs/specs/dungeon/overview/038_generated_dungeon_profiles_v1.md`
+    - Slice: `docs/specs/dungeon/slices/045_generated_dungeon_profiles_v1.md`
+    - Implemented:
+      - `short_mine`, `medium_mine`, and `deep_mine` profiles;
+      - generated entry payload preserves `generated_profile`;
+      - profile metadata is exposed on generated dungeon drafts;
+      - profiles set first beta difficulty, light budget, and loadout capacity;
+      - debug difficulty buttons act as profile shortcuts.
+    - Proof: `scripts/domain/dungeon_entry_selection_tests.gd`; `scripts/domain/dungeon_procedural_draft_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
 
-11. **Planned - Generated Template Pool Expansion**
+11. **Done - Generated Template Pool Expansion**
     - Goal: grow curated finite layouts before returning to freer procedural generation.
-    - Expected work:
-      - more layouts per difficulty/profile;
-      - candidate slots for room events and corridor hazards;
-      - authored pacing rules for treasure, combat, and exits;
-      - visual fit checks for dense templates.
-    - Proof target: procedural tests and headless scene load at common resolutions.
+    - Owner spec: `docs/specs/dungeon/overview/039_generated_template_pool_expansion_v1.md`
+    - Slice: `docs/specs/dungeon/slices/046_generated_template_pool_expansion_v1.md`
+    - Implemented:
+      - template schema requires `profile_ids` and `pacing`;
+      - `short_mine`, `medium_mine`, and `deep_mine` each have at least three selectable Old Mine layouts;
+      - generated template selection filters by requested profile before difficulty fallback;
+      - generated dungeon output exposes selected template id, display name, and pacing metadata;
+      - added authored pacing rules for route length, branch count, treasure count, combat count, room-event slots, and corridor-hazard candidates.
+    - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_procedural_draft_tests.gd`; `scripts/domain/dungeon_state_model_tests.gd`; headless `DungeonDebug.tscn` load.
 
-12. **Planned - Combat Encounter Selection Per Dungeon**
+12. **Done - Combat Encounter Selection Per Dungeon**
     - Goal: stop using one debug encounter for every dungeon combat room.
-    - Expected work:
-      - encounter pools by dungeon theme/difficulty/room kind;
-      - generated rooms choose encounter refs by seed;
-      - authored rooms can still pin a specific encounter;
-      - combat launch metadata includes dungeon context.
-    - Proof target: validator checks and session/combat launch tests.
+    - Owner spec: `docs/specs/dungeon/overview/040_dungeon_combat_encounter_selection_v1.md`
+    - Slice: `docs/specs/dungeon/slices/047_dungeon_combat_encounter_selection_v1.md`
+    - Implemented:
+      - `combat_encounter_pool_id` is valid on dungeon/template combat content;
+      - `old_mine_generated_combat_pool` validates through schema and references presentation-ready combat encounters;
+      - generated template combat rooms select encounter refs deterministically by seed, profile, difficulty, and room kind;
+      - explicit authored `combat_encounter_path` remains supported as a manual pin;
+      - pending combat requests include selected encounter path plus pool/entry/tactical-role metadata;
+      - tactical map design rules are documented for coherent floors, believable blockers, readable cover, justified high ground, and worldbuilding-driven encounter spaces.
+    - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_procedural_draft_tests.gd`; `scripts/domain/dungeon_state_model_tests.gd`; headless `DungeonDebug.tscn` load.
 
-13. **Planned - Dungeon UI Game Skin**
-    - Goal: replace the current debug-like chrome with a first game UI skin.
-    - Expected work:
-      - styled resource bar;
-      - event cards;
-      - map frame and room nodes;
-      - clearer combat/reward/exit buttons;
-      - hover/disabled/active states.
-    - Proof target: presentation tests plus manual screenshot review.
-
-14. **Planned - Pixel-Art Dungeon UI Assets**
+13. **Done - Pixel-Art Dungeon UI Assets**
     - Goal: create or integrate small readable pixel-art UI assets for dungeon play.
-    - Expected work:
-      - oil, pickaxe, trap tools, remedy, gold, light state, room event, trap, rubble icons;
-      - source assets under `assets_src/` where practical;
-      - exported assets under `assets/`;
-      - repeatable asset workflow documented.
-   - Proof target: asset import check and manual visual review.
+    - Owner spec: `docs/specs/dungeon/presentation/017_pixel_art_dungeon_ui_assets_v1.md`
+    - Slice: `docs/specs/dungeon/slices/048_pixel_art_dungeon_ui_assets_v1.md`
+    - Implemented:
+      - torch oil, pickaxe, trap tools, bandage, camping kit, food, gold, light state, room event, trap, and rubble icons;
+      - dedicated icon coverage for each compact resource tile instead of temporary atlas reuse;
+      - exported semantic PNG assets under `assets/ui/dungeon/processed/icons/`;
+      - green atlas background cleanup with no visible green pixels remaining;
+      - HUD resource and room icon paths now use semantic dedicated files.
+   - Proof: `scripts/presentation/dungeon_exploration_hud_tests.gd` and green-pixel scan.
 
-15. **Planned - Playable Dungeon Beta**
+14. **In Progress - Playable Dungeon Beta**
     - Goal: ship one coherent beta dungeon pass for hands-on testing.
+    - First beta step spec: `docs/specs/dungeon/overview/042_playable_generated_beta_party_v1.md`
+    - First beta step slice: `docs/specs/dungeon/slices/050_playable_generated_beta_party_v1.md`
+    - Party roster spec: `docs/specs/dungeon/overview/043_party_roster_contract_v1.md`
+    - Party roster slice: `docs/specs/dungeon/slices/051_party_roster_contract_v1.md`
+    - Implemented so far:
+      - debug dungeon defaults to generated medium-mine content instead of authored Old Mine;
+      - authored Old Mine remains available through the source toggle;
+      - dungeon state uses a two-slot beta formation: Warrior front, Archer back;
+      - dungeon-launched combat encounters automatically receive the Archer and bow profile;
+      - front-slot dungeon effects still resolve only to Warrior.
+      - shared party roster defines Bran the Warrior and Torin the Archer;
+      - dungeon HUD renders both party members from roster data instead of one hardcoded portrait;
+      - combat launch and combat text resolve player visuals/names from the same roster.
+      - generated D2/D3 maps are horizontally scrollable, and D3/deep-mine layouts carry at least three combat rooms.
     - Expected work:
-      - pre-entry setup;
-      - supplies;
-      - generated or curated layout;
-      - corridor hazards;
-      - room events;
-      - multiple combat encounter choices;
-      - rewards/inventory result;
-      - finish/return flow;
-      - first-pass game UI.
+      - manual smoke playthrough from generated dungeon entry;
+      - verify supplies, capacity, hazards, room events, combat, rewards, and finish/return flow as one loop;
+      - record bugs and tune balance from the playthrough;
+      - keep combat boards data-driven until bespoke tactical maps are ready.
     - Proof target: automated smoke tests plus manual playthrough checklist.
 
+## End-Of-Day Backlog
+
+### 2026-11-01 cross-project implementation gate
+
+The user approved the cross-project plan with sequential stage gates and actual
+playthroughs after every stage. The first prerequisite is recorded in
+`docs/specs/tooling/001_stage_verification.md` and its acceptance slice
+`docs/specs/tooling/slices/001_environment_baseline.md`.
+
+Stage 0 adds local Python setup, full-suite validation orchestration and a
+DISPLAY1-only interactive launcher. Its report is
+`docs/qa/stages/2026-11-01-stage-0.md`. Computer Use access now works; actual
+playtesting found collapsed combat HUD labels (combat slice 095), now repaired
+and retested in-game. Stage 0 is accepted: 23/23 checks plus a real completed
+expedition. Stage 1 is next: full-loop QA and the newly observed combat HP return
+regression (Bran 8 HP in combat became 14 in dungeon). Repair this prerequisite
+before exportable assets (stage 2) or later features.
+
+Stage 1 implementation (subsequently accepted below): overview 045 / slice 053 add absolute combat injury
+return, recovery of incapacitated members, current HP cards, pending/completed
+navigation guards, and a deterministic full-loop runner using ordinary resolver
+commands. `stage1-first-20261101` passes all 25 checks, including two identical
+seeded expeditions and boundary regressions. Scene checker: 0 errors/warnings
+in 1926 files. Actual repaired-build expedition is the current gate.
+The existing Playable Dungeon Beta item remains in progress.
+
+This checkpoint preserves the current dungeon direction after the loadout/resource UI pass. The immediate next work should stay on the established spec -> slice -> implementation -> proof workflow.
+
+1. **Done - Resource Balance Pass**
+   - Owner spec: `docs/specs/dungeon/overview/041_resource_balance_pass_v1.md`
+   - Slice: `docs/specs/dungeon/slices/049_resource_balance_pass_v1.md`
+   - Implemented:
+     - authored Old Mine capacity tightened to 7 packing points;
+     - generated profile capacities tightened to short 6, medium 7, and deep 9;
+     - bandages now repair one point of dungeon HP loss;
+     - camping now requires and consumes food as well as a camping kit;
+     - every visible carried resource now has at least one in-dungeon use.
+   - Proof: `scripts/domain/dungeon_state_model_tests.gd` and `scripts/presentation/dungeon_exploration_hud_tests.gd`.
+
+2. **Done - Dungeon Icon Coverage**
+   - Add or process dedicated icons for the six visible carried resources.
+   - Keep the compact resource tray behavior: icon plus number, tooltip for name/usage.
+   - Processed semantic icons now live under `assets/ui/dungeon/processed/icons/`.
+   - Proof: `scripts/presentation/dungeon_exploration_hud_tests.gd` and green-pixel scan.
+
+3. **Done - Playable Generated Beta Party**
+   - Owner spec: `docs/specs/dungeon/overview/042_playable_generated_beta_party_v1.md`
+   - Slice: `docs/specs/dungeon/slices/050_playable_generated_beta_party_v1.md`
+   - Implemented:
+     - generated medium mine is the default debug entry;
+     - beta party formation is Warrior plus Archer;
+     - dungeon-launched combat injects Archer with bow loadout/profile;
+     - authored Old Mine can still be used for fallback testing.
+   - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_entry_selection_tests.gd`; `scripts/domain/dungeon_state_model_tests.gd`; `scripts/session/dungeon_run_session_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`.
+
+4. **Done - Party Roster Contract**
+   - Owner spec: `docs/specs/dungeon/overview/043_party_roster_contract_v1.md`
+   - Slice: `docs/specs/dungeon/slices/051_party_roster_contract_v1.md`
+   - Implemented:
+     - `PartyRoster` defines Bran and Torin with names, classes, portraits, combat visuals, stats, resources, actions, and loadouts;
+     - dungeon HUD party cards resolve from formation/roster data;
+     - Warrior combat visual now resolves to existing `warrior` processed sprites;
+     - combat text names player units through the roster.
+   - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_state_model_tests.gd`; `scripts/session/dungeon_run_session_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`; `scripts/presentation/combat_mercenary_asset_pipeline_tests.gd`; headless `DungeonDebug.tscn`; headless `CombatDebug.tscn`.
+
+5. **Done - Large Horizontal Dungeon Maps**
+   - Owner spec: `docs/specs/dungeon/overview/044_large_d3_scrollable_dungeon_maps_v1.md`
+   - Slice: `docs/specs/dungeon/slices/052_large_d3_scrollable_dungeon_maps_v1.md`
+   - Implemented:
+     - generated D2 and D3 maps use longer rightward presentation;
+     - D3 templates now carry at least three combat rooms;
+     - dungeon graph content has its own horizontal scrollable viewport;
+     - room cards keep normal readable size instead of being compressed to fit the visible frame.
+   - Proof: `python tools/validators/validate_all.py`; `scripts/domain/dungeon_procedural_draft_tests.gd`; `scripts/presentation/dungeon_exploration_hud_tests.gd`; headless `DungeonDebug.tscn`.
+
+6. **Done - World/Town Integration Prep**
+   - Define the future boundary where town/global map owns supply purchase and durable inventory.
+   - Dungeon should continue to receive only the carried loadout payload and return run results/inventory deltas.
+   - Proof target: spec and slice first; implementation only after the global-map/town contract exists.
+   - Implemented world001/slice001: App/Ravenford, owned supplies, durable campaign,
+     checkpoint/resume and idempotent return settlement; stage6 accepted33/33 plus
+     actual purchase/restart/retreat/inn. Report docs/qa/stages/2026-11-01-stage-6.md.
+
+Stage 1 final acceptance (2026-11-01): `stage1-final-20261101` passed 26/26
+checks, no errors. Actual normal victory retained Bran 9/14 on dungeon return;
+bandage refreshed 10/14. Finished 6/6 rooms with 20g, 7 XP, four items; further
+movement rejected. Fresh-process HP bar layout verified. Report:
+`docs/qa/stages/2026-11-01-stage-1.md`. Next ordered task: stage 2 exportable assets.
+
 ## First Implementation Guidance
+
+Stage2 accepted: deterministic AssetCatalog, ResourceLoader runtime and isolated
+Windows export smoke, 27/27 checks with zero errors/warnings, real source/EXE
+move/attack and dungeon event verified. Report `docs/qa/stages/2026-11-01-stage-2.md`.
+Stage3 accepted: passive PartyCard/ResourceMeter scenes and PixelSkin helper,
+28/28 checks, actual injury/recovery and combat resources verified.
+Report `docs/qa/stages/2026-11-01-stage-3.md`. Stage4 accepted: tooling003/slice003,
+29/29 checks and actual map-reference edit/save/reload/play/return; report stage4.
+Stage5 accepted: overview046/slice054, explicit template acceptance, graph
+quality and 300-seed deterministic sweep. Four stale hazard slot counts repaired.
+stage5-final-20261101 passed30/30 with zero errors/warnings; actual D1/D2/D3,
+reroll and ordinary event/exploration passed. Report docs/qa/stages/2026-11-01-stage-5.md.
+Stage6 accepted: world/town boundary and durable inventory/effects,33/33 plus
+actual checkpoint/restart/retreat/recovery. Stage7 final exported acceptance also
+passed as recorded below.
+
+Stage7 accepted: all34 source checks and fresh corrected export/probe PASS with
+zero diagnostics. Actual play exposed a Defend Tween error, repaired under
+combat074/slice096 and retested with full regression and a new export. Corrected
+EXE passed ordinary three-enemy victory, HP return6/14, bandage7/14,6/6 finish
+and20g/7XP/four items. Settlement75g/16XP/nine items and party HP persisted on
+restart without duplication; the closed interactive log is clean. Temporary
+capture failure was recovered and the same battle continued. Full evidence in
+docs/qa/stages/2026-11-01-stage-7.md. Further work can extend global travel,
+encounters and presentation through new owning specs and acceptance slices.
 
 - Keep the first dungeon map small: start room, one empty room, one treasure room, and one combat room.
 - Use authored data before procedural generation.
@@ -753,4 +917,9 @@ python tools\validators\validate_all.py
 & "C:\Users\karol\Desktop\Gierka\installers\Godot_v4.7-stable_win64.exe\Godot_v4.7-stable_win64_console.exe" --headless --path "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game" res://scenes/combat/CombatDebug.tscn --quit --resolution 2560x1440
 ```
 
-Next dungeon work should continue roadmap item 8, **Expedition Loadout Capacity V2**, unless the user explicitly reprioritizes UI/assets, generated content variety, or combat encounter selection.
+The world/town foundation and final corrected-release acceptance passed in
+stages6..7. Broader global travel remains future work. Combat queue15..19 now
+has implementation/technical review and automated PASS in stages8..12; all live
+acceptance is deferred by user instruction to docs/qa/live-test-scenarios.md.
+Next: accumulated DISPLAY1 play on the stage12 build, fix/retest and acceptance.
+Current status/evidence is linked from docs/CONTINUE_HERE.md.

@@ -9,6 +9,8 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 - `overview/000_combat_core.md`
 - `overview/005_event_log_and_replay.md`
 - `overview/082_combat_result_contract_v1.md`
+- `overview/092_combat_encounter_authoring_v1.md`
+- `overview/093_combat_readiness_for_dungeon.md`
 
 ### Grid
 
@@ -69,6 +71,9 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 - `presentation/086_combat_ui_asset_pipeline_v1.md`
 - `presentation/087_combat_hud_restructure_v1.md`
 - `presentation/088_combat_terrain_asset_showcase_v1.md`
+- `presentation/089_combat_board_frame_skin_v1.md`
+- `presentation/090_combat_unit_resource_assets_v1.md`
+- `presentation/091_combat_feedback_polish_v2.md`
 - `presentation/094_combat_map_editor_v1.md`
 
 ## Executable Slices
@@ -84,6 +89,15 @@ Recent presentation/debug slices:
 - `slices/087_combat_hud_restructure_v1.md`
 - `slices/088_combat_terrain_asset_showcase_v1.md`
 - `slices/094_combat_map_editor_v1.md`
+- `slices/095_combat_hud_text_layout.md`
+- `slices/096_combat_animation_lifecycle.md`
+- `slices/097_combat_board_frame_skin_v1.md`
+- `slices/098_combat_unit_resource_assets_v1.md`
+- `slices/099_combat_feedback_polish_v2.md`
+- `slices/100_combat_encounter_authoring_v1.md`
+- `slices/101_combat_readiness_for_dungeon.md`
+- `slices/102_campaign_equipment_handoff.md` (world005 campaign boundary)
+- `slices/103_party_advancement_handoff.md` (world007 progression)
 
 ## Milestones
 

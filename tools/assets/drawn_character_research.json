@@ -1,0 +1,60 @@
+{
+    "owner":  "presentation019",
+    "paid_generation_calls":  0,
+    "candidates":  [
+                       {
+                           "commit":  "7f4b801c7248d51b093ec365aceb114bd06139e6",
+                           "name":  "scenario-sprite-animation",
+                           "installed":  false,
+                           "repo":  "https://github.com/scenario-labs/skills",
+                           "path":  "skills/scenario-sprite-animation/SKILL.md",
+                           "license":  "MIT"
+                       },
+                       {
+                           "commit":  "26053306efddfb72bb65f8f288534659724db0fc",
+                           "name":  "spa",
+                           "installed":  false,
+                           "repo":  "https://github.com/aigengame/aseprite-automation",
+                           "path":  "skills/spa/SKILL.md",
+                           "python":  "\u003e=3.13",
+                           "license":  "MIT"
+                       },
+                       {
+                           "commit":  "ebf1f2bc16d8a59211e03a7ed44b545699697270",
+                           "name":  "aseprite-mcp",
+                           "installed":  false,
+                           "repo":  "https://github.com/MalloyTheDev/aseprite-mcp",
+                           "python":  "\u003e=3.10",
+                           "license":  "MIT"
+                       },
+                       {
+                           "commit":  "12e66b876d7e242042beeaf073c95c0626069da8",
+                           "endpoint":  "https://mcp.retrodiffusion.ai/mcp",
+                           "name":  "Retro Diffusion MCP",
+                           "repo":  "https://github.com/Retro-Diffusion/retro-diffusion-mcp",
+                           "connected":  false
+                       },
+                       {
+                           "docs":  "https://api.pixellab.ai/mcp/docs",
+                           "name":  "PixelLab MCP",
+                           "connected":  false,
+                           "account_required":  true
+                       },
+                       {
+                           "endpoint":  "https://www.autosprite.io/api/mcp",
+                           "docs":  "https://www.autosprite.io/docs/mcp",
+                           "name":  "AutoSprite MCP",
+                           "connected":  false,
+                           "account_required":  true
+                       }
+                   ],
+    "runtime_changed":  false,
+    "status":  "RESEARCH_ONLY_NOT_INSTALLED",
+    "date":  "2026-11-03",
+    "new_packages_installed":  0,
+    "existing":  [
+                     "Aseprite1.3.17.2 batch/Lua",
+                     "imagegen tool",
+                     "Godot4.7 raster character renderer"
+                 ]
+}

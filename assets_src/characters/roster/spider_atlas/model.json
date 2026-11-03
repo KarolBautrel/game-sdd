@@ -1,0 +1,36 @@
+{
+  "id": "spider_atlas",
+  "kind": "spider",
+  "label": "Giant spider",
+  "canvas_size": [
+    512,
+    384
+  ],
+  "pivot": [
+    256,
+    282
+  ],
+  "camera_elevation": 18,
+  "pixels_per_metre": 100,
+  "triangles": 2408,
+  "vertices": 1276,
+  "bones": 22,
+  "uv": true,
+  "weighted": true,
+  "actions": {
+    "pose": "spider_pose",
+    "walk": "spider_walk",
+    "combat": "spider_combat",
+    "hit": "spider_hit",
+    "death": "spider_death"
+  },
+  "frame_counts": {
+    "pose": 4,
+    "walk": 8,
+    "combat": 8,
+    "hit": 4,
+    "death": 8
+  },
+  "preview_only": false,
+  "legacy_reference": "../references/spider_atlas.png"
+}

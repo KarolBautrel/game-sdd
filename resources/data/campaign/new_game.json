@@ -1,0 +1,58 @@
+{
+  "version": 4,
+  "gold": 40,
+  "xp": 0,
+  "items": [
+    "hero_sword",
+    "hero_bow"
+  ],
+  "supplies": {
+    "lamp_oil": 4,
+    "pickaxe": 2,
+    "trap_tools": 2,
+    "bandage": 3,
+    "camping_kit": 1,
+    "food": 3
+  },
+  "effects": {
+    "party_effects": {
+      "hp_loss": 0,
+      "debuffs": []
+    },
+    "target_effects": {},
+    "active_debuffs": {}
+  },
+  "active_run": {},
+  "receipts": [],
+  "last_return": {},
+  "world": {
+    "region_id": "region_001",
+    "location_id": "town_ravenford",
+    "elapsed_hours": 0,
+    "journey_count": 0,
+    "seed": 170717,
+    "pending_event": {},
+    "resolved_nodes": [],
+    "last_journey": {}
+  },
+  "equipment": {
+    "unit_player_001": {
+      "main_hand": "hero_sword",
+      "off_hand": null,
+      "armor": null,
+      "boots": null,
+      "helmet": null
+    },
+    "unit_player_002": {
+      "main_hand": "hero_bow",
+      "off_hand": null,
+      "armor": null,
+      "boots": null,
+      "helmet": null
+    }
+  },
+  "advancement": {
+    "unit_player_001": 1,
+    "unit_player_002": 1
+  }
+}

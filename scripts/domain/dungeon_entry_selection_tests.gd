@@ -6,11 +6,13 @@ const DungeonEntrySelection := preload("res://scripts/domain/dungeon_entry_selec
 func _init() -> void:
 	var errors: Array[String] = []
 
-	var authored_payload := DungeonEntrySelection.default_payload()
-	var authored_dungeon := DungeonEntrySelection.dungeon_for_payload(authored_payload)
-	_expect_equal(errors, "default source", authored_payload["source"], DungeonEntrySelection.SOURCE_AUTHORED)
-	_expect_equal(errors, "authored dungeon id", authored_dungeon["id"], "dungeon_old_mine")
-	_expect_equal(errors, "authored display", DungeonEntrySelection.display_name(authored_payload), "Old Mine")
+	var default_payload := DungeonEntrySelection.default_payload()
+	var default_dungeon := DungeonEntrySelection.dungeon_for_payload(default_payload)
+	_expect_equal(errors, "default source", default_payload["source"], DungeonEntrySelection.SOURCE_GENERATED)
+	_expect_equal(errors, "default generated seed", default_payload["generated_seed"], 170717)
+	_expect_equal(errors, "default generated difficulty", default_payload["generated_difficulty"], 2)
+	_expect_equal(errors, "default dungeon id", default_dungeon["id"], "generated_old_mine_draft")
+	_expect_equal(errors, "default display", DungeonEntrySelection.display_name(default_payload), "Medium Mine D2 S170717")
 
 	var generated_payload := DungeonEntrySelection.generated_payload(222, 3)
 	var generated_dungeon := DungeonEntrySelection.dungeon_for_payload(generated_payload)
@@ -18,20 +20,24 @@ func _init() -> void:
 	_expect_equal(errors, "generated source", generated_payload["source"], DungeonEntrySelection.SOURCE_GENERATED)
 	_expect_equal(errors, "generated seed", generated_payload["generated_seed"], 222)
 	_expect_equal(errors, "generated difficulty", generated_payload["generated_difficulty"], 3)
+	_expect_equal(errors, "generated profile", generated_payload["generated_profile"], "deep_mine")
 	_expect_equal(errors, "generated dungeon id", generated_dungeon["id"], "generated_old_mine_draft")
 	_expect_equal(errors, "generated dungeon hazard seed", int(generated_dungeon["hazard_seed"]), 222)
+	_expect_equal(errors, "generated dungeon profile metadata", generated_dungeon["generated_profile"]["id"], "deep_mine")
 	_expect_equal(errors, "same payload graph", _graph_signature(generated_dungeon), _graph_signature(same_generated_dungeon))
-	_expect_true(errors, "generated display", DungeonEntrySelection.display_name(generated_payload).contains("Generated D3 S222"))
+	_expect_true(errors, "generated display", DungeonEntrySelection.display_name(generated_payload).contains("Deep Mine D3 S222"))
 
 	var normalized := DungeonEntrySelection.normalize_payload({"source": "bad", "generated_seed": 99, "generated_difficulty": 9})
 	_expect_equal(errors, "invalid source falls back authored", normalized["source"], DungeonEntrySelection.SOURCE_AUTHORED)
 	_expect_equal(errors, "authored clears generated seed", normalized["generated_seed"], 0)
 	_expect_equal(errors, "difficulty clamps", normalized["generated_difficulty"], 3)
+	_expect_equal(errors, "profile follows clamped difficulty", normalized["generated_profile"], "deep_mine")
 
 	var round_trip_payload := DungeonEntrySelection.payload_for_dungeon(generated_dungeon)
 	_expect_equal(errors, "round trip source", round_trip_payload["source"], DungeonEntrySelection.SOURCE_GENERATED)
 	_expect_equal(errors, "round trip seed", round_trip_payload["generated_seed"], 222)
 	_expect_equal(errors, "round trip difficulty", round_trip_payload["generated_difficulty"], 3)
+	_expect_equal(errors, "round trip profile", round_trip_payload["generated_profile"], "deep_mine")
 
 	if errors.is_empty():
 		print("Dungeon entry selection validation passed.")

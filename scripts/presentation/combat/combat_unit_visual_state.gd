@@ -19,6 +19,27 @@ static func movement_actions_from_events(events: Array) -> Dictionary:
 	return actions
 
 
+static func movement_step_facings(event: Dictionary) -> Array[Dictionary]:
+	if event.get("type", "") != "unit_moved":
+		return []
+	var step_facings: Array[Dictionary] = []
+	var current: Dictionary = event.get("from", {})
+	var path: Array = event.get("path", [event.get("to", {})])
+	for step: Dictionary in path:
+		if not _has_position(current) or not _has_position(step):
+			current = step
+			continue
+		var direction := direction_between(current, step)
+		if direction != "":
+			step_facings.append({
+				"from": current.duplicate(true),
+				"to": step.duplicate(true),
+				"direction": direction,
+			})
+		current = step
+	return step_facings
+
+
 static func combat_actions_from_events(events: Array) -> Dictionary:
 	var actions: Dictionary = {}
 	for event: Dictionary in events:
@@ -60,3 +81,33 @@ static func has_movement_state(events: Array) -> bool:
 
 static func has_combat_state(events: Array) -> bool:
 	return not combat_actions_from_events(events).is_empty()
+
+
+static func direction_between(from_position: Dictionary, to_position: Dictionary) -> String:
+	if not _has_position(from_position) or not _has_position(to_position):
+		return ""
+	var dx := int(to_position["x"]) - int(from_position["x"])
+	var dy := int(to_position["y"]) - int(from_position["y"])
+	if dx == 0 and dy == 0:
+		return ""
+	if dy < 0 and dx == 0:
+		return "north"
+	if dy > 0 and dx == 0:
+		return "south"
+	if dx < 0 and dy == 0:
+		return "west"
+	if dx > 0 and dy == 0:
+		return "east"
+	if dx < 0 and dy < 0:
+		return "north_west"
+	if dx > 0 and dy < 0:
+		return "north_east"
+	if dx < 0 and dy > 0:
+		return "south_west"
+	if dx > 0 and dy > 0:
+		return "south_east"
+	return ""
+
+
+static func _has_position(position: Dictionary) -> bool:
+	return position.has("x") and position.has("y")

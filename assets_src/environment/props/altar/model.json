@@ -1,0 +1,8 @@
+{
+  "id": "altar",
+  "pixels_per_metre": 100,
+  "camera_elevation": 18,
+  "triangles": 612,
+  "uv": true,
+  "original": true
+}

@@ -1,0 +1,126 @@
+{
+  "schema": "sdd.mpfb-warden-v1",
+  "static": true,
+  "rigged": false,
+  "animated": false,
+  "integrated": false,
+  "addon_version": "2.0.18",
+  "blender": "5.2.3 LTS",
+  "reference_sha256": "1cbe614de2da6dfac3a515a8bd62cd4d84980b19e10361c10f04ad658c937964",
+  "parts": [
+    {
+      "name": "Retained_authored_warden_costume",
+      "triangles": 68954,
+      "uvs": [
+        "BakedAtlas"
+      ],
+      "materials": [
+        "Retained_painted_costume_Painted_reference_Head",
+        "Retained_painted_costume_Painted_reference_Body",
+        "Retained_painted_costume_Dark_wool",
+        "Retained_painted_costume_Collar",
+        "Retained_painted_costume_Brass",
+        "Retained_painted_costume_Painted_reference_Boot",
+        "Retained_painted_costume_Painted_reference_Metal",
+        "Retained_painted_costume_Painted_reference_Cloak"
+      ]
+    },
+    {
+      "name": "MPFB_coherent_head_and_neck",
+      "triangles": 35520,
+      "uvs": [
+        "UVMap"
+      ],
+      "materials": [
+        "MPFB_skin_matching_native_UV"
+      ]
+    },
+    {
+      "name": "MPFB_eyes",
+      "triangles": 2040,
+      "uvs": [
+        "UVMap"
+      ],
+      "materials": [
+        "MPFB_separate_brown_iris_and_sclera"
+      ]
+    },
+    {
+      "name": "MPFB_hair",
+      "triangles": 3678,
+      "uvs": [
+        "UVMap"
+      ],
+      "materials": [
+        "MPFB_separate_dark_hair"
+      ]
+    },
+    {
+      "name": "MPFB_eyebrows",
+      "triangles": 192,
+      "uvs": [
+        "UVMap"
+      ],
+      "materials": [
+        "MPFB_separate_eyebrows"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "asset": "eyes/high-poly/high-poly.mhclo",
+      "sha256": "b183cfe37120ab726f9b3f2ea6cd3a64c44ce7b4bd91a77c841cf70c04f83a0d",
+      "license": "CC0"
+    },
+    {
+      "asset": "hair/short01/short01.mhclo",
+      "sha256": "ae1ffaa98da5753b803b3a173bede4895d2215e6bb94763f3765a71f0e984f35",
+      "license": "CC0"
+    },
+    {
+      "asset": "eyebrows/eyebrow001/eyebrow001.mhclo",
+      "sha256": "54c8892c2ba577f4152d779ce1f20f7cd323beb8cbd9cb701796165c221b4f5b",
+      "license": "CC0"
+    },
+    {
+      "asset": "skins/jartur69_middleage_slavic_male_with_genitals_and_beard/jartur69_middleage_slavic_male_with_genitals_and_beard.mhmat",
+      "sha256": "803a8be0a00ae27db9b9c94778b441e77de8ccacb808d48a3ea25877ae94b69a",
+      "license": "CC0"
+    }
+  ],
+  "method": "coherent native-UV MPFB skin, separate CC0 eyes/hair/brows; retained authored costume",
+  "limits": [
+    "static visual pilot",
+    "costume retains earlier painted lighting",
+    "lower neck is cut under collar",
+    "no deformation/animation proof",
+    "offline tactical composition is not a Godot capture"
+  ],
+  "camera": {
+    "elevation": 18,
+    "yaw": 330,
+    "ortho": 2.7,
+    "tactical_pixels_per_metre": 100
+  },
+  "files": {
+    "mpfb_warden.blend": "0365891e93d6f1fa888850d6d641305a8d75a42273e687ad4fe45dd88d1d7f1a",
+    "mpfb_warden.fbx": "47dcac293e77fdec9558ea0f0bb8e7bccb5ef1b5b3eec77ff203044263194c82",
+    "renders/face_changed_light.png": "9c0c24acaada6b6db4fbbef9acd6fd0f7ec09c54bcbeb40a6771f1331f59e0e3",
+    "renders/face_front.png": "bb8659104cb037a13f4b7e13a37bb9c9909298acd972725bc282a3347f65e255",
+    "renders/face_profile.png": "d93e73978e1e638738b3790613eb8741fe96b41099e21765a4470dea09de63cf",
+    "renders/face_three_quarter.png": "e336543704a776ebe09242aea1d7f32b2badc80a0c37c6efb2cdeee81992dce9",
+    "renders/face_uv_checker.png": "b54f6a519ba80e19767ca2e2a9759d40ccce47733604a095213e6583e625b2fe",
+    "renders/front.png": "ad49630e4e7748e02ea2c8610fa50f27d2c6d0e4cf9bf8f1579628c75becd9df",
+    "renders/isometric35.png": "eabeb7cf21d9b30d7748a39a5996a90942584f2cf55f8cdc3534b395f3c365f9",
+    "renders/rear.png": "07b80a4bd29170d2d3459c4656e17358947a78c694e26207bb6e5c9bb8fce32a",
+    "renders/side.png": "2c2ca21f0093e01529a97c981bc07335d774554819032cfe94792d4db78912a1",
+    "renders/tactical.png": "3c3b14ba60981db882a7c25ce8176d8c832490f806088e20a4a654080d6fc932",
+    "renders/three_quarter.png": "a1e5efce7f55a2e9cb50120aba80ebba2f9db2ffb7ed4f1ec73db4d3e6d0760f",
+    "textures/02_warden_albedo.png": "a6f3c490980d2b0ebf28f4ddacf2b40357a9138bd34a1a3e5c79a5d8947babd7",
+    "textures/brown_eye_02.png": "fae2cf1e45fd4df3bc07ea4ea0f26883c78cbeae03585fa6754dc3e54c03c3dd",
+    "textures/eyebrow001.png": "9940f7d0b1b223709a19b05156ba6f6e9e4dbdbced02d7574f4d51d72c58967b",
+    "textures/eyebrow003.png": "e98837d77247f2c11a8259f8b265243b9053ba55683bd70223c668110e7dfb62",
+    "textures/Jartur_mid_old_Slavic_Male_with_Genitals_and_Beard_lsdif_lighter.png": "0f1a86d78af8bc1e55ae21cfaca0e7308384f789796adc77a78e4d22ccaf419c",
+    "textures/short01_diffuse.png": "f34a0957184e3d1e911ed59245f874f8d4843f61ee44ff49f43edb4be0196949"
+  }
+}

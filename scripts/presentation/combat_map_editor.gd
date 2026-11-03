@@ -1,8 +1,12 @@
 extends Control
 
+const AssetCatalog := preload("res://scripts/presentation/shared/asset_catalog.gd")
+const EnvironmentArt := preload("res://scripts/presentation/combat/environment_art.gd")
+const AuthoringDraft := preload("res://scripts/presentation/combat/authoring_draft.gd")
+
 const DEFAULT_ENCOUNTER_PATH := "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json"
 const TILE_TYPES := ["floor", "blocked", "cover_low", "highground"]
-const BRUSH_MODES := ["Tile + Decoration", "Tile", "Decoration", "Erase Decoration"]
+const BRUSH_MODES := ["Tile + Decoration", "Tile", "Decoration", "Erase Decoration", "Unit start"]
 const TERRAIN_ROOT := "res://assets/combat/terrain/processed"
 const FLOOR_BACKGROUND_PATHS := {
 	"floor_nature": "res://assets/combat/terrain/backgrounds/old_mine_meadow_01_deep_green.png",
@@ -48,6 +52,8 @@ var grid_container: GridContainer
 var board_scroll: ScrollContainer
 var selected_decoration_preview: TextureRect
 var selected_decoration_path_label: Label
+var unit_option: OptionButton
+var reference_spawns: Array = []
 
 
 func _ready() -> void:
@@ -56,6 +62,18 @@ func _ready() -> void:
 	_populate_decoration_option()
 	_populate_floor_option()
 	_load_encounter(encounter_path)
+	if get_tree().has_meta(AuthoringDraft.DRAFT_META):
+		encounter = get_tree().get_meta(AuthoringDraft.DRAFT_META).duplicate(true)
+		encounter_path = str(get_tree().get_meta(AuthoringDraft.PATH_META, "user://combat_draft.json"))
+		path_edit.text = encounter_path
+		_rebuild_lookup_tables()
+		_populate_units()
+		_render_board()
+		_update_background_path_label()
+		_set_status("Returned from draft combat; unsaved working copy restored.")
+		get_tree().remove_meta(AuthoringDraft.DRAFT_META)
+		if get_tree().has_meta(AuthoringDraft.PATH_META):
+			get_tree().remove_meta(AuthoringDraft.PATH_META)
 
 
 func _build_ui() -> void:
@@ -104,6 +122,16 @@ func _build_ui() -> void:
 		_save_encounter(path_edit.text.strip_edges())
 	)
 	path_buttons.add_child(save_button)
+	var play_button := Button.new()
+	play_button.text = "Play Draft (F5)"
+	play_button.pressed.connect(_play_draft)
+	tools.add_child(play_button)
+	unit_option = OptionButton.new()
+	tools.add_child(_labeled_control("Unit start brush moves selected unit", unit_option))
+	var return_button := Button.new()
+	return_button.text = "Return to Dungeon (F6)"
+	return_button.pressed.connect(func() -> void: get_tree().change_scene_to_file("res://scenes/dungeon/DungeonDebug.tscn"))
+	tools.add_child(return_button)
 
 	var reload_assets_button := Button.new()
 	reload_assets_button.text = "Reload Assets"
@@ -223,9 +251,21 @@ func _load_encounter(path: String) -> void:
 	if typeof(parsed) != TYPE_DICTIONARY:
 		_set_status("Invalid encounter JSON: %s" % path)
 		return
+	var working_copy := AuthoringDraft.materialize(parsed)
+	var failures := AuthoringDraft.errors(working_copy)
+	if not failures.is_empty():
+		_set_status("Cannot load: " + "; ".join(failures))
+		return
 	encounter_path = path
 	path_edit.text = encounter_path
-	encounter = parsed
+	reference_spawns = []
+	var map_path := str(parsed.get("map_path", ""))
+	if map_path != "":
+		var map_json: Variant = JSON.parse_string(FileAccess.get_file_as_string(map_path))
+		if map_json is Dictionary:
+			reference_spawns = map_json.get("test_spawns", []).duplicate(true)
+	encounter = working_copy
+	_populate_units()
 	_rebuild_lookup_tables()
 	_render_board()
 	_update_background_path_label()
@@ -245,12 +285,33 @@ func _save_encounter(path: String) -> void:
 		_set_status("Cannot save: no encounter loaded.")
 		return
 	_write_lookup_tables_to_encounter()
+	var failures := AuthoringDraft.errors(encounter)
+	if not failures.is_empty():
+		_set_status("Cannot save: " + "; ".join(failures))
+		return
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
 		_set_status("Cannot write encounter: %s" % path)
 		return
 	file.store_string(JSON.stringify(encounter, "  "))
 	_set_status("Saved %s" % path)
+
+
+func _populate_units() -> void:
+	unit_option.clear()
+	for unit: Dictionary in encounter.get("units", []):
+		unit_option.add_item(str(unit.get("id", "?")))
+
+
+func _play_draft() -> void:
+	_write_lookup_tables_to_encounter()
+	var failures := AuthoringDraft.errors(encounter)
+	if not failures.is_empty():
+		_set_status("Cannot play: " + "; ".join(failures))
+		return
+	get_tree().set_meta(AuthoringDraft.DRAFT_META, encounter.duplicate(true))
+	get_tree().set_meta(AuthoringDraft.PATH_META, path_edit.text.strip_edges())
+	get_tree().change_scene_to_file("res://scenes/combat/CombatDebug.tscn")
 
 
 func _rebuild_lookup_tables() -> void:
@@ -293,6 +354,7 @@ func _write_lookup_tables_to_encounter() -> void:
 
 func _render_board() -> void:
 	for child in grid_container.get_children():
+		grid_container.remove_child(child)
 		child.queue_free()
 	var grid: Dictionary = encounter.get("grid", {})
 	var width := int(grid.get("width", 0))
@@ -339,6 +401,11 @@ func _on_cell_gui_input(event: InputEvent, position: Dictionary) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_F5:
+			_play_draft()
+		elif event.keycode == KEY_F6:
+			get_tree().change_scene_to_file("res://scenes/dungeon/DungeonDebug.tscn")
 	if event is InputEventMouseButton:
 		var mouse_event := event as InputEventMouseButton
 		if mouse_event.button_index == MOUSE_BUTTON_LEFT and not mouse_event.pressed:
@@ -363,6 +430,13 @@ func _apply_brush(position: Dictionary) -> void:
 				_set_decoration(position, selected_decoration_path)
 		"Erase Decoration":
 			_clear_decoration(position)
+		"Unit start":
+			var index := unit_option.selected
+			if index >= 0 and index < encounter.get("units", []).size():
+				encounter["units"][index]["position"] = position.duplicate()
+				_render_board()
+				_set_status("Moved unit start. Save/Play validates blocked and overlapping starts.")
+				return
 	_refresh_cell(position)
 
 
@@ -440,11 +514,11 @@ func _add_decoration_preview(cell: Button, position: Dictionary) -> void:
 	if texture == null:
 		return
 	var preview := TextureRect.new()
+	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	preview.texture = texture
 	preview.custom_minimum_size = DECORATION_PREVIEW_SIZE
 	preview.size = DECORATION_PREVIEW_SIZE
 	preview.position = Vector2((CELL_SIZE.x - DECORATION_PREVIEW_SIZE.x) / 2.0, 15)
-	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	cell.add_child(preview)
@@ -455,6 +529,9 @@ func _cell_label(position: Dictionary) -> String:
 	var decoration_label := ""
 	if not decoration.is_empty():
 		decoration_label = "\n%s" % _short_asset_label(str(decoration.get("path", "")))
+	for unit: Dictionary in encounter.get("units", []):
+		if _position_key(unit.get("position", {})) == _position_key(position):
+			decoration_label += "\n%s" % ("PLAYER" if unit.get("team") == "player" else "ENEMY")
 	return "%s,%s\n%s%s" % [
 		int(position.get("x", 0)),
 		int(position.get("y", 0)),
@@ -468,6 +545,12 @@ func _cell_tooltip(position: Dictionary) -> String:
 	var text := "(%s,%s) %s" % [position.get("x", 0), position.get("y", 0), _tile_type(position)]
 	if not decoration.is_empty():
 		text += "\n%s" % str(decoration.get("path", ""))
+	for unit: Dictionary in encounter.get("units", []):
+		if _position_key(unit.get("position", {})) == _position_key(position):
+			text += "\nUnit: %s" % unit.get("id", "?")
+	for spawn: Dictionary in reference_spawns:
+		if _position_key(spawn) == _position_key(position):
+			text += "\nTMX marker: %s (%s)" % [spawn.get("id", "?"), spawn.get("role", "?")]
 	return text
 
 
@@ -510,22 +593,7 @@ func _load_decoration_paths() -> void:
 
 
 func _collect_png_paths(root: String, output: Array[String]) -> void:
-	var dir := DirAccess.open(root)
-	if dir == null:
-		return
-	dir.list_dir_begin()
-	var file_name := dir.get_next()
-	while file_name != "":
-		if file_name == "." or file_name == "..":
-			file_name = dir.get_next()
-			continue
-		var path := "%s/%s" % [root, file_name]
-		if dir.current_is_dir():
-			_collect_png_paths(path, output)
-		elif file_name.to_lower().ends_with(".png"):
-			output.append(path)
-		file_name = dir.get_next()
-	dir.list_dir_end()
+	output.append_array(AssetCatalog.paths_under(root))
 
 
 func _populate_decoration_option() -> void:
@@ -615,11 +683,7 @@ func _decoration_texture(path: String) -> Texture2D:
 		return null
 	if decoration_texture_cache.has(path):
 		return decoration_texture_cache[path]
-	var image := Image.new()
-	var error := image.load(path)
-	if error != OK:
-		return null
-	var texture := ImageTexture.create_from_image(image)
+	var texture := EnvironmentArt.texture(path)
 	decoration_texture_cache[path] = texture
 	return texture
 

@@ -6,6 +6,7 @@ const CombatUnitVisualState := preload("res://scripts/presentation/combat/combat
 func _init() -> void:
 	var errors: Array[String] = []
 	errors.append_array(_test_movement_action())
+	errors.append_array(_test_movement_step_facings())
 	errors.append_array(_test_damage_hit_actions())
 	errors.append_array(_test_damage_death_actions())
 	errors.append_array(_test_status_damage_target_only())
@@ -28,6 +29,26 @@ func _test_movement_action() -> Array[String]:
 		{"type": "unit_moved", "actor_id": "unit_player_001"},
 	])
 	return _expect_action("movement", actions, "unit_player_001", "walk")
+
+
+func _test_movement_step_facings() -> Array[String]:
+	var facings := CombatUnitVisualState.movement_step_facings({
+		"type": "unit_moved",
+		"actor_id": "unit_enemy_001",
+		"from": {"x": 1, "y": 1},
+		"path": [
+			{"x": 2, "y": 1},
+			{"x": 2, "y": 2},
+			{"x": 1, "y": 2},
+		],
+	})
+	var expected := ["east", "south", "west"]
+	var actual: Array[String] = []
+	for facing: Dictionary in facings:
+		actual.append(str(facing.get("direction", "")))
+	if actual == expected:
+		return []
+	return ["movement step facings: expected %s, got %s" % [expected, actual]]
 
 
 func _test_damage_hit_actions() -> Array[String]:

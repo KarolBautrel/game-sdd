@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "scope": "quick painted pose study, pending user review",
+  "previous_files_unchanged": 77,
+  "prompt": "prompt.json",
+  "preview": "before_after.png",
+  "sample": "sample.png"
+}

@@ -1,0 +1,36 @@
+{
+  "id": "bandit_rogue",
+  "kind": "human",
+  "label": "Bandit rogue",
+  "canvas_size": [
+    512,
+    384
+  ],
+  "pivot": [
+    256,
+    282
+  ],
+  "camera_elevation": 18,
+  "pixels_per_metre": 100,
+  "triangles": 4058,
+  "vertices": 2142,
+  "bones": 65,
+  "uv": true,
+  "weighted": true,
+  "actions": {
+    "pose": "Idle_Loop",
+    "walk": "Walk_Loop",
+    "combat": "Sword_Attack",
+    "hit": "Hit_Chest",
+    "death": "Death01"
+  },
+  "frame_counts": {
+    "pose": 4,
+    "walk": 8,
+    "combat": 8,
+    "hit": 4,
+    "death": 8
+  },
+  "preview_only": false,
+  "legacy_reference": "../references/bandit_rogue.png"
+}

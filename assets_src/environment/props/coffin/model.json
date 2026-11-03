@@ -1,0 +1,8 @@
+{
+  "id": "coffin",
+  "pixels_per_metre": 100,
+  "camera_elevation": 18,
+  "triangles": 120,
+  "uv": true,
+  "original": true
+}

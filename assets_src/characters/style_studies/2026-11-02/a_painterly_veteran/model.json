@@ -1,0 +1,47 @@
+{
+  "id": "a_painterly_veteran",
+  "title": "A / Malarski weteran",
+  "scaffold": "realistic",
+  "base_library_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+  "static": true,
+  "rigged": false,
+  "animated": false,
+  "integrated": false,
+  "vertices": 63571,
+  "triangles": 126322,
+  "bounds": [
+    [
+      -0.6417111158370972,
+      0.6710418462753296
+    ],
+    [
+      -0.21050000190734863,
+      0.254104346036911
+    ],
+    [
+      0.014000002294778824,
+      1.839067816734314
+    ]
+  ],
+  "camera": {
+    "elevation": 18,
+    "three_quarter_yaw": 330,
+    "close_ortho": 2.8,
+    "tactical_ortho": 3.84,
+    "tactical_pixels": 384,
+    "pixels_per_meter": 100
+  },
+  "render_only_ink_hull": false,
+  "authoring_materials": "procedural directional brush variation; baked albedo in portable FBX",
+  "files": {
+    "a_painterly_veteran.blend": "2d4918571e7adfb92f705843908e4881e4dce8c24cfcd2f8290048c53ef69e0a",
+    "a_painterly_veteran.fbx": "9e8017c897deb1d2c0c94ac028f6c06824eb73b0a7cb794ed9a7244fd7f7840d",
+    "renders/face.png": "6b5762dc5ef13722b5ad732313c18158a445949e3ef5a3272372988698977a97",
+    "renders/front.png": "c0f2277a2d9da618ef49f9d0adff4faac5bd355d53aa7674c0fedb7fead6f2b0",
+    "renders/rear.png": "fe9919c9d011d6a84374701d73205b396a0b3f5e0723e31f24b1417740d93360",
+    "renders/side.png": "6db18355b5b8e49527f5e850164764b722f978e769dd1bb33a55b979f04dcb8c",
+    "renders/tactical_100ppm.png": "0c4d786b0ae96892dbc108c82cf02349af74b40005bdcec88b2aa97bfbe312be",
+    "renders/three_quarter.png": "47fac87e06aff8d582e4f36e6b922ff211a9ca4843db4ea610659e5e9f019bb9",
+    "textures/a_painterly_veteran_albedo.png": "a89a07361b515c787cfdc600f9a79422d3726b3f3a47dc946537910e68a1051e"
+  }
+}

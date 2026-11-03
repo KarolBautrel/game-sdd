@@ -1,0 +1,8 @@
+{
+  "id": "rubble",
+  "pixels_per_metre": 100,
+  "camera_elevation": 18,
+  "triangles": 1476,
+  "uv": true,
+  "original": true
+}

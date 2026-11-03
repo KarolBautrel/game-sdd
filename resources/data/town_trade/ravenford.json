@@ -1,0 +1,46 @@
+{
+  "schema": "sdd.town-trade-v1",
+  "town_id": "town_ravenford",
+  "offers": [
+    {
+      "item_id": "hero_sword",
+      "buy_price": 10
+    },
+    {
+      "item_id": "hero_bow",
+      "buy_price": 10
+    },
+    {
+      "item_id": "salvaged_blade",
+      "buy_price": 16
+    },
+    {
+      "item_id": "salvaged_shield",
+      "buy_price": 12
+    },
+    {
+      "item_id": "patched_leather",
+      "buy_price": 14
+    },
+    {
+      "item_id": "leather_boots",
+      "buy_price": 6
+    },
+    {
+      "item_id": "steel_boots",
+      "buy_price": 10
+    },
+    {
+      "item_id": "leather_cap",
+      "buy_price": 8
+    },
+    {
+      "item_id": "closed_helm",
+      "buy_price": 14
+    },
+    {
+      "item_id": "weathered_cuirass",
+      "buy_price": 18
+    }
+  ]
+}

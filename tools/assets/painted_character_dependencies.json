@@ -1,0 +1,160 @@
+{
+  "schema": "sdd.painted-character-dependencies-v1",
+  "verified": "2026-11-02",
+  "blender": "5.2.3 LTS",
+  "skills": {
+    "repo": "https://github.com/scenario-labs/skills",
+    "commit": "7f4b801c7248d51b093ec365aceb114bd06139e6",
+    "license": "MIT",
+    "installer": "official Codex skill-installer install-skill-from-github.py",
+    "paths": [
+      {
+        "name": "scenario-blender-expert",
+        "upstream_path": "skills/dcc/blender/scenario-blender-expert",
+        "skill_sha256": "049f0ecd4bbbdc3e6ee09beac9ce5f262d6970f6932221e20e0420bf492bd5f2"
+      },
+      {
+        "name": "scenario-blender-sculpting",
+        "upstream_path": "skills/dcc/blender/scenario-blender-sculpting",
+        "skill_sha256": "7ac5f27f2ddd320f38f9d47993eedaa8f0e5988b0004ef64ea7d1e188bbdb699"
+      },
+      {
+        "name": "scenario-blender-texturing-shading",
+        "upstream_path": "skills/dcc/blender/scenario-blender-texturing-shading",
+        "skill_sha256": "a178cdb8cee1e0406d0eacd577aa9fcc3bce5766abcf8fba274f55b8c4aebe3a"
+      },
+      {
+        "name": "scenario-blender-hair",
+        "upstream_path": "skills/dcc/blender/scenario-blender-hair",
+        "skill_sha256": "2cb34c57d4b8cb4f6e8154e5d337a308ecb66df52cab4b16ba49e9a26caf5e3b"
+      },
+      {
+        "name": "scenario-blender-uv-baking",
+        "upstream_path": "skills/dcc/blender/scenario-blender-uv-baking",
+        "skill_sha256": "46896959cd9220989eae6ec253c19c8733d5dd587011ccda7f75ddd11a288a61"
+      },
+      {
+        "name": "scenario-blender-lighting-rendering",
+        "upstream_path": "skills/dcc/blender/scenario-blender-lighting-rendering",
+        "skill_sha256": "2d428bcf7d7af12be58a680dc670fb965335b742bb7fa69fc560870a7a45403a"
+      },
+      {
+        "name": "scenario-blender-hard-surface",
+        "upstream_path": "skills/dcc/blender/scenario-blender-hard-surface",
+        "skill_sha256": "2bfcc5fbab235b0aa6f94d73d9c01521b0143c89a5dc7ba994fa49ee0f3d2510"
+      },
+      {
+        "name": "scenario-blender-retopology",
+        "upstream_path": "skills/dcc/blender/scenario-blender-retopology",
+        "skill_sha256": "2578f4de892cd107df8aefa8892ccf1b348a1720a6ae2e9798b6ae0120362f08"
+      },
+      {
+        "name": "scenario-blender-rigging",
+        "upstream_path": "skills/dcc/blender/scenario-blender-rigging",
+        "skill_sha256": "21f40e2bd29e110f0a8ae32204f74a866e292431b5769e002783b3a1ac13e3c6"
+      },
+      {
+        "name": "scenario-blender-animation",
+        "upstream_path": "skills/dcc/blender/scenario-blender-animation",
+        "skill_sha256": "7000c7bab1569343ee8e50ca41e34de03ec0cb7dde1e4ed6ed04a19b117caf67"
+      },
+      {
+        "name": "scenario-blender-grease-pencil",
+        "upstream_path": "skills/dcc/blender/scenario-blender-grease-pencil",
+        "skill_sha256": "507f60992492c9d63b498494aaeab2f0a76ca35d92e31c18e1ce29470d36169d"
+      },
+      {
+        "name": "scenario-blender-geometry-nodes",
+        "upstream_path": "skills/dcc/blender/scenario-blender-geometry-nodes",
+        "skill_sha256": "2cac914718e24041734a15fa54b0cb1bd2d5a3e9a19570fd6ac34dc507722b7e"
+      },
+      {
+        "name": "scenario-blender-previs-storyboard",
+        "upstream_path": "skills/dcc/blender/scenario-blender-previs-storyboard",
+        "skill_sha256": "6cd8d335f2c98d05d2a03f1440224531c8ac082ad1b21ac5ab513d926b261d22"
+      },
+      {
+        "name": "scenario-blender-export",
+        "upstream_path": "skills/dcc/blender/scenario-blender-export",
+        "skill_sha256": "742d381564dd1709b6054ea92caf6d48566a91ffa1d8032415fc3d1f6200d475"
+      },
+      {
+        "name": "scenario-blender-blockout",
+        "upstream_path": "skills/dcc/blender/scenario-blender-blockout",
+        "skill_sha256": "93101ffad8a67c299b2490710ea33755b5be416ccec74c00d9e19e20f5f692de"
+      }
+    ]
+  },
+  "ucupaint": {
+    "version": "3.0.0",
+    "variant": "no-auto-update",
+    "source": "https://github.com/ucupumar/ucupaint/releases/download/3.0.0/ucupaint-no-auto-update-3.0.0.zip",
+    "archive_sha256": "1d96d610517bc2af68b8f1ecccbb5ee088ebbc8b1ad49056e0ec438e916c5bb6",
+    "license": "GPL-3.0-or-later",
+    "license_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "install": "%USERPROFILE%/.codex/tools/character-art/profile/scripts/addons/ucupaint",
+    "user_preferences_saved": false
+  },
+  "executed_helpers": [
+    "bx_sculpt.Clay",
+    "bx_sculpt.Sculptor.plane_cut",
+    "bx_hardsurface.hard_surface_stack",
+    "bx_materials.painted_light",
+    "bx_audit.deliverable",
+    "bx_review.review"
+  ],
+  "smoke_modules_imported": [
+    "bx_uvbake"
+  ],
+  "smoke": {
+    "status": "PASS",
+    "blender": "5.2.3 LTS",
+    "skill_modules": [
+      "bx_audit",
+      "bx_sculpt",
+      "bx_hardsurface",
+      "bx_materials",
+      "bx_uvbake"
+    ],
+    "ucupaint": "3.0.0 no-auto-update",
+    "ucupaint_nodes": 1,
+    "ucupaint_setup": true,
+    "ucupaint_image_layer": true,
+    "audit": {
+      "profile": "render",
+      "eps": 0.000346,
+      "tol": 0.006928,
+      "gap": 0.034641,
+      "pass": true,
+      "errors": [],
+      "warnings": [],
+      "per_object": {
+        "ToolSmoke": {
+          "tris": 12,
+          "parts": 1,
+          "errors": [],
+          "warnings": []
+        }
+      },
+      "skipped": []
+    },
+    "sculpt": {
+      "faces": 1814,
+      "verts": 1816,
+      "height": 0.09,
+      "voxel": null,
+      "voxel_over_H": null,
+      "components": 1,
+      "non_manifold_edges": 0,
+      "stretch_p95_over_median": 1.005,
+      "mirror_max": 0.0,
+      "mirror_mean": 0.0,
+      "scale_applied": true
+    },
+    "gui_brush_strokes": false
+  },
+  "paid_cloud_jobs": 0,
+  "desktop_input": false,
+  "new_mcp_installed": false,
+  "note": "Existing background Blender MCP remains configured. Helpers used directly in owned Blender CLI; no Scenario cloud/connector installed."
+}

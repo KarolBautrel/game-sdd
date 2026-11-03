@@ -1,0 +1,47 @@
+{
+  "id": "b_ink_warden",
+  "title": "B / Mroczny komiks",
+  "scaffold": "realistic",
+  "base_library_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+  "static": true,
+  "rigged": false,
+  "animated": false,
+  "integrated": false,
+  "vertices": 61339,
+  "triangles": 122050,
+  "bounds": [
+    [
+      -0.614341139793396,
+      0.6423418521881104
+    ],
+    [
+      -0.2453005462884903,
+      0.254104346036911
+    ],
+    [
+      0.014000002294778824,
+      1.839067816734314
+    ]
+  ],
+  "camera": {
+    "elevation": 18,
+    "three_quarter_yaw": 330,
+    "close_ortho": 2.8,
+    "tactical_ortho": 3.84,
+    "tactical_pixels": 384,
+    "pixels_per_meter": 100
+  },
+  "render_only_ink_hull": true,
+  "authoring_materials": "procedural directional brush variation; baked albedo in portable FBX",
+  "files": {
+    "b_ink_warden.blend": "ae39b207324884df19f9954f24028258b2e07b2dc4de412b02b5d77bc6e28bdd",
+    "b_ink_warden.fbx": "ff69604391f47db5a84c6d318ba1641a5e29c8127d16a4bced2a3dacb12f3ccc",
+    "renders/face.png": "555629cad9dd4de0f9af24f19233eabf4fe48dc891609cefd1e73749cdfb23e3",
+    "renders/front.png": "7185d4291b9fefa34d61b65991302fd3d47d6d1865a158fe6ffbfdb969864c74",
+    "renders/rear.png": "2a3b2e2873458187c955ebe802d4aa3372bf52c0888d1580ea608a2300ddb797",
+    "renders/side.png": "ad5671ce61d564035eadc4e74caa30ac2d9aa7adca4415586970552f829db5e2",
+    "renders/tactical_100ppm.png": "f98582912d14813a14da2593a9934c6561d623cbae0d783720533f0620d060d1",
+    "renders/three_quarter.png": "4d66baed7bfe3450203663a0ce8be63aefcc233f2ea522b1eef4254722349c0c",
+    "textures/b_ink_warden_albedo.png": "3ec6d49700e9cbbaf16c401313fb394fa7afe970c7da3b9e564208286946e4a2"
+  }
+}

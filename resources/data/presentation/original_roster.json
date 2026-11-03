@@ -1,0 +1,344 @@
+{
+  "schema": "sdd.original-roster-v1",
+  "camera": {
+    "elevation": 18,
+    "ortho_width": 5.12,
+    "size": [
+      512,
+      384
+    ],
+    "pivot": [
+      256,
+      282
+    ],
+    "yaw": {
+      "south": 0,
+      "south_west": 15,
+      "west": 30,
+      "north_west": 60,
+      "north": 180,
+      "north_east": 300,
+      "east": 330,
+      "south_east": 345
+    },
+    "pixels_per_metre": 100
+  },
+  "frame_counts": {
+    "pose": 4,
+    "walk": 8,
+    "combat": 8,
+    "hit": 4,
+    "death": 8
+  },
+  "aliases": {
+    "enemy_baddie": "bandit",
+    "enemy_orc": "goblin_atlas",
+    "enemy_skeleton": "skeleton_warrior"
+  },
+  "characters": [
+    {
+      "id": "warrior",
+      "kind": "human",
+      "label": "Bran",
+      "weapon": "sword",
+      "offhand": "kite_shield",
+      "headwear": "hair",
+      "accent": "blue",
+      "scale": 1.0,
+      "face": "beard"
+    },
+    {
+      "id": "archer_1",
+      "kind": "human",
+      "label": "Torin",
+      "weapon": "bow",
+      "offhand": "quiver",
+      "headwear": "hood",
+      "accent": "blue",
+      "scale": 1.0,
+      "face": "clean"
+    },
+    {
+      "id": "rogue_1",
+      "kind": "human",
+      "label": "Red scarf rogue",
+      "weapon": "dagger",
+      "offhand": "dagger",
+      "headwear": "hair",
+      "accent": "red",
+      "scale": 0.98,
+      "face": "mask"
+    },
+    {
+      "id": "bandit_spearman",
+      "kind": "human",
+      "label": "Bandit spearman",
+      "weapon": "spear",
+      "offhand": "none",
+      "headwear": "helmet",
+      "accent": "red",
+      "scale": 1.0,
+      "face": "clean"
+    },
+    {
+      "id": "crossbowman",
+      "kind": "human",
+      "label": "Crossbowman",
+      "weapon": "crossbow",
+      "offhand": "none",
+      "headwear": "cap",
+      "accent": "red",
+      "scale": 1.0,
+      "face": "beard"
+    },
+    {
+      "id": "guardian",
+      "kind": "human",
+      "label": "Guardian",
+      "weapon": "mace",
+      "offhand": "round_shield",
+      "headwear": "helmet",
+      "accent": "red",
+      "scale": 1.03,
+      "face": "beard"
+    },
+    {
+      "id": "axe_bandit",
+      "kind": "human",
+      "label": "Axe bandit",
+      "weapon": "axe",
+      "offhand": "none",
+      "headwear": "hood",
+      "accent": "red",
+      "scale": 1.0,
+      "face": "mask"
+    },
+    {
+      "id": "bandit_archer",
+      "kind": "human",
+      "label": "Bandit archer",
+      "weapon": "bow",
+      "offhand": "quiver",
+      "headwear": "helmet",
+      "accent": "red",
+      "scale": 0.99,
+      "face": "clean"
+    },
+    {
+      "id": "bandit_brute",
+      "kind": "human",
+      "label": "Bandit brute",
+      "weapon": "cleaver",
+      "offhand": "fur",
+      "headwear": "hair",
+      "accent": "red",
+      "scale": 1.1,
+      "face": "beard"
+    },
+    {
+      "id": "bandit_carnage",
+      "kind": "human",
+      "label": "Dark hood assassin",
+      "weapon": "dagger",
+      "offhand": "dagger",
+      "headwear": "hood",
+      "accent": "charcoal",
+      "scale": 0.97,
+      "face": "mask"
+    },
+    {
+      "id": "bandit_marauder",
+      "kind": "human",
+      "label": "Red hood marauder",
+      "weapon": "axe",
+      "offhand": "dagger",
+      "headwear": "hood",
+      "accent": "red",
+      "scale": 1.03,
+      "face": "mask"
+    },
+    {
+      "id": "bandit_rogue",
+      "kind": "human",
+      "label": "Bandit rogue",
+      "weapon": "dagger",
+      "offhand": "none",
+      "headwear": "hood",
+      "accent": "red",
+      "scale": 0.96,
+      "face": "mask"
+    },
+    {
+      "id": "armored_brute",
+      "kind": "human",
+      "label": "Armored brute",
+      "weapon": "axe",
+      "offhand": "spikes",
+      "headwear": "closed_helmet",
+      "accent": "charcoal",
+      "scale": 1.12,
+      "face": "clean"
+    },
+    {
+      "id": "bandit",
+      "kind": "human",
+      "label": "Road bandit",
+      "weapon": "sword",
+      "offhand": "none",
+      "headwear": "hood",
+      "accent": "charcoal",
+      "scale": 0.99,
+      "face": "mask"
+    },
+    {
+      "id": "ash_raider",
+      "kind": "human",
+      "label": "Ash-road Raider",
+      "weapon": "cleaver",
+      "offhand": "none",
+      "headwear": "hood",
+      "accent": "red",
+      "scale": 1.0,
+      "face": "mask"
+    },
+    {
+      "id": "goblin_atlas",
+      "kind": "goblin",
+      "label": "Goblin",
+      "weapon": "spear",
+      "offhand": "none",
+      "headwear": "bare",
+      "accent": "olive",
+      "scale": 0.72,
+      "face": "goblin"
+    },
+    {
+      "id": "lizardman",
+      "kind": "lizard",
+      "label": "Lizardman",
+      "weapon": "spear",
+      "offhand": "tail",
+      "headwear": "bare",
+      "accent": "olive",
+      "scale": 1.02,
+      "face": "lizard"
+    },
+    {
+      "id": "ogre",
+      "kind": "ogre",
+      "label": "Ogre",
+      "weapon": "club",
+      "offhand": "none",
+      "headwear": "bare",
+      "accent": "brown",
+      "scale": 1.16,
+      "face": "ogre"
+    },
+    {
+      "id": "skeleton_archer",
+      "kind": "skeleton",
+      "label": "Skeleton archer",
+      "weapon": "bow",
+      "offhand": "quiver",
+      "headwear": "bare",
+      "accent": "bone",
+      "scale": 1.0,
+      "face": "skull"
+    },
+    {
+      "id": "skeleton_warrior",
+      "kind": "skeleton",
+      "label": "Skeleton warrior",
+      "weapon": "sword",
+      "offhand": "none",
+      "headwear": "bare",
+      "accent": "bone",
+      "scale": 1.0,
+      "face": "skull"
+    },
+    {
+      "id": "wraith",
+      "kind": "wraith",
+      "label": "Wraith",
+      "weapon": "none",
+      "offhand": "shroud",
+      "headwear": "hood",
+      "accent": "teal",
+      "scale": 1.03,
+      "face": "skull"
+    },
+    {
+      "id": "wolf_atlas",
+      "kind": "wolf",
+      "label": "Dire wolf",
+      "weapon": "fangs",
+      "offhand": "fur",
+      "headwear": "bare",
+      "accent": "charcoal",
+      "scale": 1.0,
+      "face": "wolf"
+    },
+    {
+      "id": "dire_boar",
+      "kind": "boar",
+      "label": "Dire boar",
+      "weapon": "tusks",
+      "offhand": "bristles",
+      "headwear": "bare",
+      "accent": "brown",
+      "scale": 1.0,
+      "face": "boar"
+    },
+    {
+      "id": "hell_hound",
+      "kind": "hound",
+      "label": "Hell hound",
+      "weapon": "fangs",
+      "offhand": "embers",
+      "headwear": "bare",
+      "accent": "ember",
+      "scale": 1.08,
+      "face": "hound"
+    },
+    {
+      "id": "bat",
+      "kind": "bat",
+      "label": "Cave bat",
+      "weapon": "fangs",
+      "offhand": "wings",
+      "headwear": "bare",
+      "accent": "brown",
+      "scale": 1.0,
+      "face": "bat"
+    },
+    {
+      "id": "giant_snake",
+      "kind": "snake",
+      "label": "Giant snake",
+      "weapon": "fangs",
+      "offhand": "cobra_hood",
+      "headwear": "bare",
+      "accent": "olive",
+      "scale": 1.0,
+      "face": "snake"
+    },
+    {
+      "id": "spider_atlas",
+      "kind": "spider",
+      "label": "Giant spider",
+      "weapon": "fangs",
+      "offhand": "eight_legs",
+      "headwear": "bare",
+      "accent": "brown",
+      "scale": 1.0,
+      "face": "spider"
+    }
+  ],
+  "frame_seconds": {
+    "pose": 0.2,
+    "walk": 0.065,
+    "combat": 0.07,
+    "hit": 0.06,
+    "death": 0.08
+  }
+}

@@ -22,6 +22,19 @@ Combat terrain props should use the new scale-matched terrain atlases instead of
 
 ## Proof
 
+Presentation010/stage36 supersedes the displayed art through a central semantic
+adapter. Authored IDs/placements, themes and logical terrain remain unchanged;
+legacy resources stay as references. Displayed floors use original painted ground
+swatches and every displayed prop family routes to original Blender renders with
+the characters' material palette,18-degree camera and consistent contact shadows.
+Raised terrain uses an actual stone/earth ledge sprite rather than yellow debug
+plates/labels. The editor preview uses the same adapter while serializing the
+original authoring identifiers. Validate domain equality, mapping coverage and
+native nature/dungeon boards before export.
+The newer semantic terrain layer supplies a solid silhouette on a blocked or
+cover tile with no authored decoration; explicit empty floor tiles remain empty
+and `_tile_decoration_path`/saved placement data still has no fallback entry.
+
 - `tools/terrain/extract_combat_terrain_assets.gd`
 - `assets/combat/terrain/processed/processed_terrain_manifest.json`
 - `resources/data/combat_encounters/debug_terrain_grass_showcase.json`

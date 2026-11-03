@@ -1,0 +1,23 @@
+{
+  "id": "axe_bandit",
+  "resource": "res://assets/combat/models/axe_bandit.glb",
+  "channels": [
+    "armor_default",
+    "body",
+    "boots_default",
+    "headwear_default",
+    "weapon_axe"
+  ],
+  "actions": {
+    "axe": {
+      "pose": "axe_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    }
+  },
+  "default_weapon": "axe",
+  "hero": false,
+  "bones": 65
+}

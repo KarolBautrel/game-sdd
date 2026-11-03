@@ -1,0 +1,8 @@
+{
+  "id": "statue",
+  "pixels_per_metre": 100,
+  "camera_elevation": 18,
+  "triangles": 440,
+  "uv": true,
+  "original": true
+}

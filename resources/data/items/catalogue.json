@@ -1,0 +1,359 @@
+{
+  "schema": "sdd.campaign-items-v1",
+  "items": [
+    {
+      "id": "amber_idol_chip",
+      "name": "Amber idol fragment",
+      "description": "A fragment recovered from a forgotten shrine.",
+      "category": "valuable",
+      "value": 5
+    },
+    {
+      "id": "bent_mining_token",
+      "name": "Bent mining token",
+      "description": "An old token from a mine work crew.",
+      "category": "valuable",
+      "value": 2
+    },
+    {
+      "id": "brass_route_marker",
+      "name": "Brass route marker",
+      "description": "A survey marker bearing an old route number.",
+      "category": "quest",
+      "value": 0
+    },
+    {
+      "id": "generated_old_mine_relic",
+      "name": "Ancient mine relic",
+      "description": "A curious relic found in a deep mine chamber.",
+      "category": "valuable",
+      "value": 8
+    },
+    {
+      "id": "generated_old_mine_trinket",
+      "name": "Mine trinket",
+      "description": "A small keepsake recovered from the mine.",
+      "category": "valuable",
+      "value": 3
+    },
+    {
+      "id": "hero_bow",
+      "name": "Hunting bow",
+      "description": "A two-handed bow. Grants Ranged Attack and Aimed Shot; cannot use an off-hand item.",
+      "category": "equipment",
+      "value": 5,
+      "combat_profile": {
+        "action_profiles": {
+          "aimed_shot": {
+            "action_id": "aimed_shot",
+            "ap_cost": 2,
+            "base_hit_chance": 90,
+            "cooldown_turns": 2,
+            "damage_bonus": 1,
+            "id": "hero_bow_aimed_shot",
+            "range": 5
+          },
+          "ranged_attack": {
+            "action_id": "ranged_attack",
+            "ap_cost": 1,
+            "base_hit_chance": 75,
+            "damage_bonus": 0,
+            "id": "hero_bow_ranged_attack",
+            "range": 5
+          }
+        },
+        "grants_actions": [
+          "ranged_attack",
+          "aimed_shot"
+        ],
+        "id": "hero_bow",
+        "slot": "main_hand",
+        "two_handed": true
+      },
+      "visual": {
+        "faction": "heroes",
+        "character": "archer_1"
+      },
+      "appearance": {
+        "weapon": "bow"
+      }
+    },
+    {
+      "id": "hero_sword",
+      "name": "Travel sword",
+      "description": "A balanced sword. Grants Basic Attack, Power Strike, Deep Cut and Guard Break.",
+      "category": "equipment",
+      "value": 5,
+      "combat_profile": {
+        "action_profiles": {
+          "basic_attack": {
+            "action_id": "basic_attack",
+            "ap_cost": 1,
+            "damage_bonus": 0,
+            "id": "hero_sword_basic_attack",
+            "range": 1
+          },
+          "deep_cut": {
+            "action_id": "deep_cut",
+            "ap_cost": 1,
+            "damage_bonus": 0,
+            "id": "hero_sword_deep_cut",
+            "range": 1,
+            "status_id": "bleeding",
+            "status_remaining_turns": 2,
+            "status_tick_damage": 1
+          },
+          "guard_break": {
+            "action_id": "guard_break",
+            "ap_cost": 1,
+            "damage_bonus": 0,
+            "id": "hero_sword_guard_break",
+            "range": 1,
+            "status_defense_modifier": -2,
+            "status_id": "guard_broken",
+            "status_remaining_turns": 1
+          },
+          "power_strike": {
+            "action_id": "power_strike",
+            "ap_cost": 2,
+            "cooldown_turns": 2,
+            "damage_bonus": 2,
+            "id": "hero_sword_power_strike",
+            "range": 1
+          }
+        },
+        "grants_actions": [
+          "basic_attack",
+          "power_strike",
+          "deep_cut",
+          "guard_break"
+        ],
+        "id": "hero_sword",
+        "slot": "main_hand"
+      },
+      "visual": {
+        "faction": "heroes",
+        "character": "warrior"
+      },
+      "appearance": {
+        "weapon": "sword"
+      }
+    },
+    {
+      "id": "old_mine_blade",
+      "name": "Old mine blade",
+      "description": "A corroded blade kept as salvage, not yet restored.",
+      "category": "valuable",
+      "value": 4
+    },
+    {
+      "id": "old_mine_scrip",
+      "name": "Mine scrip",
+      "description": "Old payment tokens from the mine settlement.",
+      "category": "valuable",
+      "value": 2
+    },
+    {
+      "id": "old_mine_trinket",
+      "name": "Miner keepsake",
+      "description": "A keepsake from the abandoned mine.",
+      "category": "valuable",
+      "value": 3
+    },
+    {
+      "id": "patched_leather",
+      "name": "Patched leather armor",
+      "description": "Light leather armor. Reduces incoming damage by 1 (minimum damage remains 1).",
+      "category": "equipment",
+      "value": 6,
+      "combat_profile": {
+        "id": "patched_leather",
+        "slot": "armor",
+        "armor_reduction": 1,
+        "grants_actions": []
+      },
+      "appearance": {
+        "armor": "leather"
+      }
+    },
+    {
+      "id": "rusty_key",
+      "name": "Rusty key",
+      "description": "A key that may open an old mine lock.",
+      "category": "quest",
+      "value": 0
+    },
+    {
+      "id": "salvaged_blade",
+      "name": "Salvaged blade",
+      "description": "A sharpened sword. Standard sword skills with +1 damage bonus on every attack.",
+      "category": "equipment",
+      "value": 7,
+      "combat_profile": {
+        "action_profiles": {
+          "basic_attack": {
+            "action_id": "basic_attack",
+            "ap_cost": 1,
+            "damage_bonus": 1,
+            "id": "salvaged_blade_basic_attack",
+            "range": 1
+          },
+          "deep_cut": {
+            "action_id": "deep_cut",
+            "ap_cost": 1,
+            "damage_bonus": 1,
+            "id": "salvaged_blade_deep_cut",
+            "range": 1,
+            "status_id": "bleeding",
+            "status_remaining_turns": 2,
+            "status_tick_damage": 1
+          },
+          "guard_break": {
+            "action_id": "guard_break",
+            "ap_cost": 1,
+            "damage_bonus": 1,
+            "id": "salvaged_blade_guard_break",
+            "range": 1,
+            "status_defense_modifier": -2,
+            "status_id": "guard_broken",
+            "status_remaining_turns": 1
+          },
+          "power_strike": {
+            "action_id": "power_strike",
+            "ap_cost": 2,
+            "cooldown_turns": 2,
+            "damage_bonus": 3,
+            "id": "salvaged_blade_power_strike",
+            "range": 1
+          }
+        },
+        "grants_actions": [
+          "basic_attack",
+          "power_strike",
+          "deep_cut",
+          "guard_break"
+        ],
+        "id": "salvaged_blade",
+        "slot": "main_hand"
+      },
+      "visual": {
+        "faction": "heroes",
+        "character": "warrior"
+      },
+      "appearance": {
+        "weapon": "sword"
+      }
+    },
+    {
+      "id": "salvaged_shield",
+      "name": "Salvaged shield",
+      "description": "A serviceable shield. Grants Shield Wall: 2 damage reduction for 1 turn, 1 AP, 2-turn cooldown.",
+      "category": "equipment",
+      "value": 5,
+      "combat_profile": {
+        "id": "salvaged_shield",
+        "slot": "off_hand",
+        "grants_actions": [
+          "shield_wall"
+        ],
+        "action_profiles": {
+          "shield_wall": {
+            "id": "salvaged_shield_wall",
+            "action_id": "shield_wall",
+            "ap_cost": 1,
+            "status_id": "shield_wall",
+            "status_remaining_turns": 1,
+            "damage_reduction": 2,
+            "cooldown_turns": 2
+          }
+        }
+      },
+      "appearance": {
+        "offhand": "shield"
+      }
+    },
+    {
+      "id": "sealed_oil_twist",
+      "name": "Sealed oil twist",
+      "description": "A sealed packet of miner oil kept with the expedition loot.",
+      "category": "valuable",
+      "value": 2
+    },
+    {
+      "id": "leather_boots",
+      "name": "Ranger boots",
+      "description": "Sturdy travelling boots. Cosmetic equipment; no combat bonus.",
+      "category": "equipment",
+      "value": 3,
+      "combat_profile": {
+        "id": "leather_boots",
+        "slot": "boots",
+        "grants_actions": []
+      },
+      "appearance": {
+        "boots": "leather"
+      }
+    },
+    {
+      "id": "steel_boots",
+      "name": "Iron greaves",
+      "description": "Reinforced iron greaves. Cosmetic equipment; no combat bonus.",
+      "category": "equipment",
+      "value": 5,
+      "combat_profile": {
+        "id": "steel_boots",
+        "slot": "boots",
+        "grants_actions": []
+      },
+      "appearance": {
+        "boots": "steel"
+      }
+    },
+    {
+      "id": "leather_cap",
+      "name": "Leather cap",
+      "description": "A worn leather cap. Cosmetic equipment; no combat bonus.",
+      "category": "equipment",
+      "value": 4,
+      "combat_profile": {
+        "id": "leather_cap",
+        "slot": "helmet",
+        "grants_actions": []
+      },
+      "appearance": {
+        "helmet": "cap"
+      }
+    },
+    {
+      "id": "closed_helm",
+      "name": "Closed iron helm",
+      "description": "A closed iron helm. Cosmetic equipment; no combat bonus.",
+      "category": "equipment",
+      "value": 7,
+      "combat_profile": {
+        "id": "closed_helm",
+        "slot": "helmet",
+        "grants_actions": []
+      },
+      "appearance": {
+        "helmet": "closed"
+      }
+    },
+    {
+      "id": "weathered_cuirass",
+      "name": "Weathered cuirass",
+      "description": "Worn steel armour. Reduces incoming damage by 1, like patched leather.",
+      "category": "equipment",
+      "value": 9,
+      "combat_profile": {
+        "id": "weathered_cuirass",
+        "slot": "armor",
+        "grants_actions": [],
+        "armor_reduction": 1
+      },
+      "appearance": {
+        "armor": "plate"
+      }
+    }
+  ]
+}

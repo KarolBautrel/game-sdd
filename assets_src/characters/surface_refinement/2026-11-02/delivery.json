@@ -1,0 +1,525 @@
+{
+  "schema": "sdd.character-surface-delivery-v1",
+  "status": "TECHNICAL_PASS_AWAITING_USER_REVIEW",
+  "date": "2026-11-02",
+  "file_count": 101,
+  "total_bytes": 104049398,
+  "files": [
+    {
+      "path": "01_mercenary/01_mercenary.blend",
+      "sha256": "ab184ce2f5acf7c85ed36e08e9c6796beedd0f24779bdfcb6df287b35f9f7104",
+      "bytes": 14869170
+    },
+    {
+      "path": "01_mercenary/01_mercenary.fbx",
+      "sha256": "02e0d869f98213d15c0ffb8c7c3ccacd9e63fc4fef8c1ef82bae55cf7134ede7",
+      "bytes": 2514364
+    },
+    {
+      "path": "01_mercenary/concept.png",
+      "sha256": "672ee8d8ff5f1f487cfea9b00435484ca40b9f2fc31410933c659a9d3608f9f6",
+      "bytes": 1925600
+    },
+    {
+      "path": "01_mercenary/geometry_review/matcap_back.png",
+      "sha256": "a3f909765f51743a341f9d5131ae6cc366ed06d81722832dcc659007afb4269b",
+      "bytes": 119956
+    },
+    {
+      "path": "01_mercenary/geometry_review/matcap_front.png",
+      "sha256": "08af3f54cc6d8d2021cc383fec5230f91a7dbf6527afb7dee92a78726e1677a5",
+      "bytes": 124380
+    },
+    {
+      "path": "01_mercenary/geometry_review/matcap_right.png",
+      "sha256": "eb87125e2567381f9a97039e1d26cb504bb3063ce3522823a5f86c9abe5fd57b",
+      "bytes": 111473
+    },
+    {
+      "path": "01_mercenary/geometry_review/matcap_threequarter.png",
+      "sha256": "6ed6569cc18474b9e6309a898286580c3dc723ccda2773bc22c4b7ed0a41cbcc",
+      "bytes": 123223
+    },
+    {
+      "path": "01_mercenary/geometry_review/review_sheet.png",
+      "sha256": "9a73c64feea4ba9f08ab919cd4882d34a919c2096d626ca60ff8eb463c45dd56",
+      "bytes": 1195995
+    },
+    {
+      "path": "01_mercenary/geometry_review/review_sheet_legend.txt",
+      "sha256": "78696a9b9495bd10dc9a279079ee5a9b93661ef3ac5cb9dacd56aabe637cec72",
+      "bytes": 247
+    },
+    {
+      "path": "01_mercenary/geometry_review/silhouette_back.png",
+      "sha256": "41b34977529144a2bd6837ec0ec73a35b7d196cf6decf0c11df81d8b9e9e67dc",
+      "bytes": 73298
+    },
+    {
+      "path": "01_mercenary/geometry_review/silhouette_front.png",
+      "sha256": "0256c948a5c101dff13a4a26c11c5db5ced4533b8fb706a56da7442bf8a990de",
+      "bytes": 73327
+    },
+    {
+      "path": "01_mercenary/geometry_review/silhouette_right.png",
+      "sha256": "4abc17f6569030b842ce5619b03a83e0d1159b3b6cf4ed740ec368d2fa5bd96e",
+      "bytes": 72281
+    },
+    {
+      "path": "01_mercenary/geometry_review/silhouette_threequarter.png",
+      "sha256": "38daca52840746e41a4a97796f6c5a76d30753a0ec71eaa513516acaa3c29218",
+      "bytes": 73197
+    },
+    {
+      "path": "01_mercenary/geometry_review/wire_back.png",
+      "sha256": "816c2843abfdec17e3acb468792fc1f08ff4e903db17491582d079def6df11b5",
+      "bytes": 120152
+    },
+    {
+      "path": "01_mercenary/geometry_review/wire_front.png",
+      "sha256": "d34fdc4bdf81280bcd5f746742cdbc3e31857f92d7afd0df0aaf965a1d719d71",
+      "bytes": 121690
+    },
+    {
+      "path": "01_mercenary/geometry_review/wire_right.png",
+      "sha256": "4fb9b083d53764fbaa845c37609624ce14ce19fa55f8d84888a763070b5ff12c",
+      "bytes": 108018
+    },
+    {
+      "path": "01_mercenary/geometry_review/wire_threequarter.png",
+      "sha256": "65182aefff2a59dd36ed1c57054ffa910a1a776d3cdf322aed5883b96204f0bd",
+      "bytes": 118035
+    },
+    {
+      "path": "01_mercenary/model.json",
+      "sha256": "d64bbb712fe6cbdb83050d6c9a82d0117683fbfaa39860a952ebcd975cf40f34",
+      "bytes": 9046
+    },
+    {
+      "path": "01_mercenary/projection-padded.aseprite",
+      "sha256": "e5e921c4776cfb48e6cb7722f7358528a17bb687cad0e26e4227a2ad74b96188",
+      "bytes": 1565050
+    },
+    {
+      "path": "01_mercenary/projection-padded.png",
+      "sha256": "50b584933a34c13c3a25b7859a1b70d4ea8c9be5130d9057ef9086c38fcc5491",
+      "bytes": 1280036
+    },
+    {
+      "path": "01_mercenary/projection-silhouette.json",
+      "sha256": "96b04032ddd82034a220b0d0c840559a468fbdbd46f857b9af7ab4c3b0ceb25d",
+      "bytes": 54597
+    },
+    {
+      "path": "01_mercenary/renders/face.png",
+      "sha256": "9f3baa64f1a69c618d96de5af8ac4acbb249780edb6b23fc10c5685e6d3ddfd8",
+      "bytes": 713700
+    },
+    {
+      "path": "01_mercenary/renders/fbx_roundtrip.png",
+      "sha256": "5c968ac3733f64af15abfbd484b8e6d28d0711b0e47136a5397490aff533b4bd",
+      "bytes": 461247
+    },
+    {
+      "path": "01_mercenary/renders/front.png",
+      "sha256": "c47ee85ec3df240644c7e8a767ee430eaf22ca6100619d380a2c066b892de420",
+      "bytes": 475559
+    },
+    {
+      "path": "01_mercenary/renders/rear.png",
+      "sha256": "eaad2ac1f831f94770d0e0abdde94224409cee09136538803d9002c68c02c21c",
+      "bytes": 432290
+    },
+    {
+      "path": "01_mercenary/renders/side.png",
+      "sha256": "0c8aa9584b4ace35a14942595a1791e4865dd0a2934bdd63907cf750273f6f0d",
+      "bytes": 416049
+    },
+    {
+      "path": "01_mercenary/renders/tactical.png",
+      "sha256": "02974116a71047cb1282f2b8ce0a637d37bbd1d3b6fe2f00ba062b87cb7ad885",
+      "bytes": 74861
+    },
+    {
+      "path": "01_mercenary/renders/three_quarter.png",
+      "sha256": "c0337158da1c16c03a69d0becb096e8718bfe756fc9b0a8c546b022c91c7cf51",
+      "bytes": 466619
+    },
+    {
+      "path": "01_mercenary/textures/01_mercenary_albedo.png",
+      "sha256": "4dc620579c2c700b3c755dfa3321d7f91757914b1d6228deeac13f7fbfa408cb",
+      "bytes": 4115775
+    },
+    {
+      "path": "02_warden/02_warden.blend",
+      "sha256": "174333f9fb3fedefee351b51847d5e509db179515fb9c69707f8d92ef590d048",
+      "bytes": 16360974
+    },
+    {
+      "path": "02_warden/02_warden.fbx",
+      "sha256": "cafe131be8eced182d565a87747f3e1c379a0330230548a1c103bf2cea0052ae",
+      "bytes": 2900812
+    },
+    {
+      "path": "02_warden/concept.png",
+      "sha256": "1cbe614de2da6dfac3a515a8bd62cd4d84980b19e10361c10f04ad658c937964",
+      "bytes": 1927367
+    },
+    {
+      "path": "02_warden/geometry_review/matcap_back.png",
+      "sha256": "5705f8348bc87b0386e3f81927a4ea77a17a285569c28311a61f0fde94071e50",
+      "bytes": 120631
+    },
+    {
+      "path": "02_warden/geometry_review/matcap_front.png",
+      "sha256": "8c77bafd2f75bc017c9c0b037e3dea146f288be57466918eb916e208a5403417",
+      "bytes": 124213
+    },
+    {
+      "path": "02_warden/geometry_review/matcap_right.png",
+      "sha256": "d6acc1b8d4295a569a8a5544c92d411d05b69af71a8a87b30b9ec110df5b0232",
+      "bytes": 111350
+    },
+    {
+      "path": "02_warden/geometry_review/matcap_threequarter.png",
+      "sha256": "66cf4792f10e14a39bd4ca39a18a11b203db5d0dd49aeca03599189079c5c22b",
+      "bytes": 124024
+    },
+    {
+      "path": "02_warden/geometry_review/review_sheet.png",
+      "sha256": "8fbd7361492dccf934eef32054e4f3095440b882e3263f8964884bccb37f9f6f",
+      "bytes": 1198213
+    },
+    {
+      "path": "02_warden/geometry_review/review_sheet_legend.txt",
+      "sha256": "78696a9b9495bd10dc9a279079ee5a9b93661ef3ac5cb9dacd56aabe637cec72",
+      "bytes": 247
+    },
+    {
+      "path": "02_warden/geometry_review/silhouette_back.png",
+      "sha256": "02b980fd4201d152f975794f43635491447aa73660202beb73d0df3364e8497e",
+      "bytes": 73684
+    },
+    {
+      "path": "02_warden/geometry_review/silhouette_front.png",
+      "sha256": "449201e2f62eedc87e2ea1c2ed6b7071fa3699c0e02f9e8bdf2d126f59575877",
+      "bytes": 73507
+    },
+    {
+      "path": "02_warden/geometry_review/silhouette_right.png",
+      "sha256": "d359461a8b264c2cf82d329e7baff69476088ddf81359b5a1b829f825c938bec",
+      "bytes": 71936
+    },
+    {
+      "path": "02_warden/geometry_review/silhouette_threequarter.png",
+      "sha256": "804db54b86046197ce84f2ca31686848f6545fdcd141a798af9678ada72e05dc",
+      "bytes": 73687
+    },
+    {
+      "path": "02_warden/geometry_review/wire_back.png",
+      "sha256": "190f691a5b62158568ee5b39a2d7fdc54b01b0cea53582c8ab7de0a5349558b2",
+      "bytes": 120907
+    },
+    {
+      "path": "02_warden/geometry_review/wire_front.png",
+      "sha256": "46926a3e4cd19b374cdf873c0dd2b9d4162acb9dcd782f49f109ac976469311e",
+      "bytes": 121059
+    },
+    {
+      "path": "02_warden/geometry_review/wire_right.png",
+      "sha256": "325c974a72f64c7651a39531385f9b2c9154b3ea6eaeac130071d138b6031c49",
+      "bytes": 107992
+    },
+    {
+      "path": "02_warden/geometry_review/wire_threequarter.png",
+      "sha256": "06d2e20bda91c5eb0a908c847902e918fda56bda440648a2392c302339bdacc1",
+      "bytes": 118947
+    },
+    {
+      "path": "02_warden/model.json",
+      "sha256": "3504ae163e154cde97f52b05d91fea2bb81c08be563c7991395b41ef0fed7cdb",
+      "bytes": 10082
+    },
+    {
+      "path": "02_warden/projection-padded.aseprite",
+      "sha256": "9b4025447bb8e37f9a30ad4a9a98fe82f9db4ef3bddd203c40502361401caa8e",
+      "bytes": 1599552
+    },
+    {
+      "path": "02_warden/projection-padded.png",
+      "sha256": "d2be55e16d91cfbcbd76787b50bbfb0038b5f1c19dd6ee4257c5fb3d653df7ef",
+      "bytes": 1264517
+    },
+    {
+      "path": "02_warden/projection-silhouette.json",
+      "sha256": "e46a0477e0980e2e1273196795f9dc2210fcc9e06638caf5ce4d99e174774049",
+      "bytes": 55154
+    },
+    {
+      "path": "02_warden/renders/face.png",
+      "sha256": "63b4f191c4fbfa2f4acc4202debdc2458523dacdf430658cf170045dfd915bcb",
+      "bytes": 731033
+    },
+    {
+      "path": "02_warden/renders/fbx_roundtrip.png",
+      "sha256": "164c824457ec6b264540e3af8104c83286c6d7932c86ee8a6d9dc33f88d362cc",
+      "bytes": 474250
+    },
+    {
+      "path": "02_warden/renders/front.png",
+      "sha256": "0d0aeb23f4b4dbc8afcc0850c74108f5cb10cfd04ce777a6a30f0d5892bd2a96",
+      "bytes": 483133
+    },
+    {
+      "path": "02_warden/renders/rear.png",
+      "sha256": "3b1056bbf585e1549854980edbb4ba3cee4d63c5c96e605a48b607406d05fd64",
+      "bytes": 449230
+    },
+    {
+      "path": "02_warden/renders/side.png",
+      "sha256": "9cb6ad976daf1b0157496fb1d7b7b9ad9b8daef04a4a7435526225281be12234",
+      "bytes": 415442
+    },
+    {
+      "path": "02_warden/renders/tactical.png",
+      "sha256": "470d74c1d86f2ac68c6c849696ed7dacef0b431c72ecfc06a27d7a2ed99ad7e9",
+      "bytes": 76035
+    },
+    {
+      "path": "02_warden/renders/three_quarter.png",
+      "sha256": "74e6d2199c03603082dca4122960563df447790516fc3b1898c310b6c0e1979c",
+      "bytes": 477509
+    },
+    {
+      "path": "02_warden/textures/02_warden_albedo.png",
+      "sha256": "a6f3c490980d2b0ebf28f4ddacf2b40357a9138bd34a1a3e5c79a5d8947babd7",
+      "bytes": 4176142
+    },
+    {
+      "path": "03_wayfarer/03_wayfarer.blend",
+      "sha256": "e939c041bd6d238dc61c6b9594b46ed230a8fbcb24be4446563d1ada4e54025e",
+      "bytes": 15038421
+    },
+    {
+      "path": "03_wayfarer/03_wayfarer.fbx",
+      "sha256": "c76683ca5b7309be845f014de8615e10f2f958f7cd43cb0382aed5df7d7fbb82",
+      "bytes": 2536732
+    },
+    {
+      "path": "03_wayfarer/concept.png",
+      "sha256": "6b1129c5a18be7cf10fb8d84ab40bf2a0e8be757ef13021016ea89c31161f741",
+      "bytes": 1923977
+    },
+    {
+      "path": "03_wayfarer/geometry_review/matcap_back.png",
+      "sha256": "cdb2e5e14c74159f6fbefc3eaa07b0c6bf050b25d79c20a4e683b1a4f779a9b3",
+      "bytes": 119611
+    },
+    {
+      "path": "03_wayfarer/geometry_review/matcap_front.png",
+      "sha256": "6a16f8b3f7223f02e70ed7b88c1a71d08b4cd4073b79c3d016d9066da18899fc",
+      "bytes": 123469
+    },
+    {
+      "path": "03_wayfarer/geometry_review/matcap_right.png",
+      "sha256": "92b9b83c3e5466e2a75de5c91bad945dc07433cc619d9604164fa11f7ad01883",
+      "bytes": 111322
+    },
+    {
+      "path": "03_wayfarer/geometry_review/matcap_threequarter.png",
+      "sha256": "3a038ade5212e5bafa604a0a613f5158b28d58f184b8e6c105ec73e163d86c13",
+      "bytes": 123132
+    },
+    {
+      "path": "03_wayfarer/geometry_review/review_sheet.png",
+      "sha256": "dffa4eecae43db1aa20cd766557029decce1226867d5419527915d2f7a193168",
+      "bytes": 1191842
+    },
+    {
+      "path": "03_wayfarer/geometry_review/review_sheet_legend.txt",
+      "sha256": "78696a9b9495bd10dc9a279079ee5a9b93661ef3ac5cb9dacd56aabe637cec72",
+      "bytes": 247
+    },
+    {
+      "path": "03_wayfarer/geometry_review/silhouette_back.png",
+      "sha256": "c0786c25ac1bec17963d65e09d73a4fc9d429003cb754064955cbe3ebaba893a",
+      "bytes": 72720
+    },
+    {
+      "path": "03_wayfarer/geometry_review/silhouette_front.png",
+      "sha256": "6402b798f185d695ec0ee2a4b4bd1062716515b02e7754470f12b111fd75f080",
+      "bytes": 72886
+    },
+    {
+      "path": "03_wayfarer/geometry_review/silhouette_right.png",
+      "sha256": "5d1bf09b530404ecd46ac0094dbb8ef89d7d9268228631d8f4a1a8e01ba8c815",
+      "bytes": 71373
+    },
+    {
+      "path": "03_wayfarer/geometry_review/silhouette_threequarter.png",
+      "sha256": "35dcd029096fa71908490baba409098ee308753baeba85429397d2307cf2d83d",
+      "bytes": 72725
+    },
+    {
+      "path": "03_wayfarer/geometry_review/wire_back.png",
+      "sha256": "7b1a01fef5e2c2c935d93c2d1eb4502a897936c901658df7e9394f54298050e9",
+      "bytes": 120778
+    },
+    {
+      "path": "03_wayfarer/geometry_review/wire_front.png",
+      "sha256": "fdd45ab4360b32b8546ef354b583e07ea8fb554e1f1ade874235c52503931fa1",
+      "bytes": 121822
+    },
+    {
+      "path": "03_wayfarer/geometry_review/wire_right.png",
+      "sha256": "d626ec351b47dc586acde47462f74ceb1d3f98d4bf88308dca9c5f8b4eba7355",
+      "bytes": 108854
+    },
+    {
+      "path": "03_wayfarer/geometry_review/wire_threequarter.png",
+      "sha256": "79fea7a2696fb7c819369b9b230181f07bac465cc850ea31252eb92849065f04",
+      "bytes": 118455
+    },
+    {
+      "path": "03_wayfarer/model.json",
+      "sha256": "a7ebcdc4444fffc65c7cdc5e7860bf510a8773cb48bf7832f66d673e171d7ed6",
+      "bytes": 9039
+    },
+    {
+      "path": "03_wayfarer/projection-padded.aseprite",
+      "sha256": "052d28a8d827052c1228bd02126567b1ec6e036ef63d2e009cd2e7c41a3bca60",
+      "bytes": 1623830
+    },
+    {
+      "path": "03_wayfarer/projection-padded.png",
+      "sha256": "b6f1d91480318659dc94c8c3bbb7a6e6c4a475847e846f099947638f601b0600",
+      "bytes": 1292921
+    },
+    {
+      "path": "03_wayfarer/projection-silhouette.json",
+      "sha256": "195786349da0bd296b71f197c80d8f1599e888517b692526f1f85ce687763199",
+      "bytes": 52757
+    },
+    {
+      "path": "03_wayfarer/renders/face.png",
+      "sha256": "ec26fa5e5c06e218be5974d2b71591be22b17972551c9d2809c7f17d9cc7609f",
+      "bytes": 716864
+    },
+    {
+      "path": "03_wayfarer/renders/fbx_roundtrip.png",
+      "sha256": "4b448024496e407ad30ab7e192965826ef909b8b96cf76d8792a1cf5bbeec6e7",
+      "bytes": 481406
+    },
+    {
+      "path": "03_wayfarer/renders/front.png",
+      "sha256": "9b0bcae044e8c206577359d6fe8c2d8e9620ef100c38eb2fab98c336422e75b8",
+      "bytes": 491363
+    },
+    {
+      "path": "03_wayfarer/renders/rear.png",
+      "sha256": "0ec9c0eb924580580141f636bff70ddc922f1bc65fc29eb5959e0802297ef4cc",
+      "bytes": 443197
+    },
+    {
+      "path": "03_wayfarer/renders/side.png",
+      "sha256": "76d4d02e3c95a79cdae3e73b79a7ff8dce954de4f73163063f9049d0354041ba",
+      "bytes": 427238
+    },
+    {
+      "path": "03_wayfarer/renders/tactical.png",
+      "sha256": "5d6ab944c290bce4f51e1d696d1a5a8195b93eb3b8e46ea71b76024846af92a3",
+      "bytes": 76766
+    },
+    {
+      "path": "03_wayfarer/renders/three_quarter.png",
+      "sha256": "bdc17a562a775bcbf3b4005f227c065533070f4f3745e7cabd0c9499768f1248",
+      "bytes": 485351
+    },
+    {
+      "path": "03_wayfarer/textures/03_wayfarer_albedo.png",
+      "sha256": "070db85e4b49fbe44c0f5a4ebca55fa87622463b380a15d984a2cdd912501225",
+      "bytes": 4200498
+    },
+    {
+      "path": "all_views.aseprite",
+      "sha256": "0d8f5f52006a6235b792e7efb861c91db74c4a954965388f1888bddc188752e5",
+      "bytes": 720760
+    },
+    {
+      "path": "all_views.png",
+      "sha256": "f44065dfa032a83c9774c5ae3c18dbc10d3a9acce781fcbe274c78ff2922a8fa",
+      "bytes": 601356
+    },
+    {
+      "path": "comparison.aseprite",
+      "sha256": "bfea9c9650439b6242080388b8ae69154afef00cff8479ec66c5902a38ee27e7",
+      "bytes": 976994
+    },
+    {
+      "path": "comparison.png",
+      "sha256": "e4b61597b1f81c9f71f2be43d41046e2892ced57adeec2ad19c426e66259bc77",
+      "bytes": 822881
+    },
+    {
+      "path": "concept-prompts.json",
+      "sha256": "c6e388c51f0d3dab65c9e3876eddf966f3593dc75f660ccb0b5acf4a9a6bdaef",
+      "bytes": 6922
+    },
+    {
+      "path": "details.aseprite",
+      "sha256": "f1173fb44f78d9279e87116570756955502b135044ed78ed88aa8eedec9c14ad",
+      "bytes": 1373780
+    },
+    {
+      "path": "details.png",
+      "sha256": "16ea5ab0d98cec60566a854c291f4693a9552014416f4b76a32d837441317a75",
+      "bytes": 863509
+    },
+    {
+      "path": "provenance.json",
+      "sha256": "6cefb3ca64f855a1f8dd0b9232e8d3a52fd4b655d3f2f0d896460c8da1341f5c",
+      "bytes": 3406
+    },
+    {
+      "path": "README.md",
+      "sha256": "27b9538f518e30fe009c729c54cdada9600929de7eec7b312bc0ab561cf788f6",
+      "bytes": 843
+    },
+    {
+      "path": "review-history/full-contrast-cloth-pilot.png",
+      "sha256": "7940fbcfb145002125027da74744c6cfcedea4c147d9d55ae9214b53152dd5f8",
+      "bytes": 337593
+    },
+    {
+      "path": "review-history/README.md",
+      "sha256": "b8c8d66405cde6ceb904fd509ded559835f54edc7ddbfbd28a1552d68f3ebb2d",
+      "bytes": 422
+    },
+    {
+      "path": "review-history/uniform-source.json",
+      "sha256": "b70f0a9080670c4167e78692311b66bb58e2d84defe2db30e3e2fb1a41b93c73",
+      "bytes": 251
+    },
+    {
+      "path": "review-history/uniform-wool-pilot.png",
+      "sha256": "48a641e2b0a0db0acd57201772ed736820fd98037e2df741b2eb4c344b2c6190",
+      "bytes": 451992
+    },
+    {
+      "path": "verification.json",
+      "sha256": "ffa107de1c2a223dc8df6a1a63dfcd296ef7c08146565ee661b5ca6e69731087",
+      "bytes": 8229
+    }
+  ],
+  "source_tools": {
+    "tools/blender/build_surface_refinement.py": "a5264e104d7b22de1a06b20213fc3bc9e4ec096baecd77eb5477f33e9e2ed1e8",
+    "tools/blender/verify_surface_refinement.py": "26257f116cac3f63eeabeb26b566997f8ed18157eab6545aa22f75fe7a4473fa",
+    "tools/aseprite/surface_refinement.lua": "6f0e2298a6d1df59535fec4a3e161a1a88a8e5483b7ffe5a9a32dd2f455d6d92"
+  },
+  "baseline_delivery_sha256": "ad6eb0d01082abdfd54edb2ce7c070566f878c0d001b1b4bd1cf39e2009cc1bb",
+  "static": true,
+  "rigged": false,
+  "animated": false,
+  "integrated": false,
+  "desktop_input": false
+}

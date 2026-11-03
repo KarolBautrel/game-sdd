@@ -1,0 +1,460 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sdd-game/campaign_profile.schema.json",
+  "type": "object",
+  "required": [
+    "version",
+    "gold",
+    "xp",
+    "items",
+    "supplies",
+    "effects",
+    "active_run",
+    "receipts",
+    "last_return",
+    "world",
+    "equipment",
+    "advancement"
+  ],
+  "properties": {
+    "version": {
+      "const": 4
+    },
+    "gold": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000000
+    },
+    "xp": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000000
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supplies": {
+      "type": "object",
+      "required": [
+        "lamp_oil",
+        "pickaxe",
+        "trap_tools",
+        "bandage",
+        "camping_kit",
+        "food"
+      ],
+      "properties": {
+        "lamp_oil": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "pickaxe": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "trap_tools": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "bandage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "camping_kit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "food": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      },
+      "additionalProperties": false
+    },
+    "effects": {
+      "type": "object",
+      "required": [
+        "party_effects",
+        "target_effects",
+        "active_debuffs"
+      ]
+    },
+    "active_run": {
+      "type": "object"
+    },
+    "receipts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "last_return": {
+      "type": "object"
+    },
+    "world": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "region_id",
+        "location_id",
+        "elapsed_hours",
+        "journey_count",
+        "seed",
+        "pending_event",
+        "resolved_nodes",
+        "last_journey"
+      ],
+      "properties": {
+        "region_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "elapsed_hours": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "journey_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "pending_event": {
+          "oneOf": [
+            {
+              "type": "object",
+              "maxProperties": 0
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "kind",
+                "phase",
+                "seed",
+                "node_id",
+                "journey_id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "kind": {
+                  "enum": [
+                    "cart",
+                    "ambush"
+                  ]
+                },
+                "phase": {
+                  "enum": [
+                    "choice",
+                    "combat"
+                  ]
+                },
+                "seed": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1000000000
+                },
+                "node_id": {
+                  "type": "string"
+                },
+                "journey_id": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "equipment_snapshot": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "unit_player_001",
+                    "unit_player_002"
+                  ],
+                  "properties": {
+                    "unit_player_001": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "main_hand",
+                        "off_hand",
+                        "armor"
+                      ],
+                      "properties": {
+                        "main_hand": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "off_hand": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "armor": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "boots": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "helmet": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "dependentRequired": {
+                        "boots": [
+                          "helmet"
+                        ],
+                        "helmet": [
+                          "boots"
+                        ]
+                      }
+                    },
+                    "unit_player_002": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "main_hand",
+                        "off_hand",
+                        "armor"
+                      ],
+                      "properties": {
+                        "main_hand": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "off_hand": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "armor": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "boots": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "helmet": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "dependentRequired": {
+                        "boots": [
+                          "helmet"
+                        ],
+                        "helmet": [
+                          "boots"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "advancement_snapshot": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "unit_player_001",
+                    "unit_player_002"
+                  ],
+                  "properties": {
+                    "unit_player_001": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 4
+                    },
+                    "unit_player_002": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 4
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "resolved_nodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "last_journey": {
+          "type": "object"
+        }
+      }
+    },
+    "equipment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit_player_001",
+        "unit_player_002"
+      ],
+      "properties": {
+        "unit_player_001": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "main_hand",
+            "off_hand",
+            "armor"
+          ],
+          "properties": {
+            "main_hand": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "off_hand": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "armor": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "boots": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "helmet": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "dependentRequired": {
+            "boots": [
+              "helmet"
+            ],
+            "helmet": [
+              "boots"
+            ]
+          }
+        },
+        "unit_player_002": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "main_hand",
+            "off_hand",
+            "armor"
+          ],
+          "properties": {
+            "main_hand": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "off_hand": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "armor": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "boots": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "helmet": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "dependentRequired": {
+            "boots": [
+              "helmet"
+            ],
+            "helmet": [
+              "boots"
+            ]
+          }
+        }
+      }
+    },
+    "advancement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit_player_001",
+        "unit_player_002"
+      ],
+      "properties": {
+        "unit_player_001": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "unit_player_002": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

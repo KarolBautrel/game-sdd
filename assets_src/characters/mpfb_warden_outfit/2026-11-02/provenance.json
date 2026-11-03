@@ -1,0 +1,48 @@
+{
+  "schema": "sdd.modelled-warden-provenance-v1",
+  "reference": {
+    "schema": "sdd.warden-outfit-reference-v1",
+    "status": "READY_FOR_STATIC_PILOT",
+    "baseline": "assets_src/characters/mpfb_warden/2026-11-02",
+    "baseline_delivery_sha256": "cfbf34e338008ef155eff97c78723189f0b44f0f2f5a77594db5c3765e219827",
+    "approved_head_source_sha256": "0365891e93d6f1fa888850d6d641305a8d75a42273e687ad4fe45dd88d1d7f1a",
+    "design_reference": "assets_src/characters/surface_refinement/2026-11-02/02_warden/concept.png",
+    "reference_sha256": "1cbe614de2da6dfac3a515a8bd62cd4d84980b19e10361c10f04ad658c937964",
+    "reviewed_views": [
+      "original concept front/profile/rear",
+      "actual stage41 all_views and full body"
+    ],
+    "user_corrections": [
+      "straight natural legs",
+      "smaller boots",
+      "actual3D harness/buckle/armor volume",
+      "future cast must have distinct facial anatomy"
+    ],
+    "inference": "Hidden armor construction and cloth/metal thickness, corrected stance and boot fit; preserve approved face geometry/UV.",
+    "brief": {
+      "palette": "navy cloth, muted steel, dark brown leather, restrained brass",
+      "camera": "retained18deg/yaw330; front/profile and native100px/m",
+      "scope": "one corrected static warden, no animation/cast rollout"
+    }
+  },
+  "anatomy": "Pinned MPFB2.0.18; retained coherent head and a posed copy of the actual MPFB body master. Selected CC0 skin/eyes/hair/brows retain prior licensing.",
+  "costume": "New authored geometry and procedural PBR materials; no old concept projection or painted armor atlas. Closed glove geometry derives from the retained own stage40 authoring sources.",
+  "prior_sources": [
+    {
+      "path": "assets_src/characters/mpfb_warden/2026-11-02/delivery.json",
+      "sha256": "cfbf34e338008ef155eff97c78723189f0b44f0f2f5a77594db5c3765e219827"
+    },
+    {
+      "path": "assets_src/characters/surface_refinement/2026-11-02/delivery.json",
+      "sha256": "497e7879e30a594fecf5c0801282d60528e994de1bba20f93242ffc26ab8a65e"
+    }
+  ],
+  "head_maps_unchanged": {
+    "Jartur_mid_old_Slavic_Male_with_Genitals_and_Beard_lsdif_lighter.png": "0f1a86d78af8bc1e55ae21cfaca0e7308384f789796adc77a78e4d22ccaf419c",
+    "brown_eye_02.png": "fae2cf1e45fd4df3bc07ea4ea0f26883c78cbeae03585fa6754dc3e54c03c3dd",
+    "short01_diffuse.png": "f34a0957184e3d1e911ed59245f874f8d4843f61ee44ff49f43edb4be0196949",
+    "eyebrow001.png": "9940f7d0b1b223709a19b05156ba6f6e9e4dbdbced02d7574f4d51d72c58967b"
+  },
+  "new_paid_or_ai_calls": false,
+  "acceptance": "AWAITING_USER_REVIEW"
+}

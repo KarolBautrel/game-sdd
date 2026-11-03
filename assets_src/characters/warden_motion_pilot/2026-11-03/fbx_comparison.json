@@ -1,0 +1,434 @@
+[
+  {
+    "clip": "Idle",
+    "frame": 0,
+    "mesh": "Retained_authored_warden_costume",
+    "drift_m": 8.985906561065349e-07,
+    "source_vertices": 34645,
+    "fbx_vertices": 34645
+  },
+  {
+    "clip": "Idle",
+    "frame": 0,
+    "mesh": "MPFB_coherent_head_and_neck",
+    "drift_m": 4.788121259480249e-07,
+    "source_vertices": 17815,
+    "fbx_vertices": 17815
+  },
+  {
+    "clip": "Idle",
+    "frame": 0,
+    "mesh": "MPFB_eyes",
+    "drift_m": 3.5935053688262997e-07,
+    "source_vertices": 1064,
+    "fbx_vertices": 1064
+  },
+  {
+    "clip": "Idle",
+    "frame": 0,
+    "mesh": "MPFB_hair",
+    "drift_m": 4.800986062036827e-07,
+    "source_vertices": 2984,
+    "fbx_vertices": 2984
+  },
+  {
+    "clip": "Idle",
+    "frame": 0,
+    "mesh": "MPFB_eyebrows",
+    "drift_m": 3.5894481698051095e-07,
+    "source_vertices": 124,
+    "fbx_vertices": 124
+  },
+  {
+    "clip": "Idle",
+    "frame": 0,
+    "mesh": "Warden_Sword",
+    "drift_m": 3.686343745812337e-07,
+    "source_vertices": 297,
+    "fbx_vertices": 297
+  },
+  {
+    "clip": "Idle",
+    "frame": 24,
+    "mesh": "Retained_authored_warden_costume",
+    "drift_m": 8.985906561065349e-07,
+    "source_vertices": 34645,
+    "fbx_vertices": 34645
+  },
+  {
+    "clip": "Idle",
+    "frame": 24,
+    "mesh": "MPFB_coherent_head_and_neck",
+    "drift_m": 4.78728793495975e-07,
+    "source_vertices": 17815,
+    "fbx_vertices": 17815
+  },
+  {
+    "clip": "Idle",
+    "frame": 24,
+    "mesh": "MPFB_eyes",
+    "drift_m": 3.595628754737845e-07,
+    "source_vertices": 1064,
+    "fbx_vertices": 1064
+  },
+  {
+    "clip": "Idle",
+    "frame": 24,
+    "mesh": "MPFB_hair",
+    "drift_m": 4.793661219082423e-07,
+    "source_vertices": 2984,
+    "fbx_vertices": 2984
+  },
+  {
+    "clip": "Idle",
+    "frame": 24,
+    "mesh": "MPFB_eyebrows",
+    "drift_m": 3.5925882002629805e-07,
+    "source_vertices": 124,
+    "fbx_vertices": 124
+  },
+  {
+    "clip": "Idle",
+    "frame": 24,
+    "mesh": "Warden_Sword",
+    "drift_m": 3.686343745812337e-07,
+    "source_vertices": 297,
+    "fbx_vertices": 297
+  },
+  {
+    "clip": "Idle",
+    "frame": 48,
+    "mesh": "Retained_authored_warden_costume",
+    "drift_m": 8.985906561065349e-07,
+    "source_vertices": 34645,
+    "fbx_vertices": 34645
+  },
+  {
+    "clip": "Idle",
+    "frame": 48,
+    "mesh": "MPFB_coherent_head_and_neck",
+    "drift_m": 4.788121259480249e-07,
+    "source_vertices": 17815,
+    "fbx_vertices": 17815
+  },
+  {
+    "clip": "Idle",
+    "frame": 48,
+    "mesh": "MPFB_eyes",
+    "drift_m": 3.5935053688262997e-07,
+    "source_vertices": 1064,
+    "fbx_vertices": 1064
+  },
+  {
+    "clip": "Idle",
+    "frame": 48,
+    "mesh": "MPFB_hair",
+    "drift_m": 4.800986062036827e-07,
+    "source_vertices": 2984,
+    "fbx_vertices": 2984
+  },
+  {
+    "clip": "Idle",
+    "frame": 48,
+    "mesh": "MPFB_eyebrows",
+    "drift_m": 3.5894481698051095e-07,
+    "source_vertices": 124,
+    "fbx_vertices": 124
+  },
+  {
+    "clip": "Idle",
+    "frame": 48,
+    "mesh": "Warden_Sword",
+    "drift_m": 3.686343745812337e-07,
+    "source_vertices": 297,
+    "fbx_vertices": 297
+  },
+  {
+    "clip": "Walk",
+    "frame": 0,
+    "mesh": "Retained_authored_warden_costume",
+    "drift_m": 1.8487897932573105e-06,
+    "source_vertices": 34645,
+    "fbx_vertices": 34645
+  },
+  {
+    "clip": "Walk",
+    "frame": 0,
+    "mesh": "MPFB_coherent_head_and_neck",
+    "drift_m": 2.4620757699267415e-07,
+    "source_vertices": 17815,
+    "fbx_vertices": 17815
+  },
+  {
+    "clip": "Walk",
+    "frame": 0,
+    "mesh": "MPFB_eyes",
+    "drift_m": 2.432874168789567e-07,
+    "source_vertices": 1064,
+    "fbx_vertices": 1064
+  },
+  {
+    "clip": "Walk",
+    "frame": 0,
+    "mesh": "MPFB_hair",
+    "drift_m": 2.428306515867007e-07,
+    "source_vertices": 2984,
+    "fbx_vertices": 2984
+  },
+  {
+    "clip": "Walk",
+    "frame": 0,
+    "mesh": "MPFB_eyebrows",
+    "drift_m": 2.4578449142609315e-07,
+    "source_vertices": 124,
+    "fbx_vertices": 124
+  },
+  {
+    "clip": "Walk",
+    "frame": 0,
+    "mesh": "Warden_Sword",
+    "drift_m": 1.3657139561473741e-06,
+    "source_vertices": 297,
+    "fbx_vertices": 297
+  },
+  {
+    "clip": "Walk",
+    "frame": 16,
+    "mesh": "Retained_authored_warden_costume",
+    "drift_m": 1.8651116988621652e-06,
+    "source_vertices": 34645,
+    "fbx_vertices": 34645
+  },
+  {
+    "clip": "Walk",
+    "frame": 16,
+    "mesh": "MPFB_coherent_head_and_neck",
+    "drift_m": 2.491492523404304e-07,
+    "source_vertices": 17815,
+    "fbx_vertices": 17815
+  },
+  {
+    "clip": "Walk",
+    "frame": 16,
+    "mesh": "MPFB_eyes",
+    "drift_m": 2.4713588686609e-07,
+    "source_vertices": 1064,
+    "fbx_vertices": 1064
+  },
+  {
+    "clip": "Walk",
+    "frame": 16,
+    "mesh": "MPFB_hair",
+    "drift_m": 2.471236371093255e-07,
+    "source_vertices": 2984,
+    "fbx_vertices": 2984
+  },
+  {
+    "clip": "Walk",
+    "frame": 16,
+    "mesh": "MPFB_eyebrows",
+    "drift_m": 2.4713588686609e-07,
+    "source_vertices": 124,
+    "fbx_vertices": 124
+  },
+  {
+    "clip": "Walk",
+    "frame": 16,
+    "mesh": "Warden_Sword",
+    "drift_m": 4.814712610823335e-07,
+    "source_vertices": 297,
+    "fbx_vertices": 297
+  },
+  {
+    "clip": "Walk",
+    "frame": 32,
+    "mesh": "Retained_authored_warden_costume",
+    "drift_m": 1.8540656583354576e-06,
+    "source_vertices": 34645,
+    "fbx_vertices": 34645
+  },
+  {
+    "clip": "Walk",
+    "frame": 32,
+    "mesh": "MPFB_coherent_head_and_neck",
+    "drift_m": 2.4755667027420714e-07,
+    "source_vertices": 17815,
+    "fbx_vertices": 17815
+  },
+  {
+    "clip": "Walk",
+    "frame": 32,
+    "mesh": "MPFB_eyes",
+    "drift_m": 2.4677061105649045e-07,
+    "source_vertices": 1064,
+    "fbx_vertices": 1064
+  },
+  {
+    "clip": "Walk",
+    "frame": 32,
+    "mesh": "MPFB_hair",
+    "drift_m": 2.4755667027420714e-07,
+    "source_vertices": 2984,
+    "fbx_vertices": 2984
+  },
+  {
+    "clip": "Walk",
+    "frame": 32,
+    "mesh": "MPFB_eyebrows",
+    "drift_m": 2.4620757699267415e-07,
+    "source_vertices": 124,
+    "fbx_vertices": 124
+  },
+  {
+    "clip": "Walk",
+    "frame": 32,
+    "mesh": "Warden_Sword",
+    "drift_m": 1.3539572591980686e-06,
+    "source_vertices": 297,
+    "fbx_vertices": 297
+  },
+  {
+    "clip": "Sword",
+    "frame": 0,
+    "mesh": "Retained_authored_warden_costume",
+    "drift_m": 9.132129434874514e-07,
+    "source_vertices": 34645,
+    "fbx_vertices": 34645
+  },
+  {
+    "clip": "Sword",
+    "frame": 0,
+    "mesh": "MPFB_coherent_head_and_neck",
+    "drift_m": 3.5814287002722267e-07,
+    "source_vertices": 17815,
+    "fbx_vertices": 17815
+  },
+  {
+    "clip": "Sword",
+    "frame": 0,
+    "mesh": "MPFB_eyes",
+    "drift_m": 2.394712623754458e-07,
+    "source_vertices": 1064,
+    "fbx_vertices": 1064
+  },
+  {
+    "clip": "Sword",
+    "frame": 0,
+    "mesh": "MPFB_hair",
+    "drift_m": 2.421796807539067e-07,
+    "source_vertices": 2984,
+    "fbx_vertices": 2984
+  },
+  {
+    "clip": "Sword",
+    "frame": 0,
+    "mesh": "MPFB_eyebrows",
+    "drift_m": 2.39407881963416e-07,
+    "source_vertices": 124,
+    "fbx_vertices": 124
+  },
+  {
+    "clip": "Sword",
+    "frame": 0,
+    "mesh": "Warden_Sword",
+    "drift_m": 6.078504952711228e-07,
+    "source_vertices": 297,
+    "fbx_vertices": 297
+  },
+  {
+    "clip": "Sword",
+    "frame": 20,
+    "mesh": "Retained_authored_warden_costume",
+    "drift_m": 1.5701866686868016e-06,
+    "source_vertices": 34645,
+    "fbx_vertices": 34645
+  },
+  {
+    "clip": "Sword",
+    "frame": 20,
+    "mesh": "MPFB_coherent_head_and_neck",
+    "drift_m": 4.865748337579134e-07,
+    "source_vertices": 17815,
+    "fbx_vertices": 17815
+  },
+  {
+    "clip": "Sword",
+    "frame": 20,
+    "mesh": "MPFB_eyes",
+    "drift_m": 4.840584324483643e-07,
+    "source_vertices": 1064,
+    "fbx_vertices": 1064
+  },
+  {
+    "clip": "Sword",
+    "frame": 20,
+    "mesh": "MPFB_hair",
+    "drift_m": 4.865748337579134e-07,
+    "source_vertices": 2984,
+    "fbx_vertices": 2984
+  },
+  {
+    "clip": "Sword",
+    "frame": 20,
+    "mesh": "MPFB_eyebrows",
+    "drift_m": 4.829821023122349e-07,
+    "source_vertices": 124,
+    "fbx_vertices": 124
+  },
+  {
+    "clip": "Sword",
+    "frame": 20,
+    "mesh": "Warden_Sword",
+    "drift_m": 1.10067037439876e-06,
+    "source_vertices": 297,
+    "fbx_vertices": 297
+  },
+  {
+    "clip": "Sword",
+    "frame": 40,
+    "mesh": "Retained_authored_warden_costume",
+    "drift_m": 9.132129434874514e-07,
+    "source_vertices": 34645,
+    "fbx_vertices": 34645
+  },
+  {
+    "clip": "Sword",
+    "frame": 40,
+    "mesh": "MPFB_coherent_head_and_neck",
+    "drift_m": 3.5814287002722267e-07,
+    "source_vertices": 17815,
+    "fbx_vertices": 17815
+  },
+  {
+    "clip": "Sword",
+    "frame": 40,
+    "mesh": "MPFB_eyes",
+    "drift_m": 2.394712623754458e-07,
+    "source_vertices": 1064,
+    "fbx_vertices": 1064
+  },
+  {
+    "clip": "Sword",
+    "frame": 40,
+    "mesh": "MPFB_hair",
+    "drift_m": 2.421796807539067e-07,
+    "source_vertices": 2984,
+    "fbx_vertices": 2984
+  },
+  {
+    "clip": "Sword",
+    "frame": 40,
+    "mesh": "MPFB_eyebrows",
+    "drift_m": 2.39407881963416e-07,
+    "source_vertices": 124,
+    "fbx_vertices": 124
+  },
+  {
+    "clip": "Sword",
+    "frame": 40,
+    "mesh": "Warden_Sword",
+    "drift_m": 6.230039844012936e-07,
+    "source_vertices": 297,
+    "fbx_vertices": 297
+  }
+]

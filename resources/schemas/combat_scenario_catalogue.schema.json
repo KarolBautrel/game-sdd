@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sdd-game/combat_scenario_catalogue.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "scenarios"],
+  "properties": {
+    "schema": {"const": "sdd.combat-scenarios-v1"},
+    "scenarios": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "label", "path"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+          "label": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "pattern": "^res://resources/data/combat_encounters/[a-z0-9_]+\\.json$"}
+        }
+      }
+    }
+  }
+}

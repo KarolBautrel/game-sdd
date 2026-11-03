@@ -1,0 +1,73 @@
+{
+  "schema": "sdd.character-style-provenance-v1",
+  "date": "2026-11-02",
+  "anatomy": {
+    "name": "Blender Studio Human Base Meshes v1.4.1",
+    "license": "CC0-1.0",
+    "source": "https://www.blender.org/download/demo-files/",
+    "archive": "https://download.blender.org/demo/asset-bundles/human-base-meshes/human-base-meshes-bundle-v1.4.1.zip",
+    "archive_sha256": "811f43accbb31a88266d932f8f5563b2d13586fca0ba2693aad1f5fe582b3515",
+    "blend_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+    "used": [
+      "GEO-body_male_realistic",
+      "GEO-body_male_stylized",
+      "corresponding anatomical eyes"
+    ],
+    "scope": "Face/neck/eyes and derived fitted garment anatomy; underlying scaffold is third-party CC0, not authored from scratch."
+  },
+  "project_authored": [
+    "costume construction",
+    "cape folds",
+    "hair/beard treatment",
+    "armour",
+    "gloves and curled fingers",
+    "sword",
+    "round shield and heraldry",
+    "materials",
+    "camera/light recipe",
+    "comparative renders"
+  ],
+  "skills_researched": {
+    "repo": "https://github.com/arjun988/blender-skills",
+    "revision": "8f778d2405a214b508d4c7d80742be8e43acdd52",
+    "license": "MIT",
+    "consulted": [
+      "character-artist",
+      "stylized-style",
+      "comic-book-style",
+      "hand-painted-style",
+      "painterly-style",
+      "stylized-style/references/npr-shaders.md"
+    ],
+    "installed": false
+  },
+  "tools": {
+    "blender": "5.2.3 LTS",
+    "aseprite": "1.3.17.2",
+    "execution": "owned background CLI; hidden Aseprite batch",
+    "cloud_generators": false,
+    "desktop_input": false
+  },
+  "scope": {
+    "static": true,
+    "rigged": false,
+    "animated": false,
+    "game_integrated": false,
+    "status": "AWAITING_STYLE_CHOICE"
+  },
+  "comparison": {
+    "main": "comparison.png",
+    "all_views": "all_views.png",
+    "editable": [
+      "comparison.aseprite",
+      "all_views.aseprite"
+    ],
+    "native_scale": "100px/m;384px source canvas, unscaled character in the ground composite",
+    "ground": "retained assets/combat/environment/floors/earth.png + contact_shadow.png; reference composite, not gameplay screenshot"
+  },
+  "limitations": [
+    "Not production retopology/LOD/animation assets.",
+    "B emission/ink hull and procedural bump are Blender-render features; FBX contains baked albedo and basic PBR values.",
+    "Textures are procedural/baked, not hand-painted final production maps."
+  ]
+}

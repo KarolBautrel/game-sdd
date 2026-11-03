@@ -1,0 +1,865 @@
+{
+  "status": "PASS",
+  "files": [
+    {
+      "path": "assets_src/environment/fbx-check.json",
+      "sha256": "ada40542624f9aed1ce42449d0b0ae38ed67cb6a81d95cc6f8cce7788f5693e6"
+    },
+    {
+      "path": "assets_src/environment/FLOORS-PROMPT.txt",
+      "sha256": "ecbb5b77c89fd64b5b9b196fa849b63a56cf214595045bbb7319397160f8fbab"
+    },
+    {
+      "path": "assets_src/environment/floors-source.png",
+      "sha256": "a6ad2910eb268483fa86eaa2bac74e4dd66c40a3687dd3005eb05a200b273fe2"
+    },
+    {
+      "path": "assets_src/environment/props/altar/altar.blend",
+      "sha256": "ed1fad717fe51226d6d31229b10df1a516f552d2abd0734a1647026fccf7bcca"
+    },
+    {
+      "path": "assets_src/environment/props/altar/altar.fbx",
+      "sha256": "710e29033d90c5b29a8f5d06ebfa695be22d38b7a22fd9d9ae13aceb794a1b9b"
+    },
+    {
+      "path": "assets_src/environment/props/altar/altar_albedo.png",
+      "sha256": "362beabfa838e7b7409bf95ef5181a7a508bad9528a5ccf5e6ca6c6f0ccbc695"
+    },
+    {
+      "path": "assets_src/environment/props/altar/model.json",
+      "sha256": "2d3a61c336711210c4be584ba650673037d8747665976ecd531e46e539191f96"
+    },
+    {
+      "path": "assets_src/environment/props/altar/render.png",
+      "sha256": "c49c606f02178d3a9c494942aa555687354f5826c02030fbd8a02d8a4ea63c94"
+    },
+    {
+      "path": "assets_src/environment/props/arch/arch.blend",
+      "sha256": "2c38b35778c30844bf95a73c172185de3e8017dd9074a8715819550a9af58810"
+    },
+    {
+      "path": "assets_src/environment/props/arch/arch.fbx",
+      "sha256": "fd9f38b0bd084d41acc4a0e8730b4e73549acbea557d04337e8508d7b714d51d"
+    },
+    {
+      "path": "assets_src/environment/props/arch/arch_albedo.png",
+      "sha256": "2761d0523e321d69be4bb53fd7e9c910aabc71b2b3a27e99c85a14f45af0754d"
+    },
+    {
+      "path": "assets_src/environment/props/arch/model.json",
+      "sha256": "9129e30479bbc9c8753e6a9cf93796b2aca2de4ca71ab198b9bb61f3c92b49e2"
+    },
+    {
+      "path": "assets_src/environment/props/arch/render.png",
+      "sha256": "55af4814ed2ff1ae5dcdc6458cefab282a58e7d044483b8b35579d6d2361d6d3"
+    },
+    {
+      "path": "assets_src/environment/props/barrel/barrel.blend",
+      "sha256": "797b6e7dcfdc072700e06ccb0500e5b5c8383dac056267cf1fe2a16e21819abf"
+    },
+    {
+      "path": "assets_src/environment/props/barrel/barrel.fbx",
+      "sha256": "3a4b6daf4c7829c7b6501f53cedbfe7c3a7f291699034f279aa5eae2891bde96"
+    },
+    {
+      "path": "assets_src/environment/props/barrel/barrel_albedo.png",
+      "sha256": "3b25388c48e404ed6915611b14de9f2238cf0eefa03678d770727696e1505f11"
+    },
+    {
+      "path": "assets_src/environment/props/barrel/model.json",
+      "sha256": "24dfcb38035e319ff9fee565c13596c0301dbb2620d04e8187d976adafc188e8"
+    },
+    {
+      "path": "assets_src/environment/props/barrel/render.png",
+      "sha256": "14efceb7e680d235ee37fa2a9b479febb164b10d73f06c776a4e39bf107c6ea5"
+    },
+    {
+      "path": "assets_src/environment/props/bone_totem/bone_totem.blend",
+      "sha256": "da7ac4f9dcc2d4452188e3d885a1b827fbef19254be12d5e2909982a84048bb8"
+    },
+    {
+      "path": "assets_src/environment/props/bone_totem/bone_totem.fbx",
+      "sha256": "42604cfd660cf4c41c3ceaecf836fa5c625ba547095c20e9b84a3ff7d0b4a656"
+    },
+    {
+      "path": "assets_src/environment/props/bone_totem/bone_totem_albedo.png",
+      "sha256": "947c241488cc425fc1f0c7e5ad47189ffce6a7da3f545d8f2ee7e276b7db21ba"
+    },
+    {
+      "path": "assets_src/environment/props/bone_totem/model.json",
+      "sha256": "4df29562845b288d46c2b03a6dbbbc3a3f60c3db79c3c021db813136b59cf426"
+    },
+    {
+      "path": "assets_src/environment/props/bone_totem/render.png",
+      "sha256": "e49798dd1942dc1e888b142b5533f1e975698ad68f2f8b3bee2271a8fe4d9a63"
+    },
+    {
+      "path": "assets_src/environment/props/bones/bones.blend",
+      "sha256": "6c32cc2d4130bbe47e40af260553a4e9beef22df2ddd742c0795693fbedb7bce"
+    },
+    {
+      "path": "assets_src/environment/props/bones/bones.fbx",
+      "sha256": "499fa2100c1a53046f7e8adb9cfd5a20b885abef9d627d19e8652d32af4bee1c"
+    },
+    {
+      "path": "assets_src/environment/props/bones/bones_albedo.png",
+      "sha256": "b8c0c4556f911d32c550a28e575b754402e8e53bad52468712888fabff6a2ebe"
+    },
+    {
+      "path": "assets_src/environment/props/bones/model.json",
+      "sha256": "b09cfcc178c06edbc8e84ac2ae2d5b0da6d13ea7a6acfef9bfe47e9b27c98b46"
+    },
+    {
+      "path": "assets_src/environment/props/bones/render.png",
+      "sha256": "de5e11c09c3e2192f7778051579484339af49f85595ea30a43907991d94ec683"
+    },
+    {
+      "path": "assets_src/environment/props/boulder/boulder.blend",
+      "sha256": "7dc1d62a28ba6dc0e7e818c32ee9c12f04305e2012098bc786e2ed34f4340b16"
+    },
+    {
+      "path": "assets_src/environment/props/boulder/boulder.fbx",
+      "sha256": "0035c166eec6a9f093ed31808c1c8e3a3218e9578feb3cca85695b620c35626a"
+    },
+    {
+      "path": "assets_src/environment/props/boulder/boulder_albedo.png",
+      "sha256": "21e740876841aa78a0fbb45e879d46c84562990552e7cbebf469e3ee0f7276f4"
+    },
+    {
+      "path": "assets_src/environment/props/boulder/model.json",
+      "sha256": "83e413d2451acb6daf4350065d88f4e4e31a402b482c7e4ab675991a7a1ff33d"
+    },
+    {
+      "path": "assets_src/environment/props/boulder/render.png",
+      "sha256": "af12b25d9f97e09a7cfc7cb12999d49b0278af8c3a27dbec8af91e8521f8bf67"
+    },
+    {
+      "path": "assets_src/environment/props/branches/branches.blend",
+      "sha256": "929f1d67dc1be9f33dc8eb4f517ea4d794303c6fc7605762bbadb4665ceee20f"
+    },
+    {
+      "path": "assets_src/environment/props/branches/branches.fbx",
+      "sha256": "0c97647e3e86c159fb3c74c066aa0d9d0df7ae7be7c81f153c03aab8565c24ff"
+    },
+    {
+      "path": "assets_src/environment/props/branches/branches_albedo.png",
+      "sha256": "e0504d59966b4139dc9db18d835e7a77b7952e4bde8869a21ee2deeab574f5ac"
+    },
+    {
+      "path": "assets_src/environment/props/branches/model.json",
+      "sha256": "d695b1ea463fedf582db11502b1f2725c5849dcf0f45267118741fcf0dc695c8"
+    },
+    {
+      "path": "assets_src/environment/props/branches/render.png",
+      "sha256": "61156c3dbe71fcbf65d32ca161c4d4a9c3b0016202292dd5f9df357e7ff95725"
+    },
+    {
+      "path": "assets_src/environment/props/brazier/brazier.blend",
+      "sha256": "852af6a9d3f5b8075cfd182e246a1ed464709c0cee0b36310241cec24e94d1be"
+    },
+    {
+      "path": "assets_src/environment/props/brazier/brazier.fbx",
+      "sha256": "fc848f5313905d7fd3b75fe3cc1162c0b210c72c66d7bc86110e431f671e45b7"
+    },
+    {
+      "path": "assets_src/environment/props/brazier/brazier_albedo.png",
+      "sha256": "e7b3bff67a0c889be68f966935f219986bdedc06e671756225985da22506fbde"
+    },
+    {
+      "path": "assets_src/environment/props/brazier/model.json",
+      "sha256": "a560484d1705a3b4a8c99b231b86095fbff4df45b64599239d782eb18ccdb018"
+    },
+    {
+      "path": "assets_src/environment/props/brazier/render.png",
+      "sha256": "4c384032f845e45a6a6a41e9e450d5c89440e901bd73bb5f1eb9b83542788cf8"
+    },
+    {
+      "path": "assets_src/environment/props/broken_pillar/broken_pillar.blend",
+      "sha256": "7b28289608c492462285f2ae389d3a4033fe59d83c33168e2a55a925b72b086a"
+    },
+    {
+      "path": "assets_src/environment/props/broken_pillar/broken_pillar.fbx",
+      "sha256": "e0e96548bbbe9a1a815097fd7fedb672b9464979fbb62490d3f6fc066add9979"
+    },
+    {
+      "path": "assets_src/environment/props/broken_pillar/broken_pillar_albedo.png",
+      "sha256": "cb7b84b20344d1f66c32e0eaf6ba1501989fb0a4d60e35c098ad9761da6032c8"
+    },
+    {
+      "path": "assets_src/environment/props/broken_pillar/model.json",
+      "sha256": "1f6f2ec0262046ca4ad1428f522c007e332ffb750c57b7c9c34fd29b9a0bd89d"
+    },
+    {
+      "path": "assets_src/environment/props/broken_pillar/render.png",
+      "sha256": "a67b771268b5797531b3daa4f8e4eb9983f18930d163625702f9c8130d650efa"
+    },
+    {
+      "path": "assets_src/environment/props/bush/bush.blend",
+      "sha256": "d865e2b6e8b48973e40f609ddf02c166d2223d35664b460dec2bbf1e3528a17c"
+    },
+    {
+      "path": "assets_src/environment/props/bush/bush.fbx",
+      "sha256": "39f93fa402e44c9476e014ddac2ad9ce5fea9fe022f8877c686a4b0c6f913983"
+    },
+    {
+      "path": "assets_src/environment/props/bush/bush_albedo.png",
+      "sha256": "2ba48ce5272719b020c1d3e40cc1078288f4041fd9cbfa7c41e860cb725c656c"
+    },
+    {
+      "path": "assets_src/environment/props/bush/model.json",
+      "sha256": "365884daeb75561eb963ee0925080378bec2fcaed60094c69c797e9a9ee47fff"
+    },
+    {
+      "path": "assets_src/environment/props/bush/render.png",
+      "sha256": "aeffed40a6b8dcf95b759f238ba8223d4c68bcb8ffaa12c55550b8f0ead0aeb5"
+    },
+    {
+      "path": "assets_src/environment/props/chest/chest.blend",
+      "sha256": "5345c69c541af01d55b050d6b9b5b367d9b8a092749dc25fca6a13151371e383"
+    },
+    {
+      "path": "assets_src/environment/props/chest/chest.fbx",
+      "sha256": "58ecfc6b299ddc5fa0020ab85c7d74af06ae5bc6ee135a3bb45ead4b37655a60"
+    },
+    {
+      "path": "assets_src/environment/props/chest/chest_albedo.png",
+      "sha256": "eb9c5938f27e365f1273cc1b1a13edaec32c3a5a3c401c1d067cfa65a6c37bbc"
+    },
+    {
+      "path": "assets_src/environment/props/chest/model.json",
+      "sha256": "a4b0a8c874d6e0e70cfb517c1de91a763ea1c089b094457b99c37deadd8e583d"
+    },
+    {
+      "path": "assets_src/environment/props/chest/render.png",
+      "sha256": "b88643b398a49a7c7978c7a0797cdf63091a20992b7b9488df6e87d15fe62da4"
+    },
+    {
+      "path": "assets_src/environment/props/coffin/coffin.blend",
+      "sha256": "583688b4d316032fe80492750568112c998a4a3e4f85f2d98727e795738520f4"
+    },
+    {
+      "path": "assets_src/environment/props/coffin/coffin.fbx",
+      "sha256": "f4617eb7df6d84fe96955704a6064cbd14b422d4196fdcff09695575ddb80ad8"
+    },
+    {
+      "path": "assets_src/environment/props/coffin/coffin_albedo.png",
+      "sha256": "ca741d36c602cba04b78b47d1c58418b0d4157f0dec8c16c93a2be960ad3632c"
+    },
+    {
+      "path": "assets_src/environment/props/coffin/model.json",
+      "sha256": "b11285a42961e424569d121161e423433eb94e357fa3d058a8cbeb0dab7279b9"
+    },
+    {
+      "path": "assets_src/environment/props/coffin/render.png",
+      "sha256": "169c1b5311a60e2837d182fa91d2d5f6565a73b723672132c464b274b7a19f38"
+    },
+    {
+      "path": "assets_src/environment/props/crate/crate.blend",
+      "sha256": "08df7f7d2126ea6dca043e1696ddc6381d8ef5e85225d4dbc2a758dd270229f8"
+    },
+    {
+      "path": "assets_src/environment/props/crate/crate.fbx",
+      "sha256": "c314ec55ed155d904a072307fb24991d8e2478091c60c3700b2ce37b6d85106c"
+    },
+    {
+      "path": "assets_src/environment/props/crate/crate_albedo.png",
+      "sha256": "a602a7270461c58c8f35eb70dd8abbfe89be15baa8220f4289b3e8a806cd8e77"
+    },
+    {
+      "path": "assets_src/environment/props/crate/model.json",
+      "sha256": "606a2957092cec827d9bec95971e2269526e49ee9ffa6e0134cd43f7def481cc"
+    },
+    {
+      "path": "assets_src/environment/props/crate/render.png",
+      "sha256": "a8ac7f2dcae63d6f355701f73bdc4d76ce8e1e6e5c7601719cab7df5220bb8c7"
+    },
+    {
+      "path": "assets_src/environment/props/dead_tree/dead_tree.blend",
+      "sha256": "eef4c519e7cbcf4980fe17b9fa8b3929c59749a704fba943d1a89fbb4ef4034f"
+    },
+    {
+      "path": "assets_src/environment/props/dead_tree/dead_tree.fbx",
+      "sha256": "1fc600032d71aaaaac00979f7db069a38c99921782c50392b270acd6f7a3a5ce"
+    },
+    {
+      "path": "assets_src/environment/props/dead_tree/dead_tree_albedo.png",
+      "sha256": "3345879c9ac9bd464faaf9c242ea60394b66d28b9c858f93ec6c1c4cc0db1533"
+    },
+    {
+      "path": "assets_src/environment/props/dead_tree/model.json",
+      "sha256": "b24bebc6c1abb5b043fb6d85a079b9de3bce96d1db52f3f30196d9f6829d0e20"
+    },
+    {
+      "path": "assets_src/environment/props/dead_tree/render.png",
+      "sha256": "5e340eb60d1ac0241bb05273640eef28ba3650556f63c976bc76172cd11fa158"
+    },
+    {
+      "path": "assets_src/environment/props/fallen_log/fallen_log.blend",
+      "sha256": "33932990c6da509a192e2a1daa11efc98a8b5dea13d004e0bb055bde3a6cc046"
+    },
+    {
+      "path": "assets_src/environment/props/fallen_log/fallen_log.fbx",
+      "sha256": "04d61758810a0dea2478cde3822e1ada02b28682c125b29fed33e08f3920a623"
+    },
+    {
+      "path": "assets_src/environment/props/fallen_log/fallen_log_albedo.png",
+      "sha256": "1863e5e241d6d0d1d4022cfd6337f57c3bea2b3302e786fb9debf59fc0869fb3"
+    },
+    {
+      "path": "assets_src/environment/props/fallen_log/model.json",
+      "sha256": "d4358679481692c91aa998f1ac95ad87d82da1c000b0009e95ad301fbaedd0ee"
+    },
+    {
+      "path": "assets_src/environment/props/fallen_log/render.png",
+      "sha256": "22dbd6bf94399a7b8982c364a4a162d494f36794788b541a7377d83cfb54330b"
+    },
+    {
+      "path": "assets_src/environment/props/flowers/flowers.blend",
+      "sha256": "730d548a5f46d3eac0bc38b0979138a54cb83d6cee78f32bcc220c825bea8847"
+    },
+    {
+      "path": "assets_src/environment/props/flowers/flowers.fbx",
+      "sha256": "5365e724ab3228ba49889ba7bc03929c01289d44f331c5e99d2921250f621092"
+    },
+    {
+      "path": "assets_src/environment/props/flowers/flowers_albedo.png",
+      "sha256": "fd443b51805c7818186d5260d5022edd89de12d8018eba209f64f87ca44d65ad"
+    },
+    {
+      "path": "assets_src/environment/props/flowers/model.json",
+      "sha256": "87237cd4381a6eb4cb00068b40122d4a6b600ca0db0686af48a83b92d36ffe55"
+    },
+    {
+      "path": "assets_src/environment/props/flowers/render.png",
+      "sha256": "8ce31139ba08fad6cc4c143d80986b714045406420a9f07c76967d1f100ce111"
+    },
+    {
+      "path": "assets_src/environment/props/grass/grass.blend",
+      "sha256": "a439285cfdc7c596a853f61f34e14f7ae81a4699b663cef86162a57cd6136b87"
+    },
+    {
+      "path": "assets_src/environment/props/grass/grass.fbx",
+      "sha256": "500126251de41cef4cfa04426cea52b392e902fbd0b9d54bd7d66ebd5d554802"
+    },
+    {
+      "path": "assets_src/environment/props/grass/grass_albedo.png",
+      "sha256": "33224983af121447109161c33a8b18f952969e453541440e0d122658de6f85e0"
+    },
+    {
+      "path": "assets_src/environment/props/grass/model.json",
+      "sha256": "f7edc540645121fdd590fed133ece94c594e6ca8a3903f1b4dba450a019d15eb"
+    },
+    {
+      "path": "assets_src/environment/props/grass/render.png",
+      "sha256": "55c3df27960ef976f0995325e812e8d92aa456b9bcd85787236796991e962dc7"
+    },
+    {
+      "path": "assets_src/environment/props/mushrooms/model.json",
+      "sha256": "782e7ed5a6c83bdec36fddccee73bb9fb6061447e893d12d7194687af6fde9af"
+    },
+    {
+      "path": "assets_src/environment/props/mushrooms/mushrooms.blend",
+      "sha256": "2b402dca71bc5b5e6673d71065957e9ae5333b38aae3fe5de216ab72fcc87df9"
+    },
+    {
+      "path": "assets_src/environment/props/mushrooms/mushrooms.fbx",
+      "sha256": "2098e3d11254471fc4169636873c680814dcaf27a3c2d3768c24a0e19c20baed"
+    },
+    {
+      "path": "assets_src/environment/props/mushrooms/mushrooms_albedo.png",
+      "sha256": "0a036db63e59d59e9981e27c7f0af6de11514a9c76179553deac27db2ed4d6e3"
+    },
+    {
+      "path": "assets_src/environment/props/mushrooms/render.png",
+      "sha256": "e7426d3f7ad11b6fa27757a6ad6d24cf16cef99cfeee09c6afa8247f84e406b0"
+    },
+    {
+      "path": "assets_src/environment/props/oak/model.json",
+      "sha256": "63d7c2091ba752b4104ad60ad3a4220eeca8ae8889cc816df79631f62730ffa1"
+    },
+    {
+      "path": "assets_src/environment/props/oak/oak.blend",
+      "sha256": "95f72bd3c930960d34843dc5fbb23ecfc1c4fb96af3e1a1a8c87a71cee644004"
+    },
+    {
+      "path": "assets_src/environment/props/oak/oak.fbx",
+      "sha256": "e47b7010a2bf8fe043d81f857b134a5d9dd2ffabd11ce16d80d45de012f065f0"
+    },
+    {
+      "path": "assets_src/environment/props/oak/oak_albedo.png",
+      "sha256": "8dec302514d9904a51afe6e11543ca1d1ea78e61c4365e7227a58057555c9c05"
+    },
+    {
+      "path": "assets_src/environment/props/oak/render.png",
+      "sha256": "1b853220b3ff151a23449edb716449aa145a5f69d3b4711b5829991006188380"
+    },
+    {
+      "path": "assets_src/environment/props/pillar/model.json",
+      "sha256": "5c844839c9dfc9d8e27c034a38bb6c9f52eba9ca202efd8926566fd817e508cb"
+    },
+    {
+      "path": "assets_src/environment/props/pillar/pillar.blend",
+      "sha256": "35fcddb6892b8cc7a870ef72cd159b422da6afd8b111503a78c27af120f674d3"
+    },
+    {
+      "path": "assets_src/environment/props/pillar/pillar.fbx",
+      "sha256": "c6dd10c258a8c22329f734bce28cbd9805e940a4ed849d7c6051d16952192d7d"
+    },
+    {
+      "path": "assets_src/environment/props/pillar/pillar_albedo.png",
+      "sha256": "f24b6370371d9be6b51894c6848516b7d7dc8254ae641ba1cf0562a618af4dd3"
+    },
+    {
+      "path": "assets_src/environment/props/pillar/render.png",
+      "sha256": "a6ee7f316bbdf52c8701239b1d1bdbab85b1502a60dde8c36361bb56a32eb95b"
+    },
+    {
+      "path": "assets_src/environment/props/pine/model.json",
+      "sha256": "82eb4d6b0645d829440b347539b96e79bd87be17ae4975ea016cd95f44487e81"
+    },
+    {
+      "path": "assets_src/environment/props/pine/pine.blend",
+      "sha256": "5942d2ca97fb566b973fdf2e0ad98c5c597c1e5c86a4aae76b924cc3e6ff9b19"
+    },
+    {
+      "path": "assets_src/environment/props/pine/pine.fbx",
+      "sha256": "866417efad0f02cb536c212b45d7631869d5e4f01335ef7e971196bb6820f416"
+    },
+    {
+      "path": "assets_src/environment/props/pine/pine_albedo.png",
+      "sha256": "202e64c5d0c5e304c2eb8485e5ec926911dd5915fe4bd72c875797706d894932"
+    },
+    {
+      "path": "assets_src/environment/props/pine/render.png",
+      "sha256": "8963a282f09e6be68e391d0c965e40b685d1b35245e2b941e40114ec5da49150"
+    },
+    {
+      "path": "assets_src/environment/props/rock_cluster/model.json",
+      "sha256": "3966826b342d721bb11ff965e535aa13952379600819b3c5418fd73daecea18b"
+    },
+    {
+      "path": "assets_src/environment/props/rock_cluster/render.png",
+      "sha256": "5adae1cda18809314584ba9df98ccc69a79acb79a8ed30be5f6abd4e429b1b7c"
+    },
+    {
+      "path": "assets_src/environment/props/rock_cluster/rock_cluster.blend",
+      "sha256": "4c71e94c84c8da94cc8e107fe7d220c3aedf939433f032ce6e6409cb2b9222ba"
+    },
+    {
+      "path": "assets_src/environment/props/rock_cluster/rock_cluster.fbx",
+      "sha256": "59218f9cd7aa7fb08b267eed02820f3236c6ea040ef4d22a923952221009964e"
+    },
+    {
+      "path": "assets_src/environment/props/rock_cluster/rock_cluster_albedo.png",
+      "sha256": "cee29bcf9909f6505403a1c6a6d378576a443d17baa7f193c6cbb4842e0f144d"
+    },
+    {
+      "path": "assets_src/environment/props/rubble/model.json",
+      "sha256": "c06d2d46e22b6bef71c2c6d71d1aa06f52d10b0f61c6f499d95642eae6027e50"
+    },
+    {
+      "path": "assets_src/environment/props/rubble/render.png",
+      "sha256": "87264f403856d74e8b9bd6c0f246d487419eac4d4a2af3576d9c7feaf4d45a25"
+    },
+    {
+      "path": "assets_src/environment/props/rubble/rubble.blend",
+      "sha256": "b71c9bfd6d12ea406ae864f01d9e39a3e73fab9d636eaaea8ecf43ad00814617"
+    },
+    {
+      "path": "assets_src/environment/props/rubble/rubble.fbx",
+      "sha256": "91a169aaf95956c22e67131ec9f03c026f17d81e9f27442303428a1906f71574"
+    },
+    {
+      "path": "assets_src/environment/props/rubble/rubble_albedo.png",
+      "sha256": "8d9ec80824a533b7618c94e85d370a6beba915c48445270f819939ee3528ade6"
+    },
+    {
+      "path": "assets_src/environment/props/sacks/model.json",
+      "sha256": "8cce1a74a429c83c2bc44e165ad22e58f0e91f209d80a1a28461bf22403e9e7d"
+    },
+    {
+      "path": "assets_src/environment/props/sacks/render.png",
+      "sha256": "7ed5291767eb5550a2012749a9c28d2a19a28aaa12ec91bbe5e02064ac1afa8d"
+    },
+    {
+      "path": "assets_src/environment/props/sacks/sacks.blend",
+      "sha256": "9918aa9e5492d6b088e66d6b43e664ced2acbc662a920a71b580fe07529d34c1"
+    },
+    {
+      "path": "assets_src/environment/props/sacks/sacks.fbx",
+      "sha256": "81c4ab996ef5a635dbe1bf7e4c45f115e09ce452f9ac891fdff952a90adfc56c"
+    },
+    {
+      "path": "assets_src/environment/props/sacks/sacks_albedo.png",
+      "sha256": "62b3a73af0d1a10ddc23f2326d9150837afb3fa363ba5903a1cf1186c748e77a"
+    },
+    {
+      "path": "assets_src/environment/props/spike_fence/model.json",
+      "sha256": "6f9fc4a93879014b404422cce229ef421079e80dce164b0b770149404feb7c76"
+    },
+    {
+      "path": "assets_src/environment/props/spike_fence/render.png",
+      "sha256": "4d18bb12a398f156ede076fea4e3262da3298d2f49bcbacd4409ed404ce73670"
+    },
+    {
+      "path": "assets_src/environment/props/spike_fence/spike_fence.blend",
+      "sha256": "611b28b231ba10111e5fd406dde34012120b7ea60b764ddba7b78a00d40485ba"
+    },
+    {
+      "path": "assets_src/environment/props/spike_fence/spike_fence.fbx",
+      "sha256": "895d23dbf58fc0c9c05903860fb4b4a249eb62662b0e4501d30f9fcc707d5efc"
+    },
+    {
+      "path": "assets_src/environment/props/spike_fence/spike_fence_albedo.png",
+      "sha256": "242833c2f95a92ec4ebae9abfbf38f51eab3124c34a055a53a7367cdf791e896"
+    },
+    {
+      "path": "assets_src/environment/props/statue/model.json",
+      "sha256": "573f7c0bf8bd84628bf8120a19a5c8c69a72949b84ba6028e745961a1a491249"
+    },
+    {
+      "path": "assets_src/environment/props/statue/render.png",
+      "sha256": "f70044aabb6ca64ccfc8cfbc21ea46ae0cebf1e8e0c178acea3f1d74b98963cb"
+    },
+    {
+      "path": "assets_src/environment/props/statue/statue.blend",
+      "sha256": "d9e3b3d2181793e953d350e4b1b8c127f7b82118f9dc9f8166da2dfdceb279af"
+    },
+    {
+      "path": "assets_src/environment/props/statue/statue.fbx",
+      "sha256": "e73ab86105b95b410504e64371a3a9ee0967317e9890ae4b1419f7390b8800a4"
+    },
+    {
+      "path": "assets_src/environment/props/statue/statue_albedo.png",
+      "sha256": "fe92842c922f0075ed746185614432e478d38c057a139ef6ae63651c9ae682c5"
+    },
+    {
+      "path": "assets_src/environment/props/stump/model.json",
+      "sha256": "2b1a2a5e569081deeb8a1e21a1c99420d79d4162db9c7c28c9ed76ee048d250b"
+    },
+    {
+      "path": "assets_src/environment/props/stump/render.png",
+      "sha256": "7a465cb2ebb341e466b551f1464aa4d087e055934bd9a870ca5a07e102fcd604"
+    },
+    {
+      "path": "assets_src/environment/props/stump/stump.blend",
+      "sha256": "3c541e43096a72d270b9ca19dbe3e80632387c8e50c3b9e7fd26206967e24780"
+    },
+    {
+      "path": "assets_src/environment/props/stump/stump.fbx",
+      "sha256": "d42e1b9a18b987b716d2f1c88238fa36da1183d36c8330e27626927768a3c303"
+    },
+    {
+      "path": "assets_src/environment/props/stump/stump_albedo.png",
+      "sha256": "f8cbf4ecebd836e7016cb88ba53448329be7ce152b779d03f54935a08e923a9e"
+    },
+    {
+      "path": "assets_src/environment/props/wall/model.json",
+      "sha256": "9ea1daac70d04fc42c534b0aa7caf66c241762324af479799407ac1a64358c64"
+    },
+    {
+      "path": "assets_src/environment/props/wall/render.png",
+      "sha256": "f1a85e7634b3c34f6ddeeb96ed4b36c2e5682a232c45c9d99e28aab369d57bdc"
+    },
+    {
+      "path": "assets_src/environment/props/wall/wall.blend",
+      "sha256": "04fe05793a169a8760a368640d9f9af4fe4b623316ee6aebc3e2780524e132c2"
+    },
+    {
+      "path": "assets_src/environment/props/wall/wall.fbx",
+      "sha256": "08ed71f06bb71c7cb657d8d03665caa9a84029d67e94a08475e2a42ea776f405"
+    },
+    {
+      "path": "assets_src/environment/props/wall/wall_albedo.png",
+      "sha256": "d97e0795415d85d4fcb4bf9d3ec1fba2860220407f32c2f6ac425fe8879c5d20"
+    },
+    {
+      "path": "assets_src/environment/props.json",
+      "sha256": "b1afecd534e3a15468beb9ef57412597e672d9c01d793caf1cd29f471cbd7638"
+    },
+    {
+      "path": "assets_src/environment/provenance.json",
+      "sha256": "2070da67c86493506d823bcd4ac9e992fe140f4e77b471f009a6c9f60b3b7051"
+    },
+    {
+      "path": "assets_src/aseprite/environment/contact_shadow.aseprite",
+      "sha256": "be436161c6950d17d73c7ac4abc24afe6dec2f72f299070280cb8c9f7f940a92"
+    },
+    {
+      "path": "assets_src/aseprite/environment/floors_cave.aseprite",
+      "sha256": "108953db12b00c1fc64329594653a0b762e7086763d89bffd28b8aa069a749c3"
+    },
+    {
+      "path": "assets_src/aseprite/environment/floors_earth.aseprite",
+      "sha256": "f8acf0edd8b986db4418ddb3697030b3aa5775e7cb71a5a7720cb9679018293d"
+    },
+    {
+      "path": "assets_src/aseprite/environment/floors_flagstone.aseprite",
+      "sha256": "c20e26fa92605a72c8c2573c6174432cc72d4abb049721077f8bbdf7f898e57d"
+    },
+    {
+      "path": "assets_src/aseprite/environment/floors_woodland.aseprite",
+      "sha256": "1752165949b8107db4c944bba6c6ef82968070c0a9999fbd78a03595956fd6a5"
+    },
+    {
+      "path": "assets_src/aseprite/environment/ledge_dungeon.aseprite",
+      "sha256": "056e6a7f0e542e67361346ca293385dc7672f521dd0eb88c0a291b1f3a5725a0"
+    },
+    {
+      "path": "assets_src/aseprite/environment/ledge_nature.aseprite",
+      "sha256": "ed18b9c60ee312843c2af6fc59582b3edf0d2125710eab6cebb88ca8a2c6f8f2"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_altar.aseprite",
+      "sha256": "7b91c1fd06f0111b103f9e398813cde1df189eff9c0239f37c1815448a51f49f"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_arch.aseprite",
+      "sha256": "11b1f8619e4f39a6fedd0b35e5901452eada8b1285f0ee6695575fc4001878cc"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_barrel.aseprite",
+      "sha256": "3ab06444a30cdab843aa778daad51734a9f852b034f6b82ebb122e847bd5cfc6"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_bone_totem.aseprite",
+      "sha256": "671c8bf157a8b11b5bb0dcf5ee7b7d718103546c8457a3d3f4b5cd239bb5a88c"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_bones.aseprite",
+      "sha256": "605ebf1a63ab82653b9c97c29edd1c725736b17f8841a7a792975672292e12a1"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_boulder.aseprite",
+      "sha256": "036ba5cc8f219520f501be861d08a8f273a689cfe72b7568990e00b3c341cc25"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_branches.aseprite",
+      "sha256": "be3946e87b267564a4f4fa6e03ad00bb2913b48fc7611d937263e2b92780f84d"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_brazier.aseprite",
+      "sha256": "02fc464976a7c40b9577d5236c0671e1e695c0b57aabb5a6ff5b7ee2ad06b599"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_broken_pillar.aseprite",
+      "sha256": "9e2ce044c48ee291325b53b034221cbe5c0aac47b3c0f47cc0e1c656c78b42b7"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_bush.aseprite",
+      "sha256": "664698c38d2b401b74f09407e668839e8feceab8b4c88030f14e8b4e34b5463a"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_chest.aseprite",
+      "sha256": "0ab94647de00e339647399cf1da104a5fbc1611f8826f4ec0915132f464235b4"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_coffin.aseprite",
+      "sha256": "898d31d1ddb9880342696c2bc07235eae34184982dcdce6ff08d3d786904f1f1"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_crate.aseprite",
+      "sha256": "319c2c84a995a1e023a6c058a1f250c88c6dba8d248eb57bdaa49c733738fba1"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_dead_tree.aseprite",
+      "sha256": "08ab94f66bfdd4256f3024531604f6f3eb441101bcf666aaad15102a3adf1fdf"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_fallen_log.aseprite",
+      "sha256": "e09822edbeaf1d5b85fa0864c893dd26965d7e440d83eca856615af7a84f3b86"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_flowers.aseprite",
+      "sha256": "df54d56b86b070803e5f5b8165b9ae763d1086d181d6f755d06e6891fbf45d9e"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_grass.aseprite",
+      "sha256": "e02ca164af8d266aeb18de9c67c9e5aee916fa653ba5bf498d856854f10a5783"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_mushrooms.aseprite",
+      "sha256": "f0cfa12198c98258894deb55e41da23defe340689b046a8994e763bece5a8d4b"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_oak.aseprite",
+      "sha256": "bdd6724de1e22a93e192e6c7694afda99bfd483552017ebe69e855706ad212b7"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_pillar.aseprite",
+      "sha256": "ae25a788550f88132efe22e6c5238390a723f2c3f3f92e89edee312671793729"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_pine.aseprite",
+      "sha256": "b077c6626122847d5ce4ae164dbe3b72a80bd95ecfa353ad16f8f34b8c2a8551"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_rock_cluster.aseprite",
+      "sha256": "b12a85095383564f87e0ac5db5cd730be10ff16530f646ba0d1cf56e47ba8a6a"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_rubble.aseprite",
+      "sha256": "7983a285ef37c14c2c7411ab13b6d2f0e4c58b24c621b62e72cce4c6861fa7ce"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_sacks.aseprite",
+      "sha256": "9ab95423231e0d0644c2e62a2aafee48e841e2a68cfb2f023b47b4bc0b6dc152"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_spike_fence.aseprite",
+      "sha256": "7d2c8447ed980083d6f977c3ff787c1e0e1ba295361017c8015ed241041d6834"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_statue.aseprite",
+      "sha256": "b02472f7b5c70f53f844398bb81a7a9bb652670f10f88abde2cee38499e2b602"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_stump.aseprite",
+      "sha256": "c1b679c2388de3ca1e059dfb09d08b5cbd8ca0fe51b8e0bcbc7be0efd888ebde"
+    },
+    {
+      "path": "assets_src/aseprite/environment/props_wall.aseprite",
+      "sha256": "3051cac8ab46cb2b7b7b2b1552c8fda784cba4f4770a653040079197c1159acd"
+    },
+    {
+      "path": "assets/combat/environment/contact_shadow.png",
+      "sha256": "7b8c51f15386bbeb0957526632a40dfe26a700a31ffaaff5edb152fb63801b08"
+    },
+    {
+      "path": "assets/combat/environment/floors/cave.png",
+      "sha256": "1c3c9216bebb3b845fa82680bfae9f8b4ec780fa59dc2f2224250875798b6ace"
+    },
+    {
+      "path": "assets/combat/environment/floors/earth.png",
+      "sha256": "cdaa7cec5199014d4057a93cff43d941774ee9484dddd0ca41aefdf7d910e4c0"
+    },
+    {
+      "path": "assets/combat/environment/floors/flagstone.png",
+      "sha256": "c94367dad0050f96997fb4df6852a7b4e982069c3d473b4dc4b2025b9336a5b4"
+    },
+    {
+      "path": "assets/combat/environment/floors/woodland.png",
+      "sha256": "d655d62b5773487226fccdb8910a67ba5c3e44589cb2e6341b70721fc72d642a"
+    },
+    {
+      "path": "assets/combat/environment/ledge_dungeon.png",
+      "sha256": "750e6ece68246263a35e7be305fe5fc2f0ac3b8e42b714d9e7e9c751e467913e"
+    },
+    {
+      "path": "assets/combat/environment/ledge_nature.png",
+      "sha256": "4c7e611d45265616cc00c12c9aed7af3ad328b1d0777b374e329d756c347cf11"
+    },
+    {
+      "path": "assets/combat/environment/props/altar.png",
+      "sha256": "e61cba62f1ec20475492fcc687c74647c6cb7d5d6ff4e6eea33ddc24699e9a0b"
+    },
+    {
+      "path": "assets/combat/environment/props/arch.png",
+      "sha256": "e111e8e5ce912dcbcf81fd9487f7f19a39f702754169cf6cef521920ff144307"
+    },
+    {
+      "path": "assets/combat/environment/props/barrel.png",
+      "sha256": "d95f6d2b8cdc1774fdac3cc6596a7f2b2ee825dea44d44b736b11211dd8587bf"
+    },
+    {
+      "path": "assets/combat/environment/props/bone_totem.png",
+      "sha256": "6ea395e6b3d6c206a8cb648d1e1544de6310492f6f5ecb2169d81124fc39701c"
+    },
+    {
+      "path": "assets/combat/environment/props/bones.png",
+      "sha256": "aca7833969227e1cd74bb8021913e02ca209c94aff9a1c756c91681f88849b5f"
+    },
+    {
+      "path": "assets/combat/environment/props/boulder.png",
+      "sha256": "8da54f46be0fd73e4a3081d11bca386b34891f045692fbe67a0358828805d07a"
+    },
+    {
+      "path": "assets/combat/environment/props/branches.png",
+      "sha256": "3a6392499befafaa594d529fb9fb6adb415a647044efa602873893f535cd2659"
+    },
+    {
+      "path": "assets/combat/environment/props/brazier.png",
+      "sha256": "07e2897c84cc923c58dd74e6e19dca6eeeb543f4507471a9c6cb5f058000f270"
+    },
+    {
+      "path": "assets/combat/environment/props/broken_pillar.png",
+      "sha256": "ac8a7485cbc0e323b52a20eca8855bcff7ae17925321c5e04be7a19e2cc9d6b4"
+    },
+    {
+      "path": "assets/combat/environment/props/bush.png",
+      "sha256": "c4566472ef75fa348b984503ca139dc30d3d0d4f62a0ee7bad95eab878ce68ff"
+    },
+    {
+      "path": "assets/combat/environment/props/chest.png",
+      "sha256": "1c5fc28ea9e28d156cd4121e0e2c79c857f1d194121093e6464d6b7d7cce5a04"
+    },
+    {
+      "path": "assets/combat/environment/props/coffin.png",
+      "sha256": "0053fa59e711692f890e3002a1998673857ff5b016e31b9359dc95d93e154f46"
+    },
+    {
+      "path": "assets/combat/environment/props/crate.png",
+      "sha256": "1fc495222986b206edc7c8fab487e0fcbcf2c7c537fd4610b911a0f0c9a9894d"
+    },
+    {
+      "path": "assets/combat/environment/props/dead_tree.png",
+      "sha256": "d93857be1d3e1d5e6de675aa60e7fcde1c149a162a5837eb99a739c5f5e1bc78"
+    },
+    {
+      "path": "assets/combat/environment/props/fallen_log.png",
+      "sha256": "c963bdb705e86a4753635d230f6e662a7a6d07a625ea34dbf48aa6ea56e18f5f"
+    },
+    {
+      "path": "assets/combat/environment/props/flowers.png",
+      "sha256": "e2051b049241ad1d28fa3b44f3e9cef61af988cbd9f46f7a228ffbc9c871c7e2"
+    },
+    {
+      "path": "assets/combat/environment/props/grass.png",
+      "sha256": "3439c87d3ceac7fae4dba351904ba4bd19053fe871fc4d413a6180e7afe46910"
+    },
+    {
+      "path": "assets/combat/environment/props/mushrooms.png",
+      "sha256": "d92909842a95844e32bef6e89fb75d41bbf868bceb0aa88f63c70243cce9d32d"
+    },
+    {
+      "path": "assets/combat/environment/props/oak.png",
+      "sha256": "cbc2cc630e2cf8a9a76019c68abf641f98b9e1c68138891c09560ebc99c8bbab"
+    },
+    {
+      "path": "assets/combat/environment/props/pillar.png",
+      "sha256": "d900a88acb17338817620330807493833866fdef5a9a594cad395c725fa8394c"
+    },
+    {
+      "path": "assets/combat/environment/props/pine.png",
+      "sha256": "422e1e057c0c5419e003f70dbecbc0dbd5061c11dfc6a098a4103dd2939cd449"
+    },
+    {
+      "path": "assets/combat/environment/props/rock_cluster.png",
+      "sha256": "ce6ded5cf0eb2a26d30c8721922535b034a2dd096e5dc5b2043da74fb14922f1"
+    },
+    {
+      "path": "assets/combat/environment/props/rubble.png",
+      "sha256": "ce870e263c3cde4d5701431389ce7a517fd2780cd9eb2ff79bfc0816c6c289fb"
+    },
+    {
+      "path": "assets/combat/environment/props/sacks.png",
+      "sha256": "eead367bcccb1ea5b4f258b94dd62c4bbc38e6ab509ba6c4ec9efbbb38fbd61a"
+    },
+    {
+      "path": "assets/combat/environment/props/spike_fence.png",
+      "sha256": "71fe2180f71584a471d0251ddd7c2403d41142a6bd4524ff17504b3f4e9e778f"
+    },
+    {
+      "path": "assets/combat/environment/props/statue.png",
+      "sha256": "a7e6ae8091fb14a2db75b30c0a836915ebaa64982cd11fd406d3f93df73b032e"
+    },
+    {
+      "path": "assets/combat/environment/props/stump.png",
+      "sha256": "245ec3ef3e0ed11a97d995a169880041bd55c8464520c6dffcffa9e75293a700"
+    },
+    {
+      "path": "assets/combat/environment/props/wall.png",
+      "sha256": "96ae370ab70f7a7d4f11b841344374fe273c213f0b2ac2c7d44929bb7144ad85"
+    }
+  ]
+}

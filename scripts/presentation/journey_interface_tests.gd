@@ -1,0 +1,57 @@
+extends SceneTree
+var errors: Array[String] = []
+var checks := 0
+func _initialize() -> void: _run.call_deferred()
+func check(ok: bool,message: String) -> void:
+	checks += 1
+	if not ok: errors.append(message)
+func frames() -> void:
+	for frame in range(5): await process_frame
+func _run() -> void:
+	var campaign := root.get_node("CampaignSession")
+	campaign.load_profile("",true)
+	var app: Control = load("res://scenes/town/town_shell.tscn").instantiate()
+	root.add_child(app)
+	await frames()
+	app.action_buttons.buy_food.pressed.emit()
+	await frames()
+	check(campaign.state.gold == 39 and campaign.state.supplies.food == 4,"actual supply tile trusted price/quantity")
+	app.shell.nav_buttons.region.pressed.emit()
+	await frames()
+	var map := app.find_child("RegionMap",true,false)
+	check(map.marker_buttons.size() == 3 and map.marker_buttons.town_ravenford.disabled and not map.marker_buttons.dungeon_old_mine.disabled,"landmarks/current/adjacent availability")
+	var before: Dictionary = campaign.state.duplicate(true)
+	map.marker_buttons.town_ravenford.pressed.emit()
+	check(campaign.state == before,"current marker never charges")
+	map.marker_buttons.dungeon_old_mine.pressed.emit()
+	await frames()
+	map = app.find_child("RegionMap",true,false)
+	check(campaign.state.world.location_id == "dungeon_old_mine" and campaign.state.supplies.food == 3 and campaign.state.world.elapsed_hours == 6,"actual map travel once")
+	check(map.marker_buttons.event_broken_cart.disabled,"nonadjacent landmark disabled")
+	map.marker_buttons.town_ravenford.pressed.emit()
+	await frames()
+	map = app.find_child("RegionMap",true,false)
+	map.marker_buttons.event_broken_cart.pressed.emit()
+	await frames()
+	map = app.find_child("RegionMap",true,false)
+	check(campaign.state.world.pending_event.kind == "cart" and app.action_buttons.has("event_salvage"),"map travel preserves real event choices")
+	for button: Button in map.marker_buttons.values(): check(button.disabled,"pending event locks every map marker")
+	app.action_buttons.event_help.pressed.emit()
+	await frames()
+	map = app.find_child("RegionMap",true,false)
+	map.marker_buttons.town_ravenford.pressed.emit()
+	await frames()
+	# Low-food fixture checks the new map input boundary as well as model rejection.
+	campaign.state.supplies.food = 0
+	app._render()
+	await frames()
+	map = app.find_child("RegionMap",true,false)
+	before = campaign.state.duplicate(true)
+	check(map.marker_buttons.dungeon_old_mine.disabled,"return reserve gate reflected on map")
+	map.marker_buttons.dungeon_old_mine.pressed.emit()
+	check(campaign.state == before,"disabled marker cannot bypass guard")
+	app.queue_free()
+	await frames()
+	for error in errors: push_error(error)
+	print("journey_interface_tests: ",checks," checks, ",errors.size()," failures")
+	quit(0 if errors.is_empty() else 1)

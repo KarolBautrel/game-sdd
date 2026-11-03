@@ -1,0 +1,331 @@
+{
+  "id": "ash_road_raiders",
+  "seed": 20261101,
+  "item_profiles": {
+    "hero_sword": {
+      "id": "hero_sword",
+      "slot": "main_hand",
+      "grants_actions": [
+        "basic_attack",
+        "power_strike",
+        "deep_cut",
+        "guard_break"
+      ],
+      "action_profiles": {
+        "basic_attack": {
+          "id": "hero_sword_basic_attack",
+          "action_id": "basic_attack",
+          "range": 1,
+          "ap_cost": 1,
+          "damage_bonus": 0
+        },
+        "power_strike": {
+          "id": "hero_sword_power_strike",
+          "action_id": "power_strike",
+          "range": 1,
+          "ap_cost": 2,
+          "damage_bonus": 2,
+          "cooldown_turns": 2
+        },
+        "deep_cut": {
+          "id": "hero_sword_deep_cut",
+          "action_id": "deep_cut",
+          "range": 1,
+          "ap_cost": 1,
+          "damage_bonus": 0,
+          "status_id": "bleeding",
+          "status_remaining_turns": 2,
+          "status_tick_damage": 1
+        },
+        "guard_break": {
+          "id": "hero_sword_guard_break",
+          "action_id": "guard_break",
+          "range": 1,
+          "ap_cost": 1,
+          "damage_bonus": 0,
+          "status_id": "guard_broken",
+          "status_remaining_turns": 1,
+          "status_defense_modifier": -2
+        }
+      }
+    },
+    "hero_shield": {
+      "id": "hero_shield",
+      "slot": "off_hand",
+      "grants_actions": [
+        "shield_wall"
+      ],
+      "action_profiles": {
+        "shield_wall": {
+          "id": "hero_shield_wall",
+          "action_id": "shield_wall",
+          "ap_cost": 1,
+          "status_id": "shield_wall",
+          "status_remaining_turns": 1,
+          "damage_reduction": 2,
+          "cooldown_turns": 2
+        }
+      }
+    },
+    "hero_chainmail": {
+      "id": "hero_chainmail",
+      "slot": "armor",
+      "armor_reduction": 1,
+      "grants_actions": []
+    },
+    "raider_axe": {
+      "id": "raider_axe",
+      "slot": "main_hand",
+      "grants_actions": [
+        "basic_attack"
+      ],
+      "action_profiles": {
+        "basic_attack": {
+          "id": "raider_axe_basic_attack",
+          "action_id": "basic_attack",
+          "range": 1,
+          "ap_cost": 1,
+          "damage_bonus": 0
+        }
+      }
+    },
+    "raider_bow": {
+      "id": "raider_bow",
+      "slot": "main_hand",
+      "grants_actions": [
+        "ranged_attack"
+      ],
+      "action_profiles": {
+        "ranged_attack": {
+          "id": "raider_bow_ranged_attack",
+          "action_id": "ranged_attack",
+          "range": 4,
+          "ap_cost": 1,
+          "base_hit_chance": 75,
+          "damage_bonus": 0
+        }
+      }
+    },
+    "hero_bow": {
+      "id": "hero_bow",
+      "slot": "main_hand",
+      "grants_actions": [
+        "ranged_attack",
+        "aimed_shot"
+      ],
+      "action_profiles": {
+        "ranged_attack": {
+          "id": "hero_bow_ranged_attack",
+          "action_id": "ranged_attack",
+          "range": 3,
+          "ap_cost": 1,
+          "base_hit_chance": 75,
+          "damage_bonus": 0
+        },
+        "aimed_shot": {
+          "id": "hero_bow_aimed_shot",
+          "action_id": "aimed_shot",
+          "range": 4,
+          "ap_cost": 2,
+          "base_hit_chance": 90,
+          "damage_bonus": 1
+        }
+      }
+    }
+  },
+  "units": [
+    {
+      "id": "unit_player_001",
+      "team": "player",
+      "position": {
+        "x": 1,
+        "y": 8
+      },
+      "stats": {
+        "max_hp": 14,
+        "strength": 5,
+        "defense": 2,
+        "initiative": 12,
+        "move_points": 4,
+        "max_ap": 2,
+        "accuracy": 5,
+        "evasion": 5
+      },
+      "resources": {
+        "hp": 14,
+        "ap": 2,
+        "mp": 4
+      },
+      "statuses": [],
+      "available_actions": [
+        "move",
+        "defend",
+        "end_turn"
+      ],
+      "loadout": {
+        "main_hand": "hero_sword",
+        "off_hand": "hero_shield",
+        "armor": "hero_chainmail"
+      }
+    },
+    {
+      "id": "unit_player_002",
+      "team": "player",
+      "position": {
+        "x": 2,
+        "y": 8
+      },
+      "stats": {
+        "max_hp": 10,
+        "strength": 3,
+        "defense": 0,
+        "initiative": 11,
+        "move_points": 4,
+        "max_ap": 2,
+        "accuracy": 12,
+        "evasion": 8
+      },
+      "resources": {
+        "hp": 10,
+        "ap": 2,
+        "mp": 4
+      },
+      "statuses": [],
+      "available_actions": [
+        "move",
+        "defend",
+        "end_turn"
+      ],
+      "loadout": {
+        "main_hand": "hero_bow",
+        "off_hand": null,
+        "armor": null
+      },
+      "visual": {
+        "faction": "heroes",
+        "character": "archer_1"
+      }
+    },
+    {
+      "id": "unit_enemy_001",
+      "team": "enemy",
+      "position": {
+        "x": 5,
+        "y": 7
+      },
+      "stats": {
+        "max_hp": 9,
+        "strength": 4,
+        "defense": 1,
+        "initiative": 8,
+        "move_points": 4,
+        "max_ap": 1,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "resources": {
+        "hp": 9,
+        "ap": 1,
+        "mp": 4
+      },
+      "statuses": [],
+      "available_actions": [],
+      "archetype_id": "raider_swordsman",
+      "visual": {
+        "faction": "villains",
+        "character": "ash_raider"
+      }
+    },
+    {
+      "id": "unit_enemy_002",
+      "team": "enemy",
+      "position": {
+        "x": 8,
+        "y": 5
+      },
+      "stats": {
+        "max_hp": 7,
+        "strength": 3,
+        "defense": 0,
+        "initiative": 7,
+        "move_points": 3,
+        "max_ap": 1,
+        "accuracy": 10,
+        "evasion": 0
+      },
+      "resources": {
+        "hp": 7,
+        "ap": 1,
+        "mp": 3
+      },
+      "statuses": [],
+      "available_actions": [],
+      "archetype_id": "raider_archer"
+    }
+  ],
+  "turn_state": {
+    "active_unit_id": "unit_player_001",
+    "round": 1,
+    "turn_order": [
+      "unit_player_001",
+      "unit_player_002",
+      "unit_enemy_001",
+      "unit_enemy_002"
+    ]
+  },
+  "event_log": [],
+  "enemy_archetypes": {
+    "raider_swordsman": {
+      "id": "raider_swordsman",
+      "role": "melee",
+      "family": "humanoid",
+      "display_name": "Raider Swordsman",
+      "visual_pool": [
+        {
+          "faction": "villains",
+          "character": "axe_bandit"
+        },
+        {
+          "faction": "villains",
+          "character": "bandit_marauder"
+        },
+        {
+          "faction": "villains",
+          "character": "bandit_rogue"
+        }
+      ],
+      "available_actions": [
+        "move",
+        "defend",
+        "end_turn"
+      ],
+      "loadout": {
+        "main_hand": "raider_axe",
+        "off_hand": null,
+        "armor": null
+      }
+    },
+    "raider_archer": {
+      "id": "raider_archer",
+      "role": "ranged",
+      "family": "humanoid",
+      "display_name": "Raider Archer",
+      "visual_pool": [
+        {
+          "faction": "villains",
+          "character": "bandit_archer"
+        }
+      ],
+      "available_actions": [
+        "move",
+        "end_turn"
+      ],
+      "loadout": {
+        "main_hand": "raider_bow",
+        "off_hand": null,
+        "armor": null
+      }
+    }
+  },
+  "map_path": "res://resources/data/maps/combat_test_clearing.json"
+}

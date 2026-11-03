@@ -1,0 +1,8 @@
+{
+  "id": "bones",
+  "pixels_per_metre": 100,
+  "camera_elevation": 18,
+  "triangles": 672,
+  "uv": true,
+  "original": true
+}

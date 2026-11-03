@@ -1,0 +1,8 @@
+{
+  "weapons": {
+    "prompt": "Use case: stylized-concept. Painted2D RPG detachable weapon sprite library matching reference's painted steel bronze leather and muted lighting. TRUE transparent background, no characters/hands/shadows/floor/text/labels. Exact3 columns by3 rows,9 isolated objects with generous space and no overlap. Upright objects with tips at TOP and grips atBOTTOM in their own equal cells: row1 long straight two-handed steel sword with bronze crossguard/brown wrapped grip, shorter one-handed straight steel sword same material, navy/bronze kite shield plain pale four-point motif. Row2 unstrung? NO: a simple slim wooden longbow with taut straight string from tip to tip and bare grip at its middle (longbow vertical), one straight wooden arrow with steel head and feather tail, two short matching straight daggers next to each other. Row3 single-edge practical iron bearded axe on brown haft, long straight wooden spear with small leaf point, plain brown leather long sword scabbard. Orthographic clear silhouettes, realistic functional shapes. Every object full length and separate from cell neighbors. Same artist/lighting as supplied knight; no red or green edge glow. High resolution square asset sheet.",
+    "generator": "built-in imagegen",
+    "source": "C:\\Users\\karol\\.codex\\generated_images\\01a1a0d5-2ac8-74c1-aa23-5568e96330b1\\exec-e88b6aa1-f177-40fb-b542-002f7fb2c425.png",
+    "output": "assets_src\\characters\\drawn_animation\\2026-11-03\\weapon_library\\raw\\weapons.png"
+  }
+}

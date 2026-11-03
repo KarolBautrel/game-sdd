@@ -1,0 +1,94 @@
+{
+  "id": "01_mercenary",
+  "title": "I / Najemnik",
+  "static": true,
+  "rigged": false,
+  "animated": false,
+  "integrated": false,
+  "triangles": 39248,
+  "source_parts": 25,
+  "bounds": [
+    [
+      -0.4459589719772339,
+      0.4430762231349945
+    ],
+    [
+      -0.21430590748786926,
+      0.2667247951030731
+    ],
+    [
+      0.00800000037997961,
+      1.846993088722229
+    ]
+  ],
+  "audit": {
+    "profile": "render",
+    "eps": 0.00021,
+    "tol": 0.004197,
+    "gap": 0.020985,
+    "pass": true,
+    "errors": [],
+    "warnings": [
+      "01_mercenary_static_actor: 5 detached fragments (29% of its faces), nearest 0.0105 from the rest"
+    ],
+    "per_object": {
+      "01_mercenary_static_actor": {
+        "tris": 39248,
+        "parts": 21,
+        "errors": [],
+        "warnings": [
+          "01_mercenary_static_actor: 5 detached fragments (29% of its faces), nearest 0.0105 from the rest"
+        ]
+      }
+    },
+    "skipped": []
+  },
+  "ucupaint": {
+    "version": "3.0.0",
+    "workspace": "PAINT_WORKSPACE_01_mercenary",
+    "layers": 1,
+    "image": "01_mercenary_painted_albedo",
+    "gui_brush_strokes": false
+  },
+  "method": "CC0 anatomical scaffold; authored tailored/forged geometry; original AI-painted multiview projection with baked diffuse atlas",
+  "limits": [
+    "static visual prototype",
+    "projection contains designed/baked lighting",
+    "inferred geometry and view seams need later animation polish",
+    "no live GUI sculpt/paint strokes"
+  ],
+  "camera": {
+    "elevation": 18,
+    "yaw": 330,
+    "ortho": 2.7,
+    "render_size": 900,
+    "tactical_pixels_per_metre": 100
+  },
+  "files": {
+    "01_mercenary.blend": "65bc3b9df8ef08bd445f88133e6e3ec4d9efa873a46a195f725df0c81f5b68c2",
+    "01_mercenary.fbx": "e1f8dcd039dc8f66560c5a4cbbcfb902c5a5855db2db938a117762e4b4fd0285",
+    "concept.png": "672ee8d8ff5f1f487cfea9b00435484ca40b9f2fc31410933c659a9d3608f9f6",
+    "projection-padded.png": "50b584933a34c13c3a25b7859a1b70d4ea8c9be5130d9057ef9086c38fcc5491",
+    "geometry_review/matcap_back.png": "1f146c4a96144a3034bf9cbf8afaab0fe2da39ba2d918f1946260c1d52d75f49",
+    "geometry_review/matcap_front.png": "fb192aac3f377fc2fc64312c1554b00d234f7174c00cd7a41bf46fd684c733a1",
+    "geometry_review/matcap_right.png": "3fa8bb1101c053c3b86ac647661cecb2c316ff57515114d3f5e4fe0936bc764f",
+    "geometry_review/matcap_threequarter.png": "ac149670163052844f366c832a3c0361607ba7aef2710ecae2c27331ec33b3f4",
+    "geometry_review/review_sheet.png": "041e2776fc39f29498bcad9c20c8cf75bfd8c2caff4b8bc3100547a9f333ae42",
+    "geometry_review/silhouette_back.png": "cc8cc1203b0f441c21a196e97843b9e73950dc9d32044df7834c4f7b2fcf0cc4",
+    "geometry_review/silhouette_front.png": "4d3d94310defba493fbaa1d4951bbe32fbba744da33f91e1b2eaa70a4b55973c",
+    "geometry_review/silhouette_right.png": "f5e5f53d46a6d12fbe18b8b40131188ccb4a507f5dce36a7d5284fdda7bb2001",
+    "geometry_review/silhouette_threequarter.png": "c0317c0abed1c3eda54d70558cbeada03388477fd864be92fbed4f9f5a114b06",
+    "geometry_review/wire_back.png": "af323d62247fae54fca3a030cf2770a327ac8d06de689a0533134df67fbaa847",
+    "geometry_review/wire_front.png": "e62ade436a2e0381b1b7f13be9500963ceaaa29f97cc7792b688a16a6844776c",
+    "geometry_review/wire_right.png": "725245bac10de2c017279986e93d4bd5655042562401920c25c6e6af5dd184dd",
+    "geometry_review/wire_threequarter.png": "15a0335d94a6b55f5d2a6a8a9caeca6dd80a6c7e282fedc004b919600575cd94",
+    "renders/face.png": "27dc49c81b11a83631840f507a5da6dec2ac8e93b3779f5d9f4791ee7f1bd31f",
+    "renders/fbx_roundtrip.png": "dbf2004e1ceb72a52ee03b9b41224c3f6d66945dc61176e2969052059921669a",
+    "renders/front.png": "5137c3e92416a1687284d57115e4d6a9cea1f2b1ff7f44e84c0f948e4d0d77d6",
+    "renders/rear.png": "dc4a864f7e444d1c0d9a72f7c40bbed03e66db5ec9d2b36e4c5898fea09c3470",
+    "renders/side.png": "c7737bcd7e9221adb6fb3baa8b9da9a59eb1c6b500ac46060077d53e41cca2db",
+    "renders/tactical.png": "2b9f40fd6b542714226d0b88e87a5a3673417d6f55f83b595dabe565baa505be",
+    "renders/three_quarter.png": "ff71a7981442fec3bdbd32104db6a330eb8165541ec6f07dbc390288b6020c9b",
+    "textures/01_mercenary_albedo.png": "7c8d4c8c58231b798a723df5b9c2be205c4386a14d1e4ed4b5f16ed7080c98ec"
+  }
+}

@@ -15,10 +15,12 @@
       "type": "object",
       "additionalProperties": { "type": "integer", "minimum": 0 }
     },
+    "supply_loadout_capacity": { "type": "integer", "minimum": 0 },
     "supply_loadout_options": {
       "type": "object",
       "additionalProperties": { "$ref": "#/$defs/supply_loadout_option" }
     },
+    "generated_profile": { "$ref": "#/$defs/generated_profile" },
     "default_party_formation": {
       "type": "array",
       "items": { "$ref": "#/$defs/party_formation_slot" }
@@ -66,6 +68,8 @@
                   "type": "string",
                   "pattern": "^res://resources/data/combat_encounters/.+\\.json$"
                 },
+                "combat_encounter_pool_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+                "combat_encounter_selection": { "$ref": "#/$defs/combat_encounter_selection" },
                 "quest_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
                 "rewards": { "$ref": "#/$defs/rewards" }
               }
@@ -181,7 +185,21 @@
       "properties": {
         "min": { "type": "integer", "minimum": 0 },
         "max": { "type": "integer", "minimum": 0 },
-        "default": { "type": "integer", "minimum": 0 }
+        "default": { "type": "integer", "minimum": 0 },
+        "packing_cost": { "type": "integer", "minimum": 0 },
+        "label": { "type": "string", "minLength": 1 }
+      }
+    },
+    "generated_profile": {
+      "type": "object",
+      "required": ["id", "display_name", "difficulty", "theme"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "display_name": { "type": "string", "minLength": 1 },
+        "difficulty": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "theme": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "length": { "type": "string", "enum": ["short", "medium", "deep"] }
       }
     },
     "party_formation_slot": {
@@ -244,6 +262,16 @@
         "supply_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
         "debuff_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
         "target_id": { "type": "string", "pattern": "^[a-z0-9_]+$" }
+      }
+    },
+    "combat_encounter_selection": {
+      "type": "object",
+      "required": ["pool_id", "entry_id", "tactical_role"],
+      "additionalProperties": false,
+      "properties": {
+        "pool_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "entry_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "tactical_role": { "type": "string", "pattern": "^[a-z0-9_]+$" }
       }
     },
     "rewards": {

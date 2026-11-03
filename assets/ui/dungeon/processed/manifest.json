@@ -1,5 +1,5 @@
 {
-	"asset_count": 120,
+	"asset_count": 126,
 	"assets": [
 		{
 			"area": 443212,
@@ -7,7 +7,7 @@
 			"height": 1250,
 			"id": "mercenary_pose_for_portrait_00",
 			"path": "res://assets/ui/dungeon/processed/mercenary_pose_for_portrait/mercenary_pose_for_portrait_00.png",
-			"source": "res://assets/ui/dungeon/to_process/portraits/mercenary_pose_for_portrait.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/portraits/mercenary_pose_for_portrait.png",
 			"width": 823
 		},
 		{
@@ -16,7 +16,7 @@
 			"height": 388,
 			"id": "mercenary_pose_for_portrait_head",
 			"path": "res://assets/ui/dungeon/processed/mercenary_pose_for_portrait/mercenary_pose_for_portrait_head.png",
-			"source": "res://assets/ui/dungeon/to_process/portraits/mercenary_pose_for_portrait.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/portraits/mercenary_pose_for_portrait.png",
 			"width": 296
 		},
 		{
@@ -25,7 +25,7 @@
 			"height": 157,
 			"id": "dungeon_icons_00",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_00.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 159
 		},
 		{
@@ -34,7 +34,7 @@
 			"height": 157,
 			"id": "dungeon_icons_01",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_01.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 158
 		},
 		{
@@ -43,7 +43,7 @@
 			"height": 157,
 			"id": "dungeon_icons_02",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_02.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 159
 		},
 		{
@@ -52,7 +52,7 @@
 			"height": 157,
 			"id": "dungeon_icons_03",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_03.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 157
 		},
 		{
@@ -61,7 +61,7 @@
 			"height": 157,
 			"id": "dungeon_icons_04",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_04.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 157
 		},
 		{
@@ -70,7 +70,7 @@
 			"height": 157,
 			"id": "dungeon_icons_05",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_05.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 156
 		},
 		{
@@ -79,7 +79,7 @@
 			"height": 157,
 			"id": "dungeon_icons_06",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_06.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 156
 		},
 		{
@@ -88,7 +88,7 @@
 			"height": 157,
 			"id": "dungeon_icons_07",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_07.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 157
 		},
 		{
@@ -97,7 +97,7 @@
 			"height": 156,
 			"id": "dungeon_icons_08",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_08.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 159
 		},
 		{
@@ -106,7 +106,7 @@
 			"height": 156,
 			"id": "dungeon_icons_09",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_09.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 158
 		},
 		{
@@ -115,7 +115,7 @@
 			"height": 156,
 			"id": "dungeon_icons_10",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_10.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 158
 		},
 		{
@@ -124,7 +124,7 @@
 			"height": 156,
 			"id": "dungeon_icons_11",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_11.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 157
 		},
 		{
@@ -133,7 +133,7 @@
 			"height": 156,
 			"id": "dungeon_icons_12",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_12.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 156
 		},
 		{
@@ -142,7 +142,7 @@
 			"height": 156,
 			"id": "dungeon_icons_13",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_13.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 156
 		},
 		{
@@ -151,7 +151,7 @@
 			"height": 156,
 			"id": "dungeon_icons_14",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_14.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 156
 		},
 		{
@@ -160,7 +160,7 @@
 			"height": 156,
 			"id": "dungeon_icons_15",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_15.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 157
 		},
 		{
@@ -169,7 +169,7 @@
 			"height": 155,
 			"id": "dungeon_icons_16",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_16.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 159
 		},
 		{
@@ -178,7 +178,7 @@
 			"height": 155,
 			"id": "dungeon_icons_17",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_17.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 158
 		},
 		{
@@ -187,7 +187,7 @@
 			"height": 155,
 			"id": "dungeon_icons_18",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_18.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 158
 		},
 		{
@@ -196,7 +196,7 @@
 			"height": 155,
 			"id": "dungeon_icons_19",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_19.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 156
 		},
 		{
@@ -205,7 +205,7 @@
 			"height": 153,
 			"id": "dungeon_icons_20",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_20.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 155
 		},
 		{
@@ -214,7 +214,7 @@
 			"height": 153,
 			"id": "dungeon_icons_21",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_21.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 156
 		},
 		{
@@ -223,7 +223,7 @@
 			"height": 151,
 			"id": "dungeon_icons_22",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_22.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 153
 		},
 		{
@@ -232,7 +232,7 @@
 			"height": 152,
 			"id": "dungeon_icons_23",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_23.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 152
 		},
 		{
@@ -241,7 +241,7 @@
 			"height": 138,
 			"id": "dungeon_icons_24",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_24.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 137
 		},
 		{
@@ -250,7 +250,7 @@
 			"height": 138,
 			"id": "dungeon_icons_25",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_25.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 137
 		},
 		{
@@ -259,7 +259,7 @@
 			"height": 138,
 			"id": "dungeon_icons_26",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_26.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 137
 		},
 		{
@@ -268,7 +268,7 @@
 			"height": 138,
 			"id": "dungeon_icons_27",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_27.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 137
 		},
 		{
@@ -277,7 +277,7 @@
 			"height": 138,
 			"id": "dungeon_icons_28",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_28.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 137
 		},
 		{
@@ -286,7 +286,7 @@
 			"height": 138,
 			"id": "dungeon_icons_29",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_29.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 136
 		},
 		{
@@ -295,7 +295,7 @@
 			"height": 138,
 			"id": "dungeon_icons_30",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_30.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 137
 		},
 		{
@@ -304,7 +304,7 @@
 			"height": 138,
 			"id": "dungeon_icons_31",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_31.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 136
 		},
 		{
@@ -313,7 +313,7 @@
 			"height": 72,
 			"id": "dungeon_icons_32",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_32.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 65
 		},
 		{
@@ -322,7 +322,7 @@
 			"height": 73,
 			"id": "dungeon_icons_33",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_33.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 77
 		},
 		{
@@ -331,7 +331,7 @@
 			"height": 72,
 			"id": "dungeon_icons_34",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_34.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 72
 		},
 		{
@@ -340,7 +340,7 @@
 			"height": 73,
 			"id": "dungeon_icons_35",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_35.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 71
 		},
 		{
@@ -349,7 +349,7 @@
 			"height": 74,
 			"id": "dungeon_icons_36",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_36.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 55
 		},
 		{
@@ -358,7 +358,7 @@
 			"height": 74,
 			"id": "dungeon_icons_37",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_37.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 57
 		},
 		{
@@ -367,7 +367,7 @@
 			"height": 74,
 			"id": "dungeon_icons_38",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_38.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 55
 		},
 		{
@@ -376,7 +376,7 @@
 			"height": 74,
 			"id": "dungeon_icons_39",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_39.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 54
 		},
 		{
@@ -385,7 +385,7 @@
 			"height": 72,
 			"id": "dungeon_icons_40",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_40.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 72
 		},
 		{
@@ -394,7 +394,7 @@
 			"height": 72,
 			"id": "dungeon_icons_41",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_41.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 67
 		},
 		{
@@ -403,7 +403,7 @@
 			"height": 71,
 			"id": "dungeon_icons_42",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_42.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 66
 		},
 		{
@@ -412,7 +412,7 @@
 			"height": 62,
 			"id": "dungeon_icons_43",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_43.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 61
 		},
 		{
@@ -421,7 +421,7 @@
 			"height": 49,
 			"id": "dungeon_icons_44",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_44.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 84
 		},
 		{
@@ -430,7 +430,7 @@
 			"height": 46,
 			"id": "dungeon_icons_45",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_45.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 84
 		},
 		{
@@ -439,7 +439,7 @@
 			"height": 46,
 			"id": "dungeon_icons_46",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_46.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 80
 		},
 		{
@@ -448,7 +448,7 @@
 			"height": 46,
 			"id": "dungeon_icons_47",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_47.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 78
 		},
 		{
@@ -457,7 +457,7 @@
 			"height": 46,
 			"id": "dungeon_icons_48",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_48.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 72
 		},
 		{
@@ -466,7 +466,7 @@
 			"height": 46,
 			"id": "dungeon_icons_49",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_49.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 71
 		},
 		{
@@ -475,7 +475,7 @@
 			"height": 46,
 			"id": "dungeon_icons_50",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_50.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 80
 		},
 		{
@@ -484,7 +484,7 @@
 			"height": 47,
 			"id": "dungeon_icons_51",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_51.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 66
 		},
 		{
@@ -493,7 +493,7 @@
 			"height": 44,
 			"id": "dungeon_icons_52",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_52.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 68
 		},
 		{
@@ -502,7 +502,7 @@
 			"height": 44,
 			"id": "dungeon_icons_53",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_53.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 85
 		},
 		{
@@ -511,7 +511,7 @@
 			"height": 41,
 			"id": "dungeon_icons_54",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_54.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 69
 		},
 		{
@@ -520,7 +520,7 @@
 			"height": 38,
 			"id": "dungeon_icons_55",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_55.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 65
 		},
 		{
@@ -529,7 +529,7 @@
 			"height": 69,
 			"id": "dungeon_icons_56",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_56.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 229
 		},
 		{
@@ -538,7 +538,7 @@
 			"height": 64,
 			"id": "dungeon_icons_57",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_57.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 200
 		},
 		{
@@ -547,7 +547,7 @@
 			"height": 61,
 			"id": "dungeon_icons_58",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_58.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 221
 		},
 		{
@@ -556,7 +556,7 @@
 			"height": 60,
 			"id": "dungeon_icons_59",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_59.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 165
 		},
 		{
@@ -565,7 +565,7 @@
 			"height": 53,
 			"id": "dungeon_icons_60",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_60.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 215
 		},
 		{
@@ -574,7 +574,7 @@
 			"height": 45,
 			"id": "dungeon_icons_61",
 			"path": "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_61.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_icons.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_icons.png",
 			"width": 207
 		},
 		{
@@ -583,7 +583,7 @@
 			"height": 77,
 			"id": "dungeon_ui_00",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_00.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 67
 		},
 		{
@@ -592,7 +592,7 @@
 			"height": 73,
 			"id": "dungeon_ui_01",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_01.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 230
 		},
 		{
@@ -601,7 +601,7 @@
 			"height": 73,
 			"id": "dungeon_ui_02",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_02.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 211
 		},
 		{
@@ -610,7 +610,7 @@
 			"height": 73,
 			"id": "dungeon_ui_03",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_03.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 225
 		},
 		{
@@ -619,7 +619,7 @@
 			"height": 73,
 			"id": "dungeon_ui_04",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_04.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 202
 		},
 		{
@@ -628,7 +628,7 @@
 			"height": 73,
 			"id": "dungeon_ui_05",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_05.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 205
 		},
 		{
@@ -637,7 +637,7 @@
 			"height": 73,
 			"id": "dungeon_ui_06",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_06.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 215
 		},
 		{
@@ -646,7 +646,7 @@
 			"height": 438,
 			"id": "dungeon_ui_07",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_07.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 399
 		},
 		{
@@ -655,7 +655,7 @@
 			"height": 471,
 			"id": "dungeon_ui_08",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_08.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 1063
 		},
 		{
@@ -664,7 +664,7 @@
 			"height": 304,
 			"id": "dungeon_ui_09",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_09.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 394
 		},
 		{
@@ -673,7 +673,7 @@
 			"height": 253,
 			"id": "dungeon_ui_10",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_10.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 499
 		},
 		{
@@ -682,7 +682,7 @@
 			"height": 119,
 			"id": "dungeon_ui_11",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_11.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 168
 		},
 		{
@@ -691,7 +691,7 @@
 			"height": 119,
 			"id": "dungeon_ui_12",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_12.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 167
 		},
 		{
@@ -700,7 +700,7 @@
 			"height": 119,
 			"id": "dungeon_ui_13",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_13.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 162
 		},
 		{
@@ -709,7 +709,7 @@
 			"height": 79,
 			"id": "dungeon_ui_14",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_14.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 124
 		},
 		{
@@ -718,7 +718,7 @@
 			"height": 63,
 			"id": "dungeon_ui_15",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_15.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 141
 		},
 		{
@@ -727,7 +727,7 @@
 			"height": 63,
 			"id": "dungeon_ui_16",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_16.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 133
 		},
 		{
@@ -736,7 +736,7 @@
 			"height": 63,
 			"id": "dungeon_ui_17",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_17.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 129
 		},
 		{
@@ -745,7 +745,7 @@
 			"height": 150,
 			"id": "dungeon_ui_18",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_18.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 475
 		},
 		{
@@ -754,7 +754,7 @@
 			"height": 162,
 			"id": "dungeon_ui_19",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_19.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 364
 		},
 		{
@@ -763,7 +763,7 @@
 			"height": 142,
 			"id": "dungeon_ui_20",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_20.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 192
 		},
 		{
@@ -772,7 +772,7 @@
 			"height": 37,
 			"id": "dungeon_ui_21",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_21.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 209
 		},
 		{
@@ -781,7 +781,7 @@
 			"height": 38,
 			"id": "dungeon_ui_22",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_22.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 224
 		},
 		{
@@ -790,7 +790,7 @@
 			"height": 43,
 			"id": "dungeon_ui_23",
 			"path": "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_23.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungeon_ui.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungeon_ui.png",
 			"width": 222
 		},
 		{
@@ -799,7 +799,7 @@
 			"height": 269,
 			"id": "dungoen_ramki_00",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_00.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 296
 		},
 		{
@@ -808,7 +808,7 @@
 			"height": 254,
 			"id": "dungoen_ramki_01",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_01.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 292
 		},
 		{
@@ -817,7 +817,7 @@
 			"height": 241,
 			"id": "dungoen_ramki_02",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_02.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 285
 		},
 		{
@@ -826,7 +826,7 @@
 			"height": 228,
 			"id": "dungoen_ramki_03",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_03.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 263
 		},
 		{
@@ -835,7 +835,7 @@
 			"height": 248,
 			"id": "dungoen_ramki_04",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_04.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 277
 		},
 		{
@@ -844,7 +844,7 @@
 			"height": 248,
 			"id": "dungoen_ramki_05",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_05.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 276
 		},
 		{
@@ -853,7 +853,7 @@
 			"height": 249,
 			"id": "dungoen_ramki_06",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_06.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 283
 		},
 		{
@@ -862,7 +862,7 @@
 			"height": 240,
 			"id": "dungoen_ramki_07",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_07.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 283
 		},
 		{
@@ -871,7 +871,7 @@
 			"height": 46,
 			"id": "dungoen_ramki_08",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_08.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 308
 		},
 		{
@@ -880,7 +880,7 @@
 			"height": 45,
 			"id": "dungoen_ramki_09",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_09.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 314
 		},
 		{
@@ -889,7 +889,7 @@
 			"height": 46,
 			"id": "dungoen_ramki_10",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_10.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 308
 		},
 		{
@@ -898,7 +898,7 @@
 			"height": 46,
 			"id": "dungoen_ramki_11",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_11.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 329
 		},
 		{
@@ -907,7 +907,7 @@
 			"height": 191,
 			"id": "dungoen_ramki_12",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_12.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 49
 		},
 		{
@@ -916,7 +916,7 @@
 			"height": 191,
 			"id": "dungoen_ramki_13",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_13.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 48
 		},
 		{
@@ -925,7 +925,7 @@
 			"height": 191,
 			"id": "dungoen_ramki_14",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_14.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 49
 		},
 		{
@@ -934,7 +934,7 @@
 			"height": 191,
 			"id": "dungoen_ramki_15",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_15.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 127
 		},
 		{
@@ -943,7 +943,7 @@
 			"height": 189,
 			"id": "dungoen_ramki_16",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_16.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 129
 		},
 		{
@@ -952,7 +952,7 @@
 			"height": 190,
 			"id": "dungoen_ramki_17",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_17.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 128
 		},
 		{
@@ -961,7 +961,7 @@
 			"height": 124,
 			"id": "dungoen_ramki_18",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_18.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 120
 		},
 		{
@@ -970,7 +970,7 @@
 			"height": 124,
 			"id": "dungoen_ramki_19",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_19.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 116
 		},
 		{
@@ -979,7 +979,7 @@
 			"height": 124,
 			"id": "dungoen_ramki_20",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_20.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 119
 		},
 		{
@@ -988,7 +988,7 @@
 			"height": 49,
 			"id": "dungoen_ramki_21",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_21.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 51
 		},
 		{
@@ -997,7 +997,7 @@
 			"height": 49,
 			"id": "dungoen_ramki_22",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_22.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 50
 		},
 		{
@@ -1006,7 +1006,7 @@
 			"height": 49,
 			"id": "dungoen_ramki_23",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_23.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 50
 		},
 		{
@@ -1015,7 +1015,7 @@
 			"height": 95,
 			"id": "dungoen_ramki_24",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_24.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 165
 		},
 		{
@@ -1024,7 +1024,7 @@
 			"height": 95,
 			"id": "dungoen_ramki_25",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_25.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 164
 		},
 		{
@@ -1033,7 +1033,7 @@
 			"height": 95,
 			"id": "dungoen_ramki_26",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_26.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 156
 		},
 		{
@@ -1042,7 +1042,7 @@
 			"height": 95,
 			"id": "dungoen_ramki_27",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_27.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 156
 		},
 		{
@@ -1051,7 +1051,7 @@
 			"height": 66,
 			"id": "dungoen_ramki_28",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_28.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 145
 		},
 		{
@@ -1060,7 +1060,7 @@
 			"height": 65,
 			"id": "dungoen_ramki_29",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_29.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 145
 		},
 		{
@@ -1069,7 +1069,7 @@
 			"height": 65,
 			"id": "dungoen_ramki_30",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_30.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 135
 		},
 		{
@@ -1078,8 +1078,62 @@
 			"height": 65,
 			"id": "dungoen_ramki_31",
 			"path": "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_31.png",
-			"source": "res://assets/ui/dungeon/to_process/ui/dungoen_ramki.png",
+			"source": "res://assets/ui/dungeon/to_process/finished/ui/dungoen_ramki.png",
 			"width": 136
+		},
+		{
+			"area": 524332,
+			"category": "portrait",
+			"height": 1434,
+			"id": "archer_00",
+			"path": "res://assets/ui/dungeon/processed/archer/archer_00.png",
+			"source": "res://assets/ui/dungeon/to_process/portraits/archer.png",
+			"width": 840
+		},
+		{
+			"area": 134390,
+			"category": "portrait_head",
+			"height": 445,
+			"id": "archer_head",
+			"path": "res://assets/ui/dungeon/processed/archer/archer_head.png",
+			"source": "res://assets/ui/dungeon/to_process/portraits/archer.png",
+			"width": 302
+		},
+		{
+			"area": 1051124,
+			"category": "portrait",
+			"height": 1406,
+			"id": "archer_portrait_00",
+			"path": "res://assets/ui/dungeon/processed/archer_portrait/archer_portrait_00.png",
+			"source": "res://assets/ui/dungeon/to_process/portraits/archer_portrait.png",
+			"width": 1097
+		},
+		{
+			"area": 491628,
+			"category": "portrait_head",
+			"height": 773,
+			"id": "archer_portrait_head",
+			"path": "res://assets/ui/dungeon/processed/archer_portrait/archer_portrait_head.png",
+			"source": "res://assets/ui/dungeon/to_process/portraits/archer_portrait.png",
+			"width": 636
+		},
+		{
+			"area": 516943,
+			"category": "portrait",
+			"height": 1472,
+			"id": "rogue_00",
+			"path": "res://assets/ui/dungeon/processed/rogue/rogue_00.png",
+			"source": "res://assets/ui/dungeon/to_process/portraits/rogue.png",
+			"width": 805
+		},
+		{
+			"area": 132240,
+			"category": "portrait_head",
+			"height": 456,
+			"id": "rogue_head",
+			"path": "res://assets/ui/dungeon/processed/rogue/rogue_head.png",
+			"source": "res://assets/ui/dungeon/to_process/portraits/rogue.png",
+			"width": 290
 		}
 	],
 	"output_root": "res://assets/ui/dungeon/processed",

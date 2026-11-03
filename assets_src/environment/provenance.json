@@ -1,0 +1,12 @@
+{
+  "mode": "original Blender geometry plus built-in imagegen painted material references",
+  "floor_source": "floors-source.png",
+  "floor_prompt": "FLOORS-PROMPT.txt",
+  "geometry": "tools/blender/build_world_props.py",
+  "shared_character_materials": "assets_src/characters/roster/material-atlas.png",
+  "normalization": "tools/aseprite/world_art.lua",
+  "runtime_manifest": "resources/data/presentation/world_art.json",
+  "camera_elevation": 18,
+  "pixels_per_metre": 100,
+  "external_paid_services": false
+}

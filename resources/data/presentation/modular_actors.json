@@ -1,0 +1,827 @@
+{
+  "archer_1": {
+    "id": "archer_1",
+    "resource": "res://assets/combat/models/archer_1.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "armor_leather",
+      "armor_plate",
+      "boots_leather",
+      "boots_steel",
+      "helmet_cap",
+      "helmet_closed",
+      "weapon_sword",
+      "weapon_bow",
+      "weapon_axe",
+      "weapon_mace",
+      "weapon_dagger",
+      "weapon_cleaver",
+      "weapon_crossbow",
+      "weapon_spear",
+      "offhand_default",
+      "offhand_shield",
+      "quiver"
+    ],
+    "actions": {
+      "sword": {
+        "pose": "sword_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      },
+      "bow": {
+        "pose": "bow_pose",
+        "walk": "bow_walk",
+        "combat": "bow_combat",
+        "hit": "bow_hit",
+        "death": "bow_death"
+      },
+      "axe": {
+        "pose": "axe_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      },
+      "mace": {
+        "pose": "mace_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      },
+      "dagger": {
+        "pose": "dagger_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      },
+      "cleaver": {
+        "pose": "cleaver_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      },
+      "crossbow": {
+        "pose": "crossbow_pose",
+        "walk": "crossbow_walk",
+        "combat": "crossbow_combat",
+        "hit": "crossbow_hit",
+        "death": "crossbow_death"
+      },
+      "spear": {
+        "pose": "spear_pose",
+        "walk": "spear_walk",
+        "combat": "spear_combat",
+        "hit": "spear_hit",
+        "death": "spear_death"
+      }
+    },
+    "default_weapon": "bow",
+    "hero": true,
+    "bones": 65,
+    "sha256": "b0b8ccf53c950a2bff9dc14cdd895d35dbca9b0568918d8d88f7563b22c0ba68"
+  },
+  "armored_brute": {
+    "id": "armored_brute",
+    "resource": "res://assets/combat/models/armored_brute.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_axe"
+    ],
+    "actions": {
+      "axe": {
+        "pose": "axe_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "axe",
+    "hero": false,
+    "bones": 65,
+    "sha256": "a783979d4f36270ff6cf648fe6cc556c3ccbb9927111bb498cba17b6ba45dc12"
+  },
+  "ash_raider": {
+    "id": "ash_raider",
+    "resource": "res://assets/combat/models/ash_raider.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_cleaver"
+    ],
+    "actions": {
+      "cleaver": {
+        "pose": "cleaver_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "cleaver",
+    "hero": false,
+    "bones": 65,
+    "sha256": "a287bb4debb0bb846c0a7e68434003d09f7b8155e4b37f1e8f917f73f4b9cadb"
+  },
+  "axe_bandit": {
+    "id": "axe_bandit",
+    "resource": "res://assets/combat/models/axe_bandit.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_axe"
+    ],
+    "actions": {
+      "axe": {
+        "pose": "axe_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "axe",
+    "hero": false,
+    "bones": 65,
+    "sha256": "043e1dc06ab41b6f4b3ca616ce6a47b12e6b9ec8bf153e19081e702d917438af"
+  },
+  "bandit": {
+    "id": "bandit",
+    "resource": "res://assets/combat/models/bandit.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_sword"
+    ],
+    "actions": {
+      "sword": {
+        "pose": "sword_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "sword",
+    "hero": false,
+    "bones": 65,
+    "sha256": "dc96dbba3a70207f11fb04d5841603265e021816ffaef0e85c5192fc5a4e1cb8"
+  },
+  "bandit_archer": {
+    "id": "bandit_archer",
+    "resource": "res://assets/combat/models/bandit_archer.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_bow",
+      "offhand_default"
+    ],
+    "actions": {
+      "bow": {
+        "pose": "bow_pose",
+        "walk": "bow_walk",
+        "combat": "bow_combat",
+        "hit": "bow_hit",
+        "death": "bow_death"
+      }
+    },
+    "default_weapon": "bow",
+    "hero": false,
+    "bones": 65,
+    "sha256": "544d63f9f74487b86b74d74959baffc0ae92135bee031620592b014d86a01267"
+  },
+  "bandit_brute": {
+    "id": "bandit_brute",
+    "resource": "res://assets/combat/models/bandit_brute.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_cleaver"
+    ],
+    "actions": {
+      "cleaver": {
+        "pose": "cleaver_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "cleaver",
+    "hero": false,
+    "bones": 65,
+    "sha256": "c51cb6a28d40df972d372efb35f395bee57a3d500ca3fe188799b70b04e3a36e"
+  },
+  "bandit_carnage": {
+    "id": "bandit_carnage",
+    "resource": "res://assets/combat/models/bandit_carnage.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_dagger",
+      "offhand_default"
+    ],
+    "actions": {
+      "dagger": {
+        "pose": "dagger_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "dagger",
+    "hero": false,
+    "bones": 65,
+    "sha256": "ba64edde68827bbf915be44dac40310c36c17f445a84fd984a09d2438616db8e"
+  },
+  "bandit_marauder": {
+    "id": "bandit_marauder",
+    "resource": "res://assets/combat/models/bandit_marauder.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_axe",
+      "offhand_default"
+    ],
+    "actions": {
+      "axe": {
+        "pose": "axe_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "axe",
+    "hero": false,
+    "bones": 65,
+    "sha256": "1effcb1f74fa4ca1a16e4d37608aa80deb018d64a0f3772043a37e2fe14487cb"
+  },
+  "bandit_rogue": {
+    "id": "bandit_rogue",
+    "resource": "res://assets/combat/models/bandit_rogue.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_dagger"
+    ],
+    "actions": {
+      "dagger": {
+        "pose": "dagger_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "dagger",
+    "hero": false,
+    "bones": 65,
+    "sha256": "c3e82d88a0e35d9e8319932a7414baef60908199dff5edc8e7ef2018c024a0f2"
+  },
+  "bandit_spearman": {
+    "id": "bandit_spearman",
+    "resource": "res://assets/combat/models/bandit_spearman.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_spear"
+    ],
+    "actions": {
+      "spear": {
+        "pose": "spear_pose",
+        "walk": "spear_walk",
+        "combat": "spear_combat",
+        "hit": "spear_hit",
+        "death": "spear_death"
+      }
+    },
+    "default_weapon": "spear",
+    "hero": false,
+    "bones": 65,
+    "sha256": "ea83e07b35d41ba499769c04eee41669fa542cfcb078fd57253982d085cbc81c"
+  },
+  "bat": {
+    "id": "bat",
+    "resource": "res://assets/combat/models/bat.glb",
+    "channels": [
+      "body"
+    ],
+    "actions": {
+      "fangs": {
+        "pose": "bat_pose",
+        "walk": "bat_walk",
+        "combat": "bat_combat",
+        "hit": "bat_hit",
+        "death": "bat_death"
+      }
+    },
+    "default_weapon": "fangs",
+    "hero": false,
+    "bones": 7,
+    "original_source": "assets_src/characters/roster/bat",
+    "sha256": "39ae2973f0836e559b68a3f93659520f838bef8890bd328cc8b85d389b3ca8cb"
+  },
+  "crossbowman": {
+    "id": "crossbowman",
+    "resource": "res://assets/combat/models/crossbowman.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_crossbow"
+    ],
+    "actions": {
+      "crossbow": {
+        "pose": "crossbow_pose",
+        "walk": "crossbow_walk",
+        "combat": "crossbow_combat",
+        "hit": "crossbow_hit",
+        "death": "crossbow_death"
+      }
+    },
+    "default_weapon": "crossbow",
+    "hero": false,
+    "bones": 65,
+    "sha256": "f2d55a2cb996e90af62ca8d02f06e4c2177a42dfd93d3a42c31c36ea36226239"
+  },
+  "dire_boar": {
+    "id": "dire_boar",
+    "resource": "res://assets/combat/models/dire_boar.glb",
+    "channels": [
+      "body"
+    ],
+    "actions": {
+      "tusks": {
+        "pose": "boar_pose",
+        "walk": "boar_walk",
+        "combat": "boar_combat",
+        "hit": "boar_hit",
+        "death": "boar_death"
+      }
+    },
+    "default_weapon": "tusks",
+    "hero": false,
+    "bones": 13,
+    "original_source": "assets_src/characters/roster/dire_boar",
+    "sha256": "a3bacd76682c862b9a16d446af0ecd9f0911f69639f91c4d38800ce61ba09515"
+  },
+  "giant_snake": {
+    "id": "giant_snake",
+    "resource": "res://assets/combat/models/giant_snake.glb",
+    "channels": [
+      "body"
+    ],
+    "actions": {
+      "fangs": {
+        "pose": "snake_pose",
+        "walk": "snake_walk",
+        "combat": "snake_combat",
+        "hit": "snake_hit",
+        "death": "snake_death"
+      }
+    },
+    "default_weapon": "fangs",
+    "hero": false,
+    "bones": 11,
+    "original_source": "assets_src/characters/roster/giant_snake",
+    "sha256": "950714fc427c342cddecca56a266a8a30e50e8e4890d883ff0b01c5be6593fbe"
+  },
+  "goblin_atlas": {
+    "id": "goblin_atlas",
+    "resource": "res://assets/combat/models/goblin_atlas.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "weapon_spear"
+    ],
+    "actions": {
+      "spear": {
+        "pose": "spear_pose",
+        "walk": "spear_walk",
+        "combat": "spear_combat",
+        "hit": "spear_hit",
+        "death": "spear_death"
+      }
+    },
+    "default_weapon": "spear",
+    "hero": false,
+    "bones": 65,
+    "sha256": "68809b364748476f85c6b29a3e0c3e24b4e23b539d75ff93f61b2f42a4392947"
+  },
+  "guardian": {
+    "id": "guardian",
+    "resource": "res://assets/combat/models/guardian.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_mace",
+      "offhand_default"
+    ],
+    "actions": {
+      "mace": {
+        "pose": "mace_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "mace",
+    "hero": false,
+    "bones": 65,
+    "sha256": "88f0469b5421bd1114eead7f57416300308f2aa47764764e2d3dd2765e12b43d"
+  },
+  "hell_hound": {
+    "id": "hell_hound",
+    "resource": "res://assets/combat/models/hell_hound.glb",
+    "channels": [
+      "body"
+    ],
+    "actions": {
+      "fangs": {
+        "pose": "hound_pose",
+        "walk": "hound_walk",
+        "combat": "hound_combat",
+        "hit": "hound_hit",
+        "death": "hound_death"
+      }
+    },
+    "default_weapon": "fangs",
+    "hero": false,
+    "bones": 13,
+    "original_source": "assets_src/characters/roster/hell_hound",
+    "sha256": "a00f3b5c4769411274bb6e0088045e9431acf52b0c6dc4a1504011a88e4a6580"
+  },
+  "lizardman": {
+    "id": "lizardman",
+    "resource": "res://assets/combat/models/lizardman.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "weapon_spear"
+    ],
+    "actions": {
+      "spear": {
+        "pose": "spear_pose",
+        "walk": "spear_walk",
+        "combat": "spear_combat",
+        "hit": "spear_hit",
+        "death": "spear_death"
+      }
+    },
+    "default_weapon": "spear",
+    "hero": false,
+    "bones": 65,
+    "sha256": "25cbe161df9b5b011ff1888661196075a313a749dd6b42b530d13bf5b97598c4"
+  },
+  "ogre": {
+    "id": "ogre",
+    "resource": "res://assets/combat/models/ogre.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "weapon_club"
+    ],
+    "actions": {
+      "club": {
+        "pose": "club_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "club",
+    "hero": false,
+    "bones": 65,
+    "sha256": "a6495472b5e051b5f7f44086f6388c72a474eae61b321df63decfca0384ce423"
+  },
+  "rogue_1": {
+    "id": "rogue_1",
+    "resource": "res://assets/combat/models/rogue_1.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_dagger",
+      "offhand_default"
+    ],
+    "actions": {
+      "dagger": {
+        "pose": "dagger_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "dagger",
+    "hero": false,
+    "bones": 65,
+    "sha256": "a8050a93b9e85a105ea5203cd97d11d01e0522b3154d11663dc3bc9845da21f7"
+  },
+  "skeleton_archer": {
+    "id": "skeleton_archer",
+    "resource": "res://assets/combat/models/skeleton_archer.glb",
+    "channels": [
+      "body",
+      "boots_default",
+      "weapon_bow",
+      "offhand_default"
+    ],
+    "actions": {
+      "bow": {
+        "pose": "bow_pose",
+        "walk": "bow_walk",
+        "combat": "bow_combat",
+        "hit": "bow_hit",
+        "death": "bow_death"
+      }
+    },
+    "default_weapon": "bow",
+    "hero": false,
+    "bones": 65,
+    "sha256": "38163965294f8968aecfa8817bc78bca86d45611f4aa999f6a5e5fedc2ebb7a6"
+  },
+  "skeleton_warrior": {
+    "id": "skeleton_warrior",
+    "resource": "res://assets/combat/models/skeleton_warrior.glb",
+    "channels": [
+      "body",
+      "boots_default",
+      "weapon_sword"
+    ],
+    "actions": {
+      "sword": {
+        "pose": "sword_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "sword",
+    "hero": false,
+    "bones": 65,
+    "sha256": "336e63409d42bb666609c8c51313e7a05f9cb58fb8d7e2cb8c0f5f5b6bcc9d29"
+  },
+  "spider_atlas": {
+    "id": "spider_atlas",
+    "resource": "res://assets/combat/models/spider_atlas.glb",
+    "channels": [
+      "body"
+    ],
+    "actions": {
+      "fangs": {
+        "pose": "spider_pose",
+        "walk": "spider_walk",
+        "combat": "spider_combat",
+        "hit": "spider_hit",
+        "death": "spider_death"
+      }
+    },
+    "default_weapon": "fangs",
+    "hero": false,
+    "bones": 22,
+    "original_source": "assets_src/characters/roster/spider_atlas",
+    "sha256": "4bcfc9cd32f00153f2903e02a863539694a02da44f0bd6b6a5b5ad46e1e0bf67"
+  },
+  "warrior": {
+    "id": "warrior",
+    "resource": "res://assets/combat/models/warrior.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "armor_leather",
+      "armor_plate",
+      "boots_leather",
+      "boots_steel",
+      "helmet_cap",
+      "helmet_closed",
+      "weapon_sword",
+      "weapon_bow",
+      "weapon_axe",
+      "weapon_mace",
+      "weapon_dagger",
+      "weapon_cleaver",
+      "weapon_crossbow",
+      "weapon_spear",
+      "offhand_default",
+      "offhand_shield",
+      "quiver"
+    ],
+    "actions": {
+      "sword": {
+        "pose": "sword_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      },
+      "bow": {
+        "pose": "bow_pose",
+        "walk": "bow_walk",
+        "combat": "bow_combat",
+        "hit": "bow_hit",
+        "death": "bow_death"
+      },
+      "axe": {
+        "pose": "axe_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      },
+      "mace": {
+        "pose": "mace_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      },
+      "dagger": {
+        "pose": "dagger_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      },
+      "cleaver": {
+        "pose": "cleaver_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      },
+      "crossbow": {
+        "pose": "crossbow_pose",
+        "walk": "crossbow_walk",
+        "combat": "crossbow_combat",
+        "hit": "crossbow_hit",
+        "death": "crossbow_death"
+      },
+      "spear": {
+        "pose": "spear_pose",
+        "walk": "spear_walk",
+        "combat": "spear_combat",
+        "hit": "spear_hit",
+        "death": "spear_death"
+      }
+    },
+    "default_weapon": "sword",
+    "hero": true,
+    "bones": 65,
+    "sha256": "87e9fca1a159cdfd481e3d1c96cf4daf5d21dd69bf15b55e0a05a61782f9318a"
+  },
+  "wolf_atlas": {
+    "id": "wolf_atlas",
+    "resource": "res://assets/combat/models/wolf_atlas.glb",
+    "channels": [
+      "body"
+    ],
+    "actions": {
+      "fangs": {
+        "pose": "wolf_pose",
+        "walk": "wolf_walk",
+        "combat": "wolf_combat",
+        "hit": "wolf_hit",
+        "death": "wolf_death"
+      }
+    },
+    "default_weapon": "fangs",
+    "hero": false,
+    "bones": 13,
+    "original_source": "assets_src/characters/roster/wolf_atlas",
+    "sha256": "22d52aaabbc1ef7206432419ea625622f890ba013a5d5fbb7142858533c2634e"
+  },
+  "wraith": {
+    "id": "wraith",
+    "resource": "res://assets/combat/models/wraith.glb",
+    "channels": [
+      "body",
+      "headwear_default"
+    ],
+    "actions": {
+      "none": {
+        "pose": "none_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Wraith_Dissolve"
+      }
+    },
+    "default_weapon": "none",
+    "hero": false,
+    "bones": 65,
+    "sha256": "3412bd4eb0769c2474ccf83e219d99bf3dbfd687d1d4b56ad50c16f642477684"
+  },
+  "enemy_baddie": {
+    "id": "bandit",
+    "resource": "res://assets/combat/models/bandit.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "headwear_default",
+      "weapon_sword"
+    ],
+    "actions": {
+      "sword": {
+        "pose": "sword_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "sword",
+    "hero": false,
+    "bones": 65,
+    "sha256": "dc96dbba3a70207f11fb04d5841603265e021816ffaef0e85c5192fc5a4e1cb8"
+  },
+  "enemy_orc": {
+    "id": "goblin_atlas",
+    "resource": "res://assets/combat/models/goblin_atlas.glb",
+    "channels": [
+      "armor_default",
+      "body",
+      "boots_default",
+      "weapon_spear"
+    ],
+    "actions": {
+      "spear": {
+        "pose": "spear_pose",
+        "walk": "spear_walk",
+        "combat": "spear_combat",
+        "hit": "spear_hit",
+        "death": "spear_death"
+      }
+    },
+    "default_weapon": "spear",
+    "hero": false,
+    "bones": 65,
+    "sha256": "68809b364748476f85c6b29a3e0c3e24b4e23b539d75ff93f61b2f42a4392947"
+  },
+  "enemy_skeleton": {
+    "id": "skeleton_warrior",
+    "resource": "res://assets/combat/models/skeleton_warrior.glb",
+    "channels": [
+      "body",
+      "boots_default",
+      "weapon_sword"
+    ],
+    "actions": {
+      "sword": {
+        "pose": "sword_pose",
+        "walk": "Walk_Loop",
+        "combat": "Sword_Attack",
+        "hit": "Hit_Chest",
+        "death": "Death01"
+      }
+    },
+    "default_weapon": "sword",
+    "hero": false,
+    "bones": 65,
+    "sha256": "336e63409d42bb666609c8c51313e7a05f9cb58fb8d7e2cb8c0f5f5b6bcc9d29"
+  }
+}

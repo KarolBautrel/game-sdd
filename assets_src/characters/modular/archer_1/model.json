@@ -1,0 +1,88 @@
+{
+  "id": "archer_1",
+  "resource": "res://assets/combat/models/archer_1.glb",
+  "channels": [
+    "armor_default",
+    "body",
+    "boots_default",
+    "headwear_default",
+    "armor_leather",
+    "armor_plate",
+    "boots_leather",
+    "boots_steel",
+    "helmet_cap",
+    "helmet_closed",
+    "weapon_sword",
+    "weapon_bow",
+    "weapon_axe",
+    "weapon_mace",
+    "weapon_dagger",
+    "weapon_cleaver",
+    "weapon_crossbow",
+    "weapon_spear",
+    "offhand_default",
+    "offhand_shield",
+    "quiver"
+  ],
+  "actions": {
+    "sword": {
+      "pose": "sword_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    },
+    "bow": {
+      "pose": "bow_pose",
+      "walk": "bow_walk",
+      "combat": "bow_combat",
+      "hit": "bow_hit",
+      "death": "bow_death"
+    },
+    "axe": {
+      "pose": "axe_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    },
+    "mace": {
+      "pose": "mace_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    },
+    "dagger": {
+      "pose": "dagger_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    },
+    "cleaver": {
+      "pose": "cleaver_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    },
+    "crossbow": {
+      "pose": "crossbow_pose",
+      "walk": "crossbow_walk",
+      "combat": "crossbow_combat",
+      "hit": "crossbow_hit",
+      "death": "crossbow_death"
+    },
+    "spear": {
+      "pose": "spear_pose",
+      "walk": "spear_walk",
+      "combat": "spear_combat",
+      "hit": "spear_hit",
+      "death": "spear_death"
+    }
+  },
+  "default_weapon": "bow",
+  "hero": true,
+  "bones": 65
+}

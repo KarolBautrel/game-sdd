@@ -1,0 +1,75 @@
+{
+  "status": "TECHNICAL_PASS_VISUAL_REVIEW_REQUIRED",
+  "checks": 231935,
+  "proof": {
+    "weighted_vertices": 56632,
+    "bones": 29,
+    "max_influences": 2,
+    "max_weight_sum_error": 2.9802322387695312e-08,
+    "unweighted_vertices": 0,
+    "opposite_side_leaks": 0,
+    "rest_skinning_drift_m": 1.2377834115800373e-07,
+    "exact_rest_appearance": true,
+    "texture_sha256": {
+      "02_warden_albedo.png": "a6f3c490980d2b0ebf28f4ddacf2b40357a9138bd34a1a3e5c79a5d8947babd7",
+      "brown_eye_02.png": "fae2cf1e45fd4df3bc07ea4ea0f26883c78cbeae03585fa6754dc3e54c03c3dd",
+      "eyebrow001.png": "9940f7d0b1b223709a19b05156ba6f6e9e4dbdbced02d7574f4d51d72c58967b",
+      "Jartur_mid_old_Slavic_Male_with_Genitals_and_Beard_lsdif_lighter.png": "0f1a86d78af8bc1e55ae21cfaca0e7308384f789796adc77a78e4d22ccaf419c",
+      "short01_diffuse.png": "f34a0957184e3d1e911ed59245f874f8d4843f61ee44ff49f43edb4be0196949"
+    },
+    "rigid_parts": {
+      "Convex_forged_cuirass": 814,
+      "Leather_belt_with_real_thickness": 480,
+      "Belt_pouch_real_volume": 152,
+      "Forged_belt_buckle": 96,
+      "Forged_belt_buckle.002": 96,
+      "Forged_belt_buckle.001": 96,
+      "Forged_belt_buckle.003": 96,
+      "Fitted_wrist_cuff_-1": 624,
+      "Fitted_wrist_cuff_1": 624,
+      "Forged_shoulder_lame": 1346,
+      "Forged_shoulder_lame.001": 1378,
+      "Forged_shoulder_lame.002": 1378,
+      "Forged_shoulder_lame.003": 1346,
+      "Forged_shoulder_lame.004": 1378,
+      "Forged_shoulder_lame.005": 1378,
+      "Closed_anatomical_glove_-1": 4119,
+      "Closed_anatomical_glove_1": 4119
+    }
+  },
+  "preserved": [
+    {
+      "manifest": "assets_src/characters/mpfb_warden_boots_only/2026-11-02/delivery.json",
+      "files": 21,
+      "manifest_sha256": "b0361dcfce17a070d5761e3db5917018cdf4db91990c9e518ab54ed38e8338c2"
+    },
+    {
+      "manifest": "assets_src/characters/roster/manifest.json",
+      "files": 8223,
+      "manifest_sha256": "0501314863fe984b2c4d5741d6f33063da07eb064b7cafe249fede9a7769a537"
+    },
+    {
+      "manifest": "assets_src/environment/manifest.json",
+      "files": 215,
+      "manifest_sha256": "245ad430ff41f2e2cf3e51873dc74372caa45fc9b7e299fa1a40ebea059779e7"
+    }
+  ],
+  "route": "Manual fitted29-bone FK rig, explicit semantic weights. No auto-heat binding.",
+  "tested_pose_images": [
+    "placement_front",
+    "placement_side",
+    "placement_top",
+    "rest_three_quarter",
+    "ready_three_quarter",
+    "ready_elbow",
+    "squat_arm_raise",
+    "squat_knee_side",
+    "head_turn"
+  ],
+  "limitations": [
+    "No finger/face controls",
+    "Pilot joint range only; no extreme120degree deform claim",
+    "Continuous playback and native game not tested"
+  ],
+  "os_input_used": false
+}

@@ -1,0 +1,682 @@
+{
+  "profile": "render",
+  "eps": 0.00021,
+  "tol": 0.004196,
+  "gap": 0.02098,
+  "pass": true,
+  "errors": [],
+  "warnings": [
+    "Standing_padded_collar: not touching, 0.0066 from the nearest part",
+    "MPFB_coherent_head_and_neck: not touching, 0.0066 from the nearest part",
+    "MPFB_eyes: not touching, 0.0066 from the nearest part",
+    "MPFB_hair: not touching, 0.0066 from the nearest part",
+    "MPFB_eyebrows: not touching, 0.0066 from the nearest part"
+  ],
+  "per_object": {
+    "Tailored_navy_gambeson_and_sleeves": {
+      "tris": 7880,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Anatomical_dark_trousers": {
+      "tris": 4620,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Standing_padded_collar": {
+      "tris": 2496,
+      "parts": 1,
+      "errors": [],
+      "warnings": [
+        "Standing_padded_collar: not touching, 0.0066 from the nearest part"
+      ]
+    },
+    "Sewn_coat_skirt_-1": {
+      "tris": 3712,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Coat_hem_-1": {
+      "tris": 352,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Sewn_coat_skirt_1": {
+      "tris": 3712,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Coat_hem_1": {
+      "tris": 352,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Woven_half_cloak_with_real_folds": {
+      "tris": 5864,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Forged_curved_breastplate": {
+      "tris": 5328,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Forged_curved_backplate": {
+      "tris": 5328,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Raised_steel_gorget": {
+      "tris": 3584,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Articulated_fauld_1.148": {
+      "tris": 2240,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Articulated_fauld_1.082": {
+      "tris": 2240,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Articulated_fauld_1.015": {
+      "tris": 2240,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Cuirass_rolled_edge_1.145": {
+      "tris": 1024,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Cuirass_rolled_edge_1.47": {
+      "tris": 1024,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Domed_shoulder_crown_r": {
+      "tris": 1728,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_r_0": {
+      "tris": 1692,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_r_0_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_r_0_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_r_1": {
+      "tris": 1692,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_r_1_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_r_1_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_r_2": {
+      "tris": 1692,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_r_2_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_r_2_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Fitted_forearm_bracer_r": {
+      "tris": 1536,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Fitted_forearm_bracer_r_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Fitted_forearm_bracer_r_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Leather_wrist_seal_r": {
+      "tris": 1536,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Leather_wrist_seal_r_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Leather_wrist_seal_r_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Bracer_leather_closure_r0.53": {
+      "tris": 1536,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Bracer_leather_closure_r0.53_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Bracer_leather_closure_r0.53_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Bracer_leather_closure_r0.88": {
+      "tris": 1536,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Bracer_leather_closure_r0.88_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Bracer_leather_closure_r0.88_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Domed_shoulder_crown_l": {
+      "tris": 1728,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_l_0": {
+      "tris": 1692,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_l_0_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_l_0_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_l_1": {
+      "tris": 1692,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_l_1_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_l_1_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_l_2": {
+      "tris": 1692,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_l_2_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Shoulder_lame_l_2_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Fitted_forearm_bracer_l": {
+      "tris": 1536,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Fitted_forearm_bracer_l_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Fitted_forearm_bracer_l_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Leather_wrist_seal_l": {
+      "tris": 1536,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Leather_wrist_seal_l_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Leather_wrist_seal_l_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Bracer_leather_closure_l0.53": {
+      "tris": 1536,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Bracer_leather_closure_l0.53_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Bracer_leather_closure_l0.53_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Bracer_leather_closure_l0.88": {
+      "tris": 1536,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Bracer_leather_closure_l0.88_rolled_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Bracer_leather_closure_l0.88_rolled_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Cloak_sewn_hem": {
+      "tris": 448,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Cloak_attachment_stud_0": {
+      "tris": 120,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Cloak_attachment_stud_1": {
+      "tris": 120,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Physical_diagonal_leather_harness": {
+      "tris": 1692,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Harness_sewn_edge_0": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Harness_sewn_edge_1": {
+      "tris": 768,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Harness_buckle_side_-1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Harness_buckle_end_-1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Harness_buckle_side_1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Harness_buckle_end_1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Harness_buckle_tongue": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Thick_waist_leather_belt": {
+      "tris": 3200,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Waist_buckle_side_-1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Waist_buckle_end_-1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Waist_buckle_side_1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Waist_buckle_end_1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Waist_buckle_tongue": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Steel_fastener_-1_1.22": {
+      "tris": 120,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Steel_fastener_-1_1.35": {
+      "tris": 120,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Steel_fastener_-1_1.42": {
+      "tris": 120,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Steel_fastener_1_1.22": {
+      "tris": 120,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Steel_fastener_1_1.35": {
+      "tris": 120,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Steel_fastener_1_1.42": {
+      "tris": 120,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Smaller_fitted_boot_r": {
+      "tris": 7168,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Layered_boot_sole_r": {
+      "tris": 1276,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_top_cuff_r": {
+      "tris": 1920,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_ankle_strap_r": {
+      "tris": 1920,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_toe_stitch_r": {
+      "tris": 640,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_buckle_r_side_-1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_buckle_r_end_-1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_buckle_r_side_1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_buckle_r_end_1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_buckle_r_tongue": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Leather_closed_glove_r": {
+      "tris": 8234,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Smaller_fitted_boot_l": {
+      "tris": 7168,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Layered_boot_sole_l": {
+      "tris": 1276,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_top_cuff_l": {
+      "tris": 1920,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_ankle_strap_l": {
+      "tris": 1920,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_toe_stitch_l": {
+      "tris": 640,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_buckle_l_side_-1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_buckle_l_end_-1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_buckle_l_side_1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_buckle_l_end_1": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Boot_buckle_l_tongue": {
+      "tris": 188,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "Leather_closed_glove_l": {
+      "tris": 8234,
+      "parts": 1,
+      "errors": [],
+      "warnings": []
+    },
+    "MPFB_coherent_head_and_neck": {
+      "tris": 35520,
+      "parts": 1,
+      "errors": [],
+      "warnings": [
+        "MPFB_coherent_head_and_neck: not touching, 0.0066 from the nearest part"
+      ]
+    },
+    "MPFB_eyes": {
+      "tris": 2040,
+      "parts": 4,
+      "errors": [],
+      "warnings": [
+        "MPFB_eyes: not touching, 0.0066 from the nearest part"
+      ]
+    },
+    "MPFB_hair": {
+      "tris": 3678,
+      "parts": 200,
+      "errors": [],
+      "warnings": [
+        "MPFB_hair: not touching, 0.0066 from the nearest part"
+      ]
+    },
+    "MPFB_eyebrows": {
+      "tris": 192,
+      "parts": 2,
+      "errors": [],
+      "warnings": [
+        "MPFB_eyebrows: not touching, 0.0066 from the nearest part"
+      ]
+    }
+  },
+  "skipped": []
+}

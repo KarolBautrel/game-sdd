@@ -1,5 +1,18 @@
 # Character Art Direction
 
+User rollback2026-11-02: the active renderer uses the stage33 original PNG roster
+on native GPUs and headless alike. The later modular GLB/grip/helmet refinements
+were rejected and are disconnected from battle, gallery and inventory. Preserve
+the earlier27 models/6912 animated frames. Illustrated hero portraits and the new
+environment assets remain. See the current override in presentation010.
+
+The active roster is now `original/<id>/`, owned by presentation009. Read
+`docs/design/character-art/ROSTER.md` and the canonical original_roster.json.
+The heroes/npc/villains folders below are retained legacy design references and
+are excluded from runtime import/export. Their historical naming/fallback notes
+below do not define current behavior. Every active family has five actions,
+eight actual views,256 frames and a fixed native ground pivot.
+
 Use the current character PNGs as the visual reference for future combat heroes, villains, and combat-capable NPCs. Character art lives in `assets/combat/characters` so combat assets stay separate from dungeon crawler and world map presentation layers.
 
 ## Reference Assets

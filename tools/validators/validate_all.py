@@ -10,6 +10,9 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from tools.assets.build_catalogue import catalogue_errors
+from tools.validators.combat_authoring import catalogue_errors as combat_authoring_errors, encounter_errors
+
 try:
     from jsonschema import Draft202012Validator
 except ImportError:
@@ -84,11 +87,19 @@ from tools.validators.validate_combat_slice import (
     validate_combat_slice_82,
 )
 from tools.maps.tiled_to_map_json import convert_tmx
+from tools.validators.dungeon_quality import catalogue_errors as dungeon_quality_errors
 
 
 ID_RE = re.compile(r"^[a-z0-9_]+$")
 
 VALIDATION_TARGETS = [
+    ("resources/schemas/original_roster.schema.json", "resources/data/presentation/original_roster.json"),
+    ("resources/schemas/party_levels.schema.json", "resources/data/progression/*.json"),
+    ("resources/schemas/town_trade.schema.json", "resources/data/town_trade/*.json"),
+    ("resources/schemas/campaign_item_catalogue.schema.json", "resources/data/items/*.json"),
+    ("resources/schemas/road_event_catalogue.schema.json", "resources/data/world_events/*.json"),
+    ("resources/schemas/campaign_profile.schema.json", "resources/data/campaign/*.json"),
+    ("resources/schemas/combat_scenario_catalogue.schema.json", "resources/data/combat_scenarios/*.json"),
     ("resources/schemas/world_region.schema.json", "resources/data/world_regions/*.json"),
     ("resources/schemas/town.schema.json", "resources/data/towns/*.json"),
     ("resources/schemas/dungeon.schema.json", "resources/data/dungeons/*.json"),
@@ -97,6 +108,7 @@ VALIDATION_TARGETS = [
     ("resources/schemas/dungeon_room_event.schema.json", "resources/data/dungeon_room_events/*.json"),
     ("resources/schemas/dungeon_room_event_pool.schema.json", "resources/data/dungeon_room_event_pools/*.json"),
     ("resources/schemas/dungeon_template.schema.json", "resources/data/dungeon_templates/*.json"),
+    ("resources/schemas/dungeon_combat_encounter_pool.schema.json", "resources/data/dungeon_combat_encounter_pools/*.json"),
     ("resources/schemas/dungeon_debuff.schema.json", "resources/data/dungeon_debuffs/*.json"),
     ("resources/schemas/map.schema.json", "resources/data/maps/*.json"),
     ("resources/schemas/combat_action.schema.json", "resources/data/combat_actions/*.json"),
@@ -150,8 +162,10 @@ def validate_dungeon_references() -> list[str]:
     dungeon_event_pools = _dungeon_event_pools()
     dungeon_room_events = _dungeon_room_event_templates()
     dungeon_room_event_pools = _dungeon_room_event_pools()
+    dungeon_combat_encounter_pools = _dungeon_combat_encounter_pools()
     errors.extend(validate_dungeon_event_pool_references(dungeon_events, dungeon_event_pools))
     errors.extend(validate_dungeon_room_event_pool_references(dungeon_room_events, dungeon_room_event_pools))
+    errors.extend(validate_dungeon_combat_encounter_pool_references(dungeon_combat_encounter_pools))
     for path in sorted((ROOT / "resources/data/dungeons").glob("*.json")):
         dungeon = load_json(path)
         room_ids = {room["id"] for room in dungeon["rooms"]}
@@ -215,8 +229,12 @@ def validate_dungeon_references() -> list[str]:
                 encounter_path = content.get("combat_encounter_path")
                 rewards = content.get("rewards")
                 if content_type in {"combat", "guarded_treasure"}:
+                    pool_id = content.get("combat_encounter_pool_id", "")
+                    if pool_id and pool_id not in dungeon_combat_encounter_pools:
+                        errors.append(f"{path.relative_to(ROOT)}: room {room['id']} references missing combat encounter pool {pool_id}")
                     if not encounter_path:
-                        errors.append(f"{path.relative_to(ROOT)}: room {room['id']} {content_type} content is missing combat_encounter_path")
+                        if not pool_id:
+                            errors.append(f"{path.relative_to(ROOT)}: room {room['id']} {content_type} content is missing combat_encounter_path or combat_encounter_pool_id")
                     else:
                         resolved = ROOT / str(encounter_path).removeprefix("res://")
                         if not resolved.exists():
@@ -275,6 +293,36 @@ def validate_dungeon_room_event_pool_references(dungeon_room_events: dict[str, d
             event_id = entry.get("event_id", "")
             if event_id not in dungeon_room_events:
                 errors.append(f"resources/data/dungeon_room_event_pools: pool {pool_id} references missing room event {event_id}")
+    return errors
+
+
+def validate_dungeon_combat_encounter_pool_references(dungeon_combat_encounter_pools: dict[str, dict]) -> list[str]:
+    errors: list[str] = []
+    min_dungeon_combat_width = 10
+    min_dungeon_combat_height = 8
+    for pool_id, pool in dungeon_combat_encounter_pools.items():
+        for entry in pool.get("entries", []):
+            if int(entry.get("difficulty_min", 1)) > int(entry.get("difficulty_max", 3)):
+                errors.append(f"resources/data/dungeon_combat_encounter_pools: pool {pool_id} entry {entry.get('id', '')} difficulty_min exceeds difficulty_max")
+            encounter_path = entry.get("encounter_path", "")
+            resolved = ROOT / str(encounter_path).removeprefix("res://")
+            if not resolved.exists():
+                errors.append(f"resources/data/dungeon_combat_encounter_pools: pool {pool_id} entry {entry.get('id', '')} references missing encounter {encounter_path}")
+                continue
+            encounter = load_json(resolved)
+            if resolved.name.startswith("slice_") or str(encounter.get("id", "")).startswith("slice_"):
+                errors.append(
+                    f"resources/data/dungeon_combat_encounter_pools: pool {pool_id} entry {entry.get('id', '')} "
+                    f"references regression slice encounter {encounter_path}"
+                )
+            if not encounter.get("background_path"):
+                errors.append(f"resources/data/dungeon_combat_encounter_pools: pool {pool_id} entry {entry.get('id', '')} encounter is missing background_path")
+            width, height = _combat_encounter_dimensions(encounter)
+            if width < min_dungeon_combat_width or height < min_dungeon_combat_height:
+                errors.append(
+                    f"resources/data/dungeon_combat_encounter_pools: pool {pool_id} entry {entry.get('id', '')} "
+                    f"encounter board is {width}x{height}; dungeon combat must be at least {min_dungeon_combat_width}x{min_dungeon_combat_height}"
+                )
     return errors
 
 
@@ -353,6 +401,18 @@ def _dungeon_room_event_pools() -> dict[str, dict]:
     return pools
 
 
+def _dungeon_combat_encounter_pools() -> dict[str, dict]:
+    pools: dict[str, dict] = {}
+    for path in sorted((ROOT / "resources/data/dungeon_combat_encounter_pools").glob("*.json")):
+        catalogue = load_json(path)
+        for pool in catalogue.get("pools", []):
+            pool_id = pool["id"]
+            if pool_id in pools:
+                continue
+            pools[pool_id] = pool
+    return pools
+
+
 def _dungeon_debuff_ids() -> set[str]:
     debuff_ids: set[str] = set()
     for path in sorted((ROOT / "resources/data/dungeon_debuffs").glob("*.json")):
@@ -394,9 +454,12 @@ def validate_map_integrity() -> list[str]:
         if not source_path.exists():
             errors.append(f"{path.relative_to(ROOT)}: source TMX does not exist: {map_data['source']}")
         else:
-            exported = convert_tmx(source_path)
-            if exported != map_data:
-                errors.append(f"{path.relative_to(ROOT)}: JSON is not in sync with {source_path.relative_to(ROOT)}")
+            try:
+                exported = convert_tmx(source_path)
+                if exported != map_data:
+                    errors.append(f"{path.relative_to(ROOT)}: JSON is not in sync with {source_path.relative_to(ROOT)}")
+            except (ValueError, OSError) as error:
+                errors.append(f"{path.relative_to(ROOT)}: TMX conversion failed: {error}")
         width = int(map_data["width"])
         height = int(map_data["height"])
         tiles = map_data["tiles"]
@@ -468,8 +531,94 @@ def validate_combat_map_references() -> list[str]:
     return errors
 
 
+def validate_campaign_items(data: dict | None = None) -> list[str]:
+    data = load_json(ROOT / "resources/data/items/catalogue.json") if data is None else data
+    errors: list[str] = []
+    schema = load_json(ROOT / "resources/schemas/combat_encounter.schema.json")
+    profile_validator = Draft202012Validator(schema["properties"]["item_profiles"]["additionalProperties"])
+    actions = {load_json(path)["id"] for path in (ROOT / "resources/data/combat_actions").glob("*.json")}
+    # Existing skill actions are resolver-owned, not standalone combat_action files.
+    actions |= {"aimed_shot", "power_strike", "deep_cut", "guard_break", "shield_wall"}
+    seen: set[str] = set()
+    for row in data.get("items", []):
+        item_id = row.get("id")
+        if item_id in seen:
+            errors.append(f"Duplicate campaign item {item_id}")
+        seen.add(item_id)
+        profile = row.get("combat_profile")
+        if row.get("category") != "equipment":
+            continue
+        if not isinstance(profile, dict):
+            errors.append(f"{item_id}: missing combat profile")
+            continue
+        errors.extend(f"{item_id}: {error.message}" for error in profile_validator.iter_errors(profile))
+        if profile.get("id") != item_id:
+            errors.append(f"{item_id}: combat profile id differs")
+        for action in profile.get("grants_actions", []):
+            if action not in actions:
+                errors.append(f"{item_id}: unknown action {action}")
+        for action, values in profile.get("action_profiles", {}).items():
+            if action not in profile.get("grants_actions", []) or values.get("action_id") != action:
+                errors.append(f"{item_id}: mismatched action profile {action}")
+    return errors
+
+
+def validate_town_trade(data: dict | None = None) -> list[str]:
+    data = load_json(ROOT / "resources/data/town_trade/ravenford.json") if data is None else data
+    schema = load_json(ROOT / "resources/schemas/town_trade.schema.json")
+    errors = [f"Town trade: {error.message}" for error in Draft202012Validator(schema).iter_errors(data)]
+    if errors:
+        return errors
+    town_path = ROOT / f"resources/data/towns/{data['town_id']}.json"
+    if not town_path.is_file():
+        errors.append("Town trade references missing town")
+    items = {row['id']: row for row in load_json(ROOT / "resources/data/items/catalogue.json")['items']}
+    seen: set[str] = set()
+    for offer in data['offers']:
+        item_id = offer['item_id']
+        if item_id in seen:
+            errors.append(f"Duplicate trade offer {item_id}")
+        seen.add(item_id)
+        item = items.get(item_id, {})
+        if item.get('category') != 'equipment':
+            errors.append(f"Trade offer must reference known equipment: {item_id}")
+        if offer['buy_price'] <= item.get('value', 0):
+            errors.append(f"Trade offer price must exceed resale value: {item_id}")
+    return errors
+
+
+def validate_party_levels(data: dict | None = None) -> list[str]:
+    data = load_json(ROOT / "resources/data/progression/party_levels.json") if data is None else data
+    errors = [str(error.message) for error in Draft202012Validator(load_json(ROOT / "resources/schemas/party_levels.schema.json")).iter_errors(data)]
+    if errors:
+        return errors
+    if [row['level'] for row in data['levels']] != [1, 2, 3, 4]:
+        errors.append('Party levels must be sequential and unique')
+    if data['levels'][0]['cost'] != 0 or data['levels'][0]['bonuses']:
+        errors.append('Level1 must preserve baseline stats and cost zero')
+    prior: dict = {}
+    for row in data['levels'][1:]:
+        if row['cost'] < 1 or any(row['bonuses'].get(key, 0) < value for key, value in prior.items()):
+            errors.append('Training costs must be positive and cumulative bonuses nondecreasing')
+        prior = row['bonuses']
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
+    errors.extend(catalogue_errors())
+    errors.extend(dungeon_quality_errors())
+    errors.extend(combat_authoring_errors())
+    errors.extend(validate_campaign_items())
+    errors.extend(validate_town_trade())
+    errors.extend(validate_party_levels())
+
+    road = load_json(ROOT / "resources/data/world_events/catalogue.json")
+    road_path = ROOT / road["ambush"]["encounter_path"].removeprefix("res://")
+    if not road_path.is_file():
+        errors.append("Missing road ambush encounter")
+    else:
+        errors.extend(encounter_errors(load_json(road_path)))
 
     for schema_rel, data_glob in VALIDATION_TARGETS:
         schema_path = ROOT / schema_rel

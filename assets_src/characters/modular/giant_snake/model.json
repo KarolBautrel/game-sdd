@@ -1,0 +1,20 @@
+{
+  "id": "giant_snake",
+  "resource": "res://assets/combat/models/giant_snake.glb",
+  "channels": [
+    "body"
+  ],
+  "actions": {
+    "fangs": {
+      "pose": "snake_pose",
+      "walk": "snake_walk",
+      "combat": "snake_combat",
+      "hit": "snake_hit",
+      "death": "snake_death"
+    }
+  },
+  "default_weapon": "fangs",
+  "hero": false,
+  "bones": 11,
+  "original_source": "assets_src/characters/roster/giant_snake"
+}

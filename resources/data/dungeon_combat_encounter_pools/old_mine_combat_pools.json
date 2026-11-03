@@ -1,0 +1,44 @@
+{
+  "id": "old_mine_combat_pools",
+  "pools": [
+    {
+      "id": "old_mine_generated_combat_pool",
+      "theme": "mine",
+      "entries": [
+        {
+          "id": "old_mine_tactical_gallery",
+          "encounter_path": "res://resources/data/combat_encounters/old_mine_tactical_gallery.json",
+          "weight": 3,
+          "profile_ids": ["short_mine", "medium_mine", "deep_mine"],
+          "difficulty_min": 1,
+          "difficulty_max": 3,
+          "room_kinds": ["combat"],
+          "tactical_role": "ledge_gallery",
+          "notes": "Coherent stone gallery with side walls, structural blockers, low rubble cover, and a connected raised archer ledge."
+        },
+        {
+          "id": "old_mine_broken_lift_platform",
+          "encounter_path": "res://resources/data/combat_encounters/old_mine_broken_lift_platform.json",
+          "weight": 2,
+          "profile_ids": ["short_mine", "medium_mine", "deep_mine"],
+          "difficulty_min": 1,
+          "difficulty_max": 3,
+          "room_kinds": ["combat"],
+          "tactical_role": "broken_lift",
+          "notes": "Collapsed lift room with a central blocker, deliberate cover approach, and a connected raised side platform."
+        },
+        {
+          "id": "old_mine_vault_approach",
+          "encounter_path": "res://resources/data/combat_encounters/old_mine_vault_approach.json",
+          "weight": 2,
+          "profile_ids": ["short_mine", "medium_mine", "deep_mine"],
+          "difficulty_min": 1,
+          "difficulty_max": 3,
+          "room_kinds": ["combat"],
+          "tactical_role": "vault_approach",
+          "notes": "Pillar-framed vault approach with readable lanes, low cover, and a rear highground defensive shelf."
+        }
+      ]
+    }
+  ]
+}

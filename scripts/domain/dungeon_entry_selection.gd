@@ -7,10 +7,11 @@ const DUNGEON_PATH := "res://resources/data/dungeons/dungeon_old_mine.json"
 const SOURCE_AUTHORED := "authored"
 const SOURCE_GENERATED := "generated"
 const DEFAULT_GENERATED_DUNGEON_DIFFICULTY := 2
+const DEFAULT_GENERATED_PROFILE_ID := "medium_mine"
 
 
 static func default_payload() -> Dictionary:
-	return authored_payload()
+	return generated_payload(170717, DEFAULT_GENERATED_DUNGEON_DIFFICULTY, DEFAULT_GENERATED_PROFILE_ID)
 
 
 static func authored_payload() -> Dictionary:
@@ -19,15 +20,18 @@ static func authored_payload() -> Dictionary:
 		"dungeon_path": DUNGEON_PATH,
 		"generated_seed": 0,
 		"generated_difficulty": DEFAULT_GENERATED_DUNGEON_DIFFICULTY,
+		"generated_profile": DEFAULT_GENERATED_PROFILE_ID,
 	}
 
 
-static func generated_payload(seed: int, difficulty: int = DEFAULT_GENERATED_DUNGEON_DIFFICULTY) -> Dictionary:
+static func generated_payload(seed: int, difficulty: int = DEFAULT_GENERATED_DUNGEON_DIFFICULTY, profile_id: String = "") -> Dictionary:
+	var profile := DungeonStateModel.generated_dungeon_profile(profile_id, difficulty)
 	return {
 		"source": SOURCE_GENERATED,
 		"dungeon_path": DUNGEON_PATH,
 		"generated_seed": maxi(1, seed),
-		"generated_difficulty": clampi(difficulty, 1, 3),
+		"generated_difficulty": clampi(int(profile.get("difficulty", difficulty)), 1, 3),
+		"generated_profile": str(profile.get("id", DEFAULT_GENERATED_PROFILE_ID)),
 	}
 
 
@@ -40,11 +44,14 @@ static func normalize_payload(payload: Dictionary) -> Dictionary:
 		generated_seed = maxi(1, generated_seed)
 	else:
 		generated_seed = 0
+	var requested_difficulty := clampi(int(payload.get("generated_difficulty", payload.get("difficulty", DEFAULT_GENERATED_DUNGEON_DIFFICULTY))), 1, 3)
+	var profile := DungeonStateModel.generated_dungeon_profile(str(payload.get("generated_profile", payload.get("profile_id", ""))), requested_difficulty)
 	return {
 		"source": source,
 		"dungeon_path": str(payload.get("dungeon_path", DUNGEON_PATH)),
 		"generated_seed": generated_seed,
-		"generated_difficulty": clampi(int(payload.get("generated_difficulty", payload.get("difficulty", DEFAULT_GENERATED_DUNGEON_DIFFICULTY))), 1, 3),
+		"generated_difficulty": clampi(int(profile.get("difficulty", requested_difficulty)), 1, 3),
+		"generated_profile": str(profile.get("id", DEFAULT_GENERATED_PROFILE_ID)),
 	}
 
 
@@ -52,7 +59,8 @@ static func payload_for_dungeon(dungeon: Dictionary) -> Dictionary:
 	if source_for_dungeon(dungeon) == SOURCE_GENERATED:
 		return generated_payload(
 			int(dungeon.get("hazard_seed", 1)),
-			_generated_difficulty_for_name(str(dungeon.get("display_name", "")))
+			int(dungeon.get("generated_profile", {}).get("difficulty", _generated_difficulty_for_name(str(dungeon.get("display_name", ""))))),
+			str(dungeon.get("generated_profile", {}).get("id", ""))
 		)
 	return authored_payload()
 
@@ -63,6 +71,7 @@ static func dungeon_for_payload(payload: Dictionary) -> Dictionary:
 		return DungeonStateModel.procedural_dungeon_draft({
 			"seed": int(normalized.get("generated_seed", 1)),
 			"difficulty": int(normalized.get("generated_difficulty", DEFAULT_GENERATED_DUNGEON_DIFFICULTY)),
+			"profile_id": str(normalized.get("generated_profile", DEFAULT_GENERATED_PROFILE_ID)),
 		})
 	return _load_json(str(normalized.get("dungeon_path", DUNGEON_PATH)))
 
@@ -77,7 +86,9 @@ static func source_for_dungeon(dungeon: Dictionary) -> String:
 static func display_name(payload: Dictionary) -> String:
 	var normalized := normalize_payload(payload)
 	if str(normalized.get("source", "")) == SOURCE_GENERATED:
-		return "Generated D%s S%s" % [
+		var profile := DungeonStateModel.generated_dungeon_profile(str(normalized.get("generated_profile", DEFAULT_GENERATED_PROFILE_ID)), int(normalized.get("generated_difficulty", DEFAULT_GENERATED_DUNGEON_DIFFICULTY)))
+		return "%s D%s S%s" % [
+			str(profile.get("display_name", "Generated")),
 			int(normalized.get("generated_difficulty", DEFAULT_GENERATED_DUNGEON_DIFFICULTY)),
 			int(normalized.get("generated_seed", 1)),
 		]

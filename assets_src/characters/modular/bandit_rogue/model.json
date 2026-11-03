@@ -1,0 +1,23 @@
+{
+  "id": "bandit_rogue",
+  "resource": "res://assets/combat/models/bandit_rogue.glb",
+  "channels": [
+    "armor_default",
+    "body",
+    "boots_default",
+    "headwear_default",
+    "weapon_dagger"
+  ],
+  "actions": {
+    "dagger": {
+      "pose": "dagger_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    }
+  },
+  "default_weapon": "dagger",
+  "hero": false,
+  "bones": 65
+}

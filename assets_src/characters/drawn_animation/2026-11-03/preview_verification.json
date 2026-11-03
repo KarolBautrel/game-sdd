@@ -1,0 +1,77 @@
+{
+  "status": "ASSET_PACKAGE_PASS",
+  "profiles": 6,
+  "frames": 2344,
+  "clips": 386,
+  "previous_sources_preserved": 119,
+  "views": {
+    "knight": [
+      "south_east",
+      "south",
+      "south_west",
+      "west",
+      "north_west",
+      "north",
+      "north_east",
+      "east"
+    ],
+    "warrior": [
+      "south_east",
+      "south",
+      "south_west",
+      "west",
+      "north_west",
+      "north",
+      "north_east",
+      "east"
+    ],
+    "archer_1": [
+      "south_east",
+      "south",
+      "south_west",
+      "west",
+      "north_west",
+      "north",
+      "north_east",
+      "east"
+    ],
+    "rogue_1": [
+      "south_east",
+      "south",
+      "south_west",
+      "west",
+      "north_west",
+      "north",
+      "north_east",
+      "east"
+    ],
+    "axe_bandit": [
+      "south_east",
+      "south",
+      "south_west",
+      "west",
+      "north_west",
+      "north",
+      "north_east",
+      "east"
+    ],
+    "bandit_spearman": [
+      "south_east",
+      "south",
+      "south_west",
+      "west",
+      "north_west",
+      "north",
+      "north_east",
+      "east"
+    ]
+  },
+  "user_motion_acceptance": {
+    "knight_south_east_12_clips": "USER_ACCEPTED_2026-11-03",
+    "other_roles_and_directional_runtime": "positive overall user feedback; physical scenarios remain open",
+    "idle_shield_bow_corrections": "USER_ACCEPTED_PREVIEW_2026-11-03"
+  },
+  "continuous_motion_reviewed": false,
+  "external_network_requests": 0,
+  "desktop_input_used": false
+}

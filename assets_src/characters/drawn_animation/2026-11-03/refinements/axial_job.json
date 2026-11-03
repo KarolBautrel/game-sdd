@@ -1,0 +1,12 @@
+[
+  {
+    "id": "archer_1",
+    "view": "north",
+    "kind": "attack_aim_axial",
+    "refs": [
+      "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/assets_src/characters/drawn_animation/2026-11-03/refinements/before/assets_src/characters/drawn_animation/2026-11-03/archer_1/directions/north/frames/attack/004.png"
+    ],
+    "prompt": "Precise corrective animation sheet from this exact archer BACK VIEW reference. Same brown leather archer, moss hood, quiver, proportions and painted game style. Eight full-body drawings arranged4columns x2rows, separated transparent alpha cells. Important: the archer shoots DIRECTLY AWAY FROM CAMERA, to12o'clock into depth. Preserve the reference's AXIAL arm and bow arrangement. Do not rotate the shot to the left or right. No long horizontal arrow shaft anywhere: any arrow is almost entirely FORESHORTENED and hidden behind his head/hands, pointing into the image away from us. Bow remains mostly narrow edge-on behind/left of his head, not a broad full sideways arch occupying the left half of cell. At full draw the left bow arm projects away into depth and is largely occluded by torso/head; right drawing elbow is raised at right shoulder level, right drawing fingers anchored against the unseen right cheek beside his ear. Aiming occurs away from viewer, not to screen left. Frame1 nock/low ready;2 raise bow into depth;3 half draw;4 full tension cheek anchor and high right elbow;5 hold identical aim, strong tension;6 release hand follows back beside right ear, string springs;7 follow-through;8 lower. Standing planted feet, fixed body scale and camera in all8. Show complete bow tips and boots within every cell with clear margins. Restrained original game colors, no white/gray backdrop, no cast shadows, labels or extra figures.",
+    "source": "C:\\Users\\karol\\.codex\\generated_images\\01a1a0d5-2ac8-74c1-aa23-5568e96330b1\\exec-c0607f6e-dfc2-4492-b238-819f2ab64fac.png"
+  }
+]

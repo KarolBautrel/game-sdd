@@ -1,0 +1,23 @@
+{
+  "id": "crossbowman",
+  "resource": "res://assets/combat/models/crossbowman.glb",
+  "channels": [
+    "armor_default",
+    "body",
+    "boots_default",
+    "headwear_default",
+    "weapon_crossbow"
+  ],
+  "actions": {
+    "crossbow": {
+      "pose": "crossbow_pose",
+      "walk": "crossbow_walk",
+      "combat": "crossbow_combat",
+      "hit": "crossbow_hit",
+      "death": "crossbow_death"
+    }
+  },
+  "default_weapon": "crossbow",
+  "hero": false,
+  "bones": 65
+}

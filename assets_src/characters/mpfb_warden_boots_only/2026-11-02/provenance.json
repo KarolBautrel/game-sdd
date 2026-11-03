@@ -1,0 +1,10 @@
+{
+  "schema": "sdd.warden-boots-only-rollback-v1",
+  "completed": "2026-11-03",
+  "baseline": "assets_src/characters/mpfb_warden/2026-11-02",
+  "baseline_delivery_sha256": "cfbf34e338008ef155eff97c78723189f0b44f0f2f5a77594db5c3765e219827",
+  "baseline_blend_sha256": "0365891e93d6f1fa888850d6d641305a8d75a42273e687ad4fe45dd88d1d7f1a",
+  "change": "Existing boot low-foot XY scale0.94, tapering to exact original above0.32m; Z/non-boot geometry/UV/materials unchanged.",
+  "stage42": "Explicitly rejected by user; retained only as historical evidence, not used in current model.",
+  "new_ai_paid_or_install": false
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "sdd.road-events-v1",
+  "cart": {
+    "title": "Broken Cart",
+    "description": "A merchant has overturned on the road. Help unload the cart or recover useful equipment from the wreck.",
+    "choices": [
+      {
+        "id": "help",
+        "label": "Help the merchant / 1h / +4g, +1 XP",
+        "gold_cost": 0,
+        "time_hours": 1,
+        "rewards": {
+          "gold": 4,
+          "xp": 1,
+          "items": []
+        }
+      },
+      {
+        "id": "salvage",
+        "label": "Salvage equipment / 1h / shield and leather armor",
+        "gold_cost": 0,
+        "time_hours": 1,
+        "rewards": {
+          "gold": 0,
+          "xp": 0,
+          "items": [
+            "salvaged_shield",
+            "patched_leather"
+          ]
+        }
+      }
+    ]
+  },
+  "ambush": {
+    "title": "Roadside Ambush",
+    "description": "Bandits block the road. Pay their toll or fight your way through.",
+    "encounter_path": "res://resources/data/combat_encounters/roadside_ambush.json",
+    "toll_gold": 5,
+    "victory_rewards": {
+      "gold": 6,
+      "xp": 3,
+      "items": [
+        "salvaged_blade"
+      ]
+    }
+  }
+}

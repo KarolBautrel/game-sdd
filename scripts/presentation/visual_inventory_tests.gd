@@ -1,0 +1,67 @@
+extends SceneTree
+const Items := preload("res://scripts/domain/item_catalog.gd")
+const Presentation := preload("res://scripts/presentation/world/item_presentation.gd")
+const BRAN := "unit_player_001"
+const TORIN := "unit_player_002"
+var errors: Array[String] = []
+var checks := 0
+
+func _initialize() -> void: _run.call_deferred()
+func check(ok: bool,message: String) -> void:
+	checks += 1
+	if not ok: errors.append(message)
+func frames() -> void:
+	for frame in range(5): await process_frame
+
+func _run() -> void:
+	var comparison := Presentation.comparison(Items.item("salvaged_blade"),Items.item("hero_sword"))
+	check(comparison[0].delta == 1 and comparison[0].label == "Attack bonus","authored attack bonus comparison")
+	check(Presentation.comparison(Items.item("patched_leather"),{})[0].after == 1,"armor metadata reduction")
+	check(Presentation.comparison(Items.item("legacy_relic"),{}).is_empty(),"legacy has no invented combat stats")
+	var campaign := root.get_node("CampaignSession")
+	campaign.load_profile("",true)
+	campaign.state.items.append_array(["salvaged_blade","patched_leather","patched_leather","salvaged_shield","legacy_relic","rusty_key"])
+	var before: Dictionary = campaign.state.duplicate(true)
+	var app: Control = load("res://scenes/app/App.tscn").instantiate()
+	root.add_child(app)
+	await frames()
+	app.action_buttons.inventory.pressed.emit()
+	await frames()
+	var inventory := app.find_child("InventoryView",true,false)
+	var gear := app.find_child("EquipmentView",true,false)
+	check(inventory.grid.item_buttons.size() == 7,"all exact distinct stacks visible")
+	inventory.filter_buttons.equipment.pressed.emit()
+	await frames()
+	check(inventory.shown_ids.size() == 5 and app.inventory_category == "equipment","actual category tabs")
+	gear.hero_buttons[TORIN].pressed.emit()
+	inventory.grid.item_buttons.patched_leather.pressed.emit()
+	await frames()
+	check(gear.selected_hero == TORIN and gear.selected_slot == "armor" and not gear.equip_button.disabled and campaign.state == before,"portrait/item selection no campaign mutation")
+	gear.equip_button.pressed.emit()
+	await frames()
+	gear = app.find_child("EquipmentView",true,false)
+	inventory = app.find_child("InventoryView",true,false)
+	check(campaign.state.equipment[TORIN].armor == "patched_leather" and gear.selected_hero == TORIN and gear.selected_item == "patched_leather" and inventory.category == "equipment","equip keeps hero/item/filter")
+	check(gear.equip_button.disabled and gear.rejection_reason == "Already equipped.","same equipped copy explicit state")
+	gear.unequip_button.pressed.emit()
+	await frames()
+	gear = app.find_child("EquipmentView",true,false)
+	inventory = app.find_child("InventoryView",true,false)
+	check(campaign.state.equipment[TORIN].armor == null and not gear.equip_button.disabled,"unequip retains inspector and owned copy")
+	inventory.grid.item_buttons.salvaged_shield.pressed.emit()
+	await frames()
+	check(gear.equip_button.disabled and gear.rejection_reason.contains("two-handed"),"bow/shield conflict explicit")
+	inventory.filter_buttons.all.pressed.emit()
+	await frames()
+	inventory.grid.item_buttons.legacy_relic.pressed.emit()
+	await frames()
+	check(gear.equip_button.disabled and gear.selected_item == "legacy_relic","legacy inspectable but not equippable")
+	gear.slot_buttons.main_hand.pressed.emit()
+	await frames()
+	check(gear.selected_item == "hero_bow" and app.inventory_item_id == "hero_bow","click worn slot inspects owned item")
+	check(campaign.state.items.count("patched_leather") == 2,"no equipment inventory consumption")
+	app.queue_free()
+	await frames()
+	for error in errors: push_error(error)
+	print("visual_inventory_tests: ",checks," checks, ",errors.size()," failures")
+	quit(0 if errors.is_empty() else 1)

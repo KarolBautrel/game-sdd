@@ -1,0 +1,94 @@
+{
+  "id": "02_warden",
+  "title": "II / Straznik",
+  "static": true,
+  "rigged": false,
+  "animated": false,
+  "integrated": false,
+  "triangles": 43676,
+  "source_parts": 30,
+  "bounds": [
+    [
+      -0.45590898394584656,
+      0.45369425415992737
+    ],
+    [
+      -0.21432049572467804,
+      0.2667247951030731
+    ],
+    [
+      0.00800000037997961,
+      1.846993088722229
+    ]
+  ],
+  "audit": {
+    "profile": "render",
+    "eps": 0.000211,
+    "tol": 0.004215,
+    "gap": 0.021073,
+    "pass": true,
+    "errors": [],
+    "warnings": [
+      "02_warden_static_actor: 5 detached fragments (26% of its faces), nearest 0.0105 from the rest"
+    ],
+    "per_object": {
+      "02_warden_static_actor": {
+        "tris": 43676,
+        "parts": 26,
+        "errors": [],
+        "warnings": [
+          "02_warden_static_actor: 5 detached fragments (26% of its faces), nearest 0.0105 from the rest"
+        ]
+      }
+    },
+    "skipped": []
+  },
+  "ucupaint": {
+    "version": "3.0.0",
+    "workspace": "PAINT_WORKSPACE_02_warden",
+    "layers": 1,
+    "image": "02_warden_painted_albedo",
+    "gui_brush_strokes": false
+  },
+  "method": "CC0 anatomical scaffold; authored tailored/forged geometry; original AI-painted multiview projection with baked diffuse atlas",
+  "limits": [
+    "static visual prototype",
+    "projection contains designed/baked lighting",
+    "inferred geometry and view seams need later animation polish",
+    "no live GUI sculpt/paint strokes"
+  ],
+  "camera": {
+    "elevation": 18,
+    "yaw": 330,
+    "ortho": 2.7,
+    "render_size": 900,
+    "tactical_pixels_per_metre": 100
+  },
+  "files": {
+    "02_warden.blend": "0a41dea72db714916a393c455f4e0fb879bf4f7aa7d511de0c56ee62c704f62f",
+    "02_warden.fbx": "90e7bfc34772df3597ee8a97d14448e20c28d519320ef496aa807e5466a38f3b",
+    "concept.png": "1cbe614de2da6dfac3a515a8bd62cd4d84980b19e10361c10f04ad658c937964",
+    "projection-padded.png": "d2be55e16d91cfbcbd76787b50bbfb0038b5f1c19dd6ee4257c5fb3d653df7ef",
+    "geometry_review/matcap_back.png": "4ee33c8bc875681040dd0198cb328b44e04222d9d1b29312504bc26fd1a540fd",
+    "geometry_review/matcap_front.png": "6200ee3cbea61a9dd83a46787fc53659d30230831d67c4faba20d41d3fc4616f",
+    "geometry_review/matcap_right.png": "fb1058c9b80a92af1c130441de983f81d6f7fdddbbccecc6f4454f7da61c5fe5",
+    "geometry_review/matcap_threequarter.png": "a9328743ce023aaf955bd08439bd5febfabc5dd5703757f971b94f8bc42258f0",
+    "geometry_review/review_sheet.png": "cf5f83352e923502789cf83055e28194d4452be4f0b6889831c6a23c875dbc26",
+    "geometry_review/silhouette_back.png": "6dbab8b39688e7a7dbc54b3a209dec5d3fbacffd1353b9d832bc320908d18cab",
+    "geometry_review/silhouette_front.png": "05dc78d9844aa951f45436363db33ed7868548c5424262a5aed5277650e3b99a",
+    "geometry_review/silhouette_right.png": "4557217c770f2eeb6f332a91b01749a9b27319ee20c79cbf566b8f8837538f57",
+    "geometry_review/silhouette_threequarter.png": "5456b0170c81815df4de101fc72feb655bf081ab73baf868a37f226de76be01f",
+    "geometry_review/wire_back.png": "c69e6f1fbce2afe4b306be32ae3bc391f7a15ba3ccde2c65739bacc3c0dc79a5",
+    "geometry_review/wire_front.png": "c88662dab601bb673ca221d6dcac28b437b78be7388de278419ab18746b77ed6",
+    "geometry_review/wire_right.png": "5bfa9b8fd38f12b37bd0e2bf206e5bc404214393d799e2b05a95ef4ec1851db6",
+    "geometry_review/wire_threequarter.png": "ff9be476f072b0a79a720f4813d83fc27dac1a53410d552cfc001395b3436781",
+    "renders/face.png": "258ad70879079f8fb7aa5aadcef39cd62b449febbc7931b940cce3cff76038d7",
+    "renders/fbx_roundtrip.png": "771e0efa8e1a2c9cca32f54a36ab2347f95a9189aec86946ff31bd14ab4daed7",
+    "renders/front.png": "2f378f8105bc587b8254c5b03bfb7334778905be4f2897df9a9fec0a4028f53a",
+    "renders/rear.png": "63cb00892fb0ba02e55f753fd86974f0987a5eb1fe1b1ce8f54a096404472e65",
+    "renders/side.png": "9473a1c723a54699e4c7fb52b2f02b292529290fb3f6c058fa926c8088cd0e01",
+    "renders/tactical.png": "054529d45ab3aa7d3f9a6092f77b61da72e9d22fd6c216bb3e6fde04719b6b11",
+    "renders/three_quarter.png": "ce90428b8b8ab07f3188a3635ee755842c9c8e3d5cd4a57b229361655e34c24f",
+    "textures/02_warden_albedo.png": "6017084a8747c24ca62a4371b5241e9b6ed629faf8f1784148105278364d752b"
+  }
+}

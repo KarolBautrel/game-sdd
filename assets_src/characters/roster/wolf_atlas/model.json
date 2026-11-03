@@ -1,0 +1,36 @@
+{
+  "id": "wolf_atlas",
+  "kind": "wolf",
+  "label": "Dire wolf",
+  "canvas_size": [
+    512,
+    384
+  ],
+  "pivot": [
+    256,
+    282
+  ],
+  "camera_elevation": 18,
+  "pixels_per_metre": 100,
+  "triangles": 3636,
+  "vertices": 1924,
+  "bones": 13,
+  "uv": true,
+  "weighted": true,
+  "actions": {
+    "pose": "wolf_pose",
+    "walk": "wolf_walk",
+    "combat": "wolf_combat",
+    "hit": "wolf_hit",
+    "death": "wolf_death"
+  },
+  "frame_counts": {
+    "pose": 4,
+    "walk": 8,
+    "combat": 8,
+    "hit": 4,
+    "death": 8
+  },
+  "preview_only": false,
+  "legacy_reference": "../references/wolf_atlas.png"
+}

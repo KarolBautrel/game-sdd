@@ -2,66 +2,161 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "sdd-game/combat_encounter.schema.json",
   "type": "object",
-  "required": ["id", "seed", "units", "turn_state", "event_log"],
+  "required": [
+    "id",
+    "seed",
+    "units",
+    "turn_state",
+    "event_log"
+  ],
   "additionalProperties": false,
   "anyOf": [
-    { "required": ["grid"] },
-    { "required": ["map_path"] }
+    {
+      "required": [
+        "grid"
+      ]
+    },
+    {
+      "required": [
+        "map_path"
+      ]
+    }
   ],
   "properties": {
-    "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-    "seed": { "type": "integer", "minimum": 0 },
-    "source_dungeon_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-    "source_room_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-    "background_path": { "type": "string", "pattern": "^res://assets/combat/terrain/backgrounds/.+\\.png$" },
-    "terrain_theme": { "type": "string", "enum": ["nature", "dungeon"] },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "source_dungeon_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "source_room_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "background_path": {
+      "type": "string",
+      "pattern": "^res://assets/combat/terrain/backgrounds/.+\\.png$"
+    },
+    "terrain_theme": {
+      "type": "string",
+      "enum": [
+        "nature",
+        "dungeon"
+      ]
+    },
     "terrain_decorations": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["x", "y", "path"],
+        "required": [
+          "x",
+          "y",
+          "path"
+        ],
         "additionalProperties": false,
         "properties": {
-          "x": { "type": "integer", "minimum": 0 },
-          "y": { "type": "integer", "minimum": 0 },
-          "path": { "type": "string", "pattern": "^res://assets/combat/terrain/processed/.+\\.png$" },
-          "kind": { "type": "string", "pattern": "^[a-z0-9_]+$" }
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^res://assets/combat/terrain/processed/.+\\.png$"
+          },
+          "kind": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          }
         }
       }
     },
-    "map_path": { "type": "string", "pattern": "^res://resources/data/maps/.+\\.json$" },
+    "map_path": {
+      "type": "string",
+      "pattern": "^res://resources/data/maps/.+\\.json$"
+    },
     "rewards": {
       "type": "object",
-      "required": ["xp", "gold", "items"],
+      "required": [
+        "xp",
+        "gold",
+        "items"
+      ],
       "additionalProperties": false,
       "properties": {
-        "xp": { "type": "integer", "minimum": 0 },
-        "gold": { "type": "integer", "minimum": 0 },
+        "xp": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": 0
+        },
         "items": {
           "type": "array",
-          "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
           "uniqueItems": true
         }
       }
     },
     "grid": {
       "type": "object",
-      "required": ["width", "height", "tiles"],
+      "required": [
+        "width",
+        "height",
+        "tiles"
+      ],
       "additionalProperties": false,
       "properties": {
-        "width": { "type": "integer", "minimum": 1 },
-        "height": { "type": "integer", "minimum": 1 },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
         "tiles": {
           "type": "array",
           "minItems": 1,
           "items": {
             "type": "object",
-            "required": ["x", "y", "type"],
+            "required": [
+              "x",
+              "y",
+              "type"
+            ],
             "additionalProperties": false,
             "properties": {
-              "x": { "type": "integer", "minimum": 0 },
-              "y": { "type": "integer", "minimum": 0 },
-              "type": { "type": "string", "enum": ["floor", "blocked", "highground", "cover_low"] }
+              "x": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "y": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "floor",
+                  "blocked",
+                  "highground",
+                  "cover_low"
+                ]
+              }
             }
           }
         }
@@ -71,21 +166,61 @@
       "type": "object",
       "additionalProperties": {
         "type": "object",
-        "required": ["id", "action_id", "range", "ap_cost"],
+        "required": [
+          "id",
+          "action_id",
+          "range",
+          "ap_cost"
+        ],
         "additionalProperties": false,
         "properties": {
-          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "action_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "range": { "type": "integer", "minimum": 1 },
-          "ap_cost": { "type": "integer", "minimum": 0 },
-          "base_hit_chance": { "type": "integer", "minimum": 0, "maximum": 100 },
-          "damage_bonus": { "type": "integer" },
-          "cooldown_turns": { "type": "integer", "minimum": 0 },
-          "status_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "status_remaining_turns": { "type": "integer", "minimum": 0 },
-          "damage_reduction": { "type": "integer", "minimum": 0 },
-          "status_tick_damage": { "type": "integer", "minimum": 0 },
-          "status_defense_modifier": { "type": "integer" }
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "action_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "range": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "ap_cost": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "base_hit_chance": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "damage_bonus": {
+            "type": "integer"
+          },
+          "cooldown_turns": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "status_remaining_turns": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "damage_reduction": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status_tick_damage": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status_defense_modifier": {
+            "type": "integer"
+          }
         }
       }
     },
@@ -93,21 +228,60 @@
       "type": "object",
       "additionalProperties": {
         "type": "object",
-        "required": ["id", "action_id", "ap_cost"],
+        "required": [
+          "id",
+          "action_id",
+          "ap_cost"
+        ],
         "additionalProperties": false,
         "properties": {
-          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "action_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "range": { "type": "integer", "minimum": 1 },
-          "ap_cost": { "type": "integer", "minimum": 0 },
-          "base_hit_chance": { "type": "integer", "minimum": 0, "maximum": 100 },
-          "damage_bonus": { "type": "integer" },
-          "cooldown_turns": { "type": "integer", "minimum": 0 },
-          "status_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "status_remaining_turns": { "type": "integer", "minimum": 0 },
-          "damage_reduction": { "type": "integer", "minimum": 0 },
-          "status_tick_damage": { "type": "integer", "minimum": 0 },
-          "status_defense_modifier": { "type": "integer" }
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "action_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "range": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "ap_cost": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "base_hit_chance": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "damage_bonus": {
+            "type": "integer"
+          },
+          "cooldown_turns": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "status_remaining_turns": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "damage_reduction": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status_tick_damage": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status_defense_modifier": {
+            "type": "integer"
+          }
         }
       }
     },
@@ -115,37 +289,100 @@
       "type": "object",
       "additionalProperties": {
         "type": "object",
-        "required": ["id", "slot", "grants_actions"],
+        "required": [
+          "id",
+          "slot",
+          "grants_actions"
+        ],
         "additionalProperties": false,
         "properties": {
-          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "slot": { "type": "string", "enum": ["main_hand", "off_hand", "armor"] },
-          "two_handed": { "type": "boolean" },
-          "armor_reduction": { "type": "integer", "minimum": 0 },
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "slot": {
+            "type": "string",
+            "enum": [
+              "main_hand",
+              "off_hand",
+              "armor",
+              "boots",
+              "helmet"
+            ]
+          },
+          "two_handed": {
+            "type": "boolean"
+          },
+          "armor_reduction": {
+            "type": "integer",
+            "minimum": 0
+          },
           "grants_actions": {
             "type": "array",
-            "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9_]+$"
+            },
             "uniqueItems": true
           },
           "action_profiles": {
             "type": "object",
             "additionalProperties": {
               "type": "object",
-              "required": ["id", "action_id", "ap_cost"],
+              "required": [
+                "id",
+                "action_id",
+                "ap_cost"
+              ],
               "additionalProperties": false,
               "properties": {
-                "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-                "action_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-                "range": { "type": "integer", "minimum": 1 },
-                "ap_cost": { "type": "integer", "minimum": 0 },
-                "base_hit_chance": { "type": "integer", "minimum": 0, "maximum": 100 },
-                "damage_bonus": { "type": "integer" },
-                "cooldown_turns": { "type": "integer", "minimum": 0 },
-                "status_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-                "status_remaining_turns": { "type": "integer", "minimum": 0 },
-                "damage_reduction": { "type": "integer", "minimum": 0 },
-                "status_tick_damage": { "type": "integer", "minimum": 0 },
-                "status_defense_modifier": { "type": "integer" }
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9_]+$"
+                },
+                "action_id": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9_]+$"
+                },
+                "range": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "ap_cost": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "base_hit_chance": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "damage_bonus": {
+                  "type": "integer"
+                },
+                "cooldown_turns": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "status_id": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9_]+$"
+                },
+                "status_remaining_turns": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "damage_reduction": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "status_tick_damage": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "status_defense_modifier": {
+                  "type": "integer"
+                }
               }
             }
           }
@@ -156,43 +393,108 @@
       "type": "object",
       "additionalProperties": {
         "type": "object",
-        "required": ["id", "available_actions"],
+        "required": [
+          "id",
+          "available_actions"
+        ],
         "additionalProperties": false,
         "properties": {
-          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "role": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "family": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "display_name": { "type": "string", "minLength": 1 },
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "role": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "family": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "display_name": {
+            "type": "string",
+            "minLength": 1
+          },
           "visual_pool": {
             "type": "array",
             "minItems": 1,
             "items": {
               "type": "object",
-              "required": ["faction", "character"],
+              "required": [
+                "faction",
+                "character"
+              ],
               "additionalProperties": false,
               "properties": {
-                "faction": { "type": "string", "enum": ["heroes", "villains"] },
-                "character": { "type": "string", "pattern": "^[a-z0-9_]+$" }
+                "faction": {
+                  "type": "string",
+                  "enum": [
+                    "heroes",
+                    "villains"
+                  ]
+                },
+                "character": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9_]+$"
+                }
               }
             }
           },
           "available_actions": {
             "type": "array",
-            "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9_]+$"
+            },
             "uniqueItems": true
           },
           "learned_actions": {
             "type": "array",
-            "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9_]+$"
+            },
             "uniqueItems": true
           },
           "loadout": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "main_hand": { "type": ["string", "null"], "pattern": "^[a-z0-9_]+$" },
-              "off_hand": { "type": ["string", "null"], "pattern": "^[a-z0-9_]+$" },
-              "armor": { "type": ["string", "null"], "pattern": "^[a-z0-9_]+$" }
+              "main_hand": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[a-z0-9_]+$"
+              },
+              "off_hand": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[a-z0-9_]+$"
+              },
+              "armor": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[a-z0-9_]+$"
+              },
+              "boots": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[a-z0-9_]+$"
+              },
+              "helmet": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[a-z0-9_]+$"
+              }
             }
           }
         }
@@ -203,77 +505,202 @@
       "minItems": 2,
       "items": {
         "type": "object",
-        "required": ["id", "team", "position", "stats", "resources", "statuses", "available_actions"],
+        "required": [
+          "id",
+          "team",
+          "position",
+          "stats",
+          "resources",
+          "statuses",
+          "available_actions"
+        ],
         "additionalProperties": false,
         "properties": {
-          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "team": { "type": "string", "enum": ["player", "enemy"] },
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "team": {
+            "type": "string",
+            "enum": [
+              "player",
+              "enemy"
+            ]
+          },
           "position": {
             "type": "object",
-            "required": ["x", "y"],
+            "required": [
+              "x",
+              "y"
+            ],
             "additionalProperties": false,
             "properties": {
-              "x": { "type": "integer", "minimum": 0 },
-              "y": { "type": "integer", "minimum": 0 }
+              "x": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "y": {
+                "type": "integer",
+                "minimum": 0
+              }
             }
           },
           "stats": {
             "type": "object",
-            "required": ["max_hp", "strength", "defense", "initiative", "move_points", "max_ap"],
+            "required": [
+              "max_hp",
+              "strength",
+              "defense",
+              "initiative",
+              "move_points",
+              "max_ap"
+            ],
             "additionalProperties": false,
             "properties": {
-              "max_hp": { "type": "integer", "minimum": 1 },
-              "strength": { "type": "integer", "minimum": 0 },
-              "defense": { "type": "integer", "minimum": 0 },
-              "initiative": { "type": "integer", "minimum": 0 },
-              "move_points": { "type": "integer", "minimum": 0 },
-              "max_ap": { "type": "integer", "minimum": 0 },
-              "accuracy": { "type": "integer" },
-              "evasion": { "type": "integer" }
+              "max_hp": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "strength": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "defense": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "initiative": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "move_points": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "max_ap": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "accuracy": {
+                "type": "integer"
+              },
+              "evasion": {
+                "type": "integer"
+              }
             }
           },
           "resources": {
             "type": "object",
-            "required": ["hp", "ap"],
+            "required": [
+              "hp",
+              "ap"
+            ],
             "additionalProperties": false,
             "properties": {
-              "hp": { "type": "integer", "minimum": 0 },
-              "ap": { "type": "integer", "minimum": 0 },
-              "mp": { "type": "integer", "minimum": 0 }
+              "hp": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "ap": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "mp": {
+                "type": "integer",
+                "minimum": 0
+              }
             }
           },
           "statuses": {
             "type": "array",
-            "items": { "type": "object" }
+            "items": {
+              "type": "object"
+            }
           },
           "available_actions": {
             "type": "array",
-            "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9_]+$"
+            },
             "uniqueItems": true
           },
           "learned_actions": {
             "type": "array",
-            "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9_]+$"
+            },
             "uniqueItems": true
           },
-          "archetype_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-          "equipped_weapon_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "archetype_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "equipped_weapon_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
           "visual": {
             "type": "object",
-            "required": ["faction", "character"],
+            "required": [
+              "faction",
+              "character"
+            ],
             "additionalProperties": false,
             "properties": {
-              "faction": { "type": "string", "enum": ["heroes", "villains"] },
-              "character": { "type": "string", "pattern": "^[a-z0-9_]+$" }
+              "faction": {
+                "type": "string",
+                "enum": [
+                  "heroes",
+                  "villains"
+                ]
+              },
+              "character": {
+                "type": "string",
+                "pattern": "^[a-z0-9_]+$"
+              }
             }
           },
           "loadout": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "main_hand": { "type": ["string", "null"], "pattern": "^[a-z0-9_]+$" },
-              "off_hand": { "type": ["string", "null"], "pattern": "^[a-z0-9_]+$" },
-              "armor": { "type": ["string", "null"], "pattern": "^[a-z0-9_]+$" }
+              "main_hand": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[a-z0-9_]+$"
+              },
+              "off_hand": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[a-z0-9_]+$"
+              },
+              "armor": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[a-z0-9_]+$"
+              },
+              "boots": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[a-z0-9_]+$"
+              },
+              "helmet": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[a-z0-9_]+$"
+              }
             }
           }
         }
@@ -281,21 +708,36 @@
     },
     "turn_state": {
       "type": "object",
-      "required": ["active_unit_id", "round", "turn_order"],
+      "required": [
+        "active_unit_id",
+        "round",
+        "turn_order"
+      ],
       "additionalProperties": false,
       "properties": {
-        "active_unit_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-        "round": { "type": "integer", "minimum": 1 },
+        "active_unit_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "round": {
+          "type": "integer",
+          "minimum": 1
+        },
         "turn_order": {
           "type": "array",
           "minItems": 1,
-          "items": { "type": "string", "pattern": "^[a-z0-9_]+$" }
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          }
         }
       }
     },
     "event_log": {
       "type": "array",
-      "items": { "type": "object" }
+      "items": {
+        "type": "object"
+      }
     }
   }
 }

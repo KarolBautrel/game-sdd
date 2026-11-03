@@ -53,10 +53,10 @@
       ],
       "outcomes": [
         {
-          "id": "trap_disarmed",
+          "id": "trap_toxin_neutralized",
           "when": { "choice_id": "use_supply", "has_supply": true },
           "consume_required_supply": true,
-          "message": "The trap tools catch the tripwire and disarm the needle mechanism.",
+          "message": "The trap tools pin the wire and empty the needle reservoir safely.",
           "consequences": []
         },
         {
@@ -124,10 +124,10 @@
       ],
       "outcomes": [
         {
-          "id": "snare_disarmed",
+          "id": "snare_treated",
           "when": { "choice_id": "use_supply", "has_supply": true },
           "consume_required_supply": true,
-          "message": "The trap tools pin the cable before it can tighten.",
+          "message": "The trap tools loosen the cable loop before it can snap shut.",
           "consequences": []
         },
         {

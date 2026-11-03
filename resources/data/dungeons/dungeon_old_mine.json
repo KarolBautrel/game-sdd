@@ -8,21 +8,32 @@
   "starting_supplies": {
     "lamp_oil": 2,
     "pickaxe": 1,
+    "bandage": 1,
     "trap_tools": 1,
-    "remedy_kit": 1
+    "food": 1,
+    "camping_kit": 0
   },
+  "supply_loadout_capacity": 7,
   "supply_loadout_options": {
-    "lamp_oil": { "min": 0, "max": 4, "default": 2 },
-    "pickaxe": { "min": 0, "max": 2, "default": 1 },
-    "trap_tools": { "min": 0, "max": 3, "default": 1 },
-    "remedy_kit": { "min": 0, "max": 2, "default": 1 }
+    "lamp_oil": { "min": 0, "max": 4, "default": 2, "packing_cost": 1, "label": "Torch" },
+    "pickaxe": { "min": 0, "max": 2, "default": 1, "packing_cost": 2, "label": "Pickaxe" },
+    "bandage": { "min": 0, "max": 3, "default": 1, "packing_cost": 1, "label": "Bandage" },
+    "trap_tools": { "min": 0, "max": 3, "default": 1, "packing_cost": 1, "label": "Trap Tools" },
+    "food": { "min": 0, "max": 3, "default": 1, "packing_cost": 1, "label": "Food" },
+    "camping_kit": { "min": 0, "max": 1, "default": 0, "packing_cost": 3, "label": "Camping Kit" }
   },
   "default_party_formation": [
     {
       "slot_id": "front",
       "target_id": "party_slot_front",
       "combat_unit_id": "unit_player_001",
-      "label": "Front"
+      "label": "Bran (Warrior)"
+    },
+    {
+      "slot_id": "back",
+      "target_id": "party_slot_back",
+      "combat_unit_id": "unit_player_002",
+      "label": "Torin (Archer)"
     }
   ],
   "rooms": [

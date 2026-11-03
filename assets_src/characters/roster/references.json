@@ -1,0 +1,191 @@
+[
+  {
+    "id": "ash_raider",
+    "path": "res://assets/combat/characters/original/ash_raider/pose/ash_raider_east_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/ash_raider.png",
+    "sha256": "74187c07dea10d180293349e2ec922a436538b6c35a32ff05175fdabce0318ec",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "archer_1",
+    "path": "res://assets/combat/characters/heroes/mercenaries/processed/archer_1/pose/archer_1_right_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/archer_1.png",
+    "sha256": "11e1e310ccebb1e4813886d99170e07b614c9b7666ecdd1a932b04c619eca7e7",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "rogue_1",
+    "path": "res://assets/combat/characters/heroes/mercenaries/processed/rogue_1/pose/rogue_1_right_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/rogue_1.png",
+    "sha256": "a76271c46175bfe87d82f5eab699148e0b41dc9c8476e7f3a0308defcf273c1f",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "warrior",
+    "path": "res://assets/combat/characters/heroes/mercenaries/processed/warrior/pose/warrior_right_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/warrior.png",
+    "sha256": "f9a5dc075841ef01d27fcc23a7653797e740da15ea0e7b17c0fdce60a81c3ce4",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "bandit_spearman",
+    "path": "res://assets/combat/characters/npc/processed/bandit_spearman/pose/bandit_spearman_right_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/bandit_spearman.png",
+    "sha256": "477d35311cca78eff1728c7137c41866d1866651541c71b54baa52a324a96e81",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "crossbowman",
+    "path": "res://assets/combat/characters/npc/processed/crossbowman/pose/crossbowman_right_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/crossbowman.png",
+    "sha256": "c1fd18311845518b9f8cbed89220d8119e1f03337c6a4d5ff97a0ff3e51097aa",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "guardian",
+    "path": "res://assets/combat/characters/npc/processed/guardian/pose/guardian_right_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/guardian.png",
+    "sha256": "12d83f796102bcc60c05df9fea9d1fec813356056487ba112ddef71e01889016",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "axe_bandit",
+    "path": "res://assets/combat/characters/villains/bandits/processed/axe_bandit/pose/axe_bandit_right_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/axe_bandit.png",
+    "sha256": "2f7c4074939ceb7241e5fe054bf6a92905913bc7acbf4ecffc0a38f91ee4c893",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "bandit_archer",
+    "path": "res://assets/combat/characters/villains/bandits/processed/bandit_archer/pose/bandit_archer_right_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/bandit_archer.png",
+    "sha256": "553f844cbc1db1fcbaaa790ec9532ba6d9a12e1e2f22a47bc9b4ae51aa5580f5",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "bandit_brute",
+    "path": "res://assets/combat/characters/villains/bandits/processed/bandit_brute/pose/bandit_brute_right_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/bandit_brute.png",
+    "sha256": "7e76b0266900e0ba159faeda4bf614935813049f39a4094888837bdf580ef4fb",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "bandit_carnage",
+    "path": "res://assets/combat/characters/villains/bandits/processed/bandit_carnage/pose/bandit_carnage_right_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/bandit_carnage.png",
+    "sha256": "deb66cbea9dde9a6ea73640af4dc19d982f71395a97893dde2b042154d00aae3",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "bandit_marauder",
+    "path": "res://assets/combat/characters/villains/bandits/processed/bandit_marauder/pose/bandit_marauder_right_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/bandit_marauder.png",
+    "sha256": "7a155758d545646cdb4c9b471acc791efe572b278186336915f25e192d2c1635",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "bandit_rogue",
+    "path": "res://assets/combat/characters/villains/bandits/processed/bandit_rogue/pose/bandit_rogue_right_pose_000.png",
+    "retained_reference": "assets_src/characters/roster/references/bandit_rogue.png",
+    "sha256": "6a15eaee9adfeb2fed07a52119cbb9ced241f71065a5c7db08746f0004246270",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "armored_brute",
+    "path": "res://assets/combat/characters/villains/raw_extracted/armored_brute/atlas_frames_right/raw_armored_brute_atlas_frame_000.png",
+    "retained_reference": "assets_src/characters/roster/references/armored_brute.png",
+    "sha256": "11570bc5503c45d1eee88085d148712b4a382699112e2a41a4a2dddf9a4bac40",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "bandit",
+    "path": "res://assets/combat/characters/villains/raw_extracted/bandit/atlas_frames_right/raw_bandit_atlas_frame_000.png",
+    "retained_reference": "assets_src/characters/roster/references/bandit.png",
+    "sha256": "852438f3bb23e3950842fef1547dff7d998d2c68480f7031102b262b20cabc93",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "bat",
+    "path": "res://assets/combat/characters/villains/raw_extracted/bat/atlas_frames_right/raw_bat_atlas_frame_000.png",
+    "retained_reference": "assets_src/characters/roster/references/bat.png",
+    "sha256": "c545f699cdb7317c0c7755cdc17ab69a2a7f57d2bafa05240db315a1b49b3edb",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "dire_boar",
+    "path": "res://assets/combat/characters/villains/raw_extracted/dire_boar/atlas_frames_right/raw_dire_boar_atlas_frame_000.png",
+    "retained_reference": "assets_src/characters/roster/references/dire_boar.png",
+    "sha256": "20f5cff0909d135e9b69db1b193f994af15975aa876d552c98c3356e06a9f08d",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "giant_snake",
+    "path": "res://assets/combat/characters/villains/raw_extracted/giant_snake/atlas_frames_right/raw_giant_snake_atlas_frame_000.png",
+    "retained_reference": "assets_src/characters/roster/references/giant_snake.png",
+    "sha256": "c7f48ae0cdcde3419c7b09f2b5f385d1a213c1d4614440fcbe47339e01433ade",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "goblin_atlas",
+    "path": "res://assets/combat/characters/villains/raw_extracted/goblin_atlas/atlas_frames_right/raw_goblin_atlas_atlas_frame_000.png",
+    "retained_reference": "assets_src/characters/roster/references/goblin_atlas.png",
+    "sha256": "7cf3e9cbdbdea336ce9aef27f97f1d5191205572c94490bdae01590839f2a841",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "hell_hound",
+    "path": "res://assets/combat/characters/villains/raw_extracted/hell_hound/atlas_frames_right/raw_hell_hound_atlas_frame_000.png",
+    "retained_reference": "assets_src/characters/roster/references/hell_hound.png",
+    "sha256": "df54674d5e80dd67811e867d42ac2482d61b1422f9867ae5913d468b5287b5af",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "lizardman",
+    "path": "res://assets/combat/characters/villains/raw_extracted/lizardman/atlas_frames_right/raw_lizardman_atlas_frame_000.png",
+    "retained_reference": "assets_src/characters/roster/references/lizardman.png",
+    "sha256": "a31ffbffc65f2c7f649e7bf3d651a56a3efb707fa0ec70fc14257b1897f85703",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "ogre",
+    "path": "res://assets/combat/characters/villains/raw_extracted/ogre/atlas_frames_right/raw_ogre_atlas_frame_002.png",
+    "retained_reference": "assets_src/characters/roster/references/ogre.png",
+    "sha256": "74df111ddf6bf9383db7700febc60937d251fcd8eabcfe0bec1e3de23fc2735d",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "spider_atlas",
+    "path": "res://assets/combat/characters/villains/raw_extracted/spider_atlas/atlas_frames_right/raw_spider_atlas_atlas_frame_001.png",
+    "retained_reference": "assets_src/characters/roster/references/spider_atlas.png",
+    "sha256": "8320946f3255e78e4d9e23eddca1780f78fd06f435e1575585a3aa7fc2fe3f51",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "skeleton_archer",
+    "path": "res://assets/combat/characters/villains/raw_extracted/skeleton_archer/atlas_frames_right/raw_skeleton_archer_atlas_frame_000.png",
+    "retained_reference": "assets_src/characters/roster/references/skeleton_archer.png",
+    "sha256": "44d0eba84da13673247b960c32bad9122d067ececcaf67b14d5a9bae39465b2d",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "skeleton_warrior",
+    "path": "res://assets/combat/characters/villains/raw_extracted/skeleton_warrior/atlas_frames_right/raw_skeleton_warrior_atlas_frame_000.png",
+    "retained_reference": "assets_src/characters/roster/references/skeleton_warrior.png",
+    "sha256": "19e2e0ff995cc2be281898b44bfe983c37ae25bfb1643085be2477f0ccd0fb35",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "wolf_atlas",
+    "path": "res://assets/combat/characters/villains/raw_extracted/wolf/pose_right/raw_wolf_pose_frame_000.png",
+    "retained_reference": "assets_src/characters/roster/references/wolf_atlas.png",
+    "sha256": "260478fb2457d91e2e424e01002c69f99bd5084fd65b04119d390a84ca0699c2",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  },
+  {
+    "id": "wraith",
+    "path": "res://assets/combat/characters/villains/raw_extracted/wraith/atlas_frames_right/raw_wraith_atlas_frame_000.png",
+    "retained_reference": "assets_src/characters/roster/references/wraith.png",
+    "sha256": "c30da465b90242fc712cc815205be5da09c7c318fb60f78bf800b1ec394e7550",
+    "review": "inspected legacy-sheet; design reference, camera unknown"
+  }
+]

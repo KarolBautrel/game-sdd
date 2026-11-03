@@ -1,0 +1,511 @@
+{
+  "status": "PASS",
+  "blender": "5.2.3 LTS",
+  "import_policy": "preserve authored unconnected joints and animated bone translations",
+  "models": [
+    {
+      "id": "warrior",
+      "status": "PASS",
+      "triangles": 4614,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.6798040536376284,
+        "walk": 190.28231840499438,
+        "combat": 388.91714087111177,
+        "hit": 77.7679062003855,
+        "death": 507.93078450687835
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "403ebbe4b135a238769116de44f61cce217dedfbc4723749cb11d3edc60a6f6f"
+    },
+    {
+      "id": "archer_1",
+      "status": "PASS",
+      "triangles": 4022,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 0.4050395077365465,
+        "walk": 190.53997288749315,
+        "combat": 125.803316462785,
+        "hit": 77.76788535738628,
+        "death": 507.9346892034323
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "e0726d9018ab6eed25cc77629289248f9b1a93eb5e45621f78a26bd52ff2d250"
+    },
+    {
+      "id": "rogue_1",
+      "status": "PASS",
+      "triangles": 4000,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.6798214837427228,
+        "walk": 190.28236622906485,
+        "combat": 388.9173263080738,
+        "hit": 77.76787847227072,
+        "death": 507.9309118523006
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "902712505509f7326d8fc246b93d0d0b2564cbfe2b2655acc21285a5dba2c4e9"
+    },
+    {
+      "id": "bandit_spearman",
+      "status": "PASS",
+      "triangles": 3744,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.4116368544498528,
+        "walk": 184.80074477444478,
+        "combat": 11.688314710063423,
+        "hit": 70.20199653784206,
+        "death": 499.47731572565226
+      },
+      "weapon_min_z": {
+        "pose": 1.18419,
+        "walk": 0.76224,
+        "combat": 1.18397,
+        "hit": 0.75646,
+        "death": 0.04884
+      },
+      "fbx_sha256": "cff33d6a44d1f6efcee03dc9c54f04b2827304c80b33a667c4d1d4e0d42f78c6"
+    },
+    {
+      "id": "crossbowman",
+      "status": "PASS",
+      "triangles": 4344,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 4.356409329477174,
+        "walk": 190.3776153634558,
+        "combat": 5.053929968882585,
+        "hit": 77.76790321456532,
+        "death": 507.93469946940104
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "cb68db5c6b9a234071ec5420b3a9cbc468133d819fb4323c6d7613bd5f7adc5f"
+    },
+    {
+      "id": "guardian",
+      "status": "PASS",
+      "triangles": 5468,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.679829776893131,
+        "walk": 190.28232554687315,
+        "combat": 388.91729467954065,
+        "hit": 77.7677867267237,
+        "death": 507.9306408906159
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "fabe2c78da8f0d8d19e1da3bd150c001aaa14fc8f3ad66acb562f25a6dae5a4b"
+    },
+    {
+      "id": "axe_bandit",
+      "status": "PASS",
+      "triangles": 4010,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.6798040536376284,
+        "walk": 190.28231840499438,
+        "combat": 388.91714087111177,
+        "hit": 77.7679062003855,
+        "death": 507.93078450687835
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "e0ddb400e3d91f095fe10d8f38051688f3a74f086baff9c889d7bb32251cc8ed"
+    },
+    {
+      "id": "bandit_archer",
+      "status": "PASS",
+      "triangles": 3948,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 0.4050296991963478,
+        "walk": 190.53997181799267,
+        "combat": 125.80331329768524,
+        "hit": 77.76785355064584,
+        "death": 507.93460481259035
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "f498ba6ace02ac30651a5011fe58eb4a3cb4709e6737e1d41eafecf0245ebde5"
+    },
+    {
+      "id": "bandit_brute",
+      "status": "PASS",
+      "triangles": 4720,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.679799742617626,
+        "walk": 190.28237262214515,
+        "combat": 388.9172847124719,
+        "hit": 77.76782986966745,
+        "death": 507.9308102259747
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "82183131d5cddca591246f22c1d03e2584462ecf5e766668ce161cb38f170f09"
+    },
+    {
+      "id": "bandit_carnage",
+      "status": "PASS",
+      "triangles": 4150,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.6798508240421768,
+        "walk": 190.2820804036701,
+        "combat": 388.9172111587686,
+        "hit": 77.76785672605328,
+        "death": 507.93091080747945
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "01604f035239ed3d96ff7d2108abb7c27fa19794da6cdddb4f4f6d5de97febec"
+    },
+    {
+      "id": "bandit_marauder",
+      "status": "PASS",
+      "triangles": 4102,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.679829776893131,
+        "walk": 190.28232554687315,
+        "combat": 388.91729467954065,
+        "hit": 77.7677867267237,
+        "death": 507.9306408906159
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "1ed834453fa4ce3f2e6b2d941fee04d56d3c1efd868a2c800ef6e93564d592f9"
+    },
+    {
+      "id": "bandit_rogue",
+      "status": "PASS",
+      "triangles": 4058,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.6798245803438014,
+        "walk": 190.28238410285135,
+        "combat": 388.9171920275767,
+        "hit": 77.76778993095685,
+        "death": 507.9308418271771
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "85c82758191047410d9c216b6a1244246da99f8510443f3b86ec6eb52468153d"
+    },
+    {
+      "id": "armored_brute",
+      "status": "PASS",
+      "triangles": 4208,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.6798125255190683,
+        "walk": 190.28232767624658,
+        "combat": 388.91716679893216,
+        "hit": 77.76789577411027,
+        "death": 507.9307322463278
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "6ffc9a3515a772e69fb28ed5e440735bc6c857ecdfdf8ce16140c358ac78aab6"
+    },
+    {
+      "id": "bandit",
+      "status": "PASS",
+      "triangles": 4058,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.679808262432232,
+        "walk": 190.28232219886038,
+        "combat": 388.91724538511335,
+        "hit": 77.76786377470506,
+        "death": 507.9306920871045
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "a4838d070c1b0af479107d8c9962c3a5698d2f423ed5e5cc5df170a2912e365e"
+    },
+    {
+      "id": "ash_raider",
+      "status": "PASS",
+      "triangles": 4058,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.6798040536376284,
+        "walk": 190.28231840499438,
+        "combat": 388.91714087111177,
+        "hit": 77.7679062003855,
+        "death": 507.93078450687835
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "a30afceddad69b602863e04bf0dbab4197d659ca214634c99ddef956c2866a40"
+    },
+    {
+      "id": "goblin_atlas",
+      "status": "PASS",
+      "triangles": 2912,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.4116711899496295,
+        "walk": 184.80068389970046,
+        "combat": 11.68837082938262,
+        "hit": 70.20195309335307,
+        "death": 499.47730354273244
+      },
+      "weapon_min_z": {
+        "pose": 0.85262,
+        "walk": 0.54881,
+        "combat": 0.85246,
+        "hit": 0.54465,
+        "death": 0.03516
+      },
+      "fbx_sha256": "6e9f3eea50071378e48bcc4e6c6b1a26a9182063bd6329405b9e80996a47c13b"
+    },
+    {
+      "id": "lizardman",
+      "status": "PASS",
+      "triangles": 3148,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.411657360523236,
+        "walk": 184.80049225785584,
+        "combat": 11.688368702070875,
+        "hit": 70.2019209177898,
+        "death": 499.4772209423927
+      },
+      "weapon_min_z": {
+        "pose": 1.20788,
+        "walk": 0.77748,
+        "combat": 1.20765,
+        "hit": 0.77159,
+        "death": 0.04981
+      },
+      "fbx_sha256": "85ab16b8c03020a111bdec74e9a88bceced0cdcc4e027452e9152fe654e8e357"
+    },
+    {
+      "id": "ogre",
+      "status": "PASS",
+      "triangles": 3228,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.6798107796381814,
+        "walk": 190.28239336434865,
+        "combat": 388.91734191796786,
+        "hit": 77.7677712141307,
+        "death": 507.9310015044516
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "223f07c91d4854d0fbc50d41ebbd3355cc15edb0b46639539c3b9ac37a8417a6"
+    },
+    {
+      "id": "skeleton_archer",
+      "status": "PASS",
+      "triangles": 3444,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 0.4050395077365465,
+        "walk": 190.53997288749315,
+        "combat": 125.803316462785,
+        "hit": 77.76788535738628,
+        "death": 507.9346892034323
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "010d23e123814084649e7b5bddfc94cf48a76c5e18993685988091ea57db95a6"
+    },
+    {
+      "id": "skeleton_warrior",
+      "status": "PASS",
+      "triangles": 3292,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.6798040536376284,
+        "walk": 190.28231840499438,
+        "combat": 388.91714087111177,
+        "hit": 77.7679062003855,
+        "death": 507.93078450687835
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "d0050fda18f3ec34c44a8ba2b1e3cb171cba2f0bb87d8747936f11a49b86ec81"
+    },
+    {
+      "id": "wraith",
+      "status": "PASS",
+      "triangles": 2534,
+      "bones": 65,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.679829776893131,
+        "walk": 190.28232554687315,
+        "combat": 388.91729467954065,
+        "hit": 77.7677867267237,
+        "death": 75.15558528719532
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "02b99c26485aa98c59201bd273a768921e27490ae19b65c85d20842f3b85d256"
+    },
+    {
+      "id": "wolf_atlas",
+      "status": "PASS",
+      "triangles": 3636,
+      "bones": 13,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 0.8226118318864657,
+        "walk": 11.520845655178423,
+        "combat": 2.888502319169934,
+        "hit": 10.949855835303243,
+        "death": 35.46710395403198
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "aed0232f49b1c09914750df9c0cff0549662be03c4179584841ef91298cd9415"
+    },
+    {
+      "id": "dire_boar",
+      "status": "PASS",
+      "triangles": 3420,
+      "bones": 13,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 0.8226118318864657,
+        "walk": 11.520845655178423,
+        "combat": 2.888502319169934,
+        "hit": 10.949855835303243,
+        "death": 35.46710395403198
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "72b7278978954973aa9f7eda3e7e19a194d870d4ee7c319708977729f7275963"
+    },
+    {
+      "id": "hell_hound",
+      "status": "PASS",
+      "triangles": 3792,
+      "bones": 13,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 0.8226118821778741,
+        "walk": 11.52084552758722,
+        "combat": 2.88850221672444,
+        "hit": 10.949856587993212,
+        "death": 35.467103593372684
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "63d2e14a4cac9370a4a9af9ceceda201e6c76e956b81af82a9183f4b0eb0e6be"
+    },
+    {
+      "id": "bat",
+      "status": "PASS",
+      "triangles": 1234,
+      "bones": 7,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 4.113551998619972,
+        "walk": 0.8222014850296802,
+        "combat": 5.962153235559402,
+        "hit": 9.328985160269289,
+        "death": 10.53845162015902
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "223ef4defbb1c8ef707cb50ff03035b9c12b86afbbd43a2bae5d5bcf86e681b1"
+    },
+    {
+      "id": "giant_snake",
+      "status": "PASS",
+      "triangles": 1724,
+      "bones": 11,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 1.3709024586451095,
+        "walk": 2.2146798171770614,
+        "combat": 7.13574887827393,
+        "hit": 8.941301301205872,
+        "death": 8.408687153831124
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "36c9fbd82cb77899ead1d26f978aa657a4240968cec0785289da27ab0691ab6d"
+    },
+    {
+      "id": "spider_atlas",
+      "status": "PASS",
+      "triangles": 2408,
+      "bones": 22,
+      "uv": true,
+      "weighted": true,
+      "texture": true,
+      "motion": {
+        "pose": 0.7236976527934758,
+        "walk": 20.017974861363086,
+        "combat": 13.317924359813333,
+        "hit": 18.155587450843598,
+        "death": 15.894172811358873
+      },
+      "weapon_min_z": {},
+      "fbx_sha256": "aad5121bd4c7ddcd738d7dd9a1e18706c19875d7bc50ffcc946f1a8e90d4fcc3"
+    }
+  ]
+}

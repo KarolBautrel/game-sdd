@@ -1,0 +1,342 @@
+{
+  "status": "TECHNICAL_PASS",
+  "art_acceptance": "AWAITING_USER_REVIEW",
+  "checks": 8705,
+  "models": [
+    {
+      "id": "01_mercenary",
+      "status": "PASS",
+      "checks": 80,
+      "triangles": 39248,
+      "actual_fbx_reimport": true,
+      "ucupaint_layer_reopened": true,
+      "textures": [
+        "assets_src\\characters\\painted_candidates\\2026-11-02\\01_mercenary\\textures\\01_mercenary_albedo.png"
+      ],
+      "renders": {
+        "front": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            301,
+            136,
+            597,
+            738
+          ],
+          "mean_linear_rgb": 0.15261
+        },
+        "three_quarter": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            323,
+            128,
+            590,
+            738
+          ],
+          "mean_linear_rgb": 0.15304
+        },
+        "side": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            378,
+            128,
+            538,
+            737
+          ],
+          "mean_linear_rgb": 0.16151
+        },
+        "rear": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            302,
+            145,
+            598,
+            740
+          ],
+          "mean_linear_rgb": 0.16649
+        },
+        "face": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            29,
+            0,
+            839,
+            727
+          ],
+          "mean_linear_rgb": 0.20784
+        },
+        "tactical": {
+          "size": [
+            384,
+            384
+          ],
+          "alpha_bounds": [
+            154,
+            95,
+            234,
+            278
+          ],
+          "mean_linear_rgb": 0.15551
+        },
+        "fbx_roundtrip": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            323,
+            128,
+            590,
+            738
+          ],
+          "mean_linear_rgb": 0.15036
+        }
+      },
+      "audit_warnings": [
+        "01_mercenary_static_actor: 5 detached fragments (29% of its faces), nearest 0.0105 from the rest"
+      ]
+    },
+    {
+      "id": "02_warden",
+      "status": "PASS",
+      "checks": 80,
+      "triangles": 43676,
+      "actual_fbx_reimport": true,
+      "ucupaint_layer_reopened": true,
+      "textures": [
+        "assets_src\\characters\\painted_candidates\\2026-11-02\\02_warden\\textures\\02_warden_albedo.png"
+      ],
+      "renders": {
+        "front": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            298,
+            136,
+            601,
+            738
+          ],
+          "mean_linear_rgb": 0.18583
+        },
+        "three_quarter": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            321,
+            128,
+            593,
+            738
+          ],
+          "mean_linear_rgb": 0.18172
+        },
+        "side": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            378,
+            127,
+            538,
+            737
+          ],
+          "mean_linear_rgb": 0.18974
+        },
+        "rear": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            298,
+            145,
+            602,
+            740
+          ],
+          "mean_linear_rgb": 0.16995
+        },
+        "face": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            21,
+            0,
+            848,
+            727
+          ],
+          "mean_linear_rgb": 0.23905
+        },
+        "tactical": {
+          "size": [
+            384,
+            384
+          ],
+          "alpha_bounds": [
+            153,
+            95,
+            235,
+            278
+          ],
+          "mean_linear_rgb": 0.1842
+        },
+        "fbx_roundtrip": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            321,
+            128,
+            593,
+            738
+          ],
+          "mean_linear_rgb": 0.17826
+        }
+      },
+      "audit_warnings": [
+        "02_warden_static_actor: 5 detached fragments (26% of its faces), nearest 0.0105 from the rest"
+      ]
+    },
+    {
+      "id": "03_wayfarer",
+      "status": "PASS",
+      "checks": 80,
+      "triangles": 39428,
+      "actual_fbx_reimport": true,
+      "ucupaint_layer_reopened": true,
+      "textures": [
+        "assets_src\\characters\\painted_candidates\\2026-11-02\\03_wayfarer\\textures\\03_wayfarer_albedo.png"
+      ],
+      "renders": {
+        "front": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            302,
+            136,
+            596,
+            738
+          ],
+          "mean_linear_rgb": 0.15563
+        },
+        "three_quarter": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            324,
+            128,
+            589,
+            738
+          ],
+          "mean_linear_rgb": 0.15408
+        },
+        "side": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            381,
+            128,
+            538,
+            737
+          ],
+          "mean_linear_rgb": 0.16099
+        },
+        "rear": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            303,
+            145,
+            597,
+            740
+          ],
+          "mean_linear_rgb": 0.16535
+        },
+        "face": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            33,
+            0,
+            835,
+            727
+          ],
+          "mean_linear_rgb": 0.20691
+        },
+        "tactical": {
+          "size": [
+            384,
+            384
+          ],
+          "alpha_bounds": [
+            154,
+            95,
+            233,
+            278
+          ],
+          "mean_linear_rgb": 0.15732
+        },
+        "fbx_roundtrip": {
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            324,
+            128,
+            589,
+            738
+          ],
+          "mean_linear_rgb": 0.15132
+        }
+      },
+      "audit_warnings": [
+        "03_wayfarer_static_actor: 5 detached fragments (30% of its faces), nearest 0.0105 from the rest"
+      ]
+    }
+  ],
+  "production_manifests": [
+    {
+      "manifest": "assets_src/characters/roster/manifest.json",
+      "files": 8223,
+      "status": "PASS"
+    },
+    {
+      "manifest": "assets_src/environment/manifest.json",
+      "files": 215,
+      "status": "PASS"
+    }
+  ],
+  "os_input_used": false,
+  "gameplay_tested": false
+}

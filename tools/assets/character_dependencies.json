@@ -1,0 +1,93 @@
+{
+  "schema": "sdd.character-art-dependencies-v1",
+  "verified_date": "2026-11-02",
+  "local_root": "%USERPROFILE%/.codex/tools/character-art",
+  "dependencies": [
+    {
+      "id": "blender",
+      "version": "5.2.3",
+      "source": "https://download.blender.org/release/Blender5.2/blender-5.2.3-windows-x64.zip",
+      "sha256": "723f08a4401502561eb763cdeacf8745b31e5f3f154d287d3830d97cf75dc2fb",
+      "license": "GPL-3.0-or-later (application)",
+      "directory": "blender-5.2.3-windows-x64"
+    },
+    {
+      "id": "blender-mcp",
+      "version": "2.2.6",
+      "source": "https://github.com/ahujasid/mcp-for-blender",
+      "commit": "992233bb258975a05eec8b5691465c50c2831e34",
+      "license": "MIT",
+      "directory": "mcp-for-blender",
+      "mcp_sdk_version": "1.30.0"
+    },
+    {
+      "id": "retarget",
+      "version": "5.2.0",
+      "source": "https://github.com/KBSBAUDRICE/Retarget/releases/download/v5.2.0/retarget.zip",
+      "sha256": "521ec8ff5c2373893ea8022b3f71d27ed191fb73f3a5634cac31585e0dcb7af3",
+      "license": "GPL-3.0-or-later (addon)",
+      "directory": "retarget-5.2.0"
+    },
+    {
+      "id": "universal-animation-library",
+      "edition": "Standard",
+      "source": "https://quaternius.itch.io/universal-animation-library",
+      "upload_id": "17958403",
+      "sha256": "cc73fc4e495b82958207316596317a3f40b9fa38065bde1027937452da537724",
+      "license": "CC0-1.0",
+      "directory": "animations/universal-animation-library",
+      "imported_actions": 43,
+      "bones": 65
+    },
+    {
+      "id": "universal-animation-library-2",
+      "edition": "Standard",
+      "source": "https://quaternius.itch.io/universal-animation-library-2",
+      "upload_id": "17958478",
+      "sha256": "4008ea208a604773a2b2177d965f0f5d3195498b5bf838c3f5785d68e95f2a68",
+      "license": "CC0-1.0",
+      "directory": "animations/universal-animation-library-2",
+      "imported_actions": 43,
+      "bones": 65
+    },
+    {
+      "id": "meshy-mcp",
+      "npm_package": "@meshy-ai/meshy-mcp-server",
+      "version": "0.6.7",
+      "integrity": "sha512-kmOyjdcW+FZuc+TZHK4aUjfOID+LbjmQAM7W9YLtLhApW7b7lo+aZLnLl6xnNfM2KvktODXCF61kgDhjwP7dUg==",
+      "license": "MIT",
+      "directory": "meshy-mcp",
+      "account_connected": false
+    },
+    {
+      "id": "meshy-cli",
+      "npm_package": "meshy-cli",
+      "version": "0.7.3",
+      "integrity": "sha512-Ebwxw8TOhy9binXrpd5FoOp7hkHoPd2jGqa+oBiE2PEEFwqp4WU9JDvh+sn4mtId/8wNYSj6lEA/HDyy4QDCEg==",
+      "license": "MIT",
+      "directory": "meshy-cli",
+      "account_connected": false
+    }
+  ],
+  "skills": [
+    {
+      "name": "godot-animation",
+      "repo": "gamedev-skills/awesome-gamedev-agent-skills",
+      "commit": "19d93f97c9c1ea0f8b306e77aa81e0d3e352d3e9",
+      "path": "skills/godot/godot-animation"
+    },
+    {
+      "name": "meshy-3d-generation",
+      "repo": "meshy-dev/meshy-3d-agent",
+      "commit": "1acd9653d34a81f906b0230b74242452788a02c4",
+      "path": "skills/meshy-3d-generation"
+    }
+  ],
+  "optional_remote_mcp": {
+    "pixellab": {
+      "url": "https://api.pixellab.ai/mcp",
+      "auth_env": "PIXELLAB_API_TOKEN",
+      "connected": false
+    }
+  }
+}

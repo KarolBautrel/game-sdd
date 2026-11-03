@@ -1,0 +1,21 @@
+{
+  "schema": "sdd.aseprite-static-weapon-separation-v1",
+  "source_canvas": [1254, 1254],
+  "native_canvas": [280, 280],
+  "ground_pivot": [140, 229],
+  "source_ground_x": 550,
+  "requested_uniform_source_scale": 0.148,
+  "guard_polygon": [[676,401],[700,406],[746,428],[789,448],[795,454],[789,465],[777,462],[736,444],[700,428],[676,418],[673,411]],
+  "handle_polygon": [[718,439],[744,450],[676,610],[651,600]],
+  "glove_polygons": [
+    [[688,441],[709,442],[731,451],[746,464],[747,480],[739,495],[725,509],[706,514],[687,507],[676,495],[675,477],[681,458]],
+    [[665,509],[686,507],[707,514],[726,529],[738,545],[737,567],[723,584],[704,592],[682,585],[663,575],[650,561],[652,539],[658,523]]
+  ],
+  "pommel_radius": 22,
+  "blade_root_half_width": 21,
+  "grip_half_width": 12,
+  "variants": {
+    "pixel": {"guard_center":[735,430],"pommel_center":[650,621],"source_blade_root":[737,419],"source_blade_tip":[958,36]},
+    "painted": {"guard_center":[736,430],"pommel_center":[653,620],"source_blade_root":[739,416],"source_blade_tip":[954,58]}
+  }
+}

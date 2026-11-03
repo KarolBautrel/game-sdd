@@ -1,0 +1,201 @@
+{
+  "status": "PASS",
+  "props": [
+    {
+      "id": "altar",
+      "status": "PASS",
+      "sha256": "710e29033d90c5b29a8f5d06ebfa695be22d38b7a22fd9d9ae13aceb794a1b9b",
+      "meshes": 1,
+      "triangles": 612
+    },
+    {
+      "id": "arch",
+      "status": "PASS",
+      "sha256": "fd9f38b0bd084d41acc4a0e8730b4e73549acbea557d04337e8508d7b714d51d",
+      "meshes": 1,
+      "triangles": 276
+    },
+    {
+      "id": "barrel",
+      "status": "PASS",
+      "sha256": "3a4b6daf4c7829c7b6501f53cedbfe7c3a7f291699034f279aa5eae2891bde96",
+      "meshes": 1,
+      "triangles": 304
+    },
+    {
+      "id": "bone_totem",
+      "status": "PASS",
+      "sha256": "42604cfd660cf4c41c3ceaecf836fa5c625ba547095c20e9b84a3ff7d0b4a656",
+      "meshes": 1,
+      "triangles": 1116
+    },
+    {
+      "id": "bones",
+      "status": "PASS",
+      "sha256": "499fa2100c1a53046f7e8adb9cfd5a20b885abef9d627d19e8652d32af4bee1c",
+      "meshes": 1,
+      "triangles": 672
+    },
+    {
+      "id": "boulder",
+      "status": "PASS",
+      "sha256": "0035c166eec6a9f093ed31808c1c8e3a3218e9578feb3cca85695b620c35626a",
+      "meshes": 1,
+      "triangles": 164
+    },
+    {
+      "id": "branches",
+      "status": "PASS",
+      "sha256": "0c97647e3e86c159fb3c74c066aa0d9d0df7ae7be7c81f153c03aab8565c24ff",
+      "meshes": 1,
+      "triangles": 360
+    },
+    {
+      "id": "brazier",
+      "status": "PASS",
+      "sha256": "fc848f5313905d7fd3b75fe3cc1162c0b210c72c66d7bc86110e431f671e45b7",
+      "meshes": 1,
+      "triangles": 408
+    },
+    {
+      "id": "broken_pillar",
+      "status": "PASS",
+      "sha256": "e0e96548bbbe9a1a815097fd7fedb672b9464979fbb62490d3f6fc066add9979",
+      "meshes": 1,
+      "triangles": 880
+    },
+    {
+      "id": "bush",
+      "status": "PASS",
+      "sha256": "39f93fa402e44c9476e014ddac2ad9ce5fea9fe022f8877c686a4b0c6f913983",
+      "meshes": 1,
+      "triangles": 1400
+    },
+    {
+      "id": "chest",
+      "status": "PASS",
+      "sha256": "58ecfc6b299ddc5fa0020ab85c7d74af06ae5bc6ee135a3bb45ead4b37655a60",
+      "meshes": 1,
+      "triangles": 646
+    },
+    {
+      "id": "coffin",
+      "status": "PASS",
+      "sha256": "f4617eb7df6d84fe96955704a6064cbd14b422d4196fdcff09695575ddb80ad8",
+      "meshes": 1,
+      "triangles": 120
+    },
+    {
+      "id": "crate",
+      "status": "PASS",
+      "sha256": "c314ec55ed155d904a072307fb24991d8e2478091c60c3700b2ce37b6d85106c",
+      "meshes": 1,
+      "triangles": 136
+    },
+    {
+      "id": "dead_tree",
+      "status": "PASS",
+      "sha256": "1fc600032d71aaaaac00979f7db069a38c99921782c50392b270acd6f7a3a5ce",
+      "meshes": 1,
+      "triangles": 776
+    },
+    {
+      "id": "fallen_log",
+      "status": "PASS",
+      "sha256": "04d61758810a0dea2478cde3822e1ada02b28682c125b29fed33e08f3920a623",
+      "meshes": 1,
+      "triangles": 728
+    },
+    {
+      "id": "flowers",
+      "status": "PASS",
+      "sha256": "5365e724ab3228ba49889ba7bc03929c01289d44f331c5e99d2921250f621092",
+      "meshes": 1,
+      "triangles": 1160
+    },
+    {
+      "id": "grass",
+      "status": "PASS",
+      "sha256": "500126251de41cef4cfa04426cea52b392e902fbd0b9d54bd7d66ebd5d554802",
+      "meshes": 1,
+      "triangles": 176
+    },
+    {
+      "id": "mushrooms",
+      "status": "PASS",
+      "sha256": "2098e3d11254471fc4169636873c680814dcaf27a3c2d3768c24a0e19c20baed",
+      "meshes": 1,
+      "triangles": 2068
+    },
+    {
+      "id": "oak",
+      "status": "PASS",
+      "sha256": "e47b7010a2bf8fe043d81f857b134a5d9dd2ffabd11ce16d80d45de012f065f0",
+      "meshes": 1,
+      "triangles": 4876
+    },
+    {
+      "id": "pillar",
+      "status": "PASS",
+      "sha256": "c6dd10c258a8c22329f734bce28cbd9805e940a4ed849d7c6051d16952192d7d",
+      "meshes": 1,
+      "triangles": 84
+    },
+    {
+      "id": "pine",
+      "status": "PASS",
+      "sha256": "866417efad0f02cb536c212b45d7631869d5e4f01335ef7e971196bb6820f416",
+      "meshes": 1,
+      "triangles": 996
+    },
+    {
+      "id": "rock_cluster",
+      "status": "PASS",
+      "sha256": "59218f9cd7aa7fb08b267eed02820f3236c6ea040ef4d22a923952221009964e",
+      "meshes": 1,
+      "triangles": 820
+    },
+    {
+      "id": "rubble",
+      "status": "PASS",
+      "sha256": "91a169aaf95956c22e67131ec9f03c026f17d81e9f27442303428a1906f71574",
+      "meshes": 1,
+      "triangles": 1476
+    },
+    {
+      "id": "sacks",
+      "status": "PASS",
+      "sha256": "81c4ab996ef5a635dbe1bf7e4c45f115e09ce452f9ac891fdff952a90adfc56c",
+      "meshes": 1,
+      "triangles": 504
+    },
+    {
+      "id": "spike_fence",
+      "status": "PASS",
+      "sha256": "895d23dbf58fc0c9c05903860fb4b4a249eb62662b0e4501d30f9fcc707d5efc",
+      "meshes": 1,
+      "triangles": 220
+    },
+    {
+      "id": "statue",
+      "status": "PASS",
+      "sha256": "e73ab86105b95b410504e64371a3a9ee0967317e9890ae4b1419f7390b8800a4",
+      "meshes": 1,
+      "triangles": 440
+    },
+    {
+      "id": "stump",
+      "status": "PASS",
+      "sha256": "d42e1b9a18b987b716d2f1c88238fa36da1183d36c8330e27626927768a3c303",
+      "meshes": 1,
+      "triangles": 312
+    },
+    {
+      "id": "wall",
+      "status": "PASS",
+      "sha256": "08ed71f06bb71c7cb657d8d03665caa9a84029d67e94a08475e2a42ea776f405",
+      "meshes": 1,
+      "triangles": 1012
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "flowers",
+  "pixels_per_metre": 100,
+  "camera_elevation": 18,
+  "triangles": 1160,
+  "uv": true,
+  "original": true
+}

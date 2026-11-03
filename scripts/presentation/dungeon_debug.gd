@@ -1,13 +1,22 @@
 extends Control
 
+const AssetCatalog := preload("res://scripts/presentation/shared/asset_catalog.gd")
+const PixelSkin := preload("res://scripts/presentation/shared/pixel_skin.gd")
+const PartyCardScene := preload("res://scenes/ui/PartyCard.tscn")
+var pixel_skin := PixelSkin.new()
+var party_cards: Dictionary = {}
+
 const DungeonStateModel := preload("res://scripts/domain/dungeon_state_model.gd")
 const DungeonEntrySelection := preload("res://scripts/domain/dungeon_entry_selection.gd")
+const PartyRoster := preload("res://scripts/domain/party_roster.gd")
 
 const DUNGEON_PATH := DungeonEntrySelection.DUNGEON_PATH
 const DUNGEON_SOURCE_AUTHORED := DungeonEntrySelection.SOURCE_AUTHORED
 const DUNGEON_SOURCE_GENERATED := DungeonEntrySelection.SOURCE_GENERATED
 const DEFAULT_GENERATED_DUNGEON_DIFFICULTY := DungeonEntrySelection.DEFAULT_GENERATED_DUNGEON_DIFFICULTY
-const ROOM_SIZE := Vector2(220, 172)
+const ROOM_SIZE := Vector2(256, 232)
+const ExpeditionChrome := preload("res://scripts/presentation/dungeon/expedition_chrome.gd")
+var expedition_chrome: RefCounted
 const ENTER_COMBAT_LABEL := "Enter Combat"
 const FINISH_EXPEDITION_LABEL := "Finish Expedition"
 const FALLBACK_VIEWPORT_SIZE := Vector2(2048, 1152)
@@ -16,11 +25,11 @@ const DUNGEON_UI_DETAIL_PANEL_PATH := "res://assets/ui/dungeon/processed/dungeon
 const DUNGEON_UI_MODAL_PATH := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_10.png"
 const DUNGEON_UI_PARTY_PANEL_PATH := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_10.png"
 const DUNGEON_UI_PORTRAIT_FRAME_PATH := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_20.png"
-const DUNGEON_UI_PORTRAIT_PATH := "res://assets/ui/dungeon/processed/mercenary_pose_for_portrait/mercenary_pose_for_portrait_head.png"
 const DUNGEON_UI_CORRIDOR_PATH := "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_56.png"
 const DUNGEON_UI_CORRIDOR_DIAMOND_PATH := "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_18.png"
 const DUNGEON_UI_TILE_PREFIX := "res://assets/ui/dungeon/processed/dungeon_ui/dungeon_ui_"
 const DUNGEON_ICON_PREFIX := "res://assets/ui/dungeon/processed/dungeon_icons/dungeon_icons_"
+const DUNGEON_DEDICATED_ICON_DIR := "res://assets/ui/dungeon/processed/icons/"
 const DUNGEON_ROOM_FRAME_PREFIX := "res://assets/ui/dungeon/processed/dungoen_ramki/dungoen_ramki_"
 const DUNGEON_LAYOUT_OVERRIDE_PATH := "res://resources/debug/dungeon_debug_layout_overrides.json"
 const LAYOUT_EDIT_HANDLE_SIZE := 24.0
@@ -30,9 +39,10 @@ const EVENT_POPUP_MAX_SIZE := Vector2(760, 420)
 
 var dungeon: Dictionary = {}
 var entry_payload: Dictionary = DungeonEntrySelection.default_payload()
-var dungeon_source := DUNGEON_SOURCE_AUTHORED
-var generated_dungeon_seed := 0
+var dungeon_source := DUNGEON_SOURCE_GENERATED
+var generated_dungeon_seed := int(entry_payload.get("generated_seed", 0))
 var generated_dungeon_difficulty := DEFAULT_GENERATED_DUNGEON_DIFFICULTY
+var generated_profile_id := DungeonEntrySelection.DEFAULT_GENERATED_PROFILE_ID
 var run_state: Dictionary = {}
 var room_nodes: Dictionary = {}
 var selected_room_id := ""
@@ -54,7 +64,10 @@ var reward_button: Button
 var finish_button: Button
 var oil_button: Button
 var recovery_button: Button
+var camp_button: Button
 var reset_button: Button
+var retreat_button: Button
+var world_button: Button
 var corridor_event_panel: Control
 var corridor_event_title_label: Label
 var corridor_event_type_label: Label
@@ -64,12 +77,16 @@ var corridor_event_result_label: Label
 var corridor_event_choice_row: HBoxContainer
 var corridor_hazard_choice_buttons: Array[Button] = []
 var map_frame_panel: PanelContainer
+var map_scroll_container: ScrollContainer
 var map_title_label: Label
 var route_state_label: Label
 var resource_tray_panel: PanelContainer
+var resource_tiles: Dictionary = {}
 var resource_tile_labels: Dictionary = {}
 var loadout_panel: PanelContainer
 var party_panel: PanelContainer
+var party_hp_labels: Dictionary = {}
+var party_hp_bars: Dictionary = {}
 var party_log_label: Label
 var loadout_summary_label: Label
 var generator_summary_label: Label
@@ -88,8 +105,9 @@ var graph_origin := Vector2(140, 360)
 var graph_step := Vector2(258, 168)
 var room_node_size := ROOM_SIZE
 var graph_node_scale := 1.0
+var graph_content_size := Vector2(1320, 920)
+var graph_axis_swap := false
 var dungeon_ui_texture_cache: Dictionary = {}
-var dungeon_ui_style_cache: Dictionary = {}
 var layout_overrides: Dictionary = {}
 var layout_edit_enabled := false
 var layout_edit_target_id := ""
@@ -98,9 +116,21 @@ var layout_edit_drag_offset := Vector2.ZERO
 var layout_edit_start_mouse := Vector2.ZERO
 var layout_edit_start_rect := Rect2()
 var layout_edit_preview_popup := false
+var qa_input_trace_enabled := OS.get_cmdline_user_args().has("--qa-input-trace")
 
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F7:
+		_open_world()
+		return
+	if OS.is_debug_build() and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F6:
+		if _run_session().managed_run or _run_session().town_preparation:
+			return
+		_run_session().set_dungeon_run(dungeon, run_state)
+		get_tree().change_scene_to_file("res://scenes/combat/CombatMapEditor.tscn")
+		return
+	if qa_input_trace_enabled and (event is InputEventMouseButton or event is InputEventKey):
+		print("QA_INPUT ", JSON.stringify({"event": event.as_text(), "pressed": event.is_pressed(), "viewport_mouse": str(get_viewport().get_mouse_position())}))
 	if _handle_layout_edit_input(event):
 		return
 
@@ -124,6 +154,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _ready() -> void:
+	if qa_input_trace_enabled:
+		var qa_screen := DisplayServer.window_get_current_screen()
+		print("QA_WINDOW ", JSON.stringify({"mode": DisplayServer.window_get_mode(), "window_position": str(DisplayServer.window_get_position()), "window_size": str(DisplayServer.window_get_size()), "screen": qa_screen, "screen_position": str(DisplayServer.screen_get_position(qa_screen)), "screen_size": str(DisplayServer.screen_get_size(qa_screen))}))
 	if _run_session().has_dungeon_run():
 		dungeon = _run_session().dungeon_data.duplicate(true)
 		entry_payload = DungeonEntrySelection.payload_for_dungeon(dungeon)
@@ -153,12 +186,26 @@ func _ready() -> void:
 	_create_resource_tray()
 	_create_party_status_panel()
 	_create_loadout_panel()
+	world_button = Button.new()
+	world_button.text = "World / Ravenford [F7]"
+	world_button.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	world_button.offset_left = -360
+	world_button.offset_right = -40
+	world_button.offset_top = 38
+	world_button.offset_bottom = 88
+	world_button.add_theme_font_size_override("font_size", 20)
+	world_button.pressed.connect(_open_world)
+	add_child(world_button)
 	_create_action_buttons()
 	_create_corridor_event_panel()
 	_apply_positioned_chrome()
 	_build_graph()
 	_update_detail()
 	_refresh_loadout_panel()
+	expedition_chrome = ExpeditionChrome.new()
+	expedition_chrome.setup(self)
+	_build_graph()
+	_refresh_presentation_chrome()
 
 
 func _notification(what: int) -> void:
@@ -188,6 +235,9 @@ func _build_graph() -> void:
 
 
 func _apply_responsive_layout() -> void:
+	if expedition_chrome!=null and not layout_edit_enabled:
+		expedition_chrome.layout(self)
+		return
 	var viewport_size := FALLBACK_VIEWPORT_SIZE
 	if is_inside_tree():
 		viewport_size = get_viewport_rect().size
@@ -219,10 +269,24 @@ func _apply_detail_panel_layout() -> void:
 
 
 func _apply_positioned_chrome() -> void:
+	if expedition_chrome!=null:
+		expedition_chrome.layout(self)
+		return
 	if map_frame_panel != null:
 		map_frame_panel.position = map_area.position
 		map_frame_panel.custom_minimum_size = map_area.size
 		map_frame_panel.size = map_area.size
+	if map_scroll_container != null:
+		var scroll_rect := _map_scroll_rect()
+		map_scroll_container.position = scroll_rect.position
+		map_scroll_container.custom_minimum_size = scroll_rect.size
+		map_scroll_container.size = scroll_rect.size
+		map_scroll_container.clip_contents = true
+	if graph_layer != null:
+		graph_layer.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+		graph_layer.position = Vector2.ZERO
+		graph_layer.custom_minimum_size = graph_content_size
+		graph_layer.size = graph_content_size
 	if resource_tray_panel != null:
 		resource_tray_panel.position = resource_tray_area.position
 		resource_tray_panel.custom_minimum_size = resource_tray_area.size
@@ -248,21 +312,23 @@ func _apply_layout_overrides() -> void:
 
 
 func _recalculate_graph_transform() -> void:
+	graph_axis_swap = _should_swap_graph_axes()
 	var bounds := _authored_room_bounds()
-	var graph_rect := Rect2(map_area.position + Vector2(74, 70), map_area.size - Vector2(148, 142))
+	var graph_rect := Rect2(Vector2(32, 28), _map_scroll_rect().size - Vector2(64, 56))
 	var range_x = max(1.0, float(bounds["max_x"] - bounds["min_x"]))
 	var range_y = max(1.0, float(bounds["max_y"] - bounds["min_y"]))
-	var columns: float = range_x + 1.0
-	var rows: float = range_y + 1.0
-	var available_cell := Vector2(graph_rect.size.x / columns, graph_rect.size.y / rows)
-	var fit_scale: float = min(1.0, min(available_cell.x / ROOM_SIZE.x, available_cell.y / ROOM_SIZE.y) * 0.94)
-	graph_node_scale = clampf(fit_scale, 0.72, 1.0)
-	room_node_size = Vector2(
-		floor(ROOM_SIZE.x * graph_node_scale),
-		floor(ROOM_SIZE.y * graph_node_scale)
+	var minimum_step := Vector2(312, 272)
+	if _generated_dungeon_scroll_tier() >= 2:
+		minimum_step.x = 520.0
+	graph_node_scale = 1.0
+	room_node_size = ROOM_SIZE
+	var required_graph_size := Vector2(
+		room_node_size.x + range_x * minimum_step.x,
+		room_node_size.y + range_y * minimum_step.y
 	)
-	graph_rect.size.x = max(room_node_size.x + 16, graph_rect.size.x)
-	graph_rect.size.y = max(room_node_size.y + 16, graph_rect.size.y)
+	graph_rect.size.x = max(graph_rect.size.x, required_graph_size.x)
+	graph_rect.size.y = max(graph_rect.size.y, required_graph_size.y)
+	graph_content_size = graph_rect.size + Vector2(64, 56)
 	graph_step = Vector2(
 		(graph_rect.size.x - room_node_size.x) / range_x,
 		(graph_rect.size.y - room_node_size.y) / range_y
@@ -270,7 +336,47 @@ func _recalculate_graph_transform() -> void:
 	graph_origin = graph_rect.position - Vector2(float(bounds["min_x"]), float(bounds["min_y"])) * graph_step
 
 
+func _map_scroll_rect() -> Rect2:
+	if expedition_chrome!=null: return expedition_chrome.map_scroll_rect(self)
+	var inset := Vector2(30, 42)
+	var size := map_area.size - Vector2(inset.x * 2.0, inset.y + 24.0)
+	return Rect2(map_area.position + inset, Vector2(maxf(120.0, size.x), maxf(120.0, size.y)))
+
+
 func _authored_room_bounds() -> Dictionary:
+	var min_x := 0
+	var min_y := 0
+	var max_x := 0
+	var max_y := 0
+	var first := true
+	for room: Dictionary in dungeon.get("rooms", []):
+		var map_position := _room_map_position(room)
+		var x := int(map_position.x)
+		var y := int(map_position.y)
+		if first:
+			min_x = x
+			max_x = x
+			min_y = y
+			max_y = y
+			first = false
+		else:
+			min_x = mini(min_x, x)
+			max_x = maxi(max_x, x)
+			min_y = mini(min_y, y)
+			max_y = maxi(max_y, y)
+	return {"min_x": min_x, "max_x": max_x, "min_y": min_y, "max_y": max_y}
+
+
+func _should_swap_graph_axes() -> bool:
+	if _generated_dungeon_scroll_tier() < 2:
+		return false
+	var raw_bounds := _raw_room_bounds()
+	var span_x := int(raw_bounds["max_x"] - raw_bounds["min_x"])
+	var span_y := int(raw_bounds["max_y"] - raw_bounds["min_y"])
+	return span_y > span_x
+
+
+func _raw_room_bounds() -> Dictionary:
 	var min_x := 0
 	var min_y := 0
 	var max_x := 0
@@ -292,6 +398,13 @@ func _authored_room_bounds() -> Dictionary:
 			min_y = mini(min_y, y)
 			max_y = maxi(max_y, y)
 	return {"min_x": min_x, "max_x": max_x, "min_y": min_y, "max_y": max_y}
+
+
+func _generated_dungeon_scroll_tier() -> int:
+	if not dungeon.has("generated_profile"):
+		return 0
+	var profile: Dictionary = dungeon.get("generated_profile", {})
+	return clampi(int(profile.get("difficulty", dungeon.get("recommended_party_level", 1))), 1, 3)
 
 
 func _build_corridors() -> void:
@@ -351,7 +464,7 @@ func _create_corridor_ornament_line(from_pos: Vector2, to_pos: Vector2, color: C
 
 func _create_corridor_marker(text: String, center: Vector2) -> PanelContainer:
 	var panel := PanelContainer.new()
-	var marker_size := Vector2(92, 32) * graph_node_scale
+	var marker_size := Vector2(140, 52) * graph_node_scale
 	panel.position = center - marker_size * 0.5
 	panel.custom_minimum_size = marker_size
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -361,13 +474,14 @@ func _create_corridor_marker(text: String, center: Vector2) -> PanelContainer:
 	label.text = text
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", max(10, int(13.0 * graph_node_scale)))
+	label.add_theme_font_size_override("font_size", max(24, int(24.0 * graph_node_scale)))
 	label.add_theme_color_override("font_color", Color(0.95, 0.78, 0.44))
 	panel.add_child(label)
 	return panel
 
 
 func _create_room_panel(room: Dictionary) -> PanelContainer:
+	if expedition_chrome!=null: return expedition_chrome.room_panel(self,room)
 	var room_id: String = str(room["id"])
 	var panel := PanelContainer.new()
 	panel.position = _room_screen_position(room)
@@ -482,7 +596,7 @@ func _create_action_buttons() -> void:
 	action_row.add_child(oil_button)
 
 	recovery_button = Button.new()
-	recovery_button.text = "Use Remedy"
+	recovery_button.text = "Use Recovery"
 	recovery_button.custom_minimum_size = Vector2(0, 42)
 	recovery_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	recovery_button.add_theme_font_size_override("font_size", 14)
@@ -493,6 +607,19 @@ func _create_action_buttons() -> void:
 		_use_recovery_supply()
 	)
 	action_row.add_child(recovery_button)
+
+	camp_button = Button.new()
+	camp_button.text = "Camp"
+	camp_button.custom_minimum_size = Vector2(0, 42)
+	camp_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	camp_button.add_theme_font_size_override("font_size", 14)
+	camp_button.add_theme_stylebox_override("normal", _button_style(Color(0.16, 0.14, 0.10), Color(0.70, 0.54, 0.30)))
+	camp_button.add_theme_stylebox_override("hover", _button_style(Color(0.24, 0.20, 0.13), Color(0.94, 0.72, 0.40)))
+	camp_button.add_theme_stylebox_override("pressed", _button_style(Color(0.11, 0.10, 0.08), Color(0.56, 0.42, 0.24)))
+	camp_button.pressed.connect(func() -> void:
+		_use_camp()
+	)
+	action_row.add_child(camp_button)
 
 	reset_button = Button.new()
 	reset_button.text = "Reset Run"
@@ -506,6 +633,14 @@ func _create_action_buttons() -> void:
 		_reset_expedition()
 	)
 	action_row.add_child(reset_button)
+	retreat_button = Button.new()
+	retreat_button.text = "Retreat to Ravenford"
+	retreat_button.custom_minimum_size = Vector2(0, 42)
+	retreat_button.add_theme_font_size_override("font_size", 14)
+	retreat_button.add_theme_stylebox_override("normal", _button_style(Color(0.10, 0.16, 0.16), Color(0.50, 0.65, 0.60)))
+	retreat_button.add_theme_stylebox_override("hover", _button_style(Color(0.16, 0.24, 0.22), Color(0.78, 0.86, 0.60)))
+	retreat_button.pressed.connect(_retreat_to_world)
+	action_row.add_child(retreat_button)
 
 	exit_row = VBoxContainer.new()
 	exit_row.add_theme_constant_override("separation", 8)
@@ -522,8 +657,51 @@ func _create_map_chrome() -> void:
 	add_child(map_frame_panel)
 	move_child(map_frame_panel, graph_layer.get_index())
 
+	_create_map_scroll_container()
 	map_title_label = null
 	route_state_label = null
+
+
+func _create_map_scroll_container() -> void:
+	map_scroll_container = ScrollContainer.new()
+	map_scroll_container.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_ALWAYS
+	map_scroll_container.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	map_scroll_container.mouse_filter = Control.MOUSE_FILTER_PASS
+	map_scroll_container.clip_contents = true
+	map_scroll_container.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+	map_scroll_container.gui_input.connect(_handle_map_scroll_input)
+	add_child(map_scroll_container)
+	move_child(map_scroll_container, map_frame_panel.get_index() + 1)
+
+	var previous_parent := graph_layer.get_parent()
+	if previous_parent != null:
+		previous_parent.remove_child(graph_layer)
+	map_scroll_container.add_child(graph_layer)
+	graph_layer.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	graph_layer.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	graph_layer.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	graph_layer.mouse_filter = Control.MOUSE_FILTER_PASS
+
+
+func _handle_map_scroll_input(event: InputEvent) -> void:
+	if not event is InputEventMouseButton:
+		return
+	var mouse_event := event as InputEventMouseButton
+	if not mouse_event.pressed:
+		return
+	if mouse_event.button_index == MOUSE_BUTTON_WHEEL_DOWN or mouse_event.button_index == MOUSE_BUTTON_WHEEL_RIGHT:
+		_scroll_map_horizontal(180)
+		get_viewport().set_input_as_handled()
+	elif mouse_event.button_index == MOUSE_BUTTON_WHEEL_UP or mouse_event.button_index == MOUSE_BUTTON_WHEEL_LEFT:
+		_scroll_map_horizontal(-180)
+		get_viewport().set_input_as_handled()
+
+
+func _scroll_map_horizontal(delta: int) -> void:
+	if map_scroll_container == null:
+		return
+	var max_scroll := maxi(0, int(graph_content_size.x - map_scroll_container.size.x))
+	map_scroll_container.scroll_horizontal = clampi(map_scroll_container.scroll_horizontal + delta, 0, max_scroll)
 
 
 func _create_resource_tray() -> void:
@@ -545,29 +723,32 @@ func _create_resource_tray() -> void:
 	row.add_theme_constant_override("separation", 8)
 	margin.add_child(row)
 
+	resource_tiles.clear()
 	resource_tile_labels.clear()
-	for tile_id: String in ["light", "oil", "pickaxe", "trap_tools", "remedy_kit", "effects"]:
+	for tile_id: String in _resource_tile_ids():
 		var tile := _create_resource_tile(tile_id)
 		var label: Label = tile.get_meta("value_label") as Label
+		resource_tiles[tile_id] = tile
 		resource_tile_labels[tile_id] = label
 		row.add_child(tile)
 
 
 func _create_resource_tile_label() -> Label:
 	var label := Label.new()
-	label.custom_minimum_size = Vector2(132, 38)
+	label.custom_minimum_size = Vector2(34, 38)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", 15)
+	label.add_theme_font_size_override("font_size", 18)
 	label.add_theme_color_override("font_color", Color(0.90, 0.82, 0.62))
 	return label
 
 
 func _create_resource_tile(tile_id: String) -> PanelContainer:
 	var tile := PanelContainer.new()
-	tile.custom_minimum_size = Vector2(198, 46)
-	tile.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	tile.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	tile.custom_minimum_size = Vector2(92, 46)
+	tile.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	tile.mouse_filter = Control.MOUSE_FILTER_STOP
+	tile.tooltip_text = _resource_tooltip_text(tile_id)
 	tile.add_theme_stylebox_override("panel", _dungeon_ui_stylebox(
 		_resource_tile_frame_path(tile_id),
 		Vector4(34, 18, 34, 18),
@@ -583,7 +764,7 @@ func _create_resource_tile(tile_id: String) -> PanelContainer:
 	tile.add_child(margin)
 
 	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 7)
+	row.add_theme_constant_override("separation", 4)
 	margin.add_child(row)
 
 	var icon := TextureRect.new()
@@ -594,7 +775,6 @@ func _create_resource_tile(tile_id: String) -> PanelContainer:
 	row.add_child(icon)
 
 	var label := _create_resource_tile_label()
-	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(label)
 	tile.set_meta("value_label", label)
 	return tile
@@ -618,10 +798,12 @@ func _create_party_status_panel() -> void:
 	row.add_theme_constant_override("separation", 16)
 	margin.add_child(row)
 
-	row.add_child(_create_party_portrait_slot(0))
+	var party_members := _party_members_for_ui()
+	for index in range(party_members.size()):
+		row.add_child(_create_party_portrait_slot(party_members[index], index))
 
 	party_log_label = Label.new()
-	party_log_label.custom_minimum_size = Vector2(360, 0)
+	party_log_label.custom_minimum_size = Vector2(300, 0)
 	party_log_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	party_log_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	party_log_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -630,40 +812,19 @@ func _create_party_status_panel() -> void:
 	row.add_child(party_log_label)
 
 
-func _create_party_portrait_slot(slot_index: int) -> PanelContainer:
-	var slot := PanelContainer.new()
-	slot.custom_minimum_size = Vector2(196, 158)
-	slot.add_theme_stylebox_override("panel", _dungeon_ui_stylebox(
+func _create_party_portrait_slot(hero: Dictionary, slot_index: int) -> PanelContainer:
+	var slot := PartyCardScene.instantiate()
+	var frame := _dungeon_ui_stylebox(
 		DUNGEON_UI_PORTRAIT_FRAME_PATH,
 		Vector4(38, 34, 38, 34),
 		Vector4(16, 14, 16, 14),
 		_fantasy_panel_style(Color(0.060, 0.052, 0.045), Color(0.46, 0.34, 0.18), 1, 4)
-	))
-
-	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 16)
-	margin.add_theme_constant_override("margin_top", 14)
-	margin.add_theme_constant_override("margin_right", 16)
-	margin.add_theme_constant_override("margin_bottom", 14)
-	slot.add_child(margin)
-
-	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 8)
-	box.alignment = BoxContainer.ALIGNMENT_CENTER
-	margin.add_child(box)
-
-	var portrait := TextureRect.new()
-	portrait.texture = _dungeon_ui_texture(DUNGEON_UI_PORTRAIT_PATH)
-	portrait.custom_minimum_size = Vector2(132, 102)
-	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	portrait.modulate = _party_slot_tint(slot_index)
-	box.add_child(portrait)
-
-	var bar := ColorRect.new()
-	bar.custom_minimum_size = Vector2(132, 10)
-	bar.color = _party_slot_bar_color(slot_index)
-	box.add_child(bar)
+	)
+	var unit_id := str(hero.get("combat_unit_id", ""))
+	slot.configure(hero, DungeonStateModel.party_member_hp(run_state, unit_id), _party_slot_bar_color(slot_index), frame)
+	party_cards[unit_id] = slot
+	party_hp_labels[unit_id] = slot.hp_label
+	party_hp_bars[unit_id] = slot.hp_bar
 	return slot
 
 
@@ -884,6 +1045,9 @@ func _create_corridor_event_panel() -> void:
 
 
 func _center_corridor_event_panel() -> void:
+	if expedition_chrome!=null:
+		expedition_chrome.center_event(self)
+		return
 	if corridor_event_panel == null:
 		return
 	var panel_rect := _default_event_popup_rect()
@@ -1009,7 +1173,7 @@ func _layout_edit_items() -> Array[Dictionary]:
 	if corridor_event_panel != null and corridor_event_panel.visible:
 		items.append({"id": "event_popup", "rect": Rect2(corridor_event_panel.position, corridor_event_panel.size)})
 	items.append({"id": "detail", "rect": detail_area})
-	items.append({"id": "loadout", "rect": loadout_area})
+	if expedition_chrome==null: items.append({"id": "loadout", "rect": loadout_area})
 	items.append({"id": "party", "rect": party_area})
 	items.append({"id": "resources", "rect": resource_tray_area})
 	items.append({"id": "map", "rect": map_area})
@@ -1150,9 +1314,6 @@ func _try_enter_room(room_id: String) -> void:
 		_run_session().set_dungeon_run(dungeon, run_state)
 		selected_room_id = str(run_state["current_room_id"])
 		last_feedback = _movement_feedback(result, selected_room_id)
-		var pending_room_event: Dictionary = run_state.get("pending_room_event", {})
-		if not pending_room_event.is_empty():
-			_show_room_event_popup(pending_room_event)
 	elif result["status"] == "choice_required":
 		run_state = result["state"]
 		_run_session().set_dungeon_run(dungeon, run_state)
@@ -1160,9 +1321,9 @@ func _try_enter_room(room_id: String) -> void:
 			_room_display_name(str(result["event"].get("from_room_id", ""))),
 			_room_display_name(str(result["event"].get("to_room_id", ""))),
 		]
-		_show_corridor_hazard_popup(result["event"])
 	else:
 		last_feedback = "Cannot enter %s: %s." % [_room_display_name(room_id), result["rejection"]]
+	_refresh_pending_event_popup()
 	_refresh_room_styles()
 	_update_detail()
 
@@ -1200,19 +1361,35 @@ func _use_lamp_oil() -> void:
 
 
 func _use_recovery_supply() -> void:
-	var result: Dictionary = DungeonStateModel.use_recovery_supply(run_state, "remedy_kit")
+	var supply_id := _preferred_recovery_supply_id()
+	var result: Dictionary = DungeonStateModel.use_bandage(run_state, supply_id) if supply_id == "bandage" else DungeonStateModel.use_recovery_supply(run_state, supply_id)
 	if result["status"] == "accepted":
 		run_state = result["state"]
 		if is_inside_tree():
 			_run_session().set_dungeon_run(dungeon, run_state)
 		last_feedback = str(result["event"].get("message", "Recovery used."))
 	else:
-		last_feedback = "Cannot use remedy: %s." % result["rejection"]
+		last_feedback = "Cannot use %s: %s." % [_supply_display_name(supply_id), result["rejection"]]
+	_refresh_room_styles()
+	_update_detail()
+
+
+func _use_camp() -> void:
+	var result: Dictionary = DungeonStateModel.use_camp(run_state, "camping_kit")
+	if result["status"] == "accepted":
+		run_state = result["state"]
+		if is_inside_tree():
+			_run_session().set_dungeon_run(dungeon, run_state)
+		last_feedback = str(result["event"].get("message", "Camp used."))
+	else:
+		last_feedback = "Cannot camp: %s." % result["rejection"]
 	_refresh_room_styles()
 	_update_detail()
 
 
 func _reset_expedition() -> void:
+	if _run_session().managed_run:
+		return
 	_run_session().clear()
 	dungeon = _dungeon_data_for_entry_payload()
 	selected_supply_loadout = DungeonStateModel.default_supply_loadout(dungeon)
@@ -1231,13 +1408,19 @@ func _resolve_pending_corridor_hazard(choice_id: String) -> void:
 	var result: Dictionary = DungeonStateModel.resolve_corridor_hazard_choice(dungeon, run_state, choice_id)
 	if result["status"] == "accepted":
 		run_state = result["state"]
-		_run_session().set_dungeon_run(dungeon, run_state)
+		if is_inside_tree():
+			_run_session().set_dungeon_run(dungeon, run_state)
 		selected_room_id = str(run_state["current_room_id"])
 		last_feedback = _movement_feedback(result, selected_room_id)
+	elif result["rejection"] == "hazard_blocked":
+		run_state = result["state"]
+		if is_inside_tree():
+			_run_session().set_dungeon_run(dungeon, run_state)
+		selected_room_id = str(run_state["current_room_id"])
+		last_feedback = str(result.get("event", {}).get("message", "The passage remains blocked."))
 	else:
 		last_feedback = "Cannot resolve corridor event: %s." % result["rejection"]
-	if corridor_event_panel != null:
-		corridor_event_panel.hide()
+	_refresh_pending_event_popup()
 	_refresh_room_styles()
 	_update_detail()
 
@@ -1251,8 +1434,7 @@ func _resolve_pending_room_event(choice_id: String) -> void:
 		last_feedback = "Room event resolved: %s." % str(result["event"].get("outcome_id", "resolved"))
 	else:
 		last_feedback = "Cannot resolve room event: %s." % result["rejection"]
-	if corridor_event_panel != null:
-		corridor_event_panel.hide()
+	_refresh_pending_event_popup()
 	_refresh_room_styles()
 	_update_detail()
 
@@ -1284,6 +1466,41 @@ func _apply_debug_combat_result(result: String) -> void:
 	_update_detail()
 
 
+func _retreat_to_world() -> void:
+	if not _run_session().managed_run:
+		return
+	if _run_session().finish_run(dungeon, run_state, "retreated"):
+		run_state = _run_session().dungeon_state.duplicate(true)
+		_open_world()
+	else:
+		last_feedback = _run_session().last_feedback
+		_update_detail()
+
+
+func _open_world() -> void:
+	var session := _run_session()
+	if session.managed_run:
+		if bool(run_state.get("completed", false)):
+			var campaign := get_node("/root/CampaignSession")
+			if not campaign.settle(session.pending_world_return_payload):
+				last_feedback = campaign.last_feedback
+				_update_detail()
+				return
+			session.clear()
+		else:
+			if not session.checkpoint_campaign():
+				last_feedback = session.last_feedback
+				_update_detail()
+				return
+	elif expedition_started and not bool(run_state.get("completed", false)):
+		last_feedback = "Finish or reset this sandbox before opening the campaign."
+		_update_detail()
+		return
+	else:
+		session.clear()
+	get_tree().change_scene_to_file("res://scenes/app/App.tscn")
+
+
 func _refresh_room_styles() -> void:
 	for room: Dictionary in dungeon.get("rooms", []):
 		var panel: PanelContainer = room_nodes.get(room["id"])
@@ -1292,6 +1509,10 @@ func _refresh_room_styles() -> void:
 
 
 func _update_detail() -> void:
+	if is_inside_tree() and not expedition_started and _run_session().town_preparation:
+		var campaign := get_node("/root/CampaignSession")
+		for key in ["party_effects", "target_effects", "active_debuffs"]:
+			run_state[key] = campaign.state.effects.get(key, {}).duplicate(true)
 	if detail_label == null or panel_title == null or status_label == null or progress_label == null:
 		return
 	var room: Dictionary = _rooms_by_id().get(selected_room_id, {})
@@ -1325,14 +1546,19 @@ func _detail_lines_for_room(room: Dictionary) -> PackedStringArray:
 		"State: %s" % _room_state_summary(room_id),
 		"Position: %s" % _room_position_summary(room),
 		"Content: %s" % _content_summary(room),
-		"Light: %s %s/%s | Oil: %s | Pickaxe: %s | Trap Tools: %s | Remedy: %s" % [
+		"Light: %s %s/%s | Torch: %s | Pickaxe: %s | Trap Tools: %s | Bandage: %s" % [
 			str(run_state.get("light_state", "bright")),
 			int(run_state.get("light_level", 0)),
 			int(run_state.get("max_light_level", 0)),
 			DungeonStateModel.supply_count(run_state, "lamp_oil"),
 			DungeonStateModel.supply_count(run_state, "pickaxe"),
 			DungeonStateModel.supply_count(run_state, "trap_tools"),
-			DungeonStateModel.supply_count(run_state, "remedy_kit"),
+			DungeonStateModel.supply_count(run_state, "bandage"),
+		],
+		"Camping Kit: %s | Food: %s | %s" % [
+			DungeonStateModel.supply_count(run_state, "camping_kit"),
+			DungeonStateModel.supply_count(run_state, "food"),
+			_loadout_packing_text(run_state.get("selected_supply_loadout", {})),
 		],
 		"Exits: %s" % _state_list_or_none(_connected_room_labels(room_id)),
 	]
@@ -1391,6 +1617,7 @@ func _refresh_action_buttons() -> void:
 	var has_finish := not blocked_by_event and _current_room_can_finish_expedition()
 	var has_oil := not blocked_by_event and _can_use_lamp_oil()
 	var has_recovery := not blocked_by_event and _can_use_recovery_supply()
+	var has_camp := not blocked_by_event and _can_use_camp()
 	action_row.visible = true
 	start_combat_button.disabled = not has_pending
 	start_combat_button.visible = has_pending
@@ -1402,8 +1629,15 @@ func _refresh_action_buttons() -> void:
 	oil_button.visible = has_oil
 	recovery_button.disabled = not has_recovery
 	recovery_button.visible = has_recovery
+	recovery_button.text = "Use %s" % _supply_display_name(_preferred_recovery_supply_id()) if has_recovery else "Use Recovery"
+	camp_button.disabled = not has_camp
+	camp_button.visible = has_camp
 	reset_button.disabled = false
 	reset_button.visible = true
+	if is_inside_tree() and _run_session().managed_run:
+		reset_button.visible = false
+	if retreat_button != null:
+		retreat_button.visible = is_inside_tree() and _run_session().managed_run and not bool(run_state.get("completed", false)) and bool(dungeon.get("exit_rules", {}).get("allow_retreat", false)) and not has_pending and not blocked_by_event
 
 
 func _refresh_exit_buttons() -> void:
@@ -1432,6 +1666,7 @@ func _refresh_exit_buttons() -> void:
 			_try_enter_room(target_room_id)
 		)
 		exit_row.add_child(button)
+		if expedition_chrome!=null: expedition_chrome.style_button(button)
 
 
 func _connected_room_labels(room_id: String) -> Array[String]:
@@ -1540,9 +1775,7 @@ func _show_corridor_hazard_popup(prompt: Dictionary) -> void:
 		button.add_theme_stylebox_override("normal", _button_style(Color(0.12, 0.13, 0.10), Color(0.62, 0.48, 0.24)))
 		button.add_theme_stylebox_override("hover", _button_style(Color(0.18, 0.18, 0.12), Color(0.90, 0.68, 0.30)))
 		button.add_theme_stylebox_override("pressed", _button_style(Color(0.08, 0.09, 0.07), Color(0.72, 0.50, 0.20)))
-		button.pressed.connect(func() -> void:
-			_resolve_pending_corridor_hazard(action)
-		)
+		button.pressed.connect(_resolve_pending_corridor_hazard.bind(action))
 		corridor_event_choice_row.add_child(button)
 		corridor_hazard_choice_buttons.append(button)
 	_show_event_popup_panel()
@@ -1574,12 +1807,24 @@ func _show_room_event_popup(prompt: Dictionary) -> void:
 		button.add_theme_stylebox_override("normal", _button_style(Color(0.12, 0.13, 0.10), Color(0.62, 0.48, 0.24)))
 		button.add_theme_stylebox_override("hover", _button_style(Color(0.18, 0.18, 0.12), Color(0.90, 0.68, 0.30)))
 		button.add_theme_stylebox_override("pressed", _button_style(Color(0.08, 0.09, 0.07), Color(0.72, 0.50, 0.20)))
-		button.pressed.connect(func() -> void:
-			_resolve_pending_room_event(action)
-		)
+		button.pressed.connect(_resolve_pending_room_event.bind(action))
 		corridor_event_choice_row.add_child(button)
 		corridor_hazard_choice_buttons.append(button)
 	_show_event_popup_panel()
+
+
+func _refresh_pending_event_popup() -> void:
+	if corridor_event_panel == null:
+		return
+	var pending_hazard: Dictionary = run_state.get("pending_corridor_hazard", {})
+	if not pending_hazard.is_empty():
+		_show_corridor_hazard_popup(pending_hazard)
+		return
+	var pending_room_event: Dictionary = run_state.get("pending_room_event", {})
+	if not pending_room_event.is_empty():
+		_show_room_event_popup(pending_room_event)
+		return
+	corridor_event_panel.hide()
 
 
 func _room_event_popup_text(prompt: Dictionary) -> String:
@@ -1736,8 +1981,32 @@ func _rooms_by_id() -> Dictionary:
 
 
 func _room_screen_position(room: Dictionary) -> Vector2:
+	return graph_origin + _room_map_position(room) * graph_step
+
+
+func _room_map_position(room: Dictionary) -> Vector2:
 	var position: Dictionary = room.get("position", {})
-	return graph_origin + Vector2(float(position.get("x", 0)), float(position.get("y", 0))) * graph_step
+	var raw_position := Vector2(float(position.get("x", 0)), float(position.get("y", 0)))
+	if graph_axis_swap:
+		return Vector2(raw_position.y, raw_position.x)
+	return raw_position
+
+
+func _display_room_position_span(axis: String) -> float:
+	var first := true
+	var minimum := 0.0
+	var maximum := 0.0
+	for room: Dictionary in dungeon.get("rooms", []):
+		var map_position := _room_map_position(room)
+		var value := map_position.x if axis == "x" else map_position.y
+		if first:
+			minimum = value
+			maximum = value
+			first = false
+		else:
+			minimum = minf(minimum, value)
+			maximum = maxf(maximum, value)
+	return maximum - minimum
 
 
 func _content_summary(room: Dictionary) -> String:
@@ -1775,6 +2044,16 @@ func _room_state_summary(room_id: String) -> String:
 	return "unexplored"
 
 
+func _map_legend_lines() -> PackedStringArray:
+	return PackedStringArray([
+		"[*] entrance",
+		"[ ] empty",
+		"[$] treasure",
+		"[!] combat",
+		"[>] exit",
+	])
+
+
 func _reward_summary(room: Dictionary) -> String:
 	var room_id := str(room.get("id", ""))
 	for content: Dictionary in room.get("content", []):
@@ -1794,8 +2073,22 @@ func _reward_summary(room: Dictionary) -> String:
 
 
 func _start_expedition_with_loadout() -> void:
+	if dungeon.get("rooms", []).is_empty():
+		last_feedback = "Cannot start: no accepted dungeon layout is available."
+		if status_label != null:
+			status_label.text = last_feedback
+		return
 	selected_supply_loadout = DungeonStateModel.clamp_supply_loadout(dungeon, selected_supply_loadout)
 	run_state = DungeonStateModel.initial_state(dungeon, selected_supply_loadout)
+	if is_inside_tree() and _run_session().town_preparation:
+		var campaign := get_node("/root/CampaignSession")
+		if not campaign.begin_run(dungeon, run_state):
+			last_feedback = campaign.last_feedback
+			status_label.text = last_feedback
+			return
+		run_state = campaign.state.active_run.state.duplicate(true)
+		_run_session().managed_run = true
+		_run_session().town_preparation = false
 	if is_inside_tree():
 		_run_session().set_dungeon_run(dungeon, run_state)
 	expedition_started = true
@@ -1813,7 +2106,7 @@ func _adjust_loadout_supply(supply_id: String, delta: int) -> void:
 		selected_supply_loadout = DungeonStateModel.default_supply_loadout(dungeon)
 	var next_loadout := selected_supply_loadout.duplicate(true)
 	next_loadout[supply_id] = int(next_loadout.get(supply_id, 0)) + delta
-	selected_supply_loadout = DungeonStateModel.clamp_supply_loadout(dungeon, next_loadout)
+	selected_supply_loadout = DungeonStateModel.clamp_supply_loadout(dungeon, next_loadout, supply_id)
 	run_state = DungeonStateModel.initial_state(dungeon, selected_supply_loadout)
 	selected_room_id = str(run_state.get("current_room_id", dungeon.get("start_room_id", "")))
 	if detail_label != null:
@@ -1828,7 +2121,11 @@ func _refresh_loadout_panel() -> void:
 	if selected_supply_loadout.is_empty():
 		selected_supply_loadout = DungeonStateModel.default_supply_loadout(dungeon)
 	if loadout_summary_label != null:
-		loadout_summary_label.text = "Source: %s\nSelected: %s" % [_source_display_name(dungeon_source), _loadout_summary_text(selected_supply_loadout)]
+		loadout_summary_label.text = "Source: %s\nSelected: %s\n%s" % [
+			_source_display_name(dungeon_source),
+			_loadout_summary_text(selected_supply_loadout),
+			_loadout_packing_text(selected_supply_loadout),
+		]
 	if generator_summary_label != null:
 		generator_summary_label.text = _generator_summary_text()
 	if source_toggle_button != null:
@@ -1845,13 +2142,20 @@ func _refresh_loadout_panel() -> void:
 		var value_label: Label = row.get("value_label", null)
 		if value_label != null:
 			value_label.text = str(value)
+			if is_inside_tree() and _run_session().town_preparation:
+				value_label.tooltip_text = "Owned in Ravenford: %s" % get_node("/root/CampaignSession").state.supplies.get(supply_id, 0)
 		var option: Dictionary = options.get(supply_id, {"min": 0, "max": value})
 		var minus_button: Button = row.get("minus_button", null)
 		if minus_button != null:
 			minus_button.disabled = value <= int(option.get("min", 0))
 		var plus_button: Button = row.get("plus_button", null)
 		if plus_button != null:
-			plus_button.disabled = value >= int(option.get("max", value))
+			var packing_summary := DungeonStateModel.loadout_packing_summary(dungeon, selected_supply_loadout)
+			var capacity := int(packing_summary.get("capacity", 0))
+			var remaining := int(packing_summary.get("remaining", 0))
+			var cost := DungeonStateModel.supply_packing_cost(dungeon, supply_id)
+			plus_button.disabled = value >= int(option.get("max", value)) or (capacity > 0 and remaining < cost)
+	if expedition_chrome!=null: expedition_chrome.refresh(self)
 
 
 func _loadout_pending() -> bool:
@@ -1866,7 +2170,7 @@ func _set_dungeon_source(next_source: String) -> void:
 	if not _loadout_pending():
 		return
 	if next_source == DUNGEON_SOURCE_GENERATED:
-		entry_payload = DungeonEntrySelection.generated_payload(_new_generated_seed(), generated_dungeon_difficulty)
+		entry_payload = DungeonEntrySelection.generated_payload(_new_generated_seed(), generated_dungeon_difficulty, generated_profile_id)
 	else:
 		entry_payload = DungeonEntrySelection.authored_payload()
 	_apply_entry_payload_fields()
@@ -1895,7 +2199,8 @@ func _reroll_generated_dungeon() -> void:
 	var previous_seed := generated_dungeon_seed
 	entry_payload = DungeonEntrySelection.generated_payload(
 		(previous_seed % 999999) + 1 if previous_seed > 0 else _new_generated_seed(),
-		generated_dungeon_difficulty
+		generated_dungeon_difficulty,
+		generated_profile_id
 	)
 	_apply_entry_payload_fields()
 	dungeon = _dungeon_data_for_entry_payload()
@@ -1921,6 +2226,7 @@ func _set_generated_difficulty(difficulty: int) -> void:
 	if not _loadout_pending():
 		return
 	generated_dungeon_difficulty = clampi(difficulty, 1, 3)
+	generated_profile_id = str(DungeonStateModel.generated_dungeon_profile("", generated_dungeon_difficulty).get("id", generated_profile_id))
 	if dungeon_source != DUNGEON_SOURCE_GENERATED:
 		entry_payload = DungeonEntrySelection.normalize_payload({
 			"source": dungeon_source,
@@ -1930,7 +2236,7 @@ func _set_generated_difficulty(difficulty: int) -> void:
 		return
 	if generated_dungeon_seed == 0:
 		generated_dungeon_seed = _new_generated_seed()
-	entry_payload = DungeonEntrySelection.generated_payload(generated_dungeon_seed, generated_dungeon_difficulty)
+	entry_payload = DungeonEntrySelection.generated_payload(generated_dungeon_seed, generated_dungeon_difficulty, generated_profile_id)
 	_apply_entry_payload_fields()
 	dungeon = _dungeon_data_for_entry_payload()
 	_recalculate_graph_transform()
@@ -1960,7 +2266,7 @@ func _dungeon_data_for_source(source: String) -> Dictionary:
 	if source == DUNGEON_SOURCE_GENERATED:
 		if generated_dungeon_seed == 0:
 			generated_dungeon_seed = _new_generated_seed()
-		entry_payload = DungeonEntrySelection.generated_payload(generated_dungeon_seed, generated_dungeon_difficulty)
+		entry_payload = DungeonEntrySelection.generated_payload(generated_dungeon_seed, generated_dungeon_difficulty, generated_profile_id)
 	else:
 		entry_payload = DungeonEntrySelection.authored_payload()
 	_apply_entry_payload_fields()
@@ -1972,6 +2278,7 @@ func _apply_entry_payload_fields() -> void:
 	dungeon_source = str(entry_payload.get("source", DUNGEON_SOURCE_AUTHORED))
 	generated_dungeon_seed = int(entry_payload.get("generated_seed", 0))
 	generated_dungeon_difficulty = int(entry_payload.get("generated_difficulty", DEFAULT_GENERATED_DUNGEON_DIFFICULTY))
+	generated_profile_id = str(entry_payload.get("generated_profile", DungeonEntrySelection.DEFAULT_GENERATED_PROFILE_ID))
 
 
 func _source_for_dungeon(next_dungeon: Dictionary) -> String:
@@ -1984,7 +2291,7 @@ func _other_dungeon_source() -> String:
 
 func _source_display_name(source: String) -> String:
 	if source == DUNGEON_SOURCE_GENERATED:
-		return DungeonEntrySelection.display_name(DungeonEntrySelection.generated_payload(maxi(1, generated_dungeon_seed), generated_dungeon_difficulty)) if generated_dungeon_seed > 0 else "Generated Draft"
+		return DungeonEntrySelection.display_name(DungeonEntrySelection.generated_payload(maxi(1, generated_dungeon_seed), generated_dungeon_difficulty, generated_profile_id)) if generated_dungeon_seed > 0 else "Generated Draft"
 	return DungeonEntrySelection.display_name(DungeonEntrySelection.authored_payload())
 
 
@@ -2006,7 +2313,9 @@ func _generator_summary_text() -> String:
 	var corridor_count: int = dungeon.get("corridors", []).size()
 	var hazard_count := _generated_hazard_count(dungeon)
 	if dungeon_source == DUNGEON_SOURCE_GENERATED:
-		return "Generated: D%s | Seed %s | Rooms %s | Corridors %s | Hazards %s" % [
+		var profile: Dictionary = dungeon.get("generated_profile", {})
+		return "Generated: %s | D%s | Seed %s | Rooms %s | Corridors %s | Hazards %s" % [
+			str(profile.get("display_name", "Profile")),
 			generated_dungeon_difficulty,
 			generated_dungeon_seed,
 			room_count,
@@ -2049,16 +2358,34 @@ func _loadout_summary_text(loadout: Dictionary) -> String:
 	return ", ".join(labels)
 
 
+func _loadout_packing_text(loadout: Dictionary) -> String:
+	var summary := DungeonStateModel.loadout_packing_summary(dungeon, loadout)
+	if int(summary.get("capacity", 0)) <= 0:
+		return "Packing: unlimited"
+	return "Packing: %s/%s points, %s left" % [
+		int(summary.get("used", 0)),
+		int(summary.get("capacity", 0)),
+		int(summary.get("remaining", 0)),
+	]
+
+
 func _supply_display_name(supply_id: String) -> String:
+	var option: Dictionary = dungeon.get("supply_loadout_options", {}).get(supply_id, {})
+	if str(option.get("label", "")) != "":
+		return str(option.get("label", ""))
 	match supply_id:
 		"lamp_oil":
-			return "Oil"
+			return "Torch"
 		"pickaxe":
 			return "Pickaxe"
+		"bandage":
+			return "Bandage"
 		"trap_tools":
 			return "Trap Tools"
-		"remedy_kit":
-			return "Remedy"
+		"camping_kit":
+			return "Camping Kit"
+		"food":
+			return "Food"
 		_:
 			return supply_id.capitalize()
 
@@ -2091,10 +2418,15 @@ func _status_summary() -> String:
 
 
 func _refresh_presentation_chrome() -> void:
+	if expedition_chrome!=null: expedition_chrome.refresh(self)
 	if route_state_label != null:
 		route_state_label.text = _route_state_text()
 	if party_log_label != null:
 		party_log_label.text = _party_log_text()
+	for hero: Dictionary in _party_members_for_ui():
+		var unit_id := str(hero.get("combat_unit_id", ""))
+		if party_hp_labels.has(unit_id):
+			party_cards[unit_id].set_hp(DungeonStateModel.party_member_hp(run_state, unit_id))
 	if resource_tile_labels.is_empty():
 		return
 	var tile_texts := _resource_tile_texts()
@@ -2102,27 +2434,75 @@ func _refresh_presentation_chrome() -> void:
 		var label: Label = resource_tile_labels.get(tile_id, null)
 		if label != null:
 			label.text = str(tile_texts.get(tile_id, ""))
+		var tile: Control = resource_tiles.get(tile_id, null)
+		if tile != null:
+			tile.tooltip_text = _resource_tooltip_text(tile_id)
 
 
 func _resource_tile_texts() -> Dictionary:
+	return {
+		"torch": str(_resource_tile_count("torch")),
+		"pickaxe": str(_resource_tile_count("pickaxe")),
+		"bandage": str(_resource_tile_count("bandage")),
+		"trap_tools": str(_resource_tile_count("trap_tools")),
+		"camping_kit": str(_resource_tile_count("camping_kit")),
+		"food": str(_resource_tile_count("food")),
+	}
+
+
+func _resource_tile_ids() -> Array[String]:
+	return ["torch", "pickaxe", "trap_tools", "bandage", "camping_kit", "food"]
+
+
+func _resource_tile_count(tile_id: String) -> int:
+	var supply_id := _resource_tile_supply_id(tile_id)
+	if supply_id == "":
+		return int(run_state.get("light_level", 0))
 	var loadout := selected_supply_loadout
 	var state_supplies: Dictionary = run_state.get("supplies", {})
-	var oil := int(loadout.get("lamp_oil", state_supplies.get("lamp_oil", 0))) if _loadout_pending() else DungeonStateModel.supply_count(run_state, "lamp_oil")
-	var pickaxe := int(loadout.get("pickaxe", state_supplies.get("pickaxe", 0))) if _loadout_pending() else DungeonStateModel.supply_count(run_state, "pickaxe")
-	var trap_tools := int(loadout.get("trap_tools", state_supplies.get("trap_tools", 0))) if _loadout_pending() else DungeonStateModel.supply_count(run_state, "trap_tools")
-	var remedy_kit := int(loadout.get("remedy_kit", state_supplies.get("remedy_kit", 0))) if _loadout_pending() else DungeonStateModel.supply_count(run_state, "remedy_kit")
-	return {
-		"light": "Light %s/%s %s" % [
-			int(run_state.get("light_level", 0)),
-			int(run_state.get("max_light_level", 0)),
-			str(run_state.get("light_state", "")),
-		],
-		"oil": "Oil %s" % oil,
-		"pickaxe": "Pickaxe %s" % pickaxe,
-		"trap_tools": "Trap Tools %s" % trap_tools,
-		"remedy_kit": "Remedy %s" % remedy_kit,
-		"effects": "Effects %s" % _active_debuff_summary_text(),
-	}
+	return int(loadout.get(supply_id, state_supplies.get(supply_id, 0))) if _loadout_pending() else DungeonStateModel.supply_count(run_state, supply_id)
+
+
+func _resource_tile_supply_id(tile_id: String) -> String:
+	match tile_id:
+		"torch":
+			return "lamp_oil"
+		"pickaxe":
+			return "pickaxe"
+		"bandage":
+			return "bandage"
+		"trap_tools":
+			return "trap_tools"
+		"camping_kit":
+			return "camping_kit"
+		"food":
+			return "food"
+		_:
+			return ""
+
+
+func _resource_tooltip_text(tile_id: String) -> String:
+	var count := _resource_tile_count(tile_id)
+	match tile_id:
+		"torch":
+			return "Torch oil: %s carried. Light: %s/%s %s." % [
+				count,
+				int(run_state.get("light_level", 0)),
+				int(run_state.get("max_light_level", 0)),
+				str(run_state.get("light_state", "")),
+			]
+		"pickaxe":
+			return "Pickaxe: %s carried. Clears rubble and cave-ins." % count
+		"bandage":
+			return "Bandages: %s carried. Patches one injury." % count
+		"trap_tools":
+			return "Trap tools: %s carried. Disarms corridor traps." % count
+		"camping_kit":
+			return "Camping kit: %s carried. Enables camp recovery with food." % count
+		"food":
+			return "Food: %s carried. Spent when the party camps." % count
+		_:
+			return ""
 
 
 func _route_state_text() -> String:
@@ -2156,7 +2536,7 @@ func _progress_summary() -> String:
 	var visited_count: int = run_state.get("visited_room_ids", []).size()
 	var cleared_count: int = run_state.get("cleared_room_ids", []).size()
 	var totals := DungeonStateModel.reward_totals(run_state)
-	return "Rooms visited %s/%s | Secured %s/%s | Light %s/%s %s | Oil %s | Pickaxe %s | Trap Tools %s | Effects %s | Gold %s | Items %s | XP %s" % [
+	return "Rooms visited %s/%s | Secured %s/%s | Light %s/%s %s | Torch %s | Pickaxe %s | Trap Tools %s | Bandage %s | Camp %s | Food %s | Effects %s | Gold %s | Items %s | XP %s" % [
 		visited_count,
 		room_count,
 		cleared_count,
@@ -2167,6 +2547,9 @@ func _progress_summary() -> String:
 		DungeonStateModel.supply_count(run_state, "lamp_oil"),
 		DungeonStateModel.supply_count(run_state, "pickaxe"),
 		DungeonStateModel.supply_count(run_state, "trap_tools"),
+		DungeonStateModel.supply_count(run_state, "bandage"),
+		DungeonStateModel.supply_count(run_state, "camping_kit"),
+		DungeonStateModel.supply_count(run_state, "food"),
 		_active_debuff_summary_text(),
 		int(totals.get("gold", 0)),
 		totals.get("items", []).size(),
@@ -2211,8 +2594,26 @@ func _can_use_lamp_oil() -> bool:
 func _can_use_recovery_supply() -> bool:
 	if bool(run_state.get("completed", false)):
 		return false
-	if DungeonStateModel.supply_count(run_state, "remedy_kit") <= 0:
+	return _preferred_recovery_supply_id() != ""
+
+
+func _preferred_recovery_supply_id() -> String:
+	if not DungeonStateModel.active_debuff_summary(run_state).is_empty() and DungeonStateModel.supply_count(run_state, "antidote") > 0:
+		return "antidote"
+	if int(run_state.get("party_effects", {}).get("hp_loss", 0)) > 0 and DungeonStateModel.supply_count(run_state, "bandage") > 0:
+		return "bandage"
+	return ""
+
+
+func _can_use_camp() -> bool:
+	if bool(run_state.get("completed", false)):
 		return false
+	if DungeonStateModel.supply_count(run_state, "camping_kit") <= 0:
+		return false
+	if DungeonStateModel.supply_count(run_state, "food") <= 0:
+		return false
+	if int(run_state.get("party_effects", {}).get("hp_loss", 0)) > 0:
+		return true
 	return not DungeonStateModel.active_debuff_summary(run_state).is_empty()
 
 
@@ -2244,19 +2645,7 @@ func _button_style(bg_color: Color, border_color: Color) -> StyleBoxFlat:
 
 
 func _fantasy_panel_style(bg_color: Color, border_color: Color, border_width: int, radius: int) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = bg_color
-	style.border_color = border_color
-	style.set_border_width_all(border_width)
-	style.corner_radius_top_left = radius
-	style.corner_radius_top_right = radius
-	style.corner_radius_bottom_left = radius
-	style.corner_radius_bottom_right = radius
-	style.content_margin_left = 10
-	style.content_margin_top = 10
-	style.content_margin_right = 10
-	style.content_margin_bottom = 10
-	return style
+	return PixelSkin.flat_frame(bg_color, border_color, border_width, radius)
 
 
 func _dungeon_ui_texture(path: String) -> Texture2D:
@@ -2264,30 +2653,13 @@ func _dungeon_ui_texture(path: String) -> Texture2D:
 		return null
 	if dungeon_ui_texture_cache.has(path):
 		return dungeon_ui_texture_cache[path]
-	var texture := load(path) as Texture2D
+	var texture := AssetCatalog.texture(path)
 	dungeon_ui_texture_cache[path] = texture
 	return texture
 
 
 func _dungeon_ui_stylebox(path: String, texture_margins: Vector4, content_margins: Vector4, fallback: StyleBox) -> StyleBox:
-	var cache_key := "%s|%s|%s" % [path, texture_margins, content_margins]
-	if dungeon_ui_style_cache.has(cache_key):
-		return dungeon_ui_style_cache[cache_key]
-	var texture := _dungeon_ui_texture(path)
-	if texture == null:
-		return fallback
-	var style := StyleBoxTexture.new()
-	style.texture = texture
-	style.texture_margin_left = texture_margins.x
-	style.texture_margin_top = texture_margins.y
-	style.texture_margin_right = texture_margins.z
-	style.texture_margin_bottom = texture_margins.w
-	style.content_margin_left = content_margins.x
-	style.content_margin_top = content_margins.y
-	style.content_margin_right = content_margins.z
-	style.content_margin_bottom = content_margins.w
-	dungeon_ui_style_cache[cache_key] = style
-	return style
+	return pixel_skin.frame(path, texture_margins, content_margins, fallback)
 
 
 func _asset_index_path(prefix: String, index: int) -> String:
@@ -2297,14 +2669,18 @@ func _asset_index_path(prefix: String, index: int) -> String:
 func _resource_tile_frame_path(tile_id: String) -> String:
 	var index := 1
 	match tile_id:
-		"oil":
+		"torch":
 			index = 2
 		"pickaxe":
 			index = 3
-		"trap_tools":
+		"bandage":
 			index = 4
-		"remedy_kit":
+		"trap_tools":
 			index = 5
+		"camping_kit":
+			index = 5
+		"food":
+			index = 6
 		"effects":
 			index = 6
 	return _asset_index_path(DUNGEON_UI_TILE_PREFIX, index)
@@ -2312,35 +2688,48 @@ func _resource_tile_frame_path(tile_id: String) -> String:
 
 func _resource_icon_path(tile_id: String) -> String:
 	match tile_id:
-		"oil":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 1)
+		"torch":
+			return _dedicated_icon_path("icon_lamp_oil")
 		"pickaxe":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 2)
+			return _dedicated_icon_path("icon_pickaxe")
+		"bandage":
+			return _dedicated_icon_path("icon_bandage")
 		"trap_tools":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 3)
-		"remedy_kit":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 4)
+			return _dedicated_icon_path("icon_trap")
+		"camping_kit":
+			return _dedicated_icon_path("icon_camping_kit")
+		"food":
+			return _dedicated_icon_path("icon_food")
 		"effects":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 5)
+			return _dedicated_icon_path("icon_room_event")
 		_:
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 0)
+			return _dedicated_icon_path("icon_light_source")
 
 
 func _room_icon_path(room: Dictionary) -> String:
+	if room.has("locked_by_item_id"):
+		return _dedicated_icon_path("icon_locked_room")
 	var kind := str(room.get("kind", ""))
 	match kind:
 		"treasure":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 6)
+			return _dedicated_icon_path("icon_treasure")
 		"combat":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 7)
+			return _dedicated_icon_path("icon_combat_room")
 		"guarded_treasure":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 8)
+			return _dedicated_icon_path("icon_treasure")
 		"exit":
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 10)
+			return _dedicated_icon_path("icon_exit_room")
 		_:
 			if str(room.get("id", "")) == str(dungeon.get("start_room_id", "")):
-				return _asset_index_path(DUNGEON_ICON_PREFIX, 11)
-			return _asset_index_path(DUNGEON_ICON_PREFIX, 15)
+				return _dedicated_icon_path("icon_light_source")
+			for content: Dictionary in room.get("content", []):
+				if str(content.get("type", "")) == "room_event":
+					return _dedicated_icon_path("icon_room_event")
+			return _dedicated_icon_path("icon_light_source")
+
+
+func _dedicated_icon_path(icon_name: String) -> String:
+	return "%s%s.png" % [DUNGEON_DEDICATED_ICON_DIR, icon_name]
 
 
 func _room_frame_path(room_id: String, kind: String) -> String:
@@ -2380,6 +2769,13 @@ func _party_slot_bar_color(slot_index: int) -> Color:
 	return colors[slot_index % colors.size()]
 
 
+func _party_members_for_ui() -> Array:
+	var formation: Array = run_state.get("party_formation", [])
+	if formation.is_empty():
+		formation = PartyRoster.default_party_formation()
+	return PartyRoster.heroes_for_formation(formation)
+
+
 func _party_log_text() -> String:
 	if _loadout_pending():
 		return "Prepare the expedition loadout before entering the mine."
@@ -2413,6 +2809,7 @@ func _number_key_slot(event: InputEventKey) -> int:
 
 
 func _room_style(room_id: String, kind: String) -> StyleBox:
+	if expedition_chrome!=null: return expedition_chrome.room_style(self,room_id,kind)
 	var is_current: bool = room_id == str(run_state.get("current_room_id", ""))
 	var is_start: bool = room_id == str(dungeon.get("start_room_id", ""))
 	var is_visited: bool = DungeonStateModel.room_is_visited(run_state, room_id)

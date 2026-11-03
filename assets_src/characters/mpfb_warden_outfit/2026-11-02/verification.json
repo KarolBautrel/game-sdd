@@ -1,0 +1,383 @@
+{
+  "status": "TECHNICAL_PASS",
+  "art_acceptance": "AWAITING_USER_REVIEW",
+  "checks": 8906,
+  "triangles": 194738,
+  "source_bounds": [
+    [
+      -0.4224676489830017,
+      0.42953386902809143
+    ],
+    [
+      -0.24278581142425537,
+      0.2510608732700348
+    ],
+    [
+      0.00800000037997961,
+      1.8604687452316284
+    ]
+  ],
+  "head_identities": {
+    "MPFB_coherent_head_and_neck": "12f585f0ccc8c7702574e6e2eaa78b918016741620e79b2519fa84bf490a16d0",
+    "MPFB_eyes": "a897c68f21a2ac2fbbf49770fda6530d69618d4b69f6ecc217dbb75b1d55362a",
+    "MPFB_hair": "711f64d36c1b65e805e89529a19ce1ff6179b6436f92d6fa514d94e667347940",
+    "MPFB_eyebrows": "f933212368aa4534c643455e87b74623690a59d011dbb5c965e5301ffa71b103"
+  },
+  "strap_volume_m3": 7.662765985137274e-05,
+  "boot_reductions": {
+    "Smaller_fitted_boot_r": {
+      "width_ratio": 0.7733333187633089,
+      "length_ratio": 0.8243162169116345,
+      "height_ratio": 0.8709056115473347
+    },
+    "Smaller_fitted_boot_l": {
+      "width_ratio": 0.7733333187633089,
+      "length_ratio": 0.8243162169116345,
+      "height_ratio": 0.8709056115473347
+    }
+  },
+  "actual_fbx_reimport": true,
+  "maximum_fbx_bounds_drift_metres": 1.6391277313232422e-07,
+  "maps": {
+    "warden_outfit_albedo.png": [
+      2048,
+      2048
+    ],
+    "warden_outfit_roughness.png": [
+      2048,
+      2048
+    ],
+    "warden_outfit_metallic.png": [
+      2048,
+      2048
+    ],
+    "Jartur_mid_old_Slavic_Male_with_Genitals_and_Beard_lsdif_lighter.png": [
+      2048,
+      2048
+    ],
+    "brown_eye_02.png": [
+      1024,
+      1024
+    ],
+    "short01_diffuse.png": [
+      2048,
+      2048
+    ],
+    "eyebrow001.png": [
+      512,
+      512
+    ]
+  },
+  "renders": {
+    "before_boots.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        153,
+        97,
+        748,
+        899
+      ],
+      "mean_linear_rgb": 0.12146692583789277,
+      "intentionally_cropped": true
+    },
+    "belt.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        0,
+        0,
+        899,
+        899
+      ],
+      "mean_linear_rgb": 0.29059497509720655,
+      "intentionally_cropped": true
+    },
+    "boots.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        177,
+        106,
+        691,
+        899
+      ],
+      "mean_linear_rgb": 0.08956399982923456,
+      "intentionally_cropped": true
+    },
+    "changed_light.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        86,
+        0,
+        899,
+        899
+      ],
+      "mean_linear_rgb": 0.1735231061438149,
+      "intentionally_cropped": true
+    },
+    "face.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        18,
+        0,
+        867,
+        745
+      ],
+      "mean_linear_rgb": 0.42263658193091447,
+      "intentionally_cropped": true
+    },
+    "fbx_belt.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        0,
+        0,
+        899,
+        899
+      ],
+      "mean_linear_rgb": 0.29058618843442896,
+      "intentionally_cropped": true
+    },
+    "fbx_body.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        339,
+        132,
+        612,
+        742
+      ],
+      "mean_linear_rgb": 0.20781491117086737,
+      "intentionally_cropped": false
+    },
+    "front.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        309,
+        137,
+        593,
+        743
+      ],
+      "mean_linear_rgb": 0.22386690099909975,
+      "intentionally_cropped": false
+    },
+    "geometry_belt.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        0,
+        0,
+        899,
+        899
+      ],
+      "mean_linear_rgb": 0.5108816172002437,
+      "intentionally_cropped": true
+    },
+    "geometry_body.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        339,
+        132,
+        612,
+        742
+      ],
+      "mean_linear_rgb": 0.45393507969050334,
+      "intentionally_cropped": false
+    },
+    "rear.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        306,
+        145,
+        590,
+        747
+      ],
+      "mean_linear_rgb": 0.23768463064027415,
+      "intentionally_cropped": false
+    },
+    "side.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        369,
+        134,
+        533,
+        742
+      ],
+      "mean_linear_rgb": 0.2481136758410242,
+      "intentionally_cropped": false
+    },
+    "source_body.png": {
+      "size": [
+        800,
+        800
+      ],
+      "alpha_bounds": [
+        301,
+        117,
+        544,
+        660
+      ],
+      "mean_linear_rgb": 0.20258786887702304,
+      "intentionally_cropped": false
+    },
+    "source_front.png": {
+      "size": [
+        800,
+        800
+      ],
+      "alpha_bounds": [
+        274,
+        122,
+        527,
+        660
+      ],
+      "mean_linear_rgb": 0.21802717639193248,
+      "intentionally_cropped": false
+    },
+    "tactical.png": {
+      "size": [
+        384,
+        384
+      ],
+      "alpha_bounds": [
+        158,
+        96,
+        240,
+        279
+      ],
+      "mean_linear_rgb": 0.20923712603517036,
+      "intentionally_cropped": false
+    },
+    "three_quarter.png": {
+      "size": [
+        900,
+        900
+      ],
+      "alpha_bounds": [
+        339,
+        132,
+        612,
+        742
+      ],
+      "mean_linear_rgb": 0.20786455191193795,
+      "intentionally_cropped": false
+    }
+  },
+  "audit": {
+    "profile": "render",
+    "eps": 0.00021,
+    "tol": 0.004196,
+    "gap": 0.02098,
+    "pass": true,
+    "errors": [],
+    "warnings": [
+      "Warden_modelled_outfit: 1 detached fragment (1.6% of its faces), nearest 0.0066 from the rest",
+      "MPFB_coherent_head_and_neck: not touching, 0.0066 from the nearest part",
+      "MPFB_eyes: not touching, 0.0066 from the nearest part",
+      "MPFB_hair: not touching, 0.0066 from the nearest part",
+      "MPFB_eyebrows: not touching, 0.0066 from the nearest part"
+    ],
+    "per_object": {
+      "Warden_modelled_outfit": {
+        "tris": 153308,
+        "parts": 104,
+        "errors": [],
+        "warnings": [
+          "Warden_modelled_outfit: 1 detached fragment (1.6% of its faces), nearest 0.0066 from the rest"
+        ]
+      },
+      "MPFB_coherent_head_and_neck": {
+        "tris": 35520,
+        "parts": 1,
+        "errors": [],
+        "warnings": [
+          "MPFB_coherent_head_and_neck: not touching, 0.0066 from the nearest part"
+        ]
+      },
+      "MPFB_eyes": {
+        "tris": 2040,
+        "parts": 4,
+        "errors": [],
+        "warnings": [
+          "MPFB_eyes: not touching, 0.0066 from the nearest part"
+        ]
+      },
+      "MPFB_hair": {
+        "tris": 3678,
+        "parts": 200,
+        "errors": [],
+        "warnings": [
+          "MPFB_hair: not touching, 0.0066 from the nearest part"
+        ]
+      },
+      "MPFB_eyebrows": {
+        "tris": 192,
+        "parts": 2,
+        "errors": [],
+        "warnings": [
+          "MPFB_eyebrows: not touching, 0.0066 from the nearest part"
+        ]
+      }
+    },
+    "skipped": []
+  },
+  "preserved": [
+    {
+      "package": "assets_src/characters/mpfb_warden/2026-11-02",
+      "files": 38
+    },
+    {
+      "package": "assets_src/characters/painted_candidates/2026-11-02",
+      "files": 101
+    },
+    {
+      "package": "assets_src/characters/surface_refinement/2026-11-02",
+      "files": 101
+    },
+    {
+      "package": "assets_src/characters/roster/manifest.json",
+      "files": 8223
+    },
+    {
+      "package": "assets_src/environment/manifest.json",
+      "files": 215
+    }
+  ],
+  "os_input_used": false,
+  "gameplay_tested": false,
+  "limits": [
+    "static source outfit, no rig/deformation proof",
+    "offline comps are not Godot captures"
+  ]
+}

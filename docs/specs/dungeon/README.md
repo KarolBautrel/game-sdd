@@ -4,7 +4,11 @@ Dungeon specs describe the exploration layer that connects authored rooms, corri
 
 ## Implemented Snapshot
 
-Dungeon mode is currently a playable debug-stage exploration loop. It can start from an authored Old Mine dungeon or a generated Old Mine draft, show the dungeon map, move through connected rooms, resolve corridor hazards and room events, enter combat, return from combat, claim rewards, finish the expedition, and produce a stable run-result payload for a future world-map return.
+Dungeon mode is a playable exploration loop. It can start from an authored or
+generated Old Mine, resolve events/combat/rewards, finish or retreat. The
+[world boundary](../world/001_campaign_boundary.md) adds Ravenford supplies,
+durable inventory/injuries, checkpoint/resume and single-application settlement.
+Direct DungeonDebug entry remains a free sandbox; F7 opens the campaign hub.
 
 The implemented foundation includes:
 
@@ -14,17 +18,27 @@ The implemented foundation includes:
 - a debug dungeon scene with preparation, source selection, generated seed/difficulty controls, map view, resource tray, event popups, room panels, numbered exits, combat entry, reward claiming, finish flow, and post-run summary;
 - reusable corridor hazard catalogues and weighted hazard pools;
 - reusable room event catalogues and weighted room event pools;
-- generated dungeon drafts selected from curated finite Old Mine templates with seed-driven hazard and room-event placement;
-- first expedition resources: light, lamp oil, pickaxe, trap tools, and remedy kit;
+- generated dungeon drafts selected from profile-aware curated finite Old Mine templates with seed-driven hazard and room-event placement;
+- generated dungeon combat rooms select presentation-ready combat encounters from validated dungeon/theme/profile pools;
+- current visible expedition resources: torch oil, pickaxe, trap tools, bandages, camping kit, and food;
+- expedition loadout capacity with packing points and carried-only supply candidates;
+- first camping action that consumes a camping kit and food, reduces accumulated HP loss, clears dungeon debuffs, and costs light;
+- dedicated pixel-art dungeon HUD icons for carried resources and core room markers;
+- first resource balance pass where bandages repair HP loss and generated profiles use tighter capacity by length;
+- generated dungeon is now the default debug entry and dungeon-launched combat uses a two-hero beta party: Warrior plus Archer;
+- shared party roster defines Bran the Warrior and Torin the Archer for dungeon HUD, combat launch, combat visuals, and combat text;
 - persistent dungeon effects/debuffs that can affect later traversal and combat launch metadata;
 - run inventory and loot resolution that separate temporary run loot from future durable inventory integration;
-- stable entry selection and run-result payload contracts for future world/global-map integration.
+- stable entry selection, generated profile selection, and run-result payload contracts for future world/global-map integration.
 
 ## Current Boundaries
 
 Dungeon mode owns exploration pressure inside the expedition: carried supplies, light, corridor hazards, room events, temporary run loot, persistent expedition effects, and combat handoff metadata.
 
-Dungeon mode does not own the wider supply economy. Buying, pricing, crafting, restocking, and long-term ownership of supplies belong to future town, world-map, and inventory systems. The next dungeon-facing supply step is loadout capacity: deciding how much of already-owned equipment the party carries into the dungeon.
+Dungeon mode does not own the wider supply economy. CampaignSession and Ravenford
+now own buying, prices and durable supplies through world001. Dungeon owns carried
+loadout capacity and in-expedition use. Crafting, broader inventory/equipment and
+world travel remain future systems; see [continuation](../../CONTINUE_HERE.md).
 
 Combat remains a separate domain. Dungeon can launch combat with context and consume combat results, but combat still owns tactical legality, turn resolution, damage, victory, and defeat.
 
@@ -76,6 +90,17 @@ Combat remains a separate domain. Dungeon can launch combat with context and con
 - `overview/033_room_event_system_v2.md`
 - `overview/034_room_event_outcomes_v2.md`
 - `overview/035_corridor_hazard_variety_v2.md`
+- `overview/036_expedition_loadout_capacity_v2.md`
+- `overview/037_recovery_and_camping_v1.md`
+- `overview/038_generated_dungeon_profiles_v1.md`
+- `overview/039_generated_template_pool_expansion_v1.md`
+- `overview/040_dungeon_combat_encounter_selection_v1.md`
+- `overview/041_resource_balance_pass_v1.md`
+- `overview/042_playable_generated_beta_party_v1.md`
+- `overview/043_party_roster_contract_v1.md`
+- `overview/044_large_d3_scrollable_dungeon_maps_v1.md`
+- `overview/045_beta_full_loop_qa_v1.md`
+- `overview/046_generation_quality_gates.md`
 
 ### Presentation
 
@@ -90,6 +115,7 @@ Combat remains a separate domain. Dungeon can launch combat with context and con
 - `presentation/014_dungeon_debug_generated_toggle_v1.md`
 - `presentation/015_dungeon_debug_generator_controls_v1.md`
 - `presentation/016_dungeon_room_event_presentation_v1.md`
+- `presentation/017_pixel_art_dungeon_ui_assets_v1.md`
 
 ## Executable Slices
 
@@ -135,6 +161,18 @@ Combat remains a separate domain. Dungeon can launch combat with context and con
 - `slices/040_room_event_system_v2.md`
 - `slices/041_room_event_outcomes_v2.md`
 - `slices/042_corridor_hazard_variety_v2.md`
+- `slices/043_expedition_loadout_capacity_v2.md`
+- `slices/044_recovery_and_camping_v1.md`
+- `slices/045_generated_dungeon_profiles_v1.md`
+- `slices/046_generated_template_pool_expansion_v1.md`
+- `slices/047_dungeon_combat_encounter_selection_v1.md`
+- `slices/048_pixel_art_dungeon_ui_assets_v1.md`
+- `slices/049_resource_balance_pass_v1.md`
+- `slices/050_playable_generated_beta_party_v1.md`
+- `slices/051_party_roster_contract_v1.md`
+- `slices/052_large_d3_scrollable_dungeon_maps_v1.md`
+- `slices/053_beta_full_loop_qa_v1.md`
+- `slices/054_generation_quality_gates.md`
 
 ## Milestones
 
@@ -142,8 +180,13 @@ Combat remains a separate domain. Dungeon can launch combat with context and con
 
 ## Current Status
 
-Dungeon mode has moved beyond a pure graph prototype into a debug-playable beta foundation. It has a data contract, deterministic state model, debug presentation, reusable hazard/event content, generated dungeon templates, combat handoff, run inventory, end-of-run result payloads, and the first resource-pressure systems.
+Dungeon mode has moved beyond a pure graph prototype into a debug-playable beta foundation. It has a data contract, deterministic state model, debug presentation, reusable hazard/event content, generated dungeon templates/profiles, combat handoff, run inventory, end-of-run result payloads, and the first resource-pressure systems.
 
-The current dungeon presentation has a first vertical slice: preparation panel, resource tray, framed map, hazard markers, legend, and player-facing route copy. Corridor hazards support reusable catalogue templates, weighted event pools through `hazard_pool_refs`, varied rubble/trap/darkness/noise/blockage families, a procedural corridor-plan helper, template-pool generated dungeon drafts, and a stable entry payload for authored/generated source selection. Room exploration has reusable room event catalogues, expanded room event families, room event history, supply-gated room choices, weighted room outcomes, room event pools, pending room-event choices, and debug popup presentation. The dungeon-combat session bridge returns readable post-combat feedback for normal victories, guarded reward victories, and defeats. Dungeon completion produces a stable run-result payload with claimed rewards, kept/lost loot resolution, persistent effects, and a next-scene return hook.
+The current dungeon presentation has a first vertical slice: preparation panel, packing-point loadout, resource tray, framed map, hazard markers, legend, and player-facing route copy. Corridor hazards support reusable catalogue templates, weighted event pools through `hazard_pool_refs`, varied rubble/trap/darkness/noise/blockage families, a procedural corridor-plan helper, template-pool generated dungeon drafts, and a stable entry payload for authored/generated/profile source selection. Room exploration has reusable room event catalogues, expanded room event families, room event history, supply-gated room choices, weighted room outcomes, room event pools, pending room-event choices, and debug popup presentation. The dungeon-combat session bridge returns readable post-combat feedback for normal victories, guarded reward victories, and defeats. Dungeon completion produces a stable run-result payload with claimed rewards, kept/lost loot resolution, persistent effects, and a next-scene return hook.
 
-The next planned dungeon-owned work is `Expedition Loadout Capacity V2`: making pre-dungeon packing choices matter without implementing town/world supply buying or pricing in dungeon mode.
+Playable Dungeon Beta, town/campaign integration and final source/exported
+acceptance passed in stages0..7. The generated default entry launches combat with
+Warrior plus Archer. All per-stage automated and actual play evidence is indexed
+in [QA reports](../../qa/README.md). Combat queue15..19/stages8..12 now have
+automated PASS and await accumulated actual play; see
+[continuation](../../CONTINUE_HERE.md) for current status and the live registry.

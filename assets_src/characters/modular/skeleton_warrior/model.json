@@ -1,0 +1,21 @@
+{
+  "id": "skeleton_warrior",
+  "resource": "res://assets/combat/models/skeleton_warrior.glb",
+  "channels": [
+    "body",
+    "boots_default",
+    "weapon_sword"
+  ],
+  "actions": {
+    "sword": {
+      "pose": "sword_pose",
+      "walk": "Walk_Loop",
+      "combat": "Sword_Attack",
+      "hit": "Hit_Chest",
+      "death": "Death01"
+    }
+  },
+  "default_weapon": "sword",
+  "hero": false,
+  "bones": 65
+}

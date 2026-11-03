@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="12" height="10" tilewidth="76" tileheight="76" infinite="0" nextlayerid="3" nextobjectid="4">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="12" height="10" tilewidth="76" tileheight="76" infinite="0" nextlayerid="4" nextobjectid="5">
  <properties>
   <property name="id" value="combat_test_clearing"/>
   <property name="engine_json" value="res://resources/data/maps/combat_test_clearing.json"/>
   <property name="purpose" value="combat scale and obstacle test"/>
+  <property name="terrain_theme" value="nature"/>
+  <property name="background_path" value="res://assets/combat/terrain/backgrounds/old_mine_meadow_01_deep_green.png"/>
  </properties>
  <tileset firstgid="1" source="../tilesets/combat_logic_tiles.tsx"/>
  <layer id="1" name="terrain" width="12" height="10">
@@ -24,5 +26,14 @@
   <object id="1" name="player_start" type="player" x="76" y="608" width="76" height="76"/>
   <object id="2" name="melee_enemy_start" type="enemy_melee" x="684" y="76" width="76" height="76"/>
   <object id="3" name="ranged_enemy_start" type="enemy_ranged" x="760" y="532" width="76" height="76"/>
+ </objectgroup>
+ <objectgroup id="3" name="decorations">
+  <object id="4" name="boulder" x="76" y="152">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"/>
+    <property name="kind" value="boulder"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
 </map>

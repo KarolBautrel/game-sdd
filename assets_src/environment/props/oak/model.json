@@ -1,0 +1,8 @@
+{
+  "id": "oak",
+  "pixels_per_metre": 100,
+  "camera_elevation": 18,
+  "triangles": 4876,
+  "uv": true,
+  "original": true
+}

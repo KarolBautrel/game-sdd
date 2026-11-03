@@ -1,0 +1,357 @@
+{
+  "status": "TECHNICAL_PASS",
+  "art_acceptance": "AWAITING_STYLE_CHOICE",
+  "checks": 8681,
+  "models": [
+    {
+      "id": "a_painterly_veteran",
+      "status": "PASS",
+      "checks": 81,
+      "triangles": 126322,
+      "source_part_count": 174,
+      "bounds": [
+        [
+          -0.6417111158370972,
+          0.6710418462753296
+        ],
+        [
+          -0.2104998230934143,
+          0.2541044354438782
+        ],
+        [
+          0.013999979943037033,
+          1.839067816734314
+        ]
+      ],
+      "uv": true,
+      "actual_fbx_reimport": true,
+      "textures": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\assets_src\\characters\\style_studies\\2026-11-02\\a_painterly_veteran\\textures\\a_painterly_veteran_albedo.png"
+      ],
+      "renders": [
+        {
+          "view": "front",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            244,
+            148,
+            665,
+            719
+          ],
+          "mean_linear_rgb": 0.2569
+        },
+        {
+          "view": "three_quarter",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            283,
+            140,
+            651,
+            720
+          ],
+          "mean_linear_rgb": 0.24191
+        },
+        {
+          "view": "side",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            382,
+            138,
+            531,
+            729
+          ],
+          "mean_linear_rgb": 0.32004
+        },
+        {
+          "view": "rear",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            234,
+            153,
+            655,
+            730
+          ],
+          "mean_linear_rgb": 0.39578
+        },
+        {
+          "view": "face",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            4,
+            0,
+            899,
+            764
+          ],
+          "mean_linear_rgb": 0.31116
+        },
+        {
+          "view": "tactical_100ppm",
+          "size": [
+            384,
+            384
+          ],
+          "alpha_bounds": [
+            140,
+            95,
+            254,
+            276
+          ],
+          "mean_linear_rgb": 0.24564
+        }
+      ]
+    },
+    {
+      "id": "b_ink_warden",
+      "status": "PASS",
+      "checks": 81,
+      "triangles": 122050,
+      "source_part_count": 128,
+      "bounds": [
+        [
+          -0.614341139793396,
+          0.6423418521881104
+        ],
+        [
+          -0.24530035257339478,
+          0.2541044354438782
+        ],
+        [
+          0.013999979943037033,
+          1.839067816734314
+        ]
+      ],
+      "uv": true,
+      "actual_fbx_reimport": true,
+      "textures": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\assets_src\\characters\\style_studies\\2026-11-02\\b_ink_warden\\textures\\b_ink_warden_albedo.png"
+      ],
+      "renders": [
+        {
+          "view": "front",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            252,
+            147,
+            657,
+            720
+          ],
+          "mean_linear_rgb": 0.26755
+        },
+        {
+          "view": "three_quarter",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            291,
+            140,
+            643,
+            721
+          ],
+          "mean_linear_rgb": 0.26974
+        },
+        {
+          "view": "side",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            370,
+            139,
+            532,
+            730
+          ],
+          "mean_linear_rgb": 0.13853
+        },
+        {
+          "view": "rear",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            242,
+            152,
+            647,
+            730
+          ],
+          "mean_linear_rgb": 0.11302
+        },
+        {
+          "view": "face",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            0,
+            0,
+            899,
+            768
+          ],
+          "mean_linear_rgb": 0.34179
+        },
+        {
+          "view": "tactical_100ppm",
+          "size": [
+            384,
+            384
+          ],
+          "alpha_bounds": [
+            142,
+            95,
+            252,
+            276
+          ],
+          "mean_linear_rgb": 0.27252
+        }
+      ]
+    },
+    {
+      "id": "c_heroic_miniature",
+      "status": "PASS",
+      "checks": 81,
+      "triangles": 130354,
+      "source_part_count": 128,
+      "bounds": [
+        [
+          -0.7072383165359497,
+          0.7643330693244934
+        ],
+        [
+          -0.24543049931526184,
+          0.2541044354438782
+        ],
+        [
+          0.013999979943037033,
+          1.8382389545440674
+        ]
+      ],
+      "uv": true,
+      "actual_fbx_reimport": true,
+      "textures": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\assets_src\\characters\\style_studies\\2026-11-02\\c_heroic_miniature\\textures\\c_heroic_miniature_albedo.png"
+      ],
+      "renders": [
+        {
+          "view": "front",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            222,
+            148,
+            695,
+            719
+          ],
+          "mean_linear_rgb": 0.30729
+        },
+        {
+          "view": "three_quarter",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            265,
+            139,
+            675,
+            720
+          ],
+          "mean_linear_rgb": 0.29409
+        },
+        {
+          "view": "side",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            371,
+            136,
+            531,
+            730
+          ],
+          "mean_linear_rgb": 0.34336
+        },
+        {
+          "view": "rear",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            204,
+            153,
+            677,
+            729
+          ],
+          "mean_linear_rgb": 0.42188
+        },
+        {
+          "view": "face",
+          "size": [
+            900,
+            900
+          ],
+          "alpha_bounds": [
+            0,
+            0,
+            899,
+            764
+          ],
+          "mean_linear_rgb": 0.37951
+        },
+        {
+          "view": "tactical_100ppm",
+          "size": [
+            384,
+            384
+          ],
+          "alpha_bounds": [
+            134,
+            95,
+            262,
+            276
+          ],
+          "mean_linear_rgb": 0.29808
+        }
+      ]
+    }
+  ],
+  "production_manifests": [
+    {
+      "manifest": "assets_src/characters/roster/manifest.json",
+      "files": 8223,
+      "status": "PASS"
+    },
+    {
+      "manifest": "assets_src/environment/manifest.json",
+      "files": 215,
+      "status": "PASS"
+    }
+  ],
+  "os_input_used": false,
+  "gameplay_tested": false
+}

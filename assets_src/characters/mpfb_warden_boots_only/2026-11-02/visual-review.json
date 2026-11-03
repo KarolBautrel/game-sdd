@@ -1,0 +1,19 @@
+{
+  "status": "OBSERVED_RESTORATION_AWAITING_USER",
+  "reviewer": "Codex",
+  "source_sha256": "9c06bf7b63b80ebf538eabc51168fbf6b1a704a1623e747708f3e7652fbfeeda",
+  "observations": [
+    "actual old painted armor/face/original stance restored",
+    "matched old/new footwear and whole-body board inspected",
+    "six-percent lower-foot reduction is modest; upper shaft and height preserved",
+    "actual imported FBX body inspected"
+  ],
+  "images": {
+    "renders/before_boots.png": "c0c242785e0b11014c2709b2564f121d5a9b79da0e4feef515f8ba0ce5dd4cb1",
+    "renders/boots.png": "b8b2530f016279b6d134af545467b4dbc1210896c7602c2ab2197c82d01fa5a9",
+    "renders/fbx_body.png": "81ae161f15aa2417de35a9ffd00ab3e804c7613adafc77e3818f1157741d5bdb",
+    "renders/tactical.png": "9a8181cba30a0486833c2124d191880d6fda07ecd6d5344a5a43ff03c4888142",
+    "renders/three_quarter.png": "50571eb3082bd7d40054d8685a01d48be16e8cfa424e44b35e7e7988d11fcab5"
+  },
+  "board_sha256": "548ae69eb192eb70d0354c158a08070c3e090396294f7381b173318c8260906a"
+}

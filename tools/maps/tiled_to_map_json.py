@@ -21,7 +21,7 @@ def _properties(element: ET.Element) -> dict[str, str]:
         return result
     for prop in properties.findall("property"):
         name = prop.get("name")
-        value = prop.get("value")
+        value = prop.get("value", prop.text or "")
         if name is not None and value is not None:
             result[name] = value
     return result
@@ -57,12 +57,28 @@ def _csv_values(layer: ET.Element) -> list[int]:
     return values
 
 
+def _object_cell(obj: ET.Element, size: int, width: int, height: int) -> tuple[int, int]:
+    if obj.get("gid") or float(obj.get("rotation", "0")) != 0:
+        raise ValueError("Use unrotated point/rectangle objects at top-left cell origins.")
+    px, py = float(obj.get("x", "0")), float(obj.get("y", "0"))
+    if px % size or py % size:
+        raise ValueError(f"Object {obj.get('name')} is not grid-aligned.")
+    x, y = int(px // size), int(py // size)
+    if not (0 <= x < width and 0 <= y < height):
+        raise ValueError(f"Object {obj.get('name')} out of bounds at {(x, y)}.")
+    return x, y
+
+
 def convert_tmx(tmx_path: Path) -> dict:
     map_root = ET.parse(tmx_path).getroot()
     width = int(map_root.get("width", "0"))
     height = int(map_root.get("height", "0"))
     tile_width = int(map_root.get("tilewidth", "0"))
     tile_height = int(map_root.get("tileheight", "0"))
+    if width < 1 or height < 1 or tile_width < 1:
+        raise ValueError("Map dimensions and tile size must be positive.")
+    if map_root.get("infinite", "0") != "0" or map_root.get("orientation") != "orthogonal":
+        raise ValueError("Only finite orthogonal maps are supported.")
     if tile_width != tile_height:
         raise ValueError("Only square map tiles are supported.")
 
@@ -96,20 +112,40 @@ def convert_tmx(tmx_path: Path) -> dict:
         tiles.append({"x": x, "y": y, "type": tile_type})
 
     spawns: list[dict] = []
+    decorations: list[dict] = []
+    spawn_ids: set[str] = set()
+    spawn_cells: set[tuple[int, int]] = set()
+    decor_cells: set[tuple[int, int]] = set()
     for objectgroup in map_root.findall("objectgroup"):
-        if objectgroup.get("name") != "test_spawns":
+        group = objectgroup.get("name")
+        if group not in {"test_spawns", "decorations"}:
             continue
         for obj in objectgroup.findall("object"):
-            spawns.append(
-                {
-                    "id": obj.get("name", f"spawn_{obj.get('id', 'unknown')}"),
-                    "role": obj.get("type", "unknown"),
-                    "x": int(float(obj.get("x", "0")) // tile_width),
-                    "y": int(float(obj.get("y", "0")) // tile_height),
-                }
-            )
+            x, y = _object_cell(obj, tile_width, width, height)
+            if group == "decorations":
+                props = _properties(obj)
+                path = props.get("path", "")
+                if not path.startswith("res://assets/combat/terrain/processed/") or not path.endswith(".png") or not (ROOT / path.removeprefix("res://")).is_file():
+                    raise ValueError(f"Missing/invalid decoration asset: {path}")
+                if (x, y) in decor_cells:
+                    raise ValueError(f"Duplicate decoration at {(x, y)}")
+                decor_cells.add((x, y))
+                decoration = {"x": x, "y": y, "path": path}
+                if props.get("kind"):
+                    decoration["kind"] = props["kind"]
+                decorations.append(decoration)
+                continue
+            name = obj.get("name", f"spawn_{obj.get('id', 'unknown')}")
+            if name in spawn_ids or (x, y) in spawn_cells:
+                raise ValueError(f"Duplicate spawn id/cell: {name} at {(x, y)}")
+            if tiles[y * width + x]["type"] == "blocked":
+                raise ValueError(f"Blocked spawn: {name} at {(x, y)}")
+            spawn_ids.add(name)
+            spawn_cells.add((x, y))
+            spawns.append({"id": name, "role": obj.get("class", obj.get("type", "unknown")), "x": x, "y": y})
 
-    return {
+    result = {
+        "schema_version": 2,
         "id": map_id,
         "source": f"res://{_repo_path(tmx_path)}",
         "tile_size": tile_width,
@@ -118,6 +154,14 @@ def convert_tmx(tmx_path: Path) -> dict:
         "tiles": tiles,
         "test_spawns": spawns,
     }
+    for key in ("background_path", "terrain_theme"):
+        if key in map_props:
+            result[key] = map_props[key]
+    if "background_path" in result and not (ROOT / result["background_path"].removeprefix("res://")).is_file():
+        raise ValueError("Missing background asset")
+    if decorations:
+        result["terrain_decorations"] = sorted(decorations, key=lambda d: (d["y"], d["x"]))
+    return result
 
 
 def main() -> int:

@@ -2,31 +2,41 @@ extends RefCounted
 class_name CombatScenarioCatalog
 
 const DEFAULT_ENCOUNTER_PATH := "res://resources/data/combat_encounters/debug_full_combat_showcase.json"
-const FULL_COMBAT_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_full_combat_showcase.json"
-const DUNGEON_COMBAT_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json"
-const TERRAIN_GRASS_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_terrain_grass_showcase.json"
-const TERRAIN_DUNGEON_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_terrain_dungeon_showcase.json"
-const MAP_SCALE_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_map_scale_showcase.json"
-const RAW_GOBLIN_SPIDER_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_raw_goblin_spider_showcase.json"
-const RAW_BRUTE_OGRE_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_raw_brute_ogre_showcase.json"
-const RAW_WOLF_SNAKE_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_raw_wolf_snake_showcase.json"
-const RAW_UNDEAD_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_raw_undead_showcase.json"
-const RAW_BEASTS_SHOWCASE_PATH := "res://resources/data/combat_encounters/debug_raw_beasts_showcase.json"
+const CATALOGUE_PATH := "res://resources/data/combat_scenarios/catalogue.json"
+static var _loaded := false
+static var _options: Array[Dictionary] = []
 
 
 static func options() -> Array[Dictionary]:
-	return [
-		{"id": "full_combat_showcase", "label": "Old Mine skirmish", "path": FULL_COMBAT_SHOWCASE_PATH},
-		{"id": "dungeon_combat_showcase", "label": "Old Mine dungeon", "path": DUNGEON_COMBAT_SHOWCASE_PATH},
-		{"id": "terrain_grass_showcase", "label": "New terrain grass", "path": TERRAIN_GRASS_SHOWCASE_PATH},
-		{"id": "terrain_dungeon_showcase", "label": "New terrain dungeon", "path": TERRAIN_DUNGEON_SHOWCASE_PATH},
-		{"id": "map_scale_showcase", "label": "Map test arena", "path": MAP_SCALE_SHOWCASE_PATH},
-		{"id": "raw_goblin_spider_showcase", "label": "Raw Goblin + Spider", "path": RAW_GOBLIN_SPIDER_SHOWCASE_PATH},
-		{"id": "raw_brute_ogre_showcase", "label": "Raw Brute + Ogre", "path": RAW_BRUTE_OGRE_SHOWCASE_PATH},
-		{"id": "raw_wolf_snake_showcase", "label": "Raw Wolf + Snake", "path": RAW_WOLF_SNAKE_SHOWCASE_PATH},
-		{"id": "raw_undead_showcase", "label": "Raw Undead", "path": RAW_UNDEAD_SHOWCASE_PATH},
-		{"id": "raw_beasts_showcase", "label": "Raw Beasts", "path": RAW_BEASTS_SHOWCASE_PATH},
-	]
+	if not _loaded:
+		_loaded = true
+		var file := FileAccess.open(CATALOGUE_PATH, FileAccess.READ)
+		var data: Variant = JSON.parse_string(file.get_as_text()) if file != null else null
+		var failures := validation_errors(data)
+		if not failures.is_empty():
+			push_error("Invalid combat scenario catalogue: " + "; ".join(failures))
+			return []
+		for row: Dictionary in data.scenarios:
+			_options.append(row.duplicate(true))
+	return _options.duplicate(true)
+
+
+static func validation_errors(data: Variant) -> Array[String]:
+	var failures: Array[String] = []
+	if not data is Dictionary or data.get("schema", "") != "sdd.combat-scenarios-v1" or not data.get("scenarios") is Array or data.scenarios.is_empty():
+		return ["Invalid catalogue shape/schema"]
+	var ids: Dictionary = {}
+	for row in data.scenarios:
+		if not row is Dictionary or not row.get("id") is String or row.id.is_empty() or not row.get("label") is String or row.label.strip_edges().is_empty() or not row.get("path") is String:
+			failures.append("Invalid scenario entry")
+			continue
+		if ids.has(row.id):
+			failures.append("Duplicate scenario id: " + row.id)
+		ids[row.id] = true
+		var path: String = row.path
+		if path.get_base_dir() != "res://resources/data/combat_encounters" or not path.ends_with(".json") or not FileAccess.file_exists(path):
+			failures.append("Invalid/missing encounter path: " + path)
+	return failures
 
 
 static func path_for_id(scenario_id: String) -> String:

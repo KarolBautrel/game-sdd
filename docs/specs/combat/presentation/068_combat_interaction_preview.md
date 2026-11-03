@@ -65,4 +65,6 @@ Current compact labels:
 - Out-of-range or otherwise rejected targets do not show a unit-local damage panel.
 - Legal targeted AP actions show `COST X AP` in the unit-local preview.
 - HP/AP/MP readouts must not be the only visible information above a target during attack preview.
+- Preview padding/line space and top-edge resource separation follow091 and
+  slice099; both readouts must remain distinct at the board's first row.
 - Python validation, Godot project load, and Godot combat slice tests pass after presentation changes.

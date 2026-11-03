@@ -1,6 +1,8 @@
 extends RefCounted
 class_name DungeonStateModel
 
+const PartyRoster := preload("res://scripts/domain/party_roster.gd")
+const GraphQuality := preload("res://scripts/domain/dungeon_graph_quality.gd")
 const DEFAULT_RETURN_SCENE_PATH := "res://scenes/app/App.tscn"
 
 
@@ -38,6 +40,7 @@ static func initial_state(dungeon: Dictionary, selected_supply_loadout: Dictiona
 		"resolved_room_event_ids": [],
 		"hazard_log": [],
 		"room_event_log": [],
+		"camp_log": [],
 		"room_event_history": _empty_room_event_history(),
 		"party_formation": _default_party_formation(dungeon),
 		"party_effects": {"hp_loss": 0, "debuffs": []},
@@ -52,6 +55,10 @@ static func initial_state(dungeon: Dictionary, selected_supply_loadout: Dictiona
 
 static func enter_room(dungeon: Dictionary, state: Dictionary, target_room_id: String) -> Dictionary:
 	var next_state: Dictionary = state.duplicate(true)
+	if bool(next_state.get("completed", false)):
+		return _result(next_state, "rejected", "run_completed", {})
+	if not next_state.get("pending_combat_request", {}).is_empty():
+		return _result(next_state, "rejected", "pending_combat", {})
 	if not next_state.get("pending_corridor_hazard", {}).is_empty():
 		return _result(next_state, "rejected", "corridor_hazard_pending", next_state["pending_corridor_hazard"])
 	if not next_state.get("pending_room_event", {}).is_empty():
@@ -359,7 +366,7 @@ static func use_lamp_oil(state: Dictionary) -> Dictionary:
 	return _result(next_state, "accepted", "", event)
 
 
-static func use_recovery_supply(state: Dictionary, supply_id: String = "remedy_kit") -> Dictionary:
+static func use_recovery_supply(state: Dictionary, supply_id: String = "antidote") -> Dictionary:
 	var next_state: Dictionary = state.duplicate(true)
 	if supply_count(next_state, supply_id) <= 0:
 		return _result(next_state, "rejected", "missing_recovery_supply", {"supply_id": supply_id})
@@ -389,6 +396,85 @@ static func use_recovery_supply(state: Dictionary, supply_id: String = "remedy_k
 	return _result(next_state, "accepted", "", event)
 
 
+static func use_bandage(state: Dictionary, supply_id: String = "bandage") -> Dictionary:
+	var next_state: Dictionary = state.duplicate(true)
+	if supply_count(next_state, supply_id) <= 0:
+		return _result(next_state, "rejected", "missing_bandage", {"supply_id": supply_id})
+	var party_effects: Dictionary = next_state.get("party_effects", {"hp_loss": 0, "debuffs": []})
+	var old_hp_loss := int(party_effects.get("hp_loss", 0))
+	if old_hp_loss <= 0:
+		return _result(next_state, "rejected", "no_hp_loss", {"supply_id": supply_id})
+
+	_consume_supply(next_state, supply_id, 1)
+	var hp_recovered := 1
+	party_effects["hp_loss"] = max(0, old_hp_loss - hp_recovered)
+	next_state["party_effects"] = party_effects
+	_reduce_target_hp_loss(next_state, hp_recovered)
+
+	var event := {
+		"type": "bandage_used",
+		"supply_consumed": supply_id,
+		"hp_recovered": hp_recovered,
+		"message": "Bandages patch up one point of expedition injury.",
+	}
+	next_state["hazard_log"].append(event)
+	return _result(next_state, "accepted", "", event)
+
+
+static func use_camp(state: Dictionary, supply_id: String = "camping_kit") -> Dictionary:
+	var next_state: Dictionary = state.duplicate(true)
+	if bool(next_state.get("completed", false)):
+		return _result(next_state, "rejected", "run_completed", {"supply_id": supply_id})
+	if not next_state.get("pending_combat_request", {}).is_empty():
+		return _result(next_state, "rejected", "pending_combat", {"supply_id": supply_id})
+	if not next_state.get("pending_corridor_hazard", {}).is_empty():
+		return _result(next_state, "rejected", "corridor_hazard_pending", next_state["pending_corridor_hazard"])
+	if not next_state.get("pending_room_event", {}).is_empty():
+		return _result(next_state, "rejected", "room_event_pending", next_state["pending_room_event"])
+	if supply_count(next_state, supply_id) <= 0:
+		return _result(next_state, "rejected", "missing_camping_supply", {"supply_id": supply_id})
+	if supply_count(next_state, "food") <= 0:
+		return _result(next_state, "rejected", "missing_camp_food", {"supply_id": "food"})
+	var party_effects: Dictionary = next_state.get("party_effects", {"hp_loss": 0, "debuffs": []})
+	var old_hp_loss := int(party_effects.get("hp_loss", 0))
+	var removed_debuffs := active_debuff_summary(next_state)
+	if old_hp_loss <= 0 and removed_debuffs.is_empty():
+		return _result(next_state, "rejected", "no_recovery_needed", {"supply_id": supply_id})
+
+	_consume_supply(next_state, supply_id, 1)
+	_consume_supply(next_state, "food", 1)
+	var hp_recovered: int = mini(2, old_hp_loss)
+	party_effects["hp_loss"] = max(0, old_hp_loss - hp_recovered)
+	party_effects["debuffs"] = []
+	next_state["party_effects"] = party_effects
+	_reduce_target_hp_loss(next_state, hp_recovered)
+	next_state["active_debuffs"] = {}
+	var target_effects: Dictionary = next_state.get("target_effects", {})
+	for target_id in target_effects.keys():
+		var target: Dictionary = target_effects.get(target_id, {})
+		target["debuffs"] = {}
+		target_effects[target_id] = target
+	next_state["target_effects"] = target_effects
+	next_state["light_level"] = max(0, int(next_state.get("light_level", 0)) - 1)
+	_refresh_light_state(next_state)
+	next_state["camp_count"] = int(next_state.get("camp_count", 0)) + 1
+	if not next_state.has("camp_log"):
+		next_state["camp_log"] = []
+	var event := {
+		"type": "camp_used",
+		"supply_consumed": supply_id,
+		"food_consumed": 1,
+		"hp_recovered": hp_recovered,
+		"removed_debuffs": removed_debuffs,
+		"light_level": int(next_state.get("light_level", 0)),
+		"light_state": str(next_state.get("light_state", "")),
+		"message": "The party makes camp, treats wounds, and loses time in the dark.",
+	}
+	next_state["camp_log"].append(event)
+	next_state["hazard_log"].append(event)
+	return _result(next_state, "accepted", "", event)
+
+
 static func apply_combat_result(dungeon: Dictionary, state: Dictionary, result_payload: Dictionary) -> Dictionary:
 	var next_state: Dictionary = state.duplicate(true)
 	if not next_state.get("pending_room_event", {}).is_empty():
@@ -402,8 +488,11 @@ static func apply_combat_result(dungeon: Dictionary, state: Dictionary, result_p
 		return _result(next_state, "rejected", "wrong_dungeon", {})
 	if str(result_payload.get("source_room_id", "")) != str(pending.get("room_id", "")):
 		return _result(next_state, "rejected", "wrong_room", {})
+	if str(result_payload.get("result", "")) not in ["victory", "defeat"]:
+		return _result(next_state, "rejected", "unsupported_combat_result", {})
 
 	var room_id := str(pending.get("room_id", ""))
+	_apply_returned_party_hp(next_state, result_payload)
 	next_state["pending_combat_request"] = {}
 	next_state["last_combat_result"] = result_payload.duplicate(true)
 	if str(result_payload.get("result", "")) == "victory":
@@ -426,6 +515,62 @@ static func apply_combat_result(dungeon: Dictionary, state: Dictionary, result_p
 			"reward_unlocked": false,
 		})
 	return _result(next_state, "rejected", "unsupported_combat_result", {})
+
+
+static func _apply_returned_party_hp(state: Dictionary, payload: Dictionary) -> void:
+	var survivors := {}
+	for unit: Dictionary in payload.get("surviving_players", []):
+		survivors[str(unit.get("id", ""))] = unit
+	var targets: Dictionary = state.get("target_effects", {})
+	for slot: Dictionary in state.get("party_formation", []):
+		var unit_id := str(slot.get("combat_unit_id", ""))
+		var hero := PartyRoster.hero_for_combat_unit(unit_id)
+		if hero.is_empty():
+			continue
+		var fallen: bool = payload.get("defeated_player_ids", []).has(unit_id)
+		if not survivors.has(unit_id) and not fallen:
+			continue # Older result fixtures may omit party summaries.
+		var max_hp := int(hero.get("stats", {}).get("max_hp", 1))
+		var hp := 0 if fallen else clampi(int(survivors[unit_id].get("hp", max_hp)), 1, max_hp)
+		var target_id := str(slot.get("target_id", ""))
+		var target: Dictionary = targets.get(target_id, {"id": target_id, "debuffs": {}})
+		target["hp_loss"] = max_hp - hp
+		target["incapacitated"] = fallen
+		targets[target_id] = target
+	state["target_effects"] = targets
+	var total := 0
+	for target: Dictionary in targets.values():
+		total += int(target.get("hp_loss", 0))
+	state["party_effects"]["hp_loss"] = total
+
+
+static func returned_party_effects(effects: Dictionary, payload: Dictionary) -> Dictionary:
+	var next := effects.duplicate(true)
+	next.party_formation = PartyRoster.default_party_formation()
+	_apply_returned_party_hp(next, payload)
+	for slot: Dictionary in next.party_formation:
+		var target: Dictionary = next.target_effects.get(slot.target_id, {})
+		if bool(target.get("incapacitated", false)):
+			target.hp_loss = int(PartyRoster.hero_for_combat_unit(slot.combat_unit_id).stats.max_hp) - 1
+			target.incapacitated = false
+	var total := 0
+	for target: Dictionary in next.target_effects.values():
+		total += int(target.get("hp_loss", 0))
+	next.party_effects.hp_loss = total
+	next.erase("party_formation")
+	return next
+
+
+static func party_member_hp(state: Dictionary, unit_id: String) -> int:
+	var hero := PartyRoster.hero_for_combat_unit(unit_id)
+	var max_hp := int(hero.get("stats", {}).get("max_hp", 0))
+	for slot: Dictionary in state.get("party_formation", []):
+		if str(slot.get("combat_unit_id", "")) == unit_id:
+			var effect: Dictionary = state.get("target_effects", {}).get(str(slot.get("target_id", "")), {})
+			if bool(effect.get("incapacitated", false)):
+				return 0
+			return maxi(1, max_hp - int(effect.get("hp_loss", 0)))
+	return max_hp
 
 
 static func room_is_visited(state: Dictionary, room_id: String) -> bool:
@@ -453,6 +598,10 @@ static func supply_count(state: Dictionary, supply_id: String) -> int:
 
 
 static func default_supply_loadout(dungeon: Dictionary) -> Dictionary:
+	return clamp_supply_loadout(dungeon, _raw_default_supply_loadout(dungeon))
+
+
+static func _raw_default_supply_loadout(dungeon: Dictionary) -> Dictionary:
 	var options: Dictionary = dungeon.get("supply_loadout_options", {})
 	if options.is_empty():
 		return dungeon.get("starting_supplies", {"lamp_oil": 2, "pickaxe": 1}).duplicate(true)
@@ -463,14 +612,14 @@ static func default_supply_loadout(dungeon: Dictionary) -> Dictionary:
 	return loadout
 
 
-static func clamp_supply_loadout(dungeon: Dictionary, selected_supply_loadout: Dictionary) -> Dictionary:
+static func clamp_supply_loadout(dungeon: Dictionary, selected_supply_loadout: Dictionary, preferred_supply_id: String = "") -> Dictionary:
 	var options: Dictionary = dungeon.get("supply_loadout_options", {})
 	if options.is_empty():
 		var fallback: Dictionary = dungeon.get("starting_supplies", {"lamp_oil": 2, "pickaxe": 1}).duplicate(true)
 		for supply_id: String in selected_supply_loadout.keys():
 			fallback[supply_id] = max(0, int(selected_supply_loadout.get(supply_id, 0)))
 		return fallback
-	var loadout := default_supply_loadout(dungeon)
+	var loadout := _raw_default_supply_loadout(dungeon)
 	for supply_id: String in options.keys():
 		var option: Dictionary = options.get(supply_id, {})
 		loadout[supply_id] = clampi(
@@ -478,7 +627,50 @@ static func clamp_supply_loadout(dungeon: Dictionary, selected_supply_loadout: D
 			int(option.get("min", 0)),
 			int(option.get("max", 0))
 		)
+	_enforce_supply_loadout_capacity(dungeon, loadout, preferred_supply_id)
 	return loadout
+
+
+static func supply_loadout_capacity(dungeon: Dictionary) -> int:
+	return int(dungeon.get("supply_loadout_capacity", 0))
+
+
+static func supply_packing_cost(dungeon: Dictionary, supply_id: String) -> int:
+	var option: Dictionary = dungeon.get("supply_loadout_options", {}).get(supply_id, {})
+	return max(0, int(option.get("packing_cost", 1)))
+
+
+static func loadout_packing_summary(dungeon: Dictionary, loadout: Dictionary) -> Dictionary:
+	var capacity: int = supply_loadout_capacity(dungeon)
+	var used: int = 0
+	for supply_id: String in loadout.keys():
+		used += int(loadout.get(supply_id, 0)) * supply_packing_cost(dungeon, supply_id)
+	return {
+		"used": used,
+		"capacity": capacity,
+		"remaining": max(0, capacity - used) if capacity > 0 else 0,
+		"over_capacity": capacity > 0 and used > capacity,
+	}
+
+
+static func generated_dungeon_profiles() -> Array[Dictionary]:
+	return [
+		{"id": "short_mine", "display_name": "Short Mine", "difficulty": 1, "theme": "mine", "length": "short", "max_light_level": 4, "supply_loadout_capacity": 6},
+		{"id": "medium_mine", "display_name": "Medium Mine", "difficulty": 2, "theme": "mine", "length": "medium", "max_light_level": 4, "supply_loadout_capacity": 7},
+		{"id": "deep_mine", "display_name": "Deep Mine", "difficulty": 3, "theme": "mine", "length": "deep", "max_light_level": 5, "supply_loadout_capacity": 9},
+	]
+
+
+static func generated_dungeon_profile(profile_id: String = "", difficulty: int = 2) -> Dictionary:
+	var fallback: Dictionary = {}
+	for profile: Dictionary in generated_dungeon_profiles():
+		if str(profile.get("id", "")) == profile_id:
+			return profile.duplicate(true)
+		if int(profile.get("difficulty", 0)) == clampi(difficulty, 1, 3):
+			fallback = profile
+	if not fallback.is_empty():
+		return fallback.duplicate(true)
+	return generated_dungeon_profiles()[1].duplicate(true)
 
 
 static func active_debuff_summary(state: Dictionary) -> Array[String]:
@@ -524,30 +716,51 @@ static func procedural_corridor_plan(corridor: Dictionary, profile: Dictionary) 
 static func procedural_dungeon_draft(config: Dictionary = {}) -> Dictionary:
 	var dungeon_id := str(config.get("id", "generated_old_mine_draft"))
 	var seed := int(config.get("seed", config.get("hazard_seed", 31)))
-	var difficulty := clampi(int(config.get("difficulty", 1)), 1, 3)
+	var profile := generated_dungeon_profile(str(config.get("profile_id", config.get("generated_profile", ""))), int(config.get("difficulty", 2)))
+	var difficulty := clampi(int(config.get("difficulty", profile.get("difficulty", 2))), 1, 3)
+	if config.has("profile_id") or config.has("generated_profile"):
+		difficulty = clampi(int(profile.get("difficulty", difficulty)), 1, 3)
 	var hazard_seed := int(config.get("hazard_seed", seed))
 	var theme_tags: Array = config.get("theme_tags", ["mine", "corridor"])
-	var combat_encounter_path := str(config.get("combat_encounter_path", "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json"))
-	var generated_graph := _procedural_graph(seed, difficulty, theme_tags, combat_encounter_path)
-	var display_name := str(config.get("display_name", "%s D%s S%s" % [generated_graph.get("display_name", "Generated Old Mine"), difficulty, seed]))
+	var combat_encounter_path := str(config.get("combat_encounter_path", ""))
+	var generated_graph := _procedural_graph(seed, difficulty, profile, theme_tags, combat_encounter_path)
+	if not GraphQuality.errors(generated_graph, str(profile.get("id", "")) == "deep_mine").is_empty():
+		return {}
+	var profile_label := str(profile.get("display_name", "Generated Mine"))
+	var display_name := str(config.get("display_name", "%s D%s S%s" % [profile_label, difficulty, seed]))
 	return {
 		"id": dungeon_id,
 		"display_name": display_name,
 		"recommended_party_level": int(config.get("recommended_party_level", 1)),
 		"start_room_id": "generated_entrance",
-		"max_light_level": int(config.get("max_light_level", 4)),
+		"max_light_level": int(config.get("max_light_level", profile.get("max_light_level", 4))),
 		"hazard_seed": hazard_seed,
+		"template_id": str(generated_graph.get("template_id", "")),
+		"template_display_name": str(generated_graph.get("display_name", "")),
+		"template_pacing": generated_graph.get("pacing", {}).duplicate(true),
+		"generated_profile": {
+			"id": str(profile.get("id", "medium_mine")),
+			"display_name": profile_label,
+			"difficulty": difficulty,
+			"theme": str(profile.get("theme", "mine")),
+			"length": str(profile.get("length", "medium")),
+		},
 		"starting_supplies": {
 			"lamp_oil": 2,
 			"pickaxe": 1,
+			"bandage": 1,
 			"trap_tools": 1,
-			"remedy_kit": 1,
+			"food": 1,
+			"camping_kit": 0,
 		},
+		"supply_loadout_capacity": int(config.get("supply_loadout_capacity", profile.get("supply_loadout_capacity", 8))),
 		"supply_loadout_options": {
-			"lamp_oil": {"min": 0, "max": 4, "default": 2},
-			"pickaxe": {"min": 0, "max": 2, "default": 1},
-			"trap_tools": {"min": 0, "max": 3, "default": 1},
-			"remedy_kit": {"min": 0, "max": 2, "default": 1},
+			"lamp_oil": {"min": 0, "max": 5, "default": 2, "packing_cost": 1, "label": "Torch"},
+			"pickaxe": {"min": 0, "max": 2, "default": 1, "packing_cost": 2, "label": "Pickaxe"},
+			"bandage": {"min": 0, "max": 3, "default": 1, "packing_cost": 1, "label": "Bandage"},
+			"trap_tools": {"min": 0, "max": 3, "default": 1, "packing_cost": 1, "label": "Trap Tools"},
+			"food": {"min": 0, "max": 3, "default": 1, "packing_cost": 1, "label": "Food"},
+			"camping_kit": {"min": 0, "max": 1, "default": 0, "packing_cost": 3, "label": "Camping Kit"},
 		},
 		"default_party_formation": _default_party_formation({}),
 		"rooms": generated_graph["rooms"],
@@ -579,6 +792,8 @@ static func _evaluate_room_entry(dungeon: Dictionary, state: Dictionary, room_id
 			"room_id": room_id,
 			"content_type": str(combat_content.get("type", "")),
 			"combat_encounter_path": str(combat_content.get("combat_encounter_path", "")),
+			"combat_encounter_pool_id": str(combat_content.get("combat_encounter_pool_id", "")),
+			"combat_encounter_selection": combat_content.get("combat_encounter_selection", {}).duplicate(true),
 			"exploration_modifiers": state.get("exploration_modifiers", {}).duplicate(true),
 			"dungeon_modifiers": _combat_modifiers_for_state(state),
 		}
@@ -1019,6 +1234,57 @@ static func _consume_supply(state: Dictionary, supply_id: String, amount: int) -
 	state["supplies"] = supplies
 
 
+static func _enforce_supply_loadout_capacity(dungeon: Dictionary, loadout: Dictionary, preferred_supply_id: String) -> void:
+	var capacity := supply_loadout_capacity(dungeon)
+	if capacity <= 0:
+		return
+	var options: Dictionary = dungeon.get("supply_loadout_options", {})
+	var ids: Array[String] = []
+	for supply_id: String in options.keys():
+		ids.append(supply_id)
+	ids.sort()
+	var reduction_order: Array[String] = []
+	for supply_id: String in ids:
+		if supply_id != preferred_supply_id:
+			reduction_order.append(supply_id)
+	if preferred_supply_id != "":
+		reduction_order.append(preferred_supply_id)
+	var guard := 0
+	while bool(loadout_packing_summary(dungeon, loadout).get("over_capacity", false)) and guard < 1000:
+		var reduced := false
+		for supply_id: String in reduction_order:
+			var option: Dictionary = options.get(supply_id, {})
+			var minimum := int(option.get("min", 0))
+			if int(loadout.get(supply_id, 0)) > minimum:
+				loadout[supply_id] = int(loadout.get(supply_id, 0)) - 1
+				reduced = true
+				break
+		if not reduced:
+			return
+		guard += 1
+
+
+static func _reduce_target_hp_loss(state: Dictionary, amount: int) -> void:
+	var remaining: int = max(0, amount)
+	if remaining <= 0:
+		return
+	var target_effects: Dictionary = state.get("target_effects", {})
+	var target_ids: Array = target_effects.keys()
+	target_ids.sort()
+	for target_id: String in target_ids:
+		if remaining <= 0:
+			break
+		var target: Dictionary = target_effects.get(target_id, {})
+		var current: int = int(target.get("hp_loss", 0))
+		var recovered: int = mini(current, remaining)
+		target["hp_loss"] = max(0, current - recovered)
+		if recovered > 0:
+			target["incapacitated"] = false
+		target_effects[target_id] = target
+		remaining -= recovered
+	state["target_effects"] = target_effects
+
+
 static func _apply_debuff(state: Dictionary, debuff_id: String, stacks: int, target_id: String) -> void:
 	if debuff_id == "":
 		return
@@ -1094,12 +1360,7 @@ static func _default_party_formation(dungeon: Dictionary) -> Array:
 	var formation: Array = dungeon.get("default_party_formation", []).duplicate(true)
 	if not formation.is_empty():
 		return formation
-	return [{
-		"slot_id": "front",
-		"target_id": "party_slot_front",
-		"combat_unit_id": "unit_player_001",
-		"label": "Front",
-	}]
+	return PartyRoster.default_party_formation()
 
 
 static func _supplies_for_loadout(dungeon: Dictionary, selected_supply_loadout: Dictionary) -> Dictionary:
@@ -1215,8 +1476,8 @@ static func _pool_matches_corridor(pool: Dictionary, required_tags: Array, dange
 	return danger >= danger_min and danger <= danger_max
 
 
-static func _procedural_graph(seed: int, difficulty: int, theme_tags: Array, combat_encounter_path: String) -> Dictionary:
-	var template := _select_dungeon_template(seed, difficulty)
+static func _procedural_graph(seed: int, difficulty: int, profile: Dictionary, theme_tags: Array, combat_encounter_path: String) -> Dictionary:
+	var template := _select_dungeon_template(seed, difficulty, str(profile.get("id", "")))
 	if template.is_empty():
 		return {"rooms": [], "corridors": []}
 	var rooms: Array = template.get("rooms", []).duplicate(true)
@@ -1235,12 +1496,13 @@ static func _procedural_graph(seed: int, difficulty: int, theme_tags: Array, com
 				"trigger": {"mode": "first_traversal"},
 			}]
 		corridors.append(corridor)
-	_apply_template_combat_path(rooms, combat_encounter_path)
+	_apply_template_combat_paths(seed, profile, rooms, combat_encounter_path)
 	return {
 		"rooms": rooms,
 		"corridors": corridors,
 		"template_id": str(template.get("id", "")),
 		"display_name": str(template.get("display_name", "Generated Old Mine")),
+		"pacing": template.get("pacing", {}).duplicate(true),
 	}
 
 
@@ -1273,13 +1535,25 @@ static func _selected_template_hazard_pool_ids(seed: int, template: Dictionary) 
 	return selected
 
 
-static func _select_dungeon_template(seed: int, difficulty: int) -> Dictionary:
+static func _select_dungeon_template(seed: int, difficulty: int, profile_id: String = "") -> Dictionary:
+	return select_accepted_template(seed, difficulty, profile_id, _all_dungeon_templates())
+
+
+static func select_accepted_template(seed: int, difficulty: int, profile_id: String, templates: Array) -> Dictionary:
 	var candidates: Array[Dictionary] = []
-	for template: Dictionary in _all_dungeon_templates():
+	for template: Dictionary in templates:
+		if template.get("acceptance_state", "candidate") != "accepted":
+			continue
+		if profile_id != "" and not template.get("profile_ids", []).has(profile_id):
+			continue
 		if int(template.get("difficulty", 1)) == difficulty:
 			candidates.append(template)
 	if candidates.is_empty():
-		for template: Dictionary in _all_dungeon_templates():
+		for template: Dictionary in templates:
+			if template.get("acceptance_state", "candidate") != "accepted":
+				continue
+			if profile_id != "" and not template.get("profile_ids", []).has(profile_id):
+				continue
 			if int(template.get("difficulty", 1)) <= difficulty:
 				candidates.append(template)
 	if candidates.is_empty():
@@ -1303,11 +1577,95 @@ static func _dungeon_template_paths() -> Array[String]:
 	]
 
 
-static func _apply_template_combat_path(rooms: Array, combat_encounter_path: String) -> void:
+static func _apply_template_combat_paths(seed: int, profile: Dictionary, rooms: Array, combat_encounter_path: String) -> void:
+	var used_paths_by_pool := {}
+	var combat_slot_index := 0
 	for room: Dictionary in rooms:
 		for content: Dictionary in room.get("content", []):
-			if str(content.get("type", "")) in ["combat", "guarded_treasure"]:
+			if not (str(content.get("type", "")) in ["combat", "guarded_treasure"]):
+				continue
+			if combat_encounter_path != "":
 				content["combat_encounter_path"] = combat_encounter_path
+				combat_slot_index += 1
+				continue
+			if str(content.get("combat_encounter_path", "")) != "":
+				combat_slot_index += 1
+				continue
+			var pool_id := str(content.get("combat_encounter_pool_id", ""))
+			if pool_id != "" and not used_paths_by_pool.has(pool_id):
+				used_paths_by_pool[pool_id] = []
+			var used_paths: Array = used_paths_by_pool.get(pool_id, [])
+			var selected_entry := _select_combat_encounter_entry(seed, room, content, profile, used_paths, combat_slot_index)
+			if not selected_entry.is_empty():
+				var selected_path := str(selected_entry.get("encounter_path", ""))
+				content["combat_encounter_path"] = str(selected_entry.get("encounter_path", ""))
+				content["combat_encounter_selection"] = {
+					"pool_id": str(content.get("combat_encounter_pool_id", "")),
+					"entry_id": str(selected_entry.get("id", "")),
+					"tactical_role": str(selected_entry.get("tactical_role", "")),
+				}
+				if pool_id != "" and selected_path != "" and not used_paths.has(selected_path):
+					used_paths.append(selected_path)
+					used_paths_by_pool[pool_id] = used_paths
+				combat_slot_index += 1
+				continue
+			content["combat_encounter_path"] = "res://resources/data/combat_encounters/debug_dungeon_combat_showcase.json"
+			combat_slot_index += 1
+
+
+static func _select_combat_encounter_entry(seed: int, room: Dictionary, content: Dictionary, profile: Dictionary, used_paths: Array = [], combat_slot_index: int = 0) -> Dictionary:
+	var candidates := _combat_encounter_candidates(content, profile)
+	if candidates.is_empty():
+		return {}
+	var fresh_candidates: Array[Dictionary] = []
+	for candidate: Dictionary in candidates:
+		if not used_paths.has(str(candidate.get("encounter_path", ""))):
+			fresh_candidates.append(candidate)
+	if not fresh_candidates.is_empty():
+		candidates = fresh_candidates
+	var selected_index := absi(seed + combat_slot_index) % candidates.size()
+	return candidates[selected_index]
+
+
+static func _combat_encounter_candidates(content: Dictionary, profile: Dictionary) -> Array[Dictionary]:
+	var pool_id := str(content.get("combat_encounter_pool_id", ""))
+	if pool_id == "":
+		return []
+	var pool := _dungeon_combat_encounter_pool(pool_id)
+	if pool.is_empty():
+		return []
+	var profile_id := str(profile.get("id", ""))
+	var difficulty := int(profile.get("difficulty", 1))
+	var theme := str(profile.get("theme", ""))
+	if str(pool.get("theme", theme)) != theme:
+		return []
+	var room_kind := str(content.get("type", "combat"))
+	var candidates: Array[Dictionary] = []
+	for entry: Dictionary in pool.get("entries", []):
+		if not entry.get("profile_ids", []).has(profile_id):
+			continue
+		if difficulty < int(entry.get("difficulty_min", 1)) or difficulty > int(entry.get("difficulty_max", 3)):
+			continue
+		if not entry.get("room_kinds", []).has(room_kind):
+			continue
+		candidates.append(entry)
+	if candidates.is_empty() and str(pool.get("theme", "")) == theme:
+		for entry: Dictionary in pool.get("entries", []):
+			if entry.get("room_kinds", []).has(room_kind):
+				candidates.append(entry)
+	return _unique_combat_encounter_path_candidates(candidates)
+
+
+static func _unique_combat_encounter_path_candidates(candidates: Array[Dictionary]) -> Array[Dictionary]:
+	var unique: Array[Dictionary] = []
+	var seen_paths: Array[String] = []
+	for candidate: Dictionary in candidates:
+		var path := str(candidate.get("encounter_path", ""))
+		if seen_paths.has(path):
+			continue
+		seen_paths.append(path)
+		unique.append(candidate)
+	return unique
 
 
 static func _apply_generated_room_events(seed: int, rooms: Array) -> void:
@@ -1479,6 +1837,30 @@ static func _all_dungeon_room_event_pools() -> Array[Dictionary]:
 static func _dungeon_room_event_pool_paths() -> Array[String]:
 	return [
 		"res://resources/data/dungeon_room_event_pools/base_old_mine_room_event_pools.json",
+	]
+
+
+static func _dungeon_combat_encounter_pool(pool_id: String) -> Dictionary:
+	if pool_id == "":
+		return {}
+	for pool: Dictionary in _all_dungeon_combat_encounter_pools():
+		if str(pool.get("id", "")) == pool_id:
+			return pool
+	return {}
+
+
+static func _all_dungeon_combat_encounter_pools() -> Array[Dictionary]:
+	var pools: Array[Dictionary] = []
+	for pool_path: String in _dungeon_combat_encounter_pool_paths():
+		var catalogue := _load_json_dictionary(pool_path)
+		for pool: Dictionary in catalogue.get("pools", []):
+			pools.append(pool)
+	return pools
+
+
+static func _dungeon_combat_encounter_pool_paths() -> Array[String]:
+	return [
+		"res://resources/data/dungeon_combat_encounter_pools/old_mine_combat_pools.json",
 	]
 
 
