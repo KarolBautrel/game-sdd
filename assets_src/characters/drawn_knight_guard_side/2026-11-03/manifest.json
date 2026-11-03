@@ -1,0 +1,225 @@
+{
+  "schema": "sdd.static-art-proposal-v1",
+  "owner": "presentation021",
+  "stage": 1,
+  "date": "2026-11-03",
+  "shared_art_direction": "accepted_by_user",
+  "guard_appearance": "corrected_side_guard_pending_review",
+  "animation_delivered": false,
+  "runtime_imported": false,
+  "source_tool": "built-in image_gen.imagegen",
+  "raster_editor": "Aseprite 1.3.17.2",
+  "canvas": [
+    280,
+    280
+  ],
+  "ground_pivot": [
+    140,
+    229
+  ],
+  "provenance": "Original generated side-guard edits from user pose reference; raw sources preserved. Aseprite separates layers and extends the blade onto one rigid axis with source headroom.",
+  "pose_reference": "references/pozycja_miecza.webp",
+  "pose_reference_sha256": "fdc9e5d272dfb5a344c87a01f03c25463e1e5ce0adb759b65ec2a131fac5588a",
+  "reference_use": "pose only; not a runtime costume/character asset",
+  "prompts": "prompts.json",
+  "masks_and_axes": "separation.json",
+  "verification": "verification.json",
+  "collision_role": "none; static visual pilot",
+  "review": [
+    "before_after.png",
+    "comparison.png",
+    "closeup.png",
+    "board_scale.png",
+    "layer_review.png"
+  ],
+  "assets": [
+    {
+      "id": "drawn_knight_guard_side_pixel",
+      "view": "three_quarter_screen_right",
+      "frame_count": 1,
+      "native": "pixel_assembled.png",
+      "rigid_weapon": "pixel_sword.png",
+      "body_and_gloves": "pixel_body_gloves.png",
+      "foreground_gloves": "pixel_gloves.png",
+      "source": "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/pixel_native.aseprite",
+      "master": "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/pixel_master.aseprite",
+      "metadata": {
+        "actual_uniform_scale": 0.14832535885167464,
+        "blade_length_native": 80.09569377990431,
+        "body_gloves_stats": {
+          "alpha_levels": 2,
+          "bounds": [
+            105,
+            65,
+            68,
+            165
+          ],
+          "visible_colors": 47,
+          "visible_pixels": 5806
+        },
+        "canvas_offset": [
+          49,
+          3
+        ],
+        "glove_stats": {
+          "alpha_levels": 2,
+          "bounds": [
+            109,
+            95,
+            10,
+            26
+          ],
+          "visible_colors": 20,
+          "visible_pixels": 190
+        },
+        "grip_lateral_from_pivot": -26.47846889952153,
+        "grip_points_canvas": [
+          [
+            113.38575374563031,
+            102.37703429948212
+          ],
+          [
+            113.22908756695936,
+            113.50033298511939
+          ]
+        ],
+        "guard_canvas": [
+          113.52153110047847,
+          92.73684210526315
+        ],
+        "source_ground_y": 1553,
+        "source_roundtrip_exact": true,
+        "source_size": [
+          1254,
+          1554
+        ],
+        "stats": {
+          "alpha_levels": 2,
+          "bounds": [
+            105,
+            12,
+            68,
+            218
+          ],
+          "visible_colors": 47,
+          "visible_pixels": 6241
+        },
+        "sword_axis_cross_product": 2.6645352591003757e-14,
+        "sword_axis_unit": [
+          0.014083110254721722,
+          -0.9999008280852423
+        ],
+        "sword_removal_verified": true,
+        "sword_stats": {
+          "alpha_levels": 2,
+          "bounds": [
+            106,
+            12,
+            17,
+            116
+          ],
+          "visible_colors": 38,
+          "visible_pixels": 526
+        },
+        "sword_tip_source": [
+          442.81612619137053,
+          50.05504041269057
+        ]
+      }
+    },
+    {
+      "id": "drawn_knight_guard_side_painted",
+      "view": "three_quarter_screen_right",
+      "frame_count": 1,
+      "native": "painted_assembled.png",
+      "rigid_weapon": "painted_sword.png",
+      "body_and_gloves": "painted_body_gloves.png",
+      "foreground_gloves": "painted_gloves.png",
+      "source": "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/painted_native.aseprite",
+      "master": "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/painted_master.aseprite",
+      "metadata": {
+        "actual_uniform_scale": 0.14832535885167464,
+        "blade_length_native": 80.09569377990431,
+        "body_gloves_stats": {
+          "alpha_levels": 156,
+          "bounds": [
+            107,
+            65,
+            65,
+            165
+          ],
+          "visible_colors": 5326,
+          "visible_pixels": 5594
+        },
+        "canvas_offset": [
+          49,
+          4
+        ],
+        "glove_stats": {
+          "alpha_levels": 25,
+          "bounds": [
+            109,
+            95,
+            10,
+            26
+          ],
+          "visible_colors": 180,
+          "visible_pixels": 180
+        },
+        "grip_lateral_from_pivot": -26.47846889952153,
+        "grip_points_canvas": [
+          [
+            113.33879334939661,
+            103.37625847483136
+          ],
+          [
+            113.12794209814831,
+            114.49866197817927
+          ]
+        ],
+        "guard_canvas": [
+          113.52153110047847,
+          93.73684210526315
+        ],
+        "source_ground_y": 1535,
+        "source_roundtrip_exact": true,
+        "source_size": [
+          1254,
+          1554
+        ],
+        "stats": {
+          "alpha_levels": 175,
+          "bounds": [
+            105,
+            14,
+            67,
+            216
+          ],
+          "visible_colors": 5767,
+          "visible_pixels": 6031
+        },
+        "sword_axis_cross_product": 2.1316282072803006e-14,
+        "sword_axis_unit": [
+          0.018953940434793582,
+          -0.9998203579353615
+        ],
+        "sword_removal_verified": true,
+        "sword_stats": {
+          "alpha_levels": 62,
+          "bounds": [
+            105,
+            14,
+            18,
+            114
+          ],
+          "visible_colors": 454,
+          "visible_pixels": 513
+        },
+        "sword_tip_source": [
+          445.51943694131046,
+          50.09970134587434
+        ]
+      }
+    }
+  ]
+}

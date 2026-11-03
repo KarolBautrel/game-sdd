@@ -40,3 +40,9 @@ Shared UI composition owns passive visual components, never gameplay decisions.
   accepted017 appearance and prove idle/walk/one-handed attack before full sets.
 - [019 Drawn2.5D character research](019_drawn_character_research.md): archives
   rejected018 motion and evaluates drawn/pixel sprite tools, skills and MCPs.
+- [020 Drawn knight static pilot](020_drawn_knight_static_pilot.md): matched pixel
+  and painted proposals with layered swords, actual-scale boards and enlargements.
+- [021 Drawn knight combat pilot](021_drawn_knight_combat_pilot.md): accepted art
+  family in a two-handed combat guard, then ordered motion/native-scale review.
+- [022 Drawn animation batch](022_drawn_animation_batch.md): selected forward
+  guard, full knight preview followed by autonomous weapon/character integration.

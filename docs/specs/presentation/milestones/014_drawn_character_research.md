@@ -17,8 +17,10 @@ Owner presentation019 / slice019. User2026-11-03.
    HISTORICAL_SCOPE_PENDING: prepared53-commit tree/date/message-preserving
    repair,45 bad identities on master; wider remote rewriting awaits the answer
    to the explicit scope question. [Receipt](../../../qa/2026-11-03-git-author-repair.md).
-4. NOT_STARTED: one drawn dark-fantasy character visual pilot, then short walk/
-   sword prototype reviewed at1x. No automatic full-cast or renderer rewrite.
+4. SUPERSEDED2026-11-03: user authorized the static drawn knight pilot.
+   Presentation020 / milestone015 / stage47 deliver pixel and painted proposals;
+   user appearance selection and later motion remain pending. No automatic
+   full-cast or renderer rewrite.
 
 All61 physical cases remain NOT_RUN. No account purchase, paid API call, visual
 gameplay claim or prototype acceptance follows from the research.

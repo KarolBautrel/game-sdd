@@ -20,6 +20,9 @@ const CombatScenarioCatalog := preload("res://scripts/presentation/combat/combat
 const CombatFloatingText := preload("res://scripts/presentation/combat/combat_floating_text.gd")
 const CombatTargetingPreview := preload("res://scripts/presentation/combat/combat_targeting_preview.gd")
 const CombatUnitVisualState := preload("res://scripts/presentation/combat/combat_unit_visual_state.gd")
+const DrawnTimeline := preload("res://scripts/presentation/combat/drawn_combat_timeline.gd")
+var idle_elapsed: Dictionary = {}
+var active_motion_tween: Tween
 
 const DEFAULT_ENCOUNTER_PATH := CombatScenarioCatalog.DEFAULT_ENCOUNTER_PATH
 const COMBAT_UI_SLOT_NORMAL_PATH := "res://assets/ui/combat/processed/slots/slot_normal.png"
@@ -249,7 +252,7 @@ func _ready() -> void:
 	battle_chrome = BattleChrome.new()
 	battle_chrome.setup(self)
 	var idle_timer := Timer.new()
-	idle_timer.wait_time = 0.2
+	idle_timer.wait_time = 0.05
 	idle_timer.timeout.connect(_advance_original_idle)
 	add_child(idle_timer)
 	idle_timer.start()
@@ -264,12 +267,25 @@ func _advance_original_idle() -> void:
 		var current := str(unit_visual_action.get(unit.id, "pose:0"))
 		if not current.begins_with("pose") and not current.begins_with("combat_idle"):
 			continue
-		var count := unit_art.processed_sheet_frame_count(str(_unit_visual_config(unit).character), "pose")
-		unit_visual_action[unit.id] = "pose:%s" % ((int(current.get_slice(":", 1)) + 1) % count)
-		_refresh_unit_sprite(unit.id)
+		var action:=unit_art.default_visual_action(unit,state)
+		var frame:=int(current.get_slice(":",1)) if current.get_slice(":",0)==action else 0
+		var elapsed:=float(idle_elapsed.get(unit.id,0.0))+0.05
+		if current.get_slice(":",0)!=action:elapsed=0.0
+		var changed:=current.get_slice(":",0)!=action
+		var count:=unit_art.processed_sheet_frame_count(str(_unit_visual_config(unit).character),action)
+		while elapsed>=unit_art.frame_seconds(unit,action,0.2,frame):
+			elapsed-=unit_art.frame_seconds(unit,action,0.2,frame);frame=(frame+1)%count;changed=true
+		idle_elapsed[unit.id]=elapsed
+		if changed:
+			unit_visual_action[unit.id]="%s:%s" % [action,frame]
+			_refresh_unit_sprite(unit.id)
 
 
 func _reset_debug_encounter() -> void:
+	visual_generation+=1
+	animation_locked=false
+	if active_motion_tween!=null and active_motion_tween.is_valid():active_motion_tween.kill()
+	active_motion_tween=null
 	state = _load_json(current_encounter_path) if authoring_draft.is_empty() else authoring_draft.duplicate(true)
 	if authoring_draft.is_empty() and _run_session().has_pending_combat_launch():
 		state = _run_session().apply_launch_metadata(state)
@@ -279,6 +295,7 @@ func _reset_debug_encounter() -> void:
 	hovered_unit_id = ""
 	_clear_move_preview()
 	unit_facing.clear()
+	idle_elapsed.clear()
 	unit_visual_action.clear()
 	temporary_visual_units.clear()
 	visual_positions_px.clear()
@@ -2052,9 +2069,14 @@ func _prepare_combat_flash(events: Array, previous_state: Dictionary) -> bool:
 
 
 func _play_combat_animation(events: Array, previous_state: Dictionary, next_state: Dictionary, next_log: Array) -> void:
+	var units:=_timeline_units()
+	if DrawnTimeline.uses_drawn(events,units,unit_art):
+		_play_drawn_combat_animation(events,next_state,next_log,units)
+		return
 	visual_generation += 1
 	var current_generation := visual_generation
 	var tween := create_tween()
+	active_motion_tween=tween
 	var tween_has_steps := false
 	var animated_actors: Dictionary = {}
 	var animated_targets: Dictionary = {}
@@ -2125,9 +2147,46 @@ func _play_combat_animation(events: Array, previous_state: Dictionary, next_stat
 	)
 
 
+func _timeline_units() -> Dictionary:
+	var result: Dictionary={}
+	for unit: Dictionary in state.get("units",[]):result[unit.id]=unit
+	for id: String in temporary_visual_units:result[id]=temporary_visual_units[id]
+	return result
+
+
+func _play_drawn_combat_animation(events: Array, next_state: Dictionary, next_log: Array, units: Dictionary) -> void:
+	visual_generation+=1
+	var generation:=visual_generation
+	var plan:=DrawnTimeline.build(events,units,unit_art)
+	# Reactions prepared for preloading must stay at rest until the impact cue.
+	unit_visual_action.clear()
+	for id: String in units:_refresh_unit_sprite(id)
+	for actor: Dictionary in plan.actors:
+		unit_visual_action[actor.id]="combat:0"
+		_apply_action_resource_spend(actor.id,events,state)
+		_start_visual_cycle(actor.id,"combat",generation,COMBAT_CYCLE_SECONDS)
+	var elapsed:=0.0
+	for impact: Dictionary in plan.impacts:
+		var delay:=float(impact.at)-elapsed
+		if delay>0.0:await get_tree().create_timer(delay).timeout
+		if generation!=visual_generation:return
+		elapsed=float(impact.at)
+		for event: Dictionary in impact.events:
+			if event.type=="damage_applied":_apply_damage_resource_result(event)
+		for id: String in impact.reactions:
+			var action:=str(impact.reactions[id])
+			unit_visual_action[id]=action+":0"
+			_start_visual_cycle(id,action,generation,HIT_CYCLE_SECONDS)
+		_spawn_combat_floating_texts(impact.events)
+	var remaining:=float(plan.duration)-elapsed
+	if remaining>0.0:await get_tree().create_timer(remaining).timeout
+	if generation==visual_generation:_finish_combat_animation(generation,next_state,next_log)
+
+
 func _finish_combat_animation(current_generation: int, next_state: Dictionary, next_log: Array) -> void:
 	if current_generation != visual_generation:
 		return
+	active_motion_tween=null
 	unit_visual_action.clear()
 	temporary_visual_units.clear()
 	temporary_resource_overrides.clear()
@@ -2185,6 +2244,7 @@ func _play_movement_animation(events: Array, previous_state: Dictionary, next_st
 	visual_generation += 1
 	var current_generation := visual_generation
 	var tween := create_tween()
+	active_motion_tween=tween
 	var tween_has_steps := false
 	for event: Dictionary in events:
 		if event["type"] != "unit_moved":
@@ -2198,11 +2258,14 @@ func _play_movement_animation(events: Array, previous_state: Dictionary, next_st
 		var remaining_mp := int(_unit_by_id_in_state(previous_state, actor_id).get("resources", {}).get("mp", 0))
 		var step_facings := CombatUnitVisualState.movement_step_facings(event)
 		var step_index := 0
+		var previous_position:=Vector2(unit_node.position)
 		for step: Dictionary in path:
 			if step_index < step_facings.size():
 				tween.tween_callback(_movement_facing_callback(actor_id, str(step_facings[step_index].get("direction", ""))))
 			var target_position := _position_to_unit_top_left(step)
-			tween.tween_property(unit_node, "position", target_position, MOVE_STEP_SECONDS).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+			var seconds:=unit_art.movement_seconds(_unit_by_id(actor_id),previous_position.distance_to(target_position),MOVE_STEP_SECONDS)
+			tween.tween_property(unit_node, "position", target_position, seconds).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+			previous_position=target_position
 			var step_cost := _terrain_movement_cost(step)
 			remaining_mp = maxi(0, remaining_mp - step_cost)
 			var display_mp := remaining_mp
@@ -2221,6 +2284,7 @@ func _play_movement_animation(events: Array, previous_state: Dictionary, next_st
 func _finish_movement_animation(events: Array, current_generation: int, next_state: Dictionary, next_log: Array) -> void:
 	if current_generation != visual_generation:
 		return
+	active_motion_tween=null
 	for event: Dictionary in events:
 		if event["type"] != "unit_moved":
 			continue
@@ -2245,7 +2309,7 @@ func _start_walk_cycle(actor_id: String, current_generation: int) -> void:
 		unit_visual_action[actor_id] = "walk:%s" % frame
 		_refresh_unit_sprite(actor_id)
 		frame = (frame + 1) % frame_count
-		await get_tree().create_timer(unit_art.frame_seconds(_unit_by_id(actor_id), "walk", WALK_CYCLE_SECONDS)).timeout
+		await get_tree().create_timer(unit_art.frame_seconds(_unit_by_id(actor_id), "walk", WALK_CYCLE_SECONDS,frame)).timeout
 
 
 func _walk_frame_count(actor_id: String) -> int:
@@ -2261,14 +2325,14 @@ func _walk_frame_count(actor_id: String) -> int:
 func _start_visual_cycle(unit_id: String, action: String, current_generation: int, frame_seconds: float, loop: bool = false) -> void:
 	var frame := 0
 	var frame_count := _visual_frame_count(unit_id, action)
-	frame_seconds = unit_art.frame_seconds(_unit_by_id(unit_id), action, frame_seconds)
 	while current_generation == visual_generation and animation_locked and str(unit_visual_action.get(unit_id, "")).begins_with(action):
 		unit_visual_action[unit_id] = "%s:%s" % [action, frame]
 		_refresh_unit_sprite(unit_id)
 		if not loop and frame >= frame_count - 1:
 			return
+		var seconds:=unit_art.frame_seconds(_unit_by_id(unit_id),action,frame_seconds,frame)
 		frame = (frame + 1) % frame_count
-		await get_tree().create_timer(frame_seconds).timeout
+		await get_tree().create_timer(seconds).timeout
 
 
 func _visual_frame_count(unit_id: String, action: String) -> int:

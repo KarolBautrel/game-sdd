@@ -1,0 +1,1 @@
+{"from": "south_east", "handedness": "reflected", "operation": "horizontal pixel reflection about canvas centre; unchanged pivot and timing", "script": "tools/aseprite/mirror_drawn_actions.lua", "to": "south_west", "tool": "Aseprite"}

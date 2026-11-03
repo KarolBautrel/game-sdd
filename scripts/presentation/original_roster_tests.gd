@@ -36,7 +36,10 @@ func _run() -> void:
 				check(art.processed_sheet_frame_count(id,action)==count,id+action+" authored count")
 				for frame in range(count):
 					var path:=art.texture_path(unit,direction,"%s:%s" % [action,frame])
-					check(path=="res://assets/combat/characters/original/%s/%s/%s_%s_%s_%03d.png" % [id,action,id,direction,action,frame] and FileAccess.file_exists(path),"original frame without legacy fallback: "+path)
+					var original_path:="res://assets/combat/characters/original/%s/%s/%s_%s_%s_%03d.png" % [id,action,id,direction,action,frame]
+					check(FileAccess.file_exists(original_path),"preserved original source frame: "+original_path)
+					var expected_root: String=Art.PROCESSED_SHEET_VISUALS[id].root
+					check(path.begins_with(expected_root+"/") and FileAccess.file_exists(path),"current complete profile without mixed fallback: "+path)
 				if action=="pose" or direction=="east":
 					var path:=art.texture_path(unit,direction,"%s:%s" % [action,count-1])
 					var image:=Assets.image_copy(path)

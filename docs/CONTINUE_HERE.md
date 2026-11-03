@@ -6,21 +6,78 @@ when the user has only requested an explanation or plan.
 
 ## Next-session entry: read this first
 
-The user ended this session and will resume with:
-"Wracamy do tego na czym skonczylismy ostatnio".
-Read the complete [2026-11-03 resume handoff](handoffs/2026-11-03-drawn-2d-resume.md)
-before acting. It records rejected work, exact Git state/identity, researched vs
-installed tools, the proposed small2D art/motion stages and pending permissions.
-Do not repeat the whole research, resume historical3D queues or interpret the
-resume phrase as approval to rewrite master or pay for external generation.
+Latest: [2026-11-03 accepted idle/shield/bow corrections](handoffs/2026-11-03-drawn-animation-refinements.md).
+Stage55 is COMPLETE / AUTOMATED_PASS / USER_ACCEPTED_PREVIEW. Idle planting fixed
+in96clips; N/NE/NW shield interiors corrected; bow attack1800ms with1260ms release
+in8views. User explicitly accepts the before/after samples ("Tak ma byc"). Native
+7368checks/0, offline3579, full regression suites and validator PASS.125 comparison
+samples: `tools/qa/start_drawn_refinement_preview.ps1`. All sources/baselines
+preserved. No further visual iteration requested; ready for the user's next task.
+Physical gameplay gaps remain; read [stage55](qa/stages/2026-11-03-stage-55.md).
 
-Current work branch is `2d-art-research`. User explicitly requests these research/
-handoff notes committed and pushed there under the verified KarolBautrel identity;
-they are now committed on that branch and its publication is verified at session
-close. Obtain the current commit SHA from Git/remote, not from a self-reference
-in this file. No further art work is requested before tomorrow.
+Earlier batch delivery: [drawn animation batch](handoffs/2026-11-03-drawn-animation-batch.md).
+ACTIVE: presentation022 / slice022 / milestone017. User selects pose A as default
+two-handed combat guard, accepts the delivered12-clip/68-frame3/4 knight motion
+after viewing the player, and explicitly asks to CONTINUE all discussed work.
+Knight command was supplied BEFORE other character production began:
+`& "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game\tools\qa\start_drawn_animation_preview.ps1"`.
+It opens the local native-scale/enlarged player. The authorized six-role batch is
+now IMPLEMENTED / AUTOMATED_PASS / AWAITING_INTERACTIVE: knight12 clips and five
+other roles7 primary clips each, all8facings (5 drawn +3 disclosed reflections).
+2304 runtime frames,2344 source-player frames,386 source animations,398 Aseprite
+files including10 rigid weapon references and2 static boards. All48 view sources
+roundtrip pixel-exactly;119 prior source identities preserved.
+Native gallery: `tools/qa/start_game.ps1 -Scene drawn`; battle: same with `-Scene
+combat`, Tools scenario "Rycerz — próba animacji". Commands sent in chat; relaunch
+old native windows to load the final registry. Tools "Malowane postacie" opens the
+gallery overlay. Final native6980 checks, offline3579, regression suites and
+repository validator PASS. Read [stage53](qa/stages/2026-11-03-stage-53.md),
+[stage54](qa/stages/2026-11-03-stage-54.md) and the latest handoff for exact proof.
+Next unfinished task is user directional/gallery and actual battle/campaign
+review (L53-01/L54-01/L54-02); do not restart the completed source queue. Original
+3/4 knight motion is accepted; later directions/other roles/gameplay remain
+unaccepted. Preserve all61 earlier physical NOT_RUN scenarios. No desktop input/
+visible agent launch, paid tools, installation or Git history work. Branch
+2d-art-research, local changes. No new batch scope is inferred from completion.
 
-## Current status: 3D archived;2.5D research complete; historical Git scope pending
+### Earlier pose trials (superseded by022 and explicit motion acceptance above)
+
+Latest: [2026-11-03 side guard handoff](handoffs/2026-11-03-drawn-knight-side-guard.md).
+CURRENT review: [stage51](qa/stages/2026-11-03-stage-51.md), two new pose references
+`miecz_z_przodu.jpg` and `pozycja_miecza_bok.jpg`. Open
+`assets_src/characters/drawn_knight_pose_pair/2026-11-03/comparison.png` or
+`grips.png`; separate `front.png` / `side.png` are painted exploratory samples.
+User explicitly confirms TWO hands in both, including the rear-view side photo.
+Front projects forward/diagonally; side bends elbows closer to torso with more
+upright blade; crossguards above belt. Stage50's waist-level trial is REJECTED
+as too low, preserved as evidence. Final pose choice/feedback remains pending.
+User accepts BOTH020 art finishes and authorizes the discussed stages in order:
+static two-handed guard -> short3/4 motion -> continuous1x review -> directional/
+action expansion and one-knight integration. Historical Git remains deferred.
+Read presentation021 / slice021 / milestone016 and
+[stage49](qa/stages/2026-11-03-stage-49.md).
+
+Open `assets_src/characters/drawn_knight_guard_side/2026-11-03/before_after.png`,
+`comparison.png`, `closeup.png`, `board_scale.png` and `layer_review.png`.
+Latest user requests the sword MORE AT THE SIDE using `pozycja_miecza.webp`.
+Both arms/hands are redrawn near the shoulder with a nearly upright blade beside
+the head. This side guard supersedes stage48's central forward guard. Raw prompts,
+reference/masks and three-layer Aseprite sources are preserved. All47 previous
+stage47/48 PNG/source identities remain exact.
+Native boards use actual unchanged game textures/prop sizes. These are static
+compositions, with no runtime or animation change. Next: new guard feedback/fixes,
+then the authorized short motion pilot. Shared art direction is already accepted;
+do not request its approval again or report the new pose/motion as user-accepted.
+
+Current work branch is `2d-art-research`; pilot changes remain local/uncommitted.
+Previous research publication is historical. No new commit/push is requested.
+The [earlier research handoff](handoffs/2026-11-03-drawn-2d-resume.md) preserves
+tool/account and archive/Git details. Its production pause is superseded only
+by the current ordered pilot authorization. No desktop controls or paid providers
+used. Earlier static proposal details: [stage47](qa/stages/2026-11-03-stage-47.md)
+and [static handoff](handoffs/2026-11-03-drawn-knight-static.md).
+
+## Earlier research/archive status (before the static pilot above)
 
 Latest user2026-11-03 reviewed the motion and rejects the result: crooked-looking
 legs, wide/stiff gait, wrist-driven sword twirling instead of a natural cut,

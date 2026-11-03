@@ -115,15 +115,12 @@ static func _spawn_message(layer: Control, start_position: Vector2, message: Dic
 	panel.position = start_position
 	layer.add_child(panel)
 
-	var tween := layer.create_tween()
+	var tween := panel.create_tween()
 	if delay > 0.0:
 		tween.tween_interval(delay)
 	tween.tween_property(panel, "position", start_position + Vector2(0, -rise_pixels), duration_seconds).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(panel, "modulate:a", 0.0, duration_seconds).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-	tween.finished.connect(func() -> void:
-		if is_instance_valid(panel):
-			panel.queue_free()
-	)
+	tween.finished.connect(panel.queue_free)
 
 
 static func _style(color: Color) -> StyleBoxFlat:

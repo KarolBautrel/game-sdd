@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "scope": "two painted exploratory pose plates",
+  "user_confirmed_two_hands_both_poses": true,
+  "previous_files_preserved": 83,
+  "reference_sha256": {
+    "miecz_z_przodu.jpg": "0f3485d4b949065974fe058f16323a07a8750645579446d698548a41545fa4ec",
+    "pozycja_miecza_bok.jpg": "c8df23bcf1b19189ff9a75bbc3cdd14f8d645420ba4da7ce2eb2adbf09a17cfc"
+  },
+  "files": {
+    "assets_src/characters/drawn_knight_pose_pair/2026-11-03/comparison.png": "0404a7068b669667c9df5ee53c52cd63313a2f6427a4257ea291d7f17223dcdf",
+    "assets_src/characters/drawn_knight_pose_pair/2026-11-03/front.png": "0b32b918d026a0d6763542130b6492650acaf6f86ce8a3d0c2bd7e8996baf3aa",
+    "assets_src/characters/drawn_knight_pose_pair/2026-11-03/grips.png": "4608d2980f5758a6aa7f5bc66d7c01bb05f517fdf1cdd84cc6db15074f6a0f8f",
+    "assets_src/characters/drawn_knight_pose_pair/2026-11-03/side.png": "43b45226b8291ccb781194cf52e218cfa14a8c053ef17b09b6f5cf9503dfc653",
+    "assets_src/aseprite/characters/drawn_knight_pose_pair/2026-11-03/comparison.aseprite": "aacc13d5c0e80852540df9bebae7e7c219a58a205ab74ad33ebbfb5711969b04",
+    "assets_src/aseprite/characters/drawn_knight_pose_pair/2026-11-03/front.aseprite": "90434701dd7edb9de0397e0e5c590bb5a8e9de99cf3efd7370e3178624edffe7",
+    "assets_src/aseprite/characters/drawn_knight_pose_pair/2026-11-03/grips.aseprite": "d46224526d0617779d8432e38f5775146d3ff8479a81b7e19084f30767308a5c",
+    "assets_src/aseprite/characters/drawn_knight_pose_pair/2026-11-03/side.aseprite": "96caf1c4b0d6af93a4ab74d2a79d8249366aee515d81e53fd02778cf08073580"
+  },
+  "production_alpha_or_weapon_layers_verified": false
+}

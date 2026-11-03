@@ -1,0 +1,209 @@
+{
+  "status": "PASS",
+  "scope": "static asset properties; user selection pending",
+  "command": [
+    "C:\\Program Files\\Aseprite\\Aseprite.exe",
+    "-b",
+    "--script-param",
+    "root=C:/Users/karol/Desktop/Gierka/game_dir/sdd-game",
+    "--script",
+    "tools/aseprite/drawn_knight_static.lua"
+  ],
+  "normalization": {
+    "aseprite": "1.3.17.2",
+    "assumed_height_metres": 1.8,
+    "body_height": 171,
+    "camera_elevation": 18,
+    "canvas": [
+      280,
+      280
+    ],
+    "pivot": [
+      140,
+      229
+    ],
+    "pixels_per_metre": 100,
+    "status": "STATIC_PROPOSALS_AWAITING_USER_SELECTION",
+    "variants": {
+      "painted": {
+        "aseprite_roundtrip_exact": true,
+        "body_position": [
+          109,
+          58
+        ],
+        "body_size": [
+          63,
+          171
+        ],
+        "body_source_bounds": [
+          352,
+          42,
+          425,
+          1159
+        ],
+        "grip_canvas": [
+          168,
+          144
+        ],
+        "grip_sword": [
+          9,
+          13
+        ],
+        "raw_size": [
+          1254,
+          1254
+        ],
+        "stats": {
+          "alpha_levels": 166,
+          "opaque_or_partial_pixels": 6682,
+          "visible_rgba_colors": 6429
+        },
+        "sword_position": [
+          159,
+          131
+        ],
+        "sword_size": [
+          19,
+          98
+        ],
+        "sword_source_bounds": [
+          1015,
+          294,
+          130,
+          658
+        ]
+      },
+      "pixel": {
+        "aseprite_roundtrip_exact": true,
+        "body_position": [
+          109,
+          58
+        ],
+        "body_size": [
+          63,
+          171
+        ],
+        "body_source_bounds": [
+          355,
+          49,
+          420,
+          1148
+        ],
+        "grip_canvas": [
+          168,
+          144
+        ],
+        "grip_sword": [
+          9,
+          13
+        ],
+        "palette_limit": 47,
+        "raw_size": [
+          1254,
+          1254
+        ],
+        "stats": {
+          "alpha_levels": 2,
+          "opaque_or_partial_pixels": 6496,
+          "visible_rgba_colors": 45
+        },
+        "sword_position": [
+          159,
+          131
+        ],
+        "sword_size": [
+          19,
+          98
+        ],
+        "sword_source_bounds": [
+          1015,
+          297,
+          127,
+          649
+        ]
+      }
+    }
+  },
+  "files": {
+    "assets_src/aseprite/characters/drawn_knight/2026-11-03/board_scale.aseprite": {
+      "sha256": "675cad810ce2e49623ddff84e2cbcc2cacb84a64f39ba8c7a74f33c32e4f82c0",
+      "bytes": 828290
+    },
+    "assets_src/aseprite/characters/drawn_knight/2026-11-03/closeup.aseprite": {
+      "sha256": "6eee954e24f2ac6c7099ec3a77c8fa74f04e49f8d43c42a83b0f23c3d3dc1d17",
+      "bytes": 442648
+    },
+    "assets_src/aseprite/characters/drawn_knight/2026-11-03/comparison.aseprite": {
+      "sha256": "2944ab03ad070e7c7a5846329809827632fe64ad2e79e6e32733a792ce74014a",
+      "bytes": 497581
+    },
+    "assets_src/aseprite/characters/drawn_knight/2026-11-03/painted_master.aseprite": {
+      "sha256": "9717c67d7e46b99f823dd5e66fa6ba3f772884c07869b2d8f49e66b52032d05f",
+      "bytes": 1031374
+    },
+    "assets_src/aseprite/characters/drawn_knight/2026-11-03/painted_native.aseprite": {
+      "sha256": "738ee6bdf4742d690c8266e9cf1f285ec1774b377d6f5ff148f3a87d9588bd3e",
+      "bytes": 24856
+    },
+    "assets_src/aseprite/characters/drawn_knight/2026-11-03/pixel_master.aseprite": {
+      "sha256": "b8a2a8f5524d143206c07263f8ff973b73a07d6f97dc97cabd4444dea76663c7",
+      "bytes": 901321
+    },
+    "assets_src/aseprite/characters/drawn_knight/2026-11-03/pixel_native.aseprite": {
+      "sha256": "8258bc01e6e1ac96033b319759489639743c5502a99281d4e26488ca3594ff03",
+      "bytes": 6973
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/board_scale.png": {
+      "sha256": "c6a6524e78f1dde3454913c4d5525b3e24f3576f2b908984a031e04bed5d290b",
+      "bytes": 708578
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/closeup.png": {
+      "sha256": "16f2aa15acd688dab4f9a1b549d11a4eb73be4d385deb6ae5be3a8bcd115e90a",
+      "bytes": 381178
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/comparison.png": {
+      "sha256": "2e882f0d59e9886610b793bcb191dc657369b87ad7b83bd065ef1cab598ac347",
+      "bytes": 438201
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/painted_assembled.png": {
+      "sha256": "8464b4aac35395c6fbb300f61e184b120e35ac04a84c0fe00a820aa45fdbe4fe",
+      "bytes": 24074
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/painted_board_1x.png": {
+      "sha256": "a07774fb8e205a9333ca0678e24df30a89026252f79f262d3d84060d0daa8446",
+      "bytes": 316896
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/painted_body.png": {
+      "sha256": "7b240b92f46231c1a6cfadafcfa642642d823a33bf9e6f038ad1aa520a3f30e5",
+      "bytes": 22377
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/painted_sword.png": {
+      "sha256": "342af934142d2a01fa6d046643b0b82b7f76d37377aa79ae96a38dd225bba2d7",
+      "bytes": 3011
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/pixel_assembled.png": {
+      "sha256": "485b799339188dc58103b4acd6b36361c93bf8c2051e4a3e0c3db5e87c306129",
+      "bytes": 15220
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/pixel_board_1x.png": {
+      "sha256": "4366ccf44e7d711c52f2b75c5b6d295b55928631c0c70e2b04a19ac30a191dcf",
+      "bytes": 313359
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/pixel_body.png": {
+      "sha256": "f9d1d0b9edeb75f34f1c4d98185cb536395726c42e12fb2c982ec0b547a61702",
+      "bytes": 13988
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/pixel_sword.png": {
+      "sha256": "b45aa5e0ee9a5402076182e9d91c9f854492f3725fa54bf828fef4fe9b7c8815",
+      "bytes": 2077
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/raw/painted.png": {
+      "sha256": "1cda6e915fa62e8d9bb9e8844c06dd08b1e20d279680497c200254e1621c1f15",
+      "bytes": 869689
+    },
+    "assets_src/characters/drawn_knight/2026-11-03/raw/pixel.png": {
+      "sha256": "d582a118789d9f2214d207cdf98007fb45a3e9fef6fdf02b1302ce6c24127efb",
+      "bytes": 671209
+    }
+  }
+}

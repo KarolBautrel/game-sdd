@@ -1,0 +1,314 @@
+{
+  "status": "PASS",
+  "scope": "static layered side guard file properties only",
+  "appearance_review": "pending_user_feedback",
+  "motion_review": "not_started",
+  "previous020_021_files_unchanged": 47,
+  "user_pose_reference_sha256": "fdc9e5d272dfb5a344c87a01f03c25463e1e5ce0adb759b65ec2a131fac5588a",
+  "normalization": {
+    "aseprite": "1.3.17.2",
+    "canvas": [
+      280,
+      280
+    ],
+    "palette_limit": 47,
+    "pivot": [
+      140,
+      229
+    ],
+    "reference": "references/pozycja_miecza.webp",
+    "requested_source_scale": 0.148,
+    "source_top_padding": 300,
+    "stage": "SIDE_GUARD_AWAITING_VISUAL_REVIEW",
+    "variants": {
+      "painted": {
+        "actual_uniform_scale": 0.14832535885167464,
+        "blade_length_native": 80.09569377990431,
+        "body_gloves_stats": {
+          "alpha_levels": 156,
+          "bounds": [
+            107,
+            65,
+            65,
+            165
+          ],
+          "visible_colors": 5326,
+          "visible_pixels": 5594
+        },
+        "canvas_offset": [
+          49,
+          4
+        ],
+        "glove_stats": {
+          "alpha_levels": 25,
+          "bounds": [
+            109,
+            95,
+            10,
+            26
+          ],
+          "visible_colors": 180,
+          "visible_pixels": 180
+        },
+        "grip_lateral_from_pivot": -26.47846889952153,
+        "grip_points_canvas": [
+          [
+            113.33879334939661,
+            103.37625847483136
+          ],
+          [
+            113.12794209814831,
+            114.49866197817927
+          ]
+        ],
+        "guard_canvas": [
+          113.52153110047847,
+          93.73684210526315
+        ],
+        "source_ground_y": 1535,
+        "source_roundtrip_exact": true,
+        "source_size": [
+          1254,
+          1554
+        ],
+        "stats": {
+          "alpha_levels": 175,
+          "bounds": [
+            105,
+            14,
+            67,
+            216
+          ],
+          "visible_colors": 5767,
+          "visible_pixels": 6031
+        },
+        "sword_axis_cross_product": 2.1316282072803006e-14,
+        "sword_axis_unit": [
+          0.018953940434793582,
+          -0.9998203579353615
+        ],
+        "sword_removal_verified": true,
+        "sword_stats": {
+          "alpha_levels": 62,
+          "bounds": [
+            105,
+            14,
+            18,
+            114
+          ],
+          "visible_colors": 454,
+          "visible_pixels": 513
+        },
+        "sword_tip_source": [
+          445.51943694131046,
+          50.09970134587434
+        ]
+      },
+      "pixel": {
+        "actual_uniform_scale": 0.14832535885167464,
+        "blade_length_native": 80.09569377990431,
+        "body_gloves_stats": {
+          "alpha_levels": 2,
+          "bounds": [
+            105,
+            65,
+            68,
+            165
+          ],
+          "visible_colors": 47,
+          "visible_pixels": 5806
+        },
+        "canvas_offset": [
+          49,
+          3
+        ],
+        "glove_stats": {
+          "alpha_levels": 2,
+          "bounds": [
+            109,
+            95,
+            10,
+            26
+          ],
+          "visible_colors": 20,
+          "visible_pixels": 190
+        },
+        "grip_lateral_from_pivot": -26.47846889952153,
+        "grip_points_canvas": [
+          [
+            113.38575374563031,
+            102.37703429948212
+          ],
+          [
+            113.22908756695936,
+            113.50033298511939
+          ]
+        ],
+        "guard_canvas": [
+          113.52153110047847,
+          92.73684210526315
+        ],
+        "source_ground_y": 1553,
+        "source_roundtrip_exact": true,
+        "source_size": [
+          1254,
+          1554
+        ],
+        "stats": {
+          "alpha_levels": 2,
+          "bounds": [
+            105,
+            12,
+            68,
+            218
+          ],
+          "visible_colors": 47,
+          "visible_pixels": 6241
+        },
+        "sword_axis_cross_product": 2.6645352591003757e-14,
+        "sword_axis_unit": [
+          0.014083110254721722,
+          -0.9999008280852423
+        ],
+        "sword_removal_verified": true,
+        "sword_stats": {
+          "alpha_levels": 2,
+          "bounds": [
+            106,
+            12,
+            17,
+            116
+          ],
+          "visible_colors": 38,
+          "visible_pixels": 526
+        },
+        "sword_tip_source": [
+          442.81612619137053,
+          50.05504041269057
+        ]
+      }
+    }
+  },
+  "files": {
+    "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/before_after.aseprite": {
+      "bytes": 65320,
+      "sha256": "3ee3bbae95613e521238667e3458274b1722aaea3f9f8f561e9e0d8bacf434df"
+    },
+    "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/board_scale.aseprite": {
+      "bytes": 824680,
+      "sha256": "9a552ab30c557589ca49b2c2b631ccf9396560a1f8a5e335c86ab6ac96ec496a"
+    },
+    "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/closeup.aseprite": {
+      "bytes": 407578,
+      "sha256": "45a98ac09fde952ea3ccd3f76c50c79b22ca2273f00288a2f1964f2a36bf4b29"
+    },
+    "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/comparison.aseprite": {
+      "bytes": 498361,
+      "sha256": "53d76931eb76a7c5b516b834fca555a6582eb5f56152373f084582119a8ad297"
+    },
+    "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/layer_review.aseprite": {
+      "bytes": 51389,
+      "sha256": "c6b7c8257771dfa0ebce2edfce1bc26dff1a761e2267138b463d984fb3ec2f7d"
+    },
+    "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/painted_master.aseprite": {
+      "bytes": 936733,
+      "sha256": "9d52680a76579d3837fd10f54b6ea8a2722e36065aa4c6946f08915cacd75a5f"
+    },
+    "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/painted_native.aseprite": {
+      "bytes": 24736,
+      "sha256": "4409370c2e9c53041a98303fe7dbc7ae3c271889b858298d70fc8f68c8ee4237"
+    },
+    "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/pixel_master.aseprite": {
+      "bytes": 918054,
+      "sha256": "10ae80593f174514f823e9709f809593c5e5b3eec6157654100f6471ab99a0ee"
+    },
+    "assets_src/aseprite/characters/drawn_knight_guard_side/2026-11-03/pixel_native.aseprite": {
+      "bytes": 9834,
+      "sha256": "adb85f48dc9e8a84b63927a50c0fa7b9d87d4df41a9c5ef01acd83078a2c5116"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/before_after.png": {
+      "bytes": 66510,
+      "sha256": "5e01e0efc319f63a4b11fc5c88e259d29c02e290ecab5d912615f44ca59fa965"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/board_scale.png": {
+      "bytes": 708880,
+      "sha256": "ba1a59877866e68fe6c123c251012a6cb549feafdeb44c21ce77659559a7475a"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/closeup.png": {
+      "bytes": 341599,
+      "sha256": "64ce52308d40db5178096d83f794a3f2754552e709722ad8a4cd78c7fda4b996"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/comparison.png": {
+      "bytes": 441236,
+      "sha256": "d10cffef675e582c9b2910045c47665330aa8a5baeaad4a01ebed35b6fbbf325"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/layer_review.png": {
+      "bytes": 58844,
+      "sha256": "fdae728b93d1e2f9cb4263bc2cf3471b1ef168fb70fd946c12e39a875c5ffe3a"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/painted_assembled.png": {
+      "bytes": 21888,
+      "sha256": "b2464f3e19c2e37960633cb24bb5a69a420dd81cff2aeab521a7201bd92e006d"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/painted_board_1x.png": {
+      "bytes": 315562,
+      "sha256": "dc448b984b9eb3189151c4fba7217eee1fcb43ad0e606f0de9fcde7440ca9261"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/painted_body_gloves.png": {
+      "bytes": 20253,
+      "sha256": "a90029aacbb7e9912f0d281fb48dc9c85480a7c18f1cfb3484d12ca0a51b25fb"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/painted_gloves.png": {
+      "bytes": 1338,
+      "sha256": "23a0d0bb1859cc7a7a9c845f8a670defe7cdd3abfea66d3cae1882ebee47a9d7"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/painted_source_assembled.png": {
+      "bytes": 661907,
+      "sha256": "5cbad2e0004a6a7777ca982be3e78cdfda79f08ec06e9019ddb0161f31533857"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/painted_sword.png": {
+      "bytes": 2566,
+      "sha256": "5a3c6194fba9da13415c210f50e477ffd02bc26cf195a851b90e2b1977987b66"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/pixel_assembled.png": {
+      "bytes": 16456,
+      "sha256": "6f51ee2a09587b64558be7efe6eddb75532e6bab519e75ece30aedd5c384ff47"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/pixel_board_1x.png": {
+      "bytes": 315540,
+      "sha256": "6f5aee00c9375d07ad76110c4bb03fa8d050a4ee6207ac6e81bc63048578923e"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/pixel_body_gloves.png": {
+      "bytes": 15298,
+      "sha256": "0171fb7b7ecfb6053cf6dd5976cd5ee780b8186e3abe0ef5e912656e50b44bae"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/pixel_gloves.png": {
+      "bytes": 1206,
+      "sha256": "e547bd27ebb2f1dc8d8933c1e9b3f1cfb8f86e675515ce70bf5a0fc848860575"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/pixel_source_assembled.png": {
+      "bytes": 612865,
+      "sha256": "bbb88a680df0d15ced9a711152a12545e33a7bbacb2b7fb0c3465c989f2f6521"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/pixel_sword.png": {
+      "bytes": 1846,
+      "sha256": "9c86765f39061a1db0baa7a4d6d5863ca28f899cd72c2a7f74db6a6bda575df0"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/raw/drafts/painted_extraction_haze.png": {
+      "bytes": 1557000,
+      "sha256": "c7373d27a197411a9133b3d7a60fc543a03b20e72c23a2a3bf2c43674b907a87"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/raw/drafts/painted_portrait_haze.png": {
+      "bytes": 1471183,
+      "sha256": "07b63d11bee664183af0a40bbccd33e2ba673c103fe628c7c86ce8fa3c71c1e3"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/raw/painted.png": {
+      "bytes": 683060,
+      "sha256": "f7576a15a2d7cfd3d7daf5a370993cf6d9c54edeba4931e537f69df411a1c990"
+    },
+    "assets_src/characters/drawn_knight_guard_side/2026-11-03/raw/pixel.png": {
+      "bytes": 626143,
+      "sha256": "74391d55b6d4b380f1924312b5dbd276d918374e6b602de8a190c42bd045940c"
+    }
+  }
+}

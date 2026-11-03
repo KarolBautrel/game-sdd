@@ -45,7 +45,7 @@ func _ready() -> void:
 	facing.name = "GalleryFacing"
 	for value in DIRECTIONS: facing.add_item(value)
 	facing.select(DIRECTIONS.find(direction))
-	facing.item_selected.connect(func(index: int) -> void: direction=DIRECTIONS[index];frame=0;_refresh())
+	facing.item_selected.connect(func(index: int) -> void: direction=DIRECTIONS[index];frame=0;_reset_card_frames();_refresh())
 	controls.add_child(facing)
 	var motion := OptionButton.new()
 	motion.custom_minimum_size=Vector2(200,64)
@@ -53,7 +53,7 @@ func _ready() -> void:
 	for value in ACTIONS: motion.add_item(value)
 	motion.item_selected.connect(func(index: int) -> void:
 		action=ACTIONS[index];frame=0
-		timer.wait_time=Art.PROCESSED_SHEET_VISUALS["warrior"].frame_seconds[action]
+		_reset_card_frames()
 		_refresh()
 	)
 	controls.add_child(motion)
@@ -75,7 +75,7 @@ func _ready() -> void:
 	_responsive()
 	_build_page()
 	timer = Timer.new()
-	timer.wait_time = .2
+	timer.wait_time = .02
 	timer.timeout.connect(_tick)
 	add_child(timer)
 	timer.start()
@@ -127,21 +127,32 @@ func _build_page() -> void:
 		sprite.position=Vector2(320,316)-Vector2(pivot)
 		stage.add_child(sprite)
 		UI.label(box,"%s  /  %s" % [profile.id,profile.weapon],24,UI.MUTED)
-		cards.append({"id":profile.id,"sprite":sprite})
+		cards.append({"id":profile.id,"sprite":sprite,"frame":0,"phase":0.0})
 	_refresh()
 
 
 func _tick() -> void:
 	if not playing:return
-	var count:=art.processed_sheet_frame_count("warrior",action)
-	frame=mini(frame+1,count-1) if action=="death" else (frame+1)%count
+	frame+=1
+	for card: Dictionary in cards:
+		var unit: Dictionary={"id":card.id,"team":"enemy","visual":{"faction":"original","character":card.id}}
+		card.phase+=timer.wait_time
+		var count:=art.processed_sheet_frame_count(card.id,action)
+		while card.phase>=art.frame_seconds(unit,action,0.2,card.frame):
+			card.phase-=art.frame_seconds(unit,action,0.2,card.frame)
+			if action=="death" and card.frame==count-1:card.phase=0.0;break
+			card.frame=(card.frame+1)%count
 	_refresh()
+
+
+func _reset_card_frames() -> void:
+	for card: Dictionary in cards:card.frame=0;card.phase=0.0
 
 
 func _refresh() -> void:
 	for card: Dictionary in cards:
 		var unit: Dictionary={"id":card.id,"team":"enemy","visual":{"faction":"original","character":card.id}}
-		card.sprite.texture=art.icon(unit,{}, {card.id:direction},{card.id:"%s:%s" % [action,frame]},Vector2i(512,384))
+		card.sprite.texture=art.icon(unit,{}, {card.id:direction},{card.id:"%s:%s" % [action,card.frame]},Vector2i(512,384))
 
 
 func _input(event: InputEvent) -> void:

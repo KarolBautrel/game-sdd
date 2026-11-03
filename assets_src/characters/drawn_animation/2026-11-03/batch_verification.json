@@ -1,0 +1,148 @@
+{
+  "status": "TECHNICAL_PASS_AWAITING_INTERACTIVE",
+  "profiles": [
+    {
+      "id": "knight",
+      "runtime_clips_per_view": 12,
+      "runtime_frames": 544,
+      "source_frames": 544,
+      "facings": [
+        "south",
+        "south_west",
+        "west",
+        "north_west",
+        "north",
+        "north_east",
+        "east",
+        "south_east"
+      ]
+    },
+    {
+      "id": "warrior",
+      "runtime_clips_per_view": 7,
+      "runtime_frames": 352,
+      "source_frames": 360,
+      "facings": [
+        "south",
+        "south_west",
+        "west",
+        "north_west",
+        "north",
+        "north_east",
+        "east",
+        "south_east"
+      ]
+    },
+    {
+      "id": "archer_1",
+      "runtime_clips_per_view": 7,
+      "runtime_frames": 352,
+      "source_frames": 360,
+      "facings": [
+        "south",
+        "south_west",
+        "west",
+        "north_west",
+        "north",
+        "north_east",
+        "east",
+        "south_east"
+      ]
+    },
+    {
+      "id": "rogue_1",
+      "runtime_clips_per_view": 7,
+      "runtime_frames": 352,
+      "source_frames": 360,
+      "facings": [
+        "south",
+        "south_west",
+        "west",
+        "north_west",
+        "north",
+        "north_east",
+        "east",
+        "south_east"
+      ]
+    },
+    {
+      "id": "axe_bandit",
+      "runtime_clips_per_view": 7,
+      "runtime_frames": 352,
+      "source_frames": 360,
+      "facings": [
+        "south",
+        "south_west",
+        "west",
+        "north_west",
+        "north",
+        "north_east",
+        "east",
+        "south_east"
+      ]
+    },
+    {
+      "id": "bandit_spearman",
+      "runtime_clips_per_view": 7,
+      "runtime_frames": 352,
+      "source_frames": 360,
+      "facings": [
+        "south",
+        "south_west",
+        "west",
+        "north_west",
+        "north",
+        "north_east",
+        "east",
+        "south_east"
+      ]
+    }
+  ],
+  "source_views": 48,
+  "drawn_views": 30,
+  "mirrored_views": 18,
+  "source_clips": 386,
+  "source_frames": 2344,
+  "runtime_frames": 2304,
+  "editable_aseprite_files": 398,
+  "independent_weapon_masters": 10,
+  "source_roundtrip": "PASS_ALL_48_VIEWS",
+  "runtime_copy_sha256": "PASS",
+  "earlier_source_identities_preserved": 119,
+  "offline_player": "3579 deterministic timing/canvas checks PASS",
+  "native_summaries": {
+    "runtime": "Drawn animation: 7368 checks, 0 failures",
+    "original_roster": "Original roster: 15679 checks, 0 failures",
+    "lifecycle": "combat_animation_lifecycle_tests: OK",
+    "equipment": "Equipment appearance: 31 checks, 0 failures",
+    "combat": "Godot combat slice validation passed.",
+    "feedback": "combat_feedback_polish_tests: 179 checks, 0 failures"
+  },
+  "user_acceptance": {
+    "knight_south_east_12_clips": "USER_ACCEPTED_2026-11-03",
+    "other_roles_and_directional_runtime": "positive overall user feedback; physical scenarios remain open",
+    "idle_shield_bow_corrections": "USER_ACCEPTED_PREVIEW_2026-11-03"
+  },
+  "continuous_motion_observed_by_agent": false,
+  "desktop_input_used": false,
+  "browser_render": "NOT_RUN: browser access host unavailable",
+  "physical_scenarios": "61 earlier cases and L53-01/L54-01/L54-02 remain NOT_RUN",
+  "refinements": {
+    "status": "TECHNICAL_PASS_USER_ACCEPTED_PREVIEW",
+    "corrected_idle_clips": 96,
+    "drawn_idle_source_roundtrip": "60 clips PASS;36 reflected clips PASS",
+    "pinned_shins_from_y": 232,
+    "shield_inside_views": [
+      "north",
+      "north_east",
+      "north_west"
+    ],
+    "bow_clip_ms": 1800,
+    "bow_release_ms": 1260,
+    "bow_views": 8,
+    "baseline_files_preserved": 938,
+    "before_after_samples": 125,
+    "preview": "refinements/preview.html",
+    "user_acceptance": "USER_ACCEPTED_PREVIEW_2026-11-03"
+  }
+}

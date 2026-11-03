@@ -1,0 +1,61 @@
+{
+  "schema": "sdd.static-art-proposal-v1",
+  "date": "2026-11-03",
+  "owner": "presentation020",
+  "status": "awaiting_user_appearance_selection",
+  "tool": "built-in image_gen.imagegen -> Aseprite 1.3.17.2 batch Lua",
+  "provenance": "Two original generated drafts, unchanged originals in raw/, prompts in prompts.json; no downloaded character artwork.",
+  "references": [
+    "assets_src/characters/mpfb_warden_boots_only/2026-11-02/proposal.png",
+    "assets/combat/environment/floors/earth.png",
+    "assets/combat/environment/floors/woodland.png"
+  ],
+  "native_canvas": [280, 280],
+  "foot_pivot": [140, 229],
+  "pixels_per_metre": 100,
+  "approximate_camera_elevation_degrees": 18,
+  "runtime_imported": false,
+  "animation_delivered": false,
+  "collision_role": "none; visual proposal only",
+  "assets": [
+    {
+      "id": "drawn_knight_a_pixel",
+      "role": "detailed pixel knight appearance proposal",
+      "frame_count": 1,
+      "facing": "three_quarter_screen_right",
+      "native": "pixel_assembled.png",
+      "body": "pixel_body.png",
+      "rigid_weapon": "pixel_sword.png",
+      "body_size": [63, 171],
+      "sword_size": [19, 98],
+      "grip_canvas": [168, 144],
+      "source": "assets_src/aseprite/characters/drawn_knight/2026-11-03/pixel_native.aseprite",
+      "full_resolution_source": "assets_src/aseprite/characters/drawn_knight/2026-11-03/pixel_master.aseprite",
+      "filter": "nearest",
+      "alpha": "binary",
+      "visible_colors": 45,
+      "palette_colors_available": 47,
+      "approval": "pending"
+    },
+    {
+      "id": "drawn_knight_b_painted",
+      "role": "painted 2D knight appearance proposal",
+      "frame_count": 1,
+      "facing": "three_quarter_screen_right",
+      "native": "painted_assembled.png",
+      "body": "painted_body.png",
+      "rigid_weapon": "painted_sword.png",
+      "body_size": [63, 171],
+      "sword_size": [19, 98],
+      "grip_canvas": [168, 144],
+      "source": "assets_src/aseprite/characters/drawn_knight/2026-11-03/painted_native.aseprite",
+      "full_resolution_source": "assets_src/aseprite/characters/drawn_knight/2026-11-03/painted_master.aseprite",
+      "normalization_filter": "bilinear",
+      "alpha": "partial edge alpha retained",
+      "approval": "pending"
+    }
+  ],
+  "review_boards": ["comparison.png", "board_scale.png", "closeup.png"],
+  "file_identity_receipt": "verification.json",
+  "build_command": "python tools/qa/build_drawn_knight_static.py"
+}

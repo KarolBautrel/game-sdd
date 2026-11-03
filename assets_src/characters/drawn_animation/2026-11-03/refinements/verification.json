@@ -1,0 +1,18 @@
+{
+  "status": "TECHNICAL_PASS_USER_ACCEPTED_PREVIEW",
+  "corrected_idle_clips": 96,
+  "drawn_idle_source_roundtrip": "60 clips PASS;36 reflected clips PASS",
+  "pinned_shins_from_y": 232,
+  "shield_inside_views": [
+    "north",
+    "north_east",
+    "north_west"
+  ],
+  "bow_clip_ms": 1800,
+  "bow_release_ms": 1260,
+  "bow_views": 8,
+  "baseline_files_preserved": 938,
+  "before_after_samples": 125,
+  "preview": "refinements/preview.html",
+  "user_acceptance": "USER_ACCEPTED_PREVIEW_2026-11-03"
+}

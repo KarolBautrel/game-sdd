@@ -186,6 +186,26 @@ does not satisfy them. All55 previous cases also remain NOT_RUN.
 
 ## Results and defects
 
+## Drawn character animation batch (presentation022)
+
+All61 earlier physical cases remain NOT_RUN. The separate source-preview result
+below is explicit user feedback and does not close the new in-game cases.
+
+User2026-11-03 subsequently praises the overall batch and requests corrections:
+idle sliding, rear shield surface and bow draw/aim. This feedback does not record
+a completed ordinary campaign or close the deferred physical scenarios.
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L52-V01 | 52 | User watches supplied12-clip3/4 knight player at normal speed. | User approves neutral/combat movement and whole-body actions. | PASS_USER_REPORTED2026-11-03: explicitly says animations are great and asks to continue. |
+| L53-01 | 53 | Native drawn gallery: all six roles, seven primary clips plus five additional knight clips, eight directions, pause/step/restart and floors at1080p/1440p/4K. | Readable face/gloves/gear, natural movement, ground pivots, no clipping; explicitly review mirrored costume/weapon handedness. | NOT_RUN |
+| L54-01 | 54 | Ordinary battle: neutral/near-enemy guard, movement, attack anticipation/impact/recovery, hit/death, interruption/reset/reload and normal victory/defeat. | Complete timings and final corpse hold, correct aim/grips/feet/sorting, no stuck input; resolver unchanged. | NOT_RUN |
+| L54-02 | 54 | Campaign equip sword/bow and restart; ordinary expedition battle/return/settlement with the replaced subset and remaining old families. | Correct weapon-selected profiles, unchanged saves/ownership/costs/rewards and coherent portraits/world/UI; close and audit log. | NOT_RUN |
+
+| L55-V01 | 55 | User reviews idle contact, rear shield interior and stronger/slower bow draw in focused before/after preview. | Corrections match requested appearance and motion. | PASS_USER_REPORTED2026-11-03: explicitly approves the corrections, "Tak ma byc". |
+
+## Results and defects (continued)
+
 No live session started. Add observed results per scenario here, link screenshots
 or logs when available, and record any defect's owner/slice/fix/retest evidence.
 Future stage specs may refine their scenarios before implementation; keep this

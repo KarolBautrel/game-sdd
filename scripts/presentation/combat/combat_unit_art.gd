@@ -4,6 +4,7 @@ class_name CombatUnitArt
 const AssetCatalog := preload("res://scripts/presentation/shared/asset_catalog.gd")
 
 const PartyRoster := preload("res://scripts/domain/party_roster.gd")
+const DrawnCatalog := preload("res://scripts/presentation/combat/drawn_animation_catalog.gd")
 
 const UNIT_VISUALS := {
 	"unit_player_001": {"faction": "heroes", "character": "warrior"},
@@ -35,6 +36,7 @@ static func _original_visuals() -> Dictionary:
 			"frame_seconds": data.frame_seconds,
 			"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
 			"frame_counts": data.frame_counts}
+	result.merge(DrawnCatalog.visual_configs(),true)
 	for alias: String in data.aliases:
 		result[alias] = result[data.aliases[alias]]
 	return result
@@ -58,6 +60,8 @@ func idle_top(unit: Dictionary, legacy_size: Vector2i) -> float:
 func icon(unit: Dictionary, state: Dictionary, facing: Dictionary, visual_actions: Dictionary, _icon_size: Vector2i) -> Texture2D:
 	var direction := unit_direction(unit, state, facing)
 	var action := str(visual_actions.get(unit["id"], default_visual_action(unit, state)))
+	if is_drawn_unit(unit) and action.get_slice(":",0)=="walk" and default_visual_action(unit,state)=="combat_idle":
+		action=action.replace("walk","combat_walk")
 	# Imported textures are already at the native shared world scale. Reuse them.
 	return AssetCatalog.texture(texture_path(unit, direction, action))
 
@@ -89,7 +93,7 @@ func processed_sheet_texture_path(character: String, direction: String, visual_a
 	if not PROCESSED_SHEET_VISUALS.has(character):
 		return ""
 	var config: Dictionary = PROCESSED_SHEET_VISUALS[character]
-	var action := processed_sheet_action(visual_action)
+	var action := processed_sheet_action(visual_action,character)
 	var frames: Dictionary = config.get("frames", {})
 	var frame_index := processed_sheet_frame_index(character, visual_action, int(frames.get(action, 0)))
 	var side := direction
@@ -110,7 +114,7 @@ func processed_sheet_frame_index(character: String, visual_action: String, fallb
 	var frame_text := visual_action.get_slice(":", 1)
 	if not frame_text.is_valid_int():
 		return fallback
-	var action := processed_sheet_action(visual_action)
+	var action := processed_sheet_action(visual_action,character)
 	var count := processed_sheet_frame_count(character, action)
 	if count <= 0:
 		return fallback
@@ -120,7 +124,7 @@ func processed_sheet_frame_index(character: String, visual_action: String, fallb
 func processed_sheet_frame_count(character: String, visual_action: String) -> int:
 	if not PROCESSED_SHEET_VISUALS.has(character):
 		return 1
-	var action := processed_sheet_action(visual_action)
+	var action := processed_sheet_action(visual_action,character)
 	var config: Dictionary = PROCESSED_SHEET_VISUALS[character]
 	var counts: Dictionary = config.get("frame_counts", {})
 	return maxi(1, int(counts.get(action, 1)))
@@ -130,10 +134,15 @@ func processed_sheet_corpse_visual_action(character: String) -> String:
 	return "death:%s" % maxi(0, processed_sheet_frame_count(character, "death") - 1)
 
 
-func processed_sheet_action(visual_action: String) -> String:
+func processed_sheet_action(visual_action: String, character: String = "") -> String:
 	var base_action := visual_action
 	if visual_action.contains(":"):
 		base_action = visual_action.get_slice(":", 0)
+	if is_drawn_character(character):
+		var aliases: Dictionary={"pose":"neutral_idle","walk":"neutral_walk","combat":"attack","status_reaction":"hit"}
+		var resolved: String=aliases.get(base_action,base_action)
+		return resolved if PROCESSED_SHEET_VISUALS[character].frame_counts.has(resolved) else "neutral_idle"
+	if base_action=="combat_walk":return "walk"
 	if base_action == "combat_idle":
 		return "pose"
 	if base_action == "status_reaction":
@@ -166,12 +175,47 @@ func sprite_offset(unit: Dictionary, legacy_size: Vector2i) -> Vector2:
 	return Vector2(float(legacy_size.x) / 2.0 - pivot.x, legacy_size.y - pivot.y)
 
 
-func frame_seconds(unit: Dictionary, action: String, fallback: float) -> float:
+func frame_seconds(unit: Dictionary, action: String, fallback: float, frame: int = 0) -> float:
 	if unit.is_empty():
 		return fallback
 	var character := str(unit_visual_config(unit).get("character", ""))
 	var config: Dictionary = PROCESSED_SHEET_VISUALS.get(character, {})
+	if config.get("drawn",false):
+		var durations: Array=config.durations_ms[processed_sheet_action(action,character)]
+		return float(durations[posmod(frame,durations.size())])/1000.0
 	return float(config.get("frame_seconds", {}).get(action, fallback))
+
+
+func is_drawn_character(character: String) -> bool:
+	return bool(PROCESSED_SHEET_VISUALS.get(character,{}).get("drawn",false))
+
+
+func is_drawn_unit(unit: Dictionary) -> bool:
+	return not unit.is_empty() and is_drawn_character(str(unit_visual_config(unit).get("character","")))
+
+
+func clip_seconds(unit: Dictionary, action: String, fallback: float, hold_final: bool = true) -> float:
+	if not is_drawn_unit(unit):return fallback
+	var character: String=unit_visual_config(unit).character
+	var durations: Array=PROCESSED_SHEET_VISUALS[character].durations_ms[processed_sheet_action(action,character)]
+	var total:=0.0
+	for i in range(durations.size() if hold_final else maxi(0,durations.size()-1)):total+=float(durations[i])/1000.0
+	return total
+
+
+func impact_seconds(unit: Dictionary, fallback: float) -> float:
+	if not is_drawn_unit(unit):return fallback
+	var character: String=unit_visual_config(unit).character
+	var config: Dictionary=PROCESSED_SHEET_VISUALS[character]
+	var total:=0.0
+	for i in range(int(config.impact_frame)):total+=float(config.durations_ms.attack[i])/1000.0
+	return total
+
+
+func movement_seconds(unit: Dictionary, distance_pixels: float, fallback: float) -> float:
+	if not is_drawn_unit(unit):return fallback
+	var character: String=unit_visual_config(unit).character
+	return clip_seconds(unit,"walk",fallback)*distance_pixels/float(PROCESSED_SHEET_VISUALS[character].walk_stride_pixels)
 
 
 func default_visual_action(unit: Dictionary, state: Dictionary) -> String:

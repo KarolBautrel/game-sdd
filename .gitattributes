@@ -19,6 +19,8 @@ assets_src/characters/mpfb_warden/** -text -whitespace
 assets_src/characters/mpfb_warden_outfit/** -text -whitespace
 assets_src/characters/mpfb_warden_boots_only/** -text -whitespace
 assets_src/characters/warden_motion_pilot/** -text -whitespace
+assets_src/characters/drawn_animation/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+assets_src/characters/drawn_knight*/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
 
 # Preserve upstream formatting in vendored code and original license notices.
 assets_src/vendor/** -whitespace
