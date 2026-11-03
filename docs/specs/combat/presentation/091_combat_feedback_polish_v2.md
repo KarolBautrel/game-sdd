@@ -38,3 +38,6 @@ temporary display values, rejected command reason/resource preservation, result
 rendering and top-edge resource/target geometry. Existing targeting, floating
 text, animation lifecycle and domain/beta suites remain gates. Live L10-01/02
 cover visible hit/miss/status, input unlock, normal victory/defeat and return.
+The terminal test awaits actual animated commit with a bounded6second deadline,
+so the selected painted bow/death timings are not mistaken for a stuck turn by
+a fixed short sleep. This changes verification only, not gameplay durations.

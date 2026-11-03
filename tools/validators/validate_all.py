@@ -11,6 +11,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from tools.assets.build_catalogue import catalogue_errors
+from tools.validators.hero_equipment_identity import errors as hero_identity_errors
+from tools.validators.tactical_roster import errors as tactical_roster_errors
 from tools.validators.combat_authoring import catalogue_errors as combat_authoring_errors, encounter_errors
 
 try:
@@ -610,6 +612,8 @@ def main() -> int:
     errors.extend(dungeon_quality_errors())
     errors.extend(combat_authoring_errors())
     errors.extend(validate_campaign_items())
+    errors.extend(hero_identity_errors(ROOT))
+    errors.extend(tactical_roster_errors(ROOT))
     errors.extend(validate_town_trade())
     errors.extend(validate_party_levels())
 

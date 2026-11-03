@@ -1,0 +1,160 @@
+{
+  "schema": "sdd.drawn-roster-v1",
+  "profiles": [
+    {
+      "id": "bran_greatsword",
+      "label": "Bran - greatsword",
+      "enabled": true,
+      "root": "res://assets/combat/characters/identity/bran_greatsword",
+      "canvas": [
+        384,
+        320
+      ],
+      "pivot": [
+        192,
+        270
+      ],
+      "facings": [
+        "south",
+        "south_west",
+        "west",
+        "north_west",
+        "north",
+        "north_east",
+        "east",
+        "south_east"
+      ],
+      "frame_counts": {
+        "neutral_idle": 4,
+        "combat_idle": 4,
+        "neutral_walk": 8,
+        "combat_walk": 8,
+        "attack": 8,
+        "hit": 4,
+        "death": 8
+      },
+      "durations_ms": {
+        "neutral_idle": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "combat_idle": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "neutral_walk": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "combat_walk": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "attack": [
+          160,
+          120,
+          100,
+          70,
+          60,
+          100,
+          170,
+          190
+        ],
+        "hit": [
+          90,
+          90,
+          130,
+          180
+        ],
+        "death": [
+          150,
+          150,
+          140,
+          130,
+          130,
+          150,
+          200,
+          1000
+        ]
+      },
+      "impact_frame": 4,
+      "walk_stride_pixels": 160,
+      "pixels_per_metre": 100,
+      "source_roundtrip": true,
+      "view_sources": {
+        "south": {
+          "source": "assets_src/characters/hero_identity/bran/greatsword/south",
+          "kind": "drawn",
+          "mirror_of": null,
+          "handedness": "source drawing",
+          "method": "native Bran head composition / retained compatible rear"
+        },
+        "south_west": {
+          "source": "assets_src/characters/hero_identity/bran/greatsword/south_west",
+          "kind": "mirror",
+          "mirror_of": "south_east",
+          "handedness": "reflected",
+          "method": "disclosed reflection of south_east"
+        },
+        "west": {
+          "source": "assets_src/characters/hero_identity/bran/greatsword/west",
+          "kind": "mirror",
+          "mirror_of": "east",
+          "handedness": "reflected",
+          "method": "disclosed reflection of east"
+        },
+        "north_west": {
+          "source": "assets_src/characters/hero_identity/bran/greatsword/north_west",
+          "kind": "mirror",
+          "mirror_of": "north_east",
+          "handedness": "reflected",
+          "method": "disclosed reflection of north_east"
+        },
+        "north": {
+          "source": "assets_src/characters/hero_identity/bran/greatsword/north",
+          "kind": "drawn",
+          "mirror_of": null,
+          "handedness": "source drawing",
+          "method": "native Bran head composition / retained compatible rear"
+        },
+        "north_east": {
+          "source": "assets_src/characters/hero_identity/bran/greatsword/north_east",
+          "kind": "drawn",
+          "mirror_of": null,
+          "handedness": "source drawing",
+          "method": "native Bran head composition / retained compatible rear"
+        },
+        "east": {
+          "source": "assets_src/characters/hero_identity/bran/greatsword/east",
+          "kind": "drawn",
+          "mirror_of": null,
+          "handedness": "source drawing",
+          "method": "native Bran head composition / retained compatible rear"
+        },
+        "south_east": {
+          "source": "assets_src/characters/hero_identity/bran/greatsword/south_east",
+          "kind": "drawn",
+          "mirror_of": null,
+          "handedness": "source drawing",
+          "method": "native Bran head composition / retained compatible rear"
+        }
+      }
+    }
+  ]
+}

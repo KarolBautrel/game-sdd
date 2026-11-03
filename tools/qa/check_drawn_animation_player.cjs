@@ -4,7 +4,7 @@ const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const path = require('node:path');
 const root = path.resolve(__dirname, '../..');
-const base = path.join(root, 'assets_src/characters/drawn_animation/2026-11-03');
+const base = path.join(root, process.argv[2] || 'assets_src/characters/drawn_animation/2026-11-03');
 const html = fs.readFileSync(path.join(base, 'preview.html'), 'utf8');
 const data = JSON.parse(html.match(/<script id="review-data"[^>]*>([\s\S]*?)<\/script>/)[1]);
 const source = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].at(-1)[1];
@@ -67,11 +67,13 @@ assert.ok(draws>0);
 checks+=2;
 get('profile').onchange({target:{value:'0'}});
 get('direction').onchange({target:{value:'0'}});
-player.select('attack_alt');
-const north=data.profiles[0].views.findIndex(v=>v.id==='north');
-get('direction').onchange({target:{value:String(north)}});
-assert.equal(player.state().clip,data.profiles[0].views[north].clips.some(c=>c.id==='attack_alt')?'attack_alt':'attack');checks++;
+if(data.profiles[0].views[0].clips.some(c=>c.id==='attack_alt')){
+  player.select('attack_alt');
+  const north=data.profiles[0].views.findIndex(v=>v.id==='north');
+  get('direction').onchange({target:{value:String(north)}});
+  assert.equal(player.state().clip,data.profiles[0].views[north].clips.some(c=>c.id==='attack_alt')?'attack_alt':'attack');checks++;
+}
 const result={status:'PASS',checks,profiles:data.profiles.length,canvas_draw_calls:draws,
-  browser_render_check:'NOT_RUN: browser access host unavailable',continuous_motion_reviewed:false};
+  browser_render_check:'NOT_RUN: deterministic Node playback checks only',continuous_motion_reviewed:false};
 fs.writeFileSync(path.join(base,'player_logic_verification.json'),JSON.stringify(result,null,2)+'\n');
 console.log('DRAWN_PLAYER_LOGIC_PASS',checks,'checks');

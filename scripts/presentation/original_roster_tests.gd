@@ -31,6 +31,8 @@ func _run() -> void:
 		check(art.processed_sheet_corpse_visual_action(id)=="death:7",id+" terminal corpse")
 		var views: Dictionary={}
 		for direction: String in data.camera.yaw:
+			check(art.unit_direction(unit, {}, {unit.id:direction}) == direction, id + direction + " archive keeps requested view")
+			check(art.icon(unit, {}, {unit.id:direction}, {unit.id:"pose:0"}, Vector2i(384,240)) == Assets.texture(art.processed_sheet_texture_path(id,direction,"pose:0")), id + direction + " archive icon bypasses tactical remapping")
 			for action: String in data.frame_counts:
 				var count:=int(data.frame_counts[action])
 				check(art.processed_sheet_frame_count(id,action)==count,id+action+" authored count")

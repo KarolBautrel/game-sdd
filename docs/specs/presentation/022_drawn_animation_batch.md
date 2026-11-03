@@ -1,5 +1,11 @@
 # Drawn animation batch: knight, weapon profiles and playable character subset
 
+Latest tactical-view override2026-11-03: presentation024/stage62 displays only
+south_east/south_west in battle, across all actions/families. Keep all eight
+authored views and the existing galleries/sources for future use. Earlier
+eight-direction runtime requirements below are superseded at the battle sprite
+selection boundary; no new city movement or raster regeneration is authorized.
+
 User2026-11-03 accepts painted pose A from stage51 as the DEFAULT two-handed
 sword combat guard; the side guard is no longer that default. Retain the previous
 neutral/rest pose for noncombat presentation. The comment that both poses may

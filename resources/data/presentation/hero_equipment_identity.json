@@ -1,0 +1,12 @@
+{
+  "schema": "sdd.hero-equipment-identity-v1",
+  "heroes": {
+    "hero_bran": {
+      "combat_unit_id": "unit_player_001",
+      "kits": [
+        {"weapon": "sword", "offhand": "shield", "visual": {"faction": "heroes", "character": "warrior"}},
+        {"weapon": "greatsword", "offhand": "none", "visual": {"faction": "heroes", "character": "bran_greatsword"}}
+      ]
+    }
+  }
+}

@@ -13,7 +13,7 @@ def main():
     parser.add_argument('--import-assets',action='store_true')
     parser.add_argument('--require-all',action='store_true')
     parser.add_argument('--regression',action='store_true')
-    parser.add_argument('--only',nargs='+',choices=['runtime','battle','original_roster','lifecycle','equipment','combat','feedback'])
+    parser.add_argument('--only',nargs='+',choices=['runtime','battle','tactical','enemy_pilot','original_roster','lifecycle','equipment','combat','feedback'])
     args=parser.parse_args()
     logs=ROOT/'artifacts/drawn-animation';logs.mkdir(parents=True,exist_ok=True)
     jobs=[]
@@ -23,6 +23,8 @@ def main():
     if args.regression or args.only:
         for name,script,marker in [
             ('battle','res://scripts/presentation/drawn_battle_review_tests.gd','Drawn battle review:'),
+            ('tactical','res://scripts/presentation/tactical_facing_tests.gd','Tactical facing:'),
+            ('enemy_pilot','res://scripts/presentation/painted_enemy_pilot_tests.gd','Painted enemy pilot:'),
             ('original_roster','res://scripts/presentation/original_roster_tests.gd','Original roster:'),
             ('lifecycle','res://scripts/presentation/combat_animation_lifecycle_tests.gd','combat_animation_lifecycle_tests: OK'),
             ('equipment','res://scripts/session/equipment_appearance_tests.gd','Equipment appearance:'),

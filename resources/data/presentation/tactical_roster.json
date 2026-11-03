@@ -1,0 +1,344 @@
+{
+  "schema": "sdd.drawn-roster-v1",
+  "profiles": [
+    {
+      "id": "painted_bandit_archer",
+      "label": "Bandit archer",
+      "enabled": true,
+      "root": "res://assets/combat/characters/tactical/painted_bandit_archer",
+      "canvas": [
+        384,
+        320
+      ],
+      "pivot": [
+        192,
+        270
+      ],
+      "facings": [
+        "south_east",
+        "south_west"
+      ],
+      "frame_counts": {
+        "neutral_idle": 4,
+        "neutral_walk": 8,
+        "combat_idle": 4,
+        "combat_walk": 8,
+        "attack": 8,
+        "hit": 4,
+        "death": 8
+      },
+      "durations_ms": {
+        "neutral_idle": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "neutral_walk": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "combat_idle": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "combat_walk": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "attack": [
+          160,
+          200,
+          220,
+          300,
+          380,
+          80,
+          200,
+          260
+        ],
+        "hit": [
+          90,
+          90,
+          130,
+          180
+        ],
+        "death": [
+          150,
+          150,
+          140,
+          130,
+          130,
+          150,
+          200,
+          1000
+        ]
+      },
+      "impact_frame": 5,
+      "walk_stride_pixels": 160,
+      "pixels_per_metre": 100,
+      "body_height": 171,
+      "idle_lock_y": 232,
+      "source_roundtrip": true,
+      "view_sources": {
+        "south_east": {
+          "source": "assets_src/characters/tactical_batch/2026-11-03/painted_bandit_archer",
+          "kind": "drawn",
+          "mirror_of": null,
+          "handedness": "source drawing"
+        },
+        "south_west": {
+          "source": "assets_src/characters/tactical_batch/2026-11-03/painted_bandit_archer/directions/south_west",
+          "kind": "mirror",
+          "mirror_of": "south_east",
+          "handedness": "reflected"
+        }
+      }
+    },
+    {
+      "id": "painted_bandit_guard",
+      "label": "Bandit shield fighter",
+      "enabled": true,
+      "root": "res://assets/combat/characters/tactical/painted_bandit_guard",
+      "canvas": [
+        384,
+        320
+      ],
+      "pivot": [
+        192,
+        270
+      ],
+      "facings": [
+        "south_east",
+        "south_west"
+      ],
+      "frame_counts": {
+        "neutral_idle": 4,
+        "neutral_walk": 8,
+        "combat_idle": 4,
+        "combat_walk": 8,
+        "attack": 8,
+        "hit": 4,
+        "death": 8,
+        "block": 4
+      },
+      "durations_ms": {
+        "neutral_idle": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "neutral_walk": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "combat_idle": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "combat_walk": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "attack": [
+          160,
+          120,
+          100,
+          70,
+          60,
+          100,
+          170,
+          190
+        ],
+        "hit": [
+          90,
+          90,
+          130,
+          180
+        ],
+        "death": [
+          150,
+          150,
+          140,
+          130,
+          130,
+          150,
+          200,
+          1000
+        ],
+        "block": [
+          120,
+          160,
+          220,
+          180
+        ]
+      },
+      "impact_frame": 4,
+      "walk_stride_pixels": 160,
+      "pixels_per_metre": 100,
+      "body_height": 171,
+      "idle_lock_y": 232,
+      "source_roundtrip": true,
+      "view_sources": {
+        "south_east": {
+          "source": "assets_src/characters/tactical_batch/2026-11-03/painted_bandit_guard",
+          "kind": "drawn",
+          "mirror_of": null,
+          "handedness": "source drawing"
+        },
+        "south_west": {
+          "source": "assets_src/characters/tactical_batch/2026-11-03/painted_bandit_guard/directions/south_west",
+          "kind": "mirror",
+          "mirror_of": "south_east",
+          "handedness": "reflected"
+        }
+      },
+      "action_aliases": {
+        "status_reaction": "block"
+      }
+    },
+    {
+      "id": "painted_wolf",
+      "label": "Grey wolf",
+      "enabled": true,
+      "root": "res://assets/combat/characters/tactical/painted_wolf",
+      "canvas": [
+        384,
+        320
+      ],
+      "pivot": [
+        192,
+        270
+      ],
+      "facings": [
+        "south_east",
+        "south_west"
+      ],
+      "frame_counts": {
+        "neutral_idle": 4,
+        "neutral_walk": 8,
+        "combat_idle": 4,
+        "combat_walk": 8,
+        "attack": 8,
+        "hit": 4,
+        "death": 8
+      },
+      "durations_ms": {
+        "neutral_idle": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "neutral_walk": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "combat_idle": [
+          250,
+          250,
+          250,
+          250
+        ],
+        "combat_walk": [
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125,
+          125
+        ],
+        "attack": [
+          180,
+          160,
+          120,
+          80,
+          80,
+          120,
+          160,
+          200
+        ],
+        "hit": [
+          90,
+          90,
+          130,
+          180
+        ],
+        "death": [
+          150,
+          150,
+          140,
+          130,
+          130,
+          150,
+          200,
+          1000
+        ]
+      },
+      "impact_frame": 3,
+      "walk_stride_pixels": 160,
+      "pixels_per_metre": 100,
+      "body_height": 95,
+      "idle_lock_y": 250,
+      "source_roundtrip": true,
+      "view_sources": {
+        "south_east": {
+          "source": "assets_src/characters/tactical_batch/2026-11-03/painted_wolf",
+          "kind": "drawn",
+          "mirror_of": null,
+          "handedness": "source drawing"
+        },
+        "south_west": {
+          "source": "assets_src/characters/tactical_batch/2026-11-03/painted_wolf/directions/south_west",
+          "kind": "mirror",
+          "mirror_of": "south_east",
+          "handedness": "reflected"
+        }
+      }
+    }
+  ],
+  "replacements": {
+    "bandit_archer": "painted_bandit_archer",
+    "wolf_atlas": "painted_wolf"
+  },
+  "archetype_replacements": {
+    "raider_archer": "painted_bandit_archer",
+    "raider_shieldman": "painted_bandit_guard"
+  }
+}

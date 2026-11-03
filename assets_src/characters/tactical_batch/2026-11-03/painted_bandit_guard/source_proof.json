@@ -1,0 +1,131 @@
+{
+  "authority": "saved edited Aseprite cels",
+  "clips": [
+    {
+      "action": "neutral_idle",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "neutral_walk",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "combat_idle",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "combat_walk",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "attack",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "hit",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "death",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "block",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "neutral_idle",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "neutral_walk",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "combat_idle",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "combat_walk",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "attack",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "hit",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "death",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "block",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_west"
+    }
+  ],
+  "id": "painted_bandit_guard",
+  "idle_lock_y": 232,
+  "status": "PASS",
+  "views": [
+    {
+      "id": "south_east"
+    },
+    {
+      "id": "south_west",
+      "mirror_of": "south_east"
+    }
+  ],
+  "source_hashes": {
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_east/attack.aseprite": "c543fa4ae736d7df36141e7b0c5f4e23d6949845e82c3abc5e44b3d38f236bb3",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_east/block.aseprite": "55e157500d8b7ef870cbc3a1184a278176742a3b04f44a48acf4088eb92f2f2c",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_east/combat_idle.aseprite": "54da3bce1825bdda811f9306e2143d43a71626b02901418b93a9429ea00cc300",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_east/combat_walk.aseprite": "c5df7e84500837289cb7896faaeb2c54816db6f1cc1cfb92fa07c256754a4660",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_east/death.aseprite": "8a83a76cf5bb25b8de37a57c22f0f63186920a30165148e03920ee97d83e2d92",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_east/hit.aseprite": "ed5a5c1339e4aea4618fc6086ff63a497857301678cbcd2d3fa061701f0c06cb",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_east/neutral_idle.aseprite": "dd2aceef605ed297ac053f33dc67eb9b373aaebd2f76958c13d75e346163939f",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_east/neutral_walk.aseprite": "2edfa155b14d5e07604996b9f9fd6826f64b05399dc7772c625dad6b5f593814",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_west/attack.aseprite": "d9dc5a49491566f5bc5c38bcb2a12bc5d6eed998055c75f87a3884256f0c663a",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_west/block.aseprite": "3931daed6c859e5f524ee101ab40f813277371527dea822d05a02208dd67ba1c",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_west/combat_idle.aseprite": "eef214f6a4091b1c009bce1a72bb76c55cc7db610d872536cb093de1872b5d41",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_west/combat_walk.aseprite": "5b7194cd2bc2db618cc512ad0d02d5f338b872adcde47f4e24e2fb926b714959",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_west/death.aseprite": "fa65095652e25c6e84256d2f9de4303b803656e789a95221bccd7d6652aba022",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_west/hit.aseprite": "9a4be955f3a953a3a89b436a47e55d132d84dea6e17db9ffb392c2c94f6ee4fc",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_west/neutral_idle.aseprite": "9f378286172c364f3a200008214c971194306946eeb86dde5f9fccfbee845e95",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_bandit_guard/south_west/neutral_walk.aseprite": "400e6f142293baffed4f43fd3a3eedc6752d05735054ca75f18c86467c760dbf"
+  }
+}

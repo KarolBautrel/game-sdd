@@ -41,6 +41,10 @@
     {
       "item_id": "weathered_cuirass",
       "buy_price": 18
+    },
+    {
+      "item_id": "hero_greatsword",
+      "buy_price": 20
     }
   ]
 }

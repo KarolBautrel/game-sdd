@@ -16130,6 +16130,2470 @@
       "height": 320
     },
     {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_east_attack_000.png",
+      "bytes": 27264,
+      "sha256": "99b7c3c77fb308ffe7455ca87fbc003c37eb3247dcf4daa1630823eb002ae000",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_east_attack_001.png",
+      "bytes": 28494,
+      "sha256": "78d3428bbdcd60db95c20d7830c785b2e4a34af9842b728e93f75154dac18f24",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_east_attack_002.png",
+      "bytes": 27893,
+      "sha256": "b431fb41020fb662828761efcf0b1133862ae7f21f03d6ddd39aa3bac9b4445a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_east_attack_003.png",
+      "bytes": 28371,
+      "sha256": "243f5a98b97f140313e34bc2c438569ae06a44782b6828224845969d773241dd",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_east_attack_004.png",
+      "bytes": 27899,
+      "sha256": "9f0066cdb063dcc3a66a6fe0bc3811460b93b1161f7f6a90709fd3765620b6b7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_east_attack_005.png",
+      "bytes": 27589,
+      "sha256": "494d494c8d8637ea7c273dd249ca43ec69d8efb2c60e9cb5a45107191c96f413",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_east_attack_006.png",
+      "bytes": 26316,
+      "sha256": "db81aa8990eb5aeb36501c9bd3c884696fa337d768dd250339b6adad5a429a65",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_east_attack_007.png",
+      "bytes": 25741,
+      "sha256": "4abf54ac6abbeb34101ed170223ac09d7d2f43f3a2aaeb105c3da7a5867b0557",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_attack_000.png",
+      "bytes": 21664,
+      "sha256": "d4687975ee564f001e9f2974df393e66283183afba1563dcdd64f8a1bf56a391",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_attack_001.png",
+      "bytes": 22765,
+      "sha256": "e9278de185aa44c6bacfb7856d516eb2b5618ceb26f78114a8f0a00d4f2786cd",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_attack_002.png",
+      "bytes": 23629,
+      "sha256": "35ee5387f8830f6aa3bb8aa13c47cc13da454723fba6d60f845f7124426906f4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_attack_003.png",
+      "bytes": 25018,
+      "sha256": "09cfca2ba4366b0734498f25864d2d3d10c08158ffae79683bc74e19bea2b20d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_attack_004.png",
+      "bytes": 23285,
+      "sha256": "ccd6032cdb3090937954a52f76429a4d0e7e9a5ac21febbce15cccb3adf4508e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_attack_005.png",
+      "bytes": 25040,
+      "sha256": "b9b1bab1e5d7956b236bb46162991129a838bebd7af40a029d00da4ed9c5a462",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_attack_006.png",
+      "bytes": 23429,
+      "sha256": "291553869cd8efd313be342e37ea3c4a44ef204a115fb95ac7c05f5dae11dd54",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_attack_007.png",
+      "bytes": 21606,
+      "sha256": "42a36831ee096c080029ab435ee8b086bdc4537ecbc8b067aad5b5a252ccf62a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_east_attack_000.png",
+      "bytes": 27275,
+      "sha256": "758f1495ce98e83b42b7ac5474e37429a74ec3998a05783b7b0432eecc2b1483",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_east_attack_001.png",
+      "bytes": 28231,
+      "sha256": "57195cb62dd5b768f6c8314ec4912c2b02ce2aeabf2ddf91e4567bf156120a54",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_east_attack_002.png",
+      "bytes": 28217,
+      "sha256": "dba56810d3dbfcafd0d3d4277b97b36b98c2aa8ac7051bd3e69129e2e9e02089",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_east_attack_003.png",
+      "bytes": 29644,
+      "sha256": "ed2c3bd66f81409cf846dc09c97bf1b21ef693725c857b61504b12e86692a694",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_east_attack_004.png",
+      "bytes": 30072,
+      "sha256": "983e44ff90e5090b31ef3f509f1842c85b4f21454fe0047bc78a598b6eadb0ca",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_east_attack_005.png",
+      "bytes": 27901,
+      "sha256": "c3bc3fff85b111353ed88bde3b1aeea0205778fb3f386b71f902967957f91cbc",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_east_attack_006.png",
+      "bytes": 28336,
+      "sha256": "d1e019496e5adc83e545659b3ceb729bd49121f9d435cf1be8dbcb99320f5e5c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_east_attack_007.png",
+      "bytes": 27338,
+      "sha256": "96cfc33fedbeb5c304efc57b1d0e148e4d10d576b028b30b0ca4d078ac70225b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_west_attack_000.png",
+      "bytes": 27646,
+      "sha256": "766afb3dd5280738b0ce563f6d1f1543bba7dc1dee7a5be68082e2397580bd80",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_west_attack_001.png",
+      "bytes": 28671,
+      "sha256": "abb8b2e1c4698075220cb4ea4c59fba454426d042267c0ed98512dd482155fcb",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_west_attack_002.png",
+      "bytes": 28534,
+      "sha256": "f2b1a9675084e83787fa34e42c99c41f6e55a127202a683b020a548ff16275cf",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_west_attack_003.png",
+      "bytes": 30241,
+      "sha256": "97227d08a53dcb0390f5b347139cf1927be5842c1aa6aaf96bd791be861a71b1",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_west_attack_004.png",
+      "bytes": 30465,
+      "sha256": "7a940eeb586dd354286b83f0a6a447102c05d88bceb6366a3b03a4e9e69cedea",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_west_attack_005.png",
+      "bytes": 28316,
+      "sha256": "1a6273c72510f8a074cf55726b999d24ed3a66dd3a70c5015bf0ece7486400f5",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_west_attack_006.png",
+      "bytes": 27984,
+      "sha256": "163614a42d63ae1457be475978c42b4551f2608482dde36c7639ee9a20133227",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_north_west_attack_007.png",
+      "bytes": 27617,
+      "sha256": "e59e95b5ca22aba915df59af16c0283069424fe07a6ce4e0018306debcb02b13",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_attack_000.png",
+      "bytes": 25168,
+      "sha256": "ad26b3f1e1c9a0a6f581ad8502734a8e2cb03e67c654c933f6c6beb825457ab7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_attack_001.png",
+      "bytes": 25596,
+      "sha256": "9a22750be789df7a360e5d4e51e259187114faed7dd5f9bf3186ab075ed6a185",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_attack_002.png",
+      "bytes": 25573,
+      "sha256": "d9d288b3d8a9c9c657c6aab4ff8187397735a359047331377bc83a0c2ae8dd46",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_attack_003.png",
+      "bytes": 26469,
+      "sha256": "96e30ce205cc2641b80168aa24c94b13d7348652910b39a76638ee451a4fe9c4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_attack_004.png",
+      "bytes": 24237,
+      "sha256": "d5d5dcde1da2bb3fed115d2c0e5eedf312f633a173db74dd88a79d0ef021bb4e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_attack_005.png",
+      "bytes": 25256,
+      "sha256": "25b03d57ced256734f15f3831abca8dd6c947f9623fd41aea8230d38bc30c999",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_attack_006.png",
+      "bytes": 25052,
+      "sha256": "94dea80fea83c3f760c45df8a7ddcf69a5360fac9278f502c888cba9db183956",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_attack_007.png",
+      "bytes": 26176,
+      "sha256": "4cb7d109340fd3200fb2134fb60ad14bc7f52586da7de198cc51a143be4bfc54",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_east_attack_000.png",
+      "bytes": 23333,
+      "sha256": "6822390eab0d28fcb96a2bc918f0cbc9db49246aa338b40926ba492b53348899",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_east_attack_001.png",
+      "bytes": 24009,
+      "sha256": "334e03a21bd598a47a244f5c206c3acbd05aced39c04c27efb3a5dafa6141143",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_east_attack_002.png",
+      "bytes": 25314,
+      "sha256": "e89c14f2dbea5d5de3caa3b763a1cc7af43ad4416aab9c30e462091b66dd1712",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_east_attack_003.png",
+      "bytes": 24879,
+      "sha256": "19cfadf161e39b7a1264d8b093eb3c5c390a6d25c736720e84c7f410c6462c2d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_east_attack_004.png",
+      "bytes": 25080,
+      "sha256": "998c1f9f572880caba9b5b9abe2690f12c0e73de24cb18f39ed53aeb881f152b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_east_attack_005.png",
+      "bytes": 23147,
+      "sha256": "8d54a75afa133182287ed25eafd2e8f5e42fdc18710fa0e9a75cc7b30d9593b5",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_east_attack_006.png",
+      "bytes": 24335,
+      "sha256": "17f53bd95b5ba3c6f3384c07d41584466090d9a90eae1de2220f90f274e68254",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_east_attack_007.png",
+      "bytes": 23792,
+      "sha256": "c92d896fbf6273a043bd4ffe499c1baa7b047add80bdc0b7866fd498d2b69a3b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_west_attack_000.png",
+      "bytes": 23563,
+      "sha256": "3703eaf96f68471f080f2521250c2a652ef7a0784acc5a5987906dd50e63ced8",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_west_attack_001.png",
+      "bytes": 24072,
+      "sha256": "232a2ed865bdb33c36fecc4ae2755f4db22b294ee8cfadb66746310a0207d7ef",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_west_attack_002.png",
+      "bytes": 25353,
+      "sha256": "612987400530bee89f43cfd12a76d505b5995b59ff7b8b59af8046d2153c191b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_west_attack_003.png",
+      "bytes": 24788,
+      "sha256": "184c42a4a9cdf5c701ed1541ef49893751618d311a4e2cade18121702d51a755",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_west_attack_004.png",
+      "bytes": 24952,
+      "sha256": "d6876a305e03f8bdbed8029032afc3ad0b8f5e2980d2923d625bf0770d4e0652",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_west_attack_005.png",
+      "bytes": 22884,
+      "sha256": "96e9dd494434511d2868068573a112882709f8893ba78660640070d98e217336",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_west_attack_006.png",
+      "bytes": 24312,
+      "sha256": "76df70767d7ccc30f83547a234095f0f2258845b9c520f900cb128048085b5ed",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_south_west_attack_007.png",
+      "bytes": 23903,
+      "sha256": "bbe39e3ea6978e69e298ef674eb0e80b987f0ed01c8646740c85e89b5675858e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_west_attack_000.png",
+      "bytes": 27834,
+      "sha256": "5f3bd81a50e84e3284fd00b5567bf83a200259d7110d5968f0d116e401fd90f6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_west_attack_001.png",
+      "bytes": 28644,
+      "sha256": "4039ee67a26251a09fee3b0511cbf1a5057f31ca4f77b737c2ac6df258704a41",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_west_attack_002.png",
+      "bytes": 27980,
+      "sha256": "8b009b8c6f796af9972b66156fcf56ed2c0317d4c8f1e92e5f0cd956aa455c50",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_west_attack_003.png",
+      "bytes": 27953,
+      "sha256": "7871180c7eca7f0bb76574a42b64a039e76582b6cc940b37c23ae31fb009a1bf",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_west_attack_004.png",
+      "bytes": 27451,
+      "sha256": "63d8302e286dfa6542c86a8a781b0849a08bf92f99f918bbe3b5c093e86a368a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_west_attack_005.png",
+      "bytes": 27062,
+      "sha256": "ca8616116996f1afdaf6630b22df64d25de87781c7c9cc3ecb4155abca15b547",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_west_attack_006.png",
+      "bytes": 26744,
+      "sha256": "31f44c8a66fd7f82ab9442a97cfc91cbf361aeed0364fefc6c0e590a6e4a35d3",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/attack/bran_greatsword_west_attack_007.png",
+      "bytes": 26256,
+      "sha256": "ad713666310bd1e645bcdf9d9c2b2521f5bdd283c94523f8b6ccf227014c21d3",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_east_combat_idle_000.png",
+      "bytes": 22200,
+      "sha256": "0ab507926fbdac6f14968c021914ee6d29ff186815523767a763d988588040b8",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_east_combat_idle_001.png",
+      "bytes": 22244,
+      "sha256": "001273a226bb921a6eb841eb115089675292aba15cb805a2669817f3485f03a9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_east_combat_idle_002.png",
+      "bytes": 21947,
+      "sha256": "29164629d47de0fe6dc62ea267aee2904ce20ec91364be9155823f5bb94b441f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_east_combat_idle_003.png",
+      "bytes": 22077,
+      "sha256": "557d016f9bca20954125c1111a8932123ff70ecaf9d61780738705970edf55d2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_north_combat_idle_000.png",
+      "bytes": 20918,
+      "sha256": "b6d1967a496b85494f85ef209d2afd6b9467bfb5f268a3ddb7dd0a608b5e1928",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_north_combat_idle_001.png",
+      "bytes": 20827,
+      "sha256": "80bdeb9c155f87b25f6a7dc4951ac29dac200aadc8760db1937c771cfd90ce41",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_north_combat_idle_002.png",
+      "bytes": 20620,
+      "sha256": "ec919d2b37b138fcd50e458cace4072ff47664a8bf00980b8cbcac42ba6836a4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_north_combat_idle_003.png",
+      "bytes": 20455,
+      "sha256": "77405b8adc8ee754c89f271698a953795427b01911b991b7b4f487336d4eef2a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_north_east_combat_idle_000.png",
+      "bytes": 23422,
+      "sha256": "9e6bff109589289e0a517a4f302f353280c80c813ecf7fd32dc0530de7363cc7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_north_east_combat_idle_001.png",
+      "bytes": 23664,
+      "sha256": "97978754b034bce1db7da289be92c343a1f53aebbdabfd6ab3b0eb087bf5eb0c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_north_east_combat_idle_002.png",
+      "bytes": 23537,
+      "sha256": "57fabecf555f15fad03a92a761141bb3e4eb66deb88016ca214ddfc50aee570a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_north_east_combat_idle_003.png",
+      "bytes": 22910,
+      "sha256": "56f6a1d92bad9f511d4295ffd75cceeccb159f3b386ccc57abafc0e24d613b53",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_north_west_combat_idle_000.png",
+      "bytes": 23731,
+      "sha256": "d03d86cb83fbc081111a3959a8b76c5f24166f5a18566d7d680ca7b195760852",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_north_west_combat_idle_001.png",
+      "bytes": 24028,
+      "sha256": "e485df3b8406a721aea958cda91744ff6db3fabcce595fb8682f74513e629034",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_north_west_combat_idle_002.png",
+      "bytes": 23832,
+      "sha256": "c865f116a5d56eef933b70ceb75ab940d035899847559ade7e8d06824c964373",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_north_west_combat_idle_003.png",
+      "bytes": 23220,
+      "sha256": "dbd23344cd0609b37da61dfae968306c022189d4e4649837bf7ead0268c726e9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_south_combat_idle_000.png",
+      "bytes": 24055,
+      "sha256": "fc5db4093fda30f4ffa61a7a9131d5931fbbbf2e58bcb41d920f28102874a063",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_south_combat_idle_001.png",
+      "bytes": 24014,
+      "sha256": "507bb8f68dfadd13bb6ce3ded294029c382e0edff0eb29c37a39b6f6745f28c5",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_south_combat_idle_002.png",
+      "bytes": 23791,
+      "sha256": "1f02e3a440299840f1674b3442a13af252bc24d0e39b162706e93355ae5aca77",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_south_combat_idle_003.png",
+      "bytes": 23712,
+      "sha256": "5e5a62f3e89a1fc447959e877d1af437e34023f34ed53fb503af8aa8df966ed8",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_south_east_combat_idle_000.png",
+      "bytes": 24332,
+      "sha256": "3c99f07ee28d8c143c2a6b603fa3247d530524834b98724f9ee6d4c2a944b8de",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_south_east_combat_idle_001.png",
+      "bytes": 24137,
+      "sha256": "7559d624d92202bb321850a5b095b819646b0cc418b4df05ff8ee2b1444256d4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_south_east_combat_idle_002.png",
+      "bytes": 24501,
+      "sha256": "47a5e7790b6821db646de81abf1f6063f848d9da7e84ec0d45e0167871ea989c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_south_east_combat_idle_003.png",
+      "bytes": 24161,
+      "sha256": "cccd57c82c64b7503cc9dc202afc92b18ce9ebd51a78d29b587b62ceb0ab1dd0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_south_west_combat_idle_000.png",
+      "bytes": 24465,
+      "sha256": "e74bddfc241c2d7c248b477a6924968b549f3498f45f681e241af7dfe4ce67f3",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_south_west_combat_idle_001.png",
+      "bytes": 24364,
+      "sha256": "4442cb90bc50816d4f6ea548aec679041ead71b045f2005d4a272db729eaac92",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_south_west_combat_idle_002.png",
+      "bytes": 24737,
+      "sha256": "69117ec4d18b24137e719e74cac6b209ced0bb3c8151632b18498402063be624",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_south_west_combat_idle_003.png",
+      "bytes": 24314,
+      "sha256": "fa8829339895e1a74eac69a49841ee8e2ea668e0c75826bafe60055d41edee7c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_west_combat_idle_000.png",
+      "bytes": 22756,
+      "sha256": "ded4be6890421875c08641968c2359e337dd24717d0745b5624a817c3fae21a0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_west_combat_idle_001.png",
+      "bytes": 22704,
+      "sha256": "f569f59553835af25d95f15b993218bba7178f54b13ec8ac382f7013318ea990",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_west_combat_idle_002.png",
+      "bytes": 22409,
+      "sha256": "a99a5b8f595d55e13421af654509deed0db9feb381b1001656ba3790b6d78d88",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_idle/bran_greatsword_west_combat_idle_003.png",
+      "bytes": 22531,
+      "sha256": "4543c4f12714e7bf8e0a82f8fed606f640320db8481a3aac53f14ee44f68fc70",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_east_combat_walk_000.png",
+      "bytes": 25139,
+      "sha256": "d69a03887cd4ca2cb2b2c25a45dac440a8c36ec341e0398999b3cfbb330061a9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_east_combat_walk_001.png",
+      "bytes": 23129,
+      "sha256": "9633922d717ffc026f152e86163c697f6744659fc8b30e5d748af048ef9e695a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_east_combat_walk_002.png",
+      "bytes": 25230,
+      "sha256": "e024ae6da1c924eec7daede69466bd5a9a3ae92905364b65527b197764f1956e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_east_combat_walk_003.png",
+      "bytes": 25282,
+      "sha256": "aa419ef9d0884883e7ec232aaed99e0c208884f2353f3fe007934e71b4801c3a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_east_combat_walk_004.png",
+      "bytes": 22926,
+      "sha256": "b2612378eb89fd552a9ae68403d756397edf9e0709be819a5c03b3d01abdb671",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_east_combat_walk_005.png",
+      "bytes": 22798,
+      "sha256": "16d33312691c83cef0e4cd06598a534920583254c26e19dc4616a5bbea255fa0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_east_combat_walk_006.png",
+      "bytes": 23970,
+      "sha256": "9fc5aa9726076017673149e6c63112077de1106c6ab29a7b06154a726ceb8698",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_east_combat_walk_007.png",
+      "bytes": 24490,
+      "sha256": "ea8d2181f8b26ace382f422536b221c22f8862f388a413e855502f0f917b24f6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_combat_walk_000.png",
+      "bytes": 20584,
+      "sha256": "efb3117464eb51ac6f0bf66ca236323862ee66a258492e03ea4f063dffd6c4cc",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_combat_walk_001.png",
+      "bytes": 19881,
+      "sha256": "fae3b6eb617c9736daad07f5fe081f727959eb67f42db829329a879a58ebd6e2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_combat_walk_002.png",
+      "bytes": 19969,
+      "sha256": "b0a3279fa451c5b2703a490733fae163f03362623129bd9cee7bb369c10272fa",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_combat_walk_003.png",
+      "bytes": 19936,
+      "sha256": "15fd45b6695b55a6b52868afa15c4946d0ddb221a3b30281ef29b2348e4721b0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_combat_walk_004.png",
+      "bytes": 19920,
+      "sha256": "3825a7a67ea2a54eb66115ff757f5ec5090dd9840bf4a0b0f6d8a78d46515bca",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_combat_walk_005.png",
+      "bytes": 19724,
+      "sha256": "56e117833042c50a759dc444987c087dd39e37e776233b0523ac3e410f6bef59",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_combat_walk_006.png",
+      "bytes": 19608,
+      "sha256": "1c81aa0cc9f560f05a96c8c7b649f307d1db7cc2424872ac55a3137b6064711a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_combat_walk_007.png",
+      "bytes": 19960,
+      "sha256": "b37d9641847264156a336185a80f93d61ee08835df7dc9c49e31984b9a763418",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_east_combat_walk_000.png",
+      "bytes": 23978,
+      "sha256": "ebd96af07ec0cfa50568d5b983b40d448f39e67c2a6cfda91f8040d08d88010e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_east_combat_walk_001.png",
+      "bytes": 24223,
+      "sha256": "0c0fdfc47dfd52a44ef14b99d0f9a93ed0e794f0b1cf58428caabf41b0c17cb3",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_east_combat_walk_002.png",
+      "bytes": 22642,
+      "sha256": "c99383a77eda2d415908fc29562e814573f7e4b58e3f26eff35ddacfe6b9892b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_east_combat_walk_003.png",
+      "bytes": 24209,
+      "sha256": "e2e241bab23ae953d86ff03951f1d49fafead3abc9102760ca537b9f96ea8da7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_east_combat_walk_004.png",
+      "bytes": 23962,
+      "sha256": "173d74f9c520f3050f59b2ab22f8622dfa56006f8142238243932bd1f70d14be",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_east_combat_walk_005.png",
+      "bytes": 22805,
+      "sha256": "866491ad02c46624b6d9e6e63ec643f28d7c82b0b316be3c1293e1e2404f5fd5",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_east_combat_walk_006.png",
+      "bytes": 24059,
+      "sha256": "0b20969f888c61c484551d585f397bbfc6085a210a0b4b6e9b5d6e46118fdeaa",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_east_combat_walk_007.png",
+      "bytes": 24580,
+      "sha256": "9404b3ace0cf17ddafa30457c7ae04cb4e3a42637f5510226cf555f3b20cd2de",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_west_combat_walk_000.png",
+      "bytes": 24352,
+      "sha256": "20c9f5e9baa5915d541cca8ebeae7b9f81c06834c25448c8646eb09bd7022870",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_west_combat_walk_001.png",
+      "bytes": 24442,
+      "sha256": "527b1549c738f76952e253211289315b25082f9f1d2fdc6d279c29ce2903d956",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_west_combat_walk_002.png",
+      "bytes": 23033,
+      "sha256": "b81ce4207c6f28aeaec2fe12edc8013a055840e816f2b7f32d7dcf5789d47868",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_west_combat_walk_003.png",
+      "bytes": 24422,
+      "sha256": "7a0e83d3b207fdd6bcbb7fe0899567e156fa9665d4409afc9e8eb5c8ff9afe66",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_west_combat_walk_004.png",
+      "bytes": 24368,
+      "sha256": "c2d916b786d52d443712ecb6e2171d6f7640891b8fefec8e1a966f932586a1f7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_west_combat_walk_005.png",
+      "bytes": 23020,
+      "sha256": "2132390911dc01ba9cc4e955362924f876cea59dd492f3176a9d5072705813ea",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_west_combat_walk_006.png",
+      "bytes": 24369,
+      "sha256": "d5196a74ecec217f735c395c79b9ea041f4ad2701697e6582d76771c602217ad",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_north_west_combat_walk_007.png",
+      "bytes": 24892,
+      "sha256": "9cbd1b2e3c95258f82da9af39060b08e395aa3bd1594ed54825edb9c370be7bf",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_combat_walk_000.png",
+      "bytes": 23808,
+      "sha256": "bd03e14cb5cee32fe8be7e403ea4e26f40054663d4845a83508b2fa090174194",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_combat_walk_001.png",
+      "bytes": 23607,
+      "sha256": "9b3b321287cbda7cdd551ec22a1579d42909fdf4871381129224f83a24aec0a4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_combat_walk_002.png",
+      "bytes": 23845,
+      "sha256": "954c50ba0dbce64250673587a638bd99b160fa4e05293cba3a89229519772b3e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_combat_walk_003.png",
+      "bytes": 23774,
+      "sha256": "8dd5b955138ad419562d97b332ca5ac2ad08e043af5146d718b91410cfdb80fc",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_combat_walk_004.png",
+      "bytes": 24363,
+      "sha256": "9f53390a2a51bc040a94d716e4662eaf4f6ef0a8c5da4885887a34b27508563e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_combat_walk_005.png",
+      "bytes": 24511,
+      "sha256": "175d6ad6aa11faacaf056af6cc7c43deb32510e1ed62553437353cf146e97420",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_combat_walk_006.png",
+      "bytes": 24032,
+      "sha256": "c28115ba4db2e41e7f092ddeef51d8671fcde072584a6a77fc23b2bef48ce391",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_combat_walk_007.png",
+      "bytes": 23747,
+      "sha256": "b6fd349bdc4760876268ff2c6c44732b04816aa50b457a967bad0fcc77abf9af",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_east_combat_walk_000.png",
+      "bytes": 25093,
+      "sha256": "5a7215f072e6eb00741f0c2e4724d3803657b7a091a8be1d80f13448f7bd95a2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_east_combat_walk_001.png",
+      "bytes": 23239,
+      "sha256": "90838327f60933e84ad881a9ae68441d74ad44bc9e1efb8d95a1f48b9e278eff",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_east_combat_walk_002.png",
+      "bytes": 21709,
+      "sha256": "962d3f26bb2412b40a6936c5ce7be43cf50553b2603630e2aaee21c0fbf3996b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_east_combat_walk_003.png",
+      "bytes": 23568,
+      "sha256": "ffa6ebc375ac9a1ac46936fb938f25b8602513f67759d774aec678ac9fc2f0a5",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_east_combat_walk_004.png",
+      "bytes": 23250,
+      "sha256": "d68ea88fcf37a7ca4cf7debac1a26cc609b62f7984ebb89b9b888bbcc902777f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_east_combat_walk_005.png",
+      "bytes": 22039,
+      "sha256": "1a437eaea89aae49bbeb4fa895bf3a512d7df43f8d81de5adea41429b782e920",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_east_combat_walk_006.png",
+      "bytes": 23873,
+      "sha256": "ba5d85ccbb2daba9e24c05a5c20c6ec64e48bce7021db681926dbd1e914a4c66",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_east_combat_walk_007.png",
+      "bytes": 24899,
+      "sha256": "1d48f48a2f9097b0498ca01799927053ea292951f226a7ac040842e52a23c10b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_west_combat_walk_000.png",
+      "bytes": 25157,
+      "sha256": "6284432fbc63dd9fc7b6caefe4fa1fde15bbae4d0b6a97a1b1f5a50cf0be5c34",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_west_combat_walk_001.png",
+      "bytes": 23410,
+      "sha256": "9732d40af72b28635d0c08ba05966fa7b985f747b92c50a9253fe4888b1d3fe4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_west_combat_walk_002.png",
+      "bytes": 21821,
+      "sha256": "4dc77ab0d3052a0bc32ed022c7a6174e046fef329973b37fc5d51e631404527d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_west_combat_walk_003.png",
+      "bytes": 23633,
+      "sha256": "8fb9fe36c416f8303d5afdfebe46c69ffb172bd5e610c984480d5eebe9eb5df3",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_west_combat_walk_004.png",
+      "bytes": 23360,
+      "sha256": "b1bb348f9e3016972d26dffd02b6ccf96b187b6098a655d2cf8dcf90f8cbfbda",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_west_combat_walk_005.png",
+      "bytes": 22185,
+      "sha256": "479077e69b83858825aa51b003b001e581bc33faa48a8e500c2bfc0d9e6a13ef",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_west_combat_walk_006.png",
+      "bytes": 24048,
+      "sha256": "3154d4d9dffdc065b50b297fd85b24d0c15cbbe6ba42969e3dfdd4642f6e9ac9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_south_west_combat_walk_007.png",
+      "bytes": 24965,
+      "sha256": "a4a6d2a0bd3aad919d57fdc7b01ec3f8e9a0fa2331777b86bbef080a8163e65b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_west_combat_walk_000.png",
+      "bytes": 25532,
+      "sha256": "e911237136b3a5b62802b1c6e97373d11f82bc4175309e87e31519deb5a04152",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_west_combat_walk_001.png",
+      "bytes": 23486,
+      "sha256": "1a3005d8e1fa8f9dfd73c04ba51e11460355b76c1cc641aa97a3ced9e61bb5c4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_west_combat_walk_002.png",
+      "bytes": 25666,
+      "sha256": "fcad7cf40edcf8721c8d26e48b15607b774714fb2dbec1a5428d771ea49c7f61",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_west_combat_walk_003.png",
+      "bytes": 25927,
+      "sha256": "f33ca3e1559b244f4d0c280598838f6c2c486867552ef18e521ea0f599a9b3c7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_west_combat_walk_004.png",
+      "bytes": 23451,
+      "sha256": "ca5b6450f9073ffa266cedfc32199fc009610533f976c85cfef12bb939d169a1",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_west_combat_walk_005.png",
+      "bytes": 23356,
+      "sha256": "dbba81a8c03cd3b9cc157ad067cc894360da29564dd69a206ce943c62a403034",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_west_combat_walk_006.png",
+      "bytes": 24604,
+      "sha256": "5ca648726163898b0b24d18f2bc28e425914afcebf2658ce0fc1b7985186fcf7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/combat_walk/bran_greatsword_west_combat_walk_007.png",
+      "bytes": 24939,
+      "sha256": "3186c0c96a666f0d581ae886c0c10c5b794f6a0ab0092144c8239d563d83b6b8",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_east_death_000.png",
+      "bytes": 24751,
+      "sha256": "f795413da5f022905c03317038eb5a5ae19185922f6c7d8b8937b0a246794fb7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_east_death_001.png",
+      "bytes": 24191,
+      "sha256": "b7c1f6979a2cb92dcf391bd63499e26bf285c9daca8cad76c48633f3152bcb14",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_east_death_002.png",
+      "bytes": 23588,
+      "sha256": "40d0bc5527b92e8bfe7465b64b3247421d5822d391e576df9586e9f632618706",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_east_death_003.png",
+      "bytes": 22476,
+      "sha256": "a50f7cf9c73c3384f6e85d2181522a768d40bcdbc2901ae3fc36cac61ff90bf2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_east_death_004.png",
+      "bytes": 22505,
+      "sha256": "e7db4da191b950aae8d369de849212b337e6a2de13c0482fad91c571c8b85892",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_east_death_005.png",
+      "bytes": 20417,
+      "sha256": "7f5b840719062f3dfc5257d0469da829d873802230412b1e09ee48f1b2dc7975",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_east_death_006.png",
+      "bytes": 18109,
+      "sha256": "60fa92164479ae81ba6305672d6f70c67d0f793aa0c198a19ffdf96f27f14804",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_east_death_007.png",
+      "bytes": 18634,
+      "sha256": "9a889616d2ca1e13192311010b026b7874057c4af8e7df9642ff6d65675ce62f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_death_000.png",
+      "bytes": 24822,
+      "sha256": "f7183023060b56b1e127caa5b7791c061ce4d4677b57c64b7176d3d95f07420d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_death_001.png",
+      "bytes": 24694,
+      "sha256": "1e385d55b52c05a7bb7f14ba18dac86a4f09969d8bc715ca88f8215709cef091",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_death_002.png",
+      "bytes": 25040,
+      "sha256": "ed349e081e0419544b60b3371df5706c34cef24fe3e1a06e99f5650803a524c9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_death_003.png",
+      "bytes": 23837,
+      "sha256": "9379f2984a81839d2bf86bb80b18970a227598c5b547e2e1a4c16782fd8b7ea8",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_death_004.png",
+      "bytes": 24042,
+      "sha256": "686b80542a811c97123738d65e316f45246508cb2381368222440210612dadba",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_death_005.png",
+      "bytes": 20809,
+      "sha256": "63921cf8022f3183b105d846107ee4787e47ef55ed2892c70815a2c586b55fab",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_death_006.png",
+      "bytes": 18077,
+      "sha256": "119c1eb59a200429ed7ec75052da9715d6587aa0e645fb73980ea7d6bf84cd78",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_death_007.png",
+      "bytes": 17095,
+      "sha256": "57d8965fc4e5834f0890ba22c7acd2f5764247e5f5b801f97e0e27c4dd30143a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_east_death_000.png",
+      "bytes": 29425,
+      "sha256": "602a094b98194f9139cf2cd27cb5d7c7cb919a400204f64f33462b87dbffdbcc",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_east_death_001.png",
+      "bytes": 27328,
+      "sha256": "12b9f2b5179a2220d478a15ca41a881370c45940a0d607303ca35938e44111a9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_east_death_002.png",
+      "bytes": 28053,
+      "sha256": "9439701b08af4ffdd1397f3ec15db5099e03317467baae966e0f738434c3ccfb",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_east_death_003.png",
+      "bytes": 29177,
+      "sha256": "cc832ff867d4138a2b2607d5fcd2f029c2e8f948623c4cee0d1e56967a4f9bbb",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_east_death_004.png",
+      "bytes": 26121,
+      "sha256": "1798113f4acaa59c3d7d06410318a6f6e2098de9a8ad048f3e3697bdb8fcafa3",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_east_death_005.png",
+      "bytes": 24040,
+      "sha256": "a368796dfef0327fc71a3e1a1fcea99010eda8619a431c39a90628524c99a41c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_east_death_006.png",
+      "bytes": 23527,
+      "sha256": "8b19275e37f8bb78ab8466ae00d77c52e1b9effb2e759dbfa2ba83a03a7514ac",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_east_death_007.png",
+      "bytes": 23252,
+      "sha256": "5a40df2628170b9163443073c1cdfb241a261e96a1da592ac01d61500de3f534",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_west_death_000.png",
+      "bytes": 29784,
+      "sha256": "7533f0ce4a6b1ca77656f0b77facb867d0aa00a37d9acd2bd7a5ad86d22819ac",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_west_death_001.png",
+      "bytes": 27425,
+      "sha256": "8b575e60114d62eb00b1d3cfd1f63b159c2edc1b80e7ef925969c320394dc8f2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_west_death_002.png",
+      "bytes": 28192,
+      "sha256": "4cf1fe71f3b7adefcfb772ce197aca5c86c7b8064699c4b78a4a550ee0ebf385",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_west_death_003.png",
+      "bytes": 29393,
+      "sha256": "87c1267d50d8dbe751360ec0fa22e796946b451364bfab008e7a655ec9607dbd",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_west_death_004.png",
+      "bytes": 26446,
+      "sha256": "c5946cd53dbaaefcc0a5e090c152e89a7da829172b483b1daf07dc932ca29e56",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_west_death_005.png",
+      "bytes": 24274,
+      "sha256": "c8a843c1b8fc5e5a6d5a7ed7cf82605adbc02d6dd60caf18aa4ef180b1369cfe",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_west_death_006.png",
+      "bytes": 23585,
+      "sha256": "bce0cbd307f4b97cb25c57f03c64c6eed2b2e8012ab76e58a0ef930f9bff1386",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_north_west_death_007.png",
+      "bytes": 23401,
+      "sha256": "957957f685108644b22d5ba90498953b555a90d708108f16d6d3e5db9429df53",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_death_000.png",
+      "bytes": 23677,
+      "sha256": "58e2252f6f0a11110359df09718aff1554cda658ae58b949c64db90173b2b1f1",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_death_001.png",
+      "bytes": 24929,
+      "sha256": "1c559eacf6290f0176a5388987a8ab882561aae4eba697e36d678ace957adbf0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_death_002.png",
+      "bytes": 24166,
+      "sha256": "d6d8da06fbf4261bee5b0f4afd68db03c49ba576fdee128b9d5f1a08c1cd45ef",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_death_003.png",
+      "bytes": 23166,
+      "sha256": "f223ee2b028e0092bce9e642af30e509ac965760a5f66861996d5b4e426c6391",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_death_004.png",
+      "bytes": 18978,
+      "sha256": "f676c565a926ead7a202adba750df20c42969ff2ff02948c65b36c05affd5532",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_death_005.png",
+      "bytes": 20818,
+      "sha256": "19e720fadb254b0cba51109d270b3cf165f1f108ae9c021db6c88a82be41428d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_death_006.png",
+      "bytes": 21078,
+      "sha256": "088319e97999a15a90c37ad638fdf51d766a10eb59d84202781a4da3a230e8e4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_death_007.png",
+      "bytes": 20037,
+      "sha256": "e4401b3dbe08193aa1e6aebb59d7071f84f8b7e7e74ca61f82cf27204563c834",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_east_death_000.png",
+      "bytes": 22795,
+      "sha256": "15c29f01507ad499f2f474ab2b9899e502f2b2f8550fcb4797ece4eb89271a7e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_east_death_001.png",
+      "bytes": 25736,
+      "sha256": "feb1603a9351f87013ee18cd8fd85f637ee93d4277bc1178ac091ec270761ad1",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_east_death_002.png",
+      "bytes": 23299,
+      "sha256": "2b115144c28c5c27750673cc5fab3f96f0d1ebda22c22fa026dca522e9451c65",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_east_death_003.png",
+      "bytes": 22696,
+      "sha256": "382020da788d49e229bada002e8ab9ced3bc997e8d22f0ddbff93e202753371d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_east_death_004.png",
+      "bytes": 20115,
+      "sha256": "9f0e8e51c4dbd967092b9b405aa50b4ec6213d61e3fa6d2986a274e45a7b41ac",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_east_death_005.png",
+      "bytes": 18583,
+      "sha256": "5886bb9108d69b7845d58905426f72eae22b8e48952a720636444ee8e9d2dc6f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_east_death_006.png",
+      "bytes": 17200,
+      "sha256": "bce8018bd5edc029f8172b65aec6729a8687dcf54cbfb94846947d02b150c68f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_east_death_007.png",
+      "bytes": 16732,
+      "sha256": "36cd32bb4bc634753ff5c9330c9d2c58d6a9bba89594ced7cc8d53d0d31efca6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_west_death_000.png",
+      "bytes": 22921,
+      "sha256": "0e7e9c98dee1a5257be72263e38309870d8d7ad3c26cfa3b120dc94372180dc9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_west_death_001.png",
+      "bytes": 25934,
+      "sha256": "712463434f20356b0b09468c97fe2aaf662384aaf00ae9eb1ca5141e7e63ea71",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_west_death_002.png",
+      "bytes": 23464,
+      "sha256": "e09c5642b177565b87bc4f84aea103fe341f49bc20241b2bc1a38746255b761c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_west_death_003.png",
+      "bytes": 22689,
+      "sha256": "d9b6b9b9e87925500f3b198850b25ff6f749a584ed91685a6b98d217e81f02cf",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_west_death_004.png",
+      "bytes": 20078,
+      "sha256": "cc37a2b770f02629e3937c0290a8f68bc20b16ff584e0da6d3b5577ee6257566",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_west_death_005.png",
+      "bytes": 18486,
+      "sha256": "771aa7ef082a7ecda7786a03464d69d5127bcf69b26959bafd2e19b9ca1c6dfa",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_west_death_006.png",
+      "bytes": 17315,
+      "sha256": "7164264e92ff5a5670c57b247d2e965dc4908db26c863e1316a833c7aaa011b4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_south_west_death_007.png",
+      "bytes": 16848,
+      "sha256": "778de3111257cdc084c123a6ad8fa803bf14c1ae87bd28e0f1850567905f3c54",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_west_death_000.png",
+      "bytes": 25407,
+      "sha256": "cb28c922c1eccd13a0153fdefc52f5700ac6d94056905df6c1f23d0a30cff4c8",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_west_death_001.png",
+      "bytes": 24905,
+      "sha256": "6fb2b2d67f4cdeb79f6524342595d777482fff3040b2ee4c225cd2de151cb972",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_west_death_002.png",
+      "bytes": 24256,
+      "sha256": "738f4a0fcd4487cc786a5947b5d5a6b46ca7bb3101f067df3a1249c63dce60fb",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_west_death_003.png",
+      "bytes": 23021,
+      "sha256": "440ebf8af7e8e0ee7e3b40e95b938b9c54c758bd79011913a9acd8ebfab14dba",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_west_death_004.png",
+      "bytes": 23392,
+      "sha256": "1d3bd0f2a04fdf3e448816e521a8305b9007c62d93a0da869e8cce1b2b09d3e6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_west_death_005.png",
+      "bytes": 20826,
+      "sha256": "06eda7a05ba7452876432dd3d5eeb9c1f2b8a26b38b2d9d220031f381b6348f2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_west_death_006.png",
+      "bytes": 18271,
+      "sha256": "4968209dd8b4ab4999b39c8c1a157be13e57a3c74d19a758e4a874c14b7ab98a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/death/bran_greatsword_west_death_007.png",
+      "bytes": 18782,
+      "sha256": "1ef542708863b0feaeff3b30f7f21d7d6d3d45a68f0795e9068fe593a5ff16c6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_east_hit_000.png",
+      "bytes": 26108,
+      "sha256": "874faa95bb5cd283f80ae3a78aadb398a2353553e4bbb12cc8540b6699a801b9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_east_hit_001.png",
+      "bytes": 26646,
+      "sha256": "5052ba764df5c3e01d8a7e63a87efb015432b0f2ecad554e3607ee62f0a4cb23",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_east_hit_002.png",
+      "bytes": 25245,
+      "sha256": "6211018718797dc71d3f75afeeace1b10cab61b020b9565ca9e56bc52ad7ec6f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_east_hit_003.png",
+      "bytes": 24628,
+      "sha256": "25715d6026811f845bbdaecaab6602d8c84f1044261e40dc2ffc9d72a215b0e5",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_north_east_hit_000.png",
+      "bytes": 29507,
+      "sha256": "f6e60726f5f219a89473a745ffd617d9711addd2a68aed12fd3a7ba71b1d5497",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_north_east_hit_001.png",
+      "bytes": 29010,
+      "sha256": "75ce376a5fdf9a5b9ff80c081ddc03f96ce2faea7e3eaecaf776ec624f22867c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_north_east_hit_002.png",
+      "bytes": 27985,
+      "sha256": "a5292c8b3475d44ad9f1e0709b1ea6c38c6d419841d8764dd314b07e6a938d70",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_north_east_hit_003.png",
+      "bytes": 28331,
+      "sha256": "3496bdd04346b06381cdc550240cb8c9c0093133e8384dc2bb917509c75da6d2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_north_hit_000.png",
+      "bytes": 24012,
+      "sha256": "849ae64af2b4bd04617977ac1607a086d8b90c8e2b1c0cfdb03cacca0b855122",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_north_hit_001.png",
+      "bytes": 24741,
+      "sha256": "850ebef3621501199d84cb7b2cebe4380773585d2b8640600a4f64033d01db1d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_north_hit_002.png",
+      "bytes": 23611,
+      "sha256": "2969b707a67de5300dc8e45486daca275bcbba2d12764232b5521ebfd1345f52",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_north_hit_003.png",
+      "bytes": 21643,
+      "sha256": "6025d2953b6a03744eb2c248c297c292be0b0fcba543a5ec47f92ed6abd7b58c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_north_west_hit_000.png",
+      "bytes": 29895,
+      "sha256": "6d2afff1942658b1bc8f26233c7b494891b4fab1bd67250c4a1d8527383f17f9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_north_west_hit_001.png",
+      "bytes": 29300,
+      "sha256": "b5ad51bfd556fb77e7930acadb0a960690fd59428a167660c98cff8fcbd9df99",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_north_west_hit_002.png",
+      "bytes": 28507,
+      "sha256": "031a6d3854731abba3af3c2e4f928a899df35696911aeb74ac3b752350a21f7b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_north_west_hit_003.png",
+      "bytes": 28659,
+      "sha256": "d75571212f4720e35375348424795a9060e9b24ae4f7b36610023f3021ac1726",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_south_east_hit_000.png",
+      "bytes": 22707,
+      "sha256": "39eb68c3d70319c05500d7e9e0514a514b2a7cdd10baadec0fbd138e7a32ee8d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_south_east_hit_001.png",
+      "bytes": 25244,
+      "sha256": "c0ff0393c148ede58c01b9608a92f718270ce7e0a6baa2429fe0ecb8444f6b83",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_south_east_hit_002.png",
+      "bytes": 23590,
+      "sha256": "406356f250d2b6445433a755929ffdddeb8128efe61ed5750f65707a6c82c5ea",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_south_east_hit_003.png",
+      "bytes": 23206,
+      "sha256": "5d982a77f4e8477c36474ab3d1a8182ddb5628bd9a5832561150ef1bb67d9d99",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_south_hit_000.png",
+      "bytes": 26125,
+      "sha256": "9d3d8df33a2039d704740a45407ebc726c2a0731fe07d07a4e2c5f7bdbb33433",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_south_hit_001.png",
+      "bytes": 25497,
+      "sha256": "25ebcd88df190b1588235d63eaa890a2e36685048cfeea39c02822e580dbcb63",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_south_hit_002.png",
+      "bytes": 25526,
+      "sha256": "c74df1e1125a0f9f16b9743509c64f368e21fbce95486b3638104ea1a2328798",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_south_hit_003.png",
+      "bytes": 25112,
+      "sha256": "c22a08ce717eb70b9e16034366e80fbad7b148dd9012b2ab128e5fc7bbecea2e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_south_west_hit_000.png",
+      "bytes": 22808,
+      "sha256": "46400e8a6d6d2a7b9379242c3c9d9816de0671c8a91b79beca4e94598247f3f6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_south_west_hit_001.png",
+      "bytes": 25513,
+      "sha256": "0ccc849471d1def4bf69de5cc554c16847fdb0881c5c9edba18707cb5faea7f7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_south_west_hit_002.png",
+      "bytes": 23824,
+      "sha256": "fa2fa53f90514b649b3ce136f67d9284348ba6ea1adf816ab7dc2e32535ef492",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_south_west_hit_003.png",
+      "bytes": 23388,
+      "sha256": "6fc91e5ae457830f8d1a821614a0d3203a4d6e5a1c396629ab00329b7e262e60",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_west_hit_000.png",
+      "bytes": 26744,
+      "sha256": "504e9e2671c7ef852ea4048bc53962004e68d7f8a330d930f5f5f321821eccae",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_west_hit_001.png",
+      "bytes": 27111,
+      "sha256": "34b918d3c206eafecee42ec00579730ac2518ef159e7924779483a6e3ab57a22",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_west_hit_002.png",
+      "bytes": 25602,
+      "sha256": "df94c7c4e575a3f63db0c872599700df602727bca36f0928a64103185e19f568",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/hit/bran_greatsword_west_hit_003.png",
+      "bytes": 25266,
+      "sha256": "6bcc8b16a4148565d304861b671d1c8bb35db998cbc3efad573a267177fbfbda",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_east_neutral_idle_000.png",
+      "bytes": 19422,
+      "sha256": "3b3e681d072bb1ba7d4ad8356e5e59dde7d2f45dee64379e2ae2c5c0b6ec5c31",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_east_neutral_idle_001.png",
+      "bytes": 19254,
+      "sha256": "4fc064a743467cba043746544a577226db33c42f348f68bce4abb44726c4ff11",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_east_neutral_idle_002.png",
+      "bytes": 19402,
+      "sha256": "f9921c7eeb3f964054ed519e07d40248d19a82796804c86ccee9e860bfa8aa2e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_east_neutral_idle_003.png",
+      "bytes": 19115,
+      "sha256": "ed0f4d48fad43c322bf2f901f441506ca630218fe422d33f8e39f4236d5f9d57",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_north_east_neutral_idle_000.png",
+      "bytes": 22530,
+      "sha256": "4f0011c0b92b4313a548503767664e78b816be72ac3bc07d55654ea1bcfebff9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_north_east_neutral_idle_001.png",
+      "bytes": 22722,
+      "sha256": "f46f7ce45d83b5f6544f8e6965d3282b16fc4bb19411fb6e579718ab1fa1e1da",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_north_east_neutral_idle_002.png",
+      "bytes": 22423,
+      "sha256": "d2d63c1696c568b10fc0ff8c9b57daed0190df8a9284f99f586b3c5e55fffee7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_north_east_neutral_idle_003.png",
+      "bytes": 22437,
+      "sha256": "c8041a6b696d6a445684b2a2086ac537e8a648dcc0d75735e06ab785438b429d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_north_neutral_idle_000.png",
+      "bytes": 24855,
+      "sha256": "bebaf9d0b4c51faf07d1d973059c8a923b2fa8fbed5043c2c5fd139702b450d0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_north_neutral_idle_001.png",
+      "bytes": 24776,
+      "sha256": "61f8d4560b9531b847270bed2cee9902c57242c6046b5eb1707a863aabfa3332",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_north_neutral_idle_002.png",
+      "bytes": 24539,
+      "sha256": "f73b8b70e413bf723193e3fe8144db5c923706c860d5ae9aac58ee3a9a7133fc",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_north_neutral_idle_003.png",
+      "bytes": 24494,
+      "sha256": "a569db9d439e1dc5c13b8c1e3b85e69f301ab9c5fdc02ee3c523f1d7e6bebf83",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_north_west_neutral_idle_000.png",
+      "bytes": 22398,
+      "sha256": "05c47c09f125509cb09160aa08db088333005fe75e574f851695cf1ac8ec492d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_north_west_neutral_idle_001.png",
+      "bytes": 22543,
+      "sha256": "4bc848e1b405bc39796ff5adbf17a612b26686d06e4b7bbba9c2c1edf2b581c8",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_north_west_neutral_idle_002.png",
+      "bytes": 22245,
+      "sha256": "3ebacc9d7effc4be4e3acfa618e3b66806c11a7fa2c629331cf37f0566360e2f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_north_west_neutral_idle_003.png",
+      "bytes": 22314,
+      "sha256": "81d332b5a3198f8468c4534be972a51079498f1115360c85627928cf4ebf3149",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_south_east_neutral_idle_000.png",
+      "bytes": 24898,
+      "sha256": "b2c559f3f84eae9be55e94d7a538371e576df5d30fe34e9c7d67d5c2801b677e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_south_east_neutral_idle_001.png",
+      "bytes": 24743,
+      "sha256": "1a1df6af5307cec4b0e0ba3946b0428ba77d2d21d3d061229eb6d1379edef779",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_south_east_neutral_idle_002.png",
+      "bytes": 25081,
+      "sha256": "a5c95a6e9224b5997d928701a218762bd1b79d0b467fe7317a8d349211bc4598",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_south_east_neutral_idle_003.png",
+      "bytes": 24688,
+      "sha256": "90caa79d0a76fa555ee2df8c2f625210ec9b5b6f3000fb2b640d2963d2d09752",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_south_neutral_idle_000.png",
+      "bytes": 26436,
+      "sha256": "f783c40c306aaadc805e26b42feaa53b5cee6a41b4a0449d9bb434dc27fb2754",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_south_neutral_idle_001.png",
+      "bytes": 26724,
+      "sha256": "ebe578d487c7f92d230ec370a49d87dc5997575ee322790ddc1129cb9a6bea82",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_south_neutral_idle_002.png",
+      "bytes": 26522,
+      "sha256": "c8205edd51817edaa93bf4f83017fadcd3ba6fe4ab3b9b140f83580570e5b959",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_south_neutral_idle_003.png",
+      "bytes": 26531,
+      "sha256": "3d8bd15d5e409298e94b237798935af73605b8eb307ecb34e3add10fec26c78b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_south_west_neutral_idle_000.png",
+      "bytes": 24785,
+      "sha256": "51b8c55fbf3feb57b6a09220d9fecde1f1a571932e3f42a61a2693ef3dfd205c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_south_west_neutral_idle_001.png",
+      "bytes": 24598,
+      "sha256": "e44a6c0fbe6ce2d679be6330cf1cd9a40427ae3736c4f5d7985db37eb8dea12f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_south_west_neutral_idle_002.png",
+      "bytes": 24893,
+      "sha256": "a8826bafd90aee9f92f5590753f01b369e2372e9eae8b1b2c86634dfe0ade5f7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_south_west_neutral_idle_003.png",
+      "bytes": 24518,
+      "sha256": "fc30d896aa36b0bb504a341964bb3501b714a17a0186bdca6ae649d0cb98746e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_west_neutral_idle_000.png",
+      "bytes": 19332,
+      "sha256": "47e7c3ead92630495844035d55c8132fc1f30f3788696599ac9998eea8f7bd89",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_west_neutral_idle_001.png",
+      "bytes": 19085,
+      "sha256": "bdad63ef52b01a6ff03f5fab179b018f591aacb6b615b9c7b7f3e207a4d59a44",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_west_neutral_idle_002.png",
+      "bytes": 19247,
+      "sha256": "784c928563d518356c550fddc595e47c3815247365680c3b08267d5fafc19f67",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_idle/bran_greatsword_west_neutral_idle_003.png",
+      "bytes": 19014,
+      "sha256": "2c6505a9383382660417667efba4aa4c7c194120eda2ee0701e1275ce8e5e860",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_east_neutral_walk_000.png",
+      "bytes": 21176,
+      "sha256": "4a0a270c6c981511e55b9204b884a4b661c48805a8dfae14494ff0579c3348ac",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_east_neutral_walk_001.png",
+      "bytes": 20208,
+      "sha256": "efeb32db7a28b000bd427af6368f8bb479c1a532f6a3e45b10e529e34b9b9c90",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_east_neutral_walk_002.png",
+      "bytes": 20092,
+      "sha256": "d76a6391b040278cc47ff622b609ae9b557f5659e86aabd11d1d302c589f9381",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_east_neutral_walk_003.png",
+      "bytes": 21277,
+      "sha256": "ad085c30f14f965c0fd4395f3c56386320884bdc0117a0b6e1d433d6779c9c8f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_east_neutral_walk_004.png",
+      "bytes": 20216,
+      "sha256": "82dd1ea8eedab6081a2c43a7cdd3fe5f502ccfcf33ad8fcef54bcc85ea7206b0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_east_neutral_walk_005.png",
+      "bytes": 18192,
+      "sha256": "28103d475343a18b9cb9efd504432cc9642879d79cd32a5e1fb4649584d2ee5f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_east_neutral_walk_006.png",
+      "bytes": 18815,
+      "sha256": "501a2162e251904dab820df84e965710c67a45dc95f56e5a5ea3b4c2c636faa2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_east_neutral_walk_007.png",
+      "bytes": 19535,
+      "sha256": "ea3c7b8c4fb00f1a335647e1c219bf5a49db6875e4084961a053d6bc697eb318",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_east_neutral_walk_000.png",
+      "bytes": 24494,
+      "sha256": "f2f70157988aa66d834c39f3654520c12bf7674f00160b588571f0a22a6b0e14",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_east_neutral_walk_001.png",
+      "bytes": 22684,
+      "sha256": "3d14a61f637eb33d47ac63b17fbfeeed7a997c2733b4298163f495b7361adb5a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_east_neutral_walk_002.png",
+      "bytes": 22085,
+      "sha256": "64e0e5eafa769ef88bbb4e879ba60a1441bec65d3d42a0925c06eb43ddbc6052",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_east_neutral_walk_003.png",
+      "bytes": 24182,
+      "sha256": "369dfd0caebb4267d743626adc295b187c6227dc43666de0c0fe407439f6874c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_east_neutral_walk_004.png",
+      "bytes": 24031,
+      "sha256": "79e3ea0f2bd70f8ccd354e673689a3cf9d49965bbe4176b13462c97b2ab1b4a6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_east_neutral_walk_005.png",
+      "bytes": 23678,
+      "sha256": "d6c70cf2d4bdafeb3252b8968451bc2308cde2f6e5a42e223044b0670872de0b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_east_neutral_walk_006.png",
+      "bytes": 22784,
+      "sha256": "29091e886eb41086bb57ff14d4f98428f9f20ee7c096093db0843ccccecf9390",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_east_neutral_walk_007.png",
+      "bytes": 24060,
+      "sha256": "e8c771db3d192aa9262270e3ed45bab7fc3e806ec003f169b0c470d02afe7346",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_neutral_walk_000.png",
+      "bytes": 20107,
+      "sha256": "1d75be9cc89f592600cc1cb38442defa9568cd0c144bf293fa281b38a172a69b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_neutral_walk_001.png",
+      "bytes": 19653,
+      "sha256": "f0742930476a30822dcf3fdf38d4e5ec8f99636fb77992d3f25a2812f3caf97e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_neutral_walk_002.png",
+      "bytes": 18983,
+      "sha256": "bb6f2d2fdf6834baa7deb212f3704b3d8e520cf6d934f7e64ba0d8a155db290e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_neutral_walk_003.png",
+      "bytes": 18894,
+      "sha256": "6a48a28f0d188624365349319f379f0542a51deb120e57eb703483bfabf86c2e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_neutral_walk_004.png",
+      "bytes": 18271,
+      "sha256": "da8c85c2e46bc848c7afedfd6741a307316067714d1a3774ed8e31587de10e19",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_neutral_walk_005.png",
+      "bytes": 17882,
+      "sha256": "a7da25b44eca85dae011b7cce484dccc167fe7ed4bb2a0f13fa2b65d8aa3d49e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_neutral_walk_006.png",
+      "bytes": 18153,
+      "sha256": "b8f5b5c9411ccfab611e821f7d63d8e1dabd76da50f64eb65001242b2aade927",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_neutral_walk_007.png",
+      "bytes": 18025,
+      "sha256": "7388f0fa01871f02210b0ad367da97f88e821c85995cedc7a68a76aa4e80ff07",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_west_neutral_walk_000.png",
+      "bytes": 24257,
+      "sha256": "45290293c9216778869ebbfb0a667380b48129fd81066750324b6d259c93a6a5",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_west_neutral_walk_001.png",
+      "bytes": 22586,
+      "sha256": "d8dc9c96f93518cfde24cefa26cbd5ffda222c9d2aa5293742c7dabb687f717b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_west_neutral_walk_002.png",
+      "bytes": 21826,
+      "sha256": "74f3dc90402a58494febbc4185abb7d6dab96335e4145f133247abdd96ff7c2d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_west_neutral_walk_003.png",
+      "bytes": 23937,
+      "sha256": "22e51e2616944f67c50738b13269816f652af2dd5ccab1b7891211cbba493234",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_west_neutral_walk_004.png",
+      "bytes": 23739,
+      "sha256": "22d57a21fac28d93584139df9f7a4ee6568ee43c13a12167683555e8480f6ae7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_west_neutral_walk_005.png",
+      "bytes": 23441,
+      "sha256": "2d6f5364f5acd54a1044d5e39b5adcb20fcd3c7bfbcb3c81cef66114a8bdc053",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_west_neutral_walk_006.png",
+      "bytes": 22591,
+      "sha256": "63add28676a977a9d0bc4ff2e48dd38149e4117c82afcce4d66fa143a5ac8f08",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_north_west_neutral_walk_007.png",
+      "bytes": 23732,
+      "sha256": "938ac23aca84b82bc6786a6a864b3f6a960e5ff67f57d112432c8bcf25fead84",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_east_neutral_walk_000.png",
+      "bytes": 24518,
+      "sha256": "7f6a85e1efe1527d09f5f85ba33ab3730c74bd906de5990aa418c888639a8c90",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_east_neutral_walk_001.png",
+      "bytes": 23500,
+      "sha256": "d1bfaab9957548bcef75037450b3961e255b44472811bd66cbc482612fd6a3a6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_east_neutral_walk_002.png",
+      "bytes": 22297,
+      "sha256": "c657caf916061f3a0cc0d4d9eb4271d27a9b5424c53d9f2548aca40aa75c633e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_east_neutral_walk_003.png",
+      "bytes": 22817,
+      "sha256": "ef34f5608c011506160a6fc372f81c7cafd918b01ddc1f3c6359276240296415",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_east_neutral_walk_004.png",
+      "bytes": 22117,
+      "sha256": "eddb851b5298544fd8ac1fbe25d98754fa91cd835d2fe831a8bfece43aa277e8",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_east_neutral_walk_005.png",
+      "bytes": 21665,
+      "sha256": "72574f67c63c0e61ae6090ee888870847eae343d4ad39d76c7898004f02fda0f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_east_neutral_walk_006.png",
+      "bytes": 20904,
+      "sha256": "ef6cf738027212c85403be342ba67ff46ba860867712f3e97ebd1f8fc3bd3de0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_east_neutral_walk_007.png",
+      "bytes": 22564,
+      "sha256": "e8721923d6d80cfca76f9f3e153212fbd4ce8a56a9dfcb35fe5ad1bc5c2f42e7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_neutral_walk_000.png",
+      "bytes": 21798,
+      "sha256": "16fc9636cbe5c644993877a95eefff2f62670f1ebb9e6a9ca116239cba7d1bef",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_neutral_walk_001.png",
+      "bytes": 22039,
+      "sha256": "297c05504c78fe4d595b1ec1ebea5f14fe4847e785cdbd440bf1329a1699675e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_neutral_walk_002.png",
+      "bytes": 21819,
+      "sha256": "1947e226fc94897c516b45b8e31b359fa3d79494412ed99ec762c635d0b3cc4d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_neutral_walk_003.png",
+      "bytes": 21474,
+      "sha256": "37d087ed31173116ad246104dab1c4902acaeffc2cf292827230b5e84b6c28f2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_neutral_walk_004.png",
+      "bytes": 21830,
+      "sha256": "07b0c543b66fb375664ddb994b13ac6518c8f2723afb17e159af95e68014edfe",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_neutral_walk_005.png",
+      "bytes": 21872,
+      "sha256": "cfa053d3f2dbb9c36f69efaf86553140aef0614e3888b5cb3e534efaf122fbdc",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_neutral_walk_006.png",
+      "bytes": 21358,
+      "sha256": "ecd54b58c47191cb10f2c50dda98a4b2a658e5643062505d80d8d5319e8e23c6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_neutral_walk_007.png",
+      "bytes": 21595,
+      "sha256": "a172520b86c1bd688fea0fafd0e526835e0ab7073a3a2e7fff298ce440bbd054",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_west_neutral_walk_000.png",
+      "bytes": 24399,
+      "sha256": "fc2c4594beef2eff6c2a7e31a6e3f7d5728b53c2a919229c8ac7458656ac6b96",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_west_neutral_walk_001.png",
+      "bytes": 23498,
+      "sha256": "3af5366e5824b9ec1594dc96a207e140e05a40ad343252f3c444527b5aa0ba57",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_west_neutral_walk_002.png",
+      "bytes": 22144,
+      "sha256": "0e8f219928d78baf8967fa854eddff3044a8e89dc566baf480029f89d61ffab6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_west_neutral_walk_003.png",
+      "bytes": 22774,
+      "sha256": "9b0334f4c38e7e0e75e554b1c6f9e7d66f01bfb062f2c5aeb6abd4bfdd2d1cda",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_west_neutral_walk_004.png",
+      "bytes": 22132,
+      "sha256": "f45f754c3cd4a30608c5fe2680c7180e93b872136e9b0daa8a099750f7654854",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_west_neutral_walk_005.png",
+      "bytes": 21662,
+      "sha256": "67e0017646272e163b6c0cd6dbd192a64d54bf98b672fcac20c9fec3a13caa80",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_west_neutral_walk_006.png",
+      "bytes": 20955,
+      "sha256": "0e855ce7733834018c9b0c629a1789eeba5bb6105e61526a540905a116b44a1b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_south_west_neutral_walk_007.png",
+      "bytes": 22577,
+      "sha256": "9f4cded8f09957ead52ec8c5111a217131059bfde449abadecefceb4a97d1c7e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_west_neutral_walk_000.png",
+      "bytes": 21329,
+      "sha256": "d9465e61d112f13e949399da3f3e3e6b97db7f79706734fd084fdc9421c84afd",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_west_neutral_walk_001.png",
+      "bytes": 20238,
+      "sha256": "973267f63abae53ff38da84228d3351292198245f97645d738243a03dd3df2df",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_west_neutral_walk_002.png",
+      "bytes": 20338,
+      "sha256": "73d404810f5052824e024de6459d13c6cc3ddf77aea4372b1bcb64032641d481",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_west_neutral_walk_003.png",
+      "bytes": 21443,
+      "sha256": "c98d5217c210fa0723653343a320dcb07916d8860ebd4b3220dd4426f37f319e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_west_neutral_walk_004.png",
+      "bytes": 20339,
+      "sha256": "56824c47f2842fe2d672d7eeb37308c811c96699b1db80ba11bb94be5723a681",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_west_neutral_walk_005.png",
+      "bytes": 18383,
+      "sha256": "bdc598ba1053d0b35e3d6256b0acfa09d5b91a5706e1adac4bae453ac857a0fa",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_west_neutral_walk_006.png",
+      "bytes": 19000,
+      "sha256": "ea3b4b13374660594ee0d2f1c37e95a0688c94fb1fb1332b0339623215dc0268",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/identity/bran_greatsword/neutral_walk/bran_greatsword_west_neutral_walk_007.png",
+      "bytes": 19783,
+      "sha256": "aea4b343112f4352655f78f83b3f3ec471eb9c5598067474e8707c9fb52967c0",
+      "width": 384,
+      "height": 320
+    },
+    {
       "path": "res://assets/combat/characters/original/archer_1/combat/archer_1_east_combat_000.png",
       "bytes": 15539,
       "sha256": "705abafb66752f2010974a53b05608a6bc2de5df9bd3522ae1018d1f068ae171",
@@ -64703,6 +67167,1910 @@
       "height": 384
     },
     {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_east_attack_000.png",
+      "bytes": 27183,
+      "sha256": "bf607fc7571db722472b867b9cb42d13b3ffc51794249687f0dcfc0743db5285",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_east_attack_001.png",
+      "bytes": 28496,
+      "sha256": "c87d7afd94d02764c62adbda2e115d0b1563d5f78ecd84d18d1981670ff37d24",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_east_attack_002.png",
+      "bytes": 29086,
+      "sha256": "876d29f5bf56c3830419fc441578ee211245614277e0f6266b1d098f7f389182",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_east_attack_003.png",
+      "bytes": 29518,
+      "sha256": "1e9d6aaffa22a042a2b6a37e767cf7031ebb97ec8fdc2f062c7c2ec43c781eb6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_east_attack_004.png",
+      "bytes": 30046,
+      "sha256": "8759489b96e5356a3ec05dbedb231f8055cb13fd44a2ebfa6be7819c9b5de0e5",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_east_attack_005.png",
+      "bytes": 29006,
+      "sha256": "2767a08500e469dc4d4779ae31fd0c93588e9f575913e8767420f6ee0a5bf4e8",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_east_attack_006.png",
+      "bytes": 29692,
+      "sha256": "60240d9b5b9e34c7203ba3c1073a94806ee33deab126ded200060672db5faf41",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_east_attack_007.png",
+      "bytes": 27046,
+      "sha256": "498317496d67c0bdfaaf384338f6d2390b5002f8addc1b333e29ac621b25f5bf",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_west_attack_000.png",
+      "bytes": 27199,
+      "sha256": "553eb32d12ad0e3b0c05637dc887002c91141335bf7d2f4f2215037f4bab38ae",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_west_attack_001.png",
+      "bytes": 28205,
+      "sha256": "20e975bb8c7a09e7bda43a85f781a167e46ca30efb68d145a4ead59211cc440f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_west_attack_002.png",
+      "bytes": 28899,
+      "sha256": "4b48e5d947686b437c566e4221568a4b4d77dc106b664aa44cf7a43e0ac301ee",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_west_attack_003.png",
+      "bytes": 29429,
+      "sha256": "a1c487afd008a69713727bec8555953fc1382e92ff2f64b6bf19e579999396a7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_west_attack_004.png",
+      "bytes": 29896,
+      "sha256": "bf2a07af35452cb34f199ac45ee9ba6208ee0286d6bd1219ac5e0c9811ed0066",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_west_attack_005.png",
+      "bytes": 28783,
+      "sha256": "776db714a8fc06d67f90c10d263429cbb564c83c7b6579557ea689eb06979a9c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_west_attack_006.png",
+      "bytes": 29452,
+      "sha256": "f00c981d8b81d78671c8fea90f5d0053a73b14f5290fc7452b5f2370e43b4f9a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/attack/painted_bandit_archer_south_west_attack_007.png",
+      "bytes": 27176,
+      "sha256": "3fc0539bda98109ac75d5cf878001f53671087a98ca99e71a2a073814c2c3493",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_idle/painted_bandit_archer_south_east_combat_idle_000.png",
+      "bytes": 26534,
+      "sha256": "6fbdc9c784a221ec5490d0143c0cbb6a83fc674abeddf3a465bbcfda0470e893",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_idle/painted_bandit_archer_south_east_combat_idle_001.png",
+      "bytes": 26507,
+      "sha256": "52698fe9b3e42b7a224f5a376a0e2d81f19e5065b0884be7149cbdd999482f7e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_idle/painted_bandit_archer_south_east_combat_idle_002.png",
+      "bytes": 26517,
+      "sha256": "64ef2af8385fb53f167418b5587894328e07c41601ddee505127d32ebeb4075f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_idle/painted_bandit_archer_south_east_combat_idle_003.png",
+      "bytes": 26551,
+      "sha256": "282e6cc2fe56b7b33f12293283bbd89b498b51f3bd1dc07c529f9923c9d25943",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_idle/painted_bandit_archer_south_west_combat_idle_000.png",
+      "bytes": 26700,
+      "sha256": "5420272af2065b1f080ff532ec744e2ee39a8302072ed9737f998eeb70e0eff9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_idle/painted_bandit_archer_south_west_combat_idle_001.png",
+      "bytes": 26585,
+      "sha256": "8f7cead4aca84b3774bcf5a381f944ebc631ac5ebf645b7157b41062fc88e87a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_idle/painted_bandit_archer_south_west_combat_idle_002.png",
+      "bytes": 26611,
+      "sha256": "44418842c7ca1e9c67f13ace7f776ae6aa6c7a355598c169eb703d7210269914",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_idle/painted_bandit_archer_south_west_combat_idle_003.png",
+      "bytes": 26659,
+      "sha256": "597c563f27804d57edfd21e043130cbcab64d0f23b7e7207122bf338934763dc",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_east_combat_walk_000.png",
+      "bytes": 26144,
+      "sha256": "92b6278e0bbbaf25b676e5c75b69edfb336a453ca544599554c3dc7de9fab2e2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_east_combat_walk_001.png",
+      "bytes": 24600,
+      "sha256": "7c4c67bc6101a6bc9604d8cb68b992c7daeb1a24d05e59ea7fe595a17a55a207",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_east_combat_walk_002.png",
+      "bytes": 24841,
+      "sha256": "96fbcd79f1725d8f1ba04cc897873a00c5dd30339d199559ee0cd3b456cf1eb5",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_east_combat_walk_003.png",
+      "bytes": 24482,
+      "sha256": "c113ed6c9e21d0b3e2e9ae13be257d9eca642c3c15a2b8136d756a34105de3e4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_east_combat_walk_004.png",
+      "bytes": 23995,
+      "sha256": "8833b1efb648cf7490730c920402a47a2f1aa46e55adf72065b1d5355315f010",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_east_combat_walk_005.png",
+      "bytes": 24451,
+      "sha256": "ad2616df200787c2ff5c2132c2afd0726be05a9b56652fecac13188217f05a4d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_east_combat_walk_006.png",
+      "bytes": 24881,
+      "sha256": "c28c5039b0ae04577af6b98a684fcf42095d9d12454ef3555f17de18ed0ec2fa",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_east_combat_walk_007.png",
+      "bytes": 24172,
+      "sha256": "02359ef5b5ced0e8f71d9b59731f6dc7d5dcba22fdc2bad079fecf1fb20ac08f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_west_combat_walk_000.png",
+      "bytes": 26295,
+      "sha256": "6d170dc98c79c2d8113670f9e90c0cd11f87050d59688bf56b21a4ae43547c06",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_west_combat_walk_001.png",
+      "bytes": 24757,
+      "sha256": "1d74414b464aa8b1902e9ff87fa95fe94c0e91ac14823d183883fe39ca3f587d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_west_combat_walk_002.png",
+      "bytes": 24904,
+      "sha256": "0d76362c4ca1d0c2db1e58f0f861e4dfeaf1b0ebdd66f32cae03cd300e3ce85c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_west_combat_walk_003.png",
+      "bytes": 24612,
+      "sha256": "d3e24b704b6e9b15b3d338840b845462acdeca36d6b0086a61faeca80688eb05",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_west_combat_walk_004.png",
+      "bytes": 24129,
+      "sha256": "ef5c24a5feea166fcc717d7214f99b13e8807982215d268ad352b9cc974c10ff",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_west_combat_walk_005.png",
+      "bytes": 24546,
+      "sha256": "f4220ef4f537cde81ea7264bd78344415a663f778777c4c54126e48e241205a0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_west_combat_walk_006.png",
+      "bytes": 24979,
+      "sha256": "088a796c40fcb4a7b6c3d0a920a78e4dea92ed52a61e8ce57ce2fd39f1dde3c8",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/combat_walk/painted_bandit_archer_south_west_combat_walk_007.png",
+      "bytes": 24203,
+      "sha256": "57887d67694e3f14917c54c0aba827bd2063123000bfc80a46bb12475cdb0386",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_east_death_000.png",
+      "bytes": 27582,
+      "sha256": "e9b436687dba66fcdb625e21fe435436ef3aad4acfe64197456c62977676a233",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_east_death_001.png",
+      "bytes": 27711,
+      "sha256": "d7d28144f585308581f529e06b880ad931139a70f22b6add4cd344274c81ddf1",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_east_death_002.png",
+      "bytes": 28423,
+      "sha256": "68fe40149736d2f813df3405594d8cdd56d83f4ce0a453e13b1a270ec4245793",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_east_death_003.png",
+      "bytes": 28445,
+      "sha256": "8fa126c72695bd2f36daf66caac4a6377e30cf40bd29c50eb138e8852958e253",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_east_death_004.png",
+      "bytes": 26271,
+      "sha256": "4eecf14dda330cc8bbf0ede7a09af952318ff1bb5b71bff38e3b9430229ac756",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_east_death_005.png",
+      "bytes": 28700,
+      "sha256": "60b5e2cc80275de74fbe33bc7bd1a108dc6689372bb6f2c01f34a602a195fc2d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_east_death_006.png",
+      "bytes": 26045,
+      "sha256": "9214ffa81cfe098d330bf77ed2c6e964bbbf535e887425f3fab3f4373c84362c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_east_death_007.png",
+      "bytes": 21571,
+      "sha256": "b345a2477055fd4aaed1d6e5cd52c848331f5ab21f876216c5978e9816fbcca7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_west_death_000.png",
+      "bytes": 27439,
+      "sha256": "aa2093ddd6413bf2a83884d0f47cd0db321aa81e4647633b8454c8703e3a589d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_west_death_001.png",
+      "bytes": 27616,
+      "sha256": "be3e715b943757dd0176bb6c93388068ce5907732882b8645e0b3b9b552304b4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_west_death_002.png",
+      "bytes": 28267,
+      "sha256": "697754d1a77752a92ebea30ae603a2caefd31fa7725a8d802590331bd1fa1087",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_west_death_003.png",
+      "bytes": 28429,
+      "sha256": "10555294e696bfa6d77f034d16dfd0caecbd985907c1a9d0327caf5565945a5f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_west_death_004.png",
+      "bytes": 26112,
+      "sha256": "fe5fdddeec66fd8cceced9a1217d26e7a9d0cf273ed165a3536dd79f270b04e3",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_west_death_005.png",
+      "bytes": 28089,
+      "sha256": "9fb1ea5dad0cd496de8033c282ba6ce0d4cb0fe2283a932035bf6ca19af5d13e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_west_death_006.png",
+      "bytes": 25808,
+      "sha256": "6453901b812a08b45e6a18d67e8e7562a8c547a6907fdf4f5d23ce928abca748",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/death/painted_bandit_archer_south_west_death_007.png",
+      "bytes": 21571,
+      "sha256": "fd716fba19f1db54985c4eed6a263122ee909622beba8ce0a109b80dcbd043c7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/hit/painted_bandit_archer_south_east_hit_000.png",
+      "bytes": 31115,
+      "sha256": "eafcac9f48e66b1d29ca49352850ff3b1bf55ce672f4b5aeaf651701f47db2e6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/hit/painted_bandit_archer_south_east_hit_001.png",
+      "bytes": 33951,
+      "sha256": "afd6492cc981d24ae9e02ab439b30ca21596f7002b196b4ea36671930c111026",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/hit/painted_bandit_archer_south_east_hit_002.png",
+      "bytes": 32356,
+      "sha256": "81637144709694cc34a643c1ef991374da8f320461889513712fed0e83d6db8e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/hit/painted_bandit_archer_south_east_hit_003.png",
+      "bytes": 31690,
+      "sha256": "757e9135fd828c1d5da43c0cd82b99f9a16dc57b3da2c97f9d88909560b1bbf6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/hit/painted_bandit_archer_south_west_hit_000.png",
+      "bytes": 31163,
+      "sha256": "f9630cc327f893b1b5dbc3ca1b56ffc7b1952ac0c3b2c066d5bb744f9bb2b03a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/hit/painted_bandit_archer_south_west_hit_001.png",
+      "bytes": 33843,
+      "sha256": "b2bcc4c239bc4a258a83184c3d3c5224822879002c11648b9970aa5f1c63d4ac",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/hit/painted_bandit_archer_south_west_hit_002.png",
+      "bytes": 32443,
+      "sha256": "e625af41809343efaf70b05c0e3b0df7cdc07514b610906dc9e09d344f363036",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/hit/painted_bandit_archer_south_west_hit_003.png",
+      "bytes": 31744,
+      "sha256": "723fc6fd82be53552f199cf8b7fac6e08a78d7c8369db965753b6ccb9ae865a4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_idle/painted_bandit_archer_south_east_neutral_idle_000.png",
+      "bytes": 23982,
+      "sha256": "be050a0e52b42edc6c714a11a3982306eaf0e85e03512ca8c0c99fa72f35fe39",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_idle/painted_bandit_archer_south_east_neutral_idle_001.png",
+      "bytes": 23725,
+      "sha256": "27130826b62989d0ae3d6e5efdfacf62c1ba05cbe44ac2987b6d5cf4753ae5de",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_idle/painted_bandit_archer_south_east_neutral_idle_002.png",
+      "bytes": 23441,
+      "sha256": "f576e24449c2d03d2dfdc785bf22308684bd9ca35654717231de0abfe8a43d47",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_idle/painted_bandit_archer_south_east_neutral_idle_003.png",
+      "bytes": 23365,
+      "sha256": "6047f9e2eaeedb544b5e13eedad68d029ab794be35d6a83683aa95b6b57db668",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_idle/painted_bandit_archer_south_west_neutral_idle_000.png",
+      "bytes": 24124,
+      "sha256": "52ee5e019ed74fbbc01fc44dd71ebf9053f71dca304e808f1727d37ec6cb6d1d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_idle/painted_bandit_archer_south_west_neutral_idle_001.png",
+      "bytes": 23759,
+      "sha256": "c30d5c0e470645ab8731fd9db6af7df2caad3370eb9108e041e3218e550c9133",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_idle/painted_bandit_archer_south_west_neutral_idle_002.png",
+      "bytes": 23547,
+      "sha256": "54cba40443328fabef396fc4af964a0bcc98eb040d7761f447b3fcf703998bd9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_idle/painted_bandit_archer_south_west_neutral_idle_003.png",
+      "bytes": 23467,
+      "sha256": "38f73458cec68218cd446befc1fcd0eb9ed4cf1b0456990d7f2c0b2ae5c9d2fa",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_east_neutral_walk_000.png",
+      "bytes": 24312,
+      "sha256": "206ba9a73313a7aabae0a731fe834b2d49fafd4ffea0d6a83ef0b12d51b31e84",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_east_neutral_walk_001.png",
+      "bytes": 22920,
+      "sha256": "6d0c632bea6953de47f121dfb65306c5221c6c93fae6366e094f9d0af7b4e790",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_east_neutral_walk_002.png",
+      "bytes": 22531,
+      "sha256": "792f1fda8eea624d1c9890e980b6ffa7397cdb3ef0164c5301c7576882f68ca5",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_east_neutral_walk_003.png",
+      "bytes": 24396,
+      "sha256": "5f320cb15a2b5e6c59502f56a1d444e08f1b82d25b3cba16f35e4d1aa494403e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_east_neutral_walk_004.png",
+      "bytes": 23588,
+      "sha256": "5fe37ac0a763f2e772f5d91014fafcafd2303eb08f9ee201ca88b6571ec90c62",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_east_neutral_walk_005.png",
+      "bytes": 21654,
+      "sha256": "f81d93da3fa133050a37f65b7ce3d935b54d04b05417880ed6b1e77241611a8b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_east_neutral_walk_006.png",
+      "bytes": 21887,
+      "sha256": "e50c192023ce595e357e3b049572c82ffd64f1bf2cff90eb9541fd5e98df54c4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_east_neutral_walk_007.png",
+      "bytes": 22302,
+      "sha256": "382a75b3ac5902bd3d43afde1ed0a80de6fa7a994b2502ac1ae732c30b10cce7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_west_neutral_walk_000.png",
+      "bytes": 24390,
+      "sha256": "016c1be091905ac070f4053496631243dd13470e35c6f27d53f99e53c2b5d7ef",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_west_neutral_walk_001.png",
+      "bytes": 23030,
+      "sha256": "4619cbcfa0cb983c42220d7a4f6b98bd7764440af8a02c7b5afc529d2a32a77d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_west_neutral_walk_002.png",
+      "bytes": 22639,
+      "sha256": "1f3be3b9d055e817a79797eafaf679365165738d29b60eae27de428c08ebdf33",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_west_neutral_walk_003.png",
+      "bytes": 24542,
+      "sha256": "68d5e5f9dc54c41adacc7e5c3fd39c128852b628bc81590e269438426d05cb37",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_west_neutral_walk_004.png",
+      "bytes": 23650,
+      "sha256": "85bca6efcbd6c3b3d27967706472a8f14191c77eb6280d3a5f0987ce6990e80b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_west_neutral_walk_005.png",
+      "bytes": 21716,
+      "sha256": "aae306a852ad25cf201a23afecc2cf449759b6e3fb9d0904999e7a0cb262506b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_west_neutral_walk_006.png",
+      "bytes": 22015,
+      "sha256": "d6a17cee06b117763b20b8bdfedfdb6c637b36e03407596ad765be87f6422e53",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_archer/neutral_walk/painted_bandit_archer_south_west_neutral_walk_007.png",
+      "bytes": 22361,
+      "sha256": "2478bbde6486541fd06b02eab1da402d01ddcf4fa648be1892e6aad08031ea5b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_east_attack_000.png",
+      "bytes": 31646,
+      "sha256": "fc62d5fcceaeeba14533e04c370ca055da24c66805eea9d479c73e3662913885",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_east_attack_001.png",
+      "bytes": 33161,
+      "sha256": "29f89b12ba4b742d259dbe6d11529d86ee112c78464bfb7d66224c6eb8313ec2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_east_attack_002.png",
+      "bytes": 35187,
+      "sha256": "b1b8cdcde45f473e5ff6e47631e038844c586d66cd3c0476c82afe222408d399",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_east_attack_003.png",
+      "bytes": 32240,
+      "sha256": "1a54c1334eb937fe287ea84f6576ac63c395a69d2f9628265f4ed1a85cfd8f96",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_east_attack_004.png",
+      "bytes": 31947,
+      "sha256": "af832e4252b4dbf357c300b3c52d77e8dc2a861135c3c4d08a0d1cc5fc2dea3d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_east_attack_005.png",
+      "bytes": 31612,
+      "sha256": "ed9e1b38ec8ab39d3a3b84d501f8517de1d05224c01bc13e27e05602e410f71a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_east_attack_006.png",
+      "bytes": 31528,
+      "sha256": "1190ac5bebd19f606dc125754d8f275424aa9475e14d44f9684cccf7f4af21a9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_east_attack_007.png",
+      "bytes": 31882,
+      "sha256": "c9032974390672d25af51e4703b76d9905c62ea4231ae79e05225f14d2c0473b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_west_attack_000.png",
+      "bytes": 31702,
+      "sha256": "8898d8a9065db5a9fc3b7f470bb2a097e6e96b4ef260751e2d943f6cb7fbae9a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_west_attack_001.png",
+      "bytes": 33493,
+      "sha256": "7a44da08b669d9bed097b142cb4b90d6bfb73182a790a649c3ffbae2221b1335",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_west_attack_002.png",
+      "bytes": 35445,
+      "sha256": "95ab8c21dda725f49a64d0f5af6bf4884a206f56f1618afedebd270e9240b55f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_west_attack_003.png",
+      "bytes": 32391,
+      "sha256": "12acf3cd8757dee657f1a90f8e89ded737351e487a7e2adca77dd26681430a37",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_west_attack_004.png",
+      "bytes": 32061,
+      "sha256": "7141c8032a42db3e545de54cb6a933427423b3aece75c79d64def19d1b30e004",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_west_attack_005.png",
+      "bytes": 31688,
+      "sha256": "4fe41f73b08ba18605ce1240dc72eba67ef6ee374880ce39ccc5b6b8a2b8f67d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_west_attack_006.png",
+      "bytes": 31694,
+      "sha256": "4e287525dfe573252a042f5f0af5400178572cffbdb8ca23c879ce4738f8c483",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/attack/painted_bandit_guard_south_west_attack_007.png",
+      "bytes": 31884,
+      "sha256": "7bdef7773e4d93e136026c2206ea2a45cdfea16c183cac7287de251fcfffe0ef",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/block/painted_bandit_guard_south_east_block_000.png",
+      "bytes": 32435,
+      "sha256": "4ae23e577f8d854f5106196ba1c8acd4e0170721bfd472abf90e4ca3e1df1473",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/block/painted_bandit_guard_south_east_block_001.png",
+      "bytes": 33499,
+      "sha256": "09e7dfeaf7f97aba2b4fc95ef5a7fc6faef356eafb35094c201fda56d43ecf6d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/block/painted_bandit_guard_south_east_block_002.png",
+      "bytes": 33445,
+      "sha256": "56833f68db1c92f725a306ba1c64ae10d46cef5b0ba4e2c2772ec2238a4c3a9f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/block/painted_bandit_guard_south_east_block_003.png",
+      "bytes": 32819,
+      "sha256": "5176df3f5e86308e458b7e23f5e7ec96641b22d1f17243cd23402b8b129c293e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/block/painted_bandit_guard_south_west_block_000.png",
+      "bytes": 32275,
+      "sha256": "3dadd17ead6e82e68f32552f323bd045df650541e1f1698fbc1b82292404d483",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/block/painted_bandit_guard_south_west_block_001.png",
+      "bytes": 33142,
+      "sha256": "47334dff3e5f172123742f676012718ba4574df76203bb1d2def37d88408c2c4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/block/painted_bandit_guard_south_west_block_002.png",
+      "bytes": 33156,
+      "sha256": "1c334fb12be11a0eeb86feb887202bccdae2ddf02282b4df2827f07b8f8d92a6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/block/painted_bandit_guard_south_west_block_003.png",
+      "bytes": 32587,
+      "sha256": "adbdd5832ab8771776ed5e250e2de09910ccfe23b5c6aee373c16ff67182d568",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_idle/painted_bandit_guard_south_east_combat_idle_000.png",
+      "bytes": 29915,
+      "sha256": "a5027d8abe5afdec32a0592838f7785678e2654ebc2f60635d72fba240023caf",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_idle/painted_bandit_guard_south_east_combat_idle_001.png",
+      "bytes": 30132,
+      "sha256": "812d99168b5adf596f23ec95a58e4dbf29808537f75722f649273586b105062e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_idle/painted_bandit_guard_south_east_combat_idle_002.png",
+      "bytes": 30577,
+      "sha256": "7de65a4e76e6a4a23392646cc04b7342681fe6c087bf4bea095bcbfe3306c885",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_idle/painted_bandit_guard_south_east_combat_idle_003.png",
+      "bytes": 30136,
+      "sha256": "e74041615db4a21438613e3cecac811f2b35d18da69e5e379cfa8b7f2d0cf090",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_idle/painted_bandit_guard_south_west_combat_idle_000.png",
+      "bytes": 30007,
+      "sha256": "f84fe8e1da1f4400138fdbd46cb520bd10c9c852eeb64e63e65914fe95fe702d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_idle/painted_bandit_guard_south_west_combat_idle_001.png",
+      "bytes": 30197,
+      "sha256": "e8d236bebd38012b3f061d7902dbb1f765351618771d3398b074759c20a02f48",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_idle/painted_bandit_guard_south_west_combat_idle_002.png",
+      "bytes": 30659,
+      "sha256": "92babc571e0d2989c1d794640e1548204770b4f2bef885284026ad975810d2e9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_idle/painted_bandit_guard_south_west_combat_idle_003.png",
+      "bytes": 30131,
+      "sha256": "9db6691cd3cd2739d4daa152cf19dce775cab52071274fe19f575470040ea745",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_east_combat_walk_000.png",
+      "bytes": 30381,
+      "sha256": "8c20c5b9058e1cc7bfa8af7a78ed32c3e5dc2d6f37461a4d47f3f399e066c4d0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_east_combat_walk_001.png",
+      "bytes": 29595,
+      "sha256": "ed22ce6521d1a91215f86b37310be627687e135ae9aafe032d144c592fb65911",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_east_combat_walk_002.png",
+      "bytes": 30905,
+      "sha256": "708e84a9151118b3a825f68fa35c00dea5633460fd5f88452ab3c379f4bd053c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_east_combat_walk_003.png",
+      "bytes": 30098,
+      "sha256": "e58c905032daab42a358436a398e19e9a79e5b6550ed510f8b5319462fcaaaf5",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_east_combat_walk_004.png",
+      "bytes": 28489,
+      "sha256": "f67e3430c6ea315e076febf7b6c6900739b3f2feff88aa28086fcbeea1e88484",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_east_combat_walk_005.png",
+      "bytes": 28975,
+      "sha256": "b955861dc8a00b6916fbd0bf632ca5b68ecb8bde2404d46bc7e8314c7e4ad107",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_east_combat_walk_006.png",
+      "bytes": 29917,
+      "sha256": "64a4141ebc546b502c960512baa27d1412d7a7575e9141c6f209bc85623ac27e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_east_combat_walk_007.png",
+      "bytes": 30116,
+      "sha256": "535ce629f9be916721340be61cffa103d21fa9a6ee72d4d8d43274efdc3364b7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_west_combat_walk_000.png",
+      "bytes": 30392,
+      "sha256": "484a486c53557648f6dacc5dcb463e15ce91efcc6ca8d20b8db1ebf95c649335",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_west_combat_walk_001.png",
+      "bytes": 29653,
+      "sha256": "e2a4b6cf6ef79af54ad138dac70d02372a129e419f0799ee34c69b7ef273cb26",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_west_combat_walk_002.png",
+      "bytes": 30891,
+      "sha256": "a11aa8d9cdc70a0cc62b8f271dacac85e6b10ea9558c61b765d4cea73c37fddd",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_west_combat_walk_003.png",
+      "bytes": 30105,
+      "sha256": "7b092f7b9bc7ce672084963403f2bab8de1431f16419355699e7056fc0f184e4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_west_combat_walk_004.png",
+      "bytes": 28488,
+      "sha256": "3c73d9a771c39541a079efbfc5f8feceeb5e7b579ead4c9ca4e4ff9632ba1328",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_west_combat_walk_005.png",
+      "bytes": 29055,
+      "sha256": "d950116af9a660a36fd3f65942eb6be473cfd36fe50ae9cd700298780f5fd749",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_west_combat_walk_006.png",
+      "bytes": 29956,
+      "sha256": "7d09b1c20b7c6d336e33413c980f6a3e8dc03d5b7573e873cb8cc852f6992b98",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/combat_walk/painted_bandit_guard_south_west_combat_walk_007.png",
+      "bytes": 30175,
+      "sha256": "0238d847dd466241cb9b9c208983653442041da5496110942a7e6b651f44904c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_east_death_000.png",
+      "bytes": 32504,
+      "sha256": "46232d89b50a2cd044c653bdc4a3959c39f177db1130bc604f15b0a9f0254767",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_east_death_001.png",
+      "bytes": 32412,
+      "sha256": "fb745f16e80ced2b4be87ef4fe79594234628efaec69c7fa4c7908c91ba42edf",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_east_death_002.png",
+      "bytes": 32379,
+      "sha256": "8b7c23affd0fe4c9fa312f8ed8d2c35c01d80fb288107db71253b4643ba2cda0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_east_death_003.png",
+      "bytes": 32839,
+      "sha256": "3dded3b7dad2eabe9237475be017d31edf682604c1ac3218d51fa3c553732c32",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_east_death_004.png",
+      "bytes": 31258,
+      "sha256": "f0f5bebbdeb7659ec021d104949bb88d76062bc48660f32bde654fbce8727466",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_east_death_005.png",
+      "bytes": 29017,
+      "sha256": "66450b1272fcdc579fa5830faa7593537bf81718d2ff27a5c7bb63c89158174f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_east_death_006.png",
+      "bytes": 24606,
+      "sha256": "08e1d7cc8f2c03e9dc6fe9c5a747f114fc9896e9c3dc9f73692e419814d3b4c4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_east_death_007.png",
+      "bytes": 23789,
+      "sha256": "08de32f955398d0462f3ef212e1bee841e4b1ff2e76d4efdf13dfc56638b9a0d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_west_death_000.png",
+      "bytes": 32407,
+      "sha256": "85ac294b8444ec42a571394216af1f798cd5af52debd8a2fd69563f65953a1d6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_west_death_001.png",
+      "bytes": 32202,
+      "sha256": "7d5d24931463d6bad61a426fb62da5048dc787ebecb916cdde733ab085854cbc",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_west_death_002.png",
+      "bytes": 32166,
+      "sha256": "a75dca455f8be81c2d903329ac0c9f6a1b3ee64130905464e707d6eba7c4a9ff",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_west_death_003.png",
+      "bytes": 32643,
+      "sha256": "f266e471c426403d6dd69a23989d35603ef9b353729f8edf4fe09e377f453a28",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_west_death_004.png",
+      "bytes": 31237,
+      "sha256": "71eb92adad87f52ad374853ef03150d28be0e51d8badc5c1873b223dab8ad11a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_west_death_005.png",
+      "bytes": 29032,
+      "sha256": "f0a3930166021828126e57fc2988093823e5569d4cecf8a91b335ef5f93b0bd6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_west_death_006.png",
+      "bytes": 24677,
+      "sha256": "af556bedd9dd44fd751c539a5a34c75be6ad2f24aa0ae1cfeb0fc37c89e1d2c3",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/death/painted_bandit_guard_south_west_death_007.png",
+      "bytes": 23747,
+      "sha256": "cc2d24d9135105a5d3b1632b32c6b92dde840baa749286b86193d9407406f4fb",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/hit/painted_bandit_guard_south_east_hit_000.png",
+      "bytes": 37025,
+      "sha256": "ff94ac0cf008909b3e1945fad8989129f63b4058727543a8448d5f6c1dc24f80",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/hit/painted_bandit_guard_south_east_hit_001.png",
+      "bytes": 36061,
+      "sha256": "bed32fbb72acacd06601b4695e76ac3cf824d0826ecca0178c2ffefe8ee94cf9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/hit/painted_bandit_guard_south_east_hit_002.png",
+      "bytes": 33439,
+      "sha256": "d50429e1d51614ef83246fa98567f2489a3aebf05d36c5bfd9df2d09c377ebc0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/hit/painted_bandit_guard_south_east_hit_003.png",
+      "bytes": 34201,
+      "sha256": "b07559d86d4876dbc027b5841e2eb7f205e59f3a51f615f99762e2a263c8a7a8",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/hit/painted_bandit_guard_south_west_hit_000.png",
+      "bytes": 36915,
+      "sha256": "5a2cd3cc9f90adbd9fbf58277f3f2c1820a1d4b6f8c93e7fcd4844ce3ddcc7d0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/hit/painted_bandit_guard_south_west_hit_001.png",
+      "bytes": 35869,
+      "sha256": "d28803d631ea80849577668617daa181cd884f822aed99e292a16a6da2ed8ffb",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/hit/painted_bandit_guard_south_west_hit_002.png",
+      "bytes": 33375,
+      "sha256": "00c335a46aad01248620992308862e50560ec2cedf03c52c3457dd87dee503b3",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/hit/painted_bandit_guard_south_west_hit_003.png",
+      "bytes": 34108,
+      "sha256": "4a98abb921908ff43d169c09d57bacaaf79387bfcf0db8fe68ed9c3e964cfd55",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_idle/painted_bandit_guard_south_east_neutral_idle_000.png",
+      "bytes": 29497,
+      "sha256": "e7f2edf193543052fef88d6779f9f800ea1f92bceab1b10115fa0f7aeda28fbd",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_idle/painted_bandit_guard_south_east_neutral_idle_001.png",
+      "bytes": 29364,
+      "sha256": "5d92d506092804727aea8ee5f356f5a66acceeccd25b47297a718d6f5a6ae303",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_idle/painted_bandit_guard_south_east_neutral_idle_002.png",
+      "bytes": 28730,
+      "sha256": "c7ccf87a8de845c6363825880be11d13edfa4df700c18efd2fedfbd8736c3f61",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_idle/painted_bandit_guard_south_east_neutral_idle_003.png",
+      "bytes": 29519,
+      "sha256": "47dd4cb0f9882b9ba0c4f648ffc75b17d3bf932f3af6df0bd34c4c3370be536c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_idle/painted_bandit_guard_south_west_neutral_idle_000.png",
+      "bytes": 29250,
+      "sha256": "ecb57a780a59a449e80d1506eb6e94fa60442354def34b468b4718c502f9f24c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_idle/painted_bandit_guard_south_west_neutral_idle_001.png",
+      "bytes": 29194,
+      "sha256": "844af44524f51486d5efc08fb2ab36f853e90fa6b026275a5f450b9038386817",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_idle/painted_bandit_guard_south_west_neutral_idle_002.png",
+      "bytes": 28551,
+      "sha256": "db8c7c79bf00d8317cb4f835bcd53cccff5abf551399412741c5564bfec7f8d6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_idle/painted_bandit_guard_south_west_neutral_idle_003.png",
+      "bytes": 29331,
+      "sha256": "107881442244183d9c00f110993008e69151bcf19907783fa7e01eb7efdf354f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_east_neutral_walk_000.png",
+      "bytes": 27404,
+      "sha256": "be90981eaba0b13258423f25c86aca51b46e1e7514678f907b59ae85bcdb29ad",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_east_neutral_walk_001.png",
+      "bytes": 27854,
+      "sha256": "e851ad25832a17b8d25493574dd66368a84ccf104ee2f92acab93cbfa0edce0d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_east_neutral_walk_002.png",
+      "bytes": 27439,
+      "sha256": "e0cb7a0ba65471fdb23e6838765ea29a2c4837b30ba1e3dfc274005b12e0de61",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_east_neutral_walk_003.png",
+      "bytes": 27780,
+      "sha256": "cfd018d8d71dbe4a32ab537c23922b0c1a589d7b7e9331a02f70962a97adeaba",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_east_neutral_walk_004.png",
+      "bytes": 27901,
+      "sha256": "9cc9f6bfdb0e0208071ce2fead6a00d9b704918a0a04b57a26aac31d11e68e5c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_east_neutral_walk_005.png",
+      "bytes": 27029,
+      "sha256": "c3dd083906cd4c7991a6cfb76e5acadf3e8b5dd50fcbde5098b6c39429355e40",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_east_neutral_walk_006.png",
+      "bytes": 26076,
+      "sha256": "cec1bfa3b8d4f0f3c5ed2dcc8cba707122ccb2328d066cb279e531966e4ee66b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_east_neutral_walk_007.png",
+      "bytes": 29160,
+      "sha256": "d339b3460671adbadcf7d0c5bc36cace3e6d20bc00e54e5efb4f0a24ee3ab0bf",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_west_neutral_walk_000.png",
+      "bytes": 27254,
+      "sha256": "4c4375c9eb7cb65fde70e615067b4b882630ab91ac0612d24e36da7a8e670f64",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_west_neutral_walk_001.png",
+      "bytes": 27798,
+      "sha256": "3f23869e24c7b57a82f5ed6ef3eb6999c5709408a3f4729dbca18515ca25c82d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_west_neutral_walk_002.png",
+      "bytes": 27254,
+      "sha256": "5b919bf5c1b5d173cde64eddf9b5c80163d681f888bbedfd55a18bbe5e1d2ca4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_west_neutral_walk_003.png",
+      "bytes": 27721,
+      "sha256": "2f27f55d9365ea8b1bf1db18c98ad088c5df2663824a3f270cf24bfede586d87",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_west_neutral_walk_004.png",
+      "bytes": 27852,
+      "sha256": "7437898785522d63599f6e993967241c38e9f2b1f860fc156609fdff37e37fb8",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_west_neutral_walk_005.png",
+      "bytes": 26870,
+      "sha256": "e7a3e97f99f2c52e502cfeec0d31c3d6e2c4b8eb2b54800639a9412fde0ee2f4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_west_neutral_walk_006.png",
+      "bytes": 26031,
+      "sha256": "f8d8f223dbae5d499fc4d517b59f975b19e67fd0928faa721c5772ab863ba0cf",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_bandit_guard/neutral_walk/painted_bandit_guard_south_west_neutral_walk_007.png",
+      "bytes": 29118,
+      "sha256": "878cccb90c6d0ddcb3c8321ad928de5a9e4e89715a1b9e58adf6089235517d39",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_east_attack_000.png",
+      "bytes": 18309,
+      "sha256": "8fff0db7c34f2b9df131472ecd5e3e07a1ec1552c3512a690473b95d47d833c7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_east_attack_001.png",
+      "bytes": 17591,
+      "sha256": "0ef8c692831d21cbaafab7a944d4636bfa95f081f3fe71097785f60725589d7c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_east_attack_002.png",
+      "bytes": 18204,
+      "sha256": "40747fac6420005048d2a401b803600d18984aa810eb613933303dca0a1f0750",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_east_attack_003.png",
+      "bytes": 18337,
+      "sha256": "fe32a561b3c42dcdf9444c850a526a8aa923e40f04a5bf6dc22367f6e79cfb42",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_east_attack_004.png",
+      "bytes": 18898,
+      "sha256": "15d251a3a7aede7107ba5595ffe24d033825d9b9568d115c7aa1ccde06fc81ed",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_east_attack_005.png",
+      "bytes": 19115,
+      "sha256": "caab1ab4f3d508eab757f49fe7da4266586cca0ca728fe26f95455992dfba930",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_east_attack_006.png",
+      "bytes": 18406,
+      "sha256": "58d40334c424cfd7383d1a916afa922a399a9d53d90b96b91685eda097b302fd",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_east_attack_007.png",
+      "bytes": 18530,
+      "sha256": "059b5897f3c7c8dc137c64e1536ff8643db5203f0261346cbea2a9aa3c456b99",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_west_attack_000.png",
+      "bytes": 18399,
+      "sha256": "24a5638376db4a5a4628043c2fdf33967d6a0828deea1a053c1aa56c9bdeb797",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_west_attack_001.png",
+      "bytes": 17682,
+      "sha256": "b90af4aa9131fe99ecf869e845274027685191acddecdd46ef2ce8c724baf413",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_west_attack_002.png",
+      "bytes": 18301,
+      "sha256": "8554322a851547952f595c34103a45ea503edd242fe7e79bf0867157b43af360",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_west_attack_003.png",
+      "bytes": 18357,
+      "sha256": "9c7b53049270210905e919266032ffe2cb98a00c2611e501afb6afcbc5c5a462",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_west_attack_004.png",
+      "bytes": 18781,
+      "sha256": "92323e77f3e91505f568ce7b5d5144b0a9009164aadf59d1631bfbaac8afb4ec",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_west_attack_005.png",
+      "bytes": 19121,
+      "sha256": "e024310f63e19902faa974637421298766ab72a50371f54d2fb788d6c4a63f2a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_west_attack_006.png",
+      "bytes": 18361,
+      "sha256": "27e9c064b386a2ffeabd11bdd616f110694d3678ddc76675045b8c7e13e1a92c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/attack/painted_wolf_south_west_attack_007.png",
+      "bytes": 18593,
+      "sha256": "1a5b8aff8196c32446efc05aa4abf0a41a3d4324dbcf91896e9302448c65fd83",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_idle/painted_wolf_south_east_combat_idle_000.png",
+      "bytes": 18359,
+      "sha256": "21b7f65b334598b133bba86d59326c6b1e9e8605a7057925ed4f09c95a1a7422",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_idle/painted_wolf_south_east_combat_idle_001.png",
+      "bytes": 18400,
+      "sha256": "456704bec836128c38f8e1e62c242ade2fcc499c2a4788f5da219ad67a180b6e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_idle/painted_wolf_south_east_combat_idle_002.png",
+      "bytes": 18189,
+      "sha256": "58ea3825a7b549654a669f3d190fb7adef30db75caf76e3c00b427222113cce0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_idle/painted_wolf_south_east_combat_idle_003.png",
+      "bytes": 18400,
+      "sha256": "456704bec836128c38f8e1e62c242ade2fcc499c2a4788f5da219ad67a180b6e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_idle/painted_wolf_south_west_combat_idle_000.png",
+      "bytes": 18347,
+      "sha256": "53e739072cc5db80c4456af76b1c08df87486c46d232fcc3441777a2fa9c9703",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_idle/painted_wolf_south_west_combat_idle_001.png",
+      "bytes": 18390,
+      "sha256": "f14dc19f52951f73476ddc4a8b63b704a40892a15760d370defcdeec88500592",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_idle/painted_wolf_south_west_combat_idle_002.png",
+      "bytes": 18219,
+      "sha256": "ebb37b5e95bdec80eda8309745cf293687bd6afcf176fd6251a36745b9788d70",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_idle/painted_wolf_south_west_combat_idle_003.png",
+      "bytes": 18390,
+      "sha256": "f14dc19f52951f73476ddc4a8b63b704a40892a15760d370defcdeec88500592",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_east_combat_walk_000.png",
+      "bytes": 17767,
+      "sha256": "77007a5cda56af6afa0823d756c531657a40df7f0daecf7956f44f425c80c48a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_east_combat_walk_001.png",
+      "bytes": 17454,
+      "sha256": "6238fe6f4e9012b904952e72d98fcf34cb2dcfe3d8f4c69ab316e8f41bdd6c80",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_east_combat_walk_002.png",
+      "bytes": 17374,
+      "sha256": "7468d10da9d8868a254b400b278b60bbd4bbd6ff9f0fefc93dd1a0e0fa51aacf",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_east_combat_walk_003.png",
+      "bytes": 17037,
+      "sha256": "3269b0b7653a12449e90eeb22dc9e1e43f3f604a902247a9a3f4d87564a578ae",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_east_combat_walk_004.png",
+      "bytes": 17729,
+      "sha256": "948d54a9d2ed2e8d10dca802ec7ae7fc10c940202a299f4452eab4b7bf27e17d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_east_combat_walk_005.png",
+      "bytes": 17469,
+      "sha256": "09d436664d3025cd6aeee5065b685556832f4e020b82f481b817480cb40d1abd",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_east_combat_walk_006.png",
+      "bytes": 17593,
+      "sha256": "79b63d3a3f69132d586407f19ae77d44483e8fa945f6134d44c8bc56d5622f3c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_east_combat_walk_007.png",
+      "bytes": 17331,
+      "sha256": "b7a06d4a918d16597935dc904c1adf5049479c4890c5f0aac1aed760a7a14df4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_west_combat_walk_000.png",
+      "bytes": 17855,
+      "sha256": "f8e09a5095446f32da36e3704380e091edc34da44f4680abe89bafb4238c21ed",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_west_combat_walk_001.png",
+      "bytes": 17606,
+      "sha256": "46c6b2216a85edba48e71d0b405e91400b7a49c26912b25bcb203a6931106d2f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_west_combat_walk_002.png",
+      "bytes": 17510,
+      "sha256": "c0faef23c9a9160f5a59db4398ba98fed97fedd042cadb5704d0662316f1b23f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_west_combat_walk_003.png",
+      "bytes": 17162,
+      "sha256": "31cb96254295c5ceb63efbdd5b41a56a677bfa42a1c0d302213556edb0466929",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_west_combat_walk_004.png",
+      "bytes": 17813,
+      "sha256": "9fb12bb051a5686d07faf19bf4a8edbf79b688bee5aa93aa245046cfb5bd2f36",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_west_combat_walk_005.png",
+      "bytes": 17580,
+      "sha256": "7da397e08ff20cadd6170ded73fb817f02851e82df2d69eb3a24e75129cedfe4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_west_combat_walk_006.png",
+      "bytes": 17636,
+      "sha256": "e0f6060594413ea1bf22d07e311be266a49bb65b4173c029502683f8fd8ed6d9",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/combat_walk/painted_wolf_south_west_combat_walk_007.png",
+      "bytes": 17466,
+      "sha256": "9571d98cb44a80cb2587c44a61f0d93499f2c7e1b6cf88fd7d63b48f061e5d05",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_east_death_000.png",
+      "bytes": 19270,
+      "sha256": "2b3ada89c42f9078c2868d806c82b86d011c98de30d04b7ffc75890c973c2c52",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_east_death_001.png",
+      "bytes": 18592,
+      "sha256": "bebef30f1e5670891a12e4dc492bb674606c693d0a9df8358a589969687f5f33",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_east_death_002.png",
+      "bytes": 17052,
+      "sha256": "cd210956fb9b59bebd13d8b8bfc85442e930b404272091dace50211a320578ae",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_east_death_003.png",
+      "bytes": 15253,
+      "sha256": "9850ddfbabf365449b9d01f5a31cf5efd94b92f98e5521b96f7d292b3eccd86e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_east_death_004.png",
+      "bytes": 14907,
+      "sha256": "2471912d012584813b579a8f2eb826204a8f2e9d695b2922fc5fd89a6656da3e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_east_death_005.png",
+      "bytes": 14111,
+      "sha256": "13c2f13bd4197d58502c9a20592b5e43ab48e23219200090256270ddb0750166",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_east_death_006.png",
+      "bytes": 12667,
+      "sha256": "53c024541fc5f8ea6183bfe43943e01ad5b3f878c0f7e9744823ca3a9596a8d2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_east_death_007.png",
+      "bytes": 12308,
+      "sha256": "35076f06f98c157c49b37d2af76944967de67b314d4a360664496e5a3e3cd8fb",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_west_death_000.png",
+      "bytes": 19371,
+      "sha256": "b4dc0f1beea3bc818d019f50a4aa008dea6d8b6c5eb7874dc4f92fcf46ec18ce",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_west_death_001.png",
+      "bytes": 18604,
+      "sha256": "cdcb7318988c87bba65bcbc7e0404c36f6a2f7b62352231c461fe4dc8766ae08",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_west_death_002.png",
+      "bytes": 17058,
+      "sha256": "3b4369deb94aadc8f8c6340d22f397db2cc44239061a3ea1e4300dde8eb401f4",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_west_death_003.png",
+      "bytes": 15262,
+      "sha256": "e9bf4f1178f2cc09d9412d5ea92a354f6a2f84816d65763a4c5de29b566d338b",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_west_death_004.png",
+      "bytes": 14834,
+      "sha256": "aed7f97e02e1881795ea871e5b10028eac05482a5530a8f99ffa85e0cf327fff",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_west_death_005.png",
+      "bytes": 14001,
+      "sha256": "89afec47fac6b160aaaca9aee36d7d5afbdea0479aa28b91bf47ae6783dd8121",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_west_death_006.png",
+      "bytes": 12578,
+      "sha256": "d7dd01221ff6acd2c88c3faa8778854ce159ebd88e58c29bb3c13482684c08e2",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/death/painted_wolf_south_west_death_007.png",
+      "bytes": 12248,
+      "sha256": "365d0f1fdb54752b6448d36c3d8d2035a07dc4482c217e149517f14ad15fe6f5",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/hit/painted_wolf_south_east_hit_000.png",
+      "bytes": 18872,
+      "sha256": "ad8533e332d6ae4c9d4afa1e5af7b83ffe73af92f1ea0d0abcd37d6f74bd99a6",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/hit/painted_wolf_south_east_hit_001.png",
+      "bytes": 18195,
+      "sha256": "55fae94b00188133bc2d261c93f2d76712ec765b9f18f985d6cae70e28e01c4e",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/hit/painted_wolf_south_east_hit_002.png",
+      "bytes": 18462,
+      "sha256": "6aa3b624812b2a6152884792238a98d234f045120dd0ba1df34b14c7505c1c9d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/hit/painted_wolf_south_east_hit_003.png",
+      "bytes": 18814,
+      "sha256": "87ed44c3e82d6a6501c27e355b978f7e1fce859596f71fd749608de5be077364",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/hit/painted_wolf_south_west_hit_000.png",
+      "bytes": 18980,
+      "sha256": "9859cb6fee060c2806ef30078366c88236e95b01be04cfd07e05632fbf231a10",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/hit/painted_wolf_south_west_hit_001.png",
+      "bytes": 18240,
+      "sha256": "5e3880dfc55f61d5067b7fa432a6defbb497ff8d440ad8ddb39f40087498a7df",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/hit/painted_wolf_south_west_hit_002.png",
+      "bytes": 18476,
+      "sha256": "ded673c785af09157dd3195f1ce2758b973ce1c352c5a5e49e9fd98f6eb358f7",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/hit/painted_wolf_south_west_hit_003.png",
+      "bytes": 18987,
+      "sha256": "9d9d2c9a6db4c175bfbe8fb99ed7d73af2087f12843a0fd5a6b7964edc7e930c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_idle/painted_wolf_south_east_neutral_idle_000.png",
+      "bytes": 18018,
+      "sha256": "363f0e1b04aa1d823f8cbcac356ad1a3be84c7b62cf75994876fccc3eb57098a",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_idle/painted_wolf_south_east_neutral_idle_001.png",
+      "bytes": 18030,
+      "sha256": "7a922bda0f6475dd6ae516b77ab214b35a2b46fdb5f9a3d9601b9ce17c12322f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_idle/painted_wolf_south_east_neutral_idle_002.png",
+      "bytes": 18154,
+      "sha256": "25227823192b26e65f665f5ff3baee9bb54ff5924c00d4e1e1a66a13c323ed7f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_idle/painted_wolf_south_east_neutral_idle_003.png",
+      "bytes": 17854,
+      "sha256": "4a19e9b594a382e800b16ba734ce0a62ae17975643d56eec56b074cb9c821c22",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_idle/painted_wolf_south_west_neutral_idle_000.png",
+      "bytes": 18076,
+      "sha256": "090c555bfaa0cd6f3237761bd9017e2ddcdcf3834d0776aa667ca12e32532f65",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_idle/painted_wolf_south_west_neutral_idle_001.png",
+      "bytes": 18018,
+      "sha256": "b22554c37cd86c6bb858b64ea70d92728898932981aaeb92edd551faf0968183",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_idle/painted_wolf_south_west_neutral_idle_002.png",
+      "bytes": 18176,
+      "sha256": "c0b05f5681d81da6d70452a8c50edf07a87f9268e780cd74d6fec49ba762ae66",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_idle/painted_wolf_south_west_neutral_idle_003.png",
+      "bytes": 17934,
+      "sha256": "15fd36d4f75c2ccca751cdbf26c104cd292e6ce1be74799b974fe3e12f5d712d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_east_neutral_walk_000.png",
+      "bytes": 18022,
+      "sha256": "23d0ca31df33874d2be8849a1136895e52e3673c5b731819a6b56d4f73f19182",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_east_neutral_walk_001.png",
+      "bytes": 17927,
+      "sha256": "82983d85994331cc21a56aebca537c7484651034427909d2229fb7bc67650e6c",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_east_neutral_walk_002.png",
+      "bytes": 17962,
+      "sha256": "d41d9cff04aebdedeef596f1babeb613d3d3619b7b86a0e81fce84830cb9f918",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_east_neutral_walk_003.png",
+      "bytes": 17718,
+      "sha256": "e7132bad71cd0f13b1b75d1629895c303710f306747dc1010b2336d86456f5fa",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_east_neutral_walk_004.png",
+      "bytes": 17651,
+      "sha256": "2c61ff0ddec683018ff7b32dc03400b4de1a298c9bed12f37b9c9044d8691b40",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_east_neutral_walk_005.png",
+      "bytes": 17417,
+      "sha256": "809d9b7030fb65e8fbd1cdf423c5c500f10499d0689f327f720da78729360453",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_east_neutral_walk_006.png",
+      "bytes": 17529,
+      "sha256": "f27adac10e929247feb1811ad8b53b3964f7c894624ef468848247d4cca553f0",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_east_neutral_walk_007.png",
+      "bytes": 17319,
+      "sha256": "29700cc7276c6b13c7f5ea3648ae77b0c345f4df66e451b3e487521945ee950f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_west_neutral_walk_000.png",
+      "bytes": 18175,
+      "sha256": "1955c750e8f4f2e44333335ca3acbaea35ac227e8ff038846e1e143b91ffe780",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_west_neutral_walk_001.png",
+      "bytes": 18096,
+      "sha256": "9baa04551c9722ae132598ff039893bc95dd84f7cff8999eaf756907f615a1af",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_west_neutral_walk_002.png",
+      "bytes": 18018,
+      "sha256": "9b1a5705667dfcfae345f652aa8a0ddb7bff5819d1f499f25cbea31ca8366982",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_west_neutral_walk_003.png",
+      "bytes": 17883,
+      "sha256": "18db3148d097658e84775017a19cbc7222bf2df5e2dc766e7902071cdda72d55",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_west_neutral_walk_004.png",
+      "bytes": 17716,
+      "sha256": "754eceb29090c99d00edd79a30c0a75ad5f57cc6548d459ee0f0284ced40be16",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_west_neutral_walk_005.png",
+      "bytes": 17482,
+      "sha256": "565112b0a10b422c02f4693cec685cb0900239c1c1a777e242185b6f67b8e33d",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_west_neutral_walk_006.png",
+      "bytes": 17612,
+      "sha256": "d04b46eb2a55fecebab771e96dc16af20bcbbccc710b03ec07d843acdd29d061",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "res://assets/combat/characters/tactical/painted_wolf/neutral_walk/painted_wolf_south_west_neutral_walk_007.png",
+      "bytes": 17459,
+      "sha256": "fd332ca342366e11b74c836c463bde2871f74b1286cae243fc981b7e347e0499",
+      "width": 384,
+      "height": 320
+    },
+    {
       "path": "res://assets/combat/dungeons/props/arched_stone_door_01.png",
       "bytes": 2225,
       "sha256": "10dd5eaf2d84cf93e05e4f50ecc7c3cab8f90479560697f253f75ce6adc33d50",
@@ -67590,6 +71958,13 @@
       "path": "res://assets/ui/campaign/items/hero_bow.png",
       "bytes": 6562,
       "sha256": "e1e86a6a081af1d7f8f5f7570d0bbbdfd9276e145f4553e451f38b5f38f7cce4",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "path": "res://assets/ui/campaign/items/hero_greatsword.png",
+      "bytes": 2999,
+      "sha256": "408120148064574e0defce1b34b3bdfe06f31a47c5198c1b0299dab5ceb86ce6",
       "width": 96,
       "height": 96
     },

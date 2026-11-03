@@ -3,6 +3,6 @@
   "checks": 3579,
   "profiles": 6,
   "canvas_draw_calls": 3088,
-  "browser_render_check": "NOT_RUN: browser access host unavailable",
+  "browser_render_check": "NOT_RUN: deterministic Node playback checks only",
   "continuous_motion_reviewed": false
 }

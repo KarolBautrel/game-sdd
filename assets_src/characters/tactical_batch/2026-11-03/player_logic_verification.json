@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "checks": 413,
+  "profiles": 3,
+  "canvas_draw_calls": 352,
+  "browser_render_check": "NOT_RUN: deterministic Node playback checks only",
+  "continuous_motion_reviewed": false
+}

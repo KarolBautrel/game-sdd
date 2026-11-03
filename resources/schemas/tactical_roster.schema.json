@@ -1,0 +1,28 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "type":"object", "additionalProperties":false,
+  "required":["schema","profiles","replacements","archetype_replacements"],
+  "properties":{
+    "schema":{"const":"sdd.drawn-roster-v1"},
+    "replacements":{"type":"object","additionalProperties":{"type":"string"}},
+    "archetype_replacements":{"type":"object","additionalProperties":{"type":"string"}},
+    "profiles":{"type":"array","minItems":3,"maxItems":3,"items":{
+      "type":"object","additionalProperties":false,
+      "required":["id","label","enabled","root","canvas","pivot","facings","frame_counts","durations_ms","impact_frame","walk_stride_pixels","pixels_per_metre","body_height","idle_lock_y","source_roundtrip","view_sources"],
+      "properties":{
+        "id":{"enum":["painted_bandit_archer","painted_bandit_guard","painted_wolf"]},
+        "label":{"type":"string","minLength":1},"enabled":{"const":true},
+        "root":{"type":"string","pattern":"^res://assets/combat/characters/tactical/[a-z_]+$"},
+        "canvas":{"const":[384,320]},"pivot":{"const":[192,270]},
+        "facings":{"const":["south_east","south_west"]},
+        "frame_counts":{"type":"object","required":["neutral_idle","neutral_walk","combat_idle","combat_walk","attack","hit","death"],"additionalProperties":{"type":"integer","minimum":1,"maximum":16}},
+        "durations_ms":{"type":"object","additionalProperties":{"type":"array","minItems":1,"items":{"type":"integer","minimum":1,"maximum":10000}}},
+        "impact_frame":{"type":"integer","minimum":0,"maximum":7},
+        "walk_stride_pixels":{"const":160},"pixels_per_metre":{"const":100},
+        "body_height":{"enum":[95,171]},"idle_lock_y":{"enum":[232,250]},
+        "source_roundtrip":{"const":true},"view_sources":{"type":"object","required":["south_east","south_west"]},
+        "action_aliases":{"type":"object","additionalProperties":{"type":"string"}}
+      }
+    }}
+  }
+}

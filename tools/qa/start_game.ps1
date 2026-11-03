@@ -7,12 +7,14 @@ param(
     [ValidateRange(600, 1440)][int]$Height = 1080,
     [switch]$TraceInput,
     [switch]$ConfigureOnly,
+    [switch]$HeroEquipmentPilot,
     [ValidateRange(0, 2147483647)][int]$CombatSeed = 0,
     [string]$CombatScenario = ''
 )
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
+if ($HeroEquipmentPilot -and $Scene -ne 'app') { throw '-HeroEquipmentPilot requires -Scene app.' }
 if ($CombatScenario) {
     if ($Scene -ne 'combat') { throw '-CombatScenario requires -Scene combat.' }
     $catalogue = Get-Content -LiteralPath (Join-Path $repoRoot 'resources\data\combat_scenarios\catalogue.json') -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -63,12 +65,16 @@ window/size/window_height_override=$Height
 [debug]
 qa/combat_seed=$CombatSeed
 qa/combat_scenario="$CombatScenario"
+qa/hero_equipment_pilot=$($HeroEquipmentPilot.IsPresent.ToString().ToLowerInvariant())
 "@ | Set-Content -LiteralPath $overridePath -Encoding UTF8
 $runId = [DateTime]::UtcNow.ToString('yyyyMMddTHHmmssfffffffZ')
 $evidenceDir = Join-Path $repoRoot "artifacts\qa-runs\launch-$runId"
 New-Item -ItemType Directory -Path $evidenceDir | Out-Null
 $arguments = @('--path', ('"' + $repoRoot + '"'), '--windowed', '--screen', '0', '--resolution', "${Width}x${Height}", $scenes[$Scene])
-if ($TraceInput) { $arguments += @('--', '--qa-input-trace') }
+$gameUserArguments = @()
+if ($TraceInput) { $gameUserArguments += '--qa-input-trace' }
+if ($HeroEquipmentPilot) { $gameUserArguments += '--hero-equipment-pilot' }
+if ($gameUserArguments.Count -gt 0) { $arguments += @('--') + $gameUserArguments }
 $qaProcess = $null
 $startupState = 'configured_only'
 $startupExitCode = $null
@@ -87,6 +93,7 @@ $launch = [ordered]@{
     process_id = $qaProcess.Id
     scene = $scenes[$Scene]
     combat_scenario = $CombatScenario
+    hero_equipment_pilot = [bool]$HeroEquipmentPilot
     requested_display = $qaDisplay.DeviceName
     display_primary = $qaDisplay.Primary
     physical_resolution = @($qaDisplay.Width, $qaDisplay.Height)

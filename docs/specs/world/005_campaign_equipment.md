@@ -1,5 +1,10 @@
 # Persistent campaign equipment
 
+Stage61/presentation023 adds a bounded identity-preserving painted pilot for
+Bran's sword/shield and greatsword kits. Other loadouts retain the rollback below.
+A greatsword is a normal purchased/owned two-handed item; saves receive no grants
+or version changes. Existing ownership, conflicts, snapshot and return rules apply.
+
 Current presentation rollback2026-11-02: retain five-slot ownership/save safety,
 new item/icon assets and illustrated portraits, but restore the stage33 weapon-
 selected sprite family and remove the modular3D inventory preview. Cosmetic

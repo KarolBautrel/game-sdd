@@ -1,0 +1,117 @@
+{
+  "authority": "saved edited Aseprite cels",
+  "clips": [
+    {
+      "action": "neutral_idle",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "neutral_walk",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "combat_idle",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "combat_walk",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "attack",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "hit",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "death",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_east"
+    },
+    {
+      "action": "neutral_idle",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "neutral_walk",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "combat_idle",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "combat_walk",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "attack",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "hit",
+      "frames": 4,
+      "roundtrip": true,
+      "view": "south_west"
+    },
+    {
+      "action": "death",
+      "frames": 8,
+      "roundtrip": true,
+      "view": "south_west"
+    }
+  ],
+  "id": "painted_wolf",
+  "idle_lock_y": 250,
+  "status": "PASS",
+  "views": [
+    {
+      "id": "south_east"
+    },
+    {
+      "id": "south_west",
+      "mirror_of": "south_east"
+    }
+  ],
+  "source_hashes": {
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_east/attack.aseprite": "d7eb1b318c39a7786dabfa3a897f1e6c56681d7c076a36ace200a51712e8c5c0",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_east/combat_idle.aseprite": "496ff0d13ed2806851a23b2571a09bdf1792982e23ca2b0d222349f16afd7162",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_east/combat_walk.aseprite": "5686c68db682692c2cc2fb9ac4a4205001c41a80442379b820521d0805829ff1",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_east/death.aseprite": "8e66aa9fb095b0499b0f397af4ba302ef20ad4695386e8a726763b26142948d5",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_east/hit.aseprite": "7066fdfb857604b8901a85c7cd609f5654da585f683fdf15f7f04c1b8231d2a0",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_east/neutral_idle.aseprite": "42b91738240c8bc306cc24bbdd4a1eef1819beaa9d40a35a4a48fc8dd649f98f",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_east/neutral_walk.aseprite": "0aaf526b3760010212e9e9ac14f8ef85eb71bdf697c6ea75d1cfa9f42adf1e49",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_west/attack.aseprite": "96a7619e4dce5aa0138e177d1f34435ddd07e1355614bad7a7a1fa7164125ed0",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_west/combat_idle.aseprite": "404e884a484c82b93f721a07ceb47fd68ace05b5a611325a3f09a7d1606056c2",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_west/combat_walk.aseprite": "cc27c698e375de718fe623a5b7ce826652c01cdb8f7e2ca2c9474de874945ff1",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_west/death.aseprite": "6639ec8ecaeacddcb931291ad8f4350351bd0ccf10fc25c36e0e2d66609359ab",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_west/hit.aseprite": "1c0a71bb0419937d7b33fc731cb90c73a3ba655147510a53e05b929ee37e3a7e",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_west/neutral_idle.aseprite": "d5f53c74ebe2ca139fb8d25c107b6201a50158d9bee90452e5b4fb227188632d",
+    "assets_src/aseprite/characters/tactical_batch/2026-11-03/painted_wolf/south_west/neutral_walk.aseprite": "a44f76046c0dfdeab3e9eeaf195ab55d3f75a4c8582e083abccc80c697feb74f"
+  }
+}

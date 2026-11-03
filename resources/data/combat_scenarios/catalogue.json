@@ -7,6 +7,11 @@
       "path": "res://resources/data/combat_encounters/debug_full_combat_showcase.json"
     },
     {
+      "id": "painted_enemy_pilot",
+      "label": "Painted bandits & wolf - Old Mine",
+      "path": "res://resources/data/combat_encounters/painted_enemy_pilot.json"
+    },
+    {
       "id": "drawn_roster_skirmish",
       "label": "Painted Six - Old Mine",
       "path": "res://resources/data/combat_encounters/drawn_roster_skirmish.json"

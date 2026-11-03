@@ -46,3 +46,9 @@ Shared UI composition owns passive visual components, never gameplay decisions.
   family in a two-handed combat guard, then ordered motion/native-scale review.
 - [022 Drawn animation batch](022_drawn_animation_batch.md): selected forward
   guard, full knight preview followed by autonomous weapon/character integration.
+- [023 Hero equipment identity](023_hero_equipment_identity.md): Bran retains his
+  identity across authored sword/shield and greatsword kits; campaign pilot.
+- [024 Tactical two facings](024_tactical_two_facings.md): SE/SW battle sprites;
+  retain all eight authored source views for galleries and later use.
+- [025 Painted enemies and wolf](025_painted_enemies_and_wolf.md): authorized
+  two-kit campaign proof, bandit archer/shield fighter and quadruped wolf pilot.

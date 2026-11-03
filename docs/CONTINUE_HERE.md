@@ -7,6 +7,45 @@ when the user has only requested an explanation or plan.
 ## Next-session entry: read this first
 
 Latest active-task handoff:
+[Bran campaign, painted bandits and wolf](handoffs/2026-11-03-painted-enemies-wolf.md).
+User explicitly authorizes all three proposed tasks together (stages63..65).
+All three tasks IMPLEMENTED / AUTOMATED_PASS: Bran managed expedition victory/
+reward/exit/return/restart for both kits; two painted bandits and quadruped wolf,
+44edited Aseprite clips/272runtime frames,9raw imagegen sheets/prompts retained.
+Full combined regression and validator PASS; identity1259/0, new pilot1887/0,
+canonical272PNG byte reproduction/44sources preserved, old2304PNG hashes intact.
+SE/SW only in battle; archived original/legacy galleries retain eight views.
+User now gives positive feedback and explicitly requests publication on master:
+[publication record](qa/2026-11-03-painted-enemies-publication.md). Source/remote
+receipt follows verification. Physical art/play cases remain open; no desktop
+release or next production batch inferred. Commands: `tools/qa/start_tactical_batch_preview.ps1` and
+`tools/qa/start_painted_enemy_pilot.ps1`.
+
+Previous active-task handoff:
+[SE/SW tactical battle view](handoffs/2026-11-03-tactical-two-facings.md).
+User now explicitly limits all tactical actors to south_east/south_west, including
+opponents above. Stage62 IMPLEMENTED / AUTOMATED_PASS / AWAITING_USER_VISUAL_REVIEW.
+Renderer selection/preload changed; all eight source views, geographic events,
+galleries and PNG/Aseprite files retained. Tactical4751/0 and full affected
+regressions/validator PASS. L62-01 remains open. Larger-left DISPLAY1 review:
+`tools/qa/start_game.ps1 -Scene combat -CombatScenario drawn_roster_skirmish`.
+No city movement, new art, next production batch or publication authorized.
+Local uncommitted stage61 work below is preserved; desktop unreleased.
+
+Previous active-task handoff:
+[Bran identity and equipment pilot](handoffs/2026-11-03-hero-equipment-identity.md).
+User now authorizes point1 only. Stage61 IMPLEMENTED / AUTOMATED_PASS /
+AWAITING_INTERACTIVE: one Bran, authored sword/shield and greatsword variants,
+normal shop/equipment/save handoff and isolated resumable campaign review.352 new
+frames/56 Aseprite sources; all2304 accepted originals unchanged. Identity1046/0,
+full regression/validator PASS; legal AI victories33/30 commands settled/reloaded.
+New art and actual campaign play await L61-01/02. Changes local on master,
+uncommitted; no next human/creature batch or new push inferred. Desktop unreleased.
+Commands: `tools/qa/start_hero_equipment_preview.ps1` and
+`tools/qa/start_hero_equipment_pilot.ps1`. See the handoff for the bounded legacy
+fallback and separate QA-save contract. Keep stage60 accepted for now.
+
+Previous publication handoff:
 [accepted checkpoint and publication](handoffs/2026-11-03-painted-game-publication.md).
 User accepts stage60 FOR NOW and requests the accepted work in the main game repo.
 Published source checkpoint a9fbcfb279cfa834164d535e58b8f90e15b5030f on default

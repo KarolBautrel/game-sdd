@@ -69,6 +69,12 @@ The trace is opt-in, does not synthesize input or change game rules, and does no
 turn a scripted state mutation into hands-on acceptance. Normal launches do not
 log input. Use the trace only for this game's window.
 
+Stage61: `-Scene app -HeroEquipmentPilot` passes the explicit pilot argument and
+sets `debug/qa/hero_equipment_pilot` in the owned local override (also supporting
+ConfigureOnly). Every normal launcher invocation resets this setting to false.
+The opt-in opens a separate resumable QA campaign, never the player's save.
+The launch receipt records `hero_equipment_pilot`; ConfigureOnly launches no app.
+
 An actual playthrough requires observing the visible game and operating its
 normal controls. Headless tests and domain simulations cannot satisfy this gate.
 Debug Win cannot prove a real combat victory. Reports list automated results and

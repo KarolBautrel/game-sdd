@@ -71,7 +71,8 @@
               "character": {
                 "enum": [
                   "warrior",
-                  "archer_1"
+                  "archer_1",
+                  "knight"
                 ]
               }
             }
@@ -89,7 +90,8 @@
                   "dagger",
                   "cleaver",
                   "spear",
-                  "crossbow"
+                  "crossbow",
+                  "greatsword"
                 ]
               },
               "offhand": {

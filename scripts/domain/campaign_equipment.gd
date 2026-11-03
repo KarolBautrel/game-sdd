@@ -3,6 +3,7 @@ extends RefCounted
 
 const Items := preload("res://scripts/domain/item_catalog.gd")
 const Party := preload("res://scripts/domain/party_roster.gd")
+const Identity := preload("res://scripts/domain/hero_equipment_identity.gd")
 const SLOTS := ["main_hand", "off_hand", "armor", "boots", "helmet"]
 const LEGACY_SLOTS := ["main_hand", "off_hand", "armor"]
 
@@ -71,9 +72,6 @@ static func apply(encounter: Dictionary, equipment: Dictionary) -> Dictionary:
 		for id in unit.loadout.values():
 			if id != null:
 				profiles[id] = Items.item(id).combat_profile.duplicate(true)
-		if unit.loadout.main_hand != null:
-			unit.visual=Items.item(unit.loadout.main_hand).get("visual",hero.visual).duplicate(true)
-		else:
-			unit.visual=hero.visual.duplicate(true)
+		unit.visual = Identity.visual(hero, unit.loadout)
 	next.item_profiles = profiles
 	return next

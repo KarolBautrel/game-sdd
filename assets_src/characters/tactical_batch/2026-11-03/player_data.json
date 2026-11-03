@@ -1,0 +1,999 @@
+{
+  "profiles": [
+    {
+      "id": "painted_bandit_archer",
+      "title": "Bandit archer",
+      "canvas": [
+        384,
+        320
+      ],
+      "pivot": [
+        192,
+        270
+      ],
+      "walk_stride_pixels": 160,
+      "exported_views": [
+        "south_east",
+        "south_west"
+      ],
+      "views": [
+        {
+          "id": "south_east",
+          "label": "SE / rysowany",
+          "asset_base": "painted_bandit_archer/",
+          "clips": [
+            {
+              "atlas": "neutral_idle.png",
+              "durations": [
+                250,
+                250,
+                250,
+                250
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "neutral_idle",
+              "loop": true,
+              "mode": "neutral",
+              "scale": 0.608540925266904,
+              "source_first": 1,
+              "source_sheet": "locomotion",
+              "title": "Neutral Idle"
+            },
+            {
+              "atlas": "neutral_walk.png",
+              "durations": [
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "neutral_walk",
+              "loop": true,
+              "mode": "neutral",
+              "scale": 0.6286764705882353,
+              "source_first": 5,
+              "source_sheet": "locomotion",
+              "title": "Neutral Walk"
+            },
+            {
+              "atlas": "combat_idle.png",
+              "durations": [
+                250,
+                250,
+                250,
+                250
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "combat_idle",
+              "loop": true,
+              "mode": "combat",
+              "scale": 0.608540925266904,
+              "source_first": 13,
+              "source_sheet": "locomotion",
+              "title": "Combat Idle"
+            },
+            {
+              "atlas": "combat_walk.png",
+              "durations": [
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "combat_walk",
+              "loop": true,
+              "mode": "combat",
+              "scale": 0.6107142857142858,
+              "source_first": 1,
+              "source_sheet": "actions",
+              "title": "Combat Walk"
+            },
+            {
+              "atlas": "attack.png",
+              "durations": [
+                160,
+                200,
+                220,
+                300,
+                380,
+                80,
+                200,
+                260
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "attack",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.6218181818181818,
+              "source_first": 9,
+              "source_sheet": "actions",
+              "title": "Attack"
+            },
+            {
+              "atlas": "hit.png",
+              "durations": [
+                90,
+                90,
+                130,
+                180
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "hit",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.6526717557251909,
+              "source_first": 5,
+              "source_sheet": "reactions",
+              "title": "Hit"
+            },
+            {
+              "atlas": "death.png",
+              "durations": [
+                150,
+                150,
+                140,
+                130,
+                130,
+                150,
+                200,
+                1000
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "death",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.6356877323420075,
+              "source_first": 9,
+              "source_sheet": "reactions",
+              "title": "Death"
+            }
+          ],
+          "direction_note": "Nowy kandydat do oceny. SW jest odbiciem SE; asymetria i uchwyt broni sa odbite."
+        },
+        {
+          "id": "south_west",
+          "label": "SW / odbicie",
+          "asset_base": "painted_bandit_archer/directions/south_west/",
+          "clips": [
+            {
+              "atlas": "neutral_idle.png",
+              "durations": [
+                250,
+                250,
+                250,
+                250
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "neutral_idle",
+              "loop": true,
+              "mode": "neutral",
+              "scale": 0.608540925266904,
+              "source_first": 1,
+              "source_sheet": "locomotion",
+              "title": "Neutral Idle"
+            },
+            {
+              "atlas": "neutral_walk.png",
+              "durations": [
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "neutral_walk",
+              "loop": true,
+              "mode": "neutral",
+              "scale": 0.6286764705882353,
+              "source_first": 5,
+              "source_sheet": "locomotion",
+              "title": "Neutral Walk"
+            },
+            {
+              "atlas": "combat_idle.png",
+              "durations": [
+                250,
+                250,
+                250,
+                250
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "combat_idle",
+              "loop": true,
+              "mode": "combat",
+              "scale": 0.608540925266904,
+              "source_first": 13,
+              "source_sheet": "locomotion",
+              "title": "Combat Idle"
+            },
+            {
+              "atlas": "combat_walk.png",
+              "durations": [
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "combat_walk",
+              "loop": true,
+              "mode": "combat",
+              "scale": 0.6107142857142858,
+              "source_first": 1,
+              "source_sheet": "actions",
+              "title": "Combat Walk"
+            },
+            {
+              "atlas": "attack.png",
+              "durations": [
+                160,
+                200,
+                220,
+                300,
+                380,
+                80,
+                200,
+                260
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "attack",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.6218181818181818,
+              "source_first": 9,
+              "source_sheet": "actions",
+              "title": "Attack"
+            },
+            {
+              "atlas": "hit.png",
+              "durations": [
+                90,
+                90,
+                130,
+                180
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "hit",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.6526717557251909,
+              "source_first": 5,
+              "source_sheet": "reactions",
+              "title": "Hit"
+            },
+            {
+              "atlas": "death.png",
+              "durations": [
+                150,
+                150,
+                140,
+                130,
+                130,
+                150,
+                200,
+                1000
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "death",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.6356877323420075,
+              "source_first": 9,
+              "source_sheet": "reactions",
+              "title": "Death"
+            }
+          ],
+          "direction_note": "Nowy kandydat do oceny. SW jest odbiciem SE; asymetria i uchwyt broni sa odbite."
+        }
+      ]
+    },
+    {
+      "id": "painted_bandit_guard",
+      "title": "Bandit shield fighter",
+      "canvas": [
+        384,
+        320
+      ],
+      "pivot": [
+        192,
+        270
+      ],
+      "walk_stride_pixels": 160,
+      "exported_views": [
+        "south_east",
+        "south_west"
+      ],
+      "views": [
+        {
+          "id": "south_east",
+          "label": "SE / rysowany",
+          "asset_base": "painted_bandit_guard/",
+          "clips": [
+            {
+              "atlas": "neutral_idle.png",
+              "durations": [
+                250,
+                250,
+                250,
+                250
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "neutral_idle",
+              "loop": true,
+              "mode": "neutral",
+              "scale": 0.5896551724137931,
+              "source_first": 1,
+              "source_sheet": "locomotion",
+              "title": "Neutral Idle"
+            },
+            {
+              "atlas": "neutral_walk.png",
+              "durations": [
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "neutral_walk",
+              "loop": true,
+              "mode": "neutral",
+              "scale": 0.5896551724137931,
+              "source_first": 5,
+              "source_sheet": "locomotion",
+              "title": "Neutral Walk"
+            },
+            {
+              "atlas": "combat_idle.png",
+              "durations": [
+                250,
+                250,
+                250,
+                250
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "combat_idle",
+              "loop": true,
+              "mode": "combat",
+              "scale": 0.5896551724137931,
+              "source_first": 13,
+              "source_sheet": "locomotion",
+              "title": "Combat Idle"
+            },
+            {
+              "atlas": "combat_walk.png",
+              "durations": [
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "combat_walk",
+              "loop": true,
+              "mode": "combat",
+              "scale": 0.5896551724137931,
+              "source_first": 1,
+              "source_sheet": "actions",
+              "title": "Combat Walk"
+            },
+            {
+              "atlas": "attack.png",
+              "durations": [
+                160,
+                120,
+                100,
+                70,
+                60,
+                100,
+                170,
+                190
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "attack",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.59375,
+              "source_first": 9,
+              "source_sheet": "actions",
+              "title": "Attack"
+            },
+            {
+              "atlas": "hit.png",
+              "durations": [
+                90,
+                90,
+                130,
+                180
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "hit",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.602112676056338,
+              "source_first": 5,
+              "source_sheet": "reactions",
+              "title": "Hit"
+            },
+            {
+              "atlas": "death.png",
+              "durations": [
+                150,
+                150,
+                140,
+                130,
+                130,
+                150,
+                200,
+                1000
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "death",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.5816326530612245,
+              "source_first": 9,
+              "source_sheet": "reactions",
+              "title": "Death"
+            },
+            {
+              "atlas": "block.png",
+              "durations": [
+                120,
+                160,
+                220,
+                180
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "block",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.5816326530612245,
+              "source_first": 1,
+              "source_sheet": "reactions",
+              "title": "Shield brace"
+            }
+          ],
+          "direction_note": "Nowy kandydat do oceny. SW jest odbiciem SE; asymetria i uchwyt broni sa odbite."
+        },
+        {
+          "id": "south_west",
+          "label": "SW / odbicie",
+          "asset_base": "painted_bandit_guard/directions/south_west/",
+          "clips": [
+            {
+              "atlas": "neutral_idle.png",
+              "durations": [
+                250,
+                250,
+                250,
+                250
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "neutral_idle",
+              "loop": true,
+              "mode": "neutral",
+              "scale": 0.5896551724137931,
+              "source_first": 1,
+              "source_sheet": "locomotion",
+              "title": "Neutral Idle"
+            },
+            {
+              "atlas": "neutral_walk.png",
+              "durations": [
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "neutral_walk",
+              "loop": true,
+              "mode": "neutral",
+              "scale": 0.5896551724137931,
+              "source_first": 5,
+              "source_sheet": "locomotion",
+              "title": "Neutral Walk"
+            },
+            {
+              "atlas": "combat_idle.png",
+              "durations": [
+                250,
+                250,
+                250,
+                250
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "combat_idle",
+              "loop": true,
+              "mode": "combat",
+              "scale": 0.5896551724137931,
+              "source_first": 13,
+              "source_sheet": "locomotion",
+              "title": "Combat Idle"
+            },
+            {
+              "atlas": "combat_walk.png",
+              "durations": [
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "combat_walk",
+              "loop": true,
+              "mode": "combat",
+              "scale": 0.5896551724137931,
+              "source_first": 1,
+              "source_sheet": "actions",
+              "title": "Combat Walk"
+            },
+            {
+              "atlas": "attack.png",
+              "durations": [
+                160,
+                120,
+                100,
+                70,
+                60,
+                100,
+                170,
+                190
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "attack",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.59375,
+              "source_first": 9,
+              "source_sheet": "actions",
+              "title": "Attack"
+            },
+            {
+              "atlas": "hit.png",
+              "durations": [
+                90,
+                90,
+                130,
+                180
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "hit",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.602112676056338,
+              "source_first": 5,
+              "source_sheet": "reactions",
+              "title": "Hit"
+            },
+            {
+              "atlas": "death.png",
+              "durations": [
+                150,
+                150,
+                140,
+                130,
+                130,
+                150,
+                200,
+                1000
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "death",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.5816326530612245,
+              "source_first": 9,
+              "source_sheet": "reactions",
+              "title": "Death"
+            },
+            {
+              "atlas": "block.png",
+              "durations": [
+                120,
+                160,
+                220,
+                180
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "block",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.5816326530612245,
+              "source_first": 1,
+              "source_sheet": "reactions",
+              "title": "Shield brace"
+            }
+          ],
+          "direction_note": "Nowy kandydat do oceny. SW jest odbiciem SE; asymetria i uchwyt broni sa odbite."
+        }
+      ]
+    },
+    {
+      "id": "painted_wolf",
+      "title": "Grey wolf",
+      "canvas": [
+        384,
+        320
+      ],
+      "pivot": [
+        192,
+        270
+      ],
+      "walk_stride_pixels": 160,
+      "exported_views": [
+        "south_east",
+        "south_west"
+      ],
+      "views": [
+        {
+          "id": "south_east",
+          "label": "SE / rysowany",
+          "asset_base": "painted_wolf/",
+          "clips": [
+            {
+              "atlas": "neutral_idle.png",
+              "durations": [
+                250,
+                250,
+                250,
+                250
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "neutral_idle",
+              "loop": true,
+              "mode": "neutral",
+              "scale": 0.4008438818565401,
+              "source_first": 1,
+              "source_sheet": "locomotion",
+              "title": "Neutral Idle"
+            },
+            {
+              "atlas": "neutral_walk.png",
+              "durations": [
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "neutral_walk",
+              "loop": true,
+              "mode": "neutral",
+              "scale": 0.4008438818565401,
+              "source_first": 5,
+              "source_sheet": "locomotion",
+              "title": "Neutral Walk"
+            },
+            {
+              "atlas": "combat_idle.png",
+              "durations": [
+                250,
+                250,
+                250,
+                250
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "combat_idle",
+              "loop": true,
+              "mode": "combat",
+              "scale": 0.4008438818565401,
+              "source_first": 13,
+              "source_sheet": "locomotion",
+              "title": "Combat Idle"
+            },
+            {
+              "atlas": "combat_walk.png",
+              "durations": [
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "combat_walk",
+              "loop": true,
+              "mode": "combat",
+              "scale": 0.4008438818565401,
+              "source_first": 1,
+              "source_sheet": "actions",
+              "title": "Combat Walk"
+            },
+            {
+              "atlas": "attack.png",
+              "durations": [
+                180,
+                160,
+                120,
+                80,
+                80,
+                120,
+                160,
+                200
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "attack",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.4008438818565401,
+              "source_first": 9,
+              "source_sheet": "actions",
+              "title": "Attack"
+            },
+            {
+              "atlas": "hit.png",
+              "durations": [
+                90,
+                90,
+                130,
+                180
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "hit",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.4008438818565401,
+              "source_first": 5,
+              "source_sheet": "reactions",
+              "title": "Hit"
+            },
+            {
+              "atlas": "death.png",
+              "durations": [
+                150,
+                150,
+                140,
+                130,
+                130,
+                150,
+                200,
+                1000
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "death",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.4008438818565401,
+              "source_first": 9,
+              "source_sheet": "reactions",
+              "title": "Death"
+            }
+          ],
+          "direction_note": "Nowy kandydat do oceny. SW jest odbiciem SE; asymetria i uchwyt broni sa odbite."
+        },
+        {
+          "id": "south_west",
+          "label": "SW / odbicie",
+          "asset_base": "painted_wolf/directions/south_west/",
+          "clips": [
+            {
+              "atlas": "neutral_idle.png",
+              "durations": [
+                250,
+                250,
+                250,
+                250
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "neutral_idle",
+              "loop": true,
+              "mode": "neutral",
+              "scale": 0.4008438818565401,
+              "source_first": 1,
+              "source_sheet": "locomotion",
+              "title": "Neutral Idle"
+            },
+            {
+              "atlas": "neutral_walk.png",
+              "durations": [
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "neutral_walk",
+              "loop": true,
+              "mode": "neutral",
+              "scale": 0.4008438818565401,
+              "source_first": 5,
+              "source_sheet": "locomotion",
+              "title": "Neutral Walk"
+            },
+            {
+              "atlas": "combat_idle.png",
+              "durations": [
+                250,
+                250,
+                250,
+                250
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "combat_idle",
+              "loop": true,
+              "mode": "combat",
+              "scale": 0.4008438818565401,
+              "source_first": 13,
+              "source_sheet": "locomotion",
+              "title": "Combat Idle"
+            },
+            {
+              "atlas": "combat_walk.png",
+              "durations": [
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125,
+                125
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "combat_walk",
+              "loop": true,
+              "mode": "combat",
+              "scale": 0.4008438818565401,
+              "source_first": 1,
+              "source_sheet": "actions",
+              "title": "Combat Walk"
+            },
+            {
+              "atlas": "attack.png",
+              "durations": [
+                180,
+                160,
+                120,
+                80,
+                80,
+                120,
+                160,
+                200
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "attack",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.4008438818565401,
+              "source_first": 9,
+              "source_sheet": "actions",
+              "title": "Attack"
+            },
+            {
+              "atlas": "hit.png",
+              "durations": [
+                90,
+                90,
+                130,
+                180
+              ],
+              "frame_source": "redrawn",
+              "frames": 4,
+              "id": "hit",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.4008438818565401,
+              "source_first": 5,
+              "source_sheet": "reactions",
+              "title": "Hit"
+            },
+            {
+              "atlas": "death.png",
+              "durations": [
+                150,
+                150,
+                140,
+                130,
+                130,
+                150,
+                200,
+                1000
+              ],
+              "frame_source": "redrawn",
+              "frames": 8,
+              "id": "death",
+              "loop": false,
+              "mode": "combat",
+              "scale": 0.4008438818565401,
+              "source_first": 9,
+              "source_sheet": "reactions",
+              "title": "Death"
+            }
+          ],
+          "direction_note": "Nowy kandydat do oceny. SW jest odbiciem SE; asymetria i uchwyt broni sa odbite."
+        }
+      ]
+    }
+  ],
+  "ground_base": "../../../../assets/combat/environment/floors/",
+  "shadow": "../../../../assets/combat/environment/contact_shadow.png"
+}

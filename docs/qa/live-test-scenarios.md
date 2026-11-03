@@ -186,6 +186,39 @@ does not satisfy them. All55 previous cases also remain NOT_RUN.
 
 ## Results and defects
 
+## Completed background batch63..65 (presentation025)
+
+User explicitly authorized all three tasks together. Source/automated work is
+complete; new drawings and ordinary human play remain separate review cases.
+No desktop input or physical victory was used to close these rows.
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L63-01 | 63 | Play Bran's isolated campaign with sword/shield and greatsword; enter guarded Old Mine combat, win, claim reward, exit and restart. | Same identity/owned hands, complete normal battle, exactly-once reward/settlement and preserved equipment. | AWAITING_USER_PLAY; automated managed victories19/19commands plus full normal exit/reward/restart, identity1259/0 |
+| L64-V01 | 64 | Preview both new bandits at1x/enlargement, SE/SW, idle/walk/aim/cut/hit/fall; shield brace. | Matching painted finish, readable faces/gear, stable feet, rigid weapons, full bow draw/aim, natural stance and mirror caveat acceptable. | AWAITING_USER_ART_REVIEW; source/native/playback PASS |
+| L64-01 | 64 | Play painted_enemy_pilot with new bandit archer/shield fighter, observe regular managed archer appearance and archive gallery. | Matching role/weapons/actions, full animations and unlocked input, old archive retains eight views. | AWAITING_USER_PLAY; new runtime1887/0, combined regressions PASS |
+| L65-V01 | 65 | Preview grey wolf at native game scale and enlarged, SE/SW idle/walk/bite/hit/fall. | Credible four-leg support/weight, body scale, no floating/sliding/extra legs, natural lunge and full-size final corpse. | AWAITING_USER_ART_REVIEW; source/native/playback PASS |
+| L65-01 | 65 | Play normal isolated4v3 new-enemy battle to ordinary victory/defeat; watch wolf AI movement, bite, reaction and final corpse. | Readable two-view quadruped gameplay, correct target/damage/projectile separation and no blocked turn. | AWAITING_USER_PLAY; legal automated victory33/defeat185commands only |
+
+## Bran equipment identity pilot (presentation023, stage61)
+
+Stage62/presentation024 subsequently limits tactical review to SE/SW. Other
+views remain archival; do not require approval of unused battle facings.
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L62-01 | 62 | Play Painted Six - Old Mine, move north/left/right and attack enemies above; inspect neutral/ready, walk, bow/melee, hit/death/corpses. Repeat campaign with Bran's two kits. | Every tactical sprite stays SE/SW, readable at board scale; correct side, unchanged movement/targeting/timing, no stuck input. Other directions remain available only through source galleries. | AWAITING_USER_VISUAL_REVIEW; automated4751/0, no desktop input |
+
+Authorized2026-11-03: point1 only, one hero/two authored kits. Automated source,
+UI, save, snapshot, legal AI battle and return checks pass; this does not close
+any older physical case or approve the new head composition. Stage60 stays
+accepted for now; its posture/cadence are unchanged.
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L61-01 | 61 | Open start_hero_equipment_preview.ps1; compare Bran sword/shield and greatsword in seven clips/eight directions at1x/enlargement, especially falling heads. | Same recognizable bearded Bran and blue/gold armour family, readable rigid weapon and grip, planted idle feet, no double head/seam/clipping; disclosed three reflections acceptable. | AWAITING_USER_REVIEW |
+| L61-02 | 61 | Open start_hero_equipment_pilot.ps1. In Stash, play sword/shield, then unequip shield and equip greatsword. Leave town, play ordinary fight/return, restart and repeat with other kit. | Portrait/name/face remain Bran, equipped hands/actions match, normal victory/defeat return saves once, no lost gear/progress, no bad animation or blocked input. The separate QA save resumes; campaign_v1.json unchanged. | NOT_RUN; automated legal road victories/return only,33/30 commands |
+
 ## Drawn character animation batch (presentation022)
 
 All61 earlier physical cases remain NOT_RUN. The separate source-preview result

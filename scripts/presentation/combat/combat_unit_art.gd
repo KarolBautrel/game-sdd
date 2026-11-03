@@ -5,6 +5,8 @@ const AssetCatalog := preload("res://scripts/presentation/shared/asset_catalog.g
 
 const PartyRoster := preload("res://scripts/domain/party_roster.gd")
 const DrawnCatalog := preload("res://scripts/presentation/combat/drawn_animation_catalog.gd")
+const TacticalCatalog := preload("res://scripts/presentation/combat/tactical_actor_catalog.gd")
+const TACTICAL_DIRECTIONS := ["south_east", "south_west"]
 
 const UNIT_VISUALS := {
 	"unit_player_001": {"faction": "heroes", "character": "warrior"},
@@ -37,6 +39,8 @@ static func _original_visuals() -> Dictionary:
 			"frames": {"pose": 0, "combat_idle": 0, "walk": 0, "combat": 0, "hit": 0, "status_reaction": 0, "death": 0},
 			"frame_counts": data.frame_counts}
 	result.merge(DrawnCatalog.visual_configs(),true)
+	result.merge(DrawnCatalog.visual_configs("res://resources/data/presentation/hero_identity_animations.json"),true)
+	result.merge(TacticalCatalog.visual_configs(), true)
 	for alias: String in data.aliases:
 		result[alias] = result[data.aliases[alias]]
 	return result
@@ -50,7 +54,7 @@ func idle_top(unit: Dictionary, legacy_size: Vector2i) -> float:
 	var character:=str(unit_visual_config(unit).character)
 	if not idle_top_cache.has(character):
 		var top:=10000
-		for direction in ["south","south_west","west","north_west","north","north_east","east","south_east"]:
+		for direction in PROCESSED_SHEET_VISUALS.get(character, {}).get("available_facings", DrawnCatalog.DIRECTIONS):
 			var image:=AssetCatalog.image_copy(processed_sheet_texture_path(character,direction,"pose:0"))
 			if image!=null:top=mini(top,image.get_used_rect().position.y)
 		idle_top_cache[character]=top if top<10000 else 0
@@ -67,12 +71,23 @@ func icon(unit: Dictionary, state: Dictionary, facing: Dictionary, visual_action
 
 
 func unit_direction(unit: Dictionary, state: Dictionary, facing: Dictionary) -> String:
+	if _is_archive_preview(unit):
+		return str(facing.get(unit["id"], "south"))
+	var fallback := "south_west" if unit.get("team", "player") == "enemy" else "south_east"
 	if facing.has(unit["id"]):
-		return facing[unit["id"]]
+		return tactical_direction(str(facing[unit["id"]]), fallback)
 	var nearest := nearest_living_opponent(unit, state)
 	if nearest.is_empty():
-		return "south"
-	return direction_between(unit["position"], nearest["position"])
+		return fallback
+	return tactical_direction(direction_between(unit["position"], nearest["position"]), fallback)
+
+
+func tactical_direction(direction: String, fallback: String = "south_east") -> String:
+	if direction in ["west", "north_west", "south_west"]:
+		return "south_west"
+	if direction in ["east", "north_east", "south_east"]:
+		return "south_east"
+	return fallback if fallback in TACTICAL_DIRECTIONS else "south_east"
 
 
 func texture_path(unit: Dictionary, direction: String, visual_action: String) -> String:
@@ -93,6 +108,8 @@ func processed_sheet_texture_path(character: String, direction: String, visual_a
 	if not PROCESSED_SHEET_VISUALS.has(character):
 		return ""
 	var config: Dictionary = PROCESSED_SHEET_VISUALS[character]
+	if direction not in config.get("available_facings", DrawnCatalog.DIRECTIONS):
+		return ""
 	var action := processed_sheet_action(visual_action,character)
 	var frames: Dictionary = config.get("frames", {})
 	var frame_index := processed_sheet_frame_index(character, visual_action, int(frames.get(action, 0)))
@@ -140,7 +157,7 @@ func processed_sheet_action(visual_action: String, character: String = "") -> St
 		base_action = visual_action.get_slice(":", 0)
 	if is_drawn_character(character):
 		var aliases: Dictionary={"pose":"neutral_idle","walk":"neutral_walk","combat":"attack","status_reaction":"hit"}
-		var resolved: String=aliases.get(base_action,base_action)
+		var resolved: String=PROCESSED_SHEET_VISUALS[character].get("action_aliases",{}).get(base_action,aliases.get(base_action,base_action))
 		return resolved if PROCESSED_SHEET_VISUALS[character].frame_counts.has(resolved) else "neutral_idle"
 	if base_action=="combat_walk":return "walk"
 	if base_action == "combat_idle":
@@ -226,6 +243,16 @@ func default_visual_action(unit: Dictionary, state: Dictionary) -> String:
 
 
 func unit_visual_config(unit: Dictionary) -> Dictionary:
+	if _is_archive_preview(unit):
+		return _source_visual_config(unit)
+	return TacticalCatalog.resolve(unit, _source_visual_config(unit))
+
+
+func _is_archive_preview(unit: Dictionary) -> bool:
+	return str(unit.get("visual", {}).get("faction", "")) in ["original", "legacy"]
+
+
+func _source_visual_config(unit: Dictionary) -> Dictionary:
 	if unit.has("visual"):
 		return unit["visual"]
 	var hero := PartyRoster.hero_for_combat_unit(str(unit.get("id", "")))

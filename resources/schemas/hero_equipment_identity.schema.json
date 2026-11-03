@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema", "heroes"],
+  "properties": {
+    "schema": {"const": "sdd.hero-equipment-identity-v1"},
+    "heroes": {
+      "type": "object", "minProperties": 1,
+      "propertyNames": {"pattern": "^hero_[a-z0-9_]+$"},
+      "additionalProperties": {
+        "type": "object", "additionalProperties": false,
+        "required": ["combat_unit_id", "kits"],
+        "properties": {
+          "combat_unit_id": {"type": "string", "pattern": "^unit_player_[0-9]+$"},
+          "kits": {
+            "type": "array", "minItems": 1,
+            "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["weapon", "offhand", "visual"],
+              "properties": {
+                "weapon": {"enum": ["sword", "greatsword"]},
+                "offhand": {"enum": ["shield", "none"]},
+                "visual": {
+                  "type": "object", "additionalProperties": false,
+                  "required": ["faction", "character"],
+                  "properties": {
+                    "faction": {"const": "heroes"},
+                    "character": {"type": "string", "pattern": "^[a-z0-9_]+$"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

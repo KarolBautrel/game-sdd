@@ -58,7 +58,7 @@ func _run() -> void:
 		var enemy: Dictionary={"id":"opponent","team":"enemy","position":{"x":2,"y":1},"resources":{"hp":10}}
 		check(art.default_visual_action(unit,{"units":[unit,enemy]})=="combat_idle",p.id+" nearby guard")
 		var texture:=art.icon(unit,{"units":[unit,enemy]},{unit.id:"east"},{unit.id:"walk:0"},Vector2i(384,240))
-		check(texture==Assets.texture(art.processed_sheet_texture_path(p.id,"east","combat_walk:0")),p.id+" combat-ready walk routing")
+		check(texture==Assets.texture(art.processed_sheet_texture_path(p.id,"south_east","combat_walk:0")),p.id+" tactical three-quarter combat-ready walk routing")
 		Assets.clear_texture_cache()
 	_timeline_test(art)
 	await _gallery_test(registry.profiles.size())

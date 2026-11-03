@@ -1,0 +1,139 @@
+{
+  "title": "Bandit shield fighter",
+  "body_scale": true,
+  "body_height_target": 171,
+  "walk_stride_pixels": 160,
+  "idle_lock_y": 232,
+  "cleanup_neon": true,
+  "sheets": {
+    "locomotion": {
+      "cols": 4,
+      "rows": 4
+    },
+    "actions": {
+      "cols": 4,
+      "rows": 4
+    },
+    "reactions": {
+      "cols": 4,
+      "rows": 4
+    }
+  },
+  "clips": [
+    {
+      "id": "neutral_idle",
+      "title": "Neutral Idle",
+      "mode": "neutral",
+      "sheet": "locomotion",
+      "start": 1,
+      "count": 4,
+      "durations": 250,
+      "loop": true,
+      "reference_index": 1
+    },
+    {
+      "id": "neutral_walk",
+      "title": "Neutral Walk",
+      "mode": "neutral",
+      "sheet": "locomotion",
+      "start": 5,
+      "count": 8,
+      "durations": 125,
+      "loop": true,
+      "align_head": true
+    },
+    {
+      "id": "combat_idle",
+      "title": "Combat Idle",
+      "mode": "combat",
+      "sheet": "locomotion",
+      "start": 13,
+      "count": 4,
+      "durations": 250,
+      "loop": true,
+      "reference_index": 1
+    },
+    {
+      "id": "combat_walk",
+      "title": "Combat Walk",
+      "mode": "combat",
+      "sheet": "actions",
+      "start": 1,
+      "count": 8,
+      "durations": 125,
+      "loop": true,
+      "align_head": true
+    },
+    {
+      "id": "attack",
+      "title": "Attack",
+      "mode": "combat",
+      "sheet": "actions",
+      "start": 9,
+      "count": 8,
+      "durations": [
+        160,
+        120,
+        100,
+        70,
+        60,
+        100,
+        170,
+        190
+      ],
+      "loop": false
+    },
+    {
+      "id": "hit",
+      "title": "Hit",
+      "mode": "combat",
+      "sheet": "reactions",
+      "start": 5,
+      "count": 4,
+      "durations": [
+        90,
+        90,
+        130,
+        180
+      ],
+      "loop": false
+    },
+    {
+      "id": "death",
+      "title": "Death",
+      "mode": "combat",
+      "sheet": "reactions",
+      "start": 9,
+      "count": 8,
+      "durations": [
+        150,
+        150,
+        140,
+        130,
+        130,
+        150,
+        200,
+        1000
+      ],
+      "loop": false,
+      "reference_index": 1
+    },
+    {
+      "id": "block",
+      "title": "Shield brace",
+      "mode": "combat",
+      "sheet": "reactions",
+      "start": 1,
+      "count": 4,
+      "durations": [
+        120,
+        160,
+        220,
+        180
+      ],
+      "loop": false,
+      "reference_index": 1,
+      "align_feet": true
+    }
+  ]
+}

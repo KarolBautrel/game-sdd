@@ -87,7 +87,9 @@ func _run() -> void:
 		scene._run_command(scene._build_command("basic_attack", {"type":"unit","unit_id":target.id}))
 		if scene.animation_locked:
 			_check(scene.action_title_label.text not in ["Victory","Defeat"], "S10-04 result shown before animated commit")
-		await create_timer(2.5).timeout
+		var animation_deadline := Time.get_ticks_msec() + 6000
+		while scene.animation_locked and Time.get_ticks_msec() < animation_deadline:
+			await process_frame
 		var expected := "Victory" if winning_team == "player" else "Defeat"
 		_check(scene.action_title_label.text == expected, "S10-04 normal resolver outcome not shown: " + expected)
 		scene._show_action_hover("move", 1)

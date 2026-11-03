@@ -9,6 +9,7 @@ local pc=app.pixelColor
 local function read(path) local f=assert(io.open(path,'r'));local s=f:read('*a');f:close();return json.decode(s) end
 local function save(path,value) local f=assert(io.open(path,'w'));f:write(json.encode(value));f:close() end
 local cfg=read(base..'/clips_source.json')
+local BODY_HEIGHT=cfg.body_height_target or 171
 app.fs.makeAllDirectories(source)
 local W,H,PX,PY=384,320,192,270
 local function neon(p)
@@ -141,16 +142,20 @@ local function body_height(frame)
  return b[4]
 end
 local report={status='TECHNICAL_SOURCE_EXPORT_PASS_VISUAL_REVIEW_PENDING',id=id,
- canvas={W,H},pivot={PX,PY},body_height_target=171,view=view,
+ canvas={W,H},pivot={PX,PY},body_height_target=BODY_HEIGHT,view=view,
  frame_source='redrawn imagegen keyframes; Aseprite segmentation/normalization',clips={},clipping={}}
 local manifest={id=id,title=cfg.title,view=view,canvas={W,H},pivot={PX,PY},
- pixels_per_metre=100,body_height=171,walk_stride_pixels=cfg.walk_stride_pixels or 80,clips={},exported_views={view}}
+ pixels_per_metre=100,body_height=BODY_HEIGHT,walk_stride_pixels=cfg.walk_stride_pixels or 80,clips={},exported_views={view}}
 local contact=Image(W*4,H*math.ceil(#cfg.clips/4),ColorMode.RGB)
 for clipIndex,clip in ipairs(cfg.clips) do
  local frames={};for n=1,clip.count do frames[n]=sheets[clip.sheet][clip.indices and tonumber(clip.indices[n]) or clip.start+n-1] end
  local first=frames[1];local reference=clip.reference_index and sheets[clip.sheet][clip.reference_index] or first
  local refHeight=clip.reference_height or (cfg.body_scale and body_height(reference)) or reference.bounds[4]
- local scale=171/refHeight
+ if cfg.scale_reference_sheet then
+  local anchor=sheets[cfg.scale_reference_sheet][1]
+  refHeight=(cfg.body_scale and body_height(anchor) or anchor.bounds[4])*(first.width/anchor.width)
+ end
+ local scale=BODY_HEIGHT/refHeight
  local root=foot_center(first)-first.col*first.width
  local headX=head_center(first,refHeight)
  local atlas=Image(W*clip.count,H,ColorMode.RGB)

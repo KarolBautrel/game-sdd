@@ -5,6 +5,12 @@ Date: 2026-07-14
 
 ## Summary
 
+Publication verification2026-11-03 (painted stages61..65): feedback179/0 after
+replacing the test's fixed2.5second sleep with bounded actual-animation completion.
+This covers the new long-bow review-scene override; gameplay timing/outcomes are
+unchanged. Owner091/slice099, source combat_feedback_polish_tests.gd. See the
+painted-enemies publication receipt for the final combined source/remote proof.
+
 Stage18/19 (2026-11-01): world007/combat103 adds frozen campaign advancement
 stats before existing injuries, with fixed max HP and sandbox isolation. Shared
 presentation002 redesigns campaign interfaces. Final stage19-verified-20261101

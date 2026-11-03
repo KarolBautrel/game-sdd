@@ -4,6 +4,11 @@ const Art := preload("res://scripts/presentation/combat/combat_unit_art.gd")
 
 static func uses_drawn(events: Array, units: Dictionary, art: Art) -> bool:
 	for event: Dictionary in events:
+		if event.get("type", "") == "status_applied":
+			var target: Dictionary = units.get(str(event.get("target_unit_id", "")), {})
+			if art.is_drawn_unit(target) and art.processed_sheet_action("status_reaction", str(art.unit_visual_config(target).character)) == "block":
+				return true
+			continue
 		if event.get("type","") not in ["hit_roll_resolved","damage_applied"]:continue
 		for key in ["actor_id","target_unit_id"]:
 			if art.is_drawn_unit(units.get(str(event.get(key,"")),{})):return true

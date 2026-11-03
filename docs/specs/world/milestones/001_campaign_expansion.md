@@ -1,5 +1,12 @@
 # Campaign expansion stages13..22
 
+Later bounded equipment extension: stage61/presentation023 adds Bran's explicit
+sword/shield and greatsword identity variants, normal20g merchant greatsword and
+isolated campaign review. No migration/grants to existing saves. Transactions,
+locks/snapshots/restart/return pass hero identity1046checks, campaign gear50 and
+trade48, plus full validator. Physical L61-01/02 remain open. See presentation
+milestone018 and docs/qa/2026-11-03-hero-equipment-identity.md; no next batch implied.
+
 User authorized background implementation and automated testing, with actual
 computer-control tests accumulated later. No GUI activation/input while user
 uses the PC. Every stage remains AWAITING_INTERACTIVE until live proof passes.

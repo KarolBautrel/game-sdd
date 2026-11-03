@@ -38,7 +38,11 @@ var inventory_slot := "main_hand"
 func _ready() -> void:
 	var campaign := _campaign()
 	if not campaign.loaded:
-		campaign.load_profile("user://campaign_v1.json", DisplayServer.get_name() == "headless")
+		if "--hero-equipment-pilot" in OS.get_cmdline_user_args() or bool(ProjectSettings.get_setting("debug/qa/hero_equipment_pilot", false)):
+			preload("res://scripts/qa/hero_equipment_pilot.gd").open(campaign)
+			inventory_view = true
+		else:
+			campaign.load_profile("user://campaign_v1.json", DisplayServer.get_name() == "headless")
 	_render()
 
 

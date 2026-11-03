@@ -354,6 +354,46 @@
       "appearance": {
         "armor": "plate"
       }
+    },
+    {
+      "id": "hero_greatsword",
+      "name": "Two-handed greatsword",
+      "description": "A long two-handed blade. Basic Attack +2 damage; Power Strike +4 damage, 2 AP and 3-turn cooldown. Unequip your shield first.",
+      "category": "equipment",
+      "value": 9,
+      "combat_profile": {
+        "id": "hero_greatsword",
+        "slot": "main_hand",
+        "two_handed": true,
+        "grants_actions": [
+          "basic_attack",
+          "power_strike"
+        ],
+        "action_profiles": {
+          "basic_attack": {
+            "id": "hero_greatsword_basic_attack",
+            "action_id": "basic_attack",
+            "range": 1,
+            "ap_cost": 1,
+            "damage_bonus": 2
+          },
+          "power_strike": {
+            "id": "hero_greatsword_power_strike",
+            "action_id": "power_strike",
+            "range": 1,
+            "ap_cost": 2,
+            "damage_bonus": 4,
+            "cooldown_turns": 3
+          }
+        }
+      },
+      "visual": {
+        "faction": "heroes",
+        "character": "knight"
+      },
+      "appearance": {
+        "weapon": "greatsword"
+      }
     }
   ]
 }
