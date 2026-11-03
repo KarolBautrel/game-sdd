@@ -1,5 +1,14 @@
 # Original characters and animation: production tools
 
+Current accepted painted2D workflow2026-11-03 is preserved in the separate
+[painted character workshop](https://github.com/KarolBautrel/painted-character-workshop),
+releasev1.0.0, and locally installed skill `$painted-tactical-characters`.
+Read [workshop handoff](../../handoffs/2026-11-03-painted-workshop.md) and
+presentation022. It includes style references, final edited Aseprite sources,
+raw sheets/prompts, portable scripts, native golden comparison and an optional
+Godot viewer. The Blender/3D material below is historical tooling evidence;
+it does not supersede the accepted painted direction.
+
 Follow-up2026-11-02: installed/tested Scenario Blender Expert family15 skills and
 Ucupaint3.0.0 in the owned profile for the user-selected Knight painted direction.
 See [painted candidates](PAINTED_CANDIDATES.md) and

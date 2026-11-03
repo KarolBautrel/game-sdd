@@ -121,6 +121,17 @@ Presentation code must not decide combat legality or outcomes. It sends commands
 
 ## Art Creation Rules
 
+For the accepted painted2D character/animation workflow, use
+`$painted-tactical-characters` when installed. Its user-level entry point is
+`~/.agents/skills/painted-tactical-characters/SKILL.md`. The reusable workshop is
+versioned at https://github.com/KarolBautrel/painted-character-workshop, baseline
+`v1.0.0`; it contains the approved style, edited Aseprite sources, raw prompts,
+portable export/idle/mirror tools and reproducible tests. See the
+`docs/handoffs/2026-11-03-painted-workshop.md` handoff for installation and scope.
+If the skill is unavailable, the in-repo fallback is
+`assets_src/characters/drawn_animation/2026-11-03/README.md` and presentation022.
+The game's own specs/resolver still own gameplay rules.
+
 For original characters/enemies/models/animation, first read
 `docs/design/character-art/TOOLING.md` and tooling005/slice005. The user prioritized
 this visual preparation before physical tests on2026-11-02. Background Blender
