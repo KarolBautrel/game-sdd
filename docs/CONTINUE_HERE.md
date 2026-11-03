@@ -1,12 +1,27 @@
 # Continue development here
 
-Last handoff: 2026-11-03. This is a status/navigation document; owning domain
+Last handoff: 2026-11-04. This is a status/navigation document; owning domain
 specs define behavior. This handoff does not authorize additional implementation
 when the user has only requested an explanation or plan.
 
 ## Next-session entry: read this first
 
 Latest active-task handoff:
+[Dark fantasy dungeon UI design](handoffs/2026-11-04-dungeon-ui-design.md).
+User corrects the first flat design to follow the approved world-travel DARK
+FANTASY family, then explicitly delegates about two hours of staged native game
+polish, FULL DESKTOP CONTROL and commit/push master after each verified episode.
+Active queue: [autonomous polish](specs/presentation/milestones/022_autonomous_game_polish.md),
+start23:12Z/target01:12Z. Prioritize dungeon UI/mechanics, equipment, world UI /
+travel, then combat/arenas; small isometric town planning only last.
+Stage66 world-family design: exact campaign material exports, imagegen/Aseprite
+mine art, five-state mockup,39browser checks/17captures PASS. Flat v1 is archived
+and superseded. [Design](design/dungeon-ui/README.md),
+[QA](qa/2026-11-04-dungeon-world-family.md). Next67 is actual native dungeon work
+and visible normal input on DISPLAY1. Real saves and accepted character art
+remain protected; each episode needs spec/slice/checks/visible review/report/push.
+
+Previous active-task handoff:
 [Bran campaign, painted bandits and wolf](handoffs/2026-11-03-painted-enemies-wolf.md).
 User explicitly authorizes all three proposed tasks together (stages63..65).
 All three tasks IMPLEMENTED / AUTOMATED_PASS: Bran managed expedition victory/

@@ -52,3 +52,6 @@ Shared UI composition owns passive visual components, never gameplay decisions.
   retain all eight authored source views for galleries and later use.
 - [025 Painted enemies and wolf](025_painted_enemies_and_wolf.md): authorized
   two-kit campaign proof, bandit archer/shield fighter and quadruped wolf pilot.
+- [026 Dungeon interface redesign](026_dungeon_interface_redesign.md): proposed
+  dark fantasy exploration composition, internet skill research and local design
+  mockup; native implementation awaits user direction.

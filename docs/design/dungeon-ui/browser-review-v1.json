@@ -1,0 +1,174 @@
+{
+  "status": "PASS",
+  "scope": "HTML design mockup only; not native Godot/runtime/physical-play acceptance",
+  "checks": [
+    {
+      "name": "1920x1080 exploration images/fonts",
+      "pass": true
+    },
+    {
+      "name": "1920x1080 exploration viewport fit",
+      "pass": true
+    },
+    {
+      "name": "1920x1080 exploration header fit",
+      "pass": true
+    },
+    {
+      "name": "1920x1080 event fits",
+      "pass": true
+    },
+    {
+      "name": "1920x1080 packing readable",
+      "pass": true
+    },
+    {
+      "name": "1280x720 exploration images/fonts",
+      "pass": true
+    },
+    {
+      "name": "1280x720 exploration viewport fit",
+      "pass": true
+    },
+    {
+      "name": "1280x720 exploration header fit",
+      "pass": true
+    },
+    {
+      "name": "1280x720 event fits",
+      "pass": true
+    },
+    {
+      "name": "1280x720 packing readable",
+      "pass": true
+    },
+    {
+      "name": "2560x1440 exploration images/fonts",
+      "pass": true
+    },
+    {
+      "name": "2560x1440 exploration viewport fit",
+      "pass": true
+    },
+    {
+      "name": "2560x1440 exploration header fit",
+      "pass": true
+    },
+    {
+      "name": "2560x1440 event fits",
+      "pass": true
+    },
+    {
+      "name": "2560x1440 packing readable",
+      "pass": true
+    },
+    {
+      "name": "3440x1440 exploration images/fonts",
+      "pass": true
+    },
+    {
+      "name": "3440x1440 exploration viewport fit",
+      "pass": true
+    },
+    {
+      "name": "3440x1440 exploration header fit",
+      "pass": true
+    },
+    {
+      "name": "3440x1440 event fits",
+      "pass": true
+    },
+    {
+      "name": "3440x1440 packing readable",
+      "pass": true
+    },
+    {
+      "name": "3840x2160 exploration images/fonts",
+      "pass": true
+    },
+    {
+      "name": "3840x2160 exploration viewport fit",
+      "pass": true
+    },
+    {
+      "name": "3840x2160 exploration header fit",
+      "pass": true
+    },
+    {
+      "name": "3840x2160 event fits",
+      "pass": true
+    },
+    {
+      "name": "3840x2160 packing readable",
+      "pass": true
+    },
+    {
+      "name": "low light named level and oil",
+      "pass": true
+    },
+    {
+      "name": "event background is inert",
+      "pass": true
+    },
+    {
+      "name": "forced choice cannot escape",
+      "pass": true
+    },
+    {
+      "name": "event focus loops",
+      "pass": true
+    },
+    {
+      "name": "resolving choice unlocks background",
+      "pass": true
+    },
+    {
+      "name": "packing cannot exceed capacity",
+      "pass": true
+    },
+    {
+      "name": "packing cost applied",
+      "pass": true
+    },
+    {
+      "name": "reward becomes claimed receipt",
+      "pass": true
+    },
+    {
+      "name": "optional journal restores focus",
+      "pass": true
+    },
+    {
+      "name": "non-adjacent locked destination cannot travel",
+      "pass": true
+    },
+    {
+      "name": "adjacent destination previews before travel",
+      "pass": true
+    },
+    {
+      "name": "no JavaScript runtime errors",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/exploration-1920x1080.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/corridor-event-1920x1080.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/packing-1920x1080.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/exploration-1280x720.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/corridor-event-1280x720.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/packing-1280x720.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/exploration-2560x1440.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/corridor-event-2560x1440.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/packing-2560x1440.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/exploration-3440x1440.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/corridor-event-3440x1440.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/packing-3440x1440.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/exploration-3840x2160.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/corridor-event-3840x2160.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/packing-3840x2160.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/low-light-1920x1080.png",
+    "artifacts/dungeon-ui-design/2026-11-03T22-59-24-909Z/reward-1920x1080.png"
+  ],
+  "errors": []
+}

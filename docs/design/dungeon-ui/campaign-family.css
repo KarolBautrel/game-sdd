@@ -1,0 +1,74 @@
+/* The approved campaign art is the source of the skin, not an approximate palette. */
+:root{--base:#100f0e;--panel:#201c18;--ink:#f8eedc;--muted:#c9bba1;--brass:#d9b773;--edge:#79603c;--rail:150px;--side:380px}
+.game{background:#100f0e url('../../../assets/ui/campaign/leather.png');padding:0 22px}
+.game:before{background:#0003;opacity:1}
+.header{border:0;gap:22px}
+.location p{color:#c9bba1}
+.lamp{border:10px solid transparent;border-image:url('../../../assets/ui/campaign/frame_dark.png') 36 fill stretch;padding:2px 16px;gap:15px;min-height:75px}
+.lamp-icon{color:#d9b773}.lamp .reading strong{color:#e1c087}
+.nav{gap:9px}.text-button,.loot-link{border:10px solid transparent;border-image:url('../../../assets/ui/campaign/button.png') 16 fill stretch;padding:4px 18px;color:#eee2c6;min-height:48px}
+.text-button:hover,.loot-link:hover{color:#fff3d1;filter:brightness(1.18)}
+.supplies{gap:10px}.supplies .lead{padding-right:10px;color:#cab995}
+#supply-values .supply{border:9px solid transparent;border-image:url('../../../assets/ui/campaign/frame_metal.png') 36 fill stretch;padding:1px 8px;gap:6px}
+.supplies .loot-link{font-size:17px;padding:2px 12px;gap:7px}.supplies .loot-link img{width:23px;height:23px}
+.chart{border:17px solid transparent;border-image:url('../../../assets/ui/campaign/frame_dark.png') 36 fill stretch;background:transparent;grid-template-rows:52px minmax(0,1fr) 36px;box-shadow:0 3px 16px #0009;padding:0 3px}
+.chart:before,.chart:after{content:none}
+.chart-title{font-family:Cinzel,serif;font-size:23px;color:#d9b773;padding:3px 10px 14px;position:relative}
+.chart-title:after{content:'';position:absolute;width:90px;height:12px;bottom:5px;left:calc(50% - 45px);background:url('../../../assets/ui/campaign/divider.png') center/contain no-repeat;opacity:.9}
+.chart-title span:last-child{font:17px Source,sans-serif;color:#c9bba1}
+.map-scroll{background:transparent;scrollbar-color:#b1965e #15130f;box-shadow:inset 0 0 20px #0008}
+.map{width:1280px;height:570px;min-width:1280px;min-height:570px;margin:0 auto;background:url('art/mine-chart.png') left top/100% 100% no-repeat}
+.map:before,.map-note,.depth-note{display:none}
+.paths,.room,.map-note,.depth-note{zoom:1}
+.path{stroke:transparent}.path.known,.path.locked{stroke:transparent}
+.path.selected{stroke:#e9cf85;stroke-width:2.4;stroke-dasharray:6 5;opacity:.9;filter:drop-shadow(0 1px 1px #000)}
+.route-label{fill:#ffedb8;stroke:#2f251a;stroke-width:5;font-size:17px}
+.room,.room:hover,.room.current,.room.selected{background:transparent;border:0;box-shadow:none;padding:0;align-items:center;justify-content:end}
+.room img{display:none}
+.room-label{display:flex;flex-direction:column;align-items:center;justify-content:center;width:164px;min-height:70px;padding:3px 2px;border:10px solid transparent;border-image:url('../../../assets/ui/campaign/frame_dark.png') 36 fill stretch;filter:drop-shadow(0 3px 3px #0008)}
+.room:hover .room-label{filter:brightness(1.2) drop-shadow(0 3px 3px #0008)}
+.room .name{background:none;min-height:0;font-size:18px;line-height:1.15;padding:0;max-width:145px;color:#f2e5ca}
+.room .state{padding:4px 0 0;font-size:15px;color:#c9bba1}
+.room.selected .room-label{box-shadow:0 0 0 2px #dfc58b,0 0 0 5px #22190dcc}
+.room.current:after{color:#edcc83;filter:drop-shadow(0 2px 2px #120c08);top:4px;left:67px}
+.room.current .state{color:#efca7d}.room.threat .state{color:#e4a891}.room.visited .state{color:#bac49f}
+.legend{font-size:15px;padding:8px 10px 0;color:#d3c3a2}
+.inspector{border:18px solid transparent;border-image:url('../../../assets/ui/campaign/frame_paper.png') 36 fill stretch;background:transparent;color:#30231a;padding:9px 10px 13px;gap:14px}
+.inspector .eyeline{font-size:16px;color:#66503a}.inspector .eyeline span:last-child{color:#66503a}
+.inspector h2{color:#40301e;font-size:28px;line-height:1.2}
+.scene-art{border:12px solid transparent;border-image:url('../../../assets/ui/campaign/frame_dark.png') 36 fill stretch;background:transparent;min-height:154px;height:154px;margin:0}
+.scene-art:before,.scene-art:after{content:none}.scene-art img{width:170px;height:127px}
+.inspector .note{background:none;border:0;box-shadow:none;padding:0;font-size:19px;color:#30231a}
+.inspector .note small{font-size:16px;color:#66503a;margin-top:8px}
+.facts{gap:9px;border-top:1px solid #94794d;padding-top:13px}.fact{font-size:18px}.fact span{color:#66503a}.danger-text{color:#843c2f}.safe-text{color:#3a6345}
+.primary,.secondary{border:12px solid transparent;border-image:url('../../../assets/ui/campaign/button.png') 16 fill stretch;background:transparent;box-shadow:none;padding:4px 8px;color:#f6e8c9;min-height:53px}
+.primary{color:#f6da9b}.primary:hover:not(:disabled),.secondary:hover:not(:disabled){background:transparent;filter:brightness(1.17);border-color:transparent}
+.action-caption{color:#66503a;font-size:16px}
+.party-rail{border:13px solid transparent;border-image:url('../../../assets/ui/campaign/frame_dark.png') 36 fill stretch;padding:4px 8px;gap:18px}
+.party-rail>small{color:#d9b773}
+.hero{border:10px solid transparent;border-image:url('../../../assets/ui/campaign/frame_metal.png') 36 fill stretch;height:116px;min-width:316px;padding:0 7px;gap:12px}
+.portrait{width:84px;height:88px;border:0;background:none}
+.hero-name{color:#d9b773;font-size:23px}.hero-role{color:#c9bba1}.hp-track{background:#423023}.hp-track i{background:#b27c58}.hp{color:#f4e9d0}
+.rail-tools{gap:8px}.tool{min-width:112px;min-height:106px;border:10px solid transparent;border-image:url('../../../assets/ui/campaign/frame_metal.png') 36 fill stretch;background:none;gap:1px;color:#dfc28a}
+.tool span:last-child{color:#c1b194}.tool:hover{filter:brightness(1.15)}
+.journal-line{border:0;color:#d6c5a4}
+.decision{width:min(1000px,96%);border:20px solid transparent;border-image:url('../../../assets/ui/campaign/frame_dark.png') 36 fill stretch;background:transparent;grid-template-columns:285px 1fr}
+.decision-art{border:0;background:none;padding:20px 12px}
+.decision-art img{width:252px;height:189px;border:10px solid transparent;border-image:url('../../../assets/ui/campaign/frame_metal.png') 36 fill stretch}
+.decision-art p{color:#d9b773;font-size:23px}.decision-body{padding:18px 22px}.decision-body h2{color:#e0c385}.decision-body>p{color:#f2e5cc}
+.choice{border:13px solid transparent;border-image:url('../../../assets/ui/campaign/frame_metal.png') 36 fill stretch;background:none;color:#f8eedc;padding:6px 12px}
+.choice:hover,.choice.risk:hover{background:none;filter:brightness(1.18)}.choice.risk{background:none;border-color:transparent}.choice.risk>span{border-left:3px solid #9c5c48;padding-left:12px}.choice small{color:#d2c2a1}
+.sheet{border:20px solid transparent;border-image:url('../../../assets/ui/campaign/frame_dark.png') 36 fill stretch;background:transparent;padding:16px 23px}.sheet-head h2{color:#d9b773}.close{border:8px solid transparent;border-image:url('../../../assets/ui/campaign/button.png') 16 fill stretch;padding:0;line-height:1}
+.packing{border-color:#77633e}.counter button{border:6px solid transparent;border-image:url('../../../assets/ui/campaign/button.png') 16 fill stretch;background:none;width:36px;height:36px;padding:0;line-height:1}
+.receipt{border:18px solid transparent;border-image:url('../../../assets/ui/campaign/frame_paper.png') 36 fill stretch;background:none;color:#30231a;padding:7px 13px}.receipt small{color:#66503a}
+.notice{background:#100d09aa;border:1px solid #80663b;padding:13px 15px}
+.low-light .chart{background:transparent}.low-light .map{filter:brightness(.82) saturate(.8)}.low-light .map .room-label{filter:brightness(1.2)}
+/* Tile the actual leather center; do not magnify a 184px center across a whole panel. */
+.chart,.party-rail,.decision,.sheet,.low-light .chart{border-image-source:url('../../../assets/ui/campaign/frame_dark.png');border-image-slice:36;background:linear-gradient(#0008,#0008),url('../../../assets/ui/campaign/leather.png') repeat}
+.chart{grid-template-rows:44px minmax(0,1fr) 30px}
+.hero{height:108px}
+.decision-art{background:linear-gradient(#0002,#0002)}
+@media(min-width:2300px){:root{--side:480px;--rail:194px}.game{padding:0 30px}.lamp{min-height:91px;padding:6px 22px}.inspector{border-width:22px;gap:20px;padding:15px}.inspector h2{font-size:35px}.inspector .note{font-size:25px}.inspector .note small,.inspector .eyeline{font-size:20px}.fact{font-size:23px}.primary,.secondary{min-height:66px}.chart-title{font-size:29px}.chart-title span:last-child{font-size:21px}.hero{min-width:390px;height:146px}.portrait{width:110px;height:116px}.hero-name{font-size:30px}.hero-role{font-size:21px}.tool{min-width:138px;min-height:137px}.map{width:1536px;height:684px;min-width:1536px;min-height:684px}.paths,.room{zoom:1.2}.action-caption{font-size:20px}}
+@media(min-width:3200px) and (min-height:1800px){:root{--side:750px;--rail:280px}.game{padding:0 44px}.lamp{border-width:18px;min-height:140px}.inspector{border-width:32px;padding:24px;gap:30px}.inspector h2{font-size:52px}.inspector .note{font-size:36px}.inspector .note small,.inspector .eyeline{font-size:30px}.fact{font-size:32px}.primary,.secondary{min-height:100px;border-width:20px}.chart{border-width:30px;grid-template-rows:80px minmax(0,1fr) 60px}.chart-title{font-size:42px}.chart-title span:last-child{font-size:30px}.chart-title:after{width:150px;height:20px;left:calc(50% - 75px)}.map{width:2560px;height:1140px;min-width:2560px;min-height:1140px}.paths,.room{zoom:2}.legend{font-size:28px;padding:14px 15px 0}.hero{min-width:590px;height:216px;border-width:18px;gap:26px}.portrait{width:170px;height:180px}.hero-name{font-size:44px}.hero-role{font-size:31px}.tool{min-width:205px;min-height:208px;border-width:17px}.scene-art{height:290px;min-height:290px;border-width:20px}.scene-art img{width:330px;height:247px}.action-caption{font-size:28px}.text-button,.loot-link{border-width:17px;padding:6px 24px}.supplies .loot-link{font-size:30px}.supplies .loot-link img{width:38px;height:38px}#supply-values .supply{border-width:15px;gap:12px;padding:4px 12px}.supplies{gap:20px}.chart-title span:last-child{font-size:30px}}
+@media(max-width:1450px){:root{--side:320px;--rail:142px}.game{padding:0 15px}.lamp{padding:0 9px;min-height:66px}.nav .text-button{padding:3px 9px}.supplies{gap:6px}.supplies .lead{font-size:15px;padding-right:7px}#supply-values .supply{padding:0 7px;border-width:7px;min-height:42px}.supplies .loot-link{font-size:16px}.content{gap:14px}.chart{border-width:13px;grid-template-rows:43px minmax(0,1fr) 32px}.chart-title{font-size:20px}.chart-title span:last-child{font-size:15px}.chart-title:after{width:60px;left:calc(50% - 30px)}.hero{min-width:269px;height:109px;padding:0 3px;gap:8px}.portrait{width:70px;height:80px}.hero-name{font-size:21px}.tool{min-width:92px;min-height:100px;font-size:16px}.rail-tools{gap:5px}.party-rail{border-width:10px;gap:12px}.inspector{padding:9px;border-width:14px;gap:11px}.inspector h2{font-size:25px}.inspector .note{font-size:18px}.fact{font-size:17px}.scene-art{height:132px;min-height:132px}.scene-art img{width:145px;height:108px}}
+@media(max-width:1320px),(max-height:820px){:root{--rail:123px}.game{grid-template-rows:82px 54px minmax(0,1fr) var(--rail) 27px}.lamp{min-height:65px}.chart{border-width:11px;grid-template-rows:42px minmax(0,1fr) 30px}.inspector{width:335px;border-width:16px;inset:0 0 16px auto;background:none;padding:10px}.inspector h2{font-size:26px}.hero{height:93px;min-width:258px;border-width:8px}.portrait{width:62px;height:73px}.tool{min-width:86px;min-height:91px;border-width:8px;font-size:15px}.tool span:last-child{font-size:13px}.party-rail{gap:9px;border-width:9px;padding:2px 5px}.legend{gap:14px;font-size:14px}.rail-tools{gap:3px}.journal-line{font-size:15px}.scene-art{display:none}.supplies .loot-link{min-height:40px;padding:1px 9px}}

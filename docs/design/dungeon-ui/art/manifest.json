@@ -1,0 +1,48 @@
+{
+  "status": "DESIGN_CANDIDATE",
+  "date": "2026-11-04",
+  "generation_tool": "built-in image_gen",
+  "default_generation_path": "C:/Users/karol/.codex/generated_images/01a1a0d5-2ac8-74c1-aa23-5568e96330b1/exec-77cd31ae-afe3-48d6-8aaf-df15358cd026.png",
+  "prompt": "docs/design/dungeon-ui/art/GENERATION.md",
+  "reference": "assets/ui/campaign/marches_map.png",
+  "export": "tools/aseprite/dungeon_ui_design.lua",
+  "files": [
+    {
+      "path": "assets_src/dungeon_ui_design/2026-11-04/mine-map-source.png",
+      "sha256": "42e5f58d7007f4bed72f8dda7948ab0c3ac38d1b6152d0df3df65896f1c37821",
+      "bytes": 4297086,
+      "size": [
+        1879,
+        837
+      ]
+    },
+    {
+      "path": "assets_src/aseprite/dungeon_ui_design/2026-11-04/mine-chart.aseprite",
+      "sha256": "39f5816d820a957250bfec0bbec94d372b76ddedc106104f7c83e271a1e548be",
+      "bytes": 2178829
+    },
+    {
+      "path": "assets_src/aseprite/dungeon_ui_design/2026-11-04/fallen-stone.aseprite",
+      "sha256": "e5a987cb3f3cf5d9215573b13e023657674542903ff1355a7ebeef6af5fc4a1e",
+      "bytes": 233558
+    },
+    {
+      "path": "docs/design/dungeon-ui/art/mine-chart.png",
+      "sha256": "07a9bf2bfacab0011431ee989acd1453705b863e0436d041b9a1caf7f3cceb2f",
+      "bytes": 2035908,
+      "size": [
+        1280,
+        570
+      ]
+    },
+    {
+      "path": "docs/design/dungeon-ui/art/fallen-stone.png",
+      "sha256": "906f26b1644f326ee8b418cf8ce185eaf6d15a6bd754c43e0f4c221c6ccb3893",
+      "bytes": 217005,
+      "size": [
+        320,
+        240
+      ]
+    }
+  ]
+}
