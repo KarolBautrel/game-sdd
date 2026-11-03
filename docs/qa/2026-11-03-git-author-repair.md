@@ -24,8 +24,9 @@ Current remote/local `3d-models`:
 `540524ed32e77f8d1f5219da62759a343ca2058a`.
 GitHub REST confirms `author.login == committer.login == KarolBautrel`.
 Tree remains `fb20d3b704e6a0e70acc41611bd15676b945efda`, identical to the original
-e696d1c4 archive. No game/source asset bytes changed. Current local research
-branch points to that same corrected checkpoint with uncommitted research notes.
+e696d1c4 archive. No game/source asset bytes changed. At this repair step the
+research branch shared that checkpoint; the separately authorized session-end
+research/handoff commits now descend from it on2d-art-research.
 
 Original task checkpoint and the unlinked Gmail experiment remain in local
 `refs/archive/3d-models-before-email-fix-20261103` and

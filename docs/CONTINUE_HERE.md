@@ -15,9 +15,10 @@ Do not repeat the whole research, resume historical3D queues or interpret the
 resume phrase as approval to rewrite master or pay for external generation.
 
 Current work branch is `2d-art-research`. User explicitly requests these research/
-handoff notes committed and pushed there under the verified KarolBautrel identity.
-Check the current ref after push; the notes' own commit SHA is obtained from Git,
-not hardcoded into itself. No further art work is requested before tomorrow.
+handoff notes committed and pushed there under the verified KarolBautrel identity;
+they are now committed on that branch and its publication is verified at session
+close. Obtain the current commit SHA from Git/remote, not from a self-reference
+in this file. No further art work is requested before tomorrow.
 
 ## Current status: 3D archived;2.5D research complete; historical Git scope pending
 
@@ -36,8 +37,9 @@ Read [archive/rejection note](qa/2026-11-03-3d-models-archive.md).
 Archive push confirmed: `origin/3d-models` initially
 `e696d1c4a841c0400d691cd9d8df040677ee5be4`, matching local. LFS fsck,843 source/
 staged identities, validator and42 headless style-preview checks PASS. Current
-local branch `2d-art-research` starts at that complete checkpoint; research notes
-are local/uncommitted and have not changed the remote archive or runtime.
+local branch `2d-art-research` descends from the corrected complete checkpoint
+540524ed and carries the separately committed/pushed research and handoff notes.
+Those notes have not changed the remote3D archive, master or runtime.
 
 Read [drawn2.5D research](design/character-art/DRAWN_25D_RESEARCH.md),
 [presentation019](specs/presentation/019_drawn_character_research.md),
