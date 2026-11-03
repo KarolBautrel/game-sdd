@@ -38,3 +38,5 @@ Shared UI composition owns passive visual components, never gameplay decisions.
   rejected016; restore stage41 with a modest reduction of the existing boots.
 - [018 Approved warden motion pilot](018_warden_motion_pilot.md): fit a rig to the
   accepted017 appearance and prove idle/walk/one-handed attack before full sets.
+- [019 Drawn2.5D character research](019_drawn_character_research.md): archives
+  rejected018 motion and evaluates drawn/pixel sprite tools, skills and MCPs.

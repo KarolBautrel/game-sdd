@@ -8,6 +8,11 @@ Read `docs/CONTINUE_HERE.md` before choosing the next implementation task. It
 links accepted stage reports and the active ordered milestone. Read the owning
 specs and inspect current Git changes; preserve existing uncommitted work.
 
+For a generic resume such as "Wracamy do tego na czym skonczylismy ostatnio",
+read the latest dated handoff linked at the top of CONTINUE_HERE before choosing
+work. Follow its accepted/rejected status and outstanding scope decisions; do
+not restart a superseded historical queue or infer unresolved approvals.
+
 The default stage loop is: owning spec and acceptance scenarios -> implementation
 -> automated acceptance -> actual visible gameplay -> persisted report -> next
 stage. Fix failures and repeat affected checks before closing a stage. Headless
@@ -97,6 +102,11 @@ Do not commit or push automatically after every change.
 - Push only when the user explicitly says to push, wypchnij, or otherwise asks to send changes to the remote repository.
 - It is acceptable to leave validated local changes uncommitted when the user wants to test first.
 - Before any requested commit or push, run the relevant validation commands and report the result.
+- Before committing, inspect the effective author identity. Never use an invented
+  placeholder such as `karol@example.local`. Use the user's approved identity;
+  verify GitHub account linkage when attribution is part of the task. Changing
+  local config does not rewrite existing commits or grant permission to rewrite
+  remote default-branch history. Preserve old refs for any approved author repair.
 
 ## Combat Rules
 

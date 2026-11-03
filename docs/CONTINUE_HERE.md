@@ -4,7 +4,22 @@ Last handoff: 2026-11-03. This is a status/navigation document; owning domain
 specs define behavior. This handoff does not authorize additional implementation
 when the user has only requested an explanation or plan.
 
-## Current status: 3D motion rejected; archive to 3d-models, then drawn2.5D research
+## Next-session entry: read this first
+
+The user ended this session and will resume with:
+"Wracamy do tego na czym skonczylismy ostatnio".
+Read the complete [2026-11-03 resume handoff](handoffs/2026-11-03-drawn-2d-resume.md)
+before acting. It records rejected work, exact Git state/identity, researched vs
+installed tools, the proposed small2D art/motion stages and pending permissions.
+Do not repeat the whole research, resume historical3D queues or interpret the
+resume phrase as approval to rewrite master or pay for external generation.
+
+Current work branch is `2d-art-research`. User explicitly requests these research/
+handoff notes committed and pushed there under the verified KarolBautrel identity.
+Check the current ref after push; the notes' own commit SHA is obtained from Git,
+not hardcoded into itself. No further art work is requested before tomorrow.
+
+## Current status: 3D archived;2.5D research complete; historical Git scope pending
 
 Latest user2026-11-03 reviewed the motion and rejects the result: crooked-looking
 legs, wide/stiff gait, wrist-driven sword twirling instead of a natural cut,
@@ -17,6 +32,42 @@ using BG1/2 and Pillars of Eternity2 as visual references. Preserve all existing
 sources and production work. No destructive rollback, new cast/model work,
 installation/purchase, runtime change or unreleased desktop input is authorized.
 Read [archive/rejection note](qa/2026-11-03-3d-models-archive.md).
+
+Archive push confirmed: `origin/3d-models` initially
+`e696d1c4a841c0400d691cd9d8df040677ee5be4`, matching local. LFS fsck,843 source/
+staged identities, validator and42 headless style-preview checks PASS. Current
+local branch `2d-art-research` starts at that complete checkpoint; research notes
+are local/uncommitted and have not changed the remote archive or runtime.
+
+Read [drawn2.5D research](design/character-art/DRAWN_25D_RESEARCH.md),
+[presentation019](specs/presentation/019_drawn_character_research.md),
+[slice019](specs/presentation/slices/019_drawn_character_research.md),
+[milestone014](specs/presentation/milestones/014_drawn_character_research.md),
+[stage46](qa/stages/2026-11-03-stage-46.md).
+Found real Scenario sprite-animation and SPA skills, PixelLab/AutoSprite/Retro
+Diffusion MCPs, and deterministic Aseprite tooling. They are researched, not
+installed/connected/tested. Existing imagegen and Aseprite remain available.
+Recommended future pilot: one detailed drawn knight (pixel/painted candidates),
+then short natural walk/whole-body sword action with gloves and a rigid blade.
+No new asset production, provider account, paid call or full-set work performed.
+
+Latest user also requests Git author/contribution repair after research. Local
+config HAD `karol@example.local`; gh authenticates as KarolBautrel. Configuration
+and current archive are now fixed using the account's verified GitHub noreply
+address; supplied `karol.bautre@gmail.com` produced unlinked author/committer in
+the commit API. Current `origin/3d-models` and local base:
+`540524ed32e77f8d1f5219da62759a343ca2058a`, author+committer KarolBautrel confirmed
+server-side. Source tree is identical to the initial archive. Default/master
+and the original feature branch are unchanged. Read
+[Git author repair receipt](qa/2026-11-03-git-author-repair.md).
+
+An explicit scope question is pending for rewriting old history:53-commit local
+preview preserves every tree/date/message;45 placeholder commits are on master,
+51 on the feature lineage. Remote master/other heads must not be rewritten until
+the user approves that broader scope. Old originals and preview refs are local;
+the report names the next safe push sequence. Time passing is not approval.
+The archive and future commits are attributed; no historical graph repair is
+claimed yet. Do not merge rejected3D work into master to gain contributions.
 
 The status below is historical technical evidence, superseded by this rejection.
 
