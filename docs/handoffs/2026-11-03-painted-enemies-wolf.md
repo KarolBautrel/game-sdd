@@ -4,7 +4,10 @@ Latest user explicitly authorizes ALL THREE proposed tasks together. This
 supersedes the previous handoff's no-next-batch scope. Owner: presentation025 /
 slice025 / milestone020. Current work includes stages61/62 on master.
 Latest follow-up: user gives positive feedback and explicitly requests commit/
-push of the current batch. See the publication record for the verified receipt.
+push of the current batch. Published source870ca30787b111aebecad6abc0a6233cce698c12
+on origin/master; GitHub author/committer and remote SHA verified. LFS uploaded
+689missing objects/58MB and has no pending uploads. See the publication record
+for the verified receipt.
 Desktop remains unreleased; physical play cases are not closed by publication.
 Final status: all three tasks IMPLEMENTED / AUTOMATED_PASS. User art and actual
 ordinary play remain open; see docs/qa/2026-11-03-painted-enemies-wolf.md.

@@ -32,8 +32,8 @@ staged whitespace/LFS pointer review. The final pre-publication combined run is
 PASS: drawn7386/0, battle313/0, tactical5157/0 under the selected7actor pilot,
 new enemy1887/0, original16111/0, lifecycle, equipment31/0, domain combat,
 feedback179/0, identity1259/0, campaign gear50/0, campaign session/trade48/0 and
-validator. Offline players413/3579 pass. Remote source/LFS receipt follows below
-after publication is verified.
+validator. Offline players413/3579 pass. Verified remote source/LFS receipt is
+recorded below.
 
 The fresh publication run exposed a terminal-feedback test timing assumption:
 the current painted_enemy_pilot override selects an archer whose full attack /
@@ -47,3 +47,19 @@ Next recommended work: user review/ordinary play of the delivered batch via
 start_painted_enemy_pilot.ps1 and the resumable campaign pilot. Address specific
 visual/gameplay feedback, then select the next human-enemy batch. Further city
 movement, creature expansion and workshop publication remain separate scopes.
+
+## Verified publication receipt
+
+Published to origin/master on2026-11-03 without force push or history rewrite.
+Source commit:
+[870ca30787b111aebecad6abc0a6233cce698c12](https://github.com/KarolBautrel/game-sdd/commit/870ca30787b111aebecad6abc0a6233cce698c12).
+Remote refs/heads/master was verified equal to that source SHA after push.
+GitHub links both author and committer to KarolBautrel with the approved noreply
+email. The push uploaded689 previously missing LFS objects,58MB, successfully.
+Subsequent git lfs status and git lfs push --dry-run origin master report no
+pending objects; the source working tree is clean. The index audit covered1470
+LFS paths with844 unique content objects; already-present objects needed no upload.
+
+This receipt and the continuation status are recorded in a separate documentation
+commit after the source push. Publication preserves the outstanding user-review
+cases and authorizes no additional production batch.

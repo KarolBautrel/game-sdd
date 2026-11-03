@@ -15,9 +15,11 @@ reward/exit/return/restart for both kits; two painted bandits and quadruped wolf
 Full combined regression and validator PASS; identity1259/0, new pilot1887/0,
 canonical272PNG byte reproduction/44sources preserved, old2304PNG hashes intact.
 SE/SW only in battle; archived original/legacy galleries retain eight views.
-User now gives positive feedback and explicitly requests publication on master:
-[publication record](qa/2026-11-03-painted-enemies-publication.md). Source/remote
-receipt follows verification. Physical art/play cases remain open; no desktop
+User gives positive feedback and explicitly requests publication on master:
+[publication record](qa/2026-11-03-painted-enemies-publication.md). Published source
+870ca30787b111aebecad6abc0a6233cce698c12; remote ref/author verified,
+689 missing LFS objects/58MB uploaded with no pending objects. Physical art/play
+cases remain open; no desktop
 release or next production batch inferred. Commands: `tools/qa/start_tactical_batch_preview.ps1` and
 `tools/qa/start_painted_enemy_pilot.ps1`.
 

@@ -45,3 +45,9 @@ Publication verification found a test-only fixed-delay assumption under the new
 review-scene override. Terminal feedback now awaits actual animation completion
 within6seconds;179feedback checks pass. Gameplay/timing remain unchanged. The
 full combined suite is rerun for the publication checkpoint.
+
+Published source870ca30787b111aebecad6abc0a6233cce698c12 to origin/master after the
+complete combined PASS. Remote SHA/GitHub author linkage verified;689 missing
+LFS objects/58MB uploaded, no remaining LFS upload. Publication receipt and
+continuation notes are persisted separately. Next remains the recorded ordinary
+play/art review, then selection of another bounded enemy batch.
