@@ -255,3 +255,10 @@ registry synchronized without erasing failed attempts or marking unplayed cases.
 | ID | Stage | Scenario | Acceptance | Result |
 | --- | --- | --- | --- | --- |
 | L67-01 | 67 | On DISPLAY1 start an isolated expedition, inspect/confirm a passage, resolve shrine/rubble, use oil, claim loot, inspect generated fallback and keyboard focus. | Readable world-family art, no decorative pipes, preview spends nothing, one-cost travel, forced modal cannot be bypassed. | AWAITING_INTERACTIVE; native119checks/36engine clicks and31focused checks PASS; Sky/official CUA activation fails despite explicit desktop permission. |
+
+
+## Equipment navigation (stage68)
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L68-01 | 68 | Inspect worn/free copies, try hand conflicts, equip/unequip with keyboard and scroll a long stash. | Named owners, truthful counts, explicit conflict resolution, stable focus and scroll; no duplicated/lost gear or wounds. | AWAITING_INTERACTIVE;19focused checks and native112checks/60engine pointer events PASS; OS activation blocked as in67. |

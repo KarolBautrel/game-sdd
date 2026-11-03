@@ -21,7 +21,11 @@ and superseded. [Design](design/dungeon-ui/README.md),
 illustrated matching Old Mine IMPLEMENTED / AUTOMATED_PASS:31focused checks,
 GPU119checks/36engine clicks/24captures. [QA](qa/2026-11-04-dungeon-route-decisions.md).
 OS control is explicitly authorized but Sky/official CUA fail window activation;
-L67-01 remains open. Next independent scope is68 equipment usability. Real saves and accepted character art
+L67-01 remains open.67 published48552c0a.68 equipment usability implemented:
+19focused checks, visual/campaign/equipment/identity PASS, native112checks /
+60pointer events/9captures. [QA](qa/2026-11-04-equipment-usability.md).
+Next independent scope69 world journey preview; L68-01 also awaits OS control.
+Real saves and accepted character art
 remain protected; each episode needs spec/slice/checks/visible review/report/push.
 
 Previous active-task handoff:

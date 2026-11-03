@@ -123,8 +123,11 @@ func _render() -> void:
 			view.highlight_slot(slot)
 		)
 		equipment.equip_requested.connect(func(hero_id: String,slot: String,item_id: Variant) -> void:
+			var scroll_before: int=view.entries_scroll.scroll_vertical
 			campaign.equip(hero_id,slot,item_id)
 			_render()
+			var restored: Control=find_child("InventoryView",true,false)
+			if restored!=null: restored.restore_position(scroll_before,inventory_item_id)
 		)
 		_button("close_stash","Back",_close_stash)
 		return

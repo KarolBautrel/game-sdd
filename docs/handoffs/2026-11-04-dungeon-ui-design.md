@@ -15,6 +15,12 @@ missing; do not claim an actual completed playthrough or weaken OS protection.
 L67-01 remains open. Continue independently verifiable68 equipment,69 world,
 then70 combat/arenas under the two-hour instruction; town plan last.
 
+Subsequent:67 published48552c0a.68 equipment usability implemented,19focused
+checks plus visual13/campaign2430/gear50/identity1259 PASS; native112checks /
+60engine clicks/9captures. Named owners/free copies, precise hand conflicts,
+focus/scroll preserved; no ownership/save rule change. Next69 world journey
+preview/confirmation. Same OS-control limitation; L68-01 remains open.
+
 User rejects the initial flat design and directs us to the approved world-travel
 dark fantasy UI. They then delegate about two hours of staged native/gameplay
 polish, full desktop control and a normal commit/push after each verified episode.

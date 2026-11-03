@@ -57,3 +57,5 @@ Shared UI composition owns passive visual components, never gameplay decisions.
   mockup; native implementation awaits user direction.
 - [027 Dungeon route decisions](027_dungeon_route_decisions.md): authorized native
   destination preview/commit, restrained map and exclusive event focus.
+- [028 Equipment usability](028_equipment_usability.md): copy availability, named
+  assignments, explicit hand conflicts and retained native focus/scroll.

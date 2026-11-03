@@ -56,3 +56,10 @@ official CUA return `failed to activate captured window` despite explicit deskto
 permission. No successful OS input or full play acceptance is claimed. Continue
 the user's authorized unattended independent equipment/world scope with this
 external limitation preserved, not by silently marking physical gates passed.
+
+Stage67 published48552c0a6491ffdefea8d4a4f61658556ce51581; remote verified,
+7new LFS objects/15MB uploaded. Stage68 equipment usability: named assignments /
+free copies, precise hand conflicts, retained tile/category focus and scroll.
+19focused checks, existing visual13/campaign2430/equipment50/identity1259 PASS;
+native112checks/60pointer events/9captures at720p..1440p PASS. L68-01 remains
+awaiting actual OS control. Next69: world journey preview/confirmation.

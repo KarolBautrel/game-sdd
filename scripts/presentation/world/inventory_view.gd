@@ -15,6 +15,7 @@ var shown_ids: Array[String] = []
 var filter_buttons: Dictionary = {}
 var entries_scroll: ScrollContainer
 var grid: GridContainer
+var render_revision := 0
 
 func configure(items: Array,equipment: Dictionary = {},selected: String = "",filter: String = "all") -> void:
 	_items = items.duplicate(true)
@@ -32,6 +33,8 @@ func highlight_slot(slot: String) -> void:
 	_render()
 
 func _render() -> void:
+	var scroll_before: int=entries_scroll.scroll_vertical if is_instance_valid(entries_scroll) else 0
+	render_revision+=1
 	for child in get_children():
 		remove_child(child)
 		child.queue_free()
@@ -51,6 +54,7 @@ func _render() -> void:
 			category = key
 			_render()
 			category_changed.emit(key)
+			_focus_filter.call_deferred(key)
 		)
 		filter_buttons[key] = button
 	entries_scroll = ScrollContainer.new()
@@ -71,5 +75,28 @@ func _render() -> void:
 		selected_id = id
 		_render()
 		item_selected.emit(id)
+		focus_item.call_deferred(id)
 	)
 	if shown_ids.is_empty(): UI.label(self,"Nothing in this category.",20,UI.MUTED)
+	_restore_scroll.call_deferred(scroll_before,render_revision)
+
+func _restore_scroll(offset: int,revision: int) -> void:
+	if not is_inside_tree(): return
+	await get_tree().process_frame
+	if revision==render_revision and is_instance_valid(entries_scroll): entries_scroll.scroll_vertical=offset
+
+func restore_position(offset: int,id: String = "") -> void:
+	await _restore_scroll(offset,render_revision)
+	if not id.is_empty(): focus_item(id)
+
+func focus_item(id: String) -> void:
+	if is_instance_valid(grid) and grid.item_buttons.has(id):
+		var button: Button=grid.item_buttons[id]
+		if button.is_inside_tree():
+			button.grab_focus()
+			entries_scroll.ensure_control_visible(button)
+	else:
+		_focus_filter(category)
+
+func _focus_filter(key: String) -> void:
+	if filter_buttons.has(key) and filter_buttons[key].is_inside_tree(): filter_buttons[key].grab_focus()

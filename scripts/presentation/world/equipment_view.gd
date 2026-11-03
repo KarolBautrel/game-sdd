@@ -28,6 +28,7 @@ var _owned: Array = []
 var _equipment: Dictionary = {}
 var _details: Dictionary = {}
 var _locked := false
+var ownership_label: Label
 
 func _ready() -> void:
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -66,6 +67,7 @@ func _render() -> void:
 		child.queue_free()
 	hero_buttons.clear()
 	slot_buttons.clear()
+	ownership_label=null
 	layout = GridContainer.new()
 	layout.add_theme_constant_override("h_separation",18)
 	layout.add_theme_constant_override("v_separation",18)
@@ -143,6 +145,10 @@ func _render() -> void:
 		detail.max_lines_visible = 3
 		detail.tooltip_text = item.description
 		UI.label(inspector,"Owned %s  ·  Value %sg" % [_owned.count(selected_item),int(item.value)],24,UI.INK_MUTED)
+		ownership_label = UI.label(inspector,assignment_summary(selected_item),24,UI.INK_MUTED)
+		ownership_label.name = "OwnershipSummary"
+		ownership_label.max_lines_visible = 3
+		ownership_label.tooltip_text = ownership_label.text
 		var current: Variant = _equipment[selected_hero][selected_slot]
 		UI.label(inspector,"Worn: %s" % ("Empty" if current == null else Items.item(current).name),24,UI.INK_MUTED).max_lines_visible = 1
 		for comparison: Dictionary in Presentation.comparison(item,{} if current == null else Items.item(current)):
@@ -183,7 +189,30 @@ func _reason(item: Dictionary) -> String:
 	if selected_item.is_empty(): return "Choose an inventory item or a worn slot to inspect."
 	if item.get("combat_profile",{}).get("slot") != selected_slot: return "This item cannot be equipped in this slot."
 	if _equipment[selected_hero][selected_slot] == selected_item: return "Already equipped."
+	if _owned.count(selected_item)-Gear.assigned(_equipment,selected_item)<=0:
+		return "All copies are equipped: %s. Unequip a copy first." % ", ".join(assigned_to(selected_item))
+	var profile: Dictionary=item.get("combat_profile",{})
+	var hands: Dictionary=_equipment[selected_hero]
+	if selected_slot=="main_hand" and bool(profile.get("two_handed",false)) and hands.off_hand!=null:
+		return "Two-handed weapon: unequip Off hand first."
+	if selected_slot=="off_hand" and hands.main_hand!=null and bool(Items.item(hands.main_hand).get("combat_profile",{}).get("two_handed",false)):
+		return "Your two-handed weapon occupies both hands. Unequip Weapon first."
 	var next := _equipment.duplicate(true)
 	next[selected_hero][selected_slot] = selected_item
-	if not Gear.valid(next,_owned): return "No free copy, or a two-handed weapon conflicts with an off-hand item."
+	if not Gear.valid(next,_owned): return "This equipment combination is unavailable."
 	return ""
+
+func assigned_to(id: String) -> PackedStringArray:
+	var result: PackedStringArray=[]
+	for hero: Dictionary in Party.default_party():
+		for slot: String in Gear.SLOTS:
+			if _equipment.get(hero.combat_unit_id,{}).get(slot)==id:
+				result.append("%s (%s)" % [hero.display_name,SLOT_NAMES[slot]])
+	return result
+
+func assignment_summary(id: String) -> String:
+	var worn: int=Gear.assigned(_equipment,id)
+	var text: String="Available %s  /  Equipped %s" % [maxi(0,_owned.count(id)-worn),worn]
+	var names:=assigned_to(id)
+	if not names.is_empty(): text+="\nWorn by "+", ".join(names)
+	return text
