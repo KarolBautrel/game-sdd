@@ -1,5 +1,9 @@
 # User-approved dungeon checkpoint and game publication
 
+Published checkpoint: `f0afad7cf534a12a4f69c038e8e7c7164e5c34e5` on master.
+Push completed successfully; remote HEAD matched that commit.175LFS objects /
+154MB uploaded. A subsequent LFS dry run was empty and working tree was clean.
+
 The user approves the current dungeon appearance for now and explicitly requests
 publication to the game repository, followed by a reminder of the earlier review
 queue. Visual state: USER_APPROVED_FOR_CURRENT_STAGE. Detailed physical full-flow

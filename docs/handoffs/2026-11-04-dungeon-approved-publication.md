@@ -1,5 +1,12 @@
 # Latest handoff: dungeon visually accepted, return to the saved review queue
 
+PUBLISHED: game-sdd/master checkpoint
+`f0afad7cf534a12a4f69c038e8e7c7164e5c34e5`. Remote ref matches;175LFS objects/
+154MB uploaded, no pending LFS push or uncommitted game changes after publication.
+Full verification69/69 PASS, zero diagnostic errors. The current publication
+request is handled; do not repeat it on a generic resume. Next is the equipment
+review described below, after the user chooses to continue.
+
 The user says the current dungeon work looks good and can be considered finished
 for now. They request publication to the game repository and a reminder of the
 points that preceded the detailed dungeon review. This is publication plus an
