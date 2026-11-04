@@ -1,0 +1,19 @@
+{
+  "outputs": [
+    {
+      "file": "raw/map-paper-v2.png",
+      "prompt": "Production asset extraction, using the approved image as the only visual authority. Output ONLY the empty LARGE LEFT MAP PARCHMENT from that image, as a landscape isolated panel with roughly 1.81:1 aspect. Preserve its exact grey ASHEN STONE/PAPER material, subtle dark rock scratches, natural irregular torn outer boundary, muted cool desaturated palette and hand-painted detail. Remove every location vignette, label, path, selection, symbol and shadow cast by those removed objects. Seamlessly continue the original quiet grey stone material into the erased areas.\nDo NOT use beige leather, wood grain, embossed wavy fabric, swirled noise, repetitive brush patterns, puffy folds or a small repeating tile. The source's base chart is subdued cool weathered stone-grey, not the brighter tan surface in a generic parchment asset. Keep detail understated so small illustrated cave cutouts blend naturally into it. No panel frames from the surrounding UI, no text, no doors, caves, props, grass, trees or routes. Black outside the natural uneven outer edge. This is a source-resolution reusable chart substrate, completely empty.",
+      "transparent_background": false
+    },
+    {
+      "file": "raw/supplies-matte.png",
+      "prompt": "Production icon atlas matching the PAINTED Ashen Cartographer reference. Six separate small medieval travel-supply icons in exactly THREE equal columns and TWO equal rows. Real transparent alpha around each object, generous gutters, nothing crossing cells.\nRow 1 left to right: (1) a small clear glass oil flask with dark oil inside and a short stopper, (2) a worn iron mining pickaxe with wooden handle, (3) two crossed small iron tools for disarming traps, hammer and narrow pliers.\nRow 2 left to right: (4) a rolled ivory linen bandage, (5) a small folded triangular canvas camp tent, (6) a small travel ration, brown bread and a wedge of pale cheese.\nMatch the original header's hand-painted material detail, muted ivory/iron/brown palette and oblique view. The objects need clear silhouettes at 32 pixels. NOT pixel art, NOT outline-only vector symbols. No writing, numbers, UI frames, labels, grid marks, logos, extra objects or painted checkerboards. Empty space is fully transparent alpha=0, not opaque white or black.",
+      "transparent_background": true
+    },
+    {
+      "file": "raw/supplies-alpha-attempt.png",
+      "prompt": "Background removal ONLY. Preserve all six supply illustrations exactly as in the input, with their positions, colors, object silhouettes and three-column/two-row layout unchanged. Remove ALL dark/tan cloudy backdrop, all halo glows and all background shadows. The entire space outside the six actual objects must become genuinely fully transparent alpha=0, not opaque black or white. No glowing mist around the items. Preserve transparent glass flask details where appropriate but keep its silhouette and contents. No other edits. Same six-icon atlas as a true RGBA cutout sheet, empty gutters genuinely transparent.",
+      "transparent_background": true
+    }
+  ]
+}

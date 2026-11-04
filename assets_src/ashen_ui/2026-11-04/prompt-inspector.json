@@ -1,0 +1,6 @@
+{
+  "file": "raw/inspector-v2.png",
+  "tool": "built-in image_gen.imagegen",
+  "prompt": "Extract the RIGHT INSPECTOR PANEL from the approved Ashen Cartographer reference into a clean reusable production asset. Portrait vertical aspect about 2:3. Only this panel, centered and filling the image. Match its exact worn blackened iron outer frame, riveted beveled corners, thin aged metal highlights, depth and ASH-GREY worn parchment interior.\nRemove the heading plaque, wax seal, red ribbon, illustration, all text, dividers, status swash and buttons. The entire interior must be EMPTY grey aged paper with extremely quiet fine-grained natural wear, subtle darkening toward its edges. Keep fine scratches but NO puffy wrinkles, embossed swirls, obvious repeated brush motifs, wood grain, burlap, leather grain or tiled squares. The interior must look like the original subdued smooth ash parchment behind the reference text, with enough quiet contrast for small black serif type.\nNo writing, numerals, icons, holes, symbols, labels, components, doors or watermarks. Preserve the reference's thick crafted dark-fantasy frame, not a plain rectangle. Black background only outside the outer iron frame. This is an empty source-resolution game panel, not a redesigned UI.",
+  "transparent_background": false
+}

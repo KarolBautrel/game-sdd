@@ -19,6 +19,7 @@ func _run() -> void:
 		viewport.size_2d_override_stretch=true
 		viewport.render_target_update_mode=SubViewport.UPDATE_ALWAYS
 		root.add_child(viewport)
+		if "ashenfamily" in views: await _exercise_ashen_family(pixels)
 		if "atlasbounds" in views:
 			await _exercise_atlas_bounds()
 		if "modular" in views:
@@ -31,7 +32,7 @@ func _run() -> void:
 			await _exercise_arena_battles(pixels)
 		if "townpilot" in views:
 			await _exercise_town_pilot(pixels)
-		if "dungeon" in views:
+		if "dungeon" in views or "dungeonpolish" in views:
 			app=load("res://scenes/dungeon/DungeonDebug.tscn").instantiate()
 			viewport.add_child(app)
 			await frames(10)
@@ -72,9 +73,17 @@ func _run() -> void:
 				await click(app.reward_button)
 				check(MODEL.run_inventory(app.run_state).gold==9,"native loot claim preserves trusted rewards")
 				await capture("dungeon-loot",pixels)
+			if "dungeonpolish" in views:
+				app.run_state.target_effects={"party_slot_front":{"hp_loss":6,"debuffs":{}}}
+				app.run_state.party_effects.hp_loss=6
+				app._refresh_presentation_chrome()
+				await frames(8)
+				_check_dungeon_company()
+				await capture("dungeon-injured-fixture",pixels)
 			app.queue_free()
 			await frames(8)
 			session.clear()
+			if "dungeonpolish" in views: await _exercise_dungeon_generated(pixels)
 		if "combat" in views:
 			app=load("res://scenes/combat/CombatDebug.tscn").instantiate()
 			viewport.add_child(app)
@@ -169,6 +178,83 @@ func _run() -> void:
 	for message in errors: push_error(message)
 	print("Native play review: ",checks.size()," checks, ",errors.size()," failures")
 	get_tree().quit(0 if errors.is_empty() else 1)
+
+func _check_dungeon_company() -> void:
+	var color := Color.TRANSPARENT
+	for card: PanelContainer in app.party_cards.values():
+		for control: Control in [card.hp_label,card.hp_bar,card.find_child("Portrait",true,false)]:
+			check(app.party_panel.get_global_rect().encloses(control.get_global_rect()),"native company content fits footer")
+		var hp: Label=card.hp_label
+		check(hp.size.x>=hp.get_theme_font("font").get_string_size(hp.text,HORIZONTAL_ALIGNMENT_LEFT,-1,24).x,"native full health text fits")
+		var fill: Color=card.hp_bar.get_theme_stylebox("fill").bg_color
+		check(fill==Color("a43f32") and (color==Color.TRANSPARENT or fill==color),"native unified red health")
+		color=fill
+	check(app.party_log_label.size.y>=app.party_log_label.get_line_height()*2,"native feedback has real line height")
+
+func _exercise_ashen_family(pixels: Vector2i) -> void:
+	var names := {
+		"mine":["Old Mine","Mine Entrance","Dusty Crossing","Collapsed Cache","Spider Nest","Guarded Cache","Lower Exit","Sealed Armory"],
+		"dungeon":["Blackbarrow","Dungeon Stairs","Sentry Hall","Broken Vault","Flooded Cells","Watch Post","Lower Gate","Sealed Crypt"],
+		"castle":["Ravenkeep","Gatehouse","Outer Court","Ruined Chapel","Old Barracks","Great Hall","Rear Gate","Sealed Tower"],
+		"forest":["Crowswood","Forest Edge","Old Crossroads","Ruined Shrine","Spider Grove","Hunters Camp","Ridge Path","Sealed Barrow"]}
+	var ids := ["entrance","dusty_crossing","collapsed_cache","spider_nest","guarded_cache","lower_exit","sealed_armory"]
+	for theme: String in names:
+		get_node("/root/DungeonRunSession").clear()
+		app=load("res://scenes/dungeon/DungeonDebug.tscn").instantiate()
+		viewport.add_child(app)
+		await frames(10)
+		app._set_dungeon_source(app.DUNGEON_SOURCE_AUTHORED)
+		# Visual fixtures reuse legal mine mechanics; no new campaign content is claimed.
+		app.dungeon=app.dungeon.duplicate(true)
+		app.dungeon.display_name=names[theme][0]
+		app.title_label.text=names[theme][0]
+		for room: Dictionary in app.dungeon.rooms:
+			room.display_name=names[theme][ids.find(str(room.id))+1]
+		app.expedition_chrome.apply_archetype(app,theme)
+		app._build_graph()
+		app._start_expedition_with_loadout()
+		await frames(8)
+		var before: Dictionary=app.run_state.duplicate(true)
+		await click(app.room_nodes.dusty_crossing.get_node("RoomHit"))
+		check(app.run_state==before,"Native family selection is preview-only: "+theme)
+		check(app.expedition_chrome.inspector_art.texture.resource_path.contains("/"+theme+"/"),"Native inspector uses chosen theme: "+theme)
+		await capture("ashen-"+theme+"-preview",pixels)
+		app.queue_free()
+		await frames(8)
+	get_node("/root/DungeonRunSession").clear()
+
+func _exercise_dungeon_generated(pixels: Vector2i) -> void:
+	app=load("res://scenes/dungeon/DungeonDebug.tscn").instantiate()
+	viewport.add_child(app)
+	await frames(10)
+	app._set_dungeon_source(app.DUNGEON_SOURCE_GENERATED)
+	app._set_generated_difficulty(2)
+	await frames(10)
+	await capture("dungeon-generated-prep",pixels)
+	await click(_button_named("Start Expedition"))
+	_check_dungeon_company()
+	var here: String=app.run_state.current_room_id
+	var target: String=""
+	for corridor: Dictionary in app.dungeon.corridors:
+		if corridor.from==here: target=corridor.to;break
+		if corridor.to==here: target=corridor.from;break
+	check(not target.is_empty(),"native generated start has actual passage")
+	var before: Dictionary=app.run_state.duplicate(true)
+	await click(app.room_nodes[target].get_node("RoomHit"))
+	check(app.expedition_chrome.preview_room_id==target and app.run_state==before,"native generated preview preserves state")
+	check(app.expedition_chrome.passages.routes.size()==app.dungeon.corridors.size(),"native generated routes match actual graph")
+	await capture("dungeon-generated-preview",pixels)
+	var last: Control=app.room_nodes.values()[0]
+	for room: Control in app.room_nodes.values():
+		if room.position.x+room.position.y>last.position.x+last.position.y: last=room
+	app.map_scroll_container.ensure_control_visible(last)
+	await frames(8)
+	var overflow: bool=app.graph_content_size.x>app.map_scroll_container.size.x+2 or app.graph_content_size.y>app.map_scroll_container.size.y+2
+	check((not overflow) or app.map_scroll_container.scroll_horizontal>0 or app.map_scroll_container.scroll_vertical>0,"native generated map fits readably or scrolls to distant room")
+	await capture("dungeon-generated-end",pixels)
+	app.queue_free()
+	await frames(8)
+	get_node("/root/DungeonRunSession").clear()
 
 
 func _capture_roster_boards(pixels: Vector2i) -> void:

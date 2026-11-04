@@ -6,7 +6,69 @@ when the user has only requested an explanation or plan.
 
 ## Next-session entry: read this first
 
-Latest checkpoint handoff:
+Latest active handoff:
+[Dungeon accepted and publication](handoffs/2026-11-04-dungeon-approved-publication.md).
+User accepts current dungeon appearance for now and asks to publish the game
+checkpoint, then explain the earlier review queue. Point1 is visually accepted;
+next is point2 equipment, then world journey, forest battle, mine battle and the
+courtyard pilot. Do not reopen dungeon art or automatically implement the newer
+15-layout backlog. Detailed physical full-flow actions were not reported.
+The full skill copy remains private/local, excluded from public game publication.
+
+Previous handoff:
+[Native Ashen UI and published workshop](handoffs/2026-11-04-ashen-native-ui.md).
+User authorizes separate skill publication and continuation. Private workshop
+v0.2.0 is published/verified; 59 components/70 admitted Aseprite sources, portable
+export reproduces all59PNGs exactly. Native Ashen UI now runs in DungeonDebug;
+four themes render in actual engine fixtures. Source game remains Old Mine with
+the unchanged nine-template generator; the15-layout library awaits domain import.
+Focused378/0, route31/0, cohesion692/0, art99/0, domain/session/300-seed quality,
+validator and native GPU/input fixtures PASS. User/physical review1 is pending;
+reviews2..6remain saved. Next: native feedback then versioned legal layout adapter.
+Workshop-only commits/pushes performed; game work stays local on master.
+
+Previous handoff:
+[Dark fantasy UI workshop and randomized layouts](handoffs/2026-11-04-dark-fantasy-ui-workshop.md).
+User approves ALL FOUR Ashen Cartographer archetypes, requests reproducible random
+maps and an English reusable skill/package. Stage74 preparation is implemented:
+15 authored layouts, 5 per length, 4 themes / 60 base combinations; stable seeds,
+separate difficulty metadata, progression/geometry checks. Installed
+`$dark-fantasy-game-ui`; portable source in packages/dark-fantasy-ui-workshop/.
+Next: native production components and Godot composition matching the approved
+family, then domain-adapted map integration. Do not re-request family approval or
+claim the new UI is already in the game. Current runtime is still textured72;
+existing accepted9-template pool/saves are unchanged. Reviews2..6remain pending.
+That preparation handoff is superseded by the native/publication status above.
+
+Previous art handoff:
+[Exploration archetype family](handoffs/2026-11-04-exploration-archetype-art.md).
+The four-sample [gallery](design/exploration-archetypes/2026-11-04/index.html),
+prompts and provenance are retained. Its earlier pending-family review is now
+superseded by the user's approval recorded in stage74.
+
+Previous review handoff:
+[Dungeon player feedback and six-step checklist](handoffs/2026-11-04-dungeon-review-feedback.md).
+Earlier72c: user rejects the flattened72b result as much worse. Textured72 is
+restored as the TEMPORARY_CURRENT appearance; both source/export snapshots and
+hashes are saved in assets_src/ui_review_baselines/. Native restored1080p route
+PNG matches its preserved72reference exactly.692cohesion checks, validator and
+native32checks/9actions/6captures PASS. No commit/push or physical play claimed.
+
+User asks to research fantasy game-UI skills/packs/MCP and try improving the art.
+Installed/read game-ui-design and frontend-design. Primary-source research,
+license/pack comparisons and the isolated Expedition Ledger concept:
+[research and proposal](design/dungeon-ui/research-2026-11-04/RESEARCH.md).
+The concept is NOT in the game. Next is the user's choice of visual direction,
+then native production; do not silently replace textured72 with72b or the concept.
+Latest sample request specifically prioritizes the free Bloodlines inspiration
+without1:1copying. New original Ashen Cartographer v2, its brief and provenance
+are in the same research folder. Its mine look is now visually approved; the
+expanded archetype family above is now approved; see the stage74 handoff.
+World-travel art remains the approved reference. Review1 stays active;2..6remain
+pending in the [saved checklist](qa/2026-11-04-player-review-checklist.md).
+Historical correction proofs: [stage72/72b](qa/2026-11-04-dungeon-visual-cohesion.md).
+
+Previous checkpoint handoff:
 [Autonomous polish and courtyard pilot](handoffs/2026-11-04-autonomous-polish.md).
 Ordered66..70 polish and71A isolated town pilot are implemented/automated PASS;
 full67/67checks, Windows export/runtime and exact-PCK native reviews PASS.

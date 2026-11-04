@@ -1,6 +1,8 @@
 extends RefCounted
 ## Composition only; the HUD/model still owns every expedition command.
 const UI := preload("res://scripts/presentation/world/campaign_skin.gd")
+const Materials := preload("res://scripts/presentation/dungeon/dungeon_materials.gd")
+const Passages := preload("res://scripts/presentation/dungeon/dungeon_passages.gd")
 const Model := preload("res://scripts/domain/dungeon_state_model.gd")
 const CHART_PATH := "res://assets/ui/dungeon/illustrated/old_mine_chart.png"
 const CHART_POSITIONS := {"entrance":Vector2i(0,1),"dusty_crossing":Vector2i(1,1),"collapsed_cache":Vector2i(2,0),"spider_nest":Vector2i(2,2),"guarded_cache":Vector2i(3,1),"lower_exit":Vector2i(4,1),"sealed_armory":Vector2i(4,0)}
@@ -17,15 +19,12 @@ var travel_button: Button
 var current_button: Button
 var modal_focus_modes: Dictionary = {}
 var previous_focus: Control
+var passages: Control
 
 func setup(hud) -> void:
-	hud.theme = UI.theme()
-	var leather := TextureRect.new()
-	leather.texture = UI.Assets.texture(UI.ART+"leather.png")
-	leather.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	leather.stretch_mode = TextureRect.STRETCH_TILE
-	leather.modulate = Color(0.42,0.40,0.37)
-	leather.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hud.theme = Materials.theme()
+	hud.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	var leather := Materials.backdrop()
 	hud.add_child(leather)
 	hud.move_child(leather,1)
 	var margin: MarginContainer = hud.detail_panel.get_node("MarginContainer")
@@ -37,31 +36,28 @@ func setup(hud) -> void:
 	hud.detail_box.reparent(inspector_scroll)
 	hud.detail_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hud.detail_box.add_theme_constant_override("separation",16)
-	hud.detail_panel.add_theme_stylebox_override("panel",UI.paper_box(28))
+	hud.detail_panel.add_theme_stylebox_override("panel",Materials.frame("frame_dark",28))
 	hud.loadout_panel.reparent(hud.detail_box)
 	hud.loadout_panel.custom_minimum_size = Vector2.ZERO
 	hud.loadout_panel.add_theme_stylebox_override("panel",StyleBoxEmpty.new())
 	hud.detail_box.move_child(hud.loadout_panel,2)
 	hud.action_row.columns = 1
-	hud.map_frame_panel.add_theme_stylebox_override("panel",UI.paper_box(24))
-	map_heading = UI.label(hud,"MINE CHART",28,UI.INK)
+	hud.map_frame_panel.add_theme_stylebox_override("panel",Materials.frame("frame_dark",24))
+	map_heading = UI.label(hud,"MINE CHART",28,UI.GOLD)
 	light_summary = UI.label(hud,"",24,UI.GOLD)
 	_resources(hud)
 	for card: PanelContainer in hud.party_cards.values():
-		card.add_theme_stylebox_override("panel",UI.frame("frame_dark",10))
-		card.custom_minimum_size = Vector2(180,0)
-		for side in ["left","top","right","bottom"]: card.get_node("Margin").add_theme_constant_override("margin_"+side,4)
-		card.get_node("Margin/Content").add_theme_constant_override("separation",3)
-		card.get_node("Margin/Content/Name").add_theme_font_size_override("font_size",24)
-		card.hp_label.add_theme_font_size_override("font_size",24)
+		card.add_theme_stylebox_override("panel",Materials.frame("frame_dark",12))
+		card.use_expedition_layout(false)
 	hud.party_log_label.custom_minimum_size.x = 180
-	hud.party_log_label.custom_minimum_size.y = 120
+	hud.party_log_label.custom_minimum_size.y = 0
 	hud.party_log_label.add_theme_font_size_override("font_size",24)
 	hud.party_log_label.max_lines_visible = 4
 	hud.party_log_label.clip_text = true
-	hud.party_panel.add_theme_stylebox_override("panel",UI.frame("frame_dark",14))
-	_style_text(hud.detail_box,UI.INK)
+	hud.party_panel.add_theme_stylebox_override("panel",Materials.frame("frame_dark",14))
+	_style_text(hud.detail_box,UI.TEXT)
 	hud.panel_title.add_theme_font_override("font",UI.heading_font())
+	hud.panel_title.add_theme_color_override("font_color",UI.GOLD)
 	hud.panel_title.add_theme_font_size_override("font_size",32)
 	_preview_controls(hud)
 	hud.title_label.add_theme_font_override("font",UI.heading_font())
@@ -118,7 +114,7 @@ func _resources(hud) -> void:
 	for id: String in hud._resource_tile_ids():
 		var tile := PanelContainer.new()
 		tile.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		tile.add_theme_stylebox_override("panel",UI.frame("frame_metal",12))
+		tile.add_theme_stylebox_override("panel",Materials.frame("frame_metal",12))
 		tile.mouse_filter = Control.MOUSE_FILTER_STOP
 		row.add_child(tile)
 		var box := HBoxContainer.new()
@@ -145,7 +141,7 @@ func _resources(hud) -> void:
 
 func layout(hud) -> void:
 	var view: Vector2 = hud.get_viewport_rect().size
-	var footer_height := 224.0 if view.y >= 1000 else 176.0
+	var footer_height := 180.0 if view.y >= 1000 else 152.0
 	for label: Label in hud.resource_tray_panel.find_children("ResourceName","Label",true,false): label.visible=view.x>=1800
 	if not hud.layout_edit_enabled:
 		var detail_width := clampf(view.x*0.28,420,720)
@@ -175,7 +171,9 @@ func layout(hud) -> void:
 	light_summary.position = Vector2(24,96)
 	light_summary.size = Vector2(view.x-48,32)
 	for card: PanelContainer in hud.party_cards.values():
-		card.get_node("Margin/Content/Portrait").custom_minimum_size.y = 82 if footer_height>200 else 36
+		card.use_expedition_layout(view.x<1800)
+	hud.party_log_label.max_lines_visible = 3 if view.x>=1800 else 2
+	hud.party_log_label.custom_minimum_size.y = 108 if view.x>=1800 else 72
 	hud.loadout_panel.custom_minimum_size = Vector2.ZERO
 	hud.detail_label.visible = not hud._loadout_pending()
 	for row: Dictionary in hud.loadout_rows.values():
@@ -201,6 +199,8 @@ func _event(hud) -> void:
 	var popup: Control = hud.corridor_event_panel
 	var background: NinePatchRect = popup.get_child(0)
 	background.texture = UI.Assets.texture(UI.ART+"frame_paper.png")
+	background.axis_stretch_horizontal = NinePatchRect.AXIS_STRETCH_MODE_STRETCH
+	background.axis_stretch_vertical = NinePatchRect.AXIS_STRETCH_MODE_STRETCH
 	for side in ["left","right","top","bottom"]: background.set("patch_margin_"+side,36)
 	var margin: MarginContainer = popup.get_child(1)
 	margin.offset_left = 36
@@ -249,12 +249,14 @@ func refresh(hud) -> void:
 	hud.detail_label.visible = not hud._loadout_pending()
 	for button: Button in hud.generated_difficulty_buttons:
 		style_button(button)
-		if int(button.text.trim_prefix("D"))==hud.generated_dungeon_difficulty: UI.select_button(button)
+		if int(button.text.trim_prefix("D"))==hud.generated_dungeon_difficulty:
+			button.add_theme_stylebox_override("normal",Materials.frame("frame_metal",18,Color(1.2,1.02,.72)))
 	for id: String in hud.room_nodes:
 		var stamp: Label = hud.room_nodes[id].get_node_or_null("RoomBody/State")
 		if stamp!=null:
 			stamp.text = "YOU ARE HERE" if id==str(hud.run_state.get("current_room_id","")) else ("SELECTED" if id==preview_room_id else ("PASSAGE" if _adjacent(hud,id) else hud._room_state_summary(id).to_upper()))
 	_update_preview(hud)
+	if is_instance_valid(passages): passages.select_passage(str(hud.run_state.get("current_room_id","")),preview_room_id)
 	_sync_event_focus(hud)
 
 func room_style(hud,id: String,kind: String) -> StyleBox:
@@ -263,7 +265,7 @@ func room_style(hud,id: String,kind: String) -> StyleBox:
 	if id==str(hud.run_state.get("current_room_id","")): tint=Color(1.45,1.18,0.72)
 	elif id==preview_room_id: tint=Color(1.3,1.2,0.92)
 	elif _adjacent(hud,id): tint=Color(1.04,1.0,0.88)
-	return UI.frame("frame_metal",12,tint)
+	return Materials.frame("frame_metal",16,tint)
 
 func room_panel(hud,room: Dictionary) -> PanelContainer:
 	var id: String = room.id
@@ -295,6 +297,7 @@ func room_panel(hud,room: Dictionary) -> PanelContainer:
 	name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	name.custom_minimum_size.y = 62
 	name.max_lines_visible = 2
+	name.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	var stamp := UI.label(box,"",24,UI.GOLD)
 	stamp.name = "State"
 	stamp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -339,6 +342,16 @@ func build_backdrop(hud) -> void:
 	chart.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
 	hud.graph_layer.add_child(chart)
 
+func build_passages(hud) -> void:
+	passages = Passages.new()
+	passages.name = "DungeonPassages"
+	hud.graph_layer.add_child(passages)
+	var rooms: Dictionary = {}
+	for room: Dictionary in hud.dungeon.get("rooms",[]):
+		rooms[str(room.id)] = Rect2(hud._room_screen_position(room),hud.room_node_size)
+	passages.configure(rooms,hud.dungeon.get("corridors",[]),hud.graph_content_size)
+	passages.select_passage(str(hud.run_state.get("current_room_id","")),preview_room_id)
+
 func chart_room_position(hud,id: String) -> Vector2:
 	return Vector2(CHART_ANCHORS.get(id,Vector2(.5,.5)))*hud.graph_content_size-hud.room_node_size*.5
 
@@ -348,7 +361,7 @@ func _preview_controls(hud) -> void:
 	preview_box.add_theme_constant_override("separation",14)
 	hud.detail_box.add_child(preview_box)
 	hud.detail_box.move_child(preview_box,1)
-	preview_label = UI.label(preview_box,"",24,UI.INK)
+	preview_label = UI.label(preview_box,"",24,UI.TEXT)
 	preview_label.name = "PassagePreviewText"
 	travel_button = Button.new()
 	travel_button.name = "TravelToPreview"

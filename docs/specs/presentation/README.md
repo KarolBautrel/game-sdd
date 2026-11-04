@@ -63,3 +63,11 @@ Shared UI composition owns passive visual components, never gameplay decisions.
   arrival/danger/return reserve before explicit normal travel confirmation.
 - [030 Painted tactical arenas](030_painted_tactical_arenas.md): canonical forest
   ambush/mine breach pilots with existing art, terrain and legal battle proofs.
+- [031 Dungeon visual cohesion](031_dungeon_visual_cohesion.md): review1 correction
+  of material repetition, company HP/portrait fit and restrained truthful paths.
+- [032 Exploration archetype art](032_exploration_archetype_art.md): approved
+  Ashen Cartographer look expanded into mine/dungeon/castle/forest previews.
+- [033 Dark fantasy UI workshop](033_dark_fantasy_ui_workshop.md): portable skill,
+  references/layout library and native fidelity contract.
+- [034 Native Ashen exploration](034_ashen_exploration_native.md): production
+  components and data-driven native composition matching the approved family.

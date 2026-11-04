@@ -1,0 +1,38 @@
+{
+  "status": "REJECTED_BY_USER",
+  "reason": "Materials lost character; preserve for comparison, never restore as default without instruction",
+  "files": [
+    {
+      "path": "scripts/presentation/dungeon/dungeon_materials.gd",
+      "sha256": "10030d09292d31c439d42ec5fe77b85cb653afd975a29c01fe6316ac712fb20a"
+    },
+    {
+      "path": "scripts/presentation/dungeon_visual_cohesion_tests.gd",
+      "sha256": "7224238c84c86be79a7b3245d92647f577970c045f5cea57dc7f6ae026410b02"
+    },
+    {
+      "path": "tools/aseprite/dungeon_visual_materials.lua",
+      "sha256": "c779506ebe836c27872b6107c8c91efb86070d61f282dfeba7c8f0ee48dc882f"
+    },
+    {
+      "path": "assets/ui/dungeon/materials/frame_dark.png",
+      "sha256": "b7b8ba67e0dd32536f140f4bdaa12ef00093a3197b81d0f3713684f2419d8abb"
+    },
+    {
+      "path": "assets/ui/dungeon/materials/button.png",
+      "sha256": "9ea1dd6b57bd00dda7bc717b778173d63cbe9fe1e676f2c1dd8591ff80ca41e6"
+    },
+    {
+      "path": "assets/ui/dungeon/materials/charcoal_backdrop.gdshader",
+      "sha256": "dda1d3336a615afe9309013ed53f748ca575e6b41d36cc78a1c98e52e3ffb09c"
+    },
+    {
+      "path": "assets_src/aseprite/dungeon_ui/frame_dark.aseprite",
+      "sha256": "ef127cee98a793d3343def5f729647c86dca8012b2810c67a06bc321585f445b"
+    },
+    {
+      "path": "assets_src/aseprite/dungeon_ui/button.aseprite",
+      "sha256": "0148718069e5e809b67fb47a53b7765106320381e9d708da6d8d763783d70783"
+    }
+  ]
+}

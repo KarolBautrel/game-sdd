@@ -1,0 +1,43 @@
+{
+  "status": "TEMPORARY_CURRENT_BY_USER_REQUEST",
+  "reference": "docs/design/dungeon-ui/review1/route-1080p.png",
+  "known_defect": "Magnified grain near frame strips; preserve character while researching a replacement",
+  "files": [
+    {
+      "path": "scripts/presentation/dungeon/dungeon_materials.gd",
+      "sha256": "81545a524ef1aef1e4f3e20a10961d52800fe95e20e992e7cb586ff72bf796a8"
+    },
+    {
+      "path": "scripts/presentation/dungeon_visual_cohesion_tests.gd",
+      "sha256": "807cb0fb153eb083d4e581a7051aa8926fd897451fb523ae0e9bfb92526cebea"
+    },
+    {
+      "path": "tools/aseprite/dungeon_visual_materials.lua",
+      "sha256": "9b87da23f4a1581edf28fadff0459ba65cb28696dc70107fae081e4a8fa9b534"
+    },
+    {
+      "path": "assets/ui/dungeon/materials/frame_dark.png",
+      "sha256": "38d4ceb78f377ad316a5b2bdb2addd7b758f4e3d4a2b57e6b566c817facec42f"
+    },
+    {
+      "path": "assets/ui/dungeon/materials/button.png",
+      "sha256": "45518fe49e8ca23d851ac4b2a45d61a27cd22c0e45728a1a95ee2c7849207c2b"
+    },
+    {
+      "path": "assets/ui/dungeon/materials/campaign_hide.png",
+      "sha256": "164350f517b7375be406b51f94748f2c66e16f3e00fd3c2d318e7b1cb4f7abd5"
+    },
+    {
+      "path": "assets_src/aseprite/dungeon_ui/frame_dark.aseprite",
+      "sha256": "af6c6a87fe47db8b40b914519d436037728f44d384c1ac82815072be997ef93b"
+    },
+    {
+      "path": "assets_src/aseprite/dungeon_ui/button.aseprite",
+      "sha256": "8ea0f9aef7ac893b67979baf98dcd503fafcc4eada660aad6171e9c31060c99b"
+    },
+    {
+      "path": "assets_src/aseprite/dungeon_ui/campaign_hide.aseprite",
+      "sha256": "61a8dcb320cb562438dbcea6cd3b3c51e24946dd296a7e3ec845621d2a69d811"
+    }
+  ]
+}

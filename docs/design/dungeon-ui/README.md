@@ -1,5 +1,21 @@
 # Dungeon interface redesign proposal
 
+Latest75 supersedes the historical current-status paragraphs below: approved
+Ashen Cartographer family is now implemented in native DungeonDebug and ready
+for user review. [Native gallery](../exploration-native/2026-11-04/index.html) /
+[implementation and QA](../../qa/2026-11-04-ashen-native-ui.md). Textured72 remains
+an archived fallback; flat72b stays rejected. Workshop v0.2.0 is published privately.
+
+Latest72c: textured72 is restored as the temporary current game appearance;
+flat72b is rejected. [New fantasy UI research and isolated concept](research-2026-11-04/RESEARCH.md)
+await the user's visual direction choice. Both baseline versions are preserved.
+
+Current native correction after player review1: [stage72 evidence](../../qa/2026-11-04-dungeon-visual-cohesion.md)
+and screenshots in `review1/`. The implementation is ready for user retest;
+the older browser prototype below is historical design evidence. The two-hour
+session has finished. Reviews2..6remain pending and publication is not automatic.
+Latest72b material correction and native1:1 edge comparisons: `review1/material-fix/`.
+
 Date: 2026-11-04. Status: WORLD-FAMILY REVISION / AUTOMATED_PASS / AGENT_VISUAL_REVIEW.
 The user requests internet skill research and a fresh dark fantasy exploration
 interface plan before further combat play. The first flat proposal was rejected

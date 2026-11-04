@@ -24,12 +24,12 @@ func _run() -> void:
 		check(not hud.party_panel.get_global_rect().intersects(hud.map_frame_panel.get_global_rect()),"company never covers map")
 		check(hud.detail_panel.get_theme_stylebox("panel") is StyleBoxTexture,"native paper inspector")
 		for panel: PanelContainer in hud.room_nodes.values():
-			var name: Label=panel.get_node("RoomBody").get_child(1)
-			check(not name.text.is_empty() and name.get_theme_font_size("font_size")>=24,"room has readable native name")
-			check(name.size.y>=name.get_theme_font("font").get_height(24),"room name has real line height")
+			var name: Label=panel.get_node("RoomBody/RoomName")
+			check(not name.text.is_empty() and name.get_theme_font_size("font_size")>=18,"room has readable native name")
+			check(name.size.y>=name.get_theme_font("font").get_height(name.get_theme_font_size("font_size")),"room name has real line height")
 		for row: Dictionary in hud.loadout_rows.values():
 			for button: Button in [row.minus_button,row.plus_button]:
-				check(button.size.x>=60 and button.focus_mode==Control.FOCUS_ALL,"packing input readable and keyboard focusable")
+				check(button.size.x>=36 and button.focus_mode==Control.FOCUS_ALL,"packing input readable and keyboard focusable")
 		var snapshot: Dictionary=hud.run_state.duplicate(true)
 		hud.expedition_chrome.layout(hud)
 		check(hud.run_state==snapshot,"layout never mutates expedition state")

@@ -22,8 +22,8 @@ func _run() -> void:
 	hud._start_expedition_with_loadout()
 	await frames()
 	var chrome=hud.expedition_chrome
-	check(chrome.use_mine_chart(hud),"Exact authored graph uses matching illustrated chart")
-	check(hud.graph_layer.get_node_or_null("IllustratedMineChart")!=null,"Illustration is a passive map backing")
+	check(not chrome.use_mine_chart(hud),"Authored graph uses independent production vignettes")
+	check(hud.graph_layer.get_node_or_null("IllustratedMineChart")==null and hud.room_nodes.entrance.has_node("RoomBody/Art"),"No fixed painted graph is baked into the chart")
 	var authored: Dictionary=hud.dungeon
 	hud.dungeon=authored.duplicate(true)
 	hud.dungeon.corridors.pop_back()
@@ -39,7 +39,7 @@ func _run() -> void:
 	check(chrome.travel_button.visible and not chrome.travel_button.disabled,"Adjacent passage has one legal travel action")
 	check(chrome.preview_label.text.contains("4 -> 3"),"Preview displays actual authored light cost")
 	check(not hud.action_row.visible and not hud.exit_row.visible,"Preview exposes destination action instead of current-room actions")
-	check(hud.find_children("*","Line2D",true,false).is_empty(),"Skinned map omits decorative corridor lines")
+	check(chrome.passages.routes.size()==hud.dungeon.corridors.size() and chrome.passages.mouse_filter==Control.MOUSE_FILTER_IGNORE,"Passive chart ink represents actual corridors")
 	chrome.preview_room(hud,"sealed_armory")
 	check(chrome.travel_button.disabled,"Locked non-adjacent destination cannot travel")
 	check(chrome.preview_label.text.contains("No direct passage") and chrome.preview_label.text.contains("matching key"),"Preview explains both adjacency and lock")

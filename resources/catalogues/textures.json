@@ -72557,11 +72557,445 @@
       "height": 185
     },
     {
+      "path": "res://assets/ui/dungeon/ashen/button-primary.png",
+      "bytes": 53467,
+      "sha256": "a160e7ad9c2b662299d4d02d93ccb36fb8dbcd1902b506bf0301b76a8b73f274",
+      "width": 376,
+      "height": 79
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/button-return.png",
+      "bytes": 19358,
+      "sha256": "679d171ef59e6f064f2c6190bf39a0ee371e1f46e26558d42df9bdc3125cf398",
+      "width": 216,
+      "height": 54
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/button-secondary.png",
+      "bytes": 30451,
+      "sha256": "e59eb02685c98ed9ab768aac53b3b11c0a49ec073b7ffb607c54173f399e5ffa",
+      "width": 270,
+      "height": 58
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/castle/crossing.png",
+      "bytes": 230188,
+      "sha256": "f4b0b9621725ad11170a899d4cca69630d47f46c4dc5531112df9aff4a524672",
+      "width": 429,
+      "height": 270
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/castle/entrance.png",
+      "bytes": 267433,
+      "sha256": "c1b16e5be9e7b740483d6dba5af8170977e4b7081a2688531c779b015ea77f21",
+      "width": 429,
+      "height": 339
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/castle/exit.png",
+      "bytes": 231018,
+      "sha256": "89440e2361e5f4567b09023c582a1ce831461e2c80df8d5eb9b32f833a04afbe",
+      "width": 426,
+      "height": 283
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/castle/guarded_treasure.png",
+      "bytes": 271992,
+      "sha256": "dd7f9d4fbddaa517db53f9181a4b609f634c01be1a99eb068bfee97dd47b7a10",
+      "width": 427,
+      "height": 340
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/castle/locked.png",
+      "bytes": 254426,
+      "sha256": "5f9891e52d3206e4a7d2cff90d635f5423664af15e10fd7166a4138b4f231ab1",
+      "width": 418,
+      "height": 372
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/castle/map-paper.png",
+      "bytes": 2288499,
+      "sha256": "7c9e162d41bac5f3b7ee184deb69ef63c69d1488ddacdcdd7ecbb1ccb2426e56",
+      "width": 1688,
+      "height": 932
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/castle/spider.png",
+      "bytes": 241369,
+      "sha256": "47c2d56b8077b8e3aad95e7b187b1f856c0aca5a07af6c979228b89734a05be6",
+      "width": 432,
+      "height": 295
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/castle/treasure.png",
+      "bytes": 245560,
+      "sha256": "a8013e1cc9810cc8a28895d4c05b2f462b5a0c091f943def03c47a487f4649e3",
+      "width": 431,
+      "height": 311
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/company.png",
+      "bytes": 410730,
+      "sha256": "404fb741d666e0c0367f4c9f5a13b605bb1b61321c1f4abc93945cb0b6b2012e",
+      "width": 1656,
+      "height": 163
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/current-pin.png",
+      "bytes": 49362,
+      "sha256": "1c51cb6a6516e67630a7de094bf3a7e6d7bc870acb3dedad93c08cb47d019858",
+      "width": 136,
+      "height": 218
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/dungeon/crossing.png",
+      "bytes": 244267,
+      "sha256": "681b897d720120e309b7abaacad34f14d949bba68ee7d4008aee86df434b3d8b",
+      "width": 427,
+      "height": 318
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/dungeon/entrance.png",
+      "bytes": 227175,
+      "sha256": "dcdf0e6c2aa61789099e6c4187891baab237021e90d3f02b6d56edce31512a7d",
+      "width": 399,
+      "height": 344
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/dungeon/exit.png",
+      "bytes": 235445,
+      "sha256": "9681c1cfc9d791da7e77e7b7a3321f2ed3940af4ca8f60d2f38fe7b7c4a82cf4",
+      "width": 412,
+      "height": 323
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/dungeon/guarded_treasure.png",
+      "bytes": 233285,
+      "sha256": "32cd0266a96536e61184b7495682aa025920f351d7279db27b1119a8969c8a0c",
+      "width": 412,
+      "height": 318
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/dungeon/locked.png",
+      "bytes": 258875,
+      "sha256": "ee444b49761a2724f0d9db919422ff416a45d1c551ed75437f4a7023d974cbf5",
+      "width": 431,
+      "height": 329
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/dungeon/map-paper.png",
+      "bytes": 2509319,
+      "sha256": "6fbbc6120f0580937727ff489555e7b49cd1e0613976e6b9ad589ffc04b742f8",
+      "width": 1686,
+      "height": 933
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/dungeon/spider.png",
+      "bytes": 227410,
+      "sha256": "4dcb2168243f823b4c0029b3749807974a231bc4f787f6779eeee96521aa9cde",
+      "width": 430,
+      "height": 299
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/dungeon/treasure.png",
+      "bytes": 260780,
+      "sha256": "f06d7abc9ebe7a56c495c3057a54b26c526b33dce7f182ee488990a6df50a61a",
+      "width": 431,
+      "height": 320
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/forest/crossing.png",
+      "bytes": 301217,
+      "sha256": "d2d9fab82adfb8109c65c658753fa528e33211be9393490196a627f31c03b6c7",
+      "width": 428,
+      "height": 348
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/forest/entrance.png",
+      "bytes": 294204,
+      "sha256": "687a1b209c8151b4af134603524b6e0cbfa61e0494eea045e22ad078e8aab56d",
+      "width": 424,
+      "height": 347
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/forest/exit.png",
+      "bytes": 281739,
+      "sha256": "b8f2210dfae894ae55d1f7ef55b7027f570d580e2914d797a10e7fb4df27c45b",
+      "width": 423,
+      "height": 330
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/forest/guarded_treasure.png",
+      "bytes": 281728,
+      "sha256": "7669be8656140cee28539d078d5eef53d091bbb19a4a3de28e900258ff4c9b19",
+      "width": 425,
+      "height": 348
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/forest/locked.png",
+      "bytes": 302284,
+      "sha256": "01a31070af8ae100aadcbe11154c46e771ab14dd65e01400701afc8e4aa62419",
+      "width": 432,
+      "height": 342
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/forest/map-paper.png",
+      "bytes": 2659620,
+      "sha256": "2acaf6c3d0d9ac18d8389b2b0098d0130d27a7694f5076a2140db9d9cd36fb0b",
+      "width": 1686,
+      "height": 933
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/forest/spider.png",
+      "bytes": 297969,
+      "sha256": "376f1757d81c79182869b560acab2a67804aa6a97fb9f65e841d64f96accd177",
+      "width": 426,
+      "height": 333
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/forest/treasure.png",
+      "bytes": 278001,
+      "sha256": "387e14446fc7fb6ce59236e0e13fe6561878deb442f4c0fbab59a84ed2a36eb6",
+      "width": 427,
+      "height": 342
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/header.png",
+      "bytes": 230278,
+      "sha256": "94a34c9f74292630572726c26dfd0efbf7808d79b6453ede63ad5f938498b476",
+      "width": 1672,
+      "height": 100
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/inspector.png",
+      "bytes": 614707,
+      "sha256": "5ecd32177ddf01396c760e0aacd96dc6691ceeb441a568ec2ad69dd035106524",
+      "width": 456,
+      "height": 680
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/label-slip.png",
+      "bytes": 99180,
+      "sha256": "35be0e43c995469cb4b331aea08e62d75b442647c88b3f1273fab513e85f8cb4",
+      "width": 397,
+      "height": 121
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/light.png",
+      "bytes": 106830,
+      "sha256": "da593f96c61e1c6841028a1139ae7bf024903dc852896f1fccb52eb05f01c41d",
+      "width": 203,
+      "height": 316
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/lock.png",
+      "bytes": 78409,
+      "sha256": "b4beb8582d34452320e2186ed2794d19c7213ec9aa050ce9507eb855964b346f",
+      "width": 171,
+      "height": 230
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/map-paper.png",
+      "bytes": 2804824,
+      "sha256": "7f0641bdd7749e5053643cee698f98d671d9049e2b2e0a5364b248ea70089cc7",
+      "width": 1688,
+      "height": 932
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/mine/crossing.png",
+      "bytes": 227751,
+      "sha256": "c8d148ec0515bff4b5d36138ef379561a42d7665235950cbacda34856c6107a6",
+      "width": 436,
+      "height": 304
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/mine/entrance.png",
+      "bytes": 258656,
+      "sha256": "0ea1126388a2875dd7daeb90ca756bcef71c2078ee8b1656f2c224f009643aea",
+      "width": 428,
+      "height": 360
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/mine/exit.png",
+      "bytes": 233055,
+      "sha256": "23f9c6d35b2362dcdd0229c7394b00bad5adc3d7e201869203fc88c8e504ae72",
+      "width": 436,
+      "height": 311
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/mine/guarded_treasure.png",
+      "bytes": 245655,
+      "sha256": "b433622fa046c9ee6a43a52a41d852ac9c6995bfbaea502ea43e34aa2a45bdf9",
+      "width": 432,
+      "height": 326
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/mine/locked.png",
+      "bytes": 244875,
+      "sha256": "36c71ace2a03594a9c42d51535bf2d33303bcb9cea6da00f71e5356266cfdd1a",
+      "width": 437,
+      "height": 327
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/mine/spider.png",
+      "bytes": 249578,
+      "sha256": "3c3a649651b429ee0560521c87fa0807700cb00ab2eb792f69bb2cb44c6d88dd",
+      "width": 435,
+      "height": 306
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/mine/treasure.png",
+      "bytes": 248876,
+      "sha256": "d4b34bf2fdcb54e46f05e0c93c11ddb01a38d9c5da6801df7c29d54f34fe8ad0",
+      "width": 432,
+      "height": 333
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/paper.png",
+      "bytes": 231663,
+      "sha256": "e55da5ae3e9a2fdbcee629e18d8e133ca53058572c48878901478c3a8dc9371a",
+      "width": 380,
+      "height": 340
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/portrait-bran.png",
+      "bytes": 22391,
+      "sha256": "df0f7e1afa846345b8b18137539e2b9c38f6b460b0ab3fb97303ce99f7caf79a",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/portrait-ring.png",
+      "bytes": 106113,
+      "sha256": "fddaa6c5f7676d90b00e77b16eca6bd4f438f726f8e053dcb67669d46285a54e",
+      "width": 334,
+      "height": 341
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/portrait-torin.png",
+      "bytes": 21571,
+      "sha256": "e1586b8668c106ded6d6eaaa088e9e164ebd2fffd259264659fe46273b3b1e0d",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/seal-castle.png",
+      "bytes": 20037,
+      "sha256": "ea12394b23bc7f12452d12072c36efb68db6f35820c5e5ca08f1f7b67ab54a2e",
+      "width": 112,
+      "height": 151
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/seal-dungeon.png",
+      "bytes": 21783,
+      "sha256": "0256334d2acf2391d7717cd6a2ba4f4d879811d2ca5bbd65da4f6ddc82e9b44d",
+      "width": 112,
+      "height": 151
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/seal-forest.png",
+      "bytes": 22120,
+      "sha256": "77693e292ee04247dc8853ac9e1e86486240d298a53808f1343eab8dc0e72b67",
+      "width": 112,
+      "height": 151
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/seal-mine.png",
+      "bytes": 151154,
+      "sha256": "d7118fb159f207efef9d77837769affc17e6d6c0527a4b7df04d580319f5403c",
+      "width": 254,
+      "height": 394
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/selection.png",
+      "bytes": 100286,
+      "sha256": "fcc5fc497bacf32d5aa915bdb9c54dd124553a89b7a3cceb63e6240bac4f9439",
+      "width": 406,
+      "height": 293
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/state-swash.png",
+      "bytes": 126185,
+      "sha256": "e5fa06188c3c74453bab05ef30fb4cd5dee268f6f0893287096e1d7490dc5742",
+      "width": 519,
+      "height": 136
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/supply-bandage.png",
+      "bytes": 5100,
+      "sha256": "9c2cd47a9f28baa8a58d8b10eaad8397b7d58a54f0e0f07e95bb3364f74476b4",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/supply-camping_kit.png",
+      "bytes": 4140,
+      "sha256": "09642c9eea4708a39d71b9457c50642ea84eb4d9cf30144c04fa869e1e897cf9",
+      "width": 49,
+      "height": 49
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/supply-food.png",
+      "bytes": 3997,
+      "sha256": "d713922f64153e9c9a821c6c88681848e7c8339c66e50becb61f218e2c5ad2d0",
+      "width": 49,
+      "height": 46
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/supply-pickaxe.png",
+      "bytes": 4187,
+      "sha256": "01a261c47cc8aa0d0e2d9a0f0edcd947fb0e49dd1c82c012a3c2fd4eb3584a29",
+      "width": 46,
+      "height": 49
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/supply-torch.png",
+      "bytes": 3788,
+      "sha256": "05978509ff4bf5a406852d6159ca49add2b7d56f95b76efa89214379c9aab5ea",
+      "width": 35,
+      "height": 47
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/supply-trap_tools.png",
+      "bytes": 4850,
+      "sha256": "0dc1ba3983af4b61fe043b5030e008f2ee728f4391872b67b071aeede649c1b5",
+      "width": 50,
+      "height": 46
+    },
+    {
+      "path": "res://assets/ui/dungeon/ashen/title-plaque.png",
+      "bytes": 52863,
+      "sha256": "2c51ec882a3b6033d2d2db0c59dab56ad6a05ae5330141f27efc28f6afc2b2eb",
+      "width": 378,
+      "height": 82
+    },
+    {
       "path": "res://assets/ui/dungeon/illustrated/old_mine_chart.png",
       "bytes": 2035908,
       "sha256": "07a9bf2bfacab0011431ee989acd1453705b863e0436d041b9a1caf7f3cceb2f",
       "width": 1280,
       "height": 570
+    },
+    {
+      "path": "res://assets/ui/dungeon/materials/button.png",
+      "bytes": 17999,
+      "sha256": "45518fe49e8ca23d851ac4b2a45d61a27cd22c0e45728a1a95ee2c7849207c2b",
+      "width": 128,
+      "height": 64
+    },
+    {
+      "path": "res://assets/ui/dungeon/materials/campaign_hide.png",
+      "bytes": 647387,
+      "sha256": "164350f517b7375be406b51f94748f2c66e16f3e00fd3c2d318e7b1cb4f7abd5",
+      "width": 539,
+      "height": 539
+    },
+    {
+      "path": "res://assets/ui/dungeon/materials/frame_dark.png",
+      "bytes": 101722,
+      "sha256": "38d4ceb78f377ad316a5b2bdb2addd7b758f4e3d4a2b57e6b566c817facec42f",
+      "width": 256,
+      "height": 256
     },
     {
       "path": "res://assets/ui/dungeon/processed/archer/archer_00.png",

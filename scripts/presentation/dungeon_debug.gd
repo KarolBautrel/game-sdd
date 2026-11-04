@@ -15,7 +15,7 @@ const DUNGEON_SOURCE_AUTHORED := DungeonEntrySelection.SOURCE_AUTHORED
 const DUNGEON_SOURCE_GENERATED := DungeonEntrySelection.SOURCE_GENERATED
 const DEFAULT_GENERATED_DUNGEON_DIFFICULTY := DungeonEntrySelection.DEFAULT_GENERATED_DUNGEON_DIFFICULTY
 const ROOM_SIZE := Vector2(256, 232)
-const ExpeditionChrome := preload("res://scripts/presentation/dungeon/expedition_chrome.gd")
+const ExpeditionChrome := preload("res://scripts/presentation/dungeon/ashen_expedition.gd")
 var expedition_chrome: RefCounted
 const ENTER_COMBAT_LABEL := "Enter Combat"
 const FINISH_EXPEDITION_LABEL := "Finish Expedition"
@@ -236,6 +236,7 @@ func _draw() -> void:
 
 func _build_graph() -> void:
 	for child in graph_layer.get_children():
+		graph_layer.remove_child(child)
 		child.queue_free()
 	room_nodes.clear()
 	if expedition_chrome != null:
@@ -325,6 +326,9 @@ func _apply_layout_overrides() -> void:
 
 
 func _recalculate_graph_transform() -> void:
+	if expedition_chrome != null and expedition_chrome.has_method("layout_graph"):
+		expedition_chrome.layout_graph(self)
+		return
 	if expedition_chrome != null and expedition_chrome.use_mine_chart(self):
 		graph_axis_swap = false
 		graph_node_scale = 1.0
@@ -427,8 +431,9 @@ func _generated_dungeon_scroll_tier() -> int:
 
 
 func _build_corridors() -> void:
-	# Passage choices carry the topology in the campaign HUD; avoid decorative pipes.
+	# Native chart ink is derived from actual corridors, below the room plates.
 	if expedition_chrome != null:
+		expedition_chrome.build_passages(self)
 		return
 	var rooms_by_id: Dictionary = _rooms_by_id()
 	for corridor: Dictionary in dungeon.get("corridors", []):
@@ -2459,6 +2464,8 @@ func _refresh_presentation_chrome() -> void:
 		route_state_label.text = _route_state_text()
 	if party_log_label != null:
 		party_log_label.text = _party_log_text()
+		if expedition_chrome != null and expedition_chrome.has_method("company_feedback"):
+			party_log_label.text = expedition_chrome.company_feedback(party_log_label.text)
 	for hero: Dictionary in _party_members_for_ui():
 		var unit_id := str(hero.get("combat_unit_id", ""))
 		if party_hp_labels.has(unit_id):

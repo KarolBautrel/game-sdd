@@ -10,6 +10,8 @@ continue to own every move, cost, lock, event and reward.
 - The campaign-skinned map omits heavy corridor pipes, decorative junction crosses
   and permanent hazard plaques. The room graph is unchanged. Available passages
   are explicit in the current room's navigation list and highlighted room states.
+  Latest player review/stage72 supersedes omitting every route overlay:031 adds
+  restrained truthful paths behind plates, with unchanged preview/domain guards.
 - Clicking a map room or a passage-list entry previews the destination. Numeric
   passage shortcuts do the same in the skinned HUD. Preview never moves the party,
   reduces light, rolls a hazard or checkpoints/changes a save.

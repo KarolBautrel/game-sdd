@@ -1,5 +1,11 @@
 # Timed polish review guide
 
+Current ordered player review and feedback:
+[six-step checklist](2026-11-04-player-review-checklist.md). Step1(dungeon) is
+now visually accepted after native stage75. Resume step2, equipment; remaining
+steps stay saved and pending. Detailed physical full-flow actions were not reported.
+[Correction evidence and screenshots](2026-11-04-dungeon-visual-cohesion.md).
+
 Run from the active repository:
 
 ```powershell
@@ -16,6 +22,8 @@ cd C:\Users\karol\Desktop\Gierka\game_dir\sdd-game
 
 Launchers target larger left DISPLAY1 and record PID/logs; do not close another
 instance implicitly. Close the previous review normally when changing scenes.
+The dungeon starts with generated content by default. Choose **Use Old Mine**
+before **Start Expedition** to inspect the illustrated authored map.
 Combat Tools exposes the existing scenario picker/reload. No Debug Win is needed
 for acceptance. The courtyard is the first mechanical study, not the final city.
 

@@ -1,5 +1,15 @@
 # Accumulated live test scenarios
 
+Latest stage75: Ashen native exploration UI replaces textured72 as the current
+review target. User now APPROVES the current visual dungeon stage. Review1/L67-01
+retains its unreported detailed physical-flow gap; four-theme native
+fixtures and model/input checks pass. Use `tools/qa/start_game.ps1 -Scene dungeon`.
+Default is generated; **Use Old Mine** gives the seven-location reference chart.
+Check portraits/full HP, real routes, preview/confirm cost, event focus and pinned
+packing Start at the user's actual window size. Details and native gallery:
+`docs/qa/2026-11-04-ashen-native-ui.md`. Reviews2..6 remain pending; no desktop
+acceptance is inferred from engine-local pointer fixtures.
+
 Policy extended2026-11-02 by explicit user instruction: stages9..36 may be
 implemented with automated tests while the user uses the computer. Implementation
 is ready; actual gameplay for stages8..36 will run together later. All61 scenarios
@@ -251,6 +261,20 @@ registry synchronized without erasing failed attempts or marking unplayed cases.
 
 
 ## Native dungeon route decisions (stage67)
+
+Latest user review2026-11-04: L67-01 was PARTIAL_USER_REPORTED_WITH_DEFECTS for
+appearance: repeated square backgrounds, weak portrait/HP fit, inconsistent
+health colors, missing readable room paths and text/frame fit. No successful
+full movement/event/terminal playthrough is inferred. Stage72 corrects these
+defects:12headless suites and native263checks/44engine clicks/40captures PASS.
+AWAITING_USER_RETEST; no OS play was attempted this turn.
+Follow-up72b removes enlarged edge-strip/backdrop grain; native198checks /
+33engine actions /30captures at720p/1080p/4K PASS, still awaiting user retest.
+Later72c: user rejects72b visually; textured72 restored as temporary current.
+Restored native reference matches exactly; new isolated art concept/research
+awaits visual choice. Reviews2..6remain pending. See
+2026-11-04-dungeon-visual-cohesion.md and the saved six-step
+checklist; earlier automated PASS remains historical proof, not visual approval.
 
 | ID | Stage | Scenario | Acceptance | Result |
 | --- | --- | --- | --- | --- |

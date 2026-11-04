@@ -1,5 +1,9 @@
 # Dungeon Specs
 
+Preparation library: [047 Exploration layout library](overview/047_exploration_layout_library.md)
+and [slice055](slices/055_exploration_layout_library.md). This portable pool is not
+the current runtime template set.
+
 Dungeon specs describe the exploration layer that connects authored rooms, corridor movement, expedition supplies, corridor hazards, encounter triggers, rewards, and tactical combat transitions.
 
 ## Implemented Snapshot

@@ -1,0 +1,21 @@
+{
+  "status": "DESIGN_ONLY_AWAITING_USER_REVIEW",
+  "tool": "built-in OpenAI imagegen",
+  "date": "2026-11-04",
+  "image": "docs/design/dungeon-ui/research-2026-11-04/expedition-ledger-concept.png",
+  "width": 1672,
+  "height": 941,
+  "sha256": "a1e6bc4c23dc9be19f3ca1f86df6bf6dc5a07df51e171cdc17213c4fa6811efe",
+  "reference_images": [
+    {
+      "path": "docs/design/campaign-ui/implemented-journey-preview.png",
+      "sha256": "40fde3d784dd51c18f0a52643ac4dd9f19f0b0ef0b2e1cd4a55225442f78fb79"
+    },
+    {
+      "path": "docs/design/dungeon-ui/review1/route-1080p.png",
+      "sha256": "1287baf92675bc741c3af0dc91ac878ab3df3fb4deb26c79373de82a4eeb6a09"
+    }
+  ],
+  "runtime_default": "textured72",
+  "paid_pack_graphics_used": false
+}

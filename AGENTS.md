@@ -132,6 +132,23 @@ If the skill is unavailable, the in-repo fallback is
 `assets_src/characters/drawn_animation/2026-11-03/README.md` and presentation022.
 The game's own specs/resolver still own gameplay rules.
 
+For the approved Ashen Cartographer exploration UI or deliberate variants, use
+`$dark-fantasy-game-ui` when installed. Entry point:
+`~/.codex/skills/dark-fantasy-game-ui/SKILL.md`. An optional local English source
+copy may exist at `packages/dark-fantasy-ui-workshop/`; it is deliberately ignored
+in this public game repository. Its canonical source is the separate private repo.
+Published private workshop: https://github.com/KarolBautrel/dark-fantasy-ui-workshop,
+current `v0.2.0` production assets; `v0.1.0` reference/preparation baseline retained.
+Installable ZIPs are attached to releases.
+See `docs/handoffs/2026-11-04-dark-fantasy-ui-workshop.md` for installation/proofs.
+The v0.2.0 package includes 59 production components and portable Aseprite exports.
+Native Ashen UI is implemented under034 and accepted visually by the user for the
+current stage. Promotion of the 15-layout pool remains backlog. For an in-game
+source fallback use034, assets_src/ashen_ui/ and tools/aseprite/ashen_components.lua.
+Read the latest acceptance/publication handoff and resume the saved review queue.
+Shared UI must match the approved family while
+routes, labels, room positions and states follow real randomized game data.
+
 For original characters/enemies/models/animation, first read
 `docs/design/character-art/TOOLING.md` and tooling005/slice005. The user prioritized
 this visual preparation before physical tests on2026-11-02. Background Blender

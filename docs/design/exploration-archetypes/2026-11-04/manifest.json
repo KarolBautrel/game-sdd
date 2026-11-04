@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-04",
+  "status": "APPROVED_VISUAL_FAMILY_BY_USER",
+  "production_ready": false,
+  "implementation_deferred_by_user": false,
+  "reference": "docs/design/dungeon-ui/research-2026-11-04/ashen-cartographer-concept.png",
+  "reference_sha256": "d7ae0bfca82ada2beeb73c35e288e1ac7ceffe6a92c76ac16ba08d2b211e2afc",
+  "samples": [
+    {
+      "id": "mine",
+      "title": "Old Mine",
+      "path": "mine.png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "d7ae0bfca82ada2beeb73c35e288e1ac7ceffe6a92c76ac16ba08d2b211e2afc",
+      "approval": "APPROVED_VISUAL_FAMILY_BY_USER",
+      "role": "full-screen concept, not production atlas"
+    },
+    {
+      "id": "dungeon",
+      "title": "Blackbarrow",
+      "path": "dungeon.png",
+      "width": 1671,
+      "height": 941,
+      "sha256": "a4575eda07e9f91034f343eca10bbe9a0da472808cdbd6a1af7f18226fa7cb4c",
+      "approval": "APPROVED_VISUAL_FAMILY_BY_USER",
+      "role": "full-screen concept, not production atlas"
+    },
+    {
+      "id": "castle",
+      "title": "Ravenkeep",
+      "path": "castle.png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "5233e10ec576dcbb62aa40924dca0a0e39f2a67b1494e424f1432285726ffc0f",
+      "approval": "APPROVED_VISUAL_FAMILY_BY_USER",
+      "role": "full-screen concept, not production atlas"
+    },
+    {
+      "id": "forest",
+      "title": "Crowswood",
+      "path": "forest.png",
+      "width": 1671,
+      "height": 941,
+      "sha256": "705ceaa7c3ed83215d919862e838b59ea6e9625a664c149b33168e9227796238",
+      "approval": "APPROVED_VISUAL_FAMILY_BY_USER",
+      "role": "full-screen concept, not production atlas"
+    }
+  ],
+  "native_implementation_status": "NOT_STARTED_TO_THIS_TARGET"
+}

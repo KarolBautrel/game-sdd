@@ -1,0 +1,14 @@
+{
+  "status": "APPROVED_VISUAL_ANCHOR_BY_USER",
+  "date": "2026-11-04",
+  "tool": "built-in OpenAI imagegen",
+  "file": "docs/design/dungeon-ui/research-2026-11-04/ashen-cartographer-concept.png",
+  "width": 1672,
+  "height": 941,
+  "sha256": "d7ae0bfca82ada2beeb73c35e288e1ac7ceffe6a92c76ac16ba08d2b211e2afc",
+  "style_inspiration": "https://xgaida.itch.io/bloodlines-ui",
+  "original_components_used": false,
+  "runtime_default": "textured72",
+  "brief": "BRIEF-v2-bloodlines-inspired.md",
+  "approval_scope": "Mine appearance only; user requests archetype samples before implementation."
+}

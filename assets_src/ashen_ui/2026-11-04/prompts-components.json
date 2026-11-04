@@ -1,0 +1,15 @@
+{
+  "outputs": [
+    {
+      "file": "raw/widgets.png",
+      "prompt": "Create a production TRANSPARENT PNG atlas of exactly EIGHT painted medieval dark fantasy UI components, 4 equal columns x 2 equal rows, every component fully inside its cell with generous alpha gutters. Input is the approved Ashen Cartographer UI: match its actual soot leather, ashen parchment, worn iron, ivory and muted crimson paint exactly. No labels or cell borders.\nROW 1 from left: (1) empty wide torn beige parchment name slip, ragged asymmetric horizontal edges, width much greater than height, suitable for native black text; (2) hollow irregular crimson wax SELECTION RING, a wide uneven oval (about 1.5:1), only a thin red painted outline and dark shadow, completely transparent INTERIOR and exterior; (3) small round crimson wax mining seal with crossed pickaxes and short red ribbons; (4) worn blackened iron circular PORTRAIT RING, small rivets, thin aged brass inner rim, completely transparent INTERIOR and exterior, no face or picture.\nROW 2 from left: (5) small ivory parchment-map location PIN, teardrop shape with dark center hole and a tiny shadow; (6) small blackened iron padlock with aged ivory highlight, simple readable silhouette; (7) wide charcoal dry-brush status swash with a ragged edge and transparent exterior, empty ready for ivory native type; (8) amber-lit medieval hanging lantern icon with real alpha around it.\nNo writing, letters, numerals, text-like decoration, people, portraits, maps, tiles, grid marks, checkerboard pixels or watermarks. The holes in both RINGS MUST BE TRUE TRANSPARENT ALPHA, not black, white or opaque paper. Match painterly sharpness and irregular outlines, no glossy plastic, no neon, no vector look.",
+      "transparent_background": true
+    },
+    {
+      "file": "raw/mine-vignettes-alpha.png",
+      "prompt": "Precise background-extraction edit of the attached production atlas. KEEP all seven mine illustrations at EXACTLY their existing positions, dimensions, colors and painted shape. Do not redraw, rearrange, crop, resize or add anything. Remove the entire white/off-white background outside all seven cave silhouettes and replace it with genuine fully transparent alpha (RGBA alpha=0). Keep their interior shadows, warm lanterns, chest, iron door and especially the white cobwebs INSIDE the spider cave unchanged. No white edge halo. Empty eighth cell must be completely transparent. The previous delivery had an opaque white matte despite requesting transparency; this edit must actually remove it. Output ONLY the same atlas with a true transparent background, including all exterior gutters. No grid, no labels, no checkboard painted into the image.",
+      "transparent_background": true,
+      "fix": "First RGBA atlas had an opaque white matte; real alpha was verified in Aseprite after targeted imagegen correction."
+    }
+  ]
+}

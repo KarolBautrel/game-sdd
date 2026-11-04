@@ -1,0 +1,23 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "outputs": [
+    {
+      "file": "raw/dungeon-paper.png",
+      "reference": "docs/design/exploration-archetypes/2026-11-04/dungeon.png",
+      "prompt": "Extract a CLEAN EMPTY dungeon chart substrate from the large LEFT MAP PANEL of this approved Blackbarrow UI. Landscape about 1.81:1. Preserve the exact cool dark slate/ash-grey weathered parchment, irregular torn stone-paper rim and restrained hand-painted stone detail. Sparse broken masonry and tiny mossy rubble can remain along the outer rim, but the central 85 percent must be open quiet slate-ash material for dynamically placed location art.\nREMOVE all dungeon stairways, halls, vaults, cells, doors, watch posts and other named destination vignettes. Remove labels, paths/arrows, route marks, seals, rings, pins and every text element. Remove all surrounding UI. No painted travel connection or corridor traversing the center; no dark silhouette holes left by erased destinations. Fill naturally from the original subdued map material. No beige leather, no large embossed wrinkles, no repeated texture squares, no burlap or swirled grain. Match the reference's muted detailed DARK FANTASY paint. Empty reusable chart only. Black outside the natural irregular border.",
+      "transparent_background": false
+    },
+    {
+      "file": "raw/castle-paper.png",
+      "reference": "docs/design/exploration-archetypes/2026-11-04/castle.png",
+      "prompt": "Extract a CLEAN EMPTY castle chart substrate from the large LEFT MAP PANEL of the approved Ravenkeep UI. Landscape aspect about 1.81:1. Keep its exact ashen parchment with irregular worn edges and subtle stone/earth paint. Sparse atmospheric ruined curtain-wall fragments, mossy stones and distant castle silhouettes may remain ONLY along the outside rim, especially far left and upper edge. The central 80 percent must be quiet open grey-ash material for dynamically placed location vignettes.\nREMOVE all seven named destinations, chapel, gatehouse, courtyard, hall, tower, barracks and gate vignettes; remove all paths/arrows, map labels, selection rings, pins, seals, writing and the surrounding game UI. No travel connections or recognisable route through the center. Continue natural empty material where places were erased. No regular tiled squares, no wood/leather grain, no swirled embossing, no large repetitive texture. Match the approved understated detailed dark fantasy paint and desaturated atmosphere. Empty reusable background only, black outside its irregular parchment edge.",
+      "transparent_background": false
+    },
+    {
+      "file": "raw/forest-paper.png",
+      "reference": "docs/design/exploration-archetypes/2026-11-04/forest.png",
+      "prompt": "Extract a CLEAN EMPTY forest chart substrate from the large LEFT MAP PANEL of this approved Crowswood UI. Landscape about 1.81:1. Preserve the exact original grey-ash parchment and its irregular torn edge. Preserve sparse atmospheric twisted tree branches, roots, fallen leaves and mossy stones ONLY along the outside rim, especially top-left and lower-left, as in the source. Keep the broad central 80 percent quiet open subdued ashen ground ready for dynamically placed transparent location vignettes.\nREMOVE all seven named places, individual destination buildings/shrines/camp/signposts, all paths/arrows/route marks, labels, selection rings, pins, seals, writing, buttons, portraits and the surrounding UI. Do not leave dark holes where locations were removed. No intended travel connections may be painted into the background. No obvious trail crossing the center. No tiled squares, no repeated texture, no swirled embossing or burlap. Match the source's detailed quiet painted dark fantasy material and subdued forest color. This is an EMPTY reusable backdrop, not a completed map. Black only outside the parchment outer edge.",
+      "transparent_background": false
+    }
+  ]
+}

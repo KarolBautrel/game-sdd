@@ -16,3 +16,6 @@ override.cfg
 __pycache__/
 .pytest_cache/
 .venv/
+
+# Optional local checkout of the separately published private UI workshop.
+packages/dark-fantasy-ui-workshop/

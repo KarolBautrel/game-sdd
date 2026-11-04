@@ -14,6 +14,19 @@ unless a subsequent owning spec explicitly extends them.
 
 ## Proposed presentation contract
 
+Latest player review2026-11-04: the implemented dungeon is NOT visually accepted.
+Dungeon-only correction brief is recorded in
+[the ordered review checklist](../../qa/2026-11-04-player-review-checklist.md).
+Keep the current world-travel view as the concrete comparison: no obvious square
+texture repetition on backdrop/panel interiors, integrated party portraits with
+fully readable current/max HP and one HP style/color, restrained truthful room
+paths, and text/values within frame padding. This latest request supersedes
+omitting every connector overlay in027; its rejected heavy pipes/crosses stay
+excluded and all preview/confirm/event/domain guards remain. The later "DO dziela"
+authorized implementation under031: correction is implemented / automated PASS,
+awaiting user retest. See [stage72 evidence](../../qa/2026-11-04-dungeon-visual-cohesion.md).
+No fresh user visual acceptance is inferred.
+
 - Follow the approved world-travel panel directly. The user rejects the initial
   flat/minimal chart as visually unlike that target and reiterates DARK FANTASY.
   Reuse its actual textured charcoal leather, engraved brass/iron frame and
