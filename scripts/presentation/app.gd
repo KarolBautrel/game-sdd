@@ -33,6 +33,7 @@ var inventory_item_id := ""
 var inventory_category := "all"
 var inventory_hero_id := "unit_player_001"
 var inventory_slot := "main_hand"
+var journey_destination := ""
 
 
 func _ready() -> void:
@@ -226,9 +227,10 @@ func _render_region(profile: Dictionary) -> void:
 	var quotes: Dictionary = {}
 	for route: Dictionary in Travel.routes(region,profile.world.location_id):
 		var quote := Travel.quote(profile.world,route.to)
-		quotes[route.to] = {"allowed":profile.active_run.is_empty() and profile.world.pending_event.is_empty() and int(profile.supplies.food) >= int(quote.food)+int(quote.return_food),"caption":"%sh  /  %s food" % [quote.time_hours,quote.food],"tooltip":"%s / Danger %s%% / Keep %s food for return" % [Travel.node_name(route.to),int(quote.danger*100),quote.return_food]}
-	map.configure(region,profile.world.location_id,quotes)
-	map.destination_selected.connect(_travel)
+		quotes[route.to] = {"allowed":profile.active_run.is_empty() and profile.world.pending_event.is_empty() and int(profile.supplies.food) >= int(quote.food)+int(quote.return_food),"inspect_allowed":profile.active_run.is_empty() and profile.world.pending_event.is_empty(),"caption":"%sh  /  %s food" % [quote.time_hours,quote.food],"tooltip":"Inspect %s / Danger %s%% / Keep %s food for return" % [Travel.node_name(route.to),int(quote.danger*100),quote.return_food]}
+	if Travel.quote(profile.world,journey_destination).is_empty(): journey_destination=""
+	map.configure(region,profile.world.location_id,quotes,journey_destination)
+	map.destination_selected.connect(_preview_journey)
 	var columns := VBoxContainer.new()
 	columns.custom_minimum_size.x = 360
 	columns.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -240,12 +242,14 @@ func _render_region(profile: Dictionary) -> void:
 		_label("Your expedition is in progress. Resume its saved checkpoint.",22)
 		_button("resume","Resume expedition",_resume)
 	else:
-		for route: Dictionary in Travel.routes(region,profile.world.location_id):
-			var destination: String = route.to
-			var quote := Travel.quote(profile.world,destination)
-			var text := "%s  /  %sh  /  %s food" % [Travel.node_name(destination),quote.time_hours,quote.food]
-			_button("travel_"+destination,text,func() -> void: _travel(destination)).disabled = int(profile.supplies.food) < int(quote.food)+int(quote.return_food)
-			_label("Danger %s%%  /  Return reserve %s food" % [int(quote.danger*100),quote.return_food],20,UI.MUTED)
+		if journey_destination.is_empty():
+			for route: Dictionary in Travel.routes(region,profile.world.location_id):
+				var destination: String = route.to
+				var quote := Travel.quote(profile.world,destination)
+				var text := "%s  /  %sh  /  %s food" % [Travel.node_name(destination),quote.time_hours,quote.food]
+				_button("travel_"+destination,"Inspect "+text,func() -> void: _preview_journey(destination))
+				_label("Danger %s%%  /  Return reserve %s food" % [int(quote.danger*100),quote.return_food],20,UI.MUTED)
+		_render_journey_preview(profile)
 	content = UI.card(columns,"At your destination","Town services require Ravenford; expeditions depart from the Old Mine.")
 	_button("town","Enter Ravenford",func() -> void: _navigate("town")).disabled = not _campaign().at_town()
 	if profile.active_run.is_empty(): _button("prepare","Old Mine  /  Prepare expedition",_prepare).disabled = profile.world.location_id != "dungeon_old_mine" or not profile.world.pending_event.is_empty()
@@ -308,8 +312,64 @@ func _campaign() -> Node:
 
 
 func _travel(destination: String) -> void:
-	_campaign().travel(destination)
+	if _campaign().travel(destination): journey_destination=""
 	_render()
+
+
+func _preview_journey(destination: String) -> void:
+	var campaign:=_campaign()
+	if not campaign.loaded or not campaign.state.active_run.is_empty() or not campaign.state.world.pending_event.is_empty() or Travel.quote(campaign.state.world,destination).is_empty(): return
+	journey_destination=destination
+	_render()
+	var button: Button=action_buttons.get("travel_confirm")
+	if button!=null and not button.disabled:
+		UI.focus_later(button)
+		_reveal_journey(button)
+	elif action_buttons.has("travel_cancel"):
+		UI.focus_later(action_buttons.travel_cancel)
+		_reveal_journey(action_buttons.travel_cancel)
+
+
+func _reveal_journey(button: Button) -> void:
+	await get_tree().process_frame
+	if not is_instance_valid(button) or not button.is_inside_tree(): return
+	var ancestor: Node=button.get_parent()
+	while ancestor!=null:
+		if ancestor is ScrollContainer: ancestor.ensure_control_visible(button)
+		ancestor=ancestor.get_parent()
+
+
+func _render_journey_preview(profile: Dictionary) -> void:
+	if journey_destination.is_empty():
+		_label("Select a destination to inspect the journey before leaving.",22,UI.MUTED)
+		return
+	var quote:=Travel.quote(profile.world,journey_destination)
+	if quote.is_empty(): return
+	UI.rule(content)
+	_label("To "+Travel.node_name(journey_destination),28,UI.GOLD)
+	_label("Road danger %s%%" % int(quote.danger*100),24,UI.MUTED)
+	var arrival: Dictionary=profile.world.duplicate(true)
+	arrival.elapsed_hours=int(arrival.elapsed_hours)+int(quote.time_hours)
+	_label("Arrival before road events: "+Travel.clock_text(arrival),24).name="JourneyArrival"
+	var left: int=int(profile.supplies.food)-int(quote.food)
+	_label("Spend %s food  /  %s hours" % [quote.food,quote.time_hours],24)
+	_label("After travel: %s food\nKeep %s for return; %s remains beyond the reserve." % [maxi(0,left),quote.return_food,maxi(0,left-int(quote.return_food))],24,UI.MUTED).name="JourneyReserve"
+	var enough: bool=int(profile.supplies.food)>=int(quote.food)+int(quote.return_food)
+	if not enough: _label("Need %s food for this trip and return reserve; carrying %s." % [int(quote.food)+int(quote.return_food),profile.supplies.food],24,Color("e2a487"))
+	var confirm:=_button("travel_confirm","Travel to "+Travel.node_name(journey_destination),_confirm_journey)
+	confirm.disabled=not enough
+	_button("travel_cancel","Cancel journey plan",_cancel_journey)
+
+
+func _confirm_journey() -> void:
+	if not journey_destination.is_empty(): _travel(journey_destination)
+
+
+func _cancel_journey() -> void:
+	var previous:=journey_destination
+	journey_destination=""
+	_render()
+	if action_buttons.has("travel_"+previous): UI.focus_later(action_buttons["travel_"+previous])
 
 
 func _open_stash() -> void:

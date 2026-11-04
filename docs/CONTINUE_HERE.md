@@ -24,7 +24,10 @@ OS control is explicitly authorized but Sky/official CUA fail window activation;
 L67-01 remains open.67 published48552c0a.68 equipment usability implemented:
 19focused checks, visual/campaign/equipment/identity PASS, native112checks /
 60pointer events/9captures. [QA](qa/2026-11-04-equipment-usability.md).
-Next independent scope69 world journey preview; L68-01 also awaits OS control.
+68 published97d95456.69 world journey preview implemented:19journey checks,
+world/road/campaign PASS; native139checks/69engine clicks/15captures.
+[QA](qa/2026-11-04-world-journey-preview.md). Next independent scope70 forest /
+mine arena authoring; L68/69 also await OS control. Target finish01:12Z unchanged.
 Real saves and accepted character art
 remain protected; each episode needs spec/slice/checks/visible review/report/push.
 

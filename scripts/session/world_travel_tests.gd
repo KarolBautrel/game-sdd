@@ -65,6 +65,9 @@ func _run() -> void:
 	check(app.find_child("RegionMap", true, false) != null and app.action_buttons.prepare.disabled and not app.action_buttons.town.disabled, "map and location gates")
 	app.action_buttons.travel_dungeon_old_mine.pressed.emit()
 	await process_frame
+	check(global_campaign.state.world.location_id == "town_ravenford", "journey preview does not travel")
+	app.action_buttons.travel_confirm.pressed.emit()
+	await process_frame
 	check(global_campaign.state.world.location_id == "dungeon_old_mine" and not app.action_buttons.prepare.disabled and app.action_buttons.town.disabled, "actual travel control")
 	app.queue_free()
 	await process_frame

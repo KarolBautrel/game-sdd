@@ -262,3 +262,10 @@ registry synchronized without erasing failed attempts or marking unplayed cases.
 | ID | Stage | Scenario | Acceptance | Result |
 | --- | --- | --- | --- | --- |
 | L68-01 | 68 | Inspect worn/free copies, try hand conflicts, equip/unequip with keyboard and scroll a long stash. | Named owners, truthful counts, explicit conflict resolution, stable focus and scroll; no duplicated/lost gear or wounds. | AWAITING_INTERACTIVE;19focused checks and native112checks/60engine pointer events PASS; OS activation blocked as in67. |
+
+
+## World journey planning (stage69)
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L69-01 | 69 | Preview/cancel/confirm world trips, inspect low-food restriction, resolve Cart and return, repeat at720p. | No charges or risk rerolls on selection; truthful arrival/trip/reserve, one charge on commit, readable focus/scroll and saved event flow. | AWAITING_INTERACTIVE;19focused checks and native139checks/69pointer events PASS; same OS activation blocker. |

@@ -8,16 +8,18 @@ var region: Dictionary = {}
 var location := ""
 var quotes: Dictionary = {}
 var marker_buttons: Dictionary = {}
+var selected_destination := ""
 
 func _ready() -> void:
 	custom_minimum_size = Vector2(380,600)
 	mouse_filter = Control.MOUSE_FILTER_PASS
 	resized.connect(_layout)
 
-func configure(data: Dictionary,current: String,available: Dictionary = {}) -> void:
+func configure(data: Dictionary,current: String,available: Dictionary = {},selected: String = "") -> void:
 	region = data.duplicate(true)
 	location = current
 	quotes = available.duplicate(true)
+	selected_destination=selected
 	for child in get_children():
 		remove_child(child)
 		child.queue_free()
@@ -26,10 +28,10 @@ func configure(data: Dictionary,current: String,available: Dictionary = {}) -> v
 		var id: String = entry.id
 		var quote: Dictionary = quotes.get(id,{})
 		var caption := "You are here" if id == current else str(quote.get("caption","No direct road"))
-		var button := UI.button("%s\n%s" % [Travel.node_name(id),caption],id == current)
+		var button := UI.button("%s\n%s" % [Travel.node_name(id),caption],id == current or id==selected_destination)
 		button.add_theme_font_size_override("font_size",24)
 		button.custom_minimum_size = Vector2(224,90)
-		button.disabled = not bool(quote.get("allowed",false)) or id == current
+		button.disabled = not bool(quote.get("inspect_allowed",quote.get("allowed",false))) or id == current
 		if id == current:
 			button.add_theme_stylebox_override("disabled",UI.box(Color("51452e"),UI.GOLD,14))
 			button.add_theme_color_override("font_disabled_color",UI.GOLD)

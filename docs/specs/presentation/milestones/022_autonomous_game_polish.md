@@ -63,3 +63,11 @@ free copies, precise hand conflicts, retained tile/category focus and scroll.
 19focused checks, existing visual13/campaign2430/equipment50/identity1259 PASS;
 native112checks/60pointer events/9captures at720p..1440p PASS. L68-01 remains
 awaiting actual OS control. Next69: world journey preview/confirmation.
+
+Stage68 published97d954569d31a32e571ac9c6e8a5cd681ee13cd9; remote verified.
+Stage69 implemented destination preview/confirm/cancel, arrival forecast, true
+food/risk/return reserve and narrow-layout focus/scroll. Journey19/0, world /
+road/campaign tests PASS, campaign UI2433/0 and equipment19/0. Native139checks /
+69pointer events/15captures PASS. L69-01 remains open for actual OS input.
+Next70: bounded forest and mine tactical arenas, existing art/rules and painted
+actors. Use level-design, canonical TMX conversion and normal combat proofs.

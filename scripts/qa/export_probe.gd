@@ -85,6 +85,8 @@ func _campaign_probe(failures: Array[String]) -> void:
 	await get_tree().process_frame
 	app.action_buttons.travel_event_broken_cart.pressed.emit()
 	await get_tree().process_frame
+	app.action_buttons.travel_confirm.pressed.emit()
+	await get_tree().process_frame
 	app.action_buttons.event_salvage.pressed.emit()
 	await get_tree().process_frame
 	app.action_buttons.inventory.pressed.emit()
@@ -205,6 +207,8 @@ func _polish_probe(failures: Array[String]) -> void:
 	for frame in range(5): await get_tree().process_frame
 	var map := app.find_child("RegionMap",true,false)
 	map.marker_buttons.event_broken_cart.pressed.emit()
+	await get_tree().process_frame
+	app.action_buttons.travel_confirm.pressed.emit()
 	await get_tree().process_frame
 	map = app.find_child("RegionMap",true,false)
 	valid = valid and campaign.state.world.location_id == "event_broken_cart" and campaign.state.world.elapsed_hours == 2 and campaign.state.world.pending_event.kind == "cart"

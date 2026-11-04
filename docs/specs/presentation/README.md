@@ -59,3 +59,5 @@ Shared UI composition owns passive visual components, never gameplay decisions.
   destination preview/commit, restrained map and exclusive event focus.
 - [028 Equipment usability](028_equipment_usability.md): copy availability, named
   assignments, explicit hand conflicts and retained native focus/scroll.
+- [029 World journey preview](029_world_journey_preview.md): inspect true costs,
+  arrival/danger/return reserve before explicit normal travel confirmation.

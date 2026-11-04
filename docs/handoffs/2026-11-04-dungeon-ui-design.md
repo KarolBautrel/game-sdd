@@ -21,6 +21,12 @@ checks plus visual13/campaign2430/gear50/identity1259 PASS; native112checks /
 focus/scroll preserved; no ownership/save rule change. Next69 world journey
 preview/confirmation. Same OS-control limitation; L68-01 remains open.
 
+Now68 published97d95456.69 world journey preview/commit/cancel and arrival /
+food/risk/return-reserve UI implemented,19journey checks/affected regressions
+PASS; native139checks/69pointer events/15captures PASS. Next70 forest/mine
+tactical arenas with existing tiles/props/painted actors and canonical TMX.
+L69-01 remains pending OS input; two-hour deadline01:12Z remains active.
+
 User rejects the initial flat design and directs us to the approved world-travel
 dark fantasy UI. They then delegate about two hours of staged native/gameplay
 polish, full desktop control and a normal commit/push after each verified episode.
