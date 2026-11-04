@@ -7,6 +7,39 @@ when the user has only requested an explanation or plan.
 ## Next-session entry: read this first
 
 Latest active handoff:
+[Living mercenary region pilot](handoffs/2026-11-04-living-world-pilot.md).
+User authorizes proceeding. Stage77 adds an opt-in living region: continuous
+land/road travel, pause/speed, independent world parties, supply/prices, two
+factions, three contextual contracts and persistent mine consequences. Same
+campaign/equipment/dungeons; separate resumable pilot save preserves ordinary
+progress. Approved atlas graphics and233-file backup remain. Final source74/74
+and native146checks/48clicks/18captures PASS, zero diagnostics; preserved art/
+fonts119/119unchanged. Focused domain28/session41/UI97 PASS;
+final receipts in [stage77 QA](qa/2026-11-04-living-world.md). Physical review and
+normal mine victory remain pending. Next command:
+`& .\tools\qa\start_game.ps1 -Scene living-world`.
+First geography is authored; seeded modular generation/content follows review.
+Work remains local/uncommitted; no new push requested.
+
+Previous handoff:
+[World and province atlas](handoffs/2026-11-04-world-atlas.md).
+Latest follow-up: user approves the beautiful atlas appearance and requests an
+exact saved baseline. Style/source/captures and a recovery ZIP are preserved in
+assets_src/ui_review_baselines/2026-11-04-world-atlas-approved/; a second copy is
+outside the game repo under workspace backups/sdd-game/. The user now asks for
+a living mercenary world (Battle Brothers/Mount & Blade, faction contracts/war,
+dungeon-first adventures). Next is discussion of LIVING_WORLD_PROPOSAL.md in the
+world-atlas design folder; it is a draft, not implementation authorization.
+User explicitly prioritizes point3 (world) ahead of equipment. Stage76 adds four
+provinces/twenty destinations and native global/province maps with explicit
+per-leg journey planning. Accepted Marches art and old save/cost rules remain.
+Final source70/70 and native roundtrip362checks/58clicks/20captures PASS; receipts in
+[world atlas QA](qa/2026-11-04-world-atlas.md). Visual appearance is now accepted;
+physical trip review remains available via `& .\tools\qa\start_game.ps1 -Scene app`.
+Work is local, uncommitted, no new push requested.
+Equipment point2 and later battles/courtyard remain saved pending reviews.
+
+Previous handoff:
 [Dungeon accepted and publication](handoffs/2026-11-04-dungeon-approved-publication.md).
 Published game checkpoint f0afad7c on master;69/69 checks PASS,175LFS objects sent,
 remote ref verified and no pending LFS objects. The publication request is done.

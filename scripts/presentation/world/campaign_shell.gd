@@ -1,7 +1,7 @@
 extends Control
 signal navigation_requested(id: String)
 const UI := preload("res://scripts/presentation/world/campaign_skin.gd")
-const NAV := {"region":["Region","Map","boot"],"town":["Ravenford","Town","tent"],"stash":["Stash & gear","Stash","bag"],"trade":["Trading Post","Trade","sword"],"training":["Training","Train","hourglass"]}
+const NAV := {"region":["World & provinces","Map","boot"],"town":["Ravenford","Town","tent"],"stash":["Stash & gear","Stash","bag"],"trade":["Trading Post","Trade","sword"],"training":["Training","Train","hourglass"]}
 var nav_buttons: Dictionary = {}
 var header: HBoxContainer
 var footer: PanelContainer
@@ -87,6 +87,7 @@ func configure(title: String,location: String,counters: Dictionary,selected: Str
 	header.add_child(heading)
 	UI.label(heading,title,38,UI.GOLD)
 	UI.label(heading,location,24,UI.MUTED)
+	compact_summary.reparent(heading)
 	for key: String in counters:
 		var chip := PanelContainer.new()
 		chip.custom_minimum_size.x = 142
@@ -110,3 +111,15 @@ func _fit() -> void:
 	compact_summary.visible = compact and selected_tab == "region"
 	for id: String in nav_buttons:
 		nav_buttons[id].text = NAV[id][1] if compact else NAV[id][0]
+	if compact and selected_tab == "region":
+		for id: String in nav_buttons:
+			var button: Button = nav_buttons[id]
+			button.custom_minimum_size.y = 44
+			button.add_theme_font_size_override("font_size",20)
+			button.add_theme_constant_override("icon_max_width",24)
+			for state in ["normal","hover","pressed","disabled"]: button.add_theme_stylebox_override(state,UI.frame("frame_metal",8))
+		for label: Label in header.find_children("*","Label",true,false): label.add_theme_font_size_override("font_size",22)
+		compact_summary.add_theme_font_size_override("font_size",18)
+		footer.custom_minimum_size.y = 42
+		footer.add_theme_stylebox_override("panel",UI.frame("frame_dark",8))
+		feedback.add_theme_font_size_override("font_size",18)

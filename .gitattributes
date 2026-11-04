@@ -22,6 +22,7 @@ assets_src/characters/warden_motion_pilot/** -text -whitespace
 assets_src/characters/drawn_animation/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
 assets_src/characters/drawn_knight*/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
 assets_src/ui_review_baselines/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+assets_src/ui_review_baselines/*/world-atlas-stage76.zip filter=lfs diff=lfs merge=lfs -text
 assets_src/ashen_ui/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
 
 # Preserve upstream formatting in vendored code and original license notices.

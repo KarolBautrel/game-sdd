@@ -1,6 +1,6 @@
 extends Control
+signal scene_requested(path: String)
 
-const Catalog := preload("res://scripts/systems/data_catalog.gd")
 const Campaign := preload("res://scripts/session/campaign_session.gd")
 const Party := preload("res://scripts/domain/party_roster.gd")
 const Model := preload("res://scripts/domain/dungeon_state_model.gd")
@@ -34,6 +34,7 @@ var inventory_category := "all"
 var inventory_hero_id := "unit_player_001"
 var inventory_slot := "main_hand"
 var journey_destination := ""
+var viewed_province := "marches"
 
 
 func _ready() -> void:
@@ -44,7 +45,24 @@ func _ready() -> void:
 			inventory_view = true
 		else:
 			campaign.load_profile("user://campaign_v1.json", DisplayServer.get_name() == "headless")
+	if campaign.living_active():
+		var requested: String=campaign.requested_campaign_tab
+		campaign.requested_campaign_tab=""
+		if requested in ["stash","trade","training"]:
+			inventory_view=requested=="stash"
+			trading_view=requested=="trade"
+			training_view=requested=="training"
+			town_view=requested!="stash"
+		else:
+			_go_scene.call_deferred("res://scenes/world/LivingWorld.tscn")
+			return
+	if campaign.loaded: viewed_province = Travel.province_id(campaign.state.world.location_id)
 	_render()
+
+
+func _go_scene(path: String) -> void:
+	if scene_requested.has_connections(): scene_requested.emit(path)
+	else: get_tree().change_scene_to_file(path)
 
 
 func _render() -> void:
@@ -64,8 +82,8 @@ func _render() -> void:
 		return
 	var profile: Dictionary = campaign.state
 	var selected := "training" if training_view else ("trade" if trading_view else ("stash" if inventory_view else ("town" if town_view else "region")))
-	var titles := {"region":"The Marches", "town":"Ravenford", "stash":"Stash & equipment", "trade":"Trading Post", "training":"Party advancement"}
-	shell.configure(titles[selected], "%s  /  %s" % [Travel.node_name(profile.world.location_id),Travel.clock_text(profile.world)], {"Gold":"%sg" % int(profile.gold),"Available XP":str(campaign.available_xp()),"Food":str(int(profile.supplies.food))}, selected, campaign.at_town(), campaign.can_trade())
+	var titles := {"region":"The Crownlands", "town":"Ravenford", "stash":"Stash & equipment", "trade":"Trading Post", "training":"Party advancement"}
+	shell.configure(titles[selected], "%s  /  %s" % [Travel.node_name(profile.world.location_id),Travel.clock_text(profile.world)], {"Gold":"%sg" % int(profile.gold),"Available XP":str(campaign.available_xp()),"Food":str(int(profile.supplies.food))}, selected, campaign.at_town() and (not campaign.living_active() or profile.world.location_id=="town_ravenford"), campaign.can_trade())
 	shell.navigation_requested.connect(_navigate)
 	feedback.text = campaign.last_feedback
 	feedback.tooltip_text = campaign.last_feedback
@@ -184,8 +202,8 @@ func _render_town(profile: Dictionary) -> void:
 	for key: String in Campaign.PRICES:
 		var tile := _button("buy_"+key,"",func() -> void: _buy(key),supplies)
 		tile.custom_minimum_size = Vector2(120,148)
-		tile.disabled = not _campaign().can_trade() or int(profile.gold) < int(Campaign.PRICES[key])
-		tile.tooltip_text = "Buy %s for %sg / Owned %s" % [Campaign.SUPPLY_NAMES[key],Campaign.PRICES[key],int(profile.supplies[key])]
+		tile.disabled = not _campaign().can_trade() or int(profile.gold) < _campaign().supply_price(key)
+		tile.tooltip_text = "Buy %s for %sg / Owned %s" % [Campaign.SUPPLY_NAMES[key],_campaign().supply_price(key),int(profile.supplies[key])]
 		var margin := MarginContainer.new()
 		margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		for edge in ["left","right","top","bottom"]: margin.add_theme_constant_override("margin_"+edge,10)
@@ -203,7 +221,7 @@ func _render_town(profile: Dictionary) -> void:
 		supply_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		body.add_child(supply_icon)
 		UI.label(body,Campaign.SUPPLY_NAMES[key],18)
-		UI.label(body,"%sg  /  Owned %s" % [Campaign.PRICES[key],int(profile.supplies[key])],18,UI.GOLD)
+		UI.label(body,"%sg  /  Owned %s" % [_campaign().supply_price(key),int(profile.supplies[key])],18,UI.GOLD)
 	content = UI.card(columns,"Town services","Trade, recover and develop your company before the next journey.")
 	_button("trade","Trading Post  /  Equipment & loot",_open_trade).disabled = not _campaign().can_trade()
 	_button("training","Training grounds  /  Allocate XP",_open_training).disabled = not _campaign().can_trade()
@@ -216,21 +234,47 @@ func _render_town(profile: Dictionary) -> void:
 
 func _render_region(profile: Dictionary) -> void:
 	var main := content
-	var region: Dictionary = Catalog.load_vertical_slice().world_region
+	var region := Travel.region()
+	var navigation := HFlowContainer.new()
+	navigation.add_theme_constant_override("h_separation",10)
+	navigation.add_theme_constant_override("v_separation",8)
+	main.add_child(navigation)
+	_button("world_overview","World atlas",func() -> void: _view_province(""),navigation)
+	for province: Dictionary in region.provinces:
+		var id: String = province.id
+		var tab := _button("province_"+id,str(province.name),func() -> void: _view_province(id),navigation)
+		if viewed_province == id: UI.select_button(tab)
+	_button("company_location","Find company",func() -> void: _view_province(Travel.province_id(profile.world.location_id)),navigation)
+	var compact := get_viewport_rect().size.x < 1500
+	for button: Button in navigation.get_children():
+		button.add_theme_font_size_override("font_size",20 if compact else 26)
+		button.custom_minimum_size = Vector2(button.get_theme_font("font").get_string_size(button.text,HORIZONTAL_ALIGNMENT_LEFT,-1,20 if compact else 26).x+36,44 if compact else 68)
+		if compact:
+			for state in ["normal","hover","pressed","disabled"]: button.add_theme_stylebox_override(state,UI.frame("frame_metal",8))
 	var layout := preload("res://scripts/presentation/world/region_layout.gd").new()
 	main.add_child(layout)
-	var map_panel := UI.card(layout,"The Marches","Known roads  /  Keep provisions for the return")
+	var province := Travel.province(region,viewed_province)
+	var map_title := str(region.name) + " / World" if viewed_province.is_empty() else str(province.name)
+	var subtitle := "4 provinces  /  20 destinations  /  Select a province" if viewed_province.is_empty() else str(province.description)
+	var map_panel := UI.card(layout,"" if compact else map_title,"" if compact else subtitle)
+	if compact:
+		map_panel.get_parent().add_theme_stylebox_override("panel",UI.frame("frame_dark",16))
+		UI.label(map_panel,map_title,24,UI.GOLD).tooltip_text=subtitle
 	map_panel.get_parent().size_flags_stretch_ratio = 2.8
 	var map := RegionMap.new()
 	map.name = "RegionMap"
 	map_panel.add_child(map)
 	var quotes: Dictionary = {}
-	for route: Dictionary in Travel.routes(region,profile.world.location_id):
-		var quote := Travel.quote(profile.world,route.to)
-		quotes[route.to] = {"allowed":profile.active_run.is_empty() and profile.world.pending_event.is_empty() and int(profile.supplies.food) >= int(quote.food)+int(quote.return_food),"inspect_allowed":profile.active_run.is_empty() and profile.world.pending_event.is_empty(),"caption":"%sh  /  %s food" % [quote.time_hours,quote.food],"tooltip":"Inspect %s / Danger %s%% / Keep %s food for return" % [Travel.node_name(route.to),int(quote.danger*100),quote.return_food]}
-	if Travel.quote(profile.world,journey_destination).is_empty(): journey_destination=""
-	map.configure(region,profile.world.location_id,quotes,journey_destination)
+	for entry: Dictionary in region.nodes:
+		var plan := Travel.plan(profile.world,entry.id)
+		if plan.is_empty(): continue
+		quotes[entry.id] = {"inspect_allowed":profile.active_run.is_empty() and profile.world.pending_event.is_empty(),"tooltip":"%s / %s stops / %sh / %s food\n%s" % [entry.name,plan.legs.size(),plan.time_hours,plan.food,entry.description]}
+	if Travel.plan(profile.world,journey_destination).is_empty(): journey_destination=""
+	map.configure(region,profile.world.location_id,quotes,journey_destination,viewed_province)
 	map.destination_selected.connect(_preview_journey)
+	map.province_selected.connect(_view_province)
+	UI.label(map_panel,"Company: %s / %s" % [Travel.node_name(profile.world.location_id),Travel.province(region,Travel.province_id(profile.world.location_id)).name],18 if compact else 22,UI.GOLD)
+	if not compact: UI.label(map_panel,"Select a landmark to plan a route. Red ink marks the selected journey.",20,UI.MUTED)
 	var columns := VBoxContainer.new()
 	columns.custom_minimum_size.x = 360
 	columns.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -247,19 +291,34 @@ func _render_region(profile: Dictionary) -> void:
 				var destination: String = route.to
 				var quote := Travel.quote(profile.world,destination)
 				var text := "%s  /  %sh  /  %s food" % [Travel.node_name(destination),quote.time_hours,quote.food]
-				_button("travel_"+destination,"Inspect "+text,func() -> void: _preview_journey(destination))
+				var caption := "%s\n%sh / %s food" % [Travel.node_name(destination),quote.time_hours,quote.food] if compact else "Inspect "+text
+				_button("travel_"+destination,caption,func() -> void: _preview_journey(destination))
 				_label("Danger %s%%  /  Return reserve %s food" % [int(quote.danger*100),quote.return_food],20,UI.MUTED)
 		_render_journey_preview(profile)
-	content = UI.card(columns,"At your destination","Town services require Ravenford; expeditions depart from the Old Mine.")
+	content = UI.card(columns,"At the company location",str(Travel.node(region,profile.world.location_id).description))
 	_button("town","Enter Ravenford",func() -> void: _navigate("town")).disabled = not _campaign().at_town()
 	if profile.active_run.is_empty(): _button("prepare","Old Mine  /  Prepare expedition",_prepare).disabled = profile.world.location_id != "dungeon_old_mine" or not profile.world.pending_event.is_empty()
 	_button("inventory","Open stash",_open_stash)
 	if profile.world.last_journey.has("event_result"): _label("Last road event: "+str(profile.world.last_journey.event_result).capitalize(),20,UI.MUTED)
+	_button("living_world","Living Marches / Mercenary pilot",func() -> void: _go_scene("res://scenes/world/LivingWorld.tscn"))
 	if not profile.last_return.is_empty(): _label("Last expedition: %s  /  +%sg  +%s XP  /  %s items" % [profile.last_return.outcome,int(profile.last_return.gold),int(profile.last_return.xp),profile.last_return.items.size()],20,UI.MUTED)
 	content = main
 
 
+func _view_province(id: String) -> void:
+	if id != "" and Travel.province(Travel.region(),id).is_empty(): return
+	viewed_province = id
+	_render()
+	shell.body_scroll.scroll_vertical = 0
+	var key := "world_overview" if id.is_empty() else "province_"+id
+	UI.focus_later(action_buttons[key])
+
+
 func _navigate(id: String) -> void:
+	if _campaign().living_active() and id=="region":
+		_go_scene("res://scenes/world/LivingWorld.tscn")
+		return
+	if _campaign().living_active() and id=="town" and _campaign().state.world.location_id!="town_ravenford": return
 	if id == "town" and not _campaign().at_town(): return
 	if id in ["trade","training"] and not _campaign().can_trade(): return
 	inventory_view = id == "stash"
@@ -271,11 +330,13 @@ func _navigate(id: String) -> void:
 
 
 func _label(text: String, font_size: int, color: Color = UI.TEXT) -> Label:
+	if shell.selected_tab == "region" and get_viewport_rect().size.x < 1500: font_size = mini(font_size,20)
 	return UI.label(content,text,font_size,color)
 
 
 func _button(id: String,text: String,callback: Callable,parent: Node = null) -> Button:
 	var button := UI.button(text,id in ["prepare","resume","event_fight"] or id.begins_with("travel_"))
+	if shell.selected_tab == "region" and get_viewport_rect().size.x < 1500: button.add_theme_font_size_override("font_size",20)
 	button.pressed.connect(callback)
 	(parent if parent != null else content).add_child(button)
 	action_buttons[id] = button
@@ -312,13 +373,15 @@ func _campaign() -> Node:
 
 
 func _travel(destination: String) -> void:
-	if _campaign().travel(destination): journey_destination=""
+	if _campaign().travel(destination):
+		viewed_province = Travel.province_id(destination)
+		if destination == journey_destination: journey_destination=""
 	_render()
 
 
 func _preview_journey(destination: String) -> void:
 	var campaign:=_campaign()
-	if not campaign.loaded or not campaign.state.active_run.is_empty() or not campaign.state.world.pending_event.is_empty() or Travel.quote(campaign.state.world,destination).is_empty(): return
+	if not campaign.loaded or not campaign.state.active_run.is_empty() or not campaign.state.world.pending_event.is_empty() or Travel.plan(campaign.state.world,destination).is_empty(): return
 	journey_destination=destination
 	_render()
 	var button: Button=action_buttons.get("travel_confirm")
@@ -343,10 +406,20 @@ func _render_journey_preview(profile: Dictionary) -> void:
 	if journey_destination.is_empty():
 		_label("Select a destination to inspect the journey before leaving.",22,UI.MUTED)
 		return
-	var quote:=Travel.quote(profile.world,journey_destination)
-	if quote.is_empty(): return
+	var plan := Travel.plan(profile.world,journey_destination)
+	if plan.is_empty(): return
+	var quote: Dictionary = plan.legs[0]
 	UI.rule(content)
 	_label("To "+Travel.node_name(journey_destination),28,UI.GOLD)
+	_label(str(Travel.node(Travel.region(),journey_destination).description),22,UI.MUTED)
+	if plan.legs.size() > 1:
+		if Travel.node(Travel.region(),journey_destination).type == "town": _label("Return route / conserves provisions",22,UI.GOLD)
+		_label("Whole route: %s legs / %sh / %s food\nCarry %s food to cover every leg and its return reserve." % [plan.legs.size(),plan.time_hours,plan.food,plan.required_food],22,UI.GOLD).name="JourneyTotals"
+		var stops: Array[String] = []
+		for index in range(plan.stops.size()): stops.append("%s. %s" % [index+1,Travel.node_name(plan.stops[index])])
+		_label("\n".join(stops),22,UI.MUTED).name="JourneyItinerary"
+		_label("Next stop: "+Travel.node_name(quote.to),26,UI.GOLD)
+		_label("Travel one leg, resolve any road event, then continue.",20,UI.MUTED)
 	_label("Road danger %s%%" % int(quote.danger*100),24,UI.MUTED)
 	var arrival: Dictionary=profile.world.duplicate(true)
 	arrival.elapsed_hours=int(arrival.elapsed_hours)+int(quote.time_hours)
@@ -356,13 +429,17 @@ func _render_journey_preview(profile: Dictionary) -> void:
 	_label("After travel: %s food\nKeep %s for return; %s remains beyond the reserve." % [maxi(0,left),quote.return_food,maxi(0,left-int(quote.return_food))],24,UI.MUTED).name="JourneyReserve"
 	var enough: bool=int(profile.supplies.food)>=int(quote.food)+int(quote.return_food)
 	if not enough: _label("Need %s food for this trip and return reserve; carrying %s." % [int(quote.food)+int(quote.return_food),profile.supplies.food],24,Color("e2a487"))
-	var confirm:=_button("travel_confirm","Travel to "+Travel.node_name(journey_destination),_confirm_journey)
+	elif int(profile.supplies.food)<int(plan.required_food): _label("Whole route needs %s more food. You can travel only the next leg with the current provisions." % [int(plan.required_food)-int(profile.supplies.food)],22,Color("e2a487"))
+	var confirm:=_button("travel_confirm","Travel to "+Travel.node_name(quote.to),_confirm_journey.bind(str(quote.from),int(profile.world.journey_count)))
 	confirm.disabled=not enough
 	_button("travel_cancel","Cancel journey plan",_cancel_journey)
 
 
-func _confirm_journey() -> void:
-	if not journey_destination.is_empty(): _travel(journey_destination)
+func _confirm_journey(expected_from: String = "",expected_count: int = -1) -> void:
+	var world: Dictionary = _campaign().state.world
+	if expected_count >= 0 and (world.location_id != expected_from or int(world.journey_count) != expected_count): return
+	var plan := Travel.plan(_campaign().state.world,journey_destination)
+	if not plan.is_empty(): _travel(str(plan.legs[0].to))
 
 
 func _cancel_journey() -> void:
@@ -370,6 +447,9 @@ func _cancel_journey() -> void:
 	journey_destination=""
 	_render()
 	if action_buttons.has("travel_"+previous): UI.focus_later(action_buttons["travel_"+previous])
+	else:
+		var map := find_child("RegionMap",true,false)
+		if map != null and map.marker_buttons.has(previous): UI.focus_later(map.marker_buttons[previous])
 
 
 func _open_stash() -> void:
@@ -380,6 +460,9 @@ func _open_stash() -> void:
 
 
 func _close_stash() -> void:
+	if _campaign().living_active():
+		_go_scene("res://scenes/world/LivingWorld.tscn")
+		return
 	inventory_view = false
 	_render()
 

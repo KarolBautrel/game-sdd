@@ -1,0 +1,107 @@
+{
+  "schema": "sdd.world-atlas-art-v1",
+  "date": "2026-11-04",
+  "generator": "built-in imagegen",
+  "reference": {
+    "path": "assets/ui/campaign/marches_map.png",
+    "sha256": "b8029885a2561260972c55043bb68dccb54ce7002fff204af9b34fadb78fa4a3",
+    "unchanged_from_HEAD": true
+  },
+  "prompts": "assets_src/world_atlas/2026-11-04/prompts.json",
+  "pipeline": "tools/aseprite/world_atlas.lua",
+  "repeat_export": "4/4 exact PNG hashes reproduced from editable Aseprite sources",
+  "files": [
+    {
+      "path": "assets/ui/campaign/world_atlas.png",
+      "bytes": 3803222,
+      "sha256": "516bdc4ad1635f931c79fac9eaaaba0ac041607dc5aacc501593907cd41ea9a5",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "path": "assets_src/aseprite/world_atlas/world_atlas.aseprite",
+      "bytes": 5078916,
+      "sha256": "4bea8641b32b493932a329c6da8ca63e1ef327fd8bd3efa20f174539395da450"
+    },
+    {
+      "path": "assets_src/world_atlas/2026-11-04/world_atlas-source.png",
+      "bytes": 4461065,
+      "sha256": "2b764a857a41c59dca33b49e60eb2499d4313df1dbc46c479ada4c6bf87e268a",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "path": "assets/ui/campaign/blackwood_map.png",
+      "bytes": 3755951,
+      "sha256": "3482d3f4098bc14b49a3e215e92d3fa51bc6275e165bd8d2511bdfa455e646e6",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "path": "assets_src/aseprite/world_atlas/blackwood_map.aseprite",
+      "bytes": 4944966,
+      "sha256": "25dee7ff140fef76bce500619537a2735f464cea1538b612eaa9e3c915f10739"
+    },
+    {
+      "path": "assets_src/world_atlas/2026-11-04/blackwood_map-source.png",
+      "bytes": 4362886,
+      "sha256": "378e8b1318433a558360f2a458e1cb264585a5bc4ebe5126d0f5ea5ea48bf34d",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "path": "assets/ui/campaign/highlands_map.png",
+      "bytes": 3813821,
+      "sha256": "542938ddab2515a89ec16531feed3e04c6e8b37b2422edf184cf511b6e7412aa",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "path": "assets_src/aseprite/world_atlas/highlands_map.aseprite",
+      "bytes": 5082039,
+      "sha256": "5792455eefa045942014454e3d53eebb330c1f3ac245698e9a95642d9efb35f1"
+    },
+    {
+      "path": "assets_src/world_atlas/2026-11-04/highlands_map-source.png",
+      "bytes": 4460877,
+      "sha256": "d0511ba16df7035c6d63e38590c8785e5820e215a23ea8f3c954e84f35ced6c4",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "path": "assets/ui/campaign/coast_map.png",
+      "bytes": 3692082,
+      "sha256": "506f6f409618dc6ff3c0cce55c62b372889b5506d95c4621ac6c9fb9f03166dc",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "path": "assets_src/aseprite/world_atlas/coast_map.aseprite",
+      "bytes": 5042271,
+      "sha256": "15481fc6528c1ed10848ef2f0e717b4295b8ef09f4459ec40bfb4403ef7bff10"
+    },
+    {
+      "path": "assets_src/world_atlas/2026-11-04/coast_map-source.png",
+      "bytes": 4257620,
+      "sha256": "6b010146539afbafd0d6fab5bffbead21e0e0337524475021e0e156904896a7a",
+      "size": [
+        1672,
+        941
+      ]
+    }
+  ]
+}

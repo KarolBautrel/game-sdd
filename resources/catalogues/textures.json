@@ -71808,11 +71808,25 @@
       "height": 128
     },
     {
+      "path": "res://assets/ui/campaign/blackwood_map.png",
+      "bytes": 3755951,
+      "sha256": "3482d3f4098bc14b49a3e215e92d3fa51bc6275e165bd8d2511bdfa455e646e6",
+      "width": 1672,
+      "height": 941
+    },
+    {
       "path": "res://assets/ui/campaign/button.png",
       "bytes": 21080,
       "sha256": "0d9d14c11dce972675e80fd7c2c7294bd731d79800c0b4219c0df8619186e88b",
       "width": 128,
       "height": 64
+    },
+    {
+      "path": "res://assets/ui/campaign/coast_map.png",
+      "bytes": 3692082,
+      "sha256": "506f6f409618dc6ff3c0cce55c62b372889b5506d95c4621ac6c9fb9f03166dc",
+      "width": 1672,
+      "height": 941
     },
     {
       "path": "res://assets/ui/campaign/divider.png",
@@ -71911,6 +71925,13 @@
       "sha256": "c6e6b05a6113f025f833aff2a69916e3f08940b4acb0feea64ac7f78c0a82a45",
       "width": 32,
       "height": 32
+    },
+    {
+      "path": "res://assets/ui/campaign/highlands_map.png",
+      "bytes": 3813821,
+      "sha256": "542938ddab2515a89ec16531feed3e04c6e8b37b2422edf184cf511b6e7412aa",
+      "width": 1672,
+      "height": 941
     },
     {
       "path": "res://assets/ui/campaign/items/amber_idol_chip.png",
@@ -72149,6 +72170,13 @@
       "sha256": "f71f7eff45ed084e789405bbbb691758ee09ddbdc29e820b5ade4acaf41032ed",
       "width": 44,
       "height": 44
+    },
+    {
+      "path": "res://assets/ui/campaign/world_atlas.png",
+      "bytes": 3803222,
+      "sha256": "516bdc4ad1635f931c79fac9eaaaba0ac041607dc5aacc501593907cd41ea9a5",
+      "width": 1672,
+      "height": 941
     },
     {
       "path": "res://assets/ui/character_studies/a_painterly_veteran/face.png",

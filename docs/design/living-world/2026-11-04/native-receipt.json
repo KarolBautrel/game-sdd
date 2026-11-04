@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "engine_clicks": 48,
+  "errors": 0,
+  "warnings": 0,
+  "physical_desktop_acceptance": "NOT_RUN",
+  "uses_desktop_input": false,
+  "player_save_used": false,
+  "checks": 146,
+  "captures": 18,
+  "source": "artifacts/qa-runs/living-world-native-final/native-review.json",
+  "note": "Final UI includes compact tabs and integer counts. A later dungeon payroll boundary refinement is covered by41focused session checks and the final full-source verifier; it does not change these native scenarios."
+}

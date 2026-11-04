@@ -32,6 +32,25 @@ window/stretch/aspect="expand"
 
 3d/physics_engine="Jolt Physics"
 
+[input]
+
+living_pause={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":32)]
+}
+living_speed_1={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":49)]
+}
+living_speed_2={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":50)]
+}
+living_speed_4={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":52)]
+}
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/theme_gen_save_sync/plugin.cfg", "res://addons/campaign_ui_theme/plugin.cfg")

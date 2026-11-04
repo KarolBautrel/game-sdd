@@ -7,6 +7,7 @@ const Party := preload("res://scripts/domain/party_roster.gd")
 const Gear := preload("res://scripts/domain/campaign_equipment.gd")
 const Trade := preload("res://scripts/domain/town_trade.gd")
 const Advancement := preload("res://scripts/domain/party_advancement.gd")
+const Living := preload("res://scripts/domain/living_world.gd")
 const PRICES := {"lamp_oil": 2, "pickaxe": 4, "trap_tools": 3, "bandage": 2, "camping_kit": 5, "food": 1}
 const SUPPLY_NAMES := {"lamp_oil": "Torch oil", "pickaxe": "Pickaxe", "trap_tools": "Trap tools", "bandage": "Bandage", "camping_kit": "Camping kit", "food": "Food"}
 var state: Dictionary = {}
@@ -14,6 +15,7 @@ var loaded := false
 var save_path := "user://campaign_v1.json"
 var memory_only := false
 var last_feedback := ""
+var requested_campaign_tab := ""
 
 
 static func initial_profile() -> Dictionary:
@@ -69,10 +71,73 @@ func load_profile(path: String = "user://campaign_v1.json", in_memory: bool = fa
 	return true
 
 
+func living_active() -> bool:
+	return loaded and state.has("living_world")
+
+
+func enable_living_world() -> bool:
+	if not loaded or living_active() or not state.active_run.is_empty() or not state.world.pending_event.is_empty() or (not memory_only and not save_path.begins_with("user://qa_living_world_")):
+		return _reject("Living-world initialization requires its separate pilot profile.")
+	var next:=state.duplicate(true)
+	next.living_world=Living.initial(int(next.world.seed),int(next.world.elapsed_hours))
+	next.world.location_id="town_ravenford"
+	next.gold=80
+	next.supplies.food=16
+	return _commit(next,"Living Marches: a new mercenary company in Ravenford.")
+
+
+func living_course(destination: Vector2,goal: String = "") -> bool:
+	if not _living_available(): return _reject("Resolve the expedition or road event before travelling.")
+	var next:=state.duplicate(true)
+	if not Living.course(next,destination,goal): return _reject("That destination is outside the passable land. Choose a road or clearing.")
+	return _commit(next,"Course set. Pause or change direction at any time.")
+
+
+func advance_living(ticks: int = 1) -> bool:
+	if not _living_available() or ticks<1 or ticks>192: return _reject("Strategic time is paused while an expedition or road event is active.")
+	var next:=state.duplicate(true)
+	var contact:=Living.advance(next,ticks)
+	if contact:
+		next.world.journey_count=int(next.world.journey_count)+1
+		next.world.pending_event=Travel.pending_for(next.world,{"to":next.world.location_id,"danger":1.0})
+	return _commit(next,"Raider contact. Resolve the encounter to continue." if contact else last_feedback)
+
+
+func living_camp(enabled: bool) -> bool:
+	if not _living_available(): return _reject("Camping is unavailable during an expedition or road event.")
+	var next:=state.duplicate(true)
+	next.living_world.party.path=[]
+	next.living_world.party.goal=""
+	next.living_world.party.camping=enabled
+	return _commit(next,"Camp established. Time and upkeep continue while resting." if enabled else "Camp packed.")
+
+
+func accept_living_contract(id: String) -> bool:
+	if not _living_available(): return _reject("Contract acceptance is unavailable.")
+	var next:=state.duplicate(true)
+	if not Living.accept(next,id): return _reject("Accept this offered contract at its issuing settlement.")
+	return _commit(next,"Accepted "+str(Living.contract(id).name)+".")
+
+
+func report_living_contract(id: String) -> bool:
+	if not _living_available(): return _reject("Contract reporting is unavailable.")
+	var next:=state.duplicate(true)
+	if not Living.report(next,id): return _reject("Return to the issuer with the completed objective or 3 delivery food.")
+	return _commit(next,"Contract paid: "+str(Living.contract(id).name)+".")
+
+
+func _living_available() -> bool:
+	return living_active() and state.active_run.is_empty() and state.world.pending_event.is_empty()
+
+
+func supply_price(id: String) -> int:
+	return Living.food_price(state.living_world) if id=="food" and living_active() else int(PRICES.get(id,0))
+
+
 func purchase(supply_id: String) -> bool:
 	if not loaded or not PRICES.has(supply_id) or not state.active_run.is_empty() or not at_town():
 		return _reject("Purchase unavailable.")
-	var cost: int = PRICES[supply_id]
+	var cost: int = supply_price(supply_id)
 	if int(state.gold) < cost:
 		return _reject("Not enough gold.")
 	var next := state.duplicate(true)
@@ -87,6 +152,7 @@ func recover() -> bool:
 	var next := state.duplicate(true)
 	next.gold = int(next.gold) - 5
 	next.effects = initial_profile().effects
+	if living_active(): next.living_world.party.fatigue=0
 	return _commit(next, "Party recovered at the inn (5g).")
 
 
@@ -124,6 +190,9 @@ func sell_item(item_id: String) -> bool:
 func begin_run(data: Dictionary, run_state: Dictionary) -> bool:
 	if not loaded or not state.active_run.is_empty() or data.get("rooms", []).is_empty() or state.world.location_id != "dungeon_old_mine" or not state.world.pending_event.is_empty():
 		return _reject("An expedition is already active or campaign is unavailable.")
+	if living_active() and (not Living.at_site(state.living_world,"dungeon_old_mine") or (data.get("id","")!="dungeon_old_mine" and data.get("generated_profile",{}).get("theme","")!="mine")):
+		return _reject("Travel to the Old Mine before preparing its expedition.")
+	if living_active() and state.living_world.mine.status=="cleared": return _reject("The restored mine stays cleared. Seek another contract.")
 	var loadout: Dictionary = run_state.get("selected_supply_loadout", {})
 	if loadout.is_empty() or Model.clamp_supply_loadout(data, loadout) != loadout:
 		return _reject("Invalid expedition loadout.")
@@ -142,6 +211,10 @@ func begin_run(data: Dictionary, run_state: Dictionary) -> bool:
 		"data": data.duplicate(true), "state": carried, "combat_seed": 0,
 		"equipment_snapshot": state.equipment.duplicate(true),
 		"advancement_snapshot": state.advancement.duplicate(true)}
+	if living_active():
+		next.active_run.living_site="dungeon_old_mine"
+		next.active_run.living_room_count=carried.get("visited_room_ids",[]).size()
+		next.active_run.living_camp_count=carried.get("camp_log",[]).size()
 	return _commit(next, "Expedition packed from owned supplies.")
 
 
@@ -149,6 +222,14 @@ func checkpoint(data: Dictionary, run_state: Dictionary, combat_seed: int = 0) -
 	if not loaded or state.active_run.is_empty() or str(data.get("id", "")) != str(state.active_run.data.get("id", "")):
 		return _reject("No matching active expedition.")
 	var next := state.duplicate(true)
+	if living_active():
+		var rooms: int=run_state.get("visited_room_ids",[]).size()
+		var camps: int=run_state.get("camp_log",[]).size()
+		var ticks:=maxi(0,rooms-int(next.active_run.get("living_room_count",rooms)))+16*maxi(0,camps-int(next.active_run.get("living_camp_count",camps)))
+		if ticks>1000: return _reject("Invalid expedition time checkpoint.")
+		Living.advance(next,ticks,true)
+		next.active_run.living_room_count=maxi(rooms,int(next.active_run.get("living_room_count",rooms)))
+		next.active_run.living_camp_count=maxi(camps,int(next.active_run.get("living_camp_count",camps)))
 	next.active_run.data = data.duplicate(true)
 	next.active_run.state = run_state.duplicate(true)
 	next.active_run.combat_seed = combat_seed
@@ -188,15 +269,18 @@ func settle(payload: Dictionary) -> bool:
 		next.supplies[key] = int(next.supplies[key]) + int(remaining.get(key, 0))
 	next.receipts.append(receipt)
 	next.last_return = {"outcome": outcome, "gold": delta.gold, "xp": delta.xp, "items": delta.items.duplicate()}
+	if living_active(): Living.expedition_result(next,active,outcome)
 	next.active_run = {}
 	return _commit(next, "Expedition settled: %s, +%sg, +%s XP." % [outcome, delta.gold, delta.xp])
 
 
 func at_town() -> bool:
+	if living_active(): return Living.at_town(state.living_world) and state.world.pending_event.is_empty()
 	return loaded and Travel.node(Travel.region(), str(state.world.location_id)).get("type", "") == "town" and state.world.pending_event.is_empty()
 
 
 func travel(destination: String) -> bool:
+	if living_active(): return _reject("Use the continuous living map to travel.")
 	if not loaded or not state.active_run.is_empty() or not state.world.pending_event.is_empty():
 		return _reject("Travel unavailable while an expedition/event is active.")
 	var quote := Travel.quote(state.world, destination)
@@ -335,7 +419,7 @@ func _commit(next: Dictionary, message: String) -> bool:
 		var file := FileAccess.open(temporary, FileAccess.WRITE)
 		if file == null:
 			return _reject("Cannot write campaign save; transaction cancelled.")
-		file.store_string(JSON.stringify(next, "\t") + "\n")
+		file.store_string(JSON.stringify(next, "\t", true, true) + "\n")
 		file.flush()
 		var error := file.get_error()
 		file.close()
@@ -390,6 +474,14 @@ static func _valid_profile(value: Dictionary) -> bool:
 		return false
 	if int(value.version) >= 2 and not Travel.valid(value.get("world")):
 		return false
+	if value.has("living_world"):
+		if not value.get("active_run") is Dictionary: return false
+		if int(value.version)!=4 or not Living.valid(value.living_world) or int(value.world.elapsed_hours)!=int(value.living_world.tick)/4: return false
+		if not value.get("active_run",{}).is_empty():
+			var active: Dictionary=value.active_run
+			if active.get("living_site")!="dungeon_old_mine" or not _count(active.get("living_room_count")) or not _count(active.get("living_camp_count")): return false
+			if not active.get("state") is Dictionary or not active.state.get("visited_room_ids") is Array or not active.state.get("camp_log") is Array: return false
+			if int(active.living_room_count)>active.state.visited_room_ids.size() or int(active.living_camp_count)>active.state.camp_log.size(): return false
 	if int(value.version) >= 2 and value.get("active_run") is Dictionary and not value.active_run.is_empty() and not value.world.pending_event.is_empty():
 		return false
 	for key in ["supplies", "effects", "active_run", "last_return"]:

@@ -4,6 +4,10 @@ Date:2026-11-04. Authorized stage69, milestone022. Keep the approved campaign006
 world-map art, frame/material hierarchy and typography. World002/003 and
 CampaignSession remain the owners of route costs, danger, events and saves.
 
+Current extension035/world009 permits non-adjacent itinerary inspection and
+province browsing. Confirm still revalidates and commits exactly one adjacent
+leg. The adjacent-only selection restriction below is the historical stage69.
+
 - Selecting a known adjacent map landmark or journey-list entry previews the
   route. It never travels, charges food/time, increments journey_count, creates
   an event, rerolls risk, heals or writes a save.

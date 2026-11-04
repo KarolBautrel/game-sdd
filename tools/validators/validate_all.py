@@ -15,6 +15,7 @@ from tools.validators.hero_equipment_identity import errors as hero_identity_err
 from tools.validators.tactical_roster import errors as tactical_roster_errors
 from tools.validators.town_spaces import errors as town_space_errors
 from tools.validators.combat_authoring import catalogue_errors as combat_authoring_errors, encounter_errors
+from tools.validators.living_region import reference_errors as living_reference_errors
 
 try:
     from jsonschema import Draft202012Validator
@@ -104,6 +105,7 @@ VALIDATION_TARGETS = [
     ("resources/schemas/campaign_profile.schema.json", "resources/data/campaign/*.json"),
     ("resources/schemas/combat_scenario_catalogue.schema.json", "resources/data/combat_scenarios/*.json"),
     ("resources/schemas/world_region.schema.json", "resources/data/world_regions/*.json"),
+    ("resources/schemas/living_region.schema.json", "resources/data/world_simulations/*.json"),
     ("resources/schemas/town.schema.json", "resources/data/towns/*.json"),
     ("resources/schemas/dungeon.schema.json", "resources/data/dungeons/*.json"),
     ("resources/schemas/dungeon_event.schema.json", "resources/data/dungeon_events/*.json"),
@@ -143,16 +145,44 @@ def validate_world_region_references() -> list[str]:
     for path in sorted((ROOT / "resources/data/world_regions").glob("*.json")):
         region = load_json(path)
         node_ids = {node["id"] for node in region["nodes"]}
+        province_ids = {province["id"] for province in region.get("provinces", [])}
+        if len(node_ids) != len(region["nodes"]):
+            errors.append(f"{path.relative_to(ROOT)}: duplicate node ids")
+        if len(province_ids) != len(region.get("provinces", [])):
+            errors.append(f"{path.relative_to(ROOT)}: duplicate province ids")
+        roads: set[tuple[str, str]] = set()
 
         for edge in region["edges"]:
+            road = tuple(sorted((edge["from"], edge["to"])))
+            if edge["from"] == edge["to"] or road in roads:
+                errors.append(f"{path.relative_to(ROOT)}: self or duplicate road {road}")
+            roads.add(road)
             if edge["from"] not in node_ids:
                 errors.append(f"{path.relative_to(ROOT)}: edge.from references missing node {edge['from']}")
             if edge["to"] not in node_ids:
                 errors.append(f"{path.relative_to(ROOT)}: edge.to references missing node {edge['to']}")
 
         for node in region["nodes"]:
+            if node.get("province") not in province_ids:
+                errors.append(f"{path.relative_to(ROOT)}: missing province for {node['id']}")
             if not ID_RE.match(node["entry_spec"]):
                 errors.append(f"{path.relative_to(ROOT)}: invalid entry_spec {node['entry_spec']}")
+        for province in region.get("provinces", []):
+            if not any(node.get("province") == province["id"] for node in region["nodes"]):
+                errors.append(f"{path.relative_to(ROOT)}: empty province {province['id']}")
+            if not (ROOT / province["map"].removeprefix("res://")).is_file():
+                errors.append(f"{path.relative_to(ROOT)}: missing province map {province['map']}")
+        reachable = {node["id"] for node in region["nodes"] if node["type"] == "town"}
+        while True:
+            expanded = reachable | {b for a, b in roads if a in reachable} | {a for a, b in roads if b in reachable}
+            if expanded == reachable:
+                break
+            reachable = expanded
+        if node_ids - reachable:
+            errors.append(f"{path.relative_to(ROOT)}: no town return for {sorted(node_ids - reachable)}")
+    atlas_ids = {node["id"] for node in load_json(ROOT / "resources/data/world_regions/region_001.json")["nodes"]}
+    for path in sorted((ROOT / "resources/data/world_simulations").glob("*.json")):
+        errors.extend(f"{path.relative_to(ROOT)}: {message}" for message in living_reference_errors(load_json(path), atlas_ids, ROOT))
     return errors
 
 

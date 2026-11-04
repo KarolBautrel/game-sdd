@@ -233,3 +233,50 @@ Published checkpoint f0afad7c on game-sdd/master; remote SHA matches,175LFS obje
 (154MB) uploaded, subsequent dry run empty and working tree clean. Full69/69
 verification PASS. User acceptance and original queue are saved in the latest
 dungeon-approved-publication handoff; next review is equipment.
+
+76. New explicit user priority: review point3, larger interactive world, ahead
+of equipment. World009/presentation035 and slices009/035 own the four-province,
+twenty-destination atlas. Preserve the accepted Marches artwork and local saved
+position; world/province browsing, deterministic itinerary and explicit adjacent
+leg confirmations are integrated into App. Four new generated maps have editable
+Aseprite sources and exact repeatable exports; every destination has a town
+return route. Ravenford/Old Mine remain the only implemented services/expedition.
+No new interiors, loot, price changes, desktop input or player-save QA.
+
+Focused atlas170/0, campaign layout2468/0 and dark-fantasy art218/0 PASS. Native
+world/province/itinerary fixture318checks/40pointer clicks/16captures PASS at720p
+and1080p; engine-local keyboard selection also exercised. Initial full sweep
+found compact party-summary and narrow marker-overlap regressions; both repaired
+and focused checks repeated. Final verification receipts and current status:
+docs/qa/2026-11-04-world-atlas.md. User visual/physical review remains pending.
+Town-bound plans now minimize food then hours, making the displayed return route
+affordable with exactly the retained reserve. Native return-trip proof is part
+of the final fixture. Final full-source verification includes that refinement.
+Next: show the integrated atlas and review one outbound/return global journey.
+Point2 equipment and the later battles/courtyard remain saved pending reviews.
+
+77. User authorizes the living mercenary-world proposal. Implement its first
+complete authored-region pilot before seeded geography and broader content.
+Owners world010/presentation036 and slices010/036. Same approved map/art and
+immutable233-file archive remain. Optional version1 living block extends v4
+profiles without altering legacy defaults; the interactive pilot has a separate
+resumable save and never overwrites the ordinary campaign.
+
+Continuous land/road courses, pause/1x/2x/4x, company upkeep/camp, caravan and
+patrol/raider activity, supply/security/real food prices, two factions' border
+conflict and three contextual one-time contracts are implemented. Existing
+equipment, road ambush and managed dungeon boundaries are reused. Completed
+defended mine changes raid/supply state atomically with its receipt; retreat,
+bypassed defenders and duplicate reporting do not. Dungeon room/camp checkpoint
+time is charged once. Town entry checks actual position rather than last atlas id.
+
+Focused domain28/0, session41/0, interface97/0 and three Python reference/schema
+tests PASS. Native first/fixed fixtures exercise actual pointer/Space, movement,
+owned packing, ordinary retreat and equipment return at720p/1080p:132checks/
+44clicks/16captures PASS, zero diagnostics. Initial native review caught a stock
+label collapsing the header; explicit width and geometry assertions repair it.
+Final-source faction-contact/native and complete-suite receipts are recorded in
+docs/qa/2026-11-04-living-world.md. Source result approval and physical ordinary
+mine victory are pending; boundary state fixtures are not played victories.
+Next: player reviews the small living loop, then seeded modular geography and
+contract/content expansion. No new commit/push is requested by this stage.

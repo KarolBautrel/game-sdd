@@ -1,0 +1,308 @@
+{
+  "source": "artifacts/qa-runs/living-world-payroll-final/report.json",
+  "automated_status": "PASS",
+  "checks": 74,
+  "errors": 0,
+  "warnings": 0,
+  "source_sha256": "33abdbc094ae143529fe5f70a950e694e50391cd89f50d09348ff4353c701fe5",
+  "checked_source_matches_workspace": true,
+  "physical_acceptance": "NOT_RUN",
+  "results": [
+    {
+      "name": "python_validation",
+      "status": "PASS"
+    },
+    {
+      "name": "python_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "godot_version",
+      "status": "PASS"
+    },
+    {
+      "name": "godot_import",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_slice_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "dungeon_beta_loop_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "dungeon_entry_selection_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "dungeon_generation_quality_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "dungeon_procedural_draft_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "dungeon_state_model_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "living_world_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "ashen_exploration_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "asset_catalog_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_interface_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "character_style_preview_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_animation_lifecycle_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_art_direction_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_debug_force_victory_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_encounter_authoring_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_feedback_polish_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_floating_text_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_hud_layout_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_map_editor_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_mercenary_asset_pipeline_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_panel_skin_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_targeting_preview_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_terrain_asset_pipeline_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_ui_asset_pipeline_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_unit_readability_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "combat_unit_visual_state_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "dark_fantasy_ui_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "drawn_animation_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "drawn_battle_review_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "dungeon_exploration_hud_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "dungeon_party_layout_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "dungeon_route_preview_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "dungeon_visual_cohesion_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "environment_art_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "equipment_usability_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "expedition_art_direction_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "hud_component_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "inventory_stash_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "journey_interface_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "living_world_interface_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "map_authoring_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "modular_actor_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "original_raider_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "original_roster_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "painted_arena_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "painted_enemy_pilot_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "service_interface_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "tactical_facing_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "town_exploration_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "visual_inventory_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "world_town_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_equipment_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_session_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "dungeon_combat_injury_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "dungeon_run_session_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "equipment_appearance_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "hero_equipment_identity_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "living_world_session_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "party_advancement_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "road_event_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "town_trade_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "world_atlas_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "world_travel_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "scene_LivingWorld",
+      "status": "PASS"
+    },
+    {
+      "name": "scene_App",
+      "status": "PASS"
+    },
+    {
+      "name": "scene_town_shell",
+      "status": "PASS"
+    },
+    {
+      "name": "scene_TownExploration",
+      "status": "PASS"
+    },
+    {
+      "name": "scene_DungeonDebug",
+      "status": "PASS"
+    },
+    {
+      "name": "scene_CombatDebug",
+      "status": "PASS"
+    },
+    {
+      "name": "scene_CombatMapEditor",
+      "status": "PASS"
+    }
+  ]
+}

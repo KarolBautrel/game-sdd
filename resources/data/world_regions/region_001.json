@@ -4,35 +4,601 @@
     {
       "id": "town_ravenford",
       "type": "town",
-      "position": { "x": 12, "y": 8 },
-      "entry_spec": "town_ravenford"
+      "position": {
+        "x": 12,
+        "y": 8
+      },
+      "entry_spec": "town_ravenford",
+      "name": "Ravenford",
+      "description": "The company's home town. Provisioner, trading post, inn and training grounds.",
+      "province": "marches",
+      "anchor": {
+        "x": 0.22,
+        "y": 0.34
+      }
     },
     {
       "id": "dungeon_old_mine",
       "type": "dungeon",
-      "position": { "x": 18, "y": 11 },
-      "entry_spec": "dungeon_old_mine"
+      "position": {
+        "x": 18,
+        "y": 11
+      },
+      "entry_spec": "dungeon_old_mine",
+      "name": "Old Mine",
+      "description": "An abandoned mine in the eastern foothills. Prepare a managed expedition here.",
+      "province": "marches",
+      "anchor": {
+        "x": 0.84,
+        "y": 0.65
+      }
     },
     {
       "id": "event_broken_cart",
       "type": "event",
-      "position": { "x": 15, "y": 10 },
-      "entry_spec": "event_broken_cart"
+      "position": {
+        "x": 15,
+        "y": 10
+      },
+      "entry_spec": "event_broken_cart",
+      "name": "Broken Cart",
+      "description": "A broken wagon beside the old road. An unresolved roadside choice awaits the first visit.",
+      "province": "marches",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.575
+      }
+    },
+    {
+      "id": "watch_hill",
+      "type": "ruin",
+      "position": {
+        "x": 16,
+        "y": 5
+      },
+      "entry_spec": "watch_hill",
+      "name": "Watch Hill",
+      "description": "A ruined watch post above the river road. The northern trail leads into Blackwood.",
+      "province": "marches",
+      "anchor": {
+        "x": 0.53,
+        "y": 0.23
+      }
+    },
+    {
+      "id": "north_gate",
+      "type": "blockade",
+      "position": {
+        "x": 25,
+        "y": 4
+      },
+      "entry_spec": "north_gate",
+      "name": "North Gate",
+      "description": "The stone road climbs from the Marches towards the Iron Highlands.",
+      "province": "marches",
+      "anchor": {
+        "x": 0.83,
+        "y": 0.22
+      }
+    },
+    {
+      "id": "blackwood_gate",
+      "type": "camp",
+      "position": {
+        "x": 23,
+        "y": 16
+      },
+      "entry_spec": "blackwood_gate",
+      "name": "Pineward",
+      "description": "A charcoal camp at the southern edge of Blackwood. The road returns to Watch Hill.",
+      "province": "blackwood",
+      "anchor": {
+        "x": 0.78,
+        "y": 0.78
+      }
+    },
+    {
+      "id": "forester_camp",
+      "type": "camp",
+      "position": {
+        "x": 8,
+        "y": 14
+      },
+      "entry_spec": "forester_camp",
+      "name": "Forester Camp",
+      "description": "Cold hearths beneath tall pines. A stopping point on the western trail.",
+      "province": "blackwood",
+      "anchor": {
+        "x": 0.25,
+        "y": 0.68
+      }
+    },
+    {
+      "id": "sunken_abbey",
+      "type": "ruin",
+      "position": {
+        "x": 10,
+        "y": 5
+      },
+      "entry_spec": "sunken_abbey",
+      "name": "Sunken Abbey",
+      "description": "The shell of an abbey stands in the mist. Its interior is not yet explorable.",
+      "province": "blackwood",
+      "anchor": {
+        "x": 0.32,
+        "y": 0.25
+      }
+    },
+    {
+      "id": "blackwater_ford",
+      "type": "event",
+      "position": {
+        "x": 18,
+        "y": 9
+      },
+      "entry_spec": "blackwater_ford",
+      "name": "Blackwater Ford",
+      "description": "A shallow river crossing where the old forest paths meet.",
+      "province": "blackwood",
+      "anchor": {
+        "x": 0.59,
+        "y": 0.47
+      }
+    },
+    {
+      "id": "thorn_ruins",
+      "type": "ruin",
+      "position": {
+        "x": 23,
+        "y": 4
+      },
+      "entry_spec": "thorn_ruins",
+      "name": "Thorn Ruins",
+      "description": "Overgrown walls mark the eastern forest road towards the high pass.",
+      "province": "blackwood",
+      "anchor": {
+        "x": 0.78,
+        "y": 0.22
+      }
+    },
+    {
+      "id": "iron_gate",
+      "type": "blockade",
+      "position": {
+        "x": 4,
+        "y": 14
+      },
+      "entry_spec": "iron_gate",
+      "name": "Iron Gate",
+      "description": "A mountain-road checkpoint above the Marches. The route remains passable.",
+      "province": "highlands",
+      "anchor": {
+        "x": 0.15,
+        "y": 0.72
+      }
+    },
+    {
+      "id": "grey_quarry",
+      "type": "ruin",
+      "position": {
+        "x": 13,
+        "y": 13
+      },
+      "entry_spec": "grey_quarry",
+      "name": "Grey Quarry",
+      "description": "Abandoned cutting terraces and a narrow workers' road.",
+      "province": "highlands",
+      "anchor": {
+        "x": 0.43,
+        "y": 0.64
+      }
+    },
+    {
+      "id": "high_pass",
+      "type": "event",
+      "position": {
+        "x": 14,
+        "y": 4
+      },
+      "entry_spec": "high_pass",
+      "name": "High Pass",
+      "description": "A wind-scoured saddle connecting the highlands with Blackwood.",
+      "province": "highlands",
+      "anchor": {
+        "x": 0.48,
+        "y": 0.22
+      }
+    },
+    {
+      "id": "black_keep",
+      "type": "ruin",
+      "position": {
+        "x": 23,
+        "y": 7
+      },
+      "entry_spec": "black_keep",
+      "name": "Black Keep",
+      "description": "A fortress overlooking the eastern valley. Its interior is not yet explorable.",
+      "province": "highlands",
+      "anchor": {
+        "x": 0.78,
+        "y": 0.34
+      }
+    },
+    {
+      "id": "stone_bridge",
+      "type": "event",
+      "position": {
+        "x": 22,
+        "y": 15
+      },
+      "entry_spec": "stone_bridge",
+      "name": "Stone Bridge",
+      "description": "The southern bridge leads down towards the coastal beacon.",
+      "province": "highlands",
+      "anchor": {
+        "x": 0.72,
+        "y": 0.76
+      }
+    },
+    {
+      "id": "coastal_road",
+      "type": "event",
+      "position": {
+        "x": 6,
+        "y": 5
+      },
+      "entry_spec": "coastal_road",
+      "name": "Coastal Road",
+      "description": "A road descends from the Old Mine to the saltwater lowlands.",
+      "province": "coast",
+      "anchor": {
+        "x": 0.2,
+        "y": 0.25
+      }
+    },
+    {
+      "id": "saltwatch",
+      "type": "camp",
+      "position": {
+        "x": 14,
+        "y": 11
+      },
+      "entry_spec": "saltwatch",
+      "name": "Saltwatch",
+      "description": "A sheltered harbor camp. Town services are still only available in Ravenford.",
+      "province": "coast",
+      "anchor": {
+        "x": 0.48,
+        "y": 0.56
+      }
+    },
+    {
+      "id": "ashen_beacon",
+      "type": "ruin",
+      "position": {
+        "x": 23,
+        "y": 4
+      },
+      "entry_spec": "ashen_beacon",
+      "name": "Ashen Beacon",
+      "description": "A ruined lighthouse watches the inlet; the ridge road reaches Stone Bridge.",
+      "province": "coast",
+      "anchor": {
+        "x": 0.78,
+        "y": 0.22
+      }
+    },
+    {
+      "id": "wreck_shore",
+      "type": "ruin",
+      "position": {
+        "x": 25,
+        "y": 14
+      },
+      "entry_spec": "wreck_shore",
+      "name": "Wreck Shore",
+      "description": "Timbers lie scattered along the eastern strand. A travel landmark with no repeatable loot.",
+      "province": "coast",
+      "anchor": {
+        "x": 0.82,
+        "y": 0.72
+      }
+    },
+    {
+      "id": "reed_marsh",
+      "type": "event",
+      "position": {
+        "x": 7,
+        "y": 16
+      },
+      "entry_spec": "reed_marsh",
+      "name": "Reed Marsh",
+      "description": "Reed beds and raised causeways on the sheltered side of the inlet.",
+      "province": "coast",
+      "anchor": {
+        "x": 0.24,
+        "y": 0.78
+      }
     }
   ],
   "edges": [
     {
       "from": "town_ravenford",
       "to": "dungeon_old_mine",
-      "travel_cost": { "time_hours": 6, "food": 1 },
+      "travel_cost": {
+        "time_hours": 6,
+        "food": 1
+      },
       "danger": 0.35
     },
     {
       "from": "town_ravenford",
       "to": "event_broken_cart",
-      "travel_cost": { "time_hours": 2, "food": 0 },
+      "travel_cost": {
+        "time_hours": 2,
+        "food": 0
+      },
       "danger": 0.15
+    },
+    {
+      "from": "town_ravenford",
+      "to": "watch_hill",
+      "travel_cost": {
+        "time_hours": 3,
+        "food": 0
+      },
+      "danger": 0.1
+    },
+    {
+      "from": "watch_hill",
+      "to": "north_gate",
+      "travel_cost": {
+        "time_hours": 3,
+        "food": 1
+      },
+      "danger": 0.15
+    },
+    {
+      "from": "north_gate",
+      "to": "dungeon_old_mine",
+      "travel_cost": {
+        "time_hours": 4,
+        "food": 0
+      },
+      "danger": 0.2
+    },
+    {
+      "from": "event_broken_cart",
+      "to": "watch_hill",
+      "travel_cost": {
+        "time_hours": 3,
+        "food": 0
+      },
+      "danger": 0.1
+    },
+    {
+      "from": "watch_hill",
+      "to": "blackwood_gate",
+      "travel_cost": {
+        "time_hours": 5,
+        "food": 1
+      },
+      "danger": 0.22
+    },
+    {
+      "from": "blackwood_gate",
+      "to": "forester_camp",
+      "travel_cost": {
+        "time_hours": 3,
+        "food": 0
+      },
+      "danger": 0.18
+    },
+    {
+      "from": "forester_camp",
+      "to": "sunken_abbey",
+      "travel_cost": {
+        "time_hours": 4,
+        "food": 1
+      },
+      "danger": 0.28
+    },
+    {
+      "from": "blackwood_gate",
+      "to": "blackwater_ford",
+      "travel_cost": {
+        "time_hours": 2,
+        "food": 0
+      },
+      "danger": 0.12
+    },
+    {
+      "from": "blackwater_ford",
+      "to": "sunken_abbey",
+      "travel_cost": {
+        "time_hours": 3,
+        "food": 1
+      },
+      "danger": 0.2
+    },
+    {
+      "from": "blackwater_ford",
+      "to": "thorn_ruins",
+      "travel_cost": {
+        "time_hours": 3,
+        "food": 1
+      },
+      "danger": 0.25
+    },
+    {
+      "from": "north_gate",
+      "to": "iron_gate",
+      "travel_cost": {
+        "time_hours": 5,
+        "food": 1
+      },
+      "danger": 0.22
+    },
+    {
+      "from": "iron_gate",
+      "to": "grey_quarry",
+      "travel_cost": {
+        "time_hours": 3,
+        "food": 0
+      },
+      "danger": 0.15
+    },
+    {
+      "from": "grey_quarry",
+      "to": "high_pass",
+      "travel_cost": {
+        "time_hours": 5,
+        "food": 1
+      },
+      "danger": 0.28
+    },
+    {
+      "from": "high_pass",
+      "to": "black_keep",
+      "travel_cost": {
+        "time_hours": 3,
+        "food": 0
+      },
+      "danger": 0.2
+    },
+    {
+      "from": "grey_quarry",
+      "to": "stone_bridge",
+      "travel_cost": {
+        "time_hours": 3,
+        "food": 1
+      },
+      "danger": 0.18
+    },
+    {
+      "from": "black_keep",
+      "to": "stone_bridge",
+      "travel_cost": {
+        "time_hours": 4,
+        "food": 1
+      },
+      "danger": 0.22
+    },
+    {
+      "from": "thorn_ruins",
+      "to": "high_pass",
+      "travel_cost": {
+        "time_hours": 6,
+        "food": 1
+      },
+      "danger": 0.3
+    },
+    {
+      "from": "dungeon_old_mine",
+      "to": "coastal_road",
+      "travel_cost": {
+        "time_hours": 5,
+        "food": 1
+      },
+      "danger": 0.2
+    },
+    {
+      "from": "coastal_road",
+      "to": "saltwatch",
+      "travel_cost": {
+        "time_hours": 3,
+        "food": 0
+      },
+      "danger": 0.15
+    },
+    {
+      "from": "saltwatch",
+      "to": "ashen_beacon",
+      "travel_cost": {
+        "time_hours": 4,
+        "food": 1
+      },
+      "danger": 0.22
+    },
+    {
+      "from": "ashen_beacon",
+      "to": "wreck_shore",
+      "travel_cost": {
+        "time_hours": 4,
+        "food": 1
+      },
+      "danger": 0.25
+    },
+    {
+      "from": "saltwatch",
+      "to": "reed_marsh",
+      "travel_cost": {
+        "time_hours": 3,
+        "food": 0
+      },
+      "danger": 0.2
+    },
+    {
+      "from": "reed_marsh",
+      "to": "wreck_shore",
+      "travel_cost": {
+        "time_hours": 4,
+        "food": 1
+      },
+      "danger": 0.25
+    },
+    {
+      "from": "stone_bridge",
+      "to": "ashen_beacon",
+      "travel_cost": {
+        "time_hours": 5,
+        "food": 1
+      },
+      "danger": 0.25
+    }
+  ],
+  "name": "The Crownlands",
+  "provinces": [
+    {
+      "id": "marches",
+      "name": "The Marches",
+      "description": "River valleys, old watch roads and the mining frontier around Ravenford.",
+      "map": "res://assets/ui/campaign/marches_map.png",
+      "anchor": {
+        "x": 0.27,
+        "y": 0.68
+      }
+    },
+    {
+      "id": "blackwood",
+      "name": "Blackwood",
+      "description": "Ancient pinewoods, flooded crossings and forgotten abbey roads.",
+      "map": "res://assets/ui/campaign/blackwood_map.png",
+      "anchor": {
+        "x": 0.27,
+        "y": 0.25
+      }
+    },
+    {
+      "id": "highlands",
+      "name": "Iron Highlands",
+      "description": "Stone keeps guard the passes above exhausted quarries.",
+      "map": "res://assets/ui/campaign/highlands_map.png",
+      "anchor": {
+        "x": 0.72,
+        "y": 0.25
+      }
+    },
+    {
+      "id": "coast",
+      "name": "Ashen Coast",
+      "description": "Salt winds scour ruined beacons and roads through the tidal marshes.",
+      "map": "res://assets/ui/campaign/coast_map.png",
+      "anchor": {
+        "x": 0.72,
+        "y": 0.7
+      }
     }
   ]
 }
-

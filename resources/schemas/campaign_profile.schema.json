@@ -454,6 +454,510 @@
           "maximum": 4
         }
       }
+    },
+    "living_world": {
+      "type": "object",
+      "required": [
+        "version",
+        "scenario",
+        "seed",
+        "tick",
+        "party",
+        "settlements",
+        "factions",
+        "mine",
+        "politics",
+        "contracts",
+        "intelligence",
+        "encounter_until",
+        "next_raid_tick",
+        "raids",
+        "deliveries",
+        "journal",
+        "actors"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "scenario": {
+          "const": "living_marches_v1"
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "tick": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "party": {
+          "type": "object",
+          "required": [
+            "position",
+            "path",
+            "goal",
+            "camping",
+            "fatigue"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "position": {
+              "type": "object",
+              "required": [
+                "x",
+                "y"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "x": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "y": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              }
+            },
+            "path": {
+              "type": "array",
+              "maxItems": 2000,
+              "items": {
+                "type": "object",
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                }
+              }
+            },
+            "goal": {
+              "type": "string"
+            },
+            "camping": {
+              "type": "boolean"
+            },
+            "fatigue": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
+        },
+        "settlements": {
+          "type": "object",
+          "required": [
+            "town_ravenford",
+            "saltwatch",
+            "black_keep"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "town_ravenford": {
+              "type": "object",
+              "required": [
+                "supply",
+                "security"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "supply": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "security": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              }
+            },
+            "saltwatch": {
+              "type": "object",
+              "required": [
+                "supply",
+                "security"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "supply": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "security": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              }
+            },
+            "black_keep": {
+              "type": "object",
+              "required": [
+                "supply",
+                "security"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "supply": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "security": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              }
+            }
+          }
+        },
+        "factions": {
+          "type": "object",
+          "required": [
+            "river_league",
+            "iron_march"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "river_league": {
+              "type": "object",
+              "required": [
+                "relation",
+                "strength"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "relation": {
+                  "type": "integer",
+                  "minimum": -100,
+                  "maximum": 100
+                },
+                "strength": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              }
+            },
+            "iron_march": {
+              "type": "object",
+              "required": [
+                "relation",
+                "strength"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "relation": {
+                  "type": "integer",
+                  "minimum": -100,
+                  "maximum": 100
+                },
+                "strength": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              }
+            }
+          }
+        },
+        "mine": {
+          "type": "object",
+          "required": [
+            "status",
+            "threat"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "enum": [
+                "occupied",
+                "cleared"
+              ]
+            },
+            "threat": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
+        },
+        "politics": {
+          "type": "object",
+          "required": [
+            "tension",
+            "phase",
+            "skirmishes",
+            "next_skirmish_tick"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "tension": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "phase": {
+              "enum": [
+                "rivalry",
+                "border_war"
+              ]
+            },
+            "skirmishes": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "next_skirmish_tick": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            }
+          }
+        },
+        "contracts": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "restore_mine": {
+              "type": "object",
+              "required": [
+                "stage"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "stage": {
+                  "enum": [
+                    "offered",
+                    "accepted",
+                    "objective",
+                    "completed",
+                    "expired"
+                  ]
+                }
+              }
+            },
+            "scout_pass": {
+              "type": "object",
+              "required": [
+                "stage"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "stage": {
+                  "enum": [
+                    "offered",
+                    "accepted",
+                    "objective",
+                    "completed",
+                    "expired"
+                  ]
+                }
+              }
+            },
+            "supply_saltwatch": {
+              "type": "object",
+              "required": [
+                "stage"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "stage": {
+                  "enum": [
+                    "offered",
+                    "accepted",
+                    "objective",
+                    "completed",
+                    "expired"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "intelligence": {
+          "type": "boolean"
+        },
+        "encounter_until": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "next_raid_tick": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "raids": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "deliveries": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "journal": {
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "type": "object",
+            "required": [
+              "tick",
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "tick": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000000000
+              },
+              "text": {
+                "type": "string",
+                "maxLength": 500
+              }
+            }
+          }
+        },
+        "actors": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "kind",
+              "faction",
+              "position",
+              "route",
+              "index",
+              "direction",
+              "speed",
+              "cargo",
+              "active"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "enum": [
+                  "caravan",
+                  "league_patrol",
+                  "iron_patrol",
+                  "mine_raiders"
+                ]
+              },
+              "kind": {
+                "enum": [
+                  "caravan",
+                  "patrol",
+                  "raiders"
+                ]
+              },
+              "faction": {
+                "enum": [
+                  "river_league",
+                  "iron_march",
+                  "bandits"
+                ]
+              },
+              "position": {
+                "type": "object",
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                }
+              },
+              "route": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 32,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "x",
+                    "y"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "x": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "y": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  }
+                }
+              },
+              "index": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 31
+              },
+              "direction": {
+                "enum": [
+                  -1,
+                  1
+                ]
+              },
+              "speed": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 0.05
+              },
+              "cargo": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 24
+              },
+              "active": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "additionalProperties": false

@@ -12,7 +12,64 @@ static func region() -> Dictionary:
 
 
 static func node_name(id: String) -> String:
-	return NAMES.get(id, id.replace("_", " ").capitalize())
+	return str(node(region(), id).get("name", NAMES.get(id, id.replace("_", " ").capitalize())))
+
+
+static func province(data: Dictionary, id: String) -> Dictionary:
+	for entry: Dictionary in data.get("provinces", []):
+		if entry.id == id: return entry
+	return {}
+
+
+static func province_id(location: String) -> String:
+	return str(node(region(), location).get("province", "marches"))
+
+
+static func plan(world: Dictionary, destination: String) -> Dictionary:
+	# Planning is pure; travel() continues to validate one adjacent leg at a time.
+	var data := region()
+	var start := str(world.get("location_id", ""))
+	if start == destination or node(data, start).is_empty() or node(data, destination).is_empty(): return {}
+	var best := {start: 0}
+	var provisions := {start: 0}
+	var returning: bool = node(data,destination).get("type", "") == "town"
+	var previous: Dictionary = {}
+	var pending: Array[String] = [start]
+	while not pending.is_empty():
+		pending.sort_custom(func(a: String, b: String) -> bool:
+			if returning and provisions[a] != provisions[b]: return int(provisions[a]) < int(provisions[b])
+			return int(best[a]) < int(best[b]) if best[a] != best[b] else a < b)
+		var current: String = pending.pop_front()
+		if current == destination: break
+		var roads := routes(data, current)
+		roads.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return str(a.to) < str(b.to))
+		for road: Dictionary in roads:
+			var hours := int(best[current]) + int(road.time_hours)
+			var food_cost := int(provisions[current]) + int(road.food)
+			var cheaper := not best.has(road.to)
+			if not cheaper:
+				cheaper = food_cost < int(provisions[road.to]) or (food_cost == int(provisions[road.to]) and hours < int(best[road.to])) if returning else hours < int(best[road.to])
+			if cheaper:
+				best[road.to] = hours
+				provisions[road.to] = food_cost
+				previous[road.to] = road
+				if not pending.has(road.to): pending.append(road.to)
+	if not previous.has(destination): return {}
+	var legs: Array[Dictionary] = []
+	var cursor := destination
+	while cursor != start:
+		var road: Dictionary = previous[cursor].duplicate(true)
+		road.return_food = return_food(data, cursor)
+		legs.push_front(road)
+		cursor = str(road.from)
+	var food := 0
+	var required := 0
+	var stops: Array[String] = [start]
+	for road: Dictionary in legs:
+		food += int(road.food)
+		required = maxi(required, food + int(road.return_food))
+		stops.append(str(road.to))
+	return {"to": destination, "legs": legs, "stops": stops, "time_hours": int(best[destination]), "food": food, "required_food": required}
 
 
 static func node(data: Dictionary, id: String) -> Dictionary:

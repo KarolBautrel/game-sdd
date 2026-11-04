@@ -5,6 +5,10 @@ Status: implemented; automated PASS; live tests deferred. Stage13,2026-11-01.
 Stage16/world005 extends this v2 contract with equipment and migration to v3.
 Travel/world rules below remain unchanged.
 
+Current extension009 adds a provincial atlas and pure multi-leg plans. The
+single-region/adjacent UI limitations below describe the original stage13 only;
+each committed transaction still obeys the adjacent-leg rules and costs.
+
 Campaign owns world position, elapsed hours and journey sequence in save version2
 at the existing campaign_v1.json path. Valid v1 saves migrate in memory without
 losing gold/XP/items/effects/active run/receipts; load alone never rewrites a file.

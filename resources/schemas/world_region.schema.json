@@ -2,19 +2,38 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "sdd-game/world_region.schema.json",
   "type": "object",
-  "required": ["id", "nodes", "edges"],
+  "required": ["id", "name", "provinces", "nodes", "edges"],
   "additionalProperties": false,
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+    "name": { "type": "string", "minLength": 1 },
+    "provinces": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "name", "description", "map", "anchor"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "name": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "map": { "type": "string", "pattern": "^res://assets/ui/campaign/[a-z_]+\\.png$" },
+          "anchor": { "$ref": "#/$defs/anchor" }
+        }
+      }
+    },
     "nodes": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["id", "type", "position", "entry_spec"],
+        "required": ["id", "type", "position", "entry_spec", "name", "description", "province", "anchor"],
         "additionalProperties": false,
         "properties": {
           "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "name": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "province": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "anchor": { "$ref": "#/$defs/anchor" },
           "type": { "type": "string", "enum": ["town", "dungeon", "event", "camp", "blockade", "ruin"] },
           "position": {
             "type": "object",
@@ -49,6 +68,15 @@
           },
           "danger": { "type": "number", "minimum": 0, "maximum": 1 }
         }
+      }
+    }
+  },
+  "$defs": {
+    "anchor": {
+      "type": "object", "required": ["x", "y"], "additionalProperties": false,
+      "properties": {
+        "x": { "type": "number", "minimum": 0.05, "maximum": 0.95 },
+        "y": { "type": "number", "minimum": 0.05, "maximum": 0.95 }
       }
     }
   }

@@ -1,4 +1,5 @@
 extends Control
+signal scene_requested(path: String)
 
 const AssetCatalog := preload("res://scripts/presentation/shared/asset_catalog.gd")
 const PixelSkin := preload("res://scripts/presentation/shared/pixel_skin.gd")
@@ -1527,7 +1528,8 @@ func _open_world() -> void:
 		return
 	else:
 		session.clear()
-	get_tree().change_scene_to_file("res://scenes/app/App.tscn")
+	if scene_requested.has_connections(): scene_requested.emit("res://scenes/app/App.tscn")
+	else: get_tree().change_scene_to_file("res://scenes/app/App.tscn")
 
 
 func _refresh_room_styles() -> void:

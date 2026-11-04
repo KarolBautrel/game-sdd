@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "seed",
+    "map",
+    "tick_minutes",
+    "real_seconds_per_tick",
+    "grid",
+    "land",
+    "blocked",
+    "roads",
+    "sites",
+    "contracts"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "const": "living_marches_v1"
+    },
+    "version": {
+      "const": 1
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "map": {
+      "type": "string"
+    },
+    "tick_minutes": {
+      "const": 15
+    },
+    "real_seconds_per_tick": {
+      "type": "number",
+      "minimum": 0.1
+    },
+    "grid": {
+      "type": "object",
+      "required": [
+        "width",
+        "height"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 8,
+          "maximum": 128
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 8,
+          "maximum": 128
+        }
+      }
+    },
+    "land": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "#/$defs/point"
+      }
+    },
+    "blocked": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "items": {
+          "$ref": "#/$defs/point"
+        }
+      }
+    },
+    "roads": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "items": {
+          "$ref": "#/$defs/point"
+        }
+      }
+    },
+    "sites": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "owner",
+          "position"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "town",
+              "dungeon",
+              "landmark"
+            ]
+          },
+          "position": {
+            "$ref": "#/$defs/point"
+          }
+        }
+      }
+    },
+    "contracts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "issuer",
+          "target",
+          "kind",
+          "name",
+          "description",
+          "gold",
+          "xp",
+          "faction",
+          "relation"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "issuer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "faction": {
+            "type": "string",
+            "minLength": 1
+          },
+          "gold": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "xp": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "relation": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "point": {
+      "type": "object",
+      "required": [
+        "x",
+        "y"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}

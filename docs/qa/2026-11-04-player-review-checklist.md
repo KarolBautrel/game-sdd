@@ -1,6 +1,17 @@
 # Ordered player review checkpoint
 
-Latest user follow-up: current native Ashen dungeon appearance is APPROVED for
+Current authorized stage77 replaces the static-atlas gameplay priority with the
+living-region pilot: `& .\tools\qa\start_game.ps1 -Scene living-world`. Same
+accepted map family, separate resumable save, continuous movement, contracts and
+mine/world consequences. Follow2026-11-04-living-world.md and physical L77-01.
+
+Current override: user explicitly moves to point3, world travel, before point2.
+Stage76 delivers four provinces/twenty destinations and a global/provincial atlas;
+native/focused evidence and current full-check status are in world-atlas QA.
+Next is its player review. Dungeon appearance remains approved; equipment and
+later battle/courtyard reviews remain pending. No automatic new push is requested.
+
+Previous publication checkpoint: current native Ashen dungeon appearance is APPROVED for
 this stage. Stop visual dungeon redesign and return to step2, equipment review.
 The user requests publication and a reminder of this original queue, not another
 implementation batch. Detailed physical full-flow actions were not reported;
@@ -25,7 +36,7 @@ Visual direction approval does not close the physical flow case L67-01.
 | --- | --- | --- | --- | --- |
 | 1 | Dungeon appearance and passage/event flow | `& .\tools\qa\start_game.ps1 -Scene dungeon` | L67-01 | USER_APPROVED_CURRENT_VISUAL_STAGE; automated flow PASS; detailed physical flow not reported |
 | 2 | Equipment ownership, hand conflicts, retained selection/scroll | `& .\tools\qa\start_game.ps1 -Scene app -HeroEquipmentPilot` | L68-01 | PENDING |
-| 3 | Region journey preview/cancel/confirm, costs/reserve and return | Continue in the same App window, Region tab | L69-01 | PENDING |
+| 3 | Living-region movement/pause, caravan/factions/contracts, mine consequences and persistence | `& .\tools\qa\start_game.ps1 -Scene living-world` | L77-01 | ACTIVE_REVIEW; stage77 full74/74 and native146/48/18 PASS; ordinary physical mine victory pending; stage76 appearance approved/preserved |
 | 4 | Forest Ambush: routes, cover, actor readability, ordinary terminal battle | `& .\tools\qa\start_game.ps1 -Scene combat -CombatScenario painted_forest_ambush` | L70-01 forest part | PENDING |
 | 5 | Mine Breach: crossings, occlusion, movement/turn completion | `& .\tools\qa\start_game.ps1 -Scene combat -CombatScenario painted_mine_breach` | L70-01 mine part | PENDING |
 | 6 | Courtyard prototype: WASD, followers/collision,3NPC conversations | `& .\tools\qa\start_game.ps1 -Scene town-preview` | L71-01 | PENDING; services/inn/final NPC art are not implemented |

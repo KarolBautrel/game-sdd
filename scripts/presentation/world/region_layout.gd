@@ -6,4 +6,4 @@ func _ready() -> void:
 	resized.connect(_fit)
 	_fit()
 func _fit() -> void:
-	vertical = size.x < 1500
+	vertical = size.x < 1100

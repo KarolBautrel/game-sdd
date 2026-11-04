@@ -1,9 +1,16 @@
 # Timed polish review guide
 
+Current authorized world stage77: `& .\tools\qa\start_game.ps1 -Scene living-world`.
+Separate resumable pilot save, continuous map, contextual contracts and mine
+consequences. Read [living-region review](2026-11-04-living-world.md). Old atlas
+remains available/visually approved; physical mine victory is still pending.
+
 Current ordered player review and feedback:
 [six-step checklist](2026-11-04-player-review-checklist.md). Step1(dungeon) is
-now visually accepted after native stage75. Resume step2, equipment; remaining
-steps stay saved and pending. Detailed physical full-flow actions were not reported.
+now visually accepted after native stage75. The user explicitly reprioritized
+step3: world/province atlas, stage76. Launch App and click World atlas; see
+[world atlas review](2026-11-04-world-atlas.md). Equipment and the remaining
+steps stay pending. Detailed physical full-flow actions were not reported.
 [Correction evidence and screenshots](2026-11-04-dungeon-visual-cohesion.md).
 
 Run from the active repository:

@@ -305,3 +305,18 @@ checklist; earlier automated PASS remains historical proof, not visual approval.
 | ID | Stage | Scenario | Acceptance | Result |
 | --- | --- | --- | --- | --- |
 | L71-01 | 71A | Launch town-preview on DISPLAY1, walk/turn around crates, compare diagonal pace, speak to all3NPCs with E, try walking during dialogue, close by Escape/Continue and release/refocus movement. | Natural cadence, planted idle, no wall/follower clipping or stale keys, readable bounded parchment; prototype has no campaign/save/economy effect. NPC art is a stand-in. | AWAITING_INTERACTIVE;1445focused checks, source87native checks/24key events, packaged town-inclusive301checks/16key events PASS; OS activation still blocked. |
+
+## Global and provincial travel (stage76 / original review point3)
+
+Current follow-up: stage77 supersedes the static-atlas gameplay review priority.
+Its appearance remains approved and preserved; use the living-world case below.
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L76-01 | 76 | Launch App on DISPLAY1, World atlas -> each province; inspect/cancel Black Keep itinerary; provision in Ravenford, travel through stops and road events to the keep, restart remotely, reselect Ravenford and return. | Browsing never moves/charges; map labels/readability fit; each confirmation advances one named stop, exact food/time/reserve, events suspend travel, actual province/location persists, no invented keep services, no locked journey. | AWAITING_INTERACTIVE; focused atlas170/0, campaign2468/0, art218/0; native outbound318checks/40pointer clicks/16captures plus Enter selection PASS. Final exact-reserve round-trip/full-suite receipts are in2026-11-04-world-atlas.md. No OS input or player-save QA. |
+
+## Living mercenary region (stage77)
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L77-01 | 77 | Launch living-world on DISPLAY1; accept mine contract in Ravenford, continuous travel/pause, owned packing, ordinary defended mine completion, return/report; try Saltwatch delivery/Black Keep reconnaissance, camp/speeds, raids/conflict and restart. | Actual land movement and world activity, real supply/security/prices, one-time receipts/rewards and faction consequences, stable exact save/reload, mine remains cleared; ordinary retreat keeps task unfinished; separate player save. | AWAITING_INTERACTIVE; focused domain28/session41/UI97 and3Python tests PASS. Native/full final receipts are in2026-11-04-living-world.md. Boundary fixtures are not played victories. |

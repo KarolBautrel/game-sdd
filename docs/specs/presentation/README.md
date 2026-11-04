@@ -1,5 +1,11 @@
 # Shared presentation
 
+- [036 Living world](036_living_world.md): interactive illustrated strategic
+  map, persistent world actors, pause/speed and contextual-contract inspector.
+
+- [035 World atlas](035_world_atlas.md): world/province map hierarchy and
+  connected multi-leg journey preview, preserving the accepted world art family.
+
 Shared UI composition owns passive visual components, never gameplay decisions.
 
 - `001_reusable_hud_components.md`: skinned frames, party cards and resource meters.

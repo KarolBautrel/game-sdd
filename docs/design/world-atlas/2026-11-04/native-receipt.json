@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "engine_clicks": 58,
+  "errors": 0,
+  "warnings": 0,
+  "physical_desktop_acceptance": "NOT_RUN",
+  "uses_desktop_input": false,
+  "player_save_used": false,
+  "checks": 362,
+  "captures": 20,
+  "source": "artifacts/qa-runs/world-atlas-roundtrip/native-review.json"
+}

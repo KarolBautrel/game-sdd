@@ -19,3 +19,7 @@ World/Town Integration Prep. App is the regional hub; Ravenford is its market.
   XP budget, persistent hero training and managed stat snapshots.
 - `008_town_exploration.md` / `slices/008_town_exploration.md`: fully scoped small
   courtyard/inn plan, isolated movement/dialogue pilot before guarded integration.
+- `009_world_atlas.md` / `slices/009_world_atlas.md`: four provinces, twenty
+  connected destinations and explicit per-leg global journey planning.
+- `010_living_region.md` / `slices/010_living_region.md`: opt-in continuous
+  mercenary region, world activity, contextual contracts and mine consequences.
