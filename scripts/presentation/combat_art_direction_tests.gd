@@ -33,7 +33,8 @@ func _run() -> void:
 			var labels:=button.find_children("*","Label",true,false)
 			check(labels.size()==2,"native action name and cost")
 			for label: Label in labels:
-				check(label.get_theme_font_size("font_size")>=24 and label.size.y>=30,"action has legible line height")
+				var minimum:=18 if dimensions.x<1500 or dimensions.y<900 else 24
+				check(label.get_theme_font_size("font_size")>=minimum and label.size.y>=label.get_theme_font("font").get_height(minimum)-1,"action has legible responsive line height")
 			check(button.focus_mode==Control.FOCUS_ALL,"actions support keyboard focus")
 		var snapshot: Dictionary=hud.state.duplicate(true)
 		hud.battle_chrome.style_hud(hud)

@@ -34,6 +34,10 @@ combat/save acceptance. Gameplay ownership stays in dungeon/combat/domain specs.
   with no route to reach them. Retain developer layout/encounter tools explicitly;
   legacy manually positioned dungeon defaults must not override the new default
   composition unless the developer explicitly enters layout editing.
+- The720p battle fallback compacts margins/header/tray/inspector instead of
+  shrinking the playable board to a thumbnail. Named action captions use18px
+  minimum below1500logical width or900height,24px otherwise. Preserve icons,
+  shortcuts, focus and scroll access. Presentation030 adds the larger arena proof.
 
 ## Workflow and proof
 

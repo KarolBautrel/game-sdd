@@ -141,10 +141,35 @@ func style_hud(hud) -> void:
 
 func _responsive(hud) -> void:
 	var compact: bool = hud.size.x<1800
-	side_scroll.custom_minimum_size.x = 360 if compact else 500
-	for bar: TextureProgressBar in hud.overlay_resource_bars.values(): bar.custom_minimum_size.x = 300 if compact else 400
-	hud.turn_order_panel.custom_minimum_size.x = 400 if compact else 700
+	var small: bool = hud.size.x<1500 or hud.size.y<900
+	side_scroll.custom_minimum_size.x = 300 if small else (360 if compact else 500)
+	for bar: TextureProgressBar in hud.overlay_resource_bars.values():
+		bar.custom_minimum_size = Vector2(246 if small else (300 if compact else 400),30 if small else 42)
+		bar.get_node("AmountLabel").add_theme_font_size_override("font_size",18 if small else 24)
+	hud.turn_order_panel.custom_minimum_size.x = 320 if small else (400 if compact else 700)
 	portrait.custom_minimum_size.y = 72 if hud.size.y<1000 else 120
+	var margin: MarginContainer=hud.get_node("RootMargin")
+	for edge in ["left","top","right","bottom"]:margin.add_theme_constant_override("margin_"+edge,12 if small else 24)
+	hud.get_node("RootMargin/RootVBox").add_theme_constant_override("separation",8 if small else 16)
+	hud.bottom_hud.custom_minimum_size.y=132 if small else 204
+	var title: Label=hud.get_node("RootMargin/RootVBox/TopHud/EncounterPanel/TopLeft/TitleLabel")
+	for entry in [[title,1,40],[hud.status_label,1,24],[hud.turn_order_label,3,24],[hud.action_title_label,2,32],[hud.action_detail_label,4,24],[hud.action_feed_label,3,24],[hud.overlay_resource_label,1,28],[hud.overlay_log_label,4,24]]:
+		var label: Label=entry[0]
+		var font_size: int= (28 if label==title else (22 if label==hud.action_title_label else 18)) if small else int(entry[2])
+		label.add_theme_font_size_override("font_size",font_size)
+		label.custom_minimum_size.y=ceilf(label.get_theme_font("font").get_height(font_size)*int(entry[1]))
+	for button in hud.command_buttons.get_children():
+		if button is Button and button.has_meta("action_id") and not button.is_queued_for_deletion():_size_action(hud,button)
+
+func _size_action(hud,button: Button) -> void:
+	var small: bool=hud.size.x<1500 or hud.size.y<900
+	var margin:=button.get_node_or_null("ActionMargin") as MarginContainer
+	if margin==null:return
+	button.custom_minimum_size=Vector2(124,96) if small else Vector2(160,156)
+	for edge in ["left","top","right","bottom"]:margin.add_theme_constant_override("margin_"+edge,6 if small else 12)
+	var icon: TextureRect=button.find_child("ActionIcon",true,false)
+	if icon!=null:icon.custom_minimum_size.y=28 if small else 46
+	for label: Label in button.find_children("*","Label",true,false):label.add_theme_font_size_override("font_size",18 if small else 24)
 
 func decorate_action(hud,button: Button,id: String,slot: int) -> void:
 	button.set_meta("action_id",id)
@@ -159,6 +184,7 @@ func decorate_action(hud,button: Button,id: String,slot: int) -> void:
 	if hud.selected_action==id: UI.select_button(button)
 	button.add_theme_stylebox_override("focus",UI.focus_box())
 	var margin := MarginContainer.new()
+	margin.name = "ActionMargin"
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for side_name in ["left","top","right","bottom"]: margin.add_theme_constant_override("margin_"+side_name,12)
 	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -168,6 +194,7 @@ func decorate_action(hud,button: Button,id: String,slot: int) -> void:
 	box.add_theme_constant_override("separation",4)
 	margin.add_child(box)
 	var icon := TextureRect.new()
+	icon.name = "ActionIcon"
 	icon.texture = hud._action_icon_texture(id)
 	if id in ["basic_attack","ranged_attack"]: icon.texture=UI.icon("sword" if id=="basic_attack" else "bow")
 	icon.custom_minimum_size.y = 46
@@ -186,6 +213,7 @@ func decorate_action(hud,button: Button,id: String,slot: int) -> void:
 	hint.autowrap_mode = TextServer.AUTOWRAP_OFF
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	button.tooltip_text = "%s [%s]\n%s" % [hud.ACTION_LABELS.get(id,id),slot,cost]
+	_size_action(hud,button)
 
 func refresh(hud) -> void:
 	if side==null: return

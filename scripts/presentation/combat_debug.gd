@@ -331,6 +331,10 @@ func _render() -> void:
 	%TitleLabel.text = "Ash-road Raiders" if str(state.get("id", "")) == "ash_road_raiders" else "Old Mine Skirmish"
 	if str(state.get("id", "")) == "drawn_roster_skirmish":
 		%TitleLabel.text = "Painted Six - Old Mine"
+	if str(state.get("id", "")) == "painted_forest_ambush":
+		%TitleLabel.text = "Forest Ambush"
+	if str(state.get("id", "")) == "painted_mine_breach":
+		%TitleLabel.text = "Mine Breach"
 	_render_grid()
 	_render_units()
 

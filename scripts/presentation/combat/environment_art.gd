@@ -23,7 +23,8 @@ static func ledge(theme: String) -> Texture2D:
 	return Assets.texture(data().ledges.get(theme,data().ledges.nature))
 
 static func board(state: Dictionary,size: Vector2i,theme: String) -> Texture2D:
-	var kind:="flagstone" if theme=="dungeon" else ("earth" if str(state.get("id","")).contains("road") or str(state.get("id","")).contains("ambush") else "woodland")
+	var id:=str(state.get("id",""))
+	var kind:="flagstone" if theme=="dungeon" else ("woodland" if id.contains("forest") else ("earth" if id.contains("road") or id.contains("ambush") else "woodland"))
 	var key:="%s:%s:%s" % [kind,size.x,size.y]
 	if _boards.has(key):return _boards[key]
 	var patch:=Assets.image_copy(data().floors[kind])

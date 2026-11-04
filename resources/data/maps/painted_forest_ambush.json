@@ -1,0 +1,942 @@
+{
+  "schema_version": 2,
+  "id": "painted_forest_ambush",
+  "source": "res://resources/tiled/maps/painted_forest_ambush.tmx",
+  "tile_size": 76,
+  "width": 14,
+  "height": 11,
+  "tiles": [
+    {
+      "x": 0,
+      "y": 0,
+      "type": "floor"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 8,
+      "y": 0,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 0,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 0,
+      "type": "floor"
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "type": "floor"
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 12,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 13,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "type": "blocked"
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 2,
+      "type": "highground"
+    },
+    {
+      "x": 10,
+      "y": 2,
+      "type": "highground"
+    },
+    {
+      "x": 11,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 12,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 13,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "type": "blocked"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "type": "blocked"
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 3,
+      "type": "highground"
+    },
+    {
+      "x": 11,
+      "y": 3,
+      "type": "highground"
+    },
+    {
+      "x": 12,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 13,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 0,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "type": "blocked"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "type": "cover_low"
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 12,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 13,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "type": "cover_low"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "type": "cover_low"
+    },
+    {
+      "x": 8,
+      "y": 5,
+      "type": "blocked"
+    },
+    {
+      "x": 9,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 12,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 13,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 0,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 1,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 6,
+      "type": "blocked"
+    },
+    {
+      "x": 9,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 12,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 13,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 0,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "type": "cover_low"
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "type": "cover_low"
+    },
+    {
+      "x": 7,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "type": "blocked"
+    },
+    {
+      "x": 9,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 12,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 13,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 0,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 1,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 8,
+      "type": "cover_low"
+    },
+    {
+      "x": 8,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 8,
+      "type": "cover_low"
+    },
+    {
+      "x": 10,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 12,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 13,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 0,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 1,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 9,
+      "type": "highground"
+    },
+    {
+      "x": 5,
+      "y": 9,
+      "type": "highground"
+    },
+    {
+      "x": 6,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 12,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 13,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 0,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 1,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 12,
+      "y": 10,
+      "type": "floor"
+    },
+    {
+      "x": 13,
+      "y": 10,
+      "type": "floor"
+    }
+  ],
+  "test_spawns": [
+    {
+      "id": "unit_knight_pilot",
+      "role": "player",
+      "x": 2,
+      "y": 7
+    },
+    {
+      "id": "unit_player_001",
+      "role": "player",
+      "x": 2,
+      "y": 5
+    },
+    {
+      "id": "unit_player_002",
+      "role": "player",
+      "x": 1,
+      "y": 7
+    },
+    {
+      "id": "unit_rogue_pilot",
+      "role": "player",
+      "x": 3,
+      "y": 9
+    },
+    {
+      "id": "unit_bandit_archer_pilot",
+      "role": "enemy_ranged",
+      "x": 11,
+      "y": 3
+    },
+    {
+      "id": "unit_bandit_guard_pilot",
+      "role": "enemy_melee",
+      "x": 10,
+      "y": 6
+    },
+    {
+      "id": "unit_wolf_pilot",
+      "role": "enemy_melee",
+      "x": 11,
+      "y": 8
+    }
+  ],
+  "background_path": "res://assets/combat/terrain/backgrounds/old_mine_meadow_01_deep_green.png",
+  "terrain_theme": "nature",
+  "terrain_decorations": [
+    {
+      "x": 3,
+      "y": 0,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png",
+      "kind": "oak"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png",
+      "kind": "oak"
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png",
+      "kind": "oak"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_03.png",
+      "kind": "flowers"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png",
+      "kind": "oak"
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png",
+      "kind": "obstacle"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png",
+      "kind": "obstacle"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png",
+      "kind": "obstacle"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png",
+      "kind": "brush"
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png",
+      "kind": "brush"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png",
+      "kind": "brush"
+    },
+    {
+      "x": 8,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png",
+      "kind": "obstacle"
+    },
+    {
+      "x": 8,
+      "y": 6,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png",
+      "kind": "obstacle"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png",
+      "kind": "brush"
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png",
+      "kind": "brush"
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png",
+      "kind": "obstacle"
+    },
+    {
+      "x": 7,
+      "y": 8,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png",
+      "kind": "brush"
+    },
+    {
+      "x": 9,
+      "y": 8,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png",
+      "kind": "brush"
+    },
+    {
+      "x": 12,
+      "y": 10,
+      "path": "res://assets/combat/terrain/processed/nature/nature_1/nature_1_05.png",
+      "kind": "stump"
+    }
+  ]
+}

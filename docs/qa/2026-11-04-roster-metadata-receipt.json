@@ -1,0 +1,221 @@
+{
+  "reason": "All36 differences proven solely CRLF-to-LF normalization; original geometry/FBX/PNG/Aseprite files and every model summary remain byte-exact. Inspector validates27 FBX proofs and1080 timing clips. No art regenerated.",
+  "changed_text": [
+    {
+      "path": "assets_src/characters/roster/MATERIAL-PROMPT.txt",
+      "before": "2fb11d4c85402610b36b79f85aedfa031b50452aea34dba07068e6030811fa70",
+      "after": "8dc237d76204ce052a70c6535296c2f09bed4c0075b068db32c403a8de8b7962",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/archer_1/model.json",
+      "before": "92de4e75064ef96fb3c1eb855797d9a50d36a5ed33eb7d34c853b44005a5d8ce",
+      "after": "6c99c6a0a79181d1280ab68de1e0357281caab010541f15922c3d85ffedbb159",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/armored_brute/model.json",
+      "before": "19fc24567944e51e931df035c0572200365a3d45d18e0862073fe12ed4c70b23",
+      "after": "46030b8624d9fc3ba99c445524839725fb8c9b3bb0ff72c08f3f4fde469e8860",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/ash_raider/model.json",
+      "before": "3df92824c3a792ea15b5233f40935dcb5de5389fc96f0c5dbeb52a9faef8c972",
+      "after": "831de38b69dce189d594d2893f41245ff790052419efc729a7898c25e1868cda",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/axe_bandit/model.json",
+      "before": "0ed888921e0b0a403cd0a9ed04edb081ea5c0c3d7a5d3b01e1e9136fa8d68c70",
+      "after": "6a72cc8ef7dd1dae4322af2afdd1a96e096bfd6b54ce0753cce21b173e5c957a",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/bandit/model.json",
+      "before": "11985e4654f0fce1c8bda054b80b3425634bc8b172fa35b8b54650817cc4a5b0",
+      "after": "12697c6047ea485791afe9271d88650284509efb9670101e495156ba2570a474",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/bandit_archer/model.json",
+      "before": "854e47643d0c43acc6713e5f2f9d9d124c8f03905ea5779eaedf1b4f37688e90",
+      "after": "ae71eac3ef940a34102a2ddf66dd19b8397a15b9996e3df643a7e2ddfb647095",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/bandit_brute/model.json",
+      "before": "d7600b732c91456dbd87dbb131c129481babb1b8d04245a52f1a7cc7cba9a2ae",
+      "after": "c6672072a47e8dd7326555dc6b949b4086b55d93d53c903ddae73d1153053da3",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/bandit_carnage/model.json",
+      "before": "7e0f3dafe84eff35752e5368febdb04b71a1233b406540e94dcbcc9fcb700081",
+      "after": "87b0714a7c0ab28eae839fea62a662dac9d77406fc3f946c6a2a11deed000e2f",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/bandit_marauder/model.json",
+      "before": "6d95790f0327451ef201256f6bd7e31b8f2e5a582503f7b6ce3a31a2eefcf90c",
+      "after": "810bb41edf153e989f8ecad90cdfe5c884c63ef38718e4fbfa96453826d73c36",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/bandit_rogue/model.json",
+      "before": "e4bd1f9128741fd647d64876e962408097c8bbe0f99255b1184cab21eac941ee",
+      "after": "112ae661fec87d478f27afb47daf881b4d7fde95a13c4f1c3c13c7c596552213",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/bandit_spearman/model.json",
+      "before": "ffb9bd7e49ecd491da924e397f02c59b50b9200a852f13d26dbc25945bafcfa3",
+      "after": "1c1e1976b81dc7cbb068725e00e69e5021723e134341037fba84067d3618e910",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/bat/model.json",
+      "before": "09ac0691098780c47dbfcd573e62db2833f755b5d36956643dfdc202b3ed92e9",
+      "after": "10661af06d65e72a023ed4edd7fe320ff78b7a2b0468e8a4e9f59c3d9da9f856",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/crossbowman/model.json",
+      "before": "a09329b1e81fdc5b2b3aae9ca3dc72371ea0658e21e6cc62df446d1afd50b4b6",
+      "after": "6e30be39054463703a1a4fc428164be0d4bfb0448124ff5e5f8a8d9f19a090d6",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/dire_boar/model.json",
+      "before": "9188c9e0a5f5f7bd4310e3b885f4d65667ae3ba2011a34d698e08e86bdc81838",
+      "after": "27878debeb1e5b8d371f5c3cc84ab99f94ce6adeddcd3457035f564cc0f8b875",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/fbx-check.json",
+      "before": "0d0694b4abea74f24bb5d1d0d6be7c11934b03ecfc38e866f0dad39fb6d2dffe",
+      "after": "0a7d26c6d256b1da1f1c6f0e23d43a8fa8e809466ca3738895196e2ea8755fd4",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/giant_snake/model.json",
+      "before": "ab93d8b277b22ac664a20d6e9d1bf0893ec2c857851609c6b6dc664bc032fc63",
+      "after": "68959dd3458431e69c635862c731bcafaa8086a7e9e5253b0422c5e920f57b64",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/goblin_atlas/model.json",
+      "before": "5a993a9650ff2438b2be1631613f8b3047bf49f79e3a5d18c3f49f9dd96f87b2",
+      "after": "7c2259501ea3373446644a25fad142012614501e561d8ac91fad542ada336a46",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/guardian/model.json",
+      "before": "90ac4abc6866653d08800e8b1a5f52a1bac98961dcffcf81cf6545139b57766c",
+      "after": "b17fc04c7356c6af1f823ef78d38b4d68febbc45b3217ad9b5c63f2f27210778",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/hell_hound/model.json",
+      "before": "70aae57898d39117c529465c52e6e62e024b5bc2dbbc77efc9a1c77dbf6a57b5",
+      "after": "0d066426173f0051cb0c0821e3b847e07fa7c6135aa4062e82ffbc3f45d6f3fe",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/lizardman/model.json",
+      "before": "30baeb07428e0a0498abc0b1b81bf4405f18896226b4e53e11095634e1b04ead",
+      "after": "68ca7f5a9f08caa354132215d0949e28349a7a154f02c9200df38075fe02b17a",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/ogre/model.json",
+      "before": "45e7897b2b3e5536a0bb0655736b242bb3328cc4afd3482d492d429775762cd0",
+      "after": "1a86064cbb26d5a120a94c5e7b8493ea883adfa315314c09513775926dbebc59",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/provenance.json",
+      "before": "6c01e9158e32ea8d1e5edb1fc3f7ccd35e4d7a43d65984fb29517a6fc5dff943",
+      "after": "4fcaf9e8a68619ee4c43c5e50d16450cdbaa7627acfc4a8480c8a192ce2a70dd",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/references.json",
+      "before": "ffdf5b6a5f0fe288450c4084f60fe65b1b59a3b5a620e6d721882fc567964642",
+      "after": "08e13fd1dc15d96fa7f3f870633e13be4de37e97eeee02715d41bd852ae1e755",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/rogue_1/model.json",
+      "before": "db9a66dc1a2225e9305b2e074e315af4fb807dbccaf9875db402e3ebeb3e76e8",
+      "after": "d8ee9ad8104d6bcf48dddc0e7e4aca293223ca933884f504661014dec6ec1692",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/skeleton_archer/model.json",
+      "before": "5806ed73a8def675a046a4da23e34740b46085c0b11a6a8edbc7f052fb004c5a",
+      "after": "6abda168cf81274070201fad0a39923478f5a8878a7be3509911ded8f5a90303",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/skeleton_warrior/model.json",
+      "before": "c45d269c3485ecde046f23d1cbf38974a59c7cae4aaeb672ed84b67d4fd190a8",
+      "after": "62271ed9bb90284aa2934e4c595c20337fc587af059cdbd6a4dd98050ed55ff8",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/spider_atlas/model.json",
+      "before": "8d4ce4e54c8b03d76f76defcdf51aafa7db85c086be55249c436557700ed71c6",
+      "after": "325f04336253aa65cbb9ddce94a52abb92dce395fb26724f2e73317541a11199",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/warrior/model.json",
+      "before": "b56abb0325f61eedabba01b29e704367eeab99d634183d8bc77a0a8e80c6c0b4",
+      "after": "e1592f1b77039c374c7ea8c8e6248e5d13a7693a09e55f5e71d8846f3ad19722",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/wolf_atlas/model.json",
+      "before": "327091bdd628bfb4e924fd0bd8c871aa74a811e459f03b8cff071cdd4f9596f9",
+      "after": "b862200317b2e6fe9d11b45de25620acde56d343b3067facd3f15210f55defe9",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "assets_src/characters/roster/wraith/model.json",
+      "before": "8283c8ad1e0469c7d3ced01d61bb1978a0db0c7a44d2eaef8b45e35300469b70",
+      "after": "b8220159f109a91ecf962ffb42ef277f5d4b73b124253b198c96ab138feaf053",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "resources/data/presentation/original_roster.json",
+      "before": "f6e46a4d2ba14722d38ea3bc2adfabf124885943751009b1ad9725a2ce80e98b",
+      "after": "4834bcb608c982a0c9bcf2e15b466d44bc6409fa003f947cf487a4dc25a5c8a0",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "resources/schemas/original_roster.schema.json",
+      "before": "6c6cf8ecc5cc816cde124c081b529c93453e5ae39678ff7bf91ddeaa2e9410c3",
+      "after": "38ac7b87554d96363b85ef03590eaa9866ae2df87b3c3856f9350011dd0178fb",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "tools/aseprite/roster.lua",
+      "before": "f9e87722b9116beb5c32329013711d2cb8b37b7a92209fc373f4710bd6f66f17",
+      "after": "bbd0f59e910e88cbc11f7cb9a878177bf4c93ccfb397b3531b0ca72af6ca1d39",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "tools/blender/build_roster.py",
+      "before": "c8e4a3fa77047707abe28b810c951a3357719c4f9964adc0e52a1d4ec42d40d9",
+      "after": "a98048389ae91c18d23a98c10fa611c6d1edcaf3e7ba9bea7b73199ee06bf1f7",
+      "change": "CRLF to repository LF only"
+    },
+    {
+      "path": "tools/qa/normalize_roster.py",
+      "before": "d69be76618421d58ba91b084860101b405462b0d2c9a60c4f8f169278caec38b",
+      "after": "8b96c5efb6904194ab1b26ca89b64b96a6b3d59cefac4c72367d2b96ae7e3661",
+      "change": "CRLF to repository LF only"
+    }
+  ]
+}

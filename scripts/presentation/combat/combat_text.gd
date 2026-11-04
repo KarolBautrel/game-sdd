@@ -152,7 +152,7 @@ static func feedback_from_events(events: Array) -> String:
 static func unit_display_name(state: Dictionary, unit_id: String) -> String:
 	if unit_id == "":
 		return "Unknown"
-	if str(state.get("id", "")) == "painted_enemy_pilot":
+	if str(state.get("id", "")) in ["painted_enemy_pilot", "painted_forest_ambush", "painted_mine_breach"]:
 		var names := {"unit_knight_pilot":"Knight", "unit_player_001":"Bran", "unit_player_002":"Torin", "unit_rogue_pilot":"Rogue", "unit_bandit_archer_pilot":"Bandit archer", "unit_bandit_guard_pilot":"Bandit shield fighter", "unit_wolf_pilot":"Grey wolf"}
 		if names.has(unit_id):
 			return names[unit_id]

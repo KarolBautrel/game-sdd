@@ -269,3 +269,9 @@ registry synchronized without erasing failed attempts or marking unplayed cases.
 | ID | Stage | Scenario | Acceptance | Result |
 | --- | --- | --- | --- | --- |
 | L69-01 | 69 | Preview/cancel/confirm world trips, inspect low-food restriction, resolve Cart and return, repeat at720p. | No charges or risk rerolls on selection; truthful arrival/trip/reserve, one charge on commit, readable focus/scroll and saved event flow. | AWAITING_INTERACTIVE;19focused checks and native139checks/69pointer events PASS; same OS activation blocker. |
+
+## Authored tactical arenas (stage70)
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L70-01 | 70 | Play Forest Ambush and Mine Breach on DISPLAY1 to normal victory/defeat; use both crossings/flanks, cover/highground, every allied role; repeat compact view/reload. | Honest terrain/range, readable actors and full animations/corpses, no clipping/sliding or locked turn; no Debug Win. | AWAITING_INTERACTIVE;2292focused checks, native278layout checks plus718full-battle checks/205pointer events PASS; same OS activation blocker. |

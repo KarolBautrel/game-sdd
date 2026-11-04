@@ -8,6 +8,19 @@ import struct
 ROOT=Path(__file__).resolve().parents[2]
 
 
+def registered_visual_ids():
+    """Current registered painted families are separate from the original archive."""
+    result=set()
+    for name in ('drawn_roster', 'hero_identity_animations', 'tactical_roster'):
+        data=json.loads((ROOT/f'resources/data/presentation/{name}.json').read_text(encoding='utf-8'))
+        for row in data['profiles']:
+            if row.get('enabled', False):
+                assert row['root'].startswith('res://assets/combat/characters/'), row['id']
+                assert (ROOT/row['root'].removeprefix('res://')).is_dir(), row['id']+' missing source-complete runtime root'
+                result.add(row['id'])
+    return result
+
+
 def inspect_roster(ids=None):
     data=json.loads((ROOT/"resources/data/presentation/original_roster.json").read_text())
     references=json.loads((ROOT/"assets_src/characters/roster/references.json").read_text())
@@ -65,10 +78,11 @@ def inspect_roster(ids=None):
         assert set(runtime.rglob("*.png"))==expected|{runtime/"portrait.png"},ident+" unexpected frame files"
         record(runtime/"portrait.png");record(ROOT/"assets_src/aseprite/combat/characters"/ident/"portrait.aseprite")
         models.append({"id":ident,"kind":profile["kind"],"frames":256,"editable_sources":41,"triangles":meta["triangles"],"bones":meta["bones"],"status":"PASS"})
+    accepted_visuals=set(profiles)|set(data['aliases'])|registered_visual_ids()
     def walk(value):
         if isinstance(value,dict):
             visual=value.get("visual",{})
-            if isinstance(visual,dict) and "character" in visual:assert visual["character"] in profiles or visual["character"] in data["aliases"],visual
+            if isinstance(visual,dict) and "character" in visual:assert visual["character"] in accepted_visuals,visual
             for child in value.values():walk(child)
         elif isinstance(value,list):
             for child in value:walk(child)

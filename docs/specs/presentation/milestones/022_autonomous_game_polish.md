@@ -71,3 +71,13 @@ road/campaign tests PASS, campaign UI2433/0 and equipment19/0. Native139checks /
 69pointer events/15captures PASS. L69-01 remains open for actual OS input.
 Next70: bounded forest and mine tactical arenas, existing art/rules and painted
 actors. Use level-design, canonical TMX conversion and normal combat proofs.
+
+Stage69 published016e99bbc986aa8e7dbc001e4f6061995df6dc97; remote verified.
+Stage70: two canonical14x11arenas, seven preserved actors, correct floor/names and
+compact720p chrome.53Python tests, arena2292/0, full65/65checks and Windows
+EXE/PCK smoke PASS. Native layout278checks/18pointer events/12captures; complete
+normal animated victories48/43commands,718checks/205pointer events/2terminal
+captures PASS. Prior count/path and newline-hash gaps repaired with receipts;
+no accepted art changed. L70-01 remains open under the same OS activation error.
+QA:2026-11-04-painted-arenas. Next71: full small-town plan before isolated pilot;
+current town services remain default. Target01:12Z remains active.

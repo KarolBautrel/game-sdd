@@ -61,3 +61,5 @@ Shared UI composition owns passive visual components, never gameplay decisions.
   assignments, explicit hand conflicts and retained native focus/scroll.
 - [029 World journey preview](029_world_journey_preview.md): inspect true costs,
   arrival/danger/return reserve before explicit normal travel confirmation.
+- [030 Painted tactical arenas](030_painted_tactical_arenas.md): canonical forest
+  ambush/mine breach pilots with existing art, terrain and legal battle proofs.

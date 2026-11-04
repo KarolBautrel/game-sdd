@@ -26,8 +26,13 @@ L67-01 remains open.67 published48552c0a.68 equipment usability implemented:
 60pointer events/9captures. [QA](qa/2026-11-04-equipment-usability.md).
 68 published97d95456.69 world journey preview implemented:19journey checks,
 world/road/campaign PASS; native139checks/69engine clicks/15captures.
-[QA](qa/2026-11-04-world-journey-preview.md). Next independent scope70 forest /
-mine arena authoring; L68/69 also await OS control. Target finish01:12Z unchanged.
+[QA](qa/2026-11-04-world-journey-preview.md).69 published016e99bb.70 two canonical
+forest/mine arenas and compact720p battle chrome implemented: arena2292/0,
+53Python tests, full65/65checks and Windows export/runtime PASS. Native layout
+278checks/18clicks/12captures; full normal animated victories48/43commands,
+718checks/205clicks/2terminal captures PASS. [QA](qa/2026-11-04-painted-arenas.md).
+Next71 small-town plan then isolated pilot; L68/69/70 await actual OS control.
+Target finish01:12Z unchanged.
 Real saves and accepted character art
 remain protected; each episode needs spec/slice/checks/visible review/report/push.
 

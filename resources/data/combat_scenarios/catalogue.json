@@ -12,6 +12,16 @@
       "path": "res://resources/data/combat_encounters/painted_enemy_pilot.json"
     },
     {
+      "id": "painted_mine_breach",
+      "label": "Painted arenas - Mine Breach",
+      "path": "res://resources/data/combat_encounters/painted_mine_breach.json"
+    },
+    {
+      "id": "painted_forest_ambush",
+      "label": "Painted arenas - Forest Ambush",
+      "path": "res://resources/data/combat_encounters/painted_forest_ambush.json"
+    },
+    {
       "id": "drawn_roster_skirmish",
       "label": "Painted Six - Old Mine",
       "path": "res://resources/data/combat_encounters/drawn_roster_skirmish.json"

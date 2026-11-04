@@ -24,6 +24,10 @@ func _run() -> void:
 			await _exercise_modular(pixels)
 		if "environment" in views:
 			await _exercise_environment(pixels)
+		if "arenas" in views:
+			await _exercise_arenas(pixels)
+		if "arenabattles" in views:
+			await _exercise_arena_battles(pixels)
 		if "dungeon" in views:
 			app=load("res://scenes/dungeon/DungeonDebug.tscn").instantiate()
 			viewport.add_child(app)
@@ -226,6 +230,87 @@ func _exercise_modular(pixels: Vector2i) -> void:
 		await frames(8)
 		await capture("modular-"+action.replace(":","-"),pixels)
 	app.queue_free();await frames(8)
+
+
+func _exercise_arena_battles(pixels: Vector2i) -> void:
+	for scenario: String in ["painted_forest_ambush","painted_mine_breach"]:
+		app=load("res://scenes/combat/CombatDebug.tscn").instantiate();viewport.add_child(app)
+		await frames(6)
+		app.selected_scenario_id=scenario;app._load_selected_scenario()
+		await frames(12)
+		var observations: Dictionary={}
+		var watch: Callable=func() -> void:
+			if not is_instance_valid(app):return
+			for id: String in app.unit_visual_action:
+				observations[str(app.unit_visual_action[id])]=true
+		get_tree().process_frame.connect(watch)
+		var count:=0
+		while app._combat_result()=="in_progress" and count<100:
+			var policy: Dictionary=app.state.duplicate(true)
+			if app._unit_by_id(policy.turn_state.active_unit_id).team=="player":
+				for unit: Dictionary in policy.units:unit.team="enemy" if unit.team=="player" else "player"
+			var command: Dictionary=app.CombatResolver.choose_enemy_command(policy,"cmd_%03d" % app.command_index)
+			var expected: Dictionary=app.CombatResolver.simulate(app._state_without_log(),[command]).state
+			var before_index: int=app.command_index
+			await click(_action_button(command.action_id))
+			if command.target.type=="tile":
+				await click(_tile_button(command.target.position))
+				await click(_tile_button(command.target.position))
+			elif command.target.type=="unit":
+				await click(_tile_button(app._unit_by_id(command.target.unit_id).position))
+			var deadline:=Time.get_ticks_msec()+10000
+			while app.animation_locked and Time.get_ticks_msec()<deadline:await frames(1)
+			check(not app.animation_locked,"arena full battle animation unlocks: "+scenario+str(count))
+			check(app.command_index==before_index+1,"arena control submits exactly one command: "+scenario+str(count))
+			# TMX JSON numbers are floats; native tile controls use integer coords.
+			# Compare their serialized domain values, not Dictionary numeric types.
+			var actual_units: Variant=JSON.parse_string(JSON.stringify(app.state.units))
+			var expected_units: Variant=JSON.parse_string(JSON.stringify(expected.units))
+			check(actual_units==expected_units and app.state.turn_state==expected.turn_state and app.state.seed==expected.seed,"arena controls match trusted resolver: "+scenario+str(count))
+			if not errors.is_empty():break
+			count+=1
+		get_tree().process_frame.disconnect(watch)
+		check(app._combat_result()=="victory","arena ordinary controls reach normal victory: "+scenario)
+		check(observations.has("combat:7") and observations.has("death:7"),"arena full attack/death frames sampled: "+scenario)
+		for event: Dictionary in app.state.event_log:
+			check(event.type!="command_rejected" and event.get("source","")!="debug_win","arena no rejected or forced command: "+scenario)
+		print("ARENA_NATIVE_BATTLE ",scenario," result=",app._combat_result()," commands=",count," sampled=",observations.keys())
+		await capture("arena-victory-"+scenario,pixels)
+		app.queue_free();await frames(8)
+
+
+func _exercise_arenas(pixels: Vector2i) -> void:
+	for scenario: String in ["painted_forest_ambush","painted_mine_breach"]:
+		app=load("res://scenes/combat/CombatDebug.tscn").instantiate();viewport.add_child(app)
+		await frames(6)
+		app.selected_scenario_id=scenario;app._load_selected_scenario()
+		await frames(12)
+		var before: Dictionary=app.state.duplicate(true)
+		check(app.board_terrain.texture!=null,"arena painted floor: "+scenario)
+		check(app.state.units.size()==7,"arena seven accepted actors: "+scenario)
+		for unit: Dictionary in app.state.units:
+			check(app.unit_art.is_drawn_unit(unit),"arena accepted painted actor: "+unit.id)
+			var node: Control=app.unit_layer.get_node_or_null(NodePath(unit.id))
+			check(node!=null and node.get_node("Sprite").texture!=null,"arena visible actor: "+unit.id)
+		for tile: Dictionary in app.state.grid.tiles:
+			var path: String=app._tile_decoration_path(tile)
+			if not path.is_empty():check(not app.EnvironmentArt.prop(path).is_empty(),"arena semantic prop: "+path)
+		app._render();await frames(8)
+		check(app.state==before,"arena render preserves domain: "+scenario)
+		if pixels==Vector2i(1280,720):
+			check(app.board_root.size.x*app.board_root.scale.x>=500 and app.board_root.size.y*app.board_root.scale.y>=280,"arena720p retains readable floor area: "+scenario)
+		await capture("arena-"+scenario,pixels)
+		if exercise:
+			await click(_action_button("move"))
+			await click(_tile_button({"x":3,"y":7}))
+			await click(_tile_button({"x":3,"y":7}))
+			var deadline:=Time.get_ticks_msec()+8000
+			while app.animation_locked and Time.get_ticks_msec()<deadline:await frames(1)
+			check(not app.animation_locked,"arena move finishes without turn lock: "+scenario)
+			check(app._unit_by_id("unit_knight_pilot").position=={"x":3,"y":7},"arena real control reaches destination: "+scenario)
+			check(app._unit_by_id("unit_knight_pilot").resources.mp==3,"arena real control spends1MP: "+scenario)
+			await capture("arena-"+scenario+"-moved",pixels)
+		app.queue_free();await frames(8)
 
 
 func _exercise_environment(pixels: Vector2i) -> void:

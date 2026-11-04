@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "assets_src/environment/fbx-check.json",
-      "sha256": "ada40542624f9aed1ce42449d0b0ae38ed67cb6a81d95cc6f8cce7788f5693e6"
+      "sha256": "6728b380bf4b99e339f03b99b11ec125aba902b5bfe00d5abaeb8529d5f34147"
     },
     {
       "path": "assets_src/environment/FLOORS-PROMPT.txt",
@@ -27,7 +27,7 @@
     },
     {
       "path": "assets_src/environment/props/altar/model.json",
-      "sha256": "2d3a61c336711210c4be584ba650673037d8747665976ecd531e46e539191f96"
+      "sha256": "f26659410514b699088ba103eebf577017c7dbbdd4aa0455b97f6d57b6c5417f"
     },
     {
       "path": "assets_src/environment/props/altar/render.png",
@@ -47,7 +47,7 @@
     },
     {
       "path": "assets_src/environment/props/arch/model.json",
-      "sha256": "9129e30479bbc9c8753e6a9cf93796b2aca2de4ca71ab198b9bb61f3c92b49e2"
+      "sha256": "029f56f545ed101e83ffad36001474146f86daec49e196e4bfb96ebc092b86df"
     },
     {
       "path": "assets_src/environment/props/arch/render.png",
@@ -67,7 +67,7 @@
     },
     {
       "path": "assets_src/environment/props/barrel/model.json",
-      "sha256": "24dfcb38035e319ff9fee565c13596c0301dbb2620d04e8187d976adafc188e8"
+      "sha256": "f48114222e31126046213052edd8e823715e62e7bde52b1ed9718e1b30d24e81"
     },
     {
       "path": "assets_src/environment/props/barrel/render.png",
@@ -87,7 +87,7 @@
     },
     {
       "path": "assets_src/environment/props/bone_totem/model.json",
-      "sha256": "4df29562845b288d46c2b03a6dbbbc3a3f60c3db79c3c021db813136b59cf426"
+      "sha256": "8c423e65c91aa4ba3fe66c8baa950ec3ac5ed31e24814efb3af5645fcdedef31"
     },
     {
       "path": "assets_src/environment/props/bone_totem/render.png",
@@ -107,7 +107,7 @@
     },
     {
       "path": "assets_src/environment/props/bones/model.json",
-      "sha256": "b09cfcc178c06edbc8e84ac2ae2d5b0da6d13ea7a6acfef9bfe47e9b27c98b46"
+      "sha256": "6b35b4878f6b43d220f693f26768a41e9a04e876a2b0f7b4c758a022a406e598"
     },
     {
       "path": "assets_src/environment/props/bones/render.png",
@@ -127,7 +127,7 @@
     },
     {
       "path": "assets_src/environment/props/boulder/model.json",
-      "sha256": "83e413d2451acb6daf4350065d88f4e4e31a402b482c7e4ab675991a7a1ff33d"
+      "sha256": "2eeb388a8302526f44a90e55bd067fca62ddb380056ec73f5a04b7cabd7a39b5"
     },
     {
       "path": "assets_src/environment/props/boulder/render.png",
@@ -147,7 +147,7 @@
     },
     {
       "path": "assets_src/environment/props/branches/model.json",
-      "sha256": "d695b1ea463fedf582db11502b1f2725c5849dcf0f45267118741fcf0dc695c8"
+      "sha256": "b9be81d3db6680c45bc6fb9c33c45eea11a0d640613b1f7aa76daebc50af6f37"
     },
     {
       "path": "assets_src/environment/props/branches/render.png",
@@ -167,7 +167,7 @@
     },
     {
       "path": "assets_src/environment/props/brazier/model.json",
-      "sha256": "a560484d1705a3b4a8c99b231b86095fbff4df45b64599239d782eb18ccdb018"
+      "sha256": "7aa579c3407675b95dba64b39894bb86a15618a026254d7623963632162ad117"
     },
     {
       "path": "assets_src/environment/props/brazier/render.png",
@@ -187,7 +187,7 @@
     },
     {
       "path": "assets_src/environment/props/broken_pillar/model.json",
-      "sha256": "1f6f2ec0262046ca4ad1428f522c007e332ffb750c57b7c9c34fd29b9a0bd89d"
+      "sha256": "3ee43b1f2506ec1f3ba250edd2612dc9cbecfad0707bca526adf0ed3cf28e6c2"
     },
     {
       "path": "assets_src/environment/props/broken_pillar/render.png",
@@ -207,7 +207,7 @@
     },
     {
       "path": "assets_src/environment/props/bush/model.json",
-      "sha256": "365884daeb75561eb963ee0925080378bec2fcaed60094c69c797e9a9ee47fff"
+      "sha256": "542e3218b5bf5b6be7d35790ce90bc589469a9913856d22ed5e75191835793bd"
     },
     {
       "path": "assets_src/environment/props/bush/render.png",
@@ -227,7 +227,7 @@
     },
     {
       "path": "assets_src/environment/props/chest/model.json",
-      "sha256": "a4b0a8c874d6e0e70cfb517c1de91a763ea1c089b094457b99c37deadd8e583d"
+      "sha256": "59b6847a47d04374fdd05a4ad86cca18ca1b697f586ff1584371cc0e9ce0bccc"
     },
     {
       "path": "assets_src/environment/props/chest/render.png",
@@ -247,7 +247,7 @@
     },
     {
       "path": "assets_src/environment/props/coffin/model.json",
-      "sha256": "b11285a42961e424569d121161e423433eb94e357fa3d058a8cbeb0dab7279b9"
+      "sha256": "216458eeba0eb37690e4a4417535f4aa19f561d9cb8bb75a1db86ac841077c96"
     },
     {
       "path": "assets_src/environment/props/coffin/render.png",
@@ -267,7 +267,7 @@
     },
     {
       "path": "assets_src/environment/props/crate/model.json",
-      "sha256": "606a2957092cec827d9bec95971e2269526e49ee9ffa6e0134cd43f7def481cc"
+      "sha256": "baf7473e2ddef1ad5e88bd9a210c32db8e5e32f12e7c5522c64722ba51f27a3d"
     },
     {
       "path": "assets_src/environment/props/crate/render.png",
@@ -287,7 +287,7 @@
     },
     {
       "path": "assets_src/environment/props/dead_tree/model.json",
-      "sha256": "b24bebc6c1abb5b043fb6d85a079b9de3bce96d1db52f3f30196d9f6829d0e20"
+      "sha256": "b67e1d721cda305eea35d2adbd0be81cd9a55a34a92d26b016ba7f709a227486"
     },
     {
       "path": "assets_src/environment/props/dead_tree/render.png",
@@ -307,7 +307,7 @@
     },
     {
       "path": "assets_src/environment/props/fallen_log/model.json",
-      "sha256": "d4358679481692c91aa998f1ac95ad87d82da1c000b0009e95ad301fbaedd0ee"
+      "sha256": "d478bf48a3444bffa9abc26b78d5edc612e94aaf0d770b0e9576245a082adb8f"
     },
     {
       "path": "assets_src/environment/props/fallen_log/render.png",
@@ -327,7 +327,7 @@
     },
     {
       "path": "assets_src/environment/props/flowers/model.json",
-      "sha256": "87237cd4381a6eb4cb00068b40122d4a6b600ca0db0686af48a83b92d36ffe55"
+      "sha256": "3d84100e03eb5f4418b065cbb0b1840ad27dcbdbad3425c7162adbc11f4ad87b"
     },
     {
       "path": "assets_src/environment/props/flowers/render.png",
@@ -347,7 +347,7 @@
     },
     {
       "path": "assets_src/environment/props/grass/model.json",
-      "sha256": "f7edc540645121fdd590fed133ece94c594e6ca8a3903f1b4dba450a019d15eb"
+      "sha256": "179a8a0803b8454a6b9aec99b312bb566dce81d637b8f7e3db816d5f1b623dee"
     },
     {
       "path": "assets_src/environment/props/grass/render.png",
@@ -355,7 +355,7 @@
     },
     {
       "path": "assets_src/environment/props/mushrooms/model.json",
-      "sha256": "782e7ed5a6c83bdec36fddccee73bb9fb6061447e893d12d7194687af6fde9af"
+      "sha256": "7d2868cf3c96bdac575f9e9a8489fa42ed821165a65c8ac85a3def381f4eaa26"
     },
     {
       "path": "assets_src/environment/props/mushrooms/mushrooms.blend",
@@ -375,7 +375,7 @@
     },
     {
       "path": "assets_src/environment/props/oak/model.json",
-      "sha256": "63d7c2091ba752b4104ad60ad3a4220eeca8ae8889cc816df79631f62730ffa1"
+      "sha256": "04a3b0f75a82124ce6c9741c2cfad08bf9cb8d76708dfe878f40cb9e6345e3c8"
     },
     {
       "path": "assets_src/environment/props/oak/oak.blend",
@@ -395,7 +395,7 @@
     },
     {
       "path": "assets_src/environment/props/pillar/model.json",
-      "sha256": "5c844839c9dfc9d8e27c034a38bb6c9f52eba9ca202efd8926566fd817e508cb"
+      "sha256": "07c123d512a71b16329b06e81bdfeb76e948c2c80a5aa8f2f72a319e957f39da"
     },
     {
       "path": "assets_src/environment/props/pillar/pillar.blend",
@@ -415,7 +415,7 @@
     },
     {
       "path": "assets_src/environment/props/pine/model.json",
-      "sha256": "82eb4d6b0645d829440b347539b96e79bd87be17ae4975ea016cd95f44487e81"
+      "sha256": "b50fd147d890dd23842a09de4457f1520ff4069e7ac9504dfb85bbb8324bee64"
     },
     {
       "path": "assets_src/environment/props/pine/pine.blend",
@@ -435,7 +435,7 @@
     },
     {
       "path": "assets_src/environment/props/rock_cluster/model.json",
-      "sha256": "3966826b342d721bb11ff965e535aa13952379600819b3c5418fd73daecea18b"
+      "sha256": "2f4907117c16019b578179178150dd6414d4e7d4a589be7867992a8e32c727a1"
     },
     {
       "path": "assets_src/environment/props/rock_cluster/render.png",
@@ -455,7 +455,7 @@
     },
     {
       "path": "assets_src/environment/props/rubble/model.json",
-      "sha256": "c06d2d46e22b6bef71c2c6d71d1aa06f52d10b0f61c6f499d95642eae6027e50"
+      "sha256": "e2fadd1985a597ecfff07926c62b411540849d5049a338ad6f0c096b60525614"
     },
     {
       "path": "assets_src/environment/props/rubble/render.png",
@@ -475,7 +475,7 @@
     },
     {
       "path": "assets_src/environment/props/sacks/model.json",
-      "sha256": "8cce1a74a429c83c2bc44e165ad22e58f0e91f209d80a1a28461bf22403e9e7d"
+      "sha256": "1ef390303c113c52336d5535c66d92b7f378e87f2961f436fa961fa88196246c"
     },
     {
       "path": "assets_src/environment/props/sacks/render.png",
@@ -495,7 +495,7 @@
     },
     {
       "path": "assets_src/environment/props/spike_fence/model.json",
-      "sha256": "6f9fc4a93879014b404422cce229ef421079e80dce164b0b770149404feb7c76"
+      "sha256": "4e2c3dd113764f92a86d664bc43ca3cd19f1c566edf445b9fee23294cc052b52"
     },
     {
       "path": "assets_src/environment/props/spike_fence/render.png",
@@ -515,7 +515,7 @@
     },
     {
       "path": "assets_src/environment/props/statue/model.json",
-      "sha256": "573f7c0bf8bd84628bf8120a19a5c8c69a72949b84ba6028e745961a1a491249"
+      "sha256": "17bdd3aafd3a36a0109bfb0184a9f3b60fd048086a636ce31f3167a072e9cfd8"
     },
     {
       "path": "assets_src/environment/props/statue/render.png",
@@ -535,7 +535,7 @@
     },
     {
       "path": "assets_src/environment/props/stump/model.json",
-      "sha256": "2b1a2a5e569081deeb8a1e21a1c99420d79d4162db9c7c28c9ed76ee048d250b"
+      "sha256": "d8c02b5430cf5fa6b0ff736127c6c024729dcdb25ce8eca569cd6baf50ff3884"
     },
     {
       "path": "assets_src/environment/props/stump/render.png",
@@ -555,7 +555,7 @@
     },
     {
       "path": "assets_src/environment/props/wall/model.json",
-      "sha256": "9ea1daac70d04fc42c534b0aa7caf66c241762324af479799407ac1a64358c64"
+      "sha256": "905e217dda1d5345e21c67621fc97733f6b6f1f541f64fe74333d3c59da95069"
     },
     {
       "path": "assets_src/environment/props/wall/render.png",
@@ -575,7 +575,7 @@
     },
     {
       "path": "assets_src/environment/props.json",
-      "sha256": "b1afecd534e3a15468beb9ef57412597e672d9c01d793caf1cd29f471cbd7638"
+      "sha256": "851eb5a37278910851613e7013fc735dd150a55087a42ce5181a111315da2501"
     },
     {
       "path": "assets_src/environment/provenance.json",

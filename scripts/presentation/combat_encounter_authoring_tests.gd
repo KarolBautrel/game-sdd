@@ -18,7 +18,11 @@ func _check(ok: bool, message: String) -> void:
 
 func _run() -> void:
 	var options := Catalog.options()
-	_check(options.size() == 12, "S11-01 scenario count differs")
+	var canonical: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(Catalog.CATALOGUE_PATH))
+	_check(options.size() == canonical.scenarios.size(), "S11-01 discovery omits canonical entries")
+	_check(options[0].id=="full_combat_showcase", "S11-01 original default preserved")
+	for id: String in ["ash_road_raiders","clearing_crossfire","painted_enemy_pilot","painted_forest_ambush","painted_mine_breach"]:
+		_check(not Catalog.path_for_id(id).is_empty(),"S11-01 retained/painted scenario "+id)
 	options[0].label = "local change"
 	_check(Catalog.options()[0].label != "local change", "S11-01 catalogue cache leaked mutation")
 	_check(not Catalog.validation_errors(null).is_empty(), "S11-02 bad shape accepted")

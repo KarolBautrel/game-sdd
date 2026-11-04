@@ -27,6 +27,13 @@ PASS; native139checks/69pointer events/15captures PASS. Next70 forest/mine
 tactical arenas with existing tiles/props/painted actors and canonical TMX.
 L69-01 remains pending OS input; two-hour deadline01:12Z remains active.
 
+69 published016e99bb.70 two canonical forest/mine arenas, seven preserved actors,
+compact720p battle chrome and corrected names/floor. Arena2292/0,53Python tests,
+full65/65checks, Windows EXE/PCK smoke PASS. Native layout278/18clicks/12captures;
+normal animated victories48/43commands,718checks/205clicks/2terminal captures PASS.
+QA:2026-11-04-painted-arenas. L70-01 remains open; next last-priority71 full town
+plan before isolated pilot. No accepted actor art/cadence edited.
+
 User rejects the initial flat design and directs us to the approved world-travel
 dark fantasy UI. They then delegate about two hours of staged native/gameplay
 polish, full desktop control and a normal commit/push after each verified episode.
