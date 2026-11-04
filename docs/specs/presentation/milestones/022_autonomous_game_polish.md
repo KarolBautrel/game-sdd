@@ -81,3 +81,14 @@ captures PASS. Prior count/path and newline-hash gaps repaired with receipts;
 no accepted art changed. L70-01 remains open under the same OS activation error.
 QA:2026-11-04-painted-arenas. Next71: full small-town plan before isolated pilot;
 current town services remain default. Target01:12Z remains active.
+
+70 published20e8c82e50b61bf5d1c3a8c5432400b12d4c04ca; remote/author/LFS verified.
+71 full small-town plan completed before implementation. IsolatedA courtyard:
+WASD/arrows,3party actors,3NPC stand-ins, swept collision, valid breadcrumb
+followers and blocking readable conversations.1445focused checks,56Python tests,
+full67/67checks PASS. Native87checks/24key events/9captures PASS. Final EXE/PCK
+smoke PASS; packaged play301checks/30clicks/16keys/26captures and campaign106/
+50clicks/12captures PASS. Existing town services/default remain; B bridge andC
+inn/final art are future work. L71-01 remains open; timed-session work is being
+persisted/published, with physical acceptance clearly separated. See town QA
+and2026-11-04-preview-guide for all review commands.

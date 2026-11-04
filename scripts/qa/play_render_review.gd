@@ -1,6 +1,7 @@
 extends "res://scripts/qa/campaign_render_review.gd"
 ## Same no-focus/input/save boundary as the campaign renderer, for play screens.
 const MODEL := preload("res://scripts/domain/dungeon_state_model.gd")
+var keys:=0
 func _run() -> void:
 	await frames(2)
 	check(DisplayServer.get_name()!="headless","native play display")
@@ -28,6 +29,8 @@ func _run() -> void:
 			await _exercise_arenas(pixels)
 		if "arenabattles" in views:
 			await _exercise_arena_battles(pixels)
+		if "townpilot" in views:
+			await _exercise_town_pilot(pixels)
 		if "dungeon" in views:
 			app=load("res://scenes/dungeon/DungeonDebug.tscn").instantiate()
 			viewport.add_child(app)
@@ -159,6 +162,7 @@ func _run() -> void:
 		await frames(8)
 	check(not root.has_focus(),"play review acquired no focus")
 	var report: Dictionary={"status":"PASS" if errors.is_empty() else "FAIL","kind":"native play GPU and engine-local input fixture","display":DisplayServer.get_name(),"renderer":RenderingServer.get_current_rendering_method(),"window_minimized":root.mode==Window.MODE_MINIMIZED,"window_focused":root.has_focus(),"uses_desktop_input":false,"player_save_used":false,"engine_clicks":clicks,"captures":captures,"checks":checks,"failures":errors,"texture_memory_bytes":RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_TEXTURE_MEM_USED)}
+	report.engine_key_events=keys
 	var file:=FileAccess.open(output+"/native-review.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(report,"\t"))
 	file.close()
@@ -229,6 +233,53 @@ func _exercise_modular(pixels: Vector2i) -> void:
 		for index in ids.size():sprites[index].texture=atlas.texture({"id":ids[index]},ids[index],"east",action)
 		await frames(8)
 		await capture("modular-"+action.replace(":","-"),pixels)
+	app.queue_free();await frames(8)
+
+
+func _town_key(code: Key, pressed: bool) -> void:
+	var event:=InputEventKey.new();event.keycode=code;event.physical_keycode=code;event.pressed=pressed
+	viewport.push_input(event,true);keys+=1
+	await frames(2)
+
+func _exercise_town_pilot(pixels: Vector2i) -> void:
+	var campaign:=get_node("/root/CampaignSession")
+	var before: Dictionary=campaign.state.duplicate(true)
+	app=load("res://scenes/town/TownExploration.tscn").instantiate();viewport.add_child(app)
+	await frames(12)
+	check(app.actors.size()==6,"town native party and NPC stand-ins")
+	check(app.world.scale.x>0.3,"town ground layout settled before first input")
+	for actor: Dictionary in app.actors:check(actor.sprite.texture!=null,"town native painted actor texture")
+	await capture("town-courtyard",pixels)
+	var start: Vector2=app.party_positions[0]
+	var walk_frames: Dictionary={}
+	var watch: Callable=func() -> void:
+		var path: String=app.actors[0].path
+		if "/neutral_walk/" in path:walk_frames[path]=true
+	get_tree().process_frame.connect(watch)
+	await _town_key(KEY_A,true)
+	await get_tree().create_timer(1.1).timeout
+	await _town_key(KEY_A,false)
+	get_tree().process_frame.disconnect(watch)
+	check(app.Model.project(app.party_positions[0]-start).length()>70,"town native held A moves left")
+	check(walk_frames.size()==8,"town native complete eight-cel calm walk")
+	check(app.near_id=="watch","town native proximity selects gate watch")
+	for point: Vector2 in app.party_positions:check(app.Model.walkable(point,app.map),"town followers stay on walkable breadcrumbs")
+	var anchor: Vector2=app.party_positions[0]
+	await frames(8)
+	check(app.party_positions[0]==anchor,"town key release stops without sliding")
+	await capture("town-approach",pixels)
+	await _town_key(KEY_E,true);await _town_key(KEY_E,false)
+	check(app.blocker.visible and app.talking_id=="watch","town native E opens nearest dialogue")
+	check(app.dialogue.get_global_rect().encloses(app.close_dialogue.get_global_rect()),"town dialogue action stays inside parchment")
+	check(Rect2(Vector2.ZERO,app.size).encloses(app.dialogue.get_global_rect()),"town dialogue parchment stays in viewport")
+	await _town_key(KEY_D,true);await get_tree().create_timer(0.4).timeout
+	check(app.party_positions[0]==anchor,"town modal blocks native movement input")
+	await capture("town-dialogue",pixels)
+	await _town_key(KEY_ESCAPE,true);await _town_key(KEY_ESCAPE,false);await _town_key(KEY_D,false)
+	await frames(8)
+	check(not app.blocker.visible and app.held.is_empty(),"town Escape closes and clears held movement")
+	check(app.party_positions[0]==anchor,"town close never resumes stale held key")
+	check(campaign.state==before,"town native actions never change campaign save state")
 	app.queue_free();await frames(8)
 
 

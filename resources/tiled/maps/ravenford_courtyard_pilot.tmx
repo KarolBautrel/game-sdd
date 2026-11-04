@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="12" height="10" tilewidth="76" tileheight="76" infinite="0" nextlayerid="4" nextobjectid="50">
+ <properties>
+  <property name="id" value="ravenford_courtyard_pilot" />
+  <property name="engine_json" value="res://resources/data/maps/ravenford_courtyard_pilot.json" />
+  <property name="purpose" value="isolated town movement pilot" />
+  <property name="terrain_theme" value="dungeon" />
+ </properties>
+ <tileset firstgid="1" source="../tilesets/combat_logic_tiles.tsx" />
+ <layer id="1" name="terrain" width="12" height="10">
+  <data encoding="csv">
+2,2,2,2,2,2,2,2,2,2,2,2,
+2,1,2,1,1,1,1,1,1,1,1,2,
+2,1,1,1,1,1,1,1,2,1,1,2,
+2,1,1,1,1,1,1,1,1,1,1,2,
+2,1,1,1,1,1,2,1,1,1,1,2,
+2,1,1,1,1,1,2,2,1,1,1,2,
+2,1,1,1,1,1,1,1,1,1,1,2,
+2,1,1,1,1,1,1,1,1,1,1,2,
+2,1,1,1,1,1,1,1,1,1,1,2,
+2,2,2,2,2,1,1,2,2,2,2,2
+</data>
+ </layer>
+ <objectgroup id="2" name="test_spawns">
+  <object id="1" name="party_entry" type="town_party" x="380" y="456" width="76" height="76" />
+  <object id="2" name="watch" type="town_npc" x="228" y="532" width="76" height="76" />
+  <object id="3" name="trader" type="town_npc" x="684" y="304" width="76" height="76" />
+  <object id="4" name="innkeeper" type="town_npc" x="228" y="152" width="76" height="76" />
+ </objectgroup>
+ <objectgroup id="3" name="decorations">
+  <object id="5" name="pillar" x="0" y="152">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/columns/columns_00.png" />
+    <property name="kind" value="pillar" />
+   </properties>
+   <point />
+  </object>
+  <object id="6" name="broken_pillar" x="0" y="380">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_03.png" />
+    <property name="kind" value="broken_pillar" />
+   </properties>
+   <point />
+  </object>
+  <object id="7" name="pillar" x="0" y="608">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/columns/columns_00.png" />
+    <property name="kind" value="pillar" />
+   </properties>
+   <point />
+  </object>
+  <object id="8" name="pillar" x="228" y="0">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/columns/columns_00.png" />
+    <property name="kind" value="pillar" />
+   </properties>
+   <point />
+  </object>
+  <object id="9" name="broken_pillar" x="456" y="0">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_03.png" />
+    <property name="kind" value="broken_pillar" />
+   </properties>
+   <point />
+  </object>
+  <object id="10" name="pillar" x="684" y="0">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/columns/columns_00.png" />
+    <property name="kind" value="pillar" />
+   </properties>
+   <point />
+  </object>
+  <object id="11" name="pillar" x="836" y="152">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/columns/columns_00.png" />
+    <property name="kind" value="pillar" />
+   </properties>
+   <point />
+  </object>
+  <object id="12" name="broken_pillar" x="836" y="380">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_03.png" />
+    <property name="kind" value="broken_pillar" />
+   </properties>
+   <point />
+  </object>
+  <object id="13" name="pillar" x="836" y="608">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/columns/columns_00.png" />
+    <property name="kind" value="pillar" />
+   </properties>
+   <point />
+  </object>
+  <object id="14" name="arch" x="152" y="76">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_00.png" />
+    <property name="kind" value="arch" />
+   </properties>
+   <point />
+  </object>
+  <object id="15" name="brazier" x="608" y="152">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png" />
+    <property name="kind" value="brazier" />
+   </properties>
+   <point />
+  </object>
+  <object id="16" name="crate" x="456" y="304">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png" />
+    <property name="kind" value="crate" />
+   </properties>
+   <point />
+  </object>
+  <object id="17" name="crate" x="456" y="380">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png" />
+    <property name="kind" value="crate" />
+   </properties>
+   <point />
+  </object>
+  <object id="18" name="crate" x="532" y="380">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png" />
+    <property name="kind" value="crate" />
+   </properties>
+   <point />
+  </object>
+  <object id="19" name="brazier" x="304" y="684">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png" />
+    <property name="kind" value="brazier" />
+   </properties>
+   <point />
+  </object>
+  <object id="20" name="brazier" x="532" y="684">
+   <properties>
+    <property name="path" value="res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png" />
+    <property name="kind" value="brazier" />
+   </properties>
+   <point />
+  </object>
+ </objectgroup>
+</map>

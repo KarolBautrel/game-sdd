@@ -19,6 +19,9 @@ supplied with `--godot`; the existing workspace installation is the default.
 - Run `tools/validators/validate_all.py` with the runner's Python interpreter.
 - Discover every `scripts/**/*tests.gd` suite in deterministic path order.
 - Load App, Ravenford town, DungeonDebug, CombatDebug and CombatMapEditor with a bounded frame count.
+- World008 adds the isolated TownExploration preview to source/package scene
+  boots. `-Scene town-preview` launches only that movement/dialogue study; it has
+  no campaign save access and does not replace Ravenford's existing entry scene.
 - Each process has a wall-clock timeout; a timeout fails the run.
 - Capture stdout and stderr, command, exit code, duration and diagnostic counts.
 - Nonzero exits and `SCRIPT ERROR:`, `ERROR:` or assertion diagnostics fail a check,

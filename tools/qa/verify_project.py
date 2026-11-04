@@ -17,6 +17,7 @@ DEFAULT_GODOT = ROOT.parents[1] / "installers/Godot_v4.7-stable_win64.exe/Godot_
 SCENES = (
     "scenes/app/App.tscn",
     "scenes/town/town_shell.tscn",
+    "scenes/town/TownExploration.tscn",
     "scenes/dungeon/DungeonDebug.tscn",
     "scenes/combat/CombatDebug.tscn",
     "scenes/combat/CombatMapEditor.tscn",

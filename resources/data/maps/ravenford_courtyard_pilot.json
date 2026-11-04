@@ -1,0 +1,735 @@
+{
+  "schema_version": 2,
+  "id": "ravenford_courtyard_pilot",
+  "source": "res://resources/tiled/maps/ravenford_courtyard_pilot.tmx",
+  "tile_size": 76,
+  "width": 12,
+  "height": 10,
+  "tiles": [
+    {
+      "x": 0,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 8,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 9,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 11,
+      "y": 0,
+      "type": "blocked"
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "type": "blocked"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "type": "blocked"
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 1,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 1,
+      "type": "blocked"
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "type": "blocked"
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 2,
+      "type": "blocked"
+    },
+    {
+      "x": 9,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 2,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 2,
+      "type": "blocked"
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "type": "blocked"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 3,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 3,
+      "type": "blocked"
+    },
+    {
+      "x": 0,
+      "y": 4,
+      "type": "blocked"
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "type": "blocked"
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 4,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 4,
+      "type": "blocked"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "type": "blocked"
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "type": "blocked"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "type": "blocked"
+    },
+    {
+      "x": 8,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 5,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 5,
+      "type": "blocked"
+    },
+    {
+      "x": 0,
+      "y": 6,
+      "type": "blocked"
+    },
+    {
+      "x": 1,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 6,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 6,
+      "type": "blocked"
+    },
+    {
+      "x": 0,
+      "y": 7,
+      "type": "blocked"
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 7,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 7,
+      "type": "blocked"
+    },
+    {
+      "x": 0,
+      "y": 8,
+      "type": "blocked"
+    },
+    {
+      "x": 1,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 2,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 3,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 4,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 5,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 8,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 9,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 10,
+      "y": 8,
+      "type": "floor"
+    },
+    {
+      "x": 11,
+      "y": 8,
+      "type": "blocked"
+    },
+    {
+      "x": 0,
+      "y": 9,
+      "type": "blocked"
+    },
+    {
+      "x": 1,
+      "y": 9,
+      "type": "blocked"
+    },
+    {
+      "x": 2,
+      "y": 9,
+      "type": "blocked"
+    },
+    {
+      "x": 3,
+      "y": 9,
+      "type": "blocked"
+    },
+    {
+      "x": 4,
+      "y": 9,
+      "type": "blocked"
+    },
+    {
+      "x": 5,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 6,
+      "y": 9,
+      "type": "floor"
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "type": "blocked"
+    },
+    {
+      "x": 8,
+      "y": 9,
+      "type": "blocked"
+    },
+    {
+      "x": 9,
+      "y": 9,
+      "type": "blocked"
+    },
+    {
+      "x": 10,
+      "y": 9,
+      "type": "blocked"
+    },
+    {
+      "x": 11,
+      "y": 9,
+      "type": "blocked"
+    }
+  ],
+  "test_spawns": [
+    {
+      "id": "party_entry",
+      "role": "town_party",
+      "x": 5,
+      "y": 6
+    },
+    {
+      "id": "watch",
+      "role": "town_npc",
+      "x": 3,
+      "y": 7
+    },
+    {
+      "id": "trader",
+      "role": "town_npc",
+      "x": 9,
+      "y": 4
+    },
+    {
+      "id": "innkeeper",
+      "role": "town_npc",
+      "x": 3,
+      "y": 2
+    }
+  ],
+  "terrain_theme": "dungeon",
+  "terrain_decorations": [
+    {
+      "x": 3,
+      "y": 0,
+      "path": "res://assets/combat/terrain/processed/dungeon/columns/columns_00.png",
+      "kind": "pillar"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_03.png",
+      "kind": "broken_pillar"
+    },
+    {
+      "x": 9,
+      "y": 0,
+      "path": "res://assets/combat/terrain/processed/dungeon/columns/columns_00.png",
+      "kind": "pillar"
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_00.png",
+      "kind": "arch"
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "path": "res://assets/combat/terrain/processed/dungeon/columns/columns_00.png",
+      "kind": "pillar"
+    },
+    {
+      "x": 8,
+      "y": 2,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png",
+      "kind": "brazier"
+    },
+    {
+      "x": 11,
+      "y": 2,
+      "path": "res://assets/combat/terrain/processed/dungeon/columns/columns_00.png",
+      "kind": "pillar"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png",
+      "kind": "crate"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_03.png",
+      "kind": "broken_pillar"
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png",
+      "kind": "crate"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png",
+      "kind": "crate"
+    },
+    {
+      "x": 11,
+      "y": 5,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_03.png",
+      "kind": "broken_pillar"
+    },
+    {
+      "x": 0,
+      "y": 8,
+      "path": "res://assets/combat/terrain/processed/dungeon/columns/columns_00.png",
+      "kind": "pillar"
+    },
+    {
+      "x": 11,
+      "y": 8,
+      "path": "res://assets/combat/terrain/processed/dungeon/columns/columns_00.png",
+      "kind": "pillar"
+    },
+    {
+      "x": 4,
+      "y": 9,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png",
+      "kind": "brazier"
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "path": "res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png",
+      "kind": "brazier"
+    }
+  ]
+}

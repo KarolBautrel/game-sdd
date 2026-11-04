@@ -13,6 +13,7 @@ if str(ROOT) not in sys.path:
 from tools.assets.build_catalogue import catalogue_errors
 from tools.validators.hero_equipment_identity import errors as hero_identity_errors
 from tools.validators.tactical_roster import errors as tactical_roster_errors
+from tools.validators.town_spaces import errors as town_space_errors
 from tools.validators.combat_authoring import catalogue_errors as combat_authoring_errors, encounter_errors
 
 try:
@@ -614,6 +615,7 @@ def main() -> int:
     errors.extend(validate_campaign_items())
     errors.extend(hero_identity_errors(ROOT))
     errors.extend(tactical_roster_errors(ROOT))
+    errors.extend(town_space_errors(ROOT))
     errors.extend(validate_town_trade())
     errors.extend(validate_party_levels())
 

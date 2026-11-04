@@ -6,7 +6,16 @@ when the user has only requested an explanation or plan.
 
 ## Next-session entry: read this first
 
-Latest active-task handoff:
+Latest checkpoint handoff:
+[Autonomous polish and courtyard pilot](handoffs/2026-11-04-autonomous-polish.md).
+Ordered66..70 polish and71A isolated town pilot are implemented/automated PASS;
+full67/67checks, Windows export/runtime and exact-PCK native reviews PASS.
+Town service integration/inn/final NPC art remain planned B/C. Review commands:
+[preview guide](qa/2026-11-04-preview-guide.md). Physical L67..71 remain open:
+real preview capture succeeded, OS input delivery was not confirmed. Do not
+restore graph pipes, rejected poses or change accepted character artwork.
+
+Previous active-task handoff:
 [Dark fantasy dungeon UI design](handoffs/2026-11-04-dungeon-ui-design.md).
 User corrects the first flat design to follow the approved world-travel DARK
 FANTASY family, then explicitly delegates about two hours of staged native game

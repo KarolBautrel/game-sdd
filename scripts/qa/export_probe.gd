@@ -5,6 +5,7 @@ const Checks := preload("res://scripts/qa/asset_catalog_checks.gd")
 const SCENES := [
 	"res://scenes/app/App.tscn", "res://scenes/dungeon/DungeonDebug.tscn",
 	"res://scenes/town/town_shell.tscn",
+	"res://scenes/town/TownExploration.tscn",
 	"res://scenes/combat/CombatDebug.tscn", "res://scenes/combat/CombatMapEditor.tscn",
 ]
 

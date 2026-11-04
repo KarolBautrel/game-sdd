@@ -275,3 +275,9 @@ registry synchronized without erasing failed attempts or marking unplayed cases.
 | ID | Stage | Scenario | Acceptance | Result |
 | --- | --- | --- | --- | --- |
 | L70-01 | 70 | Play Forest Ambush and Mine Breach on DISPLAY1 to normal victory/defeat; use both crossings/flanks, cover/highground, every allied role; repeat compact view/reload. | Honest terrain/range, readable actors and full animations/corpses, no clipping/sliding or locked turn; no Debug Win. | AWAITING_INTERACTIVE;2292focused checks, native278layout checks plus718full-battle checks/205pointer events PASS; same OS activation blocker. |
+
+## Small-town movement pilot (stage71A)
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L71-01 | 71A | Launch town-preview on DISPLAY1, walk/turn around crates, compare diagonal pace, speak to all3NPCs with E, try walking during dialogue, close by Escape/Continue and release/refocus movement. | Natural cadence, planted idle, no wall/follower clipping or stale keys, readable bounded parchment; prototype has no campaign/save/economy effect. NPC art is a stand-in. | AWAITING_INTERACTIVE;1445focused checks, source87native checks/24key events, packaged town-inclusive301checks/16key events PASS; OS activation still blocked. |

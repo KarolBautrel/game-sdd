@@ -1,0 +1,32 @@
+{
+  "schema": "sdd.town-space-v1",
+  "id": "ravenford_courtyard",
+  "map_path": "res://resources/data/maps/ravenford_courtyard_pilot.json",
+  "entry_spawn": "party_entry",
+  "npcs": [
+    {
+      "id": "watch",
+      "name": "Varric | Gate watch",
+      "spawn_id": "watch",
+      "profile": "warrior",
+      "dialogue": "Keep the lanterns in sight. The inn is beyond the stone arch, and the quartermaster keeps her stall across the court. The mine road leaves by the southern gate.",
+      "service_hint": "Courtyard study: conversations are free. Town services remain in the existing campaign hub."
+    },
+    {
+      "id": "trader",
+      "name": "Mara | Quartermaster",
+      "spawn_id": "trader",
+      "profile": "rogue_1",
+      "dialogue": "A sound blade and dry provisions will serve you better than promises. Check every hand and strap before taking the road.",
+      "service_hint": "Trading Post integration is planned; this preview cannot buy, sell or change equipment."
+    },
+    {
+      "id": "innkeeper",
+      "name": "Oren | The Lantern Inn",
+      "spawn_id": "innkeeper",
+      "profile": "archer_1",
+      "dialogue": "The hearth is still warm. Come back from the mine in one piece and there will be a place for your company.",
+      "service_hint": "Inn entry and normal5gold recovery remain in campaign services; no recovery occurs in this study."
+    }
+  ]
+}

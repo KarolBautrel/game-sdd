@@ -17,3 +17,5 @@ World/Town Integration Prep. App is the regional hub; Ravenford is its market.
   offers and safe single-copy sales, independent of equipment assignment.
 - `007_party_advancement.md` / `slices/007_party_advancement.md`: stage18 shared
   XP budget, persistent hero training and managed stat snapshots.
+- `008_town_exploration.md` / `slices/008_town_exploration.md`: fully scoped small
+  courtyard/inn plan, isolated movement/dialogue pilot before guarded integration.
