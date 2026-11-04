@@ -40,3 +40,11 @@ and reconnaissance, persistence, camp/4x and evolving border conflict.
 Work stays local/uncommitted on master; no new push requested. Equipment point2
 and battles/courtyard4..6 remain saved, with world development explicitly first.
 Do not restart expired autonomous timers or change the preserved art direction.
+
+Follow-up2026-11-04: user approves the pilot and explicitly requests publication.
+Stages76/77 are now published as f0fc7d16 on master, with verified remote ref,
+37LFS objects/229MB uploaded and exact prior74/74 source fingerprint match.
+See [publication receipt](../qa/2026-11-04-living-world-publication.md).
+User then prioritizes shared terrain/pathfinding and a manual map-painting tool.
+That subsequent work is a separate stage78 review increment. Ordinary mine
+victory remains unreported.
