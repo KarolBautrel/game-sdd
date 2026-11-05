@@ -1,0 +1,1562 @@
+{
+  "captures": [
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/environment-terrain_grass_showcase-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "environment-terrain_grass_showcase"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/environment-terrain_dungeon_showcase-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "environment-terrain_dungeon_showcase"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/environment-clearing_crossfire-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "environment-clearing_crossfire"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/environment-ash_road_raiders-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "environment-ash_road_raiders"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/environment-prop-family-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "environment-prop-family"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/arena-painted_forest_ambush-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "arena-painted_forest_ambush"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/arena-painted_forest_ambush-moved-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "arena-painted_forest_ambush-moved"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/arena-painted_mine_breach-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "arena-painted_mine_breach"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/arena-painted_mine_breach-moved-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "arena-painted_mine_breach-moved"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/environment-terrain_grass_showcase-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "environment-terrain_grass_showcase"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/environment-terrain_dungeon_showcase-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "environment-terrain_dungeon_showcase"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/environment-clearing_crossfire-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "environment-clearing_crossfire"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/environment-ash_road_raiders-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "environment-ash_road_raiders"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/environment-prop-family-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "environment-prop-family"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/arena-painted_forest_ambush-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "arena-painted_forest_ambush"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/arena-painted_forest_ambush-moved-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "arena-painted_forest_ambush-moved"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/arena-painted_mine_breach-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "arena-painted_mine_breach"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final/arena-painted_mine_breach-moved-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "arena-painted_mine_breach-moved"
+    }
+  ],
+  "checks": [
+    {
+      "pass": true,
+      "scenario": "native play display"
+    },
+    {
+      "pass": true,
+      "scenario": "no-focus minimized play host"
+    },
+    {
+      "pass": true,
+      "scenario": "native painted floor: terrain_grass_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_2/nature_2_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_2/nature_2_03.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_05.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_09.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_2/nature_2_04.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_2/nature_2_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "environment presentation leaves map/domain untouched: terrain_grass_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: environment-terrain_grass_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: environment-terrain_grass_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "native painted floor: terrain_dungeon_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_04.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_08.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_08.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_03.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_03.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_04.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_10.png"
+    },
+    {
+      "pass": true,
+      "scenario": "environment presentation leaves map/domain untouched: terrain_dungeon_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: environment-terrain_dungeon_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: environment-terrain_dungeon_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "native painted floor: clearing_crossfire"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "environment presentation leaves map/domain untouched: clearing_crossfire"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: environment-clearing_crossfire"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: environment-clearing_crossfire"
+    },
+    {
+      "pass": true,
+      "scenario": "native painted floor: ash_road_raiders"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "environment presentation leaves map/domain untouched: ash_road_raiders"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: environment-ash_road_raiders"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: environment-ash_road_raiders"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: oak"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: pine"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: dead_tree"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: bush"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: stump"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: fallen_log"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: branches"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: boulder"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: rock_cluster"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: grass"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: flowers"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: mushrooms"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: crate"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: barrel"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: chest"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: coffin"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: pillar"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: broken_pillar"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: arch"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: wall"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: rubble"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: brazier"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: altar"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: statue"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: bones"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: spike_fence"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: bone_totem"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: sacks"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: environment-prop-family"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: environment-prop-family"
+    },
+    {
+      "pass": true,
+      "scenario": "arena painted floor: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "arena seven accepted actors: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_knight_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_knight_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_player_001"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_player_001"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_player_002"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_player_002"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_rogue_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_rogue_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_bandit_archer_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_bandit_archer_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_bandit_guard_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_bandit_guard_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_wolf_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_wolf_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_03.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_05.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena render preserves domain: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "arena720p retains readable floor area: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: arena-painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: arena-painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena move finishes without turn lock: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "arena real control reaches destination: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "arena real control spends1MP: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: arena-painted_forest_ambush-moved"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: arena-painted_forest_ambush-moved"
+    },
+    {
+      "pass": true,
+      "scenario": "arena painted floor: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "arena seven accepted actors: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_knight_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_knight_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_player_001"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_player_001"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_player_002"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_player_002"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_rogue_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_rogue_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_bandit_archer_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_bandit_archer_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_bandit_guard_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_bandit_guard_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_wolf_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_wolf_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_04.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_05.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_05.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_05.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_04.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena render preserves domain: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "arena720p retains readable floor area: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: arena-painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: arena-painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena move finishes without turn lock: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "arena real control reaches destination: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "arena real control spends1MP: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: arena-painted_mine_breach-moved"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: arena-painted_mine_breach-moved"
+    },
+    {
+      "pass": true,
+      "scenario": "native painted floor: terrain_grass_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_2/nature_2_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_2/nature_2_03.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_05.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_09.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_2/nature_2_04.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_2/nature_2_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "environment presentation leaves map/domain untouched: terrain_grass_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: environment-terrain_grass_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: environment-terrain_grass_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "native painted floor: terrain_dungeon_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_04.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_08.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_08.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_03.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_03.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_04.png"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/dungeon/dung_2/dung_2_10.png"
+    },
+    {
+      "pass": true,
+      "scenario": "environment presentation leaves map/domain untouched: terrain_dungeon_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: environment-terrain_dungeon_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: environment-terrain_dungeon_showcase"
+    },
+    {
+      "pass": true,
+      "scenario": "native painted floor: clearing_crossfire"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "environment presentation leaves map/domain untouched: clearing_crossfire"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: environment-clearing_crossfire"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: environment-clearing_crossfire"
+    },
+    {
+      "pass": true,
+      "scenario": "native painted floor: ash_road_raiders"
+    },
+    {
+      "pass": true,
+      "scenario": "native original prop mapping: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "environment presentation leaves map/domain untouched: ash_road_raiders"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: environment-ash_road_raiders"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: environment-ash_road_raiders"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: oak"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: pine"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: dead_tree"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: bush"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: stump"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: fallen_log"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: branches"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: boulder"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: rock_cluster"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: grass"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: flowers"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: mushrooms"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: crate"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: barrel"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: chest"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: coffin"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: pillar"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: broken_pillar"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: arch"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: wall"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: rubble"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: brazier"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: altar"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: statue"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: bones"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: spike_fence"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: bone_totem"
+    },
+    {
+      "pass": true,
+      "scenario": "native world family asset: sacks"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: environment-prop-family"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: environment-prop-family"
+    },
+    {
+      "pass": true,
+      "scenario": "arena painted floor: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "arena seven accepted actors: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_knight_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_knight_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_player_001"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_player_001"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_player_002"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_player_002"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_rogue_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_rogue_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_bandit_archer_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_bandit_archer_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_bandit_guard_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_bandit_guard_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_wolf_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_wolf_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_03.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_00.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_08.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/nature/nature_1/nature_1_05.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena render preserves domain: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: arena-painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: arena-painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena move finishes without turn lock: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "arena real control reaches destination: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "arena real control spends1MP: painted_forest_ambush"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: arena-painted_forest_ambush-moved"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: arena-painted_forest_ambush-moved"
+    },
+    {
+      "pass": true,
+      "scenario": "arena painted floor: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "arena seven accepted actors: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_knight_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_knight_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_player_001"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_player_001"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_player_002"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_player_002"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_rogue_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_rogue_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_bandit_archer_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_bandit_archer_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_bandit_guard_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_bandit_guard_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena accepted painted actor: unit_wolf_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena visible actor: unit_wolf_pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_04.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_05.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_01.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_05.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_06.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_05.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_04.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena semantic prop: res://assets/combat/terrain/processed/dungeon/dung_1/dung_1_02.png"
+    },
+    {
+      "pass": true,
+      "scenario": "arena render preserves domain: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: arena-painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: arena-painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena move finishes without turn lock: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "arena real control reaches destination: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "arena real control spends1MP: painted_mine_breach"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: arena-painted_mine_breach-moved"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: arena-painted_mine_breach-moved"
+    },
+    {
+      "pass": true,
+      "scenario": "play review acquired no focus"
+    }
+  ],
+  "display": "Windows",
+  "engine_clicks": 12,
+  "engine_key_events": 0,
+  "failures": [],
+  "kind": "native play GPU and engine-local input fixture",
+  "player_save_used": false,
+  "renderer": "forward_plus",
+  "status": "PASS",
+  "texture_memory_bytes": 179642368,
+  "uses_desktop_input": false,
+  "window_focused": false,
+  "window_minimized": true,
+  "command": [
+    "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+    "--path",
+    "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\artifacts\\qa-runs\\tactical-environment-los-final\\project",
+    "--audio-driver",
+    "Dummy",
+    "--max-fps",
+    "30",
+    "--",
+    "--qa-play-review",
+    "--review-output=C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-environment-los-final",
+    "--review-views=environment,arenas",
+    "--review-sizes=1280x720,1920x1080",
+    "--review-exercise"
+  ],
+  "exit_code": 0,
+  "errors": 0,
+  "warnings": 0,
+  "physical_desktop_acceptance": "NOT_RUN",
+  "packaged_build": false
+}

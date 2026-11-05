@@ -32,7 +32,7 @@ func _run() -> void:
 		for unit: Dictionary in loaded.units:
 			names[Text.unit_display_name(loaded,unit.id)]=true
 			check(art.is_drawn_unit(unit), id+" accepted painted actor "+unit.id)
-			check(is_equal_approx(art.movement_seconds(unit,160.0,0.0),1.0), id+" unchanged calm gait "+unit.id)
+			check(is_equal_approx(art.movement_seconds(unit,160.0,0.0),1.0/Art.LOCOMOTION_RATE), id+" consistent runtime gait "+unit.id)
 		check(names.size()==7,id+" seven distinct unit captions")
 		var theme: String=loaded.terrain_theme
 		var floor_image:=EnvironmentArt.board(loaded,Vector2i(128,128),theme).get_image()

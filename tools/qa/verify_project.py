@@ -15,6 +15,8 @@ import time
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_GODOT = ROOT.parents[1] / "installers/Godot_v4.7-stable_win64.exe/Godot_v4.7-stable_win64_console.exe"
 SCENES = (
+    "scenes/world/RegionFoundry.tscn",
+    "scenes/world/TerrainEditor.tscn",
     "scenes/world/LivingWorld.tscn",
     "scenes/app/App.tscn",
     "scenes/town/town_shell.tscn",
@@ -72,7 +74,7 @@ def source_fingerprint() -> str:
     digest = hashlib.sha256()
     paths = [ROOT / "project.godot", ROOT / "requirements-dev.txt", ROOT / "export_presets.cfg"]
     for folder in ("scripts", "scenes", "resources", "tools", "tests", "docs/specs"):
-        paths.extend(path for path in (ROOT / folder).rglob("*") if path.is_file() and path.suffix in {".gd", ".tscn", ".json", ".py", ".ps1", ".md", ".tmx", ".tsx"})
+        paths.extend(path for path in (ROOT / folder).rglob("*") if path.is_file() and path.suffix in {".gd", ".gdshader", ".tscn", ".json", ".py", ".ps1", ".md", ".tmx", ".tsx"})
     for path in sorted(paths):
         digest.update(path.relative_to(ROOT).as_posix().encode())
         digest.update(b"\0")

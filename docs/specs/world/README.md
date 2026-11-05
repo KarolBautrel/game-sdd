@@ -23,3 +23,11 @@ World/Town Integration Prep. App is the regional hub; Ravenford is its market.
   connected destinations and explicit per-leg global journey planning.
 - `010_living_region.md` / `slices/010_living_region.md`: opt-in continuous
   mercenary region, world activity, contextual contracts and mine consequences.
+- `011_terrain_navigation.md` / `slices/011_terrain_navigation.md`: shared weighted
+  terrain, river crossings, impassable peaks and editable semantic navigation.
+- `012_continuous_motion.md` / `slices/012_continuous_motion.md`: transient timed
+  movement traces and unused NPC movement budget across route waypoints.
+- `013_region_generation.md` / `slices/013_region_generation.md`: seeded terrain,
+  river/crossing-first geography and immutable playable region snapshots.
+- `014_large_regions.md` / `slices/014_large_regions.md`: larger mixed-biome
+  geography, versioned pilot slots and consistent physical travel scale.

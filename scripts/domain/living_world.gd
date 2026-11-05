@@ -1,20 +1,34 @@
 extends RefCounted
 ## Pure living-region rules. Call only on CampaignSession transaction candidates.
 const PATH := "res://resources/data/world_simulations/living_marches_v1.json"
+const Terrain := preload("res://scripts/domain/terrain_navigation.gd")
+const Generator := preload("res://scripts/domain/region_generator.gd")
 static var cached_definition: Dictionary = {}
+static var generated_definitions: Dictionary={}
 
-static func definition() -> Dictionary:
+static func definition(state: Dictionary={}) -> Dictionary:
 	if cached_definition.is_empty(): cached_definition=JSON.parse_string(FileAccess.get_file_as_string(PATH))
+	if state.has("geography"):
+		var geo: Dictionary=state.geography
+		if not generated_definitions.has(geo.checksum):
+			if generated_definitions.size()>=24: generated_definitions.erase(generated_definitions.keys()[0])
+			var data:=cached_definition.duplicate(false)
+			data.sites=geo.sites;data.roads=geo.roads;data.geography=geo
+			generated_definitions[geo.checksum]=data
+		return generated_definitions[geo.checksum]
 	return cached_definition
+
+static func navigation(state: Dictionary={}) -> RefCounted:
+	return Generator.navigation(state.geography) if state.has("geography") else Terrain.current()
 
 static func point(value: Dictionary) -> Vector2:
 	return Vector2(float(value.x),float(value.y))
 
 static func packed(value: Vector2) -> Dictionary:
-	return {"x":value.x,"y":value.y}
+	return Terrain.packed(value)
 
-static func site(id: String) -> Dictionary:
-	for entry: Dictionary in definition().sites:
+static func site(id: String,state: Dictionary={}) -> Dictionary:
+	for entry: Dictionary in definition(state).sites:
 		if entry.id == id: return entry
 	return {}
 
@@ -28,58 +42,66 @@ static func _polygon(values: Array) -> PackedVector2Array:
 	for value: Dictionary in values: result.append(point(value))
 	return result
 
-static func passable(position: Vector2,data: Dictionary = {}) -> bool:
+static func passable(position: Vector2,state: Dictionary = {}) -> bool:
+	return navigation(state).passable(position)
+
+static func legacy_land(position: Vector2,data: Dictionary = {}) -> bool:
 	if data.is_empty(): data=definition()
 	if not position.is_finite() or not Geometry2D.is_point_in_polygon(position,_polygon(data.land)): return false
 	for polygon: Array in data.blocked:
 		if Geometry2D.is_point_in_polygon(position,_polygon(polygon)): return false
 	return true
 
-static func terrain_cost(position: Vector2,data: Dictionary) -> float:
-	for road: Array in data.roads:
-		for index in range(1,road.size()):
-			if position.distance_to(Geometry2D.get_closest_point_to_segment(position,point(road[index-1]),point(road[index]))) < .026: return 1.0
-	return 2.2 if position.x < .46 and position.y < .55 else 1.5
+static func terrain_cost(position: Vector2,state: Dictionary) -> float:
+	return navigation(state).cost_at(position)
 
-static func path_between(start: Vector2,destination: Vector2) -> Array[Dictionary]:
-	var data := definition()
-	var result: Array[Dictionary] = []
-	if not passable(start,data) or not passable(destination,data): return result
-	var dimensions := Vector2i(int(data.grid.width),int(data.grid.height))
-	var nav := AStarGrid2D.new()
-	nav.region=Rect2i(Vector2i.ZERO,dimensions)
-	nav.diagonal_mode=AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
-	nav.update()
-	for y in range(dimensions.y):
-		for x in range(dimensions.x):
-			var cell := Vector2i(x,y)
-			var center := (Vector2(cell)+Vector2(.5,.5))/Vector2(dimensions)
-			nav.set_point_solid(cell,not passable(center,data))
-			nav.set_point_weight_scale(cell,terrain_cost(center,data))
-	var from := Vector2i(start*Vector2(dimensions)).clamp(Vector2i.ZERO,dimensions-Vector2i.ONE)
-	var to := Vector2i(destination*Vector2(dimensions)).clamp(Vector2i.ZERO,dimensions-Vector2i.ONE)
-	if nav.is_point_solid(from) or nav.is_point_solid(to): return result
-	var cells := nav.get_id_path(from,to)
-	if cells.is_empty(): return result
-	for index in range(1,cells.size()): result.append(packed((Vector2(cells[index])+Vector2(.5,.5))/Vector2(dimensions)))
-	result.append(packed(destination))
+static func path_between(start: Vector2,destination: Vector2,state: Dictionary={}) -> Array[Dictionary]:
+	return navigation(state).route(start,destination)
+
+static func navigation_anchors(state: Dictionary={}) -> Array:
+	var result: Array=definition(state).sites.duplicate(true)
+	for index in range(definition(state).roads.size()):
+		for cursor in range(definition(state).roads[index].size()):
+			var name: String=["Trade road","Mine track","Abbey road","Highland road","Keep road"][index]
+			result.append({"id":"%s / waypoint %d" % [name,cursor+1],"position":definition(state).roads[index][cursor]})
 	return result
 
-static func _actor(id: String,kind: String,faction: String,route: Array,speed: float) -> Dictionary:
-	return {"id":id,"kind":kind,"faction":faction,"position":route[0].duplicate(),"route":route.duplicate(true),"index":1,"direction":1,"speed":speed,"cargo":24 if kind=="caravan" else 0,"active":true}
+static func prepare_navigation(state: Dictionary) -> void:
+	var nav: RefCounted=navigation(state)
+	if state.get("terrain_signature","")==nav.signature: return
+	var destination: Dictionary=state.party.path.back().duplicate() if not state.party.path.is_empty() else {}
+	var recovered:=false
+	var mainland:=point(site("town_ravenford",state).position)
+	for unit: Dictionary in [state.party]+state.actors:
+		var old:=point(unit.position)
+		var safe: Vector2=nav.nearest(old,mainland)
+		if not safe.is_equal_approx(old): unit.position=packed(safe);recovered=true
+	for actor: Dictionary in state.actors:
+		for index in range(actor.route.size()): actor.route[index]=packed(nav.nearest(point(actor.route[index]),mainland))
+		actor.path=[]
+	state.party.path=path_between(point(state.party.position),point(destination),state) if not destination.is_empty() else []
+	if state.party.path.is_empty(): state.party.goal=""
+	state.terrain_signature=nav.signature
+	_log(state,"Terrain updated: routes recalculated."+(" A blocked saved position was moved to the nearest accessible ground." if recovered else ""))
 
-static func initial(seed: int,elapsed_hours: int = 0) -> Dictionary:
-	var data := definition()
+static func _actor(id: String,kind: String,faction: String,route: Array,speed: float) -> Dictionary:
+	return {"id":id,"kind":kind,"faction":faction,"position":route[0].duplicate(),"route":route.duplicate(true),"path":[],"index":1,"direction":1,"speed":speed,"cargo":24 if kind=="caravan" else 0,"active":true}
+
+static func initial(seed: int,elapsed_hours: int = 0,geography: Dictionary={}) -> Dictionary:
+	var context: Dictionary={"geography":geography} if not geography.is_empty() else {}
+	var data := definition(context)
 	var result := {"version":1,"scenario":str(data.id),"seed":seed,"tick":elapsed_hours*4,
-		"party":{"position":site("town_ravenford").position.duplicate(),"path":[],"goal":"","camping":false,"fatigue":0},
+		"party":{"position":site("town_ravenford",context).position.duplicate(),"path":[],"goal":"","camping":false,"fatigue":0},
 		"settlements":{"town_ravenford":{"supply":30,"security":45},"saltwatch":{"supply":28,"security":40},"black_keep":{"supply":65,"security":65}},
 		"factions":{"river_league":{"relation":0,"strength":80},"iron_march":{"relation":0,"strength":80}},
 		"mine":{"status":"occupied","threat":70},"politics":{"tension":55,"phase":"rivalry","skirmishes":0,"next_skirmish_tick":0},
 		"contracts":{},"intelligence":false,"encounter_until":0,"next_raid_tick":0,"raids":0,"deliveries":0,"journal":[],
+		"terrain_signature":str(navigation(context).signature),
 		"actors":[_actor("caravan","caravan","river_league",data.roads[0],.014),
-			_actor("league_patrol","patrol","river_league",[data.sites[0].position,{"x":.35,"y":.65},{"x":.46,"y":.65}],.018),
-			_actor("iron_patrol","patrol","iron_march",[{"x":.75,"y":.20},{"x":.74,"y":.43},{"x":.66,"y":.62}],.018),
-			_actor("mine_raiders","raiders","bandits",[{"x":.4,"y":.78},{"x":.46,"y":.65},{"x":.55,"y":.62}],.022)]}
+			_actor("league_patrol","patrol","river_league",data.roads[0].slice(0,4),.018),
+			_actor("iron_patrol","patrol","iron_march",data.roads[4],.018),
+			_actor("mine_raiders","raiders","bandits",[data.sites[3].position,data.roads[0][3],data.roads[0][4]],.022)]}
+	if not geography.is_empty(): result.geography=geography.duplicate(true)
 	_log(result,"Ore deliveries have stopped. Raiders occupy the Old Mine.")
 	_offers(result)
 	return result
@@ -89,16 +111,16 @@ static func _log(state: Dictionary,message: String) -> void:
 	while state.journal.size()>24: state.journal.pop_front()
 
 static func at_site(state: Dictionary,id: String) -> bool:
-	var entry := site(id)
+	var entry := site(id,state)
 	return not entry.is_empty() and state.party.path.is_empty() and point(state.party.position).distance_to(point(entry.position))<=.022
 
 static func current_site(state: Dictionary) -> String:
-	for entry: Dictionary in definition().sites:
+	for entry: Dictionary in definition(state).sites:
 		if at_site(state,entry.id): return str(entry.id)
 	return ""
 
 static func at_town(state: Dictionary) -> bool:
-	return site(current_site(state)).get("kind","") == "town"
+	return site(current_site(state),state).get("kind","") == "town"
 
 static func food_price(state: Dictionary) -> int:
 	var town := current_site(state)
@@ -107,34 +129,41 @@ static func food_price(state: Dictionary) -> int:
 static func course(profile: Dictionary,destination: Vector2,goal: String = "") -> bool:
 	var state: Dictionary=profile.living_world
 	if not goal.is_empty():
-		if site(goal).is_empty(): return false
-		destination=point(site(goal).position)
-	var route:=path_between(point(state.party.position),destination)
+		if site(goal,state).is_empty(): return false
+		destination=point(site(goal,state).position)
+	# Reject bad targets before migration can mutate the candidate.
+	if not passable(destination,state): return false
+	prepare_navigation(state)
+	var route:=path_between(point(state.party.position),destination,state)
 	if route.is_empty(): return false
 	state.party.path=route
 	state.party.goal=goal
 	state.party.camping=false
 	return true
 
-static func _walk(unit: Dictionary,path: Array,distance: float) -> bool:
-	var position:=point(unit.position)
-	while distance>0 and not path.is_empty():
-		var target:=point(path[0])
-		var length:=position.distance_to(target)
-		if length<=distance:
-			position=target
-			distance-=length
-			path.pop_front()
-		else:
-			position=position.move_toward(target,distance)
-			distance=0
-	unit.position=packed(position)
-	return path.is_empty()
+static func travel_scale(state: Dictionary) -> float:
+	return 2.0 if int(state.get("geography",{}).get("version",1))==2 else 1.0
+static func _walk(unit: Dictionary,path: Array,distance: float,motion: Variant=null,state: Dictionary={}) -> bool:
+	var scale:=travel_scale(state)
+	var arrived: bool=navigation(state).walk(unit,path,distance/scale,motion)
+	if motion!=null and scale!=1:
+		motion.remaining=float(motion.remaining)*scale
+		for sample: Dictionary in motion.samples: sample.cost=float(sample.cost)*scale
+	return arrived
 
-static func advance(profile: Dictionary,ticks: int,inside: bool = false) -> bool:
+static func _trace(units: Variant,id: String,detail: Dictionary,offset: float,total: float) -> void:
+	if units==null: return
+	if not units.has(id): units[id]=[]
+	for sample: Dictionary in detail.samples:
+		var value: Dictionary={"time":clampf((offset+float(sample.cost))/total,0,1),"position":sample.position}
+		if not units[id].is_empty() and is_equal_approx(float(units[id].back().time),float(value.time)): continue
+		units[id].append(value)
+
+static func advance(profile: Dictionary,ticks: int,inside: bool = false,motion: Variant=null) -> bool:
 	var state: Dictionary=profile.living_world
-	var data:=definition()
+	prepare_navigation(state)
 	for iteration in range(ticks):
+		var units: Dictionary={}
 		state.tick=int(state.tick)+1
 		profile.world.elapsed_hours=int(state.tick)/4
 		if int(state.tick)%96==0:
@@ -146,21 +175,30 @@ static func advance(profile: Dictionary,ticks: int,inside: bool = false) -> bool
 				else: _log(state,"Food is exhausted. The company travels more slowly until resupplied.")
 			if state.party.camping: state.party.fatigue=maxi(0,int(state.party.fatigue)-4)
 			elif not state.party.path.is_empty():
-				var speed:=.035/(terrain_cost(point(state.party.position),data)*(1.0+float(state.party.fatigue)/200.0))
+				var speed:=.045/(1.0+float(state.party.fatigue)/200.0)
 				if int(profile.supplies.food)==0: speed*=.65
-				if _walk(state.party,state.party.path,speed):
+				var detail: Dictionary={}
+				var arrived:=_walk(state.party,state.party.path,speed,detail if motion!=null else null,state)
+				if motion!=null: _trace(units,"company",detail,0,speed)
+				if arrived:
 					var arrival:=str(state.party.goal)
 					if arrival.is_empty(): arrival=current_site(state)
 					if not arrival.is_empty():
 						profile.world.location_id=arrival
-						_log(state,"Arrived at "+str(site(arrival).name)+".")
+						_log(state,"Arrived at "+str(site(arrival,state).name)+".")
 						if arrival=="high_pass" and state.contracts.get("scout_pass",{}).get("stage","")=="accepted":
 							state.contracts.scout_pass.stage="objective"
 							state.intelligence=true
 							_log(state,"High Pass surveyed. Report to Black Keep.")
 					state.party.goal=""
 				state.party.fatigue=mini(100,int(state.party.fatigue)+1)
-		_actors(state)
+		_actors(state,units if motion!=null else null)
+		if motion!=null:
+			for samples: Array in units.values():
+				if not samples.is_empty() and float(samples.back().time)<1:
+					var held: Dictionary=samples.back().duplicate(true);held.time=1.0;samples.append(held)
+			motion.clear()
+			motion.merge({"from_tick":int(state.tick)-1,"tick":int(state.tick),"units":units})
 		if int(state.tick)%96==0: _politics(state)
 		_offers(state)
 		if not inside and not state.party.path.is_empty() and int(state.tick)>=int(state.encounter_until):
@@ -171,25 +209,41 @@ static func advance(profile: Dictionary,ticks: int,inside: bool = false) -> bool
 					return true
 	return false
 
-static func _actors(state: Dictionary) -> void:
+static func _actors(state: Dictionary,motion: Variant=null) -> void:
 	var caravan: Dictionary=state.actors[0]
 	var raiders: Dictionary=state.actors[3]
 	raiders.active=state.mine.status=="occupied"
 	for actor: Dictionary in state.actors:
 		if not actor.active: continue
-		var route: Array=[actor.route[int(actor.index)]]
-		if _walk(actor,route,float(actor.speed)):
+		if int(state.tick)<int(actor.get("wait_until",0)): continue
+		var total: float=float(actor.speed)*1.3
+		var budget:=total
+		var legs:=0
+		while budget>.00000001 and legs<64:
+			legs+=1
+			if not actor.has("path"): actor.path=[]
+			if actor.path.is_empty(): actor.path=path_between(point(actor.position),point(actor.route[int(actor.index)]),state)
+			if actor.path.is_empty(): break
+			var detail: Dictionary={}
+			var arrived:=_walk(actor,actor.path,budget,detail,state)
+			_trace(motion,str(actor.id),detail,total-budget,total)
+			budget=float(detail.remaining)
+			if not arrived: break
 			var index:=int(actor.index)
 			if index==0 or index==actor.route.size()-1:
+				# Patrols guard the end of their circuit for two campaign hours.
+				# Contact remains spatial; weighted routes must not phase-lock rivals.
+				if actor.kind=="patrol": actor.wait_until=int(state.tick)+8
 				if actor.kind=="caravan":
 					var town: String="town_ravenford" if index==0 else "saltwatch"
 					if int(actor.cargo)>0:
 						state.settlements[town].supply=mini(100,int(state.settlements[town].supply)+12)
 						state.deliveries=int(state.deliveries)+1
-						_log(state,"Caravan supplied "+str(site(town).name)+".")
+						_log(state,"Caravan supplied "+str(site(town,state).name)+".")
 					actor.cargo=24
 				actor.direction=-int(actor.direction)
 			actor.index=index+int(actor.direction)
+			if int(actor.get("wait_until",0))>int(state.tick): break
 	var protected := false
 	for actor: Dictionary in state.actors:
 		if actor.kind=="patrol" and actor.faction==caravan.faction and point(actor.position).distance_to(point(caravan.position))<.09: protected=true
@@ -222,12 +276,12 @@ static func _politics(state: Dictionary) -> void:
 		_log(state,"River League and Iron March entered a border conflict.")
 
 static func _offers(state: Dictionary) -> void:
-	for entry: Dictionary in definition().contracts:
+	for entry: Dictionary in definition(state).contracts:
 		if state.contracts.has(entry.id): continue
 		var offer: bool=(entry.kind=="restoration" and state.mine.status=="occupied" and int(state.settlements.town_ravenford.supply)<60) or (entry.kind=="delivery" and int(state.settlements.saltwatch.supply)<40) or (entry.kind=="scout" and not state.intelligence)
 		if offer:
 			state.contracts[entry.id]={"stage":"offered"}
-			_log(state,"Contract posted in %s: %s." % [site(entry.issuer).name,entry.name])
+			_log(state,"Contract posted in %s: %s." % [site(entry.issuer,state).name,entry.name])
 
 static func accept(profile: Dictionary,id: String) -> bool:
 	var state: Dictionary=profile.living_world
@@ -288,16 +342,25 @@ static func _integer(value: Variant,minimum: int = 0,maximum: int = 1000000000) 
 
 static func valid(value: Variant) -> bool:
 	if not value is Dictionary or value.get("version")!=1 or value.get("scenario")!="living_marches_v1": return false
+	if value.has("geography") and (not Generator.errors(value.geography).is_empty() or not value.has("terrain_signature")): return false
 	for key in ["seed","tick","encounter_until","next_raid_tick","raids","deliveries"]:
 		if not _integer(value.get(key),1 if key=="seed" else 0): return false
 	for key in ["party","settlements","factions","mine","politics","contracts"]:
 		if not value.get(key) is Dictionary: return false
 	var party: Dictionary=value.party
 	if not valid_point(party.get("position")) or not party.get("path") is Array or party.path.size()>2000 or not party.get("camping") is bool or not _integer(party.get("fatigue"),0,100): return false
-	if not passable(point(party.position)) or (party.camping and not party.path.is_empty()): return false
-	if not party.get("goal") is String or (party.goal!="" and site(party.goal).is_empty()): return false
+	var current_terrain: bool=value.get("terrain_signature","")==navigation(value).signature
+	if value.has("terrain_signature") and (not value.terrain_signature is String or value.terrain_signature.length()!=64): return false
+	if value.has("terrain_signature"):
+		for character in value.terrain_signature:
+			if not "0123456789abcdef".contains(character): return false
+	if current_terrain and not passable(point(party.position),value): return false
+	if not value.has("terrain_signature") and not legacy_land(point(party.position)): return false
+	if party.camping and not party.path.is_empty(): return false
+	if not party.get("goal") is String or (party.goal!="" and site(party.goal,value).is_empty()): return false
 	for entry in party.path:
 		if not valid_point(entry): return false
+		if current_terrain and not passable(point(entry),value): return false
 	if value.settlements.keys().size()!=3 or value.factions.keys().size()!=2: return false
 	for id: String in ["town_ravenford","saltwatch","black_keep"]:
 		if not value.settlements.get(id) is Dictionary: return false
@@ -317,6 +380,12 @@ static func valid(value: Variant) -> bool:
 		if not valid_point(actor.get("position")) or not actor.get("route") is Array or actor.route.size()<2 or actor.route.size()>32: return false
 		for position in actor.route:
 			if not valid_point(position): return false
+		if current_terrain and not passable(point(actor.position),value): return false
+		if actor.has("path"):
+			if not actor.path is Array or actor.path.size()>2000: return false
+			for position in actor.path:
+				if not valid_point(position) or (current_terrain and not passable(point(position),value)): return false
+		if actor.has("wait_until") and not _integer(actor.wait_until): return false
 		if not _integer(actor.get("index"),0,actor.route.size()-1) or not _integer(actor.get("direction"),-1,1) or int(actor.direction)==0 or not actor.get("active") is bool or not _integer(actor.get("cargo"),0,24): return false
 		var speed: Variant=actor.get("speed")
 		if not (speed is int or speed is float) or not is_finite(float(speed)) or speed<=0 or speed>.05: return false

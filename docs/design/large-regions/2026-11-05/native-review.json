@@ -1,0 +1,1411 @@
+{
+  "captures": [
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-2087-0-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "generated-2087-0"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/large-overview-2087-0-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "large-overview-2087-0"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/large-pan-2087-0-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "large-pan-2087-0"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-route-2087-0-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "generated-route-2087-0"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-42-1-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "generated-42-1"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/large-overview-42-1-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "large-overview-42-1"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/large-pan-42-1-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "large-pan-42-1"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-route-42-1-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "generated-route-42-1"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-170717-2-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "generated-170717-2"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/large-overview-170717-2-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "large-overview-170717-2"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/large-pan-170717-2-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "large-pan-170717-2"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-route-170717-2-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "generated-route-170717-2"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-live-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "generated-live"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-crossing-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "generated-crossing"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-mine-arrival-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "generated-mine-arrival"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-mine-packing-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "generated-mine-packing"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-return-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "generated-return"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-authored-return-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "generated-authored-return"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-2087-0-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "generated-2087-0"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/large-overview-2087-0-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "large-overview-2087-0"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/large-pan-2087-0-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "large-pan-2087-0"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-route-2087-0-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "generated-route-2087-0"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-42-1-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "generated-42-1"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/large-overview-42-1-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "large-overview-42-1"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/large-pan-42-1-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "large-pan-42-1"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-route-42-1-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "generated-route-42-1"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-170717-2-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "generated-170717-2"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/large-overview-170717-2-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "large-overview-170717-2"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/large-pan-170717-2-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "large-pan-170717-2"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-route-170717-2-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "generated-route-170717-2"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-live-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "generated-live"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-crossing-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "generated-crossing"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-mine-arrival-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "generated-mine-arrival"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-mine-packing-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "generated-mine-packing"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-return-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "generated-return"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final/generated-authored-return-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "generated-authored-return"
+    }
+  ],
+  "checks": [
+    {
+      "pass": true,
+      "scenario": "native display backend"
+    },
+    {
+      "pass": true,
+      "scenario": "no-focus before window creation"
+    },
+    {
+      "pass": true,
+      "scenario": "native host stays minimized and unfocused"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Generate"
+    },
+    {
+      "pass": true,
+      "scenario": "native valid generated region"
+    },
+    {
+      "pass": true,
+      "scenario": "native preview preserves current company"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "larger generated preview opens local view"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Overview"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: large-overview-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: large-overview-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Center"
+    },
+    {
+      "pass": true,
+      "scenario": "native wheel zoom stays anchored to pointer"
+    },
+    {
+      "pass": true,
+      "scenario": "native RMB drag pans and releases"
+    },
+    {
+      "pass": true,
+      "scenario": "native pan/zoom does not advance/mutate company"
+    },
+    {
+      "pass": true,
+      "scenario": "native overview-chart click moves view without travel"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: large-pan-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: large-pan-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Overview"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "native generated route preview"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-route-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-route-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Generate"
+    },
+    {
+      "pass": true,
+      "scenario": "native valid generated region"
+    },
+    {
+      "pass": true,
+      "scenario": "native preview preserves current company"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "larger generated preview opens local view"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Overview"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: large-overview-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: large-overview-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Center"
+    },
+    {
+      "pass": true,
+      "scenario": "native wheel zoom stays anchored to pointer"
+    },
+    {
+      "pass": true,
+      "scenario": "native RMB drag pans and releases"
+    },
+    {
+      "pass": true,
+      "scenario": "native pan/zoom does not advance/mutate company"
+    },
+    {
+      "pass": true,
+      "scenario": "native overview-chart click moves view without travel"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: large-pan-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: large-pan-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Overview"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "native generated route preview"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-route-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-route-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Generate"
+    },
+    {
+      "pass": true,
+      "scenario": "native valid generated region"
+    },
+    {
+      "pass": true,
+      "scenario": "native preview preserves current company"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "larger generated preview opens local view"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Overview"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: large-overview-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: large-overview-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Center"
+    },
+    {
+      "pass": true,
+      "scenario": "native wheel zoom stays anchored to pointer"
+    },
+    {
+      "pass": true,
+      "scenario": "native RMB drag pans and releases"
+    },
+    {
+      "pass": true,
+      "scenario": "native pan/zoom does not advance/mutate company"
+    },
+    {
+      "pass": true,
+      "scenario": "native overview-chart click moves view without travel"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: large-pan-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: large-pan-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Overview"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "native generated route preview"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-route-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-route-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Play / Resume"
+    },
+    {
+      "pass": true,
+      "scenario": "native Play enters generated living pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-live"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-live"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Accept contract"
+    },
+    {
+      "pass": true,
+      "scenario": "generated company accepts actual mine contract"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "generated actual pointer travel reaches bridge bank: from"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "generated actual pointer travel reaches bridge bank: to"
+    },
+    {
+      "pass": true,
+      "scenario": "generated rendered company crosses actual semantic bridge"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-crossing"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-crossing"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Old Mine"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pay the road toll / 5g"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native continuous arrival: dungeon_old_mine"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-mine-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-mine-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "generated actual mine position gates town services and entry"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Company & gear"
+    },
+    {
+      "pass": true,
+      "scenario": "generated equipment keeps exact paused geography/company"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Map"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Prepare Old Mine expedition"
+    },
+    {
+      "pass": true,
+      "scenario": "generated mine uses owned packing"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-mine-packing"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-mine-packing"
+    },
+    {
+      "pass": true,
+      "scenario": "generated packing Start exists"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Start Expedition"
+    },
+    {
+      "pass": true,
+      "scenario": "generated Start creates ordinary managed receipt"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Retreat to Ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "generated ordinary retreat returns to living map"
+    },
+    {
+      "pass": true,
+      "scenario": "generated retreat cannot award victory"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native continuous arrival: town_ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "generated every-frame rendered company/NPC stays on passable terrain: 605frames/3025samples/0violations"
+    },
+    {
+      "pass": true,
+      "scenario": "generated native travel/gear/mine preserves immutable snapshot"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-return"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-return"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Regions"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Play / Resume"
+    },
+    {
+      "pass": true,
+      "scenario": "generated selector resumes current company without reset"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Regions"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Authored Marches"
+    },
+    {
+      "pass": true,
+      "scenario": "authored Marches and designer map remain available"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-authored-return"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-authored-return"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Generate"
+    },
+    {
+      "pass": true,
+      "scenario": "native valid generated region"
+    },
+    {
+      "pass": true,
+      "scenario": "native preview preserves current company"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "larger generated preview opens local view"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Overview"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: large-overview-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: large-overview-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Center"
+    },
+    {
+      "pass": true,
+      "scenario": "native wheel zoom stays anchored to pointer"
+    },
+    {
+      "pass": true,
+      "scenario": "native RMB drag pans and releases"
+    },
+    {
+      "pass": true,
+      "scenario": "native pan/zoom does not advance/mutate company"
+    },
+    {
+      "pass": true,
+      "scenario": "native overview-chart click moves view without travel"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: large-pan-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: large-pan-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Overview"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "native generated route preview"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-route-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-route-2087-0"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Generate"
+    },
+    {
+      "pass": true,
+      "scenario": "native valid generated region"
+    },
+    {
+      "pass": true,
+      "scenario": "native preview preserves current company"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "larger generated preview opens local view"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Overview"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: large-overview-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: large-overview-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Center"
+    },
+    {
+      "pass": true,
+      "scenario": "native wheel zoom stays anchored to pointer"
+    },
+    {
+      "pass": true,
+      "scenario": "native RMB drag pans and releases"
+    },
+    {
+      "pass": true,
+      "scenario": "native pan/zoom does not advance/mutate company"
+    },
+    {
+      "pass": true,
+      "scenario": "native overview-chart click moves view without travel"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: large-pan-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: large-pan-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Overview"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "native generated route preview"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-route-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-route-42-1"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Generate"
+    },
+    {
+      "pass": true,
+      "scenario": "native valid generated region"
+    },
+    {
+      "pass": true,
+      "scenario": "native preview preserves current company"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "larger generated preview opens local view"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Overview"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: large-overview-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: large-overview-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Center"
+    },
+    {
+      "pass": true,
+      "scenario": "native wheel zoom stays anchored to pointer"
+    },
+    {
+      "pass": true,
+      "scenario": "native RMB drag pans and releases"
+    },
+    {
+      "pass": true,
+      "scenario": "native pan/zoom does not advance/mutate company"
+    },
+    {
+      "pass": true,
+      "scenario": "native overview-chart click moves view without travel"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: large-pan-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: large-pan-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Overview"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "native generated route preview"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-route-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-route-170717-2"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Play / Resume"
+    },
+    {
+      "pass": true,
+      "scenario": "native Play enters generated living pilot"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-live"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-live"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Accept contract"
+    },
+    {
+      "pass": true,
+      "scenario": "generated company accepts actual mine contract"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "generated actual pointer travel reaches bridge bank: from"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "generated actual pointer travel reaches bridge bank: to"
+    },
+    {
+      "pass": true,
+      "scenario": "generated rendered company crosses actual semantic bridge"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-crossing"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-crossing"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Old Mine"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pay the road toll / 5g"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native continuous arrival: dungeon_old_mine"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-mine-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-mine-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "generated actual mine position gates town services and entry"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Company & gear"
+    },
+    {
+      "pass": true,
+      "scenario": "generated equipment keeps exact paused geography/company"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: World & provinces"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Prepare Old Mine expedition"
+    },
+    {
+      "pass": true,
+      "scenario": "generated mine uses owned packing"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-mine-packing"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-mine-packing"
+    },
+    {
+      "pass": true,
+      "scenario": "generated packing Start exists"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Start Expedition"
+    },
+    {
+      "pass": true,
+      "scenario": "generated Start creates ordinary managed receipt"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Retreat to Ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "generated ordinary retreat returns to living map"
+    },
+    {
+      "pass": true,
+      "scenario": "generated retreat cannot award victory"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native continuous arrival: town_ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "generated every-frame rendered company/NPC stays on passable terrain: 607frames/3035samples/0violations"
+    },
+    {
+      "pass": true,
+      "scenario": "generated native travel/gear/mine preserves immutable snapshot"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-return"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-return"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Regions"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Play / Resume"
+    },
+    {
+      "pass": true,
+      "scenario": "generated selector resumes current company without reset"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Regions"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Authored Marches"
+    },
+    {
+      "pass": true,
+      "scenario": "authored Marches and designer map remain available"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: generated-authored-return"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: generated-authored-return"
+    },
+    {
+      "pass": true,
+      "scenario": "no focus acquired during review"
+    }
+  ],
+  "display": "Windows",
+  "engine_clicks": 90,
+  "failures": [],
+  "kind": "native GPU render and engine-local pointer fixture",
+  "player_save_used": false,
+  "renderer": "forward_plus",
+  "status": "PASS",
+  "uses_desktop_input": false,
+  "window_focused": false,
+  "window_minimized": true,
+  "command": [
+    "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+    "--path",
+    "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\artifacts\\qa-runs\\large-regions-native-final\\project",
+    "--audio-driver",
+    "Dummy",
+    "--max-fps",
+    "30",
+    "--",
+    "--qa-campaign-review",
+    "--review-output=C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/large-regions-native-final",
+    "--review-views=regions",
+    "--review-sizes=1280x720,1920x1080"
+  ],
+  "exit_code": 0,
+  "errors": 0,
+  "warnings": 0,
+  "physical_desktop_acceptance": "NOT_RUN",
+  "packaged_build": false
+}

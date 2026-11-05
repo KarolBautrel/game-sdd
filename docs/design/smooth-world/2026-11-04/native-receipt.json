@@ -1,0 +1,384 @@
+{
+  "status": "PASS",
+  "kind": "native GPU render and engine-local pointer fixture",
+  "display": "Windows",
+  "renderer": "forward_plus",
+  "window_minimized": true,
+  "window_focused": false,
+  "uses_desktop_input": false,
+  "player_save_used": false,
+  "engine_clicks": 28,
+  "checks": [
+    {
+      "pass": true,
+      "scenario": "native display backend"
+    },
+    {
+      "pass": true,
+      "scenario": "no-focus before window creation"
+    },
+    {
+      "pass": true,
+      "scenario": "native host stays minimized and unfocused"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: smooth-sequence-20"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: smooth-sequence-20"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: smooth-sequence-45"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: smooth-sequence-45"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: smooth-sequence-70"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: smooth-sequence-70"
+    },
+    {
+      "pass": true,
+      "scenario": "native every-frame company/NPC positions avoid blocked cells / 1x"
+    },
+    {
+      "pass": true,
+      "scenario": "native per-frame displacement has no tick-boundary jump / 1x"
+    },
+    {
+      "pass": true,
+      "scenario": "native moving company has no reset/stall frames / 1x (0/45)"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native pause freezes current visual phase / 1x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "native resume continues without a full-tick delay / 1x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "native every-frame company/NPC positions avoid blocked cells / 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "native per-frame displacement has no tick-boundary jump / 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "native moving company has no reset/stall frames / 2x (0/77)"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native pause freezes current visual phase / 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "native resume continues without a full-tick delay / 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "native every-frame company/NPC positions avoid blocked cells / 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "native per-frame displacement has no tick-boundary jump / 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "native moving company has no reset/stall frames / 4x (0/88)"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native pause freezes current visual phase / 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "native resume continues without a full-tick delay / 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: smooth-pause-resume"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: smooth-pause-resume"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: smooth-sequence-20"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: smooth-sequence-20"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: smooth-sequence-45"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: smooth-sequence-45"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: smooth-sequence-70"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: smooth-sequence-70"
+    },
+    {
+      "pass": true,
+      "scenario": "native every-frame company/NPC positions avoid blocked cells / 1x"
+    },
+    {
+      "pass": true,
+      "scenario": "native per-frame displacement has no tick-boundary jump / 1x"
+    },
+    {
+      "pass": true,
+      "scenario": "native moving company has no reset/stall frames / 1x (0/47)"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native pause freezes current visual phase / 1x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "native resume continues without a full-tick delay / 1x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "native every-frame company/NPC positions avoid blocked cells / 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "native per-frame displacement has no tick-boundary jump / 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "native moving company has no reset/stall frames / 2x (0/77)"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native pause freezes current visual phase / 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "native resume continues without a full-tick delay / 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "native every-frame company/NPC positions avoid blocked cells / 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "native per-frame displacement has no tick-boundary jump / 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "native moving company has no reset/stall frames / 4x (0/88)"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native pause freezes current visual phase / 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 2x"
+    },
+    {
+      "pass": true,
+      "scenario": "native resume continues without a full-tick delay / 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: smooth-pause-resume"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: smooth-pause-resume"
+    },
+    {
+      "pass": true,
+      "scenario": "no focus acquired during review"
+    }
+  ],
+  "failures": [],
+  "schema": "sdd.smooth-world-native-v1",
+  "source_sha256": "b5342ed950fbba66a39d1f9d3693711a6708a7e84853e42032a3e560d7bc5f6e",
+  "report": "artifacts/qa-runs/smooth-world-native-layer-final/native-review.json",
+  "capture_count": 8,
+  "physical_desktop_acceptance": "NOT_RUN",
+  "retained_captures": [
+    {
+      "file": "smooth-sequence-20-1280x720.png",
+      "source_run": "smooth-world-native-layer-final",
+      "sha256": "6c4a9b1c36729adbc2dd2ccf9f29169b2dc46ced794750751be95b80863b6c1f"
+    },
+    {
+      "file": "smooth-sequence-45-1280x720.png",
+      "source_run": "smooth-world-native-layer-final",
+      "sha256": "64c0353751088960bb0bfd8d0123cab92628753b1008891db451632bb3fff83f"
+    },
+    {
+      "file": "smooth-sequence-70-1280x720.png",
+      "source_run": "smooth-world-native-layer-final",
+      "sha256": "af7cfcea3c0c38df82d888b99e6512201477b15f971f9eab5107ca9a1e9001db"
+    },
+    {
+      "file": "smooth-pause-resume-1280x720.png",
+      "source_run": "smooth-world-native-layer-final",
+      "sha256": "ffb1f041d55fee22e499ac8d5a7f2ac94404c9b808c611b71cf3d672f4131526"
+    },
+    {
+      "file": "smooth-sequence-20-1920x1080.png",
+      "source_run": "smooth-world-native-layer-final",
+      "sha256": "3eabfaee1faf808c0c34964e85cf699d3bb4eaaa38d2c175677a72dcd3eeae88"
+    },
+    {
+      "file": "smooth-sequence-45-1920x1080.png",
+      "source_run": "smooth-world-native-layer-final",
+      "sha256": "cfd39a5ece600ddf15570fe4485a18205a4e529e805287a126c3a72fb1ceb943"
+    },
+    {
+      "file": "smooth-sequence-70-1920x1080.png",
+      "source_run": "smooth-world-native-layer-final",
+      "sha256": "1c16aea1568a7594c7c09c6d07c1764f6b2c1a758858c07f3a9571dcdab1185e"
+    },
+    {
+      "file": "smooth-pause-resume-1920x1080.png",
+      "source_run": "smooth-world-native-layer-final",
+      "sha256": "d703da1c75595e2f1ea02d74395d00de46de2cc68734e48d2b05406318b23061"
+    },
+    {
+      "file": "living-retreat-1920x1080.png",
+      "source_run": "smooth-world-native-complete",
+      "sha256": "1cfb6476bb2b314f025d5fd90f28abf51b7075be8135ce36b256a49f3a069494"
+    },
+    {
+      "file": "living-border-conflict-1920x1080.png",
+      "source_run": "smooth-world-native-complete",
+      "sha256": "ac9672e74c580a68ad99747c8d61cb7ebbed097b1c50ef743d5c64cf6d0ce98e"
+    }
+  ],
+  "source_note": "Same frozen workspace as concurrent smooth-world-layer-final verification."
+}

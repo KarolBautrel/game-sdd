@@ -69225,6 +69225,118 @@
       "height": 104
     },
     {
+      "path": "res://assets/combat/environment/painted_v2/altar.png",
+      "bytes": 27597,
+      "sha256": "5f4b558c3c08e52224d664f258a949fe1619a352fb90ea1f83a6ff1908092602",
+      "width": 140,
+      "height": 130
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/barrel.png",
+      "bytes": 9871,
+      "sha256": "2dd229e99cd97f3a62a6c2813c156d4ba1e7b4f6cb465e2c1f8dfcf2ec9b4e78",
+      "width": 68,
+      "height": 95
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/boulder.png",
+      "bytes": 8515,
+      "sha256": "51c68adf8eb69d135c29f88556d28115d91de5597942b9809da77bc5762dde4c",
+      "width": 103,
+      "height": 88
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/brazier.png",
+      "bytes": 9948,
+      "sha256": "0d85d99852afa9ec2a665f0dae00880f9e9a958cde2d3a311777ae8a2f169705",
+      "width": 68,
+      "height": 170
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/broken_pillar.png",
+      "bytes": 27056,
+      "sha256": "27bcf3997eb33b15fe2225f4101810f260cb5dd9bd27b8a83589e8691a831ec6",
+      "width": 141,
+      "height": 146
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/bush.png",
+      "bytes": 18497,
+      "sha256": "ef0c9b96803ec2b99b8ad2c4375d33c5afd70d3a7a288eb62fa586f07fcdf6d5",
+      "width": 124,
+      "height": 103
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/coffin.png",
+      "bytes": 20331,
+      "sha256": "67059995685379f75e3b713315d5136b184d1cc91c61129c35279f81dc5e79ef",
+      "width": 160,
+      "height": 115
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/crate.png",
+      "bytes": 16131,
+      "sha256": "e72765e7011f035ac80950f545d43dba44c99a510b6947af75907fa182e0e829",
+      "width": 104,
+      "height": 106
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/dead_tree.png",
+      "bytes": 31790,
+      "sha256": "c0ab72a091a2ee55a4bc9252bd4c0ce4fcf5df9272bf7da80c6a47a28284b895",
+      "width": 149,
+      "height": 301
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/fallen_log.png",
+      "bytes": 8565,
+      "sha256": "faf9570416a72ba5697f9283ab4a14aa82ea7baf28bc4d0a03f8200a96f53817",
+      "width": 137,
+      "height": 70
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/oak.png",
+      "bytes": 102750,
+      "sha256": "2fd89dafff3881ffcc4b829bad295bf41b856427c4d2e46f10ce9fb2f5cec5a9",
+      "width": 253,
+      "height": 364
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/pillar.png",
+      "bytes": 27500,
+      "sha256": "494f231f0736951c3d3f7215cae079f76caf702b8eae1be18e4a4552c9f7d806",
+      "width": 110,
+      "height": 199
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/pine.png",
+      "bytes": 51513,
+      "sha256": "ebede1679f10a56e2288b62a0cc090d167489f51d58a57a4d4fd1a019a196b42",
+      "width": 188,
+      "height": 343
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/rubble.png",
+      "bytes": 8234,
+      "sha256": "7d5363e225f3f4adb34dc7a31fd8c4d573ec73d9ee838ae10d3ca1fb474b06a9",
+      "width": 133,
+      "height": 69
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/stump.png",
+      "bytes": 6808,
+      "sha256": "eaf45e5b1baeeae89aac1194d89fa105042b28a565cf9f4f5bdb57e03a23b890",
+      "width": 82,
+      "height": 69
+    },
+    {
+      "path": "res://assets/combat/environment/painted_v2/wall.png",
+      "bytes": 33500,
+      "sha256": "38953785e2850462bbc9ff0411866b775ce521088270d430a071f7f1ea239251",
+      "width": 174,
+      "height": 150
+    },
+    {
       "path": "res://assets/combat/environment/props/altar.png",
       "bytes": 22178,
       "sha256": "e61cba62f1ec20475492fcc687c74647c6cb7d5d6ff4e6eea33ddc24699e9a0b",
@@ -74165,6 +74277,20 @@
       "sha256": "a8f05d433ff661efd414e1f6e84775d7d98f0dd0028782f224c02e83e8c15e4b",
       "width": 128,
       "height": 128
+    },
+    {
+      "path": "res://assets/ui/world/ground_wash.png",
+      "bytes": 3476578,
+      "sha256": "75fb11869481fbedaa99674a9134d3fc14dc498c6f71d9a4e3a7912f47efdde1",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "res://assets/ui/world/region_symbols.png",
+      "bytes": 2122299,
+      "sha256": "0f53590f72d458ded5edca493a2ad54d5951bb239a50c54d0773c0f4fc4f3d5e",
+      "width": 1536,
+      "height": 1536
     },
     {
       "path": "res://assets/world/examples map/map_example.png",

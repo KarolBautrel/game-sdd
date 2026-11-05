@@ -1,0 +1,8 @@
+Procedural region illustration family
+Generated for this project with built-in imagegen using the approved generated
+world_atlas.png as a style reference; no external stock art was downloaded.
+Raw outputs/prompts: assets_src/region_symbols/2026-11-04/.
+Editable Aseprite sources: assets_src/aseprite/region_symbols/.
+Repeatable exports: tools/aseprite/region_symbols.lua.
+Runtime: assets/ui/world/region_symbols.png and ground_wash.png.
+Semantic geometry, native paths/labels and procedural shading are project code.

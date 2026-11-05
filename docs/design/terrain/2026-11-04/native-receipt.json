@@ -1,0 +1,1038 @@
+{
+  "status": "PASS",
+  "kind": "native GPU render and engine-local pointer fixture",
+  "display": "Windows",
+  "renderer": "forward_plus",
+  "window_minimized": true,
+  "window_focused": false,
+  "uses_desktop_input": false,
+  "player_save_used": false,
+  "engine_clicks": 86,
+  "checks": [
+    {
+      "pass": true,
+      "scenario": "native display backend"
+    },
+    {
+      "pass": true,
+      "scenario": "no-focus before window creation"
+    },
+    {
+      "pass": true,
+      "scenario": "native host stays minimized and unfocused"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain editor retains large map"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: save"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: reload"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: paint"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: probe"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: undo"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: redo"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: terrain_B"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: terrain-overview"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: terrain-overview"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Water / blocked"
+    },
+    {
+      "pass": true,
+      "scenario": "native pointer drag paints one continuous stroke"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: terrain-painted"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: terrain-painted"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Undo"
+    },
+    {
+      "pass": true,
+      "scenario": "native Undo restores original cells"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Redo"
+    },
+    {
+      "pass": true,
+      "scenario": "native Redo restores stroke"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Undo"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Test route"
+    },
+    {
+      "pass": true,
+      "scenario": "native route probe finds safe river crossings"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: terrain-route-probe"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: terrain-route-probe"
+    },
+    {
+      "pass": true,
+      "scenario": "native sea destination is rejected"
+    },
+    {
+      "pass": true,
+      "scenario": "native right click samples terrain and selects paint mode"
+    },
+    {
+      "pass": true,
+      "scenario": "native wheel zoom preserves input alignment"
+    },
+    {
+      "pass": true,
+      "scenario": "native middle drag pans map"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Fit map"
+    },
+    {
+      "pass": true,
+      "scenario": "native Fit restores map after zoom/pan"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Save terrain"
+    },
+    {
+      "pass": true,
+      "scenario": "native Save writes only isolated terrain QA data"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Water / blocked"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Save terrain"
+    },
+    {
+      "pass": true,
+      "scenario": "native invalid mask cannot replace saved terrain"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: terrain-save-refused"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: terrain-save-refused"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Undo"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Reload saved"
+    },
+    {
+      "pass": true,
+      "scenario": "native Reload restores saved terrain"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Living world"
+    },
+    {
+      "pass": true,
+      "scenario": "native return preserves paused company and world clock"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "native world plans a terrain-aware course"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: terrain-runtime-course"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: terrain-runtime-course"
+    },
+    {
+      "pass": true,
+      "scenario": "native interpolated company/NPC movement stays on accessible terrain and arrives"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: terrain-runtime-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: terrain-runtime-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "native living pilot starts paused in memory"
+    },
+    {
+      "pass": true,
+      "scenario": "native map and inspector have independent bounds"
+    },
+    {
+      "pass": true,
+      "scenario": "native header stock fits two readable lines"
+    },
+    {
+      "pass": true,
+      "scenario": "native living map retains at least half the viewport height"
+    },
+    {
+      "pass": true,
+      "scenario": "native inspector tabs all fit"
+    },
+    {
+      "pass": true,
+      "scenario": "living-map label stays inside map"
+    },
+    {
+      "pass": true,
+      "scenario": "living-map label stays inside map"
+    },
+    {
+      "pass": true,
+      "scenario": "living-map label stays inside map"
+    },
+    {
+      "pass": true,
+      "scenario": "living-map label stays inside map"
+    },
+    {
+      "pass": true,
+      "scenario": "living-map label stays inside map"
+    },
+    {
+      "pass": true,
+      "scenario": "living-map label stays inside map"
+    },
+    {
+      "pass": true,
+      "scenario": "paused native world does not mutate time or actors"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-paused"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-paused"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Buy food / 2g"
+    },
+    {
+      "pass": true,
+      "scenario": "native shortage food quote equals purchase"
+    },
+    {
+      "pass": true,
+      "scenario": "native contract-tab pointer input"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Accept contract"
+    },
+    {
+      "pass": true,
+      "scenario": "native mine threat contract accepted at issuer"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-contract"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-contract"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Old Mine"
+    },
+    {
+      "pass": true,
+      "scenario": "native map sets a continuous path without teleport"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-course"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-course"
+    },
+    {
+      "pass": true,
+      "scenario": "Space pauses even when a map Button owns focus"
+    },
+    {
+      "pass": true,
+      "scenario": "native sea click rejects without mutation"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Old Mine"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native continuous arrival: dungeon_old_mine"
+    },
+    {
+      "pass": true,
+      "scenario": "actual mine arrival gates provisions and opens managed preparation"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-mine-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-mine-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Company & gear"
+    },
+    {
+      "pass": true,
+      "scenario": "native pilot opens existing equipment scene"
+    },
+    {
+      "pass": true,
+      "scenario": "equipment is a paused view over existing campaign"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Map"
+    },
+    {
+      "pass": true,
+      "scenario": "native equipment Map returns to paused living company"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Prepare Old Mine expedition"
+    },
+    {
+      "pass": true,
+      "scenario": "native mine entry uses existing owned-supply preparation"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-mine-packing"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-mine-packing"
+    },
+    {
+      "pass": true,
+      "scenario": "native owned packing Start exists"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Start Expedition"
+    },
+    {
+      "pass": true,
+      "scenario": "native Start creates normal managed campaign receipt"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Retreat to Ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "native retreat settles and returns through App to living world"
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary retreat does not falsely clear mine or award contract"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-retreat"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-retreat"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native continuous arrival: town_ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Make camp"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native camp command establishes actual timed camp"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-camp"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-camp"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native live time produces independent caravan activity"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-chronicle"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-chronicle"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native elapsed days move faction patrols into a real border clash"
+    },
+    {
+      "pass": true,
+      "scenario": "native faction contact changes actual strength"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-border-conflict"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-border-conflict"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain editor retains large map"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: save"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: reload"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: paint"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: probe"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: undo"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: redo"
+    },
+    {
+      "pass": true,
+      "scenario": "native terrain control fits: terrain_B"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: terrain-overview"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: terrain-overview"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Water / blocked"
+    },
+    {
+      "pass": true,
+      "scenario": "native pointer drag paints one continuous stroke"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: terrain-painted"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: terrain-painted"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Undo"
+    },
+    {
+      "pass": true,
+      "scenario": "native Undo restores original cells"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Redo"
+    },
+    {
+      "pass": true,
+      "scenario": "native Redo restores stroke"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Undo"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Test route"
+    },
+    {
+      "pass": true,
+      "scenario": "native route probe finds safe river crossings"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: terrain-route-probe"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: terrain-route-probe"
+    },
+    {
+      "pass": true,
+      "scenario": "native sea destination is rejected"
+    },
+    {
+      "pass": true,
+      "scenario": "native right click samples terrain and selects paint mode"
+    },
+    {
+      "pass": true,
+      "scenario": "native wheel zoom preserves input alignment"
+    },
+    {
+      "pass": true,
+      "scenario": "native middle drag pans map"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Fit map"
+    },
+    {
+      "pass": true,
+      "scenario": "native Fit restores map after zoom/pan"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Save terrain"
+    },
+    {
+      "pass": true,
+      "scenario": "native Save writes only isolated terrain QA data"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Water / blocked"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Save terrain"
+    },
+    {
+      "pass": true,
+      "scenario": "native invalid mask cannot replace saved terrain"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: terrain-save-refused"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: terrain-save-refused"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Undo"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Reload saved"
+    },
+    {
+      "pass": true,
+      "scenario": "native Reload restores saved terrain"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Living world"
+    },
+    {
+      "pass": true,
+      "scenario": "native return preserves paused company and world clock"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Saltwatch"
+    },
+    {
+      "pass": true,
+      "scenario": "native world plans a terrain-aware course"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: terrain-runtime-course"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: terrain-runtime-course"
+    },
+    {
+      "pass": true,
+      "scenario": "native interpolated company/NPC movement stays on accessible terrain and arrives"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: terrain-runtime-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: terrain-runtime-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "native living pilot starts paused in memory"
+    },
+    {
+      "pass": true,
+      "scenario": "native map and inspector have independent bounds"
+    },
+    {
+      "pass": true,
+      "scenario": "native header stock fits two readable lines"
+    },
+    {
+      "pass": true,
+      "scenario": "native living map retains at least half the viewport height"
+    },
+    {
+      "pass": true,
+      "scenario": "native inspector tabs all fit"
+    },
+    {
+      "pass": true,
+      "scenario": "living-map label stays inside map"
+    },
+    {
+      "pass": true,
+      "scenario": "living-map label stays inside map"
+    },
+    {
+      "pass": true,
+      "scenario": "living-map label stays inside map"
+    },
+    {
+      "pass": true,
+      "scenario": "living-map label stays inside map"
+    },
+    {
+      "pass": true,
+      "scenario": "living-map label stays inside map"
+    },
+    {
+      "pass": true,
+      "scenario": "living-map label stays inside map"
+    },
+    {
+      "pass": true,
+      "scenario": "paused native world does not mutate time or actors"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-paused"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-paused"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Buy food / 2g"
+    },
+    {
+      "pass": true,
+      "scenario": "native shortage food quote equals purchase"
+    },
+    {
+      "pass": true,
+      "scenario": "native contract-tab pointer input"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Accept contract"
+    },
+    {
+      "pass": true,
+      "scenario": "native mine threat contract accepted at issuer"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-contract"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-contract"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Old Mine"
+    },
+    {
+      "pass": true,
+      "scenario": "native map sets a continuous path without teleport"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-course"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-course"
+    },
+    {
+      "pass": true,
+      "scenario": "Space pauses even when a map Button owns focus"
+    },
+    {
+      "pass": true,
+      "scenario": "native sea click rejects without mutation"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Old Mine"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native continuous arrival: dungeon_old_mine"
+    },
+    {
+      "pass": true,
+      "scenario": "actual mine arrival gates provisions and opens managed preparation"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-mine-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-mine-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Company & gear"
+    },
+    {
+      "pass": true,
+      "scenario": "native pilot opens existing equipment scene"
+    },
+    {
+      "pass": true,
+      "scenario": "equipment is a paused view over existing campaign"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: World & provinces"
+    },
+    {
+      "pass": true,
+      "scenario": "native equipment Map returns to paused living company"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Prepare Old Mine expedition"
+    },
+    {
+      "pass": true,
+      "scenario": "native mine entry uses existing owned-supply preparation"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-mine-packing"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-mine-packing"
+    },
+    {
+      "pass": true,
+      "scenario": "native owned packing Start exists"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Start Expedition"
+    },
+    {
+      "pass": true,
+      "scenario": "native Start creates normal managed campaign receipt"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Retreat to Ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "native retreat settles and returns through App to living world"
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary retreat does not falsely clear mine or award contract"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-retreat"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-retreat"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native continuous arrival: town_ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Make camp"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native camp command establishes actual timed camp"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-camp"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-camp"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native live time produces independent caravan activity"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-chronicle"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-chronicle"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native elapsed days move faction patrols into a real border clash"
+    },
+    {
+      "pass": true,
+      "scenario": "native faction contact changes actual strength"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: living-border-conflict"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: living-border-conflict"
+    },
+    {
+      "pass": true,
+      "scenario": "no focus acquired during review"
+    }
+  ],
+  "failures": [],
+  "schema": "sdd.native-terrain-review-v1",
+  "report": "artifacts/qa-runs/terrain-native-complete/native-review.json",
+  "capture_count": 30,
+  "source_sha256": "171fb952f5e09e3c0ce2ba20c238a2634ade583d8b6f48b2597f0257c2b8bb07",
+  "source_note": "Same frozen workspace as concurrent terrain-full-final; no source changes during either run.",
+  "physical_desktop_acceptance": "NOT_RUN",
+  "retained_captures": [
+    {
+      "file": "terrain-overview-1280x720.png",
+      "sha256": "a6d0ca341ee06677faab6fd340056bd20530052be2dafdcd1ba099d2d0082b36"
+    },
+    {
+      "file": "terrain-overview-1920x1080.png",
+      "sha256": "a1f5e3454c9acf6ada5724da1be47d4b04324d5f4a87e8c01c680b3c380560c4"
+    },
+    {
+      "file": "terrain-painted-1920x1080.png",
+      "sha256": "f5856a5ce5cf065e97a9945b70c38a3cef76002fb16ad0ed6babb972b6eeb353"
+    },
+    {
+      "file": "terrain-route-probe-1920x1080.png",
+      "sha256": "58ec77731eca2d1f348c23b6f6bdef873612a2184e5d3bcd2bd0a7885686daea"
+    },
+    {
+      "file": "terrain-save-refused-1280x720.png",
+      "sha256": "0ed5ca0d5cbe5a58c917fd6144ebe7b5fb981f1dfd3520d8f22b4341644d8065"
+    },
+    {
+      "file": "terrain-runtime-course-1920x1080.png",
+      "sha256": "16ef283beb8dc6c12eed50a19edf7910f14cd0fc45f386c9a2c9d58faf35390e"
+    },
+    {
+      "file": "terrain-runtime-arrival-1920x1080.png",
+      "sha256": "6080a968e9b2a1891e33b1e84da857154f96381da798151321f80a7c884a2be1"
+    },
+    {
+      "file": "living-mine-packing-1280x720.png",
+      "sha256": "784288c488c13478c772edfe625965c6c49928e5710ef5de158cd9febbd144fe"
+    },
+    {
+      "file": "living-retreat-1920x1080.png",
+      "sha256": "dc82dbc0f68c4778a1f87bbee80addc98de3c75550f41065f792ab28a84e7800"
+    },
+    {
+      "file": "living-border-conflict-1920x1080.png",
+      "sha256": "894518e5b57145bd90bd1dbf0fe461172fb19dd899c409fbac22806fc00c4ef8"
+    }
+  ]
+}

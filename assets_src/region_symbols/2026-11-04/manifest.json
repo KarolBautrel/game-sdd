@@ -1,0 +1,43 @@
+{
+  "schema": "sdd.region-art-provenance-v1",
+  "generator": "builtin imagegen",
+  "normalization": "Aseprite Lua",
+  "files": [
+    {
+      "path": "assets_src/region_symbols/2026-11-04/generated-source.png",
+      "sha256": "ad5087667ca7043f004071bbf92200d7325ef5ab439dd9c9a9a620330889c101"
+    },
+    {
+      "path": "assets_src/region_symbols/2026-11-04/ground-wash-source.png",
+      "sha256": "e53d7859839ab890a2fa246cadf8bf6754d7d39fc31eda819fad88933a2fe9cf"
+    },
+    {
+      "path": "assets_src/region_symbols/2026-11-04/prompts.json",
+      "sha256": "0f57e8934d62cad6423e27d1345c1b7c55a54ff9bbbc753beef6010c1f778d3a"
+    },
+    {
+      "path": "assets_src/region_symbols/2026-11-04/ground-prompt.json",
+      "sha256": "0b2b52772431d29a958034a30b532d7d6af731e0c63136e380ea6dd20413d88b"
+    },
+    {
+      "path": "assets_src/aseprite/region_symbols/region_symbols.aseprite",
+      "sha256": "936d40a08b2c9d503fb4cddd778156407df17df60f30e7ae73c8877f4cfe9bf2"
+    },
+    {
+      "path": "assets_src/aseprite/region_symbols/ground_wash.aseprite",
+      "sha256": "ee954259bc7649434ee532fe869cca85cf9c7e4053b347c1f05a0b5978eecab7"
+    },
+    {
+      "path": "assets/ui/world/region_symbols.png",
+      "sha256": "0f53590f72d458ded5edca493a2ad54d5951bb239a50c54d0773c0f4fc4f3d5e"
+    },
+    {
+      "path": "assets/ui/world/ground_wash.png",
+      "sha256": "75fb11869481fbedaa99674a9134d3fc14dc498c6f71d9a4e3a7912f47efdde1"
+    },
+    {
+      "path": "tools/aseprite/region_symbols.lua",
+      "sha256": "b854c7a9521e94117d2aa038c88bd5af78a699743a71ce7067ae7e0177206ca2"
+    }
+  ]
+}

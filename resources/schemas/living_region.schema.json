@@ -13,7 +13,8 @@
     "blocked",
     "roads",
     "sites",
-    "contracts"
+    "contracts",
+    "terrain"
   ],
   "additionalProperties": false,
   "properties": {
@@ -48,12 +49,12 @@
         "width": {
           "type": "integer",
           "minimum": 8,
-          "maximum": 128
+          "maximum": 512
         },
         "height": {
           "type": "integer",
           "minimum": 8,
-          "maximum": 128
+          "maximum": 288
         }
       }
     },
@@ -185,6 +186,9 @@
           }
         }
       }
+    },
+    "terrain": {
+      "const": "res://resources/data/world_terrain/living_marches_v1.json"
     }
   },
   "$defs": {

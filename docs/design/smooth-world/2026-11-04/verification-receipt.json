@@ -1,0 +1,560 @@
+{
+  "schema": "sdd.stage-verification-v1",
+  "run_id": "smooth-world-layer-final",
+  "started_utc": "2026-11-04T21:29:35.552440+00:00",
+  "finished_utc": "2026-11-04T21:34:43.883950+00:00",
+  "git_head": "564dbdae7fc214f81878c2a961497c6934330456",
+  "source_sha256": "b5342ed950fbba66a39d1f9d3693711a6708a7e84853e42032a3e560d7bc5f6e",
+  "automated_status": "PASS",
+  "stage_status": "AWAITING_INTERACTIVE",
+  "expected_check_count": 78,
+  "report": "artifacts/qa-runs/smooth-world-layer-final/report.json",
+  "checks": [
+    {
+      "name": "python_validation",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "python_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "godot_version",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "godot_import",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_slice_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "dungeon_beta_loop_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "dungeon_entry_selection_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "dungeon_generation_quality_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "dungeon_procedural_draft_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "dungeon_state_model_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "living_world_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "terrain_navigation_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "ashen_exploration_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "asset_catalog_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "campaign_interface_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "character_style_preview_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_animation_lifecycle_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_art_direction_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_debug_force_victory_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_encounter_authoring_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_feedback_polish_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_floating_text_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_hud_layout_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_map_editor_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_mercenary_asset_pipeline_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_panel_skin_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_targeting_preview_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_terrain_asset_pipeline_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_ui_asset_pipeline_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_unit_readability_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "combat_unit_visual_state_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "dark_fantasy_ui_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "drawn_animation_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "drawn_battle_review_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "dungeon_exploration_hud_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "dungeon_party_layout_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "dungeon_route_preview_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "dungeon_visual_cohesion_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "environment_art_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "equipment_usability_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "expedition_art_direction_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "hud_component_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "inventory_stash_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "journey_interface_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "living_motion_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "living_world_interface_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "map_authoring_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "modular_actor_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "original_raider_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "original_roster_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "painted_arena_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "painted_enemy_pilot_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "service_interface_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "tactical_facing_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "terrain_editor_interface_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "town_exploration_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "visual_inventory_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "world_town_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "campaign_equipment_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "campaign_session_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "dungeon_combat_injury_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "dungeon_run_session_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "equipment_appearance_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "hero_equipment_identity_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "living_world_session_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "party_advancement_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "road_event_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "town_trade_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "world_atlas_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "world_travel_tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "scene_TerrainEditor",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "scene_LivingWorld",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "scene_App",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "scene_town_shell",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "scene_TownExploration",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "scene_DungeonDebug",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "scene_CombatDebug",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "scene_CombatMapEditor",
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    }
+  ]
+}

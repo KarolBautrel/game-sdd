@@ -2,7 +2,7 @@
   "schema": "sdd.world-art-v1",
   "assets": {
     "oak": {
-      "path": "res://assets/combat/environment/props/oak.png",
+      "path": "res://assets/combat/environment/painted_v2/oak.png",
       "size": [
         253,
         364
@@ -13,7 +13,7 @@
       ]
     },
     "pine": {
-      "path": "res://assets/combat/environment/props/pine.png",
+      "path": "res://assets/combat/environment/painted_v2/pine.png",
       "size": [
         188,
         343
@@ -24,7 +24,7 @@
       ]
     },
     "dead_tree": {
-      "path": "res://assets/combat/environment/props/dead_tree.png",
+      "path": "res://assets/combat/environment/painted_v2/dead_tree.png",
       "size": [
         149,
         301
@@ -35,7 +35,7 @@
       ]
     },
     "bush": {
-      "path": "res://assets/combat/environment/props/bush.png",
+      "path": "res://assets/combat/environment/painted_v2/bush.png",
       "size": [
         124,
         103
@@ -46,7 +46,7 @@
       ]
     },
     "stump": {
-      "path": "res://assets/combat/environment/props/stump.png",
+      "path": "res://assets/combat/environment/painted_v2/stump.png",
       "size": [
         82,
         69
@@ -57,7 +57,7 @@
       ]
     },
     "fallen_log": {
-      "path": "res://assets/combat/environment/props/fallen_log.png",
+      "path": "res://assets/combat/environment/painted_v2/fallen_log.png",
       "size": [
         137,
         70
@@ -79,7 +79,7 @@
       ]
     },
     "boulder": {
-      "path": "res://assets/combat/environment/props/boulder.png",
+      "path": "res://assets/combat/environment/painted_v2/boulder.png",
       "size": [
         103,
         88
@@ -134,7 +134,7 @@
       ]
     },
     "crate": {
-      "path": "res://assets/combat/environment/props/crate.png",
+      "path": "res://assets/combat/environment/painted_v2/crate.png",
       "size": [
         104,
         106
@@ -145,7 +145,7 @@
       ]
     },
     "barrel": {
-      "path": "res://assets/combat/environment/props/barrel.png",
+      "path": "res://assets/combat/environment/painted_v2/barrel.png",
       "size": [
         68,
         95
@@ -167,7 +167,7 @@
       ]
     },
     "coffin": {
-      "path": "res://assets/combat/environment/props/coffin.png",
+      "path": "res://assets/combat/environment/painted_v2/coffin.png",
       "size": [
         160,
         115
@@ -178,7 +178,7 @@
       ]
     },
     "pillar": {
-      "path": "res://assets/combat/environment/props/pillar.png",
+      "path": "res://assets/combat/environment/painted_v2/pillar.png",
       "size": [
         110,
         199
@@ -189,7 +189,7 @@
       ]
     },
     "broken_pillar": {
-      "path": "res://assets/combat/environment/props/broken_pillar.png",
+      "path": "res://assets/combat/environment/painted_v2/broken_pillar.png",
       "size": [
         141,
         146
@@ -211,7 +211,7 @@
       ]
     },
     "wall": {
-      "path": "res://assets/combat/environment/props/wall.png",
+      "path": "res://assets/combat/environment/painted_v2/wall.png",
       "size": [
         174,
         150
@@ -222,7 +222,7 @@
       ]
     },
     "rubble": {
-      "path": "res://assets/combat/environment/props/rubble.png",
+      "path": "res://assets/combat/environment/painted_v2/rubble.png",
       "size": [
         133,
         69
@@ -233,7 +233,7 @@
       ]
     },
     "brazier": {
-      "path": "res://assets/combat/environment/props/brazier.png",
+      "path": "res://assets/combat/environment/painted_v2/brazier.png",
       "size": [
         68,
         170
@@ -244,7 +244,7 @@
       ]
     },
     "altar": {
-      "path": "res://assets/combat/environment/props/altar.png",
+      "path": "res://assets/combat/environment/painted_v2/altar.png",
       "size": [
         140,
         130

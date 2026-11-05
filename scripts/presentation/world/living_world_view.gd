@@ -12,6 +12,7 @@ var buttons: Dictionary={}
 var contract_nodes: Dictionary={}
 var map: Control
 var header_label: Label
+var region_title: Label
 var stock_label: Label
 var place_label: Label
 var details_label: Label
@@ -90,7 +91,7 @@ func _build() -> void:
 	var title:=VBoxContainer.new()
 	title.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	heading.add_child(title)
-	_label(title,"The Living Marches",36,UI.GOLD)
+	region_title=_label(title,"The Living Marches",36,UI.GOLD)
 	header_label=_label(title,"",22,UI.MUTED)
 	stock_label=_label(heading,"",22,UI.GOLD)
 	stock_label.custom_minimum_size.x=300 if compact else 380
@@ -107,6 +108,12 @@ func _build() -> void:
 	_button(toolbar,"camp","Make camp",_camp)
 	_button(toolbar,"stash","Company & gear",func() -> void: _open_tab("stash"))
 	_button(toolbar,"exit","Back to atlas",_exit_pilot)
+	var terrain_button:=_button(toolbar,"terrain","Terrain",func() -> void:
+		set_speed(0)
+		preload("res://scripts/domain/terrain_navigation.gd").reload()
+		_go_scene("res://scenes/world/TerrainEditor.tscn"))
+	terrain_button.tooltip_text="Paint walkable terrain, rivers, mountain slopes and crossings."
+	_button(toolbar,"regions","Regions",func() -> void: set_speed(0);_go_scene("res://scenes/world/RegionFoundry.tscn"))
 	body=HBoxContainer.new()
 	body.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	body.add_theme_constant_override("separation",16)
@@ -118,6 +125,7 @@ func _build() -> void:
 	var map_column:=VBoxContainer.new()
 	map_panel.add_child(map_column)
 	map=Map.new()
+	map.region_state=_campaign().state.get("living_world",{})
 	map.name="LivingMap"
 	map.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	map_column.add_child(map)
@@ -168,7 +176,7 @@ func _build() -> void:
 		var name:=_label(card,str(entry.name),25,UI.GOLD)
 		var status:=_label(card,"",20,UI.MUTED)
 		_label(card,str(entry.description),21)
-		_label(card,"Issuer: %s\nReward: %dg / %d XP" % [World.site(entry.issuer).name,int(entry.gold),int(entry.xp)],20,UI.GOLD)
+		_label(card,"Issuer: %s\nReward: %dg / %d XP" % [World.site(entry.issuer,_campaign().state.living_world).name,int(entry.gold),int(entry.xp)],20,UI.GOLD)
 		var accept:=_button(card,"accept_"+id,"Accept contract",func() -> void: _act(func() -> bool: return _campaign().accept_living_contract(id)))
 		var report:=_button(card,"report_"+id,"Report / collect payment",func() -> void: _act(func() -> bool: return _campaign().report_living_contract(id)))
 		contract_nodes[id]={"panel":card.get_parent(),"name":name,"status":status,"accept":accept,"report":report}
@@ -194,16 +202,20 @@ func _refresh(world_tick: bool = false) -> void:
 	var state: Dictionary=profile.living_world
 	var current:=World.current_site(state)
 	var locked: bool=not profile.active_run.is_empty() or not profile.world.pending_event.is_empty()
-	var where: String=str(World.site(current).get("name","On the road"))
+	var where: String=str(World.site(current,state).get("name","On the road"))
+	region_title.text=str(state.geography.name) if state.has("geography") else "The Living Marches"
 	header_label.text="%s / %s / %s" % [where,clock(int(state.tick)),"Paused" if speed==0 else "%sx time" % speed]
+	if state.has("geography"): header_label.text+=" / Seed %d" % int(state.geography.seed)
 	stock_label.text="%dg   |   Food %d\nFatigue %d/100" % [int(profile.gold),int(profile.supplies.food),int(state.party.fatigue)]
 	for rate in [0,1,2,4]: buttons["pause" if rate==0 else "speed_%s" % rate].set_pressed_no_signal(speed==rate)
 	buttons.camp.text="Break camp" if state.party.camping else "Make camp"
 	buttons.camp.disabled=locked
 	buttons.stash.disabled=not profile.world.pending_event.is_empty()
+	buttons.terrain.disabled=state.has("geography")
+	buttons.terrain.tooltip_text="Generated geography is fixed for this campaign. Use Regions to select another." if state.has("geography") else "Paint the authored Marches terrain."
 	map.selected_site=selected_site
-	map.update_state(profile,.6/maxi(1,speed))
-	var entry:=World.site(selected_site)
+	map.update_state(profile,.6/maxi(1,speed),campaign.living_motion if world_tick else {})
+	var entry:=World.site(selected_site,state)
 	place_label.text=str(entry.get("name","The Marches"))
 	var lines: Array[String]=[]
 	if entry.get("kind","")=="town":
@@ -241,7 +253,7 @@ func _refresh(world_tick: bool = false) -> void:
 		var stage: String=str(state.contracts.get(id,{}).get("stage","unavailable"))
 		widgets.panel.visible=stage!="unavailable"
 		var description: String={"offered":"Offered","accepted":"In progress","objective":"Ready to report","completed":"Paid","expired":"Closed"}.get(stage,"Unavailable")
-		widgets.status.text="%s / %s" % [description,World.site(definition.issuer).name]
+		widgets.status.text="%s / %s" % [description,World.site(definition.issuer,state).name]
 		widgets.report.text="Deliver 3 food / collect payment" if definition.kind=="delivery" else "Report / collect payment"
 		var at_issuer: bool=World.at_site(state,definition.issuer) and not locked
 		widgets.accept.disabled=stage!="offered" or not at_issuer
@@ -257,22 +269,22 @@ func set_speed(rate: int) -> void:
 	if rate not in [0,1,2,4]: return
 	if not _campaign().state.active_run.is_empty() or not _campaign().state.world.pending_event.is_empty(): rate=0
 	speed=rate
-	if rate==0:
-		accumulated=0
-		if map!=null: map.snap()
 	_refresh()
 func _process(delta: float) -> void:
 	if speed==0 or not _campaign().living_active(): return
 	accumulated+=delta*speed
 	var steps:=0
-	while accumulated>=.6 and steps<8:
-		accumulated-=.6;steps+=1
+	while accumulated>=.6-.000000001 and steps<8:
+		accumulated=maxf(0,accumulated-.6);steps+=1
 		if not _campaign().advance_living():
 			set_speed(0);break
+		map.update_state(_campaign().state,.6/maxi(1,speed),_campaign().living_motion)
 		if not _campaign().state.world.pending_event.is_empty():
+			map.snap()
 			tabs.current_tab=0
 			set_speed(0);break
 	if steps>0: _refresh(true)
+	if speed>0: map.set_phase(accumulated/.6)
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("living_pause"):
 		set_speed(1 if speed==0 else 0);get_viewport().set_input_as_handled()

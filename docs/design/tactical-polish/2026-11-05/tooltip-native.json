@@ -1,0 +1,170 @@
+{
+  "captures": [
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/live-tooltip-native-entered/live-tooltip-hit-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "live-tooltip-hit"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/live-tooltip-native-entered/live-tooltip-death-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "live-tooltip-death"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/live-tooltip-native-entered/live-tooltip-hit-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "live-tooltip-hit"
+    },
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/live-tooltip-native-entered/live-tooltip-death-1920x1080.png",
+      "logical_size": [
+        2560,
+        1440
+      ],
+      "pixels": [
+        1920,
+        1080
+      ],
+      "view": "live-tooltip-death"
+    }
+  ],
+  "checks": [
+    {
+      "pass": true,
+      "scenario": "native play display"
+    },
+    {
+      "pass": true,
+      "scenario": "no-focus minimized play host"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "actual native hover creates themed live tooltip"
+    },
+    {
+      "pass": true,
+      "scenario": "native popup starts with current target HP"
+    },
+    {
+      "pass": true,
+      "scenario": "existing native popup refreshes after nonlethal attack without pointer movement"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: live-tooltip-hit"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: live-tooltip-hit"
+    },
+    {
+      "pass": true,
+      "scenario": "existing native popup refreshes after death without pointer movement"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: live-tooltip-death"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: live-tooltip-death"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "actual native hover creates themed live tooltip"
+    },
+    {
+      "pass": true,
+      "scenario": "native popup starts with current target HP"
+    },
+    {
+      "pass": true,
+      "scenario": "existing native popup refreshes after nonlethal attack without pointer movement"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: live-tooltip-hit"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: live-tooltip-hit"
+    },
+    {
+      "pass": true,
+      "scenario": "existing native popup refreshes after death without pointer movement"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: live-tooltip-death"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: live-tooltip-death"
+    },
+    {
+      "pass": true,
+      "scenario": "play review acquired no focus"
+    }
+  ],
+  "display": "Windows",
+  "engine_clicks": 2,
+  "engine_key_events": 0,
+  "failures": [],
+  "kind": "native play GPU and engine-local input fixture",
+  "player_save_used": false,
+  "renderer": "forward_plus",
+  "status": "PASS",
+  "texture_memory_bytes": 133066752,
+  "uses_desktop_input": false,
+  "window_focused": false,
+  "window_minimized": true,
+  "command": [
+    "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+    "--path",
+    "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\artifacts\\qa-runs\\live-tooltip-native-entered\\project",
+    "--audio-driver",
+    "Dummy",
+    "--max-fps",
+    "30",
+    "--",
+    "--qa-play-review",
+    "--review-output=C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/live-tooltip-native-entered",
+    "--review-views=livetooltip",
+    "--review-sizes=1280x720,1920x1080",
+    "--review-exercise"
+  ],
+  "exit_code": 0,
+  "errors": 0,
+  "warnings": 0,
+  "physical_desktop_acceptance": "NOT_RUN",
+  "packaged_build": false
+}

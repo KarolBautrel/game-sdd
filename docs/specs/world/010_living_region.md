@@ -19,6 +19,8 @@ The first geography is authored on the approved world illustration. A domain
 navigation grid constrained to authored land computes paths; roads are faster
 than wilderness/forest. This is continuous click-to-travel, not province/node
 teleportation. Geography generation is the next stage after player review.
+Stage78/world011 supersedes the coarse land-only mask and NPC straight legs
+with shared weighted semantic terrain and explicit river crossings.
 
 One simulation tick is15campaign minutes. The UI runs ticks every0.6real seconds
 at1x, with pause/2x/4x; it interpolates the domain positions. Load always pauses.

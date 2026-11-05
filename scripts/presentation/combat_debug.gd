@@ -13,6 +13,7 @@ const BattleChrome := preload("res://scripts/presentation/combat/battle_chrome.g
 var battle_chrome: RefCounted
 
 const CombatResolver := preload("res://scripts/domain/combat_resolver.gd")
+const LiveTooltipTile := preload("res://scripts/presentation/combat/live_tooltip_tile.gd")
 const CombatTextUtil := preload("res://scripts/presentation/combat/combat_text.gd")
 const CombatUnitArtDb := preload("res://scripts/presentation/combat/combat_unit_art.gd")
 const CombatActionModel := preload("res://scripts/presentation/combat/combat_action_model.gd")
@@ -23,6 +24,7 @@ const CombatUnitVisualState := preload("res://scripts/presentation/combat/combat
 const DrawnTimeline := preload("res://scripts/presentation/combat/drawn_combat_timeline.gd")
 var idle_elapsed: Dictionary = {}
 var active_motion_tween: Tween
+var walk_distance_offsets: Dictionary={}
 
 const DEFAULT_ENCOUNTER_PATH := CombatScenarioCatalog.DEFAULT_ENCOUNTER_PATH
 const COMBAT_UI_SLOT_NORMAL_PATH := "res://assets/ui/combat/processed/slots/slot_normal.png"
@@ -289,6 +291,7 @@ func _advance_original_idle() -> void:
 
 func _reset_debug_encounter() -> void:
 	visual_generation+=1
+	walk_distance_offsets.clear()
 	animation_locked=false
 	if active_motion_tween!=null and active_motion_tween.is_valid():active_motion_tween.kill()
 	active_motion_tween=null
@@ -444,7 +447,7 @@ func _grid_render_key() -> String:
 
 
 func _build_tile(position: Dictionary) -> Button:
-	var tile := Button.new()
+	var tile := LiveTooltipTile.new()
 	tile.disabled = animation_locked
 	tile.custom_minimum_size = Vector2(TILE_WIDTH, TILE_HEIGHT)
 	tile.size = Vector2(TILE_WIDTH, TILE_HEIGHT)
@@ -518,7 +521,7 @@ func _build_tile(position: Dictionary) -> Button:
 
 func _update_tile_dynamic(tile: Button, position: Dictionary) -> void:
 	tile.disabled = animation_locked
-	tile.tooltip_text = _tile_tooltip(position)
+	tile.set_live_tooltip_text(_tile_tooltip(position))
 	_remove_child_if_present(tile, "Overlay")
 	_remove_child_if_present(tile, "PreviewLabel")
 
@@ -2266,17 +2269,23 @@ func _play_movement_animation(events: Array, previous_state: Dictionary, next_st
 		var unit_node := unit_layer.get_node_or_null(actor_id)
 		if unit_node == null:
 			continue
-		_start_walk_cycle(actor_id, current_generation)
+		var painted:=unit_art.is_drawn_unit(_unit_by_id(actor_id))
+		if not painted: _start_walk_cycle(actor_id, current_generation)
 		var remaining_mp := int(_unit_by_id_in_state(previous_state, actor_id).get("resources", {}).get("mp", 0))
 		var step_facings := CombatUnitVisualState.movement_step_facings(event)
 		var step_index := 0
 		var previous_position:=Vector2(unit_node.position)
+		var travelled:=float(walk_distance_offsets.get(actor_id,0.0))
+		if painted: _sample_painted_walk(0.0,actor_id,previous_position,previous_position,travelled,current_generation)
 		for step: Dictionary in path:
 			if step_index < step_facings.size():
 				tween.tween_callback(_movement_facing_callback(actor_id, str(step_facings[step_index].get("direction", ""))))
 			var target_position := _position_to_unit_top_left(step)
 			var seconds:=unit_art.movement_seconds(_unit_by_id(actor_id),previous_position.distance_to(target_position),MOVE_STEP_SECONDS)
-			tween.tween_property(unit_node, "position", target_position, seconds).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+			if painted:
+				tween.tween_method(_sample_painted_walk.bind(actor_id,previous_position,target_position,travelled,current_generation),0.0,1.0,seconds).set_trans(Tween.TRANS_LINEAR)
+			else: tween.tween_property(unit_node, "position", target_position, seconds).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+			travelled+=previous_position.distance_to(target_position)
 			previous_position=target_position
 			var step_cost := _terrain_movement_cost(step)
 			remaining_mp = maxi(0, remaining_mp - step_cost)
@@ -2291,6 +2300,17 @@ func _play_movement_animation(events: Array, previous_state: Dictionary, next_st
 	tween.finished.connect(func() -> void:
 		_finish_movement_animation(events, current_generation, next_state, next_log)
 	)
+
+func _sample_painted_walk(progress: float,actor_id: String,origin: Vector2,destination: Vector2,distance_start: float,generation: int) -> void:
+	if generation!=visual_generation or not animation_locked: return
+	var node:=unit_layer.get_node_or_null(actor_id) as Control
+	if node==null: return
+	node.position=origin.lerp(destination,progress)
+	var distance:=distance_start+origin.distance_to(destination)*progress
+	walk_distance_offsets[actor_id]=distance
+	var action: String="walk:%d" % unit_art.walk_frame_at_distance(_unit_by_id(actor_id),distance)
+	if str(unit_visual_action.get(actor_id,""))!=action:
+		unit_visual_action[actor_id]=action;_refresh_unit_sprite(actor_id)
 
 
 func _finish_movement_animation(events: Array, current_generation: int, next_state: Dictionary, next_log: Array) -> void:
@@ -3079,7 +3099,7 @@ func _tile_tooltip(position: Dictionary) -> String:
 	var lines: Array[String] = [
 		"x:%s y:%s" % [position["x"], position["y"]],
 		"terrain: %s" % _tile_type(position),
-		"move cost: %s MP" % _terrain_movement_cost(position),
+		EnvironmentArt.terrain_explanation(_tile_type(position)),
 	]
 	var unit := _tooltip_unit_at(position)
 	if not unit.is_empty():

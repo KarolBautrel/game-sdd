@@ -1,5 +1,10 @@
 # Accumulated live test scenarios
 
+Latest stage80: Region Foundry adds seeded real geography/illustration and a
+separate resumable living pilot per seed/preset. User authorizes implementation;
+appearance/physical feel still need review. Preserved authored r9 is available.
+Native GPU pointer fixtures do not close the ordinary player-victory gap.
+
 Latest stage75: Ashen native exploration UI replaces textured72 as the current
 review target. User now APPROVES the current visual dungeon stage. Review1/L67-01
 retains its unreported detailed physical-flow gap; four-theme native
@@ -317,6 +322,47 @@ Its appearance remains approved and preserved; use the living-world case below.
 
 ## Living mercenary region (stage77)
 
+Follow-up: user approves the pilot's current visual/play direction and requests
+publication (f0fc7d16). Detailed normal mine victory is not reported; retain L77-01.
+
+## Terrain navigation (stage78)
+
+Follow-up: user has hand-painted revision9 and accepts the basis. Stage79 smooths
+movement while preserving this exact mask; use L79-01 next.
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L78-01 | 78 | Launch terrain-editor; inspect water/peak alignment, paint/sample a small zone, undo/redo, probe both banks/forest/pass, save and return to Living world; travel Ravenford->Saltwatch/Old Mine/Abbey/Keep, restart mid-route. | Correct crossing/cost choices for company and NPCs; no river/peak/corner shortcuts; usable editor with intact campaign progress and readable controls. | AWAITING_INTERACTIVE; automated/native outcomes and gallery in2026-11-04-terrain.md. |
+
+### Retained stage77 ordinary-play case
+
 | ID | Stage | Scenario | Acceptance | Result |
 | --- | --- | --- | --- | --- |
 | L77-01 | 77 | Launch living-world on DISPLAY1; accept mine contract in Ravenford, continuous travel/pause, owned packing, ordinary defended mine completion, return/report; try Saltwatch delivery/Black Keep reconnaissance, camp/speeds, raids/conflict and restart. | Actual land movement and world activity, real supply/security/prices, one-time receipts/rewards and faction consequences, stable exact save/reload, mine remains cleared; ordinary retreat keeps task unfinished; separate player save. | AWAITING_INTERACTIVE; focused domain28/session41/UI97 and3Python tests PASS. Native/full final receipts are in2026-11-04-living-world.md. Boundary fixtures are not played victories. |
+
+## Smooth living-world movement (stage79)
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L79-01 | 79 | Restart living-world on designer revision9, travel Ravenford->Saltwatch/Old Mine, inspect bridges/curves and NPCs at1x/2x/4x; pause midway, wait, resume and change rates. | Continuous travel without grid/tick resets, backward twitches or pause/resume snaps; terrain costs/crossings and authored mask preserved. | AWAITING_INTERACTIVE; motion52 and final source/native per-frame receipts in2026-11-04-smooth-world-motion.md. |
+
+## Generated regions (stage80)
+
+Latest2026-11-05 stop: see2026-11-05-ordinary-skirmishes.md and
+2026-11-05-session-close.md. L70-01 has ordinary desktop Forest/Mine victories
+round2,4survivors each; compact/reload and user visual acceptance still tracked.
+Large-region actual fresh20261105 mine travel/pause/zoom/mini chart works; physical
+RMB/MMB drag remains open. This does not close campaign L77-01.
+
+## Current travel/combat batch (stages81..84)
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L81-01 | 81 | Large Marches20261105, Generate/Play, mine travel, pause/zoom/mini chart/Company. | No camera course/resource changes, coherent weighted travel. | AGENT_OBSERVED_PASS for named inputs; physical RMB/MMB and USER visual review pending. Native236checks/90actions/36captures PASS. |
+| L84-01 | 84 | Forest Ambush ordinary desktop battle. | Normal victory, terrain/roles/animation, no Debug Win. | AGENT_OBSERVED_PASS; VICTORY round2,4survivors. |
+| L84-02 | 84 | Mine Breach ordinary desktop battle. | Normal victory, pillars/LOS/crossings/defense. | AGENT_OBSERVED_PASS; VICTORY round2,4survivors; live tooltip HP/status confirmed. |
+| L84-03 | 84 | Painted Six - Old Mine seed2001. | Complete ordinary battle and record outcome. | INTERRUPTED at user stop, round1 Rogue; restart tomorrow. No third victory claimed. |
+
+| ID | Stage | Scenario | Acceptance | Result |
+| --- | --- | --- | --- | --- |
+| L80-01 | 80 | Launch regions on DISPLAY1; inspect2087 Marches,42 woodland and170717 highlands; change seed and generate, toggle overlay, preview route, Play / Resume. Travel across a bridge and through forest/pass; open gear, accept mine contract, pack and ordinarily retreat. Restart/select same seed; return to Authored Marches. | Geography and artwork materially vary and match navigation; controls/labels fit; preview is read-only; water/peaks blocked; smooth weighted travel; exact saved snapshot/company resumes; original mask/profile intact. | AWAITING_INTERACTIVE; automated/full/native receipts in2026-11-04-generated-regions.md. Ordinary physical mine victory remains L77-01. |

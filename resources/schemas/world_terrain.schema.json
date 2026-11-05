@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "region",
+    "revision",
+    "width",
+    "height",
+    "rows",
+    "crossings"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "region": {
+      "const": "living_marches_v1"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "width": {
+      "const": 192
+    },
+    "height": {
+      "const": 108
+    },
+    "rows": {
+      "type": "array",
+      "minItems": 108,
+      "maxItems": 108,
+      "items": {
+        "type": "string",
+        "minLength": 192,
+        "maxLength": 192,
+        "pattern": "^[RPFHMWXB]+$"
+      }
+    },
+    "crossings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "position"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "position": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "x",
+              "y"
+            ],
+            "properties": {
+              "x": {
+                "type": "number",
+                "minimum": 0,
+                "exclusiveMaximum": 1
+              },
+              "y": {
+                "type": "number",
+                "minimum": 0,
+                "exclusiveMaximum": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

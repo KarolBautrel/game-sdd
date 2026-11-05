@@ -280,3 +280,185 @@ docs/qa/2026-11-04-living-world.md. Source result approval and physical ordinary
 mine victory are pending; boundary state fixtures are not played victories.
 Next: player reviews the small living loop, then seeded modular geography and
 contract/content expansion. No new commit/push is requested by this stage.
+
+78. User approves the living pilot, requests publication and prioritizes terrain
+navigation before further world expansion. Approved stages76/77 and immutable
+atlas preservation archive published on master as f0fc7d16;37LFS objects/229MB
+uploaded, ordinary fast-forward push completed. Physical mine victory remains
+unreported; visual approval does not supply that separate result.
+
+Owners world011/presentation037 and slices011/037. A192x108 semantic mask is
+hand-traced over the unchanged illustration: roads100%, plains77%, forest50%,
+hills40%, difficult slopes30%, bridge/ford87%; rivers/sea/high peaks blocked.
+Weighted A* and integrated terrain costs apply to company and all NPC groups.
+No diagonal bank shortcuts; native interpolation follows safe navigation too.
+Four explicit crossings and a High Pass saddle preserve site reachability.
+Eight-tick endpoint guards prevent patrol circuit phase locking after costs
+change. Compatible signature/actor-path state replans on the next transaction;
+newly blocked positions recover to the nearest connected ground with a journal
+entry, preserving all resources/contracts. Coordinates use seven decimal places
+to avoid Godot JSON parser ULP drift. Legacy profiles remain readable without
+load-time writes; ordinary player saves and the archived art stay intact.
+
+Native terrain cartographer: palette, brush radius, continuous strokes, sample,
+undo/redo, opacity, pointer-centered zoom/middle pan/Fit, route probe, guarded
+atomic save/reload and prior-file backup. Editor cannot disconnect a required
+site/waypoint; required points are shown/named. QA writes only isolated files.
+Launcher: `& .\tools\qa\start_game.ps1 -Scene terrain-editor`; runtime toolbar
+also opens it. Visual/physical acceptance remains with the user.
+
+Focused living domain28/session41, terrain27, editor65 and living UI97 checks passed during implementation; validators
+and six Python references/archive tests passed. Final complete-suite and actual
+native pointer/render receipts are recorded in docs/qa/2026-11-04-terrain.md.
+Initial native layout/wheel/crossing failures remain in artifacts; do not cite
+them as acceptance. Next: review river/peak alignment and travel in the editor
+and living pilot, then return to geography/content expansion. Equipment/battle
+review queue remains deferred. New terrain work is local for this review;
+the explicit requested publication of the approved pilot is complete.
+
+79. User has hand-painted terrain revision9 and accepts it as a good basis, but
+reports interrupted movement. Preserve its exact SHA256
+a5d90d2ff4dbf36d0f3b46856fc30be0812767876cc407e72c3c0067a8a8f327;
+byte-identical source checkpoint: assets_src/world_navigation/2026-11-04/.
+Owners world012/presentation038 and slices012/038.
+
+Reproduced periodic visual reversal: a forward within-cell move produced
+dx=-0.0002604127 when the renderer recomputed A* through the cell center.
+Exact weighted-time traces now publish only after successful commits; rendering
+uses the simulation accumulator's phase, with no second pathfinding clock.
+Pause/rate changes preserve the pose and residual time; NPCs retain unused
+budget across ordinary route points. Patrol guards remain intentional. Moving
+NPC banners draw at fractional positions while native hit/focus targets remain.
+The route overlay includes the unplayed committed trace. No changes to company
+base speed, terrain costs, authored mask or fifteen-minute tick duration.
+The Python terrain validator now accepts finite integral-float JSON metadata
+emitted by the editor (192.0/108.0), without rewriting the user's file.
+
+Focused living motion52, navigation27, living28, UI97/session41 checks and seven
+Python terrain/reference tests pass during implementation. Command:
+`godot --headless --path . --script res://scripts/presentation/living_motion_tests.gd`.
+This proves30/60/144FPS and1x/2x/4x distance/clock consistency, no reverse/stall
+frames, pause/resume continuity, weighted boundary timing, NPC waypoint budget
+and failed-save trace rollback. Native per-frame/GPU and final complete-suite
+receipts are recorded in docs/qa/2026-11-04-smooth-world-motion.md. Initial
+native wall-clock measurement failure is retained and corrected to account for
+GPU readback/PNG encoding between process-frame and node processing.
+
+Next: user checks actual movement on the preserved terrain, then plan seeded
+regions from coherent terrain/crossings before placing settlements/roads/sites.
+Retain the hand-designed Marches as the first authored region/reference. No new
+publication request is present; stages78/79 remain local for this review.
+
+80. User approves implementing the proposed seeded-region generator ("Dobram
+to dawaj"). Owners world013/presentation039, slices013/039. The authored atlas,
+designer terrain revision9 and existing profiles remain preserved. New optional
+geography snapshots carry version1, seed/preset, checksum,192x108 semantic terrain,
+rivers/downstream erosion, tributary/confluence, explicit bank-to-bank bridges,
+six separated functional sites, five safe road routes and NPC waypoints.
+Three presets: marches, woodland, highlands. Deterministic bounded retries reject
+disconnected layouts; a ridge saddle preserves highland accessibility.
+
+Region Foundry previews real geography and route costs without mutating company
+state. Play/Resume uses independent per-seed saves and the existing simulation,
+equipment, contracts, mine packing/managed retreat. Whole geography snapshots
+survive reload without regeneration; failed profile switches restore the previous
+company. Profile-specific navigation prevents preview/region leakage. Generated
+terrain stays immutable; Authored Marches returns to the separate original pilot.
+
+Builtin imagegen supplies sixteen painted transparent cartographic symbols and
+a continuous ground wash, matching the approved olive/gold atlas family.
+Editable Aseprite sources, exact English prompts, Lua normalization/exports and
+nine-file SHA256 provenance are retained. New native coast/biome shading uses
+continuous terrain weights; native roads/bridges and symbols follow actual data.
+Initial square-cell coast and excessive overlapping mountains were rejected
+during visual QA; smooth land/water boundaries and spaced mountains replace them.
+
+Focused generator443checks across72inputs (including cold deterministic replay),
+session20 and foundry UI79 pass. Three real snapshot examples/full generated
+profile pass strict JSON schemas; four new Python tests and validation pass.
+Aseprite editable exports are byte-identical. Final full-suite/native receipts,
+actual bridge/travel/gear/packing/ordinary-retreat proof and gallery are recorded
+in docs/qa/2026-11-04-generated-regions.md. Native fixtures are not physical player
+acceptance or an ordinary played mine victory. Launch:
+`& .\tools\qa\start_game.ps1 -Scene regions`.
+
+Next: player reviews generated appearance, crossings/travel and exact resumption;
+then discuss a broader site/content pool and cross-region travel. This first
+increment deliberately reuses six current roles/names and existing contracts;
+it is not a completed endless-world/content generator. Stages78..80 remain local
+on master564dbdae; no additional commit/push is authorized this turn. Preserve
+the pending equipment/battle/courtyard and ordinary mine-victory review queue.
+
+81.2026-11-05: user approves stage80's illustrated map style and asks for larger,
+scrollable mixed-biome maps. Owners world014/presentation040, slices014/040.
+Version2 creates384x216 semantic cells (four times v1 area), wet/dry/upland climate
+zones, safe rivers/crossings/roads and the current six functional roles. Travel
+and movement traces use physical scale2 for company and NPCs. V1 remains exactly
+deterministic against frozen stage80 fixtures; authored r9 and approved art remain.
+Builder dimensions are per invocation. Strict optional v1/v2 schemas and separate
+versioned pilot slots preserve existing campaigns, including same-seed v1 progress.
+
+Foundry defaults to Large, with Classic available. Large preview/live opens local,
+with cursor-anchored wheel zoom, right/middle pan, bounded camera, Overview,
+Company/Center and clickable mini chart. One projection serves all drawing/input;
+offscreen labels hide, local labels/fonts remain readable. Camera gestures never
+advance the company or order movement. Deferred initial framing waits for layout.
+Symbol density/ground detail remain in the approved family, with offscreen symbol
+culling and continuous biome tint. No new character/art style is introduced.
+
+Focused v1 generator443, v2 generator134 across24inputs, scroll UI46, foundry79,
+session23 and five Python region tests/validation PASS. Final native236checks,
+90engine actions,36captures/720p/1080p PASS, zero diagnostics; actual gestures,
+bridge travel, gear, managed packing/ordinary retreat and exact resumption.
+Full-source/physical receipts are recorded in docs/qa/2026-11-05-large-regions.md.
+Launch regions, select Large and Generate/Play. User visual/physical review of
+this larger variant remains distinct from prior stage80 style approval.
+
+New current user authorization: approximately two hours of travel/combat polish,
+desktop control released, several ordinary remotely played skirmishes requested.
+Timed ordered queue and receipts: docs/qa/2026-11-05-two-hour-polish.md. Finish81
+verification, then82 locomotion pace/naturalness,83 arenas/tactical terrain and
+bonuses,84 ordinary played battles/fixes; choose further bounded polish only
+after those pass. Preserve character silhouettes and south-east/south-west tactical
+facing. No new commit/push instruction was given in this batch.
+
+82.2026-11-05: presentation041/slice041 adds18% faster painted translation,
+distance-driven authored foot phase carried across legs/orders and reset-safe
+tween callbacks. Same160px stride, original art/idle/attack/SE-SW retained.
+280px baseline1.75s ->1.483s. Focused4643locomotion/1887enemy-pilot/313battle-review
+checks pass. Native exercise12actions/8captures720p/1080p PASS,0diagnostics;
+actual desktop two-cell move costs2MP and End turn advances normally. Full normal
+battles and user feel acceptance remain tracked. QA:2026-11-05-tactical-locomotion.
+
+83.2026-11-05: presentation042/slice042, muted painted16-prop family
+with imagegen source, English prompt/provenance, editable Aseprite and deterministic
+exports; original16props retained. Terrain hover explains true grid024 bonuses,
+costs/impassability. Stage84 corrected an erroneous no-LOS explanation against
+existing combat/grid022 after actual Mine play. First normalization exposed Aseprite userdata
+arrays serializing as null; materialize plain arrays, guard registration and
+rerun.124export/provenance/tooltip checks pass. Native first try caught missing
+Godot imports for new PNGs; explicit import completed. Final native1757checks /
+422engine actions /22captures720p/1080p PASS,0diagnostics; full source86/86PASS.
+Actual Forest ordinary victory round2 and continuing Mine proof recorded in
+2026-11-05-ordinary-skirmishes.md. New art remains awaiting user visual acceptance.
+
+84.2026-11-05 AWAITING_INTERACTIVE: actual desktop Forest Ambush victory round2,4survivors,
+normal moves/aimed shot/melee/AI, no Debug Win. Exposed Rogue drops10->2HP; focus
+fire clears all enemies. Mine Breach also won round2,4survivors, with Defend,
+Shield wall, Deep cut, LOS rejection, pillar detour and lower crossing. Third
+ordinary battle (Painted Six - Old Mine, seed2001) interrupted on user stop;
+round1 Rogue turn, not a victory. Restart this isolated scenario next session.
+Observed stale HP in a stationary native tooltip is fixed under presentation043 /
+slice043: weakly held custom native Label updates with tile render.11focused
+checks and native21checks/4captures/2sizes PASS,0diagnostics. Physical Mine aimed
+shot14->11updates the already-open popup correctly. Native motion sequence44GPU
+frames/recorded timestamps captures a normal4cell march,54checksPASS; original
+walking art unchanged. Portable gallery: docs/design/tactical-polish/2026-11-05.
+Actual third battle shows correct blocked-cell explanation. Physical Mine play
+exposed the false prior no-LOS wording: presentation030/042/slice042 and tooltip
+now follow existing combat/grid022.124environment checks/0warnings and native
+tactical-environment-los-final/12actions/720p/1080p/0diagnostics PASS.
+User returns and explicitly stops work, requests saved handoff and publication
+of all local work on master. Only final verification/commit/push remains in this
+turn. Final full receipt is linked by docs/qa/2026-11-05-session-close.md; third
+battle, user art/motion acceptance and L77-01 campaign victory remain open.

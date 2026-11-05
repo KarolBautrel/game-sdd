@@ -15,8 +15,9 @@ spawn-pool entries or new combat rules.
   to select/move; no immediate adjacent attack or unreachable unit starts.
 - Use existing painted environment assets and actual semantic prop aliases.
   Dress blocked cells as large obstacles, cover as low props; leave movement
-  lanes readable. Current rules have no wall line-of-sight system: never promise
-  that a pillar or blocked tile stops projectiles. Terrain retains normal MP,
+  lanes readable. Intermediate blocked cells block ranged line of sight under
+  combat/grid022; low cover stays walkable and does not hard-block shots.
+  Terrain retains normal MP,
   cover and highground effects; no new bonuses or invisible hazards.
 - Forest identifiers take woodland floor precedence over generic ambush/road
   heuristics. Titles and distinct pilot unit names identify both new scenarios.

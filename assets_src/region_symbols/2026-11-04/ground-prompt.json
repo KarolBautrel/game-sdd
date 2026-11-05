@@ -1,0 +1,7 @@
+{
+  "tool": "built-in imagegen",
+  "transparent_background": false,
+  "reference": "assets/ui/campaign/world_atlas.png",
+  "prompt": "Use case: stylized-concept. Production asset: one wide landscape-format seamless-looking ground wash for a procedural medieval dark-fantasy cartographic map. The reference is only the art style and warm ochre/olive colors. Make ONLY softly varied golden grassland and dry earth ground texture seen from an elevated almost overhead cartographic view. Meticulous antique pen hatching and fine hand-painted earthy texture, warm ochre, muted straw, sandy gold, sparse olive grass flecks. Subtle low-contrast irregular mottling and tiny ground grain across the whole image, visually rich close up but calm at map scale. Flat continuous ground with no identifiable geography and no compositional focal point; it will be tinted by a procedural biome map. Edge-to-edge usable texture, 16:9 approximately1672x941. Absolutely NO trees, forest clumps, mountains, hills, cliffs, rivers, lakes, sea, coastline, buildings, roads, paths, village plots, icons, text, labels, grids, borders or burned paper frame. No large rectangular agricultural fields, no repeating squares, no tiled pattern. Match the fine illustrated earth treatment in the reference, not plain paper, not photograph or pixel art.",
+  "raw_source": "ground-wash-source.png"
+}

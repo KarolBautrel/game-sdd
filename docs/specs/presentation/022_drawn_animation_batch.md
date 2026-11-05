@@ -1,5 +1,10 @@
 # Drawn animation batch: knight, weapon profiles and playable character subset
 
+Latest2026-11-05 runtime pacing override: presentation041/stage82 increases
+tactical translation18% and samples foot frames from actual distance using the
+unchanged160px declared stride. Source clips, palettes, poses and exports remain.
+Earlier source durations below still describe artwork, not the runtime gait rate.
+
 Latest tactical-view override2026-11-03: presentation024/stage62 displays only
 south_east/south_west in battle, across all actions/families. Keep all eight
 authored views and the existing galleries/sources for future use. Earlier

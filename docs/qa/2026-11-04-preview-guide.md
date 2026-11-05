@@ -1,5 +1,20 @@
 # Timed polish review guide
 
+Current stage80: `& .\tools\qa\start_game.ps1 -Scene regions`. Choose seed/preset,
+Generate, preview a route, Play / Resume; try a crossing, mine entry/retreat and
+restart the same seed. Authored Marches retains the original pilot/designer r9.
+[Generator review and evidence](2026-11-04-generated-regions.md). Six functional
+roles/current contracts are reused; broader content and cross-region travel
+remain later work. New stages78..80 are local, with no new publication request.
+
+Current motion review: restart `& .\tools\qa\start_game.ps1 -Scene living-world`.
+Designer revision9 is preserved; check curves/crossings, pause/resume and1x/2x/4x.
+[Stage79 evidence](2026-11-04-smooth-world-motion.md). New work remains local.
+
+Current stage78: `& .\tools\qa\start_game.ps1 -Scene terrain-editor` for terrain
+painting/route probes, then Living world. [Terrain review](2026-11-04-terrain.md).
+Approved stage77 is published as f0fc7d16; new navigation is local for review.
+
 Current authorized world stage77: `& .\tools\qa\start_game.ps1 -Scene living-world`.
 Separate resumable pilot save, continuous map, contextual contracts and mine
 consequences. Read [living-region review](2026-11-04-living-world.md). Old atlas

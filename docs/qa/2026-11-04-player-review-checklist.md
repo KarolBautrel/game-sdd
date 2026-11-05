@@ -1,5 +1,18 @@
 # Ordered player review checkpoint
 
+Current stage80: user authorizes the seeded-region generator. Launch
+`& .\tools\qa\start_game.ps1 -Scene regions`; review three presets/seeds, route
+preview, actual bridge travel, gear/mine retreat and resumption. Authored Marches
+retains the original map and designer revision9. See2026-11-04-generated-regions.md.
+Generated appearance/physical feel and earlier ordinary mine-victory review stay
+unreported. Work remains local; stage79 motion is retained in both map types.
+
+Latest follow-up: user approves living stage77 and requests publication, now
+complete as f0fc7d16. Stage78 terrain navigation is the active local review:
+`& .\tools\qa\start_game.ps1 -Scene terrain-editor`, then Living world. Check
+river/peak blockers, crossings and forest/hill/slope movement costs. See
+2026-11-04-terrain.md. Physical ordinary mine victory remains unreported.
+
 Current authorized stage77 replaces the static-atlas gameplay priority with the
 living-region pilot: `& .\tools\qa\start_game.ps1 -Scene living-world`. Same
 accepted map family, separate resumable save, continuous movement, contracts and

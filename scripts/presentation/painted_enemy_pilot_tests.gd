@@ -39,7 +39,7 @@ func _run() -> void:
 		check(p.facings == Art.TACTICAL_DIRECTIONS and p.source_roundtrip, p.id + " honest two-view contract")
 		var unit := {"id":"sample", "team":"enemy", "position":{"x":1,"y":1}, "visual":{"faction":"villains", "character":p.id}, "resources":{"hp":10}}
 		check(art.is_drawn_unit(unit), p.id + " active drawn timeline")
-		check(is_equal_approx(art.movement_seconds(unit, 160.0, 0.0), 1.0), p.id + " calm one-second160px stride")
+		check(is_equal_approx(art.movement_seconds(unit, 160.0, 0.0), 1.0/Art.LOCOMOTION_RATE), p.id + " physical160px stride at runtime pace")
 		check(art.processed_sheet_texture_path(p.id, "north", "pose:0").is_empty(), p.id + " no invented north drawing")
 		for side: String in p.facings:
 			for action: String in p.frame_counts:

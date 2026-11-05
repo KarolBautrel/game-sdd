@@ -1,5 +1,23 @@
 # Shared presentation
 
+- [042 Tactical environment readability](042_tactical_environment_readability.md):
+  cohesive painted props and accurate cover/height/impassability explanations.
+
+- [041 Tactical locomotion](041_tactical_locomotion.md): modestly quicker movement
+  with distance-driven foot phase and unchanged accepted character sources.
+
+- [040 Scrollable world](040_scrollable_world.md): larger mixed-biome regions,
+  anchored zoom, bounded panning, overview chart and company framing.
+
+- [039 Region foundry](039_region_foundry.md): seeded geography selector,
+  modular illustrated previews and the same generated map in live gameplay.
+
+- [038 Smooth world motion](038_smooth_world_motion.md): exact committed traces,
+  one interpolation clock and preserved pause/speed phase.
+
+- [037 Terrain editor](037_terrain_editor.md): paint semantic movement costs,
+  water/peak barriers and crossings; probe real weighted routes before saving.
+
 - [036 Living world](036_living_world.md): interactive illustrated strategic
   map, persistent world actors, pause/speed and contextual-contract inspector.
 
@@ -77,3 +95,5 @@ Shared UI composition owns passive visual components, never gameplay decisions.
   references/layout library and native fidelity contract.
 - [034 Native Ashen exploration](034_ashen_exploration_native.md): production
   components and data-driven native composition matching the approved family.
+- [043 Live combat tooltips](043_live_combat_tooltips.md): stationary-pointer
+  target resources refresh with the rendered combat snapshot.

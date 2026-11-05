@@ -11,7 +11,7 @@ static func prop(path: String) -> Dictionary:
 	if path.is_empty():return {}
 	var catalogue:=data()
 	if catalogue.floor_routes.has(path):return {"path":catalogue.floors[catalogue.floor_routes[path]],"size":[140,104],"pivot":[70,104],"floor":true}
-	if path.begins_with("res://assets/combat/environment/props/"):return catalogue.assets.get(path.get_file().get_basename(),{})
+	if path.begins_with("res://assets/combat/environment/props/") or path.begins_with("res://assets/combat/environment/painted_v2/"):return catalogue.assets.get(path.get_file().get_basename(),{})
 	var id:=str(catalogue.legacy_routes.get(path,""))
 	return catalogue.assets.get(id,{})
 
@@ -21,6 +21,13 @@ static func texture(path: String) -> Texture2D:
 
 static func ledge(theme: String) -> Texture2D:
 	return Assets.texture(data().ledges.get(theme,data().ledges.nature))
+
+static func terrain_explanation(kind: String) -> String:
+	match kind:
+		"blocked":return "Impassable. Blocks ranged line of sight."
+		"cover_low":return "Low cover: incoming ranged hit chance -20. Walkable:1 MP."
+		"highground":return "High ground: ranged hit chance +10, maximum range +1. Entry:2 MP."
+		_:return "Open ground:1 MP."
 
 static func board(state: Dictionary,size: Vector2i,theme: String) -> Texture2D:
 	var id:=str(state.get("id",""))

@@ -11,6 +11,11 @@ var clicks := 0
 var captures: Array[Dictionary] = []
 var checks: Array[Dictionary] = []
 var root: Window
+var region_motion_frames:=0
+var region_motion_samples:=0
+var region_motion_violations:=0
+var region_bridge_samples:=0
+var inspect_region_motion:=false
 func _ready() -> void:
 	root=get_tree().root
 	for arg in OS.get_cmdline_user_args():
@@ -20,7 +25,19 @@ func _ready() -> void:
 		if arg=="--review-exercise": exercise=true
 	_run.call_deferred()
 func frames(count: int = 6) -> void:
-	for frame in range(count): await get_tree().process_frame
+	for frame in range(count):
+		await get_tree().process_frame
+		if inspect_region_motion and is_instance_valid(app) and app.get_script().resource_path.ends_with("/living_world_view.gd"):
+			var state: Dictionary=root.get_node("CampaignSession").state.living_world
+			var world:=load("res://scripts/domain/living_world.gd")
+			var nav: RefCounted=world.navigation(state)
+			var ids: Array=["company"]
+			for actor: Dictionary in state.actors: ids.append(actor.id)
+			for id: String in ids:
+				region_motion_samples+=1
+				if not nav.passable(app.map.displayed(id)): region_motion_violations+=1
+				if id=="company" and nav.code_at(app.map.displayed(id))=="B": region_bridge_samples+=1
+			region_motion_frames+=1
 func check(ok: bool,message: String) -> void:
 	checks.append({"pass":ok,"scenario":message})
 	if not ok: errors.append(message)
@@ -89,6 +106,15 @@ func _run() -> void:
 		viewport.add_child(app)
 		await frames(12)
 		for tab in views.split(","):
+			if tab=="regions":
+				await exercise_regions(campaign,pixels)
+				continue
+			if tab=="motion":
+				await exercise_motion(campaign,pixels)
+				continue
+			if tab=="terrain":
+				await exercise_terrain(campaign,pixels)
+				continue
 			if tab=="living":
 				await exercise_living(campaign,pixels)
 				continue
@@ -149,6 +175,7 @@ func embedded_route(path: String) -> void:
 	await frames(12)
 
 func living_travel(id: String,campaign: Node) -> void:
+	app.map.reveal(load("res://scripts/domain/living_world.gd").point(load("res://scripts/domain/living_world.gd").site(id,campaign.state.living_world).position))
 	await click(app.map.site_buttons[id])
 	await click(app.buttons.speed_4)
 	for iteration in range(300):
@@ -161,6 +188,7 @@ func living_travel(id: String,campaign: Node) -> void:
 	check(load("res://scripts/domain/living_world.gd").at_site(campaign.state.living_world,id),"native continuous arrival: "+id)
 
 func exercise_living(campaign: Node,pixels: Vector2i) -> void:
+	campaign.load_profile("",true)
 	await embedded_route("res://scenes/world/LivingWorld.tscn")
 	check(campaign.living_active() and app.speed==0,"native living pilot starts paused in memory")
 	check(app.map.get_global_rect().end.x<=app.side.get_global_rect().position.x,"native map and inspector have independent bounds")
@@ -234,13 +262,261 @@ func exercise_living(campaign: Node,pixels: Vector2i) -> void:
 	await pointer(bar.get_global_position()+bar.get_tab_rect(2).get_center())
 	await capture("living-chronicle",pixels)
 	await click(app.buttons.speed_4)
-	for iteration in range(600):
+	for iteration in range(1200):
 		await frames(4)
 		if int(campaign.state.living_world.politics.skirmishes)>0: break
 	await click(app.buttons.pause)
 	check(campaign.state.living_world.politics.phase=="border_war" and campaign.state.living_world.politics.skirmishes>0,"native elapsed days move faction patrols into a real border clash")
 	check(campaign.state.living_world.factions.iron_march.strength<80 and campaign.state.living_world.factions.river_league.strength<80,"native faction contact changes actual strength")
 	await capture("living-border-conflict",pixels)
+
+func terrain_drag(from: Vector2,to: Vector2) -> void:
+	var first: Vector2=app.canvas.get_global_position()+app.canvas.point(from)
+	var last: Vector2=app.canvas.get_global_position()+app.canvas.point(to)
+	var down:=InputEventMouseButton.new();down.position=first;down.global_position=first;down.button_index=MOUSE_BUTTON_LEFT;down.button_mask=MOUSE_BUTTON_MASK_LEFT;down.pressed=true
+	viewport.push_input(down,true);await frames(2)
+	for index in range(1,9):
+		var motion:=InputEventMouseMotion.new();motion.position=first.lerp(last,float(index)/8);motion.global_position=motion.position;motion.button_mask=MOUSE_BUTTON_MASK_LEFT
+		viewport.push_input(motion,true);await frames(1)
+	var up:=InputEventMouseButton.new();up.position=last;up.global_position=last;up.button_index=MOUSE_BUTTON_LEFT;up.pressed=false
+	viewport.push_input(up,true);await frames(3);clicks+=1
+
+func exercise_motion(campaign: Node,pixels: Vector2i) -> void:
+	var Terrain:=load("res://scripts/domain/terrain_navigation.gd")
+	var World:=load("res://scripts/domain/living_world.gd")
+	var records: Array=[]
+	for rate in [1,2,4]:
+		campaign.load_profile("",true);campaign.enable_living_world()
+		# Isolated motion measurement holds contact grace, not gameplay rules.
+		campaign.state.living_world.encounter_until=99999
+		await embedded_route("res://scenes/world/LivingWorld.tscn")
+		await click(app.map.site_buttons.saltwatch)
+		if rate>1: await click(app.buttons["speed_%d" % rate])
+		var previous: Dictionary={}
+		var safe:=true;var bounded:=true;var stalled:=0;var moving:=0
+		var last_usec: int=Time.get_ticks_usec()
+		var previous_clock: float=(float(campaign.state.living_world.tick)+app.map.blend)*.6/rate
+		for frame in range(90):
+			await frames(1)
+			var now: int=Time.get_ticks_usec()
+			var wall_delta: float=maxf(.000001,float(now-last_usec)/1000000.0);last_usec=now
+			# GPU readback/PNG encoding may run between process_frame and node
+			# processing. Bound by the clock actually presented, not wall sampling.
+			var clock: float=(float(campaign.state.living_world.tick)+app.map.blend)*.6/rate
+			var delta: float=maxf(0,clock-previous_clock);previous_clock=clock
+			var positions: Dictionary={}
+			for id: String in ["company"]+app.map.actor_buttons.keys():
+				var position: Vector2=app.map.displayed(id)
+				positions[id]=World.packed(position)
+				safe=safe and Terrain.current().passable(position)
+				if previous.has(id):
+					var distance: float=((position-World.point(previous[id]))*Vector2(16.0/9.0,1)).length()
+					var maximum: float=(.045 if id=="company" else .022*1.3)*rate/.6
+					bounded=bounded and distance<=maximum*delta*1.8+.00015
+					if id=="company" and int(campaign.state.living_world.tick)>2 and not campaign.state.living_world.party.path.is_empty():
+						moving+=1
+						if distance<.0000001: stalled+=1
+			previous=positions
+			records.append({"rate":rate,"frame":frame,"delta":delta,"wall_delta":wall_delta,"tick":campaign.state.living_world.tick,"phase":app.map.blend,"positions":positions})
+			if rate==1 and frame in [20,45,70]: await capture("smooth-sequence-%02d" % frame,pixels)
+		check(safe,"native every-frame company/NPC positions avoid blocked cells / %dx" % rate)
+		check(bounded,"native per-frame displacement has no tick-boundary jump / %dx" % rate)
+		check(moving>20 and stalled==0,"native moving company has no reset/stall frames / %dx (%d/%d)" % [rate,stalled,moving])
+		await click(app.buttons.pause)
+		var held: Vector2=app.map.displayed("company")
+		var clock: int=int(campaign.state.living_world.tick)
+		var phase: float=app.accumulated
+		await frames(12)
+		check(app.map.displayed("company").is_equal_approx(held) and int(campaign.state.living_world.tick)==clock and app.accumulated==phase,"native pause freezes current visual phase / %dx" % rate)
+		await click(app.buttons.speed_2)
+		check(app.map.displayed("company").distance_to(held)>.0000001,"native resume continues without a full-tick delay / %dx" % rate)
+		await click(app.buttons.pause)
+		if rate==4: await capture("smooth-pause-resume",pixels)
+	var file:=FileAccess.open(output+"/motion-samples-%sx%s.json" % [pixels.x,pixels.y],FileAccess.WRITE)
+	file.store_string(JSON.stringify({"kind":"native per-frame committed-motion sampling","records":records},"\t",true,true));file.close()
+
+func exercise_regions(campaign: Node,pixels: Vector2i) -> void:
+	region_motion_frames=0;region_motion_samples=0;region_motion_violations=0;region_bridge_samples=0
+	campaign.load_profile("",true);campaign.enable_living_world()
+	var original: Dictionary=campaign.state.duplicate(true)
+	await embedded_route("res://scenes/world/RegionFoundry.tscn")
+	for frame in range(12):
+		if not app.busy and not app.geography.is_empty(): break
+		await frames(2)
+	for item: Array in [[2087,0],[42,1],[170717,2]]:
+		app.seed_input.value=item[0];app.preset_input.select(item[1])
+		await click(app.buttons.generate)
+		await frames(10)
+		check(not app.geography.is_empty() and not app.buttons.play.disabled,"native valid generated region")
+		check(campaign.same_data(campaign.state,original),"native preview preserves current company")
+		await capture("generated-%s-%s" % [item[0],item[1]],pixels)
+		check(int(app.geography.version)==2 and app.map.camera.zoom>2,"larger generated preview opens local view")
+		await click(app.map.camera_buttons.overview)
+		await capture("large-overview-%s-%s" % [item[0],item[1]],pixels)
+		await click(app.map.camera_buttons.company)
+		var local: Vector2=app.map.size*Vector2(.46,.50)
+		var anchor: Vector2=app.map.camera.world_at(local,app.map.size)
+		var wheel:=InputEventMouseButton.new();wheel.button_index=MOUSE_BUTTON_WHEEL_UP;wheel.pressed=true;wheel.position=app.map.get_global_position()+local;wheel.global_position=wheel.position
+		viewport.push_input(wheel,true);await frames(4)
+		var release: InputEventMouseButton=wheel.duplicate();release.pressed=false;viewport.push_input(release,true);await frames(2)
+		check(app.map.camera.world_at(local,app.map.size).distance_to(anchor)<.0001 and app.map.camera.zoom>2.6,"native wheel zoom stays anchored to pointer")
+		var before_center: Vector2=app.map.camera.center
+		for pressed in [true,false]:
+			var drag:=InputEventMouseButton.new();drag.button_index=MOUSE_BUTTON_RIGHT;drag.pressed=pressed;drag.button_mask=MOUSE_BUTTON_MASK_RIGHT if pressed else 0;drag.position=app.map.get_global_position()+local;drag.global_position=drag.position
+			viewport.push_input(drag,true);await frames(2)
+			if pressed:
+				var motion:=InputEventMouseMotion.new();motion.position=drag.position+Vector2(-120,45);motion.global_position=motion.position;motion.relative=Vector2(-120,45);motion.button_mask=MOUSE_BUTTON_MASK_RIGHT
+				viewport.push_input(motion,true);await frames(4)
+		check(app.map.camera.center.distance_to(before_center)>.01 and app.map.drag_button==0,"native RMB drag pans and releases")
+		check(campaign.same_data(campaign.state,original),"native pan/zoom does not advance/mutate company")
+		await pointer(app.map.minimap.get_global_position()+Vector2(4,4)+(app.map.minimap.size-Vector2(8,8))*Vector2(.3,.4))
+		check(app.map.camera.center.distance_to(Vector2(.3,.4))<.01 and campaign.same_data(campaign.state,original),"native overview-chart click moves view without travel")
+		await capture("large-pan-%s-%s" % [item[0],item[1]],pixels)
+		await click(app.map.camera_buttons.overview)
+		await click(app.map.site_buttons.saltwatch)
+		check(not app.preview_profile.living_world.party.path.is_empty(),"native generated route preview")
+		await capture("generated-route-%s-%s" % [item[0],item[1]],pixels)
+	await click(app.buttons.play)
+	check(campaign.living_active() and campaign.state.living_world.has("geography") and app.has_method("set_speed"),"native Play enters generated living pilot")
+	await capture("generated-live",pixels)
+	var signature: String=campaign.state.living_world.geography.checksum
+	var bar: TabBar=app.tabs.get_tab_bar()
+	await pointer(bar.get_global_position()+bar.get_tab_rect(1).get_center())
+	await click(app.buttons.accept_restore_mine)
+	check(campaign.state.living_world.contracts.restore_mine.stage=="accepted","generated company accepts actual mine contract")
+	await pointer(bar.get_global_position()+bar.get_tab_rect(0).get_center())
+	inspect_region_motion=true
+	var bridge: Dictionary=campaign.state.living_world.geography.bridges[0]
+	for bank: String in ["from","to"]:
+		var position:=Vector2(float(bridge[bank].x),float(bridge[bank].y))
+		app.map.reveal(position);await frames(2)
+		await pointer(app.map.get_global_position()+app.map.paper_rect().position+app.map.paper_rect().size*position)
+		await click(app.buttons.speed_4)
+		for iteration in range(600):
+			await frames(2)
+			if not campaign.state.world.pending_event.is_empty():
+				await click(app.buttons.event_pay);await click(app.buttons.speed_4)
+			if campaign.state.living_world.party.path.is_empty(): break
+		await click(app.buttons.pause)
+		var actual:=Vector2(float(campaign.state.living_world.party.position.x),float(campaign.state.living_world.party.position.y))
+		check(actual.distance_to(position)<.015,"generated actual pointer travel reaches bridge bank: "+bank)
+	check(region_bridge_samples>0,"generated rendered company crosses actual semantic bridge")
+	await capture("generated-crossing",pixels)
+	await living_travel("dungeon_old_mine",campaign)
+	await capture("generated-mine-arrival",pixels)
+	check(app.buttons.food.disabled and not app.buttons.prepare.disabled,"generated actual mine position gates town services and entry")
+	original=campaign.state.duplicate(true)
+	await click(app.buttons.stash)
+	check(app.get_script().resource_path.ends_with("/app.gd") and app.inventory_view and campaign.same_data(campaign.state,original),"generated equipment keeps exact paused geography/company")
+	await click(app.shell.nav_buttons.region)
+	await click(app.buttons.prepare)
+	check(root.get_node("DungeonRunSession").town_preparation,"generated mine uses owned packing")
+	await capture("generated-mine-packing",pixels)
+	var start: Button=null
+	for button: Button in app.find_children("*","Button",true,false):
+		if button.text=="Start Expedition": start=button
+	check(start!=null,"generated packing Start exists")
+	if start!=null: await click(start)
+	check(not campaign.state.active_run.is_empty(),"generated Start creates ordinary managed receipt")
+	await click(app.retreat_button);await frames(16)
+	check(app.get_script().resource_path.ends_with("/living_world_view.gd") and campaign.state.active_run.is_empty(),"generated ordinary retreat returns to living map")
+	check(campaign.state.living_world.mine.status=="occupied" and campaign.state.living_world.contracts.restore_mine.stage=="accepted","generated retreat cannot award victory")
+	await living_travel("town_ravenford",campaign)
+	inspect_region_motion=false
+	check(region_motion_frames>100 and region_motion_samples>600 and region_motion_violations==0,"generated every-frame rendered company/NPC stays on passable terrain: %dframes/%dsamples/%dviolations" % [region_motion_frames,region_motion_samples,region_motion_violations])
+	check(campaign.state.living_world.geography.checksum==signature,"generated native travel/gear/mine preserves immutable snapshot")
+	await capture("generated-return",pixels)
+	original=campaign.state.duplicate(true)
+	await click(app.buttons.regions)
+	await click(app.buttons.play)
+	check(campaign.same_data(campaign.state,original),"generated selector resumes current company without reset")
+	await click(app.buttons.regions)
+	await click(app.buttons.authored)
+	check(not campaign.state.living_world.has("geography") and not app.buttons.terrain.disabled,"authored Marches and designer map remain available")
+	await capture("generated-authored-return",pixels)
+
+func exercise_terrain(campaign: Node,pixels: Vector2i) -> void:
+	var Terrain:=load("res://scripts/domain/terrain_navigation.gd")
+	var World:=load("res://scripts/domain/living_world.gd")
+	campaign.load_profile("",true);campaign.enable_living_world()
+	var before: Dictionary=campaign.state.duplicate(true)
+	await embedded_route("res://scenes/world/TerrainEditor.tscn")
+	app.qa_memory=true;app.file_path="user://qa_terrain_native_%s.json" % pixels.x
+	check(app.canvas.size.x>app.size.x*.65 and app.canvas.size.y>app.size.y*.6,"native terrain editor retains large map")
+	for id: String in ["save","reload","paint","probe","undo","redo","terrain_B"]:
+		check(Rect2(Vector2.ZERO,app.size).encloses(app.buttons[id].get_global_rect()),"native terrain control fits: "+id)
+	await capture("terrain-overview",pixels)
+	var rows: Array=app.data.rows.duplicate()
+	await click(app.palette.W)
+	await terrain_drag(Vector2(.1,.86),Vector2(.15,.86))
+	check(app._code(Vector2(.125,.86))=="W" and app.history.size()==1,"native pointer drag paints one continuous stroke")
+	await capture("terrain-painted",pixels)
+	await click(app.buttons.undo);check(app.data.rows==rows,"native Undo restores original cells")
+	await click(app.buttons.redo);check(app.data.rows!=rows,"native Redo restores stroke")
+	await click(app.buttons.undo)
+	await click(app.buttons.probe)
+	await pointer(app.canvas.get_global_position()+app.canvas.point(World.point(World.site("town_ravenford").position)))
+	await pointer(app.canvas.get_global_position()+app.canvas.point(World.point(World.site("saltwatch").position)))
+	check(not app.canvas.route.is_empty() and app.status.text.begins_with("Safe route"),"native route probe finds safe river crossings")
+	await capture("terrain-route-probe",pixels)
+	await pointer(app.canvas.get_global_position()+app.canvas.point(Vector2(.95,.9)))
+	check(app.status.text.begins_with("Blocked"),"native sea destination is rejected")
+	var sampled: Vector2=World.point(World.site("town_ravenford").position)
+	for pressed in [true,false]:
+		var right:=InputEventMouseButton.new();right.button_index=MOUSE_BUTTON_RIGHT;right.pressed=pressed;right.button_mask=MOUSE_BUTTON_MASK_RIGHT if pressed else 0;right.position=app.canvas.get_global_position()+app.canvas.point(sampled);right.global_position=right.position
+		viewport.push_input(right,true);await frames(2)
+	check(app.selected==app._code(sampled) and not app.canvas.probe_mode,"native right click samples terrain and selects paint mode")
+	# Wheel zoom is engine input too; the anchor must stay under the pointer.
+	var coordinate:=Vector2(.38,.42)
+	var pixel: Vector2=app.canvas.point(coordinate)
+	var wheel:=InputEventMouseButton.new();wheel.button_index=MOUSE_BUTTON_WHEEL_UP;wheel.pressed=true;wheel.position=app.canvas.get_global_position()+pixel;wheel.global_position=wheel.position
+	viewport.push_input(wheel,true);await frames(2)
+	var wheel_release: InputEventMouseButton=wheel.duplicate();wheel_release.pressed=false
+	viewport.push_input(wheel_release,true);await frames()
+	check(app.canvas.zoom>1 and app.canvas.normalized(pixel).distance_to(coordinate)<.0001,"native wheel zoom preserves input alignment")
+	for pressed in [true,false]:
+		var middle:=InputEventMouseButton.new();middle.button_index=MOUSE_BUTTON_MIDDLE;middle.pressed=pressed;middle.button_mask=MOUSE_BUTTON_MASK_MIDDLE if pressed else 0;middle.position=app.canvas.get_global_position()+pixel;middle.global_position=middle.position
+		viewport.push_input(middle,true);await frames(2)
+		if pressed:
+			var old_pan: Vector2=app.canvas.pan
+			var motion:=InputEventMouseMotion.new();motion.position=middle.position+Vector2(25,15);motion.global_position=motion.position;motion.relative=Vector2(25,15);motion.button_mask=MOUSE_BUTTON_MASK_MIDDLE
+			viewport.push_input(motion,true);await frames(2)
+			check(app.canvas.pan.distance_to(old_pan+Vector2(25,15))<.001,"native middle drag pans map")
+	await click(app.buttons.fit)
+	check(app.canvas.zoom==1 and app.canvas.pan==Vector2.ZERO,"native Fit restores map after zoom/pan")
+	await click(app.buttons.save)
+	if not app.status.text.begins_with("Saved revision"): print("TERRAIN_SAVE_DIAGNOSTIC ",app.status.text," path=",app.file_path)
+	check(FileAccess.file_exists(app.file_path) and app.status.text.begins_with("Saved revision"),"native Save writes only isolated terrain QA data")
+	var bytes:=FileAccess.get_file_as_string(app.file_path)
+	await click(app.palette.W)
+	await terrain_drag(World.point(World.site("town_ravenford").position),World.point(World.site("town_ravenford").position))
+	await click(app.buttons.save)
+	check(app.status.text.begins_with("Not saved") and FileAccess.get_file_as_string(app.file_path)==bytes,"native invalid mask cannot replace saved terrain")
+	await capture("terrain-save-refused",pixels)
+	await click(app.buttons.undo)
+	await click(app.buttons.reload)
+	check(app.data.rows==rows,"native Reload restores saved terrain")
+	var path: String=app.file_path
+	await click(app.buttons.back)
+	check(app.has_method("set_speed") and app.speed==0 and campaign.same_data(campaign.state,before),"native return preserves paused company and world clock")
+	await click(app.map.site_buttons.saltwatch)
+	check(not campaign.state.living_world.party.path.is_empty(),"native world plans a terrain-aware course")
+	await click(app.buttons.pause)
+	await capture("terrain-runtime-course",pixels)
+	var safe:=true
+	app.set_speed(4)
+	for iteration in range(650):
+		await frames(2)
+		for actor: Dictionary in campaign.state.living_world.actors: safe=safe and Terrain.current().passable(World.point(actor.position))
+		safe=safe and Terrain.current().passable(app.map.displayed("company"))
+		if not campaign.state.world.pending_event.is_empty():
+			await click(app.buttons.event_pay);app.set_speed(4)
+		if campaign.state.living_world.party.path.is_empty(): break
+	app.set_speed(0)
+	check(safe and World.at_site(campaign.state.living_world,"saltwatch"),"native interpolated company/NPC movement stays on accessible terrain and arrives")
+	await capture("terrain-runtime-arrival",pixels)
+	for file: String in [path,path+".previous"]:
+		if FileAccess.file_exists(file): DirAccess.remove_absolute(file)
 
 func exercise_atlas(campaign: Node,pixels: Vector2i) -> void:
 	var travel := preload("res://scripts/domain/world_travel.gd")

@@ -1,0 +1,266 @@
+{
+  "captures": [
+    {
+      "file": "C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-motion-clip-final/locomotion-clip-end-1280x720.png",
+      "logical_size": [
+        1280,
+        720
+      ],
+      "pixels": [
+        1280,
+        720
+      ],
+      "view": "locomotion-clip-end"
+    }
+  ],
+  "checks": [
+    {
+      "pass": true,
+      "scenario": "native play display"
+    },
+    {
+      "pass": true,
+      "scenario": "no-focus minimized play host"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "persist native motion frame"
+    },
+    {
+      "pass": true,
+      "scenario": "native recorded four-cell march completes and spends4MP"
+    },
+    {
+      "pass": true,
+      "scenario": "native normal-speed motion has timed rendered frames"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: locomotion-clip-end"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: locomotion-clip-end"
+    },
+    {
+      "pass": true,
+      "scenario": "play review acquired no focus"
+    }
+  ],
+  "display": "Windows",
+  "engine_clicks": 3,
+  "engine_key_events": 0,
+  "failures": [],
+  "kind": "native play GPU and engine-local input fixture",
+  "player_save_used": false,
+  "renderer": "forward_plus",
+  "status": "PASS",
+  "texture_memory_bytes": 125198336,
+  "uses_desktop_input": false,
+  "window_focused": false,
+  "window_minimized": true,
+  "command": [
+    "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+    "--path",
+    "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\artifacts\\qa-runs\\tactical-motion-clip-final\\project",
+    "--audio-driver",
+    "Dummy",
+    "--max-fps",
+    "30",
+    "--",
+    "--qa-play-review",
+    "--review-output=C:/Users/karol/Desktop/Gierka/game_dir/sdd-game/artifacts/qa-runs/tactical-motion-clip-final",
+    "--review-views=locomotionclip",
+    "--review-sizes=1280x720",
+    "--review-exercise"
+  ],
+  "exit_code": 0,
+  "errors": 0,
+  "warnings": 0,
+  "physical_desktop_acceptance": "NOT_RUN",
+  "packaged_build": false
+}

@@ -30,6 +30,10 @@ func _run() -> void:
 			await _exercise_arenas(pixels)
 		if "arenabattles" in views:
 			await _exercise_arena_battles(pixels)
+		if "livetooltip" in views:
+			await _exercise_live_tooltip(pixels)
+		if "locomotionclip" in views:
+			await _capture_locomotion_clip(pixels)
 		if "townpilot" in views:
 			await _exercise_town_pilot(pixels)
 		if "dungeon" in views or "dungeonpolish" in views:
@@ -414,6 +418,83 @@ func _exercise_arena_battles(pixels: Vector2i) -> void:
 		print("ARENA_NATIVE_BATTLE ",scenario," result=",app._combat_result()," commands=",count," sampled=",observations.keys())
 		await capture("arena-victory-"+scenario,pixels)
 		app.queue_free();await frames(8)
+
+
+func _exercise_live_tooltip(pixels: Vector2i) -> void:
+	viewport.gui_embed_subwindows=true
+	viewport.notify_mouse_entered()
+	app=load("res://scenes/combat/CombatDebug.tscn").instantiate();viewport.add_child(app)
+	await frames(8)
+	app.selected_scenario_id="painted_forest_ambush";app._load_selected_scenario()
+	await frames(8)
+	# Explicit bounded attack fixture, not an ordinary-victory receipt.
+	app._unit_by_id("unit_knight_pilot").position={"x":6,"y":7}
+	app._unit_by_id("unit_bandit_guard_pilot").position={"x":7,"y":7}
+	app._unit_by_id("unit_bandit_guard_pilot").resources.hp=7
+	app._render();await frames(8)
+	await click(_action_button("basic_attack"))
+	var tile: Button=_tile_button({"x":7,"y":7})
+	var point:=tile.get_global_rect().get_center()
+	var motion:=InputEventMouseMotion.new();motion.position=point;motion.global_position=point
+	viewport.push_input(motion,true)
+	await get_tree().create_timer(1.0).timeout
+	var labels:=tile.find_children("LiveTileTooltip","Label",true,false)
+	check(labels.size()==1,"actual native hover creates themed live tooltip")
+	if labels.size()==1:
+		var label: Label=labels[0]
+		check(label.text.contains("HP 7/"),"native popup starts with current target HP")
+		# The pointer stays stationary while the normal command resolves.
+		app._on_tile_pressed({"x":7,"y":7})
+		var deadline:=Time.get_ticks_msec()+8000
+		while app.animation_locked and Time.get_ticks_msec()<deadline:await frames(1)
+		check(is_instance_valid(label) and label.text==tile.tooltip_text and label.text.contains("HP 1/"),"existing native popup refreshes after nonlethal attack without pointer movement")
+		await capture("live-tooltip-hit",pixels)
+		app._on_tile_pressed({"x":7,"y":7})
+		deadline=Time.get_ticks_msec()+8000
+		while app.animation_locked and Time.get_ticks_msec()<deadline:await frames(1)
+		check(is_instance_valid(label) and label.text==tile.tooltip_text and label.text.contains("HP 0/"),"existing native popup refreshes after death without pointer movement")
+		await capture("live-tooltip-death",pixels)
+	app.queue_free();await frames(8)
+
+
+func _capture_locomotion_clip(pixels: Vector2i) -> void:
+	app=load("res://scenes/combat/CombatDebug.tscn").instantiate();viewport.add_child(app)
+	await frames(8)
+	app.selected_scenario_id="painted_forest_ambush";app._load_selected_scenario()
+	await frames(8)
+	await click(_action_button("move"))
+	await click(_tile_button({"x":6,"y":7}))
+	var clip: Array[Dictionary]=[]
+	var buffered_frames: Array[Image]=[]
+	var clock: Dictionary={"start":Time.get_ticks_msec(),"last":-100}
+	var folder: String=output+"/motion-%sx%s" % [pixels.x,pixels.y]
+	DirAccess.make_dir_recursive_absolute(folder)
+	var watch: Callable=func() -> void:
+		var elapsed: int=Time.get_ticks_msec()-int(clock.start)
+		if elapsed-int(clock.last)<50:return
+		clock.last=elapsed
+		var frame: Image=viewport.get_texture().get_image()
+		var filename: String="frame-%03d.png" % clip.size()
+		buffered_frames.append(frame)
+		var node: Control=app.unit_layer.get_node("unit_knight_pilot")
+		clip.append({"ms":elapsed,"file":filename,"root":[node.position.x,node.position.y],"phase":str(app.unit_visual_action.get("unit_knight_pilot","idle"))})
+	RenderingServer.frame_post_draw.connect(watch)
+	await click(_tile_button({"x":6,"y":7}))
+	var deadline:=Time.get_ticks_msec()+8000
+	while app.animation_locked and Time.get_ticks_msec()<deadline:
+		RenderingServer.force_draw(false)
+		await frames(1)
+	await get_tree().create_timer(.35).timeout
+	RenderingServer.force_draw(false)
+	RenderingServer.frame_post_draw.disconnect(watch)
+	for index in buffered_frames.size():
+		check(buffered_frames[index].save_png(folder+"/"+str(clip[index].file))==OK,"persist native motion frame")
+	check(not app.animation_locked and app._unit_by_id("unit_knight_pilot").resources.mp==0,"native recorded four-cell march completes and spends4MP")
+	check(clip.size()>30,"native normal-speed motion has timed rendered frames")
+	var file:=FileAccess.open(folder+"/frames.json",FileAccess.WRITE)
+	file.store_string(JSON.stringify({"schema":"sdd.native-motion-v1","pixels":[pixels.x,pixels.y],"source":"real GPU viewport frames; ordinary preview/confirm move; unmodified timing","frames":clip},"  "));file.close()
+	await capture("locomotion-clip-end",pixels)
+	app.queue_free();await frames(8)
 
 
 func _exercise_arenas(pixels: Vector2i) -> void:

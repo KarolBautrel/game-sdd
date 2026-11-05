@@ -1,0 +1,38 @@
+{
+  "source_sha256": "b5342ed950fbba66a39d1f9d3693711a6708a7e84853e42032a3e560d7bc5f6e",
+  "sampled_frames": 540,
+  "metrics": [
+    {
+      "size": "1280x720",
+      "rate": 2,
+      "median_ms": 33.333,
+      "p95_ms": 33.353,
+      "max_ms": 33.463,
+      "note": "Native fixture capped at30FPS; no image readback during these rate samples."
+    },
+    {
+      "size": "1280x720",
+      "rate": 4,
+      "median_ms": 33.332,
+      "p95_ms": 33.346000000000004,
+      "max_ms": 33.757000000000005,
+      "note": "Native fixture capped at30FPS; no image readback during these rate samples."
+    },
+    {
+      "size": "1920x1080",
+      "rate": 2,
+      "median_ms": 33.332,
+      "p95_ms": 33.346000000000004,
+      "max_ms": 33.353,
+      "note": "Native fixture capped at30FPS; no image readback during these rate samples."
+    },
+    {
+      "size": "1920x1080",
+      "rate": 4,
+      "median_ms": 33.333,
+      "p95_ms": 33.342999999999996,
+      "max_ms": 33.348000000000006,
+      "note": "Native fixture capped at30FPS; no image readback during these rate samples."
+    }
+  ]
+}

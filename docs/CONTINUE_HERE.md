@@ -1,12 +1,74 @@
 # Continue development here
 
-Last handoff: 2026-11-04. This is a status/navigation document; owning domain
+Last handoff: 2026-11-05. This is a status/navigation document; owning domain
 specs define behavior. This handoff does not authorize additional implementation
 when the user has only requested an explanation or plan.
 
 ## Next-session entry: read this first
 
 Latest active handoff:
+[Explicit stop, travel/combat polish and publication](handoffs/2026-11-05-travel-combat-stop.md).
+USER HAS RETURNED AND STOPPED autonomous work. Finish only requested verification,
+commit and push in this turn. The delegated desktop window has ended. Local
+stages78..84 include Large384x216 regions, natural18% faster tactical locomotion,
+16painted props and live tooltip/LOS explanation fixes. Two complete ordinary
+desktop victories; third Painted Six battle interrupted round1 Rogue turn and
+must be restarted next session. Do not claim three victories or full combat
+acceptance. Final receipt: docs/qa/2026-11-05-session-close.md. Tomorrow start with
+user sample review, finish third battle, then stable action slots and L77-01.
+
+Previous handoff (its autonomous authorization has ended):
+[Large regions and renewed two-hour work batch](handoffs/2026-11-05-large-regions.md).
+User APPROVES stage80's style;81 adds384x216 mixed-biome regions, scroll/zoom,
+overview/mini chart and separate size-aware slots, preserving authored r9/v1.
+Full84/84 and native236checks/90actions/36captures PASS, zero diagnostics. Launch
+regions, choose Large; physical larger-map review remains tracked separately.
+LATEST user releases desktop control and authorizes about two hours of continued
+travel/combat motion, arenas/bonuses and several ordinary remotely played battles.
+Follow docs/qa/2026-11-05-two-hour-polish.md; finish81 visible review, then82..84.
+The old two-hour window remains expired; THIS is a newly authorized batch.
+Work local on master564dbdae, no new commit/push instruction. Preserve all work.
+
+Previous handoff:
+[Seeded illustrated regions](handoffs/2026-11-04-generated-regions.md).
+User approves implementing the proposed geography generator. Stage80 adds three
+seeded terrain/river/crossing-first presets, immutable saved snapshots, illustrated
+data-driven maps and Region Foundry with separate resumable living pilots. Existing
+contracts/gear/mine preparation/ordinary retreat work on generated geography.
+Generator443/session20/UI79 and native164checks/66clicks/24captures PASS; full
+exact-source82/82 PASS, zero diagnostics; receipts/gallery in stage80 QA. Native694frames/3470 unit
+samples have zero blocked positions. User visual/physical review remains pending.
+Launch `& .\tools\qa\start_game.ps1 -Scene regions`; choose same seed/preset to
+resume. Authored Marches/designer r9 and119 approved art/font files remain intact.
+Six existing roles/current contracts are reused; broader content and regional
+transitions remain later scoped work. Stages78..80 stay local on master564dbdae;
+no new commit/push was requested. Keep L77-01 ordinary physical victory open.
+
+Previous handoff:
+[Smooth world motion on designer revision9](handoffs/2026-11-04-smooth-world-motion.md).
+User hand-paints the terrain (revision9), accepts the basis and requests smoother
+movement. Stage79 fixes periodic center backtracking, independent render-clock
+resets, NPC waypoint budget loss and integer-pixel banner stepping. Terrain bytes
+are preserved with a durable source copy; owners world012/presentation038.
+Final source78/78 PASS, native core318checks and final motion-layer78checks PASS,
+zero diagnostics; receipts/frame samples in stage79 QA. Next launch living-world and review continuous
+movement/pause/speeds. Seeded region generation is proposed next, not authorized
+yet. Stages78/79 stay local on master564dbdae; no new publication instruction.
+
+Previous handoff:
+[Terrain navigation and cartographer](handoffs/2026-11-04-terrain-navigation.md).
+User approves the living pilot and explicitly requests publication. Stages76/77
+are published as f0fc7d16 on master, with verified remote/LFS and prior74/74 exact
+source match. Stage78 then adds shared semantic terrain/pathfinding for company
+and all world parties, blocked rivers/sea/high peaks, forest/hill/slope costs,
+explicit crossings and a manual terrain-painting/probe tool. New work is local
+for review; approved art/archive remain intact. Final source77/77 and native
+244checks/86pointer actions/30captures PASS, zero diagnostics; see stage78 QA.
+Next: `& .\tools\qa\start_game.ps1 -Scene terrain-editor`, then
+Living world to test movement. Physical fine alignment/ordinary mine victory
+remain unreported. Do not infer procedural geography or reopen old art reviews.
+
+Previous handoff:
 [Living mercenary region pilot](handoffs/2026-11-04-living-world-pilot.md).
 User authorizes proceeding. Stage77 adds an opt-in living region: continuous
 land/road travel, pause/speed, independent world parties, supply/prices, two
@@ -19,7 +81,7 @@ final receipts in [stage77 QA](qa/2026-11-04-living-world.md). Physical review a
 normal mine victory remain pending. Next command:
 `& .\tools\qa\start_game.ps1 -Scene living-world`.
 First geography is authored; seeded modular generation/content follows review.
-Work remains local/uncommitted; no new push requested.
+At that handoff work was local; the later explicit publication is recorded above.
 
 Previous handoff:
 [World and province atlas](handoffs/2026-11-04-world-atlas.md).

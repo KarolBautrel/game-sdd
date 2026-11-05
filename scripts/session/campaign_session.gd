@@ -16,6 +16,7 @@ var save_path := "user://campaign_v1.json"
 var memory_only := false
 var last_feedback := ""
 var requested_campaign_tab := ""
+var living_motion: Dictionary={}
 
 
 static func initial_profile() -> Dictionary:
@@ -24,6 +25,7 @@ static func initial_profile() -> Dictionary:
 
 
 func load_profile(path: String = "user://campaign_v1.json", in_memory: bool = false) -> bool:
+	living_motion={}
 	save_path = path
 	memory_only = in_memory
 	loaded = false
@@ -89,18 +91,32 @@ func enable_living_world() -> bool:
 func living_course(destination: Vector2,goal: String = "") -> bool:
 	if not _living_available(): return _reject("Resolve the expedition or road event before travelling.")
 	var next:=state.duplicate(true)
-	if not Living.course(next,destination,goal): return _reject("That destination is outside the passable land. Choose a road or clearing.")
+	if not Living.course(next,destination,goal): return _reject("No accessible route. Water and high peaks are blocked; use bridges, fords or a mountain pass.")
 	return _commit(next,"Course set. Pause or change direction at any time.")
+
+func enable_generated_region(seed_value: int,preset: String="marches",version: int=1) -> bool:
+	if not loaded or living_active() or not state.active_run.is_empty() or not state.world.pending_event.is_empty() or (not memory_only and not save_path.begins_with("user://qa_living_world_generated_v%d_" % version)):
+		return _reject("Generated regions require their separate new/resumable pilot profile.")
+	var geography:=Living.Generator.generate(seed_value,preset,version)
+	if geography.is_empty(): return _reject(Living.Generator.last_error)
+	var next:=state.duplicate(true)
+	next.world.seed=seed_value;next.world.location_id="town_ravenford"
+	next.living_world=Living.initial(seed_value,int(next.world.elapsed_hours),geography)
+	next.gold=80;next.supplies.food=16
+	return _commit(next,"Company established in "+str(geography.name)+".")
 
 
 func advance_living(ticks: int = 1) -> bool:
 	if not _living_available() or ticks<1 or ticks>192: return _reject("Strategic time is paused while an expedition or road event is active.")
 	var next:=state.duplicate(true)
-	var contact:=Living.advance(next,ticks)
+	var motion: Dictionary={}
+	var contact:=Living.advance(next,ticks,false,motion)
 	if contact:
 		next.world.journey_count=int(next.world.journey_count)+1
 		next.world.pending_event=Travel.pending_for(next.world,{"to":next.world.location_id,"danger":1.0})
-	return _commit(next,"Raider contact. Resolve the encounter to continue." if contact else last_feedback)
+	if not _commit(next,"Raider contact. Resolve the encounter to continue." if contact else last_feedback): return false
+	living_motion=motion
+	return true
 
 
 func living_camp(enabled: bool) -> bool:

@@ -1,0 +1,47 @@
+{
+  "schema": "sdd.generated-regions-preservation-v1",
+  "approved_files_checked": 119,
+  "approved_file_mismatches": [],
+  "designer_runtime_sha256": "a5d90d2ff4dbf36d0f3b46856fc30be0812767876cc407e72c3c0067a8a8f327",
+  "designer_copy_sha256": "a5d90d2ff4dbf36d0f3b46856fc30be0812767876cc407e72c3c0067a8a8f327",
+  "immutable_archive_sha256": "d208ceb651294cc56318d4aa32bee7a5caa44a7cf9c7ec76d8f54bbf9280e777",
+  "source_matches_final_receipt": true,
+  "screenshots": [
+    {
+      "file": "generated-170717-2-1920x1080.png",
+      "sha256": "7c5cb23325fe3e6c982451dc3c230024e97ce6b987e871eea710ccec574f1091"
+    },
+    {
+      "file": "generated-2087-0-1920x1080.png",
+      "sha256": "4a2629992d62d06a6a894f9981e17472fb08d20d766678ae1025b87151000ad3"
+    },
+    {
+      "file": "generated-42-1-1920x1080.png",
+      "sha256": "998e57eb294f9c582f647daed51c62aed23f0dc01e31d548cbfee5f6695c299d"
+    },
+    {
+      "file": "generated-authored-return-1280x720.png",
+      "sha256": "336880b20b57b680bac93b7f24b7de36f7dfac1a63ec93595afaddd2a9754dd9"
+    },
+    {
+      "file": "generated-crossing-1280x720.png",
+      "sha256": "45cf116de564dc146f05031364d2dc9054d35dd9dea37a89f4f688b04ebc2e53"
+    },
+    {
+      "file": "generated-live-1280x720.png",
+      "sha256": "b4d43368e79b9c04a01528d9c0855a639d1e2a896abb4e6c4c1e89bcae00979e"
+    },
+    {
+      "file": "generated-live-1920x1080.png",
+      "sha256": "7db9f8f880c3af7f12173dfcae9810d898cbb4725058942dfaff78f93ec36d35"
+    },
+    {
+      "file": "generated-mine-packing-1280x720.png",
+      "sha256": "784288c488c13478c772edfe625965c6c49928e5710ef5de158cd9febbd144fe"
+    },
+    {
+      "file": "generated-return-1920x1080.png",
+      "sha256": "b0486ff1e36986cd235817f0c564e2e3d28ab33c8b412d4220b355bc5da8e41e"
+    }
+  ]
+}

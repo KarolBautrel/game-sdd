@@ -7,6 +7,7 @@ const PartyRoster := preload("res://scripts/domain/party_roster.gd")
 const DrawnCatalog := preload("res://scripts/presentation/combat/drawn_animation_catalog.gd")
 const TacticalCatalog := preload("res://scripts/presentation/combat/tactical_actor_catalog.gd")
 const TACTICAL_DIRECTIONS := ["south_east", "south_west"]
+const LOCOMOTION_RATE:=1.18
 
 const UNIT_VISUALS := {
 	"unit_player_001": {"faction": "heroes", "character": "warrior"},
@@ -232,7 +233,21 @@ func impact_seconds(unit: Dictionary, fallback: float) -> float:
 func movement_seconds(unit: Dictionary, distance_pixels: float, fallback: float) -> float:
 	if not is_drawn_unit(unit):return fallback
 	var character: String=unit_visual_config(unit).character
-	return clip_seconds(unit,"walk",fallback)*distance_pixels/float(PROCESSED_SHEET_VISUALS[character].walk_stride_pixels)
+	return clip_seconds(unit,"walk",fallback)*distance_pixels/float(PROCESSED_SHEET_VISUALS[character].walk_stride_pixels)/LOCOMOTION_RATE
+
+func walk_frame_at_distance(unit: Dictionary,distance_pixels: float) -> int:
+	if not is_drawn_unit(unit): return 0
+	var character: String=unit_visual_config(unit).character
+	var config: Dictionary=PROCESSED_SHEET_VISUALS[character]
+	var action:=processed_sheet_action("walk",character)
+	var durations: Array=config.durations_ms[action]
+	var total:=0.0
+	for duration: float in durations: total+=duration
+	var elapsed:=fposmod(distance_pixels,float(config.walk_stride_pixels))/float(config.walk_stride_pixels)*total
+	for index in range(durations.size()):
+		if elapsed<float(durations[index])-.00001: return index
+		elapsed-=float(durations[index])
+	return 0
 
 
 func default_visual_action(unit: Dictionary, state: Dictionary) -> String:
