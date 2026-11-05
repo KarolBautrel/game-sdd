@@ -8,8 +8,9 @@ when the user has only requested an explanation or plan.
 
 Latest active handoff:
 [Explicit stop, travel/combat polish and publication](handoffs/2026-11-05-travel-combat-stop.md).
-USER HAS RETURNED AND STOPPED autonomous work. Finish only requested verification,
-commit and push in this turn. The delegated desktop window has ended. Local
+USER HAS RETURNED AND STOPPED autonomous work. Requested verification/publication
+completed: implementation69cc5f16 on origin/master, LFS111/111 objects uploaded,
+full87/87 PASS,0errors/warnings. The delegated desktop window has ended. Published
 stages78..84 include Large384x216 regions, natural18% faster tactical locomotion,
 16painted props and live tooltip/LOS explanation fixes. Two complete ordinary
 desktop victories; third Painted Six battle interrupted round1 Rogue turn and

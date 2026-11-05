@@ -33,6 +33,9 @@ SHA remains d208ceb651294cc56318d4aa32bee7a5caa44a7cf9c7ec76d8f54bbf9280e777.
 temporary helper/EXE/artifacts excluded. Gallery7captures/44frames, all20static
 links and frame files exist; Node syntax parse PASS. Browser playback not claimed.
 
-Publication status: awaiting final verification, staging review and ordinary
-fast-forward push to origin/master. Do not interpret this provisional text as a
-successful push receipt; completion details are appended after remote checks.
+Published implementation commit69cc5f168c7a8e1dc1808ece3c864e5de910e5b6 to
+origin/master by ordinary fast-forward push. Git LFS upload completed111/111
+objects,171MB. Remote refs/heads/master independently read back the same SHA.
+Working tree was clean after implementation push; approved author identity
+verified. This receipt and the final resume pointer are a separate documentation
+commit; no code/spec/runtime change follows the verified source fingerprint.
