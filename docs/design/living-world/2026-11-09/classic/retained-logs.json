@@ -1,0 +1,58 @@
+{
+  "python_validation": {
+    "stdout": "python_validation.stdout.txt",
+    "stderr": "python_validation.stderr.txt"
+  },
+  "python_tests": {
+    "stdout": "python_tests.stdout.txt",
+    "stderr": "python_tests.stderr.txt"
+  },
+  "godot_version": {
+    "stdout": "godot_version.stdout.txt",
+    "stderr": "godot_version.stderr.txt"
+  },
+  "godot_import": {
+    "stdout": "godot_import.stdout.txt",
+    "stderr": "godot_import.stderr.txt"
+  },
+  "classic_world_tests": {
+    "stdout": "classic_world_tests.stdout.txt",
+    "stderr": "classic_world_tests.stderr.txt"
+  },
+  "faction_planner_tests": {
+    "stdout": "faction_planner_tests.stdout.txt",
+    "stderr": "faction_planner_tests.stderr.txt"
+  },
+  "world_strategy_tests": {
+    "stdout": "world_strategy_tests.stdout.txt",
+    "stderr": "world_strategy_tests.stderr.txt"
+  },
+  "campaign_session_tests": {
+    "stdout": "campaign_session_tests.stdout.txt",
+    "stderr": "campaign_session_tests.stderr.txt"
+  },
+  "classic_session_tests": {
+    "stdout": "classic_session_tests.stdout.txt",
+    "stderr": "classic_session_tests.stderr.txt"
+  },
+  "generated_region_session_tests": {
+    "stdout": "generated_region_session_tests.stdout.txt",
+    "stderr": "generated_region_session_tests.stderr.txt"
+  },
+  "living_world_session_tests": {
+    "stdout": "living_world_session_tests.stdout.txt",
+    "stderr": "living_world_session_tests.stderr.txt"
+  },
+  "strategy_campaign_session_tests": {
+    "stdout": "strategy_campaign_session_tests.stdout.txt",
+    "stderr": "strategy_campaign_session_tests.stderr.txt"
+  },
+  "world_atlas_tests": {
+    "stdout": "world_atlas_tests.stdout.txt",
+    "stderr": "world_atlas_tests.stderr.txt"
+  },
+  "world_travel_tests": {
+    "stdout": "world_travel_tests.stdout.txt",
+    "stderr": "world_travel_tests.stderr.txt"
+  }
+}

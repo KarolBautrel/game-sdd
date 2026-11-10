@@ -9,6 +9,7 @@ var last_error: String=""
 func _init(generator_version: int=1) -> void:
 	version=generator_version
 	if version==2: W=384;H=216;SIZE=Vector2i(W,H)
+	elif version==3: W=768;H=432;SIZE=Vector2i(W,H)
 func _point(value: Dictionary) -> Vector2: return Vector2(float(value.x),float(value.y))
 func _center(id: int) -> Vector2: return (Vector2(id%W,id/W)+Vector2(.5,.5))/Vector2(W,H)
 func _id(point: Vector2) -> int: return clampi(int(point.y*H),0,H-1)*W+clampi(int(point.x*W),0,W-1)
@@ -62,7 +63,7 @@ func attempt(seed_value: int,preset: String,attempt: int) -> Dictionary:
 	var phase:=rng.randf_range(0,TAU)
 	var saddle_x:=rng.randf_range(.34,.56)
 	var climates: Array=[]
-	if version==2:
+	if version>=2:
 		for item: Array in [["wetwood",Vector2(.25,.42),.31],["drylands",Vector2(.63,.72),.30],["uplands",Vector2(.55,.27),.27]]:
 			var center: Vector2=_orient(item[1]+Vector2(rng.randf_range(-.07,.07),rng.randf_range(-.06,.06)),derived)
 			climates.append({"id":item[0],"position":Terrain.packed(center),"radius":item[2]})
@@ -82,7 +83,7 @@ func attempt(seed_value: int,preset: String,attempt: int) -> Dictionary:
 			elevation=clampf(elevation+lower_hills,0,1)
 			heights[id]=elevation if land else -.2
 			var wetness: float=.50+.5*wet_noise.get_noise_2d(x,y)
-			if version==2:
+			if version>=2:
 				var wet: float=exp(-pow(_distance(p,_point(climates[0].position))/float(climates[0].radius),2))
 				var dry: float=exp(-pow(_distance(p,_point(climates[1].position))/float(climates[1].radius),2))
 				wetness+=wet*.28-dry*.34
@@ -195,7 +196,7 @@ func attempt(seed_value: int,preset: String,attempt: int) -> Dictionary:
 	var suffixes: Array[String]=["Reach","March","Coast","Highlands","Borderlands"]
 	var name: String=prefixes[seed_value%prefixes.size()]+" "+suffixes[(seed_value/7)%suffixes.size()]
 	var result: Dictionary={"version":version,"seed":seed_value,"preset":preset,"attempt":attempt,"name":name,"terrain":terrain,"sites":sites,"roads":roads,"road_paths":road_paths,"rivers":[{"points":main,"profile":river_heights},{"points":tributary,"profile":tributary_heights}],"bridges":bridges,"diagnostics":{"land_cells":land_count,"connected_cells":component.size(),"bridges":bridges.size()}}
-	if version==2: result.climates=climates
+	if version>=2: result.climates=climates
 	return result
 func _pick_river_source(cells: Array[String],heights: PackedFloat32Array,desired: Vector2,ridge: bool=true) -> int:
 	var best:=-1;var score:=-INF

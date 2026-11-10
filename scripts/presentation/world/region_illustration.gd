@@ -14,7 +14,7 @@ var reference_width:=1672.0
 func configure(value: Dictionary) -> void:
 	geography=value
 	var dimensions:=Vector2i(int(value.terrain.width),int(value.terrain.height))
-	var factor:=2.0 if int(value.version)==2 else 1.0
+	var factor:=float(Gen.world_scale(int(value.version)))
 	reference_width=1672.0*factor
 	var image:=Image.create(dimensions.x,dimensions.y,false,Image.FORMAT_RGBA8)
 	var mask:=Image.create(dimensions.x,dimensions.y,false,Image.FORMAT_RGBA8)
@@ -24,7 +24,7 @@ func configure(value: Dictionary) -> void:
 			var code: String=geography.terrain.rows[y][x]
 			image.set_pixel(x,y,Color(PALETTE[code]))
 			var climate:=.5
-			if int(value.version)==2:
+			if int(value.version)>=2:
 				var p: Vector2=(Vector2(x,y)+Vector2(.5,.5))/Vector2(dimensions)
 				for index in range(2):
 					var zone: Dictionary=value.climates[index]
@@ -76,7 +76,7 @@ func background() -> TextureRect:
 	rect.mouse_filter=Control.MOUSE_FILTER_IGNORE;rect.show_behind_parent=true
 	var material:=ShaderMaterial.new();material.shader=SHADER;material.set_shader_parameter("terrain_codes",codes);material.set_shader_parameter("chart_seed",float(geography.seed))
 	material.set_shader_parameter("terrain_texel",Vector2(1.0/float(geography.terrain.width),1.0/float(geography.terrain.height)))
-	material.set_shader_parameter("climate_enabled",int(geography.version)==2)
+	material.set_shader_parameter("climate_enabled",int(geography.version)>=2)
 	if ResourceLoader.exists("res://assets/ui/world/ground_wash.png"):
 		material.set_shader_parameter("ground_wash",load("res://assets/ui/world/ground_wash.png"));material.set_shader_parameter("has_ground",true)
 	rect.material=material

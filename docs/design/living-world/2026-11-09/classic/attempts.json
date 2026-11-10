@@ -1,0 +1,11 @@
+[
+  {
+    "run_id": "classic-strategy-20261109-final",
+    "status": "INTERRUPTED_BY_AGENT",
+    "reason": "Effective convoy escort and waiting-cargo regression added before completion; not final acceptance."
+  },
+  {
+    "run_id": "classic-strategy-20261109-final2",
+    "status": "PASS"
+  }
+]

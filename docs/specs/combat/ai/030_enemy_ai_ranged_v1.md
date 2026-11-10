@@ -11,6 +11,10 @@ Enemy AI ranged v1 lets an enemy shoot instead of walking when a legal ranged ta
 
 When the active unit is an enemy:
 
+First, if AP is exhausted, return `end_turn` immediately, even when MP remains.
+This guard precedes target selection, skill choice and pathfinding. It preserves
+the no-AP policy from008 for both melee and ranged MP-enabled enemies.
+
 1. If a living player is adjacent and `basic_attack` is available, use `basic_attack`.
 2. Otherwise, if a living player is a legal `ranged_attack` target, use `ranged_attack`.
 3. Otherwise, move one legal step toward the nearest living player.

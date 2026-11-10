@@ -1509,9 +1509,14 @@ func _open_world() -> void:
 	if _expedition_decision_pending():
 		return
 	var session := _run_session()
+	var return_path := "res://scenes/app/App.tscn"
+	var owner: Node = session.campaign_owner()
+	if owner.has_method("world_return_scene"): return_path=owner.world_return_scene()
 	if session.managed_run:
 		if bool(run_state.get("completed", false)):
-			var campaign := get_node("/root/CampaignSession")
+			var campaign: Node = _run_session().campaign_owner()
+			if campaign.has_method("regional_active") and not session.checkpoint_campaign():
+				last_feedback=session.last_feedback;_update_detail();return
 			if not campaign.settle(session.pending_world_return_payload):
 				last_feedback = campaign.last_feedback
 				_update_detail()
@@ -1528,8 +1533,8 @@ func _open_world() -> void:
 		return
 	else:
 		session.clear()
-	if scene_requested.has_connections(): scene_requested.emit("res://scenes/app/App.tscn")
-	else: get_tree().change_scene_to_file("res://scenes/app/App.tscn")
+	if scene_requested.has_connections(): scene_requested.emit(return_path)
+	else: get_tree().change_scene_to_file(return_path)
 
 
 func _refresh_room_styles() -> void:
@@ -1541,7 +1546,7 @@ func _refresh_room_styles() -> void:
 
 func _update_detail() -> void:
 	if is_inside_tree() and not expedition_started and _run_session().town_preparation:
-		var campaign := get_node("/root/CampaignSession")
+		var campaign: Node = _run_session().campaign_owner()
 		for key in ["party_effects", "target_effects", "active_debuffs"]:
 			run_state[key] = campaign.state.effects.get(key, {}).duplicate(true)
 	if detail_label == null or panel_title == null or status_label == null or progress_label == null:
@@ -2124,7 +2129,7 @@ func _start_expedition_with_loadout() -> void:
 	selected_supply_loadout = DungeonStateModel.clamp_supply_loadout(dungeon, selected_supply_loadout)
 	run_state = DungeonStateModel.initial_state(dungeon, selected_supply_loadout)
 	if is_inside_tree() and _run_session().town_preparation:
-		var campaign := get_node("/root/CampaignSession")
+		var campaign: Node = _run_session().campaign_owner()
 		if not campaign.begin_run(dungeon, run_state):
 			last_feedback = campaign.last_feedback
 			status_label.text = last_feedback
@@ -2186,7 +2191,7 @@ func _refresh_loadout_panel() -> void:
 		if value_label != null:
 			value_label.text = str(value)
 			if is_inside_tree() and _run_session().town_preparation:
-				value_label.tooltip_text = "Owned in Ravenford: %s" % get_node("/root/CampaignSession").state.supplies.get(supply_id, 0)
+				value_label.tooltip_text = ("Owned by the company: %s" if _run_session().campaign_owner().has_method("regional_active") else "Owned in Ravenford: %s") % _run_session().campaign_owner().state.supplies.get(supply_id, 0)
 		var option: Dictionary = options.get(supply_id, {"min": 0, "max": value})
 		var minus_button: Button = row.get("minus_button", null)
 		if minus_button != null:
@@ -2209,6 +2214,15 @@ func _toggle_dungeon_source() -> void:
 	_set_dungeon_source(_other_dungeon_source())
 
 
+func _clear_preparation_preview() -> void:
+	if not is_inside_tree():
+		return
+	var session := _run_session()
+	var from_campaign: bool = session.town_preparation
+	session.clear()
+	session.town_preparation = from_campaign
+
+
 func _set_dungeon_source(next_source: String) -> void:
 	if not _loadout_pending():
 		return
@@ -2223,8 +2237,7 @@ func _set_dungeon_source(next_source: String) -> void:
 	run_state = DungeonStateModel.initial_state(dungeon, selected_supply_loadout)
 	selected_room_id = str(run_state.get("current_room_id", dungeon.get("start_room_id", "")))
 	last_feedback = "Dungeon source changed to %s. Prepare a new loadout." % _source_display_name(dungeon_source)
-	if is_inside_tree():
-		_run_session().clear()
+	_clear_preparation_preview()
 	if title_label != null:
 		title_label.text = dungeon.get("display_name", "Dungeon")
 	if corridor_event_panel != null:
@@ -2252,8 +2265,7 @@ func _reroll_generated_dungeon() -> void:
 	run_state = DungeonStateModel.initial_state(dungeon, selected_supply_loadout)
 	selected_room_id = str(run_state.get("current_room_id", dungeon.get("start_room_id", "")))
 	last_feedback = "Generated draft rerolled with D%s seed %s." % [generated_dungeon_difficulty, generated_dungeon_seed]
-	if is_inside_tree():
-		_run_session().clear()
+	_clear_preparation_preview()
 	if title_label != null:
 		title_label.text = dungeon.get("display_name", "Dungeon")
 	if corridor_event_panel != null:
@@ -2287,8 +2299,7 @@ func _set_generated_difficulty(difficulty: int) -> void:
 	run_state = DungeonStateModel.initial_state(dungeon, selected_supply_loadout)
 	selected_room_id = str(run_state.get("current_room_id", dungeon.get("start_room_id", "")))
 	last_feedback = "Generated difficulty set to D%s." % generated_dungeon_difficulty
-	if is_inside_tree():
-		_run_session().clear()
+	_clear_preparation_preview()
 	if title_label != null:
 		title_label.text = dungeon.get("display_name", "Dungeon")
 	if corridor_event_panel != null:

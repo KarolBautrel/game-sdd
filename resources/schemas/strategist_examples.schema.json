@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "sdd.strategist-examples"
+    },
+    "version": {
+      "const": 1
+    },
+    "provenance": {
+      "type": "string",
+      "maxLength": 180
+    },
+    "preferred_goals": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "enum": [
+          "hold",
+          "commerce",
+          "supplies",
+          "claim",
+          "defend",
+          "peace"
+        ]
+      },
+      "maxProperties": 32
+    },
+    "default_goal": {
+      "enum": [
+        "hold",
+        "commerce",
+        "supplies",
+        "claim",
+        "defend",
+        "peace"
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "version",
+    "provenance",
+    "preferred_goals",
+    "default_goal"
+  ],
+  "additionalProperties": false
+}

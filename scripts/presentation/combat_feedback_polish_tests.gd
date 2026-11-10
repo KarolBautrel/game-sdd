@@ -19,6 +19,10 @@ func _run() -> void:
 	root.add_child(scene)
 	for frame in range(8):
 		await process_frame
+	# Own the fixture rather than inherit a manual review's launcher override.
+	scene.selected_scenario_id = "full_combat_showcase"
+	scene._load_selected_scenario()
+	await process_frame
 	scene._show_action_hover("basic_attack", 1)
 	_check(scene.action_detail_label.text.contains("COST 1 AP"), "S10-01 profile AP cost missing")
 	scene._show_action_hover("move", 2)

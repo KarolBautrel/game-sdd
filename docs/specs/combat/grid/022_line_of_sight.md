@@ -9,7 +9,7 @@ Line of sight determines whether a unit can target another unit or tile with ran
 
 ## Scope V1
 
-- `ranged_attack` requires line of sight.
+- `ranged_attack` and `aimed_shot` require the same terrain line of sight.
 - Line of sight is traced from attacker tile center to target tile center.
 - Attacker and target tiles do not block their own line.
 - Intermediate `blocked` tiles block line of sight.
@@ -36,9 +36,19 @@ Line of sight determines whether a unit can target another unit or tile with ran
 - When the attacker performs `ranged_attack`
 - Then the command is rejected with `target_not_visible`
 - And AP and HP do not change
+- The same rejection applies to `aimed_shot`, including equipment-granted and
+  fallback action profiles; rejection spends no AP, adds no cooldown, and does
+  not consume a hit/intercept roll.
 
 ### Clear ranged attack
 
 - Given no `blocked` tile lies between attacker and target
 - When the attacker performs `ranged_attack`
 - Then hit chance resolution may continue
+
+## Regression proof (2026-11-05)
+
+Desktop Painted Six play exposed an aimed shot passing through terrain that
+rejected a basic shot. Slice104 and `combat_playtest_regression_tests.gd` /
+`tests/test_combat_playtest_regressions.py` cover shared preview/resolution
+legality, endpoint exclusions, clear lines and atomic rejection.

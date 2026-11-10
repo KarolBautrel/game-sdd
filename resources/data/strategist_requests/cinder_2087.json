@@ -1,0 +1,358 @@
+{
+	"apply_by_tick": 288,
+	"capabilities": {
+		"goals": {
+			"goal_39745d9f837d59666b84": {
+				"goal": "hold",
+				"resource": "",
+				"target": ""
+			},
+			"goal_46ddc9912c01af82041b": {
+				"goal": "supplies",
+				"resource": "food",
+				"target": ""
+			},
+			"goal_9362e961b290bce866d6": {
+				"goal": "commerce",
+				"resource": "",
+				"target": ""
+			},
+			"goal_c8b59cbbe42232cfd92b": {
+				"goal": "supplies",
+				"resource": "ore",
+				"target": ""
+			}
+		},
+		"intents": {
+			"candidate_89a8121baf0bde24b975": {
+				"action": "protect_route",
+				"payload": {
+					"party": "compact_watch",
+					"route": "border_road"
+				}
+			}
+		},
+		"predicates": [
+			"food_below_target",
+			"at_war",
+			"trade_offer_waiting"
+		],
+		"reason_codes": [
+			"reserve_deficit",
+			"profitable_exports",
+			"actual_war",
+			"war_costs",
+			"contested_supply_claim",
+			"rebuild_reserves",
+			"honour_agreement",
+			"protect_trade"
+		]
+	},
+	"faction_id": "cinder_compact",
+	"generation": 1,
+	"horizon_tick": 1632,
+	"number": 1,
+	"observation": {
+		"actor": "cinder_compact",
+		"aid": [],
+		"claim": {},
+		"forces": [
+			{
+				"at": "ashmere",
+				"edge_to": "",
+				"headcount": 6,
+				"id": "compact_watch",
+				"mission": "guard",
+				"mode": "idle",
+				"objective": "ashmere",
+				"ready_tick": 0,
+				"remaining": 0
+			}
+		],
+		"incoming_pacts": [],
+		"incoming_peace": [],
+		"incoming_trades": [],
+		"live_trade_resources": [
+			"food",
+			"ore"
+		],
+		"markets": [
+			{
+				"amount": 12,
+				"resource": "food",
+				"seller": "iron_march",
+				"source": "black_keep",
+				"unit_price": 1
+			},
+			{
+				"amount": 12,
+				"resource": "timber",
+				"seller": "iron_march",
+				"source": "black_keep",
+				"unit_price": 1
+			},
+			{
+				"amount": 12,
+				"resource": "food",
+				"seller": "river_league",
+				"source": "town_ravenford",
+				"unit_price": 1
+			},
+			{
+				"amount": 12,
+				"resource": "ore",
+				"seller": "river_league",
+				"source": "town_ravenford",
+				"unit_price": 2
+			},
+			{
+				"amount": 12,
+				"resource": "timber",
+				"seller": "river_league",
+				"source": "town_ravenford",
+				"unit_price": 1
+			},
+			{
+				"amount": 12,
+				"resource": "timber",
+				"seller": "thornwood_accord",
+				"source": "thornhaven",
+				"unit_price": 1
+			}
+		],
+		"own": {
+			"available": {
+				"coin": 128,
+				"food": 8,
+				"ore": 15,
+				"timber": 16
+			},
+			"manpower": 30.0,
+			"name": "Cinder Compact",
+			"policy": {
+				"claim_route": "",
+				"consumption": {
+					"coin": 2.0,
+					"food": 3.0,
+					"ore": 1.0,
+					"timber": 2.0
+				},
+				"home": "ashmere",
+				"personality": {
+					"aggression": 10.0,
+					"security": 40.0,
+					"trade": 95.0
+				},
+				"production": {
+					"coin": 12.0,
+					"food": 2.0,
+					"ore": 2.0,
+					"timber": 1.0
+				},
+				"targets": {
+					"coin": 50.0,
+					"food": 42.0,
+					"ore": 18.0,
+					"timber": 16.0
+				}
+			},
+			"prices": {
+				"food": 1.0,
+				"ore": 2.0,
+				"timber": 1.0
+			},
+			"shortfalls": {
+				"coin": 0,
+				"food": 0,
+				"ore": 0,
+				"timber": 0
+			},
+			"stocks": {
+				"coin": 140.0,
+				"food": 8,
+				"ore": 15.0,
+				"timber": 16.0
+			}
+		},
+		"own_trade_route": "border_road",
+		"pending_trades": [],
+		"previous": {
+			"commit_until": 288,
+			"goal": "supplies",
+			"horizon_tick": 1344,
+			"reason": "reserve_deficit",
+			"resource": "food",
+			"review_tick": 672,
+			"scores": {
+				"claim": 0,
+				"cost": -5,
+				"economic": 100,
+				"readiness": 0,
+				"security": 10,
+				"switching": 0
+			},
+			"selected_tick": 0,
+			"supporting": [
+				"trade",
+				"guard"
+			],
+			"target": ""
+		},
+		"relations": [
+			{
+				"deliveries": 0,
+				"exhaustion": 0,
+				"grievance": 0,
+				"pacts": [],
+				"route": "",
+				"stance": "peace",
+				"strength": 12,
+				"target": "iron_march",
+				"truce_until": 0,
+				"trust": 10,
+				"war_age": 0
+			},
+			{
+				"deliveries": 0,
+				"exhaustion": 0,
+				"grievance": 0,
+				"pacts": [],
+				"route": "",
+				"stance": "peace",
+				"strength": 12,
+				"target": "river_league",
+				"truce_until": 0,
+				"trust": 10,
+				"war_age": 0
+			},
+			{
+				"deliveries": 0,
+				"exhaustion": 0,
+				"grievance": 0,
+				"pacts": [],
+				"route": "",
+				"stance": "peace",
+				"strength": 8,
+				"target": "thornwood_accord",
+				"truce_until": 0,
+				"trust": 10,
+				"war_age": 0
+			}
+		],
+		"reports": [
+			{
+				"actor": "cinder_compact",
+				"age_ticks": 264,
+				"amount": 0,
+				"confidence": 100,
+				"id": "event_0000000001",
+				"kind": "reserve_budget",
+				"reason": "budget_hold",
+				"resource": "",
+				"sequence": 1,
+				"target": "hold_00000001",
+				"tick": 0
+			},
+			{
+				"actor": "cinder_compact",
+				"age_ticks": 240,
+				"amount": 12,
+				"confidence": 100,
+				"id": "event_0000000006",
+				"kind": "trade_offer",
+				"reason": "supply_negotiation",
+				"resource": "food",
+				"sequence": 6,
+				"target": "trade_00000006",
+				"tick": 24
+			},
+			{
+				"actor": "iron_march",
+				"age_ticks": 216,
+				"amount": 12,
+				"confidence": 100,
+				"id": "event_0000000009",
+				"kind": "trade_dispatched",
+				"reason": "cargo_and_escrow_committed",
+				"resource": "food",
+				"sequence": 9,
+				"target": "trade_00000006",
+				"tick": 48
+			},
+			{
+				"actor": "river_league",
+				"age_ticks": 144,
+				"amount": 16,
+				"confidence": 100,
+				"id": "event_0000000013",
+				"kind": "mobilization",
+				"reason": "prepared_force_on_real_route",
+				"resource": "coin",
+				"sequence": 13,
+				"target": "league_patrol",
+				"tick": 120
+			},
+			{
+				"actor": "iron_march",
+				"age_ticks": 96,
+				"amount": 11,
+				"confidence": 100,
+				"id": "event_0000000016",
+				"kind": "trade_offer",
+				"reason": "supply_negotiation",
+				"resource": "ore",
+				"sequence": 16,
+				"target": "trade_00000009",
+				"tick": 168
+			},
+			{
+				"actor": "cinder_compact",
+				"age_ticks": 72,
+				"amount": 11,
+				"confidence": 100,
+				"id": "event_0000000018",
+				"kind": "trade_dispatched",
+				"reason": "cargo_and_escrow_committed",
+				"resource": "ore",
+				"sequence": 18,
+				"target": "trade_00000009",
+				"tick": 192
+			},
+			{
+				"actor": "cinder_compact",
+				"age_ticks": 48,
+				"amount": 3,
+				"confidence": 100,
+				"id": "event_0000000020",
+				"kind": "trade_offer",
+				"reason": "supply_negotiation",
+				"resource": "ore",
+				"sequence": 20,
+				"target": "trade_00000011",
+				"tick": 216
+			},
+			{
+				"actor": "river_league",
+				"age_ticks": 24,
+				"amount": 3,
+				"confidence": 100,
+				"id": "event_0000000021",
+				"kind": "trade_dispatched",
+				"reason": "cargo_and_escrow_committed",
+				"resource": "ore",
+				"sequence": 21,
+				"target": "trade_00000011",
+				"tick": 240
+			}
+		],
+		"seed": 2087,
+		"tick": 264
+	},
+	"observation_hash": "c106450aab310a97fd3f73d14dce56d1f180316ecb9b7a83f0f36cc6018db9c2",
+	"observation_tick": 264,
+	"policy_version": 1,
+	"request_id": "request_00000001",
+	"requested_review_tick": 960,
+	"schema": "sdd.strategist-request",
+	"version": 1
+}

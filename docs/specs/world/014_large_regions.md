@@ -4,6 +4,10 @@ Stage81,2026-11-05: user approves stage80's map style and requests larger maps
 that can be scrolled, with changing biomes. Preserve existing authored and v1
 regions. Owners world010..013 retain simulation, costs, snapshots and contracts.
 
+Follow-up96c adds an explicit Vastv3 option under world020/presentation048.
+This document still owns the unchanged Largev2 baseline; stored Large worlds
+are not upgraded or relabelled when the larger option is selected.
+
 Generator version2 builds384x216 semantic cells: twice the width/height and four
 times the terrain area of v1. Terrain/river/crossing/site/road order and safety
 gates remain. Regional wet/dry climate zones and a second hill belt create

@@ -1,0 +1,1116 @@
+{
+  "checks": [
+    {
+      "pass": true,
+      "scenario": "native play display"
+    },
+    {
+      "pass": true,
+      "scenario": "no-focus minimized play host"
+    },
+    {
+      "pass": true,
+      "scenario": "full loop uses a fresh isolated QA profile"
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary Large company persists to QA-only profile"
+    },
+    {
+      "pass": true,
+      "scenario": "native map pan and release button2"
+    },
+    {
+      "pass": true,
+      "scenario": "native pan leaves time/resources/course unchanged"
+    },
+    {
+      "pass": true,
+      "scenario": "native map pan and release button3"
+    },
+    {
+      "pass": true,
+      "scenario": "native pan leaves time/resources/course unchanged"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Accept contract"
+    },
+    {
+      "pass": true,
+      "scenario": "full loop accepts actual issuer contract"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Old Mine"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native continuous arrival: dungeon_old_mine"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: contract-mine-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: contract-mine-arrival"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Prepare Old Mine expedition"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Use Old Mine"
+    },
+    {
+      "pass": true,
+      "scenario": "owned preparation selects ordinary authored mine through UI"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Start Expedition"
+    },
+    {
+      "pass": true,
+      "scenario": "full loop starts real managed expedition"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Travel to room"
+    },
+    {
+      "pass": true,
+      "scenario": "native ordinary dungeon arrival: dusty_crossing"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Move on"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Travel to room"
+    },
+    {
+      "pass": true,
+      "scenario": "native ordinary dungeon arrival: guarded_cache"
+    },
+    {
+      "pass": true,
+      "scenario": "guarded room requires a real tactical battle"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Enter Combat"
+    },
+    {
+      "pass": true,
+      "scenario": "actual production scene transition: res://scenes/combat/CombatDebug.tscn"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: contract-battle-start"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: contract-battle-start"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 0"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 1"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 2"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 3"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 4"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 5"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 6"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 7"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 8"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 9"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 10"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 11"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 12"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 13"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 14"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 15"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 16"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 17"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 18"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 19"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 20"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 21"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 22"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 23"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 24"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 25"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 26"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 27"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 28"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 29"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 30"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 31"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary campaign battle command completes once: 32"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "campaign battle has no rejected or forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary managed mine combat wins without forced result"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: contract-battle-victory"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: contract-battle-victory"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Return\nto Dungeon"
+    },
+    {
+      "pass": true,
+      "scenario": "actual production scene transition: res://scenes/dungeon/DungeonDebug.tscn"
+    },
+    {
+      "pass": true,
+      "scenario": "real combat payload clears guarded room"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Claim Reward"
+    },
+    {
+      "pass": true,
+      "scenario": "full loop claims actual guarded loot once"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Travel to room"
+    },
+    {
+      "pass": true,
+      "scenario": "native ordinary dungeon arrival: lower_exit"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Finish Expedition"
+    },
+    {
+      "pass": true,
+      "scenario": "full loop exits by normal completion"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Return to Ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "ordinary return settles and restores mine"
+    },
+    {
+      "pass": true,
+      "scenario": "real restoration unlocks reporting, not immediate contract payment"
+    },
+    {
+      "pass": true,
+      "scenario": "restored mine stops raider departures"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: contract-restored-mine"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: contract-restored-mine"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native continuous arrival: town_ravenford"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Report / collect payment"
+    },
+    {
+      "pass": true,
+      "scenario": "issuer pays exactly45 gold and20 XP"
+    },
+    {
+      "pass": true,
+      "scenario": "contract improves River League relation by10"
+    },
+    {
+      "pass": true,
+      "scenario": "paid contract disables report control"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: contract-paid"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: contract-paid"
+    },
+    {
+      "pass": true,
+      "scenario": "duplicate report is rejected atomically"
+    },
+    {
+      "pass": true,
+      "scenario": "duplicate expedition settlement cannot pay again"
+    },
+    {
+      "pass": true,
+      "scenario": "exact paid company/mine persists after disk reload"
+    },
+    {
+      "pass": true,
+      "scenario": "reloaded paid company resumes paused"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Old Mine"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: 4x"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: Pause [Space]"
+    },
+    {
+      "pass": true,
+      "scenario": "native continuous arrival: dungeon_old_mine"
+    },
+    {
+      "pass": true,
+      "scenario": "restored mine cannot be farmed after reload"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: contract-reloaded-cleared"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: contract-reloaded-cleared"
+    },
+    {
+      "pass": true,
+      "scenario": "play review acquired no focus"
+    }
+  ],
+  "display": "Windows",
+  "engine_clicks": 102,
+  "engine_key_events": 0,
+  "failures": [],
+  "kind": "native play GPU and engine-local input fixture",
+  "player_save_used": false,
+  "renderer": "forward_plus",
+  "status": "PASS",
+  "texture_memory_bytes": 169017344,
+  "uses_desktop_input": false,
+  "window_focused": false,
+  "window_minimized": true,
+  "exit_code": 0,
+  "errors": 0,
+  "warnings": 0,
+  "physical_desktop_acceptance": "NOT_RUN",
+  "packaged_build": false,
+  "source_report": "artifacts/qa-runs/living-contract-native-final/native-review.json",
+  "captures": [
+    {
+      "file": "contract-battle-victory-1920x1080.png",
+      "sha256": "e331b156008ac24d99b0d72f7aae8927df83f31dc2143bbef7bd0ea7ccf84711"
+    },
+    {
+      "file": "contract-paid-1920x1080.png",
+      "sha256": "0853b2ff32c4154b32513754e29584f9ce7af2eeaf1168b3c6e45171fb030be4"
+    },
+    {
+      "file": "contract-reloaded-cleared-1920x1080.png",
+      "sha256": "f603d02cd4075a5ede14b8d32b834a707464d991880ed0fdba3dd3932660a788"
+    }
+  ]
+}

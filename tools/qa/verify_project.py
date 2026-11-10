@@ -15,6 +15,10 @@ import time
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_GODOT = ROOT.parents[1] / "installers/Godot_v4.7-stable_win64.exe/Godot_v4.7-stable_win64_console.exe"
 SCENES = (
+    "scenes/world/StrategicVastWorld.tscn",
+    "scenes/world/StrategistVastWorld.tscn",
+    "scenes/world/StrategistWorld.tscn",
+    "scenes/world/StrategicWorld.tscn",
     "scenes/world/RegionFoundry.tscn",
     "scenes/world/TerrainEditor.tscn",
     "scenes/world/LivingWorld.tscn",

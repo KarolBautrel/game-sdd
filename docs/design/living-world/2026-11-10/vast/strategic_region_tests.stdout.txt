@@ -1,0 +1,4 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+STRATEGIC_PATH_QUERY_1000_MS 15.061
+strategic_region_tests: 221 checks, 0 failures

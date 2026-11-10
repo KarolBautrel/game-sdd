@@ -74,8 +74,9 @@ func setup(hud) -> void:
 			pinned_start = button
 			pinned_start.reparent(hud)
 			break
-	hud.world_button.text = "Return to Ravenford"
-	hud.world_button.tooltip_text = "Return to the world / Ravenford [F7]"
+	var strategic: bool=hud._run_session().campaign_owner().has_method("regional_active")
+	hud.world_button.text = "Return to the region" if strategic else "Return to Ravenford"
+	hud.world_button.tooltip_text = "Return to the strategic region [F7]" if strategic else "Return to the world / Ravenford [F7]"
 	for card: PanelContainer in hud.party_cards.values():
 		card.add_theme_stylebox_override("panel",StyleBoxEmpty.new())
 		var portrait: TextureRect = card.find_child("Portrait",true,false)
@@ -99,7 +100,7 @@ func _style_text(parent: Node, color: Color) -> void:
 func style_button(button: Button) -> void:
 	for state in ["normal","hover","pressed","disabled","focus"]: button.remove_theme_stylebox_override(state)
 	var primary := button.text in ["Travel to room","Start Expedition","Enter Combat","Claim Reward","Finish Expedition"]
-	var returning := button.text=="Return to Ravenford"
+	var returning := button.text in ["Return to Ravenford","Return to the region"]
 	var id := "button-return" if returning else ("button-primary" if primary else "button-secondary")
 	for state in ["normal","hover","pressed","disabled"]:
 		var box := AshenStyle.frame(id,(6 if returning or button.text in ["+","-"] else 12)*ui_scale,20)

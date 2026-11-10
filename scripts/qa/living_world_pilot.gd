@@ -19,7 +19,7 @@ static func generated_path(seed_value: int,preset: String,version: int=1) -> Str
 	return "user://qa_living_world_generated_v%d_%s_%d.json" % [version,preset,seed_value]
 
 static func open_generated(campaign: Node,seed_value: int,preset: String,version: int=1) -> bool:
-	if seed_value<1 or seed_value>1000000000 or version not in [1,2] or not preload("res://scripts/domain/region_generator.gd").PRESETS.has(preset): return false
+	if seed_value<1 or seed_value>1000000000 or version not in [1,2,3] or not preload("res://scripts/domain/region_generator.gd").PRESETS.has(preset): return false
 	if campaign.living_active():
 		var current: Dictionary=campaign.state.living_world.get("geography",{})
 		if int(current.get("seed",-1))==seed_value and current.get("preset","")==preset and int(current.get("version",0))==version: return true

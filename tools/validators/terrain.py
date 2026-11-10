@@ -13,7 +13,7 @@ def terrain_errors(data, anchors=()):
     w, h = data.get('width'), data.get('height')
     def integer(n):
         return type(n) in (int, float) and math.isfinite(n) and n == math.floor(n)
-    if not integer(w) or not integer(h) or not 4 <= w <= 512 or not 4 <= h <= 288:
+    if not integer(w) or not integer(h) or not 4 <= w <= 768 or not 4 <= h <= 432:
         return ['invalid terrain dimensions']
     w, h = int(w), int(h)
     if data.get('version') != 1 or data.get('region') != 'living_marches_v1':

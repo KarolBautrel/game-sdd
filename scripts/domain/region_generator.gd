@@ -11,6 +11,7 @@ static var snapshots: Dictionary={}
 static var navigators: Dictionary={}
 static var approved: Dictionary={}
 static var last_error: String=""
+static func world_scale(version: int) -> int: return 4 if version==3 else (2 if version==2 else 1)
 
 static func _integer(value: Variant,low: int,high: int) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and value==floor(float(value)) and value>=low and value<=high
@@ -41,8 +42,8 @@ static func navigation(geography: Dictionary) -> RefCounted:
 	return navigators[key]
 static func generate(seed_value: int,preset: String="marches",version: int=1) -> Dictionary:
 	last_error=""
-	if seed_value<1 or seed_value>1000000000 or not PRESETS.has(preset) or version not in [1,2]:
-		last_error="Choose seed 1..1000000000, a supported preset and generator version1 or2."
+	if seed_value<1 or seed_value>1000000000 or not PRESETS.has(preset) or version not in [1,2,3]:
+		last_error="Choose seed 1..1000000000, a supported preset and generator version1,2 or3."
 		return {}
 	var key: String="%s:%s:%s" % [version,preset,seed_value]
 	if snapshots.has(key): return snapshots[key].duplicate(true)
@@ -63,7 +64,7 @@ static func errors(value: Variant) -> Array[String]:
 	if not value is Dictionary: return ["Generated geography is not an object."]
 	for key in value:
 		if not ["version","seed","preset","attempt","name","terrain","sites","roads","road_paths","rivers","bridges","diagnostics","checksum","climates"].has(key): return ["Unknown geography field."]
-	if not _integer(value.get("version"),1,2) or not _integer(value.get("seed"),1,1000000000) or not PRESETS.has(value.get("preset","")): return ["Unsupported generator version, seed or preset."]
+	if not _integer(value.get("version"),1,3) or not _integer(value.get("seed"),1,1000000000) or not PRESETS.has(value.get("preset","")): return ["Unsupported generator version, seed or preset."]
 	if not value.get("checksum") is String or value.checksum.length()!=64: return ["Missing geography checksum."]
 	var digest:=checksum(value)
 	if digest!=value.checksum: return ["Geography checksum mismatch."]
@@ -71,9 +72,9 @@ static func errors(value: Variant) -> Array[String]:
 	if not value.get("name") is String or value.name.length()>80 or not _integer(value.get("attempt"),0,7): return ["Invalid region metadata."]
 	var issues:=Terrain.errors(value.get("terrain"))
 	if not issues.is_empty(): return issues
-	var factor:=int(value.version)
+	var factor:=world_scale(int(value.version))
 	if int(value.terrain.width)!=W*factor or int(value.terrain.height)!=H*factor: return ["Generated terrain dimensions differ."]
-	if factor==2:
+	if factor>=2:
 		if not value.get("climates") is Array or value.climates.size()!=3: return ["Missing large-region climate zones."]
 		for index in range(3):
 			var zone: Variant=value.climates[index]

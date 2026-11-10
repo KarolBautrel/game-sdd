@@ -3,6 +3,51 @@
 Continuation status and the next unfinished task: [CONTINUE_HERE.md](../CONTINUE_HERE.md).
 Accumulated actual-play acceptance: [live-test-scenarios.md](live-test-scenarios.md).
 
+Latest map expansion: [2026-11-10 Vast worlds](2026-11-10-vast-worlds.md).
+Real768x432geography/four times Large area with consistent physical travel,
+local camera and independent save sizes. No player reset; physical review open.
+
+Latest UI follow-up: [2026-11-09 strategist result visibility](2026-11-09-strategist-feedback.md).
+User waited three days but an accepted plan's action was unfunded. Read-only
+diagnosis and persistent applied/blocked feedback now have targeted proof;
+L96-01 awaits user retest. No forced event or changed gameplay balance.
+
+Latest adapter: [2026-11-09 bounded strategist](2026-11-09-strategist-adapter.md).
+Stage96 provides strict proposals, isolated v4, recorded offline examples,
+asynchronous session lifecycle, replay and classic fallback. It does not claim
+live-model calls or physical acceptance; desktop remains withheld.
+
+Latest native stage: [2026-11-09 strategic region](2026-11-09-strategic-region.md).
+Opt-in campaignv3 connects six towns/actual terrain, the company economy, funded
+causal jobs and managed mine restoration. Automated proofs and final-source
+receipts are recorded there; physical L95-01/02 remain open. No desktop takeover.
+
+Previous backend: [2026-11-09 classic strategy simulation](2026-11-09-classic-strategy.md).
+Stage94 proves isolated classic economy/logistics/planning/conflict over the
+foundation. Native scene/geography/company integration remains stage95, live
+model adapter96. User retains desktop; prior actual-play gaps remain.
+
+Previous backend: [2026-11-09 strategy foundation](2026-11-09-strategy-foundation.md).
+Stage93 adds an isolated versioned registry/diplomacy/save model with automated
+proof. There is no new player scene or classic/LLM political simulation yet;
+physical acceptance remains deferred and the user holds the desktop.
+
+Latest design: [2026-11-09 strategic world and two planner modes](2026-11-09-world-strategy-design.md).
+Stage92 is design only; proposed classic/LLM faction simulation is not runtime
+functionality. User keeps the desktop. Earlier physical acceptance gaps remain.
+
+Latest background-only work: [2026-11-09 contract feedback and preview audit](2026-11-09-background-contracts.md).
+User retains the desktop. Shared contract reasons/progress and headless service
+chains are verified; actual L91-01/L91-02 and remaining L77-01 are deferred.
+
+Latest background follow-up: [2026-11-05 stable actions and managed mine contract](2026-11-05-background-followup.md).
+
+Latest physical/background follow-up: [2026-11-05 third desktop victory and combat regressions](2026-11-05-playtest-followup.md).
+The user subsequently released controls again. The physical mine contract,
+post-fix L87-01/L88-01 and three L89-01 fixtures pass; broader world acceptance
+remains open. Durable captures and input
+trace distinguish the clean campaign victory from the limited Painted Six replay.
+
 Research baseline: the user rejected the earlier UI appearance. See
 [UI research and proposed design sequence](2026-11-02-ui-design-research.md).
 The subsequent authorized response is presentation006, stages23..26: selected

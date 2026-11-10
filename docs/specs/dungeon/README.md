@@ -184,6 +184,9 @@ Combat remains a separate domain. Dungeon can launch combat with context and con
 
 ## Current Status
 
+Stage86 regression proof: [056 Managed preparation context](slices/056_managed_preparation_context.md)
+keeps owned campaign preparation across source/seed/difficulty preview changes.
+
 Dungeon mode has moved beyond a pure graph prototype into a debug-playable beta foundation. It has a data contract, deterministic state model, debug presentation, reusable hazard/event content, generated dungeon templates/profiles, combat handoff, run inventory, end-of-run result payloads, and the first resource-pressure systems.
 
 The current dungeon presentation has a first vertical slice: preparation panel, packing-point loadout, resource tray, framed map, hazard markers, legend, and player-facing route copy. Corridor hazards support reusable catalogue templates, weighted event pools through `hazard_pool_refs`, varied rubble/trap/darkness/noise/blockage families, a procedural corridor-plan helper, template-pool generated dungeon drafts, and a stable entry payload for authored/generated/profile source selection. Room exploration has reusable room event catalogues, expanded room event families, room event history, supply-gated room choices, weighted room outcomes, room event pools, pending room-event choices, and debug popup presentation. The dungeon-combat session bridge returns readable post-combat feedback for normal victories, guarded reward victories, and defeats. Dungeon completion produces a stable run-result payload with claimed rewards, kept/lost loot resolution, persistent effects, and a next-scene return hook.

@@ -37,6 +37,7 @@ func _run() -> void:
 		var before: Dictionary=campaign.state.duplicate(true)
 		await frames()
 		check(campaign.state==before,"paused rendering changes no campaign state")
+		await contract_feedback(world,campaign)
 		world.buttons.accept_restore_mine.pressed.emit()
 		check(campaign.state.living_world.contracts.restore_mine.stage=="accepted","contract control uses campaign owner")
 		world.map.site_buttons.dungeon_old_mine.pressed.emit()
@@ -58,3 +59,59 @@ func _run() -> void:
 	for failure in failures: push_error(failure)
 	print("living_world_interface_tests: ",checks," checks, ",failures.size()," failures")
 	quit(0 if failures.is_empty() else 1)
+
+func contract_feedback(world: Control, campaign: Node) -> void:
+	# Trusted UI boundary fixtures, separate from ordinary travel evidence.
+	var saved: Dictionary = campaign.state.duplicate(true)
+	world.tabs.current_tab = 1
+	await frames()
+	var card: Node = world.contract_nodes.supply_saltwatch.panel
+	var delivery: Dictionary = world.contract_nodes.supply_saltwatch
+	var state: Dictionary = campaign.state.living_world
+	state.party.position = Living.site("saltwatch",state).position.duplicate()
+	state.contracts.supply_saltwatch.stage = "accepted"
+	campaign.state.world.location_id = "saltwatch"
+	campaign.state.supplies.food = 2
+	world._refresh()
+	await frames()
+	check(delivery.status.text.contains("Food carried: 2/3"), "contract status shows actual carried food")
+	check(delivery.report.disabled and delivery.report.tooltip_text == "Need 3 food; carrying 2.", "disabled delivery explains exact shortage")
+	var before: Dictionary = campaign.state.duplicate(true)
+	delivery.report.pressed.emit()
+	check(campaign.same_data(campaign.state,before) and world.footer.text.contains("Need 3 food"), "UI and command share shortage reason without spending stock")
+	campaign.state.supplies.food = 3
+	world._refresh()
+	check(not delivery.report.disabled and delivery.report.tooltip_text.contains("3 owned food"), "owned stock refresh enables delivery with action tooltip")
+	check(campaign.living_course(Vector2.ZERO,"black_keep"), "actual outgoing course fixture")
+	world._refresh()
+	check(delivery.report.disabled and delivery.report.tooltip_text.contains("Stop at Saltwatch"), "moving issuer state disables report with reason")
+	check(campaign.living_camp(false), "stop fixture without advancing time")
+	campaign.state.living_world.party.position = Living.site("black_keep",campaign.state.living_world).position.duplicate()
+	campaign.state.world.location_id = "black_keep"
+	campaign.state.living_world.contracts.scout_pass.stage = "accepted"
+	world._refresh()
+	await frames()
+	var scout: Dictionary = world.contract_nodes.scout_pass
+	check(scout.report.disabled and scout.report.tooltip_text.contains("Visit High Pass"), "recon explains unvisited objective")
+	check(scout.status.text.contains("Visit High Pass, then report to Black Keep"), "recon card names target and issuer")
+	campaign.state.living_world.contracts.scout_pass.stage = "objective"
+	campaign.state.living_world.intelligence = true
+	world._refresh()
+	check(not scout.report.disabled and scout.status.text.contains("Objective complete"), "real card enables objective report")
+	var gold: int = campaign.state.gold
+	scout.report.pressed.emit()
+	check(campaign.state.gold == gold+18 and scout.report.disabled and scout.status.text.contains("Paid"), "UI report pays once and refreshes paid card")
+	check(scout.report.tooltip_text == "Contract already paid.", "paid card explains disabled state")
+	before = campaign.state.duplicate(true)
+	scout.report.pressed.emit()
+	check(campaign.same_data(campaign.state,before), "repeated UI signal cannot duplicate payment")
+	await frames()
+	check(world.contract_nodes.supply_saltwatch.panel == card, "refresh preserves existing card identity")
+	for widgets: Dictionary in world.contract_nodes.values():
+		if not widgets.panel.visible: continue
+		check(widgets.panel.get_global_rect().grow(2).encloses(widgets.status.get_global_rect()), "progress label stays inside its padded card")
+		check(widgets.status.get_minimum_size().x <= widgets.status.size.x+1, "progress copy wraps within available width")
+	campaign.state = saved
+	world.tabs.current_tab = 0
+	world._refresh()
+	await frames()

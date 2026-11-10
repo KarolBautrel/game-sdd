@@ -1,0 +1,2066 @@
+{
+  "schema": "sdd.stage-verification-v1",
+  "run_id": "strategic-region-20261109-final2",
+  "started_utc": "2026-11-09T19:41:32.282996+00:00",
+  "python": {
+    "executable": "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\.venv\\Scripts\\python.exe",
+    "version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "godot": "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+  "git_head": "583ebc84267bacf4497e01f5a7dfbdf0caf3d9f2",
+  "git_status": "M docs/CONTINUE_HERE.md\n M docs/qa/README.md\n M docs/qa/live-test-scenarios.md\n M docs/specs/combat/README.md\n M docs/specs/combat/actions/063_aimed_shot_v1.md\n M docs/specs/combat/ai/008_enemy_ai_v0.md\n M docs/specs/combat/ai/030_enemy_ai_ranged_v1.md\n M docs/specs/combat/grid/022_line_of_sight.md\n M docs/specs/combat/presentation/068_combat_interaction_preview.md\n M docs/specs/dungeon/README.md\n M docs/specs/dungeon/presentation/014_dungeon_debug_generated_toggle_v1.md\n M docs/specs/presentation/036_living_world.md\n M docs/specs/presentation/README.md\n M docs/specs/presentation/milestones/022_autonomous_game_polish.md\n M docs/specs/presentation/slices/036_living_world.md\n M docs/specs/tooling/001_stage_verification.md\n M docs/specs/world/010_living_region.md\n M docs/specs/world/README.md\n M docs/specs/world/slices/010_living_region.md\n M project.godot\n M resources/data/combat_scenarios/catalogue.json\n M scripts/domain/combat_resolver.gd\n M scripts/domain/living_world.gd\n M scripts/presentation/combat/battle_chrome.gd\n M scripts/presentation/combat/combat_action_model.gd\n M scripts/presentation/combat_debug.gd\n M scripts/presentation/combat_feedback_polish_tests.gd\n M scripts/presentation/combat_hud_layout_tests.gd\n M scripts/presentation/dungeon/ashen_expedition.gd\n M scripts/presentation/dungeon_debug.gd\n M scripts/presentation/living_world_interface_tests.gd\n M scripts/presentation/tactical_environment_tests.gd\n M scripts/presentation/world/living_world_view.gd\n M scripts/presentation/world/region_foundry.gd\n M scripts/qa/play_render_review.gd\n M scripts/session/campaign_session.gd\n M scripts/session/dungeon_run_session.gd\n M tools/combat/simulate_combat.py\n M tools/qa/start_game.ps1\n M tools/qa/verify_project.py\n M tools/validators/validate_all.py\n?? docs/design/background-polish/\n?? docs/design/living-world/2026-11-09/\n?? docs/handoffs/2026-11-05-background-followup.md\n?? docs/handoffs/2026-11-05-playtest-followup.md\n?? docs/handoffs/2026-11-09-background-contracts.md\n?? docs/handoffs/2026-11-09-classic-strategy.md\n?? docs/handoffs/2026-11-09-strategic-region.md\n?? docs/handoffs/2026-11-09-strategy-foundation.md\n?? docs/handoffs/2026-11-09-world-strategy-design.md\n?? docs/qa/2026-11-05-background-followup.md\n?? docs/qa/2026-11-05-playtest-followup.md\n?? docs/qa/2026-11-09-background-contracts.md\n?? docs/qa/2026-11-09-classic-strategy.md\n?? docs/qa/2026-11-09-strategic-region.md\n?? docs/qa/2026-11-09-strategy-foundation.md\n?? docs/qa/2026-11-09-world-strategy-design.md\n?? docs/specs/combat/slices/104_aimed_shot_line_of_sight.md\n?? docs/specs/combat/slices/105_enemy_ai_exhausted_ap_with_mp.md\n?? docs/specs/combat/slices/106_enemy_ai_affordable_fallback.md\n?? docs/specs/combat/slices/107_preview_command_consistency.md\n?? docs/specs/dungeon/slices/056_managed_preparation_context.md\n?? docs/specs/presentation/044_stable_combat_actions.md\n?? docs/specs/presentation/045_strategic_region.md\n?? docs/specs/presentation/slices/044_stable_combat_actions.md\n?? docs/specs/presentation/slices/045_strategic_region.md\n?? docs/specs/world/015_world_strategy.md\n?? docs/specs/world/016_strategy_foundation.md\n?? docs/specs/world/017_classic_strategy.md\n?? docs/specs/world/018_strategic_region.md\n?? docs/specs/world/slices/015_contract_transaction_regressions.md\n?? docs/specs/world/slices/016_world_strategy.md\n?? docs/specs/world/slices/017_strategy_foundation.md\n?? docs/specs/world/slices/018_classic_strategy.md\n?? docs/specs/world/slices/019_strategic_region.md\n?? resources/data/combat_encounters/qa_ai_budget_floor_1.json\n?? resources/data/combat_encounters/qa_ai_budget_highground_1.json\n?? resources/data/combat_encounters/qa_ai_budget_highground_2.json\n?? resources/data/combat_encounters/qa_bow_los_detour.json\n?? resources/data/strategic_regions/\n?? resources/data/strategy_regions/\n?? resources/data/strategy_simulations/\n?? resources/data/strategy_snapshots/\n?? resources/data/strategy_worlds/\n?? resources/schemas/classic_rules.schema.json\n?? resources/schemas/classic_world.schema.json\n?? resources/schemas/region_rules.schema.json\n?? resources/schemas/strategic_region.schema.json\n?? resources/schemas/strategy_world.schema.json\n?? scenes/world/StrategicWorld.tscn\n?? scripts/domain/classic_world.gd\n?? scripts/domain/classic_world.gd.uid\n?? scripts/domain/classic_world_state.gd\n?? scripts/domain/classic_world_state.gd.uid\n?? scripts/domain/classic_world_tests.gd\n?? scripts/domain/classic_world_tests.gd.uid\n?? scripts/domain/combat_playtest_regression_tests.gd\n?? scripts/domain/combat_playtest_regression_tests.gd.uid\n?? scripts/domain/faction_planner.gd\n?? scripts/domain/faction_planner.gd.uid\n?? scripts/domain/faction_planner_tests.gd\n?? scripts/domain/faction_planner_tests.gd.uid\n?? scripts/domain/strategic_geography.gd\n?? scripts/domain/strategic_geography.gd.uid\n?? scripts/domain/strategic_region.gd\n?? scripts/domain/strategic_region.gd.uid\n?? scripts/domain/strategic_region_tests.gd\n?? scripts/domain/strategic_region_tests.gd.uid\n?? scripts/domain/world_strategy.gd\n?? scripts/domain/world_strategy.gd.uid\n?? scripts/domain/world_strategy_tests.gd\n?? scripts/domain/world_strategy_tests.gd.uid\n?? scripts/presentation/combat_preview_consistency_tests.gd\n?? scripts/presentation/combat_preview_consistency_tests.gd.uid\n?? scripts/presentation/dungeon_preparation_context_tests.gd\n?? scripts/presentation/dungeon_preparation_context_tests.gd.uid\n?? scripts/presentation/stable_combat_actions_tests.gd\n?? scripts/presentation/stable_combat_actions_tests.gd.uid\n?? scripts/presentation/strategic_interface_tests.gd\n?? scripts/presentation/strategic_interface_tests.gd.uid\n?? scripts/presentation/world/strategic_map.gd\n?? scripts/presentation/world/strategic_map.gd.uid\n?? scripts/presentation/world/strategic_world_view.gd\n?? scripts/presentation/world/strategic_world_view.gd.uid\n?? scripts/qa/classic_fixture_export.gd\n?? scripts/qa/classic_fixture_export.gd.uid\n?? scripts/qa/living_contract_review.gd\n?? scripts/qa/living_contract_review.gd.uid\n?? scripts/qa/strategic_region_export.gd\n?? scripts/qa/strategic_region_export.gd.uid\n?? scripts/session/campaign_profile_kind.gd\n?? scripts/session/campaign_profile_kind.gd.uid\n?? scripts/session/classic_session_tests.gd\n?? scripts/session/classic_session_tests.gd.uid\n?? scripts/session/living_contract_regression_tests.gd\n?? scripts/session/living_contract_regression_tests.gd.uid\n?? scripts/session/regional_expedition_tests.gd\n?? scripts/session/regional_expedition_tests.gd.uid\n?? scripts/session/regional_session_tests.gd\n?? scripts/session/regional_session_tests.gd.uid\n?? scripts/session/strategic_session.gd\n?? scripts/session/strategic_session.gd.uid\n?? scripts/session/strategy_campaign_session.gd\n?? scripts/session/strategy_campaign_session.gd.uid\n?? scripts/session/strategy_campaign_session_tests.gd\n?? scripts/session/strategy_campaign_session_tests.gd.uid\n?? tests/test_classic_strategy.py\n?? tests/test_combat_playtest_regressions.py\n?? tests/test_strategic_region.py\n?? tests/test_strategy_foundation.py\n?? tools/validators/classic_strategy.py\n?? tools/validators/strategic_region.py\n?? tools/validators/strategy_world.py",
+  "source_sha256": "c9419c3f2fe045586a4f0f4b2c92804cd9a2d5e34ced113e039a9d69a9a4b737",
+  "checks": [
+    {
+      "name": "python_validation",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\.venv\\Scripts\\python.exe",
+        "tools/validators/validate_all.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 7.891,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\python_validation.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\python_validation.stderr.log"
+    },
+    {
+      "name": "python_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\.venv\\Scripts\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 5.313,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\python_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\python_tests.stderr.log"
+    },
+    {
+      "name": "godot_version",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--version"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.047,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\godot_version.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\godot_version.stderr.log"
+    },
+    {
+      "name": "godot_import",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--import"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 6.703,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\godot_import.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\godot_import.stderr.log"
+    },
+    {
+      "name": "classic_world_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/classic_world_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.11,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\classic_world_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\classic_world_tests.stderr.log"
+    },
+    {
+      "name": "combat_playtest_regression_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/combat_playtest_regression_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.937,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_playtest_regression_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_playtest_regression_tests.stderr.log"
+    },
+    {
+      "name": "combat_slice_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/combat_slice_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.828,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_slice_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_slice_tests.stderr.log"
+    },
+    {
+      "name": "dungeon_beta_loop_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/dungeon_beta_loop_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 3.25,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_beta_loop_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_beta_loop_tests.stderr.log"
+    },
+    {
+      "name": "dungeon_entry_selection_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/dungeon_entry_selection_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.641,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_entry_selection_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_entry_selection_tests.stderr.log"
+    },
+    {
+      "name": "dungeon_generation_quality_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/dungeon_generation_quality_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.782,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_generation_quality_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_generation_quality_tests.stderr.log"
+    },
+    {
+      "name": "dungeon_procedural_draft_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/dungeon_procedural_draft_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.109,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_procedural_draft_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_procedural_draft_tests.stderr.log"
+    },
+    {
+      "name": "dungeon_state_model_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/dungeon_state_model_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.641,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_state_model_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_state_model_tests.stderr.log"
+    },
+    {
+      "name": "faction_planner_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/faction_planner_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 89.515,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\faction_planner_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\faction_planner_tests.stderr.log"
+    },
+    {
+      "name": "large_region_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/large_region_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 33.063,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\large_region_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\large_region_tests.stderr.log"
+    },
+    {
+      "name": "living_world_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/living_world_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.203,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\living_world_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\living_world_tests.stderr.log"
+    },
+    {
+      "name": "region_generation_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/region_generation_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 21.578,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\region_generation_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\region_generation_tests.stderr.log"
+    },
+    {
+      "name": "strategic_region_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/strategic_region_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 16.016,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\strategic_region_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\strategic_region_tests.stderr.log"
+    },
+    {
+      "name": "terrain_navigation_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/terrain_navigation_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.109,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\terrain_navigation_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\terrain_navigation_tests.stderr.log"
+    },
+    {
+      "name": "world_strategy_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/world_strategy_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.828,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\world_strategy_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\world_strategy_tests.stderr.log"
+    },
+    {
+      "name": "ashen_exploration_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/ashen_exploration_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 4.906,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\ashen_exploration_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\ashen_exploration_tests.stderr.log"
+    },
+    {
+      "name": "asset_catalog_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/asset_catalog_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.954,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\asset_catalog_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\asset_catalog_tests.stderr.log"
+    },
+    {
+      "name": "campaign_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/campaign_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.406,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\campaign_interface_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\campaign_interface_tests.stderr.log"
+    },
+    {
+      "name": "character_style_preview_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat/character_style_preview_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.297,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\character_style_preview_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\character_style_preview_tests.stderr.log"
+    },
+    {
+      "name": "combat_animation_lifecycle_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_animation_lifecycle_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 4.812,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_animation_lifecycle_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_animation_lifecycle_tests.stderr.log"
+    },
+    {
+      "name": "combat_art_direction_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_art_direction_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.485,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_art_direction_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_art_direction_tests.stderr.log"
+    },
+    {
+      "name": "combat_debug_force_victory_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_debug_force_victory_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.937,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_debug_force_victory_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_debug_force_victory_tests.stderr.log"
+    },
+    {
+      "name": "combat_encounter_authoring_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_encounter_authoring_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.5,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_encounter_authoring_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_encounter_authoring_tests.stderr.log"
+    },
+    {
+      "name": "combat_feedback_polish_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_feedback_polish_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 6.203,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_feedback_polish_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_feedback_polish_tests.stderr.log"
+    },
+    {
+      "name": "combat_floating_text_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_floating_text_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.656,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_floating_text_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_floating_text_tests.stderr.log"
+    },
+    {
+      "name": "combat_hud_layout_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_hud_layout_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.391,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_hud_layout_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_hud_layout_tests.stderr.log"
+    },
+    {
+      "name": "combat_map_editor_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_map_editor_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.75,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_map_editor_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_map_editor_tests.stderr.log"
+    },
+    {
+      "name": "combat_mercenary_asset_pipeline_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_mercenary_asset_pipeline_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.828,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_mercenary_asset_pipeline_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_mercenary_asset_pipeline_tests.stderr.log"
+    },
+    {
+      "name": "combat_panel_skin_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_panel_skin_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.953,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_panel_skin_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_panel_skin_tests.stderr.log"
+    },
+    {
+      "name": "combat_preview_consistency_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_preview_consistency_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 74.235,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_preview_consistency_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_preview_consistency_tests.stderr.log"
+    },
+    {
+      "name": "combat_targeting_preview_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_targeting_preview_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.656,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_targeting_preview_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_targeting_preview_tests.stderr.log"
+    },
+    {
+      "name": "combat_terrain_asset_pipeline_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_terrain_asset_pipeline_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.203,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_terrain_asset_pipeline_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_terrain_asset_pipeline_tests.stderr.log"
+    },
+    {
+      "name": "combat_ui_asset_pipeline_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_ui_asset_pipeline_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.844,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_ui_asset_pipeline_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_ui_asset_pipeline_tests.stderr.log"
+    },
+    {
+      "name": "combat_unit_readability_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_unit_readability_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.297,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_unit_readability_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_unit_readability_tests.stderr.log"
+    },
+    {
+      "name": "combat_unit_visual_state_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_unit_visual_state_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.64,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_unit_visual_state_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\combat_unit_visual_state_tests.stderr.log"
+    },
+    {
+      "name": "dark_fantasy_ui_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/dark_fantasy_ui_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.734,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dark_fantasy_ui_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dark_fantasy_ui_tests.stderr.log"
+    },
+    {
+      "name": "drawn_animation_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/drawn_animation_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 9.719,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\drawn_animation_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\drawn_animation_tests.stderr.log"
+    },
+    {
+      "name": "drawn_battle_review_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/drawn_battle_review_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 38.781,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\drawn_battle_review_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\drawn_battle_review_tests.stderr.log"
+    },
+    {
+      "name": "dungeon_exploration_hud_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/dungeon_exploration_hud_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.828,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_exploration_hud_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_exploration_hud_tests.stderr.log"
+    },
+    {
+      "name": "dungeon_party_layout_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/dungeon_party_layout_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.11,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_party_layout_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_party_layout_tests.stderr.log"
+    },
+    {
+      "name": "dungeon_preparation_context_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/dungeon_preparation_context_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.765,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_preparation_context_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_preparation_context_tests.stderr.log"
+    },
+    {
+      "name": "dungeon_route_preview_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/dungeon_route_preview_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.204,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_route_preview_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_route_preview_tests.stderr.log"
+    },
+    {
+      "name": "dungeon_visual_cohesion_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/dungeon_visual_cohesion_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 3.515,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_visual_cohesion_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_visual_cohesion_tests.stderr.log"
+    },
+    {
+      "name": "environment_art_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/environment_art_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.485,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\environment_art_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\environment_art_tests.stderr.log"
+    },
+    {
+      "name": "equipment_usability_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/equipment_usability_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.953,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\equipment_usability_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\equipment_usability_tests.stderr.log"
+    },
+    {
+      "name": "expedition_art_direction_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/expedition_art_direction_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.125,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\expedition_art_direction_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\expedition_art_direction_tests.stderr.log"
+    },
+    {
+      "name": "hud_component_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/hud_component_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.75,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\hud_component_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\hud_component_tests.stderr.log"
+    },
+    {
+      "name": "inventory_stash_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/inventory_stash_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.015,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\inventory_stash_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\inventory_stash_tests.stderr.log"
+    },
+    {
+      "name": "journey_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/journey_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.938,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\journey_interface_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\journey_interface_tests.stderr.log"
+    },
+    {
+      "name": "live_combat_tooltip_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/live_combat_tooltip_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 6.937,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\live_combat_tooltip_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\live_combat_tooltip_tests.stderr.log"
+    },
+    {
+      "name": "living_motion_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/living_motion_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.562,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\living_motion_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\living_motion_tests.stderr.log"
+    },
+    {
+      "name": "living_world_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/living_world_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.516,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\living_world_interface_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\living_world_interface_tests.stderr.log"
+    },
+    {
+      "name": "map_authoring_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/map_authoring_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.391,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\map_authoring_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\map_authoring_tests.stderr.log"
+    },
+    {
+      "name": "modular_actor_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/modular_actor_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.672,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\modular_actor_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\modular_actor_tests.stderr.log"
+    },
+    {
+      "name": "original_raider_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/original_raider_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 8.328,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\original_raider_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\original_raider_tests.stderr.log"
+    },
+    {
+      "name": "original_roster_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/original_roster_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 5.937,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\original_roster_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\original_roster_tests.stderr.log"
+    },
+    {
+      "name": "painted_arena_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/painted_arena_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 22.11,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\painted_arena_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\painted_arena_tests.stderr.log"
+    },
+    {
+      "name": "painted_enemy_pilot_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/painted_enemy_pilot_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 42.015,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\painted_enemy_pilot_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\painted_enemy_pilot_tests.stderr.log"
+    },
+    {
+      "name": "region_foundry_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/region_foundry_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 6.016,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\region_foundry_interface_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\region_foundry_interface_tests.stderr.log"
+    },
+    {
+      "name": "scrollable_world_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/scrollable_world_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.687,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scrollable_world_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scrollable_world_tests.stderr.log"
+    },
+    {
+      "name": "service_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/service_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.11,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\service_interface_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\service_interface_tests.stderr.log"
+    },
+    {
+      "name": "stable_combat_actions_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/stable_combat_actions_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.672,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\stable_combat_actions_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\stable_combat_actions_tests.stderr.log"
+    },
+    {
+      "name": "strategic_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/strategic_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 4.625,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\strategic_interface_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\strategic_interface_tests.stderr.log"
+    },
+    {
+      "name": "tactical_environment_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/tactical_environment_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.39,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\tactical_environment_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\tactical_environment_tests.stderr.log"
+    },
+    {
+      "name": "tactical_facing_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/tactical_facing_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 8.328,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\tactical_facing_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\tactical_facing_tests.stderr.log"
+    },
+    {
+      "name": "tactical_locomotion_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/tactical_locomotion_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.688,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\tactical_locomotion_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\tactical_locomotion_tests.stderr.log"
+    },
+    {
+      "name": "terrain_editor_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/terrain_editor_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.203,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\terrain_editor_interface_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\terrain_editor_interface_tests.stderr.log"
+    },
+    {
+      "name": "town_exploration_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/town_exploration_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.922,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\town_exploration_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\town_exploration_tests.stderr.log"
+    },
+    {
+      "name": "visual_inventory_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/visual_inventory_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.297,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\visual_inventory_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\visual_inventory_tests.stderr.log"
+    },
+    {
+      "name": "world_town_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/world_town_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.39,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\world_town_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\world_town_tests.stderr.log"
+    },
+    {
+      "name": "campaign_equipment_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/campaign_equipment_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.11,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\campaign_equipment_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\campaign_equipment_tests.stderr.log"
+    },
+    {
+      "name": "campaign_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/campaign_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.75,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\campaign_session_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\campaign_session_tests.stderr.log"
+    },
+    {
+      "name": "classic_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/classic_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.109,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\classic_session_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\classic_session_tests.stderr.log"
+    },
+    {
+      "name": "dungeon_combat_injury_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/dungeon_combat_injury_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.641,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_combat_injury_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_combat_injury_tests.stderr.log"
+    },
+    {
+      "name": "dungeon_run_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/dungeon_run_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.656,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_run_session_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\dungeon_run_session_tests.stderr.log"
+    },
+    {
+      "name": "equipment_appearance_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/equipment_appearance_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.641,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\equipment_appearance_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\equipment_appearance_tests.stderr.log"
+    },
+    {
+      "name": "generated_region_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/generated_region_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.687,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\generated_region_session_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\generated_region_session_tests.stderr.log"
+    },
+    {
+      "name": "hero_equipment_identity_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/hero_equipment_identity_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 3.703,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\hero_equipment_identity_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\hero_equipment_identity_tests.stderr.log"
+    },
+    {
+      "name": "living_contract_regression_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/living_contract_regression_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 11.391,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\living_contract_regression_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\living_contract_regression_tests.stderr.log"
+    },
+    {
+      "name": "living_world_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/living_world_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.109,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\living_world_session_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\living_world_session_tests.stderr.log"
+    },
+    {
+      "name": "party_advancement_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/party_advancement_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.016,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\party_advancement_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\party_advancement_tests.stderr.log"
+    },
+    {
+      "name": "regional_expedition_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/regional_expedition_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 8.515,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\regional_expedition_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\regional_expedition_tests.stderr.log"
+    },
+    {
+      "name": "regional_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/regional_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 26.485,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\regional_session_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\regional_session_tests.stderr.log"
+    },
+    {
+      "name": "road_event_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/road_event_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.922,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\road_event_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\road_event_tests.stderr.log"
+    },
+    {
+      "name": "strategy_campaign_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/strategy_campaign_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.75,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\strategy_campaign_session_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\strategy_campaign_session_tests.stderr.log"
+    },
+    {
+      "name": "town_trade_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/town_trade_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.109,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\town_trade_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\town_trade_tests.stderr.log"
+    },
+    {
+      "name": "world_atlas_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/world_atlas_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.656,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\world_atlas_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\world_atlas_tests.stderr.log"
+    },
+    {
+      "name": "world_travel_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/world_travel_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.922,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\world_travel_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\world_travel_tests.stderr.log"
+    },
+    {
+      "name": "scene_StrategicWorld",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/StrategicWorld.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.61,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_StrategicWorld.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_StrategicWorld.stderr.log"
+    },
+    {
+      "name": "scene_RegionFoundry",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/RegionFoundry.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.218,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_RegionFoundry.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_RegionFoundry.stderr.log"
+    },
+    {
+      "name": "scene_TerrainEditor",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/TerrainEditor.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.75,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_TerrainEditor.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_TerrainEditor.stderr.log"
+    },
+    {
+      "name": "scene_LivingWorld",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/LivingWorld.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.828,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_LivingWorld.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_LivingWorld.stderr.log"
+    },
+    {
+      "name": "scene_App",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/app/App.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.829,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_App.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_App.stderr.log"
+    },
+    {
+      "name": "scene_town_shell",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/town/town_shell.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.828,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_town_shell.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_town_shell.stderr.log"
+    },
+    {
+      "name": "scene_TownExploration",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/town/TownExploration.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.75,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_TownExploration.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_TownExploration.stderr.log"
+    },
+    {
+      "name": "scene_DungeonDebug",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/dungeon/DungeonDebug.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.109,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_DungeonDebug.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_DungeonDebug.stderr.log"
+    },
+    {
+      "name": "scene_CombatDebug",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/combat/CombatDebug.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.203,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_CombatDebug.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_CombatDebug.stderr.log"
+    },
+    {
+      "name": "scene_CombatMapEditor",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/combat/CombatMapEditor.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.75,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_CombatMapEditor.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategic-region-20261109-final2\\scene_CombatMapEditor.stderr.log"
+    }
+  ],
+  "interactive": {
+    "status": "NOT_RUN",
+    "required_display": "DISPLAY1"
+  },
+  "godot_version": "4.7.stable.official.5b4e0cb0f",
+  "expected_check_count": 102,
+  "automated_status": "PASS",
+  "stage_status": "AWAITING_INTERACTIVE",
+  "finished_utc": "2026-11-09T19:51:08.961284+00:00"
+}

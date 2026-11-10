@@ -22,6 +22,17 @@ supplied with `--godot`; the existing workspace installation is the default.
 - World008 adds the isolated TownExploration preview to source/package scene
   boots. `-Scene town-preview` launches only that movement/dialogue study; it has
   no campaign save access and does not replace Ravenford's existing entry scene.
+- World018 adds StrategicWorld to source headless boots and `-Scene strategy`
+  as an explicit interactive option. Headless boot is memory-only; visible use
+  opens a separate seed/preset-specific strategy campaignv3, never a conversion
+  or reset of legacy/v1/v2 files. App remains the normal entry scene. The same
+  DISPLAY1/desktop-permission contract applies to this option.
+- World019 adds a separate StrategistWorld headless boot and `-Scene strategy-ai`.
+  This explicitly creates/resumes campaignv4, default classic, with authored offline
+  examples only. It cannot silently convert a v3 file or imply live inference.
+- World020 adds `strategy-vast` and `strategy-ai-vast` plus their bounded native
+  scene boots. Both explicitly select generatorv3 / separate Vast slots; old
+  `strategy`/`strategy-ai` still resume the existing Large slots. No save reset.
 - Each process has a wall-clock timeout; a timeout fails the run.
 - Capture stdout and stderr, command, exit code, duration and diagnostic counts.
 - Nonzero exits and `SCRIPT ERROR:`, `ERROR:` or assertion diagnostics fail a check,
@@ -64,6 +75,12 @@ record it in launch evidence. A regular launch writes an empty ID. CombatDebug
 resolves it through the catalogue only when no pending expedition or authoring
 draft owns the launch. This option does not change the project's normal encounter
 or write a campaign save. It follows the same DISPLAY1/no-input permission rules.
+
+Tests that require a particular encounter must explicitly load that fixture
+after CombatDebug initialization. A launcher-owned scenario override must not
+silently change their terrain, resource or outcome assumptions. In particular,
+the feedback and tactical-environment suites select `full_combat_showcase`;
+they must pass with an isolated movement-budget QA scenario selected locally.
 
 For input-delivery diagnosis, `start_game.ps1 -TraceInput` may pass
 `--qa-input-trace` to DungeonDebug. The scene logs its actual window mode,

@@ -142,7 +142,7 @@ static func course(profile: Dictionary,destination: Vector2,goal: String = "") -
 	return true
 
 static func travel_scale(state: Dictionary) -> float:
-	return 2.0 if int(state.get("geography",{}).get("version",1))==2 else 1.0
+	return float(Generator.world_scale(int(state.get("geography",{}).get("version",1))))
 static func _walk(unit: Dictionary,path: Array,distance: float,motion: Variant=null,state: Dictionary={}) -> bool:
 	var scale:=travel_scale(state)
 	var arrived: bool=navigation(state).walk(unit,path,distance/scale,motion)
@@ -283,10 +283,48 @@ static func _offers(state: Dictionary) -> void:
 			state.contracts[entry.id]={"stage":"offered"}
 			_log(state,"Contract posted in %s: %s." % [site(entry.issuer,state).name,entry.name])
 
+static func contract_availability(profile: Dictionary,id: String) -> Dictionary:
+	var result := {"accept_reason":"Living-world campaign is unavailable.","report_reason":"Living-world campaign is unavailable.","progress":""}
+	if not profile.has("living_world"): return result
+	var entry := contract(id)
+	if entry.is_empty():
+		result.accept_reason="Unknown contract."
+		result.report_reason="Unknown contract."
+		return result
+	var state: Dictionary=profile.living_world
+	var stage: String=str(state.contracts.get(id,{}).get("stage","unavailable"))
+	var issuer: String=str(site(entry.issuer,state).name)
+	var blocked := ""
+	if not profile.get("active_run",{}).is_empty() or not profile.get("world",{}).get("pending_event",{}).is_empty():
+		blocked="Resolve the expedition or road encounter first."
+	elif not at_site(state,entry.issuer):
+		blocked="Stop at %s to accept or report this contract." % issuer
+	result.accept_reason=blocked if stage=="offered" else "This contract is already accepted."
+	result.report_reason=blocked
+	if stage in ["completed","expired","unavailable"]:
+		var reason: String={"completed":"Contract already paid.","expired":"This contract is closed.","unavailable":"This contract is not available."}[stage]
+		result.accept_reason=reason
+		result.report_reason=reason
+		result.progress="Payment collected." if stage=="completed" else reason
+	elif stage=="offered":
+		result.report_reason="Accept this contract first."
+		result.progress="Accept at %s." % issuer
+	elif entry.kind=="delivery":
+		var food: int=int(profile.supplies.food)
+		result.progress="Food carried: %d/3. Deliver at %s." % [food,issuer]
+		if stage!="accepted": result.report_reason="This delivery is not ready to report."
+		elif blocked.is_empty() and food<3: result.report_reason="Need 3 food; carrying %d." % food
+	elif stage=="objective":
+		result.progress="Objective complete. Report to %s." % issuer
+	else:
+		result.progress="Visit %s, then report to %s." % [site(entry.target,state).name,issuer] if entry.kind=="scout" else "Clear the defended mine expedition, then report to %s." % issuer
+		if blocked.is_empty(): result.report_reason="Visit %s after accepting the contract." % site(entry.target,state).name if entry.kind=="scout" else "Complete the defended mine expedition first."
+	return result
+
 static func accept(profile: Dictionary,id: String) -> bool:
 	var state: Dictionary=profile.living_world
 	var entry:=contract(id)
-	if entry.is_empty() or not at_site(state,entry.issuer) or state.contracts.get(id,{}).get("stage","")!="offered": return false
+	if not str(contract_availability(profile,id).accept_reason).is_empty(): return false
 	state.contracts[id].stage="accepted"
 	_log(state,"Accepted: "+str(entry.name)+".")
 	return true
@@ -294,13 +332,10 @@ static func accept(profile: Dictionary,id: String) -> bool:
 static func report(profile: Dictionary,id: String) -> bool:
 	var state: Dictionary=profile.living_world
 	var entry:=contract(id)
-	if entry.is_empty() or not at_site(state,entry.issuer): return false
-	var stage: String=str(state.contracts.get(id,{}).get("stage",""))
+	if not str(contract_availability(profile,id).report_reason).is_empty(): return false
 	if entry.kind=="delivery":
-		if stage!="accepted" or int(profile.supplies.food)<3: return false
 		profile.supplies.food=int(profile.supplies.food)-3
 		state.settlements.saltwatch.supply=mini(100,int(state.settlements.saltwatch.supply)+24)
-	elif stage!="objective": return false
 	state.contracts[id].stage="completed"
 	profile.gold=int(profile.gold)+int(entry.gold)
 	profile.xp=int(profile.xp)+int(entry.xp)

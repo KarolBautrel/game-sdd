@@ -1,0 +1,402 @@
+[
+  {
+    "action": "ranged_attack",
+    "actor": "unit_player_002",
+    "command": 1,
+    "committed_damage": 2,
+    "hp_after": 10,
+    "label": "87% HIT\nDMG 2\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 2
+  },
+  {
+    "action": "ranged_attack",
+    "actor": "unit_player_002",
+    "command": 19,
+    "committed_damage": 2,
+    "hp_after": 10,
+    "label": "87% HIT\nDMG 2\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 2
+  },
+  {
+    "action": "ranged_attack",
+    "actor": "unit_player_002",
+    "command": 42,
+    "committed_damage": 2,
+    "hp_after": 10,
+    "label": "87% HIT\nDMG 2\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 2
+  },
+  {
+    "action": "ranged_attack",
+    "actor": "unit_player_002",
+    "command": 599,
+    "committed_damage": -1,
+    "hp_after": 12.0,
+    "label": "87% HIT\nROLL 92 MISS\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": -1
+  },
+  {
+    "action": "ranged_attack",
+    "actor": "unit_player_002",
+    "command": 1,
+    "committed_damage": 2,
+    "hp_after": 0,
+    "label": "87% HIT\nDMG 2\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 2
+  },
+  {
+    "action": "ranged_attack",
+    "actor": "unit_player_002",
+    "command": 19,
+    "committed_damage": 2,
+    "hp_after": 0,
+    "label": "87% HIT\nDMG 2\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 2
+  },
+  {
+    "action": "ranged_attack",
+    "actor": "unit_player_002",
+    "command": 42,
+    "committed_damage": 2,
+    "hp_after": 0,
+    "label": "87% HIT\nDMG 2\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 2
+  },
+  {
+    "action": "ranged_attack",
+    "actor": "unit_player_002",
+    "command": 599,
+    "committed_damage": -1,
+    "hp_after": 1,
+    "label": "87% HIT\nROLL 92 MISS\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": -1
+  },
+  {
+    "action": "aimed_shot",
+    "actor": "unit_player_002",
+    "command": 1,
+    "committed_damage": 3,
+    "hp_after": 9,
+    "label": "95% HIT\nDMG 3\nCOST 2 AP",
+    "low_hp": false,
+    "preview_damage": 3
+  },
+  {
+    "action": "aimed_shot",
+    "actor": "unit_player_002",
+    "command": 19,
+    "committed_damage": 3,
+    "hp_after": 9,
+    "label": "95% HIT\nDMG 3\nCOST 2 AP",
+    "low_hp": false,
+    "preview_damage": 3
+  },
+  {
+    "action": "aimed_shot",
+    "actor": "unit_player_002",
+    "command": 42,
+    "committed_damage": 3,
+    "hp_after": 9,
+    "label": "95% HIT\nDMG 3\nCOST 2 AP",
+    "low_hp": false,
+    "preview_damage": 3
+  },
+  {
+    "action": "aimed_shot",
+    "actor": "unit_player_002",
+    "command": 599,
+    "committed_damage": 3,
+    "hp_after": 9,
+    "label": "95% HIT\nDMG 3\nCOST 2 AP",
+    "low_hp": false,
+    "preview_damage": 3
+  },
+  {
+    "action": "aimed_shot",
+    "actor": "unit_player_002",
+    "command": 1,
+    "committed_damage": 3,
+    "hp_after": 0,
+    "label": "95% HIT\nDMG 3\nCOST 2 AP",
+    "low_hp": true,
+    "preview_damage": 3
+  },
+  {
+    "action": "aimed_shot",
+    "actor": "unit_player_002",
+    "command": 19,
+    "committed_damage": 3,
+    "hp_after": 0,
+    "label": "95% HIT\nDMG 3\nCOST 2 AP",
+    "low_hp": true,
+    "preview_damage": 3
+  },
+  {
+    "action": "aimed_shot",
+    "actor": "unit_player_002",
+    "command": 42,
+    "committed_damage": 3,
+    "hp_after": 0,
+    "label": "95% HIT\nDMG 3\nCOST 2 AP",
+    "low_hp": true,
+    "preview_damage": 3
+  },
+  {
+    "action": "aimed_shot",
+    "actor": "unit_player_002",
+    "command": 599,
+    "committed_damage": 3,
+    "hp_after": 0,
+    "label": "95% HIT\nDMG 3\nCOST 2 AP",
+    "low_hp": true,
+    "preview_damage": 3
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_rogue_pilot",
+    "command": 1,
+    "committed_damage": 3,
+    "hp_after": 9,
+    "label": "100% HIT\nDMG 3\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 3
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_rogue_pilot",
+    "command": 19,
+    "committed_damage": 3,
+    "hp_after": 9,
+    "label": "100% HIT\nDMG 3\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 3
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_rogue_pilot",
+    "command": 42,
+    "committed_damage": 3,
+    "hp_after": 9,
+    "label": "100% HIT\nDMG 3\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 3
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_rogue_pilot",
+    "command": 599,
+    "committed_damage": 3,
+    "hp_after": 9,
+    "label": "100% HIT\nDMG 3\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 3
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_rogue_pilot",
+    "command": 1,
+    "committed_damage": 3,
+    "hp_after": 0,
+    "label": "100% HIT\nDMG 3\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 3
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_rogue_pilot",
+    "command": 19,
+    "committed_damage": 3,
+    "hp_after": 0,
+    "label": "100% HIT\nDMG 3\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 3
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_rogue_pilot",
+    "command": 42,
+    "committed_damage": 3,
+    "hp_after": 0,
+    "label": "100% HIT\nDMG 3\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 3
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_rogue_pilot",
+    "command": 599,
+    "committed_damage": 3,
+    "hp_after": 0,
+    "label": "100% HIT\nDMG 3\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 3
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_player_001",
+    "command": 1,
+    "committed_damage": 4,
+    "hp_after": 8,
+    "label": "100% HIT\nDMG 4\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 4
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_player_001",
+    "command": 19,
+    "committed_damage": 4,
+    "hp_after": 8,
+    "label": "100% HIT\nDMG 4\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 4
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_player_001",
+    "command": 42,
+    "committed_damage": 4,
+    "hp_after": 8,
+    "label": "100% HIT\nDMG 4\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 4
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_player_001",
+    "command": 599,
+    "committed_damage": 4,
+    "hp_after": 8,
+    "label": "100% HIT\nDMG 4\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 4
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_player_001",
+    "command": 1,
+    "committed_damage": 4,
+    "hp_after": 0,
+    "label": "100% HIT\nDMG 4\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 4
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_player_001",
+    "command": 19,
+    "committed_damage": 4,
+    "hp_after": 0,
+    "label": "100% HIT\nDMG 4\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 4
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_player_001",
+    "command": 42,
+    "committed_damage": 4,
+    "hp_after": 0,
+    "label": "100% HIT\nDMG 4\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 4
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_player_001",
+    "command": 599,
+    "committed_damage": 4,
+    "hp_after": 0,
+    "label": "100% HIT\nDMG 4\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 4
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_knight_pilot",
+    "command": 1,
+    "committed_damage": 6,
+    "hp_after": 6,
+    "label": "100% HIT\nDMG 6\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 6
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_knight_pilot",
+    "command": 19,
+    "committed_damage": 6,
+    "hp_after": 6,
+    "label": "100% HIT\nDMG 6\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 6
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_knight_pilot",
+    "command": 42,
+    "committed_damage": 6,
+    "hp_after": 6,
+    "label": "100% HIT\nDMG 6\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 6
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_knight_pilot",
+    "command": 599,
+    "committed_damage": 6,
+    "hp_after": 6,
+    "label": "100% HIT\nDMG 6\nCOST 1 AP",
+    "low_hp": false,
+    "preview_damage": 6
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_knight_pilot",
+    "command": 1,
+    "committed_damage": 6,
+    "hp_after": 0,
+    "label": "100% HIT\nDMG 6\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 6
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_knight_pilot",
+    "command": 19,
+    "committed_damage": 6,
+    "hp_after": 0,
+    "label": "100% HIT\nDMG 6\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 6
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_knight_pilot",
+    "command": 42,
+    "committed_damage": 6,
+    "hp_after": 0,
+    "label": "100% HIT\nDMG 6\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 6
+  },
+  {
+    "action": "basic_attack",
+    "actor": "unit_knight_pilot",
+    "command": 599,
+    "committed_damage": 6,
+    "hp_after": 0,
+    "label": "100% HIT\nDMG 6\nCOST 1 AP",
+    "low_hp": true,
+    "preview_damage": 6
+  }
+]

@@ -14,6 +14,15 @@ feedback. The sidebar presents actual selected/current location, supplies/
 security, faction relationships, contracts, camp/inn/provision actions and mine
 entry/resume. Prices and availability come from CampaignSession/domain state.
 
+Contract cards show domain-provided progress: carried delivery food versus3,
+the unvisited scouting target, readiness to return to the issuer, or paid/closed
+state. Disabled Accept/Report controls expose the exact current domain reason
+in their tooltips; enabled controls describe the action. Campaign rejection
+feedback uses the same reason. Recompute after stock, location, movement,
+objective or event/run changes without rebuilding cards. Preserve accepted art,
+styles and prices. Headless availability/layout checks are technical evidence;
+ordinary desktop readability and play remain deferred when controls are held.
+
 Keep leather/brass, parchment, Cinzel/Source Sans and readable native focus.
 Map and inspector have independent bounds/scrolling at720p/1080p; the illustrated
 map must remain visible while reading long contracts. Clicking/pausing/selection

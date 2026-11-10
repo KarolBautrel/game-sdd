@@ -1,0 +1,89 @@
+{
+  "schema": "sdd.physical-followup-v1",
+  "recorded_utc": "2026-11-05T17:00:47.790784+00:00",
+  "branch": "master",
+  "head": "583ebc84267bacf4497e01f5a7dfbdf0caf3d9f2",
+  "desktop": "larger left DISPLAY1; windowed",
+  "authorization": "Latest user: Dobra, kontynuuj; resumes previously withheld desktop permission.",
+  "runtime_source_sha256": "ab530fde0f2cc6ec6d7f616326b298dc0ff29703773d3b9a8b978874be86b2f9",
+  "later_changes": "Four isolated catalogue fixtures, regression assertions and deterministic test fixture selection only; no gameplay/art change.",
+  "results": {
+    "L87-01": {
+      "status": "PASS",
+      "painted_six": "Same blocked target rejects basic and Aimed with AP/cooldown intact; clear Aimed at another target and basic after actual detour legal.",
+      "exact_detour": "Static qa_bow_los_detour, original slice63 bow/stats,2AP/3MP. Both blocked at actor1,1 ->target4,1. Two independent UI runs each move to3,2 for3MP, retaining2AP. Aimed then hits for5 (10->5HP), costs2AP; after normal fixture Load, basic hits for3 (10->7HP), costs1AP. Both clear previews match actual damage.",
+      "limitation": "QA-only legacy fixture uses generic Bran visual despite a hunting_bow loadout; this verifies resolver/HUD LOS, not weapon art or an ordinary victory."
+    },
+    "L88-01": {
+      "status": "PASS",
+      "observed": "Spear at10,5 exhausts AP on Bran, retains3MP and immediately ends. Further spear and campaign ranged actors also pass without extra movement."
+    },
+    "L89-01": {
+      "status": "PASS",
+      "observed": "Static fixtures:1MP highground passes unchanged;2MP highground moves1,1 to2,1 for2MP;1MP floor moves for1MP. All preserve1AP."
+    },
+    "L77-01-mine-contract": {
+      "status": "PASS",
+      "seed": 20261107,
+      "preset": "Marches",
+      "size": "Large",
+      "region": "Ashenvale Highlands",
+      "profile": "qa_living_world_generated_v2_marches_20261107.json",
+      "ordinary_victory_round": 3,
+      "survivors": {
+        "Bran": "12/14",
+        "Torin": "4/10"
+      },
+      "flow": "Fresh80g/16Food, accept contract, normal travel, owned7/7 packing, Use Old Mine, entrance/crossing/cache, ordinary two-hero victory with every enemy turn run by AI, claim7g/12XP/rusty_key, Lower Exit completion, restored mine, return Ravenford,45g/20XP/+10River League report.",
+      "reward_once_and_exact_reload": true
+    },
+    "L77-01-full": {
+      "status": "PARTIAL",
+      "open": "Delivery, reconnaissance, camping, raids/conflict and other broad world acceptance subcases are not closed by the mine loop."
+    },
+    "painted-six-postfix": {
+      "status": "VICTORY_WITH_TEST_LIMITATION",
+      "round": 3,
+      "survivors": {
+        "Knight": "14/14",
+        "Bran": "12/14",
+        "Torin": "2/10",
+        "Rogue": "10/10"
+      },
+      "limitation": "An input during a transition accidentally skipped the first Axe I turn. Exclude this replay from clean ordinary-enemy-policy victory evidence; preserve earlier L84-03 ordinary victory."
+    }
+  },
+  "old_profile_correction": "20261106 was already exhausted in the pre-input campaign-before.json baseline. The earlier Day1 handoff was stale; no offline-progress bug inferred. Used a new20261107 QA profile without resetting the old one.",
+  "timing_limitation": "4x travel plus operator observation latency advanced unused calendar time before pausing. FinalDay6 09:30, Food1, fatigue73; not a travel balance/pace acceptance.",
+  "unresolved_observation": "Some Painted Six preview labels appeared to show2 damage before3 applied. Reproduce in isolation before declaring a bug; campaign Aimed4 and melee5 matched their previews.",
+  "diagnostics": {
+    "closed_runtime_logs": [
+      "game-20261105T145632543.log",
+      "game-20261105T155418601.log",
+      "game-20261105T163025619.log",
+      "game-20261105T163949174.log",
+      "game-20261105T165614699.log"
+    ],
+    "errors": 0,
+    "warnings": 0
+  },
+  "untouched_existing_profiles": 8,
+  "art_and_terrain_preserved": true,
+  "own_test_windows_closed": true,
+  "user_visual_motion_acceptance": "PENDING",
+  "commit_push": "Not requested; local changes retained.",
+  "final_automated": {
+    "run_id": "physical-followup-complete-final",
+    "source_sha256": "f0d2a9b6c8579856490a03ddd26aa62e431715b82167a5ec36fca77dd56ac5ce",
+    "started_utc": "2026-11-05T17:01:56.192278+00:00",
+    "finished_utc": "2026-11-05T17:07:03.203787+00:00",
+    "automated_status": "PASS",
+    "checks": 90,
+    "errors": 0,
+    "warnings": 0,
+    "source_matches_after_run": true,
+    "focused_godot_checks": 161,
+    "python_tests": 75,
+    "preexisting_profiles_still_unchanged_after_run": 8
+  }
+}

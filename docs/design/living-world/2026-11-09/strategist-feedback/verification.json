@@ -1,0 +1,131 @@
+{
+  "scope": "targeted presentation-only follow-up96b",
+  "source_sha256": "e16ac01c2b989278d3d38e2f5bfcc353f566caf386885b0faf517a6f62233276",
+  "git_head": "583ebc84267bacf4497e01f5a7dfbdf0caf3d9f2",
+  "interactive": "NOT_RUN",
+  "checks": [
+    {
+      "name": "python_validation",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\.venv\\Scripts\\python.exe",
+        "tools/validators/validate_all.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 8.594,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategist-feedback-20261109\\python_validation.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategist-feedback-20261109\\python_validation.stderr.log"
+    },
+    {
+      "name": "godot_import",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--import"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 7.171,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategist-feedback-20261109\\godot_import.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategist-feedback-20261109\\godot_import.stderr.log"
+    },
+    {
+      "name": "strategist_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/strategist_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 9.36,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategist-feedback-20261109\\strategist_interface_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategist-feedback-20261109\\strategist_interface_tests.stderr.log"
+    },
+    {
+      "name": "strategic_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/strategic_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 5.0,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategist-feedback-20261109\\strategic_interface_tests.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategist-feedback-20261109\\strategic_interface_tests.stderr.log"
+    },
+    {
+      "name": "scene_StrategistWorld",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/StrategistWorld.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.687,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategist-feedback-20261109\\scene_StrategistWorld.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategist-feedback-20261109\\scene_StrategistWorld.stderr.log"
+    },
+    {
+      "name": "scene_StrategicWorld",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/StrategicWorld.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.594,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "artifacts\\qa-runs\\strategist-feedback-20261109\\scene_StrategicWorld.stdout.log",
+      "stderr": "artifacts\\qa-runs\\strategist-feedback-20261109\\scene_StrategicWorld.stderr.log"
+    }
+  ],
+  "current_source_sha256": "e16ac01c2b989278d3d38e2f5bfcc353f566caf386885b0faf517a6f62233276",
+  "source_matches": true,
+  "automated_status": "PASS",
+  "player_save_before": "f633df0c3c206bc518986e698a8b736bac28db687e81e00d877e703dbe91ca6f",
+  "player_save_after": "f633df0c3c206bc518986e698a8b736bac28db687e81e00d877e703dbe91ca6f",
+  "player_save_unchanged": true
+}

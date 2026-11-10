@@ -69,6 +69,23 @@ Campaign settlement marks the objective, clears the mine and changes supply/
 security atomically with the existing dungeon receipt. Report pays the contract
 once. The changed mine persists and cannot be farmed by revisiting/reloading.
 
+Contract transaction acceptance also covers absent/duplicate offers, incorrect
+issuer, a stale location_id while the company is physically elsewhere or still
+moving, insufficient owned food, pending encounters and failed disk writes.
+Rejected commands preserve the whole campaign snapshot and existing save bytes.
+Delivery consumes exactly3food once and changes Saltwatch supply by24 capped100;
+scouting grants nothing before the accepted objective is actually visited.
+Reporting uses the configured rewards, bounded faction relations and existing
+Iron March tension/rival-relation effects. Reload cannot make a paid job payable.
+Slice015 extends background proof; no new economy values or contract pool.
+
+A read-only contract availability query owns acceptance/reporting reasons as
+well as progress copy. Commands and the living-world interface use this same
+query instead of independent eligibility rules. Explain unknown/unoffered/paid /
+closed contracts, unresolved expedition/events, actual issuer stationarity,
+missing delivery food and incomplete scouting/restoration. A query changes no
+profile, clock, journal or save. It does not reserve stock or grant rewards.
+
 Dungeon world time advances at checkpointed room visits and camps, not every
 autosave: one tick per newly visited room,16ticks per newly used camp. Counters
 live in the active run, so retries/reload cannot charge twice. The simulation

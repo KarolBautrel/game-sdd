@@ -55,7 +55,7 @@ func run() -> void:
 	check(not Gen.errors(bad).is_empty(),"rechecksummed road through blocked border rejected")
 	bad=Gen.generate(2087,"marches");bad.bridges[0].position={"x":.001,"y":.001};bad.checksum=Gen.checksum(bad)
 	check(not Gen.errors(bad).is_empty(),"rechecksummed false bridge rejected")
-	check(Gen.generate(0).is_empty() and Gen.generate(1,"missing").is_empty() and Gen.generate(1,"marches",3).is_empty(),"invalid generator inputs refused")
+	check(Gen.generate(0).is_empty() and Gen.generate(1,"missing").is_empty() and Gen.generate(1,"marches",4).is_empty(),"invalid generator inputs refused")
 	check(Terrain.current()==authored and FileAccess.get_file_as_string(Terrain.PATH)==authored_bytes,"preview batch never replaces authored navigation or designer bytes")
 	print("Generator batch:72inputs, max_ms=",max_msec," attempts=",attempts)
 	for failure in failures: push_error(failure)

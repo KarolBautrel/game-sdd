@@ -1,0 +1,15 @@
+{
+  "run_id": "vast-worlds-20261110-final",
+  "source_sha256": "d95384ec3ed753bf6390f295d7069cb22294175306e21ec23a532b0f457a42bf",
+  "current_source_sha256": "d95384ec3ed753bf6390f295d7069cb22294175306e21ec23a532b0f457a42bf",
+  "source_matches": true,
+  "passed": 113,
+  "expected": 113,
+  "errors": 0,
+  "warnings": 0,
+  "interactive": "NOT_RUN",
+  "git_head": "583ebc84267bacf4497e01f5a7dfbdf0caf3d9f2",
+  "ordinary_commands_sha256": "364f1bf088b5218a855ecf8809732f3f65e57cf7344322697c0857a9e9d3a980",
+  "vast_reference_sha256": "f3f740ad7564c80c47039d54e02de0544d1dc22bfeaefe2a97e4517ceaf11628",
+  "supplementary_foundry_checks": 11
+}

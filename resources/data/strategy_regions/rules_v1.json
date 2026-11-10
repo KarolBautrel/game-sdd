@@ -1,0 +1,21 @@
+{
+  "schema": "sdd.region-rules",
+  "version": 1,
+  "food_ratio": 4,
+  "offer_ticks": 288,
+  "cooldown_ticks": 672,
+  "delivery": {
+    "gold": 12,
+    "xp": 3,
+    "party_food": 3,
+    "world_food": 12
+  },
+  "recon": {
+    "gold": 14,
+    "xp": 4
+  },
+  "restoration": {
+    "gold": 28,
+    "xp": 12
+  }
+}

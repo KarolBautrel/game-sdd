@@ -1,0 +1,15 @@
+{
+  "run_id": "strategist-adapter-20261109-final",
+  "source_sha256": "b5f340968b43172bbc99c3396264c0862e3b874b8030560bd158f02f7b49e3d0",
+  "current_source_sha256": "b5f340968b43172bbc99c3396264c0862e3b874b8030560bd158f02f7b49e3d0",
+  "source_matches": true,
+  "passed": 107,
+  "expected": 107,
+  "errors": 0,
+  "warnings": 0,
+  "interactive": "NOT_RUN",
+  "git_head": "583ebc84267bacf4497e01f5a7dfbdf0caf3d9f2",
+  "ordinary_commands_sha256": "551aa43e1810c7be30a4c42b3299164f72d6b044e9d6d661926a4e893d1e56b7",
+  "checkpoint_sha256": "5158f9dbff4ae4382e10180d37562c4387488f99f0b57faea7c74b4a280d7832",
+  "contingency_checks": 9
+}

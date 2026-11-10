@@ -1,0 +1,120 @@
+{
+  "schema": "sdd.physical-play-receipt-v1",
+  "date": "2026-11-05",
+  "scenario": "drawn_roster_skirmish",
+  "label": "Painted Six - Old Mine",
+  "seed": 2001,
+  "input": "Ordinary mouse/keyboard on larger left DISPLAY1 before user reclaimed desktop",
+  "source_sha256": "072abfea07accbc7cf1edcb51c75d23b04813fbf35158caefcff42f4f52fb5c0",
+  "source_scope": "stage85/86, before stage87..89 fixes",
+  "outcome": "victory",
+  "round": 3,
+  "survivors_hp": {
+    "Knight": [
+      14,
+      14
+    ],
+    "Bran": [
+      10,
+      14
+    ],
+    "Torin": [
+      10,
+      10
+    ],
+    "Rogue": [
+      10,
+      10
+    ]
+  },
+  "forced_state_or_debug_win": false,
+  "enemy_commands": "Ordinary AI policy stepped through Tools / Next turn step",
+  "capture": {
+    "file": "painted-six-victory.jpg",
+    "format": "JPEG",
+    "size": [
+      2882,
+      1668
+    ],
+    "unchanged_bytes": true,
+    "sha256": "a34f6ef7cf67ed54c4fb0ea0602845ca83ff092f90b104e3896bd659319e1e55"
+  },
+  "runtime_log": "painted-six-runtime.log",
+  "observed_defects": [
+    "aimed_shot bypassed intermediate blocked terrain",
+    "enemy with zero AP spent remaining MP approaching other heroes"
+  ],
+  "next_physical_checks": [
+    "L87-01",
+    "L88-01",
+    "L89-01",
+    "L77-01"
+  ],
+  "campaign_attempt": {
+    "seed": 20261106,
+    "preset": "marches",
+    "size": "Large",
+    "region": "Northbarrow Highlands",
+    "stopped": "Paused Ravenford, Contracts tab; mine job not yet accepted",
+    "starting_resources": {
+      "day": 1,
+      "time": "08:00",
+      "gold": 80,
+      "food": 16,
+      "fatigue": 0
+    },
+    "profile": "qa_living_world_generated_v2_marches_20261106.json",
+    "result": "INCOMPLETE; user reclaimed controls"
+  },
+  "existing_save_comparison": [
+    {
+      "file": "campaign_v1.json",
+      "before_sha256": "9a485f2e205a55d1c82361a46687053d2e7983f260e215aa13d0bf7c3fee7301",
+      "after_sha256": "9a485f2e205a55d1c82361a46687053d2e7983f260e215aa13d0bf7c3fee7301",
+      "unchanged": true
+    },
+    {
+      "file": "qa-travel-253691.json",
+      "before_sha256": "e4c7a0158508d7184a04ac123d15b0d5176714bf6ae0448678dd3cbc1b0be711",
+      "after_sha256": "e4c7a0158508d7184a04ac123d15b0d5176714bf6ae0448678dd3cbc1b0be711",
+      "unchanged": true
+    },
+    {
+      "file": "qa_hero_equipment_pilot_v1.json",
+      "before_sha256": "52393c9fbd296812ad197bf109c81f4da0cf1d59b094d9075a9924944f8726f0",
+      "after_sha256": "52393c9fbd296812ad197bf109c81f4da0cf1d59b094d9075a9924944f8726f0",
+      "unchanged": true
+    },
+    {
+      "file": "qa_living_world_generated_v2_marches_20261105.json",
+      "before_sha256": "dfbb42bdfe0effc65c4287738a6e2a0c81970a3a954b2f1623d2def30a68ea18",
+      "after_sha256": "dfbb42bdfe0effc65c4287738a6e2a0c81970a3a954b2f1623d2def30a68ea18",
+      "unchanged": true
+    },
+    {
+      "file": "qa_living_world_generated_v2_marches_2087.json",
+      "before_sha256": "6d321b18551de2de1567f44fe68ee7ae87f359ea7d4db7246d5c139e2ea240cf",
+      "after_sha256": "6d321b18551de2de1567f44fe68ee7ae87f359ea7d4db7246d5c139e2ea240cf",
+      "unchanged": true
+    },
+    {
+      "file": "qa_living_world_v1.json",
+      "before_sha256": "52c1c10119a9fe90d765b428c82f64fc74613a0932692e13607b3fef243bed33",
+      "after_sha256": "52c1c10119a9fe90d765b428c82f64fc74613a0932692e13607b3fef243bed33",
+      "unchanged": true
+    },
+    {
+      "file": "stage4_manual.json",
+      "before_sha256": "d8d6debd275e969154af9729f325c445043efd8403c973aa35d85dd2747a98da",
+      "after_sha256": "d8d6debd275e969154af9729f325c445043efd8403c973aa35d85dd2747a98da",
+      "unchanged": true
+    },
+    {
+      "file": "terrain_editor_previous.json",
+      "before_sha256": "fec3e189ff3caf3d32041db469abcb9d948f5de6843bddb225f38e4c95386990",
+      "after_sha256": "fec3e189ff3caf3d32041db469abcb9d948f5de6843bddb225f38e4c95386990",
+      "unchanged": true
+    }
+  ],
+  "post_fix_physical_status": "NOT_RUN; no OS input while user uses desktop"
+}

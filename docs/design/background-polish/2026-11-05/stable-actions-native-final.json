@@ -1,0 +1,452 @@
+{
+  "checks": [
+    {
+      "pass": true,
+      "scenario": "native play display"
+    },
+    {
+      "pass": true,
+      "scenario": "no-focus minimized play host"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: stable-actions-ready"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: stable-actions-ready"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "native spending AP retains all action positions/keys"
+    },
+    {
+      "pass": true,
+      "scenario": "native insufficient AP has explicit disabled reason"
+    },
+    {
+      "pass": true,
+      "scenario": "native disabled click/number never selects an adjacent action"
+    },
+    {
+      "pass": true,
+      "scenario": "native disabled hover reports actual AP deficit"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: stable-actions-insufficient-ap"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: stable-actions-insufficient-ap"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "native first numeric slot still selects Move after all AP spent"
+    },
+    {
+      "pass": true,
+      "scenario": "native ordinary full-MP destination exists"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "native full-MP move commits normally"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted tray stays fixed and selects End turn"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state move"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD move"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state basic_attack"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD basic_attack"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state power_strike"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD power_strike"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state defend"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD defend"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state end_turn"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD end_turn"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: stable-actions-exhausted"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: stable-actions-exhausted"
+    },
+    {
+      "pass": true,
+      "scenario": "native stable End turn number advances normally"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "native real Shield wall cooldown remains visible"
+    },
+    {
+      "pass": true,
+      "scenario": "native real cooldown retains button geometry"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: stable-actions-cooldown"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: stable-actions-cooldown"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: stable-actions-ready"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: stable-actions-ready"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "native spending AP retains all action positions/keys"
+    },
+    {
+      "pass": true,
+      "scenario": "native insufficient AP has explicit disabled reason"
+    },
+    {
+      "pass": true,
+      "scenario": "native disabled click/number never selects an adjacent action"
+    },
+    {
+      "pass": true,
+      "scenario": "native disabled hover reports actual AP deficit"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: stable-actions-insufficient-ap"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: stable-actions-insufficient-ap"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "native first numeric slot still selects Move after all AP spent"
+    },
+    {
+      "pass": true,
+      "scenario": "native ordinary full-MP destination exists"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "native full-MP move commits normally"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted tray stays fixed and selects End turn"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state move"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD move"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state basic_attack"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD basic_attack"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state power_strike"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD power_strike"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state defend"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD defend"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state end_turn"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD end_turn"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: stable-actions-exhausted"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: stable-actions-exhausted"
+    },
+    {
+      "pass": true,
+      "scenario": "native stable End turn number advances normally"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "native real Shield wall cooldown remains visible"
+    },
+    {
+      "pass": true,
+      "scenario": "native real cooldown retains button geometry"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: stable-actions-cooldown"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: stable-actions-cooldown"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: stable-actions-ready"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: stable-actions-ready"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "native spending AP retains all action positions/keys"
+    },
+    {
+      "pass": true,
+      "scenario": "native insufficient AP has explicit disabled reason"
+    },
+    {
+      "pass": true,
+      "scenario": "native disabled click/number never selects an adjacent action"
+    },
+    {
+      "pass": true,
+      "scenario": "native disabled hover reports actual AP deficit"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: stable-actions-insufficient-ap"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: stable-actions-insufficient-ap"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "native first numeric slot still selects Move after all AP spent"
+    },
+    {
+      "pass": true,
+      "scenario": "native ordinary full-MP destination exists"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "native full-MP move commits normally"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted tray stays fixed and selects End turn"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state move"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD move"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state basic_attack"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD basic_attack"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state power_strike"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD power_strike"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state defend"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD defend"
+    },
+    {
+      "pass": true,
+      "scenario": "native exhausted enabled state end_turn"
+    },
+    {
+      "pass": true,
+      "scenario": "native fixed action stays inside HUD end_turn"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: stable-actions-exhausted"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: stable-actions-exhausted"
+    },
+    {
+      "pass": true,
+      "scenario": "native stable End turn number advances normally"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "native real Shield wall cooldown remains visible"
+    },
+    {
+      "pass": true,
+      "scenario": "native real cooldown retains button geometry"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: stable-actions-cooldown"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: stable-actions-cooldown"
+    },
+    {
+      "pass": true,
+      "scenario": "play review acquired no focus"
+    }
+  ],
+  "display": "Windows",
+  "engine_clicks": 18,
+  "engine_key_events": 18,
+  "failures": [],
+  "kind": "native play GPU and engine-local input fixture",
+  "player_save_used": false,
+  "renderer": "forward_plus",
+  "status": "PASS",
+  "texture_memory_bytes": 112160768,
+  "uses_desktop_input": false,
+  "window_focused": false,
+  "window_minimized": true,
+  "exit_code": 0,
+  "errors": 0,
+  "warnings": 0,
+  "physical_desktop_acceptance": "NOT_RUN",
+  "packaged_build": false,
+  "source_report": "artifacts/qa-runs/stable-actions-native-final/native-review.json",
+  "captures": [
+    {
+      "file": "stable-actions-exhausted-1280x720.png",
+      "sha256": "2228901624f76fb130bce53bb289462c5ca43a7f0a51a0064094bc308f98bfee"
+    },
+    {
+      "file": "stable-actions-cooldown-1920x1080.png",
+      "sha256": "a1d108716ca80390f52a526d781cd4cf62510b4a9eb7e594f0ed95f8b04598ea"
+    }
+  ]
+}

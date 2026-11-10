@@ -1,0 +1,12 @@
+{
+  "schema": "sdd.strategist-examples",
+  "version": 1,
+  "provenance": "Authored offline protocol fixtures; no live-model output.",
+  "preferred_goals": {
+    "river_league": "commerce",
+    "iron_march": "hold",
+    "cinder_compact": "supplies",
+    "thornwood_accord": "commerce"
+  },
+  "default_goal": "hold"
+}

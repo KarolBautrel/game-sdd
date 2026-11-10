@@ -1,0 +1,13 @@
+{
+  "run_id": "classic-strategy-20261109-final2",
+  "source_sha256": "1d5b94e37dd22c9f38f07970a16ff38262a51b176b5bc0abe082559e936c5696",
+  "current_source_sha256": "1d5b94e37dd22c9f38f07970a16ff38262a51b176b5bc0abe082559e936c5696",
+  "passed": 97,
+  "expected": 97,
+  "errors": 0,
+  "warnings": 0,
+  "interactive": "NOT_RUN",
+  "git_head": "583ebc84267bacf4497e01f5a7dfbdf0caf3d9f2",
+  "campaign_diagnostics_sha256": "d494849d4a6d16d894b0b0286130a8170607c88411514084e4d65f1dd05329e0",
+  "source_matches": true
+}

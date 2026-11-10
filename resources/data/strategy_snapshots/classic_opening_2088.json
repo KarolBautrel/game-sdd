@@ -1,0 +1,801 @@
+{
+  "aid": {},
+  "core": {
+    "command_seq": 0.0,
+    "company_reputation": {
+      "cinder_compact": 0.0,
+      "iron_march": 0.0,
+      "river_league": 0.0,
+      "thornwood_accord": 0.0
+    },
+    "content_version": 1.0,
+    "diplomacy": {
+      "cinder_compact~iron_march": {
+        "a": "cinder_compact",
+        "b": "iron_march",
+        "stance": "peace",
+        "treaties": []
+      },
+      "cinder_compact~river_league": {
+        "a": "cinder_compact",
+        "b": "river_league",
+        "stance": "peace",
+        "treaties": []
+      },
+      "cinder_compact~thornwood_accord": {
+        "a": "cinder_compact",
+        "b": "thornwood_accord",
+        "stance": "peace",
+        "treaties": []
+      },
+      "iron_march~river_league": {
+        "a": "iron_march",
+        "b": "river_league",
+        "stance": "peace",
+        "treaties": []
+      },
+      "iron_march~thornwood_accord": {
+        "a": "iron_march",
+        "b": "thornwood_accord",
+        "stance": "peace",
+        "treaties": []
+      },
+      "river_league~thornwood_accord": {
+        "a": "river_league",
+        "b": "thornwood_accord",
+        "stance": "peace",
+        "treaties": []
+      }
+    },
+    "factions": {
+      "cinder_compact": {
+        "manpower": 30.0,
+        "name": "Cinder Compact",
+        "stocks": {
+          "coin": 140.0,
+          "food": 45.0,
+          "ore": 24.0,
+          "timber": 18.0
+        }
+      },
+      "iron_march": {
+        "manpower": 60.0,
+        "name": "Iron March",
+        "stocks": {
+          "coin": 100.0,
+          "food": 70.0,
+          "ore": 12.0,
+          "timber": 35.0
+        }
+      },
+      "river_league": {
+        "manpower": 45.0,
+        "name": "River League",
+        "stocks": {
+          "coin": 120.0,
+          "food": 90.0,
+          "ore": 40.0,
+          "timber": 25.0
+        }
+      },
+      "thornwood_accord": {
+        "manpower": 35.0,
+        "name": "Thornwood Accord",
+        "stocks": {
+          "coin": 90.0,
+          "food": 40.0,
+          "ore": 8.0,
+          "timber": 90.0
+        }
+      }
+    },
+    "pact_offers": {},
+    "parties": {
+      "accord_patrol": {
+        "faction_id": "thornwood_accord",
+        "headcount": 8.0,
+        "kind": "patrol",
+        "settlement_id": "thornhaven"
+      },
+      "compact_watch": {
+        "faction_id": "cinder_compact",
+        "headcount": 6.0,
+        "kind": "patrol",
+        "settlement_id": "ashmere"
+      },
+      "iron_patrol": {
+        "faction_id": "iron_march",
+        "headcount": 12.0,
+        "kind": "patrol",
+        "settlement_id": "black_keep"
+      },
+      "league_patrol": {
+        "faction_id": "river_league",
+        "headcount": 8.0,
+        "kind": "patrol",
+        "settlement_id": "town_ravenford"
+      }
+    },
+    "planner_mode": "classic",
+    "receipts": [],
+    "reservations": {},
+    "routes": {
+      "border_road": {
+        "a": "thornhaven",
+        "b": "black_keep",
+        "travel_ticks": 16.0
+      },
+      "eastern_road": {
+        "a": "ashmere",
+        "b": "ironhold",
+        "travel_ticks": 22.0
+      },
+      "iron_road": {
+        "a": "black_keep",
+        "b": "ironhold",
+        "travel_ticks": 12.0
+      },
+      "market_road": {
+        "a": "saltwatch",
+        "b": "ashmere",
+        "travel_ticks": 20.0
+      },
+      "pass_road": {
+        "a": "town_ravenford",
+        "b": "black_keep",
+        "travel_ticks": 24.0
+      },
+      "river_road": {
+        "a": "town_ravenford",
+        "b": "saltwatch",
+        "travel_ticks": 12.0
+      },
+      "woodland_road": {
+        "a": "town_ravenford",
+        "b": "thornhaven",
+        "travel_ticks": 18.0
+      }
+    },
+    "scenario_id": "four_factions_foundation_v1",
+    "schema": "sdd.strategy-world",
+    "seed": 2088,
+    "settlements": {
+      "ashmere": {
+        "name": "Ashmere",
+        "owner_id": "cinder_compact",
+        "x": 0.7,
+        "y": 0.65
+      },
+      "black_keep": {
+        "name": "Black Keep",
+        "owner_id": "iron_march",
+        "x": 0.6,
+        "y": 0.2
+      },
+      "ironhold": {
+        "name": "Ironhold",
+        "owner_id": "iron_march",
+        "x": 0.8,
+        "y": 0.3
+      },
+      "saltwatch": {
+        "name": "Saltwatch",
+        "owner_id": "river_league",
+        "x": 0.2,
+        "y": 0.8
+      },
+      "thornhaven": {
+        "name": "Thornhaven",
+        "owner_id": "thornwood_accord",
+        "x": 0.35,
+        "y": 0.2
+      },
+      "town_ravenford": {
+        "name": "Ravenford",
+        "owner_id": "river_league",
+        "x": 0.15,
+        "y": 0.6
+      }
+    },
+    "simulation_version": 1.0,
+    "tick": 0.0,
+    "topology_kind": "abstract_fixture",
+    "version": 1.0
+  },
+  "decisions": {
+    "cinder_compact": [
+      {
+        "commit_until": 288,
+        "goal": "commerce",
+        "horizon_tick": 1344,
+        "reason": "profitable_exports",
+        "resource": "",
+        "review_tick": 672,
+        "scores": {
+          "claim": 0,
+          "cost": 0,
+          "economic": 47,
+          "readiness": 0,
+          "security": 0,
+          "switching": 0
+        },
+        "selected_tick": 0,
+        "supporting": [
+          "trade",
+          "guard"
+        ],
+        "target": ""
+      }
+    ],
+    "iron_march": [
+      {
+        "commit_until": 288,
+        "goal": "supplies",
+        "horizon_tick": 1344,
+        "reason": "reserve_deficit",
+        "resource": "ore",
+        "review_tick": 672,
+        "scores": {
+          "claim": 0,
+          "cost": -5,
+          "economic": 64,
+          "readiness": 0,
+          "security": 0,
+          "switching": 0
+        },
+        "selected_tick": 0,
+        "supporting": [
+          "trade",
+          "guard"
+        ],
+        "target": ""
+      }
+    ],
+    "river_league": [
+      {
+        "commit_until": 288,
+        "goal": "commerce",
+        "horizon_tick": 1344,
+        "reason": "profitable_exports",
+        "resource": "",
+        "review_tick": 672,
+        "scores": {
+          "claim": 0,
+          "cost": 0,
+          "economic": 42,
+          "readiness": 0,
+          "security": 0,
+          "switching": 0
+        },
+        "selected_tick": 0,
+        "supporting": [
+          "trade",
+          "guard"
+        ],
+        "target": ""
+      }
+    ],
+    "thornwood_accord": [
+      {
+        "commit_until": 288,
+        "goal": "supplies",
+        "horizon_tick": 1344,
+        "reason": "reserve_deficit",
+        "resource": "food",
+        "review_tick": 672,
+        "scores": {
+          "claim": 0,
+          "cost": -5,
+          "economic": 56,
+          "readiness": 0,
+          "security": 10,
+          "switching": 0
+        },
+        "selected_tick": 0,
+        "supporting": [
+          "trade",
+          "guard"
+        ],
+        "target": ""
+      }
+    ]
+  },
+  "entity_seq": 0,
+  "event_seq": 0,
+  "events": [],
+  "forces": {
+    "accord_patrol": {
+      "at": "thornhaven",
+      "edge_to": "",
+      "mission": "guard",
+      "mode": "idle",
+      "objective": "thornhaven",
+      "ready_tick": 0,
+      "remaining": 0
+    },
+    "compact_watch": {
+      "at": "ashmere",
+      "edge_to": "",
+      "mission": "guard",
+      "mode": "idle",
+      "objective": "ashmere",
+      "ready_tick": 0,
+      "remaining": 0
+    },
+    "iron_patrol": {
+      "at": "black_keep",
+      "edge_to": "",
+      "mission": "guard",
+      "mode": "idle",
+      "objective": "black_keep",
+      "ready_tick": 0,
+      "remaining": 0
+    },
+    "league_patrol": {
+      "at": "town_ravenford",
+      "edge_to": "",
+      "mission": "guard",
+      "mode": "idle",
+      "objective": "town_ravenford",
+      "ready_tick": 0,
+      "remaining": 0
+    }
+  },
+  "initial_manpower": 170,
+  "ledger": {
+    "consumed": {
+      "coin": 0,
+      "food": 0,
+      "ore": 0,
+      "timber": 0
+    },
+    "lost": {
+      "coin": 0,
+      "food": 0,
+      "ore": 0,
+      "timber": 0
+    },
+    "opening": {
+      "coin": 450,
+      "food": 245,
+      "ore": 84,
+      "timber": 168
+    },
+    "produced": {
+      "coin": 0,
+      "food": 0,
+      "ore": 0,
+      "timber": 0
+    }
+  },
+  "metrics": {
+    "battles": 0,
+    "casualties": 0,
+    "peace": 0,
+    "plan_changes": 4,
+    "rejected_intents": 0,
+    "reviews": 4,
+    "trade_delivered": 0,
+    "trade_lost": 0,
+    "trade_started": 0,
+    "trade_volume": 0,
+    "wars": 0
+  },
+  "peace_offers": {},
+  "plans": {
+    "cinder_compact": {
+      "commit_until": 288,
+      "goal": "commerce",
+      "horizon_tick": 1344,
+      "reason": "profitable_exports",
+      "resource": "",
+      "review_tick": 672,
+      "scores": {
+        "claim": 0,
+        "cost": 0,
+        "economic": 47,
+        "readiness": 0,
+        "security": 0,
+        "switching": 0
+      },
+      "selected_tick": 0,
+      "supporting": [
+        "trade",
+        "guard"
+      ],
+      "target": ""
+    },
+    "iron_march": {
+      "commit_until": 288,
+      "goal": "supplies",
+      "horizon_tick": 1344,
+      "reason": "reserve_deficit",
+      "resource": "ore",
+      "review_tick": 672,
+      "scores": {
+        "claim": 0,
+        "cost": -5,
+        "economic": 64,
+        "readiness": 0,
+        "security": 0,
+        "switching": 0
+      },
+      "selected_tick": 0,
+      "supporting": [
+        "trade",
+        "guard"
+      ],
+      "target": ""
+    },
+    "river_league": {
+      "commit_until": 288,
+      "goal": "commerce",
+      "horizon_tick": 1344,
+      "reason": "profitable_exports",
+      "resource": "",
+      "review_tick": 672,
+      "scores": {
+        "claim": 0,
+        "cost": 0,
+        "economic": 42,
+        "readiness": 0,
+        "security": 0,
+        "switching": 0
+      },
+      "selected_tick": 0,
+      "supporting": [
+        "trade",
+        "guard"
+      ],
+      "target": ""
+    },
+    "thornwood_accord": {
+      "commit_until": 288,
+      "goal": "supplies",
+      "horizon_tick": 1344,
+      "reason": "reserve_deficit",
+      "resource": "food",
+      "review_tick": 672,
+      "scores": {
+        "claim": 0,
+        "cost": -5,
+        "economic": 56,
+        "readiness": 0,
+        "security": 10,
+        "switching": 0
+      },
+      "selected_tick": 0,
+      "supporting": [
+        "trade",
+        "guard"
+      ],
+      "target": ""
+    }
+  },
+  "premise": "open_markets",
+  "receipts": [],
+  "relations": {
+    "cinder_compact": {
+      "iron_march": {
+        "deliveries": 0,
+        "grievance": 0,
+        "trust": 10
+      },
+      "river_league": {
+        "deliveries": 0,
+        "grievance": 0,
+        "trust": 10
+      },
+      "thornwood_accord": {
+        "deliveries": 0,
+        "grievance": 0,
+        "trust": 10
+      }
+    },
+    "iron_march": {
+      "cinder_compact": {
+        "deliveries": 0,
+        "grievance": 0,
+        "trust": 10
+      },
+      "river_league": {
+        "deliveries": 0,
+        "grievance": 0,
+        "trust": 10
+      },
+      "thornwood_accord": {
+        "deliveries": 0,
+        "grievance": 0,
+        "trust": 10
+      }
+    },
+    "river_league": {
+      "cinder_compact": {
+        "deliveries": 0,
+        "grievance": 0,
+        "trust": 10
+      },
+      "iron_march": {
+        "deliveries": 0,
+        "grievance": 0,
+        "trust": 10
+      },
+      "thornwood_accord": {
+        "deliveries": 0,
+        "grievance": 0,
+        "trust": 10
+      }
+    },
+    "thornwood_accord": {
+      "cinder_compact": {
+        "deliveries": 0,
+        "grievance": 0,
+        "trust": 10
+      },
+      "iron_march": {
+        "deliveries": 0,
+        "grievance": 0,
+        "trust": 10
+      },
+      "river_league": {
+        "deliveries": 0,
+        "grievance": 0,
+        "trust": 10
+      }
+    }
+  },
+  "rules": {
+    "ceasefire_ticks": 1344.0,
+    "mobilize_cost": {
+      "coin": 8.0,
+      "food": 4.0,
+      "ore": 2.0,
+      "timber": 0.0
+    },
+    "policies": {
+      "cinder_compact": {
+        "claim_route": "",
+        "consumption": {
+          "coin": 2.0,
+          "food": 3.0,
+          "ore": 1.0,
+          "timber": 2.0
+        },
+        "home": "ashmere",
+        "personality": {
+          "aggression": 10.0,
+          "security": 40.0,
+          "trade": 95.0
+        },
+        "production": {
+          "coin": 12.0,
+          "food": 2.0,
+          "ore": 2.0,
+          "timber": 1.0
+        },
+        "targets": {
+          "coin": 50.0,
+          "food": 42.0,
+          "ore": 18.0,
+          "timber": 16.0
+        }
+      },
+      "iron_march": {
+        "claim_route": "pass_road",
+        "consumption": {
+          "coin": 3.0,
+          "food": 4.0,
+          "ore": 4.0,
+          "timber": 2.0
+        },
+        "home": "black_keep",
+        "personality": {
+          "aggression": 80.0,
+          "security": 80.0,
+          "trade": 40.0
+        },
+        "production": {
+          "coin": 11.0,
+          "food": 6.0,
+          "ore": 1.0,
+          "timber": 2.0
+        },
+        "targets": {
+          "coin": 40.0,
+          "food": 40.0,
+          "ore": 24.0,
+          "timber": 18.0
+        }
+      },
+      "river_league": {
+        "claim_route": "pass_road",
+        "consumption": {
+          "coin": 2.0,
+          "food": 3.0,
+          "ore": 1.0,
+          "timber": 1.0
+        },
+        "home": "town_ravenford",
+        "personality": {
+          "aggression": 20.0,
+          "security": 65.0,
+          "trade": 85.0
+        },
+        "production": {
+          "coin": 10.0,
+          "food": 14.0,
+          "ore": 5.0,
+          "timber": 1.0
+        },
+        "targets": {
+          "coin": 40.0,
+          "food": 60.0,
+          "ore": 18.0,
+          "timber": 12.0
+        }
+      },
+      "thornwood_accord": {
+        "claim_route": "",
+        "consumption": {
+          "coin": 2.0,
+          "food": 4.0,
+          "ore": 1.0,
+          "timber": 2.0
+        },
+        "home": "thornhaven",
+        "personality": {
+          "aggression": 10.0,
+          "security": 85.0,
+          "trade": 65.0
+        },
+        "production": {
+          "coin": 9.0,
+          "food": 1.0,
+          "ore": 1.0,
+          "timber": 12.0
+        },
+        "targets": {
+          "coin": 35.0,
+          "food": 48.0,
+          "ore": 8.0,
+          "timber": 30.0
+        }
+      }
+    },
+    "premises": [
+      {
+        "dispute": false,
+        "id": "open_markets",
+        "stocks": {}
+      },
+      {
+        "dispute": true,
+        "id": "contested_ore",
+        "stocks": {
+          "iron_march": {
+            "ore": 4.0
+          }
+        }
+      },
+      {
+        "dispute": false,
+        "id": "lean_harvest",
+        "stocks": {
+          "cinder_compact": {
+            "food": 12.0
+          },
+          "thornwood_accord": {
+            "food": 10.0
+          }
+        }
+      }
+    ],
+    "prices": {
+      "food": 1.0,
+      "ore": 2.0,
+      "timber": 1.0
+    },
+    "schema": "sdd.classic-rules",
+    "train_ticks": 24.0,
+    "version": 1.0,
+    "warehouse_cap": 1000.0
+  },
+  "schema": "sdd.classic-world",
+  "sequence": 0,
+  "shortfalls": {
+    "cinder_compact": {
+      "coin": 0,
+      "food": 0,
+      "ore": 0,
+      "timber": 0
+    },
+    "iron_march": {
+      "coin": 0,
+      "food": 0,
+      "ore": 0,
+      "timber": 0
+    },
+    "river_league": {
+      "coin": 0,
+      "food": 0,
+      "ore": 0,
+      "timber": 0
+    },
+    "thornwood_accord": {
+      "coin": 0,
+      "food": 0,
+      "ore": 0,
+      "timber": 0
+    }
+  },
+  "trades": {},
+  "version": 1,
+  "wars": {
+    "cinder_compact~iron_march": {
+      "aggressor": "",
+      "exhaustion": {
+        "cinder_compact": 0,
+        "iron_march": 0
+      },
+      "peace_id": "",
+      "route": "",
+      "started_tick": null,
+      "truce_until": 0
+    },
+    "cinder_compact~river_league": {
+      "aggressor": "",
+      "exhaustion": {
+        "cinder_compact": 0,
+        "river_league": 0
+      },
+      "peace_id": "",
+      "route": "",
+      "started_tick": null,
+      "truce_until": 0
+    },
+    "cinder_compact~thornwood_accord": {
+      "aggressor": "",
+      "exhaustion": {
+        "cinder_compact": 0,
+        "thornwood_accord": 0
+      },
+      "peace_id": "",
+      "route": "",
+      "started_tick": null,
+      "truce_until": 0
+    },
+    "iron_march~river_league": {
+      "aggressor": "",
+      "exhaustion": {
+        "iron_march": 0,
+        "river_league": 0
+      },
+      "peace_id": "",
+      "route": "",
+      "started_tick": null,
+      "truce_until": 0
+    },
+    "iron_march~thornwood_accord": {
+      "aggressor": "",
+      "exhaustion": {
+        "iron_march": 0,
+        "thornwood_accord": 0
+      },
+      "peace_id": "",
+      "route": "",
+      "started_tick": null,
+      "truce_until": 0
+    },
+    "river_league~thornwood_accord": {
+      "aggressor": "",
+      "exhaustion": {
+        "river_league": 0,
+        "thornwood_accord": 0
+      },
+      "peace_id": "",
+      "route": "",
+      "started_tick": null,
+      "truce_until": 0
+    }
+  }
+}

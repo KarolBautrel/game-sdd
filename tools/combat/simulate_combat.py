@@ -39,6 +39,8 @@ def choose_enemy_command(state: dict[str, Any], command_id: str = "cmd_ai_001") 
     actor = _unit_by_id(state, state["turn_state"]["active_unit_id"])
     if actor is None or actor["team"] != "enemy":
         return _end_turn_command(state["turn_state"]["active_unit_id"], command_id)
+    if actor["resources"]["ap"] <= 0:
+        return _end_turn_command(actor["id"], command_id)
 
     adjacent_player = _adjacent_living_enemy(state, actor, target_team="player")
     if adjacent_player is not None and _enemy_should_use_power_strike(state, actor, adjacent_player):
@@ -647,7 +649,7 @@ def _range_rejection(
 ) -> str | None:
     if _chebyshev(actor["position"], target["position"]) > max_range:
         return "target_out_of_range"
-    if action_id == "ranged_attack" and not _has_line_of_sight(state, actor["position"], target["position"]):
+    if action_id in ("ranged_attack", "aimed_shot") and not _has_line_of_sight(state, actor["position"], target["position"]):
         return "target_not_visible"
     return None
 
@@ -1315,7 +1317,7 @@ def _best_move_toward(
             return multi_tile_target
 
     path_step = _first_path_step_toward(state, actor, target)
-    if path_step is not None:
+    if path_step is not None and _move_rejection(state, actor, path_step) is None:
         return path_step
 
     current_distance = _manhattan(actor["position"], target["position"])

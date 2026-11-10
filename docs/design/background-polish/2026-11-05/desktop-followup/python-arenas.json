@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "implementation": "Python simulate_combat",
+  "physical_gameplay": "NOT_RUN",
+  "battles": [
+    {
+      "arena": "painted_forest_ambush",
+      "policy": "both_teams_existing_ai",
+      "commands": 34,
+      "result": "victory",
+      "rejected_commands": 0,
+      "debug_win": false
+    },
+    {
+      "arena": "painted_forest_ambush",
+      "policy": "passive_players",
+      "commands": 106,
+      "result": "defeat",
+      "rejected_commands": 0,
+      "debug_win": false
+    },
+    {
+      "arena": "painted_mine_breach",
+      "policy": "both_teams_existing_ai",
+      "commands": 50,
+      "result": "victory",
+      "rejected_commands": 0,
+      "debug_win": false
+    },
+    {
+      "arena": "painted_mine_breach",
+      "policy": "passive_players",
+      "commands": 103,
+      "result": "defeat",
+      "rejected_commands": 0,
+      "debug_win": false
+    }
+  ]
+}

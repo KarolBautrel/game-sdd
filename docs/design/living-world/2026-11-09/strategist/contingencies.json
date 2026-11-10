@@ -1,0 +1,15 @@
+{
+	"cases": [
+		{
+			"attempted_intents": 1,
+			"predicate": "food_below_target"
+		},
+		{
+			"attempted_intents": 0,
+			"predicate": "at_war"
+		}
+	],
+	"checks": 9,
+	"failures": [],
+	"headless": true
+}

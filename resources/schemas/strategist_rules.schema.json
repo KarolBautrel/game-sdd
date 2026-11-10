@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "sdd.strategist-rules"
+    },
+    "version": {
+      "const": 1
+    },
+    "provider": {
+      "const": "recorded_fixtures"
+    },
+    "calls_per_minute": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4
+    },
+    "calls_per_day": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8
+    },
+    "tokens_per_day": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65536
+    },
+    "response_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 512
+    },
+    "timeout_ms": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "cost_micro_limit": {
+      "const": 0
+    }
+  },
+  "required": [
+    "schema",
+    "version",
+    "provider",
+    "calls_per_minute",
+    "calls_per_day",
+    "tokens_per_day",
+    "response_tokens",
+    "timeout_ms",
+    "cost_micro_limit"
+  ],
+  "additionalProperties": false
+}

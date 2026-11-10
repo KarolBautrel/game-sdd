@@ -1,0 +1,1003 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "sdd.strategist-request"
+    },
+    "version": {
+      "const": 1
+    },
+    "number": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000000000
+    },
+    "observation": {
+      "type": "object",
+      "properties": {
+        "tick": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "actor": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "own": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "maxLength": 128
+            },
+            "stocks": {
+              "type": "object",
+              "properties": {
+                "coin": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                },
+                "food": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                },
+                "ore": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                },
+                "timber": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                }
+              },
+              "required": [
+                "coin",
+                "food",
+                "ore",
+                "timber"
+              ],
+              "additionalProperties": false
+            },
+            "manpower": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "available": {
+              "type": "object",
+              "properties": {
+                "coin": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                },
+                "food": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                },
+                "ore": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                },
+                "timber": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                }
+              },
+              "required": [
+                "coin",
+                "food",
+                "ore",
+                "timber"
+              ],
+              "additionalProperties": false
+            },
+            "policy": {
+              "type": "object",
+              "properties": {
+                "home": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                },
+                "claim_route": {
+                  "type": "string",
+                  "maxLength": 64
+                },
+                "production": {
+                  "type": "object",
+                  "properties": {
+                    "coin": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    },
+                    "food": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    },
+                    "ore": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    },
+                    "timber": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    }
+                  },
+                  "required": [
+                    "coin",
+                    "food",
+                    "ore",
+                    "timber"
+                  ],
+                  "additionalProperties": false
+                },
+                "consumption": {
+                  "type": "object",
+                  "properties": {
+                    "coin": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    },
+                    "food": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    },
+                    "ore": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    },
+                    "timber": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    }
+                  },
+                  "required": [
+                    "coin",
+                    "food",
+                    "ore",
+                    "timber"
+                  ],
+                  "additionalProperties": false
+                },
+                "targets": {
+                  "type": "object",
+                  "properties": {
+                    "coin": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    },
+                    "food": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    },
+                    "ore": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    },
+                    "timber": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    }
+                  },
+                  "required": [
+                    "coin",
+                    "food",
+                    "ore",
+                    "timber"
+                  ],
+                  "additionalProperties": false
+                },
+                "personality": {
+                  "type": "object",
+                  "properties": {
+                    "trade": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "security": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "aggression": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "trade",
+                    "security",
+                    "aggression"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "home",
+                "claim_route",
+                "production",
+                "consumption",
+                "targets",
+                "personality"
+              ],
+              "additionalProperties": false
+            },
+            "shortfalls": {
+              "type": "object",
+              "properties": {
+                "coin": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                },
+                "food": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                },
+                "ore": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                },
+                "timber": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                }
+              },
+              "required": [
+                "coin",
+                "food",
+                "ore",
+                "timber"
+              ],
+              "additionalProperties": false
+            },
+            "prices": {
+              "type": "object",
+              "properties": {
+                "food": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                "ore": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                "timber": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "food",
+                "ore",
+                "timber"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "name",
+            "stocks",
+            "manpower",
+            "available",
+            "policy",
+            "shortfalls",
+            "prices"
+          ],
+          "additionalProperties": false
+        },
+        "previous": {
+          "type": "object"
+        },
+        "claim": {
+          "type": "object"
+        },
+        "live_trade_resources": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "food",
+              "ore",
+              "timber"
+            ]
+          },
+          "maxItems": 32,
+          "uniqueItems": false
+        },
+        "own_trade_route": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "forces": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 8,
+          "uniqueItems": false
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 16,
+          "uniqueItems": false
+        },
+        "markets": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 12,
+          "uniqueItems": false
+        },
+        "incoming_trades": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 8,
+          "uniqueItems": false
+        },
+        "incoming_pacts": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 8,
+          "uniqueItems": false
+        },
+        "incoming_peace": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 8,
+          "uniqueItems": false
+        },
+        "aid": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 8,
+          "uniqueItems": false
+        },
+        "pending_trades": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 8,
+          "uniqueItems": false
+        },
+        "reports": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 16,
+          "uniqueItems": false
+        }
+      },
+      "required": [
+        "tick",
+        "seed",
+        "actor",
+        "own",
+        "previous",
+        "claim",
+        "live_trade_resources",
+        "own_trade_route",
+        "forces",
+        "relations",
+        "markets",
+        "incoming_trades",
+        "incoming_pacts",
+        "incoming_peace",
+        "aid",
+        "pending_trades",
+        "reports"
+      ],
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "goals": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "goal": {
+                "enum": [
+                  "hold",
+                  "commerce",
+                  "supplies",
+                  "claim",
+                  "defend",
+                  "peace"
+                ]
+              },
+              "target": {
+                "type": "string",
+                "maxLength": 64
+              },
+              "resource": {
+                "enum": [
+                  "",
+                  "food",
+                  "ore",
+                  "timber"
+                ]
+              }
+            },
+            "required": [
+              "goal",
+              "target",
+              "resource"
+            ],
+            "additionalProperties": false
+          },
+          "maxProperties": 40
+        },
+        "intents": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "propose_trade"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "const": "pending"
+                      },
+                      "seller": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      },
+                      "buyer": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      },
+                      "resource": {
+                        "enum": [
+                          "food",
+                          "ore",
+                          "timber"
+                        ]
+                      },
+                      "amount": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 12
+                      },
+                      "unit_price": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 100
+                      },
+                      "source": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      },
+                      "target": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "seller",
+                      "buyer",
+                      "resource",
+                      "amount",
+                      "unit_price",
+                      "source",
+                      "target"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "mobilize"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "party": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      },
+                      "route": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      }
+                    },
+                    "required": [
+                      "party",
+                      "route"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "protect_route"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "party": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      },
+                      "route": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      }
+                    },
+                    "required": [
+                      "party",
+                      "route"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "declare_war"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "target": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      },
+                      "route": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      }
+                    },
+                    "required": [
+                      "target",
+                      "route"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "propose_peace"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "const": "pending"
+                      },
+                      "target": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "target"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "propose_pact"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "const": "pending"
+                      },
+                      "target": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      },
+                      "kind": {
+                        "enum": [
+                          "nonaggression",
+                          "defensive_pact"
+                        ]
+                      },
+                      "duration_ticks": {
+                        "type": "integer",
+                        "minimum": 96,
+                        "maximum": 2880
+                      },
+                      "valid_for_ticks": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 672
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "target",
+                      "kind",
+                      "duration_ticks",
+                      "valid_for_ticks"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "respond_aid"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      },
+                      "accept": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "accept"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "accept_trade"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "reject_trade"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "accept_peace"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "reject_peace"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "accept_pact"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "reject_pact"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "action",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "maxProperties": 80
+        },
+        "predicates": {
+          "const": [
+            "food_below_target",
+            "at_war",
+            "trade_offer_waiting"
+          ]
+        },
+        "reason_codes": {
+          "const": [
+            "reserve_deficit",
+            "profitable_exports",
+            "actual_war",
+            "war_costs",
+            "contested_supply_claim",
+            "rebuild_reserves",
+            "honour_agreement",
+            "protect_trade"
+          ]
+        }
+      },
+      "required": [
+        "goals",
+        "intents",
+        "predicates",
+        "reason_codes"
+      ],
+      "additionalProperties": false
+    },
+    "policy_version": {
+      "const": 1
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^request_[0-9]{8,}$"
+    },
+    "faction_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$"
+    },
+    "generation": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000000000
+    },
+    "observation_tick": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000000
+    },
+    "apply_by_tick": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000000
+    },
+    "requested_review_tick": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000000
+    },
+    "horizon_tick": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000000
+    },
+    "observation_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "required": [
+    "schema",
+    "version",
+    "number",
+    "observation",
+    "capabilities",
+    "policy_version",
+    "request_id",
+    "faction_id",
+    "generation",
+    "observation_tick",
+    "apply_by_tick",
+    "requested_review_tick",
+    "horizon_tick",
+    "observation_hash"
+  ],
+  "additionalProperties": false
+}

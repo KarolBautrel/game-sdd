@@ -1,0 +1,17 @@
+[
+	{
+		"generation_ms": 5417,
+		"preset": "marches",
+		"seed": 2087
+	},
+	{
+		"generation_ms": 6013,
+		"preset": "woodland",
+		"seed": 42
+	},
+	{
+		"generation_ms": 5283,
+		"preset": "highlands",
+		"seed": 20261107
+	}
+]

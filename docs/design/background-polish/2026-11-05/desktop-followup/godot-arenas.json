@@ -1,0 +1,36 @@
+{
+	"battles": [
+		{
+			"arena": "painted_forest_ambush",
+			"commands": 32,
+			"debug_win": false,
+			"policy": "both_teams_existing_ai",
+			"result": "victory"
+		},
+		{
+			"arena": "painted_forest_ambush",
+			"commands": 106,
+			"debug_win": false,
+			"policy": "passive_players",
+			"result": "defeat"
+		},
+		{
+			"arena": "painted_mine_breach",
+			"commands": 47,
+			"debug_win": false,
+			"policy": "both_teams_existing_ai",
+			"result": "victory"
+		},
+		{
+			"arena": "painted_mine_breach",
+			"commands": 103,
+			"debug_win": false,
+			"policy": "passive_players",
+			"result": "defeat"
+		}
+	],
+	"checks": 1415,
+	"failures": [],
+	"physical_gameplay": "NOT_RUN",
+	"status": "PASS"
+}

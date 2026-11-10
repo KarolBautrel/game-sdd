@@ -1013,7 +1013,8 @@
               "type": "integer",
               "enum": [
                 1,
-                2
+                2,
+                3
               ]
             },
             "seed": {
@@ -1065,24 +1066,26 @@
                   "type": "integer",
                   "enum": [
                     192,
-                    384
+                    384,
+                    768
                   ]
                 },
                 "height": {
                   "type": "integer",
                   "enum": [
                     108,
-                    216
+                    216,
+                    432
                   ]
                 },
                 "rows": {
                   "type": "array",
                   "minItems": 108,
-                  "maxItems": 216,
+                  "maxItems": 432,
                   "items": {
                     "type": "string",
                     "minLength": 192,
-                    "maxLength": 384,
+                    "maxLength": 768,
                     "pattern": "^[RPFHMWXB]+$"
                   }
                 },
@@ -1411,12 +1414,12 @@
                 "land_cells": {
                   "type": "integer",
                   "minimum": 1,
-                  "maximum": 82944
+                  "maximum": 331776
                 },
                 "connected_cells": {
                   "type": "integer",
                   "minimum": 1,
-                  "maximum": 82944
+                  "maximum": 331776
                 },
                 "bridges": {
                   "type": "integer",
@@ -1550,6 +1553,60 @@
                           "minLength": 384,
                           "maxLength": 384
                         }
+                      }
+                    }
+                  },
+                  "diagnostics": {
+                    "properties": {
+                      "land_cells": {
+                        "maximum": 82944
+                      },
+                      "connected_cells": {
+                        "maximum": 82944
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "climates"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "version": {
+                    "const": 3
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "terrain": {
+                    "properties": {
+                      "width": {
+                        "const": 768
+                      },
+                      "height": {
+                        "const": 432
+                      },
+                      "rows": {
+                        "minItems": 432,
+                        "maxItems": 432,
+                        "items": {
+                          "minLength": 768,
+                          "maxLength": 768
+                        }
+                      }
+                    }
+                  },
+                  "diagnostics": {
+                    "properties": {
+                      "land_cells": {
+                        "maximum": 331776
+                      },
+                      "connected_cells": {
+                        "maximum": 331776
                       }
                     }
                   }

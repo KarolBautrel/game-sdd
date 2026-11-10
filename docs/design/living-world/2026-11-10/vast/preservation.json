@@ -1,0 +1,76 @@
+{
+  "baseline": [
+    {
+      "file": "campaign_v1.json",
+      "before": "9a485f2e205a55d1c82361a46687053d2e7983f260e215aa13d0bf7c3fee7301",
+      "after": "9a485f2e205a55d1c82361a46687053d2e7983f260e215aa13d0bf7c3fee7301",
+      "unchanged": true
+    },
+    {
+      "file": "qa-travel-253691.json",
+      "before": "e4c7a0158508d7184a04ac123d15b0d5176714bf6ae0448678dd3cbc1b0be711",
+      "after": "e4c7a0158508d7184a04ac123d15b0d5176714bf6ae0448678dd3cbc1b0be711",
+      "unchanged": true
+    },
+    {
+      "file": "qa_hero_equipment_pilot_v1.json",
+      "before": "52393c9fbd296812ad197bf109c81f4da0cf1d59b094d9075a9924944f8726f0",
+      "after": "52393c9fbd296812ad197bf109c81f4da0cf1d59b094d9075a9924944f8726f0",
+      "unchanged": true
+    },
+    {
+      "file": "qa_living_world_generated_v2_marches_20261105.json",
+      "before": "dfbb42bdfe0effc65c4287738a6e2a0c81970a3a954b2f1623d2def30a68ea18",
+      "after": "dfbb42bdfe0effc65c4287738a6e2a0c81970a3a954b2f1623d2def30a68ea18",
+      "unchanged": true
+    },
+    {
+      "file": "qa_living_world_generated_v2_marches_2087.json",
+      "before": "6d321b18551de2de1567f44fe68ee7ae87f359ea7d4db7246d5c139e2ea240cf",
+      "after": "6d321b18551de2de1567f44fe68ee7ae87f359ea7d4db7246d5c139e2ea240cf",
+      "unchanged": true
+    },
+    {
+      "file": "qa_living_world_v1.json",
+      "before": "52c1c10119a9fe90d765b428c82f64fc74613a0932692e13607b3fef243bed33",
+      "after": "52c1c10119a9fe90d765b428c82f64fc74613a0932692e13607b3fef243bed33",
+      "unchanged": true
+    },
+    {
+      "file": "stage4_manual.json",
+      "before": "d8d6debd275e969154af9729f325c445043efd8403c973aa35d85dd2747a98da",
+      "after": "d8d6debd275e969154af9729f325c445043efd8403c973aa35d85dd2747a98da",
+      "unchanged": true
+    },
+    {
+      "file": "terrain_editor_previous.json",
+      "before": "fec3e189ff3caf3d32041db469abcb9d948f5de6843bddb225f38e4c95386990",
+      "after": "fec3e189ff3caf3d32041db469abcb9d948f5de6843bddb225f38e4c95386990",
+      "unchanged": true
+    },
+    {
+      "file": "resources/data/world_terrain/living_marches_v1.json",
+      "before": "a5d90d2ff4dbf36d0f3b46856fc30be0812767876cc407e72c3c0067a8a8f327",
+      "after": "a5d90d2ff4dbf36d0f3b46856fc30be0812767876cc407e72c3c0067a8a8f327",
+      "unchanged": true
+    },
+    {
+      "file": "assets/ui/campaign/world_atlas.png",
+      "before": "516bdc4ad1635f931c79fac9eaaaba0ac041607dc5aacc501593907cd41ea9a5",
+      "after": "516bdc4ad1635f931c79fac9eaaaba0ac041607dc5aacc501593907cd41ea9a5",
+      "unchanged": true
+    }
+  ],
+  "player_large_v4": {
+    "file": "qa_strategy_world_model_v4_marches_2087.json",
+    "previous_receipt_sha256": "f633df0c3c206bc518986e698a8b736bac28db687e81e00d877e703dbe91ca6f",
+    "current_sha256": "3d8bce0e266daa86e358f6f1dde24474c17233f5f2fd4a12d3c2266d21c33ded",
+    "matches_previous_receipt": false,
+    "previous_observed_tick": 343,
+    "current_tick": 410,
+    "current_generator_version": 2.0,
+    "last_write_utc": "2026-11-09T22:38:33.658805+00:00",
+    "verification_started_utc": "2026-11-09T23:04:27.874124+00:00",
+    "last_write_predates_verification": true
+  }
+}

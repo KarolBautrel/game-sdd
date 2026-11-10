@@ -1,12 +1,154 @@
 # Continue development here
 
-Last handoff: 2026-11-05. This is a status/navigation document; owning domain
+Last handoff: 2026-11-10. This is a status/navigation document; owning domain
 specs define behavior. This handoff does not authorize additional implementation
 when the user has only requested an explanation or plan.
 
 ## Next-session entry: read this first
 
 Latest active handoff:
+[Vast world maps](handoffs/2026-11-10-vast-worlds.md).
+User leaves the current save/retest alone and prioritizes larger maps.96c adds
+Vast generatorv3 /768x432,4xLarge area, actual physical scale4, native local5.2zoom /
+minimap/overview, Large/Vast selectors and independent v3/v4 slots/return scenes.
+Launch `strategy-vast` or `strategy-ai-vast`; original commands/saves stay Large.
+No reset, migration or forced world effect. Final113/113PASS,0errors/0warnings;
+10/10baseline save/art hashes unchanged. Full-source receipt:
+qa/2026-11-10-vast-worlds.md. New L96c-01 and all prior appearance/movement/strategy
+cases remain open; source/headless ONLY, no OS input, visible launch or activation.
+Next larger-world logistics/play review and97comparison; live provider/model/cost
+still unselected. Local master583ebc84, no commit/push; preserve85..96c.
+
+Previous UI handoff:
+[Strategist result visibility](handoffs/2026-11-09-strategist-feedback.md).
+User reports seeing nothing after three days. Read-only inspection confirms
+recorded mode at tick343, one accepted plan at288 and one unfunded protection
+attempt, so no new patrol. Follow-up96b changes presentation only: persistent
+above-map result, accepted plans versus applied/blocked actions, readable reason
+and actual pending deadline, immediate retained history on reopening. Model78 /
+v3 native81checks PASS; targeted6/6PASS,0errors/0warnings. Existing10baseline
+hashes and the player v4 file unchanged. Final-source evidence:
+qa/2026-11-09-strategist-feedback.md. Previous107/107 is historical, not a full run
+of this UI revision. L96-01 AWAITING_USER_RETEST. No player-save writes, domain
+retuning, provider calls, desktop takeover, commit or push. Next: review outcomes,
+then provider/model/budget decision and97. Preserve all85..96b work.
+
+Previous adapter handoff:
+[Bounded strategist adapter](handoffs/2026-11-09-strategist-adapter.md).
+User authorizes96: "Dawaj nastepny etap". World019/slice020/presentation046 add an
+explicit v4 strategist campaign, strict finite proposals, asynchronous session
+lifecycle, fixed deadlines/revalidation, budgets, replay and classic fallback.
+Native `-Scene strategy-ai` exposes Classic and authored Recorded examples
+(offline); no external-model output or paid/network inference is claimed.
+Final-source107/107PASS,0errors/0warnings;10/10save/art hashes unchanged. Receipt:
+qa/2026-11-09-strategist-adapter.md.
+Next97 comparison/balance; provider/model/cost selection and a live asynchronous
+transport remain needed before a live-model comparison. L96-01/L95/L91/L77/user
+appearance/movement cases remain open. Source/headless ONLY; no OS input, visible
+launch or activation. Local master583ebc84, no commit/push; preserve85..96.
+
+Previous native handoff:
+[Native strategic region and company loop](handoffs/2026-11-09-strategic-region.md).
+User authorizes95 with "To dawaj". World018/slice019 and presentation045 add an
+opt-in native campaignv3: six towns on fresh Large terrain, safe physical paths,
+company travel/services, public politics/chronicle, funded causal jobs and managed
+mine consequences. Final-source102/102PASS,0errors/0warnings;10/10save/art hashes
+unchanged. Verification/preservation: qa/2026-11-09-strategic-region.md. Launch with
+`tools/qa/start_game.ps1 -Scene strategy`; default App/legacy/v1/v2 stay unchanged.
+Next96: bounded recorded model adapter/classic fallback, then97comparison;
+provider/budget remain unselected, no paid/network inference. L95-01/02 and prior
+L91/L77/user visual acceptance remain open. Desktop still withheld: no OS input,
+activation or visible launch. Local master583ebc84, no commit/push; preserve85..95.
+
+Previous backend handoff:
+[Classic faction simulation](handoffs/2026-11-09-classic-strategy.md).
+User authorizes94: "To dawaj ten nastepny etap implementuj". World017/slice018
+implement the isolated classic model: saved seeded premises, production/upkeep,
+bilateral trade with actual cargo/escrow and weighted movement, utility plans,
+mobilization, casualties, aid and bilateral ceasefires. Dedicated campaignv2
+keeps the version1 foundation and all legacy pilots unchanged. Focused domain /
+session/Python and long-run proof plus final-source verification/preservation:
+qa/2026-11-09-classic-strategy.md. This is abstract-fixture logic, not yet connected
+to the game's map or contracts. Next95: native strategic scene/terrain adapter /
+company consequences;96model adapter;97comparison/balance. Desktop remains
+withheld: no OS input, activation or visible launch. Earlier L91/L77/user live
+acceptance stays open. Local master583ebc84, no new commit/push; preserve85..94.
+
+Previous foundation handoff:
+[Versioned strategy-world foundation](handoffs/2026-11-09-strategy-foundation.md).
+User authorizes stage93 with "To lecisz". World016/slice017 implement an isolated
+versioned model/session: four factions/six towns, dynamic references, canonical
+pair facts, resource holds and genuinely bilateral pacts, bounded receipts and
+replay-safe sequences. Focused252domain/93session checks and8Python tests PASS;
+full final-source verification/preservation: qa/2026-11-09-strategy-foundation.md.
+No new game scene, classic political AI, simulated economy/time/war or model
+provider yet. Next94 is classic simulation under world015, then95native scene /
+consequences,96model adapter,97comparison. Current user retains the desktop:
+source/headless ONLY, no OS input, activation or visible launch. All earlier
+L91/L77/user physical acceptance gaps remain. Work local on master583ebc84;
+preserve earlier85..92 and old saves/art. No new commit/push instruction.
+
+Previous design handoff:
+[World strategy: classic and AI faction planners](handoffs/2026-11-09-world-strategy-design.md).
+User reprioritizes the entire strategic world: trade, factions, alliances,
+war/peace and long-term decisions. They choose a language-model strategist with
+a complete classic baseline. Stage92 DESIGN COMPLETE; world015/slice016 and
+docs/design/living-world/2026-11-09/WORLD_STRATEGY_PLAN.md record proposed rules,
+examples and stages93..97. No runtime implementation, extra live factions or
+provider connection. Contract-pool work follows world needs in that design.
+Next recommended code stage93 is an opt-in versioned registry/diplomacy/save
+foundation, then classic simulation before the model adapter. Current user
+retains the desktop: no OS input, activation or visible launch. Preserve local
+85..91 and existing saves/art; no new commit/push. Existing L91/L77 physical
+acceptance remains open. Latest design checks: qa/2026-11-09-world-strategy-design.md.
+
+Previous background handoff:
+[Background contracts and preview audit](handoffs/2026-11-09-background-contracts.md).
+Current user explicitly retains desktop controls: source/headless work ONLY,
+no OS input, window activation or visible launch. Stage90 preview audit passes
+475checks/40actual headless HUD/animation cases; old tentative damage mismatch
+not reproduced, no damage fix claimed. Stage91 adds shared read-only contract
+availability/progress for real cards and command feedback: carried food, issuer,
+missing objective and paid/locked reasons. Session151/UI157checks PASS; authored
+and Large2087/20261107 delivery/recon service chains, one-time payment, failed-write
+rollback/retry/reload and upkeep boundaries pass. Costs/rewards/art unchanged.
+Full final verification and preservation: qa/2026-11-09-background-contracts.md.
+Stage91 remains AWAITING_INTERACTIVE: L91-01 ordinary jobs and L91-02 new copy /
+tooltips/readability plus remaining L77-01/user motion/map review are deferred.
+Local master583ebc84, no new commit/push. Preserve stages85..91; do not restart an
+expired autonomous queue or the earlier desktop delegation.
+
+Previous physical handoff:
+[Physical mine contract and combat regression replays](handoffs/2026-11-05-playtest-followup.md).
+At that handoff, "Dobra, kontynuuj" released the previously withheld
+desktop permission for this bounded follow-up. Actual mine contract on separate
+seed20261107 / Marches / Large now passes: owned packing, ordinary round3 victory,
+loot, restored mine, Ravenford report, duplicate protection and exact reload.
+Post-fix L87-01/L88-01 and three L89-01 budget fixtures physically PASS. A separate
+static bow fixture closes both same-target clear shots after detouring, retaining
+normal AP/MP costs. Broader L77-01 delivery/recon/world cases and user
+visual/motion review remain open. Focused161Godot/7Python checks PASS. Final full
+verification and durable captures/trace/preservation: qa/2026-11-05-playtest-followup.md.
+The previous20261106 profile's Day1 stop description was stale; it was already
+exhausted before new input, so a separate fresh profile was used without reset.
+Own test windows are closed. All work local on master583ebc84, no new commit/push.
+Preserve stages85..89 and accepted art; do not restart expired autonomous scope.
+
+Previous background handoff:
+[Background follow-up: stable actions and managed contract](handoffs/2026-11-05-background-followup.md).
+User requested all work that does not require their own tests. Stages85/86 now
+retain disabled combat action slots/numeric keys and preserve owned preparation
+across source/reroll/difficulty changes. Full89/89 PASS,0errors/0warnings; native
+Painted Six victory69commands and complete Large-region mine contract33battle
+commands/loot/exit/settlement/report45g+20XP/exact disk reload PASS. Both native
+RMB/MMB gestures pass. Detailed report: qa/2026-11-05-background-followup.md.
+These are minimized/no-focus GPU tests, no OS input or player-save access;
+third physical battle and physical L77-01 remain open. Next: user visual/pace/
+prop review; physical checks when desktop controls are released. Changes local
+on master583ebc84, no new commit/push instruction. Do not restart old autonomous
+scope or redesign accepted art.
+
+Previous publication handoff:
 [Explicit stop, travel/combat polish and publication](handoffs/2026-11-05-travel-combat-stop.md).
 USER HAS RETURNED AND STOPPED autonomous work. Requested verification/publication
 completed: implementation69cc5f16 on origin/master, LFS111/111 objects uploaded,

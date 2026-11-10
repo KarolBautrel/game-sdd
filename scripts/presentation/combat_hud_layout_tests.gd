@@ -44,8 +44,8 @@ func _run() -> void:
 	scene._render()
 	for frame in range(5):
 		await process_frame
-	if scene.command_buttons.get_child_count() >= previous_count:
-		failures.append("Test did not exercise a reduced visible action count")
+	if scene.command_buttons.get_child_count() != previous_count:
+		failures.append("Exhausted actions changed stable tray size")
 	if scene.action_title_label.size.y < 15 or scene.action_detail_label.size.y < 11:
 		failures.append("Changing action count collapsed the action context")
 	scene.queue_free()

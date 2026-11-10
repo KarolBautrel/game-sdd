@@ -44,6 +44,8 @@ static func choose_enemy_command(state: Dictionary, command_id: String = "cmd_ai
 	var actor := _unit_by_id(state, state["turn_state"]["active_unit_id"])
 	if actor.is_empty() or actor["team"] != "enemy":
 		return _end_turn_command(state["turn_state"]["active_unit_id"], command_id)
+	if actor["resources"]["ap"] <= 0:
+		return _end_turn_command(actor["id"], command_id)
 
 	var adjacent_player := _adjacent_living_enemy(state, actor, "player")
 	if not adjacent_player.is_empty() and _enemy_should_use_power_strike(state, actor, adjacent_player):
@@ -509,7 +511,7 @@ static func _self_action_rejection(state: Dictionary, actor: Dictionary, action_
 static func _range_rejection(state: Dictionary, actor: Dictionary, target: Dictionary, action_id: String, max_range: int) -> String:
 	if _chebyshev(actor["position"], target["position"]) > max_range:
 		return "target_out_of_range"
-	if action_id == "ranged_attack" and not _has_line_of_sight(state, actor["position"], target["position"]):
+	if action_id in ["ranged_attack", "aimed_shot"] and not _has_line_of_sight(state, actor["position"], target["position"]):
 		return "target_not_visible"
 	return ""
 
@@ -1188,7 +1190,7 @@ static func _best_move_toward(state: Dictionary, actor: Dictionary, target: Dict
 			return multi_tile_target
 
 	var path_step := _first_path_step_toward(state, actor, target)
-	if not path_step.is_empty():
+	if not path_step.is_empty() and _move_rejection(state, actor, path_step) == "":
 		return path_step
 
 	var current_distance: int = _manhattan(actor["position"], target["position"])

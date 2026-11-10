@@ -1,0 +1,26 @@
+{
+	"apply_by_tick": 288.0,
+	"cited_events": [],
+	"contingencies": [],
+	"decision_id": "decision_00000001",
+	"faction_id": "cinder_compact",
+	"generation": 1.0,
+	"goal_id": "goal_46ddc9912c01af82041b",
+	"horizon_tick": 1632.0,
+	"intent_ids": [
+		"candidate_89a8121baf0bde24b975"
+	],
+	"observation_hash": "c106450aab310a97fd3f73d14dce56d1f180316ecb9b7a83f0f36cc6018db9c2",
+	"observation_tick": 264.0,
+	"policy_version": 1.0,
+	"public_summary": "Authored offline example: maintain reserves and honour lawful trade.",
+	"reason_code": "reserve_deficit",
+	"request_id": "request_00000001",
+	"requested_review_tick": 960.0,
+	"schema": "sdd.strategist-reply",
+	"supporting": [
+		"trade",
+		"guard"
+	],
+	"version": 1.0
+}

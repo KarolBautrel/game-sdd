@@ -15,6 +15,7 @@ Combat specs are split by tactical domain. See `STRUCTURE.md` for the organizati
 ### Grid
 
 - `grid/001_combat_grid.md`
+- `grid/022_line_of_sight.md`
 - `grid/024_terrain.md`
 - `grid/023_cover.md`
 
@@ -98,6 +99,10 @@ Recent presentation/debug slices:
 - `slices/101_combat_readiness_for_dungeon.md`
 - `slices/102_campaign_equipment_handoff.md` (world005 campaign boundary)
 - `slices/103_party_advancement_handoff.md` (world007 progression)
+- `slices/104_aimed_shot_line_of_sight.md` (grid022/actions063 regression)
+- `slices/105_enemy_ai_exhausted_ap_with_mp.md` (ai008/030 regression)
+- `slices/106_enemy_ai_affordable_fallback.md` (ai008 weighted-movement regression)
+- `slices/107_preview_command_consistency.md` (presentation068 preview/commit audit)
 
 ## Milestones
 

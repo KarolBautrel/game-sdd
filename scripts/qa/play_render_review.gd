@@ -30,6 +30,12 @@ func _run() -> void:
 			await _exercise_arenas(pixels)
 		if "arenabattles" in views:
 			await _exercise_arena_battles(pixels)
+		if "paintedsix" in views:
+			await _exercise_arena_battles(pixels, ["drawn_roster_skirmish"])
+		if "stableactions" in views:
+			await _exercise_stable_actions(pixels)
+		if "livingcontract" in views:
+			await preload("res://scripts/qa/living_contract_review.gd").new().run(self,pixels)
 		if "livetooltip" in views:
 			await _exercise_live_tooltip(pixels)
 		if "locomotionclip" in views:
@@ -373,8 +379,8 @@ func _exercise_town_pilot(pixels: Vector2i) -> void:
 	app.queue_free();await frames(8)
 
 
-func _exercise_arena_battles(pixels: Vector2i) -> void:
-	for scenario: String in ["painted_forest_ambush","painted_mine_breach"]:
+func _exercise_arena_battles(pixels: Vector2i, scenarios: Array = ["painted_forest_ambush","painted_mine_breach"]) -> void:
+	for scenario: String in scenarios:
 		app=load("res://scenes/combat/CombatDebug.tscn").instantiate();viewport.add_child(app)
 		await frames(6)
 		app.selected_scenario_id=scenario;app._load_selected_scenario()
@@ -386,7 +392,7 @@ func _exercise_arena_battles(pixels: Vector2i) -> void:
 				observations[str(app.unit_visual_action[id])]=true
 		get_tree().process_frame.connect(watch)
 		var count:=0
-		while app._combat_result()=="in_progress" and count<100:
+		while app._combat_result()=="in_progress" and count<400:
 			var policy: Dictionary=app.state.duplicate(true)
 			if app._unit_by_id(policy.turn_state.active_unit_id).team=="player":
 				for unit: Dictionary in policy.units:unit.team="enemy" if unit.team=="player" else "player"
@@ -419,6 +425,66 @@ func _exercise_arena_battles(pixels: Vector2i) -> void:
 		await capture("arena-victory-"+scenario,pixels)
 		app.queue_free();await frames(8)
 
+
+func _stable_action_layout() -> Dictionary:
+	var layout := {}
+	for child in app.command_buttons.get_children():
+		if child is Button and not child.is_queued_for_deletion() and child.has_meta("action_id") and not child.get_meta("developer_action", false):
+			layout[child.get_meta("action_id")] = [child.get_meta("action_slot"), child.get_global_rect()]
+	return layout
+
+func _exercise_stable_actions(pixels: Vector2i) -> void:
+	app=load("res://scenes/combat/CombatDebug.tscn").instantiate();viewport.add_child(app)
+	await frames(8)
+	app.selected_scenario_id="drawn_roster_skirmish";app._load_selected_scenario()
+	await frames(8)
+	var layout := _stable_action_layout()
+	await capture("stable-actions-ready",pixels)
+	await click(_action_button("defend"))
+	check(_stable_action_layout()==layout,"native spending AP retains all action positions/keys")
+	var skill := _action_button("power_strike")
+	check(skill.disabled and skill.tooltip_text.contains("Need 2 AP"),"native insufficient AP has explicit disabled reason")
+	var before: Dictionary=app.state.duplicate(true)
+	var selection: String=app.selected_action
+	await pointer(skill.get_global_rect().get_center())
+	await _town_key(KEY_1+int(skill.get_meta("action_slot"))-1,true)
+	await _town_key(KEY_1+int(skill.get_meta("action_slot"))-1,false)
+	check(app.state==before and app.selected_action==selection,"native disabled click/number never selects an adjacent action")
+	check(app.action_detail_label.text.contains("Need 2 AP"),"native disabled hover reports actual AP deficit")
+	await capture("stable-actions-insufficient-ap",pixels)
+	await click(_action_button("defend"))
+	await _town_key(KEY_1,true);await _town_key(KEY_1,false)
+	check(app.selected_action=="move","native first numeric slot still selects Move after all AP spent")
+	var actor: Dictionary=app._unit_by_id(app.state.turn_state.active_unit_id)
+	var destination := {}
+	for tile: Dictionary in app.state.grid.tiles:
+		var candidate: Dictionary=app._target_preview_for_position({"x":int(tile.x),"y":int(tile.y)})
+		if candidate.get("rejection","")=="" and int(candidate.get("move_event",{}).get("mp_spent",-1))==int(actor.resources.mp):
+			destination={"x":int(tile.x),"y":int(tile.y)}
+			break
+	check(not destination.is_empty(),"native ordinary full-MP destination exists")
+	if not destination.is_empty():
+		await click(_tile_button(destination));await click(_tile_button(destination))
+		var deadline:=Time.get_ticks_msec()+10000
+		while app.animation_locked and Time.get_ticks_msec()<deadline:await frames(1)
+	check(not app.animation_locked and int(app._unit_by_id(actor.id).resources.mp)==0,"native full-MP move commits normally")
+	check(_stable_action_layout()==layout and app.selected_action=="end_turn","native exhausted tray stays fixed and selects End turn")
+	for id: String in layout:
+		var button:=_action_button(id)
+		check(button.disabled==(id!="end_turn"),"native exhausted enabled state "+id)
+		check(app.bottom_hud.get_global_rect().encloses(button.get_global_rect()),"native fixed action stays inside HUD "+id)
+	await capture("stable-actions-exhausted",pixels)
+	var old_actor: String=app.state.turn_state.active_unit_id
+	var end_key: int=KEY_1+int(_action_button("end_turn").get_meta("action_slot"))-1
+	await _town_key(end_key,true);await _town_key(end_key,false)
+	check(app.state.turn_state.active_unit_id!=old_actor,"native stable End turn number advances normally")
+	layout=_stable_action_layout()
+	await click(_action_button("shield_wall"))
+	var shield:=_action_button("shield_wall")
+	check(shield.disabled and shield.tooltip_text.contains("Cooldown:"),"native real Shield wall cooldown remains visible")
+	check(_stable_action_layout()==layout,"native real cooldown retains button geometry")
+	await capture("stable-actions-cooldown",pixels)
+	app.queue_free();await frames(8)
 
 func _exercise_live_tooltip(pixels: Vector2i) -> void:
 	viewport.gui_embed_subwindows=true

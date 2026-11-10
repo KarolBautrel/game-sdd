@@ -1,0 +1,4 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+Generator batch:72inputs, max_ms=606 attempts={ "0": 54, "1": 10, "3": 8 }
+region_generation_tests: 443 checks, 0 failures

@@ -1,0 +1,242 @@
+{
+  "before-report": {
+    "sha256": "3f2f15cc8c4d0a74af2258387efda300c000a09ae072d287bdf216ae32575442",
+    "gold": 72,
+    "xp": 12,
+    "world": {
+      "elapsed_hours": 121,
+      "journey_count": 0.0,
+      "last_journey": {},
+      "location_id": "town_ravenford",
+      "pending_event": {},
+      "region_id": "region_001",
+      "resolved_nodes": [],
+      "seed": 20261107
+    },
+    "contracts": {
+      "restore_mine": {
+        "stage": "objective"
+      },
+      "scout_pass": {
+        "stage": "offered"
+      },
+      "supply_saltwatch": {
+        "stage": "offered"
+      }
+    },
+    "mine": {
+      "status": "cleared",
+      "threat": 0
+    },
+    "factions": {
+      "iron_march": {
+        "relation": 0,
+        "strength": 80
+      },
+      "river_league": {
+        "relation": 0,
+        "strength": 80
+      }
+    },
+    "tick": 486,
+    "party": {
+      "camping": false,
+      "fatigue": 73,
+      "goal": "",
+      "path": [],
+      "position": {
+        "x": 0.8138021,
+        "y": 0.7615741
+      }
+    },
+    "active_run": {},
+    "last_return": {
+      "gold": 7,
+      "items": [
+        "rusty_key"
+      ],
+      "outcome": "completed",
+      "xp": 12
+    }
+  },
+  "after-report": {
+    "sha256": "363737bb7404862d59b5bcb04dfc54d0d140f0322eb97787e734461cace5c86d",
+    "gold": 117,
+    "xp": 32,
+    "world": {
+      "elapsed_hours": 121,
+      "journey_count": 0.0,
+      "last_journey": {},
+      "location_id": "town_ravenford",
+      "pending_event": {},
+      "region_id": "region_001",
+      "resolved_nodes": [],
+      "seed": 20261107
+    },
+    "contracts": {
+      "restore_mine": {
+        "stage": "completed"
+      },
+      "scout_pass": {
+        "stage": "offered"
+      },
+      "supply_saltwatch": {
+        "stage": "offered"
+      }
+    },
+    "mine": {
+      "status": "cleared",
+      "threat": 0
+    },
+    "factions": {
+      "iron_march": {
+        "relation": 0,
+        "strength": 80
+      },
+      "river_league": {
+        "relation": 10,
+        "strength": 80
+      }
+    },
+    "tick": 486,
+    "party": {
+      "camping": false,
+      "fatigue": 73,
+      "goal": "",
+      "path": [],
+      "position": {
+        "x": 0.8138021,
+        "y": 0.7615741
+      }
+    },
+    "active_run": {},
+    "last_return": {
+      "gold": 7,
+      "items": [
+        "rusty_key"
+      ],
+      "outcome": "completed",
+      "xp": 12
+    }
+  },
+  "after-duplicate": {
+    "sha256": "363737bb7404862d59b5bcb04dfc54d0d140f0322eb97787e734461cace5c86d",
+    "gold": 117,
+    "xp": 32,
+    "world": {
+      "elapsed_hours": 121,
+      "journey_count": 0.0,
+      "last_journey": {},
+      "location_id": "town_ravenford",
+      "pending_event": {},
+      "region_id": "region_001",
+      "resolved_nodes": [],
+      "seed": 20261107
+    },
+    "contracts": {
+      "restore_mine": {
+        "stage": "completed"
+      },
+      "scout_pass": {
+        "stage": "offered"
+      },
+      "supply_saltwatch": {
+        "stage": "offered"
+      }
+    },
+    "mine": {
+      "status": "cleared",
+      "threat": 0
+    },
+    "factions": {
+      "iron_march": {
+        "relation": 0,
+        "strength": 80
+      },
+      "river_league": {
+        "relation": 10,
+        "strength": 80
+      }
+    },
+    "tick": 486,
+    "party": {
+      "camping": false,
+      "fatigue": 73,
+      "goal": "",
+      "path": [],
+      "position": {
+        "x": 0.8138021,
+        "y": 0.7615741
+      }
+    },
+    "active_run": {},
+    "last_return": {
+      "gold": 7,
+      "items": [
+        "rusty_key"
+      ],
+      "outcome": "completed",
+      "xp": 12
+    }
+  },
+  "after-reload": {
+    "sha256": "363737bb7404862d59b5bcb04dfc54d0d140f0322eb97787e734461cace5c86d",
+    "gold": 117,
+    "xp": 32,
+    "world": {
+      "elapsed_hours": 121,
+      "journey_count": 0.0,
+      "last_journey": {},
+      "location_id": "town_ravenford",
+      "pending_event": {},
+      "region_id": "region_001",
+      "resolved_nodes": [],
+      "seed": 20261107
+    },
+    "contracts": {
+      "restore_mine": {
+        "stage": "completed"
+      },
+      "scout_pass": {
+        "stage": "offered"
+      },
+      "supply_saltwatch": {
+        "stage": "offered"
+      }
+    },
+    "mine": {
+      "status": "cleared",
+      "threat": 0
+    },
+    "factions": {
+      "iron_march": {
+        "relation": 0,
+        "strength": 80
+      },
+      "river_league": {
+        "relation": 10,
+        "strength": 80
+      }
+    },
+    "tick": 486,
+    "party": {
+      "camping": false,
+      "fatigue": 73,
+      "goal": "",
+      "path": [],
+      "position": {
+        "x": 0.8138021,
+        "y": 0.7615741
+      }
+    },
+    "active_run": {},
+    "last_return": {
+      "gold": 7,
+      "items": [
+        "rusty_key"
+      ],
+      "outcome": "completed",
+      "xp": 12
+    }
+  }
+}

@@ -330,6 +330,27 @@ func _input(event: InputEvent) -> void:
 		get_tree().change_scene_to_file("res://scenes/combat/CombatMapEditor.tscn")
 
 
+func _unhandled_key_input(event: InputEvent) -> void:
+	if not is_processing_input() or not event is InputEventKey or not event.pressed or event.echo:
+		return
+	if event.alt_pressed or event.ctrl_pressed or event.meta_pressed or event.shift_pressed:
+		return
+	if event.keycode >= KEY_1 and event.keycode <= KEY_9:
+		if _activate_action_slot(int(event.keycode - KEY_1) + 1):
+			get_viewport().set_input_as_handled()
+
+
+func _activate_action_slot(slot: int) -> bool:
+	if animation_locked or not is_processing_input() or _combat_result() != "in_progress":
+		return false
+	for child in command_buttons.get_children():
+		if child is Button and not child.is_queued_for_deletion() and child.is_visible_in_tree() and not bool(child.get_meta("developer_action", false)) and int(child.get_meta("action_slot", 0)) == slot:
+			if not child.disabled:
+				child.pressed.emit()
+			return true
+	return false
+
+
 func _render() -> void:
 	%TitleLabel.text = "Ash-road Raiders" if str(state.get("id", "")) == "ash_road_raiders" else "Old Mine Skirmish"
 	if str(state.get("id", "")) == "drawn_roster_skirmish":
@@ -1193,19 +1214,26 @@ func _visible_debug_action_ids() -> Array[String]:
 
 
 func _sync_selected_action_with_visible_actions(visible_actions: Array[String]) -> void:
-	if visible_actions.has(selected_action):
+	var active := _unit_by_id(state.get("turn_state", {}).get("active_unit_id", ""))
+	if visible_actions.has(selected_action) and _action_can_be_shown_now(active, selected_action):
 		return
-	if visible_actions.has("move"):
-		selected_action = "move"
-	elif not visible_actions.is_empty():
-		selected_action = visible_actions[0]
-	else:
-		selected_action = "end_turn"
+	selected_action = "end_turn"
+	for action_id: String in visible_actions:
+		if _action_can_be_shown_now(active, action_id):
+			selected_action = action_id
+			break
 	_clear_move_preview()
 
 
 func _action_can_be_shown_now(unit: Dictionary, action_id: String) -> bool:
 	return CombatActionModel.action_can_be_shown_now(state, unit, action_id)
+
+
+func _action_unavailability_reason(action_id: String) -> String:
+	if not CombatActionModel.PRIMARY_ACTION_IDS.has(action_id):
+		return ""
+	var active := _unit_by_id(state.get("turn_state", {}).get("active_unit_id", ""))
+	return CombatActionModel.action_unavailability_reason(state, active, action_id)
 
 
 func _add_button_section(title: String) -> void:
@@ -1244,10 +1272,10 @@ func _add_action_button(action_id: String, slot: int = 0) -> void:
 	button.toggle_mode = true
 	button.button_pressed = selected_action == action_id
 	button.modulate = Color(1.0, 0.95, 0.72) if selected_action == action_id else Color(0.94, 0.90, 0.82)
-	button.disabled = animation_locked or _combat_result() != "in_progress"
+	button.disabled = animation_locked or _combat_result() != "in_progress" or not _action_unavailability_reason(action_id).is_empty()
 	_apply_skill_button_style(button, selected_action == action_id)
 	button.pressed.connect(func() -> void:
-		if animation_locked:
+		if animation_locked or not is_processing_input() or _combat_result() != "in_progress" or not _action_unavailability_reason(action_id).is_empty():
 			return
 		selected_action = action_id
 		_clear_move_preview()
@@ -1293,7 +1321,8 @@ func _show_action_hover(action_id: String, slot: int) -> void:
 		cost = "COST depends on destination MP"
 	elif action_id in ["enemy_ai", "enemy_turn", "reset"]:
 		cost = "Debug control"
-	action_detail_label.text = "%s. %s. Click to select." % [cost, resources]
+	var reason := _action_unavailability_reason(action_id)
+	action_detail_label.text = "%s. %s. %s" % [cost, resources, "Click to select." if reason.is_empty() else reason]
 
 
 func _apply_skill_button_style(button: Button, selected: bool) -> void:

@@ -85,6 +85,26 @@
       "id": "clearing_crossfire",
       "label": "Clearing crossfire",
       "path": "res://resources/data/combat_encounters/clearing_crossfire.json"
+    },
+    {
+      "id": "qa_ai_budget_highground_1",
+      "label": "QA AI budget - 1 MP / highground",
+      "path": "res://resources/data/combat_encounters/qa_ai_budget_highground_1.json"
+    },
+    {
+      "id": "qa_ai_budget_highground_2",
+      "label": "QA AI budget - 2 MP / highground",
+      "path": "res://resources/data/combat_encounters/qa_ai_budget_highground_2.json"
+    },
+    {
+      "id": "qa_ai_budget_floor_1",
+      "label": "QA AI budget - 1 MP / floor",
+      "path": "res://resources/data/combat_encounters/qa_ai_budget_floor_1.json"
+    },
+    {
+      "id": "qa_bow_los_detour",
+      "label": "QA bow - blocked line and detour",
+      "path": "res://resources/data/combat_encounters/qa_bow_los_detour.json"
     }
   ]
 }

@@ -209,10 +209,18 @@ func decorate_action(hud,button: Button,id: String,slot: int) -> void:
 	name.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	var active: Dictionary=hud._unit_by_id(hud.state.get("turn_state",{}).get("active_unit_id",""))
 	var cost := "MP" if id=="move" else ("Finish" if id=="end_turn" else "%s AP" % hud._action_ap_cost(active,id,1))
-	var hint := UI.label(box,"[%s]  %s" % [slot,cost] if slot<=9 else cost,24,UI.GOLD)
+	if developer: cost="Tools"
+	var has_shortcut: bool=slot>=1 and slot<=9 and not developer
+	var hint := UI.label(box,"[%s]  %s" % [slot,cost] if has_shortcut else cost,24,UI.GOLD)
 	hint.autowrap_mode = TextServer.AUTOWRAP_OFF
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	button.tooltip_text = "%s [%s]\n%s" % [hud.ACTION_LABELS.get(id,id),slot,cost]
+	button.tooltip_text = "%s%s\n%s" % [hud.ACTION_LABELS.get(id,id)," [%s]" % slot if has_shortcut else "",cost]
+	var reason: String = hud._action_unavailability_reason(id)
+	if not reason.is_empty():
+		button.tooltip_text += "\n" + reason
+		icon.modulate = Color(.5,.5,.5)
+		name.add_theme_color_override("font_color",UI.MUTED)
+		hint.add_theme_color_override("font_color",UI.MUTED)
 	_size_action(hud,button)
 
 func refresh(hud) -> void:

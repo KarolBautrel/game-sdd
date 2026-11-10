@@ -16,6 +16,10 @@ from tools.validators.tactical_roster import errors as tactical_roster_errors
 from tools.validators.town_spaces import errors as town_space_errors
 from tools.validators.combat_authoring import catalogue_errors as combat_authoring_errors, encounter_errors
 from tools.validators.living_region import reference_errors as living_reference_errors
+from tools.validators.strategy_world import reference_errors as strategy_reference_errors
+from tools.validators.classic_strategy import configuration_errors as classic_configuration_errors, reference_errors as classic_reference_errors
+from tools.validators.strategic_region import rules_errors as region_rules_errors, reference_errors as strategic_reference_errors
+from tools.validators.strategist import reference_errors as model_reference_errors, request_errors as model_request_errors, reply_errors as model_reply_errors, replay_errors as model_replay_errors
 
 try:
     from jsonschema import Draft202012Validator
@@ -106,9 +110,21 @@ VALIDATION_TARGETS = [
     ("resources/schemas/combat_scenario_catalogue.schema.json", "resources/data/combat_scenarios/*.json"),
     ("resources/schemas/world_region.schema.json", "resources/data/world_regions/*.json"),
     ("resources/schemas/living_region.schema.json", "resources/data/world_simulations/*.json"),
+    ("resources/schemas/strategy_world.schema.json", "resources/data/strategy_worlds/*.json"),
+    ("resources/schemas/classic_rules.schema.json", "resources/data/strategy_simulations/*.json"),
+    ("resources/schemas/classic_world.schema.json", "resources/data/strategy_snapshots/*.json"),
+    ("resources/schemas/region_rules.schema.json", "resources/data/strategy_regions/*.json"),
+    ("resources/schemas/strategic_region.schema.json", "resources/data/strategic_regions/*.json"),
+    ("resources/schemas/strategist_rules.schema.json", "resources/data/strategists/rules*.json"),
+    ("resources/schemas/strategist_examples.schema.json", "resources/data/strategists/recorded*.json"),
+    ("resources/schemas/strategist_request.schema.json", "resources/data/strategist_requests/*.json"),
+    ("resources/schemas/strategist_reply.schema.json", "resources/data/strategist_replies/*.json"),
+    ("resources/schemas/strategist_campaign.schema.json", "resources/data/strategist_campaigns/*.json"),
+    ("resources/schemas/strategist_replay.schema.json", "resources/data/strategist_replays/*.json"),
     ("resources/schemas/world_terrain.schema.json", "resources/data/world_terrain/*.json"),
     ("resources/schemas/generated_region.schema.json", "resources/data/generated_regions/*.json"),
     ("resources/schemas/generated_region.schema.json", "resources/data/large_regions/*.json"),
+    ("resources/schemas/generated_region.schema.json", "resources/data/vast_regions/*.json"),
     ("resources/schemas/town.schema.json", "resources/data/towns/*.json"),
     ("resources/schemas/dungeon.schema.json", "resources/data/dungeons/*.json"),
     ("resources/schemas/dungeon_event.schema.json", "resources/data/dungeon_events/*.json"),
@@ -651,6 +667,25 @@ def main() -> int:
     errors.extend(town_space_errors(ROOT))
     errors.extend(validate_town_trade())
     errors.extend(validate_party_levels())
+    for path in sorted((ROOT / "resources/data/strategy_worlds").glob("*.json")):
+        errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in strategy_reference_errors(load_json(path)))
+    for path in sorted((ROOT / "resources/data/strategy_simulations").glob("*.json")):
+        errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in classic_configuration_errors(load_json(path)))
+    for path in sorted((ROOT / "resources/data/strategy_snapshots").glob("*.json")):
+        errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in classic_reference_errors(load_json(path)))
+    for path in sorted((ROOT / "resources/data/strategy_regions").glob("*.json")):
+        errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in region_rules_errors(load_json(path)))
+    for path in sorted((ROOT / "resources/data/strategic_regions").glob("*.json")):
+        errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in strategic_reference_errors(load_json(path)))
+    for path in sorted((ROOT / "resources/data/strategist_campaigns").glob("*.json")):
+        errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in model_reference_errors(load_json(path)))
+    for path in sorted((ROOT / "resources/data/strategist_requests").glob("*.json")):
+        errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in model_request_errors(load_json(path)))
+    for path in sorted((ROOT / "resources/data/strategist_replies").glob("*.json")):
+        request=ROOT/'resources/data/strategist_requests'/path.name
+        errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in model_reply_errors(load_json(request),load_json(path)))
+    for path in sorted((ROOT / "resources/data/strategist_replays").glob("*.json")):
+        errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in model_replay_errors(load_json(path)))
 
     road = load_json(ROOT / "resources/data/world_events/catalogue.json")
     road_path = ROOT / road["ambush"]["encounter_path"].removeprefix("res://")

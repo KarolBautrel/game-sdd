@@ -1,0 +1,11 @@
+{
+  "schema": "sdd.strategist-rules",
+  "version": 1,
+  "provider": "recorded_fixtures",
+  "calls_per_minute": 4,
+  "calls_per_day": 8,
+  "tokens_per_day": 65536,
+  "response_tokens": 512,
+  "timeout_ms": 10000,
+  "cost_micro_limit": 0
+}

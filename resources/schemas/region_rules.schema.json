@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "sdd.region-rules"
+    },
+    "version": {
+      "const": 1
+    },
+    "food_ratio": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20
+    },
+    "offer_ticks": {
+      "type": "integer",
+      "minimum": 96,
+      "maximum": 672
+    },
+    "cooldown_ticks": {
+      "type": "integer",
+      "minimum": 96,
+      "maximum": 2880
+    },
+    "delivery": {
+      "type": "object",
+      "properties": {
+        "gold": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "xp": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "party_food": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "world_food": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "gold",
+        "xp",
+        "party_food",
+        "world_food"
+      ],
+      "additionalProperties": false
+    },
+    "recon": {
+      "type": "object",
+      "properties": {
+        "gold": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "xp": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "gold",
+        "xp"
+      ],
+      "additionalProperties": false
+    },
+    "restoration": {
+      "type": "object",
+      "properties": {
+        "gold": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "xp": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "gold",
+        "xp"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema",
+    "version",
+    "food_ratio",
+    "offer_ticks",
+    "cooldown_ticks",
+    "delivery",
+    "recon",
+    "restoration"
+  ],
+  "additionalProperties": false
+}

@@ -8,6 +8,7 @@ const Gear := preload("res://scripts/domain/campaign_equipment.gd")
 const Trade := preload("res://scripts/domain/town_trade.gd")
 const Advancement := preload("res://scripts/domain/party_advancement.gd")
 const Living := preload("res://scripts/domain/living_world.gd")
+const ProfileKind := preload("res://scripts/session/campaign_profile_kind.gd")
 const PRICES := {"lamp_oil": 2, "pickaxe": 4, "trap_tools": 3, "bandage": 2, "camping_kit": 5, "food": 1}
 const SUPPLY_NAMES := {"lamp_oil": "Torch oil", "pickaxe": "Pickaxe", "trap_tools": "Trap tools", "bandage": "Bandage", "camping_kit": "Camping kit", "food": "Food"}
 var state: Dictionary = {}
@@ -29,6 +30,8 @@ func load_profile(path: String = "user://campaign_v1.json", in_memory: bool = fa
 	save_path = path
 	memory_only = in_memory
 	loaded = false
+	if path.begins_with(ProfileKind.STRATEGY_PREFIX):
+		return _reject("Strategy profiles require the dedicated strategy session.")
 	if in_memory or not FileAccess.file_exists(path):
 		state = initial_profile()
 	else:
@@ -39,6 +42,8 @@ func load_profile(path: String = "user://campaign_v1.json", in_memory: bool = fa
 		if json.parse(file.get_as_text()) != OK:
 			return _reject("Campaign save is invalid or unsupported. Existing file preserved.")
 		var parsed: Variant = json.data
+		if ProfileKind.classify(parsed) == "strategy":
+			return _reject("Strategy profiles require the dedicated strategy session.")
 		if not parsed is Dictionary or not _valid_profile(parsed):
 			return _reject("Campaign save is invalid or unsupported. Existing file preserved.")
 		state = parsed
@@ -129,17 +134,22 @@ func living_camp(enabled: bool) -> bool:
 
 
 func accept_living_contract(id: String) -> bool:
-	if not _living_available(): return _reject("Contract acceptance is unavailable.")
+	var reason := str(living_contract_availability(id).accept_reason)
+	if not reason.is_empty(): return _reject(reason)
 	var next:=state.duplicate(true)
-	if not Living.accept(next,id): return _reject("Accept this offered contract at its issuing settlement.")
+	if not Living.accept(next,id): return _reject(str(living_contract_availability(id).accept_reason))
 	return _commit(next,"Accepted "+str(Living.contract(id).name)+".")
 
 
 func report_living_contract(id: String) -> bool:
-	if not _living_available(): return _reject("Contract reporting is unavailable.")
+	var reason := str(living_contract_availability(id).report_reason)
+	if not reason.is_empty(): return _reject(reason)
 	var next:=state.duplicate(true)
-	if not Living.report(next,id): return _reject("Return to the issuer with the completed objective or 3 delivery food.")
+	if not Living.report(next,id): return _reject(str(living_contract_availability(id).report_reason))
 	return _commit(next,"Contract paid: "+str(Living.contract(id).name)+".")
+
+func living_contract_availability(id: String) -> Dictionary:
+	return Living.contract_availability(state if living_active() else {},id)
 
 
 func _living_available() -> bool:

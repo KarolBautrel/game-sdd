@@ -1,0 +1,2164 @@
+{
+  "checks": [
+    {
+      "pass": true,
+      "scenario": "native play display"
+    },
+    {
+      "pass": true,
+      "scenario": "no-focus minimized play host"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish0"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish0"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish0"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish1"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish1"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish1"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish2"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish2"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish2"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish3"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish3"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish3"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish4"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish4"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish4"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish5"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish5"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish5"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish6"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish6"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish6"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish7"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish7"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish7"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish8"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish8"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish8"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish9"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish9"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish9"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish10"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish10"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish10"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish11"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish11"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish11"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish12"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish12"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish12"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish13"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish13"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish13"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish14"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish14"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish14"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish15"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish15"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish15"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish16"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish16"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish16"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish17"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish17"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish17"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish18"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish18"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish18"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish19"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish19"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish19"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish20"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish20"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish20"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish21"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish21"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish21"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish22"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish22"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish22"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish23"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish23"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish23"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish24"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish24"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish24"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish25"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish25"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish25"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish26"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish26"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish26"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish27"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish27"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish27"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish28"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish28"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish28"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish29"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish29"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish29"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish30"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish30"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish30"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish31"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish31"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish31"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish32"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish32"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish32"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish33"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish33"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish33"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish34"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish34"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish34"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish35"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish35"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish35"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish36"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish36"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish36"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish37"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish37"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish37"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish38"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish38"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish38"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish39"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish39"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish39"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish40"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish40"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish40"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish41"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish41"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish41"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish42"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish42"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish42"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish43"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish43"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish43"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish44"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish44"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish44"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish45"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish45"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish45"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish46"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish46"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish46"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish47"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish47"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish47"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish48"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish48"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish48"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish49"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish49"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish49"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish50"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish50"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish50"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish51"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish51"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish51"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish52"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish52"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish52"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish53"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish53"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish53"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish54"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish54"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish54"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish55"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish55"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish55"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish56"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish56"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish56"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish57"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish57"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish57"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish58"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish58"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish58"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish59"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish59"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish59"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish60"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish60"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish60"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish61"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish61"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish61"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish62"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish62"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish62"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish63"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish63"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish63"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish64"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish64"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish64"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish65"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish65"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish65"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish66"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish66"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish66"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish67"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish67"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish67"
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "enabled native click: "
+    },
+    {
+      "pass": true,
+      "scenario": "arena full battle animation unlocks: drawn_roster_skirmish68"
+    },
+    {
+      "pass": true,
+      "scenario": "arena control submits exactly one command: drawn_roster_skirmish68"
+    },
+    {
+      "pass": true,
+      "scenario": "arena controls match trusted resolver: drawn_roster_skirmish68"
+    },
+    {
+      "pass": true,
+      "scenario": "arena ordinary controls reach normal victory: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena full attack/death frames sampled: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "arena no rejected or forced command: drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "native image: arena-victory-drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "save native image: arena-victory-drawn_roster_skirmish"
+    },
+    {
+      "pass": true,
+      "scenario": "play review acquired no focus"
+    }
+  ],
+  "display": "Windows",
+  "engine_clicks": 153,
+  "engine_key_events": 0,
+  "failures": [],
+  "kind": "native play GPU and engine-local input fixture",
+  "player_save_used": false,
+  "renderer": "forward_plus",
+  "status": "PASS",
+  "texture_memory_bytes": 239599616,
+  "uses_desktop_input": false,
+  "window_focused": false,
+  "window_minimized": true,
+  "exit_code": 0,
+  "errors": 0,
+  "warnings": 0,
+  "physical_desktop_acceptance": "NOT_RUN",
+  "packaged_build": false,
+  "source_report": "artifacts/qa-runs/painted-six-native-background/native-review.json",
+  "captures": [
+    {
+      "file": "arena-victory-drawn_roster_skirmish-1920x1080.png",
+      "sha256": "ec740222e2b6bb113ed7f429f764afae0a948b903319408701984786ec7acb88"
+    }
+  ]
+}

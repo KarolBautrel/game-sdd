@@ -1,5 +1,26 @@
 # Authorized staged polish session
 
+Latest scope,2026-11-09: user prioritizes the entire strategic world/factions /
+trade/diplomacy layer and explicitly selects a language model as strategist over
+a complete classic baseline. Stage92 is DESIGN ONLY: world015/slice016 and the
+world-strategy product plan define the shared simulator and stages93..97. No
+provider activation or runtime rewrite in this stage. Desktop stays withheld;
+no new commit/push. Existing stages85..91 and physical gaps remain preserved.
+
+Previous batch scope,2026-11-09: user requests only work WITHOUT desktop takeover.
+Stage90 audits damage-preview consistency;91 checks delivery/recon transactions
+and existing upkeep rules. Use headless tests and isolated QA profiles only;
+defer ordinary desktop scenarios and user visual/pace review. No new commit/push
+or art/balance expansion is authorized. Preserve local stages85..89.
+
+Previous scope,2026-11-05: user gave the requested green light with "kontynuuj".
+Bounded desktop follow-up completed the actual campaign mine contract, ordinary
+victory, loot, return, one-time report and exact reload on separate QA seed20261107.
+L87-01/L88-01 and all three L89-01 budget fixtures physically pass. Both
+same-target clear shots after detour pass in a separate static bow fixture. No new art or
+feature expansion, and no commit/push instruction. Current receipts and next
+steps: docs/qa/2026-11-05-playtest-followup.md. Earlier stages85/86 are preserved.
+
 Date:2026-11-04 Europe/Warsaw. User explicitly delegates roughly two hours of
 development, full computer control and commit/push to the main branch after each
 verified episode. Start2026-11-03T23:12Z; target finish2026-11-04T01:12Z
@@ -462,3 +483,239 @@ User returns and explicitly stops work, requests saved handoff and publication
 of all local work on master. Only final verification/commit/push remains in this
 turn. Final full receipt is linked by docs/qa/2026-11-05-session-close.md; third
 battle, user art/motion acceptance and L77-01 campaign victory remain open.
+
+85.2026-11-05: presentation044/slice044 separates stable granted primary slots
+from resource/cooldown availability. Unavailable actions stay visible, muted,
+with actual AP/MP/cooldown reasons; numeric1..9 matches displayed primary slots,
+ignores disabled/developer commands, modifiers/repeats and suspended input. A
+spent selected action falls back to a usable action. Existing resolver and all
+accepted actor/art/motion data remain unchanged. Focused126 checks, HUD layout
+and combat slices PASS; native105checks/18clicks/12captures across720p/1080p/1440p
+PASS,0diagnostics. Native drawn_roster_skirmish victory69commands/153pointer
+events/534checks,0diagnostics; physical third battle still uncompleted. Full
+source and portable receipt: docs/qa/2026-11-05-background-followup.md.
+
+86.2026-11-05: native full-contract testing exposed lost town_preparation after
+source/reroll/difficulty preview resets. Dungeon presentation014 and slice056 now
+require preserving campaign origin. Preview resets keep that flag while Start
+still performs the existing atomic owned-supply transaction; failed packing
+cannot enter a sandbox. Focused32checks and existing route-preview31checks PASS.
+World slice010 adds ordinary native Large-region travel/RMB/MMB, managed guarded
+mine battle, loot, completion, one-time settlement/report and exact disk reload.
+Unique profiles live only in the QA host user directory. Real production combat
+scene changes are adopted by the offscreen viewport, without replacing callbacks
+or domain results. Native results and full-source checks are recorded in the
+stage85/86 QA report. Physical L77-01 and user appearance/pace remain distinct.
+
+87.2026-11-05: ordinary Painted Six seed2001 won on DISPLAY1 in round3 with
+Knight14/14, Bran10/14, Torin10/10 and Rogue10/10; normal attacks/movement/AI
+commands, no Debug Win. This completes the previously interrupted third battle
+on the stage85/86 source, while exposing aimed shots bypassing blocked terrain.
+Combat grid022/actions063 and slice104 require shared terrain LOS. Both resolver
+implementations now reject before AP/cooldown/roll changes; the actual HUD preview
+uses that same result. Clear lines and endpoint exclusions remain legal. Focused
+regression suite116Godot checks/6Python tests covers87/88; final full verification
+is recorded in the current QA report. User's latest request prohibits further OS
+input; post-fix physical replay remains AWAITING_INTERACTIVE. Art is unchanged.
+
+88.2026-11-05: the same ordinary battle exposed spearmen spending leftover MP to
+circle toward other heroes after two attacks exhausted AP. Combat ai008/030 and
+slice105 restore immediate end_turn at zero AP before target/path selection,
+in both Python/GDScript. Prove adjacent/distant/multiple targets, melee/ranged
+roles, deterministic read-only choice, normal positive-AP move/attack/pass and
+manual player zero-AP MP movement. No general movement restriction or tactical
+role redesign. Full results and deferred physical L87-01/L88-01 are persisted in
+the QA report; the user keeps the desktop. Next complete those two replays and
+resume physical L77-01 only when controls are released. No new art/content scope.
+
+89.2026-11-05 implemented prerequisite regression: full stage87/88 validation exposed Mine
+AI returning an unaffordable fallback first path step (positive AP,1MP,2MP
+highground). Combat ai008/slice106 require normal move validation for fallback
+steps, retaining affordable approaches and legacy1AP movement. Both resolvers now
+validate that fallback against the ordinary movement gate. Focused137Godot checks
+and7Python tests pass; full Forest/Mine active/passive outcomes must also pass.
+The QA report records failed/final run identities and exact results.
+Physical budget-edge replay is deferred while the user uses the desktop.
+
+2026-11-05 physical follow-up to87..89: controls were released again. L88-01
+and L89-01 now PASS with visible post-fix evidence; three static catalogue QA
+encounters also feed the focused149-check domain suite. L87-01 blocked basic /
+aimed rejection and clear shooting pass, with its same-target post-detour Aimed
+subcase still explicitly open. Actual mine contract seed20261107 / Marches /
+Large won round3 with Bran12/14 and Torin4/10 using ordinary enemy AI throughout;
+managed packing,7g/12XP loot, completion, restoration,45g/20XP report, +10River
+League, duplicate protection and disk reload pass. L77-01's broader delivery /
+recon / world cases remain open. Painted Six post-fix replay also won round3,
+but one accidentally skipped enemy turn excludes it from clean ordinary-policy
+victory evidence. The earlier pre-fix L84-03 victory remains the ordinary proof.
+Full validation exposed two tests inheriting a manual launch's QA encounter;
+tooling001 now requires explicit fixtures. Feedback179 and environment124 checks
+pass with the QA override still selected, without changing production gameplay
+or weakening assertions. Full verification and preservation receipts are linked
+in the current QA report. The later bow fixture closes L87-01: both same-target shots after3MP detour
+pass, Aimed5damage/2AP and basic3damage/1AP, with original profiles/stats. Focused
+suite now161checks. No production gameplay change. Next: remaining world scenarios; user art/movement acceptance remains separate.
+
+90.2026-11-09 background-only preview audit, combat presentation068/slice107:
+actual headless HUD controls/labels and animated commits pass475checks across
+40cases, covering Torin basic/Aimed, Rogue, Bran, Knight, near-death HP, command
+indices, a miss and basic-to-Aimed number shortcut. No2-versus3mismatch reproduced.
+No production damage/art/animation change; old observation remains unconfirmed.
+Command: Godot4.7 --headless --path . --script
+res://scripts/presentation/combat_preview_consistency_tests.gd. Ordinary desktop
+visual review remains deferred; do not claim a new physical victory.
+
+91.2026-11-09 AWAITING_INTERACTIVE: world010/slice015 and presentation036 now
+share read-only contract availability/progress between domain commands, campaign
+feedback and real cards. Explain missing owned food, actual stopped issuer,
+unvisited objective, pending expedition/event and paid/closed jobs. Card identity,
+styles, rewards, prices, upkeep and existing saves remain intact. Session151 and
+interface157checks PASS; actual automated authored/Large2087/Large20261107 delivery
+and recon chains pay once and reconcile food, wages, invoices/tolls. Failed-write
+retry/reload and old-visit/duplicate/stale-position gates pass. Commands: Godot4.7
+--headless --path . --script res://scripts/session/living_contract_regression_tests.gd
+and res://scripts/presentation/living_world_interface_tests.gd. Full final-source
+verification and diagnostic economy table: docs/qa/2026-11-09-background-contracts.md.
+User explicitly retains the desktop: no OS input or visible launch. Next: ordinary
+delivery/recon and new progress/tooltips review when controls are released; keep
+all remaining L77-01/user motion/art acceptance open. No commit/push instruction.
+
+92.2026-11-09 DESIGN COMPLETE, runtime NOT_IMPLEMENTED: user redirects the
+contract-pool plan toward the whole strategic scene, faction economics, long
+plans and diplomacy; chooses optional LLM faction strategists with a full local
+classic mode. world015/slice016 own the proposed shared authority, pair treaties,
+resource/movement consequences, classic scoring/commitment, bounded asynchronous
+model proposals, replay/fallback, compatibility and contract causality. Product
+brief includes four working factions and three branching political examples.
+Primary-source research is separated from project inferences. No game/art/save /
+provider change. Documentation validation commands: repository Python
+tools/validators/validate_all.py, changed local-link review, git diff --check;
+actual outcomes in docs/qa/2026-11-09-world-strategy-design.md. Prior92/92 belongs
+to91 and does not prove this new design. Next code increment93: isolated versioned
+registry/diplomacy/persistence foundation;94 classic four-faction simulation;
+95 native scene/consequences;96 model adapter;97 comparison/balance. Existing
+L91/L77/user acceptance remains required before default promotion. User still
+holds desktop; no commit/push request. Do not restart the expired autonomous batch.
+
+93.2026-11-09 IMPLEMENTED, headless experimental foundation: user authorizes the
+next code increment with "To lecisz". World016/slice017 own a versioned separate
+strategy campaign, four factions/six towns, dynamic registries, connected abstract
+graph, canonical pair diplomacy, separate company reputation, stock holds and
+bilateral nonaggression/defensive-pact consent. Six validated command types use
+atomic deep-copy execution, a durable sequence watermark and64recent receipts.
+Dedicated QA-only atomic persistence never converts/resets old campaigns; legacy
+dispatch rejects the strategy envelope/prefix. Temporary write/rename failure,
+retry, reload, replay beyond64receipts, invalid references/versions and expansion
+to a fifth faction pass252domain/93session checks and8Python tests. Schema and
+semantic fixture validator join validate_all. Full command:
+`.venv/Scripts/python.exe tools/qa/verify_project.py --run-id strategy-foundation-20261109-final`.
+Run identity/final outcomes: docs/qa/2026-11-09-strategy-foundation.md. No strategic
+clock/economy/convoys/war/AI or new player scene yet; no model/provider calls.
+Next94: deterministic classic four-faction simulation, then95native integration,
+96model adapter and97comparison. User keeps desktop; all earlier physical gaps
+remain open. Preserve existing saves/art and local85..92; no new commit/push.
+
+94.2026-11-09 classic simulation implemented, isolated backend: world017/slice018
+extend the versioned foundation with a separately created campaignv2 / classic
+world wrapper. Daily production/upkeep and real weighted-graph shipments conserve
+stocks/cargo/escrow; both trade and ceasefire need counterpart consent. Seeded
+classic utility plans have3day commitment, weekly review,14day horizon, private
+observations and bounded reports. Border mobilization takes time, commits existing
+manpower and spends supplies; bounded clashes deduct casualties, direct defensive
+aid is lawful/nontransitive, peace orders physical withdrawal and14day truce.
+No global tension clock or model narration creates outcomes.161domain/20session
+checks plus7newPython tests pass;16x180day and two720day campaigns form the long
+proof suite. Histories are bounded while live cargo/escrow/consent survive pruning.
+The same atomic session rolls back an entire week on write failure, preserves
+v1 and legacy files, and resumes deterministic decisions after JSON reload.
+Shared Python validation now accepts Godot integral float sequence watermarks,
+with a focused regression. Schemas/config/reference export and semantic validators
+join normal validation. Full command uses180second per-suite allowance for the
+bounded long-run matrix:
+`.venv/Scripts/python.exe tools/qa/verify_project.py --run-id classic-strategy-20261109-final2 --timeout 180`.
+Final-source outcomes and preservation: docs/qa/2026-11-09-classic-strategy.md.
+No native strategic scene, terrain adapter, company political contracts, tactical
+joining or LLM provider yet; these remain95/96. Next95 is opt-in native map /
+inspector/chronicle and genuine company consequences with terrain-safe routes.
+Desktop withheld, existing live gaps open, all changes local; no commit/push.
+
+95.2026-11-09 opt-in native strategic campaign implemented: world018/slice019
+and presentation045/slice045 add a new campaignv3 with six towns/three adventure
+anchors on immutable Large geography. Seven real terrain paths bind the classic
+clock; army/cargo interpolation follows weighted paths in both directions.
+Company travel, fatigue, camp, wages, provisions and local services share one
+atomic transaction with the classic world. Causal delivery/recon/restoration
+jobs reserve real issuer budgets, freeze accepted terms and pay once. Managed
+mine completion changes actual ore production; retreat/failure do not. Existing
+DungeonDebug/CombatDebug and owned gear/packing remain authoritative. Native
+map, public faction inspector, chronicle, jobs and company controls reuse the
+approved campaign art/fonts. Launcher: start_game.ps1 -Scene strategy. Old v1/v2
+and legacy saves are neither converted nor used as fixtures. Focused221domain /
+380session /127expedition /81interface checks and6Python tests pass, including
+nine seed/preset geographies, exact reload, failed-write rollback/retry and a
+31ordinary-command headless battle/loot/return/report chain. These are automated
+proofs, not physical visual acceptance. Final full command:
+`.venv/Scripts/python.exe tools/qa/verify_project.py --run-id strategic-region-20261109-final2 --timeout 180`.
+Outcomes/integrity/preservation: docs/qa/2026-11-09-strategic-region.md. L95-01/02
+and all earlier open live cases stay AWAITING_INTERACTIVE. Next96: recorded model
+adapter with strict validation/classic fallback; no provider/budget selected and
+no paid inference. User retains desktop, changes remain local; no commit/push.
+
+96.2026-11-09 bounded strategist adapter implemented, no live provider: world019 /
+slice020 and presentation046/slice046 add explicit campaignv4 and strategy-ai.
+The shared classic authority accepts optional host-only observation/intent hooks;
+ordinary v1/v2/v3 behavior remains intact. Finite faction-private snapshots and
+hashed goal/intent catalogues constrain strict replies, citations, contingencies,
+timing and summary. Fixed future boundaries revalidate diplomatic context/goals
+and actual operators recheck resources/readiness/routes/counterpart consent.
+Classic plans/logistics continue while requests wait or fail. Weekly staggering,
+one pending/faction, bounded extra material reviews, daily call/token reservation,
+real-minute rate/timeout, epoch+generation tickets and64record journal/watermarks
+prevent storms/replays. Dispatch commits before transport; cached valid replies
+retry failed saves without another dispatch. Native mode labels explicitly call
+the local fixture provider authored/offline, not real model output. Checkpoint /
+command-tail replay runs without a transport. Focused184domain/67session /
+131managed/54interface checks plus7Python tests pass, including31ordinary battle
+commands and correct v4 dungeon return. Full command:
+`.venv/Scripts/python.exe tools/qa/verify_project.py --run-id strategist-adapter-20261109-final --timeout 180`.
+Final results/preservation: docs/qa/2026-11-09-strategist-adapter.md. New L96-01 and
+all previous live cases remain AWAITING_INTERACTIVE. Next97 comparison/balance;
+live LLM comparison first needs a chosen provider/model/cost budget and actual
+asynchronous network transport. No paid calls, desktop takeover, commit or push.
+
+96b.2026-11-09 user feedback: waiting three days showed no obvious effect. Read-only
+inspection of the user's v4 save at tick343 finds one accepted Cinder Compact plan
+at288, but its attempted route protection was rejected as mobilization_unfunded.
+Acceptance was being displayed as an unexplained counter. Presentation046 /
+slice047 add a passive, persistent result strip above the map, separate accepted
+plans from actual applied/blocked actions, explain constraints without exposing
+private plans/stock amounts/raw model text, and show a pending request's actual
+deadline. Old results appear immediately after reopening; no forced world event,
+save migration or gameplay/budget change. Focused native model78 and v3 native81
+checks pass at720/1080/1440p with real exported boundary/reload data. Normal
+validation/import/scene evidence and current source identity are recorded in
+docs/qa/2026-11-09-strategist-feedback.md. This is a targeted UI follow-up; the
+prior107/107 receipt belongs to the preceding full source, not this revision.
+L96-01 is AWAITING_USER_RETEST; desktop remains withheld, no commit/push. Next:
+retest the clear outcomes, then resume provider/model/budget choice and stage97.
+
+96c.2026-11-10 user defers save/strategist retest and prioritizes bigger maps.
+World020/slice021 and presentation048/slice048 implement explicit Vast generatorv3:
+768x432terrain, twice each Large dimension/four times its area. Actual new terrain /
+climates/rivers/safe roads retain the approved painted renderer; all old v1/v2
+hashes stay unchanged. Company/NPC physical scale4 and measured core route weights
+keep local pace/terrain ratios while trips across the larger region take longer.
+Scale-aware local camera5.2/max9 and minimap/overview preserve native detail size.
+Factories select Large/Vast and separate size-specific v3/v4 slots; launchers
+strategy-vast/strategy-ai-vast plus managed return retain the correct size/format.
+No current save reset/upgrade, model/provider or extra unimplemented site family.
+Schemas/embedded contracts, fixtures, export/rebuild tooling and Python gates are
+updated. Focused72domain/38session/84native/127managed checks and6Python cases PASS;
+three Vast biomes/bindings, exact old checksum compatibility,30days accounting,
+write-failure retry/reload and31ordinary battle commands included. Existing
+v3native81/model78/foundry81checks pass. Full command:
+`.venv/Scripts/python.exe tools/qa/verify_project.py --run-id vast-worlds-20261110-final --timeout 180`.
+Final-source report/preservation: docs/qa/2026-11-10-vast-worlds.md. Source/headless
+only, no commit/push. Physical L96c-01 and earlier user cases remain deferred.
+Next: larger-world play/readability and logistics balance; provider/model/budget
+choice and97comparison remain separate. No claim that30days proves game balance.

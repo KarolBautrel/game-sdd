@@ -1,0 +1,202 @@
+{
+  "schema": "sdd.strategy-world",
+  "version": 1,
+  "simulation_version": 1,
+  "content_version": 1,
+  "scenario_id": "four_factions_foundation_v1",
+  "topology_kind": "abstract_fixture",
+  "seed": 2087,
+  "tick": 0,
+  "command_seq": 0,
+  "planner_mode": "classic",
+  "factions": {
+    "river_league": {
+      "name": "River League",
+      "stocks": {
+        "coin": 120,
+        "food": 90,
+        "ore": 40,
+        "timber": 25
+      },
+      "manpower": 45
+    },
+    "iron_march": {
+      "name": "Iron March",
+      "stocks": {
+        "coin": 100,
+        "food": 70,
+        "ore": 12,
+        "timber": 35
+      },
+      "manpower": 60
+    },
+    "cinder_compact": {
+      "name": "Cinder Compact",
+      "stocks": {
+        "coin": 140,
+        "food": 45,
+        "ore": 24,
+        "timber": 18
+      },
+      "manpower": 30
+    },
+    "thornwood_accord": {
+      "name": "Thornwood Accord",
+      "stocks": {
+        "coin": 90,
+        "food": 40,
+        "ore": 8,
+        "timber": 90
+      },
+      "manpower": 35
+    }
+  },
+  "settlements": {
+    "town_ravenford": {
+      "name": "Ravenford",
+      "owner_id": "river_league",
+      "x": 0.15,
+      "y": 0.6
+    },
+    "saltwatch": {
+      "name": "Saltwatch",
+      "owner_id": "river_league",
+      "x": 0.2,
+      "y": 0.8
+    },
+    "black_keep": {
+      "name": "Black Keep",
+      "owner_id": "iron_march",
+      "x": 0.6,
+      "y": 0.2
+    },
+    "ironhold": {
+      "name": "Ironhold",
+      "owner_id": "iron_march",
+      "x": 0.8,
+      "y": 0.3
+    },
+    "ashmere": {
+      "name": "Ashmere",
+      "owner_id": "cinder_compact",
+      "x": 0.7,
+      "y": 0.65
+    },
+    "thornhaven": {
+      "name": "Thornhaven",
+      "owner_id": "thornwood_accord",
+      "x": 0.35,
+      "y": 0.2
+    }
+  },
+  "routes": {
+    "river_road": {
+      "a": "town_ravenford",
+      "b": "saltwatch",
+      "travel_ticks": 12
+    },
+    "pass_road": {
+      "a": "town_ravenford",
+      "b": "black_keep",
+      "travel_ticks": 24
+    },
+    "iron_road": {
+      "a": "black_keep",
+      "b": "ironhold",
+      "travel_ticks": 12
+    },
+    "market_road": {
+      "a": "saltwatch",
+      "b": "ashmere",
+      "travel_ticks": 20
+    },
+    "woodland_road": {
+      "a": "town_ravenford",
+      "b": "thornhaven",
+      "travel_ticks": 18
+    },
+    "border_road": {
+      "a": "thornhaven",
+      "b": "black_keep",
+      "travel_ticks": 16
+    },
+    "eastern_road": {
+      "a": "ashmere",
+      "b": "ironhold",
+      "travel_ticks": 22
+    }
+  },
+  "parties": {
+    "league_patrol": {
+      "faction_id": "river_league",
+      "kind": "patrol",
+      "settlement_id": "town_ravenford",
+      "headcount": 8
+    },
+    "iron_patrol": {
+      "faction_id": "iron_march",
+      "kind": "patrol",
+      "settlement_id": "black_keep",
+      "headcount": 12
+    },
+    "compact_watch": {
+      "faction_id": "cinder_compact",
+      "kind": "patrol",
+      "settlement_id": "ashmere",
+      "headcount": 6
+    },
+    "accord_patrol": {
+      "faction_id": "thornwood_accord",
+      "kind": "patrol",
+      "settlement_id": "thornhaven",
+      "headcount": 8
+    }
+  },
+  "company_reputation": {
+    "cinder_compact": 0,
+    "iron_march": 0,
+    "river_league": 0,
+    "thornwood_accord": 0
+  },
+  "diplomacy": {
+    "cinder_compact~iron_march": {
+      "a": "cinder_compact",
+      "b": "iron_march",
+      "stance": "peace",
+      "treaties": []
+    },
+    "cinder_compact~river_league": {
+      "a": "cinder_compact",
+      "b": "river_league",
+      "stance": "peace",
+      "treaties": []
+    },
+    "cinder_compact~thornwood_accord": {
+      "a": "cinder_compact",
+      "b": "thornwood_accord",
+      "stance": "peace",
+      "treaties": []
+    },
+    "iron_march~river_league": {
+      "a": "iron_march",
+      "b": "river_league",
+      "stance": "peace",
+      "treaties": []
+    },
+    "iron_march~thornwood_accord": {
+      "a": "iron_march",
+      "b": "thornwood_accord",
+      "stance": "peace",
+      "treaties": []
+    },
+    "river_league~thornwood_accord": {
+      "a": "river_league",
+      "b": "thornwood_accord",
+      "stance": "peace",
+      "treaties": []
+    }
+  },
+  "pact_offers": {},
+  "reservations": {},
+  "receipts": []
+}

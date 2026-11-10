@@ -1,0 +1,5 @@
+SCRIPT ERROR: Invalid operands 'bool' and 'int' in operator '=='.
+   at: valid (res://scripts/session/strategy_campaign_session.gd:23)
+   GDScript backtrace (most recent call first):
+       [0] valid (res://scripts/session/strategy_campaign_session.gd:23)
+       [1] _initialize (res://scripts/session/strategy_campaign_session_tests.gd:49)

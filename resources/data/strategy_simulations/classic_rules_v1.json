@@ -1,0 +1,156 @@
+{
+  "schema": "sdd.classic-rules",
+  "version": 1,
+  "warehouse_cap": 1000,
+  "prices": {
+    "food": 1,
+    "ore": 2,
+    "timber": 1
+  },
+  "train_ticks": 24,
+  "ceasefire_ticks": 1344,
+  "mobilize_cost": {
+    "coin": 8,
+    "food": 4,
+    "ore": 2,
+    "timber": 0
+  },
+  "policies": {
+    "river_league": {
+      "home": "town_ravenford",
+      "claim_route": "pass_road",
+      "production": {
+        "coin": 10,
+        "food": 14,
+        "ore": 5,
+        "timber": 1
+      },
+      "consumption": {
+        "coin": 2,
+        "food": 3,
+        "ore": 1,
+        "timber": 1
+      },
+      "targets": {
+        "coin": 40,
+        "food": 60,
+        "ore": 18,
+        "timber": 12
+      },
+      "personality": {
+        "trade": 85,
+        "security": 65,
+        "aggression": 20
+      }
+    },
+    "iron_march": {
+      "home": "black_keep",
+      "claim_route": "pass_road",
+      "production": {
+        "coin": 11,
+        "food": 6,
+        "ore": 1,
+        "timber": 2
+      },
+      "consumption": {
+        "coin": 3,
+        "food": 4,
+        "ore": 4,
+        "timber": 2
+      },
+      "targets": {
+        "coin": 40,
+        "food": 40,
+        "ore": 24,
+        "timber": 18
+      },
+      "personality": {
+        "trade": 40,
+        "security": 80,
+        "aggression": 80
+      }
+    },
+    "cinder_compact": {
+      "home": "ashmere",
+      "claim_route": "",
+      "production": {
+        "coin": 12,
+        "food": 2,
+        "ore": 2,
+        "timber": 1
+      },
+      "consumption": {
+        "coin": 2,
+        "food": 3,
+        "ore": 1,
+        "timber": 2
+      },
+      "targets": {
+        "coin": 50,
+        "food": 42,
+        "ore": 18,
+        "timber": 16
+      },
+      "personality": {
+        "trade": 95,
+        "security": 40,
+        "aggression": 10
+      }
+    },
+    "thornwood_accord": {
+      "home": "thornhaven",
+      "claim_route": "",
+      "production": {
+        "coin": 9,
+        "food": 1,
+        "ore": 1,
+        "timber": 12
+      },
+      "consumption": {
+        "coin": 2,
+        "food": 4,
+        "ore": 1,
+        "timber": 2
+      },
+      "targets": {
+        "coin": 35,
+        "food": 48,
+        "ore": 8,
+        "timber": 30
+      },
+      "personality": {
+        "trade": 65,
+        "security": 85,
+        "aggression": 10
+      }
+    }
+  },
+  "premises": [
+    {
+      "id": "open_markets",
+      "stocks": {},
+      "dispute": false
+    },
+    {
+      "id": "contested_ore",
+      "stocks": {
+        "iron_march": {
+          "ore": 4
+        }
+      },
+      "dispute": true
+    },
+    {
+      "id": "lean_harvest",
+      "stocks": {
+        "thornwood_accord": {
+          "food": 10
+        },
+        "cinder_compact": {
+          "food": 12
+        }
+      },
+      "dispute": false
+    }
+  ]
+}

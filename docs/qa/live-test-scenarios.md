@@ -1,5 +1,86 @@
 # Accumulated live test scenarios
 
+Current96c: user defers resetting/retesting the strategist save and requests
+bigger maps. Vast is an explicit new size/slot; old progress is preserved.
+[Vast QA](2026-11-10-vast-worlds.md) records source/headless evidence.
+
+| Case | Stage | Scenario | Acceptance | Status |
+| --- | --- | --- | --- | --- |
+| L96c-01 | 96c | Launch strategy-ai-vast or strategy-vast on DISPLAY1. Inspect local chart/minimap, pan/zoom/Overview/Company, travel across biomes and a safe crossing, buy supplies, resume mid-route, finish/report the mine and return. Select Large/Vast and New/Resume; check old Large progress remains available. | Genuinely larger scrollable world with readable approved art, consistent local motion/terrain restrictions, honest longer trip costs, independent saves and correct size/format return, no freeze/locked journey. | AWAITING_INTERACTIVE; domain72/session38/native84/managed127 plus6Python checks PASS,31ordinary headless battle commands. No desktop takeover or visible launch; long-run validity is not balance/visual acceptance. |
+
+Current96b follow-up: user saw no visible change after three days. Read-only
+save inspection confirms an accepted plan with its only action blocked by funds.
+Persistent above-map applied/blocked feedback and actual pending deadline are
+implemented; native model78/v3native81checks PASS. L96-01 now
+AWAITING_USER_RETEST, including immediate retained-result display after restart.
+See [feedback QA](2026-11-09-strategist-feedback.md). Earlier54checks/full107refer
+to the preceding source, not this targeted UI revision. Desktop remains withheld.
+
+Stage96 strategist adapter2026-11-09: optional v4 classic/authored recorded modes,
+strict bounded proposals and fallback/replay, no live provider. Automated proof:
+[adapter QA](2026-11-09-strategist-adapter.md). Desktop controls remain withheld.
+
+| Case | Stage | Scenario | Acceptance | Status |
+| --- | --- | --- | --- | --- |
+| L96-01 | 96 | Launch strategy-ai on DISPLAY1 in its separate slot. Inspect Factions, switch Classic/Recorded examples, use4x until the scheduled first review, pause and inspect pending/accepted/fallback counts. Change modes with a pending reply, restart, complete/report the managed mine and return to the same optional campaign. | Truthful authored/offline label, clear schedule/status, no private plan leak, time-free reply pump, smooth normal company play, generation cancellation, correct v4 save/return, no implied live inference. | AWAITING_INTERACTIVE; domain184/session67/managed131/interface54 and7Python checks PASS, including31ordinary headless battle commands. No visible launch or OS input; real model/balance untested. |
+
+Stage95 native strategic region2026-11-09: new opt-in strategy campaignv3,
+terrain-safe routes, real company services/jobs/managed mine consequences.
+[Strategic QA](2026-11-09-strategic-region.md) owns automated receipts. Headless
+checks do not prove visible art, input feel or ordinary desktop victory. Desktop
+controls remain withheld; earlier physical gaps remain open.
+
+| Case | Stage | Scenario | Acceptance | Status |
+| --- | --- | --- | --- | --- |
+| L95-01 | 95 | Launch strategy on DISPLAY1 with a separate seed-specific v3 slot. Inspect six towns/armies/convoys, zoom/pan/minimap and order travel at1x/2x/4x. Inspect public factions/chronicle, accept a real delivery/recon, buy stock and report once; restart mid-route. | Approved readable art, terrain-safe smooth travel, truthful company supplies/wages/fatigue, local prices, reserved jobs, no private plans or duplicate rewards, exact resumed position. | AWAITING_INTERACTIVE; domain221/session380/interface81 headless checks PASS, including720/1080/1440p. No OS input or visible launch. |
+| L95-02 | 95 | In the same opt-in pilot accept restoration in Ravenford, reach Old Mine, pack owned supplies/gear, retreat and resume, then win the managed dungeon ordinarily, claim loot, exit, return/report and restart. Inspect Company/Jobs pause and keyboard controls. | Correct strategic return, retreat keeps mine occupied, genuine completion restores production without instant payment, one issuer reward, stable owned inventory/effects/XP and readable expedition UI. | AWAITING_INTERACTIVE; automated127checks/31ordinary resolver commands cover native packing, pending-combat reload, combat/loot/exit, failed-write retry, production/report and duplicate protection. This is not a physical victory. |
+
+Stage94 backend-only2026-11-09: classic economy, actual abstract-graph logistics,
+faction plans, mobilization/conflict/aid/ceasefire and dedicated campaignv2.
+[Classic QA](2026-11-09-classic-strategy.md) owns automated matrix and preservation.
+No new visible scene yet; stage95 must prove terrain-safe rendering, faction /
+chronicle readability, real company contracts and ordinary play. No earlier
+physical gap is closed and desktop controls remain withheld.
+
+Stage93 backend-only2026-11-09: isolated versioned strategy registries, resource
+holds, bilateral pacts and dedicated save session. Automated acceptance is
+recorded in [foundation QA](2026-11-09-strategy-foundation.md); there is no new
+game scene or physical case to close at this increment. Classic simulation /
+native consequences and their ordinary play scenarios follow in94/95. Earlier
+L91/L77/user appearance and motion gates remain open. Desktop stays withheld.
+
+Current instruction2026-11-09: NO desktop takeover, OS input, activation or
+visible game launch. Stages90/91 use headless tests and isolated QA files only.
+Preview475checks/40cases did not reproduce the old tentative mismatch. Shared
+contract reasons/progress, session151checks, real interface157checks and automated
+authored/Large delivery/recon chains PASS; no physical/user acceptance inferred.
+See [background report](2026-11-09-background-contracts.md).
+
+| Case | Stage | Scenario | Acceptance | Status |
+| --- | --- | --- | --- | --- |
+| L91-01 | 91 | On a separate QA profile, travel/shop/accept/deliver at Saltwatch, accept recon in Black Keep, visit High Pass, return/report and restart. Include insufficient food, wrong issuer and repeated report. | Actual owned stock/quoted prices, one-time rewards/relations and exact reload; genuine journeys and manageable provisions/camping. | NOT_RUN physically in this batch; user holds desktop. Headless session151 and automated authored/Large2087/20261107 chains PASS. Earlier L77-01 mine subcase stays historical PASS. |
+| L91-02 | 91 | Inspect delivery2/3food, ready delivery, unvisited/ready recon and paid cards; hover disabled Accept/Report, change stock/location and resize. | Clear actual progress and reason, correct enablement, wrapping/readability and stable cards in accepted style. | AWAITING_INTERACTIVE; headless157checks at720p/1080p/1440p PASS, no OS input. |
+
+Latest desktop follow-up2026-11-05: user renewed permission with "kontynuuj".
+Actual campaign mine contract on fresh20261107 / Marches / Large now PASS:
+owned packing, ordinary round3 victory, loot, restoration, return/report and
+exact reload/duplicate protection. L88-01 and all three L89-01 fixtures physically
+PASS. L87-01 also PASS: both same-target clear shots after detour in a static QA fixture.
+Earlier L84-03 ordinary victory remains valid; the post-fix Painted Six replay
+had one accidentally skipped enemy turn and is not another clean-policy proof.
+Own test windows closed; old profiles/art unchanged. See
+[playtest follow-up](2026-11-05-playtest-followup.md). Broader L77-01 and user
+composition/motion approval remain open.
+
+Latest background follow-up (2026-11-05): stages85/86 stabilize combat action
+slots and fix owned preparation across source/reroll/difficulty changes. Native
+Painted Six victory69commands and complete Large-region mine contract33battle
+commands/loot/settlement/report/reload pass; RMB/MMB gestures pass. Evidence:
+[background follow-up](2026-11-05-background-followup.md). These are engine-local
+GPU tests, not additional physical desktop victories. At that earlier handoff,
+L84-03 remained open; the desktop follow-up above now completes it. Physical
+L77-01 and user approval of larger-map composition/movement/props remain open.
+
 Latest stage80: Region Foundry adds seeded real geography/illustration and a
 separate resumable living pilot per seed/preset. User authorizes implementation;
 appearance/physical feel still need review. Preserved authored r9 is available.
@@ -338,7 +419,7 @@ movement while preserving this exact mask; use L79-01 next.
 
 | ID | Stage | Scenario | Acceptance | Result |
 | --- | --- | --- | --- | --- |
-| L77-01 | 77 | Launch living-world on DISPLAY1; accept mine contract in Ravenford, continuous travel/pause, owned packing, ordinary defended mine completion, return/report; try Saltwatch delivery/Black Keep reconnaissance, camp/speeds, raids/conflict and restart. | Actual land movement and world activity, real supply/security/prices, one-time receipts/rewards and faction consequences, stable exact save/reload, mine remains cleared; ordinary retreat keeps task unfinished; separate player save. | AWAITING_INTERACTIVE; focused domain28/session41/UI97 and3Python tests PASS. Native/full final receipts are in2026-11-04-living-world.md. Boundary fixtures are not played victories. |
+| L77-01 | 77 | Launch living-world on DISPLAY1; accept mine contract in Ravenford, continuous travel/pause, owned packing, ordinary defended mine completion, return/report; try Saltwatch delivery/Black Keep reconnaissance, camp/speeds, raids/conflict and restart. | Actual land movement and world activity, real supply/security/prices, one-time receipts/rewards and faction consequences, stable exact save/reload, mine remains cleared; ordinary retreat keeps task unfinished; separate player save. | PARTIAL: physical mine-contract subcase PASS on fresh20261107/Marches/Large: ordinary round3 win, managed packing, loot, restoration, report45g/20XP/+10relation, duplicate protection and exact reload. Delivery/recon/camp/raids/conflict subcases remain open. See current playtest-followup report and receipt. |
 
 ## Smooth living-world movement (stage79)
 
@@ -361,7 +442,10 @@ RMB/MMB drag remains open. This does not close campaign L77-01.
 | L81-01 | 81 | Large Marches20261105, Generate/Play, mine travel, pause/zoom/mini chart/Company. | No camera course/resource changes, coherent weighted travel. | AGENT_OBSERVED_PASS for named inputs; physical RMB/MMB and USER visual review pending. Native236checks/90actions/36captures PASS. |
 | L84-01 | 84 | Forest Ambush ordinary desktop battle. | Normal victory, terrain/roles/animation, no Debug Win. | AGENT_OBSERVED_PASS; VICTORY round2,4survivors. |
 | L84-02 | 84 | Mine Breach ordinary desktop battle. | Normal victory, pillars/LOS/crossings/defense. | AGENT_OBSERVED_PASS; VICTORY round2,4survivors; live tooltip HP/status confirmed. |
-| L84-03 | 84 | Painted Six - Old Mine seed2001. | Complete ordinary battle and record outcome. | INTERRUPTED at user stop, round1 Rogue; restart tomorrow. No third victory claimed. |
+| L84-03 | 84 | Painted Six - Old Mine seed2001. | Complete ordinary battle and record outcome. | PASS2026-11-05 on stage85/86 source: ordinary DISPLAY1 round3 victory, Knight14/14, Bran10/14, Torin10/10, Rogue10/10. No Debug Win. Exposed LOS/AI defects now covered by87/88; post-fix physical replay remains separate. See playtest-followup report. |
+| L87-01 | 87 | Torin with basic/aimed shot behind an intermediate rock, then move to a clear firing lane. | Both shots reject blocked terrain without AP/cooldown loss, both open after detour. | PASS: blocked shots reject atomically in Painted Six and qa_bow_los_detour. Independent UI runs move1,1 to3,2 for3MP; same target4,1 takes Aimed5damage/2AP and basic3damage/1AP. Preview matches. Focused161Godot/7Python PASS; see playtest-followup report. |
+| L88-01 | 88 | Enemy spearman spends final AP while MP remains. | Immediately passes turn without circling toward another hero; normal approach/attack still works. | PASS physically after fix: spear at10,5 attacked Bran to AP0, kept3MP and passed without moving. Other spear and campaign ranged actors also passed. Raw before/after captures and input trace in playtest-followup report. |
+| L89-01 | 89 | Enemy with positive AP and1MP faces a2MP highground approach; repeat with2MP or a floor approach. | No repeated rejected move: pass when approach is unaffordable, otherwise move and pay the actual cost; legacy1AP movement retained. | PASS physically: three static catalogue QA fixtures,1MP/highground pass unchanged;2MP/highground move for2MP;1MP/floor move for1MP; all keep1AP. Focused149Godot/7Python PASS; screenshots/trace in playtest-followup report. |
 
 | ID | Stage | Scenario | Acceptance | Result |
 | --- | --- | --- | --- | --- |

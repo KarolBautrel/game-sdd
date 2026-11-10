@@ -1,0 +1,40 @@
+{
+  "schema": "sdd.background-contract-followup-v1",
+  "run_id": "background-contracts-20261109-final",
+  "source_sha256": "350a9e4d534dc6b96923a35d3752c9ca5116a7c159c593808fed306ef6f9eb99",
+  "source_matches_after_run": true,
+  "automated_status": "PASS",
+  "checks": 92,
+  "errors": 0,
+  "warnings": 0,
+  "preview": {
+    "checks": 475,
+    "cases": 40,
+    "result": "Tentative mismatch NOT_REPRODUCED; no production damage fix."
+  },
+  "contracts": {
+    "checks": 151,
+    "result": "PASS; shared reasons/progress, atomicity and actual automated service chains."
+  },
+  "interface": {
+    "checks": 157,
+    "sizes": [
+      "1280x720",
+      "1920x1080",
+      "2560x1440"
+    ],
+    "result": "Headless PASS; no physical/readability acceptance."
+  },
+  "desktop_input": false,
+  "window_activation": false,
+  "visible_launch": false,
+  "commit_push": "Not requested",
+  "deferred": [
+    "L91-01 ordinary delivery/recon",
+    "L91-02 physical copy/tooltips/readability",
+    "remaining L77-01",
+    "user art/movement review"
+  ],
+  "preexisting_profiles_preserved": 8,
+  "terrain_and_atlas_preserved": true
+}

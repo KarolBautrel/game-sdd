@@ -23,6 +23,10 @@ var managed_run := false
 var town_preparation := false
 var road_combat := false
 
+func campaign_owner() -> Node:
+	var strategic := get_node_or_null("/root/StrategicSession")
+	return strategic if strategic!=null and strategic.regional_active() else get_node("/root/CampaignSession")
+
 
 func has_dungeon_run() -> bool:
 	return not dungeon_data.is_empty() and not dungeon_state.is_empty()
@@ -37,7 +41,7 @@ func set_dungeon_run(next_dungeon_data: Dictionary, next_dungeon_state: Dictiona
 func checkpoint_campaign() -> bool:
 	if not managed_run or not is_inside_tree():
 		return true
-	var campaign := get_node("/root/CampaignSession")
+	var campaign := campaign_owner()
 	var saved: bool = campaign.checkpoint(dungeon_data, dungeon_state, next_combat_seed)
 	if not saved:
 		last_feedback = campaign.last_feedback
@@ -45,7 +49,7 @@ func checkpoint_campaign() -> bool:
 
 
 func restore_campaign() -> bool:
-	var campaign := get_node("/root/CampaignSession")
+	var campaign := campaign_owner()
 	if not campaign.loaded or campaign.state.active_run.is_empty():
 		return false
 	var active: Dictionary = campaign.state.active_run
@@ -97,7 +101,7 @@ func apply_launch_metadata(encounter: Dictionary) -> Dictionary:
 	next_encounter["dungeon_modifiers"] = pending_combat_request.get("dungeon_modifiers", {}).duplicate(true)
 	_ensure_beta_party(next_encounter)
 	if (managed_run or road_combat) and is_inside_tree():
-		var campaign := get_node("/root/CampaignSession")
+		var campaign := campaign_owner()
 		if campaign.loaded:
 			var snapshot: Dictionary = campaign.state.world.pending_event.get("equipment_snapshot", {}) if road_combat else campaign.state.active_run.get("equipment_snapshot", {})
 			next_encounter = Gear.apply(next_encounter, snapshot)
@@ -403,7 +407,7 @@ func _backline_player_position(encounter: Dictionary, front_position: Dictionary
 
 func finish_combat(result_payload: Dictionary) -> bool:
 	if road_combat:
-		var campaign := get_node("/root/CampaignSession")
+		var campaign := campaign_owner()
 		if not campaign.finish_road_combat(result_payload):
 			last_feedback = campaign.last_feedback
 			return false
@@ -447,7 +451,7 @@ func finish_run(next_dungeon_data: Dictionary, next_dungeon_state: Dictionary, o
 	set_dungeon_run(next_dungeon_data, result["state"])
 	pending_world_return_payload = result.get("event", {}).get("run_result_payload", {}).duplicate(true)
 	if managed_run and is_inside_tree():
-		pending_world_return_payload["run_id"] = get_node("/root/CampaignSession").state.active_run.id
+		pending_world_return_payload["run_id"] = campaign_owner().state.active_run.id
 	last_feedback = _run_return_feedback(pending_world_return_payload)
 	return true
 
@@ -457,6 +461,9 @@ func has_pending_world_return() -> bool:
 
 
 func world_return_scene_path() -> String:
+	if is_inside_tree():
+		var owner := campaign_owner()
+		if owner.has_method("world_return_scene"): return owner.world_return_scene()
 	return str(pending_world_return_payload.get("next_scene_path", DungeonStateModel.DEFAULT_RETURN_SCENE_PATH))
 
 
@@ -473,7 +480,7 @@ func clear() -> void:
 
 
 func restore_road_combat() -> bool:
-	var campaign := get_node("/root/CampaignSession")
+	var campaign := campaign_owner()
 	if not campaign.loaded:
 		return false
 	var pending: Dictionary = campaign.state.world.pending_event

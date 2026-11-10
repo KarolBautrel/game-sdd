@@ -1,0 +1,560 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "sdd.strategy-world"
+    },
+    "version": {
+      "const": 1
+    },
+    "simulation_version": {
+      "const": 1
+    },
+    "content_version": {
+      "const": 1
+    },
+    "topology_kind": {
+      "const": "abstract_fixture"
+    },
+    "planner_mode": {
+      "const": "classic"
+    },
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000000000
+    },
+    "tick": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000000
+    },
+    "command_seq": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000000
+    },
+    "factions": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/faction"
+      },
+      "minProperties": 2,
+      "maxProperties": 12
+    },
+    "settlements": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/settlement"
+      },
+      "minProperties": 2,
+      "maxProperties": 64
+    },
+    "routes": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/route"
+      },
+      "minProperties": 1,
+      "maxProperties": 256
+    },
+    "parties": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/party"
+      },
+      "minProperties": 0,
+      "maxProperties": 128
+    },
+    "company_reputation": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": -100,
+        "maximum": 100
+      }
+    },
+    "diplomacy": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/pair"
+      },
+      "maxProperties": 66
+    },
+    "pact_offers": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/offer"
+      },
+      "minProperties": 0,
+      "maxProperties": 1024
+    },
+    "reservations": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/reservation"
+      },
+      "minProperties": 0,
+      "maxProperties": 1024
+    },
+    "receipts": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/receipt"
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "version",
+    "simulation_version",
+    "content_version",
+    "topology_kind",
+    "planner_mode",
+    "scenario_id",
+    "seed",
+    "tick",
+    "command_seq",
+    "factions",
+    "settlements",
+    "routes",
+    "parties",
+    "company_reputation",
+    "diplomacy",
+    "pact_offers",
+    "reservations",
+    "receipts"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "faction": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "stocks": {
+          "type": "object",
+          "properties": {
+            "coin": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "food": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "ore": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "timber": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            }
+          },
+          "required": [
+            "coin",
+            "food",
+            "ore",
+            "timber"
+          ],
+          "additionalProperties": false
+        },
+        "manpower": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      },
+      "required": [
+        "name",
+        "stocks",
+        "manpower"
+      ],
+      "additionalProperties": false
+    },
+    "settlement": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "owner_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "name",
+        "owner_id",
+        "x",
+        "y"
+      ],
+      "additionalProperties": false
+    },
+    "route": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "b": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "travel_ticks": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        }
+      },
+      "required": [
+        "a",
+        "b",
+        "travel_ticks"
+      ],
+      "additionalProperties": false
+    },
+    "party": {
+      "type": "object",
+      "properties": {
+        "faction_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "kind": {
+          "enum": [
+            "patrol",
+            "caravan"
+          ]
+        },
+        "settlement_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "headcount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      },
+      "required": [
+        "faction_id",
+        "kind",
+        "settlement_id",
+        "headcount"
+      ],
+      "additionalProperties": false
+    },
+    "treaty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "kind": {
+          "enum": [
+            "nonaggression",
+            "defensive_pact"
+          ]
+        },
+        "start_tick": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "end_tick": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "start_tick",
+        "end_tick"
+      ],
+      "additionalProperties": false
+    },
+    "pair": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "b": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "stance": {
+          "enum": [
+            "peace",
+            "war"
+          ]
+        },
+        "treaties": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/treaty"
+          }
+        }
+      },
+      "required": [
+        "a",
+        "b",
+        "stance",
+        "treaties"
+      ],
+      "additionalProperties": false
+    },
+    "offer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "proposer": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "recipient": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "kind": {
+          "enum": [
+            "nonaggression",
+            "defensive_pact"
+          ]
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected",
+            "withdrawn"
+          ]
+        },
+        "signed_by": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true
+        },
+        "duration_ticks": {
+          "type": "integer",
+          "minimum": 96,
+          "maximum": 2880
+        },
+        "created_tick": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "expires_tick": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "accepted_tick": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "proposer",
+        "recipient",
+        "kind",
+        "status",
+        "signed_by",
+        "duration_ticks",
+        "created_tick",
+        "expires_tick",
+        "accepted_tick"
+      ],
+      "additionalProperties": false
+    },
+    "reservation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "faction_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "resource": {
+          "enum": [
+            "coin",
+            "food",
+            "ore",
+            "timber"
+          ]
+        },
+        "amount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "status": {
+          "enum": [
+            "reserved",
+            "released"
+          ]
+        },
+        "created_seq": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "closed_seq": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "faction_id",
+        "resource",
+        "amount",
+        "purpose",
+        "status",
+        "created_seq",
+        "closed_seq"
+      ],
+      "additionalProperties": false
+    },
+    "receipt": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "actor_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "action": {
+          "enum": [
+            "reserve_budget",
+            "release_budget",
+            "propose_pact",
+            "accept_pact",
+            "reject_pact",
+            "withdraw_pact"
+          ]
+        },
+        "target_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "tick": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      },
+      "required": [
+        "id",
+        "sequence",
+        "actor_id",
+        "action",
+        "target_id",
+        "tick"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

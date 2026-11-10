@@ -1,5 +1,14 @@
 # World and town
 
+- [020 Vast regions](020_vast_regions.md), slice021:768x432worlds, physical
+  travel scale4, immutable old snapshots and explicit independent size slots.
+
+- [019 Model strategist](019_model_strategist.md), slice020: isolated v4,
+  bounded proposals, recorded offline examples, replay and classic fallback.
+
+- [018 Strategic region](018_strategic_region.md), slice019: opt-in terrain-bound
+  classic world, company services, causal jobs and managed expedition consequences.
+
 Owner: [001_campaign_boundary.md](001_campaign_boundary.md). Acceptance:
 [slice001](slices/001_campaign_boundary.md). Milestone: dungeon foundation,
 World/Town Integration Prep. App is the regional hub; Ravenford is its market.
@@ -31,3 +40,13 @@ World/Town Integration Prep. App is the regional hub; Ravenford is its market.
   river/crossing-first geography and immutable playable region snapshots.
 - `014_large_regions.md` / `slices/014_large_regions.md`: larger mixed-biome
   geography, versioned pilot slots and consistent physical travel scale.
+- `slices/015_contract_transaction_regressions.md`: delivery/recon atomicity,
+  real automated service chains and existing upkeep boundary diagnostics.
+- `015_world_strategy.md` / `slices/016_world_strategy.md`: DESIGNED ONLY;
+  shared strategic simulation with classic and optional language-model faction
+  planners, economy/diplomacy/contract consequences and staged implementation.
+- `016_strategy_foundation.md` / `slices/017_strategy_foundation.md`: stage93
+  isolated versioned registries, reservations, bilateral pact facts and atomic
+  strategy campaign persistence; classic political simulation follows separately.
+- `017_classic_strategy.md` / `slices/018_classic_strategy.md`: stage94 classic
+  economy, real abstract-graph logistics, durable plans, diplomacy and conflict.

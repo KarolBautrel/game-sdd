@@ -21,6 +21,8 @@ Define the first ranged special attack that can be granted by equipment.
   - damage bonus;
   - cooldown turns.
 - `aimed_shot` uses ranged target validation, including range and line of sight.
+- Intermediate blocked terrain rejects it with `target_not_visible` before AP,
+  cooldown or hit/intercept resolution changes; preview reports the same reason.
 - `aimed_shot` resolves hit chance through the normal hit resolution pipeline.
 - `aimed_shot` applies normal weapon/profile damage calculation on hit.
 - If the profile defines `cooldown_turns`, using `aimed_shot` applies `skill_cooldown` to the actor.
@@ -33,6 +35,7 @@ Implemented by:
 
 ```text
 docs/specs/combat/slices/063_aimed_shot_from_bow.md
+docs/specs/combat/slices/104_aimed_shot_line_of_sight.md
 ```
 
 ## Non-Goals

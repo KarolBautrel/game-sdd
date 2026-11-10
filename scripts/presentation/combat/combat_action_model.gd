@@ -11,7 +11,7 @@ static func visible_primary_action_ids(state: Dictionary) -> Array[String]:
 	if active.is_empty() or combat_result(state) != "in_progress":
 		return visible
 	for action_id: String in PRIMARY_ACTION_IDS:
-		if action_can_be_shown_now(state, active, action_id):
+		if action_granted_to_unit(state, active, action_id):
 			visible.append(action_id)
 	return visible
 
@@ -27,31 +27,27 @@ static func visible_debug_action_ids(state: Dictionary) -> Array[String]:
 
 
 static func action_can_be_shown_now(state: Dictionary, unit: Dictionary, action_id: String) -> bool:
+	# Availability is independent of membership in the stable displayed tray.
+	return action_unavailability_reason(state, unit, action_id).is_empty()
+
+
+static func action_unavailability_reason(state: Dictionary, unit: Dictionary, action_id: String) -> String:
+	if unit.is_empty() or combat_result(state) != "in_progress":
+		return "Battle finished or no active unit."
 	if not action_granted_to_unit(state, unit, action_id):
-		return false
-	match action_id:
-		"move":
-			if unit["resources"].has("mp"):
-				return int(unit["resources"].get("mp", 0)) >= 1
-			return int(unit["resources"].get("ap", 0)) >= 1
-		"end_turn":
-			return true
-		"defend":
-			return int(unit["resources"].get("ap", 0)) >= 1
-		"shield_wall":
-			return int(unit["resources"].get("ap", 0)) >= action_ap_cost(state, unit, action_id, 1) and not skill_on_cooldown(unit, action_id)
-		"power_strike":
-			return int(unit["resources"].get("ap", 0)) >= action_ap_cost(state, unit, action_id, 2) and not skill_on_cooldown(unit, action_id)
-		"deep_cut":
-			return int(unit["resources"].get("ap", 0)) >= action_ap_cost(state, unit, action_id, 1) and not skill_on_cooldown(unit, action_id)
-		"guard_break":
-			return int(unit["resources"].get("ap", 0)) >= action_ap_cost(state, unit, action_id, 1) and not skill_on_cooldown(unit, action_id)
-		"aimed_shot":
-			return int(unit["resources"].get("ap", 0)) >= action_ap_cost(state, unit, action_id, 2) and not skill_on_cooldown(unit, action_id)
-		"basic_attack", "ranged_attack":
-			return int(unit["resources"].get("ap", 0)) >= action_ap_cost(state, unit, action_id, 1)
-		_:
-			return true
+		return "Not available with this equipment."
+	if action_id == "end_turn":
+		return ""
+	if action_id == "move":
+		var resource := "mp" if unit.resources.has("mp") else "ap"
+		return "Need 1 %s (have 0)." % resource.to_upper() if int(unit.resources.get(resource, 0)) < 1 else ""
+	for status: Dictionary in unit.get("statuses", []):
+		if status.get("id", "") == "skill_cooldown" and status.get("action_id", "") == action_id and int(status.get("remaining_turns", 0)) > 0:
+			var turns := int(status.remaining_turns)
+			return "Cooldown: %s turn%s." % [turns, "" if turns == 1 else "s"]
+	var cost := action_ap_cost(state, unit, action_id, 2 if action_id in ["power_strike", "aimed_shot"] else 1)
+	var ap := int(unit.resources.get("ap", 0))
+	return "Need %s AP (have %s)." % [cost, ap] if ap < cost else ""
 
 
 static func action_granted_to_unit(state: Dictionary, unit: Dictionary, action_id: String) -> bool:

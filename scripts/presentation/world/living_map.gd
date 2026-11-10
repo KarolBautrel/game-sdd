@@ -67,8 +67,9 @@ func _ready() -> void:
 	banner_layer.draw.connect(_draw_actor_banners)
 	add_child(banner_layer)
 	if camera_enabled():
+		camera.configure_world(World.travel_scale(_state()))
 		_build_camera_controls()
-		if int(_state().geography.version)==2:
+		if int(_state().geography.version)>=2:
 			camera.focus(World.point(_state().party.position),size)
 			_initial_camera.call_deferred()
 	resized.connect(_layout)
@@ -186,7 +187,7 @@ func _layout() -> void:
 		camera.clamp_view(size)
 		minimap.position=size-minimap.size-Vector2(10,10);minimap.visible=camera.zoom>1.05;minimap.queue_redraw()
 		camera_hint.position=Vector2(12,size.y-24)
-		camera_buttons.out.disabled=camera.zoom<=1;camera_buttons["in"].disabled=camera.zoom>=Camera.MAX_ZOOM
+		camera_buttons.out.disabled=camera.zoom<=1;camera_buttons["in"].disabled=camera.zoom>=camera.max_zoom
 	var compact:=get_viewport_rect().size.x<1500
 	var paper:=paper_rect()
 	if ground!=null: ground.position=paper.position;ground.size=paper.size

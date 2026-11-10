@@ -18,3 +18,16 @@ Owner: world010; presentation036/slice036.
 Proof: living-world domain/session tests and existing campaign/dungeon suites;
 native movement/pause/speed/contracts/provision input and visible world activity.
 Physical full expedition to ordinary victory and return: AWAITING_INTERACTIVE.
+
+Stage86 background integration proof (2026-11-05): the user requests all work
+that does not need their testing. Extend native input coverage through acceptance,
+surface travel, owned authored-mine packing, a normally won guarded room, loot,
+exit, settlement, issuer report and exact disk reload. Use a unique profile under
+the isolated QA user directory, never a player profile. No boosted stats, fake
+combat payload, cleared-room fixture or Debug Win. Repeated report/return must
+leave the paid state unchanged. Native scene changes may be adopted into the
+GPU SubViewport after the real production transition, without replacing the
+session/transaction callbacks. Also exercise RMB and MMB map pan/release with
+no course/time/resource change. This extends technical proof, not physical or
+user art/motion acceptance. Harness: living_contract_review.gd, invoked through
+play_render_review.gd --review-views=livingcontract.

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 DungeonRunSession="*res://scripts/session/dungeon_run_session.gd"
 CampaignSession="*res://scripts/session/campaign_session.gd"
+StrategicSession="*res://scripts/session/strategic_session.gd"
 ExportProbe="*res://scripts/qa/export_probe.gd"
 
 [display]

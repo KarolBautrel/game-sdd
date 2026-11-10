@@ -28,6 +28,12 @@ Presentation may simulate commands against a clean copy of the current state, bu
 
 - Selecting a targeted attack or skill prepares preview data for targetable unit positions before rendering.
 - Preview data must be derived from `CombatResolver.simulate`, not from duplicated presentation rules.
+- Preview must use the next submitted command identity and the same current
+  snapshot. Repeated inspection must not spend resources, advance rolls or
+  mutate statuses. Compare shown damage with `damage_applied.damage`, not the
+  HP delta of an overkill. After animated commit, rebuild from the new snapshot;
+  a defeated target must not retain a legal target panel. Slice107 records the
+  background consistency audit; physical appearance remains a separate gate.
 - Legal targets should be highlighted on the terrain tile.
 - Rejected targets may be highlighted differently when useful for diagnostics.
 - Target preview text should be visible on the unit layer, not only on the terrain tile, because sprites and resource readouts can obscure tile labels.

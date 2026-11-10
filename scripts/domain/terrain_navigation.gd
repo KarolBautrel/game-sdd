@@ -51,7 +51,7 @@ static func errors(value: Variant) -> Array[String]:
 		if not (number is float or number is int) or not is_finite(float(number)) or float(number)!=floor(float(number)): return ["Dimensions must be finite integers."]
 	var width: int=int(value.width)
 	var height: int=int(value.height)
-	if width<4 or height<4 or width>512 or height>288: return ["Terrain dimensions are outside4..512 /4..288."]
+	if width<4 or height<4 or width>768 or height>432: return ["Terrain dimensions are outside4..768 /4..432."]
 	if value.get("width")!=width or value.get("height")!=height: result.append("Dimensions must be integers.")
 	if not value.get("revision") is float and not value.get("revision") is int: return ["Missing revision."]
 	if not is_finite(float(value.revision)) or float(value.revision)!=floor(float(value.revision)) or value.revision<1: result.append("Revision must be a positive integer.")

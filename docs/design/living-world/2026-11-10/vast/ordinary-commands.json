@@ -1,0 +1,351 @@
+{
+	"commands": [
+		{
+			"action_id": "move",
+			"actor_id": "unit_player_002",
+			"id": "cmd_001",
+			"target": {
+				"position": {
+					"x": 9,
+					"y": 2
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "ranged_attack",
+			"actor_id": "unit_player_002",
+			"id": "cmd_002",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_enemy_001"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "ranged_attack",
+			"actor_id": "unit_player_002",
+			"id": "cmd_003",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_enemy_001"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_player_002",
+			"id": "cmd_004",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_player_001",
+			"id": "cmd_005",
+			"target": {
+				"position": {
+					"x": 8.0,
+					"y": 1.0
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "power_strike",
+			"actor_id": "unit_player_001",
+			"id": "cmd_006",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_enemy_001"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_player_001",
+			"id": "cmd_007",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_enemy_002",
+			"id": "cmd_008",
+			"target": {
+				"position": {
+					"x": 12,
+					"y": 2
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_enemy_002",
+			"id": "cmd_009",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_enemy_003",
+			"id": "cmd_010",
+			"target": {
+				"position": {
+					"x": 11,
+					"y": 1
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_enemy_003",
+			"id": "cmd_011",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_player_002",
+			"id": "cmd_012",
+			"target": {
+				"position": {
+					"x": 12,
+					"y": 1
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "ranged_attack",
+			"actor_id": "unit_player_002",
+			"id": "cmd_013",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_enemy_002"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "ranged_attack",
+			"actor_id": "unit_player_002",
+			"id": "cmd_014",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_enemy_002"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_player_002",
+			"id": "cmd_015",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_player_001",
+			"id": "cmd_016",
+			"target": {
+				"position": {
+					"x": 10.0,
+					"y": 1.0
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "basic_attack",
+			"actor_id": "unit_player_001",
+			"id": "cmd_017",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_enemy_003"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "basic_attack",
+			"actor_id": "unit_player_001",
+			"id": "cmd_018",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_enemy_003"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_player_001",
+			"id": "cmd_019",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "basic_attack",
+			"actor_id": "unit_enemy_002",
+			"id": "cmd_020",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_player_002"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_enemy_002",
+			"id": "cmd_021",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "basic_attack",
+			"actor_id": "unit_enemy_003",
+			"id": "cmd_022",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_player_001"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_enemy_003",
+			"id": "cmd_023",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "ranged_attack",
+			"actor_id": "unit_player_002",
+			"id": "cmd_024",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_enemy_002"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "ranged_attack",
+			"actor_id": "unit_player_002",
+			"id": "cmd_025",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_enemy_002"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_player_002",
+			"id": "cmd_026",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "power_strike",
+			"actor_id": "unit_player_001",
+			"id": "cmd_027",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_enemy_003"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_player_001",
+			"id": "cmd_028",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "basic_attack",
+			"actor_id": "unit_enemy_002",
+			"id": "cmd_029",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_player_002"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_enemy_002",
+			"id": "cmd_030",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "ranged_attack",
+			"actor_id": "unit_player_002",
+			"id": "cmd_031",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_enemy_002"
+			},
+			"type": "perform_action"
+		}
+	],
+	"debug_win": false,
+	"headless": true,
+	"mine": {
+		"ore_rate": 5.0,
+		"status": "restored"
+	},
+	"paid_job": {
+		"accepted_tick": 0.0,
+		"cause": {
+			"context": "The Old Mine is occupied; ore production is suspended.",
+			"id": "occupied_old_mine",
+			"kind": "site_occupied",
+			"tick": 0.0
+		},
+		"created_tick": 0.0,
+		"expires_tick": 288.0,
+		"gold": 28.0,
+		"hold": "hold_00000004",
+		"id": "job_00000004",
+		"issuer": "river_league",
+		"issuer_town": "town_ravenford",
+		"kind": "restoration",
+		"number": 4.0,
+		"party_food": 0.0,
+		"status": "paid",
+		"target": "dungeon_old_mine",
+		"world_food": 0.0,
+		"xp": 12.0
+	},
+	"physical": "NOT_RUN"
+}

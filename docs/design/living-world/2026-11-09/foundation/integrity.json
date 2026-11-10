@@ -1,0 +1,12 @@
+{
+  "run_id": "strategy-foundation-20261109-final",
+  "source_sha256": "cc28b45498eb4e08b0a2d24f9473e758ee6ee5cd01a43f4dbc6c9c4b31dcffef",
+  "current_source_sha256": "cc28b45498eb4e08b0a2d24f9473e758ee6ee5cd01a43f4dbc6c9c4b31dcffef",
+  "source_matches": true,
+  "pass_count": 94,
+  "expected_check_count": 94,
+  "errors": 0,
+  "warnings": 0,
+  "interactive": "NOT_RUN",
+  "git_head": "583ebc84267bacf4497e01f5a7dfbdf0caf3d9f2"
+}

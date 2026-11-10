@@ -30,6 +30,10 @@ func _initialize() -> void:
 	var scene: Control=load("res://scenes/combat/CombatDebug.tscn").instantiate()
 	root.add_child.call_deferred(scene)
 	await process_frame;await process_frame
+	# The terrain assertions require the showcase, independent of QA launch settings.
+	scene.selected_scenario_id = "full_combat_showcase"
+	scene._load_selected_scenario()
+	await process_frame
 	for kind: String in ["floor","blocked","cover_low","highground"]:
 		var found:=false
 		for tile: Dictionary in scene.state.grid.tiles:

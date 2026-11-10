@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "sdd.classic-rules"
+    },
+    "version": {
+      "const": 1
+    },
+    "warehouse_cap": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 100000
+    },
+    "prices": {
+      "type": "object",
+      "properties": {
+        "food": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "ore": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "timber": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "food",
+        "ore",
+        "timber"
+      ],
+      "additionalProperties": false
+    },
+    "train_ticks": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 96
+    },
+    "ceasefire_ticks": {
+      "type": "integer",
+      "minimum": 96,
+      "maximum": 2880
+    },
+    "mobilize_cost": {
+      "type": "object",
+      "properties": {
+        "coin": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "food": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "ore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "timber": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        }
+      },
+      "required": [
+        "coin",
+        "food",
+        "ore",
+        "timber"
+      ],
+      "additionalProperties": false
+    },
+    "policies": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "home": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "claim_route": {
+            "type": "string",
+            "pattern": "^$|^[a-z][a-z0-9_]{0,63}$"
+          },
+          "production": {
+            "type": "object",
+            "properties": {
+              "coin": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "food": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "ore": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "timber": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              }
+            },
+            "required": [
+              "coin",
+              "food",
+              "ore",
+              "timber"
+            ],
+            "additionalProperties": false
+          },
+          "consumption": {
+            "type": "object",
+            "properties": {
+              "coin": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "food": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "ore": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "timber": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              }
+            },
+            "required": [
+              "coin",
+              "food",
+              "ore",
+              "timber"
+            ],
+            "additionalProperties": false
+          },
+          "targets": {
+            "type": "object",
+            "properties": {
+              "coin": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "food": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "ore": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "timber": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              }
+            },
+            "required": [
+              "coin",
+              "food",
+              "ore",
+              "timber"
+            ],
+            "additionalProperties": false
+          },
+          "personality": {
+            "type": "object",
+            "properties": {
+              "trade": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "security": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "aggression": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            "required": [
+              "trade",
+              "security",
+              "aggression"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "home",
+          "claim_route",
+          "production",
+          "consumption",
+          "targets",
+          "personality"
+        ],
+        "additionalProperties": false
+      },
+      "maxProperties": 12
+    },
+    "premises": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "stocks": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,63}$"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "propertyNames": {
+                "enum": [
+                  "coin",
+                  "food",
+                  "ore",
+                  "timber"
+                ]
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              }
+            },
+            "maxProperties": 12
+          },
+          "dispute": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "stocks",
+          "dispute"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "version",
+    "warehouse_cap",
+    "prices",
+    "train_ticks",
+    "ceasefire_ticks",
+    "mobilize_cost",
+    "policies",
+    "premises"
+  ],
+  "additionalProperties": false
+}

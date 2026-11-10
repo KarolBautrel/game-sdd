@@ -253,11 +253,13 @@ func _refresh(world_tick: bool = false) -> void:
 		var stage: String=str(state.contracts.get(id,{}).get("stage","unavailable"))
 		widgets.panel.visible=stage!="unavailable"
 		var description: String={"offered":"Offered","accepted":"In progress","objective":"Ready to report","completed":"Paid","expired":"Closed"}.get(stage,"Unavailable")
-		widgets.status.text="%s / %s" % [description,World.site(definition.issuer,state).name]
+		var availability: Dictionary=campaign.living_contract_availability(id)
+		widgets.status.text="%s / %s\n%s" % [description,World.site(definition.issuer,state).name,availability.progress]
 		widgets.report.text="Deliver 3 food / collect payment" if definition.kind=="delivery" else "Report / collect payment"
-		var at_issuer: bool=World.at_site(state,definition.issuer) and not locked
-		widgets.accept.disabled=stage!="offered" or not at_issuer
-		widgets.report.disabled=not at_issuer or not (stage=="objective" or (definition.kind=="delivery" and stage=="accepted" and int(profile.supplies.food)>=3))
+		widgets.accept.disabled=not str(availability.accept_reason).is_empty()
+		widgets.report.disabled=not str(availability.report_reason).is_empty()
+		widgets.accept.tooltip_text=str(availability.accept_reason) if widgets.accept.disabled else "Accept this contract at its issuing settlement."
+		widgets.report.tooltip_text=str(availability.report_reason) if widgets.report.disabled else "Deliver 3 owned food and collect payment." if definition.kind=="delivery" else "Report the completed objective and collect payment."
 	var history: Array[String]=[]
 	for index in range(state.journal.size()-1,-1,-1):
 		var event: Dictionary=state.journal[index]

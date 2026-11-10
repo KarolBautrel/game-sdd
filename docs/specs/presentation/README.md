@@ -1,5 +1,19 @@
 # Shared presentation
 
+- [048 Vast worlds](048_vast_worlds.md): real larger geography, scale-aware
+  local camera and explicit Large/Vast factories; source/headless proof.
+
+- [046 Strategist campaign](046_strategist_lab.md): optional v4 classic/recorded
+  controls, truthful offline provenance and public-only adapter status.
+  Follow-up [slice047](slices/047_strategist_feedback.md) distinguishes accepted
+  plans from applied/blocked actions and retains the result above the map.
+
+- [045 Strategic region](045_strategic_region.md): native terrain-bound classic
+  campaign, public faction/chronicle/jobs/company inspector; world018/slice045.
+
+- [044 Stable combat actions](044_stable_combat_actions.md): resource/cooldown
+  locks retain granted action positions, with truthful reasons and stable keys.
+
 - [042 Tactical environment readability](042_tactical_environment_readability.md):
   cohesive painted props and accurate cover/height/impassability explanations.
 

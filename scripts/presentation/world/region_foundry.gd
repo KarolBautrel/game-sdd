@@ -47,6 +47,7 @@ func _build() -> void:
 	var heading:=HBoxContainer.new();column.add_child(heading)
 	title=_label(heading,"Uncharted lands",30,UI.GOLD);title.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	_button(heading,"authored","Authored Marches",_authored)
+	_button(heading,"strategy","Faction campaign",_strategy)
 	_button(heading,"back","Current company",_back)
 	var toolbar:=HBoxContainer.new();toolbar.add_theme_constant_override("separation",8);column.add_child(toolbar)
 	_label(toolbar,"Seed",19)
@@ -58,7 +59,7 @@ func _build() -> void:
 	for preset in ["Marches","Deep woodland","Highlands"]: preset_input.add_item(preset)
 	preset_input.item_selected.connect(func(_index: int) -> void: _selection_changed());toolbar.add_child(preset_input)
 	size_input=OptionButton.new();size_input.add_theme_font_size_override("font_size",19);size_input.custom_minimum_size.x=128
-	size_input.add_item("Classic");size_input.add_item("Large");size_input.select(1);toolbar.add_child(size_input)
+	size_input.add_item("Classic");size_input.add_item("Large");size_input.add_item("Vast");size_input.select(1);toolbar.add_child(size_input)
 	size_input.item_selected.connect(func(_index: int) -> void: _selection_changed())
 	_button(toolbar,"generate","Generate",generate_region)
 	_button(toolbar,"play","Play / Resume",_play)
@@ -93,7 +94,7 @@ func generate_region() -> void:
 	map.course_requested.connect(_preview_route)
 	title.text=str(geography.name)
 	var coverage:=int(geography.diagnostics.connected_cells)*100/maxi(1,int(geography.diagnostics.land_cells))
-	summary.text="Seed %d / %s / %s / %d crossings / %d%% connected / %dx%d terrain / v%d" % [int(geography.seed),str(geography.preset).capitalize(),"Large: 4x area" if int(geography.version)==2 else "Classic",geography.bridges.size(),coverage,int(geography.terrain.width),int(geography.terrain.height),int(geography.version)]
+	summary.text="Seed %d / %s / %s / %d crossings / %d%% connected / %dx%d terrain / v%d" % [int(geography.seed),str(geography.preset).capitalize(),["Classic","Large: 4x area","Vast: 16x area"][int(geography.version)-1],geography.bridges.size(),coverage,int(geography.terrain.width),int(geography.terrain.height),int(geography.version)]
 	status.text="Terrain, crossings and all six sites validated. Click a site to preview a real route; Play / Resume opens this seed's own company."
 	_selection_changed()
 func _preview_route(position: Vector2,id: String) -> void:
@@ -115,6 +116,11 @@ func _authored() -> void:
 	get_node("/root/DungeonRunSession").clear();_go("res://scenes/world/LivingWorld.tscn")
 func _back() -> void:
 	_go("res://scenes/world/LivingWorld.tscn" if _campaign().living_active() else "res://scenes/app/App.tscn")
+func _strategy() -> void:
+	var owner := get_node("/root/StrategicSession")
+	if owner.open_seed(int(seed_input.value),Gen.PRESETS[preset_input.selected],DisplayServer.get_name()=="headless" or _campaign().memory_only,maxi(2,size_input.selected+1)): _go(owner.world_return_scene())
+	else: status.text=owner.last_feedback
+
 func _go(path: String) -> void:
 	if scene_requested.get_connections().is_empty(): get_tree().change_scene_to_file(path)
 	else: scene_requested.emit(path)
