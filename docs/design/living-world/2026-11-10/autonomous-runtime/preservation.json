@@ -1,0 +1,72 @@
+{
+  "files": [
+    {
+      "path": "C:\\Users\\karol\\AppData\\Roaming\\Godot\\app_userdata\\sdd-game\\campaign_v1.json",
+      "before_sha256": "9a485f2e205a55d1c82361a46687053d2e7983f260e215aa13d0bf7c3fee7301",
+      "after_sha256": "9a485f2e205a55d1c82361a46687053d2e7983f260e215aa13d0bf7c3fee7301",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\karol\\AppData\\Roaming\\Godot\\app_userdata\\sdd-game\\qa-travel-253691.json",
+      "before_sha256": "e4c7a0158508d7184a04ac123d15b0d5176714bf6ae0448678dd3cbc1b0be711",
+      "after_sha256": "e4c7a0158508d7184a04ac123d15b0d5176714bf6ae0448678dd3cbc1b0be711",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\karol\\AppData\\Roaming\\Godot\\app_userdata\\sdd-game\\qa_hero_equipment_pilot_v1.json",
+      "before_sha256": "52393c9fbd296812ad197bf109c81f4da0cf1d59b094d9075a9924944f8726f0",
+      "after_sha256": "52393c9fbd296812ad197bf109c81f4da0cf1d59b094d9075a9924944f8726f0",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\karol\\AppData\\Roaming\\Godot\\app_userdata\\sdd-game\\qa_living_world_generated_v2_marches_20261105.json",
+      "before_sha256": "dfbb42bdfe0effc65c4287738a6e2a0c81970a3a954b2f1623d2def30a68ea18",
+      "after_sha256": "dfbb42bdfe0effc65c4287738a6e2a0c81970a3a954b2f1623d2def30a68ea18",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\karol\\AppData\\Roaming\\Godot\\app_userdata\\sdd-game\\qa_living_world_generated_v2_marches_2087.json",
+      "before_sha256": "6d321b18551de2de1567f44fe68ee7ae87f359ea7d4db7246d5c139e2ea240cf",
+      "after_sha256": "6d321b18551de2de1567f44fe68ee7ae87f359ea7d4db7246d5c139e2ea240cf",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\karol\\AppData\\Roaming\\Godot\\app_userdata\\sdd-game\\qa_living_world_v1.json",
+      "before_sha256": "52c1c10119a9fe90d765b428c82f64fc74613a0932692e13607b3fef243bed33",
+      "after_sha256": "52c1c10119a9fe90d765b428c82f64fc74613a0932692e13607b3fef243bed33",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\karol\\AppData\\Roaming\\Godot\\app_userdata\\sdd-game\\stage4_manual.json",
+      "before_sha256": "d8d6debd275e969154af9729f325c445043efd8403c973aa35d85dd2747a98da",
+      "after_sha256": "d8d6debd275e969154af9729f325c445043efd8403c973aa35d85dd2747a98da",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\karol\\AppData\\Roaming\\Godot\\app_userdata\\sdd-game\\terrain_editor_previous.json",
+      "before_sha256": "fec3e189ff3caf3d32041db469abcb9d948f5de6843bddb225f38e4c95386990",
+      "after_sha256": "fec3e189ff3caf3d32041db469abcb9d948f5de6843bddb225f38e4c95386990",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\resources\\data\\world_terrain\\living_marches_v1.json",
+      "before_sha256": "a5d90d2ff4dbf36d0f3b46856fc30be0812767876cc407e72c3c0067a8a8f327",
+      "after_sha256": "a5d90d2ff4dbf36d0f3b46856fc30be0812767876cc407e72c3c0067a8a8f327",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\assets\\ui\\campaign\\world_atlas.png",
+      "before_sha256": "516bdc4ad1635f931c79fac9eaaaba0ac041607dc5aacc501593907cd41ea9a5",
+      "after_sha256": "516bdc4ad1635f931c79fac9eaaaba0ac041607dc5aacc501593907cd41ea9a5",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\karol\\AppData\\Roaming\\Godot\\app_userdata\\sdd-game\\qa_strategy_world_model_v4_marches_2087.json",
+      "before_sha256": "3d8bce0e266daa86e358f6f1dde24474c17233f5f2fd4a12d3c2266d21c33ded",
+      "after_sha256": "3d8bce0e266daa86e358f6f1dde24474c17233f5f2fd4a12d3c2266d21c33ded",
+      "unchanged": true
+    }
+  ],
+  "unchanged": 11,
+  "checked_utc": "2026-11-10T21:40:33.757254+00:00"
+}

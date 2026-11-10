@@ -1,0 +1,10 @@
+{
+  "matched_faction_cases": 12,
+  "matched_native_cases": 6,
+  "all_initial_digests_match": true,
+  "all_conservation_checks_pass": true,
+  "provider": "authored_offline_only",
+  "desktop": "NOT_USED",
+  "simulated_world_days_per_matrix": 2160,
+  "native_world_days_per_matrix": 180
+}

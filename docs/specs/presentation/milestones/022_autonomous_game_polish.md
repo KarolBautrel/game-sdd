@@ -749,3 +749,97 @@ No desktop or player-save changes. L97a-01 and all earlier physical gaps stay op
 Next: provision throughput/stock targets on longer routes, duplicate diplomatic
 proposal diagnostics, then configured live transport and genuine matched model
 comparison after provider/model/cost choice. No automatic campaign promotion.
+
+97b.2026-11-10 implemented; AWAITING_INTERACTIVE. User asks for the next steps to be executed.
+World022/slice023 extend procurement to actual lead-time targets, reachable cargo,
+soft pending order/coin commitments and shared consent budgets, with fixed saved
+production/prices and unchanged authoritative operators. Native30day regional
+job-refresh probes supplement the frozen-job180day matrix. No desktop, player
+reset, provider choice or new publication permission is inferred. Focused supply96 /
+readiness26/classic161/adapter184/native90/regional221/session380/model-session67 /
+managed127/131/127checks PASS; validation/111Python tests PASS. All12faction-only
+180day pairs match opening digests; classic food shortages581->4, recorded654->2.
+Six actual30day native regions match openings and reduce shortages55->4, with
+normal job refresh/expiry and company upkeep. Evidence/limitations:
+docs/qa/2026-11-10-supply-pipeline.md. Full shared regression follows97c.
+Next:97c redundant diplomatic proposal filtering, then final regression.
+
+97c.2026-11-10 implemented; AWAITING_INTERACTIVE after97b automated PASS. World023/slice024 own known
+pending/expired bilateral proposal filters, unchanged actual consent/resource
+operators and repeated native/faction matrices. No desktop, user reset, provider
+activation, campaign promotion or publication inferred. Diplomatic42/supply96 /
+classic161/readiness26/adapter184/native90/comparison348checks PASS, including
+historical overdue-pending records, real signatures, stale duplicate rejection,
+privacy and deterministic order-independent observations. Validation/111Python
+cases PASS. All12matched180day faction and six30day native probes PASS.
+Classic rejected intents1731->934, authored recorded2053->1185. Known fresh
+active-pact/expired-trade retries disappear from classic; delayed examples and
+simultaneous actual capacity/offer contention still reach the real operator gate.
+Food shortages remain4classic/2recorded faction-days,4native; native deliveries
+937->930 (small scenario variation is retained, not hidden as universal gain).
+Pre97b baseline had581/654food-shortfall faction-days and55native; no production,
+prices, order size or shipment limit was increased. Final full-source command:
+`.venv/Scripts/python.exe tools/qa/verify_project.py --run-id supply-diplomacy-20261110-final --timeout 420`.
+Outcome/source-integrity/save preservation are owned by
+docs/qa/2026-11-10-diplomatic-proposals.md. Earlier intermediate capacity saturation,
+fixture-isolation and replay-revision details are retained in97b QA/evidence.
+Next: user review of travel/traffic/jobs, then provider/model/hosting/cost choice
+before live asynchronous inference and genuine matched classic/model comparison.
+No city/art/tactical rewrite or automatic main-campaign promotion.
+
+98.2026-11-10 autonomous-world product strategy; DESIGN ONLY. User explicitly
+redirects effort from detailed economics toward the entire global world's
+independent life. World024/slice025 and
+docs/design/living-world/2026-11-10/AUTONOMOUS_WORLD_PLAN.md define actors,
+ambitions, modest means/readiness/stability/supply assessments, persistent
+episodes, autonomous NPC results, consequences/jobs, distant province detail,
+knowledge and company opportunities. Preserve all97b/c runtime work and saves.
+No economy rewrite, live provider, migration, desktop control or publication.
+New ordered priority supersedes the earlier next-provider/economic queue:
+99complete classic threatened-road vertical slice with functional camp content;
+100NPC/player claims and expedition outcomes;101political campaigns/control /
+recovery;102real site families/province summaries;103native feedback and hands-off
+30/90day review;104optional live strategist after local world proof and user
+configuration. This design alone does not authorize runtime99 implementation.
+Validation command: `.venv/Scripts/python.exe tools/validators/validate_all.py`;
+document links/whitespace and unchanged-runtime receipt:
+docs/qa/2026-11-10-autonomous-world-design.md. Prior117/117 is historical runtime
+evidence, not a full-source run after these documentation changes. No new
+gameplay acceptance claimed. Next implementation request starts at99, with its
+own data/ops/slice/tests before code; provider choice does not block99..103.
+
+## Authorized world-life batch,2026-11-10
+
+User authorizes99..103 and publication to master. World025/slice026 own the new
+version5. Stage99 domain: world_life_tests.gd25/25PASS; actual forest camp content
+added. AWAITING_INTERACTIVE. Next100: claims and ordinary company expedition.
+Desktop/live provider stay deferred. Report: docs/qa/2026-11-10-world-life-99.md.
+
+Stage100: claims37/37 and native expedition114/114PASS,31ordinary commands.
+Report docs/qa/2026-11-10-world-life-100.md. Next101 political outposts.
+
+Stage101 politics29/29PASS; no errors/warnings. Report docs/qa/2026-11-10-world-life-101.md. Next102 sites/districts.
+
+Stage102 regions57/57PASS over90days. Report docs/qa/2026-11-10-world-life-102.md. Next103 native feedback/soaks/publication.
+
+Stage103 integrates presentation049/slice049 and world025/slice026: separate
+v5 Large/Vast scene/slots, actual extra sites/rivals/arriving bands, World tab,
+fixed forest/ruin preparation, news, claims and dated district reports.
+Native interface focused90checks passed before the added retainer/news polish;
+final full-source verification is required before publication. The review found
+quiet politics, so a causal nonaggression dispute/real mobilization and a finite
+political retainer were added: world_life_dispute_tests27/27PASS including a
+protected peaceful branch. Full verification and the final six-opening30/90day
+review are the remaining background gates. User tests are persisted under
+docs/qa/autonomous-world-test-scenarios.md; all physical gates stay open.
+
+Final stage103 scope is implemented. Focused ordinary expedition114/114PASS with
+31legal resolver commands; dispute27/27PASS and portable/new/parent checks9/9PASS.
+Six real openings (Large/Vast x42/2087/170717) each reached30/90days with canonical
+valid states: wars1..4 and captures0..5 at90days, finite survivors, no company
+commands. The finite two-site content can be exhausted; expansion remains a
+subsequent content task. Final publication gate: `.venv/Scripts/python.exe
+tools/qa/verify_project.py --run-id autonomous-world-20261110-final --timeout 420`.
+The final status/source hash is maintained in docs/qa/2026-11-10-world-life-runtime.md.
+Next recommended step: user runbook01..05; L99..L103 and earlier physical cases
+remain AWAITING_INTERACTIVE. No live provider or desktop control was activated.

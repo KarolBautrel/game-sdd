@@ -1,0 +1,15 @@
+{
+  "run_id": "supply-diplomacy-20261110-final",
+  "tested_source_sha256": "2aeb2613a3b259cd2a9c2354df2c87a7f0a5c813f51ad77573c7bc5cc693e96a",
+  "final_source_sha256": "2aeb2613a3b259cd2a9c2354df2c87a7f0a5c813f51ad77573c7bc5cc693e96a",
+  "match": true,
+  "checks": 117,
+  "errors": 0,
+  "warnings": 0,
+  "python_tests": 111,
+  "godot_suites": 100,
+  "scene_boots": 13,
+  "interactive": "NOT_RUN",
+  "git_head": "654aaa225abdf9b53678a68f639748d33405b47b",
+  "worktree": "97b/c local and uncommitted"
+}

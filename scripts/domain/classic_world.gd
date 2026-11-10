@@ -3,6 +3,7 @@ extends RefCounted
 const W := preload("res://scripts/domain/world_strategy.gd")
 const S := preload("res://scripts/domain/classic_world_state.gd")
 const Planner := preload("res://scripts/domain/faction_planner.gd")
+const Supply := preload("res://scripts/domain/supply_planning.gd")
 const ACTIONS := ["advance","propose_trade","accept_trade","reject_trade","mobilize","declare_war","propose_peace","accept_peace","reject_peace","respond_aid","propose_pact","accept_pact","reject_pact","withdraw_pact","reserve_budget","release_budget","protect_route"]
 
 static func initial(seed_value: int = 2087) -> Dictionary:
@@ -75,7 +76,7 @@ static func _trade(s: Dictionary, actor: String, action: String, p: Dictionary) 
 		if S.hostile(s,p.seller,p.buyer) or S.path(s,p.source,p.target,[p.seller,p.buyer]).is_empty(): return "trade_route_closed"
 		var pending := 0
 		for t: Dictionary in s.trades.values():
-			if t.status=="proposed" and t.proposer==actor:
+			if t.status=="proposed" and t.expires_tick>s.core.tick and t.proposer==actor:
 				pending+=1
 				if t.seller==p.seller and t.buyer==p.buyer and t.resource==p.resource: return "trade_pending"
 		if pending>=2: return "offer_capacity"
@@ -94,7 +95,7 @@ static func _trade(s: Dictionary, actor: String, action: String, p: Dictionary) 
 	var active := 0
 	for other: Dictionary in s.trades.values():
 		if other.status in ["transit","waiting"]: active+=1
-	if active>=32: return "shipment_capacity"
+	if active>=S.SHIPMENT_LIMIT: return "shipment_capacity"
 	if W.available(s.core,t.seller,t.resource)<t.amount or W.available(s.core,t.buyer,"coin")<t.amount*t.unit_price: return "trade_unfunded"
 	s.core.factions[t.seller].stocks[t.resource]-=int(t.amount)
 	s.core.factions[t.buyer].stocks.coin-=int(t.amount)*int(t.unit_price)
@@ -277,7 +278,7 @@ static func _diplomacy(s: Dictionary, actor: String, action: String, p: Dictiona
 		var war: Dictionary=s.wars[W.pair_key(actor,p.target)]
 		if s.core.tick-war.started_tick<672 and war.exhaustion[actor]<24 and s.shortfalls[actor].food==0: return "no_peace_pressure"
 		for offer: Dictionary in s.peace_offers.values():
-			if offer.status=="pending" and W.pair_key(offer.proposer,offer.recipient)==W.pair_key(actor,p.target): return "peace_pending"
+			if offer.status=="pending" and offer.expires_tick>s.core.tick and W.pair_key(offer.proposer,offer.recipient)==W.pair_key(actor,p.target): return "peace_pending"
 		s.peace_offers[p.id]={"id":p.id,"proposer":actor,"recipient":p.target,"signed_by":[actor],"status":"pending","created_tick":int(s.core.tick),"expires_tick":int(s.core.tick)+96,"accepted_tick":null}
 		s.entity_seq=int(s.entity_seq)+1
 		S.event(s,"peace_offer",actor,p.target,"war_costs")
@@ -389,6 +390,8 @@ static func _execute_plans(s: Dictionary, planner_hook: Callable=Callable()) -> 
 static func _archive(s: Dictionary) -> void:
 	for t: Dictionary in s.trades.values():
 		if t.status=="proposed" and s.core.tick>=t.expires_tick: t.status="expired"
+	for offer: Dictionary in s.peace_offers.values():
+		if offer.status=="pending" and s.core.tick>=offer.expires_tick: offer.status="expired"
 	for p: Dictionary in s.peace_offers.values():
 		if p.status=="pending" and s.core.tick>=p.expires_tick: p.status="expired"
 	for field: String in ["trades","peace_offers","aid"]:
@@ -416,6 +419,8 @@ static func _archive(s: Dictionary) -> void:
 static func observe(s: Dictionary, actor: String) -> Dictionary:
 	if not s.core.factions.has(actor): return {}
 	var own: Dictionary=s.core.factions[actor].duplicate(true)
+	var incoming := Supply.inbound(s,actor)
+	var slots := Supply.free_slots(s)
 	own["available"]=S.stocks()
 	for resource: String in W.STOCKS: own.available[resource]=W.available(s.core,actor,resource)
 	own["policy"]=s.rules.policies[actor].duplicate(true);own["shortfalls"]=s.shortfalls[actor].duplicate(true);own["prices"]=s.rules.prices.duplicate(true)
@@ -432,6 +437,11 @@ static func observe(s: Dictionary, actor: String) -> Dictionary:
 		var key := W.pair_key(actor,other);var pair: Dictionary=s.core.diplomacy[key];var war: Dictionary=s.wars[key]
 		var r: Dictionary=s.relations[actor][other].duplicate(true)
 		r.merge({"target":other,"stance":pair.stance,"truce_until":int(war.truce_until),"exhaustion":int(war.exhaustion[actor]),"war_age":0 if war.started_tick==null else int(s.core.tick)-int(war.started_tick),"route":war.route,"strength":total_strength[other],"pacts":[]})
+		r["pending_pacts"]=[]
+		for offer: Dictionary in s.core.pact_offers.values():
+			if offer.status=="pending" and offer.expires_tick>s.core.tick and W.pair_key(offer.proposer,offer.recipient)==key and offer.kind not in r.pending_pacts: r.pending_pacts.append(offer.kind)
+		r.pending_pacts.sort()
+		r["peace_pending"]=s.peace_offers.values().any(func(offer): return offer.status=="pending" and offer.expires_tick>s.core.tick and W.pair_key(offer.proposer,offer.recipient)==key)
 		for treaty: Dictionary in pair.treaties:
 			if treaty.end_tick>s.core.tick: r.pacts.append(treaty.kind)
 		result.relations.append(r)
@@ -440,8 +450,9 @@ static func observe(s: Dictionary, actor: String) -> Dictionary:
 			var offered := mini(12,maxi(0,W.available(s.core,other,resource)-int(s.rules.policies[other].targets[resource])/2))
 			if offered==0: continue
 			var source: String=s.rules.policies[other].home
-			if S.path(s,source,own.policy.home,[actor,other]).is_empty(): continue
-			result.markets.append({"seller":other,"source":source,"resource":resource,"amount":offered,"unit_price":int(s.rules.prices[resource])})
+			var path := S.path(s,source,own.policy.home,[actor,other])
+			if path.is_empty(): continue
+			result.markets.append({"seller":other,"source":source,"resource":resource,"amount":offered,"unit_price":int(s.rules.prices[resource]),"supply":Supply.quote(s,actor,resource,path,incoming,slots)})
 	var claim_route: String=own.policy.claim_route
 	if claim_route!="":
 		var edge: Dictionary=s.core.routes[claim_route]
@@ -453,9 +464,15 @@ static func observe(s: Dictionary, actor: String) -> Dictionary:
 	for id: String in S.sorted_ids(s.trades):
 		var t: Dictionary=s.trades[id]
 		if actor not in [t.seller,t.buyer]: continue
-		if t.status=="proposed":
+		if t.status=="proposed" and t.expires_tick>s.core.tick:
 			if t.proposer==actor: result.pending_trades.append(t.duplicate(true))
-			else: result.incoming_trades.append(t.duplicate(true))
+			else:
+				var offer: Dictionary=t.duplicate(true)
+				offer["supply"]={"free_slots":slots}
+				if t.buyer==actor:
+					var path := S.path(s,t.source,t.target,[t.seller,t.buyer])
+					if not path.is_empty(): offer["supply"]=Supply.quote(s,actor,t.resource,path,incoming,slots)
+				result.incoming_trades.append(offer)
 		if t.status in ["transit","waiting"]:
 			if t.buyer==actor: result.live_trade_resources.append(t.resource)
 			if result.own_trade_route=="":

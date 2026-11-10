@@ -1,0 +1,13 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+HUD_LAYOUT (2560, 1440) ActionTitleLabel (432.0, 88.0)
+HUD_LAYOUT (2560, 1440) ActionDetailLabel (432.0, 128.0)
+HUD_LAYOUT (2560, 1440) ActionFeedLabel (432.0, 96.0)
+HUD_LAYOUT (2560, 1440) StatusLabel (1766.0, 32.0)
+HUD_LAYOUT (2560, 1440) TurnOrderLabel (664.0, 96.0)
+HUD_LAYOUT (1920, 1080) ActionTitleLabel (432.0, 88.0)
+HUD_LAYOUT (1920, 1080) ActionDetailLabel (432.0, 128.0)
+HUD_LAYOUT (1920, 1080) ActionFeedLabel (432.0, 96.0)
+HUD_LAYOUT (1920, 1080) StatusLabel (1766.0, 32.0)
+HUD_LAYOUT (1920, 1080) TurnOrderLabel (664.0, 96.0)
+combat_hud_layout_tests: OK

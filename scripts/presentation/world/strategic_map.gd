@@ -2,6 +2,7 @@ extends Control
 signal course_requested(position: Vector2,site_id: String)
 signal actor_selected(id: String)
 const R := preload("res://scripts/domain/strategic_region.gd")
+const Life := preload("res://scripts/domain/life_campaign.gd")
 const UI := preload("res://scripts/presentation/world/campaign_skin.gd")
 const Illustration := preload("res://scripts/presentation/world/region_illustration.gd")
 const Camera := preload("res://scripts/presentation/world/map_camera.gd")
@@ -20,6 +21,13 @@ var toolbar: HBoxContainer
 var minimap: Control
 var drag_button := 0
 
+func catalog() -> Dictionary:
+	return R.sites(profile,Life.extras(profile)) if profile.get("version")==5 else profile.region.sites
+
+func life_actor(id: String) -> Dictionary:
+	if profile.get("version")!=5: return {}
+	return profile.life.actors.get(id,profile.life.regions.migrations.get(id,{}))
+
 func _ready() -> void:
 	clip_contents=true;mouse_filter=Control.MOUSE_FILTER_STOP
 	custom_minimum_size=Vector2(450,300)
@@ -30,16 +38,19 @@ func _ready() -> void:
 	illustration.symbols=illustration.symbols.filter(func(symbol):
 		if symbol.slot>=8: return true
 		for id: String in extra:
-			if ((symbol.position-R.G.point(profile.region.sites[id].position))*R.G.Terrain.ASPECT).length()<.04: return false
+			if ((symbol.position-R.G.point(catalog()[id].position))*R.G.Terrain.ASPECT).length()<.04: return false
 		return true)
-	for id: String in extra: illustration.symbols.append({"slot":10 if id=="ironhold" else (8 if id=="ashmere" else 9),"position":R.G.point(profile.region.sites[id].position),"size":Vector2.ONE*140})
+	for id: String in extra: illustration.symbols.append({"slot":10 if id=="ironhold" else (8 if id=="ashmere" else 9),"position":R.G.point(catalog()[id].position),"size":Vector2.ONE*140})
+	if profile.get("version")==5:
+		for site: Dictionary in profile.life.sites.values(): illustration.symbols.append({"slot":11 if site.family=="ruins" else 0,"position":R.G.point(site.position),"size":Vector2.ONE*100})
+		for site: Dictionary in profile.life.politics.outposts.values(): illustration.symbols.append({"slot":10,"position":R.G.point(site.position),"size":Vector2.ONE*105})
 	illustration.symbols.sort_custom(func(a,b): return a.position.y<b.position.y)
 	ground=illustration.background();add_child(ground)
-	for id: String in R.C.S.sorted_ids(profile.region.sites):
-		var button := Button.new();button.text=profile.region.sites[id].name;button.focus_mode=Control.FOCUS_ALL
+	for id: String in R.C.S.sorted_ids(catalog()):
+		var button := Button.new();button.text=catalog()[id].name;button.focus_mode=Control.FOCUS_ALL
 		button.tooltip_text="Travel to "+button.text;button.add_theme_font_size_override("font_size",17)
 		for state: String in ["normal","hover","pressed","disabled"]: button.add_theme_stylebox_override(state,UI.box(Color("30251b"),UI.GOLD,0))
-		button.pressed.connect(func(): course_requested.emit(R.G.point(profile.region.sites[id].position),id))
+		button.pressed.connect(func(): course_requested.emit(R.G.point(catalog()[id].position),id))
 		add_child(button);site_buttons[id]=button
 	toolbar=HBoxContainer.new();toolbar.position=Vector2(8,8);toolbar.z_index=5;add_child(toolbar)
 	for entry: Array in [["out","-"],["in","+"],["overview","Overview"],["company","Company"]]:
@@ -72,6 +83,16 @@ func company_position() -> Vector2:
 	return R.G.point(profile.travel.position)
 
 func actor_position(id: String) -> Vector2:
+	var extra := life_actor(id)
+	if not extra.is_empty():
+		var trace: Dictionary=motion.get("life",{}).get(id,{})
+		if trace.get("tick",-1)==profile.strategy_world.core.tick and not trace.get("samples",[]).is_empty():
+			var cost: float=float(trace.budget)*phase
+			for i in range(1,trace.samples.size()):
+				var a: Dictionary=trace.samples[i-1];var b: Dictionary=trace.samples[i]
+				if cost<=float(b.cost): return R.G.point(a.position).lerp(R.G.point(b.position),clampf((cost-float(a.cost))/maxf(.00000001,float(b.cost)-float(a.cost)),0,1))
+			return R.G.point(trace.samples.back().position)
+		return R.G.point(extra.position)
 	var world: Dictionary=profile.strategy_world
 	var field := "forces" if world.forces.has(id) else "trades"
 	return R.G.actor_position(profile.region,world[field][id],previous_world.get(field,{}).get(id,{}),phase)
@@ -82,11 +103,20 @@ func _sync_actors() -> void:
 		if world.core.parties[id].headcount>0: ids.append(id)
 	for id: String in R.C.S.sorted_ids(world.trades):
 		if world.trades[id].status in ["transit","waiting"]: ids.append(id)
+	if profile.get("version")==5:
+		ids.append_array(R.C.S.sorted_ids(profile.life.actors))
+		for id: String in R.C.S.sorted_ids(profile.life.regions.migrations):
+			if profile.life.regions.migrations[id].status=="travelling": ids.append(id)
 	for id: String in actor_buttons.keys():
 		if id not in ids: actor_buttons[id].queue_free();actor_buttons.erase(id)
 	for id: String in ids:
 		if actor_buttons.has(id): continue
 		var button := Button.new();button.custom_minimum_size=Vector2(28,28);button.size=Vector2(28,28);button.z_index=2;button.add_theme_font_size_override("font_size",16)
+		var extra := life_actor(id)
+		if not extra.is_empty():
+			button.text="R" if extra.has("wallet") else "!";button.tooltip_text=extra.get("name","Displaced raiders")
+			button.add_theme_stylebox_override("normal",UI.box(UI.PANEL,UI.GOLD,0));button.add_theme_color_override("font_color",UI.GOLD)
+			button.pressed.connect(func(): actor_selected.emit(id));add_child(button);actor_buttons[id]=button;continue
 		var faction: String=world.core.parties[id].faction_id if world.forces.has(id) else world.trades[id].seller
 		button.text="" if world.trades.has(id) else world.core.factions[faction].name.left(1)
 		if world.trades.has(id): button.icon=UI.icon("bag");button.expand_icon=true;button.add_theme_constant_override("icon_max_width",18)
@@ -104,7 +134,7 @@ func _layout() -> void:
 	if minimap.visible: occupied.append(minimap.get_rect().grow(5))
 	var bounds := Rect2(Vector2(8,50),size-Vector2(16,66))
 	for id: String in site_buttons:
-		var button: Button=site_buttons[id];var at := camera.pixel_at(R.G.point(profile.region.sites[id].position),size)
+		var button: Button=site_buttons[id];var at := camera.pixel_at(R.G.point(catalog()[id].position),size)
 		button.size=Vector2(136,32);button.visible=bounds.has_point(at);button.disabled=not profile.company.active_run.is_empty()
 		if not button.visible: continue
 		for offset: Vector2 in [Vector2(-68,18),Vector2(-68,-50),Vector2(18,18),Vector2(-154,18),Vector2(-68,58),Vector2(-68,-90)]:
@@ -174,8 +204,11 @@ func _draw() -> void:
 	for p: Dictionary in profile.travel.path: path.append(camera.pixel_at(R.G.point(p),size))
 	if path.size()>1: draw_polyline(path,Color("a94229"),3,true)
 	for id: String in site_buttons:
-		var at := camera.pixel_at(R.G.point(profile.region.sites[id].position),size)
-		draw_circle(at,5,UI.GOLD);draw_circle(at,7,UI.INK,false,1.5,true)
+		var at := camera.pixel_at(R.G.point(catalog()[id].position),size)
+		var tint := UI.GOLD
+		if profile.get("version")==5 and profile.life.sites.has(id): tint=Color("a84d38") if profile.life.sites[id].status=="occupied" else Color("809a77")
+		elif profile.get("version")==5 and profile.life.politics.outposts.has(id): tint=COLORS[profile.life.politics.outposts[id].owner]
+		draw_circle(at,5,tint);draw_circle(at,7,UI.INK,false,1.5,true)
 	for id: String in actor_buttons:
 		var button: Button=actor_buttons[id]
 		if button.visible: draw_line(camera.pixel_at(actor_position(id),size),button.position+button.size*.5,Color("705331"),1,true)
@@ -187,7 +220,7 @@ func _draw() -> void:
 
 func _draw_minimap() -> void:
 	minimap.draw_texture_rect(illustration.base,Rect2(Vector2.ZERO,minimap.size),false)
-	for entry: Dictionary in profile.region.sites.values(): minimap.draw_circle(minimap.size*R.G.point(entry.position),2,UI.GOLD)
+	for entry: Dictionary in catalog().values(): minimap.draw_circle(minimap.size*R.G.point(entry.position),2,UI.GOLD)
 	minimap.draw_circle(minimap.size*company_position(),3,Color("c85136"))
 	var visible := camera.visible_world(size)
 	minimap.draw_rect(Rect2(visible.position*minimap.size,visible.size*minimap.size),UI.TEXT,false,1.5)

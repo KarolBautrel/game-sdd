@@ -39,7 +39,12 @@ func run() -> void:
 		view._refresh();await frames()
 		check(view.model_status.text.contains("Plans accepted: 1") and owner.session.state.strategist.totals.accepted==1,"actual accepted decision status")
 		view.tabs.current_tab=0;await frames()
-		check(view.model_notice.is_visible_in_tree() and view.model_notice.text.contains("0 applied, 0 blocked") and view.model_notice.text.contains("no immediate action"),"new first plan truthfully reports zero immediate actions after readiness filtering")
+		var applied := 0;var blocked_count := 0
+		for execution: Dictionary in owner.session.state.strategist.journal[0].executions:
+			if execution.reason=="": applied+=1
+			else: blocked_count+=1
+		var expected_counts := "%d applied, %d blocked" % [applied,blocked_count]
+		check(view.model_notice.is_visible_in_tree() and view.model_notice.text.contains(expected_counts),"native strip reports actual committed operator counts independently of the chosen first plan")
 		check(not view.model_status.text.contains("reserve_deficit") and not view.factions.text.contains("claim"),"no private plan or reason-text leak")
 		for control: Control in [view.model_input,view.model_status,view.faction_input,view.model_notice]:
 			check(control.get_global_rect().position.x>=0 and control.get_global_rect().end.x<=pixels.x+1,"model controls stay on screen")
@@ -50,13 +55,20 @@ func run() -> void:
 		check(P.encoded(before)==P.encoded(owner.session.state),"camera never changes model/company facts")
 		view.queue_free();await frames();view=View.instantiate();view.qa_memory=true
 		view.scene_requested.connect(func(path): routes.append(path));viewport.add_child(view);await frames()
-		check(view.model_notice.text.contains("0 applied, 0 blocked") and owner.session.state.strategy_world.core.tick==288,"reopening displays retained zero-action result immediately")
+		check(view.model_notice.text.contains(expected_counts) and owner.session.state.strategy_world.core.tick==288,"reopening displays retained actual execution counts immediately")
 		var historical: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://resources/data/strategist_campaigns/reference_2087.json"))
 		var blocked := M.replay(historical,[M.command(historical,"advance",{"ticks":24})])
 		check(blocked.ok,"historical queued request still executes through actual current operator gates")
 		if blocked.ok:
 			owner.session.state=blocked.state;view._refresh();await frames()
 			check(view.model_notice.text.contains("0 applied, 1 blocked") and view.model_notice.text.contains("resources"),"existing historical blocked result still appears natively after reopening")
+		var no_action := historical.duplicate(true)
+		no_action.strategist.pending.cinder_compact.reply.intent_ids=[]
+		var quiet := M.replay(no_action,[M.command(no_action,"advance",{"ticks":24})])
+		check(quiet.ok,"explicit zero-action reply is a valid independent fixture")
+		if quiet.ok:
+			owner.session.state=quiet.state;view._refresh();await frames()
+			check(view.model_notice.text.contains("0 applied, 0 blocked") and view.model_notice.text.contains("no immediate action"),"zero-action feedback remains covered independently of planner tuning")
 		view._open_seed();check(routes.back()=="res://scenes/world/StrategistWorld.tscn" and owner.session.state.version==4,"seed/resume stays in optional format")
 		view.queue_free();viewport.queue_free();await frames()
 	owner.deactivate()

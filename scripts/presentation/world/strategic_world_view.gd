@@ -2,6 +2,8 @@ extends Control
 signal scene_requested(path: String)
 const UI := preload("res://scripts/presentation/world/campaign_skin.gd")
 const Map := preload("res://scripts/presentation/world/strategic_map.gd")
+const F := preload("res://scripts/domain/life_campaign.gd")
+const LifePanel := preload("res://scripts/presentation/world/world_life_panel.gd")
 const R := preload("res://scripts/domain/strategic_region.gd")
 const ModelFeedback := preload("res://scripts/presentation/world/strategist_feedback.gd")
 var buttons: Dictionary={}
@@ -30,6 +32,8 @@ var speed := 0
 var accumulated := 0.0
 var inventory_signature := ""
 var qa_memory := false
+@export var qa_life := false
+var life_panel: RefCounted
 @export var qa_model := false
 @export var qa_geography_version := 2
 var world_size_input: OptionButton
@@ -57,10 +61,10 @@ func _tab(title: String) -> VBoxContainer:
 func _ready() -> void:
 	set_process(false)
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);theme=UI.theme()
-	if not owner().regional_active() or (owner().session.state.version==4)!=qa_model or owner().session.state.region.base.version!=qa_geography_version:
+	if not owner().regional_active() or owner().session.state.version!=(5 if qa_life else (4 if qa_model else 3)) or owner().session.state.region.base.version!=qa_geography_version:
 		var loading := _label(self,"Charting a "+("Vast" if qa_geography_version==3 else "Large")+" world...",28,UI.GOLD);loading.position=Vector2(30,30)
 		await get_tree().process_frame
-		var opened: bool=owner().call("open_model_seed" if qa_model else "open_seed",2087,"marches",qa_memory or DisplayServer.get_name()=="headless",qa_geography_version)
+		var opened: bool=owner().call("open_life_seed" if qa_life else ("open_model_seed" if qa_model else "open_seed"),2087,"marches",qa_memory or DisplayServer.get_name()=="headless",qa_geography_version)
 		loading.queue_free()
 		if not opened:
 			var unavailable := VBoxContainer.new();unavailable.set_anchors_and_offsets_preset(Control.PRESET_CENTER);unavailable.custom_minimum_size=Vector2(480,160);add_child(unavailable)
@@ -92,7 +96,7 @@ func _build() -> void:
 	world_size_input.select(1 if qa_geography_version==3 else 0)
 	_button(controls,"open","New / Resume",_open_seed)
 	_button(controls,"exit","Regions",_exit)
-	if qa_model:
+	if qa_model or qa_life:
 		var notice := PanelContainer.new();notice.mouse_filter=Control.MOUSE_FILTER_IGNORE;notice.add_theme_stylebox_override("panel",UI.box(UI.RAISED,UI.EDGE,10));column.add_child(notice)
 		model_notice=_label(notice,"",18,UI.GOLD)
 	var body := HBoxContainer.new();body.size_flags_vertical=Control.SIZE_EXPAND_FILL;body.add_theme_constant_override("separation",12);column.add_child(body)
@@ -105,7 +109,7 @@ func _build() -> void:
 	var place := _tab("Location")
 	site_title=_label(place,"",26,UI.GOLD)
 	location=_label(place,"",21)
-	_button(place,"travel","Travel to selection",func(): _course(R.G.point(owner().session.state.region.sites[selected].position),selected))
+	_button(place,"travel","Travel to selection",func(): _course(R.G.point(_catalog(owner().session.state)[selected].position),selected))
 	supply_input=_option(place)
 	for id: String in R.Legacy.PRICES: supply_input.add_item(R.Legacy.SUPPLY_NAMES[id]);supply_input.set_item_metadata(supply_input.item_count-1,id)
 	supply_input.select(supply_input.item_count-1);supply_input.item_selected.connect(func(_i): _refresh())
@@ -146,23 +150,31 @@ func _build() -> void:
 	tabs.tab_changed.connect(func(index):
 		if index in [2,4]: set_speed(0)
 		else: _refresh())
+	if qa_life:
+		life_panel=LifePanel.new();life_panel.build(self,_tab("World"))
 	footer=_label(column,"",18,UI.GOLD);footer.custom_minimum_size.y=28
+
+func _catalog(s: Dictionary) -> Dictionary:
+	return R.sites(s,F.extras(s)) if qa_life else s.region.sites
+func select_life_site(id: String) -> void:
+	selected=id;tabs.current_tab=0
+	map.camera.focus(R.G.point(_catalog(owner().session.state)[id].position),map.size);map._layout();_refresh()
 
 func _selected(option: OptionButton) -> Variant:
 	return option.get_item_metadata(option.selected) if option.selected>=0 else null
 func clock(tick: int) -> String: return "Day%d %02d:%02d" % [tick/96+1,(tick/4)%24,(tick%4)*15]
 func _refresh() -> void:
 	if not owner().regional_active(): return
-	var s: Dictionary=owner().session.state;var current := R.current(s);var world: Dictionary=s.strategy_world
+	var s: Dictionary=owner().session.state;var current := F.current(s) if qa_life else R.current(s);var world: Dictionary=s.strategy_world
 	heading.text=s.region.base.name+" / "+("Vast" if int(s.region.base.version)==3 else "Large")+" / "+clock(int(world.core.tick))+" / "+("Paused" if speed==0 else "%dx" % speed)
 	stocks.text="%dg / Food%d\nFatigue%d/100" % [s.company.gold,s.company.supplies.food,s.travel.fatigue]
 	map.update_state(s,owner().session.last_motion)
 	if model_status!=null:
 		_refresh_model(s)
-	var site: Dictionary=s.region.sites.get(selected,s.region.sites.town_ravenford)
-	var actual_owner := R.site_owner(s,site.id)
+	var site: Dictionary=_catalog(s).get(selected,s.region.sites.town_ravenford)
+	var actual_owner: String=site.owner if qa_life and not s.region.sites.has(site.id) else R.site_owner(s,site.id)
 	site_title.text=site.name
-	location.text="%s\n\nCompany: %s\n%s" % [world.core.factions.get(actual_owner,{}).get("name",actual_owner.capitalize()),s.region.sites.get(current,{}).get("name","On the road"),"The mine has been restored." if s.mine.status=="restored" else "The Old Mine's ore production is stopped."]
+	location.text="%s\n\nCompany: %s\n%s" % [world.core.factions.get(actual_owner,{}).get("name",actual_owner.capitalize()),_catalog(s).get(current,{}).get("name","On the road"),"The mine has been restored." if s.mine.status=="restored" else "The Old Mine's ore production is stopped."]
 	var quote := R.supply_quote(s,str(_selected(supply_input)))
 	buttons.buy.text="Buy %s / %dg" % [R.Legacy.SUPPLY_NAMES[_selected(supply_input)],quote.price]
 	buttons.buy.disabled=quote.reason!="";buttons.buy.tooltip_text=quote.reason if quote.reason!="" else "Pay from owned gold and receive one carried supply."
@@ -182,7 +194,20 @@ func _refresh() -> void:
 		factions.text="\n".join(lines)
 	var history: Array[String]=[]
 	for entry: Dictionary in R.chronicle(s): history.append(clock(int(entry.tick))+" / "+entry.text)
+	if qa_life:
+		for entry: Dictionary in s.life.events: history.push_front(clock(int(entry.tick))+" / "+entry.source+" / "+entry.text)
 	journal.text="\n\n".join(history)
+	if qa_life:
+		if s.life.events.is_empty(): model_notice.text="The world is paused. Open World and wait a day to receive the first camp reports."
+		else:
+			var latest: Dictionary=s.life.events.back()
+			model_notice.text=clock(int(latest.tick))+" / "+latest.source+" / "+latest.text
+		life_panel.refresh(s)
+		if s.life.sites.has(current):
+			buttons.prepare.text="Prepare "+s.life.sites[current].name
+			buttons.prepare.disabled=F.prepare_reason(s)!=""
+			buttons.prepare.tooltip_text=F.prepare_reason(s)
+		else: buttons.prepare.text="Prepare Old Mine expedition"
 	_refresh_jobs(s);_refresh_company(s)
 	footer.text=owner().last_feedback
 
@@ -243,6 +268,8 @@ func _course(position: Vector2,id: String) -> void:
 	if id!="": selected=id
 	_act("course",{"position":R.G.Terrain.packed(position),"site":id})
 func _actor(id: String) -> void:
+	if qa_life and (owner().session.state.life.actors.has(id) or owner().session.state.life.regions.migrations.has(id)):
+		tabs.current_tab=5;_refresh();return
 	var world: Dictionary=owner().session.state.strategy_world
 	var faction: String=world.core.parties[id].faction_id if world.forces.has(id) else world.trades[id].seller
 	for index in range(faction_input.item_count):
@@ -282,7 +309,7 @@ func _resume() -> void:
 	if run.restore_campaign(): _route(run.DUNGEON_SCENE_PATH)
 func _open_seed() -> void:
 	set_speed(0)
-	if owner().call("open_model_seed" if qa_model else "open_seed",int(seed_input.value),str(_selected(preset_input)),qa_memory or DisplayServer.get_name()=="headless",int(_selected(world_size_input))):
+	if owner().call("open_life_seed" if qa_life else ("open_model_seed" if qa_model else "open_seed"),int(seed_input.value),str(_selected(preset_input)),qa_memory or DisplayServer.get_name()=="headless",int(_selected(world_size_input))):
 		get_node("/root/DungeonRunSession").clear();_route(owner().world_return_scene())
 	else: footer.text=owner().last_feedback
 func _model_lab() -> void:

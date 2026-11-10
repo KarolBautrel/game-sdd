@@ -1,5 +1,10 @@
 # A travelling company in a changing political world
 
+Priority update2026-11-10: [autonomous world life](../2026-11-10/AUTONOMOUS_WORLD_PLAN.md)
+is the current product direction. Build the full classic actor/episode loop with
+modest economic support before selecting a live model. This earlier plan remains
+historical context; current runtime017..023 and existing work/saves are preserved.
+
 Date:2026-11-09. Status: DESIGN COMPLETE; NOT IMPLEMENTED.
 The user reprioritized the full strategic-world layer over the isolated contract
 pool and chose a language model as faction strategist with a complete classic

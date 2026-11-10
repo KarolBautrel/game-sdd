@@ -1,0 +1,382 @@
+{
+	"company_orders": 0,
+	"headless": true,
+	"physical": "NOT_RUN",
+	"provider": "none",
+	"results": [
+		{
+			"captures": 0,
+			"convoy_raids": 6,
+			"days": 30,
+			"episodes": 4,
+			"geography_version": 2,
+			"migration_reserve": {
+				"bandits": 12,
+				"ruins": 12
+			},
+			"migrations": 2,
+			"old_mine": "occupied",
+			"open_commissions": 0,
+			"outpost_campaigns": 0,
+			"phases": {
+				"aftermath": 4
+			},
+			"seed": 42,
+			"state_sha256": "3cd57a204f26de859c792d174ba076704589d51b3f79a8cb451bef698d8962f9",
+			"stats": {
+				"casualties": 43,
+				"failed": 2,
+				"fees": 112,
+				"hired": 6,
+				"recruited": 43,
+				"resolved": 4,
+				"transferred": 0
+			},
+			"valid": true,
+			"wars": 0
+		},
+		{
+			"captures": 0,
+			"convoy_raids": 6,
+			"days": 90,
+			"episodes": 6,
+			"geography_version": 2,
+			"migration_reserve": {
+				"bandits": 0,
+				"ruins": 0
+			},
+			"migrations": 4,
+			"old_mine": "occupied",
+			"open_commissions": 0,
+			"outpost_campaigns": 0,
+			"phases": {
+				"aftermath": 6
+			},
+			"seed": 42,
+			"state_sha256": "788c0c6f014e8d5f50f9dd4741fc86ceb68c1d3a4f0d20b4762639d5ec902e33",
+			"stats": {
+				"casualties": 49,
+				"failed": 2,
+				"fees": 160,
+				"hired": 8,
+				"recruited": 49,
+				"resolved": 6,
+				"transferred": 0
+			},
+			"valid": true,
+			"wars": 0
+		},
+		{
+			"captures": 0,
+			"convoy_raids": 11,
+			"days": 30,
+			"episodes": 3,
+			"geography_version": 2,
+			"migration_reserve": {
+				"bandits": 12,
+				"ruins": 12
+			},
+			"migrations": 2,
+			"old_mine": "occupied",
+			"open_commissions": 0,
+			"outpost_campaigns": 0,
+			"phases": {
+				"aftermath": 3
+			},
+			"seed": 2087,
+			"state_sha256": "0ff82cde82e6f5ec30965a8dedf4ebf4bd95d978b6b9556af694142befac64fd",
+			"stats": {
+				"casualties": 58,
+				"failed": 4,
+				"fees": 104,
+				"hired": 7,
+				"recruited": 40,
+				"resolved": 3,
+				"transferred": 0
+			},
+			"valid": true,
+			"wars": 0
+		},
+		{
+			"captures": 0,
+			"convoy_raids": 12,
+			"days": 90,
+			"episodes": 6,
+			"geography_version": 2,
+			"migration_reserve": {
+				"bandits": 0,
+				"ruins": 0
+			},
+			"migrations": 4,
+			"old_mine": "occupied",
+			"open_commissions": 0,
+			"outpost_campaigns": 0,
+			"phases": {
+				"aftermath": 6
+			},
+			"seed": 2087,
+			"state_sha256": "29a48ad8c6a2f675f3aa23a1f822faf1965126b7615d9687f2e7a647f525d076",
+			"stats": {
+				"casualties": 67,
+				"failed": 4,
+				"fees": 176,
+				"hired": 10,
+				"recruited": 49,
+				"resolved": 6,
+				"transferred": 0
+			},
+			"valid": true,
+			"wars": 0
+		},
+		{
+			"captures": 0,
+			"convoy_raids": 2,
+			"days": 30,
+			"episodes": 4,
+			"geography_version": 2,
+			"migration_reserve": {
+				"bandits": 12,
+				"ruins": 12
+			},
+			"migrations": 2,
+			"old_mine": "occupied",
+			"open_commissions": 0,
+			"outpost_campaigns": 0,
+			"phases": {
+				"aftermath": 4
+			},
+			"seed": 170717,
+			"state_sha256": "d7dffe3605c7a374f34d2607652bbdf79d4f49215c97b3d3aba47017468936f2",
+			"stats": {
+				"casualties": 43,
+				"failed": 2,
+				"fees": 112,
+				"hired": 6,
+				"recruited": 43,
+				"resolved": 4,
+				"transferred": 0
+			},
+			"valid": true,
+			"wars": 0
+		},
+		{
+			"captures": 0,
+			"convoy_raids": 4,
+			"days": 90,
+			"episodes": 6,
+			"geography_version": 2,
+			"migration_reserve": {
+				"bandits": 0,
+				"ruins": 0
+			},
+			"migrations": 4,
+			"old_mine": "occupied",
+			"open_commissions": 0,
+			"outpost_campaigns": 0,
+			"phases": {
+				"aftermath": 6
+			},
+			"seed": 170717,
+			"state_sha256": "f2a335a968a64ce7a745924c0c5e304518fca7ad31c58cfbc8d462a30f6458be",
+			"stats": {
+				"casualties": 49,
+				"failed": 2,
+				"fees": 160,
+				"hired": 8,
+				"recruited": 49,
+				"resolved": 6,
+				"transferred": 0
+			},
+			"valid": true,
+			"wars": 0
+		},
+		{
+			"captures": 0,
+			"convoy_raids": 6,
+			"days": 30,
+			"episodes": 4,
+			"geography_version": 3,
+			"migration_reserve": {
+				"bandits": 12,
+				"ruins": 12
+			},
+			"migrations": 2,
+			"old_mine": "occupied",
+			"open_commissions": 0,
+			"outpost_campaigns": 0,
+			"phases": {
+				"aftermath": 3,
+				"commitment": 1
+			},
+			"seed": 42,
+			"state_sha256": "38bcfb288d7b2b7af39c08ed04569b12c0218d8243daa36bd3a9aae07ad01fcf",
+			"stats": {
+				"casualties": 40,
+				"failed": 2,
+				"fees": 88,
+				"hired": 6,
+				"recruited": 40,
+				"resolved": 3,
+				"transferred": 0
+			},
+			"valid": true,
+			"wars": 0
+		},
+		{
+			"captures": 0,
+			"convoy_raids": 10,
+			"days": 90,
+			"episodes": 6,
+			"geography_version": 3,
+			"migration_reserve": {
+				"bandits": 0,
+				"ruins": 0
+			},
+			"migrations": 4,
+			"old_mine": "occupied",
+			"open_commissions": 0,
+			"outpost_campaigns": 0,
+			"phases": {
+				"aftermath": 6
+			},
+			"seed": 42,
+			"state_sha256": "c10a8901454bf416ed6b211b5ece971badfaca05e6085167798c3c6f7033a9b4",
+			"stats": {
+				"casualties": 49,
+				"failed": 2,
+				"fees": 160,
+				"hired": 8,
+				"recruited": 49,
+				"resolved": 6,
+				"transferred": 0
+			},
+			"valid": true,
+			"wars": 0
+		},
+		{
+			"captures": 0,
+			"convoy_raids": 5,
+			"days": 30,
+			"episodes": 4,
+			"geography_version": 3,
+			"migration_reserve": {
+				"bandits": 12,
+				"ruins": 12
+			},
+			"migrations": 2,
+			"old_mine": "occupied",
+			"open_commissions": 0,
+			"outpost_campaigns": 0,
+			"phases": {
+				"aftermath": 3,
+				"commitment": 1
+			},
+			"seed": 2087,
+			"state_sha256": "87fa1af0bbefa971f70c96ac2782298dee34d1266d71a015efeba18e44123807",
+			"stats": {
+				"casualties": 50,
+				"failed": 3,
+				"fees": 96,
+				"hired": 7,
+				"recruited": 37,
+				"resolved": 3,
+				"transferred": 0
+			},
+			"valid": true,
+			"wars": 0
+		},
+		{
+			"captures": 0,
+			"convoy_raids": 5,
+			"days": 90,
+			"episodes": 6,
+			"geography_version": 3,
+			"migration_reserve": {
+				"bandits": 0,
+				"ruins": 0
+			},
+			"migrations": 4,
+			"old_mine": "occupied",
+			"open_commissions": 0,
+			"outpost_campaigns": 0,
+			"phases": {
+				"aftermath": 6
+			},
+			"seed": 2087,
+			"state_sha256": "aa7bf82d7be83b69166584f52bac5fb808c0b2b82b25a1b76e5586e9836bc2b3",
+			"stats": {
+				"casualties": 59,
+				"failed": 3,
+				"fees": 168,
+				"hired": 9,
+				"recruited": 46,
+				"resolved": 6,
+				"transferred": 0
+			},
+			"valid": true,
+			"wars": 0
+		},
+		{
+			"captures": 0,
+			"convoy_raids": 5,
+			"days": 30,
+			"episodes": 3,
+			"geography_version": 3,
+			"migration_reserve": {
+				"bandits": 12,
+				"ruins": 24
+			},
+			"migrations": 1,
+			"old_mine": "occupied",
+			"open_commissions": 0,
+			"outpost_campaigns": 0,
+			"phases": {
+				"aftermath": 3
+			},
+			"seed": 170717,
+			"state_sha256": "d59e174381bbfd4e2644ed001da7be6d6e057388d4501ba60351c94b07ef5bc1",
+			"stats": {
+				"casualties": 40,
+				"failed": 2,
+				"fees": 88,
+				"hired": 5,
+				"recruited": 40,
+				"resolved": 3,
+				"transferred": 0
+			},
+			"valid": true,
+			"wars": 0
+		},
+		{
+			"captures": 0,
+			"convoy_raids": 8,
+			"days": 90,
+			"episodes": 6,
+			"geography_version": 3,
+			"migration_reserve": {
+				"bandits": 0,
+				"ruins": 0
+			},
+			"migrations": 4,
+			"old_mine": "occupied",
+			"open_commissions": 0,
+			"outpost_campaigns": 0,
+			"phases": {
+				"aftermath": 6
+			},
+			"seed": 170717,
+			"state_sha256": "14357ca887257e0bc1e3e810715e9e9056396a1e144922bddd10e614a4e427ec",
+			"stats": {
+				"casualties": 49,
+				"failed": 2,
+				"fees": 160,
+				"hired": 8,
+				"recruited": 49,
+				"resolved": 6,
+				"transferred": 0
+			},
+			"valid": true,
+			"wars": 0
+		}
+	]
+}

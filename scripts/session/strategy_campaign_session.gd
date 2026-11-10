@@ -4,6 +4,7 @@ const World := preload("res://scripts/domain/world_strategy.gd")
 const Classic := preload("res://scripts/domain/classic_world.gd")
 const Region := preload("res://scripts/domain/strategic_region.gd")
 const Model := preload("res://scripts/domain/strategist_campaign.gd")
+const Life := preload("res://scripts/domain/life_campaign.gd")
 const Recorded := preload("res://scripts/domain/recorded_strategist.gd")
 const Company := preload("res://scripts/session/campaign_session.gd")
 const Kind := preload("res://scripts/session/campaign_profile_kind.gd")
@@ -27,6 +28,7 @@ static func initial(seed_value: int = 2087) -> Dictionary:
 	return {"schema":Kind.STRATEGY_SCHEMA,"version":1,"company":company,"strategy_world":world,"current_settlement_id":"town_ravenford"}
 
 static func valid(value: Variant) -> bool:
+	if value is Dictionary and World._count(value.get("version"),5,5): return Life.valid(value)
 	if value is Dictionary and World._count(value.get("version"),4,4): return Model.valid(value)
 	if value is Dictionary and World._count(value.get("version"),3,3): return Region.valid(value)
 	if not World._shape(value,["schema","version","company","strategy_world","current_settlement_id"]): return false
@@ -52,12 +54,16 @@ func create_region(seed_value: int=2087, path: String="", in_memory: bool=true, 
 func create_model(seed_value: int=2087, path: String="", in_memory: bool=true, preset: String="marches", geography_version: int=2) -> bool:
 	return _create(seed_value,path,in_memory,4,preset,geography_version)
 
+func create_life(seed_value: int=2087, path: String="", in_memory: bool=true, preset: String="marches", geography_version: int=3) -> bool:
+	return _create(seed_value,path,in_memory,5,preset,geography_version)
+
 func _create(seed_value: int, path: String, in_memory: bool, format_version: int, preset: String="marches", geography_version: int=2) -> bool:
 	if loaded: return _reject("A strategy campaign is already loaded.")
 	if not in_memory and (not Kind.is_strategy_path(path) or FileAccess.file_exists(path) or DirAccess.dir_exists_absolute(ProjectSettings.globalize_path(path))):
 		return _reject("Create requires a fresh dedicated strategy QA path.")
 	_reset_transport()
 	var candidate := Model.initial(seed_value,preset,geography_version) if format_version==4 else (Region.initial(seed_value,preset,geography_version) if format_version==3 else initial(seed_value))
+	if format_version==5: candidate=Life.initial(seed_value,preset,geography_version)
 	if candidate.is_empty(): return _reject("Invalid strategy seed or foundation data.")
 	if format_version==2:
 		candidate.version=2;candidate.strategy_world=Classic.initial(seed_value)
@@ -85,6 +91,11 @@ func load_profile(path: String) -> bool:
 
 func apply_command(cmd: Dictionary) -> bool:
 	if not loaded: return _reject("No valid strategy campaign is loaded.")
+	if state.version==5:
+		var result := Life.apply(state,cmd)
+		if not result.ok: return _reject(str(result.reason))
+		if not _commit(result.state): return false
+		last_motion=result.motion;return true
 	if state.version==4:
 		var model := Model.apply(state,cmd)
 		if not model.ok: return _reject(str(model.reason))
@@ -104,7 +115,7 @@ func apply_command(cmd: Dictionary) -> bool:
 	return _commit(next)
 
 func regional(action: String, payload: Dictionary={}) -> bool:
-	if not loaded or not World._count(state.version,3,4): return _reject("No regional campaign is loaded.")
+	if not loaded or not World._count(state.version,3,5): return _reject("No regional campaign is loaded.")
 	return apply_command(Region.command(state,action,payload))
 
 func _reset_transport() -> void:

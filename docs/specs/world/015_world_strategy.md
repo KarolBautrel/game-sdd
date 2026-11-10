@@ -1,5 +1,12 @@
 # Strategic world and interchangeable faction planners
 
+Priority update2026-11-10: user now prioritizes complete autonomous world life
+and permits simpler economics. Proposed [world024](024_autonomous_world_life.md)
+and its product plan supersede this document's next-step emphasis on economic
+refinement/live inference. Preserve implemented017..023 rules/saves until explicit
+versioned changes. A classic actor/episode loop comes before provider selection;
+this planning update changes no runtime.
+
 Date:2026-11-09. Status: DESIGNED; isolated foundation implemented in
 [world016](016_strategy_foundation.md), stage93, and classic simulation in
 [world017](017_classic_strategy.md), stage94. Opt-in native terrain/company

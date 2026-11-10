@@ -111,3 +111,5 @@ Shared UI composition owns passive visual components, never gameplay decisions.
   components and data-driven native composition matching the approved family.
 - [043 Live combat tooltips](043_live_combat_tooltips.md): stationary-pointer
   target resources refresh with the rendered combat snapshot.
+
+- [049 Autonomous world feedback](049_autonomous_world_feedback.md), acceptance [slice049](slices/049_autonomous_world_feedback.md).

@@ -10,7 +10,7 @@
 			"sequence": 6
 		}
 	],
-	"expected_digest": "b6faf4fdb3657c448ca11e7516e680ba0989dba9efab6aaecd713f0704d061fa",
+	"expected_digest": "988c29bd0969eede28beef8b796ec66c8b4faa4ec9cc65fd6036a159bfead79d",
 	"schema": "sdd.strategist-replay",
 	"version": 1
 }

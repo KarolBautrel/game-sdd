@@ -37,3 +37,12 @@ repeatability; retain pre-change and post-change reports when tuning readiness.
 The result supports further tuning and a future matched real-model experiment.
 No finite matrix proves fun, full balance or physical acceptance. Preserve every
 open live case and the unresolved live provider/model/budget decision.
+
+Stage97b supplements the frozen-job faction experiment with
+`scripts/qa/regional_supply_probe.gd -- --label ID`: six native classic regions
+(seeds2087/2088/2089, Large/Vast),30days in192tick commands. Actual regional job
+refresh/expiry and company upkeep run; the company remains idle at its starting
+town, with no restoration, purchases or contract completion. Host-only review
+observations measure daily shortages without overriding plans. Reconcile and
+validate every candidate. Store only a new owned
+`artifacts/qa-runs/regional-supply-ID/` output. No player profile or transport.

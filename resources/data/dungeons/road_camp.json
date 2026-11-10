@@ -1,0 +1,173 @@
+{
+  "id": "road_camp",
+  "display_name": "Briar Road Camp",
+  "recommended_party_level": 1,
+  "start_room_id": "entrance",
+  "max_light_level": 4,
+  "hazard_seed": 2098,
+  "starting_supplies": {
+    "lamp_oil": 2,
+    "pickaxe": 1,
+    "bandage": 1,
+    "trap_tools": 1,
+    "food": 1,
+    "camping_kit": 0
+  },
+  "supply_loadout_capacity": 7,
+  "supply_loadout_options": {
+    "lamp_oil": {
+      "min": 0,
+      "max": 4,
+      "default": 2,
+      "packing_cost": 1,
+      "label": "Torch"
+    },
+    "pickaxe": {
+      "min": 0,
+      "max": 2,
+      "default": 1,
+      "packing_cost": 2,
+      "label": "Pickaxe"
+    },
+    "bandage": {
+      "min": 0,
+      "max": 3,
+      "default": 1,
+      "packing_cost": 1,
+      "label": "Bandage"
+    },
+    "trap_tools": {
+      "min": 0,
+      "max": 3,
+      "default": 1,
+      "packing_cost": 1,
+      "label": "Trap Tools"
+    },
+    "food": {
+      "min": 0,
+      "max": 3,
+      "default": 1,
+      "packing_cost": 1,
+      "label": "Food"
+    },
+    "camping_kit": {
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "packing_cost": 3,
+      "label": "Camping Kit"
+    }
+  },
+  "default_party_formation": [
+    {
+      "slot_id": "front",
+      "target_id": "party_slot_front",
+      "combat_unit_id": "unit_player_001",
+      "label": "Bran (Warrior)"
+    },
+    {
+      "slot_id": "back",
+      "target_id": "party_slot_back",
+      "combat_unit_id": "unit_player_002",
+      "label": "Torin (Archer)"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "entrance",
+      "display_name": "Trailhead",
+      "kind": "entrance",
+      "position": {
+        "x": 0,
+        "y": 1
+      },
+      "content": [
+        {
+          "type": "empty"
+        }
+      ]
+    },
+    {
+      "id": "watchfire",
+      "display_name": "Abandoned Watchfire",
+      "kind": "empty",
+      "position": {
+        "x": 1,
+        "y": 1
+      },
+      "content": [
+        {
+          "type": "empty"
+        }
+      ]
+    },
+    {
+      "id": "stockade",
+      "display_name": "Bandit Stockade",
+      "kind": "guarded_treasure",
+      "position": {
+        "x": 2,
+        "y": 1
+      },
+      "content": [
+        {
+          "type": "guarded_treasure",
+          "combat_encounter_path": "res://resources/data/combat_encounters/painted_forest_ambush.json",
+          "rewards": {
+            "gold": 7,
+            "xp": 12,
+            "items": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "exit",
+      "display_name": "Freed Road",
+      "kind": "exit",
+      "position": {
+        "x": 3,
+        "y": 1
+      },
+      "content": [
+        {
+          "type": "empty"
+        }
+      ]
+    }
+  ],
+  "corridors": [
+    {
+      "id": "entrance_to_watchfire",
+      "from": "entrance",
+      "to": "watchfire",
+      "danger": 0.05,
+      "light_decay": 1
+    },
+    {
+      "id": "watchfire_to_stockade",
+      "from": "watchfire",
+      "to": "stockade",
+      "danger": 0.05,
+      "light_decay": 1
+    },
+    {
+      "id": "stockade_to_exit",
+      "from": "stockade",
+      "to": "exit",
+      "danger": 0.05,
+      "light_decay": 1
+    }
+  ],
+  "exit_rules": {
+    "allow_retreat": true,
+    "boss_required": false
+  },
+  "generated_profile": {
+    "id": "road_camp",
+    "display_name": "Woodland Camp",
+    "difficulty": 1,
+    "theme": "forest",
+    "length": "short"
+  }
+}

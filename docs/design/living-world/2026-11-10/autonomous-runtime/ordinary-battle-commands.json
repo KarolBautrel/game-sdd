@@ -1,0 +1,356 @@
+{
+	"commands": [
+		{
+			"action_id": "move",
+			"actor_id": "unit_knight_pilot",
+			"id": "cmd_001",
+			"target": {
+				"position": {
+					"x": 6.0,
+					"y": 6.0
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_knight_pilot",
+			"id": "cmd_002",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_player_002",
+			"id": "cmd_003",
+			"target": {
+				"position": {
+					"x": 5.0,
+					"y": 6.0
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_player_002",
+			"id": "cmd_004",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_player_001",
+			"id": "cmd_005",
+			"target": {
+				"position": {
+					"x": 6.0,
+					"y": 5.0
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_player_001",
+			"id": "cmd_006",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_rogue_pilot",
+			"id": "cmd_007",
+			"target": {
+				"position": {
+					"x": 7.0,
+					"y": 8.0
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_rogue_pilot",
+			"id": "cmd_008",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_wolf_pilot",
+			"id": "cmd_009",
+			"target": {
+				"position": {
+					"x": 8.0,
+					"y": 8.0
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "basic_attack",
+			"actor_id": "unit_wolf_pilot",
+			"id": "cmd_010",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_rogue_pilot"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_wolf_pilot",
+			"id": "cmd_011",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "ranged_attack",
+			"actor_id": "unit_bandit_archer_pilot",
+			"id": "cmd_012",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_player_001"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_bandit_archer_pilot",
+			"id": "cmd_013",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_bandit_guard_pilot",
+			"id": "cmd_014",
+			"target": {
+				"position": {
+					"x": 8.0,
+					"y": 4.0
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_bandit_guard_pilot",
+			"id": "cmd_015",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_knight_pilot",
+			"id": "cmd_016",
+			"target": {
+				"position": {
+					"x": 7.0,
+					"y": 4.0
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "basic_attack",
+			"actor_id": "unit_knight_pilot",
+			"id": "cmd_017",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_bandit_guard_pilot"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "basic_attack",
+			"actor_id": "unit_knight_pilot",
+			"id": "cmd_018",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_bandit_guard_pilot"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_knight_pilot",
+			"id": "cmd_019",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "ranged_attack",
+			"actor_id": "unit_player_002",
+			"id": "cmd_020",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_bandit_guard_pilot"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "ranged_attack",
+			"actor_id": "unit_player_002",
+			"id": "cmd_021",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_wolf_pilot"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_player_002",
+			"id": "cmd_022",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_player_001",
+			"id": "cmd_023",
+			"target": {
+				"position": {
+					"x": 7.0,
+					"y": 7.0
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "power_strike",
+			"actor_id": "unit_player_001",
+			"id": "cmd_024",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_wolf_pilot"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_player_001",
+			"id": "cmd_025",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_rogue_pilot",
+			"id": "cmd_026",
+			"target": {
+				"position": {
+					"x": 11.0,
+					"y": 6.0
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_rogue_pilot",
+			"id": "cmd_027",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "ranged_attack",
+			"actor_id": "unit_bandit_archer_pilot",
+			"id": "cmd_028",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_rogue_pilot"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "end_turn",
+			"actor_id": "unit_bandit_archer_pilot",
+			"id": "cmd_029",
+			"target": {
+				"type": "none"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "move",
+			"actor_id": "unit_knight_pilot",
+			"id": "cmd_030",
+			"target": {
+				"position": {
+					"x": 10.0,
+					"y": 3.0
+				},
+				"type": "tile"
+			},
+			"type": "perform_action"
+		},
+		{
+			"action_id": "power_strike",
+			"actor_id": "unit_knight_pilot",
+			"id": "cmd_031",
+			"target": {
+				"type": "unit",
+				"unit_id": "unit_bandit_archer_pilot"
+			},
+			"type": "perform_action"
+		}
+	],
+	"debug_win": false,
+	"headless": true,
+	"physical": "NOT_RUN",
+	"site": {
+		"cleared_tick": 62,
+		"episode": "episode_00000001",
+		"family": "bandits",
+		"history": [
+			"episode_00000001"
+		],
+		"home": "town_ravenford",
+		"id": "road_camp",
+		"kind": "dungeon",
+		"name": "Briar Road Camp",
+		"owner": "neutral",
+		"patron": "river_league",
+		"position": {
+			"x": 0.8067188,
+			"y": 0.6941667
+		},
+		"seed": 2098.0,
+		"status": "cleared",
+		"strength": 0
+	}
+}

@@ -7,6 +7,57 @@ when the user has only requested an explanation or plan.
 ## Next-session entry: read this first
 
 Latest active handoff:
+[Autonomous world implementation](handoffs/2026-11-10-autonomous-runtime.md).
+Latest user authorizes99..103 and publication of all pending work to master.
+Version5 and the native autonomous-world scene implement world025/slice026 and
+presentation049/slice049. Automated126/126PASS,0errors/0warnings;114Python,
+107Godot suites/15boots; tested/final source match,11/11old save/art hashes
+unchanged. Six Large/Vast openings each reached30/90days without company orders. Final verification/publication receipt is maintained
+in qa/2026-11-10-world-life-runtime.md. Player tests are ordered in
+qa/autonomous-world-test-scenarios.md, starting01..05. Physical gates remain open;
+source/headless ONLY, no desktop/live provider/reset. Preserve all old profiles.
+The two-site content pool is finite; more places/political motives are subsequent
+content work after user review. Do not treat this as a complete unlimited world.
+
+Previous product-design handoff:
+[Autonomous world product strategy](handoffs/2026-11-10-autonomous-world-design.md).
+User redirects effort from detailed economics toward the whole global world's
+independent life. Stage98 is DESIGN ONLY: world024/slice025 and
+design/living-world/2026-11-10/AUTONOMOUS_WORLD_PLAN.md. Actors, ambitions,
+simple supporting means, persistent episodes, autonomous NPC outcomes, changing
+places/jobs/news, province detail and company agency define the direction.
+Runtime97b/c work and saves preserved; master654aaa22, all follow-ups uncommitted.
+No desktop/push/provider/budget/reset inferred. Proposed next implementation is
+99one complete threatened-road episode with actual NPC response and playable
+camp content;100claims/NPC expeditions;101political campaigns/control/recovery;
+102real site families/province summaries;103native feedback/hands-off review;
+104optional live strategist after local proof. Live model choice does not block
+99..103. This saved design alone does not authorize99runtime work. Design QA:
+qa/2026-11-10-autonomous-world-design.md. Data validation/document links PASS,
+637runtime/data/tool/test files byte-preserved. Source/headless ONLY; live gates
+remain open. Prior117/117 is historical; new documents change its source hash.
+
+Previous implementation handoff:
+[Supply and diplomatic follow-ups](handoffs/2026-11-10-supply-diplomacy.md).
+User requests next steps;97b lead-time procurement and97c pending/expired offer
+filters implement world022/023. Local/uncommitted master654aaa22; preserve all
+changes. No new push/desktop/provider/budget/save-reset permission inferred.
+Focused diplomatic42/supply96/readiness26/classic161/adapter184/native90 /
+comparison348checks and111Python/validation PASS; shared final-source117/117PASS,
+0errors/0warnings,100Godot suites/13scene boots. Tested/final source hashes match,
+11/11persistent save/terrain/art hashes unchanged. Receipt/integrity:
+qa/2026-11-10-diplomatic-proposals.md.
+Matched12x180day faction-only and6x30day native probes retain identical openings.
+Food shortages581/654/55->4/2/4classic/recorded/native after97b, retained in97c;
+classic duplicate active-pact/expired-trade attempts392/235->0/0. Actual capacity
+contention and small delivery declines remain measured, not forced successful.
+Old raw requests/checkpoints/commands/replies and user saves stay intact; replay
+expected output is specific to simulation-code revision. Next: user travel /
+traffic/job review and provider/model/hosting/cost choice before actual inference /
+comparison. All L97b/c and earlier live gates remain open. Source/headless ONLY,
+no OS input/activation/visible launch; do not restart old city/art/tactical queues.
+
+Previous readiness handoff:
 [Faction readiness and matched logistics](handoffs/2026-11-10-strategy-readiness.md).
 User requests publication and the next stage.85..96c pushed to origin/master
 4223f8d7; GitHub-linked author and tested113/113source verified first. Follow-up

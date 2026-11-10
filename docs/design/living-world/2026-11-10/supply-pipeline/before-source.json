@@ -1,0 +1,9 @@
+{
+  "git_head": "654aaa225abdf9b53678a68f639748d33405b47b",
+  "source": "committed production scripts loaded before the pipeline changes",
+  "sha256": {
+    "scripts/domain/classic_world.gd": "7db47911a10ab4be476443062100604feabb22dfe430239983de6c9189d8c3b5",
+    "scripts/domain/faction_planner.gd": "0c06e93c9b4c212ff257d91607e28f4780d33a7b59d9cf001cf2472db5f20baf",
+    "scripts/domain/strategist_protocol.gd": "04c7cb261315c899988a9cda8b2b7c5d3c88104466929873edad1a602b4052b6"
+  }
+}

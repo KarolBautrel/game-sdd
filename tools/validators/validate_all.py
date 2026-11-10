@@ -19,6 +19,7 @@ from tools.validators.living_region import reference_errors as living_reference_
 from tools.validators.strategy_world import reference_errors as strategy_reference_errors
 from tools.validators.classic_strategy import configuration_errors as classic_configuration_errors, reference_errors as classic_reference_errors
 from tools.validators.strategic_region import rules_errors as region_rules_errors, reference_errors as strategic_reference_errors
+from tools.validators.autonomous_world import reference_errors as autonomous_reference_errors
 from tools.validators.strategist import reference_errors as model_reference_errors, request_errors as model_request_errors, reply_errors as model_reply_errors, replay_errors as model_replay_errors
 
 try:
@@ -115,6 +116,7 @@ VALIDATION_TARGETS = [
     ("resources/schemas/classic_world.schema.json", "resources/data/strategy_snapshots/*.json"),
     ("resources/schemas/region_rules.schema.json", "resources/data/strategy_regions/*.json"),
     ("resources/schemas/strategic_region.schema.json", "resources/data/strategic_regions/*.json"),
+    ("resources/schemas/autonomous_campaign.schema.json", "resources/data/autonomous_campaigns/*.json"),
     ("resources/schemas/strategist_rules.schema.json", "resources/data/strategists/rules*.json"),
     ("resources/schemas/strategist_examples.schema.json", "resources/data/strategists/recorded*.json"),
     ("resources/schemas/strategist_request.schema.json", "resources/data/strategist_requests/*.json"),
@@ -298,7 +300,7 @@ def validate_dungeon_references() -> list[str]:
                                     f"{path.relative_to(ROOT)}: room {room['id']} references regression slice encounter {encounter_path}; "
                                     "dungeon rooms must use presentation-ready combat encounters"
                                 )
-                            if not encounter.get("background_path"):
+                            if not _combat_encounter_background(encounter):
                                 errors.append(
                                     f"{path.relative_to(ROOT)}: room {room['id']} encounter {encounter_path} is missing background_path"
                                 )
@@ -485,6 +487,13 @@ def validate_dungeon_debuff_references() -> list[str]:
                 errors.append(f"{path.relative_to(ROOT)}: duplicate dungeon debuff id {debuff_id}")
             seen.add(debuff_id)
     return errors
+
+
+def _combat_encounter_background(encounter: dict) -> str:
+    if encounter.get("background_path"):
+        return str(encounter["background_path"])
+    map_path = ROOT / str(encounter.get("map_path", "")).removeprefix("res://")
+    return str(load_json(map_path).get("background_path", "")) if map_path.is_file() else ""
 
 
 def _combat_encounter_dimensions(encounter: dict) -> tuple[int, int]:
@@ -675,6 +684,8 @@ def main() -> int:
         errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in classic_reference_errors(load_json(path)))
     for path in sorted((ROOT / "resources/data/strategy_regions").glob("*.json")):
         errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in region_rules_errors(load_json(path)))
+    for path in sorted((ROOT / "resources/data/autonomous_campaigns").glob("*.json")):
+        errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in autonomous_reference_errors(load_json(path)))
     for path in sorted((ROOT / "resources/data/strategic_regions").glob("*.json")):
         errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in strategic_reference_errors(load_json(path)))
     for path in sorted((ROOT / "resources/data/strategist_campaigns").glob("*.json")):

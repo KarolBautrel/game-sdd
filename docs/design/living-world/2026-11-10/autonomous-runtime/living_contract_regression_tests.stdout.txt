@@ -1,0 +1,4 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+CONTRACT_CHAIN_METRICS [{"fatigue":100,"food":11,"gold":107,"iron_relation":6,"provision_cost":2,"river_relation":2,"road_tolls":0,"seed":0,"size":"authored","start_gold":80,"ticks":121,"wages":3,"xp":8},{"fatigue":100,"food":5,"gold":96,"iron_relation":6,"provision_cost":2,"river_relation":2,"road_tolls":5,"seed":2087,"size":"Large","start_gold":80,"ticks":306,"wages":9,"xp":8},{"fatigue":100,"food":4,"gold":91,"iron_relation":6,"provision_cost":2,"river_relation":2,"road_tolls":10,"seed":20261107,"size":"Large","start_gold":80,"ticks":337,"wages":9,"xp":8}]
+living_contract_regression_tests: 151 checks, 0 failures

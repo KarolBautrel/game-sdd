@@ -1,0 +1,2553 @@
+{
+  "schema": "sdd.stage-verification-v1",
+  "run_id": "autonomous-world-20261110-final",
+  "started_utc": "2026-11-10T21:23:56.153431+00:00",
+  "python": {
+    "executable": "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\.venv\\Scripts\\python.exe",
+    "version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "godot": "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+  "git_head": "654aaa225abdf9b53678a68f639748d33405b47b",
+  "git_status": "M docs/CONTINUE_HERE.md\n M docs/design/living-world/2026-11-09/WORLD_STRATEGY_PLAN.md\n M docs/qa/README.md\n M docs/qa/live-test-scenarios.md\n M docs/specs/presentation/README.md\n M docs/specs/presentation/milestones/022_autonomous_game_polish.md\n M docs/specs/tooling/006_strategy_comparison.md\n M docs/specs/world/015_world_strategy.md\n M docs/specs/world/017_classic_strategy.md\n M docs/specs/world/019_model_strategist.md\n M docs/specs/world/README.md\n M resources/data/strategist_replays/mine_region_2087.json\n M scripts/domain/classic_world.gd\n M scripts/domain/classic_world_state.gd\n M scripts/domain/faction_planner.gd\n M scripts/domain/faction_readiness_tests.gd\n M scripts/domain/strategic_region.gd\n M scripts/domain/strategist_adapter_tests.gd\n M scripts/domain/strategist_protocol.gd\n M scripts/presentation/dungeon_debug.gd\n M scripts/presentation/strategist_interface_tests.gd\n M scripts/presentation/world/strategic_map.gd\n M scripts/presentation/world/strategic_world_view.gd\n M scripts/session/strategic_session.gd\n M scripts/session/strategy_campaign_session.gd\n M tools/qa/start_game.ps1\n M tools/qa/verify_project.py\n M tools/validators/strategic_region.py\n M tools/validators/validate_all.py\n?? docs/design/living-world/2026-11-10/AUTONOMOUS_WORLD_PLAN.md\n?? docs/design/living-world/2026-11-10/autonomous-runtime/\n?? docs/design/living-world/2026-11-10/autonomous-world-design/\n?? docs/design/living-world/2026-11-10/diplomatic-proposals/\n?? docs/design/living-world/2026-11-10/supply-pipeline/\n?? docs/handoffs/2026-11-10-autonomous-runtime.md\n?? docs/handoffs/2026-11-10-autonomous-world-design.md\n?? docs/handoffs/2026-11-10-supply-diplomacy.md\n?? docs/qa/2026-11-10-autonomous-world-design.md\n?? docs/qa/2026-11-10-diplomatic-proposals.md\n?? docs/qa/2026-11-10-supply-pipeline.md\n?? docs/qa/2026-11-10-world-life-100.md\n?? docs/qa/2026-11-10-world-life-101.md\n?? docs/qa/2026-11-10-world-life-102.md\n?? docs/qa/2026-11-10-world-life-99.md\n?? docs/qa/2026-11-10-world-life-runtime.md\n?? docs/qa/autonomous-world-test-scenarios.md\n?? docs/specs/presentation/049_autonomous_world_feedback.md\n?? docs/specs/presentation/slices/049_autonomous_world_feedback.md\n?? docs/specs/world/022_supply_pipeline.md\n?? docs/specs/world/023_diplomatic_proposals.md\n?? docs/specs/world/024_autonomous_world_life.md\n?? docs/specs/world/025_world_life_runtime.md\n?? docs/specs/world/slices/023_supply_pipeline.md\n?? docs/specs/world/slices/024_diplomatic_proposals.md\n?? docs/specs/world/slices/025_autonomous_world_life.md\n?? docs/specs/world/slices/026_world_life_runtime.md\n?? resources/data/autonomous_campaigns/\n?? resources/data/dungeons/road_camp.json\n?? resources/data/dungeons/ruined_shrine.json\n?? resources/schemas/autonomous_campaign.schema.json\n?? scenes/world/AutonomousLargeWorld.tscn\n?? scenes/world/AutonomousWorld.tscn\n?? scripts/domain/diplomatic_proposal_tests.gd\n?? scripts/domain/diplomatic_proposal_tests.gd.uid\n?? scripts/domain/life_campaign.gd\n?? scripts/domain/supply_pipeline_tests.gd\n?? scripts/domain/supply_pipeline_tests.gd.uid\n?? scripts/domain/supply_planning.gd\n?? scripts/domain/supply_planning.gd.uid\n?? scripts/domain/world_life.gd\n?? scripts/domain/world_life_contract_tests.gd\n?? scripts/domain/world_life_dispute_tests.gd\n?? scripts/domain/world_life_disputes.gd\n?? scripts/domain/world_life_politics.gd\n?? scripts/domain/world_life_politics_tests.gd\n?? scripts/domain/world_life_regions.gd\n?? scripts/domain/world_life_regions_tests.gd\n?? scripts/domain/world_life_tests.gd\n?? scripts/presentation/world/world_life_panel.gd\n?? scripts/presentation/world_life_interface_tests.gd\n?? scripts/qa/regional_supply_probe.gd\n?? scripts/qa/regional_supply_probe.gd.uid\n?? scripts/qa/world_life_review.gd\n?? scripts/session/life_expedition_tests.gd\n?? tests/test_autonomous_world.py\n?? tools/validators/autonomous_world.py",
+  "source_sha256": "5978afbd29b5e5752328dca386795e9a79873144c86cdd8dcc480fa5228c2098",
+  "checks": [
+    {
+      "name": "python_validation",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\.venv\\Scripts\\python.exe",
+        "tools/validators/validate_all.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 10.828,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/python_validation.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/python_validation.stderr.txt"
+    },
+    {
+      "name": "python_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game\\.venv\\Scripts\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 11.031,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/python_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/python_tests.stderr.txt"
+    },
+    {
+      "name": "godot_version",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--version"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.047,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/godot_version.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/godot_version.stderr.txt"
+    },
+    {
+      "name": "godot_import",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--import"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 8.844,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/godot_import.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/godot_import.stderr.txt"
+    },
+    {
+      "name": "classic_world_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/classic_world_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.593,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/classic_world_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/classic_world_tests.stderr.txt"
+    },
+    {
+      "name": "combat_playtest_regression_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/combat_playtest_regression_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.125,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_playtest_regression_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_playtest_regression_tests.stderr.txt"
+    },
+    {
+      "name": "combat_slice_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/combat_slice_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.954,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_slice_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_slice_tests.stderr.txt"
+    },
+    {
+      "name": "diplomatic_proposal_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/diplomatic_proposal_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.937,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/diplomatic_proposal_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/diplomatic_proposal_tests.stderr.txt"
+    },
+    {
+      "name": "dungeon_beta_loop_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/dungeon_beta_loop_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 3.625,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_beta_loop_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_beta_loop_tests.stderr.txt"
+    },
+    {
+      "name": "dungeon_entry_selection_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/dungeon_entry_selection_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.844,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_entry_selection_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_entry_selection_tests.stderr.txt"
+    },
+    {
+      "name": "dungeon_generation_quality_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/dungeon_generation_quality_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 3.078,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_generation_quality_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_generation_quality_tests.stderr.txt"
+    },
+    {
+      "name": "dungeon_procedural_draft_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/dungeon_procedural_draft_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.312,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_procedural_draft_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_procedural_draft_tests.stderr.txt"
+    },
+    {
+      "name": "dungeon_state_model_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/dungeon_state_model_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.844,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_state_model_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_state_model_tests.stderr.txt"
+    },
+    {
+      "name": "faction_planner_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/faction_planner_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 125.485,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/faction_planner_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/faction_planner_tests.stderr.txt"
+    },
+    {
+      "name": "faction_readiness_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/faction_readiness_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.859,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/faction_readiness_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/faction_readiness_tests.stderr.txt"
+    },
+    {
+      "name": "large_region_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/large_region_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 38.797,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/large_region_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/large_region_tests.stderr.txt"
+    },
+    {
+      "name": "living_world_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/living_world_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.515,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/living_world_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/living_world_tests.stderr.txt"
+    },
+    {
+      "name": "region_generation_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/region_generation_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 24.438,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/region_generation_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/region_generation_tests.stderr.txt"
+    },
+    {
+      "name": "strategic_region_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/strategic_region_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 18.437,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/strategic_region_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/strategic_region_tests.stderr.txt"
+    },
+    {
+      "name": "strategist_adapter_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/strategist_adapter_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 5.938,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/strategist_adapter_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/strategist_adapter_tests.stderr.txt"
+    },
+    {
+      "name": "strategy_comparison_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/strategy_comparison_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 7.875,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/strategy_comparison_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/strategy_comparison_tests.stderr.txt"
+    },
+    {
+      "name": "supply_pipeline_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/supply_pipeline_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.234,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/supply_pipeline_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/supply_pipeline_tests.stderr.txt"
+    },
+    {
+      "name": "terrain_navigation_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/terrain_navigation_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.407,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/terrain_navigation_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/terrain_navigation_tests.stderr.txt"
+    },
+    {
+      "name": "vast_region_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/vast_region_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 26.578,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/vast_region_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/vast_region_tests.stderr.txt"
+    },
+    {
+      "name": "world_life_contract_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/world_life_contract_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 9.187,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/world_life_contract_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/world_life_contract_tests.stderr.txt"
+    },
+    {
+      "name": "world_life_dispute_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/world_life_dispute_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 6.688,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/world_life_dispute_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/world_life_dispute_tests.stderr.txt"
+    },
+    {
+      "name": "world_life_politics_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/world_life_politics_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 7.062,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/world_life_politics_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/world_life_politics_tests.stderr.txt"
+    },
+    {
+      "name": "world_life_regions_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/world_life_regions_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 14.641,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/world_life_regions_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/world_life_regions_tests.stderr.txt"
+    },
+    {
+      "name": "world_life_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/world_life_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 6.953,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/world_life_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/world_life_tests.stderr.txt"
+    },
+    {
+      "name": "world_strategy_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/domain/world_strategy_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.047,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/world_strategy_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/world_strategy_tests.stderr.txt"
+    },
+    {
+      "name": "ashen_exploration_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/ashen_exploration_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 5.281,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/ashen_exploration_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/ashen_exploration_tests.stderr.txt"
+    },
+    {
+      "name": "asset_catalog_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/asset_catalog_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.328,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/asset_catalog_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/asset_catalog_tests.stderr.txt"
+    },
+    {
+      "name": "campaign_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/campaign_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.703,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/campaign_interface_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/campaign_interface_tests.stderr.txt"
+    },
+    {
+      "name": "character_style_preview_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat/character_style_preview_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.5,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/character_style_preview_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/character_style_preview_tests.stderr.txt"
+    },
+    {
+      "name": "combat_animation_lifecycle_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_animation_lifecycle_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 5.016,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_animation_lifecycle_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_animation_lifecycle_tests.stderr.txt"
+    },
+    {
+      "name": "combat_art_direction_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_art_direction_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.703,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_art_direction_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_art_direction_tests.stderr.txt"
+    },
+    {
+      "name": "combat_debug_force_victory_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_debug_force_victory_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.125,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_debug_force_victory_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_debug_force_victory_tests.stderr.txt"
+    },
+    {
+      "name": "combat_encounter_authoring_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_encounter_authoring_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.797,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_encounter_authoring_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_encounter_authoring_tests.stderr.txt"
+    },
+    {
+      "name": "combat_feedback_polish_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_feedback_polish_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 6.484,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_feedback_polish_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_feedback_polish_tests.stderr.txt"
+    },
+    {
+      "name": "combat_floating_text_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_floating_text_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.86,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_floating_text_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_floating_text_tests.stderr.txt"
+    },
+    {
+      "name": "combat_hud_layout_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_hud_layout_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.593,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_hud_layout_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_hud_layout_tests.stderr.txt"
+    },
+    {
+      "name": "combat_map_editor_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_map_editor_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.938,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_map_editor_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_map_editor_tests.stderr.txt"
+    },
+    {
+      "name": "combat_mercenary_asset_pipeline_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_mercenary_asset_pipeline_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.125,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_mercenary_asset_pipeline_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_mercenary_asset_pipeline_tests.stderr.txt"
+    },
+    {
+      "name": "combat_panel_skin_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_panel_skin_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.141,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_panel_skin_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_panel_skin_tests.stderr.txt"
+    },
+    {
+      "name": "combat_preview_consistency_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_preview_consistency_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 74.89,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_preview_consistency_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_preview_consistency_tests.stderr.txt"
+    },
+    {
+      "name": "combat_targeting_preview_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_targeting_preview_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.86,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_targeting_preview_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_targeting_preview_tests.stderr.txt"
+    },
+    {
+      "name": "combat_terrain_asset_pipeline_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_terrain_asset_pipeline_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.5,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_terrain_asset_pipeline_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_terrain_asset_pipeline_tests.stderr.txt"
+    },
+    {
+      "name": "combat_ui_asset_pipeline_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_ui_asset_pipeline_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.031,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_ui_asset_pipeline_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_ui_asset_pipeline_tests.stderr.txt"
+    },
+    {
+      "name": "combat_unit_readability_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_unit_readability_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.484,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_unit_readability_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_unit_readability_tests.stderr.txt"
+    },
+    {
+      "name": "combat_unit_visual_state_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/combat_unit_visual_state_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.844,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_unit_visual_state_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/combat_unit_visual_state_tests.stderr.txt"
+    },
+    {
+      "name": "dark_fantasy_ui_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/dark_fantasy_ui_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.937,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dark_fantasy_ui_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dark_fantasy_ui_tests.stderr.txt"
+    },
+    {
+      "name": "drawn_animation_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/drawn_animation_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 10.672,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/drawn_animation_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/drawn_animation_tests.stderr.txt"
+    },
+    {
+      "name": "drawn_battle_review_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/drawn_battle_review_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 41.844,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/drawn_battle_review_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/drawn_battle_review_tests.stderr.txt"
+    },
+    {
+      "name": "dungeon_exploration_hud_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/dungeon_exploration_hud_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.125,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_exploration_hud_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_exploration_hud_tests.stderr.txt"
+    },
+    {
+      "name": "dungeon_party_layout_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/dungeon_party_layout_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.406,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_party_layout_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_party_layout_tests.stderr.txt"
+    },
+    {
+      "name": "dungeon_preparation_context_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/dungeon_preparation_context_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.141,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_preparation_context_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_preparation_context_tests.stderr.txt"
+    },
+    {
+      "name": "dungeon_route_preview_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/dungeon_route_preview_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.593,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_route_preview_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_route_preview_tests.stderr.txt"
+    },
+    {
+      "name": "dungeon_visual_cohesion_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/dungeon_visual_cohesion_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 4.0,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_visual_cohesion_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_visual_cohesion_tests.stderr.txt"
+    },
+    {
+      "name": "environment_art_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/environment_art_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.766,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/environment_art_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/environment_art_tests.stderr.txt"
+    },
+    {
+      "name": "equipment_usability_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/equipment_usability_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.328,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/equipment_usability_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/equipment_usability_tests.stderr.txt"
+    },
+    {
+      "name": "expedition_art_direction_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/expedition_art_direction_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.5,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/expedition_art_direction_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/expedition_art_direction_tests.stderr.txt"
+    },
+    {
+      "name": "hud_component_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/hud_component_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.953,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/hud_component_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/hud_component_tests.stderr.txt"
+    },
+    {
+      "name": "inventory_stash_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/inventory_stash_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.219,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/inventory_stash_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/inventory_stash_tests.stderr.txt"
+    },
+    {
+      "name": "journey_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/journey_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.328,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/journey_interface_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/journey_interface_tests.stderr.txt"
+    },
+    {
+      "name": "live_combat_tooltip_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/live_combat_tooltip_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 7.328,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/live_combat_tooltip_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/live_combat_tooltip_tests.stderr.txt"
+    },
+    {
+      "name": "living_motion_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/living_motion_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.969,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/living_motion_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/living_motion_tests.stderr.txt"
+    },
+    {
+      "name": "living_world_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/living_world_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.797,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/living_world_interface_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/living_world_interface_tests.stderr.txt"
+    },
+    {
+      "name": "map_authoring_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/map_authoring_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.687,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/map_authoring_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/map_authoring_tests.stderr.txt"
+    },
+    {
+      "name": "modular_actor_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/modular_actor_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.032,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/modular_actor_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/modular_actor_tests.stderr.txt"
+    },
+    {
+      "name": "original_raider_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/original_raider_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 8.906,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/original_raider_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/original_raider_tests.stderr.txt"
+    },
+    {
+      "name": "original_roster_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/original_roster_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 7.234,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/original_roster_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/original_roster_tests.stderr.txt"
+    },
+    {
+      "name": "painted_arena_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/painted_arena_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 29.0,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/painted_arena_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/painted_arena_tests.stderr.txt"
+    },
+    {
+      "name": "painted_enemy_pilot_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/painted_enemy_pilot_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 46.75,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/painted_enemy_pilot_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/painted_enemy_pilot_tests.stderr.txt"
+    },
+    {
+      "name": "region_foundry_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/region_foundry_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 7.422,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/region_foundry_interface_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/region_foundry_interface_tests.stderr.txt"
+    },
+    {
+      "name": "scrollable_world_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/scrollable_world_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 3.156,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scrollable_world_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scrollable_world_tests.stderr.txt"
+    },
+    {
+      "name": "service_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/service_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.407,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/service_interface_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/service_interface_tests.stderr.txt"
+    },
+    {
+      "name": "stable_combat_actions_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/stable_combat_actions_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.046,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/stable_combat_actions_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/stable_combat_actions_tests.stderr.txt"
+    },
+    {
+      "name": "strategic_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/strategic_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 5.954,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/strategic_interface_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/strategic_interface_tests.stderr.txt"
+    },
+    {
+      "name": "strategist_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/strategist_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 12.328,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/strategist_interface_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/strategist_interface_tests.stderr.txt"
+    },
+    {
+      "name": "tactical_environment_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/tactical_environment_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.593,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/tactical_environment_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/tactical_environment_tests.stderr.txt"
+    },
+    {
+      "name": "tactical_facing_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/tactical_facing_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 9.0,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/tactical_facing_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/tactical_facing_tests.stderr.txt"
+    },
+    {
+      "name": "tactical_locomotion_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/tactical_locomotion_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.985,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/tactical_locomotion_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/tactical_locomotion_tests.stderr.txt"
+    },
+    {
+      "name": "terrain_editor_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/terrain_editor_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.484,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/terrain_editor_interface_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/terrain_editor_interface_tests.stderr.txt"
+    },
+    {
+      "name": "town_exploration_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/town_exploration_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.203,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/town_exploration_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/town_exploration_tests.stderr.txt"
+    },
+    {
+      "name": "vast_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/vast_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 28.625,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/vast_interface_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/vast_interface_tests.stderr.txt"
+    },
+    {
+      "name": "visual_inventory_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/visual_inventory_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.5,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/visual_inventory_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/visual_inventory_tests.stderr.txt"
+    },
+    {
+      "name": "world_life_interface_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/world_life_interface_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 30.109,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/world_life_interface_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/world_life_interface_tests.stderr.txt"
+    },
+    {
+      "name": "world_town_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/presentation/world_town_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.688,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/world_town_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/world_town_tests.stderr.txt"
+    },
+    {
+      "name": "campaign_equipment_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/campaign_equipment_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.406,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/campaign_equipment_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/campaign_equipment_tests.stderr.txt"
+    },
+    {
+      "name": "campaign_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/campaign_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.938,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/campaign_session_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/campaign_session_tests.stderr.txt"
+    },
+    {
+      "name": "classic_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/classic_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.406,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/classic_session_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/classic_session_tests.stderr.txt"
+    },
+    {
+      "name": "dungeon_combat_injury_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/dungeon_combat_injury_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.844,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_combat_injury_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_combat_injury_tests.stderr.txt"
+    },
+    {
+      "name": "dungeon_run_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/dungeon_run_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.843,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_run_session_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/dungeon_run_session_tests.stderr.txt"
+    },
+    {
+      "name": "equipment_appearance_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/equipment_appearance_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.938,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/equipment_appearance_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/equipment_appearance_tests.stderr.txt"
+    },
+    {
+      "name": "generated_region_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/generated_region_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 3.265,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/generated_region_session_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/generated_region_session_tests.stderr.txt"
+    },
+    {
+      "name": "hero_equipment_identity_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/hero_equipment_identity_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 4.36,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/hero_equipment_identity_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/hero_equipment_identity_tests.stderr.txt"
+    },
+    {
+      "name": "life_expedition_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/life_expedition_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 14.375,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/life_expedition_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/life_expedition_tests.stderr.txt"
+    },
+    {
+      "name": "living_contract_regression_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/living_contract_regression_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 13.515,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/living_contract_regression_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/living_contract_regression_tests.stderr.txt"
+    },
+    {
+      "name": "living_world_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/living_world_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.329,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/living_world_session_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/living_world_session_tests.stderr.txt"
+    },
+    {
+      "name": "party_advancement_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/party_advancement_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.296,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/party_advancement_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/party_advancement_tests.stderr.txt"
+    },
+    {
+      "name": "regional_expedition_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/regional_expedition_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 10.407,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/regional_expedition_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/regional_expedition_tests.stderr.txt"
+    },
+    {
+      "name": "regional_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/regional_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 30.093,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/regional_session_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/regional_session_tests.stderr.txt"
+    },
+    {
+      "name": "road_event_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/road_event_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.11,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/road_event_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/road_event_tests.stderr.txt"
+    },
+    {
+      "name": "strategist_expedition_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/strategist_expedition_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 12.781,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/strategist_expedition_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/strategist_expedition_tests.stderr.txt"
+    },
+    {
+      "name": "strategist_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/strategist_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 5.938,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/strategist_session_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/strategist_session_tests.stderr.txt"
+    },
+    {
+      "name": "strategy_campaign_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/strategy_campaign_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.843,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/strategy_campaign_session_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/strategy_campaign_session_tests.stderr.txt"
+    },
+    {
+      "name": "town_trade_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/town_trade_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.203,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/town_trade_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/town_trade_tests.stderr.txt"
+    },
+    {
+      "name": "vast_expedition_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/vast_expedition_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 37.141,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/vast_expedition_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/vast_expedition_tests.stderr.txt"
+    },
+    {
+      "name": "vast_session_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/vast_session_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 18.156,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/vast_session_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/vast_session_tests.stderr.txt"
+    },
+    {
+      "name": "world_atlas_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/world_atlas_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.953,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/world_atlas_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/world_atlas_tests.stderr.txt"
+    },
+    {
+      "name": "world_travel_tests",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "--script",
+        "res://scripts/session/world_travel_tests.gd"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.219,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/world_travel_tests.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/world_travel_tests.stderr.txt"
+    },
+    {
+      "name": "scene_AutonomousWorld",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/AutonomousWorld.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 9.735,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_AutonomousWorld.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_AutonomousWorld.stderr.txt"
+    },
+    {
+      "name": "scene_AutonomousLargeWorld",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/AutonomousLargeWorld.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 3.343,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_AutonomousLargeWorld.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_AutonomousLargeWorld.stderr.txt"
+    },
+    {
+      "name": "scene_StrategicVastWorld",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/StrategicVastWorld.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 8.625,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_StrategicVastWorld.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_StrategicVastWorld.stderr.txt"
+    },
+    {
+      "name": "scene_StrategistVastWorld",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/StrategistVastWorld.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 8.703,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_StrategistVastWorld.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_StrategistVastWorld.stderr.txt"
+    },
+    {
+      "name": "scene_StrategistWorld",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/StrategistWorld.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 3.188,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_StrategistWorld.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_StrategistWorld.stderr.txt"
+    },
+    {
+      "name": "scene_StrategicWorld",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/StrategicWorld.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.969,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_StrategicWorld.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_StrategicWorld.stderr.txt"
+    },
+    {
+      "name": "scene_RegionFoundry",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/RegionFoundry.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 2.5,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_RegionFoundry.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_RegionFoundry.stderr.txt"
+    },
+    {
+      "name": "scene_TerrainEditor",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/TerrainEditor.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.937,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_TerrainEditor.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_TerrainEditor.stderr.txt"
+    },
+    {
+      "name": "scene_LivingWorld",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/world/LivingWorld.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.031,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_LivingWorld.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_LivingWorld.stderr.txt"
+    },
+    {
+      "name": "scene_App",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/app/App.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.11,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_App.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_App.stderr.txt"
+    },
+    {
+      "name": "scene_town_shell",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/town/town_shell.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.047,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_town_shell.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_town_shell.stderr.txt"
+    },
+    {
+      "name": "scene_TownExploration",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/town/TownExploration.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 0.937,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_TownExploration.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_TownExploration.stderr.txt"
+    },
+    {
+      "name": "scene_DungeonDebug",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/dungeon/DungeonDebug.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.297,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_DungeonDebug.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_DungeonDebug.stderr.txt"
+    },
+    {
+      "name": "scene_CombatDebug",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/combat/CombatDebug.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.406,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_CombatDebug.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_CombatDebug.stderr.txt"
+    },
+    {
+      "name": "scene_CombatMapEditor",
+      "command": [
+        "C:\\Users\\karol\\Desktop\\Gierka\\installers\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\karol\\Desktop\\Gierka\\game_dir\\sdd-game",
+        "res://scenes/combat/CombatMapEditor.tscn",
+        "--quit-after",
+        "5"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "launch_error": null,
+      "duration_seconds": 1.032,
+      "errors": 0,
+      "warnings": 0,
+      "status": "PASS",
+      "stdout": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_CombatMapEditor.stdout.txt",
+      "stderr": "docs/design/living-world/2026-11-10/autonomous-runtime/scene_CombatMapEditor.stderr.txt"
+    }
+  ],
+  "interactive": {
+    "status": "NOT_RUN",
+    "required_display": "DISPLAY1"
+  },
+  "godot_version": "4.7.stable.official.5b4e0cb0f",
+  "expected_check_count": 126,
+  "automated_status": "PASS",
+  "stage_status": "AWAITING_INTERACTIVE",
+  "finished_utc": "2026-11-10T21:40:03.321660+00:00",
+  "portable_copy": true,
+  "original_report_sha256": "6b8501017d47755363035bdf958e11b3bdbcea18fa9b9f4df60f17411b29b953"
+}

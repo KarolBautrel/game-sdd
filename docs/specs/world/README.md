@@ -58,3 +58,14 @@ World/Town Integration Prep. App is the regional hub; Ravenford is its market.
   consistent physical scale and independent versioned slots.
 - `021_strategy_readiness.md` / `slices/022_strategy_readiness.md`: stage97a
   affordable own-force preparation and matched Large/Vast offline diagnostics.
+- `022_supply_pipeline.md` / `slices/023_supply_pipeline.md`: stage97b
+  lead-time-aware procurement, real cargo/order budgets and native supply probes.
+- `023_diplomatic_proposals.md` / `slices/024_diplomatic_proposals.md`: stage97c
+  fresh bilateral offers, pending/expired filters and preserved consent gates.
+- `024_autonomous_world_life.md` / `slices/025_autonomous_world_life.md`: stage98
+  proposed actor/episode strategy for whole-world life, modest economics and
+  complete classic autonomy before optional live inference; design only.
+
+- [World-life runtime](025_world_life_runtime.md), [slice026](slices/026_world_life_runtime.md).
+
+- Version5 schema: resources/schemas/autonomous_campaign.schema.json; runtime opening: resources/data/autonomous_campaigns/marches_2087.json.

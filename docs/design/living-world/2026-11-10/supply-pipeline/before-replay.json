@@ -1,0 +1,16 @@
+{
+	"checkpoint": "res://resources/data/strategist_campaigns/reference_2087.json",
+	"commands": [
+		{
+			"action": "advance",
+			"id": "region_00000006",
+			"payload": {
+				"ticks": 24
+			},
+			"sequence": 6
+		}
+	],
+	"expected_digest": "b6faf4fdb3657c448ca11e7516e680ba0989dba9efab6aaecd713f0704d061fa",
+	"schema": "sdd.strategist-replay",
+	"version": 1
+}

@@ -1,0 +1,11 @@
+{
+  "stage": "97b capacity-aware supply pipeline",
+  "sha256": {
+    "scripts/domain/classic_world.gd": "daace2e27a525053cb5a9ab89ccb3dfda38a8729691b0f1962c4dd49537f1b25",
+    "scripts/domain/classic_world_state.gd": "d3cd8aaf733e21828007eaa3800d591788f88c0fd538df6196cff56cdb2e4eca",
+    "scripts/domain/faction_planner.gd": "219f158aba98774dd169e1e0bb0ec3f3d116a2243fb5e38cb1efefc3a851fe63",
+    "scripts/domain/supply_planning.gd": "2197dee9cf307ea52fbdf327ea2b2efb057720050361bc93fc2c1e96a6a6cbfc",
+    "scripts/domain/strategist_protocol.gd": "71345a9bde3c0cc1ec555836f13300e2472e937f69b6b5703fb7633283178b00",
+    "scripts/qa/regional_supply_probe.gd": "3f3208b61b62de35e74b9426a30ede99e3203bdfabc7941f4fd4f0066e1f873e"
+  }
+}

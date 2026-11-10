@@ -1,0 +1,17 @@
+{
+  "tested_source_sha256": "5978afbd29b5e5752328dca386795e9a79873144c86cdd8dcc480fa5228c2098",
+  "final_source_sha256": "5978afbd29b5e5752328dca386795e9a79873144c86cdd8dcc480fa5228c2098",
+  "source_match": true,
+  "checks": 126,
+  "godot_suites": 107,
+  "scene_boots": 15,
+  "python_tests": 114,
+  "errors": 0,
+  "warnings": 0,
+  "preserved_files": 11,
+  "physical": "NOT_RUN",
+  "desktop_control": false,
+  "live_provider": false,
+  "matrix_openings": 6,
+  "matrix_checkpoints": 12
+}

@@ -13,6 +13,7 @@ func stock(s: Dictionary, actor: String, resource: String, amount: int) -> void:
 func commerce(s: Dictionary) -> Dictionary:
 	var o := C.observe(s,"cinder_compact")
 	o.own_trade_route="market_road";o.live_trade_resources=["food","ore","timber"]
+	o.markets=[] # Isolate preparation eligibility from legitimate new procurement.
 	return o
 func has_action(intents: Array, action: String) -> bool:
 	return intents.any(func(i): return i.action==action)

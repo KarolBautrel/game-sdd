@@ -85,6 +85,10 @@ Replay accepts an explicit v4 checkpoint and ordered subsequent regional command
 stream, including recorded replies/faults. It calls no transport and reproduces
 the resulting state exactly. A seed or pruned journal alone does not promise
 replay from campaign start; only checkpoint-plus-tail replay is offered.
+Exact replay assumes the same simulation-code revision. A subsequent planner
+change can alter ordinary faction actions; retain its historical manifest and
+Git revision when updating current expected results (world022), without rewriting
+old checkpoints, commands, requests or replies.
 
 Native entry/status are owned by presentation046. Physical review remains
 deferred while desktop controls are withheld. Stage97 comparison/balance follows.

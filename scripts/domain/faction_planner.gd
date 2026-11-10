@@ -1,6 +1,7 @@
 extends RefCounted
 ## Pure observation -> scored plan / bounded intents. No privileged state access.
 const S := preload("res://scripts/domain/classic_world_state.gd")
+const Supply := preload("res://scripts/domain/supply_planning.gd")
 
 static func _candidate(goal: String, target: String, resource: String, reason: String, economic: int, security: int, claim: int, readiness: int, cost: int, switching: int) -> Dictionary:
 	return {"goal":goal,"target":target,"resource":resource,"reason":reason,"scores":{"economic":economic,"security":security,"claim":claim,"readiness":readiness,"cost":cost,"switching":switching}}
@@ -43,21 +44,39 @@ static func _preparation_funded(force: Dictionary) -> bool:
 	var quote: Dictionary=force.get("mobilization",{})
 	return quote.get("staffed",false) and quote.get("funded",false)
 
+static func _pact_pending(o: Dictionary, r: Dictionary, kind: String) -> bool:
+	return kind in r.get("pending_pacts",[]) or o.incoming_pacts.any(func(p): return p.proposer==r.target and p.kind==kind and p.expires_tick>o.tick)
+
+static func _peace_pending(o: Dictionary, r: Dictionary) -> bool:
+	return r.get("peace_pending",false) or o.incoming_peace.any(func(p): return p.proposer==r.target and p.expires_tick>o.tick)
+
+static func trade_response(o: Dictionary, offer: Dictionary, coins: int, planned: Dictionary={}, sold: Dictionary={}, slots: int=32) -> Dictionary:
+	if slots<=0 or int(offer.get("supply",{}).get("free_slots",S.SHIPMENT_LIMIT))<=0: return {}
+	var other: String=offer.buyer if offer.seller==o.actor else offer.seller
+	var r := _relation(o,other)
+	var accept: bool=r.stance=="peace" and r.trust>=-30 and offer.expires_tick>o.tick
+	if offer.buyer==o.actor:
+		accept=accept and offer.unit_price<=o.own.prices[offer.resource] and coins>=offer.amount*offer.unit_price and Supply.need(o,offer,planned)>0
+	else:
+		accept=accept and offer.unit_price>=o.own.prices[offer.resource] and int(o.own.available[offer.resource])-int(sold.get(offer.resource,0))-int(offer.amount)>=int(o.own.policy.targets[offer.resource])/2
+	return {"action":"accept_trade" if accept else "reject_trade","payload":{"id":offer.id}}
+
 static func intents(o: Dictionary, plan: Dictionary) -> Array:
 	var result: Array=[]
+	var coins := Supply.coins(o);var planned := {};var sold := {};var slots := Supply.slots(o)
 	for offer: Dictionary in o.incoming_peace:
 		var r := _relation(o,offer.proposer)
 		var accept: bool=r.stance=="war" and (r.exhaustion>=16 or r.war_age>=672 or o.own.shortfalls.food>0)
 		result.append({"action":"accept_peace" if accept else "reject_peace","payload":{"id":offer.id}})
 	for offer: Dictionary in o.incoming_trades:
-		var other: String=offer.buyer if offer.seller==o.actor else offer.seller
-		var r := _relation(o,other)
-		var accept: bool=r.stance=="peace" and r.trust>=-30
-		if offer.buyer==o.actor:
-			accept=accept and offer.unit_price<=o.own.prices[offer.resource]
-			accept=accept and o.own.available.coin>=offer.amount*offer.unit_price and o.own.available[offer.resource]<o.own.policy.targets[offer.resource]
-		else: accept=accept and offer.unit_price>=o.own.prices[offer.resource] and o.own.available[offer.resource]-offer.amount>=int(o.own.policy.targets[offer.resource])/2
-		result.append({"action":"accept_trade" if accept else "reject_trade","payload":{"id":offer.id}})
+		var response := trade_response(o,offer,coins,planned,sold,slots)
+		if response.is_empty(): continue
+		result.append(response)
+		if response.action=="accept_trade":
+			slots-=1
+			if offer.buyer==o.actor:
+				coins-=int(offer.amount)*int(offer.unit_price);planned[offer.resource]=int(planned.get(offer.resource,0))+int(offer.amount)
+			else: sold[offer.resource]=int(sold.get(offer.resource,0))+int(offer.amount)
 	for offer: Dictionary in o.incoming_pacts:
 		var r := _relation(o,offer.proposer)
 		var accept: bool=r.trust>=15 and r.stance=="peace"
@@ -73,7 +92,7 @@ static func intents(o: Dictionary, plan: Dictionary) -> Array:
 	for r: Dictionary in o.relations:
 		if r.stance!="war": continue
 		if r.exhaustion>=24 or r.war_age>=672 or o.own.shortfalls.food>0:
-			result.append({"action":"propose_peace","payload":{"id":"pending","target":r.target}})
+			if not _peace_pending(o,r): result.append({"action":"propose_peace","payload":{"id":"pending","target":r.target}})
 			return result.slice(0,3)
 		elif not force.is_empty() and r.route!="" and _preparation_funded(force) and not (force.mode=="holding" and force.mission=="attack"):
 			result.append({"action":"mobilize","payload":{"party":force.id,"route":r.route}})
@@ -89,27 +108,30 @@ static func intents(o: Dictionary, plan: Dictionary) -> Array:
 				return result.slice(0,3)
 	# Local logistics uses actual deficits even while a strategic goal stays committed.
 	var needs: Array=[]
-	for resource: String in ["food","ore","timber"]:
-		var missing := int(o.own.policy.targets[resource])-int(o.own.available[resource])
-		if missing>0 and resource not in o.live_trade_resources and not o.pending_trades.any(func(t): return t.resource==resource): needs.append({"resource":resource,"amount":missing})
-	needs.sort_custom(func(a,b): return a.amount>b.amount if a.amount!=b.amount else a.resource<b.resource)
-	for need: Dictionary in needs:
-		var options: Array=[]
-		for market: Dictionary in o.markets:
-			if market.resource!=need.resource or _relation(o,market.seller).trust< -30: continue
-			var amount := mini(int(market.amount),mini(int(need.amount),int(o.own.available.coin)/int(market.unit_price)))
-			if amount>0: options.append({"market":market,"amount":amount})
-		if options.is_empty(): continue
-		options.sort_custom(func(a,b): return a.market.seller<b.market.seller)
-		var chosen: Dictionary=options[S.roll(int(o.seed),int(o.tick),o.actor+need.resource,options.size())]
-		var m: Dictionary=chosen.market
+	if Supply.offers(o)<2 and slots>0:
+		for resource: String in ["food","ore","timber"]:
+			var options: Array=[]
+			for market: Dictionary in o.markets:
+				if market.resource!=resource or _relation(o,market.seller).trust< -30 or Supply.pending_pair(o,market): continue
+				var missing := Supply.need(o,market,planned)
+				var amount := mini(int(market.amount),mini(missing,coins/int(market.unit_price)))
+				if amount>0: options.append({"market":market,"amount":amount,"missing":missing,"lead":int(market.get("supply",{}).get("lead_ticks",0))})
+			if options.is_empty(): continue
+			options.sort_custom(func(a,b): return a.lead<b.lead if a.lead!=b.lead else a.market.seller<b.market.seller)
+			var first: int=options[0].lead
+			options=options.filter(func(x): return x.lead==first)
+			var chosen: Dictionary=options[S.roll(int(o.seed),int(o.tick),o.actor+resource,options.size())]
+			needs.append(chosen)
+	needs.sort_custom(func(a,b): return a.missing>b.missing if a.missing!=b.missing else a.market.resource<b.market.resource)
+	if not needs.is_empty():
+		var chosen: Dictionary=needs[0];var m: Dictionary=chosen.market
 		result.append({"action":"propose_trade","payload":{"id":"pending","seller":m.seller,"buyer":o.actor,"resource":m.resource,"amount":chosen.amount,"unit_price":m.unit_price,"source":m.source,"target":o.own.policy.home}})
 		return result.slice(0,3)
 	for r: Dictionary in o.relations:
-		if r.stance=="peace" and r.deliveries>=3 and r.trust>=20 and r.pacts.is_empty():
+		if r.stance=="peace" and r.deliveries>=3 and r.trust>=20 and r.pacts.is_empty() and not _pact_pending(o,r,"nonaggression"):
 			result.append({"action":"propose_pact","payload":{"id":"pending","target":r.target,"kind":"nonaggression","duration_ticks":1344,"valid_for_ticks":96}})
 			return result.slice(0,3)
-		if r.stance=="peace" and r.deliveries>=8 and r.trust>=30 and "nonaggression" in r.pacts and "defensive_pact" not in r.pacts and o.own.policy.personality.security>=60:
+		if r.stance=="peace" and r.deliveries>=8 and r.trust>=30 and "nonaggression" in r.pacts and "defensive_pact" not in r.pacts and not _pact_pending(o,r,"defensive_pact") and o.own.policy.personality.security>=60:
 			result.append({"action":"propose_pact","payload":{"id":"pending","target":r.target,"kind":"defensive_pact","duration_ticks":1344,"valid_for_ticks":96}})
 			return result.slice(0,3)
 	if plan.goal=="commerce" and not force.is_empty() and force.mode=="idle" and o.own_trade_route!="" and _preparation_funded(force):

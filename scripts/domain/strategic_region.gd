@@ -24,10 +24,16 @@ static func initial(seed_value: int=2087, preset: String="marches", geography_ve
 	_refresh_jobs(s)
 	return s if valid(s) else {}
 
-static func current(s: Dictionary) -> String:
+static func sites(s: Dictionary, extra: Dictionary={}) -> Dictionary:
+	var result: Dictionary=s.region.sites.duplicate()
+	result.merge(extra)
+	return result
+
+static func current(s: Dictionary, extra: Dictionary={}) -> String:
 	if not s.travel.path.is_empty(): return ""
-	for id: String in s.region.sites:
-		if G.point(s.travel.position).distance_to(G.point(s.region.sites[id].position))<=.012/G.travel_scale(s.region): return id
+	var catalog := sites(s,extra)
+	for id: String in catalog:
+		if G.point(s.travel.position).distance_to(G.point(catalog[id].position))<=.012/G.travel_scale(s.region): return id
 	return ""
 
 static func at_town(s: Dictionary) -> bool:
@@ -50,18 +56,18 @@ static func rules_valid(r: Variant) -> bool:
 			if not W._count(n,1,100): return false
 	return r.delivery.world_food==r.delivery.party_food*r.food_ratio
 
-static func valid(s: Variant) -> bool:
+static func valid(s: Variant, extra: Dictionary={}) -> bool:
 	if not W._shape(s,ROOT) or s.schema!="sdd.strategy-campaign" or not W._count(s.version,3,3) or not C.S.valid(s.strategy_world) or not rules_valid(s.region_rules): return false
 	var core: Dictionary=s.strategy_world.core
 	if not G.binding_valid(core,s.region) or not s.company is Dictionary or not W._count(s.company.get("version"),4,4) or s.company.has("living_world") or not Legacy._valid_profile(s.company): return false
 	if not s.company.world.pending_event.is_empty() or s.company.world.seed!=core.seed or s.company.world.elapsed_hours!=int(core.tick)/4: return false
-	if not W._shape(s.travel,["position","path","goal","camping","fatigue"]) or not G.Gen._valid_point(s.travel.position) or not s.travel.path is Array or s.travel.path.size()>2000 or not s.travel.goal is String or (s.travel.goal!="" and not s.region.sites.has(s.travel.goal)) or not s.travel.camping is bool or not W._count(s.travel.fatigue,0,100): return false
+	if not W._shape(s.travel,["position","path","goal","camping","fatigue"]) or not G.Gen._valid_point(s.travel.position) or not s.travel.path is Array or s.travel.path.size()>2000 or not s.travel.goal is String or (s.travel.goal!="" and not sites(s,extra).has(s.travel.goal)) or not s.travel.camping is bool or not W._count(s.travel.fatigue,0,100): return false
 	var nav := G.Gen.navigation(s.region.base)
 	if not nav.passable(G.point(s.travel.position)): return false
 	for p: Variant in s.travel.path:
 		if not G.Gen._valid_point(p): return false
 	if not is_finite(nav.route_cost(G.point(s.travel.position),s.travel.path)): return false
-	if s.current_settlement_id!=current(s): return false
+	if s.current_settlement_id!=current(s,extra): return false
 	for field: String in ["job_seq","request_seq"]:
 		if not W._count(s[field]): return false
 	if not W._registry(s.jobs,0,128) or not W._registry(s.cooldowns,0,128) or not W._registry(s.scouting,0,32) or not s.notes is Array or s.notes.size()>48: return false
@@ -77,7 +83,10 @@ static func valid(s: Variant) -> bool:
 	if s.company.active_run.is_empty():
 		if not s.run_context.is_empty(): return false
 	else:
-		if not W._shape(s.run_context,["id","site","rooms","camps"]) or s.run_context.id!=s.company.active_run.id or s.run_context.site!="dungeon_old_mine" or s.mine.status!="occupied" or current(s)!="dungeon_old_mine": return false
+		if not W._shape(s.run_context,["id","site","rooms","camps"]) or s.run_context.id!=s.company.active_run.id or current(s,extra)!=s.run_context.site: return false
+		if s.run_context.site=="dungeon_old_mine":
+			if s.mine.status!="occupied": return false
+		elif not extra.has(s.run_context.site): return false
 		for key: String in ["rooms","camps"]:
 			if not W._count(s.run_context[key]): return false
 		var run: Dictionary=s.company.active_run.state
@@ -112,20 +121,20 @@ static func command(s: Dictionary, action: String, payload: Dictionary) -> Dicti
 	var n := int(s.request_seq)+1
 	return {"id":"region_%08d" % n,"sequence":n,"action":action,"payload":payload.duplicate(true)}
 
-static func apply(s: Dictionary, cmd: Dictionary, planner_hook: Callable=Callable()) -> Dictionary:
-	if not valid(s): return {"ok":false,"reason":"Invalid regional campaign.","state":s.duplicate(true),"motion":{}}
+static func apply(s: Dictionary, cmd: Dictionary, planner_hook: Callable=Callable(), tick_hook: Callable=Callable(), extra: Dictionary={}) -> Dictionary:
+	if not valid(s,extra): return {"ok":false,"reason":"Invalid regional campaign.","state":s.duplicate(true),"motion":{}}
 	if not W._shape(cmd,["id","sequence","action","payload"]) or not W._count(cmd.sequence,1) or cmd.sequence!=s.request_seq+1 or cmd.id!="region_%08d" % int(cmd.sequence) or not cmd.action is String or not cmd.payload is Dictionary: return {"ok":false,"reason":"Invalid or replayed regional request.","state":s.duplicate(true),"motion":{}}
 	var next := s.duplicate(true);var motion := {}
-	var reason := _execute(next,cmd.action,cmd.payload,motion,planner_hook)
+	var reason := _execute(next,cmd.action,cmd.payload,motion,planner_hook,tick_hook,extra)
 	if reason=="":
 		next.request_seq=int(cmd.sequence);next.request_receipts.append({"id":cmd.id,"sequence":int(cmd.sequence),"action":cmd.action,"tick":int(next.strategy_world.core.tick)})
 		while next.request_receipts.size()>64: next.request_receipts.pop_front()
-		next.current_settlement_id=current(next)
+		next.current_settlement_id=current(next,extra)
 		next.company.world.location_id="dungeon_old_mine" if current(next)=="dungeon_old_mine" else "town_ravenford"
-		if not valid(next): reason="Invalid regional transaction."
+		if not valid(next,extra): reason="Invalid regional transaction."
 	return {"ok":reason=="","reason":reason,"state":next if reason=="" else s.duplicate(true),"motion":motion if reason=="" else {}}
 
-static func _advance(s: Dictionary, ticks: int, inside: bool, motion: Dictionary, planner_hook: Callable=Callable()) -> String:
+static func _advance(s: Dictionary, ticks: int, inside: bool, motion: Dictionary, planner_hook: Callable=Callable(), tick_hook: Callable=Callable()) -> String:
 	var hook := func(world: Dictionary) -> void:
 		s.strategy_world=world
 		var tick := int(world.core.tick)
@@ -144,22 +153,23 @@ static func _advance(s: Dictionary, ticks: int, inside: bool, motion: Dictionary
 				if arrived:
 					var id: String=s.travel.goal if s.travel.goal!="" else current(s)
 					s.travel.goal=""
-					if id!="": _arrive(s,id)
+					if s.region.sites.has(id): _arrive(s,id)
 		_refresh_jobs(s)
+		if tick_hook.is_valid(): tick_hook.call(s)
 	var result := C.apply(s.strategy_world,C.command(s.strategy_world,"world_clock","advance",{"ticks":ticks}),hook,planner_hook)
 	if not result.ok: return "World advance rejected: "+str(result.reason)
 	s.strategy_world=result.state
 	return ""
 
-static func _execute(s: Dictionary, action: String, p: Dictionary, motion: Dictionary, planner_hook: Callable=Callable()) -> String:
-	if action in ["begin_run","checkpoint","settle"]: return _expedition(s,action,p,motion,planner_hook)
+static func _execute(s: Dictionary, action: String, p: Dictionary, motion: Dictionary, planner_hook: Callable=Callable(), tick_hook: Callable=Callable(), extra: Dictionary={}) -> String:
+	if action in ["begin_run","checkpoint","settle"]: return _expedition(s,action,p,motion,planner_hook,tick_hook,extra)
 	if not s.company.active_run.is_empty(): return "Resolve or resume the active expedition."
 	if action=="advance":
 		if not W._shape(p,["ticks"]) or not W._count(p.ticks,1,192): return "Advance requires1..192ticks."
-		return _advance(s,int(p.ticks),false,motion,planner_hook)
+		return _advance(s,int(p.ticks),false,motion,planner_hook,tick_hook)
 	if action=="course":
-		if not W._shape(p,["position","site"]) or not p.site is String or (p.site!="" and not s.region.sites.has(p.site)) or not G.Gen._valid_point(p.position): return "Unknown destination."
-		var destination: Dictionary=p.position if p.site=="" else s.region.sites[p.site].position
+		if not W._shape(p,["position","site"]) or not p.site is String or (p.site!="" and not sites(s,extra).has(p.site)) or not G.Gen._valid_point(p.position): return "Unknown destination."
+		var destination: Dictionary=p.position if p.site=="" else sites(s,extra)[p.site].position
 		var nav := G.Gen.navigation(s.region.base)
 		if not nav.passable(G.point(destination)): return "Water and high peaks are blocked; use a crossing or pass."
 		var path: Array=nav.route(G.point(s.travel.position),G.point(destination))
@@ -318,10 +328,11 @@ static func supply_quote(s: Dictionary, id: String) -> Dictionary:
 	if result.reason=="" and s.company.gold<result.price: result.reason="Not enough company gold."
 	return result
 
-static func _expedition(s: Dictionary, action: String, p: Dictionary, motion: Dictionary, planner_hook: Callable=Callable()) -> String:
-	if action=="begin_run" and (current(s)!="dungeon_old_mine" or s.mine.status!="occupied" or not s.company.active_run.is_empty()): return "Travel to the occupied Old Mine before packing."
+static func _expedition(s: Dictionary, action: String, p: Dictionary, motion: Dictionary, planner_hook: Callable=Callable(), tick_hook: Callable=Callable(), extra: Dictionary={}) -> String:
+	var target := current(s,extra)
+	if action=="begin_run" and ((target!="dungeon_old_mine" and not extra.has(target)) or (target=="dungeon_old_mine" and s.mine.status!="occupied") or not s.company.active_run.is_empty()): return "Travel to an occupied expedition site before packing."
 	if action=="begin_run":
-		if not W._shape(p,["data","state"]) or not p.data is Dictionary or not p.state is Dictionary or not p.data.get("rooms") is Array or p.data.rooms.is_empty() or not p.data.get("generated_profile",{}) is Dictionary or (p.data.get("id")!="dungeon_old_mine" and p.data.get("generated_profile",{}).get("theme")!="mine"): return "Unsupported expedition site or layout."
+		if not W._shape(p,["data","state"]) or not p.data is Dictionary or not p.state is Dictionary or not p.data.get("rooms") is Array or p.data.rooms.is_empty() or not p.data.get("generated_profile",{}) is Dictionary or (not extra.has(target) and (p.data.get("id")!="dungeon_old_mine" and p.data.get("generated_profile",{}).get("theme")!="mine")): return "Unsupported expedition site or layout."
 	elif action=="checkpoint":
 		if not W._shape(p,["data","state","seed"]) or not p.data is Dictionary or not p.state is Dictionary or not W._count(p.seed): return "Invalid checkpoint."
 	elif not W._shape(p,["payload"]) or not p.payload is Dictionary: return "Invalid return payload."
@@ -337,24 +348,26 @@ static func _expedition(s: Dictionary, action: String, p: Dictionary, motion: Di
 	if not accepted: calculator.free();return reason
 	if action=="begin_run":
 		s.company=calculator.state.duplicate(true)
-		s.run_context={"id":s.company.active_run.id,"site":"dungeon_old_mine","rooms":s.company.active_run.state.get("visited_room_ids",[]).size(),"camps":s.company.active_run.state.get("camp_log",[]).size()}
+		s.run_context={"id":s.company.active_run.id,"site":target,"rooms":s.company.active_run.state.get("visited_room_ids",[]).size(),"camps":s.company.active_run.state.get("camp_log",[]).size()}
 	elif action=="checkpoint":
 		var rooms: int=p.state.get("visited_room_ids",[]).size();var camps: int=p.state.get("camp_log",[]).size()
 		var ticks := maxi(0,rooms-int(s.run_context.rooms))+16*maxi(0,camps-int(s.run_context.camps))
 		if ticks>192: calculator.free();return "Invalid checkpoint time increment."
 		s.company=calculator.state.duplicate(true)
 		if ticks>0:
-			var error := _advance(s,ticks,true,motion,planner_hook)
+			var error := _advance(s,ticks,true,motion,planner_hook,tick_hook)
 			if error!="": calculator.free();return error
 		s.run_context.rooms=maxi(rooms,int(s.run_context.rooms));s.run_context.camps=maxi(camps,int(s.run_context.camps))
 	else:
+		var run_site: String=s.run_context.site
 		s.company=calculator.state.duplicate(true);s.run_context={}
-		if p.payload.outcome=="completed":
+		if p.payload.outcome=="completed" and run_site=="dungeon_old_mine":
 			s.mine.status="restored";s.strategy_world.rules.policies.river_league.production.ore=int(s.mine.ore_rate)
 			for j: Dictionary in s.jobs.values():
 				if j.kind=="restoration" and j.status=="accepted": j.status="objective"
 			_note(s,"mine_restored","dungeon_old_mine","The restored mine resumes ore production. Report accepted work to Ravenford.")
-		else: _note(s,"expedition_return","dungeon_old_mine","Expedition "+str(p.payload.outcome)+"; the mine remains occupied.")
+		elif run_site=="dungeon_old_mine": _note(s,"expedition_return",run_site,"Expedition "+str(p.payload.outcome)+"; the mine remains occupied.")
+		else: _note(s,"expedition_return",run_site,"Expedition "+str(p.payload.outcome)+" returned from "+sites(s,extra)[run_site].name+".")
 	calculator.free()
 	_refresh_jobs(s)
 	return ""

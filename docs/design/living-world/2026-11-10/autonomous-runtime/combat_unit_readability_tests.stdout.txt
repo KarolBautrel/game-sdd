@@ -1,0 +1,3 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+combat_unit_readability_tests: 25 checks, 0 failures

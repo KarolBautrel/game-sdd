@@ -7,7 +7,7 @@ const Gear := Session.Company.Gear
 var session := Session.new()
 var active := false
 var loaded: bool:
-	get: return active and session.loaded and Session.World._count(session.state.get("version"),3,4)
+	get: return active and session.loaded and Session.World._count(session.state.get("version"),3,5)
 var state: Dictionary:
 	get: return session.state.company if loaded else {}
 var last_feedback: String:
@@ -17,6 +17,7 @@ var memory_only: bool:
 
 func regional_active() -> bool: return loaded
 func world_return_scene() -> String:
+	if loaded and session.state.version==5: return "res://scenes/world/AutonomousWorld.tscn" if session.state.region.base.version==3 else "res://scenes/world/AutonomousLargeWorld.tscn"
 	var vast: bool=loaded and session.state.region.base.version==3
 	if loaded and session.state.version==4: return "res://scenes/world/StrategistVastWorld.tscn" if vast else "res://scenes/world/StrategistWorld.tscn"
 	return "res://scenes/world/StrategicVastWorld.tscn" if vast else "res://scenes/world/StrategicWorld.tscn"
@@ -28,6 +29,18 @@ func open_seed(seed_value: int=2087, preset: String="marches", in_memory: bool=f
 	return _open_seed(seed_value,preset,in_memory,false,geography_version)
 func open_model_seed(seed_value: int=2087, preset: String="marches", in_memory: bool=false, geography_version: int=2) -> bool:
 	return _open_seed(seed_value,preset,in_memory,true,geography_version)
+func open_life_seed(seed_value: int=2087, preset: String="marches", in_memory: bool=false, geography_version: int=3) -> bool:
+	var next := Session.new()
+	var path := "user://qa_strategy_world_life_v5_g%d_%s_%d.json" % [geography_version,preset,seed_value]
+	var accepted: bool=next.create_life(seed_value,"",true,preset,geography_version) if in_memory else (next.load_profile(path) if FileAccess.file_exists(path) else next.create_life(seed_value,path,false,preset,geography_version))
+	if not accepted or next.state.get("version")!=5 or next.state.region.base.version!=geography_version or next.state.region.base.seed!=seed_value or next.state.region.base.preset!=preset:
+		session.last_feedback=next.last_feedback if not accepted else "Saved autonomous campaign differs from selection.";return false
+	session=next;active=true
+	if has_node("/root/DungeonRunSession"): get_node("/root/DungeonRunSession").clear()
+	session.last_feedback="Autonomous world ready. Time is paused; existing campaigns are preserved."
+	return true
+func life_dungeon() -> Dictionary:
+	return Session.Life.dungeon(session.state,Session.Life.current(session.state)) if loaded and session.state.version==5 else {}
 func _open_seed(seed_value: int, preset: String, in_memory: bool, model: bool, geography_version: int) -> bool:
 	if geography_version not in [2,3]: return false
 	var next := Session.new()
@@ -50,6 +63,7 @@ func order(action: String, payload: Dictionary={}) -> bool:
 	elif action=="begin_run": session.last_feedback="Expedition packed from owned supplies."
 	elif action=="checkpoint": session.last_feedback="Expedition progress saved."
 	elif action=="model_mode": session.last_feedback="Strategist mode: "+("Classic." if payload.mode=="classic" else "Recorded examples; no live model.")
+	elif action in ["accept_life","report_life"]: session.last_feedback=session.state.life.events.back().text
 	elif not session.state.notes.is_empty(): session.last_feedback=session.state.notes.back().text
 	return true
 func at_town() -> bool: return loaded and Region.at_town(session.state)

@@ -1,0 +1,3 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+Generation quality: 300 deterministic seeds PASS; {"deep_mine":["old_mine_deep_branch","old_mine_deep_switchbacks","old_mine_deep_vault"],"medium_mine":["old_mine_twin_caches","old_mine_guarded_spur","old_mine_medium_ring"],"short_mine":["old_mine_short_loop","old_mine_bent_shaft","old_mine_short_split"]}

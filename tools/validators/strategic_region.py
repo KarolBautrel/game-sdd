@@ -18,13 +18,16 @@ def rules_errors(data):
     return errors
 
 
-def reference_errors(s):
+def reference_errors(s, extra_sites=None):
     schema = json.loads((ROOT / "resources/schemas/strategic_region.schema.json").read_text())
+    if extra_sites:
+        schema["properties"]["run_context"]["oneOf"][1]["properties"]["site"] = {"type": "string"}
     errors = [f"regional shape: {e.message}" for e in Draft202012Validator(schema).iter_errors(s)]
     if errors:
         return errors
     world, region = s["strategy_world"], s["region"]
     core = world["core"]
+    known_sites = dict(region["sites"], **(extra_sites or {}))
     errors.extend(classic_errors(world))
     errors.extend(rules_errors(s["region_rules"]))
     terrain = region["base"]["terrain"]
@@ -69,9 +72,9 @@ def reference_errors(s):
                     break
     if not free(s["travel"]["position"]):
         errors.append("company position is blocked")
-    if s["current_settlement_id"] and s["current_settlement_id"] not in region["sites"]:
+    if s["current_settlement_id"] and s["current_settlement_id"] not in known_sites:
         errors.append("unknown regional location")
-    if s["travel"]["goal"] and s["travel"]["goal"] not in region["sites"]:
+    if s["travel"]["goal"] and s["travel"]["goal"] not in known_sites:
         errors.append("unknown company course target")
     for identifier, job in s["jobs"].items():
         if identifier != f"job_{int(job['number']):08d}" or job["number"] > s["job_seq"] or job["id"] != identifier:

@@ -1,0 +1,10 @@
+{
+  "stage": "97c pending/expired diplomacy filters",
+  "sha256": {
+    "scripts/domain/classic_world.gd": "61e24ca68b8e86b9d5d60d086ffeb69e64bc205406b8bda54d4b5925d5364fff",
+    "scripts/domain/classic_world_state.gd": "d3cd8aaf733e21828007eaa3800d591788f88c0fd538df6196cff56cdb2e4eca",
+    "scripts/domain/faction_planner.gd": "8180a9ae6a387b3bb500c73183c05ec2dbc1c44c15764be9cc726cfaf0576f7e",
+    "scripts/domain/supply_planning.gd": "2197dee9cf307ea52fbdf327ea2b2efb057720050361bc93fc2c1e96a6a6cbfc",
+    "scripts/domain/strategist_protocol.gd": "71345a9bde3c0cc1ec555836f13300e2472e937f69b6b5703fb7633283178b00"
+  }
+}

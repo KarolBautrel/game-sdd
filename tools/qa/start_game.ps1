@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$GodotPath = '',
-    [ValidateSet('dungeon', 'combat', 'map-editor', 'app', 'styles', 'drawn', 'town-preview', 'living-world', 'terrain-editor', 'regions', 'strategy', 'strategy-ai', 'strategy-vast', 'strategy-ai-vast')]
+    [ValidateSet('dungeon', 'combat', 'map-editor', 'app', 'styles', 'drawn', 'town-preview', 'living-world', 'terrain-editor', 'regions', 'strategy', 'strategy-ai', 'strategy-vast', 'strategy-ai-vast', 'autonomous-world')]
     [string]$Scene = 'dungeon',
     [ValidateRange(800, 2560)][int]$Width = 1920,
     [ValidateRange(600, 1440)][int]$Height = 1080,
@@ -52,6 +52,7 @@ $scenes = @{
     'regions' = 'res://scenes/world/RegionFoundry.tscn'
     'strategy' = 'res://scenes/world/StrategicWorld.tscn'
     'strategy-ai' = 'res://scenes/world/StrategistWorld.tscn'
+    'autonomous-world' = 'res://scenes/world/AutonomousWorld.tscn'
     'strategy-vast' = 'res://scenes/world/StrategicVastWorld.tscn'
     'strategy-ai-vast' = 'res://scenes/world/StrategistVastWorld.tscn'
 }

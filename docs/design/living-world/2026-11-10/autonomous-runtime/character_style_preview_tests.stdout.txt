@@ -1,0 +1,5 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+STYLE_PREVIEW_WINDOW {"mode":1,"position":[0,0],"screen":-1,"size":[0,0]}
+STYLE_PREVIEW_WINDOW {"mode":1,"position":[0,0],"screen":-1,"size":[0,0]}
+STYLE_PREVIEW_TESTS_PASS 42

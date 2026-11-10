@@ -4,6 +4,7 @@ const W := preload("res://scripts/domain/world_strategy.gd")
 const RULES := "res://resources/data/strategy_simulations/classic_rules_v1.json"
 const ROOT := ["schema","version","core","rules","premise","initial_manpower","sequence","entity_seq","event_seq","receipts","relations","wars","forces","trades","peace_offers","aid","plans","decisions","shortfalls","ledger","events","metrics"]
 const METRICS := ["trade_started","trade_delivered","trade_lost","trade_volume","wars","peace","battles","casualties","reviews","plan_changes","rejected_intents"]
+const SHIPMENT_LIMIT := 32
 
 static func sorted_ids(registry: Dictionary) -> Array:
 	var ids := registry.keys(); ids.sort(); return ids
@@ -192,7 +193,7 @@ static func valid(s: Variant) -> bool:
 			active+=1
 			if t.cargo!=t.amount or t.escrow!=t.amount*t.unit_price: return false
 		elif t.cargo!=0 or t.escrow!=0 or t.remaining!=0 or t.edge_to!="": return false
-	if active>32: return false
+	if active>SHIPMENT_LIMIT: return false
 	for id: String in s.peace_offers:
 		var p: Variant=s.peace_offers[id]
 		if not W._shape(p,["id","proposer","recipient","signed_by","status","created_tick","expires_tick","accepted_tick"]) or p.id!=id or not parties_valid(s,p.proposer,p.recipient) or not window_valid(s,p): return false

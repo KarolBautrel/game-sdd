@@ -1,0 +1,3 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+live_combat_tooltip_tests: 11 checks, 0 failures

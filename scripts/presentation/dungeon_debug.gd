@@ -217,6 +217,7 @@ func _ready() -> void:
 	expedition_chrome = ExpeditionChrome.new()
 	expedition_chrome.setup(self)
 	_build_graph()
+	expedition_chrome.apply_archetype(self,str(dungeon.get("generated_profile",{}).get("theme","mine")))
 	_refresh_presentation_chrome()
 
 
@@ -2183,6 +2184,11 @@ func _refresh_loadout_panel() -> void:
 		generated_reroll_button.visible = _loadout_pending() and dungeon_source == DUNGEON_SOURCE_GENERATED
 		generated_reroll_button.text = "Reroll Generated"
 	_refresh_generator_difficulty_buttons()
+	if _fixed_life_layout():
+		source_toggle_button.hide();generated_reroll_button.hide()
+		for button: Button in generated_difficulty_buttons: button.hide()
+		generator_summary_label.text="Fixed occupation layout / "+str(dungeon.display_name)
+		loadout_summary_label.text="Source: "+str(dungeon.display_name)+"\nSelected: "+_loadout_summary_text(selected_supply_loadout)+"\n"+_loadout_packing_text(selected_supply_loadout)
 	var options: Dictionary = dungeon.get("supply_loadout_options", {})
 	for supply_id: String in loadout_rows.keys():
 		var row: Dictionary = loadout_rows.get(supply_id, {})
@@ -2311,7 +2317,17 @@ func _set_generated_difficulty(difficulty: int) -> void:
 	_refresh_loadout_panel()
 
 
+func _fixed_life_layout() -> bool:
+	if not is_inside_tree() or not _run_session().town_preparation: return false
+	var campaign: Node=_run_session().campaign_owner()
+	return campaign.has_method("life_dungeon") and not campaign.life_dungeon().is_empty()
+
 func _dungeon_data_for_entry_payload() -> Dictionary:
+	if is_inside_tree() and _run_session().town_preparation:
+		var campaign: Node=_run_session().campaign_owner()
+		if campaign.has_method("life_dungeon"):
+			var owned: Dictionary=campaign.life_dungeon()
+			if not owned.is_empty(): return owned
 	entry_payload = DungeonEntrySelection.normalize_payload(entry_payload)
 	return DungeonEntrySelection.dungeon_for_payload(entry_payload)
 

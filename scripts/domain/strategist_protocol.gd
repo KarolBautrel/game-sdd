@@ -49,6 +49,11 @@ static func capabilities(o: Dictionary) -> Dictionary:
 		result.goals["goal_"+digest(goal).substr(0,20)]=goal
 		for intent: Dictionary in C.Planner.intents(o,plan(goal,int(o.tick))):
 			result.intents["candidate_"+digest(intent).substr(0,20)]=intent
+	# Alternative replies can each be affordable alone. The shared executor still
+	# prevents an external selection from spending their common budget twice.
+	for offer: Dictionary in o.incoming_trades:
+		var response := C.Planner.trade_response(o,offer,C.Supply.coins(o))
+		if not response.is_empty(): result.intents["candidate_"+digest(response).substr(0,20)]=response
 	return result
 
 static func request(world: Dictionary, actor: String, number: int, generation: int) -> Dictionary:

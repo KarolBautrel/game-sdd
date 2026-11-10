@@ -3,6 +3,16 @@
 Continuation status and the next unfinished task: [CONTINUE_HERE.md](../CONTINUE_HERE.md).
 Accumulated actual-play acceptance: [live-test-scenarios.md](live-test-scenarios.md).
 
+Latest98: [autonomous world design](2026-11-10-autonomous-world-design.md).
+User prioritizes the complete independent actor/episode loop, with modest
+economics and classic behaviour before optional live inference. Documentation
+only; existing gameplay and physical acceptance status preserved.
+
+Latest97b/c: [supply and diplomacy](2026-11-10-diplomatic-proposals.md),
+[supply stage](2026-11-10-supply-pipeline.md). Actual lead-time procurement,
+finite shared budgets and fresh bilateral negotiation filters; matched native /
+faction diagnostics, preserved saves and deferred physical acceptance.
+
 Latest97a: [2026-11-10 faction readiness](2026-11-10-strategy-readiness.md).
 Actual affordable preparation and matched classic/authored-offline diagnostics
 on Large/Vast. Previous batch85..96c published; live provider and play review open.
@@ -103,3 +113,6 @@ remain unaccepted until the live registry passes; stages0..7 retain their eviden
 Raw runs are saved in ignored `artifacts/qa-runs/`. The stage contract is
 `docs/specs/tooling/001_stage_verification.md` and stage-0 acceptance is
 `docs/specs/tooling/slices/001_environment_baseline.md`.
+
+- [Autonomous world player runbook](autonomous-world-test-scenarios.md), stages99..103.
+- [Autonomous runtime verification](2026-11-10-world-life-runtime.md).

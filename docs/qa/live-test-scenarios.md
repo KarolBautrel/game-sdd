@@ -1,5 +1,13 @@
 # Accumulated live test scenarios
 
+Current97b/c: long-route supply ordering and fresh bilateral negotiations are
+implemented, source/headless only. Existing saved progress is preserved.
+
+| Case | Stage | Scenario | Acceptance | Status |
+| --- | --- | --- | --- | --- |
+| L97b-01 | 97b | In the existing Large/Vast strategy pilot observe several days of ordinary trade/food availability; travel, buy actual supplies, accept/report a job and resume mid-route. | Actual overlapping convoys follow safe weighted paths, food/cargo/coin remain real, company upkeep and jobs remain usable, no freeze or reset; no promise every faction always has food. | AWAITING_INTERACTIVE; supply96 and matched12x180day cases across three seeds/two sizes/two modes plus6x30day actual regional probes PASS; ordinary travel/traffic appearance still open. |
+| L97c-01 | 97c | In the same opt-in pilot inspect Factions/Chronicle and Recorded examples, advance several strategic days, resume and inspect actual signed pacts/peace/blocked counts. | Public confirmed agreements and real outcomes, no repeated fake agreements/signatures, preserved company/jobs; pending private negotiations remain internal to their factions. | AWAITING_INTERACTIVE; diplomatic42 and focused actual-outcome native90checks PASS. Same starting-world before/after matrices retained; simultaneous or stale proposals can still fail honestly. |
+
 Current97a: affordable preparations and matched offline diagnostics are
 implemented. No reset of the deferred player save or desktop access. The actual
 play gate remains separate from headless accounting/long-run checks.
@@ -458,3 +466,16 @@ RMB/MMB drag remains open. This does not close campaign L77-01.
 | ID | Stage | Scenario | Acceptance | Result |
 | --- | --- | --- | --- | --- |
 | L80-01 | 80 | Launch regions on DISPLAY1; inspect2087 Marches,42 woodland and170717 highlands; change seed and generate, toggle overlay, preview route, Play / Resume. Travel across a bridge and through forest/pass; open gear, accept mine contract, pack and ordinarily retreat. Restart/select same seed; return to Authored Marches. | Geography and artwork materially vary and match navigation; controls/labels fit; preview is read-only; water/peaks blocked; smooth weighted travel; exact saved snapshot/company resumes; original mask/profile intact. | AWAITING_INTERACTIVE; automated/full/native receipts in2026-11-04-generated-regions.md. Ordinary physical mine victory remains L77-01. |
+
+## Autonomous world99..103 ? user runbook
+
+Detailed ordered cases: [autonomous world](autonomous-world-test-scenarios.md).
+All remain AWAITING_INTERACTIVE; no desktop control or physical play occurred.
+
+| Case | Manual scenario | Status |
+| --- | --- | --- |
+| L99-01 | Runbook07: paid NPC response without company input | AWAITING_INTERACTIVE |
+| L100-01 | Runbook02..06/08: claim, normal forest expedition, reload and once-only reward | AWAITING_INTERACTIVE |
+| L101-01 | Runbook09: actual dispute/outpost assault/occupation/recovery/peace | AWAITING_INTERACTIVE |
+| L102-01 | Runbook10..11: ruins, distant dated reports and arriving reoccupation | AWAITING_INTERACTIVE |
+| L103-01 | Runbook01/03: native layout, camera, labels, safe interpolation and pause | AWAITING_INTERACTIVE |

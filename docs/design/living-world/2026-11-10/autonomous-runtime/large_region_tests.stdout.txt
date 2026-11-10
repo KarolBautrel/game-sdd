@@ -1,0 +1,4 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+Large batch24inputs max_ms=1863
+large_region_tests: 134 checks, 0 failures

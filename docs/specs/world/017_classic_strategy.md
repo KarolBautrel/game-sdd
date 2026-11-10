@@ -104,6 +104,12 @@ quotes from the same operator price helper. New classic/model preparation
 proposals require actual affordable staffing; failed preparations can continue
 ordinary supply procurement. Execution still rechecks current conditions.
 
+Stages97b/c: [world022](022_supply_pipeline.md) adds lead-time procurement quotes,
+overlapping real cargo and shared observed order/consent capacity budgets.
+[World023](023_diplomatic_proposals.md) filters live known negotiations/expired
+responses and closes overdue peace records in the existing archive phase.
+Actual prices, signatures, conservation and explicit-command gates remain.
+
 Opposing ready parties at one node or crossing on the same edge resolve bounded
 seeded clashes using actual
 headcount, faction food and a declared defender bonus, with explicit casualties
