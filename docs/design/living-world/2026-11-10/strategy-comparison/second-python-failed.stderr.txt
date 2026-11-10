@@ -1,0 +1,37 @@
+...........................................................................................................E..
+======================================================================
+ERROR: test_timeout_is_failure (test_verify_project.RunnerContract.test_timeout_is_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\karol\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 633, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] Proces nie mo¿e uzyskaæ dostêpu do pliku, poniewa¿ jest on u¿ywany przez inny proces: 'C:\\Users\\karol\\AppData\\Local\\Temp\\sdd-runner-l0pbr_lf\\probe.stderr.log'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game\tests\test_verify_project.py", line 36, in test_timeout_is_failure
+    result = self.check_child("import time; time.sleep(10)", timeout=0.1)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\karol\Desktop\Gierka\game_dir\sdd-game\tests\test_verify_project.py", line 16, in check_child
+    with tempfile.TemporaryDirectory(prefix="sdd-runner-") as directory:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\karol\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 950, in __exit__
+    self.cleanup()
+  File "C:\Users\karol\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\karol\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\karol\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\karol\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+  File "C:\Users\karol\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 909, in onexc
+    _os.unlink(path)
+PermissionError: [WinError 32] Proces nie mo¿e uzyskaæ dostêpu do pliku, poniewa¿ jest on u¿ywany przez inny proces: 'C:\\Users\\karol\\AppData\\Local\\Temp\\sdd-runner-l0pbr_lf\\probe.stderr.log'
+
+----------------------------------------------------------------------
+Ran 110 tests in 7.015s
+
+FAILED (errors=1)

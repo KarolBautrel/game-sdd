@@ -39,6 +39,10 @@ static func _relation(o: Dictionary, target: String) -> Dictionary:
 		if r.target==target: return r
 	return {}
 
+static func _preparation_funded(force: Dictionary) -> bool:
+	var quote: Dictionary=force.get("mobilization",{})
+	return quote.get("staffed",false) and quote.get("funded",false)
+
 static func intents(o: Dictionary, plan: Dictionary) -> Array:
 	var result: Array=[]
 	for offer: Dictionary in o.incoming_peace:
@@ -70,14 +74,19 @@ static func intents(o: Dictionary, plan: Dictionary) -> Array:
 		if r.stance!="war": continue
 		if r.exhaustion>=24 or r.war_age>=672 or o.own.shortfalls.food>0:
 			result.append({"action":"propose_peace","payload":{"id":"pending","target":r.target}})
-		elif not force.is_empty() and r.route!="" and not (force.mode=="holding" and force.mission=="attack"): result.append({"action":"mobilize","payload":{"party":force.id,"route":r.route}})
-		return result.slice(0,3)
+			return result.slice(0,3)
+		elif not force.is_empty() and r.route!="" and _preparation_funded(force) and not (force.mode=="holding" and force.mission=="attack"):
+			result.append({"action":"mobilize","payload":{"party":force.id,"route":r.route}})
+			return result.slice(0,3)
 	if plan.goal=="claim" and not o.claim.is_empty() and not force.is_empty():
 		var r := _relation(o,o.claim.target)
 		if r.stance=="peace" and r.truce_until<=o.tick and r.pacts.is_empty():
-			if force.at==o.claim.staging and force.mode=="holding" and force.mission=="border": result.append({"action":"declare_war","payload":{"target":o.claim.target,"route":o.claim.route}})
-			else: result.append({"action":"mobilize","payload":{"party":force.id,"route":o.claim.route}})
-			return result.slice(0,3)
+			if force.at==o.claim.staging and force.mode=="holding" and force.mission=="border":
+				result.append({"action":"declare_war","payload":{"target":o.claim.target,"route":o.claim.route}})
+				return result.slice(0,3)
+			elif _preparation_funded(force):
+				result.append({"action":"mobilize","payload":{"party":force.id,"route":o.claim.route}})
+				return result.slice(0,3)
 	# Local logistics uses actual deficits even while a strategic goal stays committed.
 	var needs: Array=[]
 	for resource: String in ["food","ore","timber"]:
@@ -103,6 +112,6 @@ static func intents(o: Dictionary, plan: Dictionary) -> Array:
 		if r.stance=="peace" and r.deliveries>=8 and r.trust>=30 and "nonaggression" in r.pacts and "defensive_pact" not in r.pacts and o.own.policy.personality.security>=60:
 			result.append({"action":"propose_pact","payload":{"id":"pending","target":r.target,"kind":"defensive_pact","duration_ticks":1344,"valid_for_ticks":96}})
 			return result.slice(0,3)
-	if plan.goal=="commerce" and not force.is_empty() and force.mode=="idle" and o.own_trade_route!="" and o.own.available.coin>=30:
+	if plan.goal=="commerce" and not force.is_empty() and force.mode=="idle" and o.own_trade_route!="" and _preparation_funded(force):
 		result.append({"action":"protect_route","payload":{"party":force.id,"route":o.own_trade_route}})
 	return result.slice(0,3)

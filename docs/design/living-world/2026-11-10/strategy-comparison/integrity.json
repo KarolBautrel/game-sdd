@@ -1,0 +1,14 @@
+{
+  "run_id": "strategy-readiness-20261110-final3",
+  "tested_source_sha256": "e26c8757b2d217c8b50d5318956c23879ca35f141dbaee660ce1d8af9e767968",
+  "final_source_sha256": "e26c8757b2d217c8b50d5318956c23879ca35f141dbaee660ce1d8af9e767968",
+  "match": true,
+  "checks": 115,
+  "failures": 0,
+  "errors": 0,
+  "warnings": 0,
+  "python_tests": 111,
+  "godot_suites": 98,
+  "scene_boots": 13,
+  "interactive": "NOT_RUN"
+}

@@ -1,0 +1,9 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+FAIL: real first accepted plan exposes its blocked action on the map
+FAIL: reopening displays retained result immediately without waiting again
+FAIL: real first accepted plan exposes its blocked action on the map
+FAIL: reopening displays retained result immediately without waiting again
+FAIL: real first accepted plan exposes its blocked action on the map
+FAIL: reopening displays retained result immediately without waiting again
+strategist_interface_tests: 78 checks, 6 failures

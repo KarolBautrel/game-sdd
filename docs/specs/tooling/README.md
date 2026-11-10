@@ -12,6 +12,8 @@ interactive QA launch. Gameplay rules remain in the combat and dungeon domains.
 - `005_character_art_pipeline.md` and `slices/005_character_art_pipeline.md`: original
   character/animation production tools, dependency provenance and background smoke checks.
 - `milestones/001_character_art_tools.md`: preparation results and the next original-character pilot.
+- `006_strategy_comparison.md`: reproducible matched classic/authored-offline
+  faction diagnostics on terrain-bound Large/Vast worlds.
 
 Stage results are recorded in `docs/qa/stages/`. Raw logs and machine reports live
 in ignored `artifacts/qa-runs/`.

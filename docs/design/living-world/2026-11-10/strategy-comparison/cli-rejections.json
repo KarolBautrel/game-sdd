@@ -1,0 +1,34 @@
+{
+  "cases": [
+    {
+      "args": [
+        "--label",
+        "readiness-final-20261110"
+      ],
+      "exit_code": 1,
+      "expected_rejection": "output already exists",
+      "passed": true
+    },
+    {
+      "args": [
+        "--label",
+        "../../outside"
+      ],
+      "exit_code": 1,
+      "expected_rejection": "safe explicit",
+      "passed": true
+    },
+    {
+      "args": [
+        "--days",
+        "721",
+        "--label",
+        "invalid-boundary"
+      ],
+      "exit_code": 1,
+      "expected_rejection": "Use1..720days",
+      "passed": true
+    }
+  ],
+  "existing_report_unchanged": true
+}

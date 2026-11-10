@@ -719,3 +719,33 @@ Final-source report/preservation: docs/qa/2026-11-10-vast-worlds.md. Source/head
 only, no commit/push. Physical L96c-01 and earlier user cases remain deferred.
 Next: larger-world play/readability and logistics balance; provider/model/budget
 choice and97comparison remain separate. No claim that30days proves game balance.
+
+97a.2026-11-10 implemented; AWAITING_INTERACTIVE. User requested publication and the next stage.
+Published all85..96c to origin/master4223f8d7; effective GitHub-linked author
+verified, final-source113/113PASS receipt matched before commit/push. Larger-world
+logistics/readiness and matched offline diagnostics now implement world021 /
+slice022/tooling006. Live provider/model/budget and physical review remain open.
+Own-force preparation quotes share the operator's actual saved price/recruits /
+available unreserved resources. Both classic and new model candidates filter
+unaffordable preparations and can continue ordinary procurement; stale replies
+still face current operator gates. Stored requests/saves remain loadable unchanged.
+New readiness26 and comparison348checks PASS; classic161/adapter184 regressions
+PASS. Native strategist84checks PASS for both new zero-action plans and historical
+blocked results at three resolutions. The new comparison tool measures identical three-seed Large/Vast openings,
+180days per mode, actual deliveries/shortages/ledger and separate plan/effect
+counts. Pre/post matrices are retained with portable source/evidence in
+docs/design/living-world/2026-11-10/strategy-comparison/. Classic unfunded
+preparations1713->0; authored recorded1307->8 (intervening stock changes remain
+lawful failures). This is offline diagnostic evidence, not live AI or full balance.
+Final-source full validation command:
+`.venv/Scripts/python.exe tools/qa/verify_project.py --run-id strategy-readiness-20261110-final3 --timeout 180`.
+Full outcome/integrity/preservation are owned by docs/qa/2026-11-10-strategy-readiness.md.
+Verification exposed the old native first-plan assumption (now zero-action plus
+historical blocked-result coverage) and a Windows venv timeout orphan holding
+temporary logs. Tooling001/E0-11 now owns PID-tree-only timeout cleanup; the
+dedicated runner contract tests cover inherited descendant handles. No user
+process names or interactive windows are targeted.
+No desktop or player-save changes. L97a-01 and all earlier physical gaps stay open.
+Next: provision throughput/stock targets on longer routes, duplicate diplomatic
+proposal diagnostics, then configured live transport and genuine matched model
+comparison after provider/model/cost choice. No automatic campaign promotion.

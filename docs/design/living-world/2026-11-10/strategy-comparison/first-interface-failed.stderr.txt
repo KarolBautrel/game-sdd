@@ -1,0 +1,30 @@
+ERROR: real first accepted plan exposes its blocked action on the map
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] run (res://scripts/presentation/strategist_interface_tests.gd:57)
+       [1] frames (res://scripts/presentation/strategist_interface_tests.gd:13)
+ERROR: reopening displays retained result immediately without waiting again
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] run (res://scripts/presentation/strategist_interface_tests.gd:57)
+       [1] frames (res://scripts/presentation/strategist_interface_tests.gd:13)
+ERROR: real first accepted plan exposes its blocked action on the map
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] run (res://scripts/presentation/strategist_interface_tests.gd:57)
+       [1] frames (res://scripts/presentation/strategist_interface_tests.gd:13)
+ERROR: reopening displays retained result immediately without waiting again
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] run (res://scripts/presentation/strategist_interface_tests.gd:57)
+       [1] frames (res://scripts/presentation/strategist_interface_tests.gd:13)
+ERROR: real first accepted plan exposes its blocked action on the map
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] run (res://scripts/presentation/strategist_interface_tests.gd:57)
+       [1] frames (res://scripts/presentation/strategist_interface_tests.gd:13)
+ERROR: reopening displays retained result immediately without waiting again
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] run (res://scripts/presentation/strategist_interface_tests.gd:57)
+       [1] frames (res://scripts/presentation/strategist_interface_tests.gd:13)

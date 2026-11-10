@@ -1,5 +1,6 @@
 """Prove the runner cannot accept silent engine errors or hanging children."""
 import importlib.util
+import os
 from pathlib import Path
 import sys
 import tempfile
@@ -36,6 +37,18 @@ class RunnerContract(unittest.TestCase):
         result = self.check_child("import time; time.sleep(10)", timeout=0.1)
         self.assertTrue(result["timed_out"])
         self.assertEqual(result["status"], "FAIL")
+
+    @unittest.skipUnless(os.name == "nt", "Windows PID-tree cleanup contract")
+    def test_timeout_closes_descendant_log_handles(self):
+        result = self.check_child(
+            "import subprocess,sys,time; "
+            "subprocess.Popen([sys.executable,'-c','import time; time.sleep(10)']); "
+            "time.sleep(10)", timeout=0.5,
+        )
+        self.assertTrue(result["timed_out"])
+        self.assertEqual(result["status"], "FAIL")
+        # check_child's TemporaryDirectory cleanup also proves no inherited log
+        # handle remains owned by the stopped child's descendants on Windows.
 
     def test_warning_is_reported_without_hiding_failure(self):
         result = self.check_child("print('WARNING: baseline warning')")

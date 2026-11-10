@@ -27,6 +27,10 @@ Goals: hold/commerce, actual reserve deficits, observed war defence/peace and an
 observed lawful claim. Intents come from the same classic capabilities/operators;
 models select IDs, never arbitrary payloads. Hash includes capabilities too.
 
+Stage97a [world021](021_strategy_readiness.md) includes transient own-force
+preparation quotes in new observations and filters unaffordable preparations.
+Old stored observations/capabilities remain valid and are never rewritten.
+
 Strict replies echo the complete context, choose one known goal, at most3distinct
 intent IDs, at most2supporting preferences and2contingencies, short allowed reason
 codes, up to4observed event citations and a public summary of at most180characters.

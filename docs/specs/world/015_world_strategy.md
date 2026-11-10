@@ -274,3 +274,8 @@ configured model, then comparison/balance. Existing L91/L77 physical acceptance
 and new ordinary world play remain explicit promotion gates. This design adds
 no runtime code, provider connection, new faction on the live map or permission
 to take over the desktop. Planned tests are in slice016.
+
+Follow-up97a adds a measured offline logistics/readiness prerequisite after the
+user-requested Vast expansion, before configuring live inference. See world021 /
+tooling006. Matched classic/authored fixtures diagnose the common executor; they
+do not close96's live-provider configuration or97's real-model comparison gate.

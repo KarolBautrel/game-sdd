@@ -50,3 +50,11 @@ World/Town Integration Prep. App is the regional hub; Ravenford is its market.
   strategy campaign persistence; classic political simulation follows separately.
 - `017_classic_strategy.md` / `slices/018_classic_strategy.md`: stage94 classic
   economy, real abstract-graph logistics, durable plans, diplomacy and conflict.
+- `018_strategic_region.md` / `slices/019_strategic_region.md`: native regional
+  company play, real terrain routes, jobs and managed mine consequences.
+- `019_model_strategist.md` / `slices/020_model_strategist.md`: optional bounded
+  strategist, authored offline replies, atomic lifecycle and replay.
+- `020_vast_regions.md` / `slices/021_vast_regions.md`: explicit larger worlds,
+  consistent physical scale and independent versioned slots.
+- `021_strategy_readiness.md` / `slices/022_strategy_readiness.md`: stage97a
+  affordable own-force preparation and matched Large/Vast offline diagnostics.

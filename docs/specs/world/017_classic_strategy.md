@@ -99,6 +99,11 @@ and ceasefires block declaration; this slice has no pact-breaking shortcut.
 Public warning is the mobilization event before a claim war. No global tension
 clock forces a conflict. No settlement conquest or elimination in this slice.
 
+Stage97a: [world021](021_strategy_readiness.md) exposes transient own-force
+quotes from the same operator price helper. New classic/model preparation
+proposals require actual affordable staffing; failed preparations can continue
+ordinary supply procurement. Execution still rechecks current conditions.
+
 Opposing ready parties at one node or crossing on the same edge resolve bounded
 seeded clashes using actual
 headcount, faction food and a declared defender bonus, with explicit casualties

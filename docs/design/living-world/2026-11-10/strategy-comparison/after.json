@@ -1,0 +1,1596 @@
+{
+	"cases": [
+		{
+			"action_attempts": {
+				"accept_pact": 123,
+				"accept_trade": 336,
+				"propose_pact": 359,
+				"propose_trade": 358,
+				"protect_route": 1,
+				"reject_trade": 21
+			},
+			"days": 180,
+			"delivery_duration_ticks": {
+				"count": 329,
+				"max": 588,
+				"median": 450
+			},
+			"ending_stocks": {
+				"cinder_compact": {
+					"coin": 997.0,
+					"food": 10,
+					"ore": 14.0,
+					"timber": 8.0
+				},
+				"iron_march": {
+					"coin": 965.0,
+					"food": 40.0,
+					"ore": 1.0,
+					"timber": 18.0
+				},
+				"river_league": {
+					"coin": 1114.0,
+					"food": 645.0,
+					"ore": 0.0,
+					"timber": 6.0
+				},
+				"thornwood_accord": {
+					"coin": 559.0,
+					"food": 20,
+					"ore": 4.0,
+					"timber": 998.0
+				}
+			},
+			"final_digest": "21a213a84eaf675ad8df5bc85f3ec115fea37898ab26d7401807ca4928a5c754",
+			"food_shortfall_faction_days": 10,
+			"food_shortfall_units": 20,
+			"generator_version": 2,
+			"geography_checksum": "3349a1079aa680416610887a01e97796568d1d96ee0c7fb385d355172c2cd81e",
+			"initial_digest": "844419ff82df04d8e8ca9eef4472a6b149553143e5a56622f792d3839047fb1a",
+			"ledger": {
+				"consumed": {
+					"coin": 2715,
+					"food": 3587,
+					"ore": 780,
+					"timber": 1259
+				},
+				"lost": {
+					"coin": 0,
+					"food": 0,
+					"ore": 0,
+					"timber": 0
+				},
+				"opening": {
+					"coin": 450,
+					"food": 182,
+					"ore": 84,
+					"timber": 168
+				},
+				"produced": {
+					"coin": 5942,
+					"food": 4140,
+					"ore": 720,
+					"timber": 2133
+				}
+			},
+			"metrics": {
+				"battles": 0,
+				"casualties": 0,
+				"peace": 0,
+				"plan_changes": 5,
+				"rejected_intents": 236,
+				"reviews": 104,
+				"trade_delivered": 329,
+				"trade_lost": 0,
+				"trade_started": 336,
+				"trade_volume": 2120,
+				"wars": 0
+			},
+			"mode": "classic",
+			"premise": "lean_harvest",
+			"reconciled": true,
+			"rejections": {
+				"offer_pending": 106,
+				"pact_exists": 130
+			},
+			"reply_source": "none",
+			"route_ticks": {
+				"border_road": 102,
+				"eastern_road": 219,
+				"iron_road": 267,
+				"market_road": 277,
+				"pass_road": 274,
+				"river_road": 173,
+				"woodland_road": 212
+			},
+			"seed": 2087,
+			"size": "Large",
+			"steps": 720,
+			"strategist": {
+				"applied_actions": 0,
+				"blocked_actions": 0,
+				"cost_micros": 0,
+				"totals": {
+					"accepted": 0,
+					"cancelled": 0,
+					"dispatched": 0,
+					"fallback": 0
+				}
+			},
+			"unresolved": {
+				"cargo": {
+					"coin": 0,
+					"food": 20,
+					"ore": 5,
+					"timber": 12
+				},
+				"escrow_coin": 42,
+				"shipments": 7
+			},
+			"waiting_shipment_days": 0
+		},
+		{
+			"action_attempts": {
+				"accept_pact": 122,
+				"accept_trade": 329,
+				"propose_pact": 377,
+				"propose_trade": 341,
+				"protect_route": 3,
+				"reject_trade": 18
+			},
+			"days": 180,
+			"delivery_duration_ticks": {
+				"count": 312,
+				"max": 588,
+				"median": 450
+			},
+			"ending_stocks": {
+				"cinder_compact": {
+					"coin": 996.0,
+					"food": 0,
+					"ore": 7.0,
+					"timber": 8.0
+				},
+				"iron_march": {
+					"coin": 929.0,
+					"food": 32.0,
+					"ore": 0.0,
+					"timber": 12.0
+				},
+				"river_league": {
+					"coin": 1126.0,
+					"food": 603.0,
+					"ore": 0.0,
+					"timber": 6.0
+				},
+				"thornwood_accord": {
+					"coin": 560.0,
+					"food": 28,
+					"ore": 4.0,
+					"timber": 998.0
+				}
+			},
+			"final_digest": "52b5a0171408f00309cb9c100402462919f245aaa5a85e3f7e658ee7a0118fed",
+			"food_shortfall_faction_days": 55,
+			"food_shortfall_units": 157,
+			"generator_version": 2,
+			"geography_checksum": "3349a1079aa680416610887a01e97796568d1d96ee0c7fb385d355172c2cd81e",
+			"initial_digest": "844419ff82df04d8e8ca9eef4472a6b149553143e5a56622f792d3839047fb1a",
+			"ledger": {
+				"consumed": {
+					"coin": 2906,
+					"food": 3627,
+					"ore": 781,
+					"timber": 1260
+				},
+				"lost": {
+					"coin": 0,
+					"food": 0,
+					"ore": 0,
+					"timber": 0
+				},
+				"opening": {
+					"coin": 450,
+					"food": 182,
+					"ore": 84,
+					"timber": 168
+				},
+				"produced": {
+					"coin": 6135,
+					"food": 4140,
+					"ore": 720,
+					"timber": 2128
+				}
+			},
+			"metrics": {
+				"battles": 0,
+				"casualties": 0,
+				"peace": 0,
+				"plan_changes": 15,
+				"rejected_intents": 264,
+				"reviews": 106,
+				"trade_delivered": 312,
+				"trade_lost": 0,
+				"trade_started": 321,
+				"trade_volume": 2104,
+				"wars": 0
+			},
+			"mode": "recorded",
+			"premise": "lean_harvest",
+			"reconciled": true,
+			"rejections": {
+				"offer_pending": 111,
+				"pact_exists": 144,
+				"trade_not_pending": 8,
+				"trade_pending": 1
+			},
+			"reply_source": "authored_offline",
+			"route_ticks": {
+				"border_road": 102,
+				"eastern_road": 219,
+				"iron_road": 267,
+				"market_road": 277,
+				"pass_road": 274,
+				"river_road": 173,
+				"woodland_road": 212
+			},
+			"seed": 2087,
+			"size": "Large",
+			"steps": 720,
+			"strategist": {
+				"applied_actions": 5,
+				"blocked_actions": 13,
+				"cost_micros": 0,
+				"totals": {
+					"accepted": 67,
+					"cancelled": 0,
+					"dispatched": 102,
+					"fallback": 35
+				}
+			},
+			"unresolved": {
+				"cargo": {
+					"coin": 0,
+					"food": 32,
+					"ore": 12,
+					"timber": 12
+				},
+				"escrow_coin": 68,
+				"shipments": 9
+			},
+			"waiting_shipment_days": 0
+		},
+		{
+			"action_attempts": {
+				"accept_pact": 113,
+				"accept_trade": 193,
+				"propose_pact": 352,
+				"propose_trade": 195,
+				"protect_route": 1,
+				"reject_trade": 2
+			},
+			"days": 180,
+			"delivery_duration_ticks": {
+				"count": 184,
+				"max": 1161,
+				"median": 718
+			},
+			"ending_stocks": {
+				"cinder_compact": {
+					"coin": 1011.0,
+					"food": 6,
+					"ore": 10.0,
+					"timber": 1.0
+				},
+				"iron_march": {
+					"coin": 995.0,
+					"food": 28.0,
+					"ore": 0.0,
+					"timber": 18.0
+				},
+				"river_league": {
+					"coin": 994.0,
+					"food": 901.0,
+					"ore": 9.0,
+					"timber": 6.0
+				},
+				"thornwood_accord": {
+					"coin": 645.0,
+					"food": 4,
+					"ore": 4.0,
+					"timber": 998.0
+				}
+			},
+			"final_digest": "a26c1fa78b2f4593193793ac28d0e4aaa5a8e7297950f84eaec6a86ab8f7f758",
+			"food_shortfall_faction_days": 102,
+			"food_shortfall_units": 260,
+			"generator_version": 3,
+			"geography_checksum": "183b14047708a6de70df03815c9a3a5277caef9434b00b847c71e1f5daeb64d6",
+			"initial_digest": "5dd6a99919a1ffce31138a5d23e0564871b1f14f35526694b21fe4fbcd8e5a18",
+			"ledger": {
+				"consumed": {
+					"coin": 2715,
+					"food": 3347,
+					"ore": 771,
+					"timber": 1214
+				},
+				"lost": {
+					"coin": 0,
+					"food": 0,
+					"ore": 0,
+					"timber": 0
+				},
+				"opening": {
+					"coin": 450,
+					"food": 182,
+					"ore": 84,
+					"timber": 168
+				},
+				"produced": {
+					"coin": 5978,
+					"food": 4140,
+					"ore": 720,
+					"timber": 2081
+				}
+			},
+			"metrics": {
+				"battles": 0,
+				"casualties": 0,
+				"peace": 0,
+				"plan_changes": 7,
+				"rejected_intents": 239,
+				"reviews": 104,
+				"trade_delivered": 184,
+				"trade_lost": 0,
+				"trade_started": 193,
+				"trade_volume": 1494,
+				"wars": 0
+			},
+			"mode": "classic",
+			"premise": "lean_harvest",
+			"reconciled": true,
+			"rejections": {
+				"offer_pending": 110,
+				"pact_exists": 129
+			},
+			"reply_source": "none",
+			"route_ticks": {
+				"border_road": 138,
+				"eastern_road": 911,
+				"iron_road": 499,
+				"market_road": 465,
+				"pass_road": 443,
+				"river_road": 253,
+				"woodland_road": 396
+			},
+			"seed": 2087,
+			"size": "Vast",
+			"steps": 720,
+			"strategist": {
+				"applied_actions": 0,
+				"blocked_actions": 0,
+				"cost_micros": 0,
+				"totals": {
+					"accepted": 0,
+					"cancelled": 0,
+					"dispatched": 0,
+					"fallback": 0
+				}
+			},
+			"unresolved": {
+				"cargo": {
+					"coin": 0,
+					"food": 36,
+					"ore": 10,
+					"timber": 12
+				},
+				"escrow_coin": 68,
+				"shipments": 9
+			},
+			"waiting_shipment_days": 2
+		},
+		{
+			"action_attempts": {
+				"accept_pact": 113,
+				"accept_trade": 198,
+				"propose_pact": 361,
+				"propose_trade": 201,
+				"protect_route": 10,
+				"reject_trade": 4
+			},
+			"days": 180,
+			"delivery_duration_ticks": {
+				"count": 184,
+				"max": 1161,
+				"median": 718
+			},
+			"ending_stocks": {
+				"cinder_compact": {
+					"coin": 997.0,
+					"food": 6,
+					"ore": 13.0,
+					"timber": 0.0
+				},
+				"iron_march": {
+					"coin": 995.0,
+					"food": 28.0,
+					"ore": 0.0,
+					"timber": 18.0
+				},
+				"river_league": {
+					"coin": 1006.0,
+					"food": 897.0,
+					"ore": 1.0,
+					"timber": 12.0
+				},
+				"thornwood_accord": {
+					"coin": 648.0,
+					"food": 4,
+					"ore": 4.0,
+					"timber": 998.0
+				}
+			},
+			"final_digest": "2e5846b8ca727311cd9a7f1df13465af2e6a936991dfd7ab7677899175c59993",
+			"food_shortfall_faction_days": 102,
+			"food_shortfall_units": 260,
+			"generator_version": 3,
+			"geography_checksum": "183b14047708a6de70df03815c9a3a5277caef9434b00b847c71e1f5daeb64d6",
+			"initial_digest": "5dd6a99919a1ffce31138a5d23e0564871b1f14f35526694b21fe4fbcd8e5a18",
+			"ledger": {
+				"consumed": {
+					"coin": 2723,
+					"food": 3351,
+					"ore": 774,
+					"timber": 1209
+				},
+				"lost": {
+					"coin": 0,
+					"food": 0,
+					"ore": 0,
+					"timber": 0
+				},
+				"opening": {
+					"coin": 450,
+					"food": 182,
+					"ore": 84,
+					"timber": 168
+				},
+				"produced": {
+					"coin": 5988,
+					"food": 4140,
+					"ore": 720,
+					"timber": 2078
+				}
+			},
+			"metrics": {
+				"battles": 0,
+				"casualties": 0,
+				"peace": 0,
+				"plan_changes": 18,
+				"rejected_intents": 267,
+				"reviews": 106,
+				"trade_delivered": 184,
+				"trade_lost": 0,
+				"trade_started": 192,
+				"trade_volume": 1494,
+				"wars": 0
+			},
+			"mode": "recorded",
+			"premise": "lean_harvest",
+			"reconciled": true,
+			"rejections": {
+				"mobilization_unfunded": 8,
+				"offer_pending": 110,
+				"pact_exists": 138,
+				"trade_not_pending": 6,
+				"trade_pending": 5
+			},
+			"reply_source": "authored_offline",
+			"route_ticks": {
+				"border_road": 138,
+				"eastern_road": 911,
+				"iron_road": 499,
+				"market_road": 465,
+				"pass_road": 443,
+				"river_road": 253,
+				"woodland_road": 396
+			},
+			"seed": 2087,
+			"size": "Vast",
+			"steps": 720,
+			"strategist": {
+				"applied_actions": 3,
+				"blocked_actions": 25,
+				"cost_micros": 0,
+				"totals": {
+					"accepted": 65,
+					"cancelled": 0,
+					"dispatched": 102,
+					"fallback": 37
+				}
+			},
+			"unresolved": {
+				"cargo": {
+					"coin": 0,
+					"food": 36,
+					"ore": 12,
+					"timber": 9
+				},
+				"escrow_coin": 69,
+				"shipments": 8
+			},
+			"waiting_shipment_days": 1
+		},
+		{
+			"action_attempts": {
+				"accept_pact": 128,
+				"accept_trade": 476,
+				"propose_pact": 379,
+				"propose_trade": 499,
+				"protect_route": 2,
+				"reject_trade": 22
+			},
+			"days": 180,
+			"delivery_duration_ticks": {
+				"count": 468,
+				"max": 446,
+				"median": 261
+			},
+			"ending_stocks": {
+				"cinder_compact": {
+					"coin": 996.0,
+					"food": 17.0,
+					"ore": 10.0,
+					"timber": 5.0
+				},
+				"iron_march": {
+					"coin": 995.0,
+					"food": 40.0,
+					"ore": 0.0,
+					"timber": 11.0
+				},
+				"river_league": {
+					"coin": 1184.0,
+					"food": 488.0,
+					"ore": 0.0,
+					"timber": 6.0
+				},
+				"thornwood_accord": {
+					"coin": 583.0,
+					"food": 28.0,
+					"ore": 4.0,
+					"timber": 998.0
+				}
+			},
+			"final_digest": "dfce2aa97ed93a4fb3ce1a9664b0eeef7ad6945952d36bd904ba11684206282e",
+			"food_shortfall_faction_days": 0,
+			"food_shortfall_units": 0,
+			"generator_version": 2,
+			"geography_checksum": "27f24b1eb99b55168c2752f33c99e5bea38eaaeb96d7153a4c293f32fa4f9f03",
+			"initial_digest": "925fde852ef4baad970e591253793bc3f6139c06890715329779715373378321",
+			"ledger": {
+				"consumed": {
+					"coin": 2914,
+					"food": 3796,
+					"ore": 784,
+					"timber": 1260
+				},
+				"lost": {
+					"coin": 0,
+					"food": 0,
+					"ore": 0,
+					"timber": 0
+				},
+				"opening": {
+					"coin": 450,
+					"food": 245,
+					"ore": 84,
+					"timber": 168
+				},
+				"produced": {
+					"coin": 6261,
+					"food": 4140,
+					"ore": 720,
+					"timber": 2123
+				}
+			},
+			"metrics": {
+				"battles": 0,
+				"casualties": 0,
+				"peace": 0,
+				"plan_changes": 6,
+				"rejected_intents": 251,
+				"reviews": 104,
+				"trade_delivered": 468,
+				"trade_lost": 0,
+				"trade_started": 476,
+				"trade_volume": 2439,
+				"wars": 0
+			},
+			"mode": "classic",
+			"premise": "open_markets",
+			"reconciled": true,
+			"rejections": {
+				"offer_pending": 109,
+				"pact_exists": 142
+			},
+			"reply_source": "none",
+			"route_ticks": {
+				"border_road": 278,
+				"eastern_road": 365,
+				"iron_road": 284,
+				"market_road": 105,
+				"pass_road": 185,
+				"river_road": 156,
+				"woodland_road": 94
+			},
+			"seed": 2088,
+			"size": "Large",
+			"steps": 720,
+			"strategist": {
+				"applied_actions": 0,
+				"blocked_actions": 0,
+				"cost_micros": 0,
+				"totals": {
+					"accepted": 0,
+					"cancelled": 0,
+					"dispatched": 0,
+					"fallback": 0
+				}
+			},
+			"unresolved": {
+				"cargo": {
+					"coin": 0,
+					"food": 16,
+					"ore": 6,
+					"timber": 11
+				},
+				"escrow_coin": 39,
+				"shipments": 8
+			},
+			"waiting_shipment_days": 0
+		},
+		{
+			"action_attempts": {
+				"accept_pact": 126,
+				"accept_trade": 482,
+				"propose_pact": 339,
+				"propose_trade": 508,
+				"protect_route": 3,
+				"reject_trade": 22
+			},
+			"days": 180,
+			"delivery_duration_ticks": {
+				"count": 468,
+				"max": 446,
+				"median": 261
+			},
+			"ending_stocks": {
+				"cinder_compact": {
+					"coin": 996.0,
+					"food": 21.0,
+					"ore": 11.0,
+					"timber": 5.0
+				},
+				"iron_march": {
+					"coin": 995.0,
+					"food": 28.0,
+					"ore": 0.0,
+					"timber": 11.0
+				},
+				"river_league": {
+					"coin": 1182.0,
+					"food": 485.0,
+					"ore": 1.0,
+					"timber": 6.0
+				},
+				"thornwood_accord": {
+					"coin": 588.0,
+					"food": 27.0,
+					"ore": 4.0,
+					"timber": 998.0
+				}
+			},
+			"final_digest": "fc50006c53c1de8261a51e77124640b70e6c781b0ca43de9e93d5fc8a1b15e64",
+			"food_shortfall_faction_days": 0,
+			"food_shortfall_units": 0,
+			"generator_version": 2,
+			"geography_checksum": "27f24b1eb99b55168c2752f33c99e5bea38eaaeb96d7153a4c293f32fa4f9f03",
+			"initial_digest": "925fde852ef4baad970e591253793bc3f6139c06890715329779715373378321",
+			"ledger": {
+				"consumed": {
+					"coin": 2922,
+					"food": 3800,
+					"ore": 783,
+					"timber": 1260
+				},
+				"lost": {
+					"coin": 0,
+					"food": 0,
+					"ore": 0,
+					"timber": 0
+				},
+				"opening": {
+					"coin": 450,
+					"food": 245,
+					"ore": 84,
+					"timber": 168
+				},
+				"produced": {
+					"coin": 6278,
+					"food": 4140,
+					"ore": 720,
+					"timber": 2123
+				}
+			},
+			"metrics": {
+				"battles": 0,
+				"casualties": 0,
+				"peace": 0,
+				"plan_changes": 18,
+				"rejected_intents": 227,
+				"reviews": 106,
+				"trade_delivered": 468,
+				"trade_lost": 0,
+				"trade_started": 476,
+				"trade_volume": 2416,
+				"wars": 0
+			},
+			"mode": "recorded",
+			"premise": "open_markets",
+			"reconciled": true,
+			"rejections": {
+				"offer_pending": 92,
+				"pact_exists": 121,
+				"trade_not_pending": 6,
+				"trade_pending": 7,
+				"trade_unfunded": 1
+			},
+			"reply_source": "authored_offline",
+			"route_ticks": {
+				"border_road": 278,
+				"eastern_road": 365,
+				"iron_road": 284,
+				"market_road": 105,
+				"pass_road": 185,
+				"river_road": 156,
+				"woodland_road": 94
+			},
+			"seed": 2088,
+			"size": "Large",
+			"steps": 720,
+			"strategist": {
+				"applied_actions": 5,
+				"blocked_actions": 15,
+				"cost_micros": 0,
+				"totals": {
+					"accepted": 67,
+					"cancelled": 0,
+					"dispatched": 102,
+					"fallback": 35
+				}
+			},
+			"unresolved": {
+				"cargo": {
+					"coin": 0,
+					"food": 24,
+					"ore": 5,
+					"timber": 11
+				},
+				"escrow_coin": 45,
+				"shipments": 8
+			},
+			"waiting_shipment_days": 0
+		},
+		{
+			"action_attempts": {
+				"accept_pact": 99,
+				"accept_trade": 161,
+				"propose_pact": 327,
+				"propose_trade": 162,
+				"protect_route": 2
+			},
+			"days": 180,
+			"delivery_duration_ticks": {
+				"count": 155,
+				"max": 1405,
+				"median": 725
+			},
+			"ending_stocks": {
+				"cinder_compact": {
+					"coin": 996.0,
+					"food": 6.0,
+					"ore": 9.0,
+					"timber": 6.0
+				},
+				"iron_march": {
+					"coin": 995.0,
+					"food": 40.0,
+					"ore": 1.0,
+					"timber": 18.0
+				},
+				"river_league": {
+					"coin": 996.0,
+					"food": 980.0,
+					"ore": 2.0,
+					"timber": 12.0
+				},
+				"thornwood_accord": {
+					"coin": 935.0,
+					"food": 4.0,
+					"ore": 3.0,
+					"timber": 998.0
+				}
+			},
+			"final_digest": "31e1f80fba386aaf0c3baf832faa907d6c3000f0b9ae7fcc583488d0afae07f4",
+			"food_shortfall_faction_days": 211,
+			"food_shortfall_units": 717,
+			"generator_version": 3,
+			"geography_checksum": "1722f72d24d2c9632a4100278465ae7fd2ac82332ac6d3560a871316ecc714fe",
+			"initial_digest": "964adb0502d119b41b23088319290ac80243736d2f7d6cb82f8cedb62667e06f",
+			"ledger": {
+				"consumed": {
+					"coin": 2914,
+					"food": 3079,
+					"ore": 776,
+					"timber": 1198
+				},
+				"lost": {
+					"coin": 0,
+					"food": 0,
+					"ore": 0,
+					"timber": 0
+				},
+				"opening": {
+					"coin": 450,
+					"food": 245,
+					"ore": 84,
+					"timber": 168
+				},
+				"produced": {
+					"coin": 6436,
+					"food": 3888,
+					"ore": 720,
+					"timber": 2064
+				}
+			},
+			"metrics": {
+				"battles": 0,
+				"casualties": 0,
+				"peace": 0,
+				"plan_changes": 6,
+				"rejected_intents": 228,
+				"reviews": 104,
+				"trade_delivered": 155,
+				"trade_lost": 0,
+				"trade_started": 161,
+				"trade_volume": 1158,
+				"wars": 0
+			},
+			"mode": "classic",
+			"premise": "open_markets",
+			"reconciled": true,
+			"rejections": {
+				"offer_pending": 114,
+				"pact_exists": 114
+			},
+			"reply_source": "none",
+			"route_ticks": {
+				"border_road": 547,
+				"eastern_road": 615,
+				"iron_road": 506,
+				"market_road": 466,
+				"pass_road": 369,
+				"river_road": 259,
+				"woodland_road": 680
+			},
+			"seed": 2088,
+			"size": "Vast",
+			"steps": 720,
+			"strategist": {
+				"applied_actions": 0,
+				"blocked_actions": 0,
+				"cost_micros": 0,
+				"totals": {
+					"accepted": 0,
+					"cancelled": 0,
+					"dispatched": 0,
+					"fallback": 0
+				}
+			},
+			"unresolved": {
+				"cargo": {
+					"coin": 0,
+					"food": 24,
+					"ore": 13,
+					"timber": 0
+				},
+				"escrow_coin": 50,
+				"shipments": 6
+			},
+			"waiting_shipment_days": 0
+		},
+		{
+			"action_attempts": {
+				"accept_pact": 94,
+				"accept_trade": 152,
+				"propose_pact": 316,
+				"propose_trade": 157,
+				"protect_route": 3,
+				"reject_trade": 7
+			},
+			"days": 180,
+			"delivery_duration_ticks": {
+				"count": 141,
+				"max": 1405,
+				"median": 725
+			},
+			"ending_stocks": {
+				"cinder_compact": {
+					"coin": 998.0,
+					"food": 0.0,
+					"ore": 10.0,
+					"timber": 7.0
+				},
+				"iron_march": {
+					"coin": 983.0,
+					"food": 40.0,
+					"ore": 0.0,
+					"timber": 14.0
+				},
+				"river_league": {
+					"coin": 996.0,
+					"food": 995.0,
+					"ore": 1.0,
+					"timber": 6.0
+				},
+				"thornwood_accord": {
+					"coin": 946.0,
+					"food": 0.0,
+					"ore": 4.0,
+					"timber": 998.0
+				}
+			},
+			"final_digest": "4e8760ccd83cd7a25d69e1373032e2cb451465697561947fefc860889ca12040",
+			"food_shortfall_faction_days": 207,
+			"food_shortfall_units": 711,
+			"generator_version": 3,
+			"geography_checksum": "1722f72d24d2c9632a4100278465ae7fd2ac82332ac6d3560a871316ecc714fe",
+			"initial_digest": "964adb0502d119b41b23088319290ac80243736d2f7d6cb82f8cedb62667e06f",
+			"ledger": {
+				"consumed": {
+					"coin": 2922,
+					"food": 3089,
+					"ore": 775,
+					"timber": 1194
+				},
+				"lost": {
+					"coin": 0,
+					"food": 0,
+					"ore": 0,
+					"timber": 0
+				},
+				"opening": {
+					"coin": 450,
+					"food": 245,
+					"ore": 84,
+					"timber": 168
+				},
+				"produced": {
+					"coin": 6463,
+					"food": 3903,
+					"ore": 720,
+					"timber": 2067
+				}
+			},
+			"metrics": {
+				"battles": 0,
+				"casualties": 0,
+				"peace": 0,
+				"plan_changes": 14,
+				"rejected_intents": 226,
+				"reviews": 106,
+				"trade_delivered": 141,
+				"trade_lost": 0,
+				"trade_started": 150,
+				"trade_volume": 1052,
+				"wars": 0
+			},
+			"mode": "recorded",
+			"premise": "open_markets",
+			"reconciled": true,
+			"rejections": {
+				"offer_pending": 111,
+				"pact_exists": 111,
+				"trade_not_pending": 3,
+				"trade_unfunded": 1
+			},
+			"reply_source": "authored_offline",
+			"route_ticks": {
+				"border_road": 547,
+				"eastern_road": 615,
+				"iron_road": 506,
+				"market_road": 466,
+				"pass_road": 369,
+				"river_road": 259,
+				"woodland_road": 680
+			},
+			"seed": 2088,
+			"size": "Vast",
+			"steps": 720,
+			"strategist": {
+				"applied_actions": 3,
+				"blocked_actions": 11,
+				"cost_micros": 0,
+				"totals": {
+					"accepted": 66,
+					"cancelled": 0,
+					"dispatched": 102,
+					"fallback": 36
+				}
+			},
+			"unresolved": {
+				"cargo": {
+					"coin": 0,
+					"food": 24,
+					"ore": 14,
+					"timber": 16
+				},
+				"escrow_coin": 68,
+				"shipments": 9
+			},
+			"waiting_shipment_days": 0
+		},
+		{
+			"action_attempts": {
+				"accept_pact": 107,
+				"accept_peace": 2,
+				"accept_trade": 340,
+				"declare_war": 2,
+				"mobilize": 4,
+				"propose_pact": 325,
+				"propose_peace": 10,
+				"propose_trade": 379,
+				"protect_route": 2,
+				"reject_peace": 4,
+				"reject_trade": 38,
+				"respond_aid": 1
+			},
+			"days": 180,
+			"delivery_duration_ticks": {
+				"count": 332,
+				"max": 905,
+				"median": 245
+			},
+			"ending_stocks": {
+				"cinder_compact": {
+					"coin": 996.0,
+					"food": 0.0,
+					"ore": 10.0,
+					"timber": 9.0
+				},
+				"iron_march": {
+					"coin": 996.0,
+					"food": 23.0,
+					"ore": 0,
+					"timber": 13.0
+				},
+				"river_league": {
+					"coin": 997.0,
+					"food": 996.0,
+					"ore": 0.0,
+					"timber": 8.0
+				},
+				"thornwood_accord": {
+					"coin": 867.0,
+					"food": 0.0,
+					"ore": 4.0,
+					"timber": 998.0
+				}
+			},
+			"final_digest": "c7d2ded167a27197ba6fd6609419ded8b81cacac08bc21d8127260a11c4cb843",
+			"food_shortfall_faction_days": 126,
+			"food_shortfall_units": 364,
+			"generator_version": 2,
+			"geography_checksum": "f9e66a1a1117132f32c0a102a3e9e6624cf55d6a2d2ee4165dca6f41a9a52364",
+			"initial_digest": "f4808c69bd28ea882fcd0283c74eb8274bebd4e1dbf855560977e9775df3a629",
+			"ledger": {
+				"consumed": {
+					"coin": 2649,
+					"food": 3133,
+					"ore": 777,
+					"timber": 1260
+				},
+				"lost": {
+					"coin": 0,
+					"food": 12,
+					"ore": 0,
+					"timber": 0
+				},
+				"opening": {
+					"coin": 450,
+					"food": 245,
+					"ore": 76,
+					"timber": 168
+				},
+				"produced": {
+					"coin": 6080,
+					"food": 3920,
+					"ore": 720,
+					"timber": 2134
+				}
+			},
+			"metrics": {
+				"battles": 2,
+				"casualties": 32,
+				"peace": 2,
+				"plan_changes": 12,
+				"rejected_intents": 221,
+				"reviews": 107,
+				"trade_delivered": 332,
+				"trade_lost": 1,
+				"trade_started": 340,
+				"trade_volume": 1476,
+				"wars": 2
+			},
+			"mode": "classic",
+			"premise": "contested_ore",
+			"reconciled": true,
+			"rejections": {
+				"invalid_peace_offer": 2,
+				"offer_pending": 99,
+				"pact_exists": 118,
+				"peace_pending": 2
+			},
+			"reply_source": "none",
+			"route_ticks": {
+				"border_road": 196,
+				"eastern_road": 443,
+				"iron_road": 238,
+				"market_road": 97,
+				"pass_road": 220,
+				"river_road": 148,
+				"woodland_road": 231
+			},
+			"seed": 2089,
+			"size": "Large",
+			"steps": 720,
+			"strategist": {
+				"applied_actions": 0,
+				"blocked_actions": 0,
+				"cost_micros": 0,
+				"totals": {
+					"accepted": 0,
+					"cancelled": 0,
+					"dispatched": 0,
+					"fallback": 0
+				}
+			},
+			"unresolved": {
+				"cargo": {
+					"coin": 0,
+					"food": 1,
+					"ore": 5,
+					"timber": 14
+				},
+				"escrow_coin": 25,
+				"shipments": 7
+			},
+			"waiting_shipment_days": 0
+		},
+		{
+			"action_attempts": {
+				"accept_pact": 105,
+				"accept_peace": 2,
+				"accept_trade": 343,
+				"declare_war": 2,
+				"mobilize": 4,
+				"propose_pact": 300,
+				"propose_peace": 10,
+				"propose_trade": 379,
+				"protect_route": 2,
+				"reject_peace": 4,
+				"reject_trade": 40
+			},
+			"days": 180,
+			"delivery_duration_ticks": {
+				"count": 327,
+				"max": 681,
+				"median": 245
+			},
+			"ending_stocks": {
+				"cinder_compact": {
+					"coin": 996.0,
+					"food": 0.0,
+					"ore": 10.0,
+					"timber": 7.0
+				},
+				"iron_march": {
+					"coin": 996.0,
+					"food": 23.0,
+					"ore": 0,
+					"timber": 18.0
+				},
+				"river_league": {
+					"coin": 997.0,
+					"food": 996.0,
+					"ore": 0.0,
+					"timber": 7.0
+				},
+				"thornwood_accord": {
+					"coin": 878.0,
+					"food": 1.0,
+					"ore": 4.0,
+					"timber": 998.0
+				}
+			},
+			"final_digest": "28dfe5a25ab56dbc8171dc7b979529a1c8f927e47c4c6eda9fcbcf866747fdbe",
+			"food_shortfall_faction_days": 148,
+			"food_shortfall_units": 429,
+			"generator_version": 2,
+			"geography_checksum": "f9e66a1a1117132f32c0a102a3e9e6624cf55d6a2d2ee4165dca6f41a9a52364",
+			"initial_digest": "f4808c69bd28ea882fcd0283c74eb8274bebd4e1dbf855560977e9775df3a629",
+			"ledger": {
+				"consumed": {
+					"coin": 2649,
+					"food": 3068,
+					"ore": 777,
+					"timber": 1260
+				},
+				"lost": {
+					"coin": 0,
+					"food": 0,
+					"ore": 0,
+					"timber": 6
+				},
+				"opening": {
+					"coin": 450,
+					"food": 245,
+					"ore": 76,
+					"timber": 168
+				},
+				"produced": {
+					"coin": 6088,
+					"food": 3848,
+					"ore": 720,
+					"timber": 2135
+				}
+			},
+			"metrics": {
+				"battles": 2,
+				"casualties": 32,
+				"peace": 2,
+				"plan_changes": 15,
+				"rejected_intents": 210,
+				"reviews": 108,
+				"trade_delivered": 327,
+				"trade_lost": 1,
+				"trade_started": 335,
+				"trade_volume": 1404,
+				"wars": 2
+			},
+			"mode": "recorded",
+			"premise": "contested_ore",
+			"reconciled": true,
+			"rejections": {
+				"invalid_peace_offer": 2,
+				"offer_pending": 80,
+				"pact_exists": 115,
+				"peace_pending": 2,
+				"trade_not_pending": 8,
+				"trade_pending": 3
+			},
+			"reply_source": "authored_offline",
+			"route_ticks": {
+				"border_road": 196,
+				"eastern_road": 443,
+				"iron_road": 238,
+				"market_road": 97,
+				"pass_road": 220,
+				"river_road": 148,
+				"woodland_road": 231
+			},
+			"seed": 2089,
+			"size": "Large",
+			"steps": 720,
+			"strategist": {
+				"applied_actions": 4,
+				"blocked_actions": 12,
+				"cost_micros": 0,
+				"totals": {
+					"accepted": 46,
+					"cancelled": 0,
+					"dispatched": 104,
+					"fallback": 57
+				}
+			},
+			"unresolved": {
+				"cargo": {
+					"coin": 0,
+					"food": 5,
+					"ore": 5,
+					"timber": 7
+				},
+				"escrow_coin": 22,
+				"shipments": 7
+			},
+			"waiting_shipment_days": 0
+		},
+		{
+			"action_attempts": {
+				"accept_pact": 100,
+				"accept_peace": 3,
+				"accept_trade": 215,
+				"declare_war": 3,
+				"mobilize": 5,
+				"propose_pact": 310,
+				"propose_peace": 8,
+				"propose_trade": 221,
+				"protect_route": 2,
+				"reject_trade": 6,
+				"respond_aid": 3
+			},
+			"days": 180,
+			"delivery_duration_ticks": {
+				"count": 203,
+				"max": 1370,
+				"median": 493
+			},
+			"ending_stocks": {
+				"cinder_compact": {
+					"coin": 996.0,
+					"food": 3.0,
+					"ore": 14.0,
+					"timber": 2.0
+				},
+				"iron_march": {
+					"coin": 995.0,
+					"food": 12.0,
+					"ore": 0,
+					"timber": 18.0
+				},
+				"river_league": {
+					"coin": 1088.0,
+					"food": 995.0,
+					"ore": 1.0,
+					"timber": 12.0
+				},
+				"thornwood_accord": {
+					"coin": 703.0,
+					"food": 4.0,
+					"ore": 4.0,
+					"timber": 998.0
+				}
+			},
+			"final_digest": "14785fd9528f6c434fb9f06ad0e4e433c9641af2d96f7e0b33d488c398f84185",
+			"food_shortfall_faction_days": 132,
+			"food_shortfall_units": 398,
+			"generator_version": 3,
+			"geography_checksum": "df485786b3b39984a163ec10950bc0f82619c96d1df4d044b56d3028cd35b787",
+			"initial_digest": "04794a01b9812f933fc5820fe07fdac3e1a152c66e3445ca07d413ec720b3b77",
+			"ledger": {
+				"consumed": {
+					"coin": 2707,
+					"food": 3147,
+					"ore": 763,
+					"timber": 1241
+				},
+				"lost": {
+					"coin": 0,
+					"food": 48,
+					"ore": 5,
+					"timber": 0
+				},
+				"opening": {
+					"coin": 450,
+					"food": 245,
+					"ore": 76,
+					"timber": 168
+				},
+				"produced": {
+					"coin": 6087,
+					"food": 3988,
+					"ore": 720,
+					"timber": 2109
+				}
+			},
+			"metrics": {
+				"battles": 3,
+				"casualties": 34,
+				"peace": 3,
+				"plan_changes": 23,
+				"rejected_intents": 215,
+				"reviews": 109,
+				"trade_delivered": 203,
+				"trade_lost": 5,
+				"trade_started": 215,
+				"trade_volume": 1303,
+				"wars": 3
+			},
+			"mode": "classic",
+			"premise": "contested_ore",
+			"reconciled": true,
+			"rejections": {
+				"invalid_peace_offer": 2,
+				"offer_pending": 93,
+				"pact_exists": 117,
+				"peace_pending": 3
+			},
+			"reply_source": "none",
+			"route_ticks": {
+				"border_road": 189,
+				"eastern_road": 838,
+				"iron_road": 532,
+				"market_road": 172,
+				"pass_road": 462,
+				"river_road": 321,
+				"woodland_road": 274
+			},
+			"seed": 2089,
+			"size": "Vast",
+			"steps": 720,
+			"strategist": {
+				"applied_actions": 0,
+				"blocked_actions": 0,
+				"cost_micros": 0,
+				"totals": {
+					"accepted": 0,
+					"cancelled": 0,
+					"dispatched": 0,
+					"fallback": 0
+				}
+			},
+			"unresolved": {
+				"cargo": {
+					"coin": 0,
+					"food": 24,
+					"ore": 9,
+					"timber": 6
+				},
+				"escrow_coin": 48,
+				"shipments": 7
+			},
+			"waiting_shipment_days": 0
+		},
+		{
+			"action_attempts": {
+				"accept_pact": 102,
+				"accept_peace": 2,
+				"accept_trade": 223,
+				"declare_war": 2,
+				"mobilize": 4,
+				"propose_pact": 322,
+				"propose_peace": 4,
+				"propose_trade": 223,
+				"protect_route": 3,
+				"reject_trade": 5,
+				"respond_aid": 2
+			},
+			"days": 180,
+			"delivery_duration_ticks": {
+				"count": 210,
+				"max": 1370,
+				"median": 493
+			},
+			"ending_stocks": {
+				"cinder_compact": {
+					"coin": 1002.0,
+					"food": 0.0,
+					"ore": 10.0,
+					"timber": 7.0
+				},
+				"iron_march": {
+					"coin": 997.0,
+					"food": 24.0,
+					"ore": 0,
+					"timber": 18.0
+				},
+				"river_league": {
+					"coin": 995.0,
+					"food": 995.0,
+					"ore": 4.0,
+					"timber": 7.0
+				},
+				"thornwood_accord": {
+					"coin": 713.0,
+					"food": 2.0,
+					"ore": 4.0,
+					"timber": 998.0
+				}
+			},
+			"final_digest": "f95b526b5cd90b26f7666f08614a86f996ae462dcae9e40841ef373a78d76e5b",
+			"food_shortfall_faction_days": 142,
+			"food_shortfall_units": 423,
+			"generator_version": 3,
+			"geography_checksum": "df485786b3b39984a163ec10950bc0f82619c96d1df4d044b56d3028cd35b787",
+			"initial_digest": "04794a01b9812f933fc5820fe07fdac3e1a152c66e3445ca07d413ec720b3b77",
+			"ledger": {
+				"consumed": {
+					"coin": 2738,
+					"food": 3154,
+					"ore": 768,
+					"timber": 1247
+				},
+				"lost": {
+					"coin": 0,
+					"food": 0,
+					"ore": 0,
+					"timber": 0
+				},
+				"opening": {
+					"coin": 450,
+					"food": 245,
+					"ore": 76,
+					"timber": 168
+				},
+				"produced": {
+					"coin": 6033,
+					"food": 3936,
+					"ore": 720,
+					"timber": 2121
+				}
+			},
+			"metrics": {
+				"battles": 2,
+				"casualties": 33,
+				"peace": 2,
+				"plan_changes": 15,
+				"rejected_intents": 227,
+				"reviews": 107,
+				"trade_delivered": 210,
+				"trade_lost": 0,
+				"trade_started": 218,
+				"trade_volume": 1286,
+				"wars": 2
+			},
+			"mode": "recorded",
+			"premise": "contested_ore",
+			"reconciled": true,
+			"rejections": {
+				"offer_pending": 105,
+				"pact_exists": 115,
+				"peace_pending": 2,
+				"trade_not_pending": 5
+			},
+			"reply_source": "authored_offline",
+			"route_ticks": {
+				"border_road": 189,
+				"eastern_road": 838,
+				"iron_road": 532,
+				"market_road": 172,
+				"pass_road": 462,
+				"river_road": 321,
+				"woodland_road": 274
+			},
+			"seed": 2089,
+			"size": "Vast",
+			"steps": 720,
+			"strategist": {
+				"applied_actions": 1,
+				"blocked_actions": 7,
+				"cost_micros": 0,
+				"totals": {
+					"accepted": 46,
+					"cancelled": 0,
+					"dispatched": 103,
+					"fallback": 57
+				}
+			},
+			"unresolved": {
+				"cargo": {
+					"coin": 0,
+					"food": 6,
+					"ore": 10,
+					"timber": 12
+				},
+				"escrow_coin": 38,
+				"shipments": 8
+			},
+			"waiting_shipment_days": 0
+		}
+	],
+	"reply_source": "authored_offline",
+	"schema": "sdd.strategy-comparison-report",
+	"scope": "terrain-bound faction simulation; no company play or wall-time transport",
+	"version": 1
+}

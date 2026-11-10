@@ -77,7 +77,7 @@ func integration() -> void:
 	s=step(s,"advance",{"ticks":24})
 	check(s.strategist.totals.accepted==1 and not s.strategist.pending.has(id),"accepted at fixed boundary once")
 	check(s.strategy_world.plans[id].selected_tick==288 and s.strategy_world.plans[id].reason==JSON.parse_string(raw).reason_code,"actual authoritative plan changed")
-	check(not s.strategist.journal[0].executions.is_empty(),"actual operator outcomes recorded")
+	check(JSON.parse_string(raw).intent_ids.is_empty() and s.strategist.journal[0].executions.is_empty(),"accepted zero-action plan records no fabricated operator effects")
 	check(C.S.reconciles(s.strategy_world),"accepted model actions preserve economy conservation")
 	check(M.valid(JSON.parse_string(P.encoded(s))),"v4 exact JSON continuation")
 	var replay := M.replay(checkpoint,tail)

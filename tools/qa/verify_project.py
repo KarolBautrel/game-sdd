@@ -47,7 +47,17 @@ def run_check(name: str, command: list[str], output: Path, timeout: float) -> di
                 exit_code = process.wait(timeout=timeout)
             except subprocess.TimeoutExpired:
                 timed_out = True
-                process.kill()
+                if os.name == "nt":
+                    # A venv redirector can own another Python holding these logs.
+                    # Target this check's PID tree only, never executable names.
+                    subprocess.run(
+                        [str(Path(os.environ["SystemRoot"]) / "System32/taskkill.exe"),
+                         "/PID", str(process.pid), "/T", "/F"],
+                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                        timeout=10, check=False, creationflags=subprocess.CREATE_NO_WINDOW,
+                    )
+                if process.poll() is None:
+                    process.kill()
                 process.wait()
                 exit_code = None
         except OSError as error:

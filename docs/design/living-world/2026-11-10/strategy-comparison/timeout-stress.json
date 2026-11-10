@@ -1,0 +1,8 @@
+{
+  "tests": 40,
+  "failures": 0,
+  "errors": 0,
+  "passed": true,
+  "seconds": 16.969,
+  "scope": "20 repetitions each of Windows redirector timeout and inherited descendant log cleanup"
+}

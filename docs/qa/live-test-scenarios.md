@@ -1,5 +1,13 @@
 # Accumulated live test scenarios
 
+Current97a: affordable preparations and matched offline diagnostics are
+implemented. No reset of the deferred player save or desktop access. The actual
+play gate remains separate from headless accounting/long-run checks.
+
+| Case | Stage | Scenario | Acceptance | Status |
+| --- | --- | --- | --- | --- |
+| L97a-01 | 97a | In a separate Large/Vast strategy pilot, review Factions/Chronicle and normal trade/patrol consequences over several days; compare Classic/Recorded examples and resume. | No free troops/resources, unfunded plans honestly produce no preparation, actual convoys/shortages remain readable, saved company/terrain preserved; no claim every review must create an event. | AWAITING_INTERACTIVE; readiness26/comparison348 and paired180day offline matrix PASS. Recorded examples are authored fixtures; no real model or desktop test. |
+
 Current96c: user defers resetting/retesting the strategist save and requests
 bigger maps. Vast is an explicit new size/slot; old progress is preserved.
 [Vast QA](2026-11-10-vast-worlds.md) records source/headless evidence.

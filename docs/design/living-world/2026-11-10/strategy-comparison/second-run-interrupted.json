@@ -1,0 +1,8 @@
+{
+  "run_id": "strategy-readiness-20261110-final2",
+  "status": "INTERRUPTED_AFTER_KNOWN_FAILURE",
+  "failed_phase": "python_tests",
+  "reason": "Windows timeout test left a redirector descendant holding a temporary stderr log",
+  "termination": "only exact owned verifier PID tree terminated; no executable-name kill",
+  "final_pass_claim": false
+}

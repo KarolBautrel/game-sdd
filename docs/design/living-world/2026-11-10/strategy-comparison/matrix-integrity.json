@@ -1,0 +1,9 @@
+{
+  "matched_cases": 12,
+  "simulated_days_per_matrix": 2160,
+  "identical_pre_post_initial_digests": true,
+  "final_rerun_matches_preliminary_worlds_and_reports": true,
+  "all_real_deliveries_counted": true,
+  "network_transport": "NOT_INSTANTIATED",
+  "interactive": "NOT_RUN"
+}

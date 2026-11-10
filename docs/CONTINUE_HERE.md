@@ -7,6 +7,24 @@ when the user has only requested an explanation or plan.
 ## Next-session entry: read this first
 
 Latest active handoff:
+[Faction readiness and matched logistics](handoffs/2026-11-10-strategy-readiness.md).
+User requests publication and the next stage.85..96c pushed to origin/master
+4223f8d7; GitHub-linked author and tested113/113source verified first. Follow-up
+97a implements actual own-force preparation quotes, affordable classic/model
+capabilities and continuing procurement, preserving authoritative revalidation /
+old request hashes/saves. Matched12case180day pre/post matrices use identical
+Large/Vast openings and actual route weights; authored offline examples only.
+Readiness26/comparison348/classic161/adapter184/native84checks PASS. Full final-source
+115/115PASS,0errors/0warnings,111Python tests; tested/final source hashes match,
+11/11save/terrain/art hashes unchanged. Results/integrity/preservation and the
+Windows timeout cleanup regression: qa/2026-11-10-strategy-readiness.md.
+Shortages and redundant diplomatic proposals still need work; next background
+prerequisite is measured food throughput/targets on longer routes, then proposal
+diagnostics. Live provider/model/budget remain unselected before real inference /
+comparison. L97a-01 and prior live gates remain open. Source/headless ONLY, no OS
+input/window activation/visible launch. Do not reset the player's deferred save.
+
+Previous map-expansion handoff:
 [Vast world maps](handoffs/2026-11-10-vast-worlds.md).
 User leaves the current save/retest alone and prioritizes larger maps.96c adds
 Vast generatorv3 /768x432,4xLarge area, actual physical scale4, native local5.2zoom /

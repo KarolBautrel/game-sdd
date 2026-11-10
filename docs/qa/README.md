@@ -3,6 +3,10 @@
 Continuation status and the next unfinished task: [CONTINUE_HERE.md](../CONTINUE_HERE.md).
 Accumulated actual-play acceptance: [live-test-scenarios.md](live-test-scenarios.md).
 
+Latest97a: [2026-11-10 faction readiness](2026-11-10-strategy-readiness.md).
+Actual affordable preparation and matched classic/authored-offline diagnostics
+on Large/Vast. Previous batch85..96c published; live provider and play review open.
+
 Latest map expansion: [2026-11-10 Vast worlds](2026-11-10-vast-worlds.md).
 Real768x432geography/four times Large area with consistent physical travel,
 local camera and independent save sizes. No player reset; physical review open.

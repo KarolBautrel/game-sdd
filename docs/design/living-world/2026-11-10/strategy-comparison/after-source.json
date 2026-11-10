@@ -1,0 +1,10 @@
+{
+  "git_head": "4223f8d7ae74492d386f1872c591bce52934ccb1",
+  "scope": "post-change production planner and executor, authored offline matrix",
+  "sha256": {
+    "scripts/domain/classic_world.gd": "7db47911a10ab4be476443062100604feabb22dfe430239983de6c9189d8c3b5",
+    "scripts/domain/faction_planner.gd": "0c06e93c9b4c212ff257d91607e28f4780d33a7b59d9cf001cf2472db5f20baf",
+    "scripts/qa/strategy_comparison.gd": "f5fc2ced63c28124ae81c509055fcb5c36e3ef2439d632d33b5766fedefd91a8",
+    "scripts/qa/strategy_comparison_run.gd": "6fa31dfb1119778ee94ba3a64ff46e531daaacf100a7090af18148df9b132849"
+  }
+}

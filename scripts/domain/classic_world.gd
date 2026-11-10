@@ -185,6 +185,19 @@ static func _economy(s: Dictionary) -> void:
 		for id: String in war.exhaustion:
 			war.exhaustion[id]=clampi(int(war.exhaustion[id])+(2+int(s.shortfalls[id].food) if s.core.diplomacy[key].stance=="war" else -2),0,100)
 
+static func mobilization_quote(s: Dictionary, actor: String, party: String) -> Dictionary:
+	if not s.core.factions.has(actor) or not s.core.parties.has(party) or s.core.parties[party].faction_id!=actor: return {}
+	var army: Dictionary=s.core.parties[party];var committed := 0
+	for other: Dictionary in s.core.parties.values():
+		if other.faction_id==actor: committed+=int(other.headcount)
+	var recruits := maxi(0,mini(12-int(army.headcount),int(s.core.factions[actor].manpower)-committed))
+	var cost: Dictionary=s.rules.mobilize_cost.duplicate(true)
+	cost.coin+=recruits*2;cost.food+=recruits;cost.ore+=ceili(recruits/2.0)
+	var funded := true
+	for resource: String in W.STOCKS:
+		if W.available(s.core,actor,resource)<cost[resource]: funded=false
+	return {"recruits":recruits,"cost":cost,"staffed":army.headcount+recruits>=6,"funded":funded}
+
 static func _mobilize(s: Dictionary, actor: String, action: String, p: Dictionary) -> String:
 	if not W._shape(p,["party","route"]) or not W._id(p.party) or not W._id(p.route) or not s.core.parties.has(p.party) or not s.core.routes.has(p.route): return "invalid_mobilization"
 	var army: Dictionary=s.core.parties[p.party];var f: Dictionary=s.forces[p.party];var edge: Dictionary=s.core.routes[p.route]
@@ -197,17 +210,12 @@ static func _mobilize(s: Dictionary, actor: String, action: String, p: Dictionar
 	if attacking: staging=opposite
 	if S.path(s,f.at,staging).is_empty(): return "unreachable_border"
 	if f.mode=="holding" and f.objective==staging and f.mission in ["border","escort","attack"]: return "mobilization_exists"
-	var committed := 0
-	for other: Dictionary in s.core.parties.values():
-		if other.faction_id==actor: committed+=int(other.headcount)
-	var recruits := maxi(0,mini(12-int(army.headcount),int(s.core.factions[actor].manpower)-committed))
-	if army.headcount+recruits<6: return "insufficient_manpower"
-	var cost: Dictionary=s.rules.mobilize_cost.duplicate(true)
-	cost.coin+=recruits*2;cost.food+=recruits;cost.ore+=ceili(recruits/2.0)
-	if not _spend(s,actor,cost): return "mobilization_unfunded"
-	army.headcount+=recruits
+	var quote := mobilization_quote(s,actor,p.party)
+	if not quote.staffed: return "insufficient_manpower"
+	if not _spend(s,actor,quote.cost): return "mobilization_unfunded"
+	army.headcount+=int(quote.recruits)
 	f.mode="preparing";f.ready_tick=int(s.core.tick)+int(s.rules.train_ticks);f.objective=staging;f.mission="escort" if action=="protect_route" else ("attack" if attacking else "border")
-	S.event(s,"mobilization",actor,p.party,"prepared_force_on_real_route","coin",int(cost.coin))
+	S.event(s,"mobilization",actor,p.party,"prepared_force_on_real_route","coin",int(quote.cost.coin))
 	return ""
 
 static func _pact_blocks(s: Dictionary, a: String, b: String) -> bool:
@@ -417,7 +425,8 @@ static func observe(s: Dictionary, actor: String) -> Dictionary:
 	for id: String in S.sorted_ids(s.core.parties):
 		var p: Dictionary=s.core.parties[id];total_strength[p.faction_id]+=int(p.headcount)
 		if p.faction_id==actor:
-			var f: Dictionary=s.forces[id].duplicate(true);f["id"]=id;f["headcount"]=int(p.headcount);result.forces.append(f)
+			var f: Dictionary=s.forces[id].duplicate(true);f["id"]=id;f["headcount"]=int(p.headcount)
+			f["mobilization"]=mobilization_quote(s,actor,id);result.forces.append(f)
 	for other: String in S.sorted_ids(s.core.factions):
 		if other==actor: continue
 		var key := W.pair_key(actor,other);var pair: Dictionary=s.core.diplomacy[key];var war: Dictionary=s.wars[key]

@@ -34,6 +34,10 @@ supplied with `--godot`; the existing workspace installation is the default.
   scene boots. Both explicitly select generatorv3 / separate Vast slots; old
   `strategy`/`strategy-ai` still resume the existing Large slots. No save reset.
 - Each process has a wall-clock timeout; a timeout fails the run.
+- On Windows, timeout cleanup terminates only that check's owned PID tree,
+  including virtual-environment redirectors and descendants, before closing log
+  handles. No name-based killing of other Python/Godot/user processes. Retain
+  the timeout failure and partial diagnostics; cleanup cannot turn it into PASS.
 - Capture stdout and stderr, command, exit code, duration and diagnostic counts.
 - Nonzero exits and `SCRIPT ERROR:`, `ERROR:` or assertion diagnostics fail a check,
   even if Godot itself exits zero. Existing warnings are reported separately.
