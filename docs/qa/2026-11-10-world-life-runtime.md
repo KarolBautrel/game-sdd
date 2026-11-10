@@ -56,11 +56,14 @@ provider/model/hosting/budget configuration.
 
 [11/11named save/terrain/atlas hashes unchanged](../design/living-world/2026-11-10/autonomous-runtime/preservation.json).
 This includes the actual old v4 campaign; no player reset or conversion occurred.
-All321changed-document relative links were checked without missing targets.
+All327changed-document relative links were checked without missing targets.
 
 Start [the12scenario player runbook](autonomous-world-test-scenarios.md),01..05
 first. L99..L103 and previous physical gates remain open. Headless PASS does not
 accept visual polish, natural motion or ordinary hands-on victory.
 
-Publication target: `origin/master`, using the verified GitHub-linked user
-identity. Publication hash/remote confirmation is recorded after the push.
+Published feature commit: `c4abd3c349f6f0cd13f979e8353fe99911a35fed` on
+`origin/master`; remote hash verified. GitHub-linked author: Karol Bautrel
+`93617105+KarolBautrel@users.noreply.github.com`.
+[Publication receipt](../design/living-world/2026-11-10/autonomous-runtime/publication.json).
+A documentation-only follow-up records publication; source fingerprint unchanged.

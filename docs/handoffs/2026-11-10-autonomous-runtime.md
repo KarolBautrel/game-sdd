@@ -14,8 +14,9 @@ Final automated verification:126/126PASS,0errors/0warnings,114Python cases,
 persistent save/terrain/art hashes are unchanged. Six Large/Vast openings each
 reach30/90days with valid autonomous results. Complete portable evidence:
 [runtime QA](../qa/2026-11-10-world-life-runtime.md).
-Publication to origin/master follows this verified receipt; final remote hash is
-recorded after pushing. The detailed [player runbook](../qa/autonomous-world-test-scenarios.md)
+Feature commit `c4abd3c349f6f0cd13f979e8353fe99911a35fed` is published on
+origin/master, verified against the remote. The following documentation commit
+records this publication; runtime/spec fingerprint remains5978afbd29b5e5752328dca386795e9a79873144c86cdd8dcc480fa5228c2098. The detailed [player runbook](../qa/autonomous-world-test-scenarios.md)
 contains the next physical work, starting01..05. All L99..L103 and earlier live
 gates remain open. Do not resume older unrelated city/art queues.
 

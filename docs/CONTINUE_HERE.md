@@ -9,6 +9,8 @@ when the user has only requested an explanation or plan.
 Latest active handoff:
 [Autonomous world implementation](handoffs/2026-11-10-autonomous-runtime.md).
 Latest user authorizes99..103 and publication of all pending work to master.
+Published feature commitc4abd3c3 on origin/master, remote hash verified. The
+documentation follow-up records publication; next work is the player test runbook.
 Version5 and the native autonomous-world scene implement world025/slice026 and
 presentation049/slice049. Automated126/126PASS,0errors/0warnings;114Python,
 107Godot suites/15boots; tested/final source match,11/11old save/art hashes

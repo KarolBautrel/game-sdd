@@ -1,0 +1,10 @@
+{
+  "feature_commit": "c4abd3c349f6f0cd13f979e8353fe99911a35fed",
+  "verified_remote_commit": "c4abd3c349f6f0cd13f979e8353fe99911a35fed",
+  "branch": "master",
+  "remote": "https://github.com/KarolBautrel/game-sdd.git",
+  "verified_utc": "2026-11-10T21:43:06.339156+00:00",
+  "author": "Karol Bautrel <93617105+KarolBautrel@users.noreply.github.com>",
+  "source_sha256": "5978afbd29b5e5752328dca386795e9a79873144c86cdd8dcc480fa5228c2098",
+  "documentation_followup": "Publication receipt and handoff only; runtime/spec source unchanged."
+}
